@@ -1,23 +1,16 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::HashMap;
 
 use gccjit::{
     Block, CType, Context, Function, FunctionPtrType, FunctionType, LValue, Location, RValue, Type,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, HasDataLayout, PointeeInfo, Size, TargetDataLayout, VariantIdx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::base::wants_msvc_seh;
 use crate::rustc_codegen_ssa::errors as ssa_errors;
 use crate::rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, MiscCodegenMethods};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::mir::interpret::Allocation;
 use crate::rustc_complete::mir::mono::CodegenUnit;
 use crate::rustc_complete::span_bug;
@@ -25,15 +18,11 @@ use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError,
     LayoutOfHelpers,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ExistentialTraitRef, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::source_map::respan;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, TlsModel, X86Abi};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CodegenCx | COMPLEXITY=14 | LINES=108 */
 
 #[cfg(feature = "master")]
 use crate::abi::conv_to_fn_attribute;
@@ -142,7 +131,6 @@ pub struct CodegenCx<'gcc, 'tcx> {
     // We cache this, since it is needed for alignment checks during loads.
     pub int128_align: Align,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=66 | LINES=238 */
 
 impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
     #[allow(clippy::too_many_arguments)]
@@ -381,7 +369,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 impl<'gcc, 'tcx> BackendTypes for CodegenCx<'gcc, 'tcx> {
     type Value = RValue<'gcc>;
@@ -396,7 +383,6 @@ impl<'gcc, 'tcx> BackendTypes for CodegenCx<'gcc, 'tcx> {
     type DILocation = Location<'gcc>;
     type DIVariable = (); // TODO(antoyo)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=vtables | COMPLEXITY=62 | LINES=116 */
 
 impl<'gcc, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn vtables(
@@ -513,28 +499,24 @@ impl<'gcc, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'gcc, 'tcx> HasTyCtxt<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'gcc, 'tcx> HasDataLayout for CodegenCx<'gcc, 'tcx> {
     fn data_layout(&self) -> &TargetDataLayout {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'gcc, 'tcx> HasTargetSpec for CodegenCx<'gcc, 'tcx> {
     fn target_spec(&self) -> &Target {
         &self.tcx.sess.target
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=x86_abi_opt | COMPLEXITY=6 | LINES=9 */
 
 impl<'gcc, 'tcx> HasX86AbiOpt for CodegenCx<'gcc, 'tcx> {
     fn x86_abi_opt(&self) -> X86Abi {
@@ -544,7 +526,6 @@ impl<'gcc, 'tcx> HasX86AbiOpt for CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=10 | LINES=11 */
 
 impl<'gcc, 'tcx> LayoutOfHelpers<'tcx> for CodegenCx<'gcc, 'tcx> {
     #[inline]
@@ -556,7 +537,6 @@ impl<'gcc, 'tcx> LayoutOfHelpers<'tcx> for CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=24 | LINES=26 */
 
 impl<'gcc, 'tcx> FnAbiOfHelpers<'tcx> for CodegenCx<'gcc, 'tcx> {
     #[inline]
@@ -583,14 +563,12 @@ impl<'gcc, 'tcx> FnAbiOfHelpers<'tcx> for CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, 'gcc> HasTypingEnv<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=generate_local_symbol_name | COMPLEXITY=8 | LINES=19 */
 
 impl<'b, 'tcx> CodegenCx<'b, 'tcx> {
     /// Generates a new symbol name with the given prefix. This symbol name must
@@ -610,7 +588,6 @@ impl<'b, 'tcx> CodegenCx<'b, 'tcx> {
         name
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=to_gcc_tls_mode | COMPLEXITY=6 | LINES=10 */
 
 fn to_gcc_tls_mode(tls_model: TlsModel) -> gccjit::TlsModel {
     match tls_model {

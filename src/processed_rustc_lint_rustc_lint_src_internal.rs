@@ -1,23 +1,16 @@
 // SRC: ../rust/compiler/rustc_lint/src/internal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Some lints that are only useful in the compiler or crates that use compiler internals, such as
 // Clippy.
 
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{Expr, ExprKind, HirId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, PredicatePolarity, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint_pass, declare_tool_lint};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::lints::{
     BadOptAccessDiag, DefaultHashTypesDiag, DiagOutOfImpl, LintPassByHand,
@@ -25,9 +18,7 @@ use crate::lints::{
     SymbolInternStringLiteralDiag, TyQualified, TykindDiag, TykindKind, TypeIrDirectUse,
     TypeIrInherentUsage, TypeIrTraitUsage, UntranslatableDiag,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EarlyContext, EarlyLintPass, LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 declare_tool_lint! {
     /// The `default_hash_type` lint detects use of [`std::collections::HashMap`] and
@@ -40,7 +31,6 @@ declare_tool_lint! {
     "forbid HashMap and HashSet and suggest the FxHash* variants",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_path | COMPLEXITY=16 | LINES=25 */
 
 declare_lint_pass!(DefaultHashTypes => [DEFAULT_HASH_TYPES]);
 
@@ -66,7 +56,6 @@ impl LateLintPass<'_> for DefaultHashTypes {
         );
     }
 }
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 declare_tool_lint! {
     /// The `potential_query_instability` lint detects use of methods which can lead to
@@ -80,7 +69,6 @@ declare_tool_lint! {
     "require explicit opt-in when using potentially unstable methods or functions",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 declare_tool_lint! {
     /// The `untracked_query_information` lint detects use of methods which leak information not
@@ -92,7 +80,6 @@ declare_tool_lint! {
     "require explicit opt-in when accessing information not tracked by the query system",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=23 | LINES=36 */
 
 declare_lint_pass!(QueryStability => [POTENTIAL_QUERY_INSTABILITY, UNTRACKED_QUERY_INFORMATION]);
 
@@ -129,7 +116,6 @@ impl<'tcx> LateLintPass<'tcx> for QueryStability {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=has_unstable_into_iter_predicate | COMPLEXITY=17 | LINES=41 */
 
 fn has_unstable_into_iter_predicate<'tcx>(
     cx: &LateContext<'tcx>,
@@ -171,7 +157,6 @@ fn has_unstable_into_iter_predicate<'tcx>(
     }
     false
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_callee_span_generic_args_and_args | COMPLEXITY=12 | LINES=22 */
 
 /// Checks whether an expression is a function or method call and, if so, returns its `DefId`,
 /// `Span`, `GenericArgs`, and arguments. This is a slight augmentation of a similarly named Clippy
@@ -194,7 +179,6 @@ fn get_callee_span_generic_args_and_args<'tcx>(
     }
     None
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 declare_tool_lint! {
     /// The `usage_of_ty_tykind` lint detects usages of `ty::TyKind::<kind>`,
@@ -204,7 +188,6 @@ declare_tool_lint! {
     "usage of `ty::TyKind` outside of the `ty::sty` module",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 declare_tool_lint! {
     /// The `usage_of_qualified_ty` lint detects usages of `ty::TyKind`,
@@ -214,7 +197,6 @@ declare_tool_lint! {
     "using `ty::{Ty,TyCtxt}` instead of importing it",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_path | COMPLEXITY=47 | LINES=76 */
 
 declare_lint_pass!(TyTyKind => [
     USAGE_OF_TY_TYKIND,
@@ -291,7 +273,6 @@ impl<'tcx> LateLintPass<'tcx> for TyTyKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=lint_ty_kind_usage | COMPLEXITY=6 | LINES=8 */
 
 fn lint_ty_kind_usage(cx: &LateContext<'_>, res: &Res) -> bool {
     if let Some(did) = res.opt_def_id() {
@@ -300,7 +281,6 @@ fn lint_ty_kind_usage(cx: &LateContext<'_>, res: &Res) -> bool {
         false
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_ty_or_ty_ctxt | COMPLEXITY=22 | LINES=21 */
 
 fn is_ty_or_ty_ctxt(cx: &LateContext<'_>, path: &hir::Path<'_>) -> Option<String> {
     match &path.res {
@@ -322,7 +302,6 @@ fn is_ty_or_ty_ctxt(cx: &LateContext<'_>, path: &hir::Path<'_>) -> Option<String
 
     None
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=gen_args | COMPLEXITY=15 | LINES=22 */
 
 fn gen_args(segment: &hir::PathSegment<'_>) -> String {
     if let Some(args) = &segment.args {
@@ -345,7 +324,6 @@ fn gen_args(segment: &hir::PathSegment<'_>) -> String {
 
     String::new()
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 declare_tool_lint! {
     /// The `non_glob_import_of_type_ir_inherent_item` lint detects
@@ -355,7 +333,6 @@ declare_tool_lint! {
     "non-glob import of `rustc_type_ir::inherent`",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 declare_tool_lint! {
     /// The `usage_of_type_ir_inherent` lint detects usage of `rustc_type_ir::inherent`.
@@ -366,7 +343,6 @@ declare_tool_lint! {
     "usage `rustc_type_ir::inherent` outside of trait system",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 declare_tool_lint! {
     /// The `usage_of_type_ir_traits` lint detects usage of `rustc_type_ir::Interner`,
@@ -380,7 +356,6 @@ declare_tool_lint! {
     "usage `rustc_type_ir`-specific abstraction traits outside of trait system",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 declare_tool_lint! {
     /// The `direct_use_of_rustc_type_ir` lint detects usage of `rustc_type_ir`.
     ///
@@ -391,7 +366,6 @@ declare_tool_lint! {
     "usage `rustc_type_ir` abstraction outside of trait system",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=56 | LINES=87 */
 
 declare_lint_pass!(TypeIr => [DIRECT_USE_OF_RUSTC_TYPE_IR, NON_GLOB_IMPORT_OF_TYPE_IR_INHERENT, USAGE_OF_TYPE_IR_INHERENT, USAGE_OF_TYPE_IR_TRAITS]);
 
@@ -479,7 +453,6 @@ impl<'tcx> LateLintPass<'tcx> for TypeIr {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 declare_tool_lint! {
     /// The `lint_pass_impl_without_macro` detects manual implementations of a lint
@@ -488,7 +461,6 @@ declare_tool_lint! {
     Allow,
     "`impl LintPass` without the `declare_lint_pass!` or `impl_lint_pass!` macros"
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=13 | LINES=24 */
 
 declare_lint_pass!(LintPassImpl => [LINT_PASS_IMPL_WITHOUT_MACRO]);
 
@@ -513,7 +485,6 @@ impl EarlyLintPass for LintPassImpl {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 declare_tool_lint! {
     /// The `untranslatable_diagnostic` lint detects messages passed to functions with `impl
@@ -527,7 +498,6 @@ declare_tool_lint! {
     report_in_external_macro: true,
     @eval_always = true
 }
-/* AST_META: AST_ID=30 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 declare_tool_lint! {
     /// The `diagnostic_outside_of_impl` lint detects calls to functions annotated with
@@ -542,7 +512,6 @@ declare_tool_lint! {
     report_in_external_macro: true,
     @eval_always = true
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=14 | LINES=25 */
 
 declare_lint_pass!(Diagnostics => [UNTRANSLATABLE_DIAGNOSTIC, DIAGNOSTIC_OUTSIDE_OF_IMPL]);
 
@@ -568,7 +537,6 @@ impl LateLintPass<'_> for Diagnostics {
         Self::untranslatable_diagnostic(cx, def_id, &arg_tys_and_spans);
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=is_diag_message | COMPLEXITY=66 | LINES=104 */
 
 impl Diagnostics {
     // Is the type `{D,Subd}iagMessage`?
@@ -673,7 +641,6 @@ impl Diagnostics {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 declare_tool_lint! {
     /// The `bad_opt_access` lint detects accessing options by field instead of
@@ -683,7 +650,6 @@ declare_tool_lint! {
     "prevent using options by field access when there is a wrapper function",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=19 | LINES=31 */
 
 declare_lint_pass!(BadOptAccess => [BAD_OPT_ACCESS]);
 
@@ -715,7 +681,6 @@ impl LateLintPass<'_> for BadOptAccess {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 declare_tool_lint! {
     pub rustc::SPAN_USE_EQ_CTXT,
@@ -723,7 +688,6 @@ declare_tool_lint! {
     "forbid uses of `==` with `Span::ctxt`, suggest `Span::eq_ctxt` instead",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=13 | LINES=17 */
 
 declare_lint_pass!(SpanUseEqCtxt => [SPAN_USE_EQ_CTXT]);
 
@@ -741,7 +705,6 @@ impl<'tcx> LateLintPass<'tcx> for SpanUseEqCtxt {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=is_span_ctxt_call | COMPLEXITY=6 | LINES=11 */
 
 fn is_span_ctxt_call(cx: &LateContext<'_>, expr: &hir::Expr<'_>) -> bool {
     match &expr.kind {
@@ -753,7 +716,6 @@ fn is_span_ctxt_call(cx: &LateContext<'_>, expr: &hir::Expr<'_>) -> bool {
         _ => false,
     }
 }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 declare_tool_lint! {
     /// The `symbol_intern_string_literal` detects `Symbol::intern` being called on a string literal
@@ -764,7 +726,6 @@ declare_tool_lint! {
     "Forbid uses of string literals in `Symbol::intern`, suggesting preinterning instead",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=9 | LINES=20 */
 
 declare_lint_pass!(SymbolInternStringLiteral => [SYMBOL_INTERN_STRING_LITERAL]);
 

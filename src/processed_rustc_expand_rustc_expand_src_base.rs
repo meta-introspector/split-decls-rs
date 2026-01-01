@@ -1,58 +1,43 @@
 // SRC: ../rust/compiler/rustc_expand/src/base.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::any::Any;
 use std::default::Default;
 use std::iter;
 use std::path::Component::Prefix;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::rc::Rc;
 use std::sync::Arc;
 
 use crate::rustc_complete::attr::{AttributeExt, MarkedAttrs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::token::MetaVarKind;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::visit::{AssocCtxt, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, AttrVec, Attribute, HasAttrs, Item, NodeId, PatKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::sync;
 use crate::rustc_complete::{BufferedEarlyLint, DiagCtxtHandle, ErrorGuaranteed, PResult};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::Features;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::{AttributeKind, CfgEntry, Deprecation};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::MacroKinds;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::{Stability, find_attr};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_lint_defs::RegisteredTools;
 use crate::rustc_parse::MACRO_ARGUMENTS;
 use crate::rustc_parse::parser::{ForceCollect, Parser};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::CollapseMacroDebuginfo;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::{AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{DUMMY_SP, FileName, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::ThinVec;
 
 use crate::base::ast::MetaItemInner;
 use crate::errors;
 use crate::expand::{self, AstFragment, Invocation};
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
 use crate::mbe::macro_rules::ParserAnyMacro;
 use crate::module::DirOwnership;
 use crate::stats::MacroStat;
@@ -77,7 +62,6 @@ pub enum Annotatable {
     WherePredicate(ast::WherePredicate),
     Crate(ast::Crate),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=span | COMPLEXITY=115 | LINES=186 */
 
 impl Annotatable {
     pub fn span(&self) -> Span {
@@ -264,7 +248,6 @@ impl Annotatable {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Result of an expansion that may need to be retried.
 /// Consider using this for non-`MultiItemModifier` expanders as well.
@@ -274,7 +257,6 @@ pub enum ExpandResult<T, U> {
     /// Expansion could not produce a result and needs to be retried.
     Retry(U),
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=map | COMPLEXITY=7 | LINES=9 */
 
 impl<T, U> ExpandResult<T, U> {
     pub fn map<E, F: FnOnce(T) -> E>(self, f: F) -> ExpandResult<E, U> {
@@ -284,7 +266,6 @@ impl<T, U> ExpandResult<T, U> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from_tts | COMPLEXITY=4 | LINES=19 */
 
 impl<'cx> MacroExpanderResult<'cx> {
     /// Creates a [`MacroExpanderResult::Ready`] from a [`TokenStream`].
@@ -304,7 +285,6 @@ impl<'cx> MacroExpanderResult<'cx> {
         ExpandResult::Ready(Box::new(parser))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=2 | LINES=12 */
 
 pub trait MultiItemModifier {
     /// `meta_item` is the attribute, and `item` is the item being modified.
@@ -317,7 +297,6 @@ pub trait MultiItemModifier {
         is_derive_const: bool,
     ) -> ExpandResult<Vec<Annotatable>, Annotatable>;
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=16 */
 
 impl<F> MultiItemModifier for F
 where
@@ -334,7 +313,6 @@ where
         ExpandResult::Ready(self(ecx, span, meta_item, item))
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=2 | LINES=9 */
 
 pub trait BangProcMacro {
     fn expand<'cx>(
@@ -344,7 +322,6 @@ pub trait BangProcMacro {
         ts: TokenStream,
     ) -> Result<TokenStream, ErrorGuaranteed>;
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=15 */
 
 impl<F> BangProcMacro for F
 where
@@ -360,7 +337,6 @@ where
         Ok(self(ts))
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=2 | LINES=10 */
 
 pub trait AttrProcMacro {
     fn expand<'cx>(
@@ -371,7 +347,6 @@ pub trait AttrProcMacro {
         annotated: TokenStream,
     ) -> Result<TokenStream, ErrorGuaranteed>;
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=16 */
 
 impl<F> AttrProcMacro for F
 where
@@ -388,7 +363,6 @@ where
         Ok(self(annotation, annotated))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=2 | LINES=10 */
 
 /// Represents a thing that maps token trees to Macro Results
 pub trait TTMacroExpander: Any {
@@ -399,7 +373,6 @@ pub trait TTMacroExpander: Any {
         input: TokenStream,
     ) -> MacroExpanderResult<'cx>;
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=6 | LINES=19 */
 
 pub type MacroExpanderResult<'cx> = ExpandResult<Box<dyn MacResult + 'cx>, ()>;
 
@@ -419,12 +392,10 @@ where
         self(ecx, span, input)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=2 | LINES=4 */
 
 pub trait GlobDelegationExpander {
     fn expand(&self, ecx: &mut ExtCtxt<'_>) -> ExpandResult<Vec<(Ident, Option<Ident>)>, ()>;
 }
-/* AST_META: AST_ID=29 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=13 */
 
 // Use a macro because forwarding to a simple function has type system issues
 macro_rules! make_stmts_default {
@@ -438,7 +409,6 @@ macro_rules! make_stmts_default {
         })
     };
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=make_expr | COMPLEXITY=27 | LINES=88 */
 
 /// The result of a macro expansion. The return values of the various
 /// methods are spliced into the AST at the callsite of the macro.
@@ -527,7 +497,6 @@ pub trait MacResult {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=MacEager | COMPLEXITY=15 | LINES=24 */
 
 macro_rules! make_MacEager {
     ( $( $fld:ident: $t:ty, )* ) => {
@@ -552,7 +521,6 @@ macro_rules! make_MacEager {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 make_MacEager! {
     expr: Box<ast::Expr>,
@@ -564,7 +532,6 @@ make_MacEager! {
     stmts: SmallVec<[ast::Stmt; 1]>,
     ty: Box<ast::Ty>,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=make_expr | COMPLEXITY=30 | LINES=54 */
 
 impl MacResult for MacEager {
     fn make_expr(self: Box<Self>) -> Option<Box<ast::Expr>> {
@@ -619,7 +586,6 @@ impl MacResult for MacEager {
         self.ty
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=DummyResult | COMPLEXITY=2 | LINES=8 */
 
 /// Fill-in macro expansion result, to allow compilation to continue
 /// after hitting errors.
@@ -628,7 +594,6 @@ pub struct DummyResult {
     guar: Option<ErrorGuaranteed>,
     span: Span,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=any | COMPLEXITY=13 | LINES=30 */
 
 impl DummyResult {
     /// Creates a default MacResult that can be anything.
@@ -659,7 +624,6 @@ impl DummyResult {
         })
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=make_expr | COMPLEXITY=31 | LINES=93 */
 
 impl MacResult for DummyResult {
     fn make_expr(self: Box<DummyResult>) -> Option<Box<ast::Expr>> {
@@ -753,7 +717,6 @@ impl MacResult for DummyResult {
         })
     }
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=16 | LINES=65 */
 
 /// A syntax extension kind.
 #[derive(Clone)]
@@ -819,7 +782,6 @@ pub enum SyntaxExtensionKind {
     /// This is for delegated function implementations, and has nothing to do with glob imports.
     GlobDelegation(Arc<dyn GlobDelegationExpander + sync::DynSync + sync::DynSend>),
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=as_legacy_bang | COMPLEXITY=24 | LINES=28 */
 
 impl SyntaxExtensionKind {
     /// Returns `Some(expander)` for a macro usable as a `LegacyBang`; otherwise returns `None`
@@ -848,7 +810,6 @@ impl SyntaxExtensionKind {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=SyntaxExtension | COMPLEXITY=12 | LINES=28 */
 
 /// A struct representing a macro definition in "lowered" form ready for expansion.
 pub struct SyntaxExtension {
@@ -877,7 +838,6 @@ pub struct SyntaxExtension {
     /// words, was the macro definition annotated with `#[collapse_debuginfo]`)?
     pub collapse_debuginfo: bool,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=macro_kinds | COMPLEXITY=94 | LINES=243 */
 
 impl SyntaxExtension {
     /// Returns which kinds of macro call this syntax extension.
@@ -1121,7 +1081,6 @@ impl SyntaxExtension {
         )
     }
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=Indeterminate; | COMPLEXITY=2 | LINES=10 */
 
 /// Error type that denotes indeterminacy.
 pub struct Indeterminate;
@@ -1132,7 +1091,6 @@ pub struct DeriveResolution {
     pub exts: Option<Arc<SyntaxExtension>>,
     pub is_const: bool,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=next_node_id | COMPLEXITY=15 | LINES=96 */
 
 pub trait ResolverExpand {
     fn next_node_id(&mut self) -> NodeId;
@@ -1229,7 +1187,6 @@ pub trait ResolverExpand {
     /// to generate an item name later that does not reference placeholder macros.
     fn insert_impl_trait_name(&mut self, id: NodeId, name: Symbol);
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=pre_expansion_lint | COMPLEXITY=2 | LINES=13 */
 
 pub trait LintStoreExpand {
     fn pre_expansion_lint(
@@ -1243,7 +1200,6 @@ pub trait LintStoreExpand {
         name: Symbol,
     );
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=ModuleData | COMPLEXITY=3 | LINES=14 */
 
 type LintStoreExpandDyn<'a> = Option<&'a (dyn LintStoreExpand + 'a)>;
 
@@ -1258,7 +1214,6 @@ pub struct ModuleData {
     /// often (but not necessarily) the parent of the top file path on the `file_path_stack`.
     pub dir_path: PathBuf,
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=with_dir_path | COMPLEXITY=4 | LINES=10 */
 
 impl ModuleData {
     pub fn with_dir_path(&self, dir_path: PathBuf) -> ModuleData {
@@ -1269,7 +1224,6 @@ impl ModuleData {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=ExpansionData | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone)]
 pub struct ExpansionData {
@@ -1281,7 +1235,6 @@ pub struct ExpansionData {
     pub lint_node_id: NodeId,
     pub is_trailing_mac: bool,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=ExtCtxt | COMPLEXITY=8 | LINES=28 */
 
 /// One of these is made during expansion and incrementally updated as we go;
 /// when a macro expansion occurs, the resulting nodes have the `backtrace()
@@ -1310,7 +1263,6 @@ pub struct ExtCtxt<'a> {
     pub macro_stats: FxHashMap<(Symbol, MacroKind), MacroStat>,
     pub nb_macro_errors: usize,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=new | COMPLEXITY=45 | LINES=131 */
 
 impl<'a> ExtCtxt<'a> {
     pub fn new(
@@ -1442,7 +1394,6 @@ impl<'a> ExtCtxt<'a> {
         self.resolver.check_unused_macros();
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=resolve_path | COMPLEXITY=20 | LINES=32 */
 
 /// Resolves a `path` mentioned inside Rust code, returning an absolute path.
 ///
@@ -1475,7 +1426,6 @@ pub fn resolve_path(sess: &Session, path: impl Into<PathBuf>, span: Span) -> PRe
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=pretty_printing_compatibility_hack | COMPLEXITY=17 | LINES=34 */
 
 /// If this item looks like a specific enums from `rental`, emit a fatal error.
 /// See #73345 and #83125 for more details.
@@ -1510,7 +1460,6 @@ fn pretty_printing_compatibility_hack(item: &Item, psess: &ParseSess) {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 pub(crate) fn ann_pretty_printing_compatibility_hack(ann: &Annotatable, psess: &ParseSess) {
     let item = match ann {
@@ -1523,7 +1472,6 @@ pub(crate) fn ann_pretty_printing_compatibility_hack(ann: &Annotatable, psess: &
     };
     pretty_printing_compatibility_hack(item, psess)
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=31 */
 
 pub(crate) fn stream_pretty_printing_compatibility_hack(
     kind: MetaVarKind,

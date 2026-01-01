@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/cleanup_post_borrowck.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 // This module provides a pass that removes parts of MIR that are no longer relevant after
 // analysis phase and borrowck. In particular, it removes false edges, user type annotations and
 // replaces following statements with [`Nop`]s:
@@ -20,7 +19,6 @@
 
 use crate::rustc_complete::mir::coverage::CoverageKind;
 use crate::rustc_complete::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=37 | LINES=60 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 

@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/cfg_accessible.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Implementation of the `#[cfg_accessible(path)]` attribute macro.
 
 use rustc_ast as ast;
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::AttributeTemplate;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=validate_input | COMPLEXITY=19 | LINES=29 */
 
 use crate::errors;
 
@@ -38,7 +35,6 @@ fn validate_input<'a>(ecx: &ExtCtxt<'_>, mi: &'a ast::MetaItem) -> Option<&'a as
     }
     None
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=17 | LINES=35 */
 
 impl MultiItemModifier for Expander {
     fn expand(

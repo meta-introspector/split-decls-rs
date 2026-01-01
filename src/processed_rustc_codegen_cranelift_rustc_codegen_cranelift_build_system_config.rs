@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/config.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fs, process};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=load_config_file | COMPLEXITY=12 | LINES=17 */
 
 fn load_config_file() -> Vec<(String, Option<String>)> {
     fs::read_to_string("config.txt")
@@ -19,7 +17,6 @@ fn load_config_file() -> Vec<(String, Option<String>)> {
         })
         .collect()
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=17 */
 
 pub(crate) fn get_bool(name: &str) -> bool {
     let values = load_config_file()

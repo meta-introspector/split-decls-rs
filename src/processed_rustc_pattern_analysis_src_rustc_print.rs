@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/rustc/print.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 // Pattern analysis sometimes wants to print patterns as part of a user-visible
 // diagnostic.
 //
@@ -14,10 +13,8 @@
 use std::fmt;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::sym;
 
 #[derive(Clone, Debug)]
@@ -26,7 +23,6 @@ pub(crate) struct FieldPat {
     pub(crate) pattern: String,
     pub(crate) is_wildcard: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=start_or_comma | COMPLEXITY=9 | LINES=15 */
 
 /// Returns a closure that will return `""` when called the first time,
 /// and then return `", "` when called any subsequent times.
@@ -42,14 +38,12 @@ fn start_or_comma() -> impl FnMut() -> &'static str {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, Debug)]
 pub(crate) enum EnumInfo<'tcx> {
     Enum { adt_def: AdtDef<'tcx>, variant_index: VariantIdx },
     NotEnum,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=57 | LINES=69 */
 
 pub(crate) fn write_struct_like<'tcx>(
     f: &mut impl fmt::Write,
@@ -119,7 +113,6 @@ pub(crate) fn write_struct_like<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=14 */
 
 pub(crate) fn write_ref_like<'tcx>(
     f: &mut impl fmt::Write,
@@ -134,7 +127,6 @@ pub(crate) fn write_ref_like<'tcx>(
     }
     write!(f, "{subpattern}")
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=20 */
 
 pub(crate) fn write_slice_like(
     f: &mut impl fmt::Write,

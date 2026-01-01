@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_session/src/config/native_libs/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::config::native_libs::{NativeLibParts, split_native_lib_value};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=split | COMPLEXITY=26 | LINES=41 */
 
 #[test]
 fn split() {

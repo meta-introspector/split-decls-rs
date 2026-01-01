@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/normalizes_to/anon_const.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{Certainty, EvalCtxt, Goal, QueryResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

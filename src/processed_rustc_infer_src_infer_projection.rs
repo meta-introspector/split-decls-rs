@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/projection.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty;
 
 use super::InferCtxt;
 use crate::infer::Term;
 use crate::traits::{Obligation, PredicateObligations};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=projection_term_to_infer | COMPLEXITY=12 | LINES=37 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// Instead of normalizing an associated type projection,

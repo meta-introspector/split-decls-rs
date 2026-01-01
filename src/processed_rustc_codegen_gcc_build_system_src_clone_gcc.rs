@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/clone_gcc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::config::ConfigInfo;
 use crate::utils::{git_clone, run_command_with_output};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=show_usage | COMPLEXITY=2 | LINES=11 */
 
 fn show_usage() {
     println!(
@@ -17,14 +14,12 @@ fn show_usage() {
     ConfigInfo::show_usage();
     println!("    --help                 : Show this help");
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Args | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 struct Args {
     out_path: PathBuf,
     config_info: ConfigInfo,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=29 | LINES=36 */
 
 impl Args {
     fn new() -> Result<Option<Self>, String> {
@@ -61,7 +56,6 @@ impl Args {
         Ok(Some(command_args))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=run | COMPLEXITY=10 | LINES=22 */
 
 pub fn run() -> Result<(), String> {
     let Some(args) = Args::new()? else {

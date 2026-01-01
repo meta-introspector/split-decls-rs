@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_transmute/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // tidy-alphabetical-start
 #[cfg_attr(test, feature(test))]
 #[feature(never_type)]
 // tidy-alphabetical-end
 
 pub(crate) use crate::rustc_data_structures::fx::{FxIndexMap as Map, FxIndexSet as Set};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Assume | COMPLEXITY=2 | LINES=11 */
 
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -16,7 +14,6 @@ pub struct Assume {
     pub safety: bool,
     pub validity: bool,
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Either transmutation is allowed, we have an error, or we have an optional
 /// Condition that must hold.
@@ -26,7 +23,6 @@ pub enum Answer<R, T> {
     No(Reason<T>),
     If(Condition<R, T>),
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=19 */
 
 /// A condition which must hold for safe transmutation to be possible.
 #[derive(Debug, Hash, Eq, PartialEq, Clone)]
@@ -46,7 +42,6 @@ pub enum Condition<R, T> {
     /// `Src` is transmutable into `Dst` if any of the enclosed requirements are met.
     IfAny(Vec<Condition<R, T>>),
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=42 */
 
 /// Answers "why wasn't the source type transmutable into the destination type?"
 #[derive(Debug, Hash, Eq, PartialEq, PartialOrd, Ord, Clone)]
@@ -89,7 +84,6 @@ pub enum Reason<T> {
     /// The size of dst is overflow
     DstSizeOverflow,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=Types | COMPLEXITY=25 | LINES=85 */
 
 #[cfg(feature = "rustc")]
 mod rustc {
@@ -175,7 +169,6 @@ mod rustc {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 
 #[cfg(feature = "rustc")]
 pub use rustc::*;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=3 | LINES=30 */
 // The Rust Abstract Syntax Tree (AST).
 //
 // # Note
@@ -24,12 +23,10 @@
 
 pub mod util {
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 
 pub use self::ast::*;
 pub use self::ast_traits::{AstNodeWrapper, HasAttrs, HasNodeId, HasTokens};
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 /// Requirements for a `StableHashingContext` to be used in this crate.
 /// This is a hack to allow using the `HashStable_Generic` derive macro

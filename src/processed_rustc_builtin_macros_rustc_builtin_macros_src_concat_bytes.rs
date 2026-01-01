@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/concat_bytes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{ExprKind, LitIntType, LitKind, StrStyle, UintTy, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::errors::report_lit_error;
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=invalid_type_err | COMPLEXITY=60 | LINES=76 */
 
 use crate::errors;
 use crate::util::get_exprs_from_tts;
@@ -84,7 +80,6 @@ fn invalid_type_err(
         Ok(LitKind::Err(guar)) => guar,
         Err(err) => report_lit_error(&cx.sess.psess, err, token_lit, span),
     }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=handle_array_element | COMPLEXITY=29 | LINES=46 */
 }
 
 /// Returns `expr` as a *single* byte literal if applicable.
@@ -131,7 +126,6 @@ fn handle_array_element(
         }
         _ => missing_literals.push(expr.span),
     }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
     None
 }
@@ -144,12 +138,10 @@ pub(crate) fn expand_concat_bytes(
     let ExpandResult::Ready(mac) = get_exprs_from_tts(cx, tts) else {
         return ExpandResult::Retry(());
     };
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
     let es = match mac {
         Ok(es) => es,
         Err(guar) => return ExpandResult::Ready(DummyResult::any(sp, guar)),
     };
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=41 | LINES=54 */
     let mut accumulator = Vec::new();
     let mut missing_literals = vec![];
     let mut guar = None;
@@ -204,17 +196,13 @@ pub(crate) fn expand_concat_bytes(
             }
         }
     }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
     ExpandResult::Ready(if !missing_literals.is_empty() {
         let guar = cx.dcx().emit_err(errors::ConcatBytesMissingLiteral { spans: missing_literals });
         MacEager::expr(DummyResult::raw_expr(sp, Some(guar)))
     } else if let Some(guar) = guar {
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
         MacEager::expr(DummyResult::raw_expr(sp, Some(guar)))
     } else {
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
         let sp = cx.with_def_site_ctxt(sp);
         MacEager::expr(cx.expr_byte_str(sp, accumulator))
     })
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=1 */
 }

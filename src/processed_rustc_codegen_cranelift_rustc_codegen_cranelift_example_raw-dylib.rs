@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/raw-dylib.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=18 | LINES=31 */
 // Tests the raw-dylib feature for Windows.
 // https://doc.rust-lang.org/reference/items/external-blocks.html#the-link-attribute
 

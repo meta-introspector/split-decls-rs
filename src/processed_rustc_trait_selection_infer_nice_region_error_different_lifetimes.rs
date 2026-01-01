@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/different_lifetimes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Error Reporting for Anonymous Region Lifetime Errors
 // where both the regions are anonymous.
 
 use crate::rustc_complete::{Diag, ErrorGuaranteed, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Ty;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::{Region, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::error_reporting::infer::nice_region_error::find_anon_type::find_anon_type;
 use crate::error_reporting::infer::nice_region_error::util::AnonymousParamInfo;
 use crate::errors::{AddLifetimeParamsSuggestion, LifetimeMismatch, LifetimeMismatchLabels};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{RegionResolutionError, SubregionOrigin};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=suggest_adding_lifetime_params | COMPLEXITY=49 | LINES=136 */
 
 impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
     /// Print the error message for lifetime errors when both the concerned regions are anonymous.

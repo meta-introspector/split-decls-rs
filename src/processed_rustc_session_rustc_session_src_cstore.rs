@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/cstore.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // the rustc crate store interface. This also includes types that
 // are *mostly* used as a part of that interface, but these should
 // probably get a better home if someone can find one.
@@ -9,19 +8,13 @@ use std::path::PathBuf;
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_data_structures::sync::{self, AppendOnlyIndexVec, FreezeLock};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::{
     CrateNum, DefId, LOCAL_CRATE, LocalDefId, StableCrateId, StableCrateIdMap,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash, Definitions};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CrateSource | COMPLEXITY=4 | LINES=14 */
 
 use crate::search_paths::PathKind;
 
@@ -36,7 +29,6 @@ pub struct CrateSource {
     pub rmeta: Option<(PathBuf, PathKind)>,
     pub sdylib_interface: Option<(PathBuf, PathKind)>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=paths | COMPLEXITY=3 | LINES=7 */
 
 impl CrateSource {
     #[inline]
@@ -44,7 +36,6 @@ impl CrateSource {
         self.dylib.iter().chain(self.rlib.iter()).chain(self.rmeta.iter()).map(|p| &p.0)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Encodable, Decodable, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Debug)]
 #[derive(HashStable_Generic)]
@@ -58,7 +49,6 @@ pub enum CrateDepKind {
     /// Ordinary `extern crate`s result in `Explicit` dependencies.
     Explicit,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=macros_only | COMPLEXITY=7 | LINES=10 */
 
 impl CrateDepKind {
     #[inline]
@@ -69,14 +59,12 @@ impl CrateDepKind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Debug, PartialEq, Clone, Encodable, Decodable, HashStable_Generic)]
 pub enum LinkagePreference {
     RequireDynamic,
     RequireStatic,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=NativeLib | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Debug, Encodable, Decodable, HashStable_Generic)]
 pub struct NativeLib {
@@ -89,7 +77,6 @@ pub struct NativeLib {
     pub verbatim: Option<bool>,
     pub dll_imports: Vec<DllImport>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=has_modifiers | COMPLEXITY=8 | LINES=10 */
 
 impl NativeLib {
     pub fn has_modifiers(&self) -> bool {
@@ -100,7 +87,6 @@ impl NativeLib {
         if self.kind == NativeLibKind::WasmImportModule { Some(self.name) } else { None }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DllImport | COMPLEXITY=9 | LINES=15 */
 
 #[derive(Clone, Debug, Encodable, Decodable, HashStable_Generic)]
 pub struct DllImport {
@@ -116,7 +102,6 @@ pub struct DllImport {
     /// Is this for a function (rather than a static variable).
     pub is_fn: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=ordinal | COMPLEXITY=8 | LINES=15 */
 
 impl DllImport {
     pub fn ordinal(&self) -> Option<u16> {
@@ -132,7 +117,6 @@ impl DllImport {
             || self.import_name_type == Some(PeImportNameType::NoPrefix)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Calling convention for a function defined in an external library.
 ///
@@ -145,7 +129,6 @@ pub enum DllCallingConvention {
     Fastcall(usize),
     Vectorcall(usize),
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=ForeignModule | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Encodable, Decodable, HashStable_Generic, Debug)]
 pub struct ForeignModule {
@@ -153,7 +136,6 @@ pub struct ForeignModule {
     pub def_id: DefId,
     pub abi: ExternAbi,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ExternCrate | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Copy, Clone, Debug, HashStable_Generic)]
 pub struct ExternCrate {
@@ -169,7 +151,6 @@ pub struct ExternCrate {
     /// Crate that depends on this crate
     pub dependency_of: CrateNum,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=is_direct | COMPLEXITY=4 | LINES=18 */
 
 impl ExternCrate {
     /// If true, then this crate is the crate named by the extern
@@ -188,7 +169,6 @@ impl ExternCrate {
         (self.is_direct(), !self.path_len)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Copy, Clone, Debug, HashStable_Generic)]
 pub enum ExternCrateSource {
@@ -202,7 +182,6 @@ pub enum ExternCrateSource {
     /// Crate is implicitly loaded by a path resolving through extern prelude.
     Path,
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// A store of Rust crates, through which their metadata can be accessed.
 ///
@@ -210,7 +189,6 @@ pub enum ExternCrateSource {
 /// functionality should be driven through queries instead!
 ///
 /// If you find a method on this trait named `{name}_untracked` it signifies
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=as_any | COMPLEXITY=5 | LINES=19 */
 /// that it's *not* tracked for dependency information throughout compilation
 /// (it'd break incremental compilation) and should only be called pre-HIR (e.g.
 /// during resolve)
@@ -230,7 +208,6 @@ pub trait CrateStore: std::fmt::Debug {
     fn crate_name(&self, cnum: CrateNum) -> Symbol;
     fn stable_crate_id(&self, cnum: CrateNum) -> StableCrateId;
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=Untracked | COMPLEXITY=4 | LINES=11 */
 
 pub type CrateStoreDyn = dyn CrateStore + sync::DynSync + sync::DynSend;
 

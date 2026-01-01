@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/traits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::mem;
 
 use crate::rustc_feature::AttributeType;
@@ -8,14 +7,10 @@ use crate::prelude::*;
 use crate::attributes::{
     AttributeOrder, NoArgsAttributeParser, OnDuplicate, SingleAttributeParser,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::context::{AcceptContext, Stage};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::parser::ArgParser;
 use crate::target_checking::Policy::{Allow, Warn};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::target_checking::{ALL_TARGETS, AllowedTargets};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=28 | LINES=45 */
 
 pub(crate) struct SkipDuringMethodDispatchParser;
 impl<S: Stage> SingleAttributeParser<S> for SkipDuringMethodDispatchParser {
@@ -61,7 +56,6 @@ impl<S: Stage> SingleAttributeParser<S> for SkipDuringMethodDispatchParser {
         Some(AttributeKind::SkipDuringMethodDispatch { array, boxed_slice, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct ParenSugarParser;
 impl<S: Stage> NoArgsAttributeParser<S> for ParenSugarParser {
@@ -70,7 +64,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ParenSugarParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::ParenSugar;
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct TypeConstParser;
 impl<S: Stage> NoArgsAttributeParser<S> for TypeConstParser {
@@ -79,7 +72,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for TypeConstParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::AssocConst)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::TypeConst;
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 // Markers
 
@@ -95,7 +87,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for MarkerParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::Marker;
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct DenyExplicitImplParser;
 impl<S: Stage> NoArgsAttributeParser<S> for DenyExplicitImplParser {
@@ -104,7 +95,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for DenyExplicitImplParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::DenyExplicitImpl;
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct DoNotImplementViaObjectParser;
 impl<S: Stage> NoArgsAttributeParser<S> for DoNotImplementViaObjectParser {
@@ -113,7 +103,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for DoNotImplementViaObjectParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::DoNotImplementViaObject;
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 // FIXME(const_trait_impl): remove this
 // Const traits
@@ -125,7 +114,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ConstTraitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::ConstTrait;
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // Specialization
 
@@ -136,7 +124,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for SpecializationTraitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::SpecializationTrait;
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct UnsafeSpecializationMarkerParser;
 impl<S: Stage> NoArgsAttributeParser<S> for UnsafeSpecializationMarkerParser {
@@ -145,7 +132,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for UnsafeSpecializationMarkerParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::UnsafeSpecializationMarker;
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // Coherence
 
@@ -156,7 +142,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for CoinductiveParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::Coinductive;
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 pub(crate) struct AllowIncoherentImplParser;
 impl<S: Stage> NoArgsAttributeParser<S> for AllowIncoherentImplParser {
@@ -166,7 +151,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for AllowIncoherentImplParser {
         AllowedTargets::AllowList(&[Allow(Target::Method(MethodKind::Inherent))]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::AllowIncoherentImpl;
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 pub(crate) struct CoherenceIsCoreParser;
 impl<S: Stage> NoArgsAttributeParser<S> for CoherenceIsCoreParser {
@@ -176,7 +160,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for CoherenceIsCoreParser {
     const TYPE: AttributeType = AttributeType::CrateLevel;
     const CREATE: fn(Span) -> AttributeKind = |_| AttributeKind::CoherenceIsCore;
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 pub(crate) struct FundamentalParser;
 impl<S: Stage> NoArgsAttributeParser<S> for FundamentalParser {
@@ -186,7 +169,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for FundamentalParser {
         AllowedTargets::AllowList(&[Allow(Target::Struct), Allow(Target::Trait)]);
     const CREATE: fn(Span) -> AttributeKind = |_| AttributeKind::Fundamental;
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct PointeeParser;
 impl<S: Stage> NoArgsAttributeParser<S> for PointeeParser {

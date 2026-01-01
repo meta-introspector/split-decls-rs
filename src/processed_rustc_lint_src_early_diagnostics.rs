@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/early/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::util::unicode::TEXT_FLOW_CONTROL_CHARS;
 use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, LintDiagnostic, elided_lifetime_in_path_suggestion,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=decorate_builtin_lint | COMPLEXITY=260 | LINES=443 */
 use crate::rustc_complete::middle::stability;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;

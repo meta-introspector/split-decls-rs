@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/canonical/query_response.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 // This module contains the code to instantiate a "query result", and
 // in particular to extract out the resulting region obligations and
 // encode them therein.
@@ -13,30 +12,23 @@ use std::fmt::Debug;
 use std::iter;
 
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::arena::ArenaAllocatable;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::infer::canonical::CanonicalVarKind;
 use crate::rustc_complete::ty::{self, BoundVar, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::infer::canonical::instantiate::{CanonicalExt, instantiate_value};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::infer::canonical::{
     Canonical, CanonicalQueryResponse, CanonicalVarValues, Certainty, OriginalQueryValues,
     QueryRegionConstraints, QueryResponse,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::infer::region_constraints::RegionConstraintData;
 use crate::infer::{
     DefineOpaqueTypes, InferCtxt, InferOk, InferResult, SubregionOrigin, TypeOutlivesConstraint,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::traits::query::NoSolution;
 use crate::traits::{ObligationCause, PredicateObligations, ScrubbedTraitError, TraitEngine};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=make_canonicalized_query_response | COMPLEXITY=218 | LINES=549 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// This method is meant to be invoked as the final step of a canonical query
@@ -586,7 +578,6 @@ impl<'tcx> InferCtxt<'tcx> {
         Ok(InferOk { value: (), obligations })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=make_query_region_constraints | COMPLEXITY=8 | LINES=31 */
 
 /// Given the region obligations and constraints scraped from the infcx,
 /// creates query region constraints.

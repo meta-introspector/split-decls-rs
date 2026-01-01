@@ -1,23 +1,15 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/cast.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::assert_matches;
 
 use crate::rustc_abi::{FieldIdx, Integer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_apfloat::{Float, FloatConvert};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::CastKind;
 use crate::rustc_complete::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, FloatTy, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use tracing::trace;
 
 use super::util::ensure_monomorphic_enough;
@@ -25,10 +17,8 @@ use super::{
     FnVal, ImmTy, Immediate, InterpCx, Machine, OpTy, PlaceTy, err_inval, interp_ok, throw_ub,
     throw_ub_custom,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::interpret::Writeable;
 use crate::{enter_trace_span, fluent_generated as fluent};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cast | COMPLEXITY=219 | LINES=491 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     pub fn cast(

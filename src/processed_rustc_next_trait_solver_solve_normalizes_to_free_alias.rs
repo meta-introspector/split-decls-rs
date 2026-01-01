@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/normalizes_to/free_alias.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Computes a normalizes-to (projection) goal for inherent associated types,
 // `#[feature(lazy_type_alias)]` and `#[feature(type_alias_impl_trait)]`.
 //
@@ -7,11 +6,9 @@
 // the alias and registers the where-clauses of the type alias.
 
 use rustc_type_ir::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{Certainty, EvalCtxt, Goal, GoalSource, QueryResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=33 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

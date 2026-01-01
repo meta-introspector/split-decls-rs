@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/builder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::borrow::Cow;
 use std::cell::Cell;
 use std::convert::TryFrom;
@@ -9,42 +8,32 @@ use gccjit::{
     BinaryOp, Block, ComparisonOp, Context, Function, LValue, Location, RValue, ToRValue, Type,
     UnaryOp,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_abi as abi;
 use crate::rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout, WrappingRange};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_apfloat::{Float, Round, Status, ieee};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::MemFlags;
 use crate::rustc_codegen_ssa::common::{
     AtomicRmwBinOp, IntPredicate, RealPredicate, SynchronizationScope, TypeKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_codegen_ssa::mir::place::PlaceRef;
 use crate::rustc_codegen_ssa::traits::{
     BackendTypes, BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods,
     LayoutTypeCodegenMethods, OverflowOp, StaticBuilderMethods,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AtomicOrdering, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_target::callconv::FnAbi;
 use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, X86Abi};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::common::{SignType, TypeReflection, type_is_pointer};
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::context::CodegenCx;
 use crate::errors;
 use crate::intrinsic::llvm;
@@ -57,7 +46,6 @@ enum ExtremumOperation {
     Max,
     Min,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Builder | COMPLEXITY=2 | LINES=7 */
 
 pub struct Builder<'a, 'gcc, 'tcx> {
     pub cx: &'a CodegenCx<'gcc, 'tcx>,
@@ -65,7 +53,6 @@ pub struct Builder<'a, 'gcc, 'tcx> {
     pub location: Option<Location<'gcc>>,
     value_counter: Cell<u64>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=with_cx | COMPLEXITY=156 | LINES=394 */
 
 impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
     fn with_cx(cx: &'a CodegenCx<'gcc, 'tcx>, block: Block<'gcc>) -> Self {
@@ -460,21 +447,18 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         result.to_rvalue()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTyCtxt<'tcx> for Builder<'_, '_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
         self.cx.tcx()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl HasDataLayout for Builder<'_, '_, '_> {
     fn data_layout(&self) -> &TargetDataLayout {
         self.cx.data_layout()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
     #[inline]
@@ -482,7 +466,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
         self.cx.handle_layout_err(err, span, ty)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
     #[inline]
@@ -495,7 +478,6 @@ impl<'tcx> FnAbiOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
         self.cx.handle_fn_abi_err(err, span, fn_abi_request)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'gcc, 'tcx> Deref for Builder<'a, 'gcc, 'tcx> {
     type Target = CodegenCx<'gcc, 'tcx>;
@@ -504,7 +486,6 @@ impl<'a, 'gcc, 'tcx> Deref for Builder<'a, 'gcc, 'tcx> {
         self.cx
     }
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 impl<'gcc, 'tcx> BackendTypes for Builder<'_, 'gcc, 'tcx> {
     type Value = <CodegenCx<'gcc, 'tcx> as BackendTypes>::Value;
@@ -518,7 +499,6 @@ impl<'gcc, 'tcx> BackendTypes for Builder<'_, 'gcc, 'tcx> {
     type DILocation = <CodegenCx<'gcc, 'tcx> as BackendTypes>::DILocation;
     type DIVariable = <CodegenCx<'gcc, 'tcx> as BackendTypes>::DIVariable;
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=set_rvalue_location | COMPLEXITY=5 | LINES=11 */
 
 fn set_rvalue_location<'a, 'gcc, 'tcx>(
     bx: &mut Builder<'a, 'gcc, 'tcx>,
@@ -530,7 +510,6 @@ fn set_rvalue_location<'a, 'gcc, 'tcx>(
     }
     rvalue
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=build | COMPLEXITY=484 | LINES=1305 */
 
 impl<'a, 'gcc, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'gcc, 'tcx> {
     type CodegenCx = CodegenCx<'gcc, 'tcx>;
@@ -1834,7 +1813,6 @@ impl<'a, 'gcc, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'gcc, 'tcx> {
         self.fptoint_sat(true, val, dest_ty)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=fptoint_sat | COMPLEXITY=224 | LINES=595 */
 
 impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
     fn fptoint_sat(
@@ -2430,7 +2408,6 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         self.bitcast_if_needed(res, result_type)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=difference_or_zero | COMPLEXITY=7 | LINES=16 */
 
 fn difference_or_zero<'gcc>(
     loc: Option<Location<'gcc>>,
@@ -2447,7 +2424,6 @@ fn difference_or_zero<'gcc>(
         if masks.get_type() != a_type { context.new_bitcast(loc, masks, a_type) } else { masks };
     difference & masks
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=get_static | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'gcc, 'tcx> StaticBuilderMethods for Builder<'a, 'gcc, 'tcx> {
     fn get_static(&mut self, def_id: DefId) -> RValue<'gcc> {
@@ -2455,33 +2431,28 @@ impl<'a, 'gcc, 'tcx> StaticBuilderMethods for Builder<'a, 'gcc, 'tcx> {
         self.cx().get_static(def_id).get_address(self.location)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTypingEnv<'tcx> for Builder<'_, '_, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         self.cx.typing_env()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for Builder<'_, '_, 'tcx> {
     fn target_spec(&self) -> &Target {
         self.cx.target_spec()
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=x86_abi_opt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasX86AbiOpt for Builder<'_, '_, 'tcx> {
     fn x86_abi_opt(&self) -> X86Abi {
         self.cx.x86_abi_opt()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=to_gcc_comparison | COMPLEXITY=2 | LINES=4 */
 
 pub trait ToGccComp {
     fn to_gcc_comparison(&self) -> ComparisonOp;
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=to_gcc_comparison | COMPLEXITY=10 | LINES=17 */
 
 impl ToGccComp for IntPredicate {
     fn to_gcc_comparison(&self) -> ComparisonOp {
@@ -2499,7 +2470,6 @@ impl ToGccComp for IntPredicate {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=to_gcc_comparison | COMPLEXITY=11 | LINES=24 */
 
 impl ToGccComp for RealPredicate {
     fn to_gcc_comparison(&self) -> ComparisonOp {
@@ -2524,7 +2494,6 @@ impl ToGccComp for RealPredicate {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[repr(C)]
 #[allow(non_camel_case_types)]
@@ -2536,12 +2505,10 @@ enum MemOrdering {
     __ATOMIC_ACQ_REL,
     __ATOMIC_SEQ_CST,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=to_gcc | COMPLEXITY=2 | LINES=4 */
 
 trait ToGccOrdering {
     fn to_gcc(self) -> i32;
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=to_gcc | COMPLEXITY=12 | LINES=15 */
 
 impl ToGccOrdering for AtomicOrdering {
     fn to_gcc(self) -> i32 {
@@ -2557,14 +2524,12 @@ impl ToGccOrdering for AtomicOrdering {
         ordering as i32
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=get_maybe_pointer_size | COMPLEXITY=2 | LINES=6 */
 
 // Needed because gcc 12 `get_size()` doesn't work on pointers.
 #[cfg(feature = "master")]
 fn get_maybe_pointer_size(value: RValue<'_>) -> u32 {
     value.get_type().get_size()
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=get_maybe_pointer_size | COMPLEXITY=6 | LINES=6 */
 
 #[cfg(not(feature = "master"))]
 fn get_maybe_pointer_size(value: RValue<'_>) -> u32 {

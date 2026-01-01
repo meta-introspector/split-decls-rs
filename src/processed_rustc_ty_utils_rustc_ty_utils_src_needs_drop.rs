@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/needs_drop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Check whether a type has (potentially) non-trivial drop glue.
 
 use crate::rustc_data_structures::fx::FxHashSet;
@@ -8,12 +7,9 @@ use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::util::{AlwaysRequiresDrop, needs_drop_components};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=needs_drop_raw | COMPLEXITY=9 | LINES=22 */
 
 use crate::errors::NeedsDropOverflow;
 
@@ -36,7 +32,6 @@ fn needs_drop_raw<'tcx>(
     debug!("needs_drop_raw({:?}) = {:?}", query, res);
     res
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=needs_async_drop_raw | COMPLEXITY=9 | LINES=18 */
 
 fn needs_async_drop_raw<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -55,7 +50,6 @@ fn needs_async_drop_raw<'tcx>(
     debug!("needs_async_drop_raw({:?}) = {:?}", query, res);
     res
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=filter_array_elements | COMPLEXITY=15 | LINES=17 */
 
 /// HACK: in order to not mistakenly assume that `[PhantomData<T>; N]` requires drop glue
 /// we check the element type for drop glue. The correct fix would be looking at the
@@ -73,7 +67,6 @@ fn filter_array_elements<'tcx>(
         Err(AlwaysRequiresDrop) => true,
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=filter_array_elements_async | COMPLEXITY=10 | LINES=12 */
 fn filter_array_elements_async<'tcx>(
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
@@ -86,7 +79,6 @@ fn filter_array_elements_async<'tcx>(
         Err(AlwaysRequiresDrop) => true,
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=has_significant_drop_raw | COMPLEXITY=4 | LINES=19 */
 
 fn has_significant_drop_raw<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -106,7 +98,6 @@ fn has_significant_drop_raw<'tcx>(
     debug!("has_significant_drop_raw({:?}) = {:?}", query, res);
     res
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=NeedsDropTypes | COMPLEXITY=10 | LINES=26 */
 
 struct NeedsDropTypes<'tcx, F> {
     tcx: TyCtxt<'tcx>,
@@ -133,7 +124,6 @@ struct NeedsDropTypes<'tcx, F> {
     // drops, which are the two important behavioral changes toggled by this bool.
     exhaustive: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=30 */
 
 impl<'tcx, F> NeedsDropTypes<'tcx, F> {
     fn new(
@@ -164,7 +154,6 @@ impl<'tcx, F> NeedsDropTypes<'tcx, F> {
         if self.exhaustive { Ok(ty) } else { Err(AlwaysRequiresDrop) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=next | COMPLEXITY=96 | LINES=151 */
 
 impl<'tcx, F, I> Iterator for NeedsDropTypes<'tcx, F>
 where
@@ -316,7 +305,6 @@ where
         None
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 enum DtorType {
     /// Type has a `Drop` but it is considered insignificant.
@@ -327,7 +315,6 @@ enum DtorType {
     /// Type has a `Drop` implantation.
     Significant,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=drop_tys_helper | COMPLEXITY=59 | LINES=77 */
 
 // This is a helper function for `adt_drop_tys` and `adt_significant_drop_tys`.
 // Depending on the implantation of `adt_has_dtor`, it is used to check if the
@@ -405,7 +392,6 @@ fn drop_tys_helper<'tcx>(
 
     NeedsDropTypes::new(tcx, typing_env, ty, exhaustive, adt_components)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=adt_consider_insignificant_dtor | COMPLEXITY=16 | LINES=23 */
 
 fn adt_consider_insignificant_dtor<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -429,7 +415,6 @@ fn adt_consider_insignificant_dtor<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=adt_drop_tys | COMPLEXITY=5 | LINES=21 */
 
 fn adt_drop_tys<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -451,7 +436,6 @@ fn adt_drop_tys<'tcx>(
     .collect::<Result<Vec<_>, _>>()
     .map(|components| tcx.mk_type_list(&components))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=adt_async_drop_tys | COMPLEXITY=5 | LINES=20 */
 
 fn adt_async_drop_tys<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -472,7 +456,6 @@ fn adt_async_drop_tys<'tcx>(
     .collect::<Result<Vec<_>, _>>()
     .map(|components| tcx.mk_type_list(&components))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=adt_significant_drop_tys | COMPLEXITY=5 | LINES=19 */
 
 // If `def_id` refers to a generic ADT, the queries above and below act as if they had been handed
 // a `tcx.make_ty(def, identity_args)` and as such it is legal to instantiate the generic parameters
@@ -492,7 +475,6 @@ fn adt_significant_drop_tys(
     .collect::<Result<Vec<_>, _>>()
     .map(|components| tcx.mk_type_list(&components))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=list_significant_drop_tys | COMPLEXITY=2 | LINES=19 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 fn list_significant_drop_tys<'tcx>(
@@ -512,7 +494,6 @@ fn list_significant_drop_tys<'tcx>(
         .collect::<Vec<_>>(),
     )
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

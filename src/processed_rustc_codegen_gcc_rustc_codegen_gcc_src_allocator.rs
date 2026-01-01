@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/allocator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[cfg(feature = "master")]
 use gccjit::FnAttribute;
 use gccjit::{Context, FunctionType, RValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=83 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::OomStrategy;
@@ -92,7 +89,6 @@ pub(crate) unsafe fn codegen(
         None,
     );
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=create_const_value_function | COMPLEXITY=7 | LINES=28 */
 
 fn create_const_value_function(
     tcx: TyCtxt<'_>,
@@ -121,7 +117,6 @@ fn create_const_value_function(
     let block = func.new_block("entry");
     block.end_with_return(None, value);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=create_wrapper_function | COMPLEXITY=21 | LINES=74 */
 
 fn create_wrapper_function(
     tcx: TyCtxt<'_>,

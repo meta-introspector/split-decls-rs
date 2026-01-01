@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_transmute/src/maybe_transmutable/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use itertools::Itertools;
 
 use super::query_context::test::{Def, UltraMinimal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Answer, Assume, Condition, Reason, layout};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_transmutable | COMPLEXITY=2 | LINES=7 */
 
 type Tree = layout::Tree<Def, !, !>;
 type Dfa = layout::Dfa<!, !>;
@@ -14,7 +11,6 @@ type Dfa = layout::Dfa<!, !>;
 trait Representation {
     fn is_transmutable(src: Self, dst: Self, assume: Assume) -> Answer<!, !>;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_transmutable | COMPLEXITY=5 | LINES=12 */
 
 impl Representation for Tree {
     fn is_transmutable(src: Self, dst: Self, assume: Assume) -> Answer<!, !> {
@@ -27,7 +23,6 @@ impl Representation for Tree {
         .answer()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_transmutable | COMPLEXITY=5 | LINES=12 */
 
 impl Representation for Dfa {
     fn is_transmutable(src: Self, dst: Self, assume: Assume) -> Answer<!, !> {
@@ -40,7 +35,6 @@ impl Representation for Dfa {
         .answer()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_transmutable | COMPLEXITY=2 | LINES=13 */
 
 fn is_transmutable<R: Representation + Clone>(
     src: &R,
@@ -54,7 +48,6 @@ fn is_transmutable<R: Representation + Clone>(
     // toggleable aspects of the transmutability analysis.
     R::is_transmutable(src, dst, assume)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=src_safe_dst_safe | COMPLEXITY=13 | LINES=52 */
 
 mod safety {
     use super::*;
@@ -107,7 +100,6 @@ mod safety {
         );
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=size | COMPLEXITY=19 | LINES=30 */
 
 mod size {
     use super::*;
@@ -138,7 +130,6 @@ mod size {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=should_permit_identity_transmutation_tree | COMPLEXITY=41 | LINES=108 */
 
 mod bool {
     use super::*;
@@ -247,7 +238,6 @@ mod bool {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=size | COMPLEXITY=24 | LINES=33 */
 
 mod uninit {
     use super::*;
@@ -281,7 +271,6 @@ mod uninit {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=should_permit_identity_transmutation | COMPLEXITY=5 | LINES=23 */
 
 mod alt {
     use super::*;
@@ -305,7 +294,6 @@ mod alt {
         assert_eq!(answer, Answer::Yes, "layout:{:#?}", layout);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=union | COMPLEXITY=5 | LINES=29 */
 
 mod union {
     use super::*;
@@ -335,7 +323,6 @@ mod union {
         assert_eq!(is_transmutable(&t, &u, Assume::default()), Answer::Yes);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=should_permit_valid_transmutation | COMPLEXITY=19 | LINES=39 */
 
 mod char {
     use super::*;
@@ -375,7 +362,6 @@ mod char {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=should_permit_identity_transmutation | COMPLEXITY=14 | LINES=31 */
 
 mod nonzero {
     use super::*;
@@ -407,7 +393,6 @@ mod nonzero {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=should_permit_identity_transmutation | COMPLEXITY=13 | LINES=41 */
 
 mod r#ref {
     use super::*;
@@ -449,7 +434,6 @@ mod r#ref {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=bench_dfa_from_tree | COMPLEXITY=7 | LINES=36 */
 
 mod benches {
     use std::hint::black_box;

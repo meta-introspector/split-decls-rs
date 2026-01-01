@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/interner.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use std::borrow::Borrow;
 use std::fmt::Debug;
 use std::hash::Hash;
@@ -12,16 +11,12 @@ use crate::fold::TypeFoldable;
 use crate::inherent::*;
 use crate::ir_print::IrPrint;
 use crate::lang_items::{SolverAdtLangItem, SolverLangItem, SolverTraitLangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::relate::Relate;
 use crate::solve::{
     CanonicalInput, ExternalConstraintsData, PredefinedOpaquesData, QueryResult, inspect,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::visit::{Flags, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, CanonicalParamEnvCacheEntry, search_graph};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=next_trait_solver_globally | COMPLEXITY=44 | LINES=390 */
 
 #[cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir_interner")]
 pub trait Interner:
@@ -412,7 +407,6 @@ pub trait Interner:
         canonical_goal: CanonicalInput<Self>,
     ) -> (QueryResult<Self>, Self::Probe);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=collect_and_apply | COMPLEXITY=15 | LINES=21 */
 
 /// Imagine you have a function `F: FnOnce(&[T]) -> R`, plus an iterator `iter`
 /// that produces `T` items. You could combine them with
@@ -434,7 +428,6 @@ pub trait CollectAndApply<T, R>: Sized {
         I: Iterator<Item = Self>,
         F: FnOnce(&[T]) -> R;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=collect_and_apply | COMPLEXITY=18 | LINES=53 */
 
 /// The blanket impl that always collects all elements and applies `f`.
 impl<T, R> CollectAndApply<T, R> for T {
@@ -488,7 +481,6 @@ impl<T, R> CollectAndApply<T, R> for T {
         f(&[t0, t1, t2, t3, t4, t5, t6, t7, t8].into_iter().chain(iter).collect::<Vec<_>>())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=collect_and_apply | COMPLEXITY=21 | LINES=66 */
 
 /// A fallible impl that will fail, without calling `f`, if there are any
 /// errors during collection.
@@ -555,7 +547,6 @@ impl<T, R, E> CollectAndApply<T, R> for Result<T, E> {
             .collect::<Result<Vec<_>, _>>()?))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=mk_tracked | COMPLEXITY=10 | LINES=27 */
 
 impl<I: Interner> search_graph::Cx for I {
     type Input = CanonicalInput<I>;

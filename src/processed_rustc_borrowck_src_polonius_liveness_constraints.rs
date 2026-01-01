@@ -1,21 +1,16 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/liveness_constraints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::collections::BTreeMap;
 
 use crate::rustc_index::bit_set::SparseBitMatrix;
 use crate::rustc_complete::mir::{Body, Location};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::relate::{self, Relate, RelateResult, TypeRelation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_mir_dataflow::points::PointIndex;
 
 use super::{
     ConstraintDirection, LocalizedOutlivesConstraint, LocalizedOutlivesConstraintSet,
     PoloniusLivenessContext,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 use crate::region_infer::values::LivenessValues;
 use crate::universal_regions::UniversalRegions;
 
@@ -36,7 +31,6 @@ impl PoloniusLivenessContext {
         extractor.relate(value, value).expect("Can't have a type error relating to itself");
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=49 */
 
 /// Propagate loans throughout the CFG: for each statement in the MIR, create localized outlives
 /// constraints for loans that are propagated to the next statements.
@@ -86,7 +80,6 @@ pub(super) fn create_liveness_constraints<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=propagate_loans_between_points | COMPLEXITY=21 | LINES=62 */
 
 /// Propagate loans within a region between two points in the CFG, if that region is live at both
 /// the source and target points.
@@ -149,7 +142,6 @@ fn propagate_loans_between_points(
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_liveness_constraint | COMPLEXITY=16 | LINES=48 */
 
 /// Adds `LocalizedOutlivesConstraint`s between two connected points, according to the given edge
 /// direction.
@@ -198,7 +190,6 @@ fn add_liveness_constraint(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=VarianceExtractor | COMPLEXITY=4 | LINES=10 */
 
 /// Extracts variances for regions contained within types. Follows the same structure as
 /// `rustc_infer`'s `Generalizer`: we try to relate a type with itself to track and extract the
@@ -209,7 +200,6 @@ struct VarianceExtractor<'a, 'tcx> {
     directions: &'a mut BTreeMap<RegionVid, ConstraintDirection>,
     universal_regions: &'a UniversalRegions<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=record_variance | COMPLEXITY=32 | LINES=51 */
 
 impl<'tcx> VarianceExtractor<'_, 'tcx> {
     fn record_variance(&mut self, region: ty::Region<'tcx>, variance: ty::Variance) {
@@ -261,7 +251,6 @@ impl<'tcx> VarianceExtractor<'_, 'tcx> {
             .or_insert(direction);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=13 | LINES=56 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for VarianceExtractor<'_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

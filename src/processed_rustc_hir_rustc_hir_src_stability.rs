@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_hir/src/stability.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::num::NonZero;
 
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Stability | COMPLEXITY=3 | LINES=25 */
 
 use crate::RustcVersion;
 use crate::attrs::PrintAttribute;
@@ -31,7 +28,6 @@ pub struct Stability {
     pub level: StabilityLevel,
     pub feature: Symbol,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_unstable | COMPLEXITY=5 | LINES=14 */
 
 impl Stability {
     pub fn is_unstable(&self) -> bool {
@@ -46,7 +42,6 @@ impl Stability {
         self.level.stable_since()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ConstStability | COMPLEXITY=2 | LINES=12 */
 
 /// Represents the `#[rustc_const_unstable]` and `#[rustc_const_stable]` attributes.
 #[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
@@ -59,7 +54,6 @@ pub struct ConstStability {
     /// This is true iff the `const_stable_indirect` attribute is present.
     pub const_stable_indirect: bool,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_partial | COMPLEXITY=10 | LINES=27 */
 
 impl ConstStability {
     pub fn from_partial(
@@ -87,7 +81,6 @@ impl ConstStability {
         self.level.is_stable()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PartialConstStability | COMPLEXITY=2 | LINES=11 */
 
 /// Excludes `const_stable_indirect`. This is necessary because when `-Zforce-unstable-if-unmarked`
 /// is set, we need to encode standalone `#[rustc_const_stable_indirect]` attributes
@@ -99,7 +92,6 @@ pub struct PartialConstStability {
     /// whether the function has a `#[rustc_promotable]` attribute
     pub promotable: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_const_unstable | COMPLEXITY=4 | LINES=10 */
 
 impl PartialConstStability {
     pub fn is_const_unstable(&self) -> bool {
@@ -110,7 +102,6 @@ impl PartialConstStability {
         self.level.is_stable()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=43 */
 
 /// The available stability levels.
 #[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, Hash)]
@@ -154,7 +145,6 @@ pub enum StabilityLevel {
         allowed_through_unstable_modules: Option<Symbol>,
     },
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Rust release in which a feature is stabilized.
 #[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, PartialOrd, Ord, Hash)]
@@ -167,7 +157,6 @@ pub enum StableSince {
     /// Failed to parse a stabilization version.
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_unstable | COMPLEXITY=13 | LINES=15 */
 
 impl StabilityLevel {
     pub fn is_unstable(&self) -> bool {
@@ -183,7 +172,6 @@ impl StabilityLevel {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, Hash)]
 #[derive(HashStable_Generic, PrintAttribute)]
@@ -192,7 +180,6 @@ pub enum UnstableReason {
     Default,
     Some(Symbol),
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=DefaultBodyStability | COMPLEXITY=2 | LINES=8 */
 
 /// Represents the `#[rustc_default_body_unstable]` attribute.
 #[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
@@ -201,7 +188,6 @@ pub struct DefaultBodyStability {
     pub level: StabilityLevel,
     pub feature: Symbol,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from_opt_reason | COMPLEXITY=12 | LINES=18 */
 
 impl UnstableReason {
     pub fn from_opt_reason(reason: Option<Symbol>) -> Self {

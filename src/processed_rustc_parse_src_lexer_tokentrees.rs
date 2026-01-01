@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_parse/src/lexer/tokentrees.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, Delimiter, Token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_ast_pretty::pprust::token_to_string;
 use crate::rustc_complete::Diag;
 
 use super::diagnostics::{
     report_missing_open_delim, report_suspicious_mismatch_block, same_indentation_level,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{Lexer, UnmatchedDelim};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=lex_token_tree_open_delim | COMPLEXITY=140 | LINES=249 */
 
 impl<'psess, 'src> Lexer<'psess, 'src> {
     // Lex into a token stream. The `Spacing` in the result is that of the

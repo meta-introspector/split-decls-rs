@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/loops.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=maybe_loop_headers | COMPLEXITY=27 | LINES=29 */
 use crate::rustc_index::bit_set::DenseBitSet;
 
 use super::*;

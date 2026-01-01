@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/codegen_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::parse::feature_err;
 
 use crate::prelude::*;
 use crate::session_diagnostics::{NakedFunctionIncompatibleAttribute, NullOnExport};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=16 | LINES=40 */
 
 pub(crate) struct OptimizeParser;
 
@@ -47,7 +44,6 @@ impl<S: Stage> SingleAttributeParser<S> for OptimizeParser {
         Some(AttributeKind::Optimize(res, cx.attr_span))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 pub(crate) struct ColdParser;
 
@@ -65,7 +61,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ColdParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::Cold;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=19 | LINES=51 */
 
 pub(crate) struct CoverageParser;
 
@@ -117,7 +112,6 @@ impl<S: Stage> SingleAttributeParser<S> for CoverageParser {
         Some(AttributeKind::Coverage(cx.attr_span, kind))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=16 | LINES=38 */
 
 pub(crate) struct ExportNameParser;
 
@@ -156,13 +150,11 @@ impl<S: Stage> SingleAttributeParser<S> for ExportNameParser {
         Some(AttributeKind::ExportName { name, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub(crate) struct NakedParser {
     span: Option<Span>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=47 | LINES=111 */
 
 impl<S: Stage> AttributeParser<S> for NakedParser {
     const ATTRIBUTES: AcceptMapping<Self, S> =
@@ -274,7 +266,6 @@ impl<S: Stage> AttributeParser<S> for NakedParser {
         Some(AttributeKind::Naked(span))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 pub(crate) struct TrackCallerParser;
 impl<S: Stage> NoArgsAttributeParser<S> for TrackCallerParser {
@@ -295,7 +286,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for TrackCallerParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::TrackCaller;
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) struct NoMangleParser;
 impl<S: Stage> NoArgsAttributeParser<S> for NoMangleParser {
@@ -309,14 +299,12 @@ impl<S: Stage> NoArgsAttributeParser<S> for NoMangleParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::NoMangle;
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 pub(crate) struct UsedParser {
     first_compiler: Option<Span>,
     first_linker: Option<Span>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=47 | LINES=77 */
 
 // A custom `AttributeParser` is used rather than a Simple attribute parser because
 // - Specifying two `#[used]` attributes is a warning (but will be an error in the future)
@@ -394,7 +382,6 @@ impl<S: Stage> AttributeParser<S> for UsedParser {
         })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=parse_tf_attribute | COMPLEXITY=22 | LINES=45 */
 
 fn parse_tf_attribute<'c, S: Stage>(
     cx: &'c mut AcceptContext<'_, '_, S>,
@@ -440,7 +427,6 @@ fn parse_tf_attribute<'c, S: Stage>(
     }
     features
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=9 | LINES=32 */
 
 pub(crate) struct TargetFeatureParser;
 
@@ -473,7 +459,6 @@ impl<S: Stage> CombineAttributeParser<S> for TargetFeatureParser {
         Warn(Target::MacroCall),
     ]);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=8 | LINES=26 */
 
 pub(crate) struct ForceTargetFeatureParser;
 
@@ -500,7 +485,6 @@ impl<S: Stage> CombineAttributeParser<S> for ForceTargetFeatureParser {
         parse_tf_attribute(cx, args)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=36 | LINES=102 */
 
 pub(crate) struct SanitizeParser;
 

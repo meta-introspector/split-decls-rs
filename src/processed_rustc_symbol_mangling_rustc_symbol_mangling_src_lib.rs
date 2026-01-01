@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=50 */
 // The Rust Linkage Model and Symbol Names
 // =======================================
 //
@@ -50,7 +49,6 @@
 //
 // - Rust allows items to be defined in anonymous scopes, such as in
 //   `fn foo() { { fn bar() {} } { fn bar() {} } }`. Both `bar` functions have
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 //   the path `foo::bar`, since the anonymous scopes do not contribute to the
 //   path of an item. The compiler already handles this case via so-called
 //   disambiguating `DefPaths` which use indices to distinguish items with the
@@ -67,7 +65,6 @@
 //   name, i.e., symbols are "crate qualified". For example, a function `foo` in
 //   module `bar` in crate `baz` would get a symbol name like
 //   `baz::bar::foo::{hash}` instead of just `bar::foo::{hash}`. This avoids
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=33 */
 //   simple conflicts between functions from different crates.
 //
 // - In order to be able to also use symbols from two versions of the same
@@ -101,14 +98,10 @@
 
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::mono::{InstantiationMode, MonoItem};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Instance, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=symbol_name_for_instance_in_crate | COMPLEXITY=7 | LINES=23 */
 use crate::rustc_complete::config::SymbolManglingVersion;
 use tracing::debug;
 
@@ -126,12 +119,10 @@ pub fn symbol_name_for_instance_in_crate<'tcx>(
 ) -> String {
     compute_symbol_name(tcx, instance, || instantiating_crate)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers { symbol_name: symbol_name_provider, ..*providers };
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=symbol_name_provider | COMPLEXITY=15 | LINES=22 */
 
 // The `symbol_name` query provides the symbol name for calling a given
 // instance from the local crate. In particular, it will also look up the
@@ -154,7 +145,6 @@ fn symbol_name_provider<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) -> ty
 
     ty::SymbolName::new(tcx, &symbol_name)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=typeid_for_trait_ref | COMPLEXITY=2 | LINES=7 */
 
 pub fn typeid_for_trait_ref<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -162,7 +152,6 @@ pub fn typeid_for_trait_ref<'tcx>(
 ) -> String {
     v0::mangle_typeid_for_trait_ref(tcx, trait_ref)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=compute_symbol_name | COMPLEXITY=85 | LINES=151 */
 
 /// Computes the symbol name for the given instance. This function will call
 /// `compute_instantiating_crate` if it needs to factor the instantiating crate
@@ -314,7 +303,6 @@ fn compute_symbol_name<'tcx>(
 
     symbol
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_generic | COMPLEXITY=2 | LINES=4 */
 
 fn is_generic<'tcx>(instance: Instance<'tcx>) -> bool {
     instance.args.non_erasable_generics().next().is_some()

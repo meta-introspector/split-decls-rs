@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/naked_functions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Checks validity of naked functions.
 
 use rustc_hir as hir;
@@ -7,7 +6,6 @@ use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{ExprKind, HirIdSet, StmtKind, find_attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Span;
@@ -15,7 +13,6 @@ use crate::rustc_complete::Span;
 use crate::errors::{
     NakedFunctionsAsmBlock, NakedFunctionsMustNakedAsm, NoPatterns, ParamsNotAllowed,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// Naked fns can only have trivial binding patterns in arguments,
 /// may not actually use those arguments, and the body must consist of just
@@ -30,7 +27,6 @@ pub(crate) fn typeck_naked_fn<'tcx>(
     check_no_parameters_use(tcx, body);
     check_asm(tcx, def_id, body);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_no_patterns | COMPLEXITY=14 | LINES=12 */
 
 /// Checks that parameters don't use patterns. Mirrors the checks for function declarations.
 fn check_no_patterns(tcx: TyCtxt<'_>, params: &[hir::Param<'_>]) {
@@ -43,7 +39,6 @@ fn check_no_patterns(tcx: TyCtxt<'_>, params: &[hir::Param<'_>]) {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_no_parameters_use | COMPLEXITY=7 | LINES=11 */
 
 /// Checks that function parameters aren't used in the function body.
 fn check_no_parameters_use<'tcx>(tcx: TyCtxt<'tcx>, body: &'tcx hir::Body<'tcx>) {
@@ -55,13 +50,11 @@ fn check_no_parameters_use<'tcx>(tcx: TyCtxt<'tcx>, body: &'tcx hir::Body<'tcx>)
     }
     CheckParameters { tcx, params }.visit_body(body);
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=CheckParameters | COMPLEXITY=2 | LINES=5 */
 
 struct CheckParameters<'tcx> {
     tcx: TyCtxt<'tcx>,
     params: HirIdSet,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=14 | LINES=16 */
 
 impl<'tcx> Visitor<'tcx> for CheckParameters<'tcx> {
     fn visit_expr(&mut self, expr: &'tcx hir::Expr<'tcx>) {
@@ -78,7 +71,6 @@ impl<'tcx> Visitor<'tcx> for CheckParameters<'tcx> {
         hir::intravisit::walk_expr(self, expr);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_asm | COMPLEXITY=29 | LINES=45 */
 
 /// Checks that function body contains a single inline assembly block.
 fn check_asm<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &'tcx hir::Body<'tcx>) {
@@ -124,12 +116,10 @@ fn check_asm<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &'tcx hir::Body<
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CheckInlineAssembly | COMPLEXITY=2 | LINES=4 */
 
 struct CheckInlineAssembly {
     items: Vec<(ItemKind, Span)>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone)]
 enum ItemKind {
@@ -138,7 +128,6 @@ enum ItemKind {
     NonAsm,
     Err,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=22 | LINES=60 */
 
 impl CheckInlineAssembly {
     fn check_expr<'tcx>(&mut self, expr: &'tcx hir::Expr<'tcx>, span: Span) {
@@ -199,7 +188,6 @@ impl CheckInlineAssembly {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_stmt | COMPLEXITY=14 | LINES=18 */
 
 impl<'tcx> Visitor<'tcx> for CheckInlineAssembly {
     fn visit_stmt(&mut self, stmt: &'tcx hir::Stmt<'tcx>) {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/closure.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt::Write;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
@@ -7,19 +6,15 @@ use rustc_hir as hir;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def_id::LocalDefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefIdMap;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::TyCtxt;
 use crate::hir::place::{
     Place as HirPlace, PlaceBase as HirPlaceBase, ProjectionKind as HirProjectionKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::query::Providers;
 use crate::{mir, ty};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UpvarPath | COMPLEXITY=2 | LINES=10 */
 
 /// Captures are represented using fields inside a structure.
 /// This represents accessing self in the closure structure
@@ -30,7 +25,6 @@ pub const CAPTURE_STRUCT_LOCAL: mir::Local = mir::Local::from_u32(1);
 pub struct UpvarPath {
     pub hir_id: HirId,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UpvarId | COMPLEXITY=2 | LINES=10 */
 
 /// Upvars do not get their own `NodeId`. Instead, we use the pair of
 /// the original var ID (that is, the root variable that is referenced
@@ -41,14 +35,12 @@ pub struct UpvarId {
     pub var_path: UpvarPath,
     pub closure_expr_id: LocalDefId,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=6 */
 
 impl UpvarId {
     pub fn new(var_hir_id: HirId, closure_def_id: LocalDefId) -> UpvarId {
         UpvarId { var_path: UpvarPath { hir_id: var_hir_id }, closure_expr_id: closure_def_id }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 /// Information describing the capture of an upvar. This is computed
 /// during `typeck`, specifically by `regionck`.
@@ -66,7 +58,6 @@ pub enum UpvarCapture {
     /// Upvar is captured by reference.
     ByRef(BorrowKind),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CapturedPlace | COMPLEXITY=8 | LINES=32 */
 
 /// Given the closure DefId this map provides a map of root variables to minimum
 /// set of `CapturedPlace`s that need to be tracked to support all captures of that closure.
@@ -99,7 +90,6 @@ pub struct CapturedPlace<'tcx> {
     /// Represents if `place` can be mutated or not.
     pub mutability: hir::Mutability,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=79 | LINES=101 */
 
 impl<'tcx> CapturedPlace<'tcx> {
     pub fn to_string(&self, tcx: TyCtxt<'tcx>) -> String {
@@ -201,7 +191,6 @@ impl<'tcx> CapturedPlace<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ClosureTypeInfo | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, HashStable)]
 pub struct ClosureTypeInfo<'tcx> {
@@ -209,7 +198,6 @@ pub struct ClosureTypeInfo<'tcx> {
     captures: &'tcx ty::List<&'tcx ty::CapturedPlace<'tcx>>,
     kind_origin: Option<&'tcx (Span, HirPlace<'tcx>)>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=closure_typeinfo | COMPLEXITY=4 | LINES=11 */
 
 fn closure_typeinfo<'tcx>(tcx: TyCtxt<'tcx>, def: LocalDefId) -> ClosureTypeInfo<'tcx> {
     debug_assert!(tcx.is_closure_like(def.to_def_id()));
@@ -221,7 +209,6 @@ fn closure_typeinfo<'tcx>(tcx: TyCtxt<'tcx>, def: LocalDefId) -> ClosureTypeInfo
     let kind_origin = typeck_results.closure_kind_origins().get(hir_id);
     ClosureTypeInfo { user_provided_sig, captures, kind_origin }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=closure_kind_origin | COMPLEXITY=9 | LINES=17 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn closure_kind_origin(self, def_id: LocalDefId) -> Option<&'tcx (Span, HirPlace<'tcx>)> {
@@ -239,7 +226,6 @@ impl<'tcx> TyCtxt<'tcx> {
         self.closure_typeinfo(def_id).captures
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=is_ancestor_or_same_capture | COMPLEXITY=11 | LINES=26 */
 
 /// Return true if the `proj_possible_ancestor` represents an ancestor path
 /// to `proj_capture` or `proj_possible_ancestor` is same as `proj_capture`,
@@ -266,7 +252,6 @@ pub fn is_ancestor_or_same_capture(
 
     proj_possible_ancestor.iter().zip(proj_capture).all(|(a, b)| a == b)
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=CaptureInfo | COMPLEXITY=16 | LINES=46 */
 
 /// Part of `MinCaptureInformationMap`; describes the capture kind (&, &mut, move)
 /// for a particular capture as well as identifying the part of the source code
@@ -313,7 +298,6 @@ pub struct CaptureInfo {
     /// Capture mode that was selected
     pub capture_kind: UpvarCapture,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=place_to_string_for_capture | COMPLEXITY=30 | LINES=36 */
 
 pub fn place_to_string_for_capture<'tcx>(tcx: TyCtxt<'tcx>, place: &HirPlace<'tcx>) -> String {
     let mut curr_string: String = match place.base {
@@ -350,7 +334,6 @@ pub fn place_to_string_for_capture<'tcx>(tcx: TyCtxt<'tcx>, place: &HirPlace<'tc
 
     curr_string
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=58 */
 
 #[derive(Eq, Clone, PartialEq, Debug, TyEncodable, TyDecodable, Copy, HashStable, Hash)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -409,7 +392,6 @@ pub enum BorrowKind {
     /// Data is mutable and not aliasable.
     Mutable,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from_mutbl | COMPLEXITY=14 | LINES=25 */
 
 impl BorrowKind {
     pub fn from_mutbl(m: hir::Mutability) -> BorrowKind {
@@ -435,7 +417,6 @@ impl BorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=analyze_coroutine_closure_captures | COMPLEXITY=34 | LINES=50 */
 
 pub fn analyze_coroutine_closure_captures<'a, 'tcx: 'a, T>(
     parent_captures: impl IntoIterator<Item = &'a CapturedPlace<'tcx>>,
@@ -486,7 +467,6 @@ pub fn analyze_coroutine_closure_captures<'a, 'tcx: 'a, T>(
         assert_eq!(child_captures.next(), None, "leftover child captures?");
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=child_prefix_matches_parent_projections | COMPLEXITY=5 | LINES=16 */
 
 fn child_prefix_matches_parent_projections(
     parent_capture: &ty::CapturedPlace<'_>,
@@ -503,7 +483,6 @@ fn child_prefix_matches_parent_projections(
         && std::iter::zip(&child_capture.place.projections, &parent_capture.place.projections)
             .all(|(child, parent)| child.kind == parent.kind)
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers { closure_typeinfo, ..*providers }

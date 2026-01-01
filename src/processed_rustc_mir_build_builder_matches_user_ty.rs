@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/matches/user_ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // Helper code for building a linked list of user-type projections on the
 // stack while visiting a THIR pattern.
 //
@@ -10,11 +9,8 @@ use std::assert_matches::assert_matches;
 use std::iter;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{ProjectionElem, UserTypeProjection, UserTypeProjections};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{AdtDef, UserTypeAnnotationIndex};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 use crate::rustc_complete::Symbol;
 
 /// One of a list of "operations" that can be used to lazily build projections
@@ -29,14 +25,12 @@ pub(crate) enum ProjectedUserTypesOp {
     Leaf { field: FieldIdx },
     Variant { name: Symbol, variant: VariantIdx, field: FieldIdx },
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Debug)]
 pub(crate) enum ProjectedUserTypesNode<'a> {
     None,
     Chain { parent: &'a Self, op: ProjectedUserTypesOp },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=maybe_push | COMPLEXITY=80 | LINES=108 */
 
 impl<'a> ProjectedUserTypesNode<'a> {
     pub(crate) fn push_user_type(&'a self, base: UserTypeAnnotationIndex) -> Self {

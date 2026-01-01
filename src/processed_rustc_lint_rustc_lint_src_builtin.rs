@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/builtin.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 // Lints in the Rust compiler.
 //
 // This contains lints which can feasibly be implemented as their own
@@ -20,47 +19,35 @@ use std::fmt::Write;
 use ast::token::TokenKind;
 use crate::rustc_abi::BackendRepr;
 use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::visit::{FnCtxt, FnKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, *};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast_pretty::pprust::expr_to_string;
 use rustc_attr_parsing::AttributeParser;
 use crate::rustc_complete::{Applicability, LintDiagnostic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_feature::GateIssue;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::FnKind as HirFnKind;
 use crate::rustc_complete::{Body, FnDecl, ImplItemImplKind, PatKind, PredicateOrigin, find_attr};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::lint::LevelAndSource;
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, AssocContainer, Ty, TyCtxt, TypeVisitableExt, Upcast, VariantDef};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 // hardwired lints from rustc_lint_defs
 pub use crate::rustc_complete::lint::builtin::*;
 use crate::rustc_complete::{declare_lint, declare_lint_pass, impl_lint_pass};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, InnerSpan, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_target::asm::InlineAsmArch;
 use crate::rustc_trait_selection::infer::{InferCtxtExt, TyCtxtInferExt};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::misc::type_allowed_to_implement_copy;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::rustc_trait_selection::traits::{self};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 use crate::errors::BuiltinEllipsisInclusiveRangePatterns;
 use crate::lints::{
@@ -75,12 +62,10 @@ use crate::lints::{
     BuiltinUnreachablePub, BuiltinUnsafe, BuiltinUnstableFeatures, BuiltinUnusedDocComment,
     BuiltinUnusedDocCommentSub, BuiltinWhileTrue, InvalidAsmLabel,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     EarlyContext, EarlyLintPass, LateContext, LateLintPass, Level, LintContext,
     fluent_generated as fluent,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=22 */
 declare_lint! {
     /// The `while_true` lint detects `while true { }`.
     ///
@@ -103,7 +88,6 @@ declare_lint! {
     Warn,
     "suggest using `loop { }` instead of `while true { }`"
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=13 | LINES=24 */
 
 declare_lint_pass!(WhileTrue => [WHILE_TRUE]);
 
@@ -128,7 +112,6 @@ impl EarlyLintPass for WhileTrue {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=36 */
 
 declare_lint! {
     /// The `non_shorthand_field_patterns` lint detects using `Struct { x: x }`
@@ -165,7 +148,6 @@ declare_lint! {
     Warn,
     "using `Struct { x: x }` instead of `Struct { x }` in a pattern"
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_pat | COMPLEXITY=29 | LINES=41 */
 
 declare_lint_pass!(NonShorthandFieldPatterns => [NON_SHORTHAND_FIELD_PATTERNS]);
 
@@ -207,7 +189,6 @@ impl<'tcx> LateLintPass<'tcx> for NonShorthandFieldPatterns {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=40 */
 
 declare_lint! {
     /// The `unsafe_code` lint catches usage of `unsafe` code and other
@@ -248,7 +229,6 @@ declare_lint! {
     "usage of `unsafe` code and other potentially unsound constructs",
     @eval_always = true
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=report_unsafe | COMPLEXITY=6 | LINES=18 */
 
 declare_lint_pass!(UnsafeCode => [UNSAFE_CODE]);
 
@@ -267,7 +247,6 @@ impl UnsafeCode {
         cx.emit_span_lint(UNSAFE_CODE, span, decorate);
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=83 | LINES=112 */
 
 impl EarlyLintPass for UnsafeCode {
     #[inline]
@@ -380,7 +359,6 @@ impl EarlyLintPass for UnsafeCode {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=26 */
 
 declare_lint! {
     /// The `missing_docs` lint detects missing documentation for public items.
@@ -407,7 +385,6 @@ declare_lint! {
     "detects missing documentation for public members",
     report_in_external_macro
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=MissingDoc; | COMPLEXITY=21 | LINES=29 */
 
 #[derive(Default)]
 pub struct MissingDoc;
@@ -437,7 +414,6 @@ fn has_doc(attr: &hir::Attribute) -> bool {
 
     false
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=check_missing_docs_attrs | COMPLEXITY=11 | LINES=27 */
 
 impl MissingDoc {
     fn check_missing_docs_attrs(
@@ -465,7 +441,6 @@ impl MissingDoc {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=48 | LINES=72 */
 
 impl<'tcx> LateLintPass<'tcx> for MissingDoc {
     fn check_crate(&mut self, cx: &LateContext<'_>) {
@@ -538,7 +513,6 @@ impl<'tcx> LateLintPass<'tcx> for MissingDoc {
         self.check_missing_docs_attrs(cx, v.def_id, "a", "variant");
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=34 */
 
 declare_lint! {
     /// The `missing_copy_implementations` lint detects potentially-forgotten
@@ -573,7 +547,6 @@ declare_lint! {
     Allow,
     "detects potentially-forgotten implementations of `Copy`"
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=60 | LINES=91 */
 
 declare_lint_pass!(MissingCopyImplementations => [MISSING_COPY_IMPLEMENTATIONS]);
 
@@ -665,7 +638,6 @@ impl<'tcx> LateLintPass<'tcx> for MissingCopyImplementations {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=type_implements_negative_copy_modulo_regions | COMPLEXITY=5 | LINES=19 */
 
 /// Check whether a `ty` has a negative `Copy` implementation, ignoring outlives constraints.
 fn type_implements_negative_copy_modulo_regions<'tcx>(
@@ -685,7 +657,6 @@ fn type_implements_negative_copy_modulo_regions<'tcx>(
     };
     infcx.predicate_must_hold_modulo_regions(&obligation)
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=32 */
 
 declare_lint! {
     /// The `missing_debug_implementations` lint detects missing
@@ -718,7 +689,6 @@ declare_lint! {
     Allow,
     "detects missing implementations of Debug"
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=26 | LINES=40 */
 
 #[derive(Default)]
 pub(crate) struct MissingDebugImplementations;
@@ -759,7 +729,6 @@ impl<'tcx> LateLintPass<'tcx> for MissingDebugImplementations {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=48 */
 
 declare_lint! {
     /// The `anonymous_parameters` lint detects anonymous parameters in trait
@@ -808,7 +777,6 @@ declare_lint! {
         reference: "issue #41686 <https://github.com/rust-lang/rust/issues/41686>",
     };
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=check_trait_item | COMPLEXITY=27 | LINES=32 */
 
 declare_lint_pass!(
     /// Checks for use of anonymous parameters (RFC 1685).
@@ -841,7 +809,6 @@ impl EarlyLintPass for AnonymousParameters {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=warn_if_doc | COMPLEXITY=25 | LINES=39 */
 
 fn warn_if_doc(cx: &EarlyContext<'_>, node_span: Span, node_kind: &str, attrs: &[ast::Attribute]) {
     use crate::rustc_complete::token::CommentKind;
@@ -881,7 +848,6 @@ fn warn_if_doc(cx: &EarlyContext<'_>, node_span: Span, node_kind: &str, attrs: &
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=check_stmt | COMPLEXITY=40 | LINES=56 */
 
 impl EarlyLintPass for UnusedDocComment {
     fn check_stmt(&mut self, cx: &EarlyContext<'_>, stmt: &ast::Stmt) {
@@ -938,7 +904,6 @@ impl EarlyLintPass for UnusedDocComment {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=27 */
 
 declare_lint! {
     /// The `no_mangle_const_items` lint detects any `const` items with the
@@ -966,7 +931,6 @@ declare_lint! {
     Deny,
     "const items will not have their symbols exported"
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=29 */
 
 declare_lint! {
     /// The `no_mangle_generic_items` lint detects generic items that must be
@@ -996,7 +960,6 @@ declare_lint! {
     Warn,
     "generic items must be mangled"
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=check_no_mangle_on_generic_fn | COMPLEXITY=8 | LINES=20 */
 
 declare_lint_pass!(InvalidNoMangleItems => [NO_MANGLE_CONST_ITEMS, NO_MANGLE_GENERIC_ITEMS]);
 
@@ -1017,7 +980,6 @@ impl InvalidNoMangleItems {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=39 | LINES=54 */
 
 impl<'tcx> LateLintPass<'tcx> for InvalidNoMangleItems {
     fn check_item(&mut self, cx: &LateContext<'_>, it: &hir::Item<'_>) {
@@ -1072,7 +1034,6 @@ impl<'tcx> LateLintPass<'tcx> for InvalidNoMangleItems {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=27 */
 
 declare_lint! {
     /// The `mutable_transmutes` lint catches transmuting from `&T` to `&mut
@@ -1100,7 +1061,6 @@ declare_lint! {
     Deny,
     "transmuting &T to &mut T is undefined behavior, even if the reference is unused"
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=25 | LINES=39 */
 
 declare_lint_pass!(MutableTransmutes => [MUTABLE_TRANSMUTES]);
 
@@ -1140,7 +1100,6 @@ impl<'tcx> LateLintPass<'tcx> for MutableTransmutes {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
 
 declare_lint! {
     /// The `unstable_features` lint detects uses of `#[feature]`.
@@ -1168,7 +1127,6 @@ declare_lint! {
     Allow,
     "enabling unstable features"
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=check_attribute | COMPLEXITY=12 | LINES=17 */
 
 declare_lint_pass!(
     /// Forbids using the `#[feature(...)]` attribute
@@ -1186,7 +1144,6 @@ impl<'tcx> LateLintPass<'tcx> for UnstableFeatures {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
 
 declare_lint! {
     /// The `ungated_async_fn_track_caller` lint warns when the
@@ -1213,7 +1170,6 @@ declare_lint! {
     Warn,
     "enabling track_caller on an async fn is a no-op unless the async_fn_track_caller feature is enabled"
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=check_fn | COMPLEXITY=15 | LINES=30 */
 
 declare_lint_pass!(
     /// Explains corresponding feature flag must be enabled for the `#[track_caller]` attribute to
@@ -1244,7 +1200,6 @@ impl<'tcx> LateLintPass<'tcx> for UngatedAsyncFnTrackCaller {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=24 | LINES=38 */
 
 declare_lint! {
     /// The `unreachable_pub` lint triggers for `pub` items not reachable from other crates - that
@@ -1283,7 +1238,6 @@ declare_lint! {
     Allow,
     "`pub` items not reachable from crate root"
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=perform_lint | COMPLEXITY=20 | LINES=52 */
 
 declare_lint_pass!(
     /// Lint for items marked `pub` that aren't reachable from other crates.
@@ -1336,7 +1290,6 @@ impl UnreachablePub {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=22 | LINES=36 */
 
 impl<'tcx> LateLintPass<'tcx> for UnreachablePub {
     fn check_item(&mut self, cx: &LateContext<'_>, item: &hir::Item<'_>) {
@@ -1373,7 +1326,6 @@ impl<'tcx> LateLintPass<'tcx> for UnreachablePub {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=38 */
 
 declare_lint! {
     /// The `type_alias_bounds` lint detects bounds in type aliases.
@@ -1412,7 +1364,6 @@ declare_lint! {
     Warn,
     "bounds in type aliases are not enforced"
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=16 */
 
 declare_lint_pass!(TypeAliasBounds => [TYPE_ALIAS_BOUNDS]);
 
@@ -1429,7 +1380,6 @@ impl TypeAliasBounds {
         false
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=40 | LINES=78 */
 
 impl<'tcx> LateLintPass<'tcx> for TypeAliasBounds {
     fn check_item(&mut self, cx: &LateContext<'_>, item: &hir::Item<'_>) {
@@ -1508,12 +1458,10 @@ impl<'tcx> LateLintPass<'tcx> for TypeAliasBounds {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct ShorthandAssocTyCollector {
     pub(crate) qselves: Vec<Span>,
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=visit_qpath | COMPLEXITY=11 | LINES=13 */
 
 impl hir::intravisit::Visitor<'_> for ShorthandAssocTyCollector {
     fn visit_qpath(&mut self, qpath: &hir::QPath<'_>, id: hir::HirId, _: Span) {
@@ -1527,7 +1475,6 @@ impl hir::intravisit::Visitor<'_> for ShorthandAssocTyCollector {
         hir::intravisit::walk_qpath(self, qpath, id)
     }
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=14 | LINES=35 */
 
 declare_lint! {
     /// The `trivial_bounds` lint detects trait bounds that don't depend on
@@ -1563,7 +1510,6 @@ declare_lint! {
     Warn,
     "these bounds don't depend on an type parameters"
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=26 | LINES=43 */
 
 declare_lint_pass!(
     /// Lint for trait and lifetime bounds that don't depend on type parameters
@@ -1607,7 +1553,6 @@ impl<'tcx> LateLintPass<'tcx> for TrivialConstraints {
         }
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 
 declare_lint! {
     /// The `double_negations` lint detects expressions of the form `--x`.
@@ -1635,7 +1580,6 @@ declare_lint! {
     Warn,
     "detects expressions of the form `--x`"
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=18 | LINES=31 */
 
 declare_lint_pass!(
     /// Lint for expressions of the form `--x` that can be confused with C's
@@ -1667,7 +1611,6 @@ impl EarlyLintPass for DoubleNegations {
         }
     }
 }
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=56 */
 
 declare_lint_pass!(
     /// Does nothing as a lint pass, but registers some `Lint`s
@@ -1724,7 +1667,6 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>",
     };
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=EllipsisInclusiveRangePatterns | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Default)]
 pub struct EllipsisInclusiveRangePatterns {
@@ -1732,7 +1674,6 @@ pub struct EllipsisInclusiveRangePatterns {
     /// warnings for better diagnostics.
     node_id: Option<ast::NodeId>,
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=check_pat | COMPLEXITY=57 | LINES=84 */
 
 impl_lint_pass!(EllipsisInclusiveRangePatterns => [ELLIPSIS_INCLUSIVE_RANGE_PATTERNS]);
 
@@ -1817,7 +1758,6 @@ impl EarlyLintPass for EllipsisInclusiveRangePatterns {
         }
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=45 */
 
 declare_lint! {
     /// The `keyword_idents_2018` lint detects edition keywords being used as an
@@ -1863,7 +1803,6 @@ declare_lint! {
         reference: "issue #49716 <https://github.com/rust-lang/rust/issues/49716>",
     };
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=45 */
 
 declare_lint! {
     /// The `keyword_idents_2024` lint detects edition keywords being used as an
@@ -1909,7 +1848,6 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html>",
     };
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=UnderMacro(bool); | COMPLEXITY=45 | LINES=81 */
 
 declare_lint_pass!(
     /// Check for uses of edition keywords used as an identifier.
@@ -1991,7 +1929,6 @@ impl KeywordIdents {
         );
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=check_mac_def | COMPLEXITY=12 | LINES=16 */
 
 impl EarlyLintPass for KeywordIdents {
     fn check_mac_def(&mut self, cx: &EarlyContext<'_>, mac_def: &ast::MacroDef) {
@@ -2008,7 +1945,6 @@ impl EarlyLintPass for KeywordIdents {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=lifetimes_outliving_lifetime | COMPLEXITY=78 | LINES=138 */
 
 declare_lint_pass!(ExplicitOutlivesRequirements => [EXPLICIT_OUTLIVES_REQUIREMENTS]);
 
@@ -2147,7 +2083,6 @@ impl ExplicitOutlivesRequirements {
         }
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=114 | LINES=190 */
 
 impl<'tcx> LateLintPass<'tcx> for ExplicitOutlivesRequirements {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'_>) {
@@ -2338,7 +2273,6 @@ impl<'tcx> LateLintPass<'tcx> for ExplicitOutlivesRequirements {
         }
     }
 }
-/* AST_META: AST_ID=66 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
 
 declare_lint! {
     /// The `incomplete_features` lint detects unstable features enabled with
@@ -2365,7 +2299,6 @@ declare_lint! {
     Warn,
     "incomplete features that may function improperly in some or all cases"
 }
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 declare_lint! {
     /// The `internal_features` lint detects unstable features enabled with
@@ -2390,7 +2323,6 @@ declare_lint! {
     Warn,
     "internal features are not supposed to be used"
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=18 | LINES=35 */
 
 declare_lint_pass!(
     /// Check for used feature gates in `INCOMPLETE_FEATURES` in `rustc_feature/src/unstable.rs`.
@@ -2426,7 +2358,6 @@ impl EarlyLintPass for IncompleteInternalFeatures {
             });
     }
 }
-/* AST_META: AST_ID=69 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=38 */
 
 const HAS_MIN_FEATURES: &[Symbol] = &[sym::specialization];
 
@@ -2465,7 +2396,6 @@ declare_lint! {
     Warn,
     "an invalid value is being created (such as a null reference)"
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=InitError | COMPLEXITY=2 | LINES=11 */
 
 declare_lint_pass!(InvalidValue => [INVALID_VALUE]);
 
@@ -2477,7 +2407,6 @@ pub struct InitError {
     /// Used to report a trace through adts.
     pub(crate) nested: Option<Box<InitError>>,
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=spanned | COMPLEXITY=6 | LINES=10 */
 impl InitError {
     fn spanned(self, span: Span) -> InitError {
         Self { span: Some(span), ..self }
@@ -2488,20 +2417,17 @@ impl InitError {
         Self { nested: nested.into().map(Box::new), ..self }
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'a> From<&'a str> for InitError {
     fn from(s: &'a str) -> Self {
         s.to_owned().into()
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=5 */
 impl From<String> for InitError {
     fn from(message: String) -> Self {
         Self { message, span: None, nested: None }
     }
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=181 | LINES=262 */
 
 impl<'tcx> LateLintPass<'tcx> for InvalidValue {
     fn check_expr(&mut self, cx: &LateContext<'tcx>, expr: &hir::Expr<'_>) {
@@ -2764,7 +2690,6 @@ impl<'tcx> LateLintPass<'tcx> for InvalidValue {
         }
     }
 }
-/* AST_META: AST_ID=75 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 declare_lint! {
     /// The `deref_nullptr` lint detects when a null pointer is dereferenced,
@@ -2794,7 +2719,6 @@ declare_lint! {
     Warn,
     "detects when an null pointer is dereferenced"
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=48 | LINES=61 */
 
 declare_lint_pass!(DerefNullPtr => [DEREF_NULLPTR]);
 
@@ -2856,7 +2780,6 @@ impl<'tcx> LateLintPass<'tcx> for DerefNullPtr {
         }
     }
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=35 */
 
 declare_lint! {
     /// The `named_asm_labels` lint detects the use of named labels in the
@@ -2892,7 +2815,6 @@ declare_lint! {
     Deny,
     "named labels in inline assembly",
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=50 */
 
 declare_lint! {
     /// The `binary_asm_labels` lint detects the use of numeric labels containing only binary
@@ -2943,7 +2865,6 @@ declare_lint! {
     Deny,
     "labels in inline assembly containing only 0 or 1 digits",
 }
-/* AST_META: AST_ID=79 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 declare_lint_pass!(AsmLabels => [NAMED_ASM_LABELS, BINARY_ASM_LABELS]);
 
@@ -2953,7 +2874,6 @@ enum AsmLabelKind {
     FormatArg,
     Binary,
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=146 | LINES=246 */
 
 impl<'tcx> LateLintPass<'tcx> for AsmLabels {
     fn check_expr(&mut self, cx: &LateContext<'tcx>, expr: &'tcx hir::Expr<'tcx>) {

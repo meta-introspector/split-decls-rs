@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/stable_hasher/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=3 | LINES=15 */
 use super::*;
 
 // The tests below compare the computed hashes to particular expected values
@@ -15,7 +14,6 @@ fn hash<T: HashStable<()>>(t: &T) -> Hash128 {
     t.hash_stable(ctx, &mut h);
     h.finish()
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_hash_bit_set | COMPLEXITY=2 | LINES=10 */
 
 // Check that bit set hash includes the domain size.
 #[test]
@@ -26,7 +24,6 @@ fn test_hash_bit_set() {
     assert_ne!(a, b);
     assert_ne!(hash(&a), hash(&b));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_hash_bit_matrix | COMPLEXITY=2 | LINES=10 */
 
 // Check that bit matrix hash includes the matrix dimensions.
 #[test]
@@ -37,7 +34,6 @@ fn test_hash_bit_matrix() {
     assert_ne!(a, b);
     assert_ne!(hash(&a), hash(&b));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_attribute_permutation | COMPLEXITY=21 | LINES=42 */
 
 // Check that exchanging the value of two adjacent fields changes the hash.
 #[test]
@@ -80,7 +76,6 @@ fn test_attribute_permutation() {
     test_type!(i64);
     test_type!(i128);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_isize_compression | COMPLEXITY=6 | LINES=21 */
 
 // Check that the `isize` hashing optimization does not produce the same hash when permuting two
 // values.

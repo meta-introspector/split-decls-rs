@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/abi/returning.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Return value handling
 
 use crate::rustc_target::callconv::{ArgAbi, PassMode};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=37 */
 
 use crate::prelude::*;
 
@@ -43,7 +40,6 @@ pub(super) fn codegen_return_param<'tcx>(
 
     ret_place
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=43 | LINES=59 */
 
 /// Invokes the closure with if necessary a value representing the return pointer. When the closure
 /// returns the call return value(s) if any are written to the correct place.
@@ -103,7 +99,6 @@ pub(super) fn codegen_with_call_return_arg<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=28 */
 
 /// Codegen a return instruction with the right return value(s) if any.
 pub(crate) fn codegen_return(fx: &mut FunctionCx<'_, '_, '_>) {

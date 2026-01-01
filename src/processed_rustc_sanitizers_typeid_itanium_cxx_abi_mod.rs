@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_sanitizers/src/cfi/typeid/itanium_cxx_abi/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 // Type metadata identifiers (using Itanium C++ ABI mangling for encoding) for LLVM Control Flow
 // Integrity (CFI) and cross-language LLVM CFI support.
 //
@@ -10,18 +9,14 @@ use crate::rustc_abi::CanonAbi;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{FnAbi, PassMode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::instrument;
 
 use crate::cfi::typeid::TypeIdOptions;
 use crate::cfi::typeid::itanium_cxx_abi::encode::{DictKey, EncodeTyOptions, encode_ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::cfi::typeid::itanium_cxx_abi::transform::{
     TransformTy, TransformTyOptions, transform_instance,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=typeid_for_fnabi | COMPLEXITY=51 | LINES=86 */
 
 /// Returns a type metadata identifier for the specified FnAbi using the Itanium C++ ABI with vendor
 /// extended type qualifiers and types for Rust types that are not used at the FFI boundary.
@@ -108,7 +103,6 @@ pub fn typeid_for_fnabi<'tcx>(
 
     typeid
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=typeid_for_instance | COMPLEXITY=13 | LINES=22 */
 
 /// Returns a type metadata identifier for the specified Instance using the Itanium C++ ABI with
 /// vendor extended type qualifiers and types for Rust types that are not used at the FFI boundary.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_pretty/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // HIR pretty-printing is layered on top of AST pretty-printing. A number of
 // the definitions in this file have equivalents in `rustc_ast_pretty`.
 
@@ -12,34 +11,24 @@ use std::vec;
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_NODE_ID, DelimArgs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_ast_pretty::pp::Breaks::{Consistent, Inconsistent};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_ast_pretty::pp::{self, BoxMarker, Breaks};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust::state::MacHeader;
 use rustc_ast_pretty::pprust::{Comments, PrintState};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, PrintAttribute};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     BindingMode, ByRef, ConstArgKind, GenericArg, GenericBound, GenericParam, GenericParamKind,
     HirId, ImplicitSelfKind, LifetimeParamKind, Node, PatKind, PreciseCapturingArg, RangeEnd, Term,
     TyPatKind,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{FileName, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=id_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn id_to_string(cx: &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_>, hir_id: HirId) -> String {
     to_string(&cx, |s| s.print_node(cx.hir_node(hir_id)))
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub enum AnnNode<'a> {
     Name(&'a Symbol),
@@ -51,7 +40,6 @@ pub enum AnnNode<'a> {
     TyPat(&'a hir::TyPat<'a>),
     Arm(&'a hir::Arm<'a>),
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub enum Nested {
     Item(hir::ItemId),
@@ -61,14 +49,12 @@ pub enum Nested {
     Body(hir::BodyId),
     BodyParamPat(hir::BodyId, usize),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=5 | LINES=6 */
 
 pub trait PpAnn {
     fn nested(&self, _state: &mut State<'_>, _nested: Nested) {}
     fn pre(&self, _state: &mut State<'_>, _node: AnnNode<'_>) {}
     fn post(&self, _state: &mut State<'_>, _node: AnnNode<'_>) {}
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=10 | LINES=13 */
 
 impl PpAnn for &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_> {
     fn nested(&self, state: &mut State<'_>, nested: Nested) {
@@ -82,7 +68,6 @@ impl PpAnn for &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=State | COMPLEXITY=2 | LINES=7 */
 
 pub struct State<'a> {
     pub s: pp::Printer,
@@ -90,7 +75,6 @@ pub struct State<'a> {
     attrs: &'a dyn Fn(HirId) -> &'a [hir::Attribute],
     ann: &'a (dyn PpAnn + 'a),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=70 | LINES=151 */
 
 impl<'a> State<'a> {
     fn attrs(&self, id: HirId) -> &'a [hir::Attribute] {
@@ -242,7 +226,6 @@ impl<'a> State<'a> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl std::ops::Deref for State<'_> {
     type Target = pp::Printer;
@@ -250,14 +233,12 @@ impl std::ops::Deref for State<'_> {
         &self.s
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl std::ops::DerefMut for State<'_> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.s
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=comments | COMPLEXITY=9 | LINES=18 */
 
 impl<'a> PrintState<'a> for State<'a> {
     fn comments(&self) -> Option<&Comments<'a>> {
@@ -276,7 +257,6 @@ impl<'a> PrintState<'a> for State<'a> {
         panic!("AST generic args printed by HIR pretty-printer");
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=print_crate | COMPLEXITY=10 | LINES=34 */
 
 const INDENT_UNIT: isize = 4;
 
@@ -311,7 +291,6 @@ pub fn print_crate<'a>(
     s.print_remaining_comments();
     s.s.eof()
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=3 | LINES=9 */
 
 fn to_string<F>(ann: &dyn PpAnn, f: F) -> String
 where
@@ -321,37 +300,30 @@ where
     f(&mut printer);
     printer.s.eof()
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=attribute_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn attribute_to_string(ann: &dyn PpAnn, attr: &hir::Attribute) -> String {
     to_string(ann, |s| s.print_attribute_as_style(attr, ast::AttrStyle::Outer))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=ty_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn ty_to_string(ann: &dyn PpAnn, ty: &hir::Ty<'_>) -> String {
     to_string(ann, |s| s.print_type(ty))
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=qpath_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn qpath_to_string(ann: &dyn PpAnn, segment: &hir::QPath<'_>) -> String {
     to_string(ann, |s| s.print_qpath(segment, false))
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=pat_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn pat_to_string(ann: &dyn PpAnn, pat: &hir::Pat<'_>) -> String {
     to_string(ann, |s| s.print_pat(pat))
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=expr_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn expr_to_string(ann: &dyn PpAnn, pat: &hir::Expr<'_>) -> String {
     to_string(ann, |s| s.print_expr(pat))
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=item_to_string | COMPLEXITY=2 | LINES=4 */
 
 pub fn item_to_string(ann: &dyn PpAnn, pat: &hir::Item<'_>) -> String {
     to_string(ann, |s| s.print_item(pat))
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=bclose_maybe_open | COMPLEXITY=1131 | LINES=2241 */
 
 impl<'a> State<'a> {
     fn bclose_maybe_open(&mut self, span: crate::rustc_span::Span, cb: Option<BoxMarker>) {
@@ -2593,17 +2565,14 @@ impl<'a> State<'a> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 /// Does this expression require a semicolon to be treated
 /// as a statement? The negation of this: 'can this expression
 /// be used as a statement without a semicolon' -- is used
 /// as an early-bail-out in the parser so that, for instance,
 ///     if true {...} else {...}
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=2 */
 ///      |x| 5
 /// isn't parsed as (if true {...} else {...} | x) | 5
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=expr_requires_semi_to_be_stmt | COMPLEXITY=4 | LINES=11 */
 //
 // Duplicated from `parse::classify`, but adapted for the HIR.
 fn expr_requires_semi_to_be_stmt(e: &hir::Expr<'_>) -> bool {
@@ -2615,7 +2584,6 @@ fn expr_requires_semi_to_be_stmt(e: &hir::Expr<'_>) -> bool {
             | hir::ExprKind::Loop(..)
     )
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=stmt_ends_with_semi | COMPLEXITY=6 | LINES=12 */
 
 /// This statement requires a semicolon after it.
 /// note that in one case (stmt_semi), we've already
@@ -2628,13 +2596,10 @@ fn stmt_ends_with_semi(stmt: &hir::StmtKind<'_>) -> bool {
         hir::StmtKind::Semi(..) => false,
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 /// Expressions that syntactically contain an "exterior" struct literal, i.e., not surrounded by any
 /// parens or other delimiters, e.g., `X { y: 1 }`, `X { y: 1 }.method()`, `foo == X { y: 1 }` and
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// `X { y: 1 } == foo` all do, but `(X { y: 1 }) == foo` does not.
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=contains_exterior_struct_lit | COMPLEXITY=15 | LINES=27 */
 fn contains_exterior_struct_lit(value: &hir::Expr<'_>) -> bool {
     match value.kind {
         hir::ExprKind::Struct(..) => true,

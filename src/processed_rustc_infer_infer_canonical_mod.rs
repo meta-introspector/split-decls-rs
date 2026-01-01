@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/canonical/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=27 */
 // **Canonicalization** is the key to constructing a query in the
 // middle of type inference. Ordinarily, it is not possible to store
 // types from type inference in query keys, because they contain
@@ -27,11 +26,9 @@ pub use instantiate::CanonicalExt;
 use crate::rustc_index::IndexVec;
 pub use crate::rustc_complete::infer::canonical::*;
 use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::infer::{InferCtxt, RegionVariableOrigin};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=instantiate_canonical | COMPLEXITY=48 | LINES=108 */
 
 
 impl<'tcx> InferCtxt<'tcx> {

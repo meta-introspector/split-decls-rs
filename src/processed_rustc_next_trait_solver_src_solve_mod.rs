@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 // The next-generation trait solver, currently still WIP.
 //
 // As a user of rust, you can use `-Znext-solver` to enable the new trait solver.
@@ -18,14 +17,12 @@ use derive_where::derive_where;
 use rustc_type_ir::inherent::*;
 pub use rustc_type_ir::solve::*;
 use rustc_type_ir::{self as ty, Interner, TyVid, TypingMode};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::instrument;
 
 pub use self::eval_ctxt::{
     EvalCtxt, GenerateProofTree, SolverDelegateEvalExt,
     evaluate_root_goal_for_proof_tree_raw_provider,
 };
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 use crate::delegate::SolverDelegate;
 use crate::solve::assembly::Candidate;
 
@@ -47,7 +44,6 @@ pub enum HasChanged {
     Yes,
     No,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=has_no_inference_or_external_constraints | COMPLEXITY=4 | LINES=16 */
 
 // FIXME(trait-system-refactor-initiative#117): we don't detect whether a response
 // ended up pulling down any universes.
@@ -64,7 +60,6 @@ fn has_no_inference_or_external_constraints<I: Interner>(
         && opaque_types.is_empty()
         && normalization_nested_goals.is_empty()
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=has_only_region_constraints | COMPLEXITY=3 | LINES=11 */
 
 fn has_only_region_constraints<I: Interner>(response: ty::Canonical<I, Response<I>>) -> bool {
     let ExternalConstraintsData {
@@ -76,7 +71,6 @@ fn has_only_region_constraints<I: Interner>(response: ty::Canonical<I, Response<
         && opaque_types.is_empty()
         && normalization_nested_goals.is_empty()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=compute_type_outlives_goal | COMPLEXITY=71 | LINES=157 */
 
 impl<'a, D, I> EvalCtxt<'a, D>
 where
@@ -234,14 +228,12 @@ where
         self.evaluate_added_goals_and_make_canonical_response(Certainty::Yes)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 enum MergeCandidateInfo {
     AlwaysApplicable(usize),
     EqualResponse,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=try_merge_candidates | COMPLEXITY=58 | LINES=133 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -375,7 +367,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=response_no_constraints_raw | COMPLEXITY=7 | LINES=19 */
 
 fn response_no_constraints_raw<I: Interner>(
     cx: I,
@@ -395,7 +386,6 @@ fn response_no_constraints_raw<I: Interner>(
         },
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=GoalEvaluation | COMPLEXITY=10 | LINES=26 */
 
 /// The result of evaluating a goal.
 pub struct GoalEvaluation<I: Interner> {
@@ -422,7 +412,6 @@ pub struct GoalEvaluation<I: Interner> {
     /// before rerunning it.
     pub stalled_on: Option<GoalStalledOn<I>>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=GoalStalledOn | COMPLEXITY=6 | LINES=10 */
 
 /// The conditions that must change for a goal to warrant
 #[derive_where(Clone, Debug; I: Interner)]

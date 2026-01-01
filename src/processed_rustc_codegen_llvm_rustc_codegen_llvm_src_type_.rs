@@ -1,52 +1,39 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/type_.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::borrow::Borrow;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, ptr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use libc::c_uint;
 use crate::rustc_abi::{AddressSpace, Align, Integer, Reg, Size};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::common::TypeKind;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{CastTarget, FnAbi};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::abi::{FnAbiLlvmExt, LlvmType};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::context::{CodegenCx, GenericCx, SCx};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub(crate) use crate::llvm::Type;
 use crate::llvm::{FALSE, Metadata, TRUE, ToLlvmBool};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::type_of::LayoutLlvmExt;
 use crate::value::Value;
 use crate::{common, llvm};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=6 */
 
 impl PartialEq for Type {
     fn eq(&self, other: &Self) -> bool {
         ptr::eq(self, other)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for Type {}
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=6 */
 
 impl Hash for Type {
     fn hash<H: Hasher>(&self, state: &mut H) {
         ptr::hash(self, state);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=11 */
 
 impl fmt::Debug for Type {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -58,10 +45,8 @@ impl fmt::Debug for Type {
         )
     }
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 impl<'ll> CodegenCx<'ll, '_> {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=34 */
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     pub(crate) fn type_named_struct(&self, name: &str) -> &'ll Type {
         let name = SmallCStr::new(name);
@@ -96,7 +81,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=46 */
 impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
     pub(crate) fn type_bool(&self) -> &'ll Type {
         self.type_i8()
@@ -143,7 +127,6 @@ impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
         self.type_array(self.type_from_integer(unit), size / unit_size)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=33 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     pub(crate) fn llcx(&self) -> &'ll llvm::Context {
@@ -177,7 +160,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=type_i8 | COMPLEXITY=116 | LINES=93 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> BaseTypeCodegenMethods for GenericCx<'ll, CX> {
     fn type_i8(&self) -> &'ll Type {
@@ -271,7 +253,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> BaseTypeCodegenMethods for GenericCx<'ll, CX> {
         unsafe { llvm::LLVMArrayType2(ty, len) }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=11 */
 
 impl Type {
     /// Creates an integer type with the given number of bits, e.g., i24
@@ -283,7 +264,6 @@ impl Type {
         unsafe { llvm::LLVMPointerTypeInContext(llcx, AddressSpace::ZERO.0) }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=backend_type | COMPLEXITY=15 | LINES=35 */
 
 impl<'ll, 'tcx> LayoutTypeCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
     fn backend_type(&self, layout: TyAndLayout<'tcx>) -> &'ll Type {
@@ -319,7 +299,6 @@ impl<'ll, 'tcx> LayoutTypeCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
         ty.llvm_type(self)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=add_type_metadata | COMPLEXITY=33 | LINES=60 */
 
 impl<'ll, 'tcx> TypeMembershipCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
     fn add_type_metadata(&self, function: &'ll Value, typeid: &[u8]) {

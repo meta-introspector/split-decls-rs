@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_metadata/src/fs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fs, io};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::rustc_data_structures::temp_dir::MaybeTempDir;
 use rustc_fs_util::TempDirBuilder;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{CrateType, OutFileName, OutputType};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::output::filename_for_metadata;
 
 use crate::errors::{
     BinaryOutputToTty, FailedCopyToStdout, FailedCreateEncodedMetadata, FailedCreateFile,
     FailedCreateTempdir, FailedWriteError,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EncodedMetadata, encode_metadata};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=emit_wrapper_file | COMPLEXITY=11 | LINES=19 */
 
 // FIXME(eddyb) maybe include the crate name in this?
 pub const METADATA_FILENAME: &str = "lib.rmeta";
@@ -39,7 +33,6 @@ pub fn emit_wrapper_file(sess: &Session, data: &[u8], tmpdir: &Path, name: &str)
 
     out_filename
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=encode_and_write_metadata | COMPLEXITY=58 | LINES=78 */
 
 pub fn encode_and_write_metadata(tcx: TyCtxt<'_>) -> EncodedMetadata {
     let out_filename = filename_for_metadata(tcx.sess, tcx.output_filenames(()));
@@ -118,13 +111,11 @@ pub fn encode_and_write_metadata(tcx: TyCtxt<'_>) -> EncodedMetadata {
 
     metadata
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=non_durable_rename | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(not(target_os = "linux"))]
 pub fn non_durable_rename(src: &Path, dst: &Path) -> std::io::Result<()> {
     std::fs::rename(src, dst)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=non_durable_rename | COMPLEXITY=9 | LINES=13 */
 
 /// This function attempts to bypass the auto_da_alloc heuristic implemented by some filesystems
 /// such as btrfs and ext4. When renaming over a file that already exists then they will "helpfully"
@@ -138,7 +129,6 @@ pub fn non_durable_rename(src: &Path, dst: &Path) -> std::io::Result<()> {
     let _ = std::fs::remove_file(dst);
     std::fs::rename(src, dst)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=copy_to_stdout | COMPLEXITY=2 | LINES=7 */
 
 pub fn copy_to_stdout(from: &Path) -> io::Result<()> {
     let mut reader = fs::File::open_buffered(from)?;

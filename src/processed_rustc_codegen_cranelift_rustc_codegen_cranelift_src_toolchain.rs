@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/toolchain.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 // Locating various executables part of a C toolchain.
 
 use std::path::PathBuf;

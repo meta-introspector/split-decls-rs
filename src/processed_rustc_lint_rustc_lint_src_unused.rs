@@ -1,28 +1,19 @@
 // SRC: ../rust/compiler/rustc_lint/src/unused.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter;
 
 use crate::rustc_complete::util::{classify, parser};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, ExprKind, FnRetTy, HasAttrs as _, StmtKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{MultiSpan, pluralize};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, LangItem, find_attr};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::util::elaborate;
 use crate::rustc_complete::ty::{self, Ty, adjustment};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass, impl_lint_pass};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition::Edition2015;
 use crate::rustc_complete::{BytePos, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use tracing::instrument;
 
 use crate::lints::{
@@ -31,9 +22,7 @@ use crate::lints::{
     UnusedDelim, UnusedDelimSuggestion, UnusedImportBracesDiag, UnusedOp, UnusedOpSuggestion,
     UnusedResult,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EarlyContext, EarlyLintPass, LateContext, LateLintPass, Lint, LintContext};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 declare_lint! {
     /// The `unused_must_use` lint detects unused result of a type flagged as
@@ -64,7 +53,6 @@ declare_lint! {
     "unused result of a type flagged as `#[must_use]`",
     report_in_external_macro
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=39 */
 
 declare_lint! {
     /// The `unused_results` lint checks for the unused result of an
@@ -104,7 +92,6 @@ declare_lint! {
     Allow,
     "unused result of an expression in a statement"
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_stmt | COMPLEXITY=205 | LINES=445 */
 
 declare_lint_pass!(UnusedResults => [UNUSED_MUST_USE, UNUSED_RESULTS]);
 
@@ -550,7 +537,6 @@ impl<'tcx> LateLintPass<'tcx> for UnusedResults {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=21 */
 
 declare_lint! {
     /// The `path_statements` lint detects path statements with no effect.
@@ -572,7 +558,6 @@ declare_lint! {
     Warn,
     "path statements with no effect"
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=check_stmt | COMPLEXITY=20 | LINES=22 */
 
 declare_lint_pass!(PathStatements => [PATH_STATEMENTS]);
 
@@ -595,7 +580,6 @@ impl<'tcx> LateLintPass<'tcx> for PathStatements {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=21 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 enum UnusedDelimsCtx {
@@ -617,7 +601,6 @@ enum UnusedDelimsCtx {
     IndexExpr,
     ClosureBody,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=15 | LINES=24 */
 
 impl From<UnusedDelimsCtx> for &'static str {
     fn from(ctx: UnusedDelimsCtx) -> &'static str {
@@ -642,7 +625,6 @@ impl From<UnusedDelimsCtx> for &'static str {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=lint | COMPLEXITY=239 | LINES=390 */
 
 /// Used by both `UnusedParens` and `UnusedBraces` to prevent code duplication.
 trait UnusedDelimLint {
@@ -1033,7 +1015,6 @@ trait UnusedDelimLint {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=21 */
 
 declare_lint! {
     /// The `unused_parens` lint detects `if`, `match`, `while` and `return`
@@ -1055,7 +1036,6 @@ declare_lint! {
     Warn,
     "`if`, `match`, `while` and `return` do not need parentheses"
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Default)]
 pub(crate) struct UnusedParens {
@@ -1067,7 +1047,6 @@ pub(crate) struct UnusedParens {
     /// contain may be ambiguous w/r/t trailing `+` operators.
     in_no_bounds_pos: FxHashMap<ast::NodeId, NoBoundsException>,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 /// Whether parentheses may be omitted from a type without resulting in ambiguity.
 ///
@@ -1090,7 +1069,6 @@ enum NoBoundsException {
     /// parentheses around the type are unnecessary.
     OneBound,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=lint | COMPLEXITY=22 | LINES=55 */
 
 impl_lint_pass!(UnusedParens => [UNUSED_PARENS]);
 
@@ -1146,7 +1124,6 @@ impl UnusedDelimLint for UnusedParens {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=check_unused_parens_pat | COMPLEXITY=41 | LINES=58 */
 
 impl UnusedParens {
     fn check_unused_parens_pat(
@@ -1205,7 +1182,6 @@ impl UnusedParens {
         None
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=139 | LINES=262 */
 
 impl EarlyLintPass for UnusedParens {
     #[inline]
@@ -1468,7 +1444,6 @@ impl EarlyLintPass for UnusedParens {
         assert!(!self.with_self_ty_parens);
     }
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=23 */
 
 declare_lint! {
     /// The `unused_braces` lint detects unnecessary braces around an
@@ -1492,7 +1467,6 @@ declare_lint! {
     Warn,
     "unnecessary braces around an expression"
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=lint | COMPLEXITY=143 | LINES=289 */
 
 declare_lint_pass!(UnusedBraces => [UNUSED_BRACES]);
 

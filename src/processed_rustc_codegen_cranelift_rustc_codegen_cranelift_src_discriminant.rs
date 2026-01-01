@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/discriminant.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Handling of enum discriminants
 //
 // Adapted from <https://github.com/rust-lang/rust/blob/31c0645b9d2539f47eecb096142474b29dc542f7/compiler/rustc_codegen_ssa/src/mir/place.rs>
@@ -7,7 +6,6 @@
 
 use crate::rustc_abi::Primitive::Int;
 use crate::rustc_abi::{TagEncoding, Variants};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=67 */
 
 use crate::prelude::*;
 
@@ -75,7 +73,6 @@ pub(crate) fn codegen_set_discriminant<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=74 | LINES=143 */
 
 pub(crate) fn codegen_get_discriminant<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/profiling.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=record_arg_with_span | COMPLEXITY=7 | LINES=19 */
 use std::borrow::Borrow;
 
 use crate::rustc_data_structures::profiling::EventArgRecorder;
@@ -19,7 +18,6 @@ pub trait SpannedEventArgRecorder {
     where
         A: Borrow<str> + Into<String>;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=record_arg_with_span | COMPLEXITY=5 | LINES=10 */
 
 impl SpannedEventArgRecorder for EventArgRecorder<'_> {
     fn record_arg_with_span<A>(&mut self, source_map: &SourceMap, event_arg: A, span: crate::Span)

@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/def_use.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::{
     MutatingUseContext, NonMutatingUseContext, NonUseContext, PlaceContext,
 };
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Eq, PartialEq, Clone)]
 pub(crate) enum DefUse {
@@ -12,7 +10,6 @@ pub(crate) enum DefUse {
     Use,
     Drop,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=76 */
 
 pub(crate) fn categorize(context: PlaceContext) -> Option<DefUse> {
     match context {

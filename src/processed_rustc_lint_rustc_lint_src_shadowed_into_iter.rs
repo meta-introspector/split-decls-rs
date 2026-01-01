@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/shadowed_into_iter.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edition::Edition;
 
 use crate::lints::{ShadowedIntoIterDiag, ShadowedIntoIterDiagSub};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 declare_lint! {
     /// The `array_into_iter` lint detects calling `into_iter` on arrays.
@@ -42,7 +36,6 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2021/IntoIterator-for-arrays.html>",
     };
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 declare_lint! {
     /// The `boxed_slice_into_iter` lint detects calling `into_iter` on boxed slices.
@@ -72,7 +65,6 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2024/intoiterator-box-slice.html>"
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=50 | LINES=90 */
 
 #[derive(Copy, Clone)]
 pub(crate) struct ShadowedIntoIter;

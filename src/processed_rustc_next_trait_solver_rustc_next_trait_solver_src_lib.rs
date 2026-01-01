@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 // Crate containing the implementation of the next-generation trait solver.
 //
 // This crate may also contain things that are used by the old trait solver,

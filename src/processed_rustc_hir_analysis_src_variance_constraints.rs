@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/variance/constraints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Constraint construction and representation
 //
 // The second pass over the HIR determines the set of constraints.
 // We walk the set of items and, for each member, generate new constraints.
 
 use hir::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 use super::terms::VarianceTerm::*;
 use super::terms::*;
@@ -30,7 +25,6 @@ pub(crate) struct ConstraintContext<'a, 'tcx> {
 
     pub constraints: Vec<Constraint<'a>>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Declares that the variable `decl_id` appears in a location with
 /// variance `variance`.
@@ -39,7 +33,6 @@ pub(crate) struct Constraint<'a> {
     pub inferred: InferredIndex,
     pub variance: &'a VarianceTerm<'a>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// To build constraints, we visit one item (type, trait) at a time
 /// and look at its contents. So e.g., if we have
@@ -47,14 +40,12 @@ pub(crate) struct Constraint<'a> {
 /// struct Foo<T> {
 ///     b: Bar<T>
 /// }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=CurrentItem | COMPLEXITY=4 | LINES=6 */
 /// ```
 /// then while we are visiting `Bar<T>`, the `CurrentItem` would have
 /// the `DefId` and the start of `Foo`'s inferreds.
 struct CurrentItem {
     inferred_start: InferredIndex,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=43 */
 
 pub(crate) fn add_constraints_from_crate<'a, 'tcx>(
     terms_cx: TermsContext<'a, 'tcx>,
@@ -98,7 +89,6 @@ pub(crate) fn add_constraints_from_crate<'a, 'tcx>(
 
     constraint_cx
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=209 | LINES=402 */
 
 impl<'a, 'tcx> ConstraintContext<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

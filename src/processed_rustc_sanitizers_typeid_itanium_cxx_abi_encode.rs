@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_sanitizers/src/cfi/typeid/itanium_cxx_abi/encode.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=10 */
 // Encodes type metadata identifiers for LLVM CFI and cross-language LLVM CFI support using Itanium
 // C++ ABI mangling for encoding with vendor extended type qualifiers and types for Rust types that
 // are not used across the FFI boundary.
@@ -10,9 +9,7 @@
 use std::fmt::Write as _;
 
 use crate::rustc_abi::{ExternAbi, Integer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, CASE_INSENSITIVE, ToBaseN};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
 use crate::rustc_complete::bug;
@@ -21,14 +18,12 @@ use crate::rustc_complete::ty::{
     self, Const, ExistentialPredicate, FloatTy, FnSig, GenericArg, GenericArgKind, GenericArgsRef,
     IntTy, List, Region, RegionKind, TermKind, Ty, TyCtxt, TypeFoldable, UintTy,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::sym;
 use tracing::instrument;
 
 use crate::cfi::typeid::TypeIdOptions;
 use crate::cfi::typeid::itanium_cxx_abi::transform::{TransformTy, TransformTyOptions};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Options for encode_ty.
 pub(crate) type EncodeTyOptions = TypeIdOptions;
@@ -41,7 +36,6 @@ pub(crate) enum DictKey<'tcx> {
     Const(Const<'tcx>),
     Predicate(ExistentialPredicate<'tcx>),
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Type and extended type qualifiers.
 #[derive(Eq, Hash, PartialEq)]
@@ -50,7 +44,6 @@ pub(crate) enum TyQ {
     Const,
     Mut,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compress | COMPLEXITY=11 | LINES=18 */
 
 /// Substitutes a component if found in the substitution dictionary (see
 /// <https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-compression>).
@@ -69,7 +62,6 @@ fn compress<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=encode_args | COMPLEXITY=19 | LINES=37 */
 
 /// Encodes args using the Itanium C++ ABI with vendor extended type qualifiers and types for Rust
 /// types that are not used at the FFI boundary.
@@ -107,7 +99,6 @@ fn encode_args<'tcx>(
     }
     s
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=encode_const | COMPLEXITY=29 | LINES=71 */
 
 /// Encodes a const using the Itanium C++ ABI as a literal argument (see
 /// <https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling.literal>).
@@ -179,7 +170,6 @@ fn encode_const<'tcx>(
 
     s
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=encode_fnsig | COMPLEXITY=27 | LINES=54 */
 
 /// Encodes a FnSig using the Itanium C++ ABI with vendor extended type qualifiers and types for
 /// Rust types that are not used at the FFI boundary.
@@ -234,7 +224,6 @@ fn encode_fnsig<'tcx>(
 
     s
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=encode_predicate | COMPLEXITY=22 | LINES=41 */
 
 /// Encodes a predicate using the Itanium C++ ABI with vendor extended type qualifiers and types for
 /// Rust types that are not used at the FFI boundary.
@@ -276,7 +265,6 @@ fn encode_predicate<'tcx>(
     compress(dict, DictKey::Predicate(*predicate.as_ref().skip_binder()), &mut s);
     s
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=encode_predicates | COMPLEXITY=6 | LINES=17 */
 
 /// Encodes predicates using the Itanium C++ ABI with vendor extended type qualifiers and types for
 /// Rust types that are not used at the FFI boundary.
@@ -294,7 +282,6 @@ fn encode_predicates<'tcx>(
     }
     s
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=encode_region | COMPLEXITY=16 | LINES=33 */
 
 /// Encodes a region using the Itanium C++ ABI as a vendor extended type.
 fn encode_region<'tcx>(region: Region<'tcx>, dict: &mut FxHashMap<DictKey<'tcx>, usize>) -> String {
@@ -328,7 +315,6 @@ fn encode_region<'tcx>(region: Region<'tcx>, dict: &mut FxHashMap<DictKey<'tcx>,
     }
     s
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=152 | LINES=346 */
 
 /// Encodes a ty:Ty using the Itanium C++ ABI with vendor extended type qualifiers and types for
 /// Rust types that are not used at the FFI boundary.
@@ -675,7 +661,6 @@ pub(crate) fn encode_ty<'tcx>(
 
     typeid
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=encode_ty_name | COMPLEXITY=54 | LINES=100 */
 
 /// Encodes a ty:Ty name, including its crate and path disambiguators and names.
 fn encode_ty_name(tcx: TyCtxt<'_>, def_id: DefId) -> String {
@@ -776,7 +761,6 @@ fn encode_ty_name(tcx: TyCtxt<'_>, def_id: DefId) -> String {
 
     s
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=to_disambiguator | COMPLEXITY=7 | LINES=10 */
 
 /// Converts a number to a disambiguator (see
 /// <https://rust-lang.github.io/rfcs/2603-rust-symbol-name-mangling-v0.html>).
@@ -787,7 +771,6 @@ fn to_disambiguator(num: u64) -> String {
         "s_".to_string()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=to_seq_id | COMPLEXITY=6 | LINES=10 */
 
 /// Converts a number to a sequence number (see
 /// <https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangle.seq-id>).

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/generic/mod.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=42 */
 // Some code that abstracts away much of the boilerplate of writing
 // `derive` instances for traits. Among other things it manages getting
 // access to the fields of the 4 different sorts of structs and enum
@@ -42,7 +41,6 @@
 // struct A {
 //     x: i32,
 // }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 //
 // struct B(i32);
 //
@@ -50,7 +48,6 @@
 //     C0(i32),
 //     C1 { x: i32 }
 // }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=28 */
 // ```
 //
 // The `i32`s in `B` and `C0` don't have an identifier, so the
@@ -79,14 +76,12 @@
 // trait PartialEq {
 //     fn eq(&self, other: &Self) -> bool;
 // }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
 //
 // impl PartialEq for i32 {
 //     fn eq(&self, other: &i32) -> bool {
 //         *self == *other
 //     }
 // }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 // ```
 //
 // Some examples of the values of `SubstructureFields` follow, using the
@@ -103,7 +98,6 @@
 //     self_: <expr for &self.x>,
 //     other: vec![<expr for &other.x>],
 // }])
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 // ```
 //
 // For the `B` impl, called with `B(a)` and `B(b)`,
@@ -115,7 +109,6 @@
 //     self_: <expr for &a>,
 //     other: vec![<expr for &b>],
 // }])
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=17 */
 // ```
 //
 // ## Enums
@@ -133,12 +126,10 @@
 //         self_: <expr for &a>,
 //         other: vec![<expr for &b>],
 //     }],
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 // )
 // ```
 //
 // For `C1 {x}` and `C1 {x}`,
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=11 */
 //
 // ```text
 // EnumMatching(
@@ -150,7 +141,6 @@
 //         self_: <expr for &self.x>,
 //         other: vec![<expr for &other.x>],
 //     }],
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=37 */
 // )
 // ```
 //
@@ -188,34 +178,24 @@
 use std::cell::RefCell;
 use std::ops::Not;
 use std::{iter, vec};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) use StaticFields::*;
 pub(crate) use SubstructureFields::*;
 use crate::rustc_complete::token::{IdentIsRaw, LitKind, Token, TokenKind};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpan, Spacing, TokenTree};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AnonConst, AttrArgs, BindingMode, ByRef, DelimArgs, EnumDef, Expr, GenericArg,
     GenericParamKind, Generics, Mutability, PatKind, Safety, VariantData,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_attr_parsing::AttributeParser;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Attribute;
 use crate::rustc_complete::attrs::{AttributeKind, ReprPacked};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use ty::{Bounds, Path, Ref, Self_, Ty};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{deriving, errors};
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=31 */
 
 
 pub(crate) struct TraitDef<'a> {
@@ -246,7 +226,6 @@ pub(crate) struct TraitDef<'a> {
 
     pub is_staged_api_crate: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 
 pub(crate) struct MethodDef<'a> {
     /// name of the method
@@ -269,7 +248,6 @@ pub(crate) struct MethodDef<'a> {
 
     pub combine_substructure: RefCell<CombineSubstructureFunc<'a>>,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 /// How to handle fieldless enum variants.
 #[derive(PartialEq)]
@@ -286,7 +264,6 @@ pub(crate) enum FieldlessVariantsStrategy {
     /// at once.
     SpecializeIfAllVariantsFieldless,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// All the data about the data structure/method being derived upon.
 pub(crate) struct Substructure<'a> {
@@ -297,7 +274,6 @@ pub(crate) struct Substructure<'a> {
     pub nonselflike_args: &'a [Box<Expr>],
     pub fields: &'a SubstructureFields<'a>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 /// Summary of the relevant parts of a struct/enum field.
 pub(crate) struct FieldInfo {
@@ -313,14 +289,12 @@ pub(crate) struct FieldInfo {
     pub other_selflike_exprs: Vec<Box<Expr>>,
     pub maybe_scalar: bool,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 pub(crate) enum IsTuple {
     No,
     Yes,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Fields for a static method
 pub(crate) enum StaticFields {
@@ -329,7 +303,6 @@ pub(crate) enum StaticFields {
     /// Normal structs/struct variants.
     Named(Vec<(Ident, Span, Option<AnonConst>)>),
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=27 */
 
 /// A summary of the possible sets of fields.
 pub(crate) enum SubstructureFields<'a> {
@@ -357,7 +330,6 @@ pub(crate) enum SubstructureFields<'a> {
     /// A static method where `Self` is an enum.
     StaticEnum(&'a ast::EnumDef),
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Combine the values of all the fields together. The last argument is
 /// all the fields of all the structures.
@@ -369,13 +341,11 @@ pub(crate) fn combine_substructure(
 ) -> RefCell<CombineSubstructureFunc<'_>> {
     RefCell::new(f)
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=TypeParameter | COMPLEXITY=2 | LINES=5 */
 
 struct TypeParameter {
     bound_generic_params: ThinVec<ast::GenericParam>,
     ty: Box<ast::Ty>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=into_block | COMPLEXITY=26 | LINES=49 */
 
 /// The code snippets built up for derived code are sometimes used as blocks
 /// (e.g. in a function body) and sometimes used as expressions (e.g. in a match
@@ -425,7 +395,6 @@ impl BlockOrExpr {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=find_type_parameters | COMPLEXITY=27 | LINES=69 */
 
 /// This method helps to extract all the type parameters referenced from a
 /// type. For a type parameter `<T>`, it looks for either a `TyPath` that
@@ -495,7 +464,6 @@ fn find_type_parameters(
 
     visitor.type_params
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=create_derived_impl | COMPLEXITY=167 | LINES=494 */
 
 impl<'a> TraitDef<'a> {
     pub(crate) fn expand(
@@ -990,7 +958,6 @@ impl<'a> TraitDef<'a> {
         self.create_derived_impl(cx, type_ident, generics, field_tys, methods, is_packed)
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=call_substructure_method | COMPLEXITY=215 | LINES=511 */
 
 impl<'a> MethodDef<'a> {
     fn call_substructure_method(
@@ -1502,7 +1469,6 @@ impl<'a> MethodDef<'a> {
         )
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=summarise_struct | COMPLEXITY=67 | LINES=175 */
 
 // general helper methods.
 impl<'a> TraitDef<'a> {
@@ -1678,7 +1644,6 @@ impl<'a> TraitDef<'a> {
         })
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=16 */
 
 /// The function passed to `cs_fold` is called repeatedly with a value of this
 /// type. It describes one part of the code generation. The result is always an
@@ -1695,7 +1660,6 @@ pub(crate) enum CsFold<'a> {
     // The fallback case for a struct or enum variant with no fields.
     Fieldless,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=56 */
 
 /// Folds over fields, combining the expressions for each field in a sequence.
 /// Statics may not be folded over.

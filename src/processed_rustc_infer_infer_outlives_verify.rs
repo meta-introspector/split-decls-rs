@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/verify.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::assert_matches;
 
 use crate::rustc_complete::ty::outlives::{Component, compute_alias_components_recursive};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, OutlivesPredicate, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::smallvec;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::infer::outlives::env::RegionBoundPairs;
 use crate::infer::region_constraints::VerifyIfEq;
 use crate::infer::{GenericKind, VerifyBound};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// The `TypeOutlives` struct has the job of "lowering" a `T: 'a`
 /// obligation into a series of `'a: 'b` constraints and "verifys", as
@@ -32,7 +27,6 @@ pub(crate) struct VerifyBoundCx<'cx, 'tcx> {
     implicit_region_bound: Option<ty::Region<'tcx>>,
     caller_bounds: &'cx [ty::PolyTypeOutlivesPredicate<'tcx>],
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=bound_from_components | COMPLEXITY=138 | LINES=264 */
 
 impl<'cx, 'tcx> VerifyBoundCx<'cx, 'tcx> {
     pub(crate) fn new(

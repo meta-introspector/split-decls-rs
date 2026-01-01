@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23 */
 // Construction of MIR from HIR.
 
 // tidy-alphabetical-start
@@ -18,7 +17,6 @@
 use crate::rustc_complete::util::Providers;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=5 | LINES=10 */
 
 pub fn provide(providers: &mut Providers) {
     providers.check_match = thir::pattern::check_match;

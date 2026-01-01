@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/array.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=make_array | COMPLEXITY=2 | LINES=21 */
 // Compiler:
 //
 // Run-time:
@@ -21,7 +20,6 @@ static mut ONE: usize = 1;
 fn make_array() -> [u8; 3] {
     [42, 10, 5]
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 
 #[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {

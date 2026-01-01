@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/alias_relate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 // Implements the `AliasRelate` goal, which is used when unifying aliases.
 // Doing this via a separate goal is called "deferred alias relation" and part
 // of our more general approach to "lazy normalization".
@@ -20,13 +19,10 @@
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::solve::GoalSource;
 use rustc_type_ir::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{Certainty, EvalCtxt, Goal, QueryResult};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=92 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/scripts/rustdoc-clif.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=25 | LINES=58 */
 use std::env;
 use std::ffi::OsString;
 #[cfg(unix)]

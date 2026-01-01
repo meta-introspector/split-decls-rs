@@ -31,7 +31,5 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_library_core_src_num_int_macros.rs"]
-mod dot_dot_rust_library_core_src_num_int_macros;
-#[path = "src/dot_dot_rust_compiler_rustc_interface_src_passes.rs"]
-mod dot_dot_rust_compiler_rustc_interface_src_passes;
+#[path = "src/dot_dot_rust_compiler_rustc_traits_src_coroutine_witnesses.rs"]
+mod dot_dot_rust_compiler_rustc_traits_src_coroutine_witnesses;

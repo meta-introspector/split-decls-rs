@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/select/candidate_assembly.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 // Candidate assembly.
 //
 // The selection process begins by examining all in-scope impls,
@@ -13,22 +12,15 @@ use std::ops::ControlFlow;
 use hir::LangItem;
 use hir::def_id::DefId;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, CoroutineDesugaring, CoroutineKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{Obligation, PolyTraitObligation, SelectionError};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
 use crate::rustc_complete::ty::{self, SizedTraitKind, Ty, TypeVisitableExt, TypingMode, elaborate};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::SelectionCandidate::*;
 use super::{SelectionCandidateSet, SelectionContext, TraitObligationStack};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=assemble_candidates_from_projected_tys | COMPLEXITY=709 | LINES=1414 */
 use crate::traits::util;
 
 impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {

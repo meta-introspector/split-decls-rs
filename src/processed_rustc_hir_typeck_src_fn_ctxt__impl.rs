@@ -1,44 +1,33 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/_impl.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::collections::hash_map::Entry;
 use std::slice;
 
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{self as hir, AmbigArg, ExprKind, GenericArg, HirId, Node, QPath, intravisit};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_hir_analysis::hir_ty_lowering::errors::GenericsArgsErrExtend;
 use crate::rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_hir_analysis::hir_ty_lowering::{
     ExplicitLateBound, FeedConstTy, GenericArgCountMismatch, GenericArgCountResult,
     GenericArgsLowerer, GenericPathSegment, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{DefineOpaqueTypes, InferResult};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_lint::builtin::SELF_CONSTRUCTOR_FROM_OUTER_ITEM;
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow, AutoBorrowMutability};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::{
     self, AdtKind, CanonicalUserType, GenericArgsRef, GenericParamDefKind, IsIdentity,
     SizedTraitKind, Ty, TyCtxt, TypeFoldable, TypeVisitable, TypeVisitableExt, UserArgs,
     UserSelfTy,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::LocalDefId;
@@ -47,18 +36,12 @@ use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAn
 use crate::rustc_trait_selection::traits::{
     self, NormalizeExt, ObligationCauseCode, StructurallyNormalizeExt,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::callee::{self, DeferredCallResolution};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{self, CtorIsPrivate};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::method::{self, MethodCallee};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{BreakableCtxt, Diverges, Expectation, FnCtxt, LoweredTy, rvalue_scopes};
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=tag | COMPLEXITY=737 | LINES=1534 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Produces warning on the given node, if the current point in the

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/volatile2.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=sigaction | COMPLEXITY=14 | LINES=38 */
 // Compiler:
 //
 // Run-time:
@@ -38,7 +37,6 @@ mod libc {
     pub const SA_SIGINFO: i32 = 0x00000004;
     pub const SIGSEGV: i32 = 11;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=main | COMPLEXITY=21 | LINES=62 */
 
 static mut COUNT: u32 = 0;
 static mut STORAGE: *mut u8 = core::ptr::null_mut();
@@ -101,7 +99,6 @@ fn main() {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=19 */
 
 unsafe extern "C" fn segv_handler(_: i32, _: *mut (), _: *mut ()) {
     let p_count = (&raw mut COUNT) as *mut u32;

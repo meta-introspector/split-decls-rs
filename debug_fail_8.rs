@@ -31,9 +31,7 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_library_stdarch_crates_core_arch_src_aarch64_tme.rs"]
-mod dot_dot_rust_library_stdarch_crates_core_arch_src_aarch64_tme;
-#[path = "src/dot_dot_rust_library_std_src_collections_hash_set.rs"]
-mod dot_dot_rust_library_std_src_collections_hash_set;
-#[path = "src/dot_dot_rust_library_std_src_os_windows_fs.rs"]
-mod dot_dot_rust_library_std_src_os_windows_fs;
+#[path = "src/dot_dot_rust_library_stdarch_crates_core_arch_src_powerpc_mod.rs"]
+mod dot_dot_rust_library_stdarch_crates_core_arch_src_powerpc_mod;
+#[path = "src/dot_dot_rust_compiler_rustc_hir_typeck_src_place_op.rs"]
+mod dot_dot_rust_compiler_rustc_hir_typeck_src_place_op;

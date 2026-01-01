@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/outlives_bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::infer::InferOk;
 use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
 use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
 use rustc_macros::extension;
 use crate::rustc_complete::infer::canonical::{OriginalQueryValues, QueryRegionConstraints};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use crate::rustc_complete::traits::query::OutlivesBound;
 use crate::rustc_complete::ty::{self, ParamEnv, Ty, TypeFolder, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::instrument;
 
@@ -23,7 +20,6 @@ use crate::traits::ObligationCause;
 /// between generic parameters. For example:
 /// ```
 /// fn foo<T>(x: &T) {}
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=implied_outlives_bounds | COMPLEXITY=20 | LINES=71 */
 /// ```
 /// can only be called with a `'a` and `T` such that `&'a T` is WF.
 /// For `&'a T` to be WF, `T: 'a` must hold. So we can assume `T: 'a`.
@@ -95,7 +91,6 @@ fn implied_outlives_bounds<'a, 'tcx>(
 
     bounds
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=implied_bounds_tys | COMPLEXITY=9 | LINES=17 */
 
 #[extension(pub trait InferCtxtExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {

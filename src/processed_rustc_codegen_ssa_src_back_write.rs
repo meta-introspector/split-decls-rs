@@ -1,57 +1,43 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/write.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::assert_matches;
 use std::marker::PhantomData;
 use std::panic::AssertUnwindSafe;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::sync::Arc;
 use std::sync::mpsc::{Receiver, Sender, channel};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fs, io, mem, str, thread};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::rustc_abi::Size;
 use crate::rustc_complete::attr;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::jobserver::{self, Acquired};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::profiling::{SelfProfilerRef, VerboseTimingGuard};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::emitter::Emitter;
 use crate::rustc_complete::translation::Translator;
 use crate::rustc_complete::{
     Diag, DiagArgMap, DiagCtxt, DiagMessage, ErrCode, FatalErrorMarker, Level, MultiSpan, Style,
     Suggestions,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_fs_util::link_or_copy;
 use rustc_incremental::{
     copy_cgu_workproduct_to_incr_comp_cache_dir, in_incr_comp_dir, in_incr_comp_dir_sess,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_metadata::fs::copy_to_stdout;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{
     self, CrateType, Lto, OutFileName, OutputFilenames, OutputType, Passes, SwitchWithOptPath,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{FileName, InnerSpan, Span, SpanData, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{MergeFunctions, SanitizerSet};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::link::{self, ensure_removed};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::lto::{self, SerializedModule};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::back::lto::check_lto_allowed;
 use crate::errors::ErrorCreatingRemarkDir;
 use crate::traits::*;
@@ -59,7 +45,6 @@ use crate::{
     CachedModuleCodegen, CodegenResults, CompiledModule, CrateInfo, ModuleCodegen, ModuleKind,
     errors,
 };
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 const PRE_LTO_BC_EXT: &str = "pre-lto.bc";
 
@@ -76,7 +61,6 @@ pub enum EmitObj {
     // Object code, possibly augmented with a bitcode section.
     ObjectCode(BitcodeSection),
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// What kind of llvm bitcode section to embed in an object file.
 #[derive(Clone, Copy, PartialEq)]
@@ -87,7 +71,6 @@ pub enum BitcodeSection {
     // A full, uncompressed bitcode section.
     Full,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=ModuleConfig | COMPLEXITY=8 | LINES=44 */
 
 /// Module-specific configuration for `optimize_and_codegen`.
 pub struct ModuleConfig {
@@ -132,7 +115,6 @@ pub struct ModuleConfig {
     pub autodiff: Vec<config::AutoDiff>,
     pub offload: Vec<config::Offload>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=70 | LINES=158 */
 
 impl ModuleConfig {
     fn new(kind: ModuleKind, tcx: TyCtxt<'_>, no_builtins: bool) -> ModuleConfig {
@@ -291,7 +273,6 @@ impl ModuleConfig {
         self.emit_obj == EmitObj::ObjectCode(BitcodeSection::Full)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=TargetMachineFactoryConfig | COMPLEXITY=7 | LINES=12 */
 
 /// Configuration passed to the function returned by the `target_machine_factory`.
 pub struct TargetMachineFactoryConfig {
@@ -304,7 +285,6 @@ pub struct TargetMachineFactoryConfig {
     /// so that LLVM can emit the CodeView S_OBJNAME record in pdb files
     pub output_obj_file: Option<PathBuf>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=25 */
 
 impl TargetMachineFactoryConfig {
     pub fn new(
@@ -330,7 +310,6 @@ impl TargetMachineFactoryConfig {
         TargetMachineFactoryConfig { split_dwarf_file, output_obj_file }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=CodegenContext | COMPLEXITY=16 | LINES=58 */
 
 pub type TargetMachineFactoryFn<B> = Arc<
     dyn Fn(
@@ -389,14 +368,12 @@ pub struct CodegenContext<B: WriteBackendMethods> {
     /// Depends on [`ExtraBackendMethods::supports_parallel()`] and `-Zno_parallel_backend`.
     pub parallel: bool,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=create_dcx | COMPLEXITY=3 | LINES=6 */
 
 impl<B: WriteBackendMethods> CodegenContext<B> {
     pub fn create_dcx(&self) -> DiagCtxt {
         DiagCtxt::new(Box::new(self.diag_emitter.clone()))
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=generate_thin_lto_work | COMPLEXITY=7 | LINES=34 */
 
 fn generate_thin_lto_work<B: ExtraBackendMethods>(
     cgcx: &CodegenContext<B>,
@@ -431,13 +408,11 @@ fn generate_thin_lto_work<B: ExtraBackendMethods>(
         }))
         .collect()
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=CompiledModules | COMPLEXITY=2 | LINES=5 */
 
 struct CompiledModules {
     modules: Vec<CompiledModule>,
     allocator_module: Option<CompiledModule>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=need_bitcode_in_object | COMPLEXITY=2 | LINES=7 */
 
 fn need_bitcode_in_object(tcx: TyCtxt<'_>) -> bool {
     let sess = tcx.sess;
@@ -445,7 +420,6 @@ fn need_bitcode_in_object(tcx: TyCtxt<'_>) -> bool {
         && tcx.crate_types().contains(&CrateType::Rlib)
         && sess.opts.output_types.contains_key(&OutputType::Exe)
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=need_pre_lto_bitcode_for_incr_comp | COMPLEXITY=9 | LINES=11 */
 
 fn need_pre_lto_bitcode_for_incr_comp(sess: &Session) -> bool {
     if sess.opts.incremental.is_none() {
@@ -457,7 +431,6 @@ fn need_pre_lto_bitcode_for_incr_comp(sess: &Session) -> bool {
         Lto::Fat | Lto::Thin | Lto::ThinLocal => true,
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=47 */
 
 pub(crate) fn start_async_codegen<B: ExtraBackendMethods>(
     backend: B,
@@ -505,7 +478,6 @@ pub(crate) fn start_async_codegen<B: ExtraBackendMethods>(
         output_filenames: Arc::clone(tcx.output_filenames(())),
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=copy_all_cgu_workproducts_to_incr_comp_cache_dir | COMPLEXITY=28 | LINES=42 */
 
 fn copy_all_cgu_workproducts_to_incr_comp_cache_dir(
     sess: &Session,
@@ -548,7 +520,6 @@ fn copy_all_cgu_workproducts_to_incr_comp_cache_dir(
 
     work_products
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=produce_final_output_artifacts | COMPLEXITY=120 | LINES=177 */
 
 fn produce_final_output_artifacts(
     sess: &Session,
@@ -726,7 +697,6 @@ fn produce_final_output_artifacts(
     //  - #crate#.bc
     // These are used in linking steps and will be cleaned up afterward.
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 pub(crate) enum WorkItem<B: WriteBackendMethods> {
     /// Optimize a newly codegened, totally unoptimized module.
@@ -744,7 +714,6 @@ pub(crate) enum WorkItem<B: WriteBackendMethods> {
     /// Performs thin-LTO on the given module.
     ThinLto(lto::ThinModule<B>),
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=short_description | COMPLEXITY=30 | LINES=51 */
 
 impl<B: WriteBackendMethods> WorkItem<B> {
     /// Generate a short description of this work item suitable for use as a thread name.
@@ -796,7 +765,6 @@ impl<B: WriteBackendMethods> WorkItem<B> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// A result produced by the backend.
 pub(crate) enum WorkItemResult<B: WriteBackendMethods> {
@@ -811,13 +779,11 @@ pub(crate) enum WorkItemResult<B: WriteBackendMethods> {
     /// thin LTO.
     NeedsThinLto(String, B::ThinBuffer),
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
 pub enum FatLtoInput<B: WriteBackendMethods> {
     Serialized { name: String, buffer: SerializedModule<B::ModuleBuffer> },
     InMemory(ModuleCodegen<B::Module>),
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Actual LTO type we end up choosing based on multiple factors.
 pub(crate) enum ComputedLtoType {
@@ -825,7 +791,6 @@ pub(crate) enum ComputedLtoType {
     Thin,
     Fat,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=35 */
 
 pub(crate) fn compute_per_cgu_lto_type(
     sess_lto: &Lto,
@@ -861,7 +826,6 @@ pub(crate) fn compute_per_cgu_lto_type(
         _ => ComputedLtoType::No,
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=execute_optimize_work_item | COMPLEXITY=39 | LINES=62 */
 
 fn execute_optimize_work_item<B: ExtraBackendMethods>(
     cgcx: &CodegenContext<B>,
@@ -924,7 +888,6 @@ fn execute_optimize_work_item<B: ExtraBackendMethods>(
         },
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=execute_copy_from_cache_work_item | COMPLEXITY=30 | LINES=88 */
 
 fn execute_copy_from_cache_work_item<B: ExtraBackendMethods>(
     cgcx: &CodegenContext<B>,
@@ -1013,7 +976,6 @@ fn execute_copy_from_cache_work_item<B: ExtraBackendMethods>(
         llvm_ir,
     })
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=execute_fat_lto_work_item | COMPLEXITY=7 | LINES=23 */
 
 fn execute_fat_lto_work_item<B: ExtraBackendMethods>(
     cgcx: &CodegenContext<B>,
@@ -1037,7 +999,6 @@ fn execute_fat_lto_work_item<B: ExtraBackendMethods>(
     let module = B::codegen(cgcx, module, &cgcx.module_config);
     WorkItemResult::Finished(module)
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=execute_thin_lto_work_item | COMPLEXITY=2 | LINES=11 */
 
 fn execute_thin_lto_work_item<B: ExtraBackendMethods>(
     cgcx: &CodegenContext<B>,
@@ -1049,7 +1010,6 @@ fn execute_thin_lto_work_item<B: ExtraBackendMethods>(
     let module = B::codegen(cgcx, module, &cgcx.module_config);
     WorkItemResult::Finished(module)
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=31 */
 
 /// Messages sent to the coordinator.
 pub(crate) enum Message<B: WriteBackendMethods> {
@@ -1081,7 +1041,6 @@ pub(crate) enum Message<B: WriteBackendMethods> {
     /// down. Sent from the main thread.
     CodegenAborted,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=CguMessage; | COMPLEXITY=7 | LINES=21 */
 
 /// A message sent from the coordinator thread to the main thread telling it to
 /// process another codegen unit.
@@ -1103,7 +1062,6 @@ struct Diagnostic {
     children: Vec<Subdiagnostic>,
     args: DiagArgMap,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 // A cut-down version of `crate::rustc_errors::Subdiag` that impls `Send`. It's
 // missing the following fields from `crate::rustc_errors::Subdiag`.
@@ -1112,7 +1070,6 @@ pub(crate) struct Subdiagnostic {
     level: Level,
     messages: Vec<(DiagMessage, Style)>,
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(PartialEq, Clone, Copy, Debug)]
 enum MainThreadState {
@@ -1125,7 +1082,6 @@ enum MainThreadState {
     /// Idle, but lending the compiler process's Token to an LLVM thread so it can do useful work.
     Lending,
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=start_executing_work | COMPLEXITY=293 | LINES=624 */
 
 fn start_executing_work<B: ExtraBackendMethods>(
     backend: B,
@@ -1750,7 +1706,6 @@ fn start_executing_work<B: ExtraBackendMethods>(
         items_in_queue > 0 && items_in_queue >= quarter_of_workers
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=spawn_work | COMPLEXITY=24 | LINES=52 */
 
 /// `FatalError` is explicitly not `Send`.
 #[must_use]
@@ -1803,25 +1758,21 @@ fn spawn_work<'a, B: ExtraBackendMethods>(
     })
     .expect("failed to spawn work thread");
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum SharedEmitterMessage {
     Diagnostic(Diagnostic),
     InlineAsmError(SpanData, String, Level, Option<(String, Vec<InnerSpan>)>),
     Fatal(String),
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=SharedEmitter | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone)]
 pub struct SharedEmitter {
     sender: Sender<SharedEmitterMessage>,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=SharedEmitterMain | COMPLEXITY=2 | LINES=4 */
 
 pub struct SharedEmitterMain {
     receiver: Receiver<SharedEmitterMessage>,
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=22 */
 
 impl SharedEmitter {
     fn new() -> (SharedEmitter, SharedEmitterMain) {
@@ -1844,7 +1795,6 @@ impl SharedEmitter {
         drop(self.sender.send(SharedEmitterMessage::Fatal(msg.to_string())));
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=emit_diagnostic | COMPLEXITY=13 | LINES=39 */
 
 impl Emitter for SharedEmitter {
     fn emit_diagnostic(
@@ -1884,7 +1834,6 @@ impl Emitter for SharedEmitter {
         panic!("shared emitter attempted to translate a diagnostic");
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=check | COMPLEXITY=42 | LINES=73 */
 
 impl SharedEmitterMain {
     fn check(&self, sess: &Session, blocking: bool) {
@@ -1958,7 +1907,6 @@ impl SharedEmitterMain {
         }
     }
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=Coordinator | COMPLEXITY=4 | LINES=7 */
 
 pub struct Coordinator<B: ExtraBackendMethods> {
     sender: Sender<Message<B>>,
@@ -1966,14 +1914,12 @@ pub struct Coordinator<B: ExtraBackendMethods> {
     // Only used for the Message type.
     phantom: PhantomData<B>,
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=join | COMPLEXITY=3 | LINES=6 */
 
 impl<B: ExtraBackendMethods> Coordinator<B> {
     fn join(mut self) -> std::thread::Result<Result<CompiledModules, ()>> {
         self.future.take().unwrap().join()
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=11 */
 
 impl<B: ExtraBackendMethods> Drop for Coordinator<B> {
     fn drop(&mut self) {
@@ -1985,7 +1931,6 @@ impl<B: ExtraBackendMethods> Drop for Coordinator<B> {
         }
     }
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=OngoingCodegen | COMPLEXITY=5 | LINES=12 */
 
 pub struct OngoingCodegen<B: ExtraBackendMethods> {
     pub backend: B,
@@ -1998,7 +1943,6 @@ pub struct OngoingCodegen<B: ExtraBackendMethods> {
     pub codegen_worker_receive: Receiver<CguMessage>,
     pub shared_emitter_main: SharedEmitterMain,
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=join | COMPLEXITY=29 | LINES=64 */
 
 impl<B: ExtraBackendMethods> OngoingCodegen<B> {
     pub fn join(self, sess: &Session) -> (CodegenResults, FxIndexMap<WorkProductId, WorkProduct>) {
@@ -2063,7 +2007,6 @@ impl<B: ExtraBackendMethods> OngoingCodegen<B> {
         }
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 pub(crate) fn submit_codegened_module_to_llvm<B: ExtraBackendMethods>(
     coordinator: &Coordinator<B>,
@@ -2073,7 +2016,6 @@ pub(crate) fn submit_codegened_module_to_llvm<B: ExtraBackendMethods>(
     let llvm_work_item = WorkItem::Optimize(module);
     drop(coordinator.sender.send(Message::CodegenDone::<B> { llvm_work_item, cost }));
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 pub(crate) fn submit_post_lto_module_to_llvm<B: ExtraBackendMethods>(
     coordinator: &Coordinator<B>,
@@ -2082,7 +2024,6 @@ pub(crate) fn submit_post_lto_module_to_llvm<B: ExtraBackendMethods>(
     let llvm_work_item = WorkItem::CopyPostLtoArtifacts(module);
     drop(coordinator.sender.send(Message::CodegenDone::<B> { llvm_work_item, cost: 0 }));
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=22 */
 
 pub(crate) fn submit_pre_lto_module_to_llvm<B: ExtraBackendMethods>(
     tcx: TyCtxt<'_>,
@@ -2105,12 +2046,10 @@ pub(crate) fn submit_pre_lto_module_to_llvm<B: ExtraBackendMethods>(
         work_product: module.source,
     }));
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=pre_lto_bitcode_filename | COMPLEXITY=4 | LINES=4 */
 
 fn pre_lto_bitcode_filename(module_name: &str) -> String {
     format!("{module_name}.{PRE_LTO_BC_EXT}")
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=msvc_imps_needed | COMPLEXITY=6 | LINES=23 */
 
 fn msvc_imps_needed(tcx: TyCtxt<'_>) -> bool {
     // This should never be true (because it's not supported). If it is true,

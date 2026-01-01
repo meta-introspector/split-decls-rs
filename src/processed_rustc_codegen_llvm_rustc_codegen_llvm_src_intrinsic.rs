@@ -1,36 +1,23 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/intrinsic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::assert_matches;
 use std::cmp::Ordering;
 
 use crate::rustc_abi::{Align, BackendRepr, ExternAbi, Float, HasDataLayout, Primitive, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::base::{compare_simd_types, wants_msvc_seh, wants_wasm_eh};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::codegen_attrs::autodiff_attrs;
 use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::errors::{ExpectedPointerMutability, InvalidMonomorphization};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::{self as hir};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::BinOp;
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_symbol_mangling::{mangle_internal_symbol, symbol_name_for_instance_in_crate};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_target::callconv::PassMode;
 use crate::rustc_target::spec::PanicStrategy;
 use tracing::debug;
@@ -38,11 +25,9 @@ use tracing::debug;
 use crate::abi::FnAbiLlvmExt;
 use crate::builder::Builder;
 use crate::builder::autodiff::{adjust_activity_to_abi, generate_enzyme_call};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::context::CodegenCx;
 use crate::errors::AutoDiffWithoutEnable;
 use crate::llvm::{self, Metadata};
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=call_simple_intrinsic | COMPLEXITY=25 | LINES=142 */
 use crate::type_::Type;
 use crate::type_of::LayoutLlvmExt;
 use crate::va_arg::emit_va_arg;
@@ -185,7 +170,6 @@ fn call_simple_intrinsic<'ll, 'tcx>(
         &args.iter().map(|arg| arg.immediate()).collect::<Vec<_>>(),
     ))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=codegen_intrinsic_call | COMPLEXITY=239 | LINES=497 */
 
 impl<'ll, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
     fn codegen_intrinsic_call(
@@ -683,7 +667,6 @@ impl<'ll, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
         self.call_intrinsic("llvm.va_end", &[self.val_ty(va_list)], &[va_list])
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=catch_unwind_intrinsic | COMPLEXITY=16 | LINES=24 */
 
 fn catch_unwind_intrinsic<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -708,7 +691,6 @@ fn catch_unwind_intrinsic<'ll, 'tcx>(
         codegen_gnu_try(bx, try_func, data, catch_func, dest);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=codegen_msvc_try | COMPLEXITY=32 | LINES=155 */
 
 // MSVC's definition of the `rust_try` function.
 //
@@ -864,7 +846,6 @@ fn codegen_msvc_try<'ll, 'tcx>(
     let ret = bx.call(llty, None, None, llfn, &[try_func, data, catch_func], None, None);
     OperandValue::Immediate(ret).store(bx, dest);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=codegen_wasm_try | COMPLEXITY=9 | LINES=73 */
 
 // WASM's definition of the `rust_try` function.
 fn codegen_wasm_try<'ll, 'tcx>(
@@ -938,7 +919,6 @@ fn codegen_wasm_try<'ll, 'tcx>(
     let ret = bx.call(llty, None, None, llfn, &[try_func, data, catch_func], None, None);
     OperandValue::Immediate(ret).store(bx, dest);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=codegen_gnu_try | COMPLEXITY=12 | LINES=66 */
 
 // Definition of the standard `try` function for Rust using the GNU-like model
 // of exceptions (e.g., the normal semantics of LLVM's `landingpad` and `invoke`
@@ -1005,7 +985,6 @@ fn codegen_gnu_try<'ll, 'tcx>(
     let ret = bx.call(llty, None, None, llfn, &[try_func, data, catch_func], None, None);
     OperandValue::Immediate(ret).store(bx, dest);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=codegen_emcc_try | COMPLEXITY=21 | LINES=82 */
 
 // Variant of codegen_gnu_try used for emscripten where Rust panics are
 // implemented using C++ exceptions. Here we use exceptions of a specific type
@@ -1088,7 +1067,6 @@ fn codegen_emcc_try<'ll, 'tcx>(
     let ret = bx.call(llty, None, None, llfn, &[try_func, data, catch_func], None, None);
     OperandValue::Immediate(ret).store(bx, dest);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=gen_fn | COMPLEXITY=5 | LINES=21 */
 
 // Helper function to give a Block to a closure to codegen a shim function.
 // This is currently primarily used for the `try` intrinsic functions above.
@@ -1110,7 +1088,6 @@ fn gen_fn<'a, 'll, 'tcx>(
     codegen(bx);
     (llty, llfn)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_rust_try_fn | COMPLEXITY=30 | LINES=50 */
 
 // Helper function used to get a handle to the `__rust_try` function used to
 // catch exceptions.
@@ -1161,7 +1138,6 @@ fn get_rust_try_fn<'a, 'll, 'tcx>(
     cx.rust_try_fn.set(Some(rust_try));
     rust_try
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=codegen_autodiff | COMPLEXITY=34 | LINES=87 */
 
 fn codegen_autodiff<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -1249,7 +1225,6 @@ fn codegen_autodiff<'ll, 'tcx>(
         result,
     );
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=get_args_from_tuple | COMPLEXITY=24 | LINES=50 */
 
 fn get_args_from_tuple<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -1300,7 +1275,6 @@ fn get_args_from_tuple<'ll, 'tcx>(
         OperandValue::ZeroSized => vec![],
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=generic_simd_intrinsic | COMPLEXITY=602 | LINES=1300 */
 
 fn generic_simd_intrinsic<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,

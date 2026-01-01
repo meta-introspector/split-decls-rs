@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/early/diagnostics/check_cfg.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::TyCtxt;
@@ -7,7 +6,6 @@ use crate::rustc_complete::Session;
 use crate::rustc_complete::config::ExpectedValues;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::{ExpnKind, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use crate::lints;
 
@@ -17,7 +15,6 @@ enum FilterWellKnownNames {
     Yes,
     No,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=sort_and_truncate_possibilities | COMPLEXITY=14 | LINES=28 */
 
 fn sort_and_truncate_possibilities(
     sess: &Session,
@@ -46,13 +43,11 @@ fn sort_and_truncate_possibilities(
     possibilities.truncate(n_possibilities);
     (possibilities, and_more)
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum EscapeQuotes {
     Yes,
     No,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=to_check_cfg_arg | COMPLEXITY=15 | LINES=13 */
 
 fn to_check_cfg_arg(name: Ident, value: Option<Symbol>, quotes: EscapeQuotes) -> String {
     if let Some(value) = value {
@@ -66,7 +61,6 @@ fn to_check_cfg_arg(name: Ident, value: Option<Symbol>, quotes: EscapeQuotes) ->
         format!("cfg({name})")
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cargo_help_sub | COMPLEXITY=17 | LINES=16 */
 
 fn cargo_help_sub(
     sess: &Session,
@@ -83,7 +77,6 @@ fn cargo_help_sub(
         lints::UnexpectedCfgCargoHelp::lint_cfg_and_build_rs(unescaped, &inst(EscapeQuotes::Yes))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=rustc_macro_help | COMPLEXITY=7 | LINES=12 */
 
 fn rustc_macro_help(span: Span) -> Option<lints::UnexpectedCfgRustcMacroHelp> {
     let oexpn = span.ctxt().outer_expn_data();
@@ -96,7 +89,6 @@ fn rustc_macro_help(span: Span) -> Option<lints::UnexpectedCfgRustcMacroHelp> {
         None
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cargo_macro_help | COMPLEXITY=8 | LINES=20 */
 
 fn cargo_macro_help(
     tcx: Option<TyCtxt<'_>>,
@@ -117,7 +109,6 @@ fn cargo_macro_help(
         None
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=100 | LINES=157 */
 
 pub(super) fn unexpected_cfg_name(
     sess: &Session,
@@ -275,7 +266,6 @@ pub(super) fn unexpected_cfg_name(
 
     lints::UnexpectedCfgName { code_sugg, invocation_help, name }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=80 | LINES=129 */
 
 pub(super) fn unexpected_cfg_value(
     sess: &Session,

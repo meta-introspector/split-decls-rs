@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/mir/body.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::io;
 
 use serde::Serialize;
@@ -10,9 +9,7 @@ use crate::ty::{
     AdtDef, ClosureDef, CoroutineClosureDef, CoroutineDef, GenericArgs, MirConst, Movability,
     Region, RigidTy, Ty, TyConst, TyKind, VariantIdx,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Error, Opaque, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Body | COMPLEXITY=7 | LINES=27 */
 
 /// The rustc_public's IR representation of a single function.
 #[derive(Clone, Debug, Serialize)]
@@ -40,7 +37,6 @@ pub struct Body {
     /// The span that covers the entire function body.
     pub span: Span,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=32 | LINES=84 */
 
 pub type BasicBlockIdx = usize;
 
@@ -125,7 +121,6 @@ impl Body {
         self.spread_arg
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LocalDecl | COMPLEXITY=2 | LINES=9 */
 
 type LocalDecls = Vec<LocalDecl>;
 
@@ -135,28 +130,24 @@ pub struct LocalDecl {
     pub span: Span,
     pub mutability: Mutability,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=BasicBlock | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Eq, Debug, Serialize)]
 pub struct BasicBlock {
     pub statements: Vec<Statement>,
     pub terminator: Terminator,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Terminator | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct Terminator {
     pub kind: TerminatorKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=3 | LINES=6 */
 
 impl Terminator {
     pub fn successors(&self) -> Successors {
         self.kind.successors()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=44 */
 
 pub type Successors = Vec<BasicBlockIdx>;
 
@@ -201,7 +192,6 @@ pub enum TerminatorKind {
         unwind: UnwindAction,
     },
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=38 | LINES=48 */
 
 impl TerminatorKind {
     pub fn successors(&self) -> Successors {
@@ -250,7 +240,6 @@ impl TerminatorKind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=InlineAsmOperand | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct InlineAsmOperand {
@@ -260,7 +249,6 @@ pub struct InlineAsmOperand {
     // For now we care about place/operand + the rest in a debug format.
     pub raw_rpr: String,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum UnwindAction {
@@ -269,7 +257,6 @@ pub enum UnwindAction {
     Terminate,
     Cleanup(BasicBlockIdx),
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum AssertMessage {
@@ -285,7 +272,6 @@ pub enum AssertMessage {
     NullPointerDereference,
     InvalidEnumConstruction(Operand),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=description | COMPLEXITY=25 | LINES=77 */
 
 impl AssertMessage {
     pub fn description(&self) -> Result<&'static str, Error> {
@@ -363,7 +349,6 @@ impl AssertMessage {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=27 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum BinOp {
@@ -391,7 +376,6 @@ pub enum BinOp {
     Cmp,
     Offset,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=5 | LINES=8 */
 
 impl BinOp {
     /// Return the type of this operation for the given input Ty.
@@ -400,7 +384,6 @@ impl BinOp {
         with(|ctx| ctx.binop_ty(*self, lhs_ty, rhs_ty))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum UnOp {
@@ -408,7 +391,6 @@ pub enum UnOp {
     Neg,
     PtrMetadata,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=5 | LINES=8 */
 
 impl UnOp {
     /// Return the type of this operation for the given input Ty.
@@ -417,14 +399,12 @@ impl UnOp {
         with(|ctx| ctx.unop_ty(*self, arg_ty))
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum CoroutineKind {
     Desugared(CoroutineDesugaring, CoroutineSource),
     Coroutine(Movability),
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum CoroutineSource {
@@ -432,7 +412,6 @@ pub enum CoroutineSource {
     Closure,
     Fn,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum CoroutineDesugaring {
@@ -442,7 +421,6 @@ pub enum CoroutineDesugaring {
 
     AsyncGen,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 pub(crate) type LocalDefId = Opaque;
 /// The rustc coverage data structures are heavily tied to internal details of the
@@ -459,7 +437,6 @@ pub enum FakeReadCause {
     ForLet(LocalDefId),
     ForIndex,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Describes what kind of retag is to be performed
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
@@ -469,7 +446,6 @@ pub enum RetagKind {
     Raw,
     Default,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum Variance {
@@ -478,7 +454,6 @@ pub enum Variance {
     Contravariant,
     Bivariant,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=CopyNonOverlapping | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct CopyNonOverlapping {
@@ -486,21 +461,18 @@ pub struct CopyNonOverlapping {
     pub dst: Operand,
     pub count: Operand,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum NonDivergingIntrinsic {
     Assume(Operand),
     CopyNonOverlapping(CopyNonOverlapping),
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=Statement | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct Statement {
     pub kind: StatementKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum StatementKind {
@@ -518,7 +490,6 @@ pub enum StatementKind {
     ConstEvalCounter,
     Nop,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=112 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum Rvalue {
@@ -631,7 +602,6 @@ pub enum Rvalue {
     /// Yields the operand unchanged
     Use(Operand),
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=27 | LINES=64 */
 
 impl Rvalue {
     pub fn ty(&self, locals: &[LocalDecl]) -> Result<Ty, Error> {
@@ -696,7 +666,6 @@ impl Rvalue {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum AggregateKind {
@@ -708,7 +677,6 @@ pub enum AggregateKind {
     CoroutineClosure(CoroutineClosureDef, GenericArgs),
     RawPtr(Ty, Mutability),
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum Operand {
@@ -716,7 +684,6 @@ pub enum Operand {
     Move(Place),
     Constant(ConstOperand),
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=Place | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Eq, PartialEq, Hash, Serialize)]
 pub struct Place {
@@ -724,14 +691,12 @@ pub struct Place {
     /// projection out of a place (access a field, deref a pointer, etc)
     pub projection: Vec<ProjectionElem>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl From<Local> for Place {
     fn from(local: Local) -> Self {
         Place { local, projection: vec![] }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=ConstOperand | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct ConstOperand {
@@ -739,7 +704,6 @@ pub struct ConstOperand {
     pub user_ty: Option<UserTypeAnnotationIndex>,
     pub const_: MirConst,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=VarDebugInfo | COMPLEXITY=7 | LINES=23 */
 
 /// Debug information pertaining to a user variable.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -763,7 +727,6 @@ pub struct VarDebugInfo {
     /// argument number in the original function before it was inlined.
     pub argument_index: Option<u16>,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=local | COMPLEXITY=19 | LINES=18 */
 
 impl VarDebugInfo {
     /// Return a local variable if this info is related to one.
@@ -782,7 +745,6 @@ impl VarDebugInfo {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=SourceInfo | COMPLEXITY=2 | LINES=8 */
 
 pub type SourceScope = u32;
 
@@ -791,21 +753,18 @@ pub struct SourceInfo {
     pub span: Span,
     pub scope: SourceScope,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=VarDebugInfoFragment | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct VarDebugInfoFragment {
     pub ty: Ty,
     pub projection: Vec<ProjectionElem>,
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum VarDebugInfoContents {
     Place(Place),
     Const(ConstOperand),
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=27 | LINES=81 */
 
 // In MIR ProjectionElem is parameterized on the second Field argument and the Index argument. This
 // is so it can be used for both Places (for which the projection elements are of type
@@ -887,7 +846,6 @@ pub enum ProjectionElem {
     /// some type metadata of the interpreter or codegen backend.
     Subtype(Ty),
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UserTypeProjection | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct UserTypeProjection {
@@ -895,7 +853,6 @@ pub struct UserTypeProjection {
 
     pub projection: Opaque,
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 pub type Local = usize;
 
@@ -909,9 +866,7 @@ pub const RETURN_LOCAL: Local = 0;
 ///    Variant0 { a: bool, b: i32 },
 ///    Variant1 { c: u8, d: u64 },
 /// }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// struct Demo2 { e: u8, f: u16, g: u8 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=SwitchTargets | COMPLEXITY=3 | LINES=19 */
 /// ```
 /// `a`'s `FieldIdx` is `0`,
 /// `b`'s `FieldIdx` is `1`,
@@ -931,7 +886,6 @@ pub struct SwitchTargets {
     /// satisfied.
     otherwise: BasicBlockIdx,
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=all_targets | COMPLEXITY=11 | LINES=27 */
 
 impl SwitchTargets {
     /// All possible targets including the `otherwise` target.
@@ -959,7 +913,6 @@ impl SwitchTargets {
         SwitchTargets { branches, otherwise }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum BorrowKind {
@@ -976,7 +929,6 @@ pub enum BorrowKind {
         kind: MutBorrowKind,
     },
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=to_mutable_lossy | COMPLEXITY=8 | LINES=11 */
 
 impl BorrowKind {
     pub fn to_mutable_lossy(self) -> Mutability {
@@ -988,7 +940,6 @@ impl BorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum RawPtrKind {
@@ -996,7 +947,6 @@ pub enum RawPtrKind {
     Const,
     FakeForPtrMetadata,
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=to_mutable_lossy | COMPLEXITY=8 | LINES=11 */
 
 impl RawPtrKind {
     pub fn to_mutable_lossy(self) -> Mutability {
@@ -1008,7 +958,6 @@ impl RawPtrKind {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum MutBorrowKind {
@@ -1016,7 +965,6 @@ pub enum MutBorrowKind {
     TwoPhaseBorrow,
     ClosureCapture,
 }
-/* AST_META: AST_ID=52 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum FakeBorrowKind {
@@ -1028,21 +976,18 @@ pub enum FakeBorrowKind {
     /// conflict with a mutable borrow of `a.b.c`.
     Shallow,
 }
-/* AST_META: AST_ID=53 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub enum Mutability {
     Not,
     Mut,
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum Safety {
     Safe,
     Unsafe,
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=27 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum PointerCoercion {
@@ -1070,7 +1015,6 @@ pub enum PointerCoercion {
     /// pointers.
     Unsize,
 }
-/* AST_META: AST_ID=56 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum CastKind {
@@ -1086,7 +1030,6 @@ pub enum CastKind {
     FnPtrToPtr,
     Transmute,
 }
-/* AST_META: AST_ID=57 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum NullOp {
@@ -1101,7 +1044,6 @@ pub enum NullOp {
     /// cfg!(contract_checks), but at codegen time
     ContractChecks,
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=11 | LINES=15 */
 
 impl Operand {
     /// Get the type of an operand relative to the local declaration.
@@ -1117,14 +1059,12 @@ impl Operand {
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=3 | LINES=6 */
 
 impl ConstOperand {
     pub fn ty(&self) -> Ty {
         self.const_.ty()
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=7 | LINES=12 */
 
 impl Place {
     /// Resolve down the chain of projections to get the type referenced at the end of it.
@@ -1137,7 +1077,6 @@ impl Place {
         self.projection.iter().try_fold(locals[self.local].ty, |place_ty, elem| elem.ty(place_ty))
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=28 | LINES=46 */
 
 impl ProjectionElem {
     /// Get the expected type after applying this projection to a given place type.

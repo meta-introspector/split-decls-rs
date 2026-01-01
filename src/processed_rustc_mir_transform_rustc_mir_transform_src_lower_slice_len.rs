@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/lower_slice_len.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=13 | LINES=33 */
 // This pass lowers calls to core::slice::len to just PtrMetadata op.
 // It should run before inlining!
 
@@ -33,7 +32,6 @@ impl<'tcx> crate::MirPass<'tcx> for LowerSliceLenCalls {
         false
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=lower_slice_len_call | COMPLEXITY=13 | LINES=34 */
 
 fn lower_slice_len_call<'tcx>(block: &mut BasicBlockData<'tcx>, slice_len_fn_item_def_id: DefId) {
     let terminator = block.terminator();

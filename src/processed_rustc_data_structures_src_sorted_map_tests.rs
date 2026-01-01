@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sorted_map/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{SortedIndexMultiMap, SortedMap};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_sorted_index_multi_map | COMPLEXITY=6 | LINES=30 */
 
 #[test]
 fn test_sorted_index_multi_map() {
@@ -32,7 +30,6 @@ fn test_sorted_index_multi_map() {
     assert_eq!(idxs, vec![0, 2, 4]);
     assert_eq!(values, vec![0, 1, 2]);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_insert_and_iter | COMPLEXITY=5 | LINES=14 */
 
 #[test]
 fn test_insert_and_iter() {
@@ -47,7 +44,6 @@ fn test_insert_and_iter() {
         expected.insert(0, (x, x));
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_get_and_index | COMPLEXITY=16 | LINES=26 */
 
 #[test]
 fn test_get_and_index() {
@@ -74,7 +70,6 @@ fn test_get_and_index() {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_range | COMPLEXITY=14 | LINES=24 */
 
 #[test]
 fn test_range() {
@@ -99,7 +94,6 @@ fn test_range() {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test_offset_keys | COMPLEXITY=2 | LINES=17 */
 
 #[test]
 fn test_offset_keys() {
@@ -117,17 +111,14 @@ fn test_offset_keys() {
 
     assert_eq!(map, expected);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=keys | COMPLEXITY=2 | LINES=4 */
 
 fn keys(s: SortedMap<u32, u32>) -> Vec<u32> {
     s.into_iter().map(|(k, _)| k).collect::<Vec<u32>>()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=elements | COMPLEXITY=2 | LINES=4 */
 
 fn elements(s: SortedMap<u32, u32>) -> Vec<(u32, u32)> {
     s.into_iter().collect::<Vec<(u32, u32)>>()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=test_remove_range | COMPLEXITY=14 | LINES=25 */
 
 #[test]
 fn test_remove_range() {
@@ -153,7 +144,6 @@ fn test_remove_range() {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_remove | COMPLEXITY=8 | LINES=21 */
 
 #[test]
 fn test_remove() {
@@ -175,7 +165,6 @@ fn test_remove() {
         assert_eq!(map.iter().cloned().collect::<Vec<_>>(), expected);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=test_insert_presorted_non_overlapping | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_insert_presorted_non_overlapping() {
@@ -188,7 +177,6 @@ fn test_insert_presorted_non_overlapping() {
     let expected = vec![2, 3, 7, 8];
     assert_eq!(keys(map), expected);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=test_insert_presorted_first_elem_equal | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_insert_presorted_first_elem_equal() {
@@ -201,7 +189,6 @@ fn test_insert_presorted_first_elem_equal() {
     let expected = vec![(2, 0), (7, 7), (8, 8)];
     assert_eq!(elements(map), expected);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=test_insert_presorted_last_elem_equal | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_insert_presorted_last_elem_equal() {
@@ -214,7 +201,6 @@ fn test_insert_presorted_last_elem_equal() {
     let expected = vec![(2, 2), (3, 3), (8, 0)];
     assert_eq!(elements(map), expected);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=test_insert_presorted_shuffle | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_insert_presorted_shuffle() {
@@ -227,7 +213,6 @@ fn test_insert_presorted_shuffle() {
     let expected = vec![(1, 1), (2, 2), (3, 3), (7, 7), (8, 8)];
     assert_eq!(elements(map), expected);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=test_insert_presorted_at_end | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_insert_presorted_at_end() {

@@ -1,24 +1,18 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/binder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::marker::PhantomData;
 use std::ops::{ControlFlow, Deref};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use crate::data_structures::SsoHashSet;
 use crate::fold::{FallibleTypeFolder, TypeFoldable, TypeFolder, TypeSuperFoldable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::inherent::*;
 use crate::lift::Lift;
 use crate::visit::{Flags, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Binder | COMPLEXITY=11 | LINES=16 */
 
 /// `Binder` is a binder for higher-ranked lifetimes or types. It is part of the
 /// compiler's representation for things like `for<'a> Fn(&'a isize)`
@@ -35,10 +29,8 @@ pub struct Binder<I: Interner, T> {
     value: T,
     bound_vars: I::BoundVarKinds,
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, T: Eq> Eq for Binder<I, T> {}
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=7 | LINES=17 */
 
 // FIXME: We manually derive `Lift` because the `derive(Lift_Generic)` doesn't
 // understand how to turn `T` to `T::Lifted` in the output `type Lifted`.
@@ -56,7 +48,6 @@ where
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=18 | LINES=28 */
 
 #[cfg(feature = "nightly")]
 macro_rules! impl_binder_encode_decode {
@@ -85,7 +76,6 @@ macro_rules! impl_binder_encode_decode {
         )*
     }
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[cfg(feature = "nightly")]
 impl_binder_encode_decode! {
@@ -97,7 +87,6 @@ impl_binder_encode_decode! {
     ty::ExistentialTraitRef<I>,
     ty::HostEffectPredicate<I>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=11 | LINES=26 */
 
 impl<I: Interner, T> Binder<I, T>
 where
@@ -124,7 +113,6 @@ where
         Binder { value, bound_vars }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=10 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Binder<I, T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -135,14 +123,12 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Binder<I, T> {
         folder.fold_binder(self)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Binder<I, T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_binder(self)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeSuperFoldable<I> for Binder<I, T> {
     fn try_super_fold_with<F: FallibleTypeFolder<I>>(
@@ -156,14 +142,12 @@ impl<I: Interner, T: TypeFoldable<I>> TypeSuperFoldable<I> for Binder<I, T> {
         self.map_bound(|t| t.fold_with(folder))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeSuperVisitable<I> for Binder<I, T> {
     fn super_visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
         self.as_ref().skip_binder().visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=skip_binder | COMPLEXITY=42 | LINES=101 */
 
 impl<I: Interner, T> Binder<I, T> {
     /// Returns the value contained inside of this `for<'a>`. Accessing generic args
@@ -265,7 +249,6 @@ impl<I: Interner, T> Binder<I, T> {
         if self.value.has_escaping_bound_vars() { None } else { Some(self.skip_binder()) }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=transpose | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T> Binder<I, Option<T>> {
     pub fn transpose(self) -> Option<Binder<I, T>> {
@@ -273,7 +256,6 @@ impl<I: Interner, T> Binder<I, Option<T>> {
         value.map(|value| Binder { value, bound_vars })
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: IntoIterator> Binder<I, T> {
     pub fn iter(self) -> impl Iterator<Item = Binder<I, T::Item>> {
@@ -281,7 +263,6 @@ impl<I: Interner, T: IntoIterator> Binder<I, T> {
         value.into_iter().map(move |value| Binder { value, bound_vars })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=ValidateBoundVars | COMPLEXITY=2 | LINES=9 */
 
 pub struct ValidateBoundVars<I: Interner> {
     bound_vars: I::BoundVarKinds,
@@ -291,7 +272,6 @@ pub struct ValidateBoundVars<I: Interner> {
     // different levels of binding, so this can't just be `Ty`.
     visited: SsoHashSet<(ty::DebruijnIndex, I::Ty)>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=10 */
 
 impl<I: Interner> ValidateBoundVars<I> {
     pub fn new(bound_vars: I::BoundVarKinds) -> Self {
@@ -302,7 +282,6 @@ impl<I: Interner> ValidateBoundVars<I> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=56 | LINES=65 */
 
 impl<I: Interner> TypeVisitor<I> for ValidateBoundVars<I> {
     type Result = ControlFlow<()>;
@@ -368,7 +347,6 @@ impl<I: Interner> TypeVisitor<I> for ValidateBoundVars<I> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=EarlyBinder | COMPLEXITY=5 | LINES=18 */
 
 /// Similar to [`Binder`] except that it tracks early bound generics, i.e. `struct Foo<T>(T)`
 /// needs `T` instantiated immediately. This type primarily exists to avoid forgetting to call
@@ -387,20 +365,16 @@ pub struct EarlyBinder<I: Interner, T> {
     #[derive_where(skip(Debug))]
     _tcx: PhantomData<fn() -> I>,
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, T: Eq> Eq for EarlyBinder<I, T> {}
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 /// For early binders, you should first call `instantiate` before using any visitors.
 #[cfg(feature = "nightly")]
 impl<I: Interner, T> !TypeFoldable<I> for ty::EarlyBinder<I, T> {}
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 /// For early binders, you should first call `instantiate` before using any visitors.
 #[cfg(feature = "nightly")]
 impl<I: Interner, T> !TypeVisitable<I> for ty::EarlyBinder<I, T> {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=bind | COMPLEXITY=19 | LINES=57 */
 
 impl<I: Interner, T> EarlyBinder<I, T> {
     pub fn bind(value: T) -> EarlyBinder<I, T> {
@@ -458,14 +432,12 @@ impl<I: Interner, T> EarlyBinder<I, T> {
         self.value
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=transpose | COMPLEXITY=4 | LINES=6 */
 
 impl<I: Interner, T> EarlyBinder<I, Option<T>> {
     pub fn transpose(self) -> Option<EarlyBinder<I, T>> {
         self.value.map(|value| EarlyBinder { value, _tcx: PhantomData })
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=iter_instantiated | COMPLEXITY=6 | LINES=18 */
 
 impl<I: Interner, Iter: IntoIterator> EarlyBinder<I, Iter>
 where
@@ -484,14 +456,12 @@ where
         self.value.into_iter()
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=IterInstantiated | COMPLEXITY=2 | LINES=6 */
 
 pub struct IterInstantiated<I: Interner, Iter: IntoIterator, A> {
     it: Iter::IntoIter,
     cx: I,
     args: A,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=next | COMPLEXITY=7 | LINES=19 */
 
 impl<I: Interner, Iter: IntoIterator, A> Iterator for IterInstantiated<I, Iter, A>
 where
@@ -511,7 +481,6 @@ where
         self.it.size_hint()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=next_back | COMPLEXITY=6 | LINES=14 */
 
 impl<I: Interner, Iter: IntoIterator, A> DoubleEndedIterator for IterInstantiated<I, Iter, A>
 where
@@ -526,7 +495,6 @@ where
         )
     }
 }
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl<I: Interner, Iter: IntoIterator, A> ExactSizeIterator for IterInstantiated<I, Iter, A>
 where
@@ -535,7 +503,6 @@ where
     A: SliceLike<Item = I::GenericArg>,
 {
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=iter_instantiated_copied | COMPLEXITY=7 | LINES=20 */
 
 impl<'s, I: Interner, Iter: IntoIterator> EarlyBinder<I, Iter>
 where
@@ -556,14 +523,12 @@ where
         IterIdentityCopied { it: self.value.into_iter() }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=IterInstantiatedCopied | COMPLEXITY=2 | LINES=6 */
 
 pub struct IterInstantiatedCopied<'a, I: Interner, Iter: IntoIterator> {
     it: Iter::IntoIter,
     cx: I,
     args: &'a [I::GenericArg],
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=18 */
 
 impl<I: Interner, Iter: IntoIterator> Iterator for IterInstantiatedCopied<'_, I, Iter>
 where
@@ -582,7 +547,6 @@ where
         self.it.size_hint()
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=next_back | COMPLEXITY=7 | LINES=13 */
 
 impl<I: Interner, Iter: IntoIterator> DoubleEndedIterator for IterInstantiatedCopied<'_, I, Iter>
 where
@@ -596,7 +560,6 @@ where
         })
     }
 }
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl<I: Interner, Iter: IntoIterator> ExactSizeIterator for IterInstantiatedCopied<'_, I, Iter>
 where
@@ -605,12 +568,10 @@ where
     <Iter::Item as Deref>::Target: Copy + TypeFoldable<I>,
 {
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=IterIdentityCopied | COMPLEXITY=2 | LINES=4 */
 
 pub struct IterIdentityCopied<Iter: IntoIterator> {
     it: Iter::IntoIter,
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=next | COMPLEXITY=6 | LINES=16 */
 
 impl<Iter: IntoIterator> Iterator for IterIdentityCopied<Iter>
 where
@@ -627,7 +588,6 @@ where
         self.it.size_hint()
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=next_back | COMPLEXITY=5 | LINES=11 */
 
 impl<Iter: IntoIterator> DoubleEndedIterator for IterIdentityCopied<Iter>
 where
@@ -639,7 +599,6 @@ where
         self.it.next_back().map(|i| *i)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl<Iter: IntoIterator> ExactSizeIterator for IterIdentityCopied<Iter>
 where
@@ -648,19 +607,16 @@ where
     <Iter::Item as Deref>::Target: Copy,
 {
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=EarlyBinderIter | COMPLEXITY=2 | LINES=4 */
 pub struct EarlyBinderIter<I, T> {
     t: T,
     _tcx: PhantomData<I>,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=transpose_iter | COMPLEXITY=4 | LINES=6 */
 
 impl<I: Interner, T: IntoIterator> EarlyBinder<I, T> {
     pub fn transpose_iter(self) -> EarlyBinderIter<I, T::IntoIter> {
         EarlyBinderIter { t: self.value.into_iter(), _tcx: PhantomData }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=next | COMPLEXITY=7 | LINES=12 */
 
 impl<I: Interner, T: Iterator> Iterator for EarlyBinderIter<I, T> {
     type Item = EarlyBinder<I, T::Item>;
@@ -673,7 +629,6 @@ impl<I: Interner, T: Iterator> Iterator for EarlyBinderIter<I, T> {
         self.t.size_hint()
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=instantiate | COMPLEXITY=20 | LINES=38 */
 
 impl<I: Interner, T: TypeFoldable<I>> ty::EarlyBinder<I, T> {
     pub fn instantiate<A>(self, cx: I, args: A) -> T
@@ -712,7 +667,6 @@ impl<I: Interner, T: TypeFoldable<I>> ty::EarlyBinder<I, T> {
         if !self.value.has_param() { Some(self.value) } else { None }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=ArgFolder | COMPLEXITY=4 | LINES=11 */
 
 ///////////////////////////////////////////////////////////////////////////
 // The actual instantiation engine itself is a type folder.
@@ -724,7 +678,6 @@ struct ArgFolder<'a, I: Interner> {
     /// Number of region binders we have passed through while doing the instantiation
     binders_passed: u32,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=44 | LINES=66 */
 
 impl<'a, I: Interner> TypeFolder<I> for ArgFolder<'a, I> {
     #[inline]
@@ -791,7 +744,6 @@ impl<'a, I: Interner> TypeFolder<I> for ArgFolder<'a, I> {
         if c.has_param() { c.super_fold_with(self) } else { c }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=ty_for_param | COMPLEXITY=74 | LINES=170 */
 
 impl<'a, I: Interner> ArgFolder<'a, I> {
     fn ty_for_param(&self, p: I::ParamTy, source_ty: I::Ty) -> I::Ty {

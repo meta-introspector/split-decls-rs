@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/method/probe.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::assert_matches::debug_assert_matches;
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::cmp::max;
 use std::ops::Deref;
 
@@ -14,32 +12,23 @@ use rustc_hir as hir;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_hir_analysis::autoderef::{self, Autoderef};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TyCtxtInferExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::ObligationCauseCode;
 use crate::rustc_complete::middle::stability;
 use crate::rustc_complete::ty::elaborate::supertrait_def_ids;
 use crate::rustc_complete::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, AssocContainer, AssocItem, GenericArgs, GenericArgsRef, GenericParamDefKind, ParamEnvAnd,
     Ty, TyCtxt, TypeVisitableExt, Upcast,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edit_distance::{
     edit_distance_with_substrings, find_best_match_for_name_with_substrings,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
 use crate::rustc_trait_selection::infer::InferCtxtExt as _;
 use crate::rustc_trait_selection::traits::query::CanonicalTyGoal;
@@ -47,18 +36,13 @@ use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtE
 use crate::rustc_trait_selection::traits::query::method_autoderef::{
     CandidateStep, MethodAutoderefBadTy, MethodAutoderefStepsResult,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use self::CandidateKind::*;
 pub(crate) use self::PickKind::*;
 use super::{CandidateSource, MethodError, NoMatchData, suggest};
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=23 | LINES=45 */
 use crate::FnCtxt;
 
 /// Boolean flag used to indicate if this search is for a suggestion
@@ -104,7 +88,6 @@ pub(crate) struct ProbeContext<'a, 'tcx> {
     /// candidates if we're *reporting* similarly named candidates.
     is_suggestion: IsSuggestion,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Deref for ProbeContext<'a, 'tcx> {
     type Target = FnCtxt<'a, 'tcx>;
@@ -112,7 +95,6 @@ impl<'a, 'tcx> Deref for ProbeContext<'a, 'tcx> {
         self.fcx
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Clone)]
 pub(crate) struct Candidate<'tcx> {
@@ -120,7 +102,6 @@ pub(crate) struct Candidate<'tcx> {
     pub(crate) kind: CandidateKind<'tcx>,
     pub(crate) import_ids: SmallVec<[LocalDefId; 1]>,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Debug, Clone)]
 pub(crate) enum CandidateKind<'tcx> {
@@ -129,7 +110,6 @@ pub(crate) enum CandidateKind<'tcx> {
     TraitCandidate(ty::PolyTraitRef<'tcx>),
     WhereClauseCandidate(ty::PolyTraitRef<'tcx>),
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 enum ProbeResult {
@@ -137,7 +117,6 @@ enum ProbeResult {
     BadReturnType,
     Match,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 /// When adjusting a receiver we often want to do one of
 ///
@@ -168,7 +147,6 @@ pub(crate) enum AutorefOrPtrAdjustment {
     /// Reborrow a `Pin<&mut T>` or `Pin<&T>`.
     ReborrowPin(hir::Mutability),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=get_unsize | COMPLEXITY=8 | LINES=10 */
 
 impl AutorefOrPtrAdjustment {
     fn get_unsize(&self) -> bool {
@@ -179,7 +157,6 @@ impl AutorefOrPtrAdjustment {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=PickDiagHints | COMPLEXITY=9 | LINES=15 */
 
 /// Extra information required only for error reporting.
 #[derive(Debug)]
@@ -195,7 +172,6 @@ struct PickDiagHints<'a, 'tcx> {
         Option<ObligationCause<'tcx>>,
     )>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=PickConstraintsForShadowed | COMPLEXITY=6 | LINES=10 */
 
 /// Criteria to apply when searching for a given Pick. This is used during
 /// the search for potentially shadowed methods to ensure we don't search
@@ -206,7 +182,6 @@ struct PickConstraintsForShadowed {
     receiver_steps: Option<usize>,
     def_id: DefId,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=may_shadow_based_on_autoderefs | COMPLEXITY=16 | LINES=21 */
 
 impl PickConstraintsForShadowed {
     fn may_shadow_based_on_autoderefs(&self, autoderefs: usize) -> bool {
@@ -228,7 +203,6 @@ impl PickConstraintsForShadowed {
             }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 #[derive(Debug, Clone)]
 pub(crate) struct Pick<'tcx> {
@@ -258,7 +232,6 @@ pub(crate) struct Pick<'tcx> {
     /// Candidates that were shadowed by supertraits.
     pub shadowed_candidates: Vec<ty::AssocItem>,
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) enum PickKind<'tcx> {
@@ -270,7 +243,6 @@ pub(crate) enum PickKind<'tcx> {
         ty::PolyTraitRef<'tcx>,
     ),
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 pub(crate) type PickResult<'tcx> = Result<Pick<'tcx>, MethodError<'tcx>>;
 
@@ -285,7 +257,6 @@ pub(crate) enum Mode {
     // implementation is for, and static methods are included.
     Path,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(PartialEq, Eq, Copy, Clone, Debug)]
 pub(crate) enum ProbeScope {
@@ -298,7 +269,6 @@ pub(crate) enum ProbeScope {
     // Assemble candidates coming from all traits.
     AllTraits,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=88 | LINES=282 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// This is used to offer suggestions to users. It returns methods
@@ -581,7 +551,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=43 | LINES=112 */
 
 pub(crate) fn method_autoderef_steps<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -694,7 +663,6 @@ pub(crate) fn method_autoderef_steps<'tcx>(
         reached_recursion_limit,
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=new | COMPLEXITY=461 | LINES=989 */
 
 impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
     fn new(
@@ -1684,7 +1652,6 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=71 */
 
 impl<'tcx> Pick<'tcx> {
     /// In case there were unstable name collisions, emit them as a lint.
@@ -1756,7 +1723,6 @@ impl<'tcx> Pick<'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=select_trait_candidate | COMPLEXITY=382 | LINES=688 */
 
 impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
     fn select_trait_candidate(
@@ -2445,7 +2411,6 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=to_unadjusted_pick | COMPLEXITY=17 | LINES=40 */
 
 impl<'tcx> Candidate<'tcx> {
     fn to_unadjusted_pick(

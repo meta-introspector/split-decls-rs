@@ -1,34 +1,25 @@
 // SRC: ../rust/compiler/rustc_middle/src/hir/map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // This module used to contain a type called `Map`. That type has since been
 // eliminated, and all its methods are now on `TyCtxt`. But the module name
 // stays as `map` because there isn't an obviously better name for it.
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::visit::{VisitorResult, walk_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::sync::{DynSend, DynSync, par_for_each_in, try_par_for_each_in};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::*;
 use rustc_hir_pretty as pprust_hir;
 use crate::rustc_complete::def_id::StableCrateId;
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, kw, with_metavar_spans};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::hir::{ModuleItems, nested_filter};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ParentHirIterator | COMPLEXITY=3 | LINES=13 */
 use crate::middle::debugger_visualizer::DebuggerVisualizerFile;
 use crate::query::LocalCrate;
 use crate::ty::TyCtxt;
@@ -42,14 +33,12 @@ struct ParentHirIterator<'tcx> {
     // the same owner, which will uselessly record many times the same query dependency.
     current_owner_nodes: Option<&'tcx OwnerNodes<'tcx>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> ParentHirIterator<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, current_id: HirId) -> ParentHirIterator<'tcx> {
         ParentHirIterator { current_id, tcx, current_owner_nodes: None }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=next | COMPLEXITY=15 | LINES=30 */
 
 impl<'tcx> Iterator for ParentHirIterator<'tcx> {
     type Item = HirId;
@@ -80,7 +69,6 @@ impl<'tcx> Iterator for ParentHirIterator<'tcx> {
         Some(parent_id)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ParentOwnerIterator | COMPLEXITY=2 | LINES=7 */
 
 /// An iterator that walks up the ancestor tree of a given `HirId`.
 /// Constructed using `tcx.hir_parent_owner_iter(hir_id)`.
@@ -88,7 +76,6 @@ pub struct ParentOwnerIterator<'tcx> {
     current_id: HirId,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=next | COMPLEXITY=14 | LINES=25 */
 
 impl<'tcx> Iterator for ParentOwnerIterator<'tcx> {
     type Item = (OwnerId, OwnerNode<'tcx>);
@@ -114,7 +101,6 @@ impl<'tcx> Iterator for ParentOwnerIterator<'tcx> {
         Some((self.current_id.owner, node))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=expect_hir_owner_nodes | COMPLEXITY=578 | LINES=988 */
 
 impl<'tcx> TyCtxt<'tcx> {
     #[inline]
@@ -1103,7 +1089,6 @@ impl<'tcx> TyCtxt<'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=hir_node | COMPLEXITY=11 | LINES=26 */
 
 impl<'tcx> intravisit::HirTyCtxt<'tcx> for TyCtxt<'tcx> {
     fn hir_node(&self, hir_id: HirId) -> Node<'tcx> {
@@ -1130,14 +1115,12 @@ impl<'tcx> intravisit::HirTyCtxt<'tcx> for TyCtxt<'tcx> {
         (*self).hir_foreign_item(id)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> pprust_hir::PpAnn for TyCtxt<'tcx> {
     fn nested(&self, state: &mut pprust_hir::State<'_>, nested: pprust_hir::Nested) {
         pprust_hir::PpAnn::nested(&(self as &dyn intravisit::HirTyCtxt<'_>), state, nested)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=75 */
 
 pub(super) fn crate_hash(tcx: TyCtxt<'_>, _: LocalCrate) -> Svh {
     let krate = tcx.hir_crate(());
@@ -1213,7 +1196,6 @@ pub(super) fn crate_hash(tcx: TyCtxt<'_>, _: LocalCrate) -> Svh {
 
     Svh::new(crate_hash)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=upstream_crates | COMPLEXITY=3 | LINES=14 */
 
 fn upstream_crates(tcx: TyCtxt<'_>) -> Vec<(StableCrateId, Svh)> {
     let mut upstream_crates: Vec<_> = tcx
@@ -1228,7 +1210,6 @@ fn upstream_crates(tcx: TyCtxt<'_>) -> Vec<(StableCrateId, Svh)> {
     upstream_crates.sort_unstable_by_key(|&(stable_crate_id, _)| stable_crate_id);
     upstream_crates
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=31 */
 
 pub(super) fn hir_module_items(tcx: TyCtxt<'_>, module_id: LocalModDefId) -> ModuleItems {
     let mut collector = ItemCollector::new(tcx, false);
@@ -1260,7 +1241,6 @@ pub(super) fn hir_module_items(tcx: TyCtxt<'_>, module_id: LocalModDefId) -> Mod
         delayed_lint_items: Box::new([]),
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=44 */
 
 pub(crate) fn hir_crate_items(tcx: TyCtxt<'_>, _: ()) -> ModuleItems {
     let mut collector = ItemCollector::new(tcx, true);
@@ -1305,7 +1285,6 @@ pub(crate) fn hir_crate_items(tcx: TyCtxt<'_>, _: ()) -> ModuleItems {
         delayed_lint_items: delayed_lint_items.into_boxed_slice(),
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=ItemCollector | COMPLEXITY=2 | LINES=16 */
 
 struct ItemCollector<'tcx> {
     // When true, it collects all items in the create,
@@ -1322,7 +1301,6 @@ struct ItemCollector<'tcx> {
     nested_bodies: Vec<LocalDefId>,
     delayed_lint_items: Vec<OwnerId>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=18 */
 
 impl<'tcx> ItemCollector<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, crate_collector: bool) -> ItemCollector<'tcx> {
@@ -1341,7 +1319,6 @@ impl<'tcx> ItemCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=49 | LINES=88 */
 
 impl<'hir> Visitor<'hir> for ItemCollector<'hir> {
     type NestedFilter = nested_filter::All;

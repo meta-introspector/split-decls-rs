@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/demand.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::intravisit::Visitor;
@@ -9,12 +7,9 @@ use crate::rustc_infer::infer::DefineOpaqueTypes;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, AssocItem, BottomUpFolder, Ty, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, sym};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=adjust_expr_for_assert_eq_macro | COMPLEXITY=622 | LINES=1264 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::ObligationCause;
 use tracing::instrument;
@@ -1279,7 +1274,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 pub(crate) enum TypeMismatchSource<'tcx> {
     /// Expected the binding to have the given type, but it was found to have

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/check_attr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 // FIXME(jdonszelmann): should become rustc_attr_validation
 // This module implements some validity checks for attributes.
 // In particular it verifies that `#[inline]` and `#[repr]` attributes are
@@ -12,61 +11,46 @@ use std::collections::hash_map::Entry;
 use std::slice;
 
 use crate::rustc_abi::{Align, ExternAbi, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AttrStyle, LitKind, MetaItemInner, MetaItemKind, ast};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_attr_parsing::{AttributeParser, Late};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{Applicability, DiagCtxtHandle, IntoDiagArg, MultiSpan, StashKey};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_feature::{
     ACCEPTED_LANG_FEATURES, AttributeDuplicates, AttributeType, BUILTIN_ATTRIBUTE_MAP,
     BuiltinAttribute,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, MirDialect, MirPhase, ReprAttr, SanitizerSet};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalModDefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     self as hir, Attribute, CRATE_HIR_ID, CRATE_OWNER_ID, FnSig, ForeignItem, HirId, Item,
     ItemKind, MethodKind, PartialConstStability, Safety, Stability, StabilityLevel, Target,
     TraitItem, find_attr,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_macros::LintDiagnostic;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::resolve_bound_vars::ObjectLifetimeDefault;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_complete::lint;
 use crate::rustc_complete::lint::builtin::{
     CONFLICTING_REPR_HINTS, INVALID_DOC_ATTRIBUTES, INVALID_MACRO_EXPORT_ARGUMENTS,
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MISPLACED_DIAGNOSTIC_ATTRIBUTES, UNUSED_ATTRIBUTES,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Span, Symbol, edition, sym};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::{TyCtxtInferExt, ValuePairs};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::debug;
 
 use crate::{errors, fluent_generated as fluent};
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=DiagnosticOnUnimplementedOnlyForTraits; | COMPLEXITY=18 | LINES=24 */
 
 #[derive(LintDiagnostic)]
 #[diag(passes_diagnostic_diagnostic_on_unimplemented_only_for_traits)]
@@ -91,14 +75,12 @@ fn target_from_impl_item<'tcx>(tcx: TyCtxt<'tcx>, impl_item: &hir::ImplItem<'_>)
         hir::ImplItemKind::Type(..) => Target::AssocTy,
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum ItemLike<'tcx> {
     Item(&'tcx Item<'tcx>),
     ForeignItem,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone)]
 pub(crate) enum ProcMacroKind {
@@ -106,7 +88,6 @@ pub(crate) enum ProcMacroKind {
     Derive,
     Attribute,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11 */
 
 impl IntoDiagArg for ProcMacroKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -118,14 +99,12 @@ impl IntoDiagArg for ProcMacroKind {
         .into_diag_arg(&mut None)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum DocFakeItemKind {
     Attribute,
     Keyword,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=name | COMPLEXITY=7 | LINES=9 */
 
 impl DocFakeItemKind {
     fn name(self) -> &'static str {
@@ -135,7 +114,6 @@ impl DocFakeItemKind {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=CheckAttrVisitor | COMPLEXITY=2 | LINES=7 */
 
 struct CheckAttrVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -143,7 +121,6 @@ struct CheckAttrVisitor<'tcx> {
     // Whether or not this visitor should abort after finding errors
     abort: Cell<bool>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=dcx | COMPLEXITY=1406 | LINES=2421 */
 
 impl<'tcx> CheckAttrVisitor<'tcx> {
     fn dcx(&self) -> DiagCtxtHandle<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_incremental/src/persist/save.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::fs;
 use std::sync::Arc;
 
@@ -8,18 +7,15 @@ use crate::rustc_data_structures::sync::join;
 use crate::rustc_complete::dep_graph::{
     DepGraph, SerializedDepGraph, WorkProduct, WorkProductId, WorkProductMap,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_serialize::Encodable as RustcEncodable;
 use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Session;
 use tracing::debug;
 
 use super::data::*;
 use super::fs::*;
 use super::{dirty_clean, file_format, work_product};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=58 */
 use crate::assert_dep_graph::assert_dep_graph;
 use crate::errors;
 
@@ -78,7 +74,6 @@ pub(crate) fn save_dep_graph(tcx: TyCtxt<'_>) {
         );
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=save_work_product_index | COMPLEXITY=20 | LINES=43 */
 
 /// Saves the work product index.
 pub fn save_work_product_index(
@@ -122,7 +117,6 @@ pub fn save_work_product_index(
         })
     });
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=encode_work_product_index | COMPLEXITY=3 | LINES=15 */
 
 fn encode_work_product_index(
     work_products: &FxIndexMap<WorkProductId, WorkProduct>,
@@ -138,12 +132,10 @@ fn encode_work_product_index(
 
     serialized_products.encode(encoder)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=encode_query_cache | COMPLEXITY=2 | LINES=4 */
 
 fn encode_query_cache(tcx: TyCtxt<'_>, encoder: FileEncoder) -> FileEncodeResult {
     tcx.sess.time("incr_comp_serialize_result_cache", || tcx.serialize_query_result_cache(encoder))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=35 */
 
 /// Builds the dependency graph.
 ///

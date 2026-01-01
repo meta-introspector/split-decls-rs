@@ -1,24 +1,18 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/test.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::fs::{File, remove_dir_all};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{BufRead, BufReader};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::str::FromStr;
 
 use crate::build;
 use crate::config::{Channel, ConfigInfo};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::utils::{
     create_dir, get_sysroot_dir, get_toolchain, git_clone, git_clone_root_dir, remove_file,
     run_command, run_command_with_env, run_command_with_output_and_env, rustc_version_info,
     split_args, walk_dir,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=get_runners | COMPLEXITY=5 | LINES=33 */
 
 type Env = HashMap<String, String>;
 type Runner = fn(&Env, &TestArg) -> Result<(), String>;
@@ -52,7 +46,6 @@ fn get_runners() -> Runners {
     runners.insert("--cargo-tests", ("Run cargo tests", cargo_tests));
     runners
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=get_number_after_arg | COMPLEXITY=15 | LINES=13 */
 
 fn get_number_after_arg(
     args: &mut impl Iterator<Item = String>,
@@ -66,7 +59,6 @@ fn get_number_after_arg(
         _ => Err(format!("Expected a number after `{option}`, found nothing")),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=show_usage | COMPLEXITY=11 | LINES=23 */
 
 fn show_usage() {
     println!(
@@ -90,7 +82,6 @@ fn show_usage() {
     }
     println!("    --help                 : Show this help");
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=TestArg | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Default, Debug)]
 struct TestArg {
@@ -107,7 +98,6 @@ struct TestArg {
     sysroot_features: Vec<String>,
     keep_lto_tests: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=57 | LINES=82 */
 
 impl TestArg {
     fn new() -> Result<Option<Self>, String> {
@@ -190,7 +180,6 @@ impl TestArg {
         !self.config_info.no_default_features
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=build_if_no_backend | COMPLEXITY=13 | LINES=20 */
 
 fn build_if_no_backend(env: &Env, args: &TestArg) -> Result<(), String> {
     if args.config_info.backend.is_some() {
@@ -211,14 +200,12 @@ fn build_if_no_backend(env: &Env, args: &TestArg) -> Result<(), String> {
     }
     run_command_with_output_and_env(&command, None, Some(env))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=clean | COMPLEXITY=2 | LINES=6 */
 
 fn clean(_env: &Env, args: &TestArg) -> Result<(), String> {
     let _ = remove_dir_all(&args.config_info.cargo_target_dir);
     let path = Path::new(&args.config_info.cargo_target_dir).join("gccjit");
     create_dir(&path)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=cargo_tests | COMPLEXITY=6 | LINES=27 */
 
 fn cargo_tests(test_env: &Env, test_args: &TestArg) -> Result<(), String> {
     // First, we call `mini_tests` to build minicore for us. This ensures we are testing with a working `minicore`,
@@ -246,7 +233,6 @@ fn cargo_tests(test_env: &Env, test_args: &TestArg) -> Result<(), String> {
     run_command_with_output_and_env(&args, None, Some(&env))?;
     Ok(())
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mini_tests | COMPLEXITY=9 | LINES=57 */
 
 fn mini_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     // FIXME: create a function "display_if_not_quiet" or something along the line.
@@ -304,7 +290,6 @@ fn mini_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     maybe_run_command_in_vm(command, env, args)?;
     Ok(())
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=build_sysroot | COMPLEXITY=2 | LINES=9 */
 
 fn build_sysroot(env: &Env, args: &TestArg) -> Result<(), String> {
     // FIXME: create a function "display_if_not_quiet" or something along the line.
@@ -314,7 +299,6 @@ fn build_sysroot(env: &Env, args: &TestArg) -> Result<(), String> {
     build::build_sysroot(env, &config)?;
     Ok(())
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=maybe_run_command_in_vm | COMPLEXITY=15 | LINES=32 */
 
 // TODO(GuillaumeGomez): when rewriting in Rust, refactor with the code in tests/lang_tests_common.rs if possible.
 fn maybe_run_command_in_vm(
@@ -347,7 +331,6 @@ fn maybe_run_command_in_vm(
     run_command_with_output_and_env(&vm_command, Some(&vm_parent_dir), Some(env))?;
     Ok(())
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=std_tests | COMPLEXITY=30 | LINES=128 */
 
 fn std_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     let cargo_target_dir = Path::new(&args.config_info.cargo_target_dir);
@@ -476,7 +459,6 @@ fn std_tests(env: &Env, args: &TestArg) -> Result<(), String> {
 
     Ok(())
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=setup_rustc | COMPLEXITY=42 | LINES=96 */
 
 fn setup_rustc(env: &mut Env, args: &TestArg) -> Result<PathBuf, String> {
     let toolchain = format!(
@@ -573,7 +555,6 @@ download-ci-llvm = false
     .map_err(|error| format!("Failed to write into `{}`: {:?}", file_path.display(), error))?;
     Ok(rust_dir_path)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=asm_tests | COMPLEXITY=15 | LINES=43 */
 
 fn asm_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     let mut env = env.clone();
@@ -617,7 +598,6 @@ fn asm_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     )?;
     Ok(())
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=run_cargo_command | COMPLEXITY=3 | LINES=12 */
 
 fn run_cargo_command(
     command: &[&dyn AsRef<OsStr>],
@@ -630,7 +610,6 @@ fn run_cargo_command(
         Ok(())
     })
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=run_cargo_command_with_callback | COMPLEXITY=15 | LINES=40 */
 
 fn run_cargo_command_with_callback<F>(
     command: &[&dyn AsRef<OsStr>],
@@ -671,7 +650,6 @@ where
     cargo_command.extend_from_slice(command);
     callback(&cargo_command, cwd, &env)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=test_projects | COMPLEXITY=18 | LINES=58 */
 
 // FIXME(antoyo): linker gives multiple definitions error on Linux
 // echo "[BUILD] sysroot in release mode"
@@ -730,7 +708,6 @@ fn test_projects(env: &Env, args: &TestArg) -> Result<(), String> {
 
     Ok(())
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=test_libcore | COMPLEXITY=2 | LINES=10 */
 
 fn test_libcore(env: &Env, args: &TestArg) -> Result<(), String> {
     // FIXME: create a function "display_if_not_quiet" or something along the line.
@@ -741,7 +718,6 @@ fn test_libcore(env: &Env, args: &TestArg) -> Result<(), String> {
     run_cargo_command(&[&"test"], Some(&path), env, args)?;
     Ok(())
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=extended_rand_tests | COMPLEXITY=7 | LINES=19 */
 
 fn extended_rand_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     if !args.is_using_gcc_master_branch() {
@@ -761,7 +737,6 @@ fn extended_rand_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     run_cargo_command(&[&"test", &"--workspace"], Some(&path), &env, args)?;
     Ok(())
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=extended_regex_example_tests | COMPLEXITY=11 | LINES=46 */
 
 fn extended_regex_example_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     if !args.is_using_gcc_master_branch() {
@@ -808,7 +783,6 @@ fn extended_regex_example_tests(env: &Env, args: &TestArg) -> Result<(), String>
 
     Ok(())
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=extended_regex_tests | COMPLEXITY=8 | LINES=32 */
 
 fn extended_regex_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     if !args.is_using_gcc_master_branch() {
@@ -841,7 +815,6 @@ fn extended_regex_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     )?;
     Ok(())
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=extended_sysroot_tests | COMPLEXITY=5 | LINES=18 */
 
 fn extended_sysroot_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     // pushd simple-raytracer
@@ -860,7 +833,6 @@ fn extended_sysroot_tests(env: &Env, args: &TestArg) -> Result<(), String> {
 
     Ok(())
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=valid_ui_error_pattern_test | COMPLEXITY=3 | LINES=15 */
 
 fn valid_ui_error_pattern_test(file: &str) -> bool {
     // contains //~ERROR, but shouldn't be removed
@@ -876,7 +848,6 @@ fn valid_ui_error_pattern_test(file: &str) -> bool {
     .iter()
     .any(|to_ignore| file.ends_with(to_ignore))
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=contains_ui_error_patterns | COMPLEXITY=30 | LINES=48 */
 
 fn contains_ui_error_patterns(file_path: &Path, keep_lto_tests: bool) -> Result<bool, String> {
     // Tests generating errors.
@@ -925,7 +896,6 @@ fn contains_ui_error_patterns(file_path: &Path, keep_lto_tests: bool) -> Result<
     }
     Ok(false)
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=test_rustc_inner | COMPLEXITY=80 | LINES=185 */
 
 // # Parameters
 //
@@ -1111,14 +1081,12 @@ where
     )?;
     Ok(())
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=test_rustc | COMPLEXITY=2 | LINES=6 */
 
 fn test_rustc(env: &Env, args: &TestArg) -> Result<(), String> {
     test_rustc_inner(env, args, |_| Ok(false), false, "run-make")?;
     test_rustc_inner(env, args, |_| Ok(false), false, "run-make-cargo")?;
     test_rustc_inner(env, args, |_| Ok(false), false, "ui")
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=test_failing_rustc | COMPLEXITY=3 | LINES=28 */
 
 fn test_failing_rustc(env: &Env, args: &TestArg) -> Result<(), String> {
     let run_make_result = test_rustc_inner(
@@ -1147,7 +1115,6 @@ fn test_failing_rustc(env: &Env, args: &TestArg) -> Result<(), String> {
 
     run_make_result.and(run_make_cargo_result).and(ui_result)
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=test_successful_rustc | COMPLEXITY=3 | LINES=24 */
 
 fn test_successful_rustc(env: &Env, args: &TestArg) -> Result<(), String> {
     test_rustc_inner(
@@ -1172,7 +1139,6 @@ fn test_successful_rustc(env: &Env, args: &TestArg) -> Result<(), String> {
         "run-make-cargo",
     )
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=test_failing_ui_pattern_tests | COMPLEXITY=2 | LINES=10 */
 
 fn test_failing_ui_pattern_tests(env: &Env, args: &TestArg) -> Result<(), String> {
     test_rustc_inner(
@@ -1183,7 +1149,6 @@ fn test_failing_ui_pattern_tests(env: &Env, args: &TestArg) -> Result<(), String
         "ui",
     )
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=retain_files_callback | COMPLEXITY=22 | LINES=60 */
 
 fn retain_files_callback<'a>(
     file_path: &'a str,
@@ -1244,7 +1209,6 @@ fn retain_files_callback<'a>(
         Ok(true)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=remove_files_callback | COMPLEXITY=32 | LINES=41 */
 
 fn remove_files_callback<'a>(
     file_path: &'a str,
@@ -1286,7 +1250,6 @@ fn remove_files_callback<'a>(
         Ok(true)
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=run_all | COMPLEXITY=2 | LINES=14 */
 
 fn run_all(env: &Env, args: &TestArg) -> Result<(), String> {
     clean(env, args)?;
@@ -1301,7 +1264,6 @@ fn run_all(env: &Env, args: &TestArg) -> Result<(), String> {
 
     Ok(())
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=run | COMPLEXITY=23 | LINES=36 */
 
 pub fn run() -> Result<(), String> {
     let mut args = match TestArg::new()? {

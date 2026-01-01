@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/resolve.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self, Const, DelayedMap, FallibleTypeFolder, InferConst, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{FixupError, FixupResult, InferCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=OpportunisticVarResolver | COMPLEXITY=7 | LINES=16 */
 use crate::infer::TyOrConstInferVar;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -25,7 +22,6 @@ pub struct OpportunisticVarResolver<'a, 'tcx> {
     /// not have any mutable state.
     cache: DelayedMap<Ty<'tcx>, Ty<'tcx>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 
 impl<'a, 'tcx> OpportunisticVarResolver<'a, 'tcx> {
     #[inline]
@@ -33,7 +29,6 @@ impl<'a, 'tcx> OpportunisticVarResolver<'a, 'tcx> {
         OpportunisticVarResolver { infcx, cache: Default::default() }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=34 | LINES=37 */
 
 impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for OpportunisticVarResolver<'a, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -71,7 +66,6 @@ impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for OpportunisticVarResolver<'a, 'tcx> {
         if !c.has_non_region_infer() { c } else { c.super_fold_with(self) }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OpportunisticRegionResolver | COMPLEXITY=5 | LINES=11 */
 
 /// The opportunistic region resolver opportunistically resolves regions
 /// variables to the variable with the least variable id. It is used when
@@ -83,14 +77,12 @@ impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for OpportunisticVarResolver<'a, 'tcx> {
 pub struct OpportunisticRegionResolver<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> OpportunisticRegionResolver<'a, 'tcx> {
     pub fn new(infcx: &'a InferCtxt<'tcx>) -> Self {
         OpportunisticRegionResolver { infcx }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=26 | LINES=34 */
 
 impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for OpportunisticRegionResolver<'a, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -125,7 +117,6 @@ impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for OpportunisticRegionResolver<'a, 'tcx
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fully_resolve | COMPLEXITY=3 | LINES=13 */
 
 ///////////////////////////////////////////////////////////////////////////
 // FULL TYPE RESOLUTION
@@ -139,12 +130,10 @@ where
 {
     value.try_fold_with(&mut FullTypeResolver { infcx })
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FullTypeResolver | COMPLEXITY=2 | LINES=4 */
 
 struct FullTypeResolver<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=49 | LINES=62 */
 
 impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for FullTypeResolver<'a, 'tcx> {
     type Error = FixupError;

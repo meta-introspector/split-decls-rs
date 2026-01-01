@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/mismatched_static_lifetime.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=5 */
 // Error Reporting for when the lifetime for a type doesn't match the `impl` selected for a predicate
 // to hold.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use rustc_hir as hir;
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::bug;
@@ -17,9 +15,7 @@ use crate::errors::{
     DoesNotOutliveStaticFromImpl, ImplicitStaticLifetimeSubdiag,
     IntroducesStaticBecauseUnmetLifetimeReq, MismatchedStaticLifetime, note_and_explain,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{RegionResolutionError, SubregionOrigin, TypeTrace};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=107 */
 use crate::traits::ObligationCauseCode;
 
 impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {

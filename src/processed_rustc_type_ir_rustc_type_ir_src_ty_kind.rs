@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/ty_kind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 use std::ops::Deref;
 
@@ -7,14 +6,10 @@ use derive_where::derive_where;
 use rustc_ast_ir::Mutability;
 #[cfg(feature = "nightly")]
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::data_structures::{NoError, UnifyKey, UnifyValue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use self::TyKind::*;
 pub use self::closure::*;
@@ -22,7 +17,6 @@ use crate::inherent::*;
 #[cfg(feature = "nightly")]
 use crate::visit::TypeVisitable;
 use crate::{self as ty, DebruijnIndex, FloatTy, IntTy, Interner, UintTy};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 
 /// Specifies how a trait object is represented.
@@ -38,7 +32,6 @@ pub enum DynKind {
     /// An unsized `dyn Trait` object
     Dyn,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 #[cfg_attr(
@@ -59,7 +52,6 @@ pub enum AliasTyKind {
     /// Can always be normalized away.
     Free,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=7 | LINES=11 */
 
 impl AliasTyKind {
     pub fn descr(self) -> &'static str {
@@ -71,7 +63,6 @@ impl AliasTyKind {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=204 */
 
 /// Defines the kinds of types used by the type system.
 ///
@@ -276,10 +267,8 @@ pub enum TyKind<I: Interner> {
     /// propagated to avoid useless error messages.
     Error(I::ErrorGuaranteed),
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TyKind<I> {}
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fn_sig | COMPLEXITY=21 | LINES=62 */
 
 impl<I: Interner> TyKind<I> {
     pub fn fn_sig(self, interner: I) -> ty::Binder<I, ty::FnSig<I>> {
@@ -342,7 +331,6 @@ impl<I: Interner> TyKind<I> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=62 | LINES=69 */
 
 // This is manually implemented because a derive would require `I: Debug`
 impl<I: Interner> fmt::Debug for TyKind<I> {
@@ -412,7 +400,6 @@ impl<I: Interner> fmt::Debug for TyKind<I> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=AliasTy | COMPLEXITY=25 | LINES=41 */
 
 /// Represents the projection of an associated, opaque, or lazy-type-alias type.
 ///
@@ -454,10 +441,8 @@ pub struct AliasTy<I: Interner> {
     #[derive_where(skip(Debug))]
     pub(crate) _use_alias_ty_new_instead: (),
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for AliasTy<I> {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=9 | LINES=29 */
 
 impl<I: Interner> AliasTy<I> {
     pub fn new_from_args(interner: I, def_id: I::DefId, args: I::GenericArgs) -> AliasTy<I> {
@@ -487,7 +472,6 @@ impl<I: Interner> AliasTy<I> {
         Ty::new_alias(interner, self.kind(interner), self)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=16 | LINES=40 */
 
 /// The following methods work only with (trait) associated type projections.
 impl<I: Interner> AliasTy<I> {
@@ -528,7 +512,6 @@ impl<I: Interner> AliasTy<I> {
         self.trait_ref_and_own_args(interner).0
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum IntVarValue {
@@ -536,7 +519,6 @@ pub enum IntVarValue {
     IntType(IntTy),
     UintType(UintTy),
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_known | COMPLEXITY=8 | LINES=13 */
 
 impl IntVarValue {
     pub fn is_known(self) -> bool {
@@ -550,14 +532,12 @@ impl IntVarValue {
         !self.is_known()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum FloatVarValue {
     Unknown,
     Known(FloatTy),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_known | COMPLEXITY=8 | LINES=13 */
 
 impl FloatVarValue {
     pub fn is_known(self) -> bool {
@@ -571,7 +551,6 @@ impl FloatVarValue {
         !self.is_known()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=TyVid | COMPLEXITY=4 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     /// A **ty**pe **v**ariable **ID**.
@@ -581,7 +560,6 @@ crate::rustc_index::newtype_index! {
     #[gate_rustc_only]
     pub struct TyVid {}
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=IntVid | COMPLEXITY=4 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     /// An **int**egral (`u32`, `i32`, `usize`, etc.) type **v**ariable **ID**.
@@ -591,7 +569,6 @@ crate::rustc_index::newtype_index! {
     #[gate_rustc_only]
     pub struct IntVid {}
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=FloatVid | COMPLEXITY=4 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     /// A **float**ing-point (`f32` or `f64`) type **v**ariable **ID**.
@@ -601,7 +578,6 @@ crate::rustc_index::newtype_index! {
     #[gate_rustc_only]
     pub struct FloatVid {}
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=23 | LINES=37 */
 
 /// A placeholder for a type that hasn't been inferred yet.
 ///
@@ -639,7 +615,6 @@ pub enum InferTy {
     /// Like [`FreshTy`][Self::FreshTy], but as a replacement for [`FloatVar`][Self::FloatVar].
     FreshFloatTy(u32),
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=unify_values | COMPLEXITY=10 | LINES=19 */
 
 impl UnifyValue for IntVarValue {
     type Error = NoError;
@@ -659,7 +634,6 @@ impl UnifyValue for IntVarValue {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=index | COMPLEXITY=9 | LINES=15 */
 
 impl UnifyKey for IntVid {
     type Value = IntVarValue;
@@ -675,7 +649,6 @@ impl UnifyKey for IntVid {
         "IntVid"
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=unify_values | COMPLEXITY=12 | LINES=17 */
 
 impl UnifyValue for FloatVarValue {
     type Error = NoError;
@@ -693,7 +666,6 @@ impl UnifyValue for FloatVarValue {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=index | COMPLEXITY=7 | LINES=15 */
 
 impl UnifyKey for FloatVid {
     type Value = FloatVarValue;
@@ -709,7 +681,6 @@ impl UnifyKey for FloatVid {
         "FloatVid"
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=11 | LINES=14 */
 
 #[cfg(feature = "nightly")]
 impl<CTX> HashStable<CTX> for InferTy {
@@ -724,7 +695,6 @@ impl<CTX> HashStable<CTX> for InferTy {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=16 | LINES=14 */
 
 impl fmt::Display for InferTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -739,7 +709,6 @@ impl fmt::Display for InferTy {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=14 */
 
 impl fmt::Debug for InferTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -754,7 +723,6 @@ impl fmt::Debug for InferTy {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=TypeAndMut | COMPLEXITY=2 | LINES=11 */
 
 #[derive_where(Clone, Copy, PartialEq, Hash, Debug; I: Interner)]
 #[cfg_attr(
@@ -766,10 +734,8 @@ pub struct TypeAndMut<I: Interner> {
     pub ty: I::Ty,
     pub mutbl: Mutability,
 }
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TypeAndMut<I> {}
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=FnSig | COMPLEXITY=3 | LINES=17 */
 
 #[derive_where(Clone, Copy, PartialEq, Hash; I: Interner)]
 #[cfg_attr(
@@ -787,10 +753,8 @@ pub struct FnSig<I: Interner> {
     #[type_foldable(identity)]
     pub abi: I::Abi,
 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for FnSig<I> {}
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=inputs | COMPLEXITY=6 | LINES=15 */
 
 impl<I: Interner> FnSig<I> {
     pub fn inputs(self) -> I::FnInputTys {
@@ -806,7 +770,6 @@ impl<I: Interner> FnSig<I> {
         !c_variadic && safety.is_safe() && abi.is_rust()
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=inputs | COMPLEXITY=15 | LINES=45 */
 
 impl<I: Interner> ty::Binder<I, FnSig<I>> {
     #[inline]
@@ -852,7 +815,6 @@ impl<I: Interner> ty::Binder<I, FnSig<I>> {
         (self.map_bound(|sig| FnSigTys { inputs_and_output: sig.inputs_and_output }), hdr)
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=33 | LINES=35 */
 
 impl<I: Interner> fmt::Debug for FnSig<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -888,7 +850,6 @@ impl<I: Interner> fmt::Debug for FnSig<I> {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UnsafeBinderInner | COMPLEXITY=6 | LINES=9 */
 
 // FIXME: this is a distinct type because we need to define `Encode`/`Decode`
 // impls in this crate for `Binder<I, I::Ty>`.
@@ -898,28 +859,24 @@ impl<I: Interner> fmt::Debug for FnSig<I> {
 pub struct UnsafeBinderInner<I: Interner>(ty::Binder<I, I::Ty>);
 
 impl<I: Interner> Eq for UnsafeBinderInner<I> {}
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner> From<ty::Binder<I, I::Ty>> for UnsafeBinderInner<I> {
     fn from(value: ty::Binder<I, I::Ty>) -> Self {
         UnsafeBinderInner(value)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner> From<UnsafeBinderInner<I>> for ty::Binder<I, I::Ty> {
     fn from(value: UnsafeBinderInner<I>) -> Self {
         value.0
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner> fmt::Debug for UnsafeBinderInner<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.0.fmt(f)
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Interner> Deref for UnsafeBinderInner<I> {
     type Target = ty::Binder<I, I::Ty>;
@@ -928,7 +885,6 @@ impl<I: Interner> Deref for UnsafeBinderInner<I> {
         &self.0
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=13 */
 
 #[cfg(feature = "nightly")]
 impl<I: Interner, E: crate::rustc_serialize::Encoder> crate::rustc_serialize::Encodable<E>
@@ -942,7 +898,6 @@ where
         self.as_ref().skip_binder().encode(e);
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=6 | LINES=16 */
 
 #[cfg(feature = "nightly")]
 impl<I: Interner, D: crate::rustc_serialize::Decoder> crate::rustc_serialize::Decodable<D>
@@ -959,7 +914,6 @@ where
         ))
     }
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=FnSigTys | COMPLEXITY=2 | LINES=11 */
 
 // This is just a `FnSig` without the `FnHeader` fields.
 #[derive_where(Clone, Copy, Debug, PartialEq, Hash; I: Interner)]
@@ -971,10 +925,8 @@ where
 pub struct FnSigTys<I: Interner> {
     pub inputs_and_output: I::Tys,
 }
-/* AST_META: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for FnSigTys<I> {}
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=inputs | COMPLEXITY=4 | LINES=10 */
 
 impl<I: Interner> FnSigTys<I> {
     pub fn inputs(self) -> I::FnInputTys {
@@ -985,7 +937,6 @@ impl<I: Interner> FnSigTys<I> {
         self.inputs_and_output.output()
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=with | COMPLEXITY=9 | LINES=32 */
 
 impl<I: Interner> ty::Binder<I, FnSigTys<I>> {
     // Used to combine the two fields in `TyKind::FnPtr` into a single value.
@@ -1018,7 +969,6 @@ impl<I: Interner> ty::Binder<I, FnSigTys<I>> {
         self.map_bound(|sig_tys| sig_tys.output())
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=FnHeader | COMPLEXITY=2 | LINES=12 */
 
 #[derive_where(Clone, Copy, Debug, PartialEq, Hash; I: Interner)]
 #[cfg_attr(
@@ -1031,10 +981,8 @@ pub struct FnHeader<I: Interner> {
     pub safety: I::Safety,
     pub abi: I::Abi,
 }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for FnHeader<I> {}
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=CoroutineWitnessTypes | COMPLEXITY=2 | LINES=11 */
 
 #[derive_where(Clone, Copy, Debug, PartialEq, Hash; I: Interner)]
 #[cfg_attr(
@@ -1046,6 +994,5 @@ pub struct CoroutineWitnessTypes<I: Interner> {
     pub types: I::Tys,
     pub assumptions: I::RegionAssumptions,
 }
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CoroutineWitnessTypes<I> {}

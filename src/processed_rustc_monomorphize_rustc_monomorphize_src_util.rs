@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 
 use crate::rustc_complete::ty::{self, ClosureSizeProfileData, Instance, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=67 */
 
 /// For a given closure, writes out the data for the profiling the impact of RFC 2229 on
 /// closure size into a CSV.

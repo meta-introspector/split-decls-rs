@@ -1,18 +1,15 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/delegation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // This module implements expansion of delegation items with early resolved paths.
 // It includes a delegation to a free functions:
 //
 // ```ignore (illustrative)
 // reuse module::name { target_expr_template }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // ```
 //
 // And delegation to a trait methods:
 //
 // ```ignore (illustrative)
 // reuse <Type as Trait>::name { target_expr_template }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 // ```
 //
 // After expansion for both cases we get:
@@ -26,7 +23,6 @@
 // ) -> InferDelegation(sig_id, Output) {
 //     callee_path(target_expr_template(arg0), arg1, ..., argN)
 // }
-/* AST_META: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 // ```
 //
 // Where `callee_path` is a path in delegation item e.g. `<Type as Trait>::name`.
@@ -45,26 +41,19 @@ use std::iter;
 
 use ast::visit::Visitor;
 use hir::def::{DefKind, PartialRes, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use hir::{BodyId, HirId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::*;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{Asyncness, ResolverAstLowering};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::symbol::kw;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{GenericArgsMode, ImplTraitContext, LoweringContext, ParamMode};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AllowReturnTypeNotation, ImplTraitPosition, ResolverAstLoweringExt};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) struct DelegationResults<'hir> {
     pub body_id: hir::BodyId,
@@ -72,7 +61,6 @@ pub(crate) struct DelegationResults<'hir> {
     pub ident: Ident,
     pub generics: &'hir hir::Generics<'hir>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_method | COMPLEXITY=156 | LINES=377 */
 
 impl<'hir> LoweringContext<'_, 'hir> {
     fn is_method(&self, def_id: DefId, span: Span) -> bool {
@@ -450,14 +438,12 @@ impl<'hir> LoweringContext<'_, 'hir> {
         hir::Expr { hir_id: self.next_id(), kind, span }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=SelfResolver | COMPLEXITY=2 | LINES=6 */
 
 struct SelfResolver<'a> {
     resolver: &'a mut ResolverAstLowering,
     path_id: NodeId,
     self_param_id: NodeId,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=try_replace_id | COMPLEXITY=6 | LINES=12 */
 
 impl<'a> SelfResolver<'a> {
     fn try_replace_id(&mut self, id: NodeId) {
@@ -470,7 +456,6 @@ impl<'a> SelfResolver<'a> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_id | COMPLEXITY=5 | LINES=6 */
 
 impl<'ast, 'a> Visitor<'ast> for SelfResolver<'a> {
     fn visit_id(&mut self, id: NodeId) {

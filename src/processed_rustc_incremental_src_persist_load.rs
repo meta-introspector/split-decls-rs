@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_incremental/src/persist/load.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Code to load the dep-graph from files.
 
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::sync::Arc;
 
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
 use crate::rustc_complete::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::query::on_disk_cache::OnDiskCache;
 use crate::rustc_serialize::Decodable;
 use crate::rustc_serialize::opaque::MemDecoder;
@@ -18,13 +15,11 @@ use crate::rustc_complete::Session;
 use crate::rustc_complete::config::IncrementalStateAssertion;
 use crate::rustc_complete::Symbol;
 use tracing::{debug, warn};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::data::*;
 use super::fs::*;
 use super::save::build_dep_graph;
 use super::{file_format, work_product};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 use crate::errors;
 
 #[derive(Debug)]
@@ -40,7 +35,6 @@ pub enum LoadResult<T> {
     /// Loading the dep graph failed.
     LoadDepGraph(PathBuf, std::io::Error),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=open | COMPLEXITY=27 | LINES=34 */
 
 impl<T: Default> LoadResult<T> {
     /// Accesses the data returned in [`LoadResult::Ok`].
@@ -75,7 +69,6 @@ impl<T: Default> LoadResult<T> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=load_data | COMPLEXITY=9 | LINES=17 */
 
 fn load_data(path: &Path, sess: &Session) -> LoadResult<(Mmap, usize)> {
     match file_format::read_file(
@@ -93,13 +86,11 @@ fn load_data(path: &Path, sess: &Session) -> LoadResult<(Mmap, usize)> {
         Err(err) => LoadResult::LoadDepGraph(path.to_path_buf(), err),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=delete_dirty_work_product | COMPLEXITY=3 | LINES=5 */
 
 fn delete_dirty_work_product(sess: &Session, swp: SerializedWorkProduct) {
     debug!("delete_dirty_work_product({:?})", swp);
     work_product::delete_workproduct_files(sess, &swp.work_product);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=load_dep_graph | COMPLEXITY=59 | LINES=90 */
 
 fn load_dep_graph(
     sess: &Session,
@@ -190,7 +181,6 @@ fn load_dep_graph(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=load_query_result_cache | COMPLEXITY=16 | LINES=25 */
 
 /// Attempts to load the query result cache from disk
 ///
@@ -216,7 +206,6 @@ pub fn load_query_result_cache(sess: &Session) -> Option<OnDiskCache> {
         _ => Some(OnDiskCache::new_empty()),
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=setup_dep_graph | COMPLEXITY=15 | LINES=27 */
 
 /// Setups the dependency graph by loading an existing graph from disk and set up streaming of a
 /// new graph to an incremental session directory.

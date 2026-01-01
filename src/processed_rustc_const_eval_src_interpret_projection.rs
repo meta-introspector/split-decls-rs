@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/projection.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=13 */
 // This file implements "place projections"; basically a symmetric API for 3 types: MPlaceTy, OpTy, PlaceTy.
 //
 // OpTy and PlaceTy generally work by "let's see if we are actually an MPlaceTy, and do something custom if not".
@@ -13,19 +12,15 @@ use std::marker::PhantomData;
 use std::ops::Range;
 
 use crate::rustc_abi::{self as abi, FieldIdx, Size, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{bug, mir, span_bug, ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     InterpCx, InterpResult, MPlaceTy, Machine, MemPlaceMeta, OpTy, Provenance, Scalar, err_ub,
     interp_ok, throw_ub, throw_unsup,
 };
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Describes the constraints placed on offset-projections.
 #[derive(Copy, Clone, Debug)]
@@ -35,7 +30,6 @@ pub enum OffsetMode {
     /// No constraints, just wrap around the edge of the address space.
     Wrapping,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=28 | LINES=74 */
 
 /// A thing that we can project into, and that has a layout.
 pub trait Projectable<'tcx, Prov: Provenance>: Sized + std::fmt::Debug {
@@ -110,7 +104,6 @@ pub trait Projectable<'tcx, Prov: Provenance>: Sized + std::fmt::Debug {
         ecx: &InterpCx<'tcx, M>,
     ) -> InterpResult<'tcx, OpTy<'tcx, M::Provenance>>;
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ArrayIterator | COMPLEXITY=2 | LINES=9 */
 
 /// A type representing iteration over the elements of an array.
 pub struct ArrayIterator<'a, 'tcx, Prov: Provenance, P: Projectable<'tcx, Prov>> {
@@ -120,7 +113,6 @@ pub struct ArrayIterator<'a, 'tcx, Prov: Provenance, P: Projectable<'tcx, Prov>>
     field_layout: TyAndLayout<'tcx>,
     _phantom: PhantomData<Prov>, // otherwise it says `Prov` is never used...
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=next | COMPLEXITY=8 | LINES=21 */
 
 impl<'a, 'tcx, Prov: Provenance, P: Projectable<'tcx, Prov>> ArrayIterator<'a, 'tcx, Prov, P> {
     /// Should be the same `ecx` on each call, and match the one used to create the iterator.
@@ -142,7 +134,6 @@ impl<'a, 'tcx, Prov: Provenance, P: Projectable<'tcx, Prov>> ArrayIterator<'a, '
         )))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=project_field | COMPLEXITY=126 | LINES=280 */
 
 // FIXME: Working around https://github.com/rust-lang/rust/issues/54385
 impl<'tcx, Prov, M> InterpCx<'tcx, M>

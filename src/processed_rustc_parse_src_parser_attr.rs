@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/attr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::token::{self, MetaVarKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::ParserRange;
 use crate::rustc_complete::{Attribute, attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Diag, PResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use thin_vec::ThinVec;
 use tracing::debug;
 
 use super::{
     AttrWrapper, Capturing, FnParseMode, ForceCollect, Parser, PathStyle, Trailing, UsePreAttrPos,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::parser::FnContext;
 use crate::{errors, exp, fluent_generated as fluent};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 // Public for rustfmt usage
 #[derive(Debug)]
@@ -28,7 +21,6 @@ pub enum InnerAttrPolicy {
     Permitted,
     Forbidden(Option<InnerAttrForbiddenReason>),
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Clone, Copy, Debug)]
 pub enum InnerAttrForbiddenReason {
@@ -36,21 +28,18 @@ pub enum InnerAttrForbiddenReason {
     AfterOuterDocComment { prev_doc_comment_span: Span },
     AfterOuterAttribute { prev_outer_attr_sp: Span },
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum OuterAttributeType {
     DocComment,
     DocBlockComment,
     Attribute,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum AllowLeadingUnsafe {
     Yes,
     No,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse_attribute | COMPLEXITY=277 | LINES=472 */
 
 impl<'a> Parser<'a> {
     /// Parses attributes that appear before an item.

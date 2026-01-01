@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pprust/state/expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt::Write;
 
 use ast::{ForLoopKind, MatchKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use itertools::{Itertools, Position};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::util::classify;
 use crate::rustc_complete::util::literal::escape_byte_str_symbol;
 use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, BinOpKind, BlockCheckMode, FormatAlignment, FormatArgPosition, FormatArgsPiece,
     FormatCount, FormatDebugHex, FormatSign, FormatTrait, YieldKind, token,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::pp::Breaks::Inconsistent;
 use crate::pprust::state::fixup::FixupContext;
 use crate::pprust::state::{AnnNode, INDENT_UNIT, PrintState, State};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=print_else | COMPLEXITY=441 | LINES=922 */
 
 impl<'a> State<'a> {
     fn print_else(&mut self, els: Option<&ast::Expr>) {
@@ -942,7 +936,6 @@ impl<'a> State<'a> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=reconstruct_format_args_template_string | COMPLEXITY=80 | LINES=85 */
 
 fn reconstruct_format_args_template_string(pieces: &[FormatArgsPiece]) -> String {
     let mut template = "\"".to_string();

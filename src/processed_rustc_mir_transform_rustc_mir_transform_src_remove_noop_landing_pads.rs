@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_noop_landing_pads.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=43 | LINES=81 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
@@ -81,7 +80,6 @@ impl<'tcx> crate::MirPass<'tcx> for RemoveNoopLandingPads {
         true
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_nop_landing_pad | COMPLEXITY=40 | LINES=63 */
 
 impl RemoveNoopLandingPads {
     fn is_nop_landing_pad(

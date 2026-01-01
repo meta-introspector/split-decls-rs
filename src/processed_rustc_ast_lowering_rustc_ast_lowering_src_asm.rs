@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::hash_map::Entry;
 use std::fmt::Write;
 
 use crate::rustc_complete::*;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 use crate::rustc_target::asm;
 
 use super::LoweringContext;
@@ -23,12 +19,10 @@ use super::errors::{
     InvalidRegisterClass, RegisterClassOnlyClobber, RegisterClassOnlyClobberStable,
     RegisterConflict,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     AllowReturnTypeNotation, ImplTraitContext, ImplTraitPosition, ParamMode,
     ResolverAstLoweringExt, fluent_generated as fluent,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=314 | LINES=493 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     pub(crate) fn lower_inline_asm(

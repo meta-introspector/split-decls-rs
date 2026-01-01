@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/mapgen/unused.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir;
 use crate::rustc_complete::mir::mono::MonoItemPartitions;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def_id::DefIdSet;
 
 use crate::common::CodegenCx;
 use crate::coverageinfo::mapgen::covfun::{CovfunRecord, prepare_covfun_record};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=42 */
 use crate::llvm;
 
 /// Each CGU will normally only emit coverage metadata for the functions that it actually generates.
@@ -56,7 +51,6 @@ pub(crate) fn prepare_covfun_records_for_unused_functions<'tcx>(
         llvm::set_initializer(array, initializer);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UnusedInstance | COMPLEXITY=4 | LINES=7 */
 
 /// Holds a dummy function instance along with its symbol name, to avoid having
 /// to repeatedly query for the name.
@@ -64,7 +58,6 @@ struct UnusedInstance<'tcx> {
     instance: ty::Instance<'tcx>,
     symbol_name: ty::SymbolName<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=gather_unused_function_instances | COMPLEXITY=10 | LINES=32 */
 
 fn gather_unused_function_instances<'tcx>(cx: &CodegenCx<'_, 'tcx>) -> Vec<UnusedInstance<'tcx>> {
     assert!(cx.codegen_unit.is_code_coverage_dead_code_cgu());
@@ -97,14 +90,12 @@ fn gather_unused_function_instances<'tcx>(cx: &CodegenCx<'_, 'tcx>) -> Vec<Unuse
         .map(|instance| UnusedInstance { instance, symbol_name: tcx.symbol_name(instance) })
         .collect::<Vec<_>>()
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UsageSets | COMPLEXITY=2 | LINES=6 */
 
 struct UsageSets<'tcx> {
     all_mono_items: &'tcx DefIdSet,
     used_via_inlining: FxHashSet<DefId>,
     missing_own_coverage: FxHashSet<DefId>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=prepare_usage_sets | COMPLEXITY=30 | LINES=57 */
 
 /// Prepare sets of definitions that are relevant to deciding whether something
 /// is an "unused function" for coverage purposes.
@@ -162,7 +153,6 @@ fn prepare_usage_sets<'tcx>(tcx: TyCtxt<'tcx>) -> UsageSets<'tcx> {
 
     UsageSets { all_mono_items, used_via_inlining, missing_own_coverage }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=make_dummy_instance | COMPLEXITY=8 | LINES=16 */
 
 fn make_dummy_instance<'tcx>(tcx: TyCtxt<'tcx>, local_def_id: LocalDefId) -> ty::Instance<'tcx> {
     let def_id = local_def_id.to_def_id();

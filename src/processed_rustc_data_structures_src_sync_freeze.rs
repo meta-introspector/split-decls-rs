@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sync/freeze.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cell::UnsafeCell;
 use std::intrinsics::likely;
 use std::marker::PhantomData;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ptr::NonNull;
 use std::sync::atomic::{AtomicBool, Ordering};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::sync::{DynSend, DynSync, ReadGuard, RwLock, WriteGuard};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FreezeLock | COMPLEXITY=2 | LINES=13 */
 
 /// A type which allows mutation using a lock until
 /// the value is frozen and can be accessed lock-free.
@@ -24,10 +20,8 @@ pub struct FreezeLock<T> {
     /// This lock protects writes to the `data` and `frozen` fields.
     lock: RwLock<()>,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl<T: DynSync + DynSend> DynSync for FreezeLock<T> {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=60 | LINES=98 */
 
 impl<T> FreezeLock<T> {
     #[inline]
@@ -126,7 +120,6 @@ impl<T> FreezeLock<T> {
         unsafe { &*self.data.get() }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=FreezeReadGuard | COMPLEXITY=4 | LINES=7 */
 
 /// A guard holding shared access to a `FreezeLock` which is in a locked state or frozen.
 #[must_use = "if unused the FreezeLock may immediately unlock"]
@@ -134,7 +127,6 @@ pub struct FreezeReadGuard<'a, T: ?Sized> {
     _lock_guard: Option<ReadGuard<'a, ()>>,
     data: NonNull<T>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=11 */
 
 impl<'a, T: ?Sized + 'a> Deref for FreezeReadGuard<'a, T> {
     type Target = T;
@@ -146,7 +138,6 @@ impl<'a, T: ?Sized + 'a> Deref for FreezeReadGuard<'a, T> {
         unsafe { &*self.data.as_ptr() }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=map | COMPLEXITY=4 | LINES=7 */
 
 impl<'a, T: ?Sized> FreezeReadGuard<'a, T> {
     #[inline]
@@ -154,7 +145,6 @@ impl<'a, T: ?Sized> FreezeReadGuard<'a, T> {
         FreezeReadGuard { data: NonNull::from(f(&*this)), _lock_guard: this._lock_guard }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FreezeWriteGuard | COMPLEXITY=4 | LINES=9 */
 
 /// A guard holding mutable access to a `FreezeLock` which is in a locked state or frozen.
 #[must_use = "if unused the FreezeLock may immediately unlock"]
@@ -164,7 +154,6 @@ pub struct FreezeWriteGuard<'a, T: ?Sized> {
     data: NonNull<T>,
     marker: PhantomData<&'a mut T>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=freeze | COMPLEXITY=8 | LINES=9 */
 
 impl<'a, T> FreezeWriteGuard<'a, T> {
     pub fn freeze(self) -> &'a T {
@@ -174,7 +163,6 @@ impl<'a, T> FreezeWriteGuard<'a, T> {
         unsafe { &*self.data.as_ptr() }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=map | COMPLEXITY=4 | LINES=15 */
 
 impl<'a, T: ?Sized> FreezeWriteGuard<'a, T> {
     #[inline]
@@ -190,7 +178,6 @@ impl<'a, T: ?Sized> FreezeWriteGuard<'a, T> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=9 */
 
 impl<'a, T: ?Sized + 'a> Deref for FreezeWriteGuard<'a, T> {
     type Target = T;
@@ -200,7 +187,6 @@ impl<'a, T: ?Sized + 'a> Deref for FreezeWriteGuard<'a, T> {
         unsafe { &*self.data.as_ptr() }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=10 | LINES=8 */
 
 impl<'a, T: ?Sized + 'a> DerefMut for FreezeWriteGuard<'a, T> {
     #[inline]

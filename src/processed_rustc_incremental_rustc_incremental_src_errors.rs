@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_incremental/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_unrecognized_depnode)]
@@ -14,7 +11,6 @@ pub(crate) struct UnrecognizedDepNode {
     pub span: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_missing_depnode)]
@@ -22,7 +18,6 @@ pub(crate) struct MissingDepNode {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_missing_if_this_changed)]
@@ -30,7 +25,6 @@ pub(crate) struct MissingIfThisChanged {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_ok)]
@@ -38,7 +32,6 @@ pub(crate) struct Ok {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_no_path)]
@@ -48,7 +41,6 @@ pub(crate) struct NoPath {
     pub target: Symbol,
     pub source: String,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_assertion_auto)]
@@ -58,7 +50,6 @@ pub(crate) struct AssertionAuto<'a> {
     pub name: &'a str,
     pub e: &'a str,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_undefined_clean_dirty_assertions_item)]
@@ -67,7 +58,6 @@ pub(crate) struct UndefinedCleanDirtyItem {
     pub span: Span,
     pub kind: String,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_undefined_clean_dirty_assertions)]
@@ -76,7 +66,6 @@ pub(crate) struct UndefinedCleanDirty {
     pub span: Span,
     pub kind: String,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_repeated_depnode_label)]
@@ -85,7 +74,6 @@ pub(crate) struct RepeatedDepNodeLabel<'a> {
     pub span: Span,
     pub label: &'a str,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_unrecognized_depnode_label)]
@@ -94,7 +82,6 @@ pub(crate) struct UnrecognizedDepNodeLabel<'a> {
     pub span: Span,
     pub label: &'a str,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_not_dirty)]
@@ -103,7 +90,6 @@ pub(crate) struct NotDirty<'a> {
     pub span: Span,
     pub dep_node_str: &'a str,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_not_clean)]
@@ -112,7 +98,6 @@ pub(crate) struct NotClean<'a> {
     pub span: Span,
     pub dep_node_str: &'a str,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_not_loaded)]
@@ -121,7 +106,6 @@ pub(crate) struct NotLoaded<'a> {
     pub span: Span,
     pub dep_node_str: &'a str,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_unknown_rustc_clean_argument)]
@@ -129,7 +113,6 @@ pub(crate) struct UnknownRustcCleanArgument {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_no_cfg)]
@@ -137,7 +120,6 @@ pub(crate) struct NoCfg {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_associated_value_expected_for)]
@@ -146,7 +128,6 @@ pub(crate) struct AssociatedValueExpectedFor {
     pub span: Span,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_associated_value_expected)]
@@ -154,7 +135,6 @@ pub(crate) struct AssociatedValueExpected {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_unchecked_clean)]
@@ -162,7 +142,6 @@ pub(crate) struct UncheckedClean {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_delete_old)]
@@ -171,7 +150,6 @@ pub(crate) struct DeleteOld<'a> {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_create_new)]
@@ -180,7 +158,6 @@ pub(crate) struct CreateNew<'a> {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_write_new)]
@@ -189,7 +166,6 @@ pub(crate) struct WriteNew<'a> {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_canonicalize_path)]
@@ -197,7 +173,6 @@ pub(crate) struct CanonicalizePath {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_create_incr_comp_dir)]
@@ -206,7 +181,6 @@ pub(crate) struct CreateIncrCompDir<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_create_lock)]
@@ -219,7 +193,6 @@ pub(crate) struct CreateLock<'a> {
     #[help(incremental_cargo_help_2)]
     pub is_cargo: bool,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_delete_lock)]
@@ -227,14 +200,12 @@ pub(crate) struct DeleteLock<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_hard_link_failed)]
 pub(crate) struct HardLinkFailed<'a> {
     pub path: &'a Path,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_delete_partial)]
@@ -242,7 +213,6 @@ pub(crate) struct DeletePartial<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_delete_full)]
@@ -250,7 +220,6 @@ pub(crate) struct DeleteFull<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_finalize)]
@@ -258,7 +227,6 @@ pub(crate) struct Finalize<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_invalid_gc_failed)]
@@ -266,7 +234,6 @@ pub(crate) struct InvalidGcFailed<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_finalized_gc_failed)]
@@ -274,7 +241,6 @@ pub(crate) struct FinalizedGcFailed<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_session_gc_failed)]
@@ -282,7 +248,6 @@ pub(crate) struct SessionGcFailed<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_assert_not_loaded)]
@@ -298,7 +263,6 @@ pub(crate) struct DeleteIncompatible {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_load_dep_graph)]
@@ -306,7 +270,6 @@ pub(crate) struct LoadDepGraph {
     pub path: PathBuf,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_move_dep_graph)]
@@ -315,7 +278,6 @@ pub(crate) struct MoveDepGraph<'a> {
     pub to: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_create_dep_graph)]
@@ -323,7 +285,6 @@ pub(crate) struct CreateDepGraph<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_copy_workproduct_to_cache)]
@@ -332,7 +293,6 @@ pub(crate) struct CopyWorkProductToCache<'a> {
     pub to: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_delete_workproduct)]
@@ -340,7 +300,6 @@ pub(crate) struct DeleteWorkProduct<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(incremental_corrupt_file)]

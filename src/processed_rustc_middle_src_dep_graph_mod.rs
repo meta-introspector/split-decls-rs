@@ -1,26 +1,20 @@
 // SRC: ../rust/compiler/rustc_middle/src/dep_graph/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_complete::Session;
 
 use crate::ty::print::with_reduced_queries;
 use crate::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[macro_use]
 
 pub use dep_node::{DepKind, DepNode, DepNodeExt, dep_kinds, label_strs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub(crate) use dep_node::{make_compile_codegen_unit, make_compile_mono_item, make_metadata};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use rustc_query_system::dep_graph::debug::{DepNodeFilter, EdgeFilter};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use rustc_query_system::dep_graph::{
     DepContext, DepGraphQuery, DepNodeIndex, Deps, SerializedDepGraph, SerializedDepNodeIndex,
     TaskDepsRef, WorkProduct, WorkProductId, WorkProductMap, hash_result,
 };
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=DepsType | COMPLEXITY=2 | LINES=9 */
 
 pub type DepGraph = rustc_query_system::dep_graph::DepGraph<DepsType>;
 
@@ -30,7 +24,6 @@ pub type DepKindStruct<'tcx> = rustc_query_system::dep_graph::DepKindStruct<TyCt
 pub struct DepsType {
     pub dep_names: Vec<&'static str>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=with_deps | COMPLEXITY=12 | LINES=33 */
 
 impl Deps for DepsType {
     fn with_deps<OP, R>(task_deps: TaskDepsRef<'_>, op: OP) -> R
@@ -64,7 +57,6 @@ impl Deps for DepsType {
     const DEP_KIND_ANON_ZERO_DEPS: DepKind = dep_kinds::AnonZeroDeps;
     const DEP_KIND_MAX: u16 = dep_node::DEP_KIND_VARIANTS - 1;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=with_stable_hashing_context | COMPLEXITY=11 | LINES=33 */
 
 impl<'tcx> DepContext for TyCtxt<'tcx> {
     type Deps = DepsType;

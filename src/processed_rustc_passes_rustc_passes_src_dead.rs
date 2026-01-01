@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/dead.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // This implements the dead-code warning pass.
 // All reachable symbols are live, code called from live code is live, code with certain lint
 // expectations such as `#[expect(unused)]` and `#[expect(dead_code)]` is live, and everything else
@@ -8,35 +7,25 @@
 use std::mem;
 
 use hir::def_id::{LocalDefIdMap, LocalDefIdSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, Node, PatKind, QPath};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::middle::privacy::Level;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, AssocTag, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::builtin::DEAD_CODE;
 use crate::rustc_complete::lint::{self, LintExpectationId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, kw, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::errors::{
     ChangeFields, IgnoredDerivedImpls, MultipleDeadCodes, ParentInfo, UselessAssignment,
 };
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=should_explore | COMPLEXITY=14 | LINES=40 */
 
 /// Any local definition that may call something in its body block should be explored. For example,
 /// if it's a live function, then we should explore its block to check for codes that may need to
@@ -77,7 +66,6 @@ fn should_explore(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Determine if a work from the worklist is coming from a `#[allow]`
 /// or a `#[expect]` of `dead_code`
@@ -86,7 +74,6 @@ enum ComesFromAllowExpect {
     Yes,
     No,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=MarkSymbolVisitor | COMPLEXITY=3 | LINES=16 */
 
 struct MarkSymbolVisitor<'tcx> {
     worklist: Vec<(LocalDefId, ComesFromAllowExpect)>,
@@ -103,7 +90,6 @@ struct MarkSymbolVisitor<'tcx> {
     // macro)
     ignored_derived_traits: LocalDefIdMap<FxIndexSet<DefId>>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=279 | LINES=423 */
 
 impl<'tcx> MarkSymbolVisitor<'tcx> {
     /// Gets the type-checking results for the current body.
@@ -527,7 +513,6 @@ impl<'tcx> MarkSymbolVisitor<'tcx> {
         true
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_nested_body | COMPLEXITY=83 | LINES=165 */
 
 impl<'tcx> Visitor<'tcx> for MarkSymbolVisitor<'tcx> {
     fn visit_nested_body(&mut self, body: hir::BodyId) {
@@ -693,7 +678,6 @@ impl<'tcx> Visitor<'tcx> for MarkSymbolVisitor<'tcx> {
         intravisit::walk_trait_ref(self, t);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=has_allow_dead_code_or_lang_attr | COMPLEXITY=19 | LINES=37 */
 
 fn has_allow_dead_code_or_lang_attr(
     tcx: TyCtxt<'_>,
@@ -731,7 +715,6 @@ fn has_allow_dead_code_or_lang_attr(
         None
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=maybe_record_as_seed | COMPLEXITY=58 | LINES=75 */
 
 /// Examine the given definition and record it in the worklist if it should be considered live.
 ///
@@ -807,7 +790,6 @@ fn maybe_record_as_seed<'tcx>(
         _ => {}
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=create_and_seed_worklist | COMPLEXITY=7 | LINES=28 */
 
 fn create_and_seed_worklist(
     tcx: TyCtxt<'_>,
@@ -836,7 +818,6 @@ fn create_and_seed_worklist(
 
     (worklist, unsolved_impl_item)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=live_symbols_and_ignored_derived_traits | COMPLEXITY=13 | LINES=41 */
 
 fn live_symbols_and_ignored_derived_traits(
     tcx: TyCtxt<'_>,
@@ -878,27 +859,23 @@ fn live_symbols_and_ignored_derived_traits(
 
     (symbol_visitor.live_symbols, symbol_visitor.ignored_derived_traits)
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=DeadItem | COMPLEXITY=2 | LINES=6 */
 
 struct DeadItem {
     def_id: LocalDefId,
     name: Symbol,
     level: (lint::Level, Option<LintExpectationId>),
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=DeadVisitor | COMPLEXITY=2 | LINES=6 */
 
 struct DeadVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     live_symbols: &'tcx LocalDefIdSet,
     ignored_derived_traits: &'tcx LocalDefIdMap<FxIndexSet<DefId>>,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum ShouldWarnAboutField {
     Yes,
     No,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 enum ReportOn {
@@ -907,7 +884,6 @@ enum ReportOn {
     /// Report on something that has got a name, which could be a field but also a method
     NamedField,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=should_warn_about_field | COMPLEXITY=112 | LINES=251 */
 
 impl<'tcx> DeadVisitor<'tcx> {
     fn should_warn_about_field(&mut self, field: &ty::FieldDef) -> ShouldWarnAboutField {
@@ -1159,7 +1135,6 @@ impl<'tcx> DeadVisitor<'tcx> {
         self.live_symbols.contains(&def_id) || name.as_str().starts_with('_')
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=check_mod_deathness | COMPLEXITY=63 | LINES=90 */
 
 fn check_mod_deathness(tcx: TyCtxt<'_>, module: LocalModDefId) {
     let (live_symbols, ignored_derived_traits) = tcx.live_symbols_and_ignored_derived_traits(());
@@ -1250,7 +1225,6 @@ fn check_mod_deathness(tcx: TyCtxt<'_>, module: LocalModDefId) {
         visitor.check_definition(foreign_item.owner_id.def_id);
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers =

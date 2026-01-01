@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/evaluate_obligation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use rustc_macros::extension;
 use crate::rustc_complete::span_bug;
 
@@ -8,7 +7,6 @@ use crate::infer::canonical::OriginalQueryValues;
 use crate::traits::{
     EvaluationResult, ObligationCtxt, OverflowError, PredicateObligation, SelectionContext,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=predicate_may_hold | COMPLEXITY=59 | LINES=117 */
 
 #[extension(pub trait InferCtxtExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {

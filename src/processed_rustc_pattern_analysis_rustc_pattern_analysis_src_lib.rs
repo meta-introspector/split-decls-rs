@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=8 | LINES=24 */
 // Analysis of patterns, notably match exhaustiveness checking. The main entrypoint for this crate
 // is [`usefulness::compute_match_usefulness`]. For rustc-specific types and entrypoints, see the
 // [`rustc`] module.
@@ -16,21 +15,16 @@
 
 #[cfg(feature = "rustc")]
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use std::fmt;
 
 pub use crate::rustc_index::{Idx, IndexVec}; // re-exported to avoid rustc_index version issues
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::constructor::{Constructor, ConstructorSet, IntRange};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::pat::DeconstructedPat;
 
 pub trait Captures<'a> {}
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'a, T: ?Sized> Captures<'a> for T {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=PrivateUninhabitedField(pub | COMPLEXITY=33 | LINES=98 */
 
 /// `bool` newtype that indicates whether this is a privately uninhabited field that we should skip
 /// during analysis.
@@ -129,7 +123,6 @@ pub trait PatCx: Sized + fmt::Debug {
         normal_pat: &DeconstructedPat<Self>,
     ) -> Self::Error;
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=MatchArm | COMPLEXITY=5 | LINES=8 */
 
 /// The arm of a match expression.
 #[derive(Debug)]
@@ -138,13 +131,11 @@ pub struct MatchArm<'p, Cx: PatCx> {
     pub has_guard: bool,
     pub arm_data: Cx::ArmData,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
 
 impl<'p, Cx: PatCx> Clone for MatchArm<'p, Cx> {
     fn clone(&self) -> Self {
         Self { pat: self.pat, has_guard: self.has_guard, arm_data: self.arm_data }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'p, Cx: PatCx> Copy for MatchArm<'p, Cx> {}

@@ -1,37 +1,27 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/method/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 // Method lookup: the secret sauce of Rust. See the [rustc dev guide] for more information.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/method-lookup.html
 
 
 use crate::rustc_complete::{Applicability, Diag, SubdiagMessage};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorOf, DefKind, Namespace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, InferOk};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TypeVisitableExt,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{self, NormalizeExt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub(crate) use self::MethodError::*;
 use self::probe::{IsSuggestion, ProbeScope};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 use crate::FnCtxt;
 
 #[derive(Clone, Copy, Debug)]
@@ -45,7 +35,6 @@ pub(crate) struct MethodCallee<'tcx> {
     /// lifetimes replaced with inference variables.
     pub sig: ty::FnSig<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=27 */
 
 #[derive(Debug)]
 pub(crate) enum MethodError<'tcx> {
@@ -73,7 +62,6 @@ pub(crate) enum MethodError<'tcx> {
     /// Error has already been emitted, no need to emit another one.
     ErrorReported(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 // Contains a list of static methods that may apply, a list of unsatisfied trait predicates which
 // could lead to matches if satisfied, and a list of not-in-scope traits which may work.
@@ -86,7 +74,6 @@ pub(crate) struct NoMatchData<'tcx> {
     pub similar_candidate: Option<ty::AssocItem>,
     pub mode: probe::Mode,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 // A pared down enum describing just the places from which a method
 // candidate can arise. Used for error reporting only.
@@ -95,7 +82,6 @@ pub(crate) enum CandidateSource {
     Impl(DefId),
     Trait(DefId /* trait id */),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=associated_value | COMPLEXITY=183 | LINES=462 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Determines whether the type `self_ty` supports a visible method named `method_name` or not.

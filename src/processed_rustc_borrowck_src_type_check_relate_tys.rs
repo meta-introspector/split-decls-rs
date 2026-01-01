@@ -1,34 +1,25 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/relate_tys.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_infer::infer::relate::{
     PredicateEmittingRelation, Relate, RelateResult, StructurallyRelateAliases, TypeRelation,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::Obligation;
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::constraints::OutlivesConstraint;
 use crate::diagnostics::UniverseInfo;
 use crate::renumber::RegionCtxt;
 use crate::type_check::{InstantiateOpaqueType, Locations, TypeChecker};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=37 */
 
 impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     /// Adds sufficient constraints to ensure that `a R b` where `R` depends on `v`:
@@ -66,7 +57,6 @@ impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=NllTypeRelating | COMPLEXITY=3 | LINES=24 */
 
 struct NllTypeRelating<'a, 'b, 'tcx> {
     type_checker: &'a mut TypeChecker<'b, 'tcx>,
@@ -91,7 +81,6 @@ struct NllTypeRelating<'a, 'b, 'tcx> {
 
     ambient_variance_info: ty::VarianceDiagInfo<TyCtxt<'tcx>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=85 | LINES=217 */
 
 impl<'a, 'b, 'tcx> NllTypeRelating<'a, 'b, 'tcx> {
     fn new(
@@ -309,7 +298,6 @@ impl<'a, 'b, 'tcx> NllTypeRelating<'a, 'b, 'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=84 | LINES=211 */
 
 impl<'b, 'tcx> TypeRelation<TyCtxt<'tcx>> for NllTypeRelating<'_, 'b, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -521,7 +509,6 @@ impl<'b, 'tcx> TypeRelation<TyCtxt<'tcx>> for NllTypeRelating<'_, 'b, 'tcx> {
         Ok(a)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span | COMPLEXITY=22 | LINES=75 */
 
 impl<'b, 'tcx> PredicateEmittingRelation<InferCtxt<'tcx>> for NllTypeRelating<'_, 'b, 'tcx> {
     fn span(&self) -> Span {

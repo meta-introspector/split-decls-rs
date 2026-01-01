@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{OnceCell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_codegen_ssa::traits::{
     ConstCodegenMethods, CoverageInfoBuilderMethods, MiscCodegenMethods,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::mir::coverage::CoverageKind;
 use crate::rustc_complete::ty::Instance;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=22 */
 
 use crate::builder::Builder;
 use crate::common::CodegenCx;
@@ -33,7 +28,6 @@ pub(crate) struct CguCoverageContext<'ll, 'tcx> {
 
     covfun_section_name: OnceCell<CString>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 impl<'ll, 'tcx> CguCoverageContext<'ll, 'tcx> {
     pub(crate) fn new() -> Self {
@@ -48,7 +42,6 @@ impl<'ll, 'tcx> CguCoverageContext<'ll, 'tcx> {
         self.pgo_func_name_var_map.borrow().keys().copied().collect::<Vec<_>>()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=covfun_section_name | COMPLEXITY=14 | LINES=37 */
 
 impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
     pub(crate) fn coverageinfo_finalize(&mut self) {
@@ -86,7 +79,6 @@ impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_coverage | COMPLEXITY=33 | LINES=53 */
 
 impl<'tcx> CoverageInfoBuilderMethods<'tcx> for Builder<'_, '_, 'tcx> {
     #[instrument(level = "debug", skip(self))]

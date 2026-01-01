@@ -1,39 +1,29 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/eval_context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::debug_assert_matches;
 
 use either::{Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::mir::interpret::{ErrorHandled, InvalidMetaKind, ReportedErrorInfo};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::layout::{
     self, FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, LayoutError, LayoutOf,
     LayoutOfHelpers, TyAndLayout,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypingEnv, Variance};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{mir, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 use crate::rustc_target::callconv::FnAbi;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     Frame, FrameInfo, GlobalId, InterpErrorInfo, InterpErrorKind, InterpResult, MPlaceTy, Machine,
     MemPlaceMeta, Memory, OpTy, Place, PlaceTy, PointerArithmetic, Projectable, Provenance,
     err_inval, interp_ok, throw_inval, throw_ub, throw_ub_custom,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{ReportErrorExt, enter_trace_span, fluent_generated as fluent, util};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=InterpCx | COMPLEXITY=5 | LINES=22 */
 
 pub struct InterpCx<'tcx, M: Machine<'tcx>> {
     /// Stores the `Machine` instance.
@@ -56,7 +46,6 @@ pub struct InterpCx<'tcx, M: Machine<'tcx>> {
     /// The recursion limit (cached from `tcx.recursion_limit(())`)
     pub recursion_limit: Limit,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, M: Machine<'tcx>> HasDataLayout for InterpCx<'tcx, M> {
     #[inline]
@@ -64,7 +53,6 @@ impl<'tcx, M: Machine<'tcx>> HasDataLayout for InterpCx<'tcx, M> {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, M> layout::HasTyCtxt<'tcx> for InterpCx<'tcx, M>
 where
@@ -75,7 +63,6 @@ where
         *self.tcx
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, M> layout::HasTypingEnv<'tcx> for InterpCx<'tcx, M>
 where
@@ -85,7 +72,6 @@ where
         self.typing_env
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=layout_tcx_at_span | COMPLEXITY=8 | LINES=20 */
 
 impl<'tcx, M: Machine<'tcx>> LayoutOfHelpers<'tcx> for InterpCx<'tcx, M> {
     type LayoutOfResult = Result<TyAndLayout<'tcx>, InterpErrorKind<'tcx>>;
@@ -106,7 +92,6 @@ impl<'tcx, M: Machine<'tcx>> LayoutOfHelpers<'tcx> for InterpCx<'tcx, M> {
         err_inval!(Layout(err))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx, M: Machine<'tcx>> FnAbiOfHelpers<'tcx> for InterpCx<'tcx, M> {
     type FnAbiOfResult = Result<&'tcx FnAbi<'tcx, Ty<'tcx>>, InterpErrorKind<'tcx>>;
@@ -122,7 +107,6 @@ impl<'tcx, M: Machine<'tcx>> FnAbiOfHelpers<'tcx> for InterpCx<'tcx, M> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=layout_of | COMPLEXITY=14 | LINES=37 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// This inherent method takes priority over the trait method with the same name in LayoutOf,
@@ -160,7 +144,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         FnAbiOf::fn_abi_of_instance(self, instance, extra_args)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=27 */
 
 /// Test if it is valid for a MIR assignment to assign `src`-typed place to `dest`-typed value.
 /// This test should be symmetric, as it is primarily about layout compatibility.
@@ -188,7 +171,6 @@ pub(super) fn mir_assign_valid_types<'tcx>(
         false
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=28 */
 
 /// Use the already known layout if given (but sanity check in debug mode),
 /// or compute the layout.
@@ -217,7 +199,6 @@ pub(super) fn from_known_layout<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=format_interp_error | COMPLEXITY=3 | LINES=20 */
 
 /// Turn the given error into a human-readable string. Expects the string to be printed, so if
 /// `RUSTC_CTFE_BACKTRACE` is set this will show a backtrace of the rustc internals that
@@ -238,7 +219,6 @@ pub fn format_interp_error<'tcx>(dcx: DiagCtxtHandle<'_>, e: InterpErrorInfo<'tc
     diag.cancel();
     s
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=194 | LINES=405 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     pub fn new(
@@ -644,7 +624,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         if f.is_nan() { M::generate_nan(self, inputs) } else { f }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=PlacePrinter | COMPLEXITY=4 | LINES=7 */
 
 #[doc(hidden)]
 /// Helper struct for the `dump_place` function.
@@ -652,7 +631,6 @@ pub struct PlacePrinter<'a, 'tcx, M: Machine<'tcx>> {
     ecx: &'a InterpCx<'tcx, M>,
     place: Place<M::Provenance>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=27 | LINES=26 */
 
 impl<'a, 'tcx, M: Machine<'tcx>> std::fmt::Debug for PlacePrinter<'a, 'tcx, M> {
     fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

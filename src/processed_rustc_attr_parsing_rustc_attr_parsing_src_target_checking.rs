@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/target_checking.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::AttrStyle;
 use crate::rustc_complete::DiagArgValue;
 use crate::rustc_feature::{AttributeType, Features};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lints::AttributeLintKind;
 use crate::rustc_complete::{MethodKind, Target};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::AttributeParser;
 use crate::context::{AcceptContext, Stage};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::session_diagnostics::InvalidTarget;
 
 #[derive(Debug)]
@@ -20,14 +16,12 @@ pub(crate) enum AllowedTargets {
     AllowList(&'static [Policy]),
     AllowListWarnRest(&'static [Policy]),
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) enum AllowedResult {
     Allowed,
     Warn,
     Error,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=39 */
 
 impl AllowedTargets {
     pub(crate) fn is_allowed(&self, target: Target) -> AllowedResult {
@@ -67,7 +61,6 @@ impl AllowedTargets {
         .collect()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Eq, PartialEq)]
 pub(crate) enum Policy {
@@ -75,7 +68,6 @@ pub(crate) enum Policy {
     Warn(Target),
     Error(Target),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=67 */
 
 impl<'sess, S: Stage> AttributeParser<'sess, S> {
     pub(crate) fn check_target(
@@ -143,7 +135,6 @@ impl<'sess, S: Stage> AttributeParser<'sess, S> {
         cx.emit_lint(lint, attr_span);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=66 */
 
 /// Takes a list of `allowed_targets` for an attribute, and the `target` the attribute was applied to.
 /// Does some heuristic-based filtering to remove uninteresting targets, and formats the targets into a string
@@ -210,7 +201,6 @@ pub(crate) fn allowed_targets_applied(
         allowed_targets.len() + added_fake_targets.len() == 1,
     )
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=filter_targets | COMPLEXITY=8 | LINES=17 */
 
 fn filter_targets(
     allowed_targets: &mut Vec<Target>,
@@ -228,7 +218,6 @@ fn filter_targets(
     allowed_targets.retain(|t| !target_group.contains(t));
     added_fake_targets.push(target_group_name);
 }
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=50 */
 
 /// This is the list of all targets to which a attribute can be applied
 /// This is used for:

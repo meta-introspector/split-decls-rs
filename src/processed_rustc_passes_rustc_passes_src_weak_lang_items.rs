@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_passes/src/weak_lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Validity checking for weak lang items
 
 use rustc_ast as ast;
 use crate::rustc_complete::visit;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::lang_items::{self, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::weak_lang_items::WEAK_LANG_ITEMS;
 use crate::rustc_complete::middle::lang_items::required;
 use crate::rustc_complete::ty::TyCtxt;
@@ -15,7 +13,6 @@ use crate::rustc_complete::config::CrateType;
 use crate::errors::{
     MissingLangItem, MissingPanicHandler, PanicUnwindWithoutStd, UnknownExternLangItem,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=25 */
 
 /// Checks the crate for usage of weak lang items, returning a vector of all the
 /// lang items required by this crate, but not defined yet.
@@ -41,13 +38,11 @@ pub(crate) fn check_crate(
 
     verify(tcx, items);
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=WeakLangItemVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct WeakLangItemVisitor<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     items: &'a mut lang_items::LanguageItems,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_foreign_item | COMPLEXITY=17 | LINES=16 */
 
 impl<'ast> visit::Visitor<'ast> for WeakLangItemVisitor<'_, '_> {
     fn visit_foreign_item(&mut self, i: &'ast ast::ForeignItem) {
@@ -64,7 +59,6 @@ impl<'ast> visit::Visitor<'ast> for WeakLangItemVisitor<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=verify | COMPLEXITY=35 | LINES=36 */
 
 fn verify(tcx: TyCtxt<'_>, items: &lang_items::LanguageItems) {
     // We only need to check for the presence of weak lang items if we're

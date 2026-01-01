@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/significant_drop_order.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=true_significant_drop_ty | COMPLEXITY=40 | LINES=63 */
 
 /// An additional filter to exclude well-known types from the ecosystem
 /// because their drops are trivial.
@@ -74,7 +70,6 @@ fn true_significant_drop_ty<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=extract_component_raw | COMPLEXITY=20 | LINES=32 */
 
 /// Returns the list of types with a "potentially significant" that may be dropped
 /// by dropping a value of type `ty`.
@@ -107,7 +102,6 @@ pub fn extract_component_raw<'tcx>(
     }
     out_tys
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=extract_component_with_significant_dtor | COMPLEXITY=2 | LINES=12 */
 
 #[instrument(level = "trace", skip(tcx, typing_env))]
 pub fn extract_component_with_significant_dtor<'tcx>(
@@ -120,7 +114,6 @@ pub fn extract_component_with_significant_dtor<'tcx>(
     tys.retain(|oty| deduplicate.insert(*oty));
     tys.into_iter().collect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=ty_dtor_span | COMPLEXITY=13 | LINES=45 */
 
 /// Extract the span of the custom destructor of a type
 /// especially the span of the `impl Drop` header or its entire block

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/region.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 // This file builds up the `ScopeTree`, which describes
 // the parent links in the region hierarchy.
 //
@@ -13,12 +12,9 @@ use std::mem;
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorKind, DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Arm, Block, Expr, LetStmt, Pat, PatKind, Stmt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Context | COMPLEXITY=2 | LINES=15 */
 use crate::rustc_index::Idx;
 use crate::rustc_complete::middle::region::*;
 use crate::rustc_complete::ty::TyCtxt;
@@ -34,7 +30,6 @@ struct Context {
     /// Region parent of expressions, etc.
     parent: Option<Scope>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ScopeResolutionVisitor | COMPLEXITY=2 | LINES=11 */
 
 struct ScopeResolutionVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -46,7 +41,6 @@ struct ScopeResolutionVisitor<'tcx> {
 
     extended_super_lets: FxHashMap<hir::ItemLocalId, ExtendedTemporaryScope>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ExtendedTemporaryScope | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Copy, Clone)]
 struct ExtendedTemporaryScope {
@@ -60,7 +54,6 @@ struct ExtendedTemporaryScope {
     /// we'll emit the `macro_extended_temporary_scopes` lint.
     compat: ScopeCompatibility,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=record_var_lifetime | COMPLEXITY=12 | LINES=16 */
 
 /// Records the lifetime of a local variable as `cx.var_parent`
 fn record_var_lifetime(visitor: &mut ScopeResolutionVisitor<'_>, var_id: hir::ItemLocalId) {
@@ -77,7 +70,6 @@ fn record_var_lifetime(visitor: &mut ScopeResolutionVisitor<'_>, var_id: hir::It
         visitor.scope_tree.record_future_incompatible_var_scope(var_id, shortens_to);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=resolve_block | COMPLEXITY=53 | LINES=116 */
 
 fn resolve_block<'tcx>(
     visitor: &mut ScopeResolutionVisitor<'tcx>,
@@ -194,7 +186,6 @@ fn resolve_block<'tcx>(
 
     visitor.cx = prev_cx;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=resolve_cond | COMPLEXITY=18 | LINES=24 */
 
 /// Resolve a condition from an `if` expression or match guard so that it is a terminating scope
 /// if it doesn't contain `let` expressions.
@@ -219,7 +210,6 @@ fn resolve_cond<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, cond: &'tcx hi
     };
     resolve_expr(visitor, cond, terminate);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=resolve_arm | COMPLEXITY=9 | LINES=20 */
 
 fn resolve_arm<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, arm: &'tcx hir::Arm<'tcx>) {
     let prev_cx = visitor.cx;
@@ -240,7 +230,6 @@ fn resolve_arm<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, arm: &'tcx hir:
 
     visitor.cx = prev_cx;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=resolve_pat | COMPLEXITY=5 | LINES=10 */
 
 #[tracing::instrument(level = "debug", skip(visitor))]
 fn resolve_pat<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, pat: &'tcx hir::Pat<'tcx>) {
@@ -251,7 +240,6 @@ fn resolve_pat<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, pat: &'tcx hir:
 
     intravisit::walk_pat(visitor, pat);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=resolve_stmt | COMPLEXITY=13 | LINES=29 */
 
 fn resolve_stmt<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, stmt: &'tcx hir::Stmt<'tcx>) {
     let stmt_id = stmt.hir_id.local_id;
@@ -281,7 +269,6 @@ fn resolve_stmt<'tcx>(visitor: &mut ScopeResolutionVisitor<'tcx>, stmt: &'tcx hi
         visitor.cx.parent = prev_parent;
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=resolve_expr | COMPLEXITY=55 | LINES=147 */
 
 #[tracing::instrument(level = "debug", skip(visitor))]
 fn resolve_expr<'tcx>(
@@ -429,14 +416,12 @@ fn resolve_expr<'tcx>(
 
     visitor.cx = prev_cx;
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum LetKind {
     Regular,
     Super,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=resolve_local | COMPLEXITY=167 | LINES=346 */
 
 fn resolve_local<'tcx>(
     visitor: &mut ScopeResolutionVisitor<'tcx>,
@@ -783,7 +768,6 @@ fn resolve_local<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=record_child_scope | COMPLEXITY=22 | LINES=38 */
 
 impl<'tcx> ScopeResolutionVisitor<'tcx> {
     /// Records the current parent (if any) as the parent of `child_scope`.
@@ -822,7 +806,6 @@ impl<'tcx> ScopeResolutionVisitor<'tcx> {
         self.cx = outer_cx;
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_block | COMPLEXITY=45 | LINES=81 */
 
 impl<'tcx> Visitor<'tcx> for ScopeResolutionVisitor<'tcx> {
     fn visit_block(&mut self, b: &'tcx Block<'tcx>) {
@@ -904,7 +887,6 @@ impl<'tcx> Visitor<'tcx> for ScopeResolutionVisitor<'tcx> {
         self.visit_body(body);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=31 */
 
 /// Per-body `region::ScopeTree`. The `DefId` should be the owner `DefId` for the body;
 /// in the case of closures, this will be redirected to the enclosing function.

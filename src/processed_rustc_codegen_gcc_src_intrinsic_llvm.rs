@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/intrinsic/llvm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::borrow::Cow;
 
 use gccjit::{CType, Context, Field, Function, FunctionPtrType, RValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=encode_key_128_type | COMPLEXITY=4 | LINES=25 */
 use crate::rustc_codegen_ssa::traits::BuilderMethods;
 
 use crate::builder::Builder;
@@ -29,7 +27,6 @@ fn encode_key_128_type<'a, 'gcc, 'tcx>(
     encode_type.as_type().set_packed();
     (encode_type.as_type(), field1, field2)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=encode_key_256_type | COMPLEXITY=4 | LINES=22 */
 
 fn encode_key_256_type<'a, 'gcc, 'tcx>(
     builder: &Builder<'a, 'gcc, 'tcx>,
@@ -52,7 +49,6 @@ fn encode_key_256_type<'a, 'gcc, 'tcx>(
     encode_type.as_type().set_packed();
     (encode_type.as_type(), field1, field2)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=aes_output_type | COMPLEXITY=3 | LINES=13 */
 
 fn aes_output_type<'a, 'gcc, 'tcx>(
     builder: &Builder<'a, 'gcc, 'tcx>,
@@ -66,7 +62,6 @@ fn aes_output_type<'a, 'gcc, 'tcx>(
     typ.set_packed();
     (typ, field1, field2)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=wide_aes_output_type | COMPLEXITY=4 | LINES=23 */
 
 fn wide_aes_output_type<'a, 'gcc, 'tcx>(
     builder: &Builder<'a, 'gcc, 'tcx>,
@@ -90,7 +85,6 @@ fn wide_aes_output_type<'a, 'gcc, 'tcx>(
     aes_output_type.as_type().set_packed();
     (aes_output_type.as_type(), field1, field2)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=adjust_function | COMPLEXITY=18 | LINES=32 */
 
 #[cfg_attr(not(feature = "master"), allow(unused_variables))]
 pub fn adjust_function<'gcc>(
@@ -123,7 +117,6 @@ pub fn adjust_function<'gcc>(
 
     func_ptr
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=adjust_intrinsic_arguments | COMPLEXITY=131 | LINES=667 */
 
 pub fn adjust_intrinsic_arguments<'a, 'b, 'gcc, 'tcx>(
     builder: &Builder<'a, 'gcc, 'tcx>,
@@ -791,7 +784,6 @@ pub fn adjust_intrinsic_arguments<'a, 'b, 'gcc, 'tcx>(
 
     args
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=adjust_intrinsic_return_value | COMPLEXITY=47 | LINES=183 */
 
 pub fn adjust_intrinsic_return_value<'a, 'gcc, 'tcx>(
     builder: &Builder<'a, 'gcc, 'tcx>,
@@ -975,7 +967,6 @@ pub fn adjust_intrinsic_return_value<'a, 'gcc, 'tcx>(
 
     return_value
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=ignore_arg_cast | COMPLEXITY=26 | LINES=58 */
 
 pub fn ignore_arg_cast(func_name: &str, index: usize, args_len: usize) -> bool {
     // FIXME(antoyo): find a way to refactor in order to avoid this hack.
@@ -1034,7 +1025,6 @@ pub fn ignore_arg_cast(func_name: &str, index: usize, args_len: usize) -> bool {
 
     false
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=intrinsic | COMPLEXITY=9 | LINES=16 */
 
 #[cfg(not(feature = "master"))]
 pub fn intrinsic<'gcc, 'tcx>(name: &str, cx: &CodegenCx<'gcc, 'tcx>) -> Function<'gcc> {
@@ -1051,7 +1041,6 @@ pub fn intrinsic<'gcc, 'tcx>(name: &str, cx: &CodegenCx<'gcc, 'tcx>) -> Function
     cx.functions.borrow_mut().insert(gcc_name.to_string(), func);
     func
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=intrinsic | COMPLEXITY=95 | LINES=552 */
 
 #[cfg(feature = "master")]
 pub fn intrinsic<'gcc, 'tcx>(name: &str, cx: &CodegenCx<'gcc, 'tcx>) -> Function<'gcc> {
@@ -1604,7 +1593,6 @@ pub fn intrinsic<'gcc, 'tcx>(name: &str, cx: &CodegenCx<'gcc, 'tcx>) -> Function
     cx.functions.borrow_mut().insert(gcc_name.to_string(), func);
     func
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 
 #[cfg(feature = "master")]
 include!("archs.rs");

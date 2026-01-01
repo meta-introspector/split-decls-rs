@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/named_anon_conflict.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=88 */
 // Error Reporting for Anonymous Region Lifetime Errors
 // where one region is named and the other is anonymous.
 

@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/inline_asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Codegen of `asm!` invocations.
 
 use std::fmt::Write;
 
 use cranelift_codegen::isa::CallConv;
 use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=30 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::sym;
 use crate::rustc_target::asm::*;
@@ -37,7 +35,6 @@ pub(crate) enum CInlineAsmOperand<'tcx> {
         symbol: String,
     },
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=53 | LINES=106 */
 
 pub(crate) fn codegen_inline_asm_terminator<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -144,7 +141,6 @@ pub(crate) fn codegen_inline_asm_terminator<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=59 */
 
 pub(crate) fn codegen_inline_asm_inner<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -204,7 +200,6 @@ pub(crate) fn codegen_inline_asm_inner<'tcx>(
 
     call_inline_asm(fx, &asm_name, asm_gen.stack_slot_size, inputs, outputs);
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=InlineAssemblyGenerator | COMPLEXITY=2 | LINES=14 */
 
 struct InlineAssemblyGenerator<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -219,7 +214,6 @@ struct InlineAssemblyGenerator<'a, 'tcx> {
     stack_slots_output: Vec<Option<Size>>,
     stack_slot_size: Size,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=allocate_registers | COMPLEXITY=397 | LINES=577 */
 
 impl<'tcx> InlineAssemblyGenerator<'_, 'tcx> {
     fn allocate_registers(&mut self) {
@@ -797,7 +791,6 @@ impl<'tcx> InlineAssemblyGenerator<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=call_inline_asm | COMPLEXITY=19 | LINES=54 */
 
 fn call_inline_asm<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -852,7 +845,6 @@ fn call_inline_asm<'tcx>(
         place.write_cvalue(fx, CValue::by_val(value, place.layout()));
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=asm_clif_type | COMPLEXITY=11 | LINES=21 */
 
 fn asm_clif_type<'tcx>(fx: &FunctionCx<'_, '_, 'tcx>, ty: Ty<'tcx>) -> Option<types::Type> {
     match ty.kind() {

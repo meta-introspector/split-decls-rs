@@ -1,38 +1,26 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/metadata/enums/native.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 
 use libc::c_uint;
 use crate::rustc_abi::{Size, TagEncoding, VariantIdx, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::debuginfo::type_names::compute_debuginfo_type_name;
 use crate::rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{ConstCodegenMethods, MiscCodegenMethods};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::smallvec;
 
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::debuginfo::metadata::type_map::{self, Stub, StubInfo, UniqueTypeId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::debuginfo::metadata::{
     DINodeCreationResult, NO_GENERICS, SmallVec, UNKNOWN_LINE_NUMBER, create_member_type,
     file_metadata, file_metadata_from_def_id, size_and_align_of, type_di_node,
     unknown_file_metadata, visibility_di_flags,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::debuginfo::utils::{DIB, create_DIArray, get_namespace_for_item};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::debuginfo::{DIFile, DIFlags, DIType};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=101 */
 
 /// Build the debuginfo node for an enum type. The listing below shows how such a
 /// type looks like at the LLVM IR/DWARF level. It is a `DW_TAG_structure_type`
@@ -134,7 +122,6 @@ pub(super) fn build_enum_type_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=120 */
 
 /// Build the debuginfo node for a coroutine environment. It looks the same as the debuginfo for
 /// an enum. See [build_enum_type_di_node] for more information.
@@ -255,7 +242,6 @@ pub(super) fn build_coroutine_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=build_enum_variant_part_di_node | COMPLEXITY=20 | LINES=78 */
 
 /// Builds the DW_TAG_variant_part of an enum or coroutine debuginfo node:
 ///
@@ -334,7 +320,6 @@ fn build_enum_variant_part_di_node<'ll, 'tcx>(
     )
     .di_node
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=build_discr_member_di_node | COMPLEXITY=21 | LINES=61 */
 
 /// Builds the DW_TAG_member describing where we can find the tag of an enum.
 /// Returns `None` if the enum does not have a tag.
@@ -396,7 +381,6 @@ fn build_discr_member_di_node<'ll, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=build_enum_variant_member_di_node | COMPLEXITY=18 | LINES=77 */
 
 /// Build the debuginfo node for `DW_TAG_variant`:
 ///
@@ -474,7 +458,6 @@ fn build_enum_variant_member_di_node<'ll, 'tcx>(
         )
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=VariantMemberInfo | COMPLEXITY=7 | LINES=21 */
 
 /// Information needed for building a `DW_TAG_variant`:
 ///

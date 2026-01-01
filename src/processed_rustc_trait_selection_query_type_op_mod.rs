@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 
 use crate::rustc_complete::ErrorGuaranteed;
@@ -7,18 +6,14 @@ use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{
     CanonicalQueryInput, CanonicalQueryResponse, Certainty, OriginalQueryValues,
     QueryRegionConstraints,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{InferCtxt, InferOk};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fully_perform | COMPLEXITY=5 | LINES=29 */
 
 
 pub use crate::rustc_complete::traits::query::type_op::*;
@@ -42,7 +37,6 @@ pub trait TypeOp<'tcx>: Sized + fmt::Debug {
         span: Span,
     ) -> Result<TypeOpOutput<'tcx, Self>, ErrorGuaranteed>;
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=TypeOpOutput | COMPLEXITY=4 | LINES=10 */
 
 /// The output from performing a type op
 pub struct TypeOpOutput<'tcx, Op: TypeOp<'tcx>> {
@@ -53,7 +47,6 @@ pub struct TypeOpOutput<'tcx, Op: TypeOp<'tcx>> {
     /// Used for error reporting to be able to rerun the query
     pub error_info: Option<Op::ErrorInfo>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=22 | LINES=79 */
 
 /// "Query type ops" are type ops that are implemented using a
 /// [canonical query][c]. The `Self` type here contains the kernel of
@@ -133,7 +126,6 @@ pub trait QueryTypeOp<'tcx>: fmt::Debug + Copy + TypeFoldable<TyCtxt<'tcx>> + 't
         Ok((value, Some(canonical_self), obligations, canonical_result.value.certainty))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fully_perform | COMPLEXITY=24 | LINES=61 */
 
 impl<'tcx, Q> TypeOp<'tcx> for ParamEnvAnd<'tcx, Q>
 where

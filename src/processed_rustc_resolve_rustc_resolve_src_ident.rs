@@ -1,59 +1,45 @@
 // SRC: ../rust/compiler/rustc_resolve/src/ident.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use Determinacy::*;
 use Namespace::*;
 use crate::rustc_complete::{self as ast, NodeId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def::{DefKind, MacroKinds, Namespace, NonMacroAttrKind, PartialRes, PerNS};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::PROC_MACRO_DERIVE_RESOLUTION_FALLBACK;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::hygiene::{ExpnId, ExpnKind, LocalExpnId, MacroKind, SyntaxContext};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{ParamKindInEnumDiscriminant, ParamKindInNonTrivialAnonConst};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::imports::{Import, NameResolution};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::late::{ConstantHasGenerics, NoConstantGenericsReason, PathSource, Rib, RibKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::macros::{MacroRulesScope, sub_namespace_match};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::{
     AmbiguityError, AmbiguityErrorMisc, AmbiguityKind, BindingKey, CmResolver, Determinacy,
     Finalize, ImportKind, LexicalScopeBinding, Module, ModuleKind, ModuleOrUniformRoot,
     NameBinding, NameBindingKind, ParentScope, PathResult, PrivacyError, Res, ResolutionError,
     Resolver, Scope, ScopeSet, Segment, Stage, Used, Weak, errors,
 };
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 pub enum UsePrelude {
     No,
     Yes,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<UsePrelude> for bool {
     fn from(up: UsePrelude) -> bool {
         matches!(up, UsePrelude::Yes)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 enum Shadowing {
     Restricted,
     Unrestricted,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=hygienic_lexical_parent | COMPLEXITY=976 | LINES=1739 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     /// A generic scope visitor.

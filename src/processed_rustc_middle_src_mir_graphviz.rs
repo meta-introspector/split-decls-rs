@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/graphviz.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=write_mir_graphviz | COMPLEXITY=19 | LINES=41 */
 
 use gsgdt::GraphvizSettings;
 use rustc_graphviz as dot;
@@ -43,7 +41,6 @@ where
 
     Ok(())
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=write_mir_fn_graphviz | COMPLEXITY=9 | LINES=37 */
 
 /// Write a graphviz DOT graph of the MIR.
 pub fn write_mir_fn_graphviz<'tcx, W>(
@@ -81,7 +78,6 @@ where
     };
     g.to_dot(w, &settings, subgraph)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=write_graph_label | COMPLEXITY=29 | LINES=46 */
 
 /// Write the graphviz DOT label for the overall graph. This is essentially a block of text that
 /// will appear below the graph, showing the type of the `fn` this MIR represents and the types of
@@ -128,7 +124,6 @@ fn write_graph_label<'tcx, W: std::fmt::Write>(
 
     Ok(())
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=escape | COMPLEXITY=3 | LINES=4 */
 
 fn escape<T: Debug>(t: &T) -> String {
     dot::escape_html(&format!("{t:?}"))

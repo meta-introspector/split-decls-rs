@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/print.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=thir_tree | COMPLEXITY=10 | LINES=18 */
 
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty;
@@ -20,7 +18,6 @@ pub fn thir_tree(tcx: TyCtxt<'_>, owner_def: LocalDefId) -> String {
         Err(_) => "error".into(),
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=thir_flat | COMPLEXITY=9 | LINES=8 */
 
 /// Create a list-like THIR representation for debugging.
 pub fn thir_flat(tcx: TyCtxt<'_>, owner_def: LocalDefId) -> String {
@@ -29,13 +26,11 @@ pub fn thir_flat(tcx: TyCtxt<'_>, owner_def: LocalDefId) -> String {
         Err(_) => "error".into(),
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=ThirPrinter | COMPLEXITY=2 | LINES=5 */
 
 struct ThirPrinter<'a, 'tcx> {
     thir: &'a Thir<'tcx>,
     fmt: String,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 const INDENT: &str = "    ";
 
@@ -45,7 +40,6 @@ macro_rules! print_indented {
         writeln!($writer, "{}", $s).expect("unable to write to ThirPrinter");
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=write_str | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Write for ThirPrinter<'a, 'tcx> {
     fn write_str(&mut self, s: &str) -> fmt::Result {
@@ -53,7 +47,6 @@ impl<'a, 'tcx> Write for ThirPrinter<'a, 'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=608 | LINES=927 */
 
 impl<'a, 'tcx> ThirPrinter<'a, 'tcx> {
     fn new(thir: &'a Thir<'tcx>) -> Self {

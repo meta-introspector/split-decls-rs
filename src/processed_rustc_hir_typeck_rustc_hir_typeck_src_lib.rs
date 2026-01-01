@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=47 */
 // tidy-alphabetical-start
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
@@ -18,28 +17,20 @@ use fn_ctxt::FnCtxt;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{HirId, HirIdMap, Node};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_hir_analysis::check::{check_abi, check_custom_abi};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
 use crate::rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use typeck_root_ctxt::TypeckRootCtxt;
 
 use crate::check::check_fn;
@@ -50,7 +41,6 @@ use crate::fn_ctxt::LoweredTy;
 use crate::gather_locals::GatherLocalsVisitor;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=13 */
 
 #[macro_export]
 macro_rules! type_error_struct {
@@ -64,17 +54,14 @@ macro_rules! type_error_struct {
         err
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=used_trait_imports | COMPLEXITY=2 | LINES=4 */
 
 fn used_trait_imports(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &UnordSet<LocalDefId> {
     &tcx.typeck(def_id).used_trait_imports
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=typeck | COMPLEXITY=2 | LINES=4 */
 
 fn typeck<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> &'tcx ty::TypeckResults<'tcx> {
     typeck_with_inspect(tcx, def_id, None)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=inspect_typeck | COMPLEXITY=3 | LINES=12 */
 
 /// Same as `typeck` but `inspect` is invoked on evaluation of each root obligation.
 /// Inspecting obligations only works with the new trait solver.
@@ -87,7 +74,6 @@ pub fn inspect_typeck<'tcx>(
 ) -> &'tcx ty::TypeckResults<'tcx> {
     typeck_with_inspect(tcx, def_id, Some(inspect))
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=typeck_with_inspect | COMPLEXITY=65 | LINES=168 */
 
 #[instrument(level = "debug", skip(tcx, inspector), ret)]
 fn typeck_with_inspect<'tcx>(
@@ -256,7 +242,6 @@ fn typeck_with_inspect<'tcx>(
 
     typeck_results
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=infer_type_if_missing | COMPLEXITY=38 | LINES=46 */
 
 fn infer_type_if_missing<'tcx>(fcx: &FnCtxt<'_, 'tcx>, node: Node<'tcx>) -> Option<Ty<'tcx>> {
     let tcx = fcx.tcx;
@@ -303,7 +288,6 @@ fn infer_type_if_missing<'tcx>(fcx: &FnCtxt<'_, 'tcx>, node: Node<'tcx>) -> Opti
     };
     expected_type
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=CoroutineTypes | COMPLEXITY=2 | LINES=12 */
 
 /// When `check_fn` is invoked on a coroutine (i.e., a body that
 /// includes yield), it returns back some information about the yield
@@ -316,14 +300,12 @@ struct CoroutineTypes<'tcx> {
     /// Type of value that is yielded.
     yield_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Needs {
     MutPlace,
     None,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=maybe_mut_place | COMPLEXITY=7 | LINES=9 */
 
 impl Needs {
     fn maybe_mut_place(m: hir::Mutability) -> Self {
@@ -333,14 +315,12 @@ impl Needs {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone)]
 pub enum PlaceOp {
     Deref,
     Index,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=BreakableCtxt | COMPLEXITY=6 | LINES=8 */
 
 pub struct BreakableCtxt<'tcx> {
     may_break: bool,
@@ -349,13 +329,11 @@ pub struct BreakableCtxt<'tcx> {
     // such as `while`, `for`, and `while let`
     coerce: Option<DynamicCoerceMany<'tcx>>,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=EnclosingBreakables | COMPLEXITY=2 | LINES=5 */
 
 pub struct EnclosingBreakables<'tcx> {
     stack: Vec<BreakableCtxt<'tcx>>,
     by_id: HirIdMap<usize>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=find_breakable | COMPLEXITY=11 | LINES=15 */
 
 impl<'tcx> EnclosingBreakables<'tcx> {
     fn find_breakable(&mut self, target_id: HirId) -> &mut BreakableCtxt<'tcx> {
@@ -371,7 +349,6 @@ impl<'tcx> EnclosingBreakables<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=report_unexpected_variant_res | COMPLEXITY=82 | LINES=112 */
 
 fn report_unexpected_variant_res(
     tcx: TyCtxt<'_>,
@@ -484,7 +461,6 @@ fn report_unexpected_variant_res(
     }
     .emit()
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 /// Controls whether the arguments are tupled. This is used for the call
 /// operator.
@@ -494,18 +470,15 @@ fn report_unexpected_variant_res(
 /// function:
 /// ```
 /// fn f(x: (isize, isize)) {}
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 /// ```
 /// Can be called as:
 /// ```ignore UNSOLVED (can this be done in user code?)
 /// # fn f(x: (isize, isize)) {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 /// f(1, 2);
 /// ```
 /// Instead of:
 /// ```
 /// # fn f(x: (isize, isize)) {}
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 /// f((1, 2));
 /// ```
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -513,7 +486,6 @@ enum TupleArgumentsFlag {
     DontTupleArguments,
     TupleArguments,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=fatally_break_rust | COMPLEXITY=12 | LINES=21 */
 
 fn fatally_break_rust(tcx: TyCtxt<'_>, span: Span) -> ! {
     let dcx = tcx.dcx();
@@ -535,7 +507,6 @@ fn fatally_break_rust(tcx: TyCtxt<'_>, span: Span) -> ! {
     }
     diag.emit()
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=11 */
 
 /// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub fn provide(providers: &mut Providers) {

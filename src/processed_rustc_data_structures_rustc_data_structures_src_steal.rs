@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/steal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::sync::{MappedReadGuard, ReadGuard, RwLock};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Steal | COMPLEXITY=10 | LINES=25 */
 
 /// The `Steal` struct is intended to used as the value for a query.
 /// Specifically, we sometimes have queries (*cough* MIR *cough*)
@@ -29,7 +26,6 @@ use crate::sync::{MappedReadGuard, ReadGuard, RwLock};
 pub struct Steal<T> {
     value: RwLock<Option<T>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=37 */
 
 impl<T> Steal<T> {
     pub fn new(value: T) -> Self {
@@ -67,7 +63,6 @@ impl<T> Steal<T> {
         self.value.borrow().is_none()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<CTX, T: HashStable<CTX>> HashStable<CTX> for Steal<T> {
     fn hash_stable(&self, hcx: &mut CTX, hasher: &mut StableHasher) {

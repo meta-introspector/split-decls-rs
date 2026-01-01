@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/compiler_builtins.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=$name:ident | COMPLEXITY=14 | LINES=35 */
 #[cfg(all(unix, feature = "jit"))]
 use std::ffi::c_int;
 #[cfg(feature = "jit")]
@@ -35,7 +34,6 @@ macro_rules! builtin_functions {
         }
     };
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=__muloti4 | COMPLEXITY=11 | LINES=120 */
 
 builtin_functions! {
     register_functions_for_jit;

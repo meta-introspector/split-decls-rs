@@ -1,38 +1,28 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/liveness/trace.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::interval::IntervalSet;
 use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
 use crate::rustc_infer::infer::outlives::for_liveness;
 use crate::rustc_complete::mir::{BasicBlock, Body, ConstraintCategory, HasLocalDecls, Local, Location};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::traits::query::DropckOutlivesResult;
 use crate::rustc_complete::ty::relate::Relate;
 use crate::rustc_complete::ty::{Ty, TyCtxt, TypeVisitable, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::impls::MaybeInitializedPlaces;
 use crate::rustc_mir_dataflow::move_paths::{HasMoveData, MoveData, MovePathIndex};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::points::{DenseLocationMap, PointIndex};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, ResultsCursor};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 use crate::rustc_trait_selection::traits::query::dropck_outlives;
 use crate::rustc_trait_selection::traits::query::type_op::{DropckOutlives, TypeOp, TypeOpOutput};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 use crate::polonius;
 use crate::region_infer::values;
 use crate::type_check::liveness::local_use_map::LocalUseMap;
 use crate::type_check::{NormalizeLocation, TypeChecker};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=40 */
 
 /// This is the heart of the liveness computation. For each variable X
 /// that requires a liveness computation, it walks over all the uses
@@ -73,7 +63,6 @@ pub(super) fn trace<'tcx>(
 
     results.dropck_boring_locals(boring_locals);
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LivenessContext | COMPLEXITY=9 | LINES=25 */
 
 /// Contextual state for the type-liveness coroutine.
 struct LivenessContext<'a, 'typeck, 'tcx> {
@@ -99,13 +88,11 @@ struct LivenessContext<'a, 'typeck, 'tcx> {
     /// dropped.
     local_use_map: &'a LocalUseMap,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DropData | COMPLEXITY=2 | LINES=5 */
 
 struct DropData<'tcx> {
     dropck_result: DropckOutlivesResult<'tcx>,
     region_constraint_data: Option<&'tcx QueryRegionConstraints<'tcx>>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LivenessResults | COMPLEXITY=3 | LINES=22 */
 
 struct LivenessResults<'a, 'typeck, 'tcx> {
     cx: LivenessContext<'a, 'typeck, 'tcx>,
@@ -128,7 +115,6 @@ struct LivenessResults<'a, 'typeck, 'tcx> {
     /// Stack used when doing (reverse) DFS.
     stack: Vec<PointIndex>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=149 | LINES=343 */
 
 impl<'a, 'typeck, 'tcx> LivenessResults<'a, 'typeck, 'tcx> {
     fn new(cx: LivenessContext<'a, 'typeck, 'tcx>) -> Self {
@@ -472,7 +458,6 @@ impl<'a, 'typeck, 'tcx> LivenessResults<'a, 'typeck, 'tcx> {
         // `Drop(X)` followed by `X = TMP`  to swap that with `X`.
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=flow_inits | COMPLEXITY=15 | LINES=34 */
 
 impl<'a, 'typeck, 'tcx> LivenessContext<'a, 'typeck, 'tcx> {
     /// Computes the `MaybeInitializedPlaces` dataflow analysis if it hasn't been done already.
@@ -507,7 +492,6 @@ impl<'a, 'typeck, 'tcx> LivenessContext<'a, 'typeck, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=body | COMPLEXITY=83 | LINES=181 */
 
 impl<'tcx> LivenessContext<'_, '_, 'tcx> {
     fn body(&self) -> &Body<'tcx> {

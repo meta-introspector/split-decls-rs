@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/scripts/filter_profile.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=74 | LINES=122 */
 #!/usr/bin/env bash
 #[rustfmt::skip]/* This line is ignored by bash
 # This block is ignored by rustc

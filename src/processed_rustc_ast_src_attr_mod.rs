@@ -1,31 +1,23 @@
 // SRC: ../rust/compiler/rustc_ast/src/attr/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Functions dealing with attributes and meta items.
 
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicU32, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_index::bit_set::GrowableBitSet;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::ast::{
     AttrArgs, AttrId, AttrItem, AttrKind, AttrStyle, AttrVec, Attribute, DUMMY_NODE_ID, DelimArgs,
     Expr, ExprKind, LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NormalAttr, Path,
     PathSegment, Safety,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::token::{self, CommentKind, Delimiter, InvisibleOrigin, MetaVarKind, Token};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::tokenstream::{
     DelimSpan, LazyAttrTokenStream, Spacing, TokenStream, TokenStreamIter, TokenTree,
 };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=MarkedAttrs(GrowableBitSet | COMPLEXITY=6 | LINES=20 */
 use crate::util::comments;
 use crate::util::literal::escape_string_symbol;
 
@@ -46,7 +38,6 @@ impl MarkedAttrs {
         self.0.contains(attr.id)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=AttrIdGenerator(AtomicU32); | COMPLEXITY=4 | LINES=14 */
 
 pub struct AttrIdGenerator(AtomicU32);
 
@@ -61,7 +52,6 @@ impl AttrIdGenerator {
         AttrId::from_u32(id)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get_normal_item | COMPLEXITY=12 | LINES=16 */
 
 impl Attribute {
     pub fn get_normal_item(&self) -> &AttrItem {
@@ -78,7 +68,6 @@ impl Attribute {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=id | COMPLEXITY=102 | LINES=154 */
 
 impl AttributeExt for Attribute {
     fn id(&self) -> AttrId {
@@ -233,7 +222,6 @@ impl AttributeExt for Attribute {
         self.has_name(sym::automatically_derived)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=style | COMPLEXITY=22 | LINES=40 */
 
 impl Attribute {
     pub fn style(&self) -> AttrStyle {
@@ -274,7 +262,6 @@ impl Attribute {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span | COMPLEXITY=29 | LINES=52 */
 
 impl AttrItem {
     pub fn span(&self) -> Span {
@@ -327,7 +314,6 @@ impl AttrItem {
         MetaItemKind::from_attr_args(&self.args)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=84 | LINES=137 */
 
 impl MetaItem {
     /// For a single-segment meta item, returns its name; otherwise, returns `None`.
@@ -465,7 +451,6 @@ impl MetaItem {
         Some(MetaItem { unsafety: Safety::Default, path, kind, span })
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=list_from_tokens | COMPLEXITY=45 | LINES=64 */
 
 impl MetaItemKind {
     // public because it can be called in the hir
@@ -530,7 +515,6 @@ impl MetaItemKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=span | COMPLEXITY=80 | LINES=115 */
 
 impl MetaItemInner {
     pub fn span(&self) -> Span {
@@ -646,7 +630,6 @@ impl MetaItemInner {
         MetaItem::from_tokens(iter).map(MetaItemInner::MetaItem)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=mk_doc_comment | COMPLEXITY=3 | LINES=10 */
 
 pub fn mk_doc_comment(
     g: &AttrIdGenerator,
@@ -657,7 +640,6 @@ pub fn mk_doc_comment(
 ) -> Attribute {
     Attribute { kind: AttrKind::DocComment(comment_kind, data), id: g.mk_attr_id(), style, span }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=mk_attr | COMPLEXITY=3 | LINES=11 */
 
 fn mk_attr(
     g: &AttrIdGenerator,
@@ -669,7 +651,6 @@ fn mk_attr(
 ) -> Attribute {
     mk_attr_from_item(g, AttrItem { unsafety, path, args, tokens: None }, None, style, span)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=mk_attr_from_item | COMPLEXITY=4 | LINES=15 */
 
 pub fn mk_attr_from_item(
     g: &AttrIdGenerator,
@@ -685,7 +666,6 @@ pub fn mk_attr_from_item(
         span,
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=mk_attr_word | COMPLEXITY=2 | LINES=12 */
 
 pub fn mk_attr_word(
     g: &AttrIdGenerator,
@@ -698,7 +678,6 @@ pub fn mk_attr_word(
     let args = AttrArgs::Empty;
     mk_attr(g, style, unsafety, path, args, span)
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=mk_attr_nested_word | COMPLEXITY=4 | LINES=22 */
 
 pub fn mk_attr_nested_word(
     g: &AttrIdGenerator,
@@ -721,7 +700,6 @@ pub fn mk_attr_nested_word(
     });
     mk_attr(g, style, unsafety, path, attr_args, span)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=mk_attr_name_value_str | COMPLEXITY=5 | LINES=21 */
 
 pub fn mk_attr_name_value_str(
     g: &AttrIdGenerator,
@@ -743,39 +721,32 @@ pub fn mk_attr_name_value_str(
     let args = AttrArgs::Eq { eq_span: span, expr };
     mk_attr(g, style, unsafety, path, args, span)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=filter_by_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn filter_by_name<A: AttributeExt>(attrs: &[A], name: Symbol) -> impl Iterator<Item = &A> {
     attrs.iter().filter(move |attr| attr.has_name(name))
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=find_by_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn find_by_name<A: AttributeExt>(attrs: &[A], name: Symbol) -> Option<&A> {
     filter_by_name(attrs, name).next()
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=first_attr_value_str_by_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn first_attr_value_str_by_name(attrs: &[impl AttributeExt], name: Symbol) -> Option<Symbol> {
     find_by_name(attrs, name).and_then(|attr| attr.value_str())
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=contains_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn contains_name(attrs: &[impl AttributeExt], name: Symbol) -> bool {
     find_by_name(attrs, name).is_some()
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=list_contains_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn list_contains_name(items: &[MetaItemInner], name: Symbol) -> bool {
     items.iter().any(|item| item.has_name(name))
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=value_str | COMPLEXITY=3 | LINES=6 */
 
 impl MetaItemLit {
     pub fn value_str(&self) -> Option<Symbol> {
         LitKind::from_token_lit(self.as_token_lit()).ok().and_then(|lit| lit.str())
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=id | COMPLEXITY=29 | LINES=85 */
 
 pub trait AttributeExt: Debug {
     fn id(&self) -> AttrId;
@@ -861,7 +832,6 @@ pub trait AttributeExt: Debug {
     /// doc).
     fn doc_resolution_scope(&self) -> Option<AttrStyle>;
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=id | COMPLEXITY=22 | LINES=74 */
 
 // FIXME(fn_delegation): use function delegation instead of manually forwarding
 

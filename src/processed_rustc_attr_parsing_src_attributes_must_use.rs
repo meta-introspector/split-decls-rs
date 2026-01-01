@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/must_use.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=24 | LINES=62 */
 use crate::rustc_complete::DiagArgValue;
 
 use crate::prelude::*;

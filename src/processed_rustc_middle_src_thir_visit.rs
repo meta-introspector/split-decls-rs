@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_middle/src/thir/visit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::{
     AdtExpr, AdtExprBase, Arm, Block, ClosureExpr, Expr, ExprKind, InlineAsmExpr, InlineAsmOperand,
     Pat, PatKind, Stmt, StmtKind, Thir,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=17 | LINES=37 */
 use crate::thir::LoopMatchMatchData;
 
 /// Every `walk_*` method uses deconstruction to access fields of structs and
@@ -42,7 +40,6 @@ pub trait Visitor<'thir, 'tcx: 'thir>: Sized {
     // You have to manually visit `ty::Const` and `mir::Const` through the
     // other `visit*` functions.
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=walk_expr | COMPLEXITY=145 | LINES=154 */
 
 pub fn walk_expr<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor: &mut V,
@@ -197,7 +194,6 @@ pub fn walk_expr<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
         Yield { value } => visitor.visit_expr(&visitor.thir()[value]),
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=walk_stmt | COMPLEXITY=17 | LINES=27 */
 
 pub fn walk_stmt<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor: &mut V,
@@ -225,7 +221,6 @@ pub fn walk_stmt<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=walk_block | COMPLEXITY=9 | LINES=14 */
 
 pub fn walk_block<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor: &mut V,
@@ -240,7 +235,6 @@ pub fn walk_block<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
         visitor.visit_expr(&visitor.thir()[*expr]);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=walk_arm | COMPLEXITY=6 | LINES=12 */
 
 pub fn walk_arm<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor: &mut V,
@@ -253,7 +247,6 @@ pub fn walk_arm<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor.visit_pat(pattern);
     visitor.visit_expr(&visitor.thir()[*body]);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=walk_pat | COMPLEXITY=2 | LINES=7 */
 
 pub fn walk_pat<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
     visitor: &mut V,
@@ -261,7 +254,6 @@ pub fn walk_pat<'thir, 'tcx: 'thir, V: Visitor<'thir, 'tcx>>(
 ) {
     for_each_immediate_subpat(pat, |p| visitor.visit_pat(p));
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=42 */
 
 /// Invokes `callback` on each immediate subpattern of `pat`, if any.
 /// A building block for assembling THIR pattern visitors.

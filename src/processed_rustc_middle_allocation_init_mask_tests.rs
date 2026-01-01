@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/allocation/init_mask/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=uninit_mask | COMPLEXITY=15 | LINES=20 */
 use super::*;
 use crate::mir::interpret::alloc_range;
 
@@ -20,7 +19,6 @@ fn uninit_mask() {
         assert!(!mask.get(Size::from_bytes(i)), "{i} should not be set");
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=materialized_block_count | COMPLEXITY=9 | LINES=8 */
 
 /// Returns the number of materialized blocks for this mask.
 fn materialized_block_count(mask: &InitMask) -> usize {
@@ -29,7 +27,6 @@ fn materialized_block_count(mask: &InitMask) -> usize {
         InitMaskBlocks::Materialized(ref blocks) => blocks.blocks.len(),
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=materialize_mask_within_range | COMPLEXITY=11 | LINES=19 */
 
 #[test]
 fn materialize_mask_within_range() {
@@ -49,7 +46,6 @@ fn materialize_mask_within_range() {
         assert!(mask.get(Size::from_bytes(i)), "{i} should be set");
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=grow_within_unused_bits_with_full_overwrite | COMPLEXITY=11 | LINES=20 */
 
 #[test]
 fn grow_within_unused_bits_with_full_overwrite() {
@@ -70,7 +66,6 @@ fn grow_within_unused_bits_with_full_overwrite() {
 
     assert_eq!(materialized_block_count(&mask), 0);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=grow_same_state_within_unused_bits | COMPLEXITY=16 | LINES=28 */
 
 // This test checks that an initmask's spare capacity is correctly used when growing within block
 // capacity. This can be fully handled without materialization.
@@ -99,7 +94,6 @@ fn grow_same_state_within_unused_bits() {
     assert_eq!(1, mask.range_as_init_chunks((0..32).into()).count());
     assert_eq!(materialized_block_count(&mask), 0);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=grow_mixed_state_within_unused_bits | COMPLEXITY=16 | LINES=31 */
 
 // This is the same test as `grow_same_state_within_unused_bits` but with both init and uninit
 // states: this forces materialization; otherwise the mask could stay lazy even when needing to
@@ -131,7 +125,6 @@ fn grow_mixed_state_within_unused_bits() {
     assert_eq!(2, mask.range_as_init_chunks((0..32).into()).count());
     assert_eq!(materialized_block_count(&mask), 1);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=grow_within_unused_bits_with_overlap | COMPLEXITY=12 | LINES=27 */
 
 // This is similar to `grow_mixed_state_within_unused_bits` to force materialization, but the range
 // to set partially overlaps the mask, so this requires a different growth + write pattern in the
@@ -159,7 +152,6 @@ fn grow_within_unused_bits_with_overlap() {
     assert_eq!(2, mask.range_as_init_chunks((0..24).into()).count());
     assert_eq!(materialized_block_count(&mask), 1);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=grow_mixed_state_within_unused_bits_and_full_overwrite | COMPLEXITY=3 | LINES=23 */
 
 // Force materialization before a full overwrite: the mask can now become lazy.
 #[test]
@@ -183,7 +175,6 @@ fn grow_mixed_state_within_unused_bits_and_full_overwrite() {
     assert_eq!(1, mask.range_as_init_chunks((0..32).into()).count());
     assert_eq!(materialized_block_count(&mask), 0);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=grow_same_state_outside_capacity | COMPLEXITY=9 | LINES=19 */
 
 // Check that growth outside the current capacity can still be lazy: if the init state doesn't
 // change, we don't need materialized blocks.

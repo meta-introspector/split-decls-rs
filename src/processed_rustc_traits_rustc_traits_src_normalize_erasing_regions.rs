@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_traits/src/normalize_erasing_regions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
 use crate::rustc_trait_selection::traits::{Normalized, ObligationCause};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 use tracing::debug;
 
 pub(crate) fn provide(p: &mut Providers) {
@@ -20,7 +17,6 @@ pub(crate) fn provide(p: &mut Providers) {
         ..*p
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_normalize_after_erasing_regions | COMPLEXITY=13 | LINES=32 */
 
 fn try_normalize_after_erasing_regions<'tcx, T: TypeFoldable<TyCtxt<'tcx>> + PartialEq + Copy>(
     tcx: TyCtxt<'tcx>,
@@ -53,7 +49,6 @@ fn try_normalize_after_erasing_regions<'tcx, T: TypeFoldable<TyCtxt<'tcx>> + Par
         Err(NoSolution) => Err(NoSolution),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=not_outlives_predicate | COMPLEXITY=8 | LINES=21 */
 
 fn not_outlives_predicate(p: ty::Predicate<'_>) -> bool {
     match p.kind().skip_binder() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/matches/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 // Code related to match expressions. These are sufficiently complex to
 // warrant their own module and submodules. :) This main module includes the
 // high-level algorithm, the submodules contain the details.
@@ -12,37 +11,27 @@ use std::mem;
 use std::sync::Arc;
 
 use itertools::{Itertools, Position};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_abi::VariantIdx;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::{BindingMode, ByRef, LetStmt, LocalSource, Node};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::region::{self, ScopeCompatibility};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::{self, *};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty, ValTree, ValTreeKind};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_pattern_analysis::constructor::RangeEnd;
 use crate::rustc_pattern_analysis::rustc::{DeconstructedPat, RustcPatCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builder::ForGuard::{self, OutsideGuard, RefWithinGuard};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::builder::expr::as_place::PlaceBuilder;
 use crate::builder::matches::user_ty::ProjectedUserTypesNode;
 use crate::builder::scope::DropKind;
 use crate::builder::{
     BlockAnd, BlockAndExtension, Builder, GuardFrame, GuardFrameLocal, LocalsForNode,
 };
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ThenElseArgs | COMPLEXITY=10 | LINES=20 */
 
 // helper functions, broken out by category:
 
@@ -59,7 +48,6 @@ struct ThenElseArgs {
     /// Forwarded to [`Builder::lower_let_expr`] when lowering [`ExprKind::Let`].
     declare_let_bindings: DeclareLetBindings,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=17 */
 
 /// Should lowering a `let` expression also declare its bindings?
 ///
@@ -77,7 +65,6 @@ pub(crate) enum DeclareLetBindings {
     /// try to lower one (e.g inside lazy-boolean-or or boolean-not).
     LetNotPermitted,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// Used by [`Builder::storage_live_binding`] and [`Builder::bind_matched_candidate_for_arm_body`]
 /// to decide whether to schedule drops.
@@ -89,7 +76,6 @@ pub(crate) enum ScheduleDrops {
     /// appropriate drops.
     No,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=then_else_break_inner | COMPLEXITY=403 | LINES=895 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Lowers a condition in a way that ensures that variables bound in any let
@@ -985,7 +971,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PatternExtraData | COMPLEXITY=3 | LINES=17 */
 
 /// Data extracted from a pattern that doesn't affect which branch is taken. Collected during
 /// pattern simplification and not mutated later.
@@ -1003,14 +988,12 @@ struct PatternExtraData<'tcx> {
     /// Whether this corresponds to a never pattern.
     is_never: bool,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> PatternExtraData<'tcx> {
     fn is_empty(&self) -> bool {
         self.bindings.is_empty() && self.ascriptions.is_empty()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[derive(Debug, Clone)]
 enum SubpatternBindings<'tcx> {
@@ -1020,7 +1003,6 @@ enum SubpatternBindings<'tcx> {
     /// order the primary bindings appear. See rust-lang/rust#142163 for more information.
     FromOrPattern,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=FlatPat | COMPLEXITY=11 | LINES=16 */
 
 /// A pattern in a form suitable for lowering the match tree, with all irrefutable
 /// patterns simplified away.
@@ -1037,7 +1019,6 @@ struct FlatPat<'tcx> {
 
     extra_data: PatternExtraData<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=13 | LINES=18 */
 
 impl<'tcx> FlatPat<'tcx> {
     /// Creates a `FlatPat` containing a simplified [`MatchPairTree`] list/forest
@@ -1056,7 +1037,6 @@ impl<'tcx> FlatPat<'tcx> {
         Self { match_pairs, extra_data }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Candidate | COMPLEXITY=80 | LINES=84 */
 
 /// Candidates are a generalization of (a) top-level match arms, and
 /// (b) sub-branches of or-patterns, allowing the match-lowering process to handle
@@ -1141,7 +1121,6 @@ struct Candidate<'tcx> {
     /// edges, see the doc for [`Builder::match_expr`].
     false_edge_start_block: Option<BasicBlock>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=24 | LINES=65 */
 
 impl<'tcx> Candidate<'tcx> {
     fn new(
@@ -1207,7 +1186,6 @@ impl<'tcx> Candidate<'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=traverse_candidate | COMPLEXITY=11 | LINES=32 */
 
 /// A depth-first traversal of the `Candidate` and all of its recursive
 /// subcandidates.
@@ -1240,7 +1218,6 @@ fn traverse_candidate<'tcx, C, T, I>(
         complete_children(context)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=Binding | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Debug)]
 struct Binding<'tcx> {
@@ -1249,7 +1226,6 @@ struct Binding<'tcx> {
     var_id: LocalVarId,
     binding_mode: BindingMode,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=Ascription | COMPLEXITY=2 | LINES=10 */
 
 /// Indicates that the type of `source` must be a subtype of the
 /// user-given type `user_ty`; this is basically a no-op but can
@@ -1260,7 +1236,6 @@ struct Ascription<'tcx> {
     annotation: CanonicalUserTypeAnnotation<'tcx>,
     variance: ty::Variance,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=24 */
 
 /// Partial summary of a [`thir::Pat`], indicating what sort of test should be
 /// performed to match/reject the pattern, and what the desired test outcome is.
@@ -1285,14 +1260,12 @@ enum TestCase<'tcx> {
     Never,
     Or { pats: Box<[FlatPat<'tcx>]> },
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=as_range | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> TestCase<'tcx> {
     fn as_range(&self) -> Option<&PatRange<'tcx>> {
         if let Self::Range(v) = self { Some(v.as_ref()) } else { None }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=34 */
 
 /// Node in a tree of "match pairs", where each pair consists of a place to be
 /// tested, and a test to perform on that place.
@@ -1327,7 +1300,6 @@ pub(crate) struct MatchPairTree<'tcx> {
     /// Span field of the pattern this node was created from.
     pattern_span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=49 */
 
 /// See [`Test`] for more.
 #[derive(Clone, Debug, PartialEq)]
@@ -1377,7 +1349,6 @@ enum TestKind<'tcx> {
     /// Assert unreachability of never patterns.
     Never,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// A test to perform to determine which [`Candidate`] matches a value.
 ///
@@ -1388,7 +1359,6 @@ pub(crate) struct Test<'tcx> {
     span: Span,
     kind: TestKind<'tcx>,
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 /// The branch to be taken after a test.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -1402,14 +1372,12 @@ enum TestBranch<'tcx> {
     /// Failure branch for tests with two possible outcomes, and "otherwise" branch for other tests.
     Failure,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=as_constant | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> TestBranch<'tcx> {
     fn as_constant(&self) -> Option<ty::Value<'tcx>> {
         if let Self::Constant(v) = self { Some(*v) } else { None }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=MatchTreeSubBranch | COMPLEXITY=14 | LINES=26 */
 
 /// `ArmHasGuard` is a wrapper around a boolean flag. It indicates whether
 /// a match arm has a guard expression attached to it.
@@ -1436,14 +1404,12 @@ struct MatchTreeSubBranch<'tcx> {
     /// Whether the sub-branch corresponds to a never pattern.
     is_never: bool,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=MatchTreeBranch | COMPLEXITY=5 | LINES=6 */
 
 /// A branch in the output of match lowering.
 #[derive(Debug, Clone)]
 struct MatchTreeBranch<'tcx> {
     sub_branches: Vec<MatchTreeSubBranch<'tcx>>,
 }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=11 */
 
 /// The result of generating MIR for a pattern-matching expression. Each input branch/arm/pattern
 /// gives rise to an output `MatchTreeBranch`. If one of the patterns matches, we branch to the
@@ -1455,7 +1421,6 @@ struct MatchTreeBranch<'tcx> {
 ///     (x, false) | (false, x) => {}
 ///     (true, true) => {}
 /// }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=13 */
 /// ```
 /// Here the first arm gives the first `MatchTreeBranch`, which has two sub-branches, one for each
 /// alternative of the or-pattern. They are kept separate because each needs to bind `x` to a
@@ -1469,7 +1434,6 @@ pub(crate) struct BuiltMatchTree<'tcx> {
     /// [`util::collect_fake_borrows`].
     fake_borrow_temps: Vec<(Place<'tcx>, Local, FakeBorrowKind)>,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=from_sub_candidate | COMPLEXITY=5 | LINES=22 */
 
 impl<'tcx> MatchTreeSubBranch<'tcx> {
     fn from_sub_candidate(
@@ -1492,7 +1456,6 @@ impl<'tcx> MatchTreeSubBranch<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from_candidate | COMPLEXITY=8 | LINES=21 */
 
 impl<'tcx> MatchTreeBranch<'tcx> {
     fn from_candidate(candidate: Candidate<'tcx>) -> Self {
@@ -1514,7 +1477,6 @@ impl<'tcx> MatchTreeBranch<'tcx> {
         MatchTreeBranch { sub_branches }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=sub_branch_bindings | COMPLEXITY=14 | LINES=31 */
 
 /// Collects the bindings for a [`MatchTreeSubBranch`], preserving the order they appear in the
 /// pattern, as though the or-alternatives chosen in this sub-branch were inlined.
@@ -1546,7 +1508,6 @@ fn sub_branch_bindings<'tcx>(
     }
     all_bindings
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=push_sub_branch_bindings | COMPLEXITY=20 | LINES=31 */
 
 /// Helper for [`sub_branch_bindings`]. Collects bindings from `candidate_bindings` into
 /// `flattened`. Bindings in or-patterns are collected recursively from `remainder`.
@@ -1578,14 +1539,12 @@ fn push_sub_branch_bindings<'c, 'tcx: 'c>(
         }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum HasMatchGuard {
     Yes,
     No,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=match_candidates | COMPLEXITY=507 | LINES=848 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// The entrypoint of the matching algorithm. Create the decision tree for the match expression,
@@ -2434,7 +2393,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         remainder_start.and(remaining_candidates)
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=bind_and_guard_matched_candidate | COMPLEXITY=310 | LINES=633 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Pat binding - used for `let` and function parameters as well.

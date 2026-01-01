@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::DiagArgFromDisplay;
 use crate::rustc_complete::codes::*;
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_generic_type_with_parentheses, code = E0214)]
@@ -16,7 +13,6 @@ pub(crate) struct GenericTypeWithParentheses {
     #[subdiagnostic]
     pub sub: Option<UseAngleBrackets>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(ast_lowering_use_angle_brackets, applicability = "maybe-incorrect")]
@@ -26,7 +22,6 @@ pub(crate) struct UseAngleBrackets {
     #[suggestion_part(code = ">")]
     pub close_param: Span,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_abi, code = E0703)]
@@ -40,7 +35,6 @@ pub(crate) struct InvalidAbi {
     #[subdiagnostic]
     pub suggestion: Option<InvalidAbiSuggestion>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_default_field_in_tuple)]
@@ -49,7 +43,6 @@ pub(crate) struct TupleStructWithDefault {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -63,7 +56,6 @@ pub(crate) struct InvalidAbiSuggestion {
     pub span: Span,
     pub suggestion: String,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_assoc_ty_parentheses)]
@@ -73,7 +65,6 @@ pub(crate) struct AssocTyParentheses {
     #[subdiagnostic]
     pub sub: AssocTyParenthesesSub,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum AssocTyParenthesesSub {
@@ -90,7 +81,6 @@ pub(crate) enum AssocTyParenthesesSub {
         close_param: Span,
     },
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_misplaced_impl_trait, code = E0562)]
@@ -100,7 +90,6 @@ pub(crate) struct MisplacedImplTrait<'a> {
     pub span: Span,
     pub position: DiagArgFromDisplay<'a>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_assoc_ty_binding_in_dyn)]
@@ -110,7 +99,6 @@ pub(crate) struct MisplacedAssocTyBinding {
     #[suggestion(code = " = impl", applicability = "maybe-incorrect", style = "verbose")]
     pub suggestion: Option<Span>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_underscore_expr_lhs_assign)]
@@ -119,7 +107,6 @@ pub(crate) struct UnderscoreExprLhsAssign {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_await_only_in_async_fn_and_blocks, code = E0728)]
@@ -130,7 +117,6 @@ pub(crate) struct AwaitOnlyInAsyncFnAndBlocks {
     #[label(ast_lowering_this_not_async)]
     pub item_span: Option<Span>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_coroutine_too_many_parameters, code = E0628)]
@@ -138,7 +124,6 @@ pub(crate) struct CoroutineTooManyParameters {
     #[primary_span]
     pub fn_decl_span: Span,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_closure_cannot_be_static, code = E0697)]
@@ -146,7 +131,6 @@ pub(crate) struct ClosureCannotBeStatic {
     #[primary_span]
     pub fn_decl_span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_functional_record_update_destructuring_assignment)]
@@ -155,7 +139,6 @@ pub(crate) struct FunctionalRecordUpdateDestructuringAssignment {
     #[suggestion(code = "", applicability = "machine-applicable")]
     pub span: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_async_coroutines_not_supported, code = E0727)]
@@ -163,7 +146,6 @@ pub(crate) struct AsyncCoroutinesNotSupported {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_inline_asm_unsupported_target, code = E0472)]
@@ -171,7 +153,6 @@ pub(crate) struct InlineAsmUnsupportedTarget {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_att_syntax_only_x86)]
@@ -179,7 +160,6 @@ pub(crate) struct AttSyntaxOnlyX86 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_abi_specified_multiple_times)]
@@ -192,7 +172,6 @@ pub(crate) struct AbiSpecifiedMultipleTimes {
     #[note]
     pub equivalent: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_clobber_abi_not_supported)]
@@ -200,7 +179,6 @@ pub(crate) struct ClobberAbiNotSupported {
     #[primary_span]
     pub abi_span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[note]
@@ -210,7 +188,6 @@ pub(crate) struct InvalidAbiClobberAbi {
     pub abi_span: Span,
     pub supported_abis: String,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_register)]
@@ -220,7 +197,6 @@ pub(crate) struct InvalidRegister<'a> {
     pub reg: Symbol,
     pub error: &'a str,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[note]
@@ -231,7 +207,6 @@ pub(crate) struct InvalidRegisterClass {
     pub reg_class: Symbol,
     pub supported_register_classes: String,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_asm_template_modifier_reg_class)]
@@ -244,7 +219,6 @@ pub(crate) struct InvalidAsmTemplateModifierRegClass {
     #[subdiagnostic]
     pub sub: InvalidAsmTemplateModifierRegClassSub,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidAsmTemplateModifierRegClassSub {
@@ -253,7 +227,6 @@ pub(crate) enum InvalidAsmTemplateModifierRegClassSub {
     #[note(ast_lowering_does_not_support_modifiers)]
     DoesNotSupportModifier { class_name: Symbol },
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_asm_template_modifier_const)]
@@ -264,7 +237,6 @@ pub(crate) struct InvalidAsmTemplateModifierConst {
     #[label(ast_lowering_argument)]
     pub op_span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_asm_template_modifier_sym)]
@@ -275,7 +247,6 @@ pub(crate) struct InvalidAsmTemplateModifierSym {
     #[label(ast_lowering_argument)]
     pub op_span: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_asm_template_modifier_label)]
@@ -286,7 +257,6 @@ pub(crate) struct InvalidAsmTemplateModifierLabel {
     #[label(ast_lowering_argument)]
     pub op_span: Span,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_register_class_only_clobber)]
@@ -295,7 +265,6 @@ pub(crate) struct RegisterClassOnlyClobber {
     pub op_span: Span,
     pub reg_class_name: Symbol,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_register_class_only_clobber_stable)]
@@ -304,7 +273,6 @@ pub(crate) struct RegisterClassOnlyClobberStable {
     pub op_span: Span,
     pub reg_class_name: Symbol,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_register_conflict)]
@@ -319,7 +287,6 @@ pub(crate) struct RegisterConflict<'a> {
     #[help]
     pub in_out: Option<Span>,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[help]
@@ -338,7 +305,6 @@ pub(crate) struct SubTupleBinding<'a> {
     pub ident_name: Symbol,
     pub ctx: &'a str,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_extra_double_dot)]
@@ -350,7 +316,6 @@ pub(crate) struct ExtraDoubleDot<'a> {
     pub prev_span: Span,
     pub ctx: &'a str,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[note]
@@ -359,7 +324,6 @@ pub(crate) struct MisplacedDoubleDot {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_match_arm_with_no_body)]
@@ -369,7 +333,6 @@ pub(crate) struct MatchArmWithNoBody {
     #[suggestion(code = " => todo!(),", applicability = "has-placeholders")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_never_pattern_with_body)]
@@ -379,7 +342,6 @@ pub(crate) struct NeverPatternWithBody {
     #[suggestion(code = "", applicability = "maybe-incorrect")]
     pub span: Span,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_never_pattern_with_guard)]
@@ -388,7 +350,6 @@ pub(crate) struct NeverPatternWithGuard {
     #[suggestion(code = "", applicability = "maybe-incorrect")]
     pub span: Span,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_arbitrary_expression_in_pattern)]
@@ -398,7 +359,6 @@ pub(crate) struct ArbitraryExpressionInPattern {
     #[note(ast_lowering_pattern_from_macro_note)]
     pub pattern_from_macro_note: bool,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_inclusive_range_with_no_end)]
@@ -406,7 +366,6 @@ pub(crate) struct InclusiveRangeWithNoEnd {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -421,7 +380,6 @@ pub(crate) struct RTNSuggestion {
     #[suggestion_part(code = "(..)")]
     pub input: Span,
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=28 */
 
 #[derive(Diagnostic)]
 pub(crate) enum BadReturnTypeNotation {
@@ -450,7 +408,6 @@ pub(crate) enum BadReturnTypeNotation {
         span: Span,
     },
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_generic_param_default_in_binder)]
@@ -458,7 +415,6 @@ pub(crate) struct GenericParamDefaultInBinder {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_async_bound_not_on_trait)]
@@ -467,7 +423,6 @@ pub(crate) struct AsyncBoundNotOnTrait {
     pub span: Span,
     pub descr: &'static str,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_async_bound_only_for_fn_traits)]
@@ -475,7 +430,6 @@ pub(crate) struct AsyncBoundOnlyForFnTraits {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_no_precise_captures_on_apit)]
@@ -483,7 +437,6 @@ pub(crate) struct NoPreciseCapturesOnApit {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_yield_in_closure)]
@@ -493,7 +446,6 @@ pub(crate) struct YieldInClosure {
     #[suggestion(code = "#[coroutine] ", applicability = "maybe-incorrect", style = "verbose")]
     pub suggestion: Option<Span>,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_invalid_legacy_const_generic_arg)]
@@ -503,7 +455,6 @@ pub(crate) struct InvalidLegacyConstGenericArg {
     #[subdiagnostic]
     pub suggestion: UseConstGenericArg,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -518,7 +469,6 @@ pub(crate) struct UseConstGenericArg {
     #[suggestion_part(code = "{other_args}")]
     pub call_args: Span,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ast_lowering_union_default_field_values)]

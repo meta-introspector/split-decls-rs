@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/int.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Module to handle integer operations.
 // This module exists because some integer types are not supported on some gcc platforms, e.g.
 // 128-bit integers on 32-bit platforms and thus require to be handled manually.
@@ -9,24 +8,15 @@
 use gccjit::{
     BinaryOp, CType, ComparisonOp, FunctionType, Location, RValue, ToRValue, Type, UnaryOp,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{CanonAbi, Endian, ExternAbi};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, BuilderMethods, OverflowOp};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{ArgAbi, ArgAttributes, FnAbi, PassMode};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::{Interner, TyKind};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builder::{Builder, ToGccComp};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{SignType, TypeReflection};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=gcc_urem | COMPLEXITY=312 | LINES=773 */
 use crate::context::CodegenCx;
 
 impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
@@ -800,7 +790,6 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         self.cx.context.new_call(self.location, bswap, &[arg])
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=gcc_int | COMPLEXITY=139 | LINES=289 */
 
 impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
     pub fn gcc_int(&self, typ: Type<'gcc>, int: i64) -> RValue<'gcc> {
@@ -1090,7 +1079,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         self.context.new_array_constructor(None, typ, &values)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=type_kind_to_gcc_type | COMPLEXITY=9 | LINES=22 */
 
 fn type_kind_to_gcc_type<I: Interner>(kind: TyKind<I>) -> CType {
     use crate::rustc_complete::ty::IntTy::*;

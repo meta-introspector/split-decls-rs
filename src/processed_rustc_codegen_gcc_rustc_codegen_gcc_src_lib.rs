@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=68 */
 /*
  * TODO(antoyo): implement equality in libgccjit based on https://zpz.github.io/blog/overloading-equality-operator-in-cpp-class-hierarchy/ (for type equality?)
  * TODO(antoyo): support #[inline] attributes.
@@ -47,38 +46,28 @@ use std::sync::atomic::AtomicBool;
 #[cfg(not(feature = "master"))]
 use std::sync::atomic::Ordering;
 use std::sync::{Arc, Mutex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use back::lto::{ThinBuffer, ThinData};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gccjit::{CType, Context, OptimizationLevel};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{TargetInfo, Version};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryFn,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::base::codegen_crate;
 use crate::rustc_codegen_ssa::target_features::cfg_target_feature;
 use crate::rustc_codegen_ssa::traits::{CodegenBackend, ExtraBackendMethods, WriteBackendMethods};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::IntoDynSyncSend;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{OptLevel, OutputFilenames};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_target::spec::RelocModel;
 use tempfile::TempDir;
@@ -87,7 +76,6 @@ use crate::back::lto::ModuleBuffer;
 use crate::gcc_util::target_cpu;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=PrintOnPanic | COMPLEXITY=9 | LINES=10 */
 
 pub struct PrintOnPanic<F: Fn() -> String>(pub F);
 
@@ -98,14 +86,12 @@ impl<F: Fn() -> String> Drop for PrintOnPanic<F> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=TargetInfo | COMPLEXITY=2 | LINES=6 */
 
 #[cfg(not(feature = "master"))]
 #[derive(Debug)]
 pub struct TargetInfo {
     supports_128bit_integers: AtomicBool,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=cpu_supports | COMPLEXITY=12 | LINES=19 */
 
 #[cfg(not(feature = "master"))]
 impl TargetInfo {
@@ -125,20 +111,17 @@ impl TargetInfo {
         false
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=LockedTargetInfo | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone)]
 pub struct LockedTargetInfo {
     info: Arc<Mutex<IntoDynSyncSend<TargetInfo>>>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl Debug for LockedTargetInfo {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         self.info.lock().expect("lock").fmt(formatter)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=cpu_supports | COMPLEXITY=4 | LINES=10 */
 
 impl LockedTargetInfo {
     fn cpu_supports(&self, feature: &str) -> bool {
@@ -149,13 +132,11 @@ impl LockedTargetInfo {
         self.info.lock().expect("lock").supports_target_dependent_type(typ)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=GccCodegenBackend | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone)]
 pub struct GccCodegenBackend {
     target_info: LockedTargetInfo,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=locale_resource | COMPLEXITY=21 | LINES=71 */
 
 impl CodegenBackend for GccCodegenBackend {
     fn locale_resource(&self) -> &'static str {
@@ -227,7 +208,6 @@ impl CodegenBackend for GccCodegenBackend {
         target_config(sess, &self.target_info)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new_context | COMPLEXITY=14 | LINES=21 */
 
 fn new_context<'gcc, 'tcx>(tcx: TyCtxt<'tcx>) -> Context<'gcc> {
     let context = Context::default();
@@ -249,7 +229,6 @@ fn new_context<'gcc, 'tcx>(tcx: TyCtxt<'tcx>) -> Context<'gcc> {
     context.add_command_line_option("-fno-asynchronous-unwind-tables");
     context
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=supports_parallel | COMPLEXITY=16 | LINES=44 */
 
 impl ExtraBackendMethods for GccCodegenBackend {
     fn supports_parallel(&self) -> bool {
@@ -294,7 +273,6 @@ impl ExtraBackendMethods for GccCodegenBackend {
         Arc::new(|_| Ok(()))
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=GccContext | COMPLEXITY=2 | LINES=10 */
 
 pub struct GccContext {
     context: Arc<SyncContext>,
@@ -305,19 +283,16 @@ pub struct GccContext {
     // Temporary directory used by LTO. We keep it here so that it's not removed before linking.
     temp_dir: Option<TempDir>,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=SyncContext | COMPLEXITY=2 | LINES=4 */
 
 struct SyncContext {
     context: Context<'static>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl SyncContext {
     fn new(context: Context<'static>) -> Self {
         Self { context }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl Deref for SyncContext {
     type Target = Context<'static>;
@@ -326,13 +301,10 @@ impl Deref for SyncContext {
         &self.context
     }
 }
-/* AST_META: AST_ID=26 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl Send for SyncContext {}
-/* AST_META: AST_ID=27 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 // FIXME(antoyo): that shouldn't be Sync. Parallel compilation is currently disabled with "CodegenBackend::supports_parallel()".
 unsafe impl Sync for SyncContext {}
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=run_and_optimize_fat_lto | COMPLEXITY=17 | LINES=70 */
 
 impl WriteBackendMethods for GccCodegenBackend {
     type Module = GccContext;
@@ -403,7 +375,6 @@ impl WriteBackendMethods for GccCodegenBackend {
         unimplemented!();
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=__rustc_codegen_backend | COMPLEXITY=9 | LINES=18 */
 
 /// This is the entrypoint for a hot plugged rustc_codegen_gccjit
 #[unsafe(no_mangle)]
@@ -422,7 +393,6 @@ pub fn __rustc_codegen_backend() -> Box<dyn CodegenBackend> {
 
     Box::new(GccCodegenBackend { target_info: LockedTargetInfo { info } })
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=to_gcc_opt_level | COMPLEXITY=11 | LINES=13 */
 
 fn to_gcc_opt_level(optlevel: Option<OptLevel>) -> OptimizationLevel {
     match optlevel {
@@ -436,7 +406,6 @@ fn to_gcc_opt_level(optlevel: Option<OptLevel>) -> OptimizationLevel {
         },
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=target_config | COMPLEXITY=15 | LINES=32 */
 
 /// Returns the features that should be set in `cfg(target_feature)`.
 fn target_config(sess: &Session, target_info: &LockedTargetInfo) -> TargetConfig {

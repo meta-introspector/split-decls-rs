@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_const_item_mutation.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=7 | LINES=18 */
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::*;
@@ -18,14 +17,12 @@ impl<'tcx> crate::MirLint<'tcx> for CheckConstItemMutation {
         checker.visit_body(body);
     }
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=ConstMutationChecker | COMPLEXITY=2 | LINES=6 */
 
 struct ConstMutationChecker<'a, 'tcx> {
     body: &'a Body<'tcx>,
     tcx: TyCtxt<'tcx>,
     target_local: Option<Local>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_const_item | COMPLEXITY=52 | LINES=70 */
 
 impl<'tcx> ConstMutationChecker<'_, 'tcx> {
     fn is_const_item(&self, local: Local) -> Option<DefId> {
@@ -96,7 +93,6 @@ impl<'tcx> ConstMutationChecker<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=44 | LINES=70 */
 
 impl<'tcx> Visitor<'tcx> for ConstMutationChecker<'_, 'tcx> {
     fn visit_statement(&mut self, stmt: &Statement<'tcx>, loc: Location) {

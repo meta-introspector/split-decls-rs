@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23 */
 // This crate contains implementations of built-in macros and other code generating facilities
 // injecting code into the crate before it is lowered to HIR.
 
@@ -23,7 +22,6 @@
 use std::sync::Arc;
 
 use crate::rustc_expand::base::{MacroExpanderFn, ResolverExpand, SyntaxExtensionKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=40 */
 use crate::rustc_expand::proc_macro::BangProcMacro;
 use crate::rustc_complete::sym;
 
@@ -32,7 +30,6 @@ use crate::deriving::*;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=register_builtin_macros | COMPLEXITY=18 | LINES=87 */
 
 pub fn register_builtin_macros(resolver: &mut dyn ResolverExpand) {
     let mut register = |name, kind| resolver.register_builtin_macro(name, kind);

@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/macro_expr_fragment_specifier_2024_migration.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Migration code for the `expr_fragment_specifier_2024` rule.
 
 use crate::rustc_complete::token::{Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=72 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::sym;
 use tracing::debug;
@@ -81,7 +77,6 @@ declare_lint! {
         reference: "Migration Guide <https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html>",
     };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_tokens | COMPLEXITY=49 | LINES=67 */
 
 declare_lint_pass!(Expr2024 => [EDITION_2024_EXPR_FRAGMENT_SPECIFIER,]);
 
@@ -149,7 +144,6 @@ impl Expr2024 {
         );
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_mac_def | COMPLEXITY=5 | LINES=6 */
 
 impl EarlyLintPass for Expr2024 {
     fn check_mac_def(&mut self, cx: &crate::EarlyContext<'_>, mc: &crate::rustc_ast::MacroDef) {

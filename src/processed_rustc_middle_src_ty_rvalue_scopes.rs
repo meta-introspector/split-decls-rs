@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/rvalue_scopes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::ItemLocalMap;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::middle::region::{ScopeCompatibility, Scope, ScopeData, ScopeTree};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=RvalueScopes | COMPLEXITY=2 | LINES=8 */
 use crate::mir::BackwardIncompatibleDropReason;
 
 /// `RvalueScopes` is a mapping from sub-expressions to _extended_ lifetime as determined by
@@ -16,7 +13,6 @@ use crate::mir::BackwardIncompatibleDropReason;
 pub struct RvalueScopes {
     map: ItemLocalMap<(Option<Scope>, Option<(Scope, BackwardIncompatibleDropReason)>)>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=49 */
 
 impl RvalueScopes {
     pub fn new() -> Self {

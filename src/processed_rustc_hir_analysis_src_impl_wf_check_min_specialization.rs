@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/impl_wf_check/min_specialization.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=27 | LINES=33 */
 // # Minimal Specialization
 //
 // This module contains the checks for sound specialization used when the
@@ -33,9 +32,7 @@
 //
 // ```ignore (illustrative)
 // impl<T> SpecExtend<T> for std::vec::IntoIter<T> { /* specialized impl */ }
-/* AST_META: AST_ID=2 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 // impl<T, I: Iterator<Item=T>> SpecExtend<T> for I { /* default impl */ }
-/* AST_META: AST_ID=3 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=9 | LINES=35 */
 // ```
 //
 // We get that the generic parameters for `impl2` are `[T, std::vec::IntoIter<T>]`.
@@ -71,7 +68,6 @@
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::traits::ObligationCause;
 use crate::rustc_infer::traits::specialization_graph::Node;
@@ -79,18 +75,13 @@ use crate::rustc_complete::ty::trait_def::TraitSpecializationKind;
 use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgs, GenericArgsRef, TyCtxt, TypeVisitableExt, TypingMode,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::traits::{self, ObligationCtxt, translate_args_with_cause, wf};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::errors::GenericArgsOnOverriddenImpl;
 use crate::{constrained_generic_params as cgp, errors};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 pub(super) fn check_min_specialization(
     tcx: TyCtxt<'_>,
@@ -101,7 +92,6 @@ pub(super) fn check_min_specialization(
     }
     Ok(())
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parent_specialization_node | COMPLEXITY=9 | LINES=19 */
 
 fn parent_specialization_node(tcx: TyCtxt<'_>, impl1_def_id: LocalDefId) -> Option<Node> {
     let trait_ref = tcx.impl_trait_ref(impl1_def_id)?;
@@ -121,7 +111,6 @@ fn parent_specialization_node(tcx: TyCtxt<'_>, impl1_def_id: LocalDefId) -> Opti
     }
     Some(impl2_node)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_always_applicable | COMPLEXITY=7 | LINES=25 */
 
 /// Check that `impl1` is a sound specialization
 #[instrument(level = "debug", skip(tcx))]
@@ -147,7 +136,6 @@ fn check_always_applicable(
         .and(check_duplicate_params(tcx, impl1_args, parent_args, span))
         .and(check_predicates(tcx, impl1_def_id, impl1_args, impl2_node, impl2_args, span))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=check_has_items | COMPLEXITY=6 | LINES=15 */
 
 fn check_has_items(
     tcx: TyCtxt<'_>,
@@ -163,7 +151,6 @@ fn check_has_items(
     }
     Ok(())
 }
-/* AST_META: AST_ID=13 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Given a specializing impl `impl1`, and the base impl `impl2`, returns two
 /// generic parameters `(S1, S2)` that equate their trait references.
@@ -173,9 +160,7 @@ fn check_has_items(
 ///
 /// ```ignore (illustrative)
 /// impl<A, B> Foo<A> for B { /* impl2 */ }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<C> Foo<Vec<C>> for C { /* impl1 */ }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_impl_args | COMPLEXITY=9 | LINES=38 */
 /// ```
 ///
 /// Would return `S1 = [C]` and `S2 = [Vec<C>, C]`.
@@ -214,7 +199,6 @@ fn get_impl_args(
     };
     Ok((impl1_args, impl2_args))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=unconstrained_parent_impl_args | COMPLEXITY=20 | LINES=49 */
 
 /// Returns a list of all of the unconstrained generic parameters of the given impl.
 ///
@@ -264,7 +248,6 @@ fn unconstrained_parent_impl_args<'tcx>(
         .map(|(_, arg)| arg)
         .collect()
 }
-/* AST_META: AST_ID=17 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Check that parameters of the derived impl don't occur more than once in the
 /// equated args of the base impl.
@@ -273,18 +256,14 @@ fn unconstrained_parent_impl_args<'tcx>(
 ///
 /// ```ignore (illustrative)
 /// impl<A> Tr for A { }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<B> Tr for (B, B) { }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 /// ```
 ///
 /// Note that only consider the unconstrained parameters of the base impl:
 ///
 /// ```ignore (illustrative)
 /// impl<S, I: IntoIterator<Item = S>> Tr<S> for I { }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<T> Tr<T> for Vec<T> { }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_duplicate_params | COMPLEXITY=9 | LINES=22 */
 /// ```
 ///
 /// The args for the parent impl here are `[T, Vec<T>]`, which repeats `T`,
@@ -307,7 +286,6 @@ fn check_duplicate_params<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Check that `'static` lifetimes are not introduced by the specializing impl.
 ///
@@ -315,9 +293,7 @@ fn check_duplicate_params<'tcx>(
 ///
 /// ```ignore (illustrative)
 /// impl<A> Tr for A { }
-/* AST_META: AST_ID=23 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl Tr for &'static i32 { }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=check_static_lifetimes | COMPLEXITY=6 | LINES=11 */
 /// ```
 fn check_static_lifetimes<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -329,7 +305,6 @@ fn check_static_lifetimes<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=check_predicates | COMPLEXITY=33 | LINES=92 */
 
 /// Check whether predicates on the specializing impl (`impl1`) are allowed.
 ///
@@ -422,7 +397,6 @@ fn check_predicates<'tcx>(
     }
     res
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=check_specialization_on | COMPLEXITY=24 | LINES=56 */
 
 #[instrument(level = "debug", skip(tcx))]
 fn check_specialization_on<'tcx>(
@@ -479,7 +453,6 @@ fn check_specialization_on<'tcx>(
             .emit()),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=trait_specialization_kind | COMPLEXITY=9 | LINES=19 */
 
 fn trait_specialization_kind<'tcx>(
     tcx: TyCtxt<'tcx>,

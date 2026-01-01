@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::borrow::Cow;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_error_messages::MultiSpan;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_type_ir::walk::TypeWalker;
 use rustc_type_ir::{self as ir, TypeFlags, WithCachedTypeInfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 
 pub use int::*;
 pub use kind::*;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=Const | COMPLEXITY=6 | LINES=19 */
 pub use valtree::*;
 
 pub type ConstKind<'tcx> = ir::ConstKind<TyCtxt<'tcx>>;
@@ -37,7 +32,6 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Const<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::Flags for Const<'tcx> {
     fn flags(&self) -> TypeFlags {
@@ -48,7 +42,6 @@ impl<'tcx> rustc_type_ir::Flags for Const<'tcx> {
         self.0.outer_exclusive_binder
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=35 | LINES=114 */
 
 impl<'tcx> Const<'tcx> {
     #[inline]
@@ -163,7 +156,6 @@ impl<'tcx> Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new_infer | COMPLEXITY=15 | LINES=38 */
 
 impl<'tcx> rustc_type_ir::inherent::Const<TyCtxt<'tcx>> for Const<'tcx> {
     fn new_infer(tcx: TyCtxt<'tcx>, infer: ty::InferConst) -> Self {
@@ -202,7 +194,6 @@ impl<'tcx> rustc_type_ir::inherent::Const<TyCtxt<'tcx>> for Const<'tcx> {
         Const::new_error(interner, guar)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_bits | COMPLEXITY=34 | LINES=84 */
 
 impl<'tcx> Const<'tcx> {
     /// Creates a constant with the given integer value and interns it.
@@ -287,7 +278,6 @@ impl<'tcx> Const<'tcx> {
         TypeWalker::new(self.into())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, TyEncodable, TyDecodable, HashStable)]
 pub enum AnonConstKind {

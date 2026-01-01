@@ -1,29 +1,21 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/proc_macro_harness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{mem, slice};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_complete::visit::{self, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, HasNodeId, NodeId, attr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::AttributeParser;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::expand::{AstFragment, ExpansionConfig};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_feature::Features;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::hygiene::AstPass;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::smallvec;
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ProcMacroDerive | COMPLEXITY=2 | LINES=10 */
 
 use crate::errors;
 
@@ -34,21 +26,18 @@ struct ProcMacroDerive {
     span: Span,
     attrs: ThinVec<Symbol>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ProcMacroDef | COMPLEXITY=2 | LINES=6 */
 
 struct ProcMacroDef {
     id: NodeId,
     function_ident: Ident,
     span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum ProcMacro {
     Derive(ProcMacroDerive),
     Attr(ProcMacroDef),
     Bang(ProcMacroDef),
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CollectProcMacros | COMPLEXITY=2 | LINES=10 */
 
 struct CollectProcMacros<'a> {
     macros: Vec<ProcMacro>,
@@ -59,7 +48,6 @@ struct CollectProcMacros<'a> {
     is_proc_macro_crate: bool,
     is_test_crate: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=inject | COMPLEXITY=13 | LINES=40 */
 
 pub fn inject(
     krate: &mut ast::Crate,
@@ -100,7 +88,6 @@ pub fn inject(
     let decls = mk_decls(&mut cx, &macros);
     krate.items.push(decls);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_not_pub_in_root | COMPLEXITY=44 | LINES=85 */
 
 impl<'a> CollectProcMacros<'a> {
     fn check_not_pub_in_root(&self, vis: &ast::Visibility, sp: Span) {
@@ -186,7 +173,6 @@ impl<'a> CollectProcMacros<'a> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=55 | LINES=91 */
 
 impl<'a> Visitor<'a> for CollectProcMacros<'a> {
     fn visit_item(&mut self, item: &'a ast::Item) {
@@ -278,7 +264,6 @@ impl<'a> Visitor<'a> for CollectProcMacros<'a> {
         self.in_root = prev_in_root;
     }
 }
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 // Creates a new module which looks like:
 //
@@ -296,7 +281,6 @@ impl<'a> Visitor<'a> for CollectProcMacros<'a> {
 //              // ...
 //          ];
 //      }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mk_decls | COMPLEXITY=27 | LINES=120 */
 fn mk_decls(cx: &mut ExtCtxt<'_>, macros: &[ProcMacro]) -> Box<ast::Item> {
     let expn_id = cx.resolver.expansion_for_ast_pass(
         DUMMY_SP,

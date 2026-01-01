@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/abstract_const.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // A subset of a mir body used for const evaluability checking.
 
 use crate::rustc_complete::ErrorGuaranteed;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::ty::{
     self, Const, EarlyBinder, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Hash, Debug, Clone, Copy, Ord, PartialOrd, PartialEq, Eq)]
 #[derive(TyDecodable, TyEncodable, HashStable, TypeVisitable, TypeFoldable)]
@@ -20,7 +17,6 @@ pub enum CastKind {
     /// thir::ExprKind::Use
     Use,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 pub enum NotConstEvaluatable {
@@ -28,14 +24,12 @@ pub enum NotConstEvaluatable {
     MentionsInfer,
     MentionsParam,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ErrorGuaranteed> for NotConstEvaluatable {
     fn from(e: ErrorGuaranteed) -> NotConstEvaluatable {
         NotConstEvaluatable::Error(e)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=expand_abstract_consts | COMPLEXITY=26 | LINES=40 */
 
 pub type BoundAbstractConst<'tcx> =
     Result<Option<EarlyBinder<'tcx, ty::Const<'tcx>>>, ErrorGuaranteed>;

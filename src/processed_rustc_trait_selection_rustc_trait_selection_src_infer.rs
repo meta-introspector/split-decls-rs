@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/infer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::fmt::Debug;
 
 use crate::rustc_complete::def_id::DefId;
@@ -10,17 +9,14 @@ use crate::rustc_complete::arena::ArenaAllocatable;
 use crate::rustc_complete::infer::canonical::{
     Canonical, CanonicalQueryInput, CanonicalQueryResponse, QueryResponse,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable, Upcast};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::instrument;
 
 use crate::infer::at::ToTrace;
 use crate::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::traits::{self, Obligation, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=can_eq | COMPLEXITY=36 | LINES=127 */
 
 #[extension(pub trait InferCtxtExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {
@@ -148,7 +144,6 @@ impl<'tcx> InferCtxt<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=enter_canonical_trait_query | COMPLEXITY=10 | LINES=35 */
 
 #[extension(pub trait InferCtxtBuilderExt<'tcx>)]
 impl<'tcx> InferCtxtBuilder<'tcx> {

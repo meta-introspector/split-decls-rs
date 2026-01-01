@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/pass_manager.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cell::RefCell;
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, MirDumper, MirPhase, RuntimePhase};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use tracing::trace;
 
 use crate::lint::lint_body;
 use crate::{errors, validate};
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 thread_local! {
     /// Maps MIR pass names to a snake case form to match profiling naming style
@@ -21,7 +17,6 @@ thread_local! {
         RefCell::new(FxHashMap::default())
     };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=to_profiler_name | COMPLEXITY=20 | LINES=24 */
 
 /// Converts a MIR pass name into a snake case form to match the profiling naming style.
 fn to_profiler_name(type_name: &'static str) -> &'static str {
@@ -46,7 +41,6 @@ fn to_profiler_name(type_name: &'static str) -> &'static str {
         }
     })
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 // A function that simplifies a pass's type_name. E.g. `Baz`, `Baz<'_>`,
 // `foo::bar::Baz`, and `foo::bar::Baz<'a, 'b>` all become `Baz`.
@@ -57,9 +51,7 @@ fn to_profiler_name(type_name: &'static str) -> &'static str {
 // this:
 // ```ignore (fragment)
 // let name = if let Some((_, tail)) = name.rsplit_once(':') { tail } else { name };
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
 // let name = if let Some((head, _)) = name.split_once('<') { head } else { name };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=26 */
 // name
 // ```
 const fn simplify_pass_type_name(name: &'static str) -> &'static str {
@@ -86,7 +78,6 @@ const fn simplify_pass_type_name(name: &'static str) -> &'static str {
         Err(_) => panic!(),
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=name | COMPLEXITY=24 | LINES=35 */
 
 /// A streamlined trait that you can implement to create a pass; the
 /// pass will be named after the type, and it will consist of a main
@@ -122,7 +113,6 @@ pub(super) trait MirPass<'tcx> {
     /// If this is `false`, `#[optimize(none)]` will disable the pass.
     fn is_required(&self) -> bool;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=name | COMPLEXITY=5 | LINES=14 */
 
 /// Just like `MirPass`, except it cannot mutate `Body`, and MIR dumping is
 /// disabled (via the `Lint` adapter).
@@ -137,7 +127,6 @@ pub(super) trait MirLint<'tcx> {
 
     fn run_lint(&self, tcx: TyCtxt<'tcx>, body: &Body<'tcx>);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=name | COMPLEXITY=12 | LINES=29 */
 
 /// An adapter for `MirLint`s that implements `MirPass`.
 #[derive(Debug, Clone)]
@@ -167,7 +156,6 @@ where
         true
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=name | COMPLEXITY=8 | LINES=23 */
 
 pub(super) struct WithMinOptLevel<T>(pub u32, pub T);
 
@@ -191,7 +179,6 @@ where
         self.1.is_required()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Whether to allow non-[required] optimizations
 ///
@@ -201,7 +188,6 @@ pub(crate) enum Optimizations {
     Suppressed,
     Allowed,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Run the sequence of passes without validating the MIR after each pass. The MIR is still
 /// validated at the end.
@@ -213,7 +199,6 @@ pub(super) fn run_passes_no_validate<'tcx>(
 ) {
     run_passes_inner(tcx, body, passes, phase_change, false, Optimizations::Allowed);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// The optional `phase_change` is applied after executing all the passes, if present
 pub(super) fn run_passes<'tcx>(
@@ -225,7 +210,6 @@ pub(super) fn run_passes<'tcx>(
 ) {
     run_passes_inner(tcx, body, passes, phase_change, true, optimizations);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=28 */
 
 pub(super) fn should_run_pass<'tcx, P>(
     tcx: TyCtxt<'tcx>,
@@ -254,7 +238,6 @@ where
     let suppressed = !pass.is_required() && matches!(optimizations, Optimizations::Suppressed);
     overridden.unwrap_or_else(|| !suppressed && pass.is_enabled(tcx.sess))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=run_passes_inner | COMPLEXITY=70 | LINES=110 */
 
 fn run_passes_inner<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -365,12 +348,10 @@ fn run_passes_inner<'tcx>(
         body.pass_count = 1;
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(super) fn validate_body<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>, when: String) {
     validate::Validator { when }.run_pass(tcx, body);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 pub(super) fn dump_mir_for_phase_change<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
     assert_eq!(body.pass_count, 0);

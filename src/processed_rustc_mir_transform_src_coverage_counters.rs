@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/counters.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::cmp::Ordering;
 
 use either::Either;
 use itertools::Itertools;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::graph::DirectedGraph;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, Expression, ExpressionId, Op};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::coverage::counters::balanced_flow::BalancedFlowGraph;
 use crate::coverage::counters::node_flow::{
     CounterTerm, NodeCounters, NodeFlowData, node_flow_data_for_balanced_graph,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::coverage::graph::{BasicCoverageBlock, CoverageGraph};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 
 /// Struct containing the results of [`prepare_bcb_counters_data`].
@@ -26,7 +21,6 @@ pub(crate) struct BcbCountersData {
     pub(crate) node_flow_data: NodeFlowData<BasicCoverageBlock>,
     pub(crate) priority_list: Vec<BasicCoverageBlock>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 /// Analyzes the coverage graph to create intermediate data structures that
 /// will later be used (during codegen) to create physical counters or counter
@@ -44,7 +38,6 @@ pub(crate) fn prepare_bcb_counters_data(graph: &CoverageGraph) -> BcbCountersDat
 
     BcbCountersData { node_flow_data, priority_list }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=make_node_flow_priority_list | COMPLEXITY=20 | LINES=35 */
 
 /// Arranges the nodes in `balanced_graph` into a list, such that earlier nodes
 /// take priority in being given a counter expression instead of a physical counter.
@@ -80,7 +73,6 @@ fn make_node_flow_priority_list(
     });
     nodes
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=49 */
 
 // Converts node counters into a form suitable for embedding into MIR.
 pub(crate) fn transcribe_counters(
@@ -130,7 +122,6 @@ pub(crate) fn transcribe_counters(
 
     new
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 /// Generates and stores coverage counter and coverage expression information
 /// associated with nodes in the coverage graph.
@@ -150,7 +141,6 @@ pub(super) struct CoverageCounters {
     /// so that we don't create unnecessary duplicates.
     expressions_memo: FxHashMap<Expression, CovTerm>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=with_num_bcbs | COMPLEXITY=26 | LINES=55 */
 
 impl CoverageCounters {
     fn with_num_bcbs(num_bcbs: usize) -> Self {

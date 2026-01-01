@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/intrinsic.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=codegen_intrinsic_call | COMPLEXITY=13 | LINES=45 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::Span;
 

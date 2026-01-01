@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/late.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // Implementation of the late lint pass.
 //
 // The late lint pass Works on HIR nodes, towards the end of analysis (after
@@ -11,12 +10,9 @@ use std::cell::Cell;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::sync::join;
 use crate::rustc_complete::def_id::{LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::LintPass;
 use crate::rustc_complete::lint::builtin::HardwiredLints;
@@ -25,7 +21,6 @@ use tracing::debug;
 
 use crate::passes::LateLintPassObject;
 use crate::{LateContext, LateLintPass, LintId, LintStore};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=unerased_lint_store | COMPLEXITY=2 | LINES=8 */
 
 /// Extract the [`LintStore`] from [`Session`].
 ///
@@ -34,12 +29,10 @@ pub fn unerased_lint_store(sess: &Session) -> &LintStore {
     let store: &dyn Any = sess.lint_store.as_deref().unwrap();
     store.downcast_ref().unwrap()
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 
 macro_rules! lint_callback { ($cx:expr, $f:ident, $($args:expr),*) => ({
     $cx.pass.$f(&$cx.context, $($args),*);
 }) }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LateContextAndPass | COMPLEXITY=4 | LINES=7 */
 
 /// Implements the AST traversal for late lint passes. `T` provides the
 /// `check_*` methods.
@@ -47,7 +40,6 @@ struct LateContextAndPass<'tcx, T: LateLintPass<'tcx>> {
     context: LateContext<'tcx>,
     pass: T,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=with_lint_attrs | COMPLEXITY=12 | LINES=38 */
 
 impl<'tcx, T: LateLintPass<'tcx>> LateContextAndPass<'tcx, T> {
     /// Merge the lints specified by any lint attributes into the
@@ -86,7 +78,6 @@ impl<'tcx, T: LateLintPass<'tcx>> LateContextAndPass<'tcx, T> {
         hir_visit::walk_mod(self, m);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=77 | LINES=224 */
 
 impl<'tcx, T: LateLintPass<'tcx>> hir_visit::Visitor<'tcx> for LateContextAndPass<'tcx, T> {
     type NestedFilter = nested_filter::All;
@@ -311,7 +302,6 @@ impl<'tcx, T: LateLintPass<'tcx>> hir_visit::Visitor<'tcx> for LateContextAndPas
         hir_visit::walk_path(self, p);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=RuntimeCombinedLateLintPass | COMPLEXITY=2 | LINES=8 */
 
 // Combines multiple lint passes into a single pass, at runtime. Each
 // `check_foo` method in `$methods` within this pass simply calls `check_foo`
@@ -320,7 +310,6 @@ impl<'tcx, T: LateLintPass<'tcx>> hir_visit::Visitor<'tcx> for LateContextAndPas
 struct RuntimeCombinedLateLintPass<'a, 'tcx> {
     passes: &'a mut [LateLintPassObject<'tcx>],
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=name | COMPLEXITY=6 | LINES=10 */
 
 #[allow(rustc::lint_pass_impl_without_macro)]
 impl LintPass for RuntimeCombinedLateLintPass<'_, '_> {
@@ -331,7 +320,6 @@ impl LintPass for RuntimeCombinedLateLintPass<'_, '_> {
         panic!()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=12 */
 
 macro_rules! impl_late_lint_pass {
     ([], [$($(#[$attr:meta])* fn $f:ident($($param:ident: $arg:ty),*);)*]) => {
@@ -344,7 +332,6 @@ macro_rules! impl_late_lint_pass {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=late_lint_mod | COMPLEXITY=16 | LINES=48 */
 
 crate::late_lint_methods!(impl_late_lint_pass, []);
 
@@ -393,7 +380,6 @@ pub fn late_lint_mod<'tcx, T: LateLintPass<'tcx> + 'tcx>(
         late_lint_mod_inner(tcx, module_def_id, context, pass);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=late_lint_mod_inner | COMPLEXITY=11 | LINES=24 */
 
 fn late_lint_mod_inner<'tcx, T: LateLintPass<'tcx>>(
     tcx: TyCtxt<'tcx>,
@@ -418,7 +404,6 @@ fn late_lint_mod_inner<'tcx, T: LateLintPass<'tcx>>(
         }
     });
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=late_lint_crate | COMPLEXITY=10 | LINES=38 */
 
 fn late_lint_crate<'tcx>(tcx: TyCtxt<'tcx>) {
     // Note: `passes` is often empty.
@@ -457,7 +442,6 @@ fn late_lint_crate<'tcx>(tcx: TyCtxt<'tcx>) {
     let pass = RuntimeCombinedLateLintPass { passes: &mut filtered_passes[..] };
     late_lint_crate_inner(tcx, context, pass);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=late_lint_crate_inner | COMPLEXITY=7 | LINES=17 */
 
 fn late_lint_crate_inner<'tcx, T: LateLintPass<'tcx>>(
     tcx: TyCtxt<'tcx>,
@@ -475,7 +459,6 @@ fn late_lint_crate_inner<'tcx, T: LateLintPass<'tcx>>(
         lint_callback!(cx, check_crate_post,);
     })
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=7 | LINES=18 */
 
 /// Performs lint checking on a crate.
 pub fn check_crate<'tcx>(tcx: TyCtxt<'tcx>) {

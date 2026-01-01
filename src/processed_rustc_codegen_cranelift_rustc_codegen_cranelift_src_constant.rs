@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/constant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Handling of `static`s, `const`s and promoted allocations
 
 use std::cmp::Ordering;
@@ -8,9 +7,7 @@ use cranelift_module::*;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::interpret::{AllocId, GlobalAlloc, Scalar, read_target_uint};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{ExistentialTraitRef, ScalarInt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::prelude::*;
 
@@ -18,14 +15,12 @@ pub(crate) struct ConstantCx {
     todo: Vec<TodoItem>,
     anon_allocs: FxHashMap<AllocId, DataId>,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum TodoItem {
     Alloc(AllocId),
     Static(DefId),
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 impl ConstantCx {
     pub(crate) fn new() -> Self {
@@ -36,7 +31,6 @@ impl ConstantCx {
         define_all_allocs(tcx, module, &mut self);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 pub(crate) fn codegen_static(tcx: TyCtxt<'_>, module: &mut dyn Module, def_id: DefId) -> DataId {
     let mut constants_cx = ConstantCx::new();
@@ -49,7 +43,6 @@ pub(crate) fn codegen_static(tcx: TyCtxt<'_>, module: &mut dyn Module, def_id: D
         false,
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=28 */
 
 pub(crate) fn codegen_tls_ref<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -78,7 +71,6 @@ pub(crate) fn codegen_tls_ref<'tcx>(
     };
     CValue::by_val(tls_ptr, layout)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 pub(crate) fn eval_mir_constant<'tcx>(
     fx: &FunctionCx<'_, '_, 'tcx>,
@@ -91,7 +83,6 @@ pub(crate) fn eval_mir_constant<'tcx>(
         .expect("erroneous constant missed by mono item collection");
     (val, cv.ty())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) fn codegen_constant_operand<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -100,7 +91,6 @@ pub(crate) fn codegen_constant_operand<'tcx>(
     let (const_val, ty) = eval_mir_constant(fx, constant);
     codegen_const_value(fx, const_val, ty)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=67 | LINES=127 */
 
 pub(crate) fn codegen_const_value<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -228,7 +218,6 @@ pub(crate) fn codegen_const_value<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pointer_for_allocation | COMPLEXITY=7 | LINES=16 */
 
 fn pointer_for_allocation<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -245,7 +234,6 @@ fn pointer_for_allocation<'tcx>(
     let global_ptr = fx.bcx.ins().global_value(fx.pointer_type, local_data_id);
     crate::pointer::Pointer::new(global_ptr)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=data_id_for_alloc_id | COMPLEXITY=2 | LINES=12 */
 
 fn data_id_for_alloc_id(
     cx: &mut ConstantCx,
@@ -258,7 +246,6 @@ fn data_id_for_alloc_id(
         .entry(alloc_id)
         .or_insert_with(|| module.declare_anonymous_data(mutability.is_mut(), false).unwrap())
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn data_id_for_vtable<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -270,7 +257,6 @@ pub(crate) fn data_id_for_vtable<'tcx>(
     let alloc_id = tcx.vtable_allocation((ty, trait_ref));
     data_id_for_alloc_id(cx, module, alloc_id, Mutability::Not)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=data_id_for_static | COMPLEXITY=44 | LINES=99 */
 
 fn data_id_for_static(
     tcx: TyCtxt<'_>,
@@ -370,7 +356,6 @@ fn data_id_for_static(
 
     data_id
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=define_all_allocs | COMPLEXITY=90 | LINES=160 */
 
 fn define_all_allocs(tcx: TyCtxt<'_>, module: &mut dyn Module, cx: &mut ConstantCx) {
     let mut done = FxHashSet::default();
@@ -531,14 +516,12 @@ fn define_all_allocs(tcx: TyCtxt<'_>, module: &mut dyn Module, cx: &mut Constant
 
     assert!(cx.todo.is_empty(), "{:?}", cx.todo);
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 
 /// Used only for intrinsic implementations that need a compile-time constant
 ///
 /// All uses of this function are a bug inside stdarch. [`eval_mir_constant`]
 /// should be used everywhere, but for some vendor intrinsics stdarch forgets
 /// to wrap the immediate argument in `const {}`, necesitating this hack to get
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=87 | LINES=115 */
 /// the correct value at compile time instead.
 pub(crate) fn mir_operand_get_const_val<'tcx>(
     fx: &FunctionCx<'_, '_, 'tcx>,

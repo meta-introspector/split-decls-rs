@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/region.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Symbol, kw, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_type_ir::RegionKind as IrRegionKind;
 pub use rustc_type_ir::RegionVid;
 use tracing::debug;
 
 use crate::ty::{self, BoundVar, TyCtxt, TypeFlags};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=Region | COMPLEXITY=5 | LINES=15 */
 
 pub type RegionKind<'tcx> = IrRegionKind<TyCtxt<'tcx>>;
 
@@ -28,7 +24,6 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Region<'tcx> {
         *self.0.0
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=10 | LINES=13 */
 
 impl<'tcx> rustc_type_ir::Flags for Region<'tcx> {
     fn flags(&self) -> TypeFlags {
@@ -42,7 +37,6 @@ impl<'tcx> rustc_type_ir::Flags for Region<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new_early_param | COMPLEXITY=29 | LINES=98 */
 
 impl<'tcx> Region<'tcx> {
     #[inline]
@@ -141,7 +135,6 @@ impl<'tcx> Region<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new_bound | COMPLEXITY=10 | LINES=22 */
 
 impl<'tcx> rustc_type_ir::inherent::Region<TyCtxt<'tcx>> for Region<'tcx> {
     fn new_bound(
@@ -164,7 +157,6 @@ impl<'tcx> rustc_type_ir::inherent::Region<TyCtxt<'tcx>> for Region<'tcx> {
         tcx.lifetimes.re_static
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=84 | LINES=160 */
 
 /// Region utilities
 impl<'tcx> Region<'tcx> {
@@ -325,7 +317,6 @@ impl<'tcx> Region<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=EarlyParamRegion | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -333,7 +324,6 @@ pub struct EarlyParamRegion {
     pub index: u32,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_named | COMPLEXITY=3 | LINES=8 */
 
 impl EarlyParamRegion {
     /// Does this early bound region have a name? Early bound regions normally
@@ -342,21 +332,18 @@ impl EarlyParamRegion {
         self.name != kw::UnderscoreLifetime
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=6 */
 
 impl rustc_type_ir::inherent::ParamLike for EarlyParamRegion {
     fn index(self) -> u32 {
         self.index
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl std::fmt::Debug for EarlyParamRegion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}/#{}", self.name, self.index)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LateParamRegion | COMPLEXITY=3 | LINES=15 */
 
 #[derive(Clone, PartialEq, Eq, Hash, TyEncodable, TyDecodable, Copy)]
 #[derive(HashStable)]
@@ -372,7 +359,6 @@ pub struct LateParamRegion {
     pub scope: DefId,
     pub kind: LateParamRegionKind,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 /// When liberating bound regions, we map their [`BoundRegionKind`]
 /// to this as we need to track the index of anonymous regions. We
@@ -402,7 +388,6 @@ pub enum LateParamRegionKind {
     /// to a closure
     ClosureEnv,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from_bound | COMPLEXITY=25 | LINES=33 */
 
 impl LateParamRegionKind {
     pub fn from_bound(var: BoundVar, br: BoundRegionKind) -> LateParamRegionKind {
@@ -436,7 +421,6 @@ impl LateParamRegionKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 
 #[derive(Clone, PartialEq, Eq, Hash, TyEncodable, TyDecodable, Copy)]
 #[derive(HashStable)]
@@ -456,7 +440,6 @@ pub enum BoundRegionKind {
     /// to a closure
     ClosureEnv,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=BoundRegion | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -464,7 +447,6 @@ pub struct BoundRegion {
     pub var: BoundVar,
     pub kind: BoundRegionKind,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=var | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundRegion {
     fn var(self) -> BoundVar {
@@ -475,7 +457,6 @@ impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundRegion {
         assert_eq!(self.kind, var.expect_region())
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=15 */
 
 impl core::fmt::Debug for BoundRegion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -491,7 +472,6 @@ impl core::fmt::Debug for BoundRegion {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_named | COMPLEXITY=19 | LINES=24 */
 
 impl BoundRegionKind {
     pub fn is_named(&self, tcx: TyCtxt<'_>) -> bool {
@@ -516,7 +496,6 @@ impl BoundRegionKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

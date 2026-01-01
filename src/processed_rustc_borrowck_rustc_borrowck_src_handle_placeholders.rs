@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/handle_placeholders.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 // Logic for lowering higher-kinded outlives constraints
 // (with placeholders and universes) and turn them into regular
 // outlives constraints.
@@ -11,25 +10,18 @@ use crate::rustc_index::IndexVec;
 use crate::rustc_infer::infer::RegionVariableOrigin;
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::ty::{RegionVid, UniverseIndex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::constraints::{ConstraintSccIndex, OutlivesConstraintSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::consumers::OutlivesConstraint;
 use crate::diagnostics::UniverseInfo;
 use crate::region_infer::values::{LivenessValues, PlaceholderIndices};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::region_infer::{ConstraintSccs, RegionDefinition, Representative, TypeTest};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::ty::VarianceDiagInfo;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
 use crate::type_check::{Locations, MirTypeckRegionConstraints};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::universal_regions::UniversalRegions;
 use crate::{BorrowckInferCtxt, NllRegionVariableOrigin};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 /// A set of outlives constraints after rewriting to remove
 /// higher-kinded constraints.
@@ -43,21 +35,18 @@ pub(crate) struct LoweredConstraints<'tcx> {
     pub(crate) universe_causes: FxIndexMap<UniverseIndex, UniverseInfo<'tcx>>,
     pub(crate) placeholder_indices: PlaceholderIndices,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<'d, 'tcx, A: scc::Annotation> SccAnnotations<'d, 'tcx, A> {
     pub(crate) fn init(definitions: &'d IndexVec<RegionVid, RegionDefinition<'tcx>>) -> Self {
         Self { scc_to_annotation: IndexVec::new(), definitions }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 /// A Visitor for SCC annotation construction.
 pub(crate) struct SccAnnotations<'d, 'tcx, A: scc::Annotation> {
     pub(crate) scc_to_annotation: IndexVec<ConstraintSccIndex, A>,
     definitions: &'d IndexVec<RegionVid, RegionDefinition<'tcx>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=14 */
 
 impl scc::Annotations<RegionVid> for SccAnnotations<'_, '_, RegionTracker> {
     fn new(&self, element: RegionVid) -> RegionTracker {
@@ -72,7 +61,6 @@ impl scc::Annotations<RegionVid> for SccAnnotations<'_, '_, RegionTracker> {
     type Ann = RegionTracker;
     type SccIdx = ConstraintSccIndex;
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 #[derive(Copy, Debug, Clone, PartialEq, Eq)]
 enum PlaceholderReachability {
@@ -90,7 +78,6 @@ enum PlaceholderReachability {
         max_placeholder: RegionVid,
     },
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=merge | COMPLEXITY=23 | LINES=38 */
 
 impl PlaceholderReachability {
     /// Merge the reachable placeholders of two graph components.
@@ -129,7 +116,6 @@ impl PlaceholderReachability {
             .is_none_or(|(max_placeholder_universe, _)| from.can_name(max_placeholder_universe))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 /// An annotation for region graph SCCs that tracks
 /// the values of its elements. This annotates a single SCC.
@@ -145,7 +131,6 @@ pub(crate) struct RegionTracker {
     /// The representative Region Variable Id for this SCC.
     pub(crate) representative: Representative,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=unnameable_placeholder | COMPLEXITY=26 | LINES=52 */
 
 impl RegionTracker {
     pub(crate) fn new(rvid: RegionVid, definition: &RegionDefinition<'_>) -> Self {
@@ -198,7 +183,6 @@ impl RegionTracker {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=merge_scc | COMPLEXITY=11 | LINES=20 */
 
 impl scc::Annotation for RegionTracker {
     fn merge_scc(self, other: Self) -> Self {
@@ -219,7 +203,6 @@ impl scc::Annotation for RegionTracker {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=35 */
 
 /// Determines if the region variable definitions contain
 /// placeholders, and compute them for later use.
@@ -255,7 +238,6 @@ pub(super) fn region_definitions<'tcx>(
     }
     (Frozen::freeze(definitions), has_placeholders)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=110 */
 
 /// This method handles placeholders by rewriting the constraint
 /// graph. For each strongly connected component in the constraint
@@ -366,7 +348,6 @@ pub(crate) fn compute_sccs_applying_placeholder_outlives_constraints<'tcx>(
         placeholder_indices,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=72 */
 
 pub(crate) fn rewrite_placeholder_outlives<'tcx>(
     sccs: &Sccs<RegionVid, ConstraintSccIndex>,

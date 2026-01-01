@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/example/subslice-patterns-const-eval.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=N(u8); | COMPLEXITY=8 | LINES=17 */
 // Based on https://github.com/rust-lang/rust/blob/c5840f9d252c2f5cc16698dbf385a29c5de3ca07/src/test/ui/array-slice-vec/subslice-patterns-const-eval-match.rs
 
 // Test that array subslice patterns are correctly handled in const evaluation.
@@ -17,21 +16,18 @@ macro_rules! n {
         [$(N($e)),*]
     }
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 // This macro has an unused variable so that it can be repeated base on the
 // number of times a repeated variable (`$e` in `z`) occurs.
 macro_rules! zed {
     ($e:expr) => { Z }
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! z {
     ($($e:expr),* $(,)?) => {
         [$(zed!($e)),*]
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 // Compare constant evaluation and runtime evaluation of a given expression.
 macro_rules! compare_evaluation {
@@ -44,7 +40,6 @@ macro_rules! compare_evaluation {
         assert_eq!(CONST_EVAL2, runtime_eval);
     }}
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 // Repeat `$test`, substituting the given macro variables with the given
 // identifiers.
@@ -55,7 +50,6 @@ macro_rules! compare_evaluation {
 //     ($name); X; Y:
 //     struct $name;
 // }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=15 */
 //
 // Expands to:
 //
@@ -71,7 +65,6 @@ macro_rules! repeat {
         $(single!($($values),+);)*
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=main | COMPLEXITY=20 | LINES=31 */
 
 fn main() {
     repeat! {

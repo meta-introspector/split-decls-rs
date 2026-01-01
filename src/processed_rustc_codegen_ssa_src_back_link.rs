@@ -1,20 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/link.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use std::collections::BTreeSet;
 use std::ffi::OsString;
 use std::fs::{File, OpenOptions, read};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{BufReader, BufWriter, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ops::{ControlFlow, Deref};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{Output, Stdio};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fmt, fs, io, mem, str};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use cc::windows_registry;
 use itertools::Itertools;
@@ -22,25 +15,19 @@ use regex::Regex;
 use rustc_arena::TypedArena;
 use crate::rustc_complete::CRATE_NODE_ID;
 use rustc_attr_parsing::{ShouldEmit, eval_config_entry};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::temp_dir::MaybeTempDir;
 use crate::rustc_complete::{DiagCtxtHandle, LintDiagnostic};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_fs_util::{TempDirBuilder, fix_windows_verbatim_for_gcc, try_canonicalize};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::NativeLibKind;
 use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::LintDiagnostic;
 use crate::rustc_metadata::fs::{METADATA_FILENAME, copy_to_stdout, emit_wrapper_file};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_metadata::{
     EncodedMetadata, NativeLibSearchFallback, find_native_static_library,
     walk_native_lib_search_dirs,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::lint::lint_level;
 use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
@@ -50,15 +37,12 @@ use crate::rustc_complete::config::{
     self, CFGuard, CrateType, DebugInfo, LinkerFeaturesCli, OutFileName, OutputFilenames,
     OutputType, PrintKind, SplitDwarfKind, Strip,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
 use crate::rustc_complete::output::{check_file_is_writeable, invalid_output_for_target, out_filename};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::search_paths::PathKind;
 /// For all the linkers we support, and information they might
 /// need out of the shared crate context before we get rid of it.
 use crate::rustc_complete::{Session, filesearch};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_target::spec::crt_objects::CrtObjects;
 use crate::rustc_target::spec::{
@@ -66,26 +50,18 @@ use crate::rustc_target::spec::{
     LinkerFeatures, LinkerFlavor, LinkerFlavorCli, Lld, PanicStrategy, RelocModel, RelroLevel,
     SanitizerSet, SplitDebuginfo,
 };
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info, warn};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::archive::{ArchiveBuilder, ArchiveBuilderBuilder};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use super::command::Command;
 use super::linker::{self, Linker};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::metadata::{MetadataPosition, create_wrapper_file};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::rpath::{self, RPathConfig};
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{apple, versioned_llvm_target};
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::base::needs_allocator_shim_for_linking;
 use crate::{
     CodegenResults, CompiledModule, CrateInfo, NativeLib, errors, looks_like_rust_object_file,
 };
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=ensure_removed | COMPLEXITY=10 | LINES=8 */
 
 pub fn ensure_removed(dcx: DiagCtxtHandle<'_>, path: &Path) {
     if let Err(e) = fs::remove_file(path) {
@@ -94,7 +70,6 @@ pub fn ensure_removed(dcx: DiagCtxtHandle<'_>, path: &Path) {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=link_binary | COMPLEXITY=106 | LINES=169 */
 
 /// Performs the linkage portion of the compilation phase. This will generate all
 /// of the requested outputs for this compilation session.
@@ -264,7 +239,6 @@ pub fn link_binary(
         }
     });
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=each_linked_rlib | COMPLEXITY=37 | LINES=47 */
 
 // Crate type is not passed when calculating the dylibs to include for LTO. In that case all
 // crate types must use the same dependency formats.
@@ -312,7 +286,6 @@ pub fn each_linked_rlib(
     }
     Ok(())
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=link_rlib | COMPLEXITY=95 | LINES=153 */
 
 /// Create an 'rlib'.
 ///
@@ -466,7 +439,6 @@ fn link_rlib<'a>(
 
     ab
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=link_staticlib | COMPLEXITY=55 | LINES=118 */
 
 /// Create a static archive.
 ///
@@ -585,7 +557,6 @@ fn link_staticlib(
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=link_dwarf_object | COMPLEXITY=46 | LINES=102 */
 
 /// Use `thorin` (rust implementation of a dwarf packaging utility) to link DWARF objects into a
 /// DWARF package.
@@ -688,7 +659,6 @@ fn link_dwarf_object(sess: &Session, cg_results: &CodegenResults, executable_out
         Err(e) => sess.dcx().emit_fatal(errors::ThorinErrorWrapper(e)),
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=LinkerOutput | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(codegen_ssa_linker_output)]
@@ -697,7 +667,6 @@ fn link_dwarf_object(sess: &Session, cg_results: &CodegenResults, executable_out
 struct LinkerOutput {
     inner: String,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=link_natively | COMPLEXITY=257 | LINES=409 */
 
 /// Create a dynamic library or executable.
 ///
@@ -1107,7 +1076,6 @@ fn link_natively(
         ab.build(out_filename);
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=strip_with_external_utility | COMPLEXITY=16 | LINES=27 */
 
 fn strip_with_external_utility(sess: &Session, util: &str, out_filename: &Path, options: &[&str]) {
     let mut cmd = Command::new(util);
@@ -1135,7 +1103,6 @@ fn strip_with_external_utility(sess: &Session, util: &str, out_filename: &Path, 
         Err(error) => sess.dcx().emit_fatal(errors::UnableToRun { util, error }),
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=escape_string | COMPLEXITY=7 | LINES=7 */
 
 fn escape_string(s: &[u8]) -> String {
     match str::from_utf8(s) {
@@ -1143,13 +1110,11 @@ fn escape_string(s: &[u8]) -> String {
         Err(_) => format!("Non-UTF-8 output: {}", s.escape_ascii()),
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=escape_linker_output | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(not(windows))]
 fn escape_linker_output(s: &[u8], _flavour: LinkerFlavor) -> String {
     escape_string(s)
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=escape_linker_output | COMPLEXITY=17 | LINES=18 */
 
 /// If the output of the msvc linker is not UTF-8 and the host is Windows,
 /// then try to convert the string from the OEM encoding.
@@ -1168,7 +1133,6 @@ fn escape_linker_output(s: &[u8], flavour: LinkerFlavor) -> String {
         },
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=54 */
 
 /// Wrappers around the Windows API.
 #[cfg(windows)]
@@ -1223,7 +1187,6 @@ mod win {
         None
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=add_sanitizer_libraries | COMPLEXITY=39 | LINES=61 */
 
 fn add_sanitizer_libraries(
     sess: &Session,
@@ -1285,7 +1248,6 @@ fn add_sanitizer_libraries(
         link_sanitizer_runtime(sess, flavor, linker, "safestack");
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=link_sanitizer_runtime | COMPLEXITY=24 | LINES=42 */
 
 fn link_sanitizer_runtime(
     sess: &Session,
@@ -1328,7 +1290,6 @@ fn link_sanitizer_runtime(
         linker.link_staticlib_by_path(&path, true);
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=ignored_for_lto | COMPLEXITY=7 | LINES=18 */
 
 /// Returns a boolean indicating whether the specified crate should be ignored
 /// during LTO.
@@ -1347,7 +1308,6 @@ pub fn ignored_for_lto(sess: &Session, info: &CrateInfo, cnum: CrateNum) -> bool
     !sess.target.no_builtins
         && (info.compiler_builtins == Some(cnum) || info.is_no_builtins.contains(&cnum))
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=linker_and_flavor | COMPLEXITY=53 | LINES=112 */
 
 /// This functions tries to determine the appropriate linker (and corresponding LinkerFlavor) to use
 pub fn linker_and_flavor(sess: &Session) -> (PathBuf, LinkerFlavor) {
@@ -1460,7 +1420,6 @@ pub fn linker_and_flavor(sess: &Session) -> (PathBuf, LinkerFlavor) {
 
     bug!("Not enough information provided to determine how to invoke the linker");
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=preserve_objects_for_their_debuginfo | COMPLEXITY=15 | LINES=26 */
 
 /// Returns a pair of boolean indicating whether we should preserve the object and
 /// dwarf object files on the filesystem for their debug information. This is often
@@ -1487,14 +1446,12 @@ fn preserve_objects_for_their_debuginfo(sess: &Session) -> (bool, bool) {
         (SplitDebuginfo::Unpacked, SplitDwarfKind::Split) => (false, true),
     }
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 enum RlibFlavor {
     Normal,
     StaticlibBase,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=print_native_static_libs | COMPLEXITY=77 | LINES=94 */
 
 fn print_native_static_libs(
     sess: &Session,
@@ -1589,7 +1546,6 @@ fn print_native_static_libs(
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=get_object_file_path | COMPLEXITY=18 | LINES=21 */
 
 fn get_object_file_path(sess: &Session, name: &str, self_contained: bool) -> PathBuf {
     let file_path = sess.target_tlib_path.dir.join(name);
@@ -1611,7 +1567,6 @@ fn get_object_file_path(sess: &Session, name: &str, self_contained: bool) -> Pat
     }
     PathBuf::from(name)
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=exec_linker | COMPLEXITY=891 | LINES=1886 */
 
 fn exec_linker(
     sess: &Session,

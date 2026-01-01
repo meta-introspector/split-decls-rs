@@ -1,42 +1,30 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt::Write;
 use std::mem;
 
 use ast::token::IdentIsRaw;
 use crate::rustc_complete::ast::*;
 use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::case::Case;
 use crate::rustc_complete::{self as ast};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, PResult, StashKey, struct_span_code_err};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edit_distance::edit_distance;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, source_map, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::diagnostics::{ConsumeClosingDelim, dummy_arg};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::ty::{AllowPlus, RecoverQPath, RecoverReturnSign};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::{
     AttrWrapper, ExpKeywordPair, ExpTokenPair, FollowedByType, ForceCollect, Parser, PathStyle,
     Recovered, Trailing, UsePreAttrPos,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{self, FnPointerCannotBeAsync, FnPointerCannotBeConst, MacroExpandsToAdtField};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{exp, fluent_generated as fluent};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=parse_crate_mod | COMPLEXITY=18 | LINES=28 */
 
 impl<'a> Parser<'a> {
     /// Parses a source module as a crate. This is the main entry point for the parser.
@@ -64,7 +52,6 @@ impl<'a> Parser<'a> {
     /// We exit once we hit `term` which can be either
     /// - EOF (for files)
     /// - `}` for mod items
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=parse_mod | COMPLEXITY=40 | LINES=60 */
     pub fn parse_mod(
         &mut self,
         term: ExpTokenPair,
@@ -125,7 +112,6 @@ impl<'a> Parser<'a> {
         let mod_spans = ModSpans { inner_span: lo.to(self.prev_token.span), inject_use_span };
         Ok((attrs, items, mod_spans))
     }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=parse_item | COMPLEXITY=4 | LINES=8 */
 }
 
 impl<'a> Parser<'a> {
@@ -134,7 +120,6 @@ impl<'a> Parser<'a> {
             FnParseMode { req_name: |_| true, context: FnContext::Free, req_body: true };
         self.parse_item_(fn_parse_mode, force_collect).map(|i| i.map(Box::new))
     }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=parse_item_ | COMPLEXITY=2 | LINES=11 */
 
     fn parse_item_(
         &mut self,
@@ -146,7 +131,6 @@ impl<'a> Parser<'a> {
         self.recover_vcs_conflict_marker();
         self.parse_item_common(attrs, true, false, fn_parse_mode, force_collect)
     }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=53 */
 
     pub(super) fn parse_item_common(
         &mut self,
@@ -200,7 +184,6 @@ impl<'a> Parser<'a> {
             Ok((None, Trailing::No, UsePreAttrPos::No))
         })
     }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=error_on_unconsumed_default | COMPLEXITY=6 | LINES=11 */
 
     /// Error in-case `default` was parsed in an in-appropriate context.
     fn error_on_unconsumed_default(&self, def: Defaultness, kind: &ItemKind) {
@@ -212,7 +195,6 @@ impl<'a> Parser<'a> {
             });
         }
     }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=parse_item_kind | COMPLEXITY=90 | LINES=138 */
 
     /// Parses one of the items allowed by the flags.
     fn parse_item_kind(
@@ -351,7 +333,6 @@ impl<'a> Parser<'a> {
         };
         Ok(Some(info))
     }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=recover_import_as_use | COMPLEXITY=10 | LINES=18 */
 
     fn recover_import_as_use(&mut self) -> PResult<'a, Option<ItemKind>> {
         let span = self.token.span;
@@ -370,7 +351,6 @@ impl<'a> Parser<'a> {
             }
         }
     }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_use_item | COMPLEXITY=13 | LINES=17 */
 
     fn parse_use_item(&mut self) -> PResult<'a, ItemKind> {
         let tree = self.parse_use_tree()?;
@@ -388,7 +368,6 @@ impl<'a> Parser<'a> {
         }
         Ok(ItemKind::Use(tree))
     }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=9 */
 
     /// When parsing a statement, would the start of a path be an item?
     pub(super) fn is_path_start_item(&mut self) -> bool {
@@ -398,20 +377,17 @@ impl<'a> Parser<'a> {
         || self.is_async_fn() // no(2015): `async::b`, yes: `async fn`
         || matches!(self.is_macro_rules_item(), IsMacroRulesItem::Yes{..}) // no: `macro_rules::b`, yes: `macro_rules! mac`
     }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=is_reuse_path_item | COMPLEXITY=4 | LINES=6 */
 
     fn is_reuse_path_item(&mut self) -> bool {
         // no: `reuse ::path` for compatibility reasons with macro invocations
         self.token.is_keyword(kw::Reuse)
             && self.look_ahead(1, |t| t.is_path_start() && *t != token::PathSep)
     }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=isnt_macro_invocation | COMPLEXITY=2 | LINES=5 */
 
     /// Are we sure this could not possibly be a macro invocation?
     fn isnt_macro_invocation(&mut self) -> bool {
         self.check_ident() && self.look_ahead(1, |t| *t != token::Bang && *t != token::PathSep)
     }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=recover_missing_kw_before_item | COMPLEXITY=1161 | LINES=1981 */
 
     /// Recover on encountering a struct, enum, or method definition where the user
     /// forgot to add the `struct`, `enum`, or `fn` keyword
@@ -2393,7 +2369,6 @@ impl<'a> Parser<'a> {
         Ok(true)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=64 */
 
 /// The parsing configuration used to parse a parameter list (see `parse_fn_params`).
 ///
@@ -2458,7 +2433,6 @@ pub(crate) struct FnParseMode {
     /// always be set to true.
     pub(super) req_body: bool,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The context in which a function is parsed.
 /// FIXME(estebank, xizheyin): Use more variants.
@@ -2471,7 +2445,6 @@ pub(crate) enum FnContext {
     /// An Impl block.
     Impl,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=parse_fn | COMPLEXITY=502 | LINES=878 */
 
 /// Parsing of functions and methods.
 impl<'a> Parser<'a> {

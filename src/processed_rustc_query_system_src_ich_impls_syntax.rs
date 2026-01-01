@@ -1,21 +1,16 @@
 // SRC: ../rust/compiler/rustc_query_system/src/ich/impls_syntax.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // This module contains `HashStable` implementations for various data types
 // from various crates in no particular order.
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, HashIgnoredAttrId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 use crate::rustc_complete::SourceFile;
 use smallvec::SmallVec;
 
 use crate::ich::StableHashingContext;
 
 impl<'ctx> crate::rustc_abi::HashStableContext for StableHashingContext<'ctx> {}
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'ctx> crate::rustc_ast::HashStableContext for StableHashingContext<'ctx> {}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=13 | LINES=24 */
 
 impl<'a> HashStable<StableHashingContext<'a>> for [hir::Attribute] {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
@@ -40,14 +35,12 @@ impl<'a> HashStable<StableHashingContext<'a>> for [hir::Attribute] {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hash_attr_id | COMPLEXITY=5 | LINES=6 */
 
 impl<'ctx> crate::rustc_hir::HashStableContext for StableHashingContext<'ctx> {
     fn hash_attr_id(&mut self, _id: &HashIgnoredAttrId, _hasher: &mut StableHasher) {
         /* we don't hash HashIgnoredAttrId, we ignore them */
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=19 | LINES=49 */
 
 impl<'a> HashStable<StableHashingContext<'a>> for SourceFile {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
@@ -97,7 +90,6 @@ impl<'a> HashStable<StableHashingContext<'a>> for SourceFile {
         cnum.hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::Features {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
@@ -107,7 +99,6 @@ impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::Feat
         self.enabled_lib_features().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::EnabledLangFeature {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
@@ -117,7 +108,6 @@ impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::Enab
         stable_since.hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::EnabledLibFeature {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {

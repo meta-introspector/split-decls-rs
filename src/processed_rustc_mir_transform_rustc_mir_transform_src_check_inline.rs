@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_inline.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Check that a body annotated with `#[rustc_force_inline]` will not fail to inline based on its
 // definition alone (irrespective of any specific caller).
 
@@ -7,7 +6,6 @@ use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::{Body, TerminatorKind};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=15 | LINES=30 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::sym;
@@ -38,7 +36,6 @@ impl<'tcx> MirLint<'tcx> for CheckForceInline {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=33 */
 
 pub(super) fn is_inline_valid_on_fn<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -72,7 +69,6 @@ pub(super) fn is_inline_valid_on_fn<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 pub(super) fn is_inline_valid_on_body<'tcx>(
     _: TyCtxt<'tcx>,

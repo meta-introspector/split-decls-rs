@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/lints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // ignore-tidy-filelength
 
 #[allow(rustc::untranslatable_diagnostic)]
@@ -10,28 +9,21 @@ use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagMessage, DiagStyledString, ElidedLifetimeInPathSubdiag,
     EmissionGuarantee, LintDiagnostic, MultiSpan, Subdiagnostic, SuggestionStyle,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::VisitorExt;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::inhabitedness::InhabitedPredicate;
 use crate::rustc_complete::ty::{Clause, PolyExistentialTraitRef, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::AmbiguityErrorDiag;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builtin::{InitError, ShorthandAssocTyCollector, TypeAliasBounds};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{OverruledAttributeSub, RequestedLevel};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::lifetime_syntax::LifetimeSyntaxCategories;
 use crate::{LateContext, fluent_generated as fluent};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // array_into_iter.rs
 #[derive(LintDiagnostic)]
@@ -44,7 +36,6 @@ pub(crate) struct ShadowedIntoIterDiag {
     #[subdiagnostic]
     pub sub: Option<ShadowedIntoIterDiagSub>,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ShadowedIntoIterDiagSub {
@@ -64,7 +55,6 @@ pub(crate) enum ShadowedIntoIterDiagSub {
         end_span: Span,
     },
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 // autorefs.rs
 #[derive(LintDiagnostic)]
@@ -81,7 +71,6 @@ pub(crate) struct ImplicitUnsafeAutorefsDiag<'a> {
     #[subdiagnostic]
     pub suggestion: ImplicitUnsafeAutorefsSuggestion,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ImplicitUnsafeAutorefsOrigin<'a> {
@@ -94,7 +83,6 @@ pub(crate) enum ImplicitUnsafeAutorefsOrigin<'a> {
     #[note(lint_overloaded_deref)]
     OverloadedDeref,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(lint_method_def)]
@@ -103,7 +91,6 @@ pub(crate) struct ImplicitUnsafeAutorefsMethodNote {
     pub def_span: Span,
     pub method_name: Symbol,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "maybe-incorrect")]
@@ -115,7 +102,6 @@ pub(crate) struct ImplicitUnsafeAutorefsSuggestion {
     #[suggestion_part(code = ")")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 // builtin.rs
 #[derive(LintDiagnostic)]
@@ -125,7 +111,6 @@ pub(crate) struct BuiltinWhileTrue {
     pub suggestion: Span,
     pub replace: String,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_non_shorthand_field_patterns)]
@@ -135,7 +120,6 @@ pub(crate) struct BuiltinNonShorthandFieldPatterns {
     pub suggestion: Span,
     pub prefix: &'static str,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=47 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum BuiltinUnsafe {
@@ -183,7 +167,6 @@ pub(crate) enum BuiltinUnsafe {
     #[note(lint_builtin_global_macro_unsafety)]
     GlobalAsm,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_missing_doc)]
@@ -191,7 +174,6 @@ pub(crate) struct BuiltinMissingDoc<'a> {
     pub article: &'a str,
     pub desc: &'a str,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_missing_copy_impl)]
@@ -201,7 +183,6 @@ pub(crate) struct BuiltinMissingDebugImpl<'a> {
     pub tcx: TyCtxt<'a>,
     pub def_id: DefId,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=7 | LINES=8 */
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for BuiltinMissingDebugImpl<'_> {
@@ -210,7 +191,6 @@ impl<'a> LintDiagnostic<'a, ()> for BuiltinMissingDebugImpl<'_> {
         diag.arg("debug", self.tcx.def_path_str(self.def_id));
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_anonymous_params)]
@@ -219,7 +199,6 @@ pub(crate) struct BuiltinAnonymousParams<'a> {
     pub suggestion: (Span, Applicability),
     pub ty_snip: &'a str,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_unused_doc_comment)]
@@ -230,7 +209,6 @@ pub(crate) struct BuiltinUnusedDocComment<'a> {
     #[subdiagnostic]
     pub sub: BuiltinUnusedDocCommentSub,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum BuiltinUnusedDocCommentSub {
@@ -239,7 +217,6 @@ pub(crate) enum BuiltinUnusedDocCommentSub {
     #[help(lint_block_help)]
     BlockHelp,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_no_mangle_generic)]
@@ -249,7 +226,6 @@ pub(crate) struct BuiltinNoMangleGeneric {
     #[suggestion(style = "short", code = "", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_const_no_mangle)]
@@ -257,7 +233,6 @@ pub(crate) struct BuiltinConstNoMangle {
     #[suggestion(code = "pub static", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_mutable_transmutes)]
@@ -272,7 +247,6 @@ pub(crate) struct BuiltinUngatedAsyncFnTrackCaller<'a> {
     pub label: Span,
     pub session: &'a Session,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=5 | LINES=12 */
 
 impl<'a> LintDiagnostic<'a, ()> for BuiltinUngatedAsyncFnTrackCaller<'_> {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -285,7 +259,6 @@ impl<'a> LintDiagnostic<'a, ()> for BuiltinUngatedAsyncFnTrackCaller<'_> {
         );
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_unreachable_pub)]
@@ -297,7 +270,6 @@ pub(crate) struct BuiltinUnreachablePub<'a> {
     #[help]
     pub help: bool,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_macro_expr_fragment_specifier_2024_migration)]
@@ -305,7 +277,6 @@ pub(crate) struct MacroExprFragment2024 {
     #[suggestion(code = "expr_2021", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct BuiltinTypeAliasBounds<'hir> {
     pub in_where_clause: bool,
@@ -315,7 +286,6 @@ pub(crate) struct BuiltinTypeAliasBounds<'hir> {
     pub preds: &'hir [hir::WherePredicate<'hir>],
     pub ty: Option<&'hir hir::Ty<'hir>>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=30 | LINES=60 */
 
 impl<'a> LintDiagnostic<'a, ()> for BuiltinTypeAliasBounds<'_> {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -376,7 +346,6 @@ impl<'a> LintDiagnostic<'a, ()> for BuiltinTypeAliasBounds<'_> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_trivial_bounds)]
@@ -384,7 +353,6 @@ pub(crate) struct BuiltinTrivialBounds<'a> {
     pub predicate_kind_name: &'a str,
     pub predicate: Clause<'a>,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_double_negations)]
@@ -394,7 +362,6 @@ pub(crate) struct BuiltinDoubleNegations {
     #[subdiagnostic]
     pub add_parens: BuiltinDoubleNegationsAddParens,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_add_parens_suggestion, applicability = "maybe-incorrect")]
@@ -404,7 +371,6 @@ pub(crate) struct BuiltinDoubleNegationsAddParens {
     #[suggestion_part(code = ")")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum BuiltinEllipsisInclusiveRangePatternsLint {
@@ -420,7 +386,6 @@ pub(crate) enum BuiltinEllipsisInclusiveRangePatternsLint {
         suggestion: Span,
     },
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_keyword_idents)]
@@ -431,7 +396,6 @@ pub(crate) struct BuiltinKeywordIdents {
     pub suggestion: Span,
     pub prefix: &'static str,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_explicit_outlives)]
@@ -440,7 +404,6 @@ pub(crate) struct BuiltinExplicitOutlives {
     #[subdiagnostic]
     pub suggestion: BuiltinExplicitOutlivesSuggestion,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion)]
@@ -450,7 +413,6 @@ pub(crate) struct BuiltinExplicitOutlivesSuggestion {
     #[applicability]
     pub applicability: Applicability,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_incomplete_features)]
@@ -461,7 +423,6 @@ pub(crate) struct BuiltinIncompleteFeatures {
     #[subdiagnostic]
     pub help: Option<BuiltinIncompleteFeaturesHelp>,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_internal_features)]
@@ -469,7 +430,6 @@ pub(crate) struct BuiltinIncompleteFeatures {
 pub(crate) struct BuiltinInternalFeatures {
     pub name: Symbol,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[help(lint_help)]
@@ -480,7 +440,6 @@ pub(crate) struct BuiltinIncompleteFeaturesHelp;
 pub(crate) struct BuiltinFeatureIssueNote {
     pub n: NonZero<u32>,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) struct BuiltinUnpermittedTypeInit<'a> {
     pub msg: DiagMessage,
@@ -489,7 +448,6 @@ pub(crate) struct BuiltinUnpermittedTypeInit<'a> {
     pub sub: BuiltinUnpermittedTypeInitSub,
     pub tcx: TyCtxt<'a>,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=11 | LINES=16 */
 
 impl<'a> LintDiagnostic<'a, ()> for BuiltinUnpermittedTypeInit<'_> {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -506,13 +464,11 @@ impl<'a> LintDiagnostic<'a, ()> for BuiltinUnpermittedTypeInit<'_> {
         self.sub.add_to_diag(diag);
     }
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 // FIXME(davidtwco): make translatable
 pub(crate) struct BuiltinUnpermittedTypeInitSub {
     pub err: InitError,
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=16 | LINES=18 */
 
 impl Subdiagnostic for BuiltinUnpermittedTypeInitSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -531,7 +487,6 @@ impl Subdiagnostic for BuiltinUnpermittedTypeInitSub {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=26 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum BuiltinClashingExtern<'a> {
@@ -558,7 +513,6 @@ pub(crate) enum BuiltinClashingExtern<'a> {
         sub: BuiltinClashingExternSub<'a>,
     },
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // FIXME(davidtwco): translatable expected/found
 pub(crate) struct BuiltinClashingExternSub<'a> {
@@ -566,7 +520,6 @@ pub(crate) struct BuiltinClashingExternSub<'a> {
     pub expected: Ty<'a>,
     pub found: Ty<'a>,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=10 */
 
 impl Subdiagnostic for BuiltinClashingExternSub<'_> {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -577,7 +530,6 @@ impl Subdiagnostic for BuiltinClashingExternSub<'_> {
         diag.note_expected_found("", expected_str, "", found_str);
     }
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_deref_nullptr)]
@@ -585,7 +537,6 @@ pub(crate) struct BuiltinDerefNullptr {
     #[label]
     pub label: Span,
 }
-/* AST_META: AST_ID=49 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 // FIXME: migrate fluent::lint::builtin_asm_labels
 
@@ -599,7 +550,6 @@ pub(crate) enum BuiltinSpecialModuleNameUsed {
     #[note]
     Main,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 // deref_into_dyn_supertrait.rs
 #[derive(LintDiagnostic)]
@@ -613,7 +563,6 @@ pub(crate) struct SupertraitAsDerefTarget<'a> {
     #[subdiagnostic]
     pub label2: Option<SupertraitAsDerefTargetLabel>,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(lint_label2)]
@@ -621,7 +570,6 @@ pub(crate) struct SupertraitAsDerefTargetLabel {
     #[primary_span]
     pub label: Span,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // enum_intrinsics_non_enums.rs
 #[derive(LintDiagnostic)]
@@ -631,7 +579,6 @@ pub(crate) struct EnumIntrinsicsMemDiscriminate<'a> {
     #[note]
     pub note: Span,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_enum_intrinsics_mem_variant)]
@@ -639,7 +586,6 @@ pub(crate) struct EnumIntrinsicsMemDiscriminate<'a> {
 pub(crate) struct EnumIntrinsicsMemVariant<'a> {
     pub ty_param: Ty<'a>,
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 // expect.rs
 #[derive(LintDiagnostic)]
@@ -650,14 +596,12 @@ pub(crate) struct Expectation {
     #[note]
     pub note: bool,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(lint_rationale)]
 pub(crate) struct ExpectationNote {
     pub rationale: Symbol,
 }
-/* AST_META: AST_ID=56 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 // ptr_nulls.rs
 #[derive(LintDiagnostic)]
@@ -678,7 +622,6 @@ pub(crate) enum UselessPtrNullChecksDiag<'a> {
     #[diag(lint_useless_ptr_null_checks_fn_ret)]
     FnRet { fn_name: Ident },
 }
-/* AST_META: AST_ID=57 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum InvalidNullArgumentsDiag {
@@ -695,7 +638,6 @@ pub(crate) enum InvalidNullArgumentsDiag {
         null_span: Span,
     },
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 // for_loops_over_fallibles.rs
 #[derive(LintDiagnostic)]
@@ -711,7 +653,6 @@ pub(crate) struct ForLoopsOverFalliblesDiag<'a> {
     #[subdiagnostic]
     pub suggestion: ForLoopsOverFalliblesSuggestion<'a>,
 }
-/* AST_META: AST_ID=59 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ForLoopsOverFalliblesLoopSub<'a> {
@@ -730,7 +671,6 @@ pub(crate) enum ForLoopsOverFalliblesLoopSub<'a> {
         var: &'a str,
     },
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(lint_use_question_mark, code = "?", applicability = "maybe-incorrect")]
@@ -738,7 +678,6 @@ pub(crate) struct ForLoopsOverFalliblesQuestionMark {
     #[primary_span]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "maybe-incorrect")]
@@ -749,7 +688,6 @@ pub(crate) struct ForLoopsOverFalliblesSuggestion<'a> {
     #[suggestion_part(code = ") = ")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=62 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UseLetUnderscoreIgnoreSuggestion {
@@ -767,7 +705,6 @@ pub(crate) enum UseLetUnderscoreIgnoreSuggestion {
         end_span: Span,
     },
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // drop_forget_useless.rs
 #[derive(LintDiagnostic)]
@@ -779,7 +716,6 @@ pub(crate) struct DropRefDiag<'a> {
     #[subdiagnostic]
     pub sugg: UseLetUnderscoreIgnoreSuggestion,
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_dropping_copy_types)]
@@ -790,7 +726,6 @@ pub(crate) struct DropCopyDiag<'a> {
     #[subdiagnostic]
     pub sugg: UseLetUnderscoreIgnoreSuggestion,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_forgetting_references)]
@@ -801,7 +736,6 @@ pub(crate) struct ForgetRefDiag<'a> {
     #[subdiagnostic]
     pub sugg: UseLetUnderscoreIgnoreSuggestion,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_forgetting_copy_types)]
@@ -812,7 +746,6 @@ pub(crate) struct ForgetCopyDiag<'a> {
     #[subdiagnostic]
     pub sugg: UseLetUnderscoreIgnoreSuggestion,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_undropped_manually_drops)]
@@ -823,7 +756,6 @@ pub(crate) struct UndroppedManuallyDropsDiag<'a> {
     #[subdiagnostic]
     pub suggestion: UndroppedManuallyDropsSuggestion,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "machine-applicable")]
@@ -833,7 +765,6 @@ pub(crate) struct UndroppedManuallyDropsSuggestion {
     #[suggestion_part(code = ")")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=69 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 // invalid_from_utf8.rs
 #[derive(LintDiagnostic)]
@@ -853,7 +784,6 @@ pub(crate) enum InvalidFromUtf8Diag {
         label: Span,
     },
 }
-/* AST_META: AST_ID=70 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=33 */
 
 // reference_casting.rs
 #[derive(LintDiagnostic)]
@@ -887,7 +817,6 @@ pub(crate) enum InvalidReferenceCastingDiag<'tcx> {
         to_size: u64,
     },
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 // map_unit_fn.rs
 #[derive(LintDiagnostic)]
@@ -903,7 +832,6 @@ pub(crate) struct MappingToUnit {
     #[suggestion(style = "verbose", code = "for_each", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // internal.rs
 #[derive(LintDiagnostic)]
@@ -913,7 +841,6 @@ pub(crate) struct DefaultHashTypesDiag<'a> {
     pub preferred: &'a str,
     pub used: Symbol,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_query_instability)]
@@ -921,7 +848,6 @@ pub(crate) struct DefaultHashTypesDiag<'a> {
 pub(crate) struct QueryInstability {
     pub query: Symbol,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_query_untracked)]
@@ -929,7 +855,6 @@ pub(crate) struct QueryInstability {
 pub(crate) struct QueryUntracked {
     pub method: Symbol,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_span_use_eq_ctxt)]
@@ -946,7 +871,6 @@ pub(crate) struct TykindKind {
     #[suggestion(code = "ty", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_tykind)]
@@ -960,7 +884,6 @@ pub(crate) struct TyQualified {
     #[suggestion(code = "{ty}", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=23 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_type_ir_inherent_usage)]
@@ -984,7 +907,6 @@ pub(crate) struct NonGlobImportTypeIrInherent {
     pub suggestion: Option<Span>,
     pub snippet: &'static str,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_lintpass_by_hand)]
@@ -1004,7 +926,6 @@ pub(crate) struct UntranslatableDiag;
 pub(crate) struct BadOptAccessDiag<'a> {
     pub msg: &'a str,
 }
-/* AST_META: AST_ID=79 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 // let_underscore.rs
 #[derive(LintDiagnostic)]
@@ -1022,14 +943,12 @@ pub(crate) enum NonBindingLet {
         sub: NonBindingLetSub,
     },
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct NonBindingLetSub {
     pub suggestion: Span,
     pub drop_fn_start_end: Option<(Span, Span)>,
     pub is_assign_desugar: bool,
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=20 | LINES=30 */
 
 impl Subdiagnostic for NonBindingLetSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1060,7 +979,6 @@ impl Subdiagnostic for NonBindingLetSub {
         }
     }
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // levels.rs
 #[derive(LintDiagnostic)]
@@ -1073,7 +991,6 @@ pub(crate) struct OverruledAttributeLint<'a> {
     #[subdiagnostic]
     pub sub: OverruledAttributeSub,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_deprecated_lint_name)]
@@ -1083,7 +1000,6 @@ pub(crate) struct DeprecatedLintName<'a> {
     pub suggestion: Span,
     pub replace: &'a str,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_deprecated_lint_name)]
@@ -1094,7 +1010,6 @@ pub(crate) struct DeprecatedLintNameFromCommandLine<'a> {
     #[subdiagnostic]
     pub requested_level: RequestedLevel<'a>,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_renamed_lint)]
@@ -1104,7 +1019,6 @@ pub(crate) struct RenamedLint<'a> {
     #[subdiagnostic]
     pub suggestion: RenamedLintSuggestion<'a>,
 }
-/* AST_META: AST_ID=86 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum RenamedLintSuggestion<'a> {
@@ -1117,7 +1031,6 @@ pub(crate) enum RenamedLintSuggestion<'a> {
     #[help(lint_help)]
     WithoutSpan { replace: &'a str },
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_renamed_lint)]
@@ -1129,7 +1042,6 @@ pub(crate) struct RenamedLintFromCommandLine<'a> {
     #[subdiagnostic]
     pub requested_level: RequestedLevel<'a>,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_removed_lint)]
@@ -1137,7 +1049,6 @@ pub(crate) struct RemovedLint<'a> {
     pub name: &'a str,
     pub reason: &'a str,
 }
-/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_removed_lint)]
@@ -1147,7 +1058,6 @@ pub(crate) struct RemovedLintFromCommandLine<'a> {
     #[subdiagnostic]
     pub requested_level: RequestedLevel<'a>,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unknown_lint)]
@@ -1156,7 +1066,6 @@ pub(crate) struct UnknownLint {
     #[subdiagnostic]
     pub suggestion: Option<UnknownLintSuggestion>,
 }
-/* AST_META: AST_ID=91 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnknownLintSuggestion {
@@ -1170,7 +1079,6 @@ pub(crate) enum UnknownLintSuggestion {
     #[help(lint_help)]
     WithoutSpan { replace: Symbol, from_rustc: bool },
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unknown_lint, code = E0602)]
@@ -1181,7 +1089,6 @@ pub(crate) struct UnknownLintFromCommandLine<'a> {
     #[subdiagnostic]
     pub requested_level: RequestedLevel<'a>,
 }
-/* AST_META: AST_ID=93 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_ignored_unless_crate_specified)]
@@ -1189,7 +1096,6 @@ pub(crate) struct IgnoredUnlessCrateSpecified<'a> {
     pub level: &'a str,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 // dangling.rs
 #[derive(LintDiagnostic)]
@@ -1207,7 +1113,6 @@ pub(crate) struct DanglingPointersFromTemporaries<'tcx> {
     #[label(lint_label_temporary)]
     pub temporary_span: Span,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_dangling_pointers_from_locals)]
@@ -1224,7 +1129,6 @@ pub(crate) struct DanglingPointersFromLocals<'tcx> {
     #[label(lint_created_at)]
     pub created_at: Option<Span>,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // multiple_supertrait_upcastable.rs
 #[derive(LintDiagnostic)]
@@ -1232,7 +1136,6 @@ pub(crate) struct DanglingPointersFromLocals<'tcx> {
 pub(crate) struct MultipleSupertraitUpcastable {
     pub ident: Ident,
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 // non_ascii_idents.rs
 #[derive(LintDiagnostic)]
@@ -1247,7 +1150,6 @@ pub(crate) struct IdentifierUncommonCodepoints {
     pub codepoints_len: usize,
     pub identifier_type: &'static str,
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_confusable_identifier_pair)]
@@ -1259,7 +1161,6 @@ pub(crate) struct ConfusableIdentifierPair {
     #[label(lint_current_use)]
     pub main_label: Span,
 }
-/* AST_META: AST_ID=99 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_mixed_script_confusables)]
@@ -1269,14 +1170,12 @@ pub(crate) struct MixedScriptConfusables {
     pub set: String,
     pub includes: String,
 }
-/* AST_META: AST_ID=100 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // non_fmt_panic.rs
 pub(crate) struct NonFmtPanicUnused {
     pub count: usize,
     pub suggestion: Option<Span>,
 }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=10 | LINES=23 */
 
 // Used because of two suggestions based on one Option<Span>
 impl<'a> LintDiagnostic<'a, ()> for NonFmtPanicUnused {
@@ -1300,7 +1199,6 @@ impl<'a> LintDiagnostic<'a, ()> for NonFmtPanicUnused {
         }
     }
 }
-/* AST_META: AST_ID=102 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_non_fmt_panic_braces)]
@@ -1310,7 +1208,6 @@ pub(crate) struct NonFmtPanicBraces {
     #[suggestion(code = "\"{{}}\", ", applicability = "machine-applicable")]
     pub suggestion: Option<Span>,
 }
-/* AST_META: AST_ID=103 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 // nonstandard_style.rs
 #[derive(LintDiagnostic)]
@@ -1321,7 +1218,6 @@ pub(crate) struct NonCamelCaseType<'a> {
     #[subdiagnostic]
     pub sub: NonCamelCaseTypeSub,
 }
-/* AST_META: AST_ID=104 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NonCamelCaseTypeSub {
@@ -1337,7 +1233,6 @@ pub(crate) enum NonCamelCaseTypeSub {
         replace: String,
     },
 }
-/* AST_META: AST_ID=105 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_non_snake_case)]
@@ -1348,7 +1243,6 @@ pub(crate) struct NonSnakeCaseDiag<'a> {
     #[subdiagnostic]
     pub sub: NonSnakeCaseDiagSub,
 }
-/* AST_META: AST_ID=106 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 pub(crate) enum NonSnakeCaseDiagSub {
     Label { span: Span },
@@ -1357,7 +1251,6 @@ pub(crate) enum NonSnakeCaseDiagSub {
     ConvertSuggestion { span: Span, suggestion: String },
     SuggestionAndNote { span: Span },
 }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=20 | LINES=38 */
 
 impl Subdiagnostic for NonSnakeCaseDiagSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1396,7 +1289,6 @@ impl Subdiagnostic for NonSnakeCaseDiagSub {
         }
     }
 }
-/* AST_META: AST_ID=108 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_non_upper_case_global)]
@@ -1408,7 +1300,6 @@ pub(crate) struct NonUpperCaseGlobal<'a> {
     #[subdiagnostic]
     pub usages: Vec<NonUpperCaseGlobalSubTool>,
 }
-/* AST_META: AST_ID=109 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NonUpperCaseGlobalSub {
@@ -1426,7 +1317,6 @@ pub(crate) enum NonUpperCaseGlobalSub {
         replace: String,
     },
 }
-/* AST_META: AST_ID=110 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1440,7 +1330,6 @@ pub(crate) struct NonUpperCaseGlobalSubTool {
     pub(crate) span: Span,
     pub(crate) replace: String,
 }
-/* AST_META: AST_ID=111 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 // noop_method_call.rs
 #[derive(LintDiagnostic)]
@@ -1459,21 +1348,18 @@ pub(crate) struct NoopMethodCallDiag<'a> {
     )]
     pub suggest_derive: Option<Span>,
 }
-/* AST_META: AST_ID=112 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_suspicious_double_ref_deref)]
 pub(crate) struct SuspiciousDoubleRefDerefDiag<'a> {
     pub ty: Ty<'a>,
 }
-/* AST_META: AST_ID=113 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_suspicious_double_ref_clone)]
 pub(crate) struct SuspiciousDoubleRefCloneDiag<'a> {
     pub ty: Ty<'a>,
 }
-/* AST_META: AST_ID=114 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 // non_local_defs.rs
 pub(crate) enum NonLocalDefinitionsDiag {
@@ -1494,7 +1380,6 @@ pub(crate) enum NonLocalDefinitionsDiag {
         cargo_update: Option<NonLocalDefinitionsCargoUpdateNote>,
     },
 }
-/* AST_META: AST_ID=115 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=40 | LINES=72 */
 
 impl<'a> LintDiagnostic<'a, ()> for NonLocalDefinitionsDiag {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -1567,7 +1452,6 @@ impl<'a> LintDiagnostic<'a, ()> for NonLocalDefinitionsDiag {
         }
     }
 }
-/* AST_META: AST_ID=116 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(lint_non_local_definitions_cargo_update)]
@@ -1576,7 +1460,6 @@ pub(crate) struct NonLocalDefinitionsCargoUpdateNote {
     pub macro_name: Symbol,
     pub crate_name: Symbol,
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // precedence.rs
 #[derive(LintDiagnostic)]
@@ -1588,7 +1471,6 @@ pub(crate) struct AmbiguousNegativeLiteralsDiag {
     #[subdiagnostic]
     pub current_behavior: AmbiguousNegativeLiteralsCurrentBehaviorSuggestion,
 }
-/* AST_META: AST_ID=118 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_negative_literal, applicability = "maybe-incorrect")]
@@ -1598,7 +1480,6 @@ pub(crate) struct AmbiguousNegativeLiteralsNegativeLiteralSuggestion {
     #[suggestion_part(code = ")")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=119 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_current_behavior, applicability = "maybe-incorrect")]
@@ -1608,7 +1489,6 @@ pub(crate) struct AmbiguousNegativeLiteralsCurrentBehaviorSuggestion {
     #[suggestion_part(code = ")")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=120 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 // pass_by_value.rs
 #[derive(LintDiagnostic)]
@@ -1618,7 +1498,6 @@ pub(crate) struct PassByValueDiag {
     #[suggestion(code = "{ty}", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=121 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // redundant_semicolon.rs
 #[derive(LintDiagnostic)]
@@ -1628,7 +1507,6 @@ pub(crate) struct RedundantSemicolonsDiag {
     #[subdiagnostic]
     pub suggestion: Option<RedundantSemicolonsSuggestion>,
 }
-/* AST_META: AST_ID=122 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(lint_redundant_semicolons_suggestion, code = "", applicability = "maybe-incorrect")]
@@ -1637,7 +1515,6 @@ pub(crate) struct RedundantSemicolonsSuggestion {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=123 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // traits.rs
 pub(crate) struct DropTraitConstraintsDiag<'a> {
@@ -1645,7 +1522,6 @@ pub(crate) struct DropTraitConstraintsDiag<'a> {
     pub tcx: TyCtxt<'a>,
     pub def_id: DefId,
 }
-/* AST_META: AST_ID=124 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=7 | LINES=9 */
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for DropTraitConstraintsDiag<'_> {
@@ -1655,13 +1531,11 @@ impl<'a> LintDiagnostic<'a, ()> for DropTraitConstraintsDiag<'_> {
         diag.arg("needs_drop", self.tcx.def_path_str(self.def_id));
     }
 }
-/* AST_META: AST_ID=125 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct DropGlue<'a> {
     pub tcx: TyCtxt<'a>,
     pub def_id: DefId,
 }
-/* AST_META: AST_ID=126 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=7 | LINES=8 */
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for DropGlue<'_> {
@@ -1670,7 +1544,6 @@ impl<'a> LintDiagnostic<'a, ()> for DropGlue<'_> {
         diag.arg("needs_drop", self.tcx.def_path_str(self.def_id));
     }
 }
-/* AST_META: AST_ID=127 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 // transmute.rs
 #[derive(LintDiagnostic)]
@@ -1684,7 +1557,6 @@ pub(crate) struct IntegerToPtrTransmutes<'tcx> {
     #[subdiagnostic]
     pub suggestion: Option<IntegerToPtrTransmutesSuggestion<'tcx>>,
 }
-/* AST_META: AST_ID=128 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum IntegerToPtrTransmutesSuggestion<'tcx> {
@@ -1714,7 +1586,6 @@ pub(crate) enum IntegerToPtrTransmutesSuggestion<'tcx> {
         start_call: Span,
     },
 }
-/* AST_META: AST_ID=129 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // types.rs
 #[derive(LintDiagnostic)]
@@ -1724,7 +1595,6 @@ pub(crate) struct RangeEndpointOutOfRange<'a> {
     #[subdiagnostic]
     pub sub: UseInclusiveRange<'a>,
 }
-/* AST_META: AST_ID=130 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=25 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UseInclusiveRange<'a> {
@@ -1750,7 +1620,6 @@ pub(crate) enum UseInclusiveRange<'a> {
         suffix: &'a str,
     },
 }
-/* AST_META: AST_ID=131 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_overflowing_bin_hex)]
@@ -1766,13 +1635,11 @@ pub(crate) struct OverflowingBinHex<'a> {
     #[subdiagnostic]
     pub sign_bit_sub: Option<OverflowingBinHexSignBitSub<'a>>,
 }
-/* AST_META: AST_ID=132 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum OverflowingBinHexSign {
     Positive,
     Negative,
 }
-/* AST_META: AST_ID=133 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=11 | LINES=14 */
 
 impl Subdiagnostic for OverflowingBinHexSign {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1787,7 +1654,6 @@ impl Subdiagnostic for OverflowingBinHexSign {
         }
     }
 }
-/* AST_META: AST_ID=134 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum OverflowingBinHexSub<'a> {
@@ -1805,7 +1671,6 @@ pub(crate) enum OverflowingBinHexSub<'a> {
     #[help(lint_help)]
     Help { suggestion_ty: &'a str },
 }
-/* AST_META: AST_ID=135 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1821,7 +1686,6 @@ pub(crate) struct OverflowingBinHexSignBitSub<'a> {
     pub uint_ty: &'a str,
     pub int_ty: &'a str,
 }
-/* AST_META: AST_ID=136 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_overflowing_int)]
@@ -1834,14 +1698,12 @@ pub(crate) struct OverflowingInt<'a> {
     #[subdiagnostic]
     pub help: Option<OverflowingIntHelp<'a>>,
 }
-/* AST_META: AST_ID=137 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(lint_help)]
 pub(crate) struct OverflowingIntHelp<'a> {
     pub suggestion_ty: &'a str,
 }
-/* AST_META: AST_ID=138 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_only_cast_u8_to_char)]
@@ -1850,7 +1712,6 @@ pub(crate) struct OnlyCastu8ToChar {
     pub span: Span,
     pub literal: u128,
 }
-/* AST_META: AST_ID=139 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_overflowing_uint)]
@@ -1861,7 +1722,6 @@ pub(crate) struct OverflowingUInt<'a> {
     pub min: u128,
     pub max: u128,
 }
-/* AST_META: AST_ID=140 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_overflowing_literal)]
@@ -1870,7 +1730,6 @@ pub(crate) struct OverflowingLiteral<'a> {
     pub ty: &'a str,
     pub lit: String,
 }
-/* AST_META: AST_ID=141 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_surrogate_char_cast)]
@@ -1878,7 +1737,6 @@ pub(crate) struct OverflowingLiteral<'a> {
 pub(crate) struct SurrogateCharCast {
     pub literal: u128,
 }
-/* AST_META: AST_ID=142 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_too_large_char_cast)]
@@ -1886,7 +1744,6 @@ pub(crate) struct SurrogateCharCast {
 pub(crate) struct TooLargeCharCast {
     pub literal: u128,
 }
-/* AST_META: AST_ID=143 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_uses_power_alignment)]
@@ -1906,7 +1763,6 @@ pub(crate) enum InvalidNanComparisons {
     #[diag(lint_invalid_nan_comparisons_lt_le_gt_ge)]
     LtLeGtGe,
 }
-/* AST_META: AST_ID=144 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidNanComparisonsSuggestion {
@@ -1926,7 +1782,6 @@ pub(crate) enum InvalidNanComparisonsSuggestion {
     #[help(lint_suggestion)]
     Spanless,
 }
-/* AST_META: AST_ID=145 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum AmbiguousWidePointerComparisons<'a> {
@@ -1949,7 +1804,6 @@ pub(crate) enum AmbiguousWidePointerComparisons<'a> {
     #[help(lint_addr_suggestion)]
     Spanless,
 }
-/* AST_META: AST_ID=146 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=21 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1971,7 +1825,6 @@ pub(crate) struct AmbiguousWidePointerComparisonsAddrMetadataSuggestion<'a> {
     #[suggestion_part(code = "{r_modifiers})")]
     pub right: Span,
 }
-/* AST_META: AST_ID=147 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=21 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1993,7 +1846,6 @@ pub(crate) struct AmbiguousWidePointerComparisonsAddrSuggestion<'a> {
     #[suggestion_part(code = "{r_modifiers})")]
     pub(crate) right: Span,
 }
-/* AST_META: AST_ID=148 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=24 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -2018,7 +1870,6 @@ pub(crate) struct AmbiguousWidePointerComparisonsCastSuggestion<'a> {
     #[suggestion_part(code = "{r_modifiers}{paren_right}.cast::<()>()")]
     pub(crate) right_after: Span,
 }
-/* AST_META: AST_ID=149 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -2038,7 +1889,6 @@ pub(crate) struct AmbiguousWidePointerComparisonsExpectSuggestion<'a> {
     #[suggestion_part(code = "{paren_right} }}")]
     pub(crate) after: Span,
 }
-/* AST_META: AST_ID=150 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum UnpredictableFunctionPointerComparisons<'a, 'tcx> {
@@ -2056,7 +1906,6 @@ pub(crate) enum UnpredictableFunctionPointerComparisons<'a, 'tcx> {
     #[note(lint_note_visit_fn_addr_eq)]
     Warn,
 }
-/* AST_META: AST_ID=151 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=37 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnpredictableFunctionPointerComparisonsSuggestion<'a, 'tcx> {
@@ -2094,7 +1943,6 @@ pub(crate) enum UnpredictableFunctionPointerComparisonsSuggestion<'a, 'tcx> {
         right: Span,
     },
 }
-/* AST_META: AST_ID=152 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct ImproperCTypes<'a> {
     pub ty: Ty<'a>,
@@ -2104,7 +1952,6 @@ pub(crate) struct ImproperCTypes<'a> {
     pub note: DiagMessage,
     pub span_note: Option<Span>,
 }
-/* AST_META: AST_ID=153 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=12 | LINES=17 */
 
 // Used because of the complexity of Option<DiagMessage>, DiagMessage, and Option<Span>
 impl<'a> LintDiagnostic<'a, ()> for ImproperCTypes<'_> {
@@ -2122,14 +1969,12 @@ impl<'a> LintDiagnostic<'a, ()> for ImproperCTypes<'_> {
         }
     }
 }
-/* AST_META: AST_ID=154 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_variant_size_differences)]
 pub(crate) struct VariantSizeDifferencesDiag {
     pub largest: u64,
 }
-/* AST_META: AST_ID=155 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_atomic_ordering_load)]
@@ -2154,7 +1999,6 @@ pub(crate) struct InvalidAtomicOrderingDiag {
     #[label]
     pub fail_order_arg_span: Span,
 }
-/* AST_META: AST_ID=156 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // unused.rs
 #[derive(LintDiagnostic)]
@@ -2166,7 +2010,6 @@ pub(crate) struct UnusedOp<'a> {
     #[subdiagnostic]
     pub suggestion: UnusedOpSuggestion,
 }
-/* AST_META: AST_ID=157 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnusedOpSuggestion {
@@ -2188,14 +2031,12 @@ pub(crate) enum UnusedOpSuggestion {
         after_span: Span,
     },
 }
-/* AST_META: AST_ID=158 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_result)]
 pub(crate) struct UnusedResult<'a> {
     pub ty: Ty<'a>,
 }
-/* AST_META: AST_ID=159 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // FIXME(davidtwco): this isn't properly translatable because of the
 // pre/post strings
@@ -2207,7 +2048,6 @@ pub(crate) struct UnusedClosure<'a> {
     pub pre: &'a str,
     pub post: &'a str,
 }
-/* AST_META: AST_ID=160 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // FIXME(davidtwco): this isn't properly translatable because of the
 // pre/post strings
@@ -2219,7 +2059,6 @@ pub(crate) struct UnusedCoroutine<'a> {
     pub pre: &'a str,
     pub post: &'a str,
 }
-/* AST_META: AST_ID=161 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // FIXME(davidtwco): this isn't properly translatable because of the pre/post
 // strings
@@ -2231,7 +2070,6 @@ pub(crate) struct UnusedDef<'a, 'b> {
     pub note: Option<Symbol>,
     pub suggestion: Option<UnusedDefSuggestion>,
 }
-/* AST_META: AST_ID=162 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 
@@ -2254,7 +2092,6 @@ pub(crate) enum UnusedDefSuggestion {
         after_span: Span,
     },
 }
-/* AST_META: AST_ID=163 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=14 | LINES=17 */
 
 // Needed because of def_path_str
 impl<'a> LintDiagnostic<'a, ()> for UnusedDef<'_, '_> {
@@ -2272,7 +2109,6 @@ impl<'a> LintDiagnostic<'a, ()> for UnusedDef<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=164 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_path_statement_drop)]
@@ -2280,7 +2116,6 @@ pub(crate) struct PathStatementDrop {
     #[subdiagnostic]
     pub sub: PathStatementDropSub,
 }
-/* AST_META: AST_ID=165 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum PathStatementDropSub {
@@ -2296,7 +2131,6 @@ pub(crate) enum PathStatementDropSub {
         span: Span,
     },
 }
-/* AST_META: AST_ID=166 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_path_statement_no_effect)]
@@ -2310,7 +2144,6 @@ pub(crate) struct UnusedDelim<'a> {
     #[subdiagnostic]
     pub suggestion: Option<UnusedDelimSuggestion>,
 }
-/* AST_META: AST_ID=167 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "machine-applicable")]
@@ -2322,14 +2155,12 @@ pub(crate) struct UnusedDelimSuggestion {
     pub end_span: Span,
     pub end_replace: &'static str,
 }
-/* AST_META: AST_ID=168 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_import_braces)]
 pub(crate) struct UnusedImportBracesDiag {
     pub node: Symbol,
 }
-/* AST_META: AST_ID=169 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_allocation)]
@@ -2342,7 +2173,6 @@ pub(crate) struct UnusedAllocationMutDiag;
 pub(crate) struct AsyncFnInTraitDiag {
     pub sugg: Option<Vec<(Span, String)>>,
 }
-/* AST_META: AST_ID=170 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=8 | LINES=10 */
 
 impl<'a> LintDiagnostic<'a, ()> for AsyncFnInTraitDiag {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -2353,7 +2183,6 @@ impl<'a> LintDiagnostic<'a, ()> for AsyncFnInTraitDiag {
         }
     }
 }
-/* AST_META: AST_ID=171 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unit_bindings)]
@@ -2361,7 +2190,6 @@ pub(crate) struct UnitBindingsDiag {
     #[label]
     pub label: Span,
 }
-/* AST_META: AST_ID=172 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum InvalidAsmLabel {
@@ -2392,7 +2220,6 @@ pub(crate) enum InvalidAsmLabel {
         span: Span,
     },
 }
-/* AST_META: AST_ID=173 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnexpectedCfgCargoHelp {
@@ -2404,7 +2231,6 @@ pub(crate) enum UnexpectedCfgCargoHelp {
     #[help(lint_unexpected_cfg_add_build_rs_println)]
     LintCfgAndBuildRs { cargo_toml_lint_cfg: String, build_rs_println: String },
 }
-/* AST_META: AST_ID=174 | TYPE=FUNCTION | NAME=cargo_toml_lint_cfg | COMPLEXITY=12 | LINES=21 */
 
 impl UnexpectedCfgCargoHelp {
     fn cargo_toml_lint_cfg(unescaped: &str) -> String {
@@ -2426,21 +2252,18 @@ impl UnexpectedCfgCargoHelp {
         }
     }
 }
-/* AST_META: AST_ID=175 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(lint_unexpected_cfg_add_cmdline_arg)]
 pub(crate) struct UnexpectedCfgRustcHelp {
     pub cmdline_arg: String,
 }
-/* AST_META: AST_ID=176 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
 
 impl UnexpectedCfgRustcHelp {
     pub(crate) fn new(unescaped: &str) -> Self {
         Self { cmdline_arg: format!("--check-cfg={unescaped}") }
     }
 }
-/* AST_META: AST_ID=177 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(lint_unexpected_cfg_from_external_macro_origin)]
@@ -2449,7 +2272,6 @@ pub(crate) struct UnexpectedCfgRustcMacroHelp {
     pub macro_kind: &'static str,
     pub macro_name: Symbol,
 }
-/* AST_META: AST_ID=178 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[note(lint_unexpected_cfg_from_external_macro_origin)]
@@ -2460,7 +2282,6 @@ pub(crate) struct UnexpectedCfgCargoMacroHelp {
     pub macro_name: Symbol,
     pub crate_name: Symbol,
 }
-/* AST_META: AST_ID=179 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unexpected_cfg_name)]
@@ -2472,7 +2293,6 @@ pub(crate) struct UnexpectedCfgName {
 
     pub name: Symbol,
 }
-/* AST_META: AST_ID=180 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=27 | LINES=116 */
 
 pub(crate) mod unexpected_cfg_name {
     use crate::rustc_complete::DiagSymbolList;
@@ -2589,7 +2409,6 @@ pub(crate) mod unexpected_cfg_name {
         },
     }
 }
-/* AST_META: AST_ID=181 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unexpected_cfg_value)]
@@ -2602,7 +2421,6 @@ pub(crate) struct UnexpectedCfgValue {
     pub has_value: bool,
     pub value: String,
 }
-/* AST_META: AST_ID=182 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=26 | LINES=114 */
 
 pub(crate) mod unexpected_cfg_value {
     use crate::rustc_complete::DiagSymbolList;
@@ -2717,7 +2535,6 @@ pub(crate) mod unexpected_cfg_value {
         Other(#[subdiagnostic] super::UnexpectedCfgCargoHelp),
     }
 }
-/* AST_META: AST_ID=183 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_macro_use_deprecated)]
@@ -2735,7 +2552,6 @@ pub(crate) struct PrivateExternCrateReexport {
     #[suggestion(code = "pub ", style = "verbose", applicability = "maybe-incorrect")]
     pub sugg: Span,
 }
-/* AST_META: AST_ID=184 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_label)]
@@ -2746,14 +2562,12 @@ pub(crate) struct UnusedLabel;
 pub(crate) struct MacroIsPrivate {
     pub ident: Ident,
 }
-/* AST_META: AST_ID=185 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_macro_definition)]
 pub(crate) struct UnusedMacroDefinition {
     pub name: Symbol,
 }
-/* AST_META: AST_ID=186 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_macro_rule_never_used)]
@@ -2761,19 +2575,16 @@ pub(crate) struct MacroRuleNeverUsed {
     pub n: usize,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=187 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct UnstableFeature {
     pub msg: DiagMessage,
 }
-/* AST_META: AST_ID=188 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=5 | LINES=6 */
 
 impl<'a> LintDiagnostic<'a, ()> for UnstableFeature {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
         diag.primary_message(self.msg);
     }
 }
-/* AST_META: AST_ID=189 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=30 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_avoid_intel_syntax)]
@@ -2804,7 +2615,6 @@ pub(crate) struct CfgAttrNoAttributes;
 pub(crate) struct MetaVariableStillRepeating {
     pub name: MacroRulesNormalizedIdent,
 }
-/* AST_META: AST_ID=190 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_metavariable_wrong_operator)]
@@ -2819,7 +2629,6 @@ pub(crate) struct DuplicateMatcherBinding;
 pub(crate) struct UnknownMacroVariable {
     pub name: MacroRulesNormalizedIdent,
 }
-/* AST_META: AST_ID=191 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_crate_dependency)]
@@ -2828,7 +2637,6 @@ pub(crate) struct UnusedCrateDependency {
     pub extern_crate: Symbol,
     pub local_crate: Symbol,
 }
-/* AST_META: AST_ID=192 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // FIXME(jdonszelmann): duplicated in rustc_attr_parsing, should be moved there completely.
 #[derive(LintDiagnostic)]
@@ -2840,7 +2648,6 @@ pub(crate) struct IllFormedAttributeInput {
     pub has_docs: bool,
     pub docs: &'static str,
 }
-/* AST_META: AST_ID=193 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unknown_diagnostic_attribute)]
@@ -2848,7 +2655,6 @@ pub(crate) struct UnknownDiagnosticAttribute {
     #[subdiagnostic]
     pub typo: Option<UnknownDiagnosticAttributeTypoSugg>,
 }
-/* AST_META: AST_ID=194 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -2862,7 +2668,6 @@ pub(crate) struct UnknownDiagnosticAttributeTypoSugg {
     pub span: Span,
     pub typo_name: Symbol,
 }
-/* AST_META: AST_ID=195 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unicode_text_flow)]
@@ -2877,7 +2682,6 @@ pub(crate) struct UnicodeTextFlow {
 
     pub num_codepoints: usize,
 }
-/* AST_META: AST_ID=196 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(lint_label_comment_char)]
@@ -2886,7 +2690,6 @@ pub(crate) struct UnicodeCharNoteSub {
     pub span: Span,
     pub c_debug: String,
 }
-/* AST_META: AST_ID=197 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "machine-applicable", style = "hidden")]
@@ -2894,7 +2697,6 @@ pub(crate) struct UnicodeTextFlowSuggestion {
     #[suggestion_part(code = "")]
     pub spans: Vec<Span>,
 }
-/* AST_META: AST_ID=198 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_abs_path_with_module)]
@@ -2902,7 +2704,6 @@ pub(crate) struct AbsPathWithModule {
     #[subdiagnostic]
     pub sugg: AbsPathWithModuleSugg,
 }
-/* AST_META: AST_ID=199 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(lint_suggestion, code = "{replacement}")]
@@ -2913,7 +2714,6 @@ pub(crate) struct AbsPathWithModuleSugg {
     pub applicability: Applicability,
     pub replacement: String,
 }
-/* AST_META: AST_ID=200 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_proc_macro_derive_resolution_fallback)]
@@ -2923,7 +2723,6 @@ pub(crate) struct ProcMacroDeriveResolutionFallback {
     pub ns_descr: &'static str,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=201 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_macro_expanded_macro_exports_accessed_by_absolute_paths)]
@@ -2931,7 +2730,6 @@ pub(crate) struct MacroExpandedMacroExportsAccessedByAbsolutePaths {
     #[note]
     pub definition: Span,
 }
-/* AST_META: AST_ID=202 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_hidden_lifetime_parameters)]
@@ -2939,7 +2737,6 @@ pub(crate) struct ElidedLifetimesInPaths {
     #[subdiagnostic]
     pub subdiag: ElidedLifetimeInPathSubdiag,
 }
-/* AST_META: AST_ID=203 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_invalid_crate_type_value)]
@@ -2947,17 +2744,14 @@ pub(crate) struct UnknownCrateTypes {
     #[subdiagnostic]
     pub sugg: Option<UnknownCrateTypesSub>,
 }
-/* AST_META: AST_ID=204 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(lint_suggestion, code = r#""{candidate}""#, applicability = "maybe-incorrect")]
-/* AST_META: AST_ID=205 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 pub(crate) struct UnknownCrateTypesSub {
     #[primary_span]
     pub span: Span,
     pub candidate: Symbol,
 }
-/* AST_META: AST_ID=206 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_imports)]
@@ -2970,7 +2764,6 @@ pub(crate) struct UnusedImports {
     pub span_snippets: DiagArgValue,
     pub num_snippets: usize,
 }
-/* AST_META: AST_ID=207 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnusedImportsSugg {
@@ -2995,7 +2788,6 @@ pub(crate) enum UnusedImportsSugg {
         num_to_remove: usize,
     },
 }
-/* AST_META: AST_ID=208 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_redundant_import)]
@@ -3005,7 +2797,6 @@ pub(crate) struct RedundantImport {
 
     pub ident: Ident,
 }
-/* AST_META: AST_ID=209 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum RedundantImportSub {
@@ -3018,7 +2809,6 @@ pub(crate) enum RedundantImportSub {
     #[label(lint_label_defined_prelude)]
     DefinedPrelude(#[primary_span] Span),
 }
-/* AST_META: AST_ID=210 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_doc_comment)]
@@ -3027,7 +2817,6 @@ pub(crate) struct UnusedDocComment {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=211 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum PatternsInFnsWithoutBody {
@@ -3042,7 +2831,6 @@ pub(crate) enum PatternsInFnsWithoutBody {
         sub: PatternsInFnsWithoutBodySub,
     },
 }
-/* AST_META: AST_ID=212 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(lint_remove_mut_from_pattern, code = "{ident}", applicability = "machine-applicable")]
@@ -3052,7 +2840,6 @@ pub(crate) struct PatternsInFnsWithoutBodySub {
 
     pub ident: Ident,
 }
-/* AST_META: AST_ID=213 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_legacy_derive_helpers)]
@@ -3060,7 +2847,6 @@ pub(crate) struct LegacyDeriveHelpers {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=214 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_or_patterns_back_compat)]
@@ -3069,7 +2855,6 @@ pub(crate) struct OrPatternsBackCompat {
     pub span: Span,
     pub suggestion: String,
 }
-/* AST_META: AST_ID=215 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_reserved_prefix)]
@@ -3081,7 +2866,6 @@ pub(crate) struct ReservedPrefix {
 
     pub prefix: String,
 }
-/* AST_META: AST_ID=216 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_raw_prefix)]
@@ -3091,7 +2875,6 @@ pub(crate) struct RawPrefix {
     #[suggestion(code = " ", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=217 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_builtin_attribute)]
@@ -3103,7 +2886,6 @@ pub(crate) struct UnusedBuiltinAttribute {
     #[suggestion(code = "", applicability = "machine-applicable", style = "tool-only")]
     pub attr_span: Span,
 }
-/* AST_META: AST_ID=218 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_trailing_semi_macro)]
@@ -3114,7 +2896,6 @@ pub(crate) struct TrailingMacro {
 
     pub name: Ident,
 }
-/* AST_META: AST_ID=219 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_break_with_label_and_loop)]
@@ -3122,7 +2903,6 @@ pub(crate) struct BreakWithLabelAndLoop {
     #[subdiagnostic]
     pub sub: BreakWithLabelAndLoopSub,
 }
-/* AST_META: AST_ID=220 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "machine-applicable")]
@@ -3132,7 +2912,6 @@ pub(crate) struct BreakWithLabelAndLoopSub {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=221 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_deprecated_where_clause_location)]
@@ -3141,7 +2920,6 @@ pub(crate) struct DeprecatedWhereClauseLocation {
     #[subdiagnostic]
     pub suggestion: DeprecatedWhereClauseLocationSugg,
 }
-/* AST_META: AST_ID=222 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum DeprecatedWhereClauseLocationSugg {
@@ -3160,7 +2938,6 @@ pub(crate) enum DeprecatedWhereClauseLocationSugg {
         span: Span,
     },
 }
-/* AST_META: AST_ID=223 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_missing_unsafe_on_extern)]
@@ -3168,7 +2945,6 @@ pub(crate) struct MissingUnsafeOnExtern {
     #[suggestion(code = "unsafe ", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=224 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_single_use_lifetime)]
@@ -3182,7 +2958,6 @@ pub(crate) struct SingleUseLifetime {
 
     pub ident: Ident,
 }
-/* AST_META: AST_ID=225 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "machine-applicable")]
@@ -3194,7 +2969,6 @@ pub(crate) struct SingleUseLifetimeSugg {
 
     pub replace_lt: String,
 }
-/* AST_META: AST_ID=226 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_lifetime)]
@@ -3204,7 +2978,6 @@ pub(crate) struct UnusedLifetime {
 
     pub ident: Ident,
 }
-/* AST_META: AST_ID=227 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_named_argument_used_positionally)]
@@ -3219,7 +2992,6 @@ pub(crate) struct NamedArgumentUsedPositionally {
     pub name: String,
     pub named_arg_name: String,
 }
-/* AST_META: AST_ID=228 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_byte_slice_in_packed_struct_with_derive)]
@@ -3228,7 +3000,6 @@ pub(crate) struct ByteSliceInPackedStructWithDerive {
     // FIXME: make this translatable
     pub ty: String,
 }
-/* AST_META: AST_ID=229 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unused_extern_crate)]
@@ -3238,7 +3009,6 @@ pub(crate) struct UnusedExternCrate {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub removal_span: Span,
 }
-/* AST_META: AST_ID=230 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_extern_crate_not_idiomatic)]
@@ -3248,13 +3018,11 @@ pub(crate) struct ExternCrateNotIdiomatic {
 
     pub code: &'static str,
 }
-/* AST_META: AST_ID=231 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 // FIXME: make this translatable
 pub(crate) struct AmbiguousGlobImports {
     pub ambiguity: AmbiguityErrorDiag,
 }
-/* AST_META: AST_ID=232 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, G: EmissionGuarantee> LintDiagnostic<'a, G> for AmbiguousGlobImports {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
@@ -3262,7 +3030,6 @@ impl<'a, G: EmissionGuarantee> LintDiagnostic<'a, G> for AmbiguousGlobImports {
         crate::rustc_errors::report_ambiguity_error(diag, self.ambiguity);
     }
 }
-/* AST_META: AST_ID=233 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_ambiguous_glob_reexport)]
@@ -3276,7 +3043,6 @@ pub(crate) struct AmbiguousGlobReexports {
     // FIXME: make this translatable
     pub namespace: String,
 }
-/* AST_META: AST_ID=234 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_hidden_glob_reexport)]
@@ -3290,7 +3056,6 @@ pub(crate) struct HiddenGlobReexports {
     // FIXME: make this translatable
     pub namespace: String,
 }
-/* AST_META: AST_ID=235 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_reexport_private_dependency)]
@@ -3299,7 +3064,6 @@ pub(crate) struct ReexportPrivateDependency {
     pub kind: String,
     pub krate: Symbol,
 }
-/* AST_META: AST_ID=236 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unnecessary_qualification)]
@@ -3307,7 +3071,6 @@ pub(crate) struct UnusedQualifications {
     #[suggestion(style = "verbose", code = "", applicability = "machine-applicable")]
     pub removal_span: Span,
 }
-/* AST_META: AST_ID=237 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_associated_const_elided_lifetime)]
@@ -3320,7 +3083,6 @@ pub(crate) struct AssociatedConstElidedLifetime {
     #[note]
     pub lifetimes_in_scope: MultiSpan,
 }
-/* AST_META: AST_ID=238 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_redundant_import_visibility)]
@@ -3333,7 +3095,6 @@ pub(crate) struct RedundantImportVisibility {
     pub import_vis: String,
     pub max_vis: String,
 }
-/* AST_META: AST_ID=239 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unsafe_attr_outside_unsafe)]
@@ -3343,7 +3104,6 @@ pub(crate) struct UnsafeAttrOutsideUnsafe {
     #[subdiagnostic]
     pub suggestion: UnsafeAttrOutsideUnsafeSuggestion,
 }
-/* AST_META: AST_ID=240 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -3356,7 +3116,6 @@ pub(crate) struct UnsafeAttrOutsideUnsafeSuggestion {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=241 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_out_of_scope_macro_calls)]
@@ -3367,7 +3126,6 @@ pub(crate) struct OutOfScopeMacroCalls {
     pub path: String,
     pub location: String,
 }
-/* AST_META: AST_ID=242 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_static_mut_refs_lint)]
@@ -3382,7 +3140,6 @@ pub(crate) struct RefOfMutStatic<'a> {
     #[note(lint_mut_note)]
     pub mut_note: bool,
 }
-/* AST_META: AST_ID=243 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MutRefSugg {
@@ -3401,12 +3158,10 @@ pub(crate) enum MutRefSugg {
         span: Span,
     },
 }
-/* AST_META: AST_ID=244 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_unqualified_local_imports)]
 pub(crate) struct UnqualifiedLocalImportsDiag {}
-/* AST_META: AST_ID=245 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_reserved_string)]
@@ -3414,7 +3169,6 @@ pub(crate) struct ReservedString {
     #[suggestion(code = " ", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=246 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_reserved_multihash)]
@@ -3422,7 +3176,6 @@ pub(crate) struct ReservedMultihash {
     #[suggestion(code = " ", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=247 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 pub(crate) struct MismatchedLifetimeSyntaxes {
@@ -3431,7 +3184,6 @@ pub(crate) struct MismatchedLifetimeSyntaxes {
 
     pub suggestions: Vec<MismatchedLifetimeSyntaxesSuggestion>,
 }
-/* AST_META: AST_ID=248 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=50 | LINES=60 */
 
 impl<'a, G: EmissionGuarantee> LintDiagnostic<'a, G> for MismatchedLifetimeSyntaxes {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
@@ -3492,7 +3244,6 @@ impl<'a, G: EmissionGuarantee> LintDiagnostic<'a, G> for MismatchedLifetimeSynta
         }
     }
 }
-/* AST_META: AST_ID=249 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Debug)]
 pub(crate) enum MismatchedLifetimeSyntaxesSuggestion {
@@ -3513,7 +3264,6 @@ pub(crate) enum MismatchedLifetimeSyntaxesSuggestion {
         optional_alternative: bool,
     },
 }
-/* AST_META: AST_ID=250 | TYPE=FUNCTION | NAME=make_optional_alternative | COMPLEXITY=10 | LINES=14 */
 
 impl MismatchedLifetimeSyntaxesSuggestion {
     fn make_optional_alternative(&mut self) {
@@ -3528,7 +3278,6 @@ impl MismatchedLifetimeSyntaxesSuggestion {
         *optional_alternative = true;
     }
 }
-/* AST_META: AST_ID=251 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=36 | LINES=75 */
 
 impl Subdiagnostic for MismatchedLifetimeSyntaxesSuggestion {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {

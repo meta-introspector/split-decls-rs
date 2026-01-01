@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/fulfill.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::marker::PhantomData;
 use std::mem;
 use std::ops::ControlFlow;
@@ -11,17 +10,14 @@ use crate::rustc_infer::traits::query::NoSolution;
 use crate::rustc_infer::traits::{
     FromSolverError, PredicateObligation, PredicateObligations, TraitEngine,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, DelayedSet, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     TypingMode,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_next_trait_solver::delegate::SolverDelegate as _;
 use rustc_next_trait_solver::solve::{
     GoalEvaluation, GoalStalledOn, HasChanged, SolverDelegateEvalExt as _,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 use tracing::instrument;
@@ -30,9 +26,7 @@ use self::derive_errors::*;
 use super::Certainty;
 use super::delegate::SolverDelegate;
 use super::inspect::{self, ProofTreeInferCtxtExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{FulfillmentError, ScrubbedTraitError};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=FulfillmentCtxt | COMPLEXITY=6 | LINES=28 */
 
 
 // FIXME: Do we need to use a `ThinVec` here?
@@ -60,7 +54,6 @@ pub struct FulfillmentCtxt<'tcx, E: 'tcx> {
     usable_in_snapshot: usize,
     _errors: PhantomData<E>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ObligationStorage | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Default, Debug)]
 struct ObligationStorage<'tcx> {
@@ -72,7 +65,6 @@ struct ObligationStorage<'tcx> {
     overflowed: Vec<PredicateObligation<'tcx>>,
     pending: PendingObligations<'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=register | COMPLEXITY=14 | LINES=54 */
 
 impl<'tcx> ObligationStorage<'tcx> {
     fn register(
@@ -127,7 +119,6 @@ impl<'tcx> ObligationStorage<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=30 */
 
 impl<'tcx, E: 'tcx> FulfillmentCtxt<'tcx, E> {
     pub fn new(infcx: &InferCtxt<'tcx>) -> FulfillmentCtxt<'tcx, E> {
@@ -158,7 +149,6 @@ impl<'tcx, E: 'tcx> FulfillmentCtxt<'tcx, E> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=register_predicate_obligation | COMPLEXITY=84 | LINES=167 */
 
 impl<'tcx, E> TraitEngine<'tcx, E> for FulfillmentCtxt<'tcx, E>
 where
@@ -326,7 +316,6 @@ where
             .collect()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=StalledOnCoroutines | COMPLEXITY=5 | LINES=14 */
 
 /// Detect if a goal is stalled on a coroutine that is owned by the current typeck root.
 ///
@@ -341,7 +330,6 @@ pub struct StalledOnCoroutines<'tcx> {
     pub span: Span,
     pub cache: DelayedSet<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=span | COMPLEXITY=11 | LINES=18 */
 
 impl<'tcx> inspect::ProofTreeVisitor<'tcx> for StalledOnCoroutines<'tcx> {
     type Result = ControlFlow<()>;
@@ -360,7 +348,6 @@ impl<'tcx> inspect::ProofTreeVisitor<'tcx> for StalledOnCoroutines<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=16 | LINES=20 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for StalledOnCoroutines<'tcx> {
     type Result = ControlFlow<()>;
@@ -381,14 +368,12 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for StalledOnCoroutines<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub enum NextSolverError<'tcx> {
     TrueError(PredicateObligation<'tcx>),
     Ambiguity(PredicateObligation<'tcx>),
     Overflow(PredicateObligation<'tcx>),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from_solver_error | COMPLEXITY=13 | LINES=16 */
 
 impl<'tcx> FromSolverError<'tcx, NextSolverError<'tcx>> for FulfillmentError<'tcx> {
     fn from_solver_error(infcx: &InferCtxt<'tcx>, error: NextSolverError<'tcx>) -> Self {
@@ -405,7 +390,6 @@ impl<'tcx> FromSolverError<'tcx, NextSolverError<'tcx>> for FulfillmentError<'tc
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from_solver_error | COMPLEXITY=10 | LINES=11 */
 
 impl<'tcx> FromSolverError<'tcx, NextSolverError<'tcx>> for ScrubbedTraitError<'tcx> {
     fn from_solver_error(_infcx: &InferCtxt<'tcx>, error: NextSolverError<'tcx>) -> Self {

@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_traits/src/normalize_projection_ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::infer::canonical::{Canonical, QueryResponse};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
 use crate::rustc_trait_selection::traits::query::normalize::NormalizationResult;
 use crate::rustc_trait_selection::traits::query::{CanonicalAliasGoal, NoSolution};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{self, ObligationCause, ScrubbedTraitError, SelectionContext};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 use tracing::debug;
 
 pub(crate) fn provide(p: &mut Providers) {
@@ -24,7 +19,6 @@ pub(crate) fn provide(p: &mut Providers) {
         ..*p
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=normalize_canonicalized_projection_ty | COMPLEXITY=24 | LINES=50 */
 
 fn normalize_canonicalized_projection_ty<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -75,7 +69,6 @@ fn normalize_canonicalized_projection_ty<'tcx>(
         },
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=normalize_canonicalized_free_alias | COMPLEXITY=9 | LINES=26 */
 
 fn normalize_canonicalized_free_alias<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -102,7 +95,6 @@ fn normalize_canonicalized_free_alias<'tcx>(
         },
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=normalize_canonicalized_inherent_projection_ty | COMPLEXITY=7 | LINES=27 */
 
 fn normalize_canonicalized_inherent_projection_ty<'tcx>(
     tcx: TyCtxt<'tcx>,

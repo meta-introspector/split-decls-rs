@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/placeholder_relation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::Diag;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, RePlaceholder, Region};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::errors::PlaceholderRelationLfNotSatisfied;
 use crate::infer::{RegionResolutionError, SubregionOrigin};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=46 | LINES=82 */
 
 impl<'tcx> NiceRegionError<'_, 'tcx> {
     /// Emitted wwhen given a `ConcreteFailure` when relating two placeholders.

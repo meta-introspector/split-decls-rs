@@ -1,37 +1,25 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 use std::{fmt, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{self as hir, AmbigArg};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_infer::traits::{
     DynCompatibilityViolation, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, ExpnKind, Span};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{info, instrument};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub use self::overflow::*;
 use crate::error_reporting::TypeErrCtxt;
 use crate::traits::{FulfillmentError, FulfillmentErrorCode};
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // When outputting impl candidates, prefer showing those that are more similar.
 //
@@ -42,7 +30,6 @@ pub enum CandidateSimilarity {
     Exact { ignoring_lifetimes: bool },
     Fuzzy { ignoring_lifetimes: bool },
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ImplCandidate | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ImplCandidate<'tcx> {
@@ -50,14 +37,12 @@ pub struct ImplCandidate<'tcx> {
     pub similarity: CandidateSimilarity,
     impl_def_id: DefId,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 enum GetSafeTransmuteErrorAndReason {
     Silent,
     Default,
     Error { err_msg: String, safe_transmute_explanation: Option<String> },
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=FindExprBySpan | COMPLEXITY=2 | LINES=9 */
 
 /// Crude way of getting back an `Expr` from a `Span`.
 pub struct FindExprBySpan<'hir> {
@@ -67,14 +52,12 @@ pub struct FindExprBySpan<'hir> {
     pub include_closures: bool,
     pub tcx: TyCtxt<'hir>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'hir> FindExprBySpan<'hir> {
     pub fn new(span: Span, tcx: TyCtxt<'hir>) -> Self {
         Self { span, result: None, ty_result: None, tcx, include_closures: false }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=19 | LINES=31 */
 
 impl<'v> Visitor<'v> for FindExprBySpan<'v> {
     type NestedFilter = crate::rustc_middle::hir::nested_filter::OnlyBodies;
@@ -106,7 +89,6 @@ impl<'v> Visitor<'v> for FindExprBySpan<'v> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 /// Summarizes information
 #[derive(Clone)]
@@ -120,7 +102,6 @@ pub enum ArgKind {
     /// strings for the components of the tuple.
     Tuple(Option<Span>, Vec<(String, String)>),
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=9 | LINES=18 */
 
 impl ArgKind {
     fn empty() -> ArgKind {
@@ -139,14 +120,12 @@ impl ArgKind {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 pub enum DefIdOrName {
     DefId(DefId),
     Name(&'static str),
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=report_fulfillment_errors | COMPLEXITY=100 | LINES=186 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub fn report_fulfillment_errors(
@@ -333,7 +312,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=SizednessFound | COMPLEXITY=61 | LINES=89 */
 
 /// Recovers the "impl X for Y" signature from `impl_def_id` and returns it as a
 /// string.
@@ -423,7 +401,6 @@ pub(crate) fn to_pretty_impl_header(tcx: TyCtxt<'_>, impl_def_id: DefId) -> Opti
     w.push(';');
     Some(w)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=report_extra_impl_obligation | COMPLEXITY=12 | LINES=28 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub fn report_extra_impl_obligation(
@@ -452,7 +429,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         err
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=report_dyn_incompatibility | COMPLEXITY=60 | LINES=89 */
 
 pub fn report_dyn_incompatibility<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -542,7 +518,6 @@ pub fn report_dyn_incompatibility<'tcx>(
 
     err
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=attempt_dyn_to_enum_suggestion | COMPLEXITY=54 | LINES=81 */
 
 /// Attempt to suggest converting the `dyn Trait` argument to an enumeration
 /// over the types that implement `Trait`.
@@ -624,7 +599,6 @@ fn attempt_dyn_to_enum_suggestion(
         ));
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=attempt_dyn_to_impl_suggestion | COMPLEXITY=13 | LINES=28 */
 
 /// Attempt to suggest that a `dyn Trait` argument or return type be converted
 /// to use `impl Trait`.

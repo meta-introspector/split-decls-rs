@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/mini_core.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 #[feature(
     no_core,
     lang_items,
@@ -18,167 +17,104 @@
 
 #[lang = "pointee_sized"]
 pub trait PointeeSized {}
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "meta_sized"]
 pub trait MetaSized: PointeeSized {}
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "sized"]
 pub trait Sized: MetaSized {}
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "destruct"]
 pub trait Destruct {}
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "tuple_trait"]
 pub trait Tuple {}
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "unsize"]
 pub trait Unsize<T: PointeeSized>: PointeeSized {}
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "coerce_unsized"]
 pub trait CoerceUnsized<T> {}
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'a, 'b: 'a, T: PointeeSized + Unsize<U>, U: PointeeSized> CoerceUnsized<&'a U> for &'b T {}
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'a, T: PointeeSized + Unsize<U>, U: PointeeSized> CoerceUnsized<&'a mut U> for &'a mut T {}
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized + Unsize<U>, U: PointeeSized> CoerceUnsized<*const U> for *const T {}
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized + Unsize<U>, U: PointeeSized> CoerceUnsized<*mut U> for *mut T {}
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "dispatch_from_dyn"]
 pub trait DispatchFromDyn<T> {}
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 // &T -> &U
 impl<'a, T: PointeeSized + Unsize<U>, U: PointeeSized> DispatchFromDyn<&'a U> for &'a T {}
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 // &mut T -> &mut U
 impl<'a, T: PointeeSized + Unsize<U>, U: PointeeSized> DispatchFromDyn<&'a mut U> for &'a mut T {}
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 // *const T -> *const U
 impl<T: PointeeSized + Unsize<U>, U: PointeeSized> DispatchFromDyn<*const U> for *const T {}
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 // *mut T -> *mut U
 impl<T: PointeeSized + Unsize<U>, U: PointeeSized> DispatchFromDyn<*mut U> for *mut T {}
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: MetaSized + Unsize<U>, U: MetaSized> DispatchFromDyn<Box<U>> for Box<T> {}
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "legacy_receiver"]
 pub trait LegacyReceiver {}
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: PointeeSized> LegacyReceiver for &T {}
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized> LegacyReceiver for &mut T {}
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: MetaSized> LegacyReceiver for Box<T> {}
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "copy"]
 pub trait Copy {}
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "bikeshed_guaranteed_no_drop"]
 pub trait BikeshedGuaranteedNoDrop {}
-/* AST_META: AST_ID=24 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Copy for bool {}
-/* AST_META: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for u8 {}
-/* AST_META: AST_ID=26 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for u16 {}
-/* AST_META: AST_ID=27 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for u32 {}
-/* AST_META: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for u64 {}
-/* AST_META: AST_ID=29 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for u128 {}
-/* AST_META: AST_ID=30 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for usize {}
-/* AST_META: AST_ID=31 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for i8 {}
-/* AST_META: AST_ID=32 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for i16 {}
-/* AST_META: AST_ID=33 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for i32 {}
-/* AST_META: AST_ID=34 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for isize {}
-/* AST_META: AST_ID=35 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for f32 {}
-/* AST_META: AST_ID=36 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for f64 {}
-/* AST_META: AST_ID=37 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl Copy for char {}
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'a, T: PointeeSized> Copy for &'a T {}
-/* AST_META: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized> Copy for *const T {}
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized> Copy for *mut T {}
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: Copy> Copy for Option<T> {}
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 
 #[lang = "sync"]
 pub unsafe trait Sync {}
-/* AST_META: AST_ID=43 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl Sync for bool {}
-/* AST_META: AST_ID=44 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for u8 {}
-/* AST_META: AST_ID=45 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for u16 {}
-/* AST_META: AST_ID=46 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for u32 {}
-/* AST_META: AST_ID=47 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for u64 {}
-/* AST_META: AST_ID=48 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for usize {}
-/* AST_META: AST_ID=49 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for i8 {}
-/* AST_META: AST_ID=50 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for i16 {}
-/* AST_META: AST_ID=51 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for i32 {}
-/* AST_META: AST_ID=52 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for isize {}
-/* AST_META: AST_ID=53 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for char {}
-/* AST_META: AST_ID=54 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for f32 {}
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<'a, T: PointeeSized> Sync for &'a T {}
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: Sync, const N: usize> Sync for [T; N] {}
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 
 #[lang = "freeze"]
 unsafe auto trait Freeze {}
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl<T: PointeeSized> Freeze for PhantomData<T> {}
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: PointeeSized> Freeze for *const T {}
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: PointeeSized> Freeze for *mut T {}
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: PointeeSized> Freeze for &T {}
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: PointeeSized> Freeze for &mut T {}
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "structural_peq"]
 pub trait StructuralPartialEq {}
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=not | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "not"]
 pub trait Not {
@@ -186,7 +122,6 @@ pub trait Not {
 
     fn not(self) -> Self::Output;
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=not | COMPLEXITY=5 | LINES=8 */
 
 impl Not for bool {
     type Output = bool;
@@ -195,7 +130,6 @@ impl Not for bool {
         !self
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=mul | COMPLEXITY=2 | LINES=8 */
 
 #[lang = "mul"]
 pub trait Mul<RHS = Self> {
@@ -204,7 +138,6 @@ pub trait Mul<RHS = Self> {
     #[must_use]
     fn mul(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=mul | COMPLEXITY=5 | LINES=8 */
 
 impl Mul for u8 {
     type Output = Self;
@@ -213,7 +146,6 @@ impl Mul for u8 {
         self * rhs
     }
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=mul | COMPLEXITY=5 | LINES=8 */
 
 impl Mul for usize {
     type Output = Self;
@@ -222,7 +154,6 @@ impl Mul for usize {
         self * rhs
     }
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=add | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "add"]
 pub trait Add<RHS = Self> {
@@ -230,7 +161,6 @@ pub trait Add<RHS = Self> {
 
     fn add(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=add | COMPLEXITY=5 | LINES=8 */
 
 impl Add for u8 {
     type Output = Self;
@@ -239,7 +169,6 @@ impl Add for u8 {
         self + rhs
     }
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=add | COMPLEXITY=5 | LINES=8 */
 
 impl Add for i8 {
     type Output = Self;
@@ -248,7 +177,6 @@ impl Add for i8 {
         self + rhs
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=add | COMPLEXITY=5 | LINES=8 */
 
 impl Add for usize {
     type Output = Self;
@@ -257,7 +185,6 @@ impl Add for usize {
         self + rhs
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=sub | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "sub"]
 pub trait Sub<RHS = Self> {
@@ -265,7 +192,6 @@ pub trait Sub<RHS = Self> {
 
     fn sub(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=sub | COMPLEXITY=5 | LINES=8 */
 
 impl Sub for usize {
     type Output = Self;
@@ -274,7 +200,6 @@ impl Sub for usize {
         self - rhs
     }
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=sub | COMPLEXITY=5 | LINES=8 */
 
 impl Sub for u8 {
     type Output = Self;
@@ -283,7 +208,6 @@ impl Sub for u8 {
         self - rhs
     }
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=sub | COMPLEXITY=5 | LINES=8 */
 
 impl Sub for i8 {
     type Output = Self;
@@ -292,7 +216,6 @@ impl Sub for i8 {
         self - rhs
     }
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=sub | COMPLEXITY=5 | LINES=8 */
 
 impl Sub for i16 {
     type Output = Self;
@@ -301,7 +224,6 @@ impl Sub for i16 {
         self - rhs
     }
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=rem | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "rem"]
 pub trait Rem<RHS = Self> {
@@ -309,7 +231,6 @@ pub trait Rem<RHS = Self> {
 
     fn rem(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=rem | COMPLEXITY=5 | LINES=8 */
 
 impl Rem for usize {
     type Output = Self;
@@ -318,7 +239,6 @@ impl Rem for usize {
         self % rhs
     }
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=bitor | COMPLEXITY=2 | LINES=8 */
 
 #[lang = "bitor"]
 pub trait BitOr<RHS = Self> {
@@ -327,7 +247,6 @@ pub trait BitOr<RHS = Self> {
     #[must_use]
     fn bitor(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=bitor | COMPLEXITY=5 | LINES=8 */
 
 impl BitOr for bool {
     type Output = bool;
@@ -336,7 +255,6 @@ impl BitOr for bool {
         self | rhs
     }
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=bitor | COMPLEXITY=5 | LINES=8 */
 
 impl<'a> BitOr<bool> for &'a bool {
     type Output = bool;
@@ -345,14 +263,12 @@ impl<'a> BitOr<bool> for &'a bool {
         *self | rhs
     }
 }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=2 | LINES=6 */
 
 #[lang = "eq"]
 pub trait PartialEq<Rhs: ?Sized = Self> {
     fn eq(&self, other: &Rhs) -> bool;
     fn ne(&self, other: &Rhs) -> bool;
 }
-/* AST_META: AST_ID=84 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for u8 {
     fn eq(&self, other: &u8) -> bool {
@@ -362,7 +278,6 @@ impl PartialEq for u8 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for u16 {
     fn eq(&self, other: &u16) -> bool {
@@ -372,7 +287,6 @@ impl PartialEq for u16 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for u32 {
     fn eq(&self, other: &u32) -> bool {
@@ -382,7 +296,6 @@ impl PartialEq for u32 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=87 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for u64 {
     fn eq(&self, other: &u64) -> bool {
@@ -392,7 +305,6 @@ impl PartialEq for u64 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=88 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for u128 {
     fn eq(&self, other: &u128) -> bool {
@@ -402,7 +314,6 @@ impl PartialEq for u128 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=89 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for usize {
     fn eq(&self, other: &usize) -> bool {
@@ -412,7 +323,6 @@ impl PartialEq for usize {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for i8 {
     fn eq(&self, other: &i8) -> bool {
@@ -422,7 +332,6 @@ impl PartialEq for i8 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for i32 {
     fn eq(&self, other: &i32) -> bool {
@@ -432,7 +341,6 @@ impl PartialEq for i32 {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=92 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for isize {
     fn eq(&self, other: &isize) -> bool {
@@ -442,7 +350,6 @@ impl PartialEq for isize {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=93 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl PartialEq for char {
     fn eq(&self, other: &char) -> bool {
@@ -452,7 +359,6 @@ impl PartialEq for char {
         (*self) != (*other)
     }
 }
-/* AST_META: AST_ID=94 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=6 | LINES=9 */
 
 impl<T: ?Sized> PartialEq for *const T {
     fn eq(&self, other: &*const T) -> bool {
@@ -462,7 +368,6 @@ impl<T: ?Sized> PartialEq for *const T {
         *self != *other
     }
 }
-/* AST_META: AST_ID=95 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=14 | LINES=18 */
 
 impl<T: PartialEq> PartialEq for Option<T> {
     fn eq(&self, other: &Self) -> bool {
@@ -481,7 +386,6 @@ impl<T: PartialEq> PartialEq for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=96 | TYPE=FUNCTION | NAME=shl | COMPLEXITY=2 | LINES=8 */
 
 #[lang = "shl"]
 pub trait Shl<RHS = Self> {
@@ -490,7 +394,6 @@ pub trait Shl<RHS = Self> {
     #[must_use]
     fn shl(self, rhs: RHS) -> Self::Output;
 }
-/* AST_META: AST_ID=97 | TYPE=FUNCTION | NAME=shl | COMPLEXITY=5 | LINES=8 */
 
 impl Shl for u128 {
     type Output = u128;
@@ -499,7 +402,6 @@ impl Shl for u128 {
         self << rhs
     }
 }
-/* AST_META: AST_ID=98 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "neg"]
 pub trait Neg {
@@ -507,7 +409,6 @@ pub trait Neg {
 
     fn neg(self) -> Self::Output;
 }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=5 | LINES=8 */
 
 impl Neg for i8 {
     type Output = i8;
@@ -516,7 +417,6 @@ impl Neg for i8 {
         -self
     }
 }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=5 | LINES=8 */
 
 impl Neg for i16 {
     type Output = i16;
@@ -525,7 +425,6 @@ impl Neg for i16 {
         self
     }
 }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=5 | LINES=8 */
 
 impl Neg for isize {
     type Output = isize;
@@ -534,7 +433,6 @@ impl Neg for isize {
         -self
     }
 }
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=5 | LINES=8 */
 
 impl Neg for f32 {
     type Output = f32;
@@ -543,13 +441,11 @@ impl Neg for f32 {
         -self
     }
 }
-/* AST_META: AST_ID=103 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum Option<T> {
     Some(T),
     None,
 }
-/* AST_META: AST_ID=104 | TYPE=FUNCTION | NAME=PhantomData | COMPLEXITY=2 | LINES=14 */
 
 pub use Option::*;
 
@@ -564,14 +460,12 @@ pub trait FnOnce<Args: Tuple> {
 
     extern "rust-call" fn call_once(self, args: Args) -> Self::Output;
 }
-/* AST_META: AST_ID=105 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[lang = "fn_mut"]
 #[rustc_paren_sugar]
 pub trait FnMut<Args: Tuple>: FnOnce<Args> {
     extern "rust-call" fn call_mut(&mut self, args: Args) -> Self::Output;
 }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=panic | COMPLEXITY=7 | LINES=9 */
 
 #[lang = "panic"]
 #[track_caller]
@@ -581,7 +475,6 @@ pub fn panic(_msg: &'static str) -> ! {
         intrinsics::abort();
     }
 }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=$lang | COMPLEXITY=10 | LINES=16 */
 
 macro_rules! panic_const {
     ($($lang:ident = $message:expr,)+) => {
@@ -598,7 +491,6 @@ macro_rules! panic_const {
         }
     }
 }
-/* AST_META: AST_ID=108 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 panic_const! {
     panic_const_add_overflow = "attempt to add with overflow",
@@ -612,7 +504,6 @@ panic_const! {
     panic_const_div_by_zero = "attempt to divide by zero",
     panic_const_rem_by_zero = "attempt to calculate the remainder with a divisor of zero",
 }
-/* AST_META: AST_ID=109 | TYPE=FUNCTION | NAME=panic_bounds_check | COMPLEXITY=7 | LINES=13 */
 
 #[lang = "panic_bounds_check"]
 #[track_caller]
@@ -626,7 +517,6 @@ fn panic_bounds_check(index: usize, len: usize) -> ! {
         intrinsics::abort();
     }
 }
-/* AST_META: AST_ID=110 | TYPE=FUNCTION | NAME=panic_cannot_unwind | COMPLEXITY=7 | LINES=9 */
 
 #[lang = "panic_cannot_unwind"]
 #[track_caller]
@@ -636,7 +526,6 @@ fn panic_cannot_unwind() -> ! {
         intrinsics::abort();
     }
 }
-/* AST_META: AST_ID=111 | TYPE=FUNCTION | NAME=eh_personality | COMPLEXITY=5 | LINES=12 */
 
 #[lang = "eh_personality"]
 // FIXME personality signature depends on target
@@ -649,20 +538,17 @@ fn eh_personality(
 ) -> i32 {
     loop {}
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=panic_in_cleanup | COMPLEXITY=5 | LINES=5 */
 
 #[lang = "panic_in_cleanup"]
 fn panic_in_cleanup() -> ! {
     loop {}
 }
-/* AST_META: AST_ID=113 | TYPE=FUNCTION | NAME=_Unwind_Resume | COMPLEXITY=2 | LINES=6 */
 
 #[cfg(all(unix, not(target_vendor = "apple")))]
 #[link(name = "gcc_s")]
 extern "C" {
     fn _Unwind_Resume(exc: *mut ()) -> !;
 }
-/* AST_META: AST_ID=114 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 #[lang = "drop_in_place"]
 #[allow(unconditional_recursion)]
@@ -671,11 +557,9 @@ pub unsafe fn drop_in_place<T: ?Sized>(to_drop: *mut T) {
     // real drop glue by the compiler.
     drop_in_place(to_drop);
 }
-/* AST_META: AST_ID=115 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 #[lang = "unpin"]
 pub auto trait Unpin {}
-/* AST_META: AST_ID=116 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "deref"]
 pub trait Deref {
@@ -683,7 +567,6 @@ pub trait Deref {
 
     fn deref(&self) -> &Self::Target;
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=NonNull | COMPLEXITY=4 | LINES=7 */
 
 #[repr(transparent)]
 #[rustc_layout_scalar_valid_range_start(1)]
@@ -691,20 +574,15 @@ pub trait Deref {
 pub struct NonNull<T: PointeeSized>(pub *const T);
 
 impl<T: PointeeSized, U: PointeeSized> CoerceUnsized<NonNull<U>> for NonNull<T> where T: Unsize<U> {}
-/* AST_META: AST_ID=118 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized, U: PointeeSized> DispatchFromDyn<NonNull<U>> for NonNull<T> where T: Unsize<U> {}
-/* AST_META: AST_ID=119 | TYPE=STRUCT | NAME=Unique | COMPLEXITY=2 | LINES=5 */
 
 pub struct Unique<T: PointeeSized> {
     pub pointer: NonNull<T>,
     pub _marker: PhantomData<T>,
 }
-/* AST_META: AST_ID=120 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: PointeeSized, U: PointeeSized> CoerceUnsized<Unique<U>> for Unique<T> where T: Unsize<U> {}
-/* AST_META: AST_ID=121 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T: PointeeSized, U: PointeeSized> DispatchFromDyn<Unique<U>> for Unique<T> where T: Unsize<U> {}
-/* AST_META: AST_ID=122 | TYPE=STRUCT | NAME=Global; | COMPLEXITY=4 | LINES=8 */
 
 #[lang = "global_alloc_ty"]
 pub struct Global;
@@ -713,7 +591,6 @@ pub struct Global;
 pub struct Box<T: ?Sized, A = Global>(Unique<T>, A);
 
 impl<T: ?Sized + Unsize<U>, U: ?Sized> CoerceUnsized<Box<U>> for Box<T> {}
-/* AST_META: AST_ID=123 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=11 */
 
 impl<T> Box<T> {
     pub fn new(val: T) -> Box<T> {
@@ -725,7 +602,6 @@ impl<T> Box<T> {
         }
     }
 }
-/* AST_META: AST_ID=124 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=9 */
 
 impl<T: ?Sized, A> Drop for Box<T, A> {
     fn drop(&mut self) {
@@ -735,7 +611,6 @@ impl<T: ?Sized, A> Drop for Box<T, A> {
         }
     }
 }
-/* AST_META: AST_ID=125 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<T: ?Sized> Deref for Box<T> {
     type Target = T;
@@ -744,26 +619,22 @@ impl<T: ?Sized> Deref for Box<T> {
         &**self
     }
 }
-/* AST_META: AST_ID=126 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 
 #[lang = "exchange_malloc"]
 unsafe fn allocate(size: usize, _align: usize) -> *mut u8 {
     libc::malloc(size)
 }
-/* AST_META: AST_ID=127 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=2 | LINES=5 */
 
 #[lang = "drop"]
 pub trait Drop {
     fn drop(&mut self);
 }
-/* AST_META: AST_ID=128 | TYPE=STRUCT | NAME=ManuallyDrop | COMPLEXITY=2 | LINES=6 */
 
 #[lang = "manually_drop"]
 #[repr(transparent)]
 pub struct ManuallyDrop<T: ?Sized> {
     pub value: T,
 }
-/* AST_META: AST_ID=129 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[lang = "maybe_uninit"]
 #[repr(transparent)]
@@ -771,7 +642,6 @@ pub union MaybeUninit<T> {
     pub uninit: (),
     pub value: ManuallyDrop<T>,
 }
-/* AST_META: AST_ID=130 | TYPE=FUNCTION | NAME=abort | COMPLEXITY=31 | LINES=29 */
 
 pub mod intrinsics {
     #[rustc_intrinsic]
@@ -801,7 +671,6 @@ pub mod intrinsics {
     #[rustc_intrinsic]
     pub unsafe fn unreachable() -> !;
 }
-/* AST_META: AST_ID=131 | TYPE=FUNCTION | NAME=printf | COMPLEXITY=5 | LINES=22 */
 
 pub mod libc {
     // With the new Universal CRT, msvc has switched to all the printf functions being inline wrapper
@@ -824,14 +693,12 @@ pub mod libc {
         pub fn strncpy(dst: *mut u8, src: *const u8, size: usize);
     }
 }
-/* AST_META: AST_ID=132 | TYPE=FUNCTION | NAME=index | COMPLEXITY=2 | LINES=6 */
 
 #[lang = "index"]
 pub trait Index<Idx: ?Sized> {
     type Output: ?Sized;
     fn index(&self, index: Idx) -> &Self::Output;
 }
-/* AST_META: AST_ID=133 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<T> Index<usize> for [T; 3] {
     type Output = T;
@@ -840,7 +707,6 @@ impl<T> Index<usize> for [T; 3] {
         &self[index]
     }
 }
-/* AST_META: AST_ID=134 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<T> Index<usize> for [T] {
     type Output = T;
@@ -849,12 +715,10 @@ impl<T> Index<usize> for [T] {
         &self[index]
     }
 }
-/* AST_META: AST_ID=135 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 extern "C" {
     type VaListImpl;
 }
-/* AST_META: AST_ID=136 | TYPE=STRUCT | NAME=VaList | COMPLEXITY=2 | LINES=10 */
 
 #[lang = "va_list"]
 #[repr(transparent)]
@@ -865,49 +729,42 @@ pub struct VaList<'a>(&'a mut VaListImpl);
 pub macro stringify($($t:tt)*) {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=137 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro file() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=138 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro line() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=139 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro cfg() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=140 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro asm() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=141 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro global_asm() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=142 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[rustc_builtin_macro]
 #[rustc_macro_transparency = "semitransparent"]
 pub macro naked_asm() {
     /* compiler built-in */
 }
-/* AST_META: AST_ID=143 | TYPE=STRUCT | NAME=PanicLocation | COMPLEXITY=2 | LINES=9 */
 
 pub static A_STATIC: u8 = 42;
 
@@ -917,7 +774,6 @@ struct PanicLocation {
     line: u32,
     column: u32,
 }
-/* AST_META: AST_ID=144 | TYPE=FUNCTION | NAME=get_tls | COMPLEXITY=2 | LINES=9 */
 
 #[unsafe(no_mangle)]
 #[cfg(not(all(windows, target_env = "gnu")))]

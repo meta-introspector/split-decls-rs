@@ -1,50 +1,36 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/checks.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use itertools::Itertools;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan, a_or_an, listify, pluralize};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{ExprKind, HirId, LangItem, Node, QPath};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_hir_analysis::check::potentially_plural_count;
 use crate::rustc_hir_analysis::hir_ty_lowering::{HirTyLowerer, PermitVariants};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TypeTrace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{self, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, kw, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::error_reporting::infer::{FailureCode, ObligationCauseExt};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt, SelectionContext};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::SmallVec;
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::Expectation::*;
 use crate::TupleArgumentsFlag::*;
 use crate::coercion::CoerceMany;
 use crate::errors::SuggestPtrNullMut;
 use crate::fn_ctxt::arg_matrix::{ArgMatrix, Compatibility, Error, ExpectedIdx, ProvidedIdx};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::gather_locals::Declaration;
 use crate::inline_asm::InlineAsmCtxt;
 use crate::method::probe::IsSuggestion;
@@ -54,14 +40,12 @@ use crate::{
     BreakableCtxt, Diverges, Expectation, FnCtxt, GatherLocalsVisitor, LoweredTy, Needs,
     TupleArgumentsFlag, errors, struct_span_code_err,
 };
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "GenericIdx({})"]
     pub(crate) struct GenericIdx {}
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=23 */
 
 #[derive(Clone, Copy, Default)]
 pub(crate) enum DivergingBlockBehavior {
@@ -85,7 +69,6 @@ pub(crate) enum DivergingBlockBehavior {
     /// ```
     Unit,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=variadic_error | COMPLEXITY=1470 | LINES=2697 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(in super::super) fn check_casts(&mut self) {
@@ -2783,13 +2766,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=FindClosureArg | COMPLEXITY=2 | LINES=5 */
 
 struct FindClosureArg<'tcx> {
     tcx: TyCtxt<'tcx>,
     calls: Vec<(&'tcx hir::Expr<'tcx>, &'tcx [hir::Expr<'tcx>])>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx> Visitor<'tcx> for FindClosureArg<'tcx> {
     type NestedFilter = crate::rustc_middle::hir::nested_filter::All;
@@ -2805,14 +2786,12 @@ impl<'tcx> Visitor<'tcx> for FindClosureArg<'tcx> {
         hir::intravisit::walk_expr(self, ex);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum FnParam<'hir> {
     Param(&'hir hir::Param<'hir>),
     Ident(Option<Ident>),
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=span | COMPLEXITY=36 | LINES=45 */
 
 impl FnParam<'_> {
     fn span(&self) -> Span {

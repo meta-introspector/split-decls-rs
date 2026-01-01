@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/lifetime_syntax.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LifetimeSource};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use tracing::instrument;
 
 use crate::{LateContext, LateLintPass, LintContext, lints};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=64 */
 
 declare_lint! {
     /// The `mismatched_lifetime_syntaxes` lint detects when the same
@@ -76,7 +71,6 @@ declare_lint! {
     Warn,
     "detects when a lifetime uses different syntax between arguments and return values"
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_fn | COMPLEXITY=21 | LINES=39 */
 
 declare_lint_pass!(LifetimeSyntax => [MISMATCHED_LIFETIME_SYNTAXES]);
 
@@ -116,7 +110,6 @@ impl<'tcx> LateLintPass<'tcx> for LifetimeSyntax {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_fn_like | COMPLEXITY=8 | LINES=15 */
 
 fn check_fn_like<'tcx>(cx: &LateContext<'tcx>, fd: &'tcx hir::FnDecl<'tcx>) {
     let mut input_map = Default::default();
@@ -132,7 +125,6 @@ fn check_fn_like<'tcx>(cx: &LateContext<'tcx>, fd: &'tcx hir::FnDecl<'tcx>) {
 
     report_mismatches(cx, &input_map, &output_map);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=report_mismatches | COMPLEXITY=11 | LINES=15 */
 
 #[instrument(skip_all)]
 fn report_mismatches<'tcx>(
@@ -148,7 +140,6 @@ fn report_mismatches<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 enum LifetimeSyntaxCategory {
@@ -156,7 +147,6 @@ enum LifetimeSyntaxCategory {
     Elided,
     Named,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=16 | LINES=39 */
 
 impl LifetimeSyntaxCategory {
     fn new(syntax_source: (hir::LifetimeSyntax, LifetimeSource)) -> Option<Self> {
@@ -196,7 +186,6 @@ impl LifetimeSyntaxCategory {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LifetimeSyntaxCategories | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Default)]
 pub struct LifetimeSyntaxCategories<T> {
@@ -204,7 +193,6 @@ pub struct LifetimeSyntaxCategories<T> {
     pub elided: T,
     pub named: T,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=select | COMPLEXITY=7 | LINES=12 */
 
 impl<T> LifetimeSyntaxCategories<T> {
     fn select(&mut self, category: LifetimeSyntaxCategory) -> &mut T {
@@ -217,7 +205,6 @@ impl<T> LifetimeSyntaxCategories<T> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=len | COMPLEXITY=6 | LINES=15 */
 
 impl<T> LifetimeSyntaxCategories<Vec<T>> {
     pub fn len(&self) -> LifetimeSyntaxCategories<usize> {
@@ -233,7 +220,6 @@ impl<T> LifetimeSyntaxCategories<Vec<T>> {
         [hidden.iter(), elided.iter()].into_iter().flatten()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=add | COMPLEXITY=6 | LINES=12 */
 
 impl std::ops::Add for LifetimeSyntaxCategories<usize> {
     type Output = Self;
@@ -246,7 +232,6 @@ impl std::ops::Add for LifetimeSyntaxCategories<usize> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=lifetimes_use_matched_syntax | COMPLEXITY=12 | LINES=19 */
 
 fn lifetimes_use_matched_syntax(input_info: &[Info<'_>], output_info: &[Info<'_>]) -> bool {
     let mut syntax_counts = LifetimeSyntaxCategories::<usize>::default();
@@ -266,7 +251,6 @@ fn lifetimes_use_matched_syntax(input_info: &[Info<'_>], output_info: &[Info<'_>
             | LifetimeSyntaxCategories { hidden: 0, elided: 0, named: _ }
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=emit_mismatch_diagnostic | COMPLEXITY=72 | LINES=249 */
 
 fn emit_mismatch_diagnostic<'tcx>(
     cx: &LateContext<'tcx>,
@@ -516,7 +500,6 @@ fn emit_mismatch_diagnostic<'tcx>(
         lints::MismatchedLifetimeSyntaxes { inputs, outputs, suggestions },
     );
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=build_mismatch_suggestion | COMPLEXITY=3 | LINES=15 */
 
 fn build_mismatch_suggestion(
     lifetime_name: &str,
@@ -532,7 +515,6 @@ fn build_mismatch_suggestion(
         optional_alternative: false,
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=Info | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 struct Info<'tcx> {
@@ -540,7 +522,6 @@ struct Info<'tcx> {
     referenced_type_span: Option<Span>,
     lifetime: &'tcx hir::Lifetime,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=syntax_source | COMPLEXITY=20 | LINES=52 */
 
 impl<'tcx> Info<'tcx> {
     fn syntax_source(&self) -> (hir::LifetimeSyntax, LifetimeSource) {
@@ -593,7 +574,6 @@ impl<'tcx> Info<'tcx> {
         self.lifetime.suggestion(lifetime_name)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=LifetimeInfoCollector | COMPLEXITY=2 | LINES=8 */
 
 type LifetimeInfoMap<'tcx> = FxIndexMap<&'tcx hir::LifetimeKind, Vec<Info<'tcx>>>;
 
@@ -602,7 +582,6 @@ struct LifetimeInfoCollector<'a, 'tcx> {
     referenced_type_span: Option<Span>,
     map: &'a mut LifetimeInfoMap<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=collect | COMPLEXITY=4 | LINES=8 */
 
 impl<'a, 'tcx> LifetimeInfoCollector<'a, 'tcx> {
     fn collect(ty: &'tcx hir::Ty<'tcx>, map: &'a mut LifetimeInfoMap<'tcx>) {
@@ -611,7 +590,6 @@ impl<'a, 'tcx> LifetimeInfoCollector<'a, 'tcx> {
         intravisit::walk_unambig_ty(&mut this, ty);
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_lifetime | COMPLEXITY=11 | LINES=28 */
 
 impl<'a, 'tcx> Visitor<'tcx> for LifetimeInfoCollector<'a, 'tcx> {
     #[instrument(skip(self))]

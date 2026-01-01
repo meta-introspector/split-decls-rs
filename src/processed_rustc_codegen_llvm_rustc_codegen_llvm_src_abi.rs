@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/abi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::borrow::Borrow;
 use std::cmp;
 
@@ -8,31 +7,24 @@ use crate::rustc_abi::{
     ArmCall, BackendRepr, CanonAbi, HasDataLayout, InterruptKind, Primitive, Reg, RegKind, Size,
     X86Call,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::MemFlags;
 use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config;
 use crate::rustc_target::callconv::{
     ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, CastTarget, FnAbi, PassMode,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::spec::SanitizerSet;
 use smallvec::SmallVec;
 
 use crate::attributes::{self, llfn_attrs_from_instance};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::builder::Builder;
 use crate::context::CodegenCx;
 use crate::llvm::{self, Attribute, AttributePlace};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=apply_attrs_to_llfn | COMPLEXITY=2 | LINES=14 */
 use crate::llvm_util;
 use crate::type_::Type;
 use crate::type_of::LayoutLlvmExt;
@@ -47,7 +39,6 @@ trait ArgAttributesExt {
         callsite: &Value,
     );
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=get_attrs | COMPLEXITY=46 | LINES=66 */
 
 const ABI_AFFECTING_ATTRIBUTES: [(ArgAttribute, llvm::AttributeKind); 1] =
     [(ArgAttribute::InReg, llvm::AttributeKind::InReg)];
@@ -114,7 +105,6 @@ fn get_attrs<'ll>(this: &ArgAttributes, cx: &CodegenCx<'ll, '_>) -> SmallVec<[&'
 
     attrs
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=apply_attrs_to_llfn | COMPLEXITY=6 | LINES=17 */
 
 impl ArgAttributesExt for ArgAttributes {
     fn apply_attrs_to_llfn(&self, idx: AttributePlace, cx: &CodegenCx<'_, '_>, llfn: &Value) {
@@ -132,12 +122,10 @@ impl ArgAttributesExt for ArgAttributes {
         attributes::apply_to_callsite(callsite, idx, &attrs);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=llvm_type | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) trait LlvmType {
     fn llvm_type<'ll>(&self, cx: &CodegenCx<'ll, '_>) -> &'ll Type;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=llvm_type | COMPLEXITY=15 | LINES=16 */
 
 impl LlvmType for Reg {
     fn llvm_type<'ll>(&self, cx: &CodegenCx<'ll, '_>) -> &'ll Type {
@@ -154,7 +142,6 @@ impl LlvmType for Reg {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=llvm_type | COMPLEXITY=28 | LINES=40 */
 
 impl LlvmType for CastTarget {
     fn llvm_type<'ll>(&self, cx: &CodegenCx<'ll, '_>) -> &'ll Type {
@@ -195,7 +182,6 @@ impl LlvmType for CastTarget {
         cx.type_struct(&args, false)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=store | COMPLEXITY=2 | LINES=15 */
 
 trait ArgAbiExt<'ll, 'tcx> {
     fn store(
@@ -211,7 +197,6 @@ trait ArgAbiExt<'ll, 'tcx> {
         dst: PlaceRef<'tcx, &'ll Value>,
     );
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=store | COMPLEXITY=45 | LINES=92 */
 
 impl<'ll, 'tcx> ArgAbiExt<'ll, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
     /// Stores a direct/indirect value described by this ArgAbi into a
@@ -304,7 +289,6 @@ impl<'ll, 'tcx> ArgAbiExt<'ll, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=store_fn_arg | COMPLEXITY=6 | LINES=19 */
 
 impl<'ll, 'tcx> ArgAbiBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
     fn store_fn_arg(
@@ -324,7 +308,6 @@ impl<'ll, 'tcx> ArgAbiBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
         arg_abi.store(self, val, dst)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=llvm_type | COMPLEXITY=3 | LINES=17 */
 
 pub(crate) trait FnAbiLlvmExt<'ll, 'tcx> {
     fn llvm_type(&self, cx: &CodegenCx<'ll, 'tcx>) -> &'ll Type;
@@ -342,7 +325,6 @@ pub(crate) trait FnAbiLlvmExt<'ll, 'tcx> {
     /// Apply attributes to a function call.
     fn apply_attrs_callsite(&self, bx: &mut Builder<'_, 'll, 'tcx>, callsite: &'ll Value);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=llvm_type | COMPLEXITY=208 | LINES=330 */
 
 impl<'ll, 'tcx> FnAbiLlvmExt<'ll, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
     fn llvm_type(&self, cx: &CodegenCx<'ll, 'tcx>) -> &'ll Type {
@@ -673,14 +655,12 @@ impl<'ll, 'tcx> FnAbiLlvmExt<'ll, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=get_param | COMPLEXITY=5 | LINES=6 */
 
 impl AbiBuilderMethods for Builder<'_, '_, '_> {
     fn get_param(&mut self, index: usize) -> Self::Value {
         llvm::get_param(self.llfn(), index as c_uint)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=41 */
 
 impl llvm::CallConv {
     pub(crate) fn from_conv(conv: CanonAbi, arch: &str) -> Self {

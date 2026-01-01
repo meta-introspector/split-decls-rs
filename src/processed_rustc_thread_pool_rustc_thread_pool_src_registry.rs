@@ -1,30 +1,22 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/registry.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cell::Cell;
 use std::collections::hash_map::DefaultHasher;
 use std::hash::Hasher;
 use std::sync::atomic::{AtomicUsize, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, Mutex, Once};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, io, mem, ptr, thread};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crossbeam_deque::{Injector, Steal, Stealer, Worker};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::SmallVec;
 
 use crate::job::{JobFifo, JobRef, StackJob};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::latch::{AsCoreLatch, CoreLatch, Latch, LatchRef, LockLatch, OnceLatch, SpinLatch};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::sleep::Sleep;
 use crate::tlv::Tlv;
 use crate::{
     AcquireThreadHandler, DeadlockHandler, ErrorKind, ExitHandler, PanicHandler,
     ReleaseThreadHandler, StartHandler, ThreadPoolBuildError, ThreadPoolBuilder, Yield, unwind,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ThreadBuilder | COMPLEXITY=4 | LINES=11 */
 
 /// Thread builder used for customization via
 /// [`ThreadPoolBuilder::spawn_handler`](struct.ThreadPoolBuilder.html#method.spawn_handler).
@@ -36,7 +28,6 @@ pub struct ThreadBuilder {
     registry: Arc<Registry>,
     index: usize,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=index | COMPLEXITY=16 | LINES=23 */
 
 impl ThreadBuilder {
     /// Gets the index of this thread in the pool, within `0..num_threads`.
@@ -60,7 +51,6 @@ impl ThreadBuilder {
         unsafe { main_loop(self) }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=11 */
 
 impl fmt::Debug for ThreadBuilder {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -72,7 +62,6 @@ impl fmt::Debug for ThreadBuilder {
             .finish()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=spawn | COMPLEXITY=5 | LINES=12 */
 
 /// Generalized trait for spawning a thread in the `Registry`.
 ///
@@ -85,7 +74,6 @@ pub trait ThreadSpawn {
     /// call `ThreadBuilder::run()`.
     fn spawn(&mut self, thread: ThreadBuilder) -> io::Result<()>;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=DefaultSpawn; | COMPLEXITY=13 | LINES=23 */
 
 /// Spawns a thread in the "normal" way with `std::thread::Builder`.
 ///
@@ -109,7 +97,6 @@ impl ThreadSpawn for DefaultSpawn {
         Ok(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=CustomSpawn | COMPLEXITY=3 | LINES=16 */
 
 /// Spawns a thread with a user's custom callback.
 ///
@@ -126,7 +113,6 @@ where
         CustomSpawn(spawn)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=spawn | COMPLEXITY=6 | LINES=12 */
 
 impl<F> ThreadSpawn for CustomSpawn<F>
 where
@@ -139,7 +125,6 @@ where
         (self.0)(thread)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Registry | COMPLEXITY=8 | LINES=28 */
 
 pub struct Registry {
     thread_infos: Vec<ThreadInfo>,
@@ -168,7 +153,6 @@ pub struct Registry {
     //   and that job will keep the pool alive.
     terminate_count: AtomicUsize,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=21 */
 
 /// ////////////////////////////////////////////////////////////////////////
 /// Initialization
@@ -190,7 +174,6 @@ pub(super) fn global_registry() -> &'static Arc<Registry> {
         })
         .expect("The global thread pool has not been initialized.")
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// Starts the worker threads (if that has not already happened) with
 /// the given builder.
@@ -202,7 +185,6 @@ where
 {
     set_global_registry(|| Registry::new(builder))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=set_global_registry | COMPLEXITY=12 | LINES=22 */
 
 /// Starts the worker threads (if that has not already happened)
 /// by creating a registry with the given callback.
@@ -225,7 +207,6 @@ where
 
     result
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=default_global_registry | COMPLEXITY=23 | LINES=38 */
 
 fn default_global_registry() -> Result<Arc<Registry>, ThreadPoolBuildError> {
     let result = Registry::new(ThreadPoolBuilder::new());
@@ -264,7 +245,6 @@ fn default_global_registry() -> Result<Arc<Registry>, ThreadPoolBuildError> {
 
     result
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=Terminator | COMPLEXITY=5 | LINES=8 */
 
 struct Terminator<'a>(&'a Arc<Registry>);
 
@@ -273,7 +253,6 @@ impl<'a> Drop for Terminator<'a> {
         self.0.terminate()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=current | COMPLEXITY=240 | LINES=361 */
 
 impl Registry {
     pub(super) fn new<S>(
@@ -635,7 +614,6 @@ impl Registry {
         self.sleep.notify_worker_latch_is_set(target_worker_index);
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=mark_blocked | COMPLEXITY=9 | LINES=12 */
 
 /// Mark a Rayon worker thread as blocked. This triggers the deadlock handler
 /// if no other worker thread is active
@@ -648,20 +626,17 @@ pub fn mark_blocked() {
         registry.sleep.mark_blocked(&registry.deadlock_handler)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=mark_unblocked | COMPLEXITY=2 | LINES=6 */
 
 /// Mark a previously blocked Rayon worker thread as unblocked
 #[inline]
 pub fn mark_unblocked(registry: &Registry) {
     registry.sleep.mark_unblocked()
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(super) struct RegistryId {
     addr: usize,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=ThreadInfo | COMPLEXITY=9 | LINES=20 */
 
 struct ThreadInfo {
     /// Latch set once thread has started and we are entering into the
@@ -682,7 +657,6 @@ struct ThreadInfo {
     /// the "stealer" half of the worker's deque
     stealer: Stealer<JobRef>,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=11 */
 
 impl ThreadInfo {
     fn new(stealer: Stealer<JobRef>) -> ThreadInfo {
@@ -694,7 +668,6 @@ impl ThreadInfo {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 /// ////////////////////////////////////////////////////////////////////////
 /// WorkerThread identifiers
@@ -716,7 +689,6 @@ pub(super) struct WorkerThread {
 
     pub(crate) registry: Arc<Registry>,
 }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 // This is a bit sketchy, but basically: the WorkerThread is
 // allocated on the stack of the worker on entry and stored into this
@@ -726,7 +698,6 @@ pub(super) struct WorkerThread {
 thread_local! {
     static WORKER_THREAD_STATE: Cell<*const WorkerThread> = const { Cell::new(ptr::null()) };
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=13 */
 
 impl From<ThreadBuilder> for WorkerThread {
     fn from(thread: ThreadBuilder) -> Self {
@@ -740,7 +711,6 @@ impl From<ThreadBuilder> for WorkerThread {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=6 | LINES=10 */
 
 impl Drop for WorkerThread {
     fn drop(&mut self) {
@@ -751,7 +721,6 @@ impl Drop for WorkerThread {
         });
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=find_work | COMPLEXITY=259 | LINES=298 */
 
 impl WorkerThread {
     /// Gets the `WorkerThread` index for the current thread; returns
@@ -1050,7 +1019,6 @@ impl WorkerThread {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=35 */
 
 /// ////////////////////////////////////////////////////////////////////////
 
@@ -1086,7 +1054,6 @@ unsafe fn main_loop(thread: ThreadBuilder) {
 
     registry.release_thread();
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=23 */
 
 /// If already in a worker-thread, just execute `op`. Otherwise,
 /// execute `op` in the default thread-pool. Either way, block until
@@ -1110,7 +1077,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=XorShift64Star | COMPLEXITY=2 | LINES=8 */
 
 /// [xorshift*] is a fast pseudorandom number generator which will
 /// even tolerate weak seeding, as long as it's not zero.
@@ -1119,7 +1085,6 @@ where
 struct XorShift64Star {
     state: Cell<u64>,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=30 */
 
 impl XorShift64Star {
     fn new() -> Self {

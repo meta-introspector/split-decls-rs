@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/drop_flag_effects.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::VariantIdx;
 use crate::rustc_complete::mir::{self, Body, Location, Terminator, TerminatorKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 use tracing::debug;
 
 use super::move_paths::{InitKind, LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// The value of an inserted drop flag.
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
@@ -19,7 +16,6 @@ pub enum DropFlagState {
     /// leaving its scope.
     Absent,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=value | COMPLEXITY=7 | LINES=9 */
 
 impl DropFlagState {
     pub fn value(self) -> bool {
@@ -29,7 +25,6 @@ impl DropFlagState {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=move_path_children_matching | COMPLEXITY=12 | LINES=22 */
 
 pub fn move_path_children_matching<'tcx, F>(
     move_data: &MoveData<'tcx>,
@@ -52,7 +47,6 @@ where
 
     None
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=on_lookup_result_bits | COMPLEXITY=7 | LINES=15 */
 
 pub fn on_lookup_result_bits<'tcx, F>(
     move_data: &MoveData<'tcx>,
@@ -68,7 +62,6 @@ pub fn on_lookup_result_bits<'tcx, F>(
         LookupResult::Exact(e) => on_all_children_bits(move_data, e, each_child),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=on_all_children_bits | COMPLEXITY=7 | LINES=25 */
 
 pub fn on_all_children_bits<'tcx, F>(
     move_data: &MoveData<'tcx>,
@@ -94,7 +87,6 @@ pub fn on_all_children_bits<'tcx, F>(
     }
     on_all_children_bits(move_data, move_path_index, &mut each_child);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=drop_flag_effects_for_function_entry | COMPLEXITY=6 | LINES=16 */
 
 pub fn drop_flag_effects_for_function_entry<'tcx, F>(
     body: &Body<'tcx>,
@@ -111,7 +103,6 @@ pub fn drop_flag_effects_for_function_entry<'tcx, F>(
         });
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=drop_flag_effects_for_location | COMPLEXITY=17 | LINES=31 */
 
 pub fn drop_flag_effects_for_location<'tcx, F>(
     body: &Body<'tcx>,
@@ -143,7 +134,6 @@ pub fn drop_flag_effects_for_location<'tcx, F>(
 
     for_location_inits(move_data, loc, |mpi| callback(mpi, DropFlagState::Present));
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=for_location_inits | COMPLEXITY=12 | LINES=21 */
 
 fn for_location_inits<'tcx, F>(move_data: &MoveData<'tcx>, loc: Location, mut callback: F)
 where
@@ -165,7 +155,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Indicates which variants are inactive at a `SwitchInt` edge by listing their `VariantIdx`s or
 /// specifying the single active variant's `VariantIdx`.
@@ -173,7 +162,6 @@ pub(crate) enum InactiveVariants {
     Inactives(SmallVec<[VariantIdx; 4]>),
     Active(VariantIdx),
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=7 | LINES=9 */
 
 impl InactiveVariants {
     fn contains(&self, variant_idx: VariantIdx) -> bool {
@@ -183,7 +171,6 @@ impl InactiveVariants {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=30 */
 
 /// Calls `handle_inactive_variant` for each child move path of `enum_place` corresponding to an
 /// inactive variant at a particular `SwitchInt` edge.

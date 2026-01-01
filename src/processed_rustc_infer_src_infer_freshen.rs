@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/freshen.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=40 */
 // Freshening is the process of replacing unknown variables with fresh types. The idea is that
 // the type, after freshening, contains no inference variables but instead contains either a
 // value for each variable or fresh "arbitrary" types wherever a variable would have been.
@@ -40,7 +39,6 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=TypeFreshener | COMPLEXITY=2 | LINES=10 */
 
 use super::InferCtxt;
 
@@ -51,7 +49,6 @@ pub struct TypeFreshener<'a, 'tcx> {
     ty_freshen_map: FxHashMap<ty::InferTy, Ty<'tcx>>,
     const_freshen_map: FxHashMap<ty::InferConst, ty::Const<'tcx>>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=27 | LINES=54 */
 
 impl<'a, 'tcx> TypeFreshener<'a, 'tcx> {
     pub fn new(infcx: &'a InferCtxt<'tcx>) -> TypeFreshener<'a, 'tcx> {
@@ -106,7 +103,6 @@ impl<'a, 'tcx> TypeFreshener<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=40 | LINES=75 */
 
 impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for TypeFreshener<'a, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -182,7 +178,6 @@ impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for TypeFreshener<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fold_infer_ty | COMPLEXITY=30 | LINES=58 */
 
 impl<'a, 'tcx> TypeFreshener<'a, 'tcx> {
     // This is separate from `fold_ty` to keep that method small and inlinable.

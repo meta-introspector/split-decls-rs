@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/inline.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // FIXME(jdonszelmann): merge these two parsers and error when both attributes are present here.
 //                      note: need to model better how duplicate attr errors work when not using
 //                      SingleAttributeParser which is what we have two of here.
 
 use crate::rustc_complete::attrs::{AttributeKind, InlineAttr};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=28 | LINES=62 */
 
 use crate::prelude::*;
 
@@ -68,7 +66,6 @@ impl<S: Stage> SingleAttributeParser<S> for InlineParser {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=18 | LINES=42 */
 
 pub(crate) struct RustcForceInlineParser;
 

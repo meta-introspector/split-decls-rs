@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/function_item_references.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use itertools::Itertools;
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::FUNCTION_ITEM_REFERENCES;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=6 | LINES=11 */
 
 use crate::errors;
 
@@ -22,13 +19,11 @@ impl<'tcx> crate::MirLint<'tcx> for FunctionItemReferences {
         checker.visit_body(body);
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FunctionItemRefChecker | COMPLEXITY=2 | LINES=5 */
 
 struct FunctionItemRefChecker<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     body: &'a Body<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_terminator | COMPLEXITY=27 | LINES=37 */
 
 impl<'tcx> Visitor<'tcx> for FunctionItemRefChecker<'_, 'tcx> {
     /// Emits a lint for function reference arguments bound by `fmt::Pointer` or passed to
@@ -66,7 +61,6 @@ impl<'tcx> Visitor<'tcx> for FunctionItemRefChecker<'_, 'tcx> {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_bound_args | COMPLEXITY=86 | LINES=128 */
 
 impl<'tcx> FunctionItemRefChecker<'_, 'tcx> {
     /// Emits a lint for function reference arguments bound by `fmt::Pointer` in calls to the

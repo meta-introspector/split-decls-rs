@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/validate_attr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 // Meta-syntax validation logic of attributes for post-expansion.
 
 use std::slice;
@@ -10,22 +9,16 @@ use crate::rustc_complete::{
     self as ast, AttrArgs, Attribute, DelimArgs, MetaItem, MetaItemInner, MetaItemKind, NodeId,
     Path, Safety,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, DiagCtxtHandle, FatalError, PResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{AttributeSafety, AttributeTemplate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_parse::parse_in;
 use crate::rustc_complete::errors::report_lit_error;
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::{ILL_FORMED_ATTRIBUTE_INPUT, UNSAFE_ATTR_OUTSIDE_UNSAFE};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{AttributeParser, Late, session_diagnostics as errors};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_attr | COMPLEXITY=36 | LINES=43 */
 
 pub fn check_attr(psess: &ParseSess, attr: &Attribute, id: NodeId) {
     if attr.is_doc_comment() || attr.has_name(sym::cfg_trace) || attr.has_name(sym::cfg_attr_trace)
@@ -69,7 +62,6 @@ pub fn check_attr(psess: &ParseSess, attr: &Attribute, id: NodeId) {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_meta | COMPLEXITY=35 | LINES=64 */
 
 pub fn parse_meta<'a>(psess: &'a ParseSess, attr: &Attribute) -> PResult<'a, MetaItem> {
     let item = attr.get_normal_item();
@@ -134,7 +126,6 @@ pub fn parse_meta<'a>(psess: &'a ParseSess, attr: &Attribute) -> PResult<'a, Met
         },
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_meta_bad_delim | COMPLEXITY=7 | LINES=10 */
 
 fn check_meta_bad_delim(psess: &ParseSess, span: DelimSpan, delim: Delimiter) {
     if let Delimiter::Parenthesis = delim {
@@ -145,7 +136,6 @@ fn check_meta_bad_delim(psess: &ParseSess, span: DelimSpan, delim: Delimiter) {
         sugg: errors::MetaBadDelimSugg { open: span.open, close: span.close },
     });
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_attr_template_compatible | COMPLEXITY=13 | LINES=14 */
 
 /// Checks that the given meta-item is compatible with this `AttributeTemplate`.
 fn is_attr_template_compatible(template: &AttributeTemplate, meta: &ast::MetaItemKind) -> bool {
@@ -160,7 +150,6 @@ fn is_attr_template_compatible(template: &AttributeTemplate, meta: &ast::MetaIte
         MetaItemKind::NameValue(..) => false,
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_attribute_safety | COMPLEXITY=40 | LINES=91 */
 
 pub fn check_attribute_safety(
     psess: &ParseSess,
@@ -252,7 +241,6 @@ pub fn check_attribute_safety(
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=deny_builtin_meta_unsafety | COMPLEXITY=9 | LINES=11 */
 
 // Called by `check_builtin_meta_item` and code that manually denies
 // `unsafe(...)` in `cfg`
@@ -264,7 +252,6 @@ pub fn deny_builtin_meta_unsafety(diag: DiagCtxtHandle<'_>, unsafety: Safety, na
         diag.emit_err(errors::InvalidAttrUnsafe { span: unsafe_span, name: name.clone() });
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_builtin_meta_item | COMPLEXITY=9 | LINES=18 */
 
 pub fn check_builtin_meta_item(
     psess: &ParseSess,
@@ -283,7 +270,6 @@ pub fn check_builtin_meta_item(
         deny_builtin_meta_unsafety(psess.dcx(), meta.unsafety, &meta.path);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=emit_malformed_attribute | COMPLEXITY=53 | LINES=57 */
 
 fn emit_malformed_attribute(
     psess: &ParseSess,
@@ -341,7 +327,6 @@ fn emit_malformed_attribute(
         err.emit();
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=emit_fatal_malformed_builtin_attribute | COMPLEXITY=2 | LINES=12 */
 
 pub fn emit_fatal_malformed_builtin_attribute(
     psess: &ParseSess,

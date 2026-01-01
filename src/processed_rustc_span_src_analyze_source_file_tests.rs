@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/analyze_source_file/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=$test_name | COMPLEXITY=11 | LINES=25 */
 use super::*;
 
 macro_rules! test {
@@ -25,7 +24,6 @@ macro_rules! test {
         }
     };
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=84 */
 
 test!(
     case: empty_text,

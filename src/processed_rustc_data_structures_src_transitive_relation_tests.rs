@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/transitive_relation/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=postdom_parent | COMPLEXITY=5 | LINES=9 */
 use super::*;
 
 impl<T: Eq + Hash + Copy> TransitiveRelation<T> {
@@ -9,7 +8,6 @@ impl<T: Eq + Hash + Copy> TransitiveRelation<T> {
         self.mutual_immediate_postdominator(self.parents(a))
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_one_step | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn test_one_step() {
@@ -22,7 +20,6 @@ fn test_one_step() {
     assert!(!relation.contains("b", "a"));
     assert!(!relation.contains("a", "d"));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_many_steps | COMPLEXITY=3 | LINES=27 */
 
 #[test]
 fn test_many_steps() {
@@ -50,7 +47,6 @@ fn test_many_steps() {
     assert!(!relation.contains("a", "x"));
     assert!(!relation.contains("b", "f"));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=mubs_triangle | COMPLEXITY=2 | LINES=15 */
 
 #[test]
 fn mubs_triangle() {
@@ -66,7 +62,6 @@ fn mubs_triangle() {
     assert_eq!(relation.parents("a"), vec!["tcx"]);
     assert_eq!(relation.parents("b"), vec!["tcx"]);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=mubs_best_choice1 | COMPLEXITY=3 | LINES=29 */
 
 #[test]
 fn mubs_best_choice1() {
@@ -96,7 +91,6 @@ fn mubs_best_choice1() {
     assert_eq!(relation.parents("2"), vec!["1"]);
     assert!(relation.parents("1").is_empty());
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=mubs_best_choice2 | COMPLEXITY=3 | LINES=28 */
 
 #[test]
 fn mubs_best_choice2() {
@@ -125,7 +119,6 @@ fn mubs_best_choice2() {
     assert_eq!(relation.parents("1"), vec!["2"]);
     assert!(relation.parents("2").is_empty());
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=mubs_no_best_choice | COMPLEXITY=3 | LINES=17 */
 
 #[test]
 fn mubs_no_best_choice() {
@@ -143,7 +136,6 @@ fn mubs_no_best_choice() {
     assert_eq!(relation.parents("0"), vec!["1", "2"]);
     assert_eq!(relation.parents("3"), vec!["1", "2"]);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=mubs_best_choice_scc | COMPLEXITY=3 | LINES=20 */
 
 #[test]
 fn mubs_best_choice_scc() {
@@ -164,7 +156,6 @@ fn mubs_best_choice_scc() {
     assert_eq!(relation.minimal_upper_bounds("0", "3"), vec!["1"]);
     assert_eq!(relation.parents("0"), vec!["1"]);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=pdub_crisscross | COMPLEXITY=3 | LINES=23 */
 
 #[test]
 fn pdub_crisscross() {
@@ -188,7 +179,6 @@ fn pdub_crisscross() {
     assert_eq!(relation.postdom_parent("a"), Some("x"));
     assert_eq!(relation.postdom_parent("b"), Some("x"));
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=pdub_crisscross_more | COMPLEXITY=3 | LINES=33 */
 
 #[test]
 fn pdub_crisscross_more() {
@@ -222,7 +212,6 @@ fn pdub_crisscross_more() {
     assert_eq!(relation.postdom_parent("a"), Some("x"));
     assert_eq!(relation.postdom_parent("b"), Some("x"));
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pdub_lub | COMPLEXITY=3 | LINES=23 */
 
 #[test]
 fn pdub_lub() {
@@ -246,7 +235,6 @@ fn pdub_lub() {
     assert_eq!(relation.postdom_parent("a1"), Some("x"));
     assert_eq!(relation.postdom_parent("b1"), Some("x"));
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=mubs_intermediate_node_on_one_side_only | COMPLEXITY=3 | LINES=17 */
 
 #[test]
 fn mubs_intermediate_node_on_one_side_only() {
@@ -264,7 +252,6 @@ fn mubs_intermediate_node_on_one_side_only() {
 
     assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["d"]);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=mubs_scc_1 | COMPLEXITY=4 | LINES=22 */
 
 #[test]
 fn mubs_scc_1() {
@@ -287,7 +274,6 @@ fn mubs_scc_1() {
 
     assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mubs_scc_2 | COMPLEXITY=4 | LINES=21 */
 
 #[test]
 fn mubs_scc_2() {
@@ -309,7 +295,6 @@ fn mubs_scc_2() {
 
     assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=mubs_scc_3 | COMPLEXITY=4 | LINES=22 */
 
 #[test]
 fn mubs_scc_3() {
@@ -332,7 +317,6 @@ fn mubs_scc_3() {
 
     assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mubs_scc_4 | COMPLEXITY=4 | LINES=23 */
 
 #[test]
 fn mubs_scc_4() {
@@ -356,7 +340,6 @@ fn mubs_scc_4() {
 
     assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=parent | COMPLEXITY=6 | LINES=37 */
 
 #[test]
 fn parent() {
@@ -394,7 +377,6 @@ fn parent() {
     let p = relation.postdom_parent(3);
     assert_eq!(p, Some(0));
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=minimal_scc_representative_1 | COMPLEXITY=4 | LINES=26 */
 
 #[test]
 fn minimal_scc_representative_1() {
@@ -421,7 +403,6 @@ fn minimal_scc_representative_1() {
     assert_eq!(relation.minimal_scc_representative("d"), "c");
     assert_eq!(relation.minimal_scc_representative("e"), "c");
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=minimal_scc_representative_2 | COMPLEXITY=4 | LINES=15 */
 
 #[test]
 fn minimal_scc_representative_2() {

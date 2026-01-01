@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_lint/src/passes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::LintPass;
 use crate::rustc_complete::lint::builtin::HardwiredLints;
 
 use crate::context::{EarlyContext, LateContext};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=check_body | COMPLEXITY=12 | LINES=47 */
 
 #[macro_export]
 macro_rules! late_lint_methods {
@@ -52,7 +50,6 @@ macro_rules! late_lint_methods {
         ]);
     )
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=17 */
 
 /// Trait for types providing lint checks.
 ///
@@ -70,14 +67,12 @@ macro_rules! declare_late_lint_pass {
         }
     )
 }
-/* AST_META: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 
 // Declare the `LateLintPass` trait, which contains empty default definitions
 // for all the `check_*` methods.
 late_lint_methods!(declare_late_lint_pass, []);
 
 impl LateLintPass<'_> for HardwiredLints {}
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 #[macro_export]
 macro_rules! expand_combined_late_lint_pass_method {
@@ -85,7 +80,6 @@ macro_rules! expand_combined_late_lint_pass_method {
         $($self.$pass.$name $params;)*
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! expand_combined_late_lint_pass_methods {
@@ -95,7 +89,6 @@ macro_rules! expand_combined_late_lint_pass_methods {
         })*
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=name | COMPLEXITY=24 | LINES=43 */
 
 /// Combines multiple lints passes into a single lint pass, at compile time,
 /// for maximum speed. Each `check_foo` method in `$methods` within this pass
@@ -139,7 +132,6 @@ macro_rules! declare_combined_late_lint_pass {
         }
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_param | COMPLEXITY=11 | LINES=46 */
 
 #[macro_export]
 macro_rules! early_lint_methods {
@@ -186,7 +178,6 @@ macro_rules! early_lint_methods {
         ]);
     )
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! declare_early_lint_pass {
     ([], [$($(#[$attr:meta])* fn $name:ident($($param:ident: $arg:ty),*);)*]) => (
@@ -195,7 +186,6 @@ macro_rules! declare_early_lint_pass {
         }
     )
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=11 */
 
 // Declare the `EarlyLintPass` trait, which contains empty default definitions
 // for all the `check_*` methods.
@@ -207,7 +197,6 @@ macro_rules! expand_combined_early_lint_pass_method {
         $($self.$pass.$name $params;)*
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! expand_combined_early_lint_pass_methods {
@@ -217,7 +206,6 @@ macro_rules! expand_combined_early_lint_pass_methods {
         })*
     )
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=name | COMPLEXITY=24 | LINES=43 */
 
 /// Combines multiple lints passes into a single lint pass, at compile time,
 /// for maximum speed. Each `check_foo` method in `$methods` within this pass
@@ -261,7 +249,6 @@ macro_rules! declare_combined_early_lint_pass {
         }
     )
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
 
 /// A lint pass boxed up as a trait object.
 pub(crate) type EarlyLintPassObject = Box<dyn EarlyLintPass + 'static>;

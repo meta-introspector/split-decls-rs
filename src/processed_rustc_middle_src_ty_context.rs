@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Type context book-keeping.
 
 #[allow(rustc::usage_of_ty_tykind)]
@@ -7,23 +6,16 @@
 
 use std::assert_matches::debug_assert_matches;
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cmp::Ordering;
 use std::env::VarError;
 use std::ffi::OsStr;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::marker::{PhantomData, PointeeSized};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ops::{Bound, Deref};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, OnceLock};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, iter, mem};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{ExternAbi, FieldIdx, Layout, LayoutData, TargetDataLayout, VariantIdx};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use rustc_ast as ast;
 use crate::rustc_data_structures::defer;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
@@ -32,82 +24,59 @@ use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::sharded::{IntoPointer, ShardedHashMap};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{
     self, DynSend, DynSync, FreezeReadGuard, Lock, RwLock, WorkerLocal,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, LintDiagnostic, LintEmitter, MultiSpan,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, Definitions, DisambiguatorState};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::{self as hir, Attribute, HirId, Node, TraitCandidate, find_attr};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_query_system::cache::WithDepNode;
 use rustc_query_system::dep_graph::DepNodeIndex;
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_complete::cstore::{CrateStoreDyn, Untracked};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::Lint;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefPathHash, StableCrateId};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_type_ir::TyKind::*;
 use rustc_type_ir::lang_items::{SolverAdtLangItem, SolverLangItem, SolverTraitLangItem};
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use rustc_type_ir::lift::Lift;
 use rustc_type_ir::{
     CollectAndApply, Interner, TypeFlags, TypeFoldable, WithCachedTypeInfo, elaborate, search_graph,
 };
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::arena::Arena;
 use crate::dep_graph::{DepGraph, DepKindStruct};
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::canonical::{CanonicalParamEnvCache, CanonicalVarKind, CanonicalVarKinds};
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::lint::lint_level;
 use crate::metadata::ModChild;
 use crate::middle::codegen_fn_attrs::{CodegenFnAttrs, TargetFeature};
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::middle::resolve_bound_vars;
 use crate::mir::interpret::{self, Allocation, ConstAllocation};
-/* AST_META: AST_ID=28 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::{Body, Local, Place, PlaceElem, ProjectionKind, Promoted};
-/* AST_META: AST_ID=29 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::query::plumbing::QuerySystem;
 use crate::query::{IntoQueryParam, LocalCrate, Providers, TyCtxtAt};
-/* AST_META: AST_ID=30 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::thir::Thir;
 use crate::traits;
 use crate::traits::solve::{
     self, CanonicalInput, ExternalConstraints, ExternalConstraintsData, PredefinedOpaques,
     PredefinedOpaquesData, QueryResult, inspect,
 };
-/* AST_META: AST_ID=31 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::ty::predicate::ExistentialPredicateStableCmpExt as _;
 use crate::ty::{
     self, AdtDef, AdtDefData, AdtKind, Binder, Clause, Clauses, Const, GenericArg, GenericArgs,
@@ -116,7 +85,6 @@ use crate::ty::{
     PredicatePolarity, Region, RegionKind, ReprOptions, TraitObjectVisitor, Ty, TyKind, TyVid,
     ValTree, ValTreeKind, Visibility,
 };
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=next_trait_solver_globally | COMPLEXITY=201 | LINES=688 */
 
 #[allow(rustc::usage_of_ty_tykind)]
 impl<'tcx> Interner for TyCtxt<'tcx> {
@@ -805,7 +773,6 @@ impl<'tcx> Interner for TyCtxt<'tcx> {
         self.evaluate_root_goal_for_proof_tree_raw(canonical_goal)
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=$from_solver | COMPLEXITY=19 | LINES=20 */
 
 macro_rules! bidirectional_lang_item_map {
     (
@@ -826,7 +793,6 @@ macro_rules! bidirectional_lang_item_map {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 bidirectional_lang_item_map! {
     SolverLangItem, lang_item_to_solver_lang_item, solver_lang_item_to_lang_item;
@@ -843,7 +809,6 @@ bidirectional_lang_item_map! {
     Metadata,
 // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 bidirectional_lang_item_map! {
     SolverAdtLangItem, lang_item_to_solver_adt_lang_item, solver_adt_lang_item_to_lang_item;
@@ -853,7 +818,6 @@ bidirectional_lang_item_map! {
     Poll,
 // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=35 */
 
 bidirectional_lang_item_map! {
     SolverTraitLangItem, lang_item_to_solver_trait_lang_item, solver_trait_lang_item_to_lang_item;
@@ -889,7 +853,6 @@ bidirectional_lang_item_map! {
     Unsize,
 // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=is_local | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::DefId<TyCtxt<'tcx>> for DefId {
     fn is_local(self) -> bool {
@@ -900,7 +863,6 @@ impl<'tcx> rustc_type_ir::inherent::DefId<TyCtxt<'tcx>> for DefId {
         self.as_local()
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=rust | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::Abi<TyCtxt<'tcx>> for ExternAbi {
     fn rust() -> Self {
@@ -911,7 +873,6 @@ impl<'tcx> rustc_type_ir::inherent::Abi<TyCtxt<'tcx>> for ExternAbi {
         matches!(self, ExternAbi::Rust)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=safe | COMPLEXITY=7 | LINES=14 */
 
 impl<'tcx> rustc_type_ir::inherent::Safety<TyCtxt<'tcx>> for hir::Safety {
     fn safe() -> Self {
@@ -926,7 +887,6 @@ impl<'tcx> rustc_type_ir::inherent::Safety<TyCtxt<'tcx>> for hir::Safety {
         self.prefix_str()
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=generic_const_exprs | COMPLEXITY=11 | LINES=21 */
 
 impl<'tcx> rustc_type_ir::inherent::Features<TyCtxt<'tcx>> for &'tcx crate::rustc_feature::Features {
     fn generic_const_exprs(self) -> bool {
@@ -948,14 +908,12 @@ impl<'tcx> rustc_type_ir::inherent::Features<TyCtxt<'tcx>> for &'tcx crate::rust
         !self.staged_api() && self.enabled(symbol)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> rustc_type_ir::inherent::Span<TyCtxt<'tcx>> for Span {
     fn dummy() -> Self {
         DUMMY_SP
     }
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=CtxtInterners | COMPLEXITY=7 | LINES=36 */
 
 type InternedSet<'tcx, T> = ShardedHashMap<InternedInSet<'tcx, T>, ()>;
 
@@ -992,7 +950,6 @@ pub struct CtxtInterners<'tcx> {
     patterns: InternedSet<'tcx, List<ty::Pattern<'tcx>>>,
     outlives: InternedSet<'tcx, List<ty::ArgOutlivesPredicate<'tcx>>>,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=new | COMPLEXITY=36 | LINES=150 */
 
 impl<'tcx> CtxtInterners<'tcx> {
     fn new(arena: &'tcx WorkerLocal<Arena<'tcx>>) -> CtxtInterners<'tcx> {
@@ -1143,7 +1100,6 @@ impl<'tcx> CtxtInterners<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=CommonTypes | COMPLEXITY=21 | LINES=64 */
 
 // For these preinterned values, an alternative would be to have
 // variable-length vectors that grow as needed. But that turned out to be
@@ -1208,7 +1164,6 @@ pub struct CommonTypes<'tcx> {
     /// for small values of `i` and `v`.
     pub anon_bound_tys: Vec<Vec<Ty<'tcx>>>,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=CommonLifetimes | COMPLEXITY=8 | LINES=16 */
 
 pub struct CommonLifetimes<'tcx> {
     /// `ReStatic`
@@ -1225,7 +1180,6 @@ pub struct CommonLifetimes<'tcx> {
     /// for small values of `i` and `v`.
     pub anon_re_bounds: Vec<Vec<Region<'tcx>>>,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=CommonConsts | COMPLEXITY=2 | LINES=8 */
 
 pub struct CommonConsts<'tcx> {
     pub unit: Const<'tcx>,
@@ -1234,7 +1188,6 @@ pub struct CommonConsts<'tcx> {
     /// Use [`ty::ValTree::zst`] instead.
     pub(crate) valtree_zst: ValTree<'tcx>,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=65 */
 
 impl<'tcx> CommonTypes<'tcx> {
     fn new(
@@ -1300,7 +1253,6 @@ impl<'tcx> CommonTypes<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=36 */
 
 impl<'tcx> CommonLifetimes<'tcx> {
     fn new(interners: &CtxtInterners<'tcx>) -> CommonLifetimes<'tcx> {
@@ -1337,7 +1289,6 @@ impl<'tcx> CommonLifetimes<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=42 */
 
 impl<'tcx> CommonConsts<'tcx> {
     fn new(
@@ -1380,7 +1331,6 @@ impl<'tcx> CommonConsts<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=FreeRegionInfo | COMPLEXITY=4 | LINES=12 */
 
 /// This struct contains information regarding a free parameter region,
 /// either a `ReEarlyParam` or `ReLateParam`.
@@ -1393,7 +1343,6 @@ pub struct FreeRegionInfo {
     /// checks if bound region is in Impl Item
     pub is_impl_item: bool,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=TyCtxtFeed | COMPLEXITY=2 | LINES=8 */
 
 /// This struct should only be created by `create_def`.
 #[derive(Copy, Clone)]
@@ -1402,12 +1351,10 @@ pub struct TyCtxtFeed<'tcx, KEY: Copy> {
     // Do not allow direct access, as downstream code must not mutate this field.
     key: KEY,
 }
-/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 /// Never return a `Feed` from a query. Only queries that create a `DefId` are
 /// allowed to feed queries for that `DefId`.
 impl<KEY: Copy, CTX> !HashStable<CTX> for TyCtxtFeed<'_, KEY> {}
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=Feed | COMPLEXITY=2 | LINES=11 */
 
 /// The same as `TyCtxtFeed`, but does not contain a `TyCtxt`.
 /// Use this to pass around when you have a `TyCtxt` elsewhere.
@@ -1419,19 +1366,16 @@ pub struct Feed<'tcx, KEY: Copy> {
     // Do not allow direct access, as downstream code must not mutate this field.
     key: KEY,
 }
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 /// Never return a `Feed` from a query. Only queries that create a `DefId` are
 /// allowed to feed queries for that `DefId`.
 impl<KEY: Copy, CTX> !HashStable<CTX> for Feed<'_, KEY> {}
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<T: fmt::Debug + Copy> fmt::Debug for Feed<'_, T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.key.fmt(f)
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=feed_unit_query | COMPLEXITY=16 | LINES=29 */
 
 /// Some workarounds to use cases that cannot use `create_def`.
 /// Do not add new ways to create `TyCtxtFeed` without consulting
@@ -1461,7 +1405,6 @@ impl<'tcx> TyCtxt<'tcx> {
         TyCtxtFeed { tcx: self, key }.type_of(value)
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=key | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx, KEY: Copy> TyCtxtFeed<'tcx, KEY> {
     #[inline(always)]
@@ -1474,7 +1417,6 @@ impl<'tcx, KEY: Copy> TyCtxtFeed<'tcx, KEY> {
         Feed { _tcx: PhantomData, key: self.key }
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=key | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx, KEY: Copy> Feed<'tcx, KEY> {
     #[inline(always)]
@@ -1487,7 +1429,6 @@ impl<'tcx, KEY: Copy> Feed<'tcx, KEY> {
         TyCtxtFeed { tcx, key: self.key }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=12 | LINES=34 */
 
 impl<'tcx> TyCtxtFeed<'tcx, LocalDefId> {
     #[inline(always)]
@@ -1522,7 +1463,6 @@ impl<'tcx> TyCtxtFeed<'tcx, LocalDefId> {
         self.feed_owner_id().hir_attr_map(attrs);
     }
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=TyCtxt | COMPLEXITY=10 | LINES=24 */
 
 /// The central data structure of the compiler. It stores references
 /// to the various **arenas** and also houses the results of the
@@ -1547,7 +1487,6 @@ impl<'tcx> TyCtxtFeed<'tcx, LocalDefId> {
 pub struct TyCtxt<'tcx> {
     gcx: &'tcx GlobalCtxt<'tcx>,
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=emit_node_span_lint | COMPLEXITY=5 | LINES=14 */
 
 impl<'tcx> LintEmitter for TyCtxt<'tcx> {
     type Id = HirId;
@@ -1562,20 +1501,16 @@ impl<'tcx> LintEmitter for TyCtxt<'tcx> {
         self.emit_node_span_lint(lint, hir_id, span, decorator);
     }
 }
-/* AST_META: AST_ID=62 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=10 | LINES=5 */
 
 // Explicitly implement `DynSync` and `DynSend` for `TyCtxt` to short circuit trait resolution. Its
 // field are asserted to implement these traits below, so this is trivially safe, and it greatly
 // speeds-up compilation of this crate and its dependents.
 unsafe impl DynSend for TyCtxt<'_> {}
-/* AST_META: AST_ID=63 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl DynSync for TyCtxt<'_> {}
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=_assert_tcx_fields | COMPLEXITY=2 | LINES=4 */
 fn _assert_tcx_fields() {
     sync::assert_dyn_sync::<&'_ GlobalCtxt<'_>>();
     sync::assert_dyn_send::<&'_ GlobalCtxt<'_>>();
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Deref for TyCtxt<'tcx> {
     type Target = &'tcx GlobalCtxt<'tcx>;
@@ -1584,7 +1519,6 @@ impl<'tcx> Deref for TyCtxt<'tcx> {
         &self.gcx
     }
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=GlobalCtxt | COMPLEXITY=32 | LINES=75 */
 
 /// See [TyCtxt] for details about this type.
 pub struct GlobalCtxt<'tcx> {
@@ -1660,7 +1594,6 @@ pub struct GlobalCtxt<'tcx> {
     /// A jobserver reference used to release then acquire a token while waiting on a query.
     pub jobserver_proxy: Arc<Proxy>,
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=enter | COMPLEXITY=8 | LINES=25 */
 
 impl<'tcx> GlobalCtxt<'tcx> {
     /// Installs `self` in a `TyCtxt` and `ImplicitCtxt` for the duration of
@@ -1686,7 +1619,6 @@ impl<'tcx> GlobalCtxt<'tcx> {
         tls::enter_context(&icx, || f(icx.tcx))
     }
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=CurrentGcx | COMPLEXITY=7 | LINES=13 */
 
 /// This is used to get a reference to a `GlobalCtxt` if one is available.
 ///
@@ -1700,12 +1632,9 @@ pub struct CurrentGcx {
     /// and reset to `None` when that function returns or unwinds.
     value: Arc<RwLock<Option<*const ()>>>,
 }
-/* AST_META: AST_ID=69 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl DynSend for CurrentGcx {}
-/* AST_META: AST_ID=70 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl DynSync for CurrentGcx {}
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=new | COMPLEXITY=13 | LINES=15 */
 
 impl CurrentGcx {
     pub fn new() -> Self {
@@ -1721,7 +1650,6 @@ impl CurrentGcx {
         f(unsafe { &*gcx })
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=has_typeck_results | COMPLEXITY=188 | LINES=432 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn has_typeck_results(self, def_id: LocalDefId) -> bool {
@@ -2154,7 +2082,6 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=create_def | COMPLEXITY=4 | LINES=18 */
 
 impl<'tcx> TyCtxtAt<'tcx> {
     /// Create a new definition within the incr. comp. engine.
@@ -2173,7 +2100,6 @@ impl<'tcx> TyCtxtAt<'tcx> {
         feed
     }
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=create_def | COMPLEXITY=137 | LINES=318 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// `tcx`-dependent operations performed for every created definition.
@@ -2491,7 +2417,6 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=25 | LINES=35 */
 
 macro_rules! nop_lift {
     ($set:ident; $ty:ty => $lifted:ty) => {
@@ -2527,7 +2452,6 @@ macro_rules! nop_lift {
         }
     };
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=24 | LINES=22 */
 
 macro_rules! nop_list_lift {
     ($set:ident; $ty:ty => $lifted:ty) => {
@@ -2550,39 +2474,25 @@ macro_rules! nop_list_lift {
         }
     };
 }
-/* AST_META: AST_ID=77 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 nop_lift! { type_; Ty<'a> => Ty<'tcx> }
-/* AST_META: AST_ID=78 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { region; Region<'a> => Region<'tcx> }
-/* AST_META: AST_ID=79 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { const_; Const<'a> => Const<'tcx> }
-/* AST_META: AST_ID=80 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { pat; Pattern<'a> => Pattern<'tcx> }
-/* AST_META: AST_ID=81 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { const_allocation; ConstAllocation<'a> => ConstAllocation<'tcx> }
-/* AST_META: AST_ID=82 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { predicate; Predicate<'a> => Predicate<'tcx> }
-/* AST_META: AST_ID=83 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { predicate; Clause<'a> => Clause<'tcx> }
-/* AST_META: AST_ID=84 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { layout; Layout<'a> => Layout<'tcx> }
-/* AST_META: AST_ID=85 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_lift! { valtree; ValTree<'a> => ValTree<'tcx> }
-/* AST_META: AST_ID=86 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 nop_list_lift! { type_lists; Ty<'a> => Ty<'tcx> }
-/* AST_META: AST_ID=87 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 nop_list_lift! {
     poly_existential_predicates; PolyExistentialPredicate<'a> => PolyExistentialPredicate<'tcx>
 }
-/* AST_META: AST_ID=88 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 nop_list_lift! { bound_variable_kinds; ty::BoundVariableKind => ty::BoundVariableKind }
-/* AST_META: AST_ID=89 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 // This is the impl for `&'a GenericArgs<'a>`.
 nop_list_lift! { args; GenericArg<'a> => GenericArg<'tcx> }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=DebugStat | COMPLEXITY=55 | LINES=76 */
 
 macro_rules! sty_debug_print {
     ($fmt: expr, $ctxt: expr, $($variant: ident),*) => {{
@@ -2659,7 +2569,6 @@ macro_rules! sty_debug_print {
         inner::go($fmt, $ctxt)
     }}
 }
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=debug_stats | COMPLEXITY=10 | LINES=39 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn debug_stats(self) -> impl fmt::Debug {
@@ -2699,7 +2608,6 @@ impl<'tcx> TyCtxt<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=92 | TYPE=FUNCTION | NAME=InternedInSet | COMPLEXITY=5 | LINES=12 */
 
 // This type holds a `T` in the interner. The `T` is stored in the arena and
 // this type just holds a pointer to it, but it still effectively owns it. It
@@ -2712,17 +2620,14 @@ impl<'tcx, T: 'tcx + ?Sized + PointeeSized> Clone for InternedInSet<'tcx, T> {
         InternedInSet(self.0)
     }
 }
-/* AST_META: AST_ID=93 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, T: 'tcx + ?Sized + PointeeSized> Copy for InternedInSet<'tcx, T> {}
-/* AST_META: AST_ID=94 | TYPE=FUNCTION | NAME=into_pointer | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, T: 'tcx + ?Sized + PointeeSized> IntoPointer for InternedInSet<'tcx, T> {
     fn into_pointer(&self) -> *const () {
         self.0 as *const _ as *const ()
     }
 }
-/* AST_META: AST_ID=95 | TYPE=FUNCTION | NAME=borrow | COMPLEXITY=5 | LINES=7 */
 
 #[allow(rustc::usage_of_ty_tykind)]
 impl<'tcx, T> Borrow<T> for InternedInSet<'tcx, WithCachedTypeInfo<T>> {
@@ -2730,7 +2635,6 @@ impl<'tcx, T> Borrow<T> for InternedInSet<'tcx, WithCachedTypeInfo<T>> {
         &self.0.internee
     }
 }
-/* AST_META: AST_ID=96 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, WithCachedTypeInfo<T>> {
     fn eq(&self, other: &InternedInSet<'tcx, WithCachedTypeInfo<T>>) -> bool {
@@ -2739,10 +2643,8 @@ impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, WithCachedTypeInfo<T>
         self.0.internee == other.0.internee
     }
 }
-/* AST_META: AST_ID=97 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, T: Eq> Eq for InternedInSet<'tcx, WithCachedTypeInfo<T>> {}
-/* AST_META: AST_ID=98 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, WithCachedTypeInfo<T>> {
     fn hash<H: Hasher>(&self, s: &mut H) {
@@ -2750,14 +2652,12 @@ impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, WithCachedTypeInfo<T>> {
         self.0.internee.hash(s)
     }
 }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=borrow | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, T> Borrow<[T]> for InternedInSet<'tcx, List<T>> {
     fn borrow(&self) -> &[T] {
         &self.0[..]
     }
 }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, List<T>> {
     fn eq(&self, other: &InternedInSet<'tcx, List<T>>) -> bool {
@@ -2766,10 +2666,8 @@ impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, List<T>> {
         self.0[..] == other.0[..]
     }
 }
-/* AST_META: AST_ID=101 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, T: Eq> Eq for InternedInSet<'tcx, List<T>> {}
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, List<T>> {
     fn hash<H: Hasher>(&self, s: &mut H) {
@@ -2777,14 +2675,12 @@ impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, List<T>> {
         self.0[..].hash(s)
     }
 }
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=borrow | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, T> Borrow<[T]> for InternedInSet<'tcx, ListWithCachedTypeInfo<T>> {
     fn borrow(&self) -> &[T] {
         &self.0[..]
     }
 }
-/* AST_META: AST_ID=104 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, ListWithCachedTypeInfo<T>> {
     fn eq(&self, other: &InternedInSet<'tcx, ListWithCachedTypeInfo<T>>) -> bool {
@@ -2793,10 +2689,8 @@ impl<'tcx, T: PartialEq> PartialEq for InternedInSet<'tcx, ListWithCachedTypeInf
         self.0[..] == other.0[..]
     }
 }
-/* AST_META: AST_ID=105 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, T: Eq> Eq for InternedInSet<'tcx, ListWithCachedTypeInfo<T>> {}
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, ListWithCachedTypeInfo<T>> {
     fn hash<H: Hasher>(&self, s: &mut H) {
@@ -2804,7 +2698,6 @@ impl<'tcx, T: Hash> Hash for InternedInSet<'tcx, ListWithCachedTypeInfo<T>> {
         self.0[..].hash(s)
     }
 }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=borrow | COMPLEXITY=28 | LINES=36 */
 
 macro_rules! direct_interners {
     ($($name:ident: $vis:vis $method:ident($ty:ty): $ret_ctor:ident -> $ret_ty:ty,)+) => {
@@ -2841,7 +2734,6 @@ macro_rules! direct_interners {
         })+
     }
 }
-/* AST_META: AST_ID=108 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 
 // Functions with a `mk_` prefix are intended for use outside this file and
 // crate. Functions with an `intern_` prefix are intended for use within this
@@ -2858,7 +2750,6 @@ direct_interners! {
     predefined_opaques_in_body: pub mk_predefined_opaques_in_body(PredefinedOpaquesData<TyCtxt<'tcx>>):
         PredefinedOpaques -> PredefinedOpaques<'tcx>,
 }
-/* AST_META: AST_ID=109 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=16 */
 
 macro_rules! slice_interners {
     ($($field:ident: $vis:vis $method:ident($ty:ty)),+ $(,)?) => (
@@ -2875,7 +2766,6 @@ macro_rules! slice_interners {
         }
     );
 }
-/* AST_META: AST_ID=110 | TYPE=FUNCTION | NAME=safe_to_unsafe_fn_ty | COMPLEXITY=278 | LINES=752 */
 
 // These functions intern slices. They all have a corresponding
 // `mk_foo_from_iter` function that interns an iterator. The slice version
@@ -3628,7 +3518,6 @@ impl<'tcx> TyCtxt<'tcx> {
         false
     }
 }
-/* AST_META: AST_ID=111 | TYPE=STRUCT | NAME=DeducedParamAttrs | COMPLEXITY=5 | LINES=15 */
 
 /// Parameter attributes that can only be determined by examining the body of a function instead
 /// of just its signature.
@@ -3644,7 +3533,6 @@ pub struct DeducedParamAttrs {
     /// type is freeze).
     pub read_only: bool,
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=6 | LINES=12 */
 
 pub fn provide(providers: &mut Providers) {
     providers.is_panic_runtime =
@@ -3657,7 +3545,6 @@ pub fn provide(providers: &mut Providers) {
     };
     providers.source_span = |tcx, def_id| tcx.untracked.source_span.get(def_id).unwrap_or(DUMMY_SP);
 }
-/* AST_META: AST_ID=113 | TYPE=FUNCTION | NAME=contains_name | COMPLEXITY=2 | LINES=4 */
 
 pub fn contains_name(attrs: &[Attribute], name: Symbol) -> bool {
     attrs.iter().any(|x| x.has_name(name))

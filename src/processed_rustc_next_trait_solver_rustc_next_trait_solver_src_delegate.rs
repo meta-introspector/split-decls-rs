@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/delegate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Deref;
 
 use rustc_type_ir::solve::{Certainty, Goal, NoSolution};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::{self as ty, InferCtxtLike, Interner, TypeFoldable};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=9 | LINES=89 */
 
 pub trait SolverDelegate: Deref<Target = Self::Infcx> + Sized {
     type Infcx: InferCtxtLike<Interner = Self::Interner>;

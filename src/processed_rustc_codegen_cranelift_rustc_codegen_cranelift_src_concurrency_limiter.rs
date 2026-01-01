@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/concurrency_limiter.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, Condvar, Mutex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::jobserver::{self, HelperThread};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_complete::DiagCtxtHandle;
 
 // FIXME don't panic when a worker thread panics
@@ -15,7 +12,6 @@ pub(super) struct ConcurrencyLimiter {
     available_token_condvar: Arc<Condvar>,
     finished: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=76 */
 
 impl ConcurrencyLimiter {
     pub(super) fn new(pending_jobs: usize) -> Self {
@@ -92,7 +88,6 @@ impl ConcurrencyLimiter {
         self.finished = true;
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=8 | LINES=8 */
 
 impl Drop for ConcurrencyLimiter {
     fn drop(&mut self) {
@@ -101,14 +96,12 @@ impl Drop for ConcurrencyLimiter {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub(super) struct ConcurrencyLimiterToken {
     state: Arc<Mutex<state::ConcurrencyLimiterState>>,
     available_token_condvar: Arc<Condvar>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=8 */
 
 impl Drop for ConcurrencyLimiterToken {
     fn drop(&mut self) {
@@ -117,7 +110,6 @@ impl Drop for ConcurrencyLimiterToken {
         self.available_token_condvar.notify_one();
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=drop_excess_capacity | COMPLEXITY=25 | LINES=94 */
 
 mod state {
     use crate::rustc_data_structures::jobserver::Acquired;

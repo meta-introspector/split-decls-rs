@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/def_path_hash_map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::owned_slice::OwnedSlice;
 use crate::rustc_complete::def_path_hash_map::{Config as HashMapConfig, DefPathHashMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefIndex, DefPathHash};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rmeta::{DecodeContext, EncodeContext};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum DefPathHashMapRef<'tcx> {
     OwnedFromMetadata(odht::HashTable<HashMapConfig, OwnedSlice>),
     BorrowedFromTcx(&'tcx DefPathHashMap),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=14 */
 
 impl DefPathHashMapRef<'_> {
     #[inline]
@@ -30,7 +24,6 @@ impl DefPathHashMapRef<'_> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=14 | LINES=15 */
 
 impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for DefPathHashMapRef<'tcx> {
     fn encode(&self, e: &mut EncodeContext<'a, 'tcx>) {
@@ -46,7 +39,6 @@ impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for DefPathHashMapRef<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=10 | LINES=18 */
 
 impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for DefPathHashMapRef<'static> {
     fn decode(d: &mut DecodeContext<'a, 'tcx>) -> DefPathHashMapRef<'static> {

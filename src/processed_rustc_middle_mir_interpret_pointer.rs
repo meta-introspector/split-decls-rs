@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/pointer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::num::NonZero;
 
 use crate::rustc_abi::{HasDataLayout, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::static_assert_size;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=pointer_size | COMPLEXITY=11 | LINES=45 */
 
 use super::AllocId;
 
@@ -53,10 +50,8 @@ pub trait PointerArithmetic: HasDataLayout {
         self.pointer_size().sign_extend(val.into()).try_into().unwrap()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: HasDataLayout> PointerArithmetic for T {}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=30 */
 
 /// This trait abstracts over the kind of provenance that is associated with a `Pointer`. It is
 /// mostly opaque; the `Machine` trait extends it with some more operations that also have access to
@@ -87,7 +82,6 @@ pub trait Provenance: Copy + PartialEq + fmt::Debug + 'static {
     /// Defines the 'join' of provenance: what happens when doing a pointer load and different bytes have different provenance.
     fn join(left: Self, right: Self) -> Option<Self>;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=CtfeProvenance(NonZero | COMPLEXITY=8 | LINES=22 */
 
 /// The type of provenance in the compile-time interpreter.
 /// This is a packed representation of:
@@ -110,7 +104,6 @@ impl From<AllocId> for CtfeProvenance {
         prov
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=10 */
 
 impl fmt::Debug for CtfeProvenance {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -121,7 +114,6 @@ impl fmt::Debug for CtfeProvenance {
         Ok(())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=alloc_id | COMPLEXITY=19 | LINES=52 */
 
 const IMMUTABLE_MASK: u64 = 1 << 63; // the highest bit
 const SHARED_REF_MASK: u64 = 1 << 62;
@@ -174,7 +166,6 @@ impl CtfeProvenance {
         CtfeProvenance(self.0 | SHARED_REF_MASK)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=22 | LINES=31 */
 
 impl Provenance for CtfeProvenance {
     // With the `AllocId` as provenance, the `offset` is interpreted *relative to the allocation*,
@@ -206,7 +197,6 @@ impl Provenance for CtfeProvenance {
         if left == right { Some(left) } else { None }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=32 */
 
 // We also need this impl so that one can debug-print `Pointer<AllocId>`
 impl Provenance for AllocId {
@@ -239,7 +229,6 @@ impl Provenance for AllocId {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=Pointer | COMPLEXITY=2 | LINES=10 */
 
 /// Represents a pointer in the Miri engine.
 ///
@@ -250,7 +239,6 @@ pub struct Pointer<Prov = CtfeProvenance> {
     pub(super) offset: Size, // kept private to avoid accidental misinterpretation (meaning depends on `Prov` type)
     pub provenance: Prov,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=13 */
 
 static_assert_size!(Pointer, 16);
 // `Option<Prov>` pointers are also passed around quite a bit
@@ -264,7 +252,6 @@ impl<Prov: Provenance> fmt::Debug for Pointer<Prov> {
         Provenance::fmt(self, f)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=9 */
 
 impl<Prov: Provenance> fmt::Debug for Pointer<Option<Prov>> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -274,7 +261,6 @@ impl<Prov: Provenance> fmt::Debug for Pointer<Option<Prov>> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl<Prov: Provenance> fmt::Display for Pointer<Option<Prov>> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -285,7 +271,6 @@ impl<Prov: Provenance> fmt::Display for Pointer<Option<Prov>> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=8 */
 
 /// Produces a `Pointer` that points to the beginning of the `Allocation`.
 impl From<AllocId> for Pointer {
@@ -294,14 +279,12 @@ impl From<AllocId> for Pointer {
         Pointer::new(alloc_id.into(), Size::ZERO)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 impl From<CtfeProvenance> for Pointer {
     #[inline(always)]
     fn from(prov: CtfeProvenance) -> Self {
         Pointer::new(prov, Size::ZERO)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=8 */
 
 impl<Prov> From<Pointer<Prov>> for Pointer<Option<Prov>> {
     #[inline(always)]
@@ -310,7 +293,6 @@ impl<Prov> From<Pointer<Prov>> for Pointer<Option<Prov>> {
         Pointer::new(Some(prov), offset)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=into_pointer_or_addr | COMPLEXITY=15 | LINES=35 */
 
 impl<Prov> Pointer<Option<Prov>> {
     /// Convert this pointer that *might* have a provenance into a pointer that *definitely* has a
@@ -346,7 +328,6 @@ impl<Prov> Pointer<Option<Prov>> {
         Pointer::without_provenance(0)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=32 */
 
 impl<Prov> Pointer<Prov> {
     #[inline(always)]
@@ -379,7 +360,6 @@ impl<Prov> Pointer<Prov> {
         self.wrapping_offset(Size::from_bytes(i as u64), cx)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=prov_and_relative_offset | COMPLEXITY=3 | LINES=9 */
 
 impl Pointer<CtfeProvenance> {
     /// Return the provenance and relative offset stored in this pointer. Safer alternative to

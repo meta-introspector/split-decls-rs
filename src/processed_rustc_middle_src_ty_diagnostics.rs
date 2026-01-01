@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // Diagnostics related methods for `Ty`.
 
 use std::fmt::Write;
@@ -9,14 +8,10 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, IntoDiagArg, into_diag_arg_using_display, listify, pluralize,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, Namespace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, AmbigArg, LangItem, PredicateOrigin, WherePredicateKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use rustc_type_ir::TyKind::*;
 
 use crate::ty::{
@@ -24,7 +19,6 @@ use crate::ty::{
     PolyTraitPredicate, Projection, Ty, TyCtxt, TypeFoldable, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitor,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
 
 impl IntoDiagArg for Ty<'_> {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -34,7 +28,6 @@ impl IntoDiagArg for Ty<'_> {
         })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
 
 impl IntoDiagArg for Instance<'_> {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -44,12 +37,10 @@ impl IntoDiagArg for Instance<'_> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 into_diag_arg_using_display! {
     ty::Region<'_>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_primitive_ty | COMPLEXITY=18 | LINES=54 */
 
 impl<'tcx> Ty<'tcx> {
     /// Similar to `Ty::is_primitive`, but also considers inferred numeric values to be primitive.
@@ -104,7 +95,6 @@ impl<'tcx> Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_suggestable | COMPLEXITY=5 | LINES=20 */
 
 pub trait IsSuggestable<'tcx>: Sized {
     /// Whether this makes sense to suggest in a diagnostic.
@@ -125,7 +115,6 @@ pub trait IsSuggestable<'tcx>: Sized {
         placeholder: Option<Ty<'tcx>>,
     ) -> Option<Self>;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_suggestable | COMPLEXITY=9 | LINES=19 */
 
 impl<'tcx, T> IsSuggestable<'tcx> for T
 where
@@ -145,7 +134,6 @@ where
         self.try_fold_with(&mut MakeSuggestableFolder { tcx, infer_suggestable, placeholder }).ok()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=suggest_arbitrary_trait_bound | COMPLEXITY=32 | LINES=45 */
 
 pub fn suggest_arbitrary_trait_bound<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -191,7 +179,6 @@ pub fn suggest_arbitrary_trait_bound<'tcx>(
     );
     true
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Debug, Clone, Copy)]
 enum SuggestChangingConstraintsMessage<'a> {
@@ -201,7 +188,6 @@ enum SuggestChangingConstraintsMessage<'a> {
     RemoveMaybeUnsized,
     ReplaceMaybeUnsizedWithSized,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=suggest_changing_unsized_bound | COMPLEXITY=46 | LINES=78 */
 
 fn suggest_changing_unsized_bound(
     generics: &hir::Generics<'_>,
@@ -280,7 +266,6 @@ fn suggest_changing_unsized_bound(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=suggest_constraining_type_param | COMPLEXITY=3 | LINES=22 */
 
 /// Suggest restricting a type param with a new bound.
 ///
@@ -303,7 +288,6 @@ pub fn suggest_constraining_type_param(
         span_to_replace,
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=suggest_constraining_type_params | COMPLEXITY=198 | LINES=291 */
 
 /// Suggest restricting a type param with a new bound.
 pub fn suggest_constraining_type_params<'a>(
@@ -595,7 +579,6 @@ pub fn suggest_constraining_type_params<'a>(
 
     suggested
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=15 | LINES=22 */
 
 /// Collect al types that have an implicit `'static` obligation that we could suggest `'_` for.
 pub(crate) struct TraitObjectVisitor<'tcx>(pub(crate) Vec<&'tcx hir::Ty<'tcx>>);
@@ -618,13 +601,11 @@ impl<'v> hir::intravisit::Visitor<'v> for TraitObjectVisitor<'v> {
         hir::intravisit::walk_ty(self, ty);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=IsSuggestableVisitor | COMPLEXITY=2 | LINES=5 */
 
 pub struct IsSuggestableVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     infer_suggestable: bool,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=44 | LINES=70 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IsSuggestableVisitor<'tcx> {
     type Result = ControlFlow<()>;
@@ -695,14 +676,12 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IsSuggestableVisitor<'tcx> {
         c.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=MakeSuggestableFolder | COMPLEXITY=2 | LINES=6 */
 
 pub struct MakeSuggestableFolder<'tcx> {
     tcx: TyCtxt<'tcx>,
     infer_suggestable: bool,
     placeholder: Option<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=45 | LINES=79 */
 
 impl<'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for MakeSuggestableFolder<'tcx> {
     type Error = ();

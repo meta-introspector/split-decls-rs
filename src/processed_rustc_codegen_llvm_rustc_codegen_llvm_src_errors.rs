@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ffi::CString;
 use std::path::Path;
 
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::Span;
 
@@ -18,7 +16,6 @@ pub(crate) struct SymbolAlreadyDefined<'a> {
     pub span: Span,
     pub symbol_name: &'a str,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=6 | LINES=16 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_sanitizer_memtag_requires_mte)]
@@ -35,7 +32,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for ParseTargetMachineConfig<'_> {
             .with_arg("error", message)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_autodiff_without_enable)]
@@ -46,7 +42,6 @@ pub(crate) struct AutoDiffWithoutEnable;
 pub(crate) struct LtoBitcodeFromRlib {
     pub err: String,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=26 */
 
 #[derive(Diagnostic)]
 pub enum LlvmError<'a> {
@@ -73,7 +68,6 @@ pub enum LlvmError<'a> {
     #[diag(codegen_llvm_prepare_autodiff)]
     PrepareAutoDiff { src: String, target: String, error: String },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=18 | LINES=25 */
 
 pub(crate) struct WithLlvmError<'a>(pub LlvmError<'a>, pub String);
 
@@ -99,7 +93,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for WithLlvmError<'_> {
             .with_arg("llvm_err", self.1)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_from_llvm_optimization_diag)]
@@ -111,14 +104,12 @@ pub(crate) struct FromLlvmOptimizationDiag<'a> {
     pub kind: &'a str,
     pub message: &'a str,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_from_llvm_diag)]
 pub(crate) struct FromLlvmDiag {
     pub message: String,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_write_bytecode)]
@@ -126,21 +117,18 @@ pub(crate) struct WriteBytecode<'a> {
     pub path: &'a Path,
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_copy_bitcode)]
 pub(crate) struct CopyBitcode {
     pub err: std::io::Error,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_unknown_debuginfo_compression)]
 pub(crate) struct UnknownCompression {
     pub algorithm: &'static str,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_mismatch_data_layout)]
@@ -150,14 +138,12 @@ pub(crate) struct MismatchedDataLayout<'a> {
     pub llvm_target: &'a str,
     pub llvm_layout: &'a str,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_fixed_x18_invalid_arch)]
 pub(crate) struct FixedX18InvalidArch<'a> {
     pub arch: &'a str,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_llvm_sanitizer_kcfi_arity_requires_llvm_21_0_0)]

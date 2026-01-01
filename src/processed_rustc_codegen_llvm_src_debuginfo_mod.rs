@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[doc = include_str!("doc.md")]
 
 use std::cell::{OnceCell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Range;
 use std::sync::Arc;
 use std::{iter, ptr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use libc::c_uint;
 use metadata::create_subroutine_type;
@@ -15,24 +12,18 @@ use crate::rustc_abi::Size;
 use crate::rustc_codegen_ssa::debuginfo::type_names;
 use crate::rustc_codegen_ssa::mir::debuginfo::VariableKind::*;
 use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::def_id::{DefId, DefIdMap};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Instance, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{self, DebugInfo};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     BytePos, Pos, SourceFile, SourceFileAndLine, SourceFileHash, Span, StableSourceFileId, Symbol,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_target::callconv::FnAbi;
 use crate::rustc_target::spec::DebuginfoKind;
 use smallvec::SmallVec;
@@ -41,19 +32,15 @@ use tracing::debug;
 use self::metadata::{
     UNKNOWN_COLUMN_NUMBER, UNKNOWN_LINE_NUMBER, file_metadata, spanned_type_di_node, type_di_node,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use self::namespace::mangled_name_of_instance;
 use self::utils::{DIB, create_DIArray, is_node_local_to_unit};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::builder::Builder;
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::llvm;
 use crate::llvm::debuginfo::{
     DIArray, DIBuilderBox, DIFile, DIFlags, DILexicalBlock, DILocation, DISPFlags, DIScope,
     DITemplateTypeParameter, DIType, DIVariable,
 };
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=32 */
 use crate::value::Value;
 
 
@@ -80,7 +67,6 @@ pub(crate) struct CodegenUnitDebugContext<'ll, 'tcx> {
     namespace_map: RefCell<DefIdMap<&'ll DIScope>>,
     recursion_marker_type: OnceCell<&'ll DIType>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=59 */
 
 impl<'ll, 'tcx> CodegenUnitDebugContext<'ll, 'tcx> {
     pub(crate) fn new(llmod: &'ll llvm::Module) -> Self {
@@ -140,7 +126,6 @@ impl<'ll, 'tcx> CodegenUnitDebugContext<'ll, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=17 */
 
 /// Creates any deferred debug metadata nodes
 pub(crate) fn finalize(cx: &CodegenCx<'_, '_>) {
@@ -158,14 +143,12 @@ pub(crate) fn finalize(cx: &CodegenCx<'_, '_>) {
         dbg_cx.finalize(cx.sess());
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 impl<'ll> Builder<'_, 'll, '_> {
     pub(crate) fn get_dbg_loc(&self) -> Option<&'ll DILocation> {
         unsafe { llvm::LLVMGetCurrentDebugLocation2(self.llbuilder) }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=dbg_var_addr | COMPLEXITY=63 | LINES=90 */
 
 impl<'ll> DebugInfoBuilderMethods for Builder<'_, 'll, '_> {
     // FIXME(eddyb) find a common convention for all of the debuginfo-related
@@ -256,7 +239,6 @@ impl<'ll> DebugInfoBuilderMethods for Builder<'_, 'll, '_> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=DebugLoc | COMPLEXITY=2 | LINES=13 */
 
 /// A source code location used to generate debug information.
 // FIXME(eddyb) rename this to better indicate it's a duplicate of
@@ -270,7 +252,6 @@ struct DebugLoc {
     /// The (1-based) column number.
     col: u32,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=lookup_debug_loc | COMPLEXITY=24 | LINES=46 */
 
 impl<'ll> CodegenCx<'ll, '_> {
     /// Looks up debug source information about a `BytePos`.
@@ -317,7 +298,6 @@ impl<'ll> CodegenCx<'ll, '_> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=create_function_debug_context | COMPLEXITY=157 | LINES=352 */
 
 impl<'ll, 'tcx> DebugInfoCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
     fn create_function_debug_context(

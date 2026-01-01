@@ -1,32 +1,26 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // This pass type-checks the MIR to ensure it is not broken.
 
 use std::rc::Rc;
 use std::{fmt, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
 use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
 use crate::rustc_infer::infer::region_constraints::RegionConstraintData;
 use crate::rustc_infer::infer::{
     BoundRegionConversionTime, InferCtxt, NllRegionVariableOrigin, RegionVariableOrigin,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
@@ -35,41 +29,28 @@ use crate::rustc_complete::ty::{
     self, CanonicalUserTypeAnnotation, CanonicalUserTypeAnnotations, CoroutineArgsExt,
     GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, UserArgs, UserTypeAnnotationIndex, fold_regions,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_mir_dataflow::move_paths::MoveData;
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::query::type_op::custom::scrape_region_constraints;
 use crate::rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::borrow_set::BorrowSet;
 use crate::constraints::{OutlivesConstraint, OutlivesConstraintSet};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::diagnostics::UniverseInfo;
 use crate::polonius::legacy::{PoloniusFacts, PoloniusLocationTable};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::polonius::{PoloniusContext, PoloniusLivenessContext};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::region_infer::TypeTest;
 use crate::region_infer::values::{LivenessValues, PlaceholderIndex, PlaceholderIndices};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::session_diagnostics::{MoveUnsized, SimdIntrinsicArgConst};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::type_check::free_region_relations::{CreateResult, UniversalRegionRelations};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::universal_regions::{DefiningTy, UniversalRegions};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{BorrowCheckRootCtxt, BorrowckInferCtxt, DeferredClosureRequirements, path_utils};
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=15 */
 
 macro_rules! span_mirbug {
     ($context:expr, $elem:expr, $($message:tt)*) => ({
@@ -85,7 +66,6 @@ macro_rules! span_mirbug {
         )
     })
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=132 */
 
 
 /// Type checks the given `mir` in the context of the inference
@@ -212,7 +192,6 @@ pub(crate) fn type_check<'tcx>(
         polonius_context,
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=mirbug | COMPLEXITY=2 | LINES=8 */
 
 #[track_caller]
 fn mirbug(tcx: TyCtxt<'_>, span: Span, msg: String) {
@@ -221,12 +200,10 @@ fn mirbug(tcx: TyCtxt<'_>, span: Span, msg: String) {
     // to avoid reporting bugs in those cases.
     tcx.dcx().span_delayed_bug(span, msg);
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 enum FieldAccessError {
     OutOfRange { field_count: usize },
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=TypeChecker | COMPLEXITY=8 | LINES=28 */
 
 /// The MIR type checker. Visits the MIR and enforces all the
 /// constraints needed for it to be valid and well-typed. Along the
@@ -255,7 +232,6 @@ struct TypeChecker<'a, 'tcx> {
     /// When using `-Zpolonius=next`, the liveness helper data used to create polonius constraints.
     polonius_liveness: Option<PoloniusLivenessContext>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 /// Holder struct for passing results from MIR typeck to the rest of the non-lexical regions
 /// inference computation.
@@ -267,7 +243,6 @@ pub(crate) struct MirTypeckResults<'tcx> {
     pub(crate) deferred_closure_requirements: DeferredClosureRequirements<'tcx>,
     pub(crate) polonius_context: Option<PoloniusContext>,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=34 */
 
 /// A collection of region constraints that must be satisfied for the
 /// program to be considered well-typed.
@@ -302,7 +277,6 @@ pub(crate) struct MirTypeckRegionConstraints<'tcx> {
 
     pub(crate) type_tests: Vec<TypeTest<'tcx>>,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=21 */
 
 impl<'tcx> MirTypeckRegionConstraints<'tcx> {
     /// Creates a `Region` for a given `PlaceholderRegion`, or returns the
@@ -324,7 +298,6 @@ impl<'tcx> MirTypeckRegionConstraints<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=49 */
 
 /// The `Locations` type summarizes *where* region constraints are
 /// required to hold. Normally, this is at a particular point which
@@ -374,7 +347,6 @@ pub enum Locations {
     /// another (e.g., `x = y`)
     Single(Location),
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from_location | COMPLEXITY=12 | LINES=17 */
 
 impl Locations {
     pub fn from_location(&self) -> Option<Location> {
@@ -392,7 +364,6 @@ impl Locations {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=70 | LINES=209 */
 
 impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -602,7 +573,6 @@ impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=visit_span | COMPLEXITY=648 | LINES=1300 */
 
 impl<'a, 'tcx> Visitor<'tcx> for TypeChecker<'a, 'tcx> {
     fn visit_span(&mut self, span: Span) {
@@ -1903,7 +1873,6 @@ impl<'a, 'tcx> Visitor<'tcx> for TypeChecker<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=check_call_dest | COMPLEXITY=364 | LINES=641 */
 
 impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     fn check_call_dest(
@@ -2545,26 +2514,22 @@ impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
         tcx.predicates_of(def_id).instantiate(tcx, args)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=to_locations | COMPLEXITY=2 | LINES=4 */
 
 trait NormalizeLocation: fmt::Debug + Copy {
     fn to_locations(self) -> Locations;
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=to_locations | COMPLEXITY=5 | LINES=6 */
 
 impl NormalizeLocation for Locations {
     fn to_locations(self) -> Locations {
         self
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=to_locations | COMPLEXITY=5 | LINES=6 */
 
 impl NormalizeLocation for Location {
     fn to_locations(self) -> Locations {
         Locations::Single(self)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Runs `infcx.instantiate_opaque_types`. Unlike other `TypeOp`s,
 /// this is not canonicalized - it directly affects the main `InferCtxt`
@@ -2575,7 +2540,6 @@ pub(super) struct InstantiateOpaqueType<'tcx> {
     pub region_constraints: Option<RegionConstraintData<'tcx>>,
     pub obligations: PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=fully_perform | COMPLEXITY=8 | LINES=26 */
 
 impl<'tcx> TypeOp<'tcx> for InstantiateOpaqueType<'tcx> {
     type Output = ();

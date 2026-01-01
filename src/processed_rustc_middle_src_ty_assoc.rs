@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/assoc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::sorted_map::SortedIndexMultiMap;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Namespace};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::find_attr;
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Symbol};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{TyCtxt, Visibility};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::ty;
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, HashStable, Hash, Encodable, Decodable)]
@@ -23,7 +18,6 @@ pub enum AssocContainer {
     /// The `DefId` points to the trait item being implemented.
     TraitImpl(Result<DefId, ErrorGuaranteed>),
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=AssocItem | COMPLEXITY=2 | LINES=8 */
 
 /// Information about an associated item
 #[derive(Copy, Clone, Debug, PartialEq, HashStable, Eq, Hash, Encodable, Decodable)]
@@ -32,7 +26,6 @@ pub struct AssocItem {
     pub kind: AssocKind,
     pub container: AssocContainer,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=opt_name | COMPLEXITY=125 | LINES=167 */
 
 impl AssocItem {
     // Gets the identifier, if it has one.
@@ -200,7 +193,6 @@ impl AssocItem {
         find_attr!(tcx.get_all_attrs(def_id), AttributeKind::TypeConst(_))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, PartialEq, Debug, HashStable, Eq, Hash, Encodable, Decodable)]
 pub enum AssocTypeData {
@@ -210,7 +202,6 @@ pub enum AssocTypeData {
     /// source.
     Rpitit(ty::ImplTraitInTraitData),
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Debug, HashStable, Eq, Hash, Encodable, Decodable)]
 pub enum AssocKind {
@@ -218,7 +209,6 @@ pub enum AssocKind {
     Fn { name: Symbol, has_self: bool },
     Type { data: AssocTypeData },
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=namespace | COMPLEXITY=19 | LINES=17 */
 
 impl AssocKind {
     pub fn namespace(&self) -> Namespace {
@@ -236,7 +226,6 @@ impl AssocKind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
 
 impl std::fmt::Display for AssocKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -248,7 +237,6 @@ impl std::fmt::Display for AssocKind {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 // Like `AssocKind`, but just the tag, no fields. Used in various kinds of matching.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -257,7 +245,6 @@ pub enum AssocTag {
     Fn,
     Type,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=AssocItems | COMPLEXITY=6 | LINES=10 */
 
 /// A list of `ty::AssocItem`s in definition order that allows for efficient lookup by name.
 ///
@@ -268,7 +255,6 @@ pub enum AssocTag {
 pub struct AssocItems {
     items: SortedIndexMultiMap<u32, Option<Symbol>, ty::AssocItem>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=27 | LINES=69 */
 
 impl AssocItems {
     /// Constructs an `AssociatedItems` map from a series of `ty::AssocItem`s in definition order.
@@ -338,7 +324,6 @@ impl AssocItems {
             .find(|item| tcx.hygienic_eq(ident, item.ident(tcx), parent_def_id))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=associated_types_for_impl_traits_in_associated_fn | COMPLEXITY=14 | LINES=19 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Given an `fn_def_id` of a trait or a trait implementation:

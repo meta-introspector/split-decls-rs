@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/relate/solver_relating.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use self::combine::{PredicateEmittingRelation, super_combine_consts, super_combine_tys};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::data_structures::DelayedSet;
 pub use crate::relate::*;
 use crate::solve::Goal;
 use crate::{self as ty, InferCtxtLike, Interner};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=3 | LINES=25 */
 
 pub trait RelateExt: InferCtxtLike {
     fn relate<T: Relate<Self::Interner>>(
@@ -35,7 +31,6 @@ pub trait RelateExt: InferCtxtLike {
         TypeError<Self::Interner>,
     >;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=8 | LINES=40 */
 
 impl<Infcx: InferCtxtLike> RelateExt for Infcx {
     fn relate<T: Relate<Self::Interner>>(
@@ -76,7 +71,6 @@ impl<Infcx: InferCtxtLike> RelateExt for Infcx {
         Ok(relate.goals)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SolverRelating | COMPLEXITY=6 | LINES=35 */
 
 /// Enforce that `a` is equal to or a subtype of `b`.
 pub struct SolverRelating<'infcx, Infcx, I: Interner> {
@@ -112,7 +106,6 @@ pub struct SolverRelating<'infcx, Infcx, I: Interner> {
     /// later proving the `Subtype(?0, ?1)` goal from the first relation.
     cache: DelayedSet<(ty::Variance, I::Ty, I::Ty)>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=24 */
 
 impl<'infcx, Infcx, I> SolverRelating<'infcx, Infcx, I>
 where
@@ -137,7 +130,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=92 | LINES=220 */
 
 impl<Infcx, I> TypeRelation<I> for SolverRelating<'_, Infcx, I>
 where
@@ -358,7 +350,6 @@ where
         Ok(a)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=span | COMPLEXITY=18 | LINES=55 */
 
 impl<Infcx, I> PredicateEmittingRelation<Infcx> for SolverRelating<'_, Infcx, I>
 where

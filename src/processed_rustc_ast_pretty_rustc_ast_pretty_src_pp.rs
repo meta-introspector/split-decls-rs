@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pp.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=37 | LINES=140 */
 // This pretty-printer is a direct reimplementation of Philip Karlton's
 // Mesa pretty-printer, as described in the appendix to
 // Derek C. Oppen, "Pretty Printing" (1979),
@@ -138,7 +137,6 @@
 use std::borrow::Cow;
 use std::collections::VecDeque;
 use std::{cmp, iter};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use ring::RingBuffer;
 
@@ -148,7 +146,6 @@ pub enum Breaks {
     Consistent,
     Inconsistent,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 #[derive(Clone, Copy, PartialEq)]
 enum IndentStyle {
@@ -165,7 +162,6 @@ enum IndentStyle {
     ///     ) {}
     Block { offset: isize },
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Default, PartialEq)]
 pub(crate) struct BreakToken {
@@ -173,14 +169,12 @@ pub(crate) struct BreakToken {
     blank_space: isize,
     pre_break: Option<char>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq)]
 pub(crate) struct BeginToken {
     indent: IndentStyle,
     breaks: Breaks,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 #[derive(PartialEq)]
 pub(crate) enum Token {
@@ -192,14 +186,12 @@ pub(crate) enum Token {
     Begin(BeginToken),
     End,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Copy, Clone)]
 enum PrintFrame {
     Fits,
     Broken { indent: usize, breaks: Breaks },
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Printer | COMPLEXITY=10 | LINES=35 */
 
 const SIZE_INFINITY: isize = 0xffff;
 
@@ -235,16 +227,13 @@ pub struct Printer {
     /// ring-buffer for printing
     last_printed: Option<Token>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=BufEntry | COMPLEXITY=2 | LINES=5 */
 
 struct BufEntry {
     token: Token,
     size: isize,
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 // Boxes opened with methods like `Printer::{cbox,ibox}` must be closed with
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=BoxMarker; | COMPLEXITY=9 | LINES=19 */
 // `Printer::end`. Failure to do so can result in bad indenting, or in extreme
 // cases, cause no output to be produced at all.
 //
@@ -264,16 +253,13 @@ struct BufEntry {
 pub struct BoxMarker;
 
 impl !Clone for BoxMarker {}
-/* AST_META: AST_ID=12 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !Copy for BoxMarker {}
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=6 */
 
 impl Drop for BoxMarker {
     fn drop(&mut self) {
         panic!("BoxMarker not ended with `Printer::end()`");
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=128 | LINES=219 */
 
 impl Printer {
     pub fn new() -> Self {

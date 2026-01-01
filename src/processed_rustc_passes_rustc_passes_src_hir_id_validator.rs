@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_passes/src/hir_id_validator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::sync::Lock;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{HirId, ItemLocalId, intravisit};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=8 | LINES=21 */
 use crate::rustc_index::bit_set::GrowableBitSet;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::TyCtxt;
@@ -26,7 +24,6 @@ pub fn check_crate(tcx: TyCtxt<'_>) {
         tcx.dcx().delayed_bug(message);
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=HirIdValidator | COMPLEXITY=2 | LINES=7 */
 
 struct HirIdValidator<'a, 'hir> {
     tcx: TyCtxt<'hir>,
@@ -34,7 +31,6 @@ struct HirIdValidator<'a, 'hir> {
     hir_ids_seen: GrowableBitSet<ItemLocalId>,
     errors: &'a Lock<Vec<String>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new_visitor | COMPLEXITY=37 | LINES=70 */
 
 impl<'a, 'hir> HirIdValidator<'a, 'hir> {
     fn new_visitor(&self, tcx: TyCtxt<'hir>) -> HirIdValidator<'a, 'hir> {
@@ -105,7 +101,6 @@ impl<'a, 'hir> HirIdValidator<'a, 'hir> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=26 | LINES=65 */
 
 impl<'a, 'hir> intravisit::Visitor<'hir> for HirIdValidator<'a, 'hir> {
     type NestedFilter = nested_filter::OnlyBodies;

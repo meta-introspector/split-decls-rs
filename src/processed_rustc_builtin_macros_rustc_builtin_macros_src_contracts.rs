@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/contracts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token;
 use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_expand::base::{AttrProcMacro, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::symbol::{Ident, Symbol, kw};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=16 */
 
 pub(crate) struct ExpandRequires;
 
@@ -25,7 +21,6 @@ impl AttrProcMacro for ExpandRequires {
         expand_requires_tts(ecx, span, annotation, annotated)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=12 */
 
 impl AttrProcMacro for ExpandEnsures {
     fn expand<'cx>(
@@ -38,7 +33,6 @@ impl AttrProcMacro for ExpandEnsures {
         expand_ensures_tts(ecx, span, annotation, annotated)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=expand_contract_clause | COMPLEXITY=45 | LINES=89 */
 
 /// Expand the function signature to include the contract clause.
 ///
@@ -128,7 +122,6 @@ fn expand_contract_clause(
 
     Ok(new_tts)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=expand_requires_tts | COMPLEXITY=4 | LINES=26 */
 
 fn expand_requires_tts(
     ecx: &mut ExtCtxt<'_>,
@@ -155,7 +148,6 @@ fn expand_requires_tts(
         Ok(())
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=expand_ensures_tts | COMPLEXITY=4 | LINES=22 */
 
 fn expand_ensures_tts(
     ecx: &mut ExtCtxt<'_>,

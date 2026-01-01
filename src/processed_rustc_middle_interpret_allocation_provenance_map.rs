@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/allocation/provenance_map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 // Store the provenance for each byte in the range, with a more efficient
 // representation for the common case where PTR_SIZE consecutive bytes have the same provenance.
 
@@ -7,17 +6,13 @@ use std::cmp;
 use std::ops::Range;
 
 use crate::rustc_abi::{HasDataLayout, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use rustc_macros::HashStable;
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::trace;
 
 use super::{AllocRange, CtfeProvenance, Provenance, alloc_range};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::interpret::{AllocError, AllocResult};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ProvenanceMap | COMPLEXITY=5 | LINES=14 */
 
 /// Stores the provenance information of pointers stored in memory.
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]
@@ -32,7 +27,6 @@ pub struct ProvenanceMap<Prov = CtfeProvenance> {
     /// Wildcard provenance is allowed to have index 0 everywhere.
     bytes: Option<Box<SortedMap<Size, (Prov, u8)>>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=8 | LINES=9 */
 
 // These impls are generic over `Prov` since `CtfeProvenance` is only decodable/encodable
 // for some particular `D`/`S`.
@@ -42,7 +36,6 @@ impl<D: Decoder, Prov: Provenance + Decodable<D>> Decodable<D> for ProvenanceMap
         Self { ptrs: Decodable::decode(d), bytes: None }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=6 | LINES=7 */
 impl<S: Encoder, Prov: Provenance + Encodable<S>> Encodable<S> for ProvenanceMap<Prov> {
     fn encode(&self, s: &mut S) {
         let Self { ptrs, bytes } = self;
@@ -50,7 +43,6 @@ impl<S: Encoder, Prov: Provenance + Encodable<S>> Encodable<S> for ProvenanceMap
         ptrs.encode(s)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=12 */
 
 impl<Prov> ProvenanceMap<Prov> {
     pub fn new() -> Self {
@@ -63,7 +55,6 @@ impl<Prov> ProvenanceMap<Prov> {
         ProvenanceMap { ptrs: SortedMap::from_presorted_elements(r), bytes: None }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=ptrs | COMPLEXITY=3 | LINES=12 */
 
 impl ProvenanceMap {
     /// Give access to the ptr-sized provenances (which can also be thought of as relocations, and
@@ -76,7 +67,6 @@ impl ProvenanceMap {
         &self.ptrs
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=adjusted_range_ptrs | COMPLEXITY=104 | LINES=209 */
 
 impl<Prov: Provenance> ProvenanceMap<Prov> {
     fn adjusted_range_ptrs(range: AllocRange, cx: &impl HasDataLayout) -> Range<Size> {
@@ -286,7 +276,6 @@ impl<Prov: Provenance> ProvenanceMap<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ProvenanceCopy | COMPLEXITY=2 | LINES=8 */
 
 /// A partial, owned list of provenance to transfer into another allocation.
 ///
@@ -295,7 +284,6 @@ pub struct ProvenanceCopy<Prov> {
     dest_ptrs: Option<Box<[(Size, Prov)]>>,
     dest_bytes: Option<Box<[(Size, (Prov, u8))]>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=prepare_copy | COMPLEXITY=78 | LINES=119 */
 
 impl<Prov: Provenance> ProvenanceMap<Prov> {
     pub fn prepare_copy(

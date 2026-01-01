@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_driver_impl/src/args.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, error, fmt, fs, io};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Expander | COMPLEXITY=2 | LINES=10 */
 
 use crate::rustc_complete::EarlyDiagCtxt;
 
@@ -12,7 +10,6 @@ struct Expander {
     next_is_unstable_option: bool,
     expanded: Vec<String>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=arg | COMPLEXITY=48 | LINES=81 */
 
 impl Expander {
     /// Handles the next argument. If the argument is an argfile, it is expanded
@@ -94,7 +91,6 @@ impl Expander {
         })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=arg_expand_all | COMPLEXITY=13 | LINES=21 */
 
 /// Replaces any `@file` arguments with the contents of `file`, with each line of `file` as a
 /// separate argument.
@@ -116,7 +112,6 @@ pub fn arg_expand_all(early_dcx: &EarlyDiagCtxt, at_args: &[String]) -> Vec<Stri
     }
     expander.finish()
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=raw_args | COMPLEXITY=16 | LINES=23 */
 
 /// Gets the raw unprocessed command-line arguments as Unicode strings, without doing any further
 /// processing (e.g., without `@file` expansion).
@@ -140,7 +135,6 @@ pub fn raw_args(early_dcx: &EarlyDiagCtxt) -> Vec<String> {
     }
     args
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 enum Error {
@@ -148,7 +142,6 @@ enum Error {
     IOError(String, io::Error),
     ShellParseError(String),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=10 */
 
 impl fmt::Display for Error {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -159,6 +152,5 @@ impl fmt::Display for Error {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl error::Error for Error {}

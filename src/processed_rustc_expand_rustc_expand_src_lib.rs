@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_expand/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=25 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[allow(rustc::diagnostic_outside_of_impl)]
@@ -19,7 +18,6 @@
 #[allow(rustc::untranslatable_diagnostic)]
 
 pub use mbe::macro_rules::{MacroRulesMacroExpander, compile_declarative_macro};
-/* AST_META: AST_ID=2 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // FIXME(Nilstrieb) Translate proc_macro diagnostics
 #[allow(rustc::untranslatable_diagnostic)]
 

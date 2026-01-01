@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/early.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Implementation of the early lint pass.
 //
 // The early lint pass works on AST nodes after macro expansion and name
@@ -7,31 +6,23 @@
 // syntactical lints.
 
 use crate::rustc_complete::visit::{self as ast_visit, Visitor, walk_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, HasAttrs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::{BufferedEarlyLint, DecorateDiagCompat, LintBuffer};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::Features;
 use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::LintPass;
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::context::{EarlyContext, LintContext, LintStore};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::passes::{EarlyLintPass, EarlyLintPassObject};
-/* AST_META: AST_ID=8 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 
 macro_rules! lint_callback { ($cx:expr, $f:ident, $($args:expr),*) => ({
     $cx.pass.$f(&$cx.context, $($args),*);
 }) }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=EarlyContextAndPass | COMPLEXITY=4 | LINES=8 */
 
 /// Implements the AST traversal for early lint passes. `T` provides the
 /// `check_*` methods.
@@ -40,7 +31,6 @@ pub struct EarlyContextAndPass<'ecx, 'tcx, T: EarlyLintPass> {
     tcx: Option<TyCtxt<'tcx>>,
     pass: T,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_id | COMPLEXITY=17 | LINES=34 */
 
 impl<'ecx, 'tcx, T: EarlyLintPass> EarlyContextAndPass<'ecx, 'tcx, T> {
     #[allow(rustc::diagnostic_outside_of_impl)]
@@ -75,7 +65,6 @@ impl<'ecx, 'tcx, T: EarlyLintPass> EarlyContextAndPass<'ecx, 'tcx, T> {
         self.context.builder.pop(push);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_id | COMPLEXITY=69 | LINES=180 */
 
 impl<'ast, 'ecx, 'tcx, T: EarlyLintPass> ast_visit::Visitor<'ast>
     for EarlyContextAndPass<'ecx, 'tcx, T>
@@ -256,7 +245,6 @@ impl<'ast, 'ecx, 'tcx, T: EarlyLintPass> ast_visit::Visitor<'ast>
         ast_visit::walk_mac(self, mac);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=RuntimeCombinedEarlyLintPass | COMPLEXITY=2 | LINES=8 */
 
 // Combines multiple lint passes into a single pass, at runtime. Each
 // `check_foo` method in `$methods` within this pass simply calls `check_foo`
@@ -265,7 +253,6 @@ impl<'ast, 'ecx, 'tcx, T: EarlyLintPass> ast_visit::Visitor<'ast>
 struct RuntimeCombinedEarlyLintPass<'a> {
     passes: &'a mut [EarlyLintPassObject],
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=name | COMPLEXITY=6 | LINES=10 */
 
 #[allow(rustc::lint_pass_impl_without_macro)]
 impl LintPass for RuntimeCombinedEarlyLintPass<'_> {
@@ -276,7 +263,6 @@ impl LintPass for RuntimeCombinedEarlyLintPass<'_> {
         panic!()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=12 */
 
 macro_rules! impl_early_lint_pass {
     ([], [$($(#[$attr:meta])* fn $f:ident($($param:ident: $arg:ty),*);)*]) => (
@@ -289,7 +275,6 @@ macro_rules! impl_early_lint_pass {
         }
     )
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=id | COMPLEXITY=2 | LINES=10 */
 
 crate::early_lint_methods!(impl_early_lint_pass, []);
 
@@ -300,7 +285,6 @@ pub trait EarlyCheckNode<'a>: Copy {
     fn attrs(self) -> &'a [ast::Attribute];
     fn check<'ecx, 'tcx, T: EarlyLintPass>(self, cx: &mut EarlyContextAndPass<'ecx, 'tcx, T>);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=id | COMPLEXITY=7 | LINES=14 */
 
 impl<'a> EarlyCheckNode<'a> for (&'a ast::Crate, &'a [ast::Attribute]) {
     fn id(self) -> ast::NodeId {
@@ -315,7 +299,6 @@ impl<'a> EarlyCheckNode<'a> for (&'a ast::Crate, &'a [ast::Attribute]) {
         lint_callback!(cx, check_crate_post, self.0);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=id | COMPLEXITY=7 | LINES=13 */
 
 impl<'a> EarlyCheckNode<'a> for (ast::NodeId, &'a [ast::Attribute], &'a [Box<ast::Item>]) {
     fn id(self) -> ast::NodeId {
@@ -329,7 +312,6 @@ impl<'a> EarlyCheckNode<'a> for (ast::NodeId, &'a [ast::Attribute], &'a [Box<ast
         walk_list!(cx, visit_item, self.2);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_ast_node | COMPLEXITY=13 | LINES=35 */
 
 pub fn check_ast_node<'a>(
     sess: &Session,
@@ -365,7 +347,6 @@ pub fn check_ast_node<'a>(
         check_ast_node_inner(sess, tcx, check_node, context, pass);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=check_ast_node_inner | COMPLEXITY=13 | LINES=26 */
 
 fn check_ast_node_inner<'a, T: EarlyLintPass>(
     sess: &Session,

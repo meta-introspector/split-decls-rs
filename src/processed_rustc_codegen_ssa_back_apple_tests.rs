@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/apple/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_add_version_to_llvm_target | COMPLEXITY=2 | LINES=13 */
 use super::*;
 
 #[test]
@@ -13,14 +12,12 @@ fn test_add_version_to_llvm_target() {
         "aarch64-apple-ios16.1.0-simulator"
     );
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=lookup_developer_dir | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[cfg_attr(not(target_os = "macos"), ignore = "xcode-select is only available on macOS")]
 fn lookup_developer_dir() {
     let _developer_dir = xcode_select_developer_dir().unwrap();
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=lookup_sdk | COMPLEXITY=11 | LINES=17 */
 
 #[test]
 #[cfg_attr(not(target_os = "macos"), ignore = "xcrun is only available on macOS")]
@@ -38,7 +35,6 @@ fn lookup_sdk() {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=lookup_sdk_verbose | COMPLEXITY=6 | LINES=21 */
 
 #[test]
 #[cfg_attr(not(target_os = "macos"), ignore = "xcrun is only available on macOS")]
@@ -60,7 +56,6 @@ fn lookup_sdk_verbose() {
         "stderr should contain lookup note: {stderr}",
     );
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=try_lookup_invalid_sdk | COMPLEXITY=12 | LINES=22 */
 
 #[test]
 #[cfg_attr(not(target_os = "macos"), ignore = "xcrun is only available on macOS")]

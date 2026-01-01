@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/mini_core_hello_world.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=24 */
 #[feature(
     no_core,
     lang_items,
@@ -24,7 +23,6 @@ macro_rules! assert {
         }
     };
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=8 */
 
 macro_rules! assert_eq {
     ($l:expr, $r: expr) => {
@@ -33,13 +31,11 @@ macro_rules! assert_eq {
         }
     };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=report | COMPLEXITY=2 | LINES=5 */
 
 #[lang = "termination"]
 trait Termination {
     fn report(self) -> i32;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=report | COMPLEXITY=10 | LINES=10 */
 
 impl Termination for () {
     fn report(self) -> i32 {
@@ -50,12 +46,10 @@ impl Termination for () {
         0
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=2 | LINES=4 */
 
 trait SomeTrait {
     fn object_safe(&self);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=10 | LINES=8 */
 
 impl SomeTrait for &'static str {
     fn object_safe(&self) {
@@ -64,19 +58,16 @@ impl SomeTrait for &'static str {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=NoisyDrop | COMPLEXITY=2 | LINES=5 */
 
 struct NoisyDrop {
     text: &'static str,
     inner: NoisyDropInner,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NoisyDropUnsized | COMPLEXITY=2 | LINES=5 */
 
 struct NoisyDropUnsized {
     inner: NoisyDropInner,
     text: str,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=NoisyDropInner; | COMPLEXITY=10 | LINES=10 */
 
 struct NoisyDropInner;
 
@@ -87,7 +78,6 @@ impl Drop for NoisyDrop {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for NoisyDropInner {
     fn drop(&mut self) {
@@ -96,19 +86,16 @@ impl Drop for NoisyDropInner {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=5 | LINES=4 */
 
 impl SomeTrait for NoisyDrop {
     fn object_safe(&self) {}
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum Ordering {
     Less = -1,
     Equal = 0,
     Greater = 1,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=start | COMPLEXITY=21 | LINES=22 */
 
 #[lang = "start"]
 fn start<T: Termination + 'static>(
@@ -131,34 +118,27 @@ fn start<T: Termination + 'static>(
 
     main().report() as isize
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 static mut NUM: u8 = 6 * 7;
 
 static NUM_REF: &'static u8 = unsafe { &*&raw const NUM };
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 unsafe fn zeroed<T>() -> T {
     let mut uninit = MaybeUninit { uninit: () };
     intrinsics::write_bytes(&mut uninit.value.value as *mut T, 0, 1);
     uninit.value.value
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=take_f32 | COMPLEXITY=2 | LINES=2 */
 
 fn take_f32(_f: f32) {}
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=take_unique | COMPLEXITY=2 | LINES=1 */
 fn take_unique(_u: Unique<()>) {}
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=return_u128_pair | COMPLEXITY=2 | LINES=4 */
 
 fn return_u128_pair() -> (u128, u128) {
     (0, 0)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=call_return_u128_pair | COMPLEXITY=2 | LINES=4 */
 
 fn call_return_u128_pair() {
     return_u128_pair();
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=bool_11 | COMPLEXITY=2 | LINES=15 */
 
 #[repr(C)]
 pub struct bool_11 {
@@ -174,10 +154,8 @@ pub struct bool_11 {
     field9: bool,
     field10: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 extern "C" fn bool_struct_in_11(_arg0: bool_11) {}
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=main | COMPLEXITY=76 | LINES=197 */
 
 #[allow(unreachable_code)] // FIXME false positive
 fn main() {
@@ -375,7 +353,6 @@ fn main() {
 
     stack_val_align();
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=stack_val_align | COMPLEXITY=2 | LINES=9 */
 
 #[inline(never)]
 fn stack_val_align() {
@@ -385,13 +362,11 @@ fn stack_val_align() {
     let a = Foo(0);
     assert_eq!(&a as *const Foo as usize % 8192, 0);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=global_asm_test | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(all(not(jit), target_arch = "x86_64", any(target_os = "linux", target_os = "macos")))]
 extern "C" {
     fn global_asm_test();
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[cfg(all(not(jit), target_arch = "x86_64", target_os = "linux"))]
 global_asm! {
@@ -402,7 +377,6 @@ global_asm! {
     ret
     "
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[cfg(all(not(jit), target_arch = "x86_64", target_os = "macos"))]
 global_asm! {
@@ -413,21 +387,18 @@ global_asm! {
     ret
     "
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[cfg(all(not(jit), target_arch = "x86_64"))]
 #[unsafe(naked)]
 extern "C" fn naked_test() {
     naked_asm!("ret")
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[repr(C)]
 enum c_void {
     _1,
     _2,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=pthread_attr_t | COMPLEXITY=2 | LINES=10 */
 
 type c_int = i32;
 type c_ulong = u64;
@@ -438,7 +409,6 @@ type pthread_t = c_ulong;
 struct pthread_attr_t {
     __size: [u64; 7],
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=pthread_attr_init | COMPLEXITY=2 | LINES=15 */
 
 #[link(name = "pthread")]
 #[cfg(unix)]
@@ -454,7 +424,6 @@ extern "C" {
 
     fn pthread_join(native: pthread_t, value: *mut *mut c_void) -> c_int;
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=WaitForSingleObject | COMPLEXITY=3 | LINES=21 */
 
 type DWORD = u32;
 type LPDWORD = *mut u32;
@@ -476,7 +445,6 @@ extern "C" {
         lpThreadId: LPDWORD,
     ) -> HANDLE;
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=Thread | COMPLEXITY=2 | LINES=7 */
 
 struct Thread {
     #[cfg(windows)]
@@ -484,7 +452,6 @@ struct Thread {
     #[cfg(unix)]
     handle: pthread_t,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=46 */
 
 impl Thread {
     unsafe fn create(f: extern "C" fn(_: *mut c_void) -> *mut c_void) -> Self {
@@ -531,7 +498,6 @@ impl Thread {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 #[thread_local]
 #[cfg(not(jit))]
@@ -544,7 +510,6 @@ extern "C" fn mutate_tls(_: *mut c_void) -> *mut c_void {
     }
     0 as *mut c_void
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=test_tls | COMPLEXITY=7 | LINES=15 */
 
 #[cfg(not(jit))]
 fn test_tls() {
@@ -560,12 +525,10 @@ fn test_tls() {
         puts("TLS works!\n\0" as *const str as *const i8);
     }
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 // Copied ui/issues/issue-61696.rs
 
 pub enum Infallible {}
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // The check that the `bool` field of `V1` is encoding a "niche variant"
 // (i.e. not `V1`, so `V3` or `V4`) used to be mathematically incorrect,
@@ -576,7 +539,6 @@ pub enum E1 {
     V3,
     V4,
 }
-/* AST_META: AST_ID=38 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=44 */
 
 // Computing the discriminant used to be done using the niche type (here `u8`,
 // from the `bool` field of `V1`), overflowing for variants with large enough
@@ -621,7 +583,6 @@ pub enum E2<X> {
     V3,
     V4,
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=check_niche_behavior | COMPLEXITY=11 | LINES=11 */
 
 #[allow(unreachable_patterns)]
 fn check_niche_behavior() {
@@ -633,7 +594,6 @@ fn check_niche_behavior() {
         intrinsics::abort();
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=from_decimal_string | COMPLEXITY=8 | LINES=14 */
 
 fn from_decimal_string() {
     loop {
@@ -648,10 +608,8 @@ fn from_decimal_string() {
         unreachable();
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=take_multiplier_ref | COMPLEXITY=2 | LINES=2 */
 
 fn take_multiplier_ref(_multiplier: &u128) {}
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=unreachable | COMPLEXITY=2 | LINES=4 */
 
 fn unreachable() -> ! {
     panic("unreachable")

@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/exported_symbols.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ty::{self, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// The SymbolExportLevel of a symbols specifies from which kinds of crates
 /// the symbol will be exported. `C` symbols will be exported from any
@@ -18,7 +14,6 @@ pub enum SymbolExportLevel {
     C,
     Rust,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_below_threshold | COMPLEXITY=3 | LINES=7 */
 
 impl SymbolExportLevel {
     pub fn is_below_threshold(self, threshold: SymbolExportLevel) -> bool {
@@ -26,7 +21,6 @@ impl SymbolExportLevel {
           || self == SymbolExportLevel::C
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Kind of exported symbols.
 #[derive(Eq, PartialEq, Debug, Copy, Clone, Encodable, Decodable, HashStable, Hash)]
@@ -35,7 +29,6 @@ pub enum SymbolExportKind {
     Data,
     Tls,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=SymbolExportInfo | COMPLEXITY=5 | LINES=15 */
 
 /// The `SymbolExportInfo` of a symbols specifies symbol-related information
 /// that is relevant to code generation and linking.
@@ -51,7 +44,6 @@ pub struct SymbolExportInfo {
     /// Was the symbol marked as `#[rustc_std_internal_symbol]`?
     pub rustc_std_internal_symbol: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Eq, PartialEq, Debug, Copy, Clone, TyEncodable, TyDecodable, HashStable)]
 pub enum ExportedSymbol<'tcx> {
@@ -63,7 +55,6 @@ pub enum ExportedSymbol<'tcx> {
     ThreadLocalShim(DefId),
     NoDefId(ty::SymbolName<'tcx>),
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=symbol_name_for_local_instance | COMPLEXITY=16 | LINES=27 */
 
 impl<'tcx> ExportedSymbol<'tcx> {
     /// This is the symbol name of an instance if it is instantiated in the
@@ -91,7 +82,6 @@ impl<'tcx> ExportedSymbol<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=metadata_symbol_name | COMPLEXITY=4 | LINES=8 */
 
 pub fn metadata_symbol_name(tcx: TyCtxt<'_>) -> String {
     format!(

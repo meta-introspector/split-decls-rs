@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/standard_library_imports.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_expand::expand::ExpansionConfig;
 use crate::rustc_feature::Features;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::edition::Edition::*;
 use crate::rustc_complete::hygiene::AstPass;
 use crate::rustc_complete::{DUMMY_SP, Ident, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=inject | COMPLEXITY=22 | LINES=70 */
 use thin_vec::thin_vec;
 
 pub fn inject(

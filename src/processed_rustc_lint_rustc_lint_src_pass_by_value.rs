@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/pass_by_value.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::{self as hir, AmbigArg, GenericArg, PathSegment, QPath, TyKind, find_attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{declare_lint_pass, declare_tool_lint};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::lints::PassByValueDiag;
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 declare_tool_lint! {
     /// The `rustc_pass_by_value` lint marks a type with `#[rustc_pass_by_value]` requiring it to
@@ -22,7 +18,6 @@ declare_tool_lint! {
     "pass by reference of a type flagged as `#[rustc_pass_by_value]`",
     report_in_external_macro: true
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_ty | COMPLEXITY=20 | LINES=22 */
 
 declare_lint_pass!(PassByValue => [PASS_BY_VALUE]);
 
@@ -45,7 +40,6 @@ impl<'tcx> LateLintPass<'tcx> for PassByValue {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=path_for_pass_by_value | COMPLEXITY=23 | LINES=24 */
 
 fn path_for_pass_by_value(cx: &LateContext<'_>, ty: &hir::Ty<'_>) -> Option<String> {
     if let TyKind::Path(QPath::Resolved(_, path)) = &ty.kind {
@@ -70,7 +64,6 @@ fn path_for_pass_by_value(cx: &LateContext<'_>, ty: &hir::Ty<'_>) -> Option<Stri
 
     None
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=gen_args | COMPLEXITY=15 | LINES=28 */
 
 fn gen_args(cx: &LateContext<'_>, segment: &PathSegment<'_>) -> String {
     if let Some(args) = &segment.args {

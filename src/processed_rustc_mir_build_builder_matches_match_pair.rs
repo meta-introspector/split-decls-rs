@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/matches/match_pair.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::sync::Arc;
 
 use crate::rustc_complete::ByRef;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::builder::Builder;
 use crate::builder::expr::as_place::{PlaceBase, PlaceBuilder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::builder::matches::{FlatPat, MatchPairTree, PatternExtraData, TestCase};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=field_match_pairs | COMPLEXITY=45 | LINES=77 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Builds and pushes [`MatchPairTree`] subtrees, one for each pattern in
@@ -90,7 +86,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=127 | LINES=239 */
 
 impl<'tcx> MatchPairTree<'tcx> {
     /// Recursively builds a match pair tree for the given pattern and its

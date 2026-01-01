@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_lint/src/impl_trait_overcaptures.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::debug_assert_matches;
 use std::cell::LazyCell;
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
 use rustc_macros::LintDiagnostic;
@@ -19,28 +15,21 @@ use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
 use crate::rustc_complete::ty::relate::{
     Relate, RelateResult, TypeRelation, structurally_relate_consts, structurally_relate_tys,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::errors::{
     AddPreciseCapturingForOvercapture, impl_trait_overcapture_suggestion,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::regions::OutlivesEnvironmentBuildExt;
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::{LateContext, LateLintPass, fluent_generated as fluent};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=45 */
 
 declare_lint! {
     /// The `impl_trait_overcaptures` lint warns against cases where lifetime
@@ -86,7 +75,6 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html>",
     };
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=27 */
 
 declare_lint! {
     /// The `impl_trait_redundant_captures` lint warns against cases where use of the
@@ -114,7 +102,6 @@ declare_lint! {
     Allow,
     "redundant precise-capturing `use<...>` syntax on an `impl Trait`",
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=26 | LINES=29 */
 
 declare_lint_pass!(
     /// Lint for opaque types that will begin capturing in-scope but unmentioned lifetimes
@@ -144,7 +131,6 @@ impl<'tcx> LateLintPass<'tcx> for ImplTraitOvercaptures {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(PartialEq, Eq, Hash, Debug, Copy, Clone)]
 enum ParamKind {
@@ -155,7 +141,6 @@ enum ParamKind {
     // Late-bound var in a binder. We can't capture these yet.
     Late,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=check_fn | COMPLEXITY=20 | LINES=52 */
 
 fn check_fn(tcx: TyCtxt<'_>, parent_def_id: LocalDefId) {
     let sig = tcx.fn_sig(parent_def_id).instantiate_identity();
@@ -208,7 +193,6 @@ fn check_fn(tcx: TyCtxt<'_>, parent_def_id: LocalDefId) {
         }),
     });
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=VisitOpaqueTypes | COMPLEXITY=2 | LINES=9 */
 
 struct VisitOpaqueTypes<'tcx, VarFn, OutlivesFn> {
     tcx: TyCtxt<'tcx>,
@@ -218,7 +202,6 @@ struct VisitOpaqueTypes<'tcx, VarFn, OutlivesFn> {
     outlives_env: LazyCell<OutlivesEnvironment<'tcx>, OutlivesFn>,
     seen: FxIndexSet<LocalDefId>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=114 | LINES=225 */
 
 impl<'tcx, VarFn, OutlivesFn> TypeVisitor<TyCtxt<'tcx>>
     for VisitOpaqueTypes<'tcx, VarFn, OutlivesFn>
@@ -444,7 +427,6 @@ where
         t.super_visit_with(self);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ImplTraitOvercapturesLint | COMPLEXITY=2 | LINES=7 */
 
 struct ImplTraitOvercapturesLint<'tcx> {
     uncaptured_spans: Vec<Span>,
@@ -452,7 +434,6 @@ struct ImplTraitOvercapturesLint<'tcx> {
     num_captured: usize,
     suggestion: Option<AddPreciseCapturingForOvercapture>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=9 | LINES=13 */
 
 impl<'a> LintDiagnostic<'a, ()> for ImplTraitOvercapturesLint<'_> {
     fn decorate_lint<'b>(self, diag: &'b mut crate::rustc_errors::Diag<'a, ()>) {
@@ -466,7 +447,6 @@ impl<'a> LintDiagnostic<'a, ()> for ImplTraitOvercapturesLint<'_> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=ImplTraitRedundantCapturesLint | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_impl_trait_redundant_captures)]
@@ -474,7 +454,6 @@ struct ImplTraitRedundantCapturesLint {
     #[suggestion(lint_suggestion, code = "", applicability = "machine-applicable")]
     capturing_span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=extract_def_id_from_arg | COMPLEXITY=18 | LINES=30 */
 
 fn extract_def_id_from_arg<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -505,7 +484,6 @@ fn extract_def_id_from_arg<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=FunctionalVariances | COMPLEXITY=5 | LINES=13 */
 
 /// Computes the variances of regions that appear in the type, but considering
 /// late-bound regions too, which don't have their variance computed usually.
@@ -519,7 +497,6 @@ struct FunctionalVariances<'tcx> {
     ambient_variance: ty::Variance,
     generics: &'tcx ty::Generics,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=25 | LINES=72 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for FunctionalVariances<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -592,7 +569,6 @@ impl<'tcx> TypeRelation<TyCtxt<'tcx>> for FunctionalVariances<'tcx> {
         Ok(a)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=unify | COMPLEXITY=7 | LINES=15 */
 
 /// What is the variance that satisfies the two variances?
 fn unify(a: ty::Variance, b: ty::Variance) -> ty::Variance {

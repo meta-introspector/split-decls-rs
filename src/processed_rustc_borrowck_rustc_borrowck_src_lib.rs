@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 // This query borrow-checks the MIR to (further) ensure it is not broken.
 
 // tidy-alphabetical-start
@@ -19,10 +18,8 @@
 
 use std::borrow::Cow;
 use std::cell::{OnceCell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::marker::PhantomData;
 use std::ops::{ControlFlow, Deref};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::rc::Rc;
 
 use borrow_set::LocalsStateAtExit;
@@ -31,7 +28,6 @@ use root_cx::BorrowCheckRootCtxt;
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_complete::LintDiagnostic;
 use rustc_hir as hir;
@@ -39,57 +35,40 @@ use crate::rustc_complete::CRATE_HIR_ID;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::bit_set::MixedBitSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
 use crate::rustc_infer::infer::{
     InferCtxt, NllRegionVariableOrigin, RegionVariableOrigin, TyCtxtInferExt,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{
     self, ParamEnv, RegionVid, Ty, TyCtxt, TypeFoldable, TypeVisitable, TypingMode, fold_regions,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::impls::{EverInitializedPlaces, MaybeUninitializedPlaces};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_mir_dataflow::move_paths::{
     InitIndex, InitLocation, LookupResult, MoveData, MovePathIndex,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_mir_dataflow::{Analysis, Results, ResultsVisitor, visit_results};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::builtin::{TAIL_EXPR_DROP_ORDER, UNUSED_MUT};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::borrow_set::{BorrowData, BorrowSet};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::consumers::{BodyWithBorrowckFacts, RustcFacts};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::dataflow::{BorrowIndex, Borrowck, BorrowckDomain, Borrows};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::diagnostics::{
     AccessKind, BorrowckDiagnosticsBuffer, IllegalMoveOriginKind, MoveError, RegionName,
 };
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::path_utils::*;
 use crate::place_ext::PlaceExt;
 use crate::places_conflict::{PlaceConflictBias, places_conflict};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::polonius::legacy::{
     PoloniusFacts, PoloniusFactsExt, PoloniusLocationTable, PoloniusOutput,
 };
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::polonius::{PoloniusContext, PoloniusDiagnosticsContext};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::prefixes::PrefixSet;
 use crate::region_infer::RegionInferenceContext;
 use crate::region_infer::opaque_types::DeferredOpaqueTypeError;
@@ -97,13 +76,11 @@ use crate::renumber::RegionCtxt;
 use crate::session_diagnostics::VarNeedNotMut;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
 use crate::type_check::{Locations, MirTypeckRegionConstraints, MirTypeckResults};
-/* AST_META: AST_ID=22 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=4 | LINES=26 */
 
 
 /// A public API provided for the Rust compiler consumers.
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=TyCtxtConsts | COMPLEXITY=2 | LINES=7 */
 
 /// Associate some local constants with the `'tcx` lifetime
 struct TyCtxtConsts<'tcx>(PhantomData<&'tcx ()>);
@@ -111,12 +88,10 @@ struct TyCtxtConsts<'tcx>(PhantomData<&'tcx ()>);
 impl<'tcx> TyCtxtConsts<'tcx> {
     const DEREF_PROJECTION: &'tcx [PlaceElem<'tcx>; 1] = &[ProjectionElem::Deref];
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers { mir_borrowck, ..*providers };
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=mir_borrowck | COMPLEXITY=15 | LINES=26 */
 
 /// Provider for `query mir_borrowck`. Similar to `typeck`, this must
 /// only be called for typeck roots which will then borrowck all
@@ -143,7 +118,6 @@ fn mir_borrowck(
         root_cx.finalize()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=PropagatedBorrowCheckResults | COMPLEXITY=4 | LINES=8 */
 
 /// Data propagated to the typeck parent by nested items.
 /// This should always be empty for the typeck root.
@@ -152,7 +126,6 @@ struct PropagatedBorrowCheckResults<'tcx> {
     closure_requirements: Option<ClosureRegionRequirements<'tcx>>,
     used_mut_upvars: SmallVec<[FieldIdx; 8]>,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=ClosureRegionRequirements | COMPLEXITY=13 | LINES=58 */
 
 type DeferredClosureRequirements<'tcx> = Vec<(LocalDefId, ty::GenericArgsRef<'tcx>, Locations)>;
 
@@ -211,7 +184,6 @@ pub struct ClosureRegionRequirements<'tcx> {
     /// indices.
     pub outlives_requirements: Vec<ClosureOutlivesRequirement<'tcx>>,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=ClosureOutlivesRequirement | COMPLEXITY=2 | LINES=17 */
 
 /// Indicates an outlives-constraint between a type or between two
 /// free regions declared on the closure.
@@ -229,7 +201,6 @@ pub struct ClosureOutlivesRequirement<'tcx> {
     // ... due to this reason.
     pub category: ConstraintCategory<'tcx>,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 // Make sure this enum doesn't unintentionally grow
 #[cfg(target_pointer_width = "64")]
@@ -248,7 +219,6 @@ pub enum ClosureOutlivesSubject<'tcx> {
     /// like `'a: 'b` being passed to the caller; the region here is `'a`.
     Region(ty::RegionVid),
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=ClosureOutlivesSubjectTy | COMPLEXITY=4 | LINES=10 */
 
 /// Represents a `ty::Ty` for use in [`ClosureOutlivesSubject`].
 ///
@@ -259,13 +229,10 @@ pub enum ClosureOutlivesSubject<'tcx> {
 pub struct ClosureOutlivesSubjectTy<'tcx> {
     inner: Ty<'tcx>,
 }
-/* AST_META: AST_ID=31 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 // DO NOT implement `TypeVisitable` or `TypeFoldable` traits, because this
 // type is not recognized as a binder for late-bound region.
 impl<'tcx, I> !TypeVisitable<I> for ClosureOutlivesSubjectTy<'tcx> {}
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'tcx, I> !TypeFoldable<I> for ClosureOutlivesSubjectTy<'tcx> {}
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=bind | COMPLEXITY=20 | LINES=33 */
 
 impl<'tcx> ClosureOutlivesSubjectTy<'tcx> {
     /// All regions of `ty` must be of kind `ReVar` and must represent
@@ -299,7 +266,6 @@ impl<'tcx> ClosureOutlivesSubjectTy<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=CollectRegionConstraintsResult | COMPLEXITY=3 | LINES=18 */
 
 struct CollectRegionConstraintsResult<'tcx> {
     infcx: BorrowckInferCtxt<'tcx>,
@@ -318,7 +284,6 @@ struct CollectRegionConstraintsResult<'tcx> {
     polonius_facts: Option<AllFacts<RustcFacts>>,
     polonius_context: Option<PoloniusContext>,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=borrowck_collect_region_constraints | COMPLEXITY=12 | LINES=80 */
 
 /// Start borrow checking by collecting the region constraints for
 /// the current body. This initializes the relevant data structures
@@ -399,7 +364,6 @@ fn borrowck_collect_region_constraints<'tcx>(
         polonius_context,
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=borrowck_check_region_constraints | COMPLEXITY=5 | LINES=23 */
 
 /// Using the region constraints computed by [borrowck_collect_region_constraints]
 /// and the additional constraints from [BorrowCheckRootCtxt::handle_opaque_type_uses],
@@ -423,7 +387,6 @@ fn borrowck_check_region_constraints<'tcx>(
         polonius_facts,
         polonius_context,
     }: CollectRegionConstraintsResult<'tcx>,
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=MoveVisitor | COMPLEXITY=54 | LINES=190 */
 ) -> PropagatedBorrowCheckResults<'tcx> {
     assert!(!infcx.has_opaque_types_in_storage());
     assert!(deferred_closure_requirements.is_empty());
@@ -614,7 +577,6 @@ fn borrowck_check_region_constraints<'tcx>(
 
     result
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=get_flow_results | COMPLEXITY=6 | LINES=41 */
 
 fn get_flow_results<'a, 'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -656,7 +618,6 @@ fn get_flow_results<'a, 'tcx>(
 
     (analysis, results)
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) struct BorrowckInferCtxt<'tcx> {
     pub(crate) infcx: InferCtxt<'tcx>,
@@ -664,7 +625,6 @@ pub(crate) struct BorrowckInferCtxt<'tcx> {
     pub(crate) param_env: ParamEnv<'tcx>,
     pub(crate) reg_var_to_origin: RefCell<FxIndexMap<ty::RegionVid, RegionCtxt>>,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=61 */
 
 impl<'tcx> BorrowckInferCtxt<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, def_id: LocalDefId, root_def_id: LocalDefId) -> Self {
@@ -726,7 +686,6 @@ impl<'tcx> BorrowckInferCtxt<'tcx> {
         next_region
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Deref for BorrowckInferCtxt<'tcx> {
     type Target = InferCtxt<'tcx>;
@@ -735,7 +694,6 @@ impl<'tcx> Deref for BorrowckInferCtxt<'tcx> {
         &self.infcx
     }
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=MirBorrowckCtxt | COMPLEXITY=24 | LINES=67 */
 
 struct MirBorrowckCtxt<'a, 'infcx, 'tcx> {
     root_cx: &'a mut BorrowCheckRootCtxt<'tcx>,
@@ -803,7 +761,6 @@ struct MirBorrowckCtxt<'a, 'infcx, 'tcx> {
     /// When using `-Zpolonius=next`: the data used to compute errors and diagnostics.
     polonius_diagnostics: Option<&'a PoloniusDiagnosticsContext>,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=visit_after_early_statement_effect | COMPLEXITY=170 | LINES=257 */
 
 // Check that:
 // 1. assignments are always made to mutable locations (FIXME: does that still really go here?)
@@ -1061,19 +1018,15 @@ impl<'a, 'tcx> ResultsVisitor<'tcx, Borrowck<'a, 'tcx>> for MirBorrowckCtxt<'a, 
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use self::AccessDepth::{Deep, Shallow};
-/* AST_META: AST_ID=45 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use self::ReadOrWrite::{Activation, Read, Reservation, Write};
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum ArtificialField {
     ArrayLength,
     FakeBorrow,
 }
-/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum AccessDepth {
@@ -1093,7 +1046,6 @@ enum AccessDepth {
     /// can reach the data behind the reference.
     Drop,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=RootPlace | COMPLEXITY=796 | LINES=1669 */
 
 /// Kind of access to a value: read or write
 /// (For informational purposes only)

@@ -1,28 +1,19 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Debug, Display, Formatter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{HasDataLayout, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::RemapFileNameExt;
 use crate::rustc_complete::config::RemapPathScopeComponents;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_type_ir::TypeVisitableExt;
 
 use super::interpret::ReportedErrorInfo;
 use crate::mir::interpret::{AllocId, AllocRange, ErrorHandled, GlobalAlloc, Scalar, alloc_range};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::{Promoted, pretty_print_const_value};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::print::{pretty_print_const, with_no_trimmed_paths};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, ConstKind, GenericArgsRef, ScalarInt, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ConstAlloc | COMPLEXITY=3 | LINES=14 */
 
 ///////////////////////////////////////////////////////////////////////////
 /// Evaluated Constants
@@ -37,7 +28,6 @@ pub struct ConstAlloc<'tcx> {
     pub alloc_id: AllocId,
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=23 | LINES=44 */
 
 /// Represents a constant value in Rust. `Scalar` and `Slice` are optimizations for
 /// array length computations, enum discriminants and the pattern matching logic.
@@ -82,7 +72,6 @@ pub enum ConstValue {
         offset: Size,
     },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_to_scalar | COMPLEXITY=71 | LINES=154 */
 
 #[cfg(target_pointer_width = "64")]
 crate::rustc_data_structures::static_assert_size!(ConstValue, 24);
@@ -237,7 +226,6 @@ impl ConstValue {
         false
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=28 */
 
 ///////////////////////////////////////////////////////////////////////////
 /// Constants
@@ -266,7 +254,6 @@ pub enum Const<'tcx> {
     /// something the type system cannot handle (e.g. pointers).
     Val(ConstValue, Ty<'tcx>),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from_unevaluated | COMPLEXITY=137 | LINES=272 */
 
 impl<'tcx> Const<'tcx> {
     /// Creates an unevaluated const from a `DefId` for a const item.
@@ -539,7 +526,6 @@ impl<'tcx> Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UnevaluatedConst | COMPLEXITY=2 | LINES=9 */
 
 /// An unevaluated (potentially generic) constant used in MIR.
 #[derive(Copy, Clone, Debug, Eq, PartialEq, TyEncodable, TyDecodable)]
@@ -549,7 +535,6 @@ pub struct UnevaluatedConst<'tcx> {
     pub args: GenericArgsRef<'tcx>,
     pub promoted: Option<Promoted>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=shrink | COMPLEXITY=4 | LINES=8 */
 
 impl<'tcx> UnevaluatedConst<'tcx> {
     #[inline]
@@ -558,7 +543,6 @@ impl<'tcx> UnevaluatedConst<'tcx> {
         ty::UnevaluatedConst { def: self.def, args: self.args }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> UnevaluatedConst<'tcx> {
     #[inline]
@@ -571,7 +555,6 @@ impl<'tcx> UnevaluatedConst<'tcx> {
         UnevaluatedConst::new(instance.def_id(), instance.args)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=17 | LINES=23 */
 
 impl<'tcx> Display for Const<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -595,7 +578,6 @@ impl<'tcx> Display for Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=span_as_caller_location | COMPLEXITY=4 | LINES=21 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Const-related utilities

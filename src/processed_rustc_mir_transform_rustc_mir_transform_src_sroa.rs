@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/sroa.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_complete::LangItem;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::value_analysis::{excluded_locals, iter_fields};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=23 | LINES=45 */
 
 use crate::patch::MirPatch;
 
@@ -60,7 +55,6 @@ impl<'tcx> crate::MirPass<'tcx> for ScalarReplacementOfAggregates {
         false
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=escaping_locals | COMPLEXITY=53 | LINES=94 */
 
 /// Identify all locals that are not eligible for SROA.
 ///
@@ -155,7 +149,6 @@ fn escaping_locals<'tcx>(
         fn visit_var_debug_info(&mut self, _: &VarDebugInfo<'tcx>) {}
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ReplacementMap | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Default, Debug)]
 struct ReplacementMap<'tcx> {
@@ -163,7 +156,6 @@ struct ReplacementMap<'tcx> {
     /// and deinit statement and debuginfo.
     fragments: IndexVec<Local, Option<IndexVec<FieldIdx, Option<(Ty<'tcx>, Local)>>>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=replace_place | COMPLEXITY=8 | LINES=23 */
 
 impl<'tcx> ReplacementMap<'tcx> {
     fn replace_place(&self, tcx: TyCtxt<'tcx>, place: PlaceRef<'tcx>) -> Option<Place<'tcx>> {
@@ -187,7 +179,6 @@ impl<'tcx> ReplacementMap<'tcx> {
         }))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=compute_flattening | COMPLEXITY=16 | LINES=31 */
 
 /// Compute the replacement of flattened places into locals.
 ///
@@ -219,7 +210,6 @@ fn compute_flattening<'tcx>(
     }
     ReplacementMap { fragments }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=replace_flattened_locals | COMPLEXITY=24 | LINES=39 */
 
 /// Perform the replacement computed by `compute_flattening`.
 fn replace_flattened_locals<'tcx>(
@@ -259,7 +249,6 @@ fn replace_flattened_locals<'tcx>(
     patch.apply(body);
     all_dead_locals
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ReplacementVisitor | COMPLEXITY=4 | LINES=11 */
 
 struct ReplacementVisitor<'tcx, 'll> {
     tcx: TyCtxt<'tcx>,
@@ -271,7 +260,6 @@ struct ReplacementVisitor<'tcx, 'll> {
     all_dead_locals: DenseBitSet<Local>,
     patch: MirPatch<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=expand_var_debug_info | COMPLEXITY=17 | LINES=36 */
 
 impl<'tcx> ReplacementVisitor<'tcx, '_> {
     #[instrument(level = "trace", skip(self))]
@@ -308,7 +296,6 @@ impl<'tcx> ReplacementVisitor<'tcx, '_> {
         });
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=83 | LINES=148 */
 
 impl<'tcx, 'll> MutVisitor<'tcx> for ReplacementVisitor<'tcx, 'll> {
     fn tcx(&self) -> TyCtxt<'tcx> {

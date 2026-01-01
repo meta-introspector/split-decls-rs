@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/marker.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=9 */
 use std::alloc::Allocator;
 use std::marker::PointeeSized;
 
@@ -9,7 +8,6 @@ use std::marker::PointeeSized;
 // is true. These types can be wrapped in a `FromDyn` to get a `Send` type. Wrapping a
 // `Send` type in `IntoDynSyncSend` will create a `DynSend` type.
 pub unsafe auto trait DynSend {}
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=7 */
 
 #[diagnostic::on_unimplemented(message = "`{Self}` doesn't implement `DynSync`. \
             Add it to `crate::rustc_data_structures::marker` or use `IntoDynSyncSend` if it's already `Sync`")]
@@ -17,18 +15,15 @@ pub unsafe auto trait DynSend {}
 // is true. These types can be wrapped in a `FromDyn` to get a `Sync` type. Wrapping a
 // `Sync` type in `IntoDynSyncSend` will create a `DynSync` type.
 pub unsafe auto trait DynSync {}
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=3 */
 
 // Same with `Sync` and `Send`.
 unsafe impl<T: DynSync + ?Sized + PointeeSized> DynSend for &T {}
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=6 */
 
 macro_rules! impls_dyn_send_neg {
     ($([$t1: ty $(where $($generics1: tt)*)?])*) => {
         $(impl$(<$($generics1)*>)? !DynSend for $t1 {})*
     };
 }
-/* AST_META: AST_ID=5 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=27 */
 
 // Consistent with `std`
 impls_dyn_send_neg!(
@@ -56,14 +51,12 @@ impls_dyn_send_neg!(
 ))]
 // Consistent with `std`, `env_imp::Env` is `!Sync` in these platforms
 impl !DynSend for std::env::VarsOs {}
-/* AST_META: AST_ID=6 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=15 | LINES=6 */
 
 macro_rules! already_send {
     ($([$ty: ty])*) => {
         $(unsafe impl DynSend for $ty where $ty: Send {})*
     };
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=16 | LINES=13 */
 
 // These structures are already `Send`.
 already_send!(
@@ -77,7 +70,6 @@ macro_rules! impl_dyn_send {
         $(unsafe impl<$($generics2)*> DynSend for $ty {})*
     };
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=27 */
 
 impl_dyn_send!(
     [std::sync::atomic::AtomicPtr<T> where T]
@@ -105,7 +97,6 @@ macro_rules! impls_dyn_sync_neg {
         $(impl$(<$($generics1)*>)? !DynSync for $t1 {})*
     };
 }
-/* AST_META: AST_ID=9 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=28 */
 
 // Consistent with `std`
 impls_dyn_sync_neg!(
@@ -134,14 +125,12 @@ impls_dyn_sync_neg!(
 ))]
 // Consistent with `std`, `env_imp::Env` is `!Sync` in these platforms
 impl !DynSync for std::env::VarsOs {}
-/* AST_META: AST_ID=10 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=15 | LINES=6 */
 
 macro_rules! already_sync {
     ($([$ty: ty])*) => {
         $(unsafe impl DynSync for $ty where $ty: Sync {})*
     };
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=18 | LINES=21 */
 
 // These structures are already `Sync`.
 already_sync!(
@@ -163,7 +152,6 @@ macro_rules! impl_dyn_sync {
         $(unsafe impl<$($generics2)*> DynSync for $ty {})*
     };
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=assert_dyn_sync | COMPLEXITY=5 | LINES=26 */
 
 impl_dyn_sync!(
     [std::sync::atomic::AtomicPtr<T> where T]
@@ -190,13 +178,9 @@ impl_dyn_sync!(
 );
 
 pub fn assert_dyn_sync<T: ?Sized + PointeeSized + DynSync>() {}
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=assert_dyn_send | COMPLEXITY=2 | LINES=1 */
 pub fn assert_dyn_send<T: ?Sized + PointeeSized + DynSend>() {}
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=assert_dyn_send_val | COMPLEXITY=2 | LINES=1 */
 pub fn assert_dyn_send_val<T: ?Sized + PointeeSized + DynSend>(_t: &T) {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=assert_dyn_send_sync_val | COMPLEXITY=2 | LINES=1 */
 pub fn assert_dyn_send_sync_val<T: ?Sized + PointeeSized + DynSync + DynSend>(_t: &T) {}
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=FromDyn | COMPLEXITY=10 | LINES=25 */
 
 #[derive(Copy, Clone)]
 pub struct FromDyn<T>(T);
@@ -222,15 +206,12 @@ impl<T> FromDyn<T> {
         self.0
     }
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=3 */
 
 // `FromDyn` is `Send` if `T` is `DynSend`, since it ensures that sync::is_dyn_thread_safe() is true.
 unsafe impl<T: DynSend> Send for FromDyn<T> {}
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=3 */
 
 // `FromDyn` is `Sync` if `T` is `DynSync`, since it ensures that sync::is_dyn_thread_safe() is true.
 unsafe impl<T: DynSync> Sync for FromDyn<T> {}
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<T> std::ops::Deref for FromDyn<T> {
     type Target = T;
@@ -240,7 +221,6 @@ impl<T> std::ops::Deref for FromDyn<T> {
         &self.0
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=7 */
 
 impl<T> std::ops::DerefMut for FromDyn<T> {
     #[inline(always)]
@@ -248,7 +228,6 @@ impl<T> std::ops::DerefMut for FromDyn<T> {
         &mut self.0
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=IntoDynSyncSend | COMPLEXITY=8 | LINES=8 */
 
 // A wrapper to convert a struct that is already a `Send` or `Sync` into
 // an instance of `DynSend` and `DynSync`, since the compiler cannot infer
@@ -257,9 +236,7 @@ impl<T> std::ops::DerefMut for FromDyn<T> {
 pub struct IntoDynSyncSend<T: ?Sized + PointeeSized>(pub T);
 
 unsafe impl<T: ?Sized + PointeeSized + Send> DynSend for IntoDynSyncSend<T> {}
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: ?Sized + PointeeSized + Sync> DynSync for IntoDynSyncSend<T> {}
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<T> std::ops::Deref for IntoDynSyncSend<T> {
     type Target = T;
@@ -269,7 +246,6 @@ impl<T> std::ops::Deref for IntoDynSyncSend<T> {
         &self.0
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=7 */
 
 impl<T> std::ops::DerefMut for IntoDynSyncSend<T> {
     #[inline(always)]

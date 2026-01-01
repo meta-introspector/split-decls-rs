@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Diag, LintDiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::AssertKind;
 use crate::rustc_complete::query::Key;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::lint::{self, Lint};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=42 */
 
 use crate::fluent_generated as fluent;
 
@@ -55,7 +50,6 @@ pub(crate) fn emit_inline_always_target_feature_diagnostic<'a, 'tcx>(
         },
     );
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_transform_unconditional_recursion)]
@@ -66,7 +60,6 @@ pub(crate) struct UnconditionalRecursion {
     #[label(mir_transform_unconditional_recursion_call_site_label)]
     pub(crate) call_sites: Vec<Span>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(mir_transform_force_inline_attr)]
@@ -79,7 +72,6 @@ pub(crate) struct InvalidForceInline {
     pub callee: String,
     pub reason: &'static str,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum ConstMutate {
@@ -99,7 +91,6 @@ pub(crate) enum ConstMutate {
         konst: Span,
     },
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_transform_unaligned_packed_ref, code = E0793)]
@@ -110,27 +101,23 @@ pub(crate) struct UnalignedPackedRef {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(mir_transform_unknown_pass_name)]
 pub(crate) struct UnknownPassName<'a> {
     pub(crate) name: &'a str,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct AssertLint<P> {
     pub span: Span,
     pub assert_kind: AssertKind<P>,
     pub lint_kind: AssertLintKind,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum AssertLintKind {
     ArithmeticOverflow,
     UnconditionalPanic,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=11 | LINES=14 */
 
 impl<'a, P: std::fmt::Debug> LintDiagnostic<'a, ()> for AssertLint<P> {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, ()>) {
@@ -145,7 +132,6 @@ impl<'a, P: std::fmt::Debug> LintDiagnostic<'a, ()> for AssertLint<P> {
         diag.span_label(self.span, label);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 impl AssertLintKind {
     pub(crate) fn lint(&self) -> &'static Lint {
@@ -155,7 +141,6 @@ impl AssertLintKind {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_transform_ffi_unwind_call)]
@@ -164,7 +149,6 @@ pub(crate) struct FfiUnwindCall {
     pub span: Span,
     pub foreign: bool,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_transform_fn_item_ref)]
@@ -174,7 +158,6 @@ pub(crate) struct FnItemRef {
     pub sugg: String,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) struct MustNotSupend<'a, 'tcx> {
     pub tcx: TyCtxt<'tcx>,
@@ -185,7 +168,6 @@ pub(crate) struct MustNotSupend<'a, 'tcx> {
     pub def_id: DefId,
     pub post: &'a str,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=11 | LINES=15 */
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for MustNotSupend<'_, '_> {
@@ -201,7 +183,6 @@ impl<'a> LintDiagnostic<'a, ()> for MustNotSupend<'_, '_> {
         diag.arg("post", self.post);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(mir_transform_note)]
@@ -210,7 +191,6 @@ pub(crate) struct MustNotSuspendReason {
     pub span: Span,
     pub reason: String,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 #[derive(Diagnostic)]
 #[diag(mir_transform_force_inline)]
@@ -231,7 +211,6 @@ pub(crate) struct ForceInlineFailure {
     #[subdiagnostic]
     pub justification: Option<ForceInlineJustification>,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(mir_transform_force_inline_justification)]

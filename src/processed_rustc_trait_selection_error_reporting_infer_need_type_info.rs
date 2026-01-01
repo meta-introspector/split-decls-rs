@@ -1,36 +1,25 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/need_type_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::borrow::Cow;
 use std::iter;
 use std::path::PathBuf;
 
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Diag, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorOf, DefKind, Namespace, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Body, Closure, Expr, ExprKind, FnRetTy, HirId, LetStmt, LocalSource};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter, Print, Printer};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, GenericArgsRef, InferConst, IsSuggestable, Term, TermKind,
     Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, TypeckResults,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, warn};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use super::nice_region_error::placeholder_error::Highlighted;
 use crate::error_reporting::TypeErrCtxt;
@@ -38,7 +27,6 @@ use crate::errors::{
     AmbiguousImpl, AmbiguousReturn, AnnotationRequired, InferenceBadError,
     SourceKindMultiSuggestion, SourceKindSubdiag,
 };
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 use crate::infer::InferCtxt;
 
 pub enum TypeAnnotationNeeded {
@@ -57,7 +45,6 @@ pub enum TypeAnnotationNeeded {
     /// ```
     E0284,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<TypeAnnotationNeeded> for ErrCode {
     fn from(val: TypeAnnotationNeeded) -> Self {
@@ -68,7 +55,6 @@ impl From<TypeAnnotationNeeded> for ErrCode {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=InferenceDiagnosticsData | COMPLEXITY=2 | LINES=8 */
 
 /// Information about a constant or a type containing inference variables.
 pub struct InferenceDiagnosticsData {
@@ -77,21 +63,18 @@ pub struct InferenceDiagnosticsData {
     pub kind: UnderspecifiedArgKind,
     pub parent: Option<InferenceDiagnosticsParentData>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=InferenceDiagnosticsParentData | COMPLEXITY=2 | LINES=6 */
 
 /// Data on the parent definition where a generic argument was declared.
 pub struct InferenceDiagnosticsParentData {
     prefix: &'static str,
     name: String,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 #[derive(Clone)]
 pub enum UnderspecifiedArgKind {
     Type { prefix: Cow<'static, str> },
     Const { is_parameter: bool },
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=can_add_more_info | COMPLEXITY=24 | LINES=41 */
 
 impl InferenceDiagnosticsData {
     fn can_add_more_info(&self) -> bool {
@@ -133,7 +116,6 @@ impl InferenceDiagnosticsData {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=for_parent_def_id | COMPLEXITY=6 | LINES=19 */
 
 impl InferenceDiagnosticsParentData {
     fn for_parent_def_id(
@@ -153,7 +135,6 @@ impl InferenceDiagnosticsParentData {
         Self::for_parent_def_id(tcx, tcx.parent(def_id))
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=12 | LINES=11 */
 
 impl IntoDiagArg for UnderspecifiedArgKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -165,7 +146,6 @@ impl IntoDiagArg for UnderspecifiedArgKind {
         crate::rustc_errors::DiagArgValue::Str(kind.into())
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=try_get_prefix | COMPLEXITY=9 | LINES=9 */
 
 impl UnderspecifiedArgKind {
     fn try_get_prefix(&self) -> Option<&str> {
@@ -175,19 +155,16 @@ impl UnderspecifiedArgKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=ClosureEraser | COMPLEXITY=2 | LINES=4 */
 
 struct ClosureEraser<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new_infer | COMPLEXITY=3 | LINES=6 */
 
 impl<'a, 'tcx> ClosureEraser<'a, 'tcx> {
     fn new_infer(&mut self) -> Ty<'tcx> {
         self.infcx.next_ty_var(DUMMY_SP)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=39 | LINES=78 */
 
 impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for ClosureEraser<'a, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -266,7 +243,6 @@ impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for ClosureEraser<'a, 'tcx> {
         c
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt_printer | COMPLEXITY=17 | LINES=34 */
 
 fn fmt_printer<'a, 'tcx>(infcx: &'a InferCtxt<'tcx>, ns: Namespace) -> FmtPrinter<'a, 'tcx> {
     let mut p = FmtPrinter::new(infcx.tcx, ns);
@@ -301,7 +277,6 @@ fn fmt_printer<'a, 'tcx>(infcx: &'a InferCtxt<'tcx>, ns: Namespace) -> FmtPrinte
     p.const_infer_name_resolver = Some(Box::new(const_getter));
     p
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=ty_to_string | COMPLEXITY=20 | LINES=32 */
 
 fn ty_to_string<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -334,7 +309,6 @@ fn ty_to_string<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=closure_as_fn_str | COMPLEXITY=15 | LINES=29 */
 
 /// We don't want to directly use `ty_to_string` for closures as their type isn't really
 /// something users are familiar with. Directly printing the `fn_sig` of closures also
@@ -364,7 +338,6 @@ fn closure_as_fn_str<'tcx>(infcx: &InferCtxt<'tcx>, ty: Ty<'tcx>) -> String {
     };
     format!("fn({args}){ret}")
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=extract_inference_diagnostics_data | COMPLEXITY=145 | LINES=318 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     /// Extracts data used by diagnostic for either types or constants
@@ -683,14 +656,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         err
     }
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=InferSource | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 struct InferSource<'tcx> {
     span: Span,
     kind: InferSourceKind<'tcx>,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=35 */
 
 #[derive(Debug)]
 enum InferSourceKind<'tcx> {
@@ -726,7 +697,6 @@ enum InferSourceKind<'tcx> {
         should_wrap_expr: Option<Span>,
     },
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=from_expansion | COMPLEXITY=15 | LINES=17 */
 
 impl<'tcx> InferSource<'tcx> {
     fn from_expansion(&self) -> bool {
@@ -744,7 +714,6 @@ impl<'tcx> InferSource<'tcx> {
         source_from_expansion || self.span.from_expansion()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=ty_localized_msg | COMPLEXITY=23 | LINES=24 */
 
 impl<'tcx> InferSourceKind<'tcx> {
     fn ty_localized_msg(&self, infcx: &InferCtxt<'tcx>) -> (&'static str, String, Option<PathBuf>) {
@@ -769,7 +738,6 @@ impl<'tcx> InferSourceKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=InsertableGenericArgs | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 struct InsertableGenericArgs<'tcx> {
@@ -779,7 +747,6 @@ struct InsertableGenericArgs<'tcx> {
     def_id: DefId,
     have_turbofish: bool,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=FindInferSourceVisitor | COMPLEXITY=5 | LINES=18 */
 
 /// A visitor which searches for the "best" spot to use in the inference error.
 ///
@@ -798,7 +765,6 @@ struct FindInferSourceVisitor<'a, 'tcx> {
     infer_source_cost: usize,
     infer_source: Option<InferSource<'tcx>>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=new | COMPLEXITY=214 | LINES=381 */
 
 impl<'a, 'tcx> FindInferSourceVisitor<'a, 'tcx> {
     fn new(
@@ -1180,7 +1146,6 @@ impl<'a, 'tcx> FindInferSourceVisitor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=99 | LINES=171 */
 
 impl<'a, 'tcx> Visitor<'tcx> for FindInferSourceVisitor<'a, 'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;

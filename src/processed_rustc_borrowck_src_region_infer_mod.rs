@@ -1,49 +1,36 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::VecDeque;
 use std::rc::Rc;
 
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::graph::scc::Sccs;
 use crate::rustc_complete::Diag;
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_index::IndexVec;
 use crate::rustc_infer::infer::outlives::test_type_match;
 use crate::rustc_infer::infer::region_constraints::{GenericKind, VerifyBound, VerifyIfEq};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{
     AnnotationSource, BasicBlock, Body, ConstraintCategory, Local, Location, ReturnConstraint,
     TerminatorKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt, TypeFoldable, UniverseIndex, fold_regions};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_complete::hygiene::DesugaringKind;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{Level, debug, enabled, instrument, trace};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::constraints::graph::NormalConstraintGraph;
 use crate::constraints::{ConstraintSccIndex, OutlivesConstraint, OutlivesConstraintSet};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::dataflow::BorrowIndex;
 use crate::diagnostics::{RegionErrorKind, RegionErrors, UniverseInfo};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::handle_placeholders::{LoweredConstraints, RegionTracker};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::polonius::LiveLoans;
 use crate::polonius::legacy::PoloniusOutput;
 use crate::region_infer::values::{LivenessValues, RegionElement, RegionValues, ToElementIndex};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::type_check::Locations;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
 use crate::universal_regions::UniversalRegions;
@@ -51,7 +38,6 @@ use crate::{
     BorrowckInferCtxt, ClosureOutlivesRequirement, ClosureOutlivesSubject,
     ClosureOutlivesSubjectTy, ClosureRegionRequirements,
 };
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 
 
@@ -65,7 +51,6 @@ pub(crate) enum Representative {
     Placeholder(RegionVid),
     Existential(RegionVid),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=18 */
 
 impl Representative {
     pub(crate) fn rvid(self) -> RegionVid {
@@ -84,7 +69,6 @@ impl Representative {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=RegionInferenceContext | COMPLEXITY=14 | LINES=46 */
 
 pub(crate) type ConstraintSccs = Sccs<RegionVid, ConstraintSccIndex>;
 
@@ -131,7 +115,6 @@ pub struct RegionInferenceContext<'tcx> {
     /// scope on this function relate to one another.
     universal_region_relations: Frozen<UniversalRegionRelations<'tcx>>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 #[derive(Debug)]
 pub(crate) struct RegionDefinition<'tcx> {
@@ -150,7 +133,6 @@ pub(crate) struct RegionDefinition<'tcx> {
     /// `Some(X)` where `X` is the name of the region.
     pub(crate) external_name: Option<ty::Region<'tcx>>,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// N.B., the variants in `Cause` are intentionally ordered. Lower
 /// values are preferred when it comes to error messages. Do not
@@ -163,7 +145,6 @@ pub(crate) enum Cause {
     /// point inserted because Local was dropped at the given Location
     DropVar(Local, Location),
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=14 | LINES=48 */
 
 /// A "type test" corresponds to an outlives constraint between a type
 /// and a lifetime, like `T: 'x` or `<T as Foo>::Bar: 'x`. They are
@@ -212,7 +193,6 @@ pub(crate) struct TypeTest<'tcx> {
     /// constraint is satisfied.
     pub verify_bound: VerifyBound<'tcx>,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// When we have an unmet lifetime constraint, we try to propagate it outward (e.g. to a closure
 /// environment). If we can't, it is an error.
@@ -222,7 +202,6 @@ enum RegionRelationCheckResult {
     Propagated,
     Error,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, PartialEq, Eq, Debug)]
 enum Trace<'a, 'tcx> {
@@ -231,7 +210,6 @@ enum Trace<'a, 'tcx> {
     FromStatic(RegionVid),
     NotVisited,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=sccs_info | COMPLEXITY=35 | LINES=66 */
 
 #[instrument(skip(infcx, sccs), level = "debug")]
 fn sccs_info<'tcx>(infcx: &BorrowckInferCtxt<'tcx>, sccs: &ConstraintSccs) {
@@ -298,7 +276,6 @@ fn sccs_info<'tcx>(infcx: &BorrowckInferCtxt<'tcx>, sccs: &ConstraintSccs) {
 
     debug!("SCC edges {:#?}", scc_node_to_edges);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=init_free_and_bound_regions | COMPLEXITY=695 | LINES=1571 */
 
 impl<'tcx> RegionInferenceContext<'tcx> {
     /// Creates a new region inference context with a total of
@@ -1870,7 +1847,6 @@ impl<'tcx> RegionInferenceContext<'tcx> {
         self.liveness_constraints.is_loan_live_at(loan_idx, point)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug)]
 pub(crate) struct BlameConstraint<'tcx> {

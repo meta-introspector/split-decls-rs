@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/consts/kind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::assert_matches;
 
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::Const;
 use crate::mir;
 use crate::ty::abstract_const::CastKind;
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
 #[derive(HashStable, TyEncodable, TyDecodable, TypeVisitable, TypeFoldable)]
@@ -19,21 +16,18 @@ pub enum ExprKind {
     FunctionCall,
     Cast(CastKind),
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Expr | COMPLEXITY=2 | LINES=6 */
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
 #[derive(HashStable, TyEncodable, TyDecodable, TypeVisitable, TypeFoldable)]
 pub struct Expr<'tcx> {
     pub kind: ExprKind,
     args: ty::GenericArgsRef<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=args | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> rustc_type_ir::inherent::ExprConst<TyCtxt<'tcx>> for Expr<'tcx> {
     fn args(self) -> ty::GenericArgsRef<'tcx> {
         self.args
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new_binop | COMPLEXITY=52 | LINES=108 */
 
 impl<'tcx> Expr<'tcx> {
     pub fn new_binop(
@@ -142,7 +136,6 @@ impl<'tcx> Expr<'tcx> {
         self.args
     }
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 
 #[cfg(target_pointer_width = "64")]
 crate::rustc_data_structures::static_assert_size!(Expr<'_>, 16);

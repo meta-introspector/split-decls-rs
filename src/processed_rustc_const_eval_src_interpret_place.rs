@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/place.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Computations on places -- field projections, going from mir::Place, and writing
 // into a place.
 // All high-level functions to write to memory work on places as destinations.
@@ -7,23 +6,18 @@
 use std::assert_matches::assert_matches;
 
 use either::{Either, Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{BackendRepr, HasDataLayout, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::field::Empty;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     AllocInit, AllocRef, AllocRefMut, CheckAlignMsg, CtfeProvenance, ImmTy, Immediate, InterpCx,
     InterpResult, Machine, MemoryKind, Misalignment, OffsetMode, OpTy, Operand, Pointer,
     Projectable, Provenance, Scalar, alloc_range, interp_ok, mir_assign_valid_types,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 use crate::enter_trace_span;
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq, Debug)]
@@ -34,7 +28,6 @@ pub enum MemPlaceMeta<Prov: Provenance = CtfeProvenance> {
     /// `Sized` types or unsized `extern type`
     None,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=unwrap_meta | COMPLEXITY=14 | LINES=20 */
 
 impl<Prov: Provenance> MemPlaceMeta<Prov> {
     #[cfg_attr(debug_assertions, track_caller)] // only in debug builds due to perf (see #98980)
@@ -55,7 +48,6 @@ impl<Prov: Provenance> MemPlaceMeta<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq, Debug)]
 pub(super) struct MemPlace<Prov: Provenance = CtfeProvenance> {
@@ -68,7 +60,6 @@ pub(super) struct MemPlace<Prov: Provenance = CtfeProvenance> {
     /// Stores whether this place was created based on a sufficiently aligned pointer.
     misaligned: Option<Misalignment>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=map_provenance | COMPLEXITY=14 | LINES=35 */
 
 impl<Prov: Provenance> MemPlace<Prov> {
     /// Adjust the provenance of the main pointer (metadata is unaffected).
@@ -104,7 +95,6 @@ impl<Prov: Provenance> MemPlace<Prov> {
         interp_ok(MemPlace { ptr, meta, misaligned: self.misaligned })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=MPlaceTy | COMPLEXITY=2 | LINES=7 */
 
 /// A MemPlace with its layout. Constructing it is only possible in this module.
 #[derive(Clone, Hash, Eq, PartialEq)]
@@ -112,7 +102,6 @@ pub struct MPlaceTy<'tcx, Prov: Provenance = CtfeProvenance> {
     mplace: MemPlace<Prov>,
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
 
 impl<Prov: Provenance> std::fmt::Debug for MPlaceTy<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -123,7 +112,6 @@ impl<Prov: Provenance> std::fmt::Debug for MPlaceTy<'_, Prov> {
             .finish()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fake_alloc_zst | COMPLEXITY=14 | LINES=33 */
 
 impl<'tcx, Prov: Provenance> MPlaceTy<'tcx, Prov> {
     /// Produces a MemPlace that works for ZST but nothing else.
@@ -157,7 +145,6 @@ impl<'tcx, Prov: Provenance> MPlaceTy<'tcx, Prov> {
         self.mplace.to_ref(cx)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=10 | LINES=34 */
 
 impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for MPlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -192,7 +179,6 @@ impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for MPlaceTy<'tcx, Prov> {
         interp_ok(self.clone().into())
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 #[derive(Copy, Clone, Debug)]
 pub(super) enum Place<Prov: Provenance = CtfeProvenance> {
@@ -212,7 +198,6 @@ pub(super) enum Place<Prov: Provenance = CtfeProvenance> {
     /// This variant shall not be used for unsized types -- those must always live in memory.
     Local { local: mir::Local, offset: Option<Size>, locals_addr: usize },
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PlaceTy | COMPLEXITY=5 | LINES=12 */
 
 /// An evaluated place, together with its type.
 ///
@@ -225,7 +210,6 @@ pub struct PlaceTy<'tcx, Prov: Provenance = CtfeProvenance> {
     place: Place<Prov>, // Keep this private; it helps enforce invariants.
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
 
 impl<Prov: Provenance> std::fmt::Debug for PlaceTy<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -236,7 +220,6 @@ impl<Prov: Provenance> std::fmt::Debug for PlaceTy<'_, Prov> {
             .finish()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl<'tcx, Prov: Provenance> From<MPlaceTy<'tcx, Prov>> for PlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -244,7 +227,6 @@ impl<'tcx, Prov: Provenance> From<MPlaceTy<'tcx, Prov>> for PlaceTy<'tcx, Prov> 
         PlaceTy { place: Place::Ptr(mplace.mplace), layout: mplace.layout }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=as_mplace_or_local | COMPLEXITY=20 | LINES=37 */
 
 impl<'tcx, Prov: Provenance> PlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -282,7 +264,6 @@ impl<'tcx, Prov: Provenance> PlaceTy<'tcx, Prov> {
         })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=26 | LINES=55 */
 
 impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for PlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -338,7 +319,6 @@ impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for PlaceTy<'tcx, Prov> {
         ecx.place_to_op(self)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=as_mplace_or_imm | COMPLEXITY=12 | LINES=22 */
 
 // These are defined here because they produce a place.
 impl<'tcx, Prov: Provenance> OpTy<'tcx, Prov> {
@@ -361,7 +341,6 @@ impl<'tcx, Prov: Provenance> OpTy<'tcx, Prov> {
         })
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_place | COMPLEXITY=2 | LINES=10 */
 
 /// The `Weiteable` trait describes interpreter values that can be written to.
 pub trait Writeable<'tcx, Prov: Provenance>: Projectable<'tcx, Prov> {
@@ -372,7 +351,6 @@ pub trait Writeable<'tcx, Prov: Provenance>: Projectable<'tcx, Prov> {
         ecx: &mut InterpCx<'tcx, M>,
     ) -> InterpResult<'tcx, MPlaceTy<'tcx, Prov>>;
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=to_place | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx, Prov: Provenance> Writeable<'tcx, Prov> for PlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -388,7 +366,6 @@ impl<'tcx, Prov: Provenance> Writeable<'tcx, Prov> for PlaceTy<'tcx, Prov> {
         ecx.force_allocation(self)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=to_place | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx, Prov: Provenance> Writeable<'tcx, Prov> for MPlaceTy<'tcx, Prov> {
     #[inline(always)]
@@ -404,7 +381,6 @@ impl<'tcx, Prov: Provenance> Writeable<'tcx, Prov> for MPlaceTy<'tcx, Prov> {
         interp_ok(self.clone())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=ptr_with_meta_to_mplace | COMPLEXITY=293 | LINES=686 */
 
 // FIXME: Working around https://github.com/rust-lang/rust/issues/54385
 impl<'tcx, Prov, M> InterpCx<'tcx, M>
@@ -1091,7 +1067,6 @@ where
         interp_ok(self.ptr_to_mplace(ptr.into(), layout))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

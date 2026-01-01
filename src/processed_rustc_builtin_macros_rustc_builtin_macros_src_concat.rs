@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/concat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{ExprKind, LitKind, UnOp};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=83 */
 use crate::rustc_complete::errors::report_lit_error;
 use crate::rustc_complete::Symbol;
 

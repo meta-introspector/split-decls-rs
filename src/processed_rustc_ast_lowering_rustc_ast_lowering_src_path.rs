@@ -1,33 +1,24 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/path.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use crate::rustc_complete::{self as ast, *};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, PartialRes, PerNS, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, GenericArg};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{span_bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::add_feature_diagnostics;
 use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::smallvec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::errors::{
     AsyncBoundNotOnTrait, AsyncBoundOnlyForFnTraits, BadReturnTypeNotation,
     GenericTypeWithParentheses, RTNSuggestion, UseAngleBrackets,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::{
     AllowReturnTypeNotation, GenericArgsCtor, GenericArgsMode, ImplTraitContext, ImplTraitPosition,
     LifetimeRes, LoweringContext, ParamMode, ResolverAstLoweringExt,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_insert_elided_lifetimes_in_path | COMPLEXITY=271 | LINES=586 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     #[instrument(level = "trace", skip(self))]

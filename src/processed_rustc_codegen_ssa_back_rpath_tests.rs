@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/rpath/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_minimize1 | COMPLEXITY=2 | LINES=7 */
 use super::*;
 
 #[test]
@@ -7,7 +6,6 @@ fn test_minimize1() {
     let res = minimize_rpaths(&["rpath1".into(), "rpath2".into(), "rpath1".into()]);
     assert!(res == ["rpath1", "rpath2",]);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_minimize2 | COMPLEXITY=2 | LINES=17 */
 
 #[test]
 fn test_minimize2() {
@@ -25,7 +23,6 @@ fn test_minimize2() {
     ]);
     assert!(res == ["1a", "2", "4a", "3",]);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_rpath_relative | COMPLEXITY=9 | LINES=23 */
 
 #[test]
 fn test_rpath_relative() {
@@ -49,7 +46,6 @@ fn test_rpath_relative() {
         assert_eq!(res, "$ORIGIN/../lib");
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_rpath_relative_issue_119571 | COMPLEXITY=4 | LINES=15 */
 
 #[test]
 fn test_rpath_relative_issue_119571() {

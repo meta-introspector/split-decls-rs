@@ -1,34 +1,26 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/llvm_util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::VecDeque;
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Write;
 use std::path::Path;
 use std::sync::Once;
 use std::{ptr, slice, str};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use libc::c_int;
 use crate::rustc_codegen_ssa::base::wants_wasm_eh;
 use crate::rustc_codegen_ssa::target_features::cfg_target_feature;
 use crate::rustc_codegen_ssa::{TargetConfig, target_features};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use rustc_fs_util::path_to_c_string;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{PrintKind, PrintRequest};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{MergeFunctions, PanicStrategy, SmallDataThresholdSupport};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::back::write::create_informational_target_machine;
 use crate::{errors, llvm};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=14 */
 
 static INIT: Once = Once::new();
 
@@ -43,14 +35,12 @@ pub(crate) fn init(sess: &Session) {
         });
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=require_inited | COMPLEXITY=5 | LINES=6 */
 
 fn require_inited() {
     if !INIT.is_completed() {
         bug!("LLVM is not initialized");
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=llvm_arg_to_arg_name | COMPLEXITY=85 | LINES=107 */
 
 unsafe fn configure_llvm(sess: &Session) {
     let n_args = sess.opts.cg.llvm_args.len() + sess.target.llvm_args.len();
@@ -158,7 +148,6 @@ unsafe fn configure_llvm(sess: &Session) {
 
     unsafe { llvm::LLVMRustSetLLVMOptions(llvm_args.len() as c_int, llvm_args.as_ptr()) };
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn time_trace_profiler_finish(file_name: &Path) {
     unsafe {
@@ -166,7 +155,6 @@ pub(crate) fn time_trace_profiler_finish(file_name: &Path) {
         llvm::LLVMRustTimeTraceProfilerFinish(file_name.as_ptr());
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 enum TargetFeatureFoldStrength<'a> {
     // The feature is only tied when enabling the feature, disabling
@@ -175,7 +163,6 @@ enum TargetFeatureFoldStrength<'a> {
     // The feature is tied for both enabling and disabling this feature.
     Both(&'a str),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=9 */
 
 impl<'a> TargetFeatureFoldStrength<'a> {
     fn as_str(&self) -> &'a str {
@@ -185,13 +172,11 @@ impl<'a> TargetFeatureFoldStrength<'a> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct LLVMFeature<'a> {
     llvm_feature_name: &'a str,
     dependencies: SmallVec<[TargetFeatureFoldStrength<'a>; 1]>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=13 */
 
 impl<'a> LLVMFeature<'a> {
     fn new(llvm_feature_name: &'a str) -> Self {
@@ -205,7 +190,6 @@ impl<'a> LLVMFeature<'a> {
         Self { llvm_feature_name, dependencies }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=10 */
 
 impl<'a> IntoIterator for LLVMFeature<'a> {
     type Item = &'a str;
@@ -216,7 +200,6 @@ impl<'a> IntoIterator for LLVMFeature<'a> {
         std::iter::once(self.llvm_feature_name).chain(dependencies)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Convert a Rust feature name to an LLVM feature name. Returning `None` means the
 /// feature should be skipped, usually because it is not supported by the current
@@ -227,9 +210,7 @@ impl<'a> IntoIterator for LLVMFeature<'a> {
 /// array, leading to crashes.
 ///
 /// To find a list of LLVM's names, see llvm-project/llvm/lib/Target/{ARCH}/*.td
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// where `{ARCH}` is the architecture name. Look for instances of `SubtargetFeature`.
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=82 | LINES=118 */
 ///
 /// Check the current rustc fork of LLVM in the repo at
 /// <https://github.com/rust-lang/llvm-project/>. The commit in use can be found via the
@@ -348,7 +329,6 @@ pub(crate) fn to_llvm_features<'a>(sess: &Session, s: &'a str) -> Option<LLVMFea
         (_, s) => Some(LLVMFeature::new(s)),
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=41 */
 
 /// Used to generate cfg variables and apply features.
 /// Must express features in the way Rust understands them.
@@ -390,7 +370,6 @@ pub(crate) fn target_config(sess: &Session) -> TargetConfig {
     update_target_reliable_float_cfg(sess, &mut cfg);
     cfg
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=update_target_reliable_float_cfg | COMPLEXITY=51 | LINES=83 */
 
 /// Determine whether or not experimental float types are reliable based on known bugs.
 fn update_target_reliable_float_cfg(sess: &Session, cfg: &mut TargetConfig) {
@@ -474,13 +453,11 @@ fn update_target_reliable_float_cfg(sess: &Session, cfg: &mut TargetConfig) {
         _ => false,
     } && cfg.has_reliable_f128;
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 
 pub(crate) fn print_version() {
     let (major, minor, patch) = get_version();
     println!("LLVM version: {major}.{minor}.{patch}");
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn get_version() -> (u32, u32, u32) {
     // Can be called without initializing LLVM
@@ -488,7 +465,6 @@ pub(crate) fn get_version() -> (u32, u32, u32) {
         (llvm::LLVMRustVersionMajor(), llvm::LLVMRustVersionMinor(), llvm::LLVMRustVersionPatch())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn print_passes() {
     // Can be called without initializing LLVM
@@ -496,7 +472,6 @@ pub(crate) fn print_passes() {
         llvm::LLVMRustPrintPasses();
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=llvm_target_features | COMPLEXITY=23 | LINES=23 */
 
 fn llvm_target_features(tm: &llvm::TargetMachine) -> Vec<(&str, &str)> {
     let len = unsafe { llvm::LLVMRustGetTargetFeaturesCount(tm) };
@@ -520,7 +495,6 @@ fn llvm_target_features(tm: &llvm::TargetMachine) -> Vec<(&str, &str)> {
     }
     ret
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 pub(crate) fn print(req: &PrintRequest, out: &mut String, sess: &Session) {
     require_inited();
@@ -531,7 +505,6 @@ pub(crate) fn print(req: &PrintRequest, out: &mut String, sess: &Session) {
         _ => bug!("rustc_codegen_llvm can't handle print request: {:?}", req),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=print_target_cpus | COMPLEXITY=39 | LINES=48 */
 
 fn print_target_cpus(sess: &Session, tm: &llvm::TargetMachine, out: &mut String) {
     let cpu_names = llvm::build_string(|s| unsafe {
@@ -580,7 +553,6 @@ fn print_target_cpus(sess: &Session, tm: &llvm::TargetMachine, out: &mut String)
         writeln!(out, "    {cpu_name:<width$}{remark}").unwrap();
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=print_target_features | COMPLEXITY=35 | LINES=64 */
 
 fn print_target_features(sess: &Session, tm: &llvm::TargetMachine, out: &mut String) {
     let mut llvm_target_features = llvm_target_features(tm);
@@ -645,7 +617,6 @@ fn print_target_features(sess: &Session, tm: &llvm::TargetMachine, out: &mut Str
     writeln!(out, "Code-generation features cannot be used in cfg or #[target_feature],").unwrap();
     writeln!(out, "and may be renamed or removed in a future version of LLVM or rustc.\n").unwrap();
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=get_host_cpu_name | COMPLEXITY=8 | LINES=13 */
 
 /// Returns the host CPU name, according to LLVM.
 fn get_host_cpu_name() -> &'static str {
@@ -659,7 +630,6 @@ fn get_host_cpu_name() -> &'static str {
     };
     str::from_utf8(slice).expect("host CPU name should be UTF-8")
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=handle_native | COMPLEXITY=6 | LINES=9 */
 
 /// If the given string is `"native"`, returns the host CPU name according to
 /// LLVM. Otherwise, the string is returned as-is.
@@ -669,13 +639,11 @@ fn handle_native(cpu_name: &str) -> &str {
         _ => cpu_name,
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn target_cpu(sess: &Session) -> &str {
     let cpu_name = sess.opts.cg.target_cpu.as_deref().unwrap_or_else(|| &sess.target.cpu);
     handle_native(cpu_name)
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=llvm_features_by_flags | COMPLEXITY=12 | LINES=14 */
 
 /// The target features for compiler flags other than `-Ctarget-features`.
 fn llvm_features_by_flags(sess: &Session, features: &mut Vec<String>) {
@@ -690,7 +658,6 @@ fn llvm_features_by_flags(sess: &Session, features: &mut Vec<String>) {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=117 */
 
 /// The list of LLVM features computed from CLI flags (`-Ctarget-cpu`, `-Ctarget-feature`,
 /// `--target` and similar).
@@ -808,7 +775,6 @@ pub(crate) fn global_llvm_features(
 
     features
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn tune_cpu(sess: &Session) -> Option<&str> {
     let name = sess.opts.unstable_opts.tune_cpu.as_ref()?;

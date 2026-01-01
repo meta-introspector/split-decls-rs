@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/mono_item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::mono::Visibility;
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_target::spec::RelocModel;
 use tracing::debug;
@@ -19,7 +15,6 @@ use crate::context::CodegenCx;
 use crate::errors::SymbolAlreadyDefined;
 use crate::type_of::LayoutLlvmExt;
 use crate::{base, llvm};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predefine_static | COMPLEXITY=27 | LINES=67 */
 
 impl<'tcx> PreDefineCodegenMethods<'tcx> for CodegenCx<'_, 'tcx> {
     fn predefine_static(
@@ -87,7 +82,6 @@ impl<'tcx> PreDefineCodegenMethods<'tcx> for CodegenCx<'_, 'tcx> {
         self.instances.borrow_mut().insert(instance, lldecl);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=should_assume_dso_local | COMPLEXITY=42 | LINES=66 */
 
 impl CodegenCx<'_, '_> {
     /// Whether a definition or declaration can be assumed to be local to a group of

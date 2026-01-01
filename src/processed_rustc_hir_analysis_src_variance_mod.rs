@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/variance/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // Module for inferring the variance of type and lifetime parameters. See the [rustc dev guide]
 // chapter for more info.
 //
@@ -10,14 +9,11 @@ use rustc_arena::DroplessArena;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{
     self, CrateVariancesMap, GenericArgsRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 /// Defines the `TermsContext` basically houses an arena where we can
 /// allocate terms.
@@ -33,7 +29,6 @@ pub(super) fn crate_variances(tcx: TyCtxt<'_>, (): ()) -> CrateVariancesMap<'_> 
     let constraints_cx = constraints::add_constraints_from_crate(terms_cx);
     solve::solve_constraints(constraints_cx)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=58 */
 
 pub(super) fn variances_of(tcx: TyCtxt<'_>, item_def_id: LocalDefId) -> &[ty::Variance] {
     // Skip items with no generics - there's nothing to infer in them.
@@ -92,14 +87,12 @@ pub(super) fn variances_of(tcx: TyCtxt<'_>, item_def_id: LocalDefId) -> &[ty::Va
         kind.descr(item_def_id.to_def_id())
     );
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone)]
 enum ForceCaptureTraitArgs {
     Yes,
     No,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=variance_of_opaque | COMPLEXITY=86 | LINES=129 */
 
 #[instrument(level = "trace", skip(tcx), ret)]
 fn variance_of_opaque(

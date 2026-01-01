@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/intrinsic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=IntrinsicDef | COMPLEXITY=2 | LINES=13 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_complete::def_id::DefId;
 
@@ -15,7 +13,6 @@ pub struct IntrinsicDef {
     /// Whether the intrinsic can be invoked from stable const fn
     pub const_stable: bool,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_intrinsic | COMPLEXITY=4 | LINES=7 */
 
 impl TyCtxt<'_> {
     pub fn is_intrinsic(self, def_id: DefId, name: Symbol) -> bool {

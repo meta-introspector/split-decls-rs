@@ -1,23 +1,17 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/stable/mir.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Conversion of internal Rust compiler `mir` items to stable ones.
 
 use crate::rustc_complete::mir::mono::MonoItem;
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_public_bridge::context::CompilerCtxt;
 use crate::rustc_public_bridge::{Tables, bridge};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::compiler_interface::BridgeTys;
 use crate::mir::alloc::GlobalAlloc;
 use crate::mir::{ConstOperand, Statement, UserTypeProjection, VarDebugInfoFragment};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{Allocation, ConstantKind, MirConst};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::unstable::Stable;
 use crate::{Error, alloc, opaque};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=36 */
 
 impl<'tcx> Stable<'tcx> for mir::Body<'tcx> {
     type T = crate::mir::Body;
@@ -54,7 +48,6 @@ impl<'tcx> Stable<'tcx> for mir::Body<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for mir::VarDebugInfo<'tcx> {
     type T = crate::mir::VarDebugInfo;
@@ -72,7 +65,6 @@ impl<'tcx> Stable<'tcx> for mir::VarDebugInfo<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=14 */
 
 impl<'tcx> Stable<'tcx> for mir::Statement<'tcx> {
     type T = crate::mir::Statement;
@@ -87,7 +79,6 @@ impl<'tcx> Stable<'tcx> for mir::Statement<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for mir::SourceInfo {
     type T = crate::mir::SourceInfo;
@@ -99,7 +90,6 @@ impl<'tcx> Stable<'tcx> for mir::SourceInfo {
         crate::mir::SourceInfo { span: self.span.stable(tables, cx), scope: self.scope.into() }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=14 */
 
 impl<'tcx> Stable<'tcx> for mir::VarDebugInfoFragment<'tcx> {
     type T = crate::mir::VarDebugInfoFragment;
@@ -114,7 +104,6 @@ impl<'tcx> Stable<'tcx> for mir::VarDebugInfoFragment<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=13 | LINES=23 */
 
 impl<'tcx> Stable<'tcx> for mir::VarDebugInfoContents<'tcx> {
     type T = crate::mir::VarDebugInfoContents;
@@ -138,7 +127,6 @@ impl<'tcx> Stable<'tcx> for mir::VarDebugInfoContents<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=28 | LINES=62 */
 
 impl<'tcx> Stable<'tcx> for mir::StatementKind<'tcx> {
     type T = crate::mir::StatementKind;
@@ -201,7 +189,6 @@ impl<'tcx> Stable<'tcx> for mir::StatementKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=25 | LINES=67 */
 
 impl<'tcx> Stable<'tcx> for mir::Rvalue<'tcx> {
     type T = crate::mir::Rvalue;
@@ -269,7 +256,6 @@ impl<'tcx> Stable<'tcx> for mir::Rvalue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for mir::Mutability {
     type T = crate::mir::Mutability;
@@ -281,7 +267,6 @@ impl<'tcx> Stable<'tcx> for mir::Mutability {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for mir::RawPtrKind {
     type T = crate::mir::RawPtrKind;
@@ -294,7 +279,6 @@ impl<'tcx> Stable<'tcx> for mir::RawPtrKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for mir::BorrowKind {
     type T = crate::mir::BorrowKind;
@@ -311,7 +295,6 @@ impl<'tcx> Stable<'tcx> for mir::BorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for mir::MutBorrowKind {
     type T = crate::mir::MutBorrowKind;
@@ -324,7 +307,6 @@ impl<'tcx> Stable<'tcx> for mir::MutBorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for mir::FakeBorrowKind {
     type T = crate::mir::FakeBorrowKind;
@@ -336,7 +318,6 @@ impl<'tcx> Stable<'tcx> for mir::FakeBorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=20 */
 
 impl<'tcx> Stable<'tcx> for mir::NullOp<'tcx> {
     type T = crate::mir::NullOp;
@@ -357,7 +338,6 @@ impl<'tcx> Stable<'tcx> for mir::NullOp<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=23 */
 
 impl<'tcx> Stable<'tcx> for mir::CastKind {
     type T = crate::mir::CastKind;
@@ -381,7 +361,6 @@ impl<'tcx> Stable<'tcx> for mir::CastKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for mir::FakeReadCause {
     type T = crate::mir::FakeReadCause;
@@ -398,7 +377,6 @@ impl<'tcx> Stable<'tcx> for mir::FakeReadCause {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for mir::Operand<'tcx> {
     type T = crate::mir::Operand;
@@ -415,7 +393,6 @@ impl<'tcx> Stable<'tcx> for mir::Operand<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for mir::ConstOperand<'tcx> {
     type T = crate::mir::ConstOperand;
@@ -432,7 +409,6 @@ impl<'tcx> Stable<'tcx> for mir::ConstOperand<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=14 */
 
 impl<'tcx> Stable<'tcx> for mir::Place<'tcx> {
     type T = crate::mir::Place;
@@ -447,7 +423,6 @@ impl<'tcx> Stable<'tcx> for mir::Place<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=25 | LINES=37 */
 
 impl<'tcx> Stable<'tcx> for mir::PlaceElem<'tcx> {
     type T = crate::mir::ProjectionElem;
@@ -485,7 +460,6 @@ impl<'tcx> Stable<'tcx> for mir::PlaceElem<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for mir::UserTypeProjection {
     type T = crate::mir::UserTypeProjection;
@@ -494,7 +468,6 @@ impl<'tcx> Stable<'tcx> for mir::UserTypeProjection {
         UserTypeProjection { base: self.base.as_usize(), projection: opaque(&self.projs) }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Stable<'tcx> for mir::Local {
     type T = crate::mir::Local;
@@ -502,7 +475,6 @@ impl<'tcx> Stable<'tcx> for mir::Local {
         self.as_usize()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for mir::RetagKind {
     type T = crate::mir::RetagKind;
@@ -516,7 +488,6 @@ impl<'tcx> Stable<'tcx> for mir::RetagKind {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for mir::UnwindAction {
     type T = crate::mir::UnwindAction;
@@ -530,7 +501,6 @@ impl<'tcx> Stable<'tcx> for mir::UnwindAction {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=13 | LINES=26 */
 
 impl<'tcx> Stable<'tcx> for mir::NonDivergingIntrinsic<'tcx> {
     type T = crate::mir::NonDivergingIntrinsic;
@@ -557,7 +527,6 @@ impl<'tcx> Stable<'tcx> for mir::NonDivergingIntrinsic<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=25 | LINES=50 */
 
 impl<'tcx> Stable<'tcx> for mir::AssertMessage<'tcx> {
     type T = crate::mir::AssertMessage;
@@ -608,7 +577,6 @@ impl<'tcx> Stable<'tcx> for mir::AssertMessage<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=35 */
 
 impl<'tcx> Stable<'tcx> for mir::BinOp {
     type T = crate::mir::BinOp;
@@ -644,7 +612,6 @@ impl<'tcx> Stable<'tcx> for mir::BinOp {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for mir::UnOp {
     type T = crate::mir::UnOp;
@@ -657,7 +624,6 @@ impl<'tcx> Stable<'tcx> for mir::UnOp {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=45 */
 
 impl<'tcx> Stable<'tcx> for mir::AggregateKind<'tcx> {
     type T = crate::mir::AggregateKind;
@@ -703,7 +669,6 @@ impl<'tcx> Stable<'tcx> for mir::AggregateKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=22 | LINES=27 */
 
 impl<'tcx> Stable<'tcx> for mir::InlineAsmOperand<'tcx> {
     type T = crate::mir::InlineAsmOperand;
@@ -731,7 +696,6 @@ impl<'tcx> Stable<'tcx> for mir::InlineAsmOperand<'tcx> {
         crate::mir::InlineAsmOperand { in_value, out_place, raw_rpr: format!("{self:?}") }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for mir::Terminator<'tcx> {
     type T = crate::mir::Terminator;
@@ -747,7 +711,6 @@ impl<'tcx> Stable<'tcx> for mir::Terminator<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=38 | LINES=88 */
 
 impl<'tcx> Stable<'tcx> for mir::TerminatorKind<'tcx> {
     type T = crate::mir::TerminatorKind;
@@ -836,7 +799,6 @@ impl<'tcx> Stable<'tcx> for mir::TerminatorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for mir::interpret::ConstAllocation<'tcx> {
     type T = Allocation;
@@ -849,7 +811,6 @@ impl<'tcx> Stable<'tcx> for mir::interpret::ConstAllocation<'tcx> {
         self.inner().stable(tables, cx)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=18 */
 
 impl<'tcx> Stable<'tcx> for mir::interpret::Allocation {
     type T = crate::ty::Allocation;
@@ -868,7 +829,6 @@ impl<'tcx> Stable<'tcx> for mir::interpret::Allocation {
         )
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for mir::interpret::AllocId {
     type T = crate::mir::alloc::AllocId;
@@ -880,7 +840,6 @@ impl<'tcx> Stable<'tcx> for mir::interpret::AllocId {
         tables.create_alloc_id(*self)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=19 | LINES=29 */
 
 impl<'tcx> Stable<'tcx> for mir::interpret::GlobalAlloc<'tcx> {
     type T = GlobalAlloc;
@@ -910,7 +869,6 @@ impl<'tcx> Stable<'tcx> for mir::interpret::GlobalAlloc<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=39 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_middle::mir::Const<'tcx> {
     type T = crate::ty::MirConst;
@@ -950,7 +908,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_middle::mir::Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for mir::interpret::ErrorHandled {
     type T = Error;
@@ -959,7 +916,6 @@ impl<'tcx> Stable<'tcx> for mir::interpret::ErrorHandled {
         bridge::Error::new(format!("{self:?}"))
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for MonoItem<'tcx> {
     type T = crate::mir::mono::MonoItem;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/dep_graph/dep_node.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=21 | LINES=62 */
 // This module defines the [`DepNode`] type which the compiler uses to represent
 // nodes in the [dependency graph]. A `DepNode` consists of a [`DepKind`] (which
 // specifies the kind of thing it represents, like a piece of HIR, MIR, etc.)
@@ -62,15 +61,11 @@ use std::hash::Hash;
 
 use crate::rustc_data_structures::AtomicRef;
 use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::definitions::DefPathHash;
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{DepContext, FingerprintStyle, SerializedDepNodeIndex};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=DepKind | COMPLEXITY=2 | LINES=7 */
 use crate::ich::StableHashingContext;
 
 /// This serves as an index into arrays built by `make_dep_kind_array`.
@@ -78,7 +73,6 @@ use crate::ich::StableHashingContext;
 pub struct DepKind {
     variant: u16,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 impl DepKind {
     #[inline]
@@ -96,12 +90,10 @@ impl DepKind {
         self.variant as usize
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default_dep_kind_debug | COMPLEXITY=2 | LINES=4 */
 
 pub fn default_dep_kind_debug(kind: DepKind, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     f.debug_struct("DepKind").field("variant", &kind.variant).finish()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 pub static DEP_KIND_DEBUG: AtomicRef<fn(DepKind, &mut fmt::Formatter<'_>) -> fmt::Result> =
     AtomicRef::new(&(default_dep_kind_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
@@ -111,14 +103,12 @@ impl fmt::Debug for DepKind {
         (*DEP_KIND_DEBUG)(*self, f)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=DepNode | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct DepNode {
     pub kind: DepKind,
     pub hash: PackedFingerprint,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new_no_params | COMPLEXITY=15 | LINES=45 */
 
 impl DepNode {
     /// Creates a new, parameterless DepNode. This method will assert
@@ -164,12 +154,10 @@ impl DepNode {
         DepNode { kind, hash: def_path_hash.0.into() }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=default_dep_node_debug | COMPLEXITY=2 | LINES=4 */
 
 pub fn default_dep_node_debug(node: DepNode, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     f.debug_struct("DepNode").field("kind", &node.kind).field("hash", &node.hash).finish()
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 pub static DEP_NODE_DEBUG: AtomicRef<fn(DepNode, &mut fmt::Formatter<'_>) -> fmt::Result> =
     AtomicRef::new(&(default_dep_node_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
@@ -179,7 +167,6 @@ impl fmt::Debug for DepNode {
         (*DEP_NODE_DEBUG)(*self, f)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=7 | LINES=22 */
 
 pub trait DepNodeParams<Tcx: DepContext>: fmt::Debug + Sized {
     fn fingerprint_style() -> FingerprintStyle;
@@ -202,7 +189,6 @@ pub trait DepNodeParams<Tcx: DepContext>: fmt::Debug + Sized {
     /// compilation will treat the query as having changed instead of forcing it.
     fn recover(tcx: Tcx, dep_node: &DepNode) -> Option<Self>;
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=32 */
 
 impl<Tcx: DepContext, T> DepNodeParams<Tcx> for T
 where
@@ -235,7 +221,6 @@ where
         None
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DepKindStruct | COMPLEXITY=19 | LINES=65 */
 
 /// This struct stores metadata about each DepKind.
 ///
@@ -301,7 +286,6 @@ pub struct DepKindStruct<Tcx: DepContext> {
     /// The name of this dep kind.
     pub name: &'static &'static str,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=WorkProductId | COMPLEXITY=2 | LINES=10 */
 
 /// A "work product" corresponds to a `.o` (or other) file that we
 /// save in between runs. These IDs do not have a `DefId` but rather
@@ -312,7 +296,6 @@ pub struct DepKindStruct<Tcx: DepContext> {
 pub struct WorkProductId {
     hash: Fingerprint,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from_cgu_name | COMPLEXITY=4 | LINES=8 */
 
 impl WorkProductId {
     pub fn from_cgu_name(cgu_name: &str) -> WorkProductId {
@@ -321,7 +304,6 @@ impl WorkProductId {
         WorkProductId { hash: hasher.finish() }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<HCX> HashStable<HCX> for WorkProductId {
     #[inline]
@@ -329,7 +311,6 @@ impl<HCX> HashStable<HCX> for WorkProductId {
         self.hash.hash_stable(hcx, hasher)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=7 */
 impl<HCX> ToStableHashKey<HCX> for WorkProductId {
     type KeyType = Fingerprint;
     #[inline]
@@ -337,7 +318,6 @@ impl<HCX> ToStableHashKey<HCX> for WorkProductId {
         self.hash
     }
 }
-/* AST_META: AST_ID=20 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 impl StableOrd for WorkProductId {
     // Fingerprint can use unstable (just a tuple of `u64`s), so WorkProductId can as well
     const CAN_USE_UNSTABLE_SORT: bool = true;
@@ -345,7 +325,6 @@ impl StableOrd for WorkProductId {
     // `WorkProductId` sort order is not affected by (de)serialization.
     const THIS_IMPLEMENTATION_HAS_BEEN_TRIPLE_CHECKED: () = ();
 }
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

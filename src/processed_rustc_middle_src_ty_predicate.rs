@@ -1,17 +1,14 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/predicate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::cmp::Ordering;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, extension};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_type_ir as ir;
 
 use crate::ty::{
     self, DebruijnIndex, EarlyBinder, Ty, TyCtxt, TypeFlags, Upcast, UpcastFrom, WithCachedTypeInfo,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=Predicate | COMPLEXITY=11 | LINES=46 */
 
 pub type TraitRef<'tcx> = ir::TraitRef<TyCtxt<'tcx>>;
 pub type AliasTerm<'tcx> = ir::AliasTerm<TyCtxt<'tcx>>;
@@ -58,7 +55,6 @@ impl<'tcx> rustc_type_ir::inherent::Predicate<TyCtxt<'tcx>> for Predicate<'tcx> 
         self.allow_normalization()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> rustc_type_ir::inherent::IntoKind for Predicate<'tcx> {
     type Kind = ty::Binder<'tcx, ty::PredicateKind<'tcx>>;
@@ -67,7 +63,6 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Predicate<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::Flags for Predicate<'tcx> {
     fn flags(&self) -> TypeFlags {
@@ -78,7 +73,6 @@ impl<'tcx> rustc_type_ir::Flags for Predicate<'tcx> {
         self.0.outer_exclusive_binder
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=23 | LINES=70 */
 
 impl<'tcx> Predicate<'tcx> {
     /// Gets the inner `ty::Binder<'tcx, PredicateKind<'tcx>>`.
@@ -149,7 +143,6 @@ impl<'tcx> Predicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> crate::rustc_errors::IntoDiagArg for Predicate<'tcx> {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -159,7 +152,6 @@ impl<'tcx> crate::rustc_errors::IntoDiagArg for Predicate<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> crate::rustc_errors::IntoDiagArg for Clause<'tcx> {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -169,7 +161,6 @@ impl<'tcx> crate::rustc_errors::IntoDiagArg for Clause<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=Clause | COMPLEXITY=7 | LINES=19 */
 
 /// A subset of predicates which can be assumed by the trait solver. They show up in
 /// an item's where clauses, hence the name `Clause`, and may either be user-written
@@ -189,7 +180,6 @@ impl<'tcx> rustc_type_ir::inherent::Clause<TyCtxt<'tcx>> for Clause<'tcx> {
         self.instantiate_supertrait(tcx, trait_ref)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> rustc_type_ir::inherent::IntoKind for Clause<'tcx> {
     type Kind = ty::Binder<'tcx, ClauseKind<'tcx>>;
@@ -198,7 +188,6 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Clause<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=as_predicate | COMPLEXITY=31 | LINES=51 */
 
 impl<'tcx> Clause<'tcx> {
     pub fn as_predicate(self) -> Predicate<'tcx> {
@@ -250,10 +239,8 @@ impl<'tcx> Clause<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx> rustc_type_ir::inherent::Clauses<TyCtxt<'tcx>> for ty::Clauses<'tcx> {}
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=stable_cmp | COMPLEXITY=14 | LINES=23 */
 
 #[extension(pub trait ExistentialPredicateStableCmpExt<'tcx>)]
 impl<'tcx> ExistentialPredicate<'tcx> {
@@ -277,7 +264,6 @@ impl<'tcx> ExistentialPredicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=principal_def_id | COMPLEXITY=9 | LINES=24 */
 
 pub type PolyExistentialPredicate<'tcx> = ty::Binder<'tcx, ExistentialPredicate<'tcx>>;
 
@@ -302,7 +288,6 @@ impl<'tcx> rustc_type_ir::inherent::BoundExistentialPredicates<TyCtxt<'tcx>>
         self.projection_bounds()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=principal | COMPLEXITY=38 | LINES=68 */
 
 impl<'tcx> ty::List<ty::PolyExistentialPredicate<'tcx>> {
     /// Returns the "principal `DefId`" of this set of existential predicates.
@@ -371,7 +356,6 @@ impl<'tcx> ty::List<ty::PolyExistentialPredicate<'tcx>> {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=instantiate_supertrait | COMPLEXITY=40 | LINES=110 */
 
 pub type PolyTraitRef<'tcx> = ty::Binder<'tcx, TraitRef<'tcx>>;
 pub type PolyExistentialTraitRef<'tcx> = ty::Binder<'tcx, ExistentialTraitRef<'tcx>>;
@@ -482,63 +466,54 @@ impl<'tcx> Clause<'tcx> {
         .expect_clause()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PredicateKind<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: PredicateKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         ty::Binder::dummy(from).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, PredicateKind<'tcx>>> for Predicate<'tcx> {
     fn upcast_from(from: ty::Binder<'tcx, PredicateKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
         tcx.mk_predicate(from)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ClauseKind<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: ClauseKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         tcx.mk_predicate(ty::Binder::dummy(PredicateKind::Clause(from)))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ClauseKind<'tcx>>> for Predicate<'tcx> {
     fn upcast_from(from: ty::Binder<'tcx, ClauseKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
         tcx.mk_predicate(from.map_bound(PredicateKind::Clause))
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, Clause<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: Clause<'tcx>, _tcx: TyCtxt<'tcx>) -> Self {
         from.as_predicate()
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ClauseKind<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: ClauseKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         tcx.mk_predicate(ty::Binder::dummy(PredicateKind::Clause(from))).expect_clause()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ClauseKind<'tcx>>> for Clause<'tcx> {
     fn upcast_from(from: ty::Binder<'tcx, ClauseKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
         tcx.mk_predicate(from.map_bound(|clause| PredicateKind::Clause(clause))).expect_clause()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitRef<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: TraitRef<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         ty::Binder::dummy(from).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitRef<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: TraitRef<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
@@ -546,7 +521,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitRef<'tcx>> for Clause<'tcx> {
         p.expect_clause()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Predicate<'tcx> {
     fn upcast_from(from: ty::Binder<'tcx, TraitRef<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
@@ -554,7 +528,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Predic
         pred.upcast(tcx)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Clause<'tcx> {
     fn upcast_from(from: ty::Binder<'tcx, TraitRef<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
@@ -562,21 +535,18 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Clause
         pred.upcast(tcx)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: TraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         PredicateKind::Clause(ClauseKind::Trait(from)).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyTraitPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: PolyTraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         from.map_bound(|p| PredicateKind::Clause(ClauseKind::Trait(p))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitPredicate<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: TraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
@@ -584,7 +554,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitPredicate<'tcx>> for Clause<'tcx> {
         p.expect_clause()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyTraitPredicate<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: PolyTraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
@@ -592,42 +561,36 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyTraitPredicate<'tcx>> for Clause<'tcx> {
         p.expect_clause()
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, RegionOutlivesPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: RegionOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         ty::Binder::dummy(PredicateKind::Clause(ClauseKind::RegionOutlives(from))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyRegionOutlivesPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: PolyRegionOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         from.map_bound(|p| PredicateKind::Clause(ClauseKind::RegionOutlives(p))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TypeOutlivesPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: TypeOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         ty::Binder::dummy(PredicateKind::Clause(ClauseKind::TypeOutlives(from))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ProjectionPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: ProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         ty::Binder::dummy(PredicateKind::Clause(ClauseKind::Projection(from))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyProjectionPredicate<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: PolyProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         from.map_bound(|p| PredicateKind::Clause(ClauseKind::Projection(p))).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ProjectionPredicate<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: ProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
@@ -635,7 +598,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ProjectionPredicate<'tcx>> for Clause<'tcx> 
         p.expect_clause()
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyProjectionPredicate<'tcx>> for Clause<'tcx> {
     fn upcast_from(from: PolyProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
@@ -643,7 +605,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyProjectionPredicate<'tcx>> for Clause<'t
         p.expect_clause()
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>>
     for Predicate<'tcx>
@@ -655,7 +616,6 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tc
         from.map_bound(ty::ClauseKind::HostEffect).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>>
     for Clause<'tcx>
@@ -667,14 +627,12 @@ impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tc
         from.map_bound(ty::ClauseKind::HostEffect).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> UpcastFrom<TyCtxt<'tcx>, NormalizesTo<'tcx>> for Predicate<'tcx> {
     fn upcast_from(from: NormalizesTo<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         PredicateKind::NormalizesTo(from).upcast(tcx)
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=as_trait_clause | COMPLEXITY=25 | LINES=34 */
 
 impl<'tcx> Predicate<'tcx> {
     pub fn as_trait_clause(self) -> Option<PolyTraitPredicate<'tcx>> {
@@ -709,7 +667,6 @@ impl<'tcx> Predicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_ast/src/entry.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::attr::{self, AttributeExt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
 
 #[derive(Debug)]
 pub enum EntryPointType {
@@ -32,7 +29,6 @@ pub enum EntryPointType {
     /// ```
     OtherMain,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=entry_point_type | COMPLEXITY=14 | LINES=21 */
 
 pub fn entry_point_type(
     attrs: &[impl AttributeExt],

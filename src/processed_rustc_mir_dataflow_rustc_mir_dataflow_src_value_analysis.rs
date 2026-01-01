@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/value_analysis.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{Debug, Formatter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Range;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet, StdEntry};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::debug;
 
 use crate::JoinSemiLattice;
 use crate::lattice::{HasBottom, HasTop};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PlaceIndex | COMPLEXITY=2 | LINES=7 */
 
 crate::rustc_index::newtype_index!(
     /// This index uniquely identifies a place.
@@ -28,7 +21,6 @@ crate::rustc_index::newtype_index!(
     /// Not every place has a `PlaceIndex`, and not every `PlaceIndex` corresponds to a tracked
     /// place. However, every tracked place and all places along its projection have a `PlaceIndex`.
     pub struct PlaceIndex {}
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ValueIndex | COMPLEXITY=2 | LINES=7 */
 );
 
 crate::rustc_index::newtype_index!(
@@ -36,7 +28,6 @@ crate::rustc_index::newtype_index!(
     ///
     /// It is an implementation detail of this module.
     struct ValueIndex {}
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=StateData | COMPLEXITY=2 | LINES=9 */
 );
 
 /// See [`State`].
@@ -46,7 +37,6 @@ pub struct StateData<V> {
     /// This map only contains values that are not `⊥`.
     map: FxHashMap<ValueIndex, V>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=18 */
 
 impl<V: HasBottom> StateData<V> {
     fn new() -> StateData<V> {
@@ -65,7 +55,6 @@ impl<V: HasBottom> StateData<V> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=7 | LINES=10 */
 
 impl<V: Clone> Clone for StateData<V> {
     fn clone(&self) -> Self {
@@ -76,7 +65,6 @@ impl<V: Clone> Clone for StateData<V> {
         self.map.clone_from(&source.map)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=join | COMPLEXITY=14 | LINES=17 */
 
 impl<V: JoinSemiLattice + Clone> JoinSemiLattice for StateData<V> {
     fn join(&mut self, other: &Self) -> bool {
@@ -94,14 +82,12 @@ impl<V: JoinSemiLattice + Clone> JoinSemiLattice for StateData<V> {
         changed
     }
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Dataflow state.
 ///
 /// Every instance specifies a lattice that represents the possible values of a single tracked
 /// place. If we call this lattice `V` and set of tracked places `P`, then a [`State`] is an
 /// element of `{unreachable} ∪ (P -> V)`. This again forms a lattice, where the bottom element is
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 /// `unreachable` and the top element is the mapping `p ↦ ⊤`. Note that the mapping `p ↦ ⊥` is not
 /// the bottom element (because joining an unreachable and any other reachable state yields a
 /// reachable state). All operations on unreachable states are ignored.
@@ -112,7 +98,6 @@ pub enum State<V> {
     Unreachable,
     Reachable(StateData<V>),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=15 | LINES=18 */
 
 impl<V: Clone> Clone for State<V> {
     fn clone(&self) -> Self {
@@ -131,7 +116,6 @@ impl<V: Clone> Clone for State<V> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new_reachable | COMPLEXITY=133 | LINES=224 */
 
 impl<V: Clone + HasBottom> State<V> {
     pub fn new_reachable() -> State<V> {
@@ -356,7 +340,6 @@ impl<V: Clone + HasBottom> State<V> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=join | COMPLEXITY=10 | LINES=13 */
 
 impl<V: JoinSemiLattice + Clone> JoinSemiLattice for State<V> {
     fn join(&mut self, other: &Self) -> bool {
@@ -370,7 +353,6 @@ impl<V: JoinSemiLattice + Clone> JoinSemiLattice for State<V> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=Map | COMPLEXITY=5 | LINES=17 */
 
 /// Partial mapping from [`Place`] to [`PlaceIndex`], where some places also have a [`ValueIndex`].
 ///
@@ -388,7 +370,6 @@ pub struct Map<'tcx> {
     inner_values: IndexVec<PlaceIndex, Range<usize>>,
     inner_values_buffer: Vec<ValueIndex>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=92 | LINES=169 */
 
 impl<'tcx> Map<'tcx> {
     /// Returns a map that only tracks places whose type has scalar layout.
@@ -558,7 +539,6 @@ impl<'tcx> Map<'tcx> {
         self.inner_values[root] = start..end;
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=PlaceCollector | COMPLEXITY=2 | LINES=7 */
 
 struct PlaceCollector<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -566,7 +546,6 @@ struct PlaceCollector<'a, 'tcx> {
     map: &'a mut Map<'tcx>,
     assignments: FxIndexSet<(PlaceIndex, PlaceIndex)>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=register_place | COMPLEXITY=23 | LINES=37 */
 
 impl<'tcx> PlaceCollector<'_, 'tcx> {
     #[tracing::instrument(level = "trace", skip(self))]
@@ -604,7 +583,6 @@ impl<'tcx> PlaceCollector<'_, 'tcx> {
         Some(place_index)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_place | COMPLEXITY=38 | LINES=55 */
 
 impl<'tcx> Visitor<'tcx> for PlaceCollector<'_, 'tcx> {
     #[tracing::instrument(level = "trace", skip(self))]
@@ -660,7 +638,6 @@ impl<'tcx> Visitor<'tcx> for PlaceCollector<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=apply | COMPLEXITY=77 | LINES=142 */
 
 impl<'tcx> Map<'tcx> {
     /// Applies a single projection element, yielding the corresponding child.
@@ -803,7 +780,6 @@ impl<'tcx> Map<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=PlaceInfo | COMPLEXITY=13 | LINES=22 */
 
 /// This is the information tracked for every [`PlaceIndex`] and is stored by [`Map`].
 ///
@@ -826,27 +802,23 @@ struct PlaceInfo<'tcx> {
     /// Index of the sibling to the right of this node.
     next_sibling: Option<PlaceIndex>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> PlaceInfo<'tcx> {
     fn new(ty: Ty<'tcx>, proj_elem: Option<TrackElem>) -> Self {
         Self { ty, next_sibling: None, first_child: None, proj_elem, value_index: None }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=Children | COMPLEXITY=2 | LINES=5 */
 
 struct Children<'a, 'tcx> {
     map: &'a Map<'tcx>,
     next: Option<PlaceIndex>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> Children<'a, 'tcx> {
     fn new(map: &'a Map<'tcx>, parent: PlaceIndex) -> Self {
         Self { map, next: map.places[parent].first_child }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=next | COMPLEXITY=10 | LINES=14 */
 
 impl Iterator for Children<'_, '_> {
     type Item = PlaceIndex;
@@ -861,7 +833,6 @@ impl Iterator for Children<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Used as the result of an operand or r-value.
 #[derive(Debug)]
@@ -869,12 +840,10 @@ pub enum ValueOrPlace<V> {
     Value(V),
     Place(PlaceIndex),
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 impl<V: HasTop> ValueOrPlace<V> {
     pub const TOP: Self = ValueOrPlace::Value(V::TOP);
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The set of projection elements that can be used by a tracked place.
 ///
@@ -887,7 +856,6 @@ pub enum TrackElem {
     // Length of a slice.
     DerefLen,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=9 | LINES=12 */
 
 impl<V, T> TryFrom<ProjectionElem<V, T>> for TrackElem {
     type Error = ();
@@ -900,7 +868,6 @@ impl<V, T> TryFrom<ProjectionElem<V, T>> for TrackElem {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=iter_fields | COMPLEXITY=30 | LINES=41 */
 
 /// Invokes `f` on all direct fields of `ty`.
 pub fn iter_fields<'tcx>(
@@ -942,7 +909,6 @@ pub fn iter_fields<'tcx>(
         _ => (),
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=excluded_locals | COMPLEXITY=12 | LINES=21 */
 
 /// Returns all locals with projections that have their reference or address taken.
 pub fn excluded_locals(body: &Body<'_>) -> DenseBitSet<Local> {
@@ -964,7 +930,6 @@ pub fn excluded_locals(body: &Body<'_>) -> DenseBitSet<Local> {
     collector.visit_body(body);
     collector.result
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=debug_with_context_rec | COMPLEXITY=47 | LINES=46 */
 
 fn debug_with_context_rec<V: Debug + Eq + HasBottom>(
     place: PlaceIndex,
@@ -1011,7 +976,6 @@ fn debug_with_context_rec<V: Debug + Eq + HasBottom>(
 
     Ok(())
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=debug_with_context | COMPLEXITY=9 | LINES=14 */
 
 pub fn debug_with_context<V: Debug + Eq + HasBottom>(
     new: &StateData<V>,

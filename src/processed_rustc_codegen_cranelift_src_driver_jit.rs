@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/driver/jit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // The JIT driver uses [`cranelift_jit`] to JIT execute programs without writing any object
 // files.
 
 use std::ffi::CString;
 use std::os::raw::{c_char, c_int};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use cranelift_jit::{JITBuilder, JITModule};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=create_jit_module | COMPLEXITY=4 | LINES=26 */
 use crate::rustc_codegen_ssa::CrateInfo;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::mono::MonoItem;
@@ -35,7 +32,6 @@ fn create_jit_module(tcx: TyCtxt<'_>) -> (UnwindModule<JITModule>, CodegenCx) {
 
     (jit_module, cx)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=88 */
 
 pub(crate) fn run_jit(tcx: TyCtxt<'_>, jit_args: Vec<String>) -> ! {
     if !tcx.sess.opts.output_types.should_codegen() {
@@ -124,7 +120,6 @@ pub(crate) fn run_jit(tcx: TyCtxt<'_>, jit_args: Vec<String>) -> ! {
     let ret = f(args.len() as c_int, argv.as_ptr());
     std::process::exit(ret);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=codegen_and_compile_fn | COMPLEXITY=10 | LINES=33 */
 
 fn codegen_and_compile_fn<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -158,7 +153,6 @@ fn codegen_and_compile_fn<'tcx>(
         crate::base::compile_fn(cx, &tcx.prof, cached_context, module, codegened_func);
     });
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dep_symbol_lookup_fn | COMPLEXITY=33 | LINES=48 */
 
 fn dep_symbol_lookup_fn(
     sess: &Session,

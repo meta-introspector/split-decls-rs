@@ -1,21 +1,16 @@
 // SRC: ../rust/compiler/rustc_lint/src/noop_method_call.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::{Expr, ExprKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::ty::adjustment::Adjust;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::sym;
 
 use crate::context::LintContext;
 use crate::lints::{
     NoopMethodCallDiag, SuspiciousDoubleRefCloneDiag, SuspiciousDoubleRefDerefDiag,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=27 */
 
 declare_lint! {
     /// The `noop_method_call` lint detects specific calls to noop methods
@@ -43,7 +38,6 @@ declare_lint! {
     Warn,
     "detects the use of well-known noop methods"
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=25 */
 
 declare_lint! {
     /// The `suspicious_double_ref_op` lint checks for usage of `.clone()`/`.borrow()`/`.deref()`
@@ -69,7 +63,6 @@ declare_lint! {
     Warn,
     "suspicious call of trait method on `&&T`"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=44 | LINES=97 */
 
 declare_lint_pass!(NoopMethodCall => [NOOP_METHOD_CALL, SUSPICIOUS_DOUBLE_REF_OP]);
 

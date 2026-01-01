@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/outlives/dump.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
 use crate::rustc_complete::sym;
 
 pub(crate) fn inferred_outlives(tcx: TyCtxt<'_>) {

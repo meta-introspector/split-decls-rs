@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/compile_error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // The compiler code necessary to support the compile_error! extension.
 
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=23 */
 use crate::rustc_complete::Span;
 
 use crate::util::get_single_str_from_tts;

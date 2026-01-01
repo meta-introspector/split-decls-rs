@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/renumber.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexSlice;
 use crate::rustc_infer::infer::NllRegionVariableOrigin;
 use crate::rustc_complete::mir::visit::{MutVisitor, TyContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, ConstOperand, Location, Promoted};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, fold_regions};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Symbol;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 use crate::BorrowckInferCtxt;
 
@@ -32,7 +27,6 @@ pub(crate) fn renumber_mir<'tcx>(
 
     renumberer.visit_body(body);
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 // The fields are used only for debugging output in `sccs_info`.
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
@@ -45,7 +39,6 @@ pub(crate) enum RegionCtxt {
     Placeholder(Symbol),
     Unknown,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 impl RegionCtxt {
     /// Used to determine the representative of a component in the strongly connected
@@ -61,12 +54,10 @@ impl RegionCtxt {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=RegionRenumberer | COMPLEXITY=2 | LINES=4 */
 
 struct RegionRenumberer<'a, 'tcx> {
     infcx: &'a BorrowckInferCtxt<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=renumber_regions | COMPLEXITY=6 | LINES=15 */
 
 impl<'a, 'tcx> RegionRenumberer<'a, 'tcx> {
     /// Replaces all regions appearing in `value` with fresh inference
@@ -82,7 +73,6 @@ impl<'a, 'tcx> RegionRenumberer<'a, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=17 | LINES=47 */
 
 impl<'a, 'tcx> MutVisitor<'tcx> for RegionRenumberer<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

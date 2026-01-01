@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/regions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
 use crate::rustc_infer::infer::{InferCtxt, RegionResolutionError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_macros::extension;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{self, Ty, elaborate};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=25 | LINES=63 */
 
 use crate::traits::ScrubbedTraitError;
 use crate::traits::outlives_bounds::InferCtxtExt;
@@ -72,7 +69,6 @@ impl<'tcx> OutlivesEnvironment<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=resolve_regions | COMPLEXITY=14 | LINES=46 */
 
 #[extension(pub trait InferCtxtRegionExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {

@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/redundant_semicolon.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Block, StmtKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::lints::{RedundantSemicolonsDiag, RedundantSemicolonsSuggestion};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EarlyContext, EarlyLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=21 */
 
 declare_lint! {
     /// The `redundant_semicolons` lint detects unnecessary trailing
@@ -31,7 +26,6 @@ declare_lint! {
     Warn,
     "detects unnecessary trailing semicolons"
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_block | COMPLEXITY=13 | LINES=16 */
 
 declare_lint_pass!(RedundantSemicolons => [REDUNDANT_SEMICOLONS]);
 
@@ -48,7 +42,6 @@ impl EarlyLintPass for RedundantSemicolons {
         maybe_lint_redundant_semis(cx, &mut seq);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=maybe_lint_redundant_semis | COMPLEXITY=15 | LINES=21 */
 
 fn maybe_lint_redundant_semis(cx: &EarlyContext<'_>, seq: &mut Option<(Span, bool)>) {
     if let Some((span, multiple)) = seq.take() {

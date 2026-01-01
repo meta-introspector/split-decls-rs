@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/resolve_bound_vars.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Name resolution for lifetimes and late-bound type and const variables: type declarations.
 
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::ItemLocalId;
 use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 use crate::ty;
 
@@ -20,7 +17,6 @@ pub enum ResolvedArg {
     Free(LocalDefId, /* lifetime decl */ LocalDefId),
     Error(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// A set containing, at most, one known element.
 /// If two distinct values are inserted into a set, then it
@@ -31,7 +27,6 @@ pub enum Set1<T> {
     One(T),
     Many,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=9 | LINES=10 */
 
 impl<T: PartialEq> Set1<T> {
     pub fn insert(&mut self, value: T) {
@@ -42,7 +37,6 @@ impl<T: PartialEq> Set1<T> {
         };
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, HashStable, Encodable, Decodable)]
 pub enum ObjectLifetimeDefault {
@@ -51,7 +45,6 @@ pub enum ObjectLifetimeDefault {
     Ambiguous,
     Param(DefId),
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ResolveBoundVars | COMPLEXITY=5 | LINES=20 */
 
 /// Maps the id of each bound variable reference to the variable decl
 /// that it corresponds to.

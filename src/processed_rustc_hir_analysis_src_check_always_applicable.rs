@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/always_applicable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // This module contains methods that assist in checking that impls are general
 // enough, i.e. that they always apply to every valid instantaiton of the ADT
 // they're implemented for.
@@ -9,22 +8,16 @@
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{ErrorGuaranteed, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::util::CheckRegions;
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypingMode};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
 use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::errors;
 use crate::hir::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=17 */
 
 /// This function confirms that the `Drop` implementation identified by
 /// `drop_impl_did` is not any more specialized than the type it is
@@ -42,7 +35,6 @@ use crate::hir::def_id::{DefId, LocalDefId};
 /// 3. Any bounds on the generic parameters must be reflected in the
 ///    struct/enum definition for the nominal type itself (i.e.
 ///    cannot do `struct S<T>; impl<T:Clone> Drop for S<T> { ... }`).
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=43 */
 pub(crate) fn check_drop_impl(
     tcx: TyCtxt<'_>,
     drop_impl_did: LocalDefId,
@@ -86,7 +78,6 @@ pub(crate) fn check_drop_impl(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=53 */
 
 pub(crate) fn check_negative_auto_trait_impl<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -140,7 +131,6 @@ pub(crate) fn check_negative_auto_trait_impl<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=ensure_impl_params_and_item_params_correspond | COMPLEXITY=20 | LINES=43 */
 
 fn ensure_impl_params_and_item_params_correspond<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -184,7 +174,6 @@ fn ensure_impl_params_and_item_params_correspond<'tcx>(
     );
     Err(err.emit())
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=ensure_impl_predicates_are_implied_by_item_defn | COMPLEXITY=65 | LINES=121 */
 
 /// Confirms that all predicates defined on the `Drop` impl (`drop_impl_def_id`) are able to be
 /// proven from within `adt_def_id`'s environment. I.e. all the predicates on the impl are

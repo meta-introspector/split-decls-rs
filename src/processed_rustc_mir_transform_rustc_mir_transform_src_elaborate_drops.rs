@@ -1,30 +1,22 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/elaborate_drops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::impls::{MaybeInitializedPlaces, MaybeUninitializedPlaces};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_mir_dataflow::{
     Analysis, DropFlagState, MoveDataTypingEnv, ResultsCursor, on_all_children_bits,
     on_lookup_result_bits,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::deref_separator::deref_finder;
 use crate::elaborate_drop::{DropElaborator, DropFlagMode, DropStyle, Unwind, elaborate_drop};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
 use crate::patch::MirPatch;
 
 /// During MIR building, Drop terminators are inserted in every place where a drop may occur.
@@ -54,7 +46,6 @@ use crate::patch::MirPatch;
 ///         }
 ///     }
 /// }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=18 | LINES=49 */
 /// ```
 pub(super) struct ElaborateDrops;
 
@@ -104,7 +95,6 @@ impl<'tcx> crate::MirPass<'tcx> for ElaborateDrops {
         true
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=compute_dead_unwinds | COMPLEXITY=12 | LINES=26 */
 
 /// Records unwind edges which are known to be unreachable, because they are in `drop` terminators
 /// that can't drop anything.
@@ -131,13 +121,11 @@ fn compute_dead_unwinds<'a, 'tcx>(
 
     dead_unwinds
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=InitializationData | COMPLEXITY=2 | LINES=5 */
 
 struct InitializationData<'a, 'tcx> {
     inits: ResultsCursor<'a, 'tcx, MaybeInitializedPlaces<'a, 'tcx>>,
     uninits: ResultsCursor<'a, 'tcx, MaybeUninitializedPlaces<'a, 'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=seek_before | COMPLEXITY=4 | LINES=11 */
 
 impl InitializationData<'_, '_> {
     fn seek_before(&mut self, loc: Location) {
@@ -149,7 +137,6 @@ impl InitializationData<'_, '_> {
         (self.inits.get().contains(path), self.uninits.get().contains(path))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=patch_ref | COMPLEXITY=63 | LINES=106 */
 
 impl<'a, 'tcx> DropElaborator<'a, 'tcx> for ElaborateDropsCtxt<'a, 'tcx> {
     type Path = MovePathIndex;
@@ -256,7 +243,6 @@ impl<'a, 'tcx> DropElaborator<'a, 'tcx> for ElaborateDropsCtxt<'a, 'tcx> {
         self.drop_flag(path).map(Operand::Copy)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=ElaborateDropsCtxt | COMPLEXITY=2 | LINES=9 */
 
 struct ElaborateDropsCtxt<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -266,14 +252,12 @@ struct ElaborateDropsCtxt<'a, 'tcx> {
     drop_flags: IndexVec<MovePathIndex, Option<Local>>,
     patch: MirPatch<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for ElaborateDropsCtxt<'_, '_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("ElaborateDropsCtxt").finish_non_exhaustive()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=move_data | COMPLEXITY=144 | LINES=261 */
 
 impl<'a, 'tcx> ElaborateDropsCtxt<'a, 'tcx> {
     fn move_data(&self) -> &'a MoveData<'tcx> {

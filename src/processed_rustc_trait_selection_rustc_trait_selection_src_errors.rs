@@ -1,29 +1,19 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Path;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagMessage, DiagStyledString, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{Visitor, VisitorExt, walk_ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, FnRetTy, GenericParamKind, Node};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, TraitRefPrintOnlyTraitPath};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Binder, ClosureKind, FnSig, GenericArg, Region, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Ident, Span, Symbol, kw};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UnableToConstructConstantValue | COMPLEXITY=3 | LINES=15 */
 
 use crate::error_reporting::infer::ObligationCauseAsDiagArg;
 use crate::error_reporting::infer::need_type_info::UnderspecifiedArgKind;
@@ -38,7 +28,6 @@ pub struct UnableToConstructConstantValue<'a> {
     pub span: Span,
     pub unevaluated: ty::UnevaluatedConst<'a>,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=50 */
 
 #[derive(Diagnostic)]
 pub enum InvalidOnClause {
@@ -89,7 +78,6 @@ pub enum InvalidOnClause {
         invalid_name: Symbol,
     },
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=NoValueInOnUnimplemented | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_rustc_on_unimplemented_missing_value, code = E0232)]
@@ -99,7 +87,6 @@ pub struct NoValueInOnUnimplemented {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=NegativePositiveConflict | COMPLEXITY=2 | LINES=8 */
 
 pub struct NegativePositiveConflict<'tcx> {
     pub impl_span: Span,
@@ -108,7 +95,6 @@ pub struct NegativePositiveConflict<'tcx> {
     pub negative_impl_span: Result<Span, Symbol>,
     pub positive_impl_span: Result<Span, Symbol>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=19 | LINES=30 */
 
 impl<G: EmissionGuarantee> Diagnostic<'_, G> for NegativePositiveConflict<'_> {
     #[track_caller]
@@ -139,7 +125,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for NegativePositiveConflict<'_> {
         diag
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=InherentProjectionNormalizationOverflow | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_inherent_projection_normalization_overflow)]
@@ -148,13 +133,11 @@ pub struct InherentProjectionNormalizationOverflow {
     pub span: Span,
     pub ty: String,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 pub enum AdjustSignatureBorrow {
     Borrow { to_borrow: Vec<(Span, String)> },
     RemoveBorrow { remove_borrow: Vec<(Span, String)> },
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=14 | LINES=23 */
 
 impl Subdiagnostic for AdjustSignatureBorrow {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -178,7 +161,6 @@ impl Subdiagnostic for AdjustSignatureBorrow {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ClosureKindMismatch | COMPLEXITY=6 | LINES=20 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_closure_kind_mismatch, code = E0525)]
@@ -199,7 +181,6 @@ pub struct ClosureKindMismatch {
     #[subdiagnostic]
     pub fn_mut_label: Option<ClosureFnMutLabel>,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=ClosureFnOnceLabel | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(trait_selection_closure_fn_once_label)]
@@ -208,7 +189,6 @@ pub struct ClosureFnOnceLabel {
     pub span: Span,
     pub place: String,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=ClosureFnMutLabel | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(trait_selection_closure_fn_mut_label)]
@@ -217,7 +197,6 @@ pub struct ClosureFnMutLabel {
     pub span: Span,
     pub place: String,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_coro_closure_not_fn)]
@@ -227,7 +206,6 @@ pub(crate) struct CoroClosureNotFn {
     pub kind: &'static str,
     pub coro_kind: String,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=AnnotationRequired | COMPLEXITY=3 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_type_annotations_needed, code = E0282)]
@@ -245,7 +223,6 @@ pub struct AnnotationRequired<'a> {
     #[subdiagnostic]
     pub multi_suggestions: Vec<SourceKindMultiSuggestion<'a>>,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=AmbiguousImpl | COMPLEXITY=5 | LINES=18 */
 
 // Copy of `AnnotationRequired` for E0283
 #[derive(Diagnostic)]
@@ -264,7 +241,6 @@ pub struct AmbiguousImpl<'a> {
     #[subdiagnostic]
     pub multi_suggestions: Vec<SourceKindMultiSuggestion<'a>>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=AmbiguousReturn | COMPLEXITY=5 | LINES=18 */
 
 // Copy of `AnnotationRequired` for E0284
 #[derive(Diagnostic)]
@@ -283,7 +259,6 @@ pub struct AmbiguousReturn<'a> {
     #[subdiagnostic]
     pub multi_suggestions: Vec<SourceKindMultiSuggestion<'a>>,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=InferenceBadError | COMPLEXITY=2 | LINES=15 */
 
 // Used when a better one isn't available
 #[derive(Subdiagnostic)]
@@ -299,7 +274,6 @@ pub struct InferenceBadError<'a> {
     pub parent_name: String,
     pub name: String,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=43 */
 
 #[derive(Subdiagnostic)]
 pub enum SourceKindSubdiag<'a> {
@@ -343,7 +317,6 @@ pub enum SourceKindSubdiag<'a> {
         args: String,
     },
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 #[derive(Subdiagnostic)]
 pub enum SourceKindMultiSuggestion<'a> {
@@ -374,7 +347,6 @@ pub enum SourceKindMultiSuggestion<'a> {
         end_span: Option<Span>,
     },
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=new_fully_qualified | COMPLEXITY=22 | LINES=33 */
 
 impl<'a> SourceKindMultiSuggestion<'a> {
     pub fn new_fully_qualified(
@@ -408,7 +380,6 @@ impl<'a> SourceKindMultiSuggestion<'a> {
         Self::ClosureReturn { start_span, start_span_code, end_span }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 pub enum RegionOriginNote<'a> {
     Plain {
@@ -427,7 +398,6 @@ pub enum RegionOriginNote<'a> {
         expected_found: Option<(DiagStyledString, DiagStyledString)>,
     },
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=28 | LINES=44 */
 
 impl Subdiagnostic for RegionOriginNote<'_> {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -472,7 +442,6 @@ impl Subdiagnostic for RegionOriginNote<'_> {
         };
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 pub enum LifetimeMismatchLabels {
     InRet {
@@ -490,7 +459,6 @@ pub enum LifetimeMismatchLabels {
         sub: Option<Ident>,
     },
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=20 | LINES=36 */
 
 impl Subdiagnostic for LifetimeMismatchLabels {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -527,7 +495,6 @@ impl Subdiagnostic for LifetimeMismatchLabels {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=AddLifetimeParamsSuggestion | COMPLEXITY=2 | LINES=9 */
 
 pub struct AddLifetimeParamsSuggestion<'a> {
     pub tcx: TyCtxt<'a>,
@@ -537,7 +504,6 @@ pub struct AddLifetimeParamsSuggestion<'a> {
     pub ty_sub: &'a hir::Ty<'a>,
     pub add_note: bool,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=102 | LINES=161 */
 
 impl Subdiagnostic for AddLifetimeParamsSuggestion<'_> {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -699,7 +665,6 @@ impl Subdiagnostic for AddLifetimeParamsSuggestion<'_> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=LifetimeMismatch | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_lifetime_mismatch, code = E0623)]
@@ -711,13 +676,11 @@ pub struct LifetimeMismatch<'a> {
     #[subdiagnostic]
     pub suggestion: AddLifetimeParamsSuggestion<'a>,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=IntroducesStaticBecauseUnmetLifetimeReq | COMPLEXITY=2 | LINES=5 */
 
 pub struct IntroducesStaticBecauseUnmetLifetimeReq {
     pub unmet_requirements: MultiSpan,
     pub binding_span: Span,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=8 */
 
 impl Subdiagnostic for IntroducesStaticBecauseUnmetLifetimeReq {
     fn add_to_diag<G: EmissionGuarantee>(mut self, diag: &mut Diag<'_, G>) {
@@ -726,7 +689,6 @@ impl Subdiagnostic for IntroducesStaticBecauseUnmetLifetimeReq {
         diag.span_note(self.unmet_requirements, fluent::trait_selection_msl_unmet_req);
     }
 }
-/* AST_META: AST_ID=38 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 // FIXME(#100717): replace with a `Option<Span>` when subdiagnostic supports that
 #[derive(Subdiagnostic)]
@@ -739,7 +701,6 @@ pub enum DoesNotOutliveStaticFromImpl {
     #[note(trait_selection_does_not_outlive_static_from_impl)]
     Unspanned,
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub enum ImplicitStaticLifetimeSubdiag {
@@ -759,7 +720,6 @@ pub enum ImplicitStaticLifetimeSubdiag {
         span: Span,
     },
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=MismatchedStaticLifetime | COMPLEXITY=3 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_mismatched_static_lifetime)]
@@ -775,7 +735,6 @@ pub struct MismatchedStaticLifetime<'a> {
     #[subdiagnostic]
     pub implicit_static_lifetimes: Vec<ImplicitStaticLifetimeSubdiag>,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=37 */
 
 #[derive(Diagnostic)]
 pub enum ExplicitLifetimeRequired<'a> {
@@ -813,13 +772,11 @@ pub enum ExplicitLifetimeRequired<'a> {
         new_ty: Ty<'a>,
     },
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum TyOrSig<'tcx> {
     Ty(Highlighted<'tcx, Ty<'tcx>>),
     ClosureSig(Highlighted<'tcx, Binder<'tcx, FnSig<'tcx>>>),
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=9 */
 
 impl IntoDiagArg for TyOrSig<'_> {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -829,7 +786,6 @@ impl IntoDiagArg for TyOrSig<'_> {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=25 | LINES=108 */
 
 #[derive(Subdiagnostic)]
 pub enum ActualImplExplNotes<'tcx> {
@@ -938,14 +894,12 @@ pub enum ActualImplExplNotes<'tcx> {
         ty: String,
     },
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub enum ActualImplExpectedKind {
     Signature,
     Passive,
     Other,
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub enum ActualImplExpectedLifetimeKind {
     Two,
@@ -953,7 +907,6 @@ pub enum ActualImplExpectedLifetimeKind {
     Some,
     Nothing,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=new_expected | COMPLEXITY=37 | LINES=69 */
 
 impl<'tcx> ActualImplExplNotes<'tcx> {
     pub fn new_expected(
@@ -1023,7 +976,6 @@ impl<'tcx> ActualImplExplNotes<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=TraitPlaceholderMismatch | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_trait_placeholder_mismatch)]
@@ -1042,12 +994,10 @@ pub struct TraitPlaceholderMismatch<'tcx> {
     #[subdiagnostic]
     pub actual_impl_expl_notes: Vec<ActualImplExplNotes<'tcx>>,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=ConsiderBorrowingParamHelp | COMPLEXITY=2 | LINES=4 */
 
 pub struct ConsiderBorrowingParamHelp {
     pub spans: Vec<Span>,
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=9 | LINES=12 */
 
 impl Subdiagnostic for ConsiderBorrowingParamHelp {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1060,7 +1010,6 @@ impl Subdiagnostic for ConsiderBorrowingParamHelp {
         diag.span_help(type_param_span, msg);
     }
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=RelationshipHelp; | COMPLEXITY=3 | LINES=24 */
 
 #[derive(Subdiagnostic)]
 #[help(trait_selection_tid_rel_help)]
@@ -1085,13 +1034,11 @@ pub struct TraitImplDiff {
     pub expected: String,
     pub found: String,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=DynTraitConstraintSuggestion | COMPLEXITY=2 | LINES=5 */
 
 pub struct DynTraitConstraintSuggestion {
     pub span: Span,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=6 | LINES=18 */
 
 impl Subdiagnostic for DynTraitConstraintSuggestion {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1110,7 +1057,6 @@ impl Subdiagnostic for DynTraitConstraintSuggestion {
         );
     }
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=ButCallingIntroduces | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_but_calling_introduces, code = E0772)]
@@ -1129,7 +1075,6 @@ pub struct ButCallingIntroduces {
     pub has_impl_path: bool,
     pub impl_path: String,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=ReqIntroducedLocations | COMPLEXITY=2 | LINES=8 */
 
 pub struct ReqIntroducedLocations {
     pub span: MultiSpan,
@@ -1138,7 +1083,6 @@ pub struct ReqIntroducedLocations {
     pub cause_span: Span,
     pub add_label: bool,
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=15 */
 
 impl Subdiagnostic for ReqIntroducedLocations {
     fn add_to_diag<G: EmissionGuarantee>(mut self, diag: &mut Diag<'_, G>) {
@@ -1154,7 +1098,6 @@ impl Subdiagnostic for ReqIntroducedLocations {
         diag.span_note(self.span, msg);
     }
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=ButNeedsToSatisfy | COMPLEXITY=3 | LINES=23 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_but_needs_to_satisfy, code = E0759)]
@@ -1178,7 +1121,6 @@ pub struct ButNeedsToSatisfy {
     pub has_lifetime: bool,
     pub lifetime: String,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=OutlivesContent | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_outlives_content, code = E0312)]
@@ -1188,7 +1130,6 @@ pub struct OutlivesContent<'a> {
     #[subdiagnostic]
     pub notes: Vec<note_and_explain::RegionExplanation<'a>>,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=OutlivesBound | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_outlives_bound, code = E0476)]
@@ -1198,7 +1139,6 @@ pub struct OutlivesBound<'a> {
     #[subdiagnostic]
     pub notes: Vec<note_and_explain::RegionExplanation<'a>>,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=FulfillReqLifetime | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_fulfill_req_lifetime, code = E0477)]
@@ -1209,7 +1149,6 @@ pub struct FulfillReqLifetime<'a> {
     #[subdiagnostic]
     pub note: Option<note_and_explain::RegionExplanation<'a>>,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=LfBoundNotSatisfied | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_lf_bound_not_satisfied, code = E0478)]
@@ -1219,7 +1158,6 @@ pub struct LfBoundNotSatisfied<'a> {
     #[subdiagnostic]
     pub notes: Vec<note_and_explain::RegionExplanation<'a>>,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=RefLongerThanData | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_ref_longer_than_data, code = E0491)]
@@ -1230,7 +1168,6 @@ pub struct RefLongerThanData<'a> {
     #[subdiagnostic]
     pub notes: Vec<note_and_explain::RegionExplanation<'a>>,
 }
-/* AST_META: AST_ID=63 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
 
 #[derive(Subdiagnostic)]
 pub enum WhereClauseSuggestions {
@@ -1257,7 +1194,6 @@ pub enum WhereClauseSuggestions {
         trait_predicates: String,
     },
 }
-/* AST_META: AST_ID=64 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=47 */
 
 #[derive(Subdiagnostic)]
 pub enum SuggestRemoveSemiOrReturnBinding {
@@ -1305,7 +1241,6 @@ pub enum SuggestRemoveSemiOrReturnBinding {
         spans: MultiSpan,
     },
 }
-/* AST_META: AST_ID=65 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=37 */
 
 #[derive(Subdiagnostic)]
 pub enum ConsiderAddingAwait {
@@ -1343,7 +1278,6 @@ pub enum ConsiderAddingAwait {
         spans: Vec<Span>,
     },
 }
-/* AST_META: AST_ID=66 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=59 */
 
 #[derive(Diagnostic)]
 pub enum PlaceholderRelationLfNotSatisfied {
@@ -1403,7 +1337,6 @@ pub enum PlaceholderRelationLfNotSatisfied {
         note: (),
     },
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=OpaqueCapturesLifetime | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_opaque_captures_lifetime, code = E0700)]
@@ -1414,7 +1347,6 @@ pub struct OpaqueCapturesLifetime<'tcx> {
     pub opaque_ty_span: Span,
     pub opaque_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=68 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=18 | LINES=80 */
 
 #[derive(Subdiagnostic)]
 pub enum FunctionPointerSuggestion<'a> {
@@ -1495,7 +1427,6 @@ pub enum FunctionPointerSuggestion<'a> {
         expected_sig: Binder<'a, FnSig<'a>>,
     },
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=FnItemsAreDistinct; | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[note(trait_selection_fps_items_are_distinct)]
@@ -1510,14 +1441,12 @@ pub struct FnUniqTypes;
 pub struct FnConsiderCasting {
     pub casting: String,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=FnConsiderCastingBoth | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(trait_selection_fn_consider_casting_both)]
 pub struct FnConsiderCastingBoth<'a> {
     pub sig: Binder<'a, FnSig<'a>>,
 }
-/* AST_META: AST_ID=71 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=30 */
 
 #[derive(Subdiagnostic)]
 pub enum SuggestAccessingField<'a> {
@@ -1548,7 +1477,6 @@ pub enum SuggestAccessingField<'a> {
         ty: Ty<'a>,
     },
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=SuggestTuplePatternOne | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(trait_selection_stp_wrap_one, applicability = "maybe-incorrect")]
@@ -1559,14 +1487,12 @@ pub struct SuggestTuplePatternOne {
     #[suggestion_part(code = ")")]
     pub span_high: Span,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=SuggestTuplePatternMany | COMPLEXITY=2 | LINES=6 */
 
 pub struct SuggestTuplePatternMany {
     pub path: String,
     pub cause_span: Span,
     pub compatible_variants: Vec<String>,
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=8 | LINES=17 */
 
 impl Subdiagnostic for SuggestTuplePatternMany {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1584,7 +1510,6 @@ impl Subdiagnostic for SuggestTuplePatternMany {
         );
     }
 }
-/* AST_META: AST_ID=75 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=16 | LINES=72 */
 
 #[derive(Subdiagnostic)]
 pub enum TypeErrorAdditionalDiags {
@@ -1657,7 +1582,6 @@ pub enum TypeErrorAdditionalDiags {
         span: Span,
     },
 }
-/* AST_META: AST_ID=76 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=24 | LINES=111 */
 
 #[derive(Diagnostic)]
 pub enum ObligationCauseFailureCode {
@@ -1769,7 +1693,6 @@ pub enum ObligationCauseFailureCode {
         subdiags: Vec<TypeErrorAdditionalDiags>,
     },
 }
-/* AST_META: AST_ID=77 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 #[derive(Subdiagnostic)]
 pub enum AddPreciseCapturing {
@@ -1799,14 +1722,12 @@ pub enum AddPreciseCapturing {
         post: &'static str,
     },
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=AddPreciseCapturingAndParams | COMPLEXITY=2 | LINES=6 */
 
 pub struct AddPreciseCapturingAndParams {
     pub suggs: Vec<(Span, String)>,
     pub new_lifetime: Symbol,
     pub apit_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=6 | LINES=15 */
 
 impl Subdiagnostic for AddPreciseCapturingAndParams {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1822,7 +1743,6 @@ impl Subdiagnostic for AddPreciseCapturingAndParams {
         );
     }
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=impl_trait_overcapture_suggestion | COMPLEXITY=61 | LINES=120 */
 
 /// Given a set of captured `DefId` for an RPIT (opaque_def_id) and a given
 /// function (fn_def_id), try to suggest adding `+ use<...>` to capture just
@@ -1943,13 +1863,11 @@ pub fn impl_trait_overcapture_suggestion<'tcx>(
 
     Some(AddPreciseCapturingForOvercapture { suggs, apit_spans })
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=AddPreciseCapturingForOvercapture | COMPLEXITY=2 | LINES=5 */
 
 pub struct AddPreciseCapturingForOvercapture {
     pub suggs: Vec<(Span, String)>,
     pub apit_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=13 | LINES=24 */
 
 impl Subdiagnostic for AddPreciseCapturingForOvercapture {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1974,7 +1892,6 @@ impl Subdiagnostic for AddPreciseCapturingForOvercapture {
         }
     }
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(trait_selection_opaque_type_non_generic_param, code = E0792)]

@@ -1,20 +1,14 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/global_allocator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorMethod, AllocatorMethodInput, AllocatorTy, global_fn_name,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AttrVec, Expr, Fn, FnHeader, FnSig, Generics, ItemKind, Mutability, Param, Safety,
     Stmt, StmtKind, Ty, TyKind,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=50 */
 
 use crate::errors;
 use crate::util::check_builtin_macro_attribute;
@@ -65,7 +59,6 @@ pub(crate) fn expand(
     // Return the original item and the new methods.
     vec![orig_item, const_item]
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AllocFnFactory | COMPLEXITY=2 | LINES=7 */
 
 struct AllocFnFactory<'a, 'b> {
     span: Span,
@@ -73,7 +66,6 @@ struct AllocFnFactory<'a, 'b> {
     global: Ident,
     cx: &'a ExtCtxt<'b>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=allocator_fn | COMPLEXITY=34 | LINES=105 */
 
 impl AllocFnFactory<'_, '_> {
     fn allocator_fn(&self, method: &AllocatorMethod) -> Stmt {

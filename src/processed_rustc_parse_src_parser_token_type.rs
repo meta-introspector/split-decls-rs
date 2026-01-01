@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/token_type.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token::TokenKind;
 use crate::rustc_complete::symbol::{Symbol, kw, sym};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=147 */
 
 /// Used in "expected"/"expected one of" error messages. Tokens are added here
 /// as necessary. Tokens with values (e.g. literals, identifiers) are
@@ -150,7 +148,6 @@ pub enum TokenType {
     SymSym,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=20 | LINES=15 */
 
 // Macro to avoid repetitive boilerplate code.
 macro_rules! from_u32_match {
@@ -166,7 +163,6 @@ macro_rules! from_u32_match {
         }
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=from_u32 | COMPLEXITY=32 | LINES=249 */
 
 impl TokenType {
     fn from_u32(val: u32) -> TokenType {
@@ -416,7 +412,6 @@ impl TokenType {
         .to_string()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ExpTokenPair | COMPLEXITY=2 | LINES=9 */
 
 /// Used by various `Parser` methods such as `check` and `eat`. The first field
 /// is always by used those methods. The second field is only used when the
@@ -426,7 +421,6 @@ pub struct ExpTokenPair {
     pub tok: TokenKind,
     pub token_type: TokenType,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ExpKeywordPair | COMPLEXITY=2 | LINES=9 */
 
 /// Used by various `Parser` methods such as `check_keyword` and `eat_keyword`.
 /// The first field is always used by those methods. The second field is only
@@ -436,7 +430,6 @@ pub struct ExpKeywordPair {
     pub kw: Symbol,
     pub token_type: TokenType,
 }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=133 | LINES=140 */
 
 // Gets a statically-known `ExpTokenPair` pair (for non-keywords) or
 // `ExpKeywordPair` (for keywords), as used with various `check`/`expect`
@@ -577,7 +570,6 @@ macro_rules! exp {
     (Readonly)       => { exp!(@sym, readonly,        SymReadonly) };
     (Sym)            => { exp!(@sym, sym,             SymSym) };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=32 */
 
 /// A bitset type designed specifically for `Parser::expected_token_types`,
 /// which is very hot. `u128` is the smallest integer that will fit every
@@ -610,7 +602,6 @@ impl TokenTypeSet {
         TokenTypeSetIter(*self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=next | COMPLEXITY=10 | LINES=21 */
 
 // The `TokenTypeSet` is a copy of the set being iterated. It initially holds
 // the entire set. Each bit is cleared as it is returned. We have finished once

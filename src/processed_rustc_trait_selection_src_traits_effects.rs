@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/effects.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::{
     ImplDerivedHostCause, ImplSource, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::elaborate::elaborate;
 use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
 use crate::rustc_complete::ty::{self, TypingMode};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 use super::SelectionContext;
 use super::normalize::normalize_with_depth_to;
@@ -27,7 +21,6 @@ pub enum EvaluationFailure {
     Ambiguous,
     NoSolution,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=evaluate_host_effect_obligation | COMPLEXITY=38 | LINES=51 */
 
 pub fn evaluate_host_effect_obligation<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,
@@ -79,7 +72,6 @@ pub fn evaluate_host_effect_obligation<'tcx>(
 
     Err(EvaluationFailure::NoSolution)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=match_candidate | COMPLEXITY=10 | LINES=44 */
 
 fn match_candidate<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,
@@ -124,7 +116,6 @@ fn match_candidate<'tcx>(
 
     Ok(nested)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=evaluate_host_effect_from_bounds | COMPLEXITY=36 | LINES=44 */
 
 fn evaluate_host_effect_from_bounds<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,
@@ -169,7 +160,6 @@ fn evaluate_host_effect_from_bounds<'tcx>(
         Err(EvaluationFailure::NoSolution)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=evaluate_host_effect_from_conditionally_const_item_bounds | COMPLEXITY=55 | LINES=81 */
 
 /// Assembles constness bounds from `~const` item bounds on alias types, which only
 /// hold if the `~const` where bounds also hold and the parent trait is `~const`.
@@ -251,7 +241,6 @@ fn evaluate_host_effect_from_conditionally_const_item_bounds<'tcx>(
         Err(EvaluationFailure::NoSolution)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=evaluate_host_effect_from_item_bounds | COMPLEXITY=44 | LINES=57 */
 
 /// Assembles constness bounds "normal" item bounds on aliases, which may include
 /// unconditionally `const` bounds that are *not* conditional and thus always hold.
@@ -309,7 +298,6 @@ fn evaluate_host_effect_from_item_bounds<'tcx>(
         Err(EvaluationFailure::NoSolution)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=evaluate_host_effect_from_builtin_impls | COMPLEXITY=8 | LINES=13 */
 
 fn evaluate_host_effect_from_builtin_impls<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,
@@ -323,7 +311,6 @@ fn evaluate_host_effect_from_builtin_impls<'tcx>(
         _ => Err(EvaluationFailure::NoSolution),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=evaluate_host_effect_for_destruct_goal | COMPLEXITY=34 | LINES=91 */
 
 // NOTE: Keep this in sync with `const_conditions_for_destruct` in the new solver.
 fn evaluate_host_effect_for_destruct_goal<'tcx>(
@@ -415,7 +402,6 @@ fn evaluate_host_effect_for_destruct_goal<'tcx>(
         })
         .collect())
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=evaluate_host_effect_for_fn_goal | COMPLEXITY=15 | LINES=45 */
 
 // NOTE: Keep this in sync with `extract_fn_def_from_const_callable` in the new solver.
 fn evaluate_host_effect_for_fn_goal<'tcx>(
@@ -461,7 +447,6 @@ fn evaluate_host_effect_for_fn_goal<'tcx>(
         hir::Constness::NotConst => Err(EvaluationFailure::NoSolution),
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=evaluate_host_effect_from_selection_candidate | COMPLEXITY=22 | LINES=52 */
 
 fn evaluate_host_effect_from_selection_candidate<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,

@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_passes/src/debugger_visualizer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Detecting usage of the `#[debugger_visualizer]` attribute.
 
 use crate::rustc_complete::Attribute;
 use crate::rustc_expand::base::resolve_path;
 use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::sym;
 
 use crate::errors::{DebugVisualizerInvalid, DebugVisualizerUnreadable};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_for_debugger_visualizer | COMPLEXITY=35 | LINES=58 */
 
 impl DebuggerVisualizerCollector<'_> {
     fn check_for_debugger_visualizer(&mut self, attr: &Attribute) {
@@ -72,13 +68,11 @@ impl DebuggerVisualizerCollector<'_> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=DebuggerVisualizerCollector | COMPLEXITY=2 | LINES=5 */
 
 struct DebuggerVisualizerCollector<'a> {
     sess: &'a Session,
     visualizers: Vec<DebuggerVisualizerFile>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=5 | LINES=7 */
 
 impl<'ast> crate::rustc_ast::visit::Visitor<'ast> for DebuggerVisualizerCollector<'_> {
     fn visit_attribute(&mut self, attr: &'ast Attribute) {
@@ -86,7 +80,6 @@ impl<'ast> crate::rustc_ast::visit::Visitor<'ast> for DebuggerVisualizerCollecto
         crate::rustc_ast::visit::walk_attribute(self, attr);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=debugger_visualizers | COMPLEXITY=6 | LINES=14 */
 
 /// Traverses and collects the debugger visualizers for a specific crate.
 fn debugger_visualizers(tcx: TyCtxt<'_>, _: LocalCrate) -> Vec<DebuggerVisualizerFile> {
@@ -101,7 +94,6 @@ fn debugger_visualizers(tcx: TyCtxt<'_>, _: LocalCrate) -> Vec<DebuggerVisualize
     // deterministic query result
     visitor.visualizers
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.debugger_visualizers = debugger_visualizers;

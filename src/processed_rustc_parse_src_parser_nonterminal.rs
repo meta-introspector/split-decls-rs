@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/nonterminal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::token::NtExprKind::*;
 use crate::rustc_complete::token::NtPatKind::*;
 use crate::rustc_complete::token::{self, InvisibleOrigin, MetaVarKind, NonterminalKind, Token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::PResult;
 use crate::rustc_complete::{Ident, kw};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::errors::UnexpectedNonterminal;
 use crate::parser::pat::{CommaRecoveryMode, RecoverColon, RecoverComma};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::parser::{FollowedByType, ForceCollect, ParseNtResult, Parser, PathStyle};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=nonterminal_may_begin_with | COMPLEXITY=113 | LINES=187 */
 
 impl<'a> Parser<'a> {
     /// Checks whether a non-terminal may begin with a particular token.
@@ -200,7 +195,6 @@ impl<'a> Parser<'a> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=get_macro_ident | COMPLEXITY=4 | LINES=6 */
 
 /// The token is an identifier, but not `_`.
 /// We prohibit passing `_` to macros expecting `ident` for now.

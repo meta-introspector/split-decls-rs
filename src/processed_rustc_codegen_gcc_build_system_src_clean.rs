@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/clean.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fs::remove_dir_all;
 use std::path::Path;
 
 use crate::utils::{get_sysroot_dir, remove_file, run_command};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Default)]
 enum CleanArg {
@@ -16,7 +14,6 @@ enum CleanArg {
     #[default]
     Help,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=15 */
 
 impl CleanArg {
     fn new() -> Result<Self, String> {
@@ -32,7 +29,6 @@ impl CleanArg {
         Ok(Self::default())
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=usage | COMPLEXITY=2 | LINES=12 */
 
 fn usage() {
     println!(
@@ -45,7 +41,6 @@ fn usage() {
 "#
     )
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=clean_all | COMPLEXITY=12 | LINES=27 */
 
 fn clean_all() -> Result<(), String> {
     let build_sysroot = get_sysroot_dir();
@@ -73,14 +68,12 @@ fn clean_all() -> Result<(), String> {
     println!("Successfully ran `clean all`");
     Ok(())
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=clean_ui_tests | COMPLEXITY=2 | LINES=6 */
 
 fn clean_ui_tests() -> Result<(), String> {
     let path = Path::new(crate::BUILD_DIR).join("rust/build/x86_64-unknown-linux-gnu/test/ui/");
     run_command(&[&"find", &path, &"-name", &"stamp", &"-delete"], None)?;
     Ok(())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=run | COMPLEXITY=6 | LINES=9 */
 
 pub fn run() -> Result<(), String> {
     match CleanArg::new()? {

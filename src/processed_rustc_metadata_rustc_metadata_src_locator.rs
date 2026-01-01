@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_metadata/src/locator.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=150 */
 // Finds crate binaries and loads their metadata
 //
 // Might I be the first to welcome you to a world of platform differences,
@@ -150,7 +149,6 @@
 // extern crate b2;
 //
 // fn main() {}
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=66 */
 // ```
 //
 // and the compiler would be invoked as:
@@ -217,41 +215,29 @@
 
 use std::borrow::Cow;
 use std::io::{Result as IoResult, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ops::Deref;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{cmp, fmt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::owned_slice::{OwnedSlice, slice_owned};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_fs_util::try_canonicalize;
 use crate::rustc_complete::cstore::CrateSource;
 use crate::rustc_complete::filesearch::FileSearch;
 use crate::rustc_complete::search_paths::PathKind;
 use crate::rustc_complete::utils::CanonicalizedPath;
 use crate::rustc_complete::{Session, config};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{Target, TargetTuple};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tempfile::Builder as TempFileBuilder;
 use tracing::{debug, info};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::creader::{Library, MetadataLoader};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::errors;
 use crate::rmeta::{METADATA_HEADER, MetadataBlob, rustc_version};
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 #[derive(Clone)]
 pub(crate) struct CrateLocator<'a> {
@@ -272,21 +258,18 @@ pub(crate) struct CrateLocator<'a> {
     is_proc_macro: bool,
     path_kind: PathKind,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug)]
 pub(crate) struct CratePaths {
     pub(crate) name: Symbol,
     source: CrateSource,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl CratePaths {
     pub(crate) fn new(name: Symbol, source: CrateSource) -> CratePaths {
         CratePaths { name, source }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub(crate) enum CrateFlavor {
@@ -295,7 +278,6 @@ pub(crate) enum CrateFlavor {
     Dylib,
     SDylib,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=11 */
 
 impl fmt::Display for CrateFlavor {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -307,7 +289,6 @@ impl fmt::Display for CrateFlavor {
         })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11 */
 
 impl IntoDiagArg for CrateFlavor {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -319,7 +300,6 @@ impl IntoDiagArg for CrateFlavor {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=find_library_crate | COMPLEXITY=329 | LINES=541 */
 
 impl<'a> CrateLocator<'a> {
     pub(crate) fn new(
@@ -861,7 +841,6 @@ impl<'a> CrateLocator<'a> {
         }))
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=get_metadata_section | COMPLEXITY=60 | LINES=119 */
 
 fn get_metadata_section<'p>(
     target: &Target,
@@ -981,7 +960,6 @@ fn get_metadata_section<'p>(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=get_rmeta_metadata_section | COMPLEXITY=12 | LINES=19 */
 
 fn get_rmeta_metadata_section<'a, 'p>(filename: &'p Path) -> Result<OwnedSlice, MetadataError<'a>> {
     // mmap the file, because only a small fraction of it is read.
@@ -1001,7 +979,6 @@ fn get_rmeta_metadata_section<'a, 'p>(filename: &'p Path) -> Result<OwnedSlice, 
 
     Ok(slice_owned(mmap, Deref::deref))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=list_file_metadata | COMPLEXITY=10 | LINES=16 */
 
 /// A diagnostic function for dumping crate metadata to an output stream.
 pub fn list_file_metadata(
@@ -1018,7 +995,6 @@ pub fn list_file_metadata(
         Err(msg) => write!(out, "{msg}\n"),
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=get_flavor_from_path | COMPLEXITY=9 | LINES=12 */
 
 fn get_flavor_from_path(path: &Path) -> CrateFlavor {
     let filename = path.file_name().unwrap().to_str().unwrap();
@@ -1031,7 +1007,6 @@ fn get_flavor_from_path(path: &Path) -> CrateFlavor {
         CrateFlavor::Dylib
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=CrateMismatch | COMPLEXITY=5 | LINES=8 */
 
 // ------------------------------------------ Error reporting -------------------------------------
 
@@ -1040,7 +1015,6 @@ struct CrateMismatch {
     path: PathBuf,
     got: String,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Debug, Default)]
 pub(crate) struct CrateRejections {
@@ -1051,7 +1025,6 @@ pub(crate) struct CrateRejections {
     via_filename: Vec<CrateMismatch>,
     via_invalid: Vec<CrateMismatch>,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// Candidate rejection reasons collected during crate search.
 /// If no candidate is accepted, then these reasons are presented to the user,
@@ -1065,7 +1038,6 @@ pub(crate) struct CombinedLocatorError {
     dll_suffix: String,
     crate_rejections: CrateRejections,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Debug)]
 pub(crate) enum CrateError {
@@ -1081,7 +1053,6 @@ pub(crate) enum CrateError {
     LocatorCombined(Box<CombinedLocatorError>),
     NotFound(Symbol),
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 enum MetadataError<'a> {
     /// The file was missing.
@@ -1091,7 +1062,6 @@ enum MetadataError<'a> {
     /// The file was present, but compiled with a different rustc version.
     VersionMismatch { expected_version: String, found_version: String },
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=19 | LINES=17 */
 
 impl fmt::Display for MetadataError<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -1109,7 +1079,6 @@ impl fmt::Display for MetadataError<'_> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=147 | LINES=183 */
 
 impl CrateError {
     pub(crate) fn report(self, sess: &Session, span: Span, missing_core: bool) {

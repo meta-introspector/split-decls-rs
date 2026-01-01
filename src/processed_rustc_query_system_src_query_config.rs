@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/query/config.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // Query configuration and description traits.
 
 use std::fmt::Debug;
@@ -10,12 +9,10 @@ use crate::rustc_complete::ErrorGuaranteed;
 
 use super::QueryStackFrameExtra;
 use crate::dep_graph::{DepKind, DepNode, DepNodeParams, SerializedDepNodeIndex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::error::HandleCycleError;
 use crate::ich::StableHashingContext;
 use crate::query::caches::QueryCache;
 use crate::query::{CycleError, DepNodeIndex, QueryContext, QueryState};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=name | COMPLEXITY=9 | LINES=64 */
 
 pub type HashResult<V> = Option<fn(&mut StableHashingContext<'_>, &V) -> Fingerprint>;
 

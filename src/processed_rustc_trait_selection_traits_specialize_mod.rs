@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/specialize/mod.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 // Logic and data structures related to impl specialization, explained in
 // greater detail below.
 //
@@ -15,33 +14,26 @@
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Diag, EmissionGuarantee};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::Obligation;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::query::LocalCrate;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::builtin::COHERENCE_LEAK_CHECK;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use specialization_graph::GraphExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::error_reporting::traits::to_pretty_impl_header;
 use crate::errors::NegativePositiveConflict;
 use crate::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::traits::select::IntercrateAmbiguityCause;
 use crate::traits::{
     FutureCompatOverlapErrorKind, ObligationCause, ObligationCtxt, coherence,
     predicates_for_generics,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=OverlapError | COMPLEXITY=2 | LINES=11 */
 
 /// Information pertinent to an overlapping impl error.
 #[derive(Debug)]
@@ -53,7 +45,6 @@ pub struct OverlapError<'tcx> {
     pub involves_placeholder: bool,
     pub overflowing_predicates: Vec<ty::Predicate<'tcx>>,
 }
-/* AST_META: AST_ID=9 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 /// Given the generic parameters for the requested impl, translate it to the generic parameters
 /// appropriate for the actual item definition (whether it be in that impl,
@@ -71,11 +62,8 @@ pub struct OverlapError<'tcx> {
 ///
 /// ```ignore (illustrative)
 /// trait Foo { ... }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<T, U> Foo for (T, U) { ... }  // target impl
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<V> Foo for (V, V) { ... }     // source impl
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=translate_args | COMPLEXITY=8 | LINES=33 */
 /// ```
 ///
 /// Suppose we have selected "source impl" with `V` instantiated with `u32`.
@@ -109,7 +97,6 @@ pub fn translate_args<'tcx>(
         &ObligationCause::dummy(),
     )
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=translate_args_with_cause | COMPLEXITY=26 | LINES=45 */
 
 /// Like [translate_args], but obligations from the parent implementation
 /// are registered with the provided `ObligationCause`.
@@ -155,7 +142,6 @@ pub fn translate_args_with_cause<'tcx>(
     // directly inherent the method generics, since those do not vary across impls
     source_args.rebase_onto(infcx.tcx, source_impl, target_args)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fulfill_implication | COMPLEXITY=33 | LINES=78 */
 
 /// Attempt to fulfill all obligations of `target_impl` after unification with
 /// `source_trait_ref`. If successful, returns the generic parameters for *all* the
@@ -234,12 +220,10 @@ fn fulfill_implication<'tcx>(
     // the inference variables inside with whatever we got from fulfillment.
     Ok(infcx.resolve_vars_if_possible(target_args))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(super) fn specialization_enabled_in(tcx: TyCtxt<'_>, _: LocalCrate) -> bool {
     tcx.features().specialization() || tcx.features().min_specialization()
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=78 | LINES=165 */
 
 /// Is `specializing_impl_def_id` a specialization of `parent_impl_def_id`?
 ///
@@ -405,7 +389,6 @@ pub(super) fn specializes(
 
     true
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=48 */
 
 /// Query provider for `specialization_graph_of`.
 pub(super) fn specialization_graph_provider(
@@ -454,7 +437,6 @@ pub(super) fn specialization_graph_provider(
 
     Ok(tcx.arena.alloc(sg))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=report_overlap_conflict | COMPLEXITY=10 | LINES=38 */
 
 // This function is only used when
 // encountering errors and inlining
@@ -493,7 +475,6 @@ fn report_overlap_conflict<'tcx>(
         _ => report_conflicting_impls(tcx, overlap, impl_def_id, used_to_be_allowed),
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=report_negative_positive_conflict | COMPLEXITY=7 | LINES=22 */
 
 fn report_negative_positive_conflict<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -516,7 +497,6 @@ fn report_negative_positive_conflict<'tcx>(
 
     diag.emit()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=report_conflicting_impls | COMPLEXITY=62 | LINES=97 */
 
 fn report_conflicting_impls<'tcx>(
     tcx: TyCtxt<'tcx>,

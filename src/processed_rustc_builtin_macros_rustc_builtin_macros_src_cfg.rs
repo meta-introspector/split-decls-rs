@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/cfg.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // The compiler code necessary to support the cfg! extension, which expands to
 // a literal `true` or `false` based on whether the given cfg matches the
 // current compilation environment.
@@ -8,11 +7,9 @@ use crate::rustc_complete::token;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_parse::exp;
 use crate::rustc_complete::Span;
 use {rustc_ast as ast, rustc_attr_parsing as attr};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=26 */
 
 use crate::errors;
 
@@ -39,7 +36,6 @@ pub(crate) fn expand_cfg(
         }
     })
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=parse_cfg | COMPLEXITY=10 | LINES=22 */
 
 fn parse_cfg<'a>(
     cx: &ExtCtxt<'a>,

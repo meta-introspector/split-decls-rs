@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/pattern/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // Validation of patterns/matches.
 
 
@@ -7,32 +6,23 @@ use std::cmp::Ordering;
 use std::sync::Arc;
 
 use crate::rustc_abi::{FieldIdx, Integer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::pat_util::EnumerateAndAdjustIterator;
 use crate::rustc_complete::{self as hir, LangItem, RangeEnd};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_index::Idx;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::mir::interpret::LitToConstInput;
 use crate::rustc_complete::thir::{
     Ascription, FieldPat, LocalVarId, Pat, PatKind, PatRange, PatRangeBoundary,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::adjustment::{PatAdjust, PatAdjustment};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::IntegerExt;
 use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypingMode};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=PatCtxt | COMPLEXITY=2 | LINES=13 */
 
 pub(crate) use self::check_match::check_match;
 use self::migration::PatMigration;
@@ -46,7 +36,6 @@ struct PatCtxt<'a, 'tcx> {
     /// Used by the Rust 2024 migration lint.
     rust_2024_migration: Option<PatMigration<'a>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 pub(super) fn pat_from_hir<'a, 'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -70,7 +59,6 @@ pub(super) fn pat_from_hir<'a, 'tcx>(
     }
     result
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lower_pattern | COMPLEXITY=346 | LINES=627 */
 
 impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
     fn lower_pattern(&mut self, pat: &'tcx hir::Pat<'tcx>) -> Box<Pat<'tcx>> {

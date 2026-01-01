@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_lint/src/invalid_from_utf8.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::str::Utf8Error;
 
 use crate::rustc_complete::LitKind;
 use crate::rustc_complete::{Expr, ExprKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::sym;
 
 use crate::lints::InvalidFromUtf8Diag;
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=25 */
 
 declare_lint! {
     /// The `invalid_from_utf8_unchecked` lint checks for calls to
@@ -38,7 +34,6 @@ declare_lint! {
     Deny,
     "using a non UTF-8 literal in `std::str::from_utf8_unchecked`"
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 declare_lint! {
     /// The `invalid_from_utf8` lint checks for calls to
@@ -62,7 +57,6 @@ declare_lint! {
     Warn,
     "using a non UTF-8 literal in `std::str::from_utf8`"
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=57 | LINES=82 */
 
 declare_lint_pass!(InvalidFromUtf8 => [INVALID_FROM_UTF8_UNCHECKED, INVALID_FROM_UTF8]);
 

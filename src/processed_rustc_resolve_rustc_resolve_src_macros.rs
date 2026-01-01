@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/macros.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // A bunch of methods and structures more or less related to resolving macros and
 // interface provided by `Resolver` to macro expander.
 
@@ -8,57 +7,44 @@ use std::mem;
 use std::sync::Arc;
 
 use crate::rustc_complete::{self as ast, Crate, NodeId, attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::{Applicability, DiagCtxtHandle, StashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_expand::base::{
     Annotatable, DeriveResolution, Indeterminate, ResolverExpand, SyntaxExtension,
     SyntaxExtensionKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_expand::compile_declarative_macro;
 use crate::rustc_expand::expand::{
     AstFragment, AstFragmentKind, Invocation, InvocationKind, SupportsMacroExpansion,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::StabilityLevel;
 use crate::rustc_complete::attrs::{CfgEntry, StrippedCfgItem};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, DefKind, MacroKinds, Namespace, NonMacroAttrKind};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::stability;
 use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::{
     LEGACY_DERIVE_HELPERS, OUT_OF_SCOPE_MACRO_CALLS, UNKNOWN_DIAGNOSTIC_ATTRIBUTES,
     UNUSED_MACRO_RULES, UNUSED_MACROS,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::{self, AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::Namespace::*;
 use crate::errors::{
     self, AddAsNonDerive, CannotDetermineMacroResolution, CannotFindIdentInThisScope,
     MacroExpectedFound, RemoveSurroundingDerive,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::imports::Import;
 use crate::{
     BindingKey, CmResolver, DeriveData, Determinacy, Finalize, InvocationParent, MacroData,
     ModuleKind, ModuleOrUniformRoot, NameBinding, NameBindingKind, ParentScope, PathResult,
     ResolutionError, Resolver, ScopeSet, Segment, Used,
 };
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 type Res = def::Res<NodeId>;
 
@@ -71,7 +57,6 @@ pub(crate) struct MacroRulesBinding<'ra> {
     pub(crate) parent_macro_rules_scope: MacroRulesScopeRef<'ra>,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=20 | LINES=16 */
 
 /// The scope introduced by a `macro_rules!` macro.
 /// This starts at the macro's definition and ends at the end of the macro's parent
@@ -88,7 +73,6 @@ pub(crate) enum MacroRulesScope<'ra> {
     /// create a `macro_rules!` macro definition.
     Invocation(LocalExpnId),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=27 */
 
 /// `macro_rules!` scopes are always kept by reference and inside a cell.
 /// The reason is that we update scopes with value `MacroRulesScope::Invocation(invoc_id)`
@@ -116,7 +100,6 @@ pub(crate) fn sub_namespace_match(
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fast_print_path | COMPLEXITY=17 | LINES=20 */
 
 // We don't want to format a path using pretty-printing,
 // `format!("{}", path)`, because that tries to insert
@@ -137,13 +120,11 @@ fn fast_print_path(path: &ast::Path) -> Symbol {
         Symbol::intern(&path_str)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn registered_tools(tcx: TyCtxt<'_>, (): ()) -> RegisteredTools {
     let (_, pre_configured_attrs) = &*tcx.crate_for_resolver(()).borrow();
     registered_tools_ast(tcx.dcx(), pre_configured_attrs)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=registered_tools_ast | COMPLEXITY=21 | LINES=34 */
 
 pub fn registered_tools_ast(
     dcx: DiagCtxtHandle<'_>,
@@ -178,7 +159,6 @@ pub fn registered_tools_ast(
     registered_tools.extend(predefined_tools.iter().cloned().map(Ident::with_dummy_span));
     registered_tools
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=next_node_id | COMPLEXITY=181 | LINES=385 */
 
 impl<'ra, 'tcx> ResolverExpand for Resolver<'ra, 'tcx> {
     fn next_node_id(&mut self) -> NodeId {
@@ -564,7 +544,6 @@ impl<'ra, 'tcx> ResolverExpand for Resolver<'ra, 'tcx> {
         self.impl_trait_names.insert(id, name);
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=smart_resolve_macro_path | COMPLEXITY=343 | LINES=695 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     /// Resolve macro path with error reporting and recovery.

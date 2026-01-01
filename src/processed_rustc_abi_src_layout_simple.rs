@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_abi/src/layout/simple.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::num::NonZero;
 
 use rustc_hashes::Hash64;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::{
     BackendRepr, FieldsShape, HasDataLayout, LayoutData, Niche, Primitive, Scalar, Size, Variants,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=unit | COMPLEXITY=46 | LINES=140 */
 
 /// "Simple" layout constructors that cannot fail.
 impl<FieldIdx: Idx, VariantIdx: Idx> LayoutData<FieldIdx, VariantIdx> {

@@ -1,35 +1,24 @@
 // SRC: ../rust/compiler/rustc_lint/src/if_let_rescope.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::iter::repeat;
 use std::ops::ControlFlow;
 
 use hir::intravisit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Recovered;
 use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, Subdiagnostic, SuggestionStyle};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, HirIdSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::adjustment::Adjust;
 use crate::rustc_complete::ty::significant_drop_order::{
     extract_component_with_significant_dtor, ty_dtor_span,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{FutureIncompatibilityReason, LintId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::SmallVec;
 
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=72 */
 
 declare_lint! {
     /// The `if_let_rescope` lint detects cases where a temporary value with
@@ -102,14 +91,12 @@ declare_lint! {
         reference: "<https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html>",
     };
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 
 /// Lint for potential change in program semantics of `if let`s
 #[derive(Default)]
 pub(crate) struct IfLetRescope {
     skip: HirIdSet,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=expr_parent_is_else | COMPLEXITY=4 | LINES=8 */
 
 fn expr_parent_is_else(tcx: TyCtxt<'_>, hir_id: hir::HirId) -> bool {
     let Some((_, hir::Node::Expr(expr))) = tcx.hir_parent_iter(hir_id).next() else {
@@ -118,7 +105,6 @@ fn expr_parent_is_else(tcx: TyCtxt<'_>, hir_id: hir::HirId) -> bool {
     let hir::ExprKind::If(_cond, _conseq, Some(alt)) = expr.kind else { return false };
     alt.hir_id == hir_id
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=expr_parent_is_stmt | COMPLEXITY=7 | LINES=11 */
 
 fn expr_parent_is_stmt(tcx: TyCtxt<'_>, hir_id: hir::HirId) -> bool {
     let mut parents = tcx.hir_parent_iter(hir_id);
@@ -130,12 +116,10 @@ fn expr_parent_is_stmt(tcx: TyCtxt<'_>, hir_id: hir::HirId) -> bool {
     let (hir::StmtKind::Semi(expr) | hir::StmtKind::Expr(expr)) = stmt.kind else { return false };
     expr.hir_id == hir_id
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=match_head_needs_bracket | COMPLEXITY=2 | LINES=4 */
 
 fn match_head_needs_bracket(tcx: TyCtxt<'_>, expr: &hir::Expr<'_>) -> bool {
     expr_parent_is_else(tcx, expr.hir_id) && matches!(expr.kind, hir::ExprKind::If(..))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=probe_if_cascade | COMPLEXITY=84 | LINES=144 */
 
 impl IfLetRescope {
     fn probe_if_cascade<'tcx>(&mut self, cx: &LateContext<'tcx>, mut expr: &'tcx hir::Expr<'tcx>) {
@@ -280,7 +264,6 @@ impl IfLetRescope {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=31 | LINES=40 */
 
 impl_lint_pass!(
     IfLetRescope => [IF_LET_RESCOPE]
@@ -321,7 +304,6 @@ impl<'tcx> LateLintPass<'tcx> for IfLetRescope {
         self.probe_if_cascade(cx, expr);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=IfLetRescopeLint | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_if_let_rescope)]
@@ -335,7 +317,6 @@ struct IfLetRescopeLint {
     #[subdiagnostic]
     rewrite: Option<IfLetRescopeRewrite>,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=IfLetRescopeRewrite | COMPLEXITY=2 | LINES=7 */
 
 struct IfLetRescopeRewrite {
     match_heads: Vec<SingleArmMatchBegin>,
@@ -343,7 +324,6 @@ struct IfLetRescopeRewrite {
     closing_brackets: ClosingBrackets,
     alt_heads: Vec<AltHead>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=34 | LINES=39 */
 
 impl Subdiagnostic for IfLetRescopeRewrite {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -383,7 +363,6 @@ impl Subdiagnostic for IfLetRescopeRewrite {
             SuggestionStyle::ShowCode,
         );
     }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=DestructorLabel | COMPLEXITY=14 | LINES=44 */
 }
 
 #[derive(Subdiagnostic)]
@@ -428,7 +407,6 @@ impl<'tcx> FindSignificantDropper<'_, 'tcx> {
         self.check_promoted_temp_with_drop(init)?;
         self.visit_expr(init)
     }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=check_promoted_temp_with_drop | COMPLEXITY=15 | LINES=32 */
 
     /// Check that an expression is not a promoted temporary with a significant
     /// drop impl.
@@ -461,7 +439,6 @@ impl<'tcx> FindSignificantDropper<'_, 'tcx> {
 
         ControlFlow::Break((expr.span, drop_tys))
     }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=visit_block | COMPLEXITY=13 | LINES=11 */
 }
 
 impl<'tcx> Visitor<'tcx> for FindSignificantDropper<'_, 'tcx> {
@@ -473,7 +450,6 @@ impl<'tcx> Visitor<'tcx> for FindSignificantDropper<'_, 'tcx> {
         // statements. This prevents false positives like `{ let x = &Drop; }`.
         if let Some(expr) = b.expr { self.visit_expr(expr) } else { ControlFlow::Continue(()) }
     }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=51 | LINES=43 */
 
     fn visit_expr(&mut self, expr: &'tcx hir::Expr<'tcx>) -> Self::Result {
         // Check for promoted temporaries from autoref, e.g.
@@ -517,5 +493,4 @@ impl<'tcx> Visitor<'tcx> for FindSignificantDropper<'_, 'tcx> {
             _ => intravisit::walk_expr(self, expr),
         }
     }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=1 */
 }

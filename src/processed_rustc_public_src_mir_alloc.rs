@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/mir/alloc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // This module provides methods to retrieve allocation information, such as static variables.
 
 use std::io::Read;
@@ -7,13 +6,9 @@ use std::io::Read;
 use serde::Serialize;
 
 use crate::mir::mono::{Instance, StaticDef};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::target::{Endian, MachineInfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{Allocation, Binder, ExistentialTraitRef, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Error, IndexedVal, with};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 /// An allocation in the rustc_public's IR global memory can be either a function pointer,
 /// a static, or a "real" allocation with some data in it.
@@ -33,14 +28,12 @@ pub enum GlobalAlloc {
     /// is split into two segments, on 32 bit systems there are 4 segments, and so on.
     TypeId { ty: Ty },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<AllocId> for GlobalAlloc {
     fn from(value: AllocId) -> Self {
         with(|cx| cx.global_alloc(value))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=vtable_allocation | COMPLEXITY=15 | LINES=12 */
 
 impl GlobalAlloc {
     /// Retrieve the allocation id for a global allocation if it exists.
@@ -53,7 +46,6 @@ impl GlobalAlloc {
         with(|cx| cx.vtable_allocation(self))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=AllocId(usize); | COMPLEXITY=8 | LINES=13 */
 
 /// A unique identification number for each provenance
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, Serialize)]
@@ -67,7 +59,6 @@ impl IndexedVal for AllocId {
         self.0
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 /// Utility function used to read an allocation data into a unassigned integer.
 pub(crate) fn read_target_uint(mut bytes: &[u8]) -> Result<u128, Error> {
@@ -83,7 +74,6 @@ pub(crate) fn read_target_uint(mut bytes: &[u8]) -> Result<u128, Error> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 /// Utility function used to read an allocation data into an assigned integer.
 pub(crate) fn read_target_int(mut bytes: &[u8]) -> Result<i128, Error> {

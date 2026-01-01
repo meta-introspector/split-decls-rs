@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/int.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=68 | LINES=322 */
 // Compiler:
 //
 // Run-time:

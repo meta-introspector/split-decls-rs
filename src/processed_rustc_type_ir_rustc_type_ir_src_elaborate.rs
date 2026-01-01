@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/elaborate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::marker::PhantomData;
 
 use smallvec::smallvec;
@@ -8,9 +7,7 @@ use crate::data_structures::HashSet;
 use crate::inherent::*;
 use crate::lang_items::SolverTraitLangItem;
 use crate::outlives::{Component, push_outlives_components};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, Interner, Upcast as _};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Elaborator | COMPLEXITY=7 | LINES=14 */
 
 /// "Elaboration" is the process of identifying all the predicates that
 /// are implied by a source predicate. Currently, this basically means
@@ -25,20 +22,17 @@ pub struct Elaborator<I: Interner, O> {
     mode: Filter,
     elaborate_sized: ElaborateSized,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum Filter {
     All,
     OnlySelf,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Eq, PartialEq)]
 enum ElaborateSized {
     Yes,
     No,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=5 | LINES=18 */
 
 /// Describes how to elaborate an obligation into a sub-obligation.
 pub trait Elaboratable<I: Interner> {
@@ -57,20 +51,17 @@ pub trait Elaboratable<I: Interner> {
         index: usize,
     ) -> Self;
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ClauseWithSupertraitSpan | COMPLEXITY=2 | LINES=6 */
 
 pub struct ClauseWithSupertraitSpan<I: Interner> {
     pub clause: I::Clause,
     // Span of the supertrait predicatae that lead to this clause.
     pub supertrait_span: I::Span,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=5 */
 impl<I: Interner> ClauseWithSupertraitSpan<I> {
     pub fn new(clause: I::Clause, span: I::Span) -> Self {
         ClauseWithSupertraitSpan { clause, supertrait_span: span }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=10 | LINES=19 */
 impl<I: Interner> Elaboratable<I> for ClauseWithSupertraitSpan<I> {
     fn predicate(&self) -> <I as Interner>::Predicate {
         self.clause.as_predicate()
@@ -90,7 +81,6 @@ impl<I: Interner> Elaboratable<I> for ClauseWithSupertraitSpan<I> {
         ClauseWithSupertraitSpan { clause, supertrait_span }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=elaborate | COMPLEXITY=3 | LINES=15 */
 
 pub fn elaborate<I: Interner, O: Elaboratable<I>>(
     cx: I,
@@ -106,7 +96,6 @@ pub fn elaborate<I: Interner, O: Elaboratable<I>>(
     elaborator.extend_deduped(obligations);
     elaborator
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=extend_deduped | COMPLEXITY=61 | LINES=147 */
 
 impl<I: Interner, O: Elaboratable<I>> Elaborator<I, O> {
     /// Adds `obligations` to the stack.
@@ -254,7 +243,6 @@ impl<I: Interner, O: Elaboratable<I>> Elaborator<I, O> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=elaborate_component_to_clause | COMPLEXITY=19 | LINES=43 */
 
 fn elaborate_component_to_clause<I: Interner>(
     cx: I,
@@ -298,7 +286,6 @@ fn elaborate_component_to_clause<I: Interner>(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=size_hint | COMPLEXITY=12 | LINES=18 */
 
 impl<I: Interner, O: Elaboratable<I>> Iterator for Elaborator<I, O> {
     type Item = O;
@@ -317,7 +304,6 @@ impl<I: Interner, O: Elaboratable<I>> Iterator for Elaborator<I, O> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=supertrait_def_ids | COMPLEXITY=13 | LINES=32 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Supertrait iterator
@@ -350,7 +336,6 @@ pub fn supertrait_def_ids<I: Interner>(
         Some(trait_def_id)
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=supertraits | COMPLEXITY=2 | LINES=7 */
 
 pub fn supertraits<I: Interner>(
     cx: I,
@@ -358,14 +343,12 @@ pub fn supertraits<I: Interner>(
 ) -> FilterToTraits<I, Elaborator<I, I::Clause>> {
     elaborate(cx, [trait_ref.upcast(cx)]).filter_only_self().filter_to_traits()
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=filter_to_traits | COMPLEXITY=4 | LINES=6 */
 
 impl<I: Interner> Elaborator<I, I::Clause> {
     fn filter_to_traits(self) -> FilterToTraits<I, Self> {
         FilterToTraits { _cx: PhantomData, base_iterator: self }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=FilterToTraits | COMPLEXITY=2 | LINES=7 */
 
 /// A filter around an iterator of predicates that makes it yield up
 /// just trait references.
@@ -373,7 +356,6 @@ pub struct FilterToTraits<I: Interner, It: Iterator<Item = I::Clause>> {
     _cx: PhantomData<I>,
     base_iterator: It,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=next | COMPLEXITY=13 | LINES=18 */
 
 impl<I: Interner, It: Iterator<Item = I::Clause>> Iterator for FilterToTraits<I, It> {
     type Item = ty::Binder<I, ty::TraitRef<I>>;
@@ -392,7 +374,6 @@ impl<I: Interner, It: Iterator<Item = I::Clause>> Iterator for FilterToTraits<I,
         (0, upper)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=elaborate_outlives_assumptions | COMPLEXITY=33 | LINES=51 */
 
 pub fn elaborate_outlives_assumptions<I: Interner>(
     cx: I,

@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/callee.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, Visibility};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gccjit::{Function, FunctionType};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=get_fn | COMPLEXITY=45 | LINES=146 */
 
 use crate::attributes;
 use crate::context::CodegenCx;

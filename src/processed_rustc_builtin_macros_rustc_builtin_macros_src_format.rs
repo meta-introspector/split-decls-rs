@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::ops::Range;
 
 use parse::Position::ArgumentNamed;
@@ -10,25 +9,20 @@ use crate::rustc_complete::{
     FormatDebugHex, FormatOptions, FormatPlaceholder, FormatSign, FormatTrait, Recovered, StmtKind,
     token,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{
     Applicability, BufferedEarlyLint, Diag, MultiSpan, PResult, SingleLabelManySpans, listify,
     pluralize,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_expand::base::*;
 use crate::rustc_lint_defs::builtin::NAMED_ARGUMENTS_USED_POSITIONALLY;
 use crate::rustc_lint_defs::{BuiltinLintDiag, LintId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_parse::exp;
 use rustc_parse_format as parse;
 use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, InnerSpan, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::errors;
 use crate::util::{ExprToSpannedString, expr_to_spanned_string};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 // The format_args!() macro is expanded in three steps:
 //  1. First, `parse_args` will parse the `(literal, arg, arg, name=arg, name=arg)` syntax,
@@ -48,7 +42,6 @@ enum PositionUsedAs {
     Precision,
     Width,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=MacroInput | COMPLEXITY=5 | LINES=17 */
 use PositionUsedAs::*;
 
 #[derive(Debug)]
@@ -66,7 +59,6 @@ struct MacroInput {
     /// [RFC 2795]: https://rust-lang.github.io/rfcs/2795-format-args-implicit-identifiers.html#macro-hygiene
     is_direct_literal: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_args | COMPLEXITY=59 | LINES=100 */
 
 /// Parses the arguments from the given list of tokens, returning the diagnostic
 /// if there's a parse error so we can continue parsing other format!
@@ -167,7 +159,6 @@ fn parse_args<'a>(ecx: &ExtCtxt<'a>, sp: Span, tts: TokenStream) -> PResult<'a, 
     }
     Ok(MacroInput { fmtstr, args, is_direct_literal })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=make_format_args | COMPLEXITY=248 | LINES=454 */
 
 fn make_format_args(
     ecx: &mut ExtCtxt<'_>,
@@ -622,7 +613,6 @@ fn make_format_args(
         is_source_literal,
     }))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=invalid_placeholder_type_error | COMPLEXITY=9 | LINES=28 */
 
 fn invalid_placeholder_type_error(
     ecx: &ExtCtxt<'_>,
@@ -651,7 +641,6 @@ fn invalid_placeholder_type_error(
     };
     ecx.dcx().emit_err(errors::FormatUnknownTrait { span: sp.unwrap_or(fmt_span), ty, suggs });
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=report_missing_placeholders | COMPLEXITY=278 | LINES=439 */
 
 fn report_missing_placeholders(
     ecx: &ExtCtxt<'_>,

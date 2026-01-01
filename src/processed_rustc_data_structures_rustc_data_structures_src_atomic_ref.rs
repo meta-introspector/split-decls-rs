@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/atomic_ref.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::marker::PhantomData;
 use std::sync::atomic::{AtomicPtr, Ordering};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=AtomicRef | COMPLEXITY=12 | LINES=15 */
 
 /// This is essentially an `AtomicPtr` but is guaranteed to always be valid
 pub struct AtomicRef<T: 'static>(AtomicPtr<T>, PhantomData<&'static T>);
@@ -18,7 +16,6 @@ impl<T: 'static> AtomicRef<T> {
         unsafe { &*self.0.swap(new as *const T as *mut T, Ordering::SeqCst) }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=12 | LINES=9 */
 
 impl<T: 'static> std::ops::Deref for AtomicRef<T> {
     type Target = T;

@@ -1,17 +1,14 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sync/parallel.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // This module defines parallel operations that are implemented in
 // one way for the serial compiler, and another way the parallel compiler.
 
 use std::any::Any;
 use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use parking_lot::Mutex;
 
 use crate::FatalErrorMarker;
 use crate::sync::{DynSend, DynSync, FromDyn, IntoDynSyncSend, mode};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ParallelGuard | COMPLEXITY=12 | LINES=9 */
 
 /// A guard used to hold panics that occur during a parallel section to later by unwound.
 /// This is used for the parallel compiler to prevent fatal errors from non-deterministically
@@ -21,7 +18,6 @@ use crate::sync::{DynSend, DynSync, FromDyn, IntoDynSyncSend, mode};
 pub struct ParallelGuard {
     panic: Mutex<Option<IntoDynSyncSend<Box<dyn Any + Send + 'static>>>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run | COMPLEXITY=7 | LINES=13 */
 
 impl ParallelGuard {
     pub fn run<R>(&self, f: impl FnOnce() -> R) -> Option<R> {
@@ -35,7 +31,6 @@ impl ParallelGuard {
             .ok()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parallel_guard | COMPLEXITY=6 | LINES=12 */
 
 /// This gives access to a fresh parallel guard in the closure and will unwind any panics
 /// caught in it after the closure returns.
@@ -48,7 +43,6 @@ pub fn parallel_guard<R>(f: impl FnOnce(&ParallelGuard) -> R) -> R {
     }
     ret
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=serial_join | COMPLEXITY=3 | LINES=13 */
 
 fn serial_join<A, B, RA, RB>(oper_a: A, oper_b: B) -> (RA, RB)
 where
@@ -62,7 +56,6 @@ where
     });
     (a.unwrap(), b.unwrap())
 }
-/* AST_META: AST_ID=7 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=22 | LINES=35 */
 
 /// Runs a list of blocks in parallel. The first block is executed immediately on
 /// the current thread. Use that for the longest running block.
@@ -98,7 +91,6 @@ macro_rules! parallel {
             }
         };
     }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=spawn | COMPLEXITY=7 | LINES=11 */
 
 pub fn spawn(func: impl FnOnce() + DynSend + 'static) {
     if mode::is_dyn_thread_safe() {
@@ -110,7 +102,6 @@ pub fn spawn(func: impl FnOnce() + DynSend + 'static) {
         func()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=scope | COMPLEXITY=2 | LINES=10 */
 
 // This function only works when `mode::is_dyn_thread_safe()`.
 pub fn scope<'scope, OP, R>(op: OP) -> R
@@ -121,7 +112,6 @@ where
     let op = FromDyn::from(op);
     crate::rustc_thread_pool::scope(|s| FromDyn::from(op.into_inner()(s))).into_inner()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=join | COMPLEXITY=8 | LINES=21 */
 
 #[inline]
 pub fn join<A, B, RA: DynSend, RB: DynSend>(oper_a: A, oper_b: B) -> (RA, RB)
@@ -143,7 +133,6 @@ where
         serial_join(oper_a, oper_b)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=par_slice | COMPLEXITY=14 | LINES=35 */
 
 fn par_slice<I: DynSend>(
     items: &mut [I],
@@ -179,7 +168,6 @@ fn par_slice<I: DynSend>(
     };
     par_rec(items, &state)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=par_for_each_in | COMPLEXITY=8 | LINES=16 */
 
 pub fn par_for_each_in<I: DynSend, T: IntoIterator<Item = I>>(
     t: T,
@@ -196,7 +184,6 @@ pub fn par_for_each_in<I: DynSend, T: IntoIterator<Item = I>>(
         }
     });
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=try_par_for_each_in | COMPLEXITY=19 | LINES=30 */
 
 /// This runs `for_each` in parallel for each iterator item. If one or more of the
 /// `for_each` calls returns `Err`, the function will also return `Err`. The error returned
@@ -227,7 +214,6 @@ where
         }
     })
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=par_map | COMPLEXITY=9 | LINES=22 */
 
 pub fn par_map<I: DynSend, T: IntoIterator<Item = I>, R: DynSend, C: FromIterator<R>>(
     t: T,
@@ -250,7 +236,6 @@ pub fn par_map<I: DynSend, T: IntoIterator<Item = I>, R: DynSend, C: FromIterato
         }
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=broadcast | COMPLEXITY=6 | LINES=10 */
 
 pub fn broadcast<R: DynSend>(op: impl Fn(usize) -> R + DynSync) -> Vec<R> {
     if mode::is_dyn_thread_safe() {

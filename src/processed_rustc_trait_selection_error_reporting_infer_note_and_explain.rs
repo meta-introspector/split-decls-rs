@@ -1,25 +1,17 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/note_and_explain.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::Applicability::{MachineApplicable, MaybeIncorrect};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, MultiSpan, pluralize};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
 use crate::rustc_complete::ty::print::{FmtPrinter, Printer};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, suggest_constraining_type_param};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{BytePos, Span, Symbol};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=note_and_explain_type_err | COMPLEXITY=527 | LINES=944 */
 use tracing::debug;
 
 use crate::error_reporting::TypeErrCtxt;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/validity.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Check the validity invariant of a given value, and tell the user
 // where in the value it got violated.
 // In const context, this goes even further and tries to approximate const safety.
@@ -12,30 +11,23 @@ use std::hash::Hash;
 use std::num::NonZero;
 
 use either::{Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use hir::def::DefKind;
 use crate::rustc_abi::{
     BackendRepr, FieldIdx, FieldsShape, Scalar as ScalarAbi, Size, VariantIdx, Variants,
     WrappingRange,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::ValidationErrorKind::{self, *};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::interpret::{
     ExpectedKind, InterpErrorKind, InvalidMetaKind, Misalignment, PointerKind, Provenance,
     UnsupportedOpInfo, ValidationErrorInfo, alloc_range, interp_ok,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{LayoutCx, TyAndLayout};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use tracing::trace;
 
 use super::machine::AllocMap;
@@ -44,7 +36,6 @@ use super::{
     Machine, MemPlaceMeta, PlaceTy, Pointer, Projectable, Scalar, ValueVisitor, err_ub,
     format_interp_error,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=23 */
 use crate::enter_trace_span;
 
 // for the validation errors
@@ -68,14 +59,12 @@ macro_rules! err_validation_failure {
         err_ub!(ValidationError(ValidationErrorInfo { path, kind: $kind }))
     }};
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! throw_validation_failure {
     ($where:expr, $kind: expr) => {
         do yeet err_validation_failure!($where, $kind)
     };
 }
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// If $e throws an error matching the pattern, throw a validation failure.
 /// Other errors are passed back to the caller, unchanged -- and if they reach the root of
@@ -87,7 +76,6 @@ macro_rules! throw_validation_failure {
 /// let v = try_validation!(some_fn(), some_path, {
 ///     Foo | Bar | Baz => { "some failure" },
 /// });
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 /// ```
 ///
 /// The patterns must be of type `UndefinedBehaviorInfo`.
@@ -97,7 +85,6 @@ macro_rules! throw_validation_failure {
 /// let v = try_validation!(some_fn(), some_path, {
 ///     Foo | Bar | Baz => { "some failure" } expected { "something that wasn't a failure" },
 /// });
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 /// ```
 ///
 /// An additional nicety is that both parameters actually take format args, so you can just write
@@ -107,7 +94,6 @@ macro_rules! throw_validation_failure {
 /// let v = try_validation!(some_fn(), some_path, {
 ///     Foo | Bar | Baz => { "{:?}", some_failure } expected { "{}", expected_value },
 /// });
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=16 | LINES=23 */
 /// ```
 ///
 macro_rules! try_validation {
@@ -131,7 +117,6 @@ macro_rules! try_validation {
         })?
     }};
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 
 /// We want to show a nice path to the invalid field for diagnostics,
 /// but avoid string operations in the happy case where no error happens.
@@ -151,7 +136,6 @@ pub enum PathElem {
     DynDowncast,
     Vtable,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 
 /// Extra things to check for during validation of CTFE results.
 #[derive(Copy, Clone)]
@@ -166,7 +150,6 @@ pub enum CtfeValidationMode {
     /// copied at each use site).
     Const { allow_immutable_unsafe_cell: bool },
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=allow_immutable_unsafe_cell | COMPLEXITY=11 | LINES=12 */
 
 impl CtfeValidationMode {
     fn allow_immutable_unsafe_cell(self) -> bool {
@@ -179,14 +162,12 @@ impl CtfeValidationMode {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=RefTracking | COMPLEXITY=4 | LINES=6 */
 
 /// State for tracking recursive validation of references
 pub struct RefTracking<T, PATH = ()> {
     seen: FxHashSet<T>,
     todo: Vec<(T, PATH)>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=13 | LINES=24 */
 
 impl<T: Clone + Eq + Hash + std::fmt::Debug, PATH: Default> RefTracking<T, PATH> {
     pub fn empty() -> Self {
@@ -211,7 +192,6 @@ impl<T: Clone + Eq + Hash + std::fmt::Debug, PATH: Default> RefTracking<T, PATH>
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=write_path | COMPLEXITY=22 | LINES=27 */
 
 // FIXME make this translatable as well?
 /// Format a path
@@ -239,7 +219,6 @@ fn write_path(out: &mut String, path: &[PathElem]) {
         .unwrap()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=RangeSet(Vec | COMPLEXITY=24 | LINES=50 */
 
 /// Represents a set of `Size` values as a sorted list of ranges.
 // These are (offset, length) pairs, and they are sorted and mutually disjoint,
@@ -290,7 +269,6 @@ impl RangeSet {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=ValidityVisitor | COMPLEXITY=10 | LINES=21 */
 
 struct ValidityVisitor<'rt, 'tcx, M: Machine<'tcx>> {
     /// The `path` may be pushed to, but the part that is present when a function
@@ -312,7 +290,6 @@ struct ValidityVisitor<'rt, 'tcx, M: Machine<'tcx>> {
     /// we might not track data vs padding bytes if the operand isn't stored in memory anyway).
     data_bytes: Option<RangeSet>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=aggregate_field_path_elem | COMPLEXITY=448 | LINES=744 */
 
 impl<'rt, 'tcx, M: Machine<'tcx>> ValidityVisitor<'rt, 'tcx, M> {
     fn aggregate_field_path_elem(&mut self, layout: TyAndLayout<'tcx>, field: usize) -> PathElem {
@@ -1057,7 +1034,6 @@ impl<'rt, 'tcx, M: Machine<'tcx>> ValidityVisitor<'rt, 'tcx, M> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=ecx | COMPLEXITY=189 | LINES=298 */
 
 impl<'rt, 'tcx, M: Machine<'tcx>> ValueVisitor<'tcx, M> for ValidityVisitor<'rt, 'tcx, M> {
     type V = PlaceTy<'tcx, M::Provenance>;
@@ -1356,7 +1332,6 @@ impl<'rt, 'tcx, M: Machine<'tcx>> ValueVisitor<'tcx, M> for ValidityVisitor<'rt,
         interp_ok(())
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=validate_operand_internal | COMPLEXITY=51 | LINES=126 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     fn validate_operand_internal(

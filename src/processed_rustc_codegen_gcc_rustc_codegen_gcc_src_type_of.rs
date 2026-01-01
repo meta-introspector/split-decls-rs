@@ -1,30 +1,22 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/type_of.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt::Write;
 
 use gccjit::{Struct, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_abi as abi;
 use crate::rustc_abi::Primitive::*;
 use crate::rustc_abi::{
     BackendRepr, FieldsShape, Integer, PointeeInfo, Reg, Size, TyAbiInterface, Variants,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, DerivedTypeCodegenMethods, LayoutTypeCodegenMethods,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{CastTarget, FnAbi};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::abi::{FnAbiGcc, FnAbiGccExt, GccType};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_from_unsigned_integer | COMPLEXITY=19 | LINES=39 */
 use crate::context::CodegenCx;
 use crate::type_::struct_fields;
 
@@ -64,7 +56,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=uncached_gcc_type | COMPLEXITY=62 | LINES=96 */
 
 fn uncached_gcc_type<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -161,7 +152,6 @@ fn uncached_gcc_type<'gcc, 'tcx>(
         },
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_gcc_immediate | COMPLEXITY=3 | LINES=23 */
 
 pub trait LayoutGccExt<'tcx> {
     fn is_gcc_immediate(&self) -> bool;
@@ -185,7 +175,6 @@ pub trait LayoutGccExt<'tcx> {
         offset: Size,
     ) -> Option<PointeeInfo>;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_gcc_immediate | COMPLEXITY=116 | LINES=160 */
 
 impl<'tcx> LayoutGccExt<'tcx> for TyAndLayout<'tcx> {
     fn is_gcc_immediate(&self) -> bool {
@@ -346,7 +335,6 @@ impl<'tcx> LayoutGccExt<'tcx> for TyAndLayout<'tcx> {
         result
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=backend_type | COMPLEXITY=16 | LINES=45 */
 
 impl<'gcc, 'tcx> LayoutTypeCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn backend_type(&self, layout: TyAndLayout<'tcx>) -> Type<'gcc> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/call_kind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Common logic for borrowck use-after-move errors when moved into a `fn(self)`,
 // as well as errors when attempting to call a non-const function in a const
 // context.
@@ -7,11 +6,8 @@
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{LangItem, lang_items};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{AssocContainer, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=19 */
 use tracing::debug;
 
 use crate::traits::specialization_graph;
@@ -31,7 +27,6 @@ pub enum CallDesugaringKind {
     /// `.await` calls `IntoFuture::into_future`
     Await,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=trait_def_id | COMPLEXITY=9 | LINES=14 */
 
 impl CallDesugaringKind {
     pub fn trait_def_id(self, tcx: TyCtxt<'_>) -> DefId {
@@ -46,7 +41,6 @@ impl CallDesugaringKind {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=23 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum CallKind<'tcx> {
@@ -70,7 +64,6 @@ pub enum CallKind<'tcx> {
         self_ty: Ty<'tcx>,
     },
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=call_kind | COMPLEXITY=61 | LINES=89 */
 
 pub fn call_kind<'tcx>(
     tcx: TyCtxt<'tcx>,

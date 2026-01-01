@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/builder/gpu_offload.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::ffi::CString;
 
 use llvm::Linkage::*;
@@ -11,9 +10,7 @@ use crate::builder::SBuilder;
 use crate::common::AsCCharPtr;
 use crate::llvm::AttributePlace::Function;
 use crate::llvm::{self, Linkage, Type, Value};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LlvmCodegenBackend, SimpleCx, attributes};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 pub(crate) fn handle_gpu_code<'ll>(
     _cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -33,13 +30,10 @@ pub(crate) fn handle_gpu_code<'ll>(
 
     gen_call_handling(&cx, &kernels, &o_types);
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 // What is our @1 here? A magic global, used in our data_{begin/update/end}_mapper:
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 // @0 = private unnamed_addr constant [23 x i8] c";unknown;unknown;0;0;;\00", align 1
 // @1 = private unnamed_addr constant %struct.ident_t { i32 0, i32 2, i32 0, i32 22, ptr @0 }, align 8
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=generate_at_one | COMPLEXITY=5 | LINES=25 */
 fn generate_at_one<'ll>(cx: &'ll SimpleCx<'_>) -> &'ll llvm::Value {
     // @0 = private unnamed_addr constant [23 x i8] c";unknown;unknown;0;0;;\00", align 1
     let unknown_txt = ";unknown;unknown;0;0;;";
@@ -65,7 +59,6 @@ fn generate_at_one<'ll>(cx: &'ll SimpleCx<'_>) -> &'ll llvm::Value {
     llvm::set_alignment(at_one, Align::EIGHT);
     at_one
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=24 */
 
 pub(crate) fn add_tgt_offload_entry<'ll>(cx: &'ll SimpleCx<'_>) -> &'ll llvm::Type {
     let offload_entry_ty = cx.type_named_struct("struct.__tgt_offload_entry");
@@ -90,7 +83,6 @@ pub(crate) fn add_tgt_offload_entry<'ll>(cx: &'ll SimpleCx<'_>) -> &'ll llvm::Ty
     cx.set_struct_body(offload_entry_ty, &entry_elements, false);
     offload_entry_ty
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=gen_tgt_kernel_global | COMPLEXITY=23 | LINES=40 */
 
 fn gen_tgt_kernel_global<'ll>(cx: &'ll SimpleCx<'_>) {
     let kernel_arguments_ty = cx.type_named_struct("struct.__tgt_kernel_arguments");
@@ -131,7 +123,6 @@ fn gen_tgt_kernel_global<'ll>(cx: &'ll SimpleCx<'_>) {
     // to make sure that the __tgt_offload_entry is defined and handled correctly.
     cx.declare_global("my_struct_global2", kernel_arguments_ty);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=gen_tgt_data_mappers | COMPLEXITY=4 | LINES=24 */
 
 fn gen_tgt_data_mappers<'ll>(
     cx: &'ll SimpleCx<'_>,
@@ -156,7 +147,6 @@ fn gen_tgt_data_mappers<'ll>(
 
     (begin_mapper_decl, update_mapper_decl, end_mapper_decl, mapper_fn_ty)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=add_priv_unnamed_arr | COMPLEXITY=5 | LINES=10 */
 
 fn add_priv_unnamed_arr<'ll>(cx: &SimpleCx<'ll>, name: &str, vals: &[u64]) -> &'ll llvm::Value {
     let ti64 = cx.type_i64();
@@ -167,7 +157,6 @@ fn add_priv_unnamed_arr<'ll>(cx: &SimpleCx<'ll>, name: &str, vals: &[u64]) -> &'
     let initializer = cx.const_array(ti64, &size_val);
     add_unnamed_global(cx, name, initializer, PrivateLinkage)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn add_unnamed_global<'ll>(
     cx: &SimpleCx<'ll>,
@@ -179,7 +168,6 @@ pub(crate) fn add_unnamed_global<'ll>(
     llvm::LLVMSetUnnamedAddress(llglobal, llvm::UnnamedAddr::Global);
     llglobal
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 pub(crate) fn add_global<'ll>(
     cx: &SimpleCx<'ll>,
@@ -194,7 +182,6 @@ pub(crate) fn add_global<'ll>(
     llvm::set_initializer(llglobal, initializer);
     llglobal
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=gen_define_handling | COMPLEXITY=20 | LINES=66 */
 
 fn gen_define_handling<'ll>(
     cx: &'ll SimpleCx<'_>,
@@ -261,7 +248,6 @@ fn gen_define_handling<'ll>(
     llvm::set_section(llglobal, &c_section_name);
     o_types
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=declare_offload_fn | COMPLEXITY=2 | LINES=15 */
 
 fn declare_offload_fn<'ll>(
     cx: &'ll SimpleCx<'_>,
@@ -277,7 +263,6 @@ fn declare_offload_fn<'ll>(
         ty,
     )
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=gen_call_handling | COMPLEXITY=74 | LINES=175 */
 
 // For each kernel *call*, we now use some of our previous declared globals to move data to and from
 // the gpu. We don't have a proper frontend yet, so we assume that every call to a kernel function

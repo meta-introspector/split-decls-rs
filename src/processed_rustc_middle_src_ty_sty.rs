@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/sty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // This module contains `TyKind` and its major components.
 
 #[allow(rustc::usage_of_ty_tykind)]
@@ -7,26 +6,19 @@
 use std::assert_matches::debug_assert_matches;
 use std::borrow::Cow;
 use std::ops::{ControlFlow, Range};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use hir::def::{CtorKind, DefKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, extension};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_type_ir::TyKind::*;
 use rustc_type_ir::solve::SizedTraitKind;
 use rustc_type_ir::walk::TypeWalker;
 use rustc_type_ir::{self as ir, BoundVar, CollectAndApply, DynKind, TypeVisitableExt, elaborate};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use tracing::instrument;
 use ty::util::IntTypeExt;
 
@@ -37,7 +29,6 @@ use crate::ty::{
     self, AdtDef, BoundRegionKind, Discr, GenericArg, GenericArgs, GenericArgsRef, List, ParamEnv,
     Region, Ty, TyCtxt, TypeFlags, TypeSuperVisitable, TypeVisitable, TypeVisitor, UintTy,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=article | COMPLEXITY=3 | LINES=14 */
 
 // Re-export and re-parameterize some `I = TyCtxt<'tcx>` types here
 #[rustc_diagnostic_item = "TyKind"]
@@ -52,7 +43,6 @@ pub type TypingMode<'tcx> = ir::TypingMode<TyCtxt<'tcx>>;
 pub trait Article {
     fn article(&self) -> &'static str;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=article | COMPLEXITY=11 | LINES=14 */
 
 impl<'tcx> Article for TyKind<'tcx> {
     /// Get the article ("a" or "an") to use with this type.
@@ -67,7 +57,6 @@ impl<'tcx> Article for TyKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=variant_range | COMPLEXITY=38 | LINES=101 */
 
 #[extension(pub trait CoroutineArgsExt<'tcx>)]
 impl<'tcx> ty::CoroutineArgs<TyCtxt<'tcx>> {
@@ -169,7 +158,6 @@ impl<'tcx> ty::CoroutineArgs<TyCtxt<'tcx>> {
         self.upvar_tys()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Copy, Clone, HashStable, TypeFoldable, TypeVisitable)]
 pub enum UpvarArgs<'tcx> {
@@ -177,7 +165,6 @@ pub enum UpvarArgs<'tcx> {
     Coroutine(GenericArgsRef<'tcx>),
     CoroutineClosure(GenericArgsRef<'tcx>),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=upvar_tys | COMPLEXITY=19 | LINES=30 */
 
 impl<'tcx> UpvarArgs<'tcx> {
     /// Returns an iterator over the list of types of captured paths by the closure/coroutine.
@@ -208,7 +195,6 @@ impl<'tcx> UpvarArgs<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=InlineConstArgs | COMPLEXITY=3 | LINES=21 */
 
 /// An inline const is modeled like
 /// ```ignore (illustrative)
@@ -230,14 +216,12 @@ pub struct InlineConstArgs<'tcx> {
     /// concatenated with the inferred type of the constant.
     pub args: GenericArgsRef<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=InlineConstArgsParts | COMPLEXITY=2 | LINES=6 */
 
 /// Struct returned by `split()`.
 pub struct InlineConstArgsParts<'tcx, T> {
     pub parent_args: &'tcx [GenericArg<'tcx>],
     pub ty: T,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=33 */
 
 impl<'tcx> InlineConstArgs<'tcx> {
     /// Construct `InlineConstArgs` from `InlineConstArgsParts`.
@@ -271,7 +255,6 @@ impl<'tcx> InlineConstArgs<'tcx> {
         self.split().ty.expect_ty()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -280,7 +263,6 @@ pub enum BoundVariableKind {
     Region(BoundRegionKind),
     Const,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=expect_region | COMPLEXITY=18 | LINES=23 */
 
 impl BoundVariableKind {
     pub fn expect_region(self) -> BoundRegionKind {
@@ -304,7 +286,6 @@ impl BoundVariableKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=ParamTy | COMPLEXITY=2 | LINES=10 */
 
 pub type PolyFnSig<'tcx> = Binder<'tcx, FnSig<'tcx>>;
 pub type CanonicalPolyFnSig<'tcx> = Canonical<'tcx, Binder<'tcx, FnSig<'tcx>>>;
@@ -315,14 +296,12 @@ pub struct ParamTy {
     pub index: u32,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=6 */
 
 impl rustc_type_ir::inherent::ParamLike for ParamTy {
     fn index(self) -> u32 {
         self.index
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=21 */
 
 impl<'tcx> ParamTy {
     pub fn new(index: u32, name: Symbol) -> ParamTy {
@@ -344,7 +323,6 @@ impl<'tcx> ParamTy {
         tcx.def_span(type_param.def_id)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=ParamConst | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Hash, TyEncodable, TyDecodable, Eq, PartialEq, Ord, PartialOrd)]
 #[derive(HashStable)]
@@ -352,14 +330,12 @@ pub struct ParamConst {
     pub index: u32,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=6 */
 
 impl rustc_type_ir::inherent::ParamLike for ParamConst {
     fn index(self) -> u32 {
         self.index
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new | COMPLEXITY=28 | LINES=43 */
 
 impl ParamConst {
     pub fn new(index: u32, name: Symbol) -> ParamConst {
@@ -403,7 +379,6 @@ impl ParamConst {
         ty
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=BoundTy | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -411,7 +386,6 @@ pub struct BoundTy {
     pub var: BoundVar,
     pub kind: BoundTyKind,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=var | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundTy {
     fn var(self) -> BoundVar {
@@ -422,7 +396,6 @@ impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundTy {
         assert_eq!(self.kind, var.expect_ty())
     }
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -430,7 +403,6 @@ pub enum BoundTyKind {
     Anon,
     Param(DefId),
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=new | COMPLEXITY=159 | LINES=516 */
 
 /// Constructors for `Ty`
 impl<'tcx> Ty<'tcx> {
@@ -947,7 +919,6 @@ impl<'tcx> Ty<'tcx> {
         Ty::new_mut_ref(tcx, tcx.lifetimes.re_erased, context_ty)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=new_bool | COMPLEXITY=51 | LINES=187 */
 
 impl<'tcx> rustc_type_ir::inherent::Ty<TyCtxt<'tcx>> for Ty<'tcx> {
     fn new_bool(tcx: TyCtxt<'tcx>) -> Self {
@@ -1135,7 +1106,6 @@ impl<'tcx> rustc_type_ir::inherent::Ty<TyCtxt<'tcx>> for Ty<'tcx> {
         Ty::has_unsafe_fields(self)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=456 | LINES=947 */
 
 /// Type utilities
 impl<'tcx> Ty<'tcx> {
@@ -2083,7 +2053,6 @@ impl<'tcx> Ty<'tcx> {
         TypeWalker::new(self.into())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=inputs | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::Tys<TyCtxt<'tcx>> for &'tcx ty::List<Ty<'tcx>> {
     fn inputs(self) -> &'tcx [Ty<'tcx>] {
@@ -2094,7 +2063,6 @@ impl<'tcx> rustc_type_ir::inherent::Tys<TyCtxt<'tcx>> for &'tcx ty::List<Ty<'tcx
         *self.split_last().unwrap().0
     }
 }
-/* AST_META: AST_ID=32 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

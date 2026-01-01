@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint_defs/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::AttrId;
@@ -8,19 +7,13 @@ use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::stable_hasher::{
     HashStable, StableCompare, StableHasher, ToStableHashKey,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_error_messages::{DiagArgValue, DiagMessage, IntoDiagArg, MultiSpan};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_hir_id::{HashStableContext, HirId, ItemLocalId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefPathHash;
 pub use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use serde::{Deserialize, Serialize};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=33 | LINES=24 */
 
 pub use self::Level::*;
 
@@ -44,7 +37,6 @@ macro_rules! pluralize {
         if $x == 1 { "this" } else { "these" }
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=listify | COMPLEXITY=11 | LINES=17 */
 
 /// Grammatical tool for displaying messages to end users in a nice form.
 ///
@@ -62,7 +54,6 @@ pub fn listify<T>(list: &[T], fmt: impl Fn(&T) -> String) -> Option<String> {
         [] => return None,
     })
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 /// Indicates the confidence in the correctness of a suggestion.
 ///
@@ -92,7 +83,6 @@ pub enum Applicability {
     /// The applicability of the suggestion is unknown.
     Unspecified,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=30 */
 
 /// Each lint expectation has a `LintExpectationId` assigned by the `LintLevelsBuilder`.
 /// Expected diagnostics get the lint level `Expect` which stores the `LintExpectationId`
@@ -123,7 +113,6 @@ pub enum LintExpectationId {
     /// expectation.
     Stable { hir_id: HirId, attr_index: u16, lint_index: Option<u16> },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_stable | COMPLEXITY=16 | LINES=23 */
 
 impl LintExpectationId {
     pub fn is_stable(&self) -> bool {
@@ -147,7 +136,6 @@ impl LintExpectationId {
         *lint_index = new_lint_index
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=15 | LINES=18 */
 
 impl<HCX: HashStableContext> HashStable<HCX> for LintExpectationId {
     #[inline]
@@ -166,7 +154,6 @@ impl<HCX: HashStableContext> HashStable<HCX> for LintExpectationId {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=15 | LINES=17 */
 
 impl<HCX: HashStableContext> ToStableHashKey<HCX> for LintExpectationId {
     type KeyType = (DefPathHash, ItemLocalId, u16, u16);
@@ -184,7 +171,6 @@ impl<HCX: HashStableContext> ToStableHashKey<HCX> for LintExpectationId {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=49 */
 
 /// Setting for how to handle a lint.
 ///
@@ -234,7 +220,6 @@ pub enum Level {
     /// levels.
     Forbid,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=39 | LINES=75 */
 
 impl Level {
     /// Converts a level to a lower-case string.
@@ -310,14 +295,12 @@ impl Level {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for Level {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(self.to_cmd_flag()))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=Lint | COMPLEXITY=23 | LINES=51 */
 
 /// Specification of a single lint.
 #[derive(Copy, Clone, Debug)]
@@ -369,7 +352,6 @@ pub struct Lint {
     /// (e.g. the unknown_attributes lint)
     pub eval_always: bool,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=FutureIncompatibleInfo | COMPLEXITY=20 | LINES=27 */
 
 /// Extra information for a future incompatibility lint.
 #[derive(Copy, Clone, Debug)]
@@ -397,7 +379,6 @@ pub struct FutureIncompatibleInfo {
     /// or most affected crates on crates.io have been updated.
     pub report_in_deps: bool,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=40 | LINES=96 */
 
 /// The reason for future incompatibility
 ///
@@ -494,7 +475,6 @@ pub enum FutureIncompatibilityReason {
     /// [`FutureIncompatibilityReason::FutureReleaseError`].
     Custom(&'static str),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=edition | COMPLEXITY=8 | LINES=15 */
 
 impl FutureIncompatibilityReason {
     pub fn edition(self) -> Option<Edition> {
@@ -510,7 +490,6 @@ impl FutureIncompatibilityReason {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 impl FutureIncompatibleInfo {
     pub const fn default_fields_for_macro() -> Self {
@@ -522,7 +501,6 @@ impl FutureIncompatibleInfo {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=name_lower | COMPLEXITY=7 | LINES=29 */
 
 impl Lint {
     pub const fn default_fields_for_macro() -> Self {
@@ -552,7 +530,6 @@ impl Lint {
             .unwrap_or(self.default_level)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=LintId | COMPLEXITY=2 | LINES=7 */
 
 /// Identifies a lint known to the compiler.
 #[derive(Clone, Copy, Debug)]
@@ -560,17 +537,14 @@ pub struct LintId {
     // Identity is based on pointer equality of this field.
     pub lint: &'static Lint,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=6 */
 
 impl PartialEq for LintId {
     fn eq(&self, other: &LintId) -> bool {
         std::ptr::eq(self.lint, other.lint)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for LintId {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=7 */
 
 impl std::hash::Hash for LintId {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
@@ -578,7 +552,6 @@ impl std::hash::Hash for LintId {
         ptr.hash(state);
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=of | COMPLEXITY=8 | LINES=16 */
 
 impl LintId {
     /// Gets the `LintId` for a `Lint`.
@@ -595,7 +568,6 @@ impl LintId {
         self.lint.name_lower()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<HCX> HashStable<HCX> for LintId {
     #[inline]
@@ -603,7 +575,6 @@ impl<HCX> HashStable<HCX> for LintId {
         self.lint_name_raw().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<HCX> ToStableHashKey<HCX> for LintId {
     type KeyType = &'static str;
@@ -613,7 +584,6 @@ impl<HCX> ToStableHashKey<HCX> for LintId {
         self.lint_name_raw()
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=stable_cmp | COMPLEXITY=5 | LINES=8 */
 
 impl StableCompare for LintId {
     const CAN_USE_UNSTABLE_SORT: bool = true;
@@ -622,7 +592,6 @@ impl StableCompare for LintId {
         self.lint_name_raw().cmp(&other.lint_name_raw())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=AmbiguityErrorDiag | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Debug)]
 pub struct AmbiguityErrorDiag {
@@ -638,7 +607,6 @@ pub struct AmbiguityErrorDiag {
     pub b2_note_msg: String,
     pub b2_help_msgs: Vec<String>,
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Clone)]
 pub enum DeprecatedSinceKind {
@@ -646,7 +614,6 @@ pub enum DeprecatedSinceKind {
     InFuture,
     InVersion(String),
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=name | COMPLEXITY=122 | LINES=351 */
 
 // This could be a closure, but then implementing derive trait
 // becomes hacky (and it gets allocated).

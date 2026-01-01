@@ -1,17 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/gcc_util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 #[cfg(feature = "master")]
 use gccjit::Context;
 use crate::rustc_codegen_ssa::target_features;
 use crate::rustc_complete::Session;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=gcc_features_by_flags | COMPLEXITY=2 | LINES=5 */
 
 fn gcc_features_by_flags(sess: &Session, features: &mut Vec<String>) {
     target_features::retpoline_features_by_flags(sess, features);
     // FIXME: LLVM also sets +reserve-x18 here under some conditions.
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=54 */
 
 /// The list of GCC features computed from CLI flags (`-Ctarget-cpu`, `-Ctarget-feature`,
 /// `--target` and similar).
@@ -66,7 +63,6 @@ pub(crate) fn global_gcc_features(sess: &Session, diagnostics: bool) -> Vec<Stri
 
     features
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=to_gcc_features | COMPLEXITY=18 | LINES=45 */
 
 // To find a list of GCC's names, check https://gcc.gnu.org/onlinedocs/gcc/Function-Attributes.html
 pub fn to_gcc_features<'a>(sess: &Session, s: &'a str) -> SmallVec<[&'a str; 2]> {
@@ -112,7 +108,6 @@ pub fn to_gcc_features<'a>(sess: &Session, s: &'a str) -> SmallVec<[&'a str; 2]>
     }
     // cSpell:enable
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=arch_to_gcc | COMPLEXITY=6 | LINES=8 */
 
 fn arch_to_gcc(name: &str) -> &str {
     match name {
@@ -121,7 +116,6 @@ fn arch_to_gcc(name: &str) -> &str {
         _ => name,
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=handle_native | COMPLEXITY=6 | LINES=15 */
 
 fn handle_native(name: &str) -> &str {
     if name != "native" {
@@ -137,7 +131,6 @@ fn handle_native(name: &str) -> &str {
     #[cfg(not(feature = "master"))]
     unimplemented!();
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=target_cpu | COMPLEXITY=6 | LINES=7 */
 
 pub fn target_cpu(sess: &Session) -> &str {
     match sess.opts.cg.target_cpu {

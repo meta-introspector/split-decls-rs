@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_metadata/src/creader.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Validates all used crates and extern libraries and loads their metadata
 
 use std::error::Error;
@@ -7,58 +6,44 @@ use std::path::Path;
 use std::str::FromStr;
 use std::time::Duration;
 use std::{cmp, env, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_complete::expand::allocator::{AllocatorKind, alloc_error_handler_name, global_fn_name};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, *};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::owned_slice::OwnedSlice;
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::sync::{self, FreezeReadGuard, FreezeWriteGuard};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_expand::base::SyntaxExtension;
 use rustc_fs_util::try_canonicalize;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE, LocalDefId, StableCrateId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::definitions::Definitions;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::data_structures::IndexSet;
 use crate::rustc_complete::ty::{TyCtxt, TyCtxtFeed};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_proc_macro::bridge::client::ProcMacro;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{
     CrateType, ExtendedTargetModifierInfo, ExternLocation, Externs, OptionsTargetModifiers,
     TargetModifier,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::cstore::{CrateDepKind, CrateSource, ExternCrate, ExternCrateSource};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{self, BuiltinLintDiag};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::output::validate_crate_name;
 use crate::rustc_complete::search_paths::PathKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{PanicStrategy, Target};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info, trace};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::errors;
 use crate::locator::{CrateError, CrateLocator, CratePaths, CrateRejections};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rmeta::{
     CrateDep, CrateMetadata, CrateNumMap, CrateRoot, MetadataBlob, TargetModifiers,
 };
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_rlib_metadata | COMPLEXITY=3 | LINES=9 */
 
 /// The backend's way to give the crate store access to the metadata in a library.
 /// Note that it returns the raw metadata bytes stored in the library file, whether
@@ -68,7 +53,6 @@ pub trait MetadataLoader {
     fn get_rlib_metadata(&self, target: &Target, filename: &Path) -> Result<OwnedSlice, String>;
     fn get_dylib_metadata(&self, target: &Target, filename: &Path) -> Result<OwnedSlice, String>;
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=CStore | COMPLEXITY=4 | LINES=27 */
 
 pub type MetadataLoaderDyn = dyn MetadataLoader + Send + Sync + sync::DynSend + sync::DynSync;
 
@@ -96,14 +80,12 @@ pub struct CStore {
 
     used_extern_options: FxHashSet<Symbol>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl std::fmt::Debug for CStore {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("CStore").finish_non_exhaustive()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub enum LoadedMacro {
     MacroDef {
@@ -115,19 +97,16 @@ pub enum LoadedMacro {
     },
     ProcMacro(SyntaxExtension),
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct Library {
     pub source: CrateSource,
     pub metadata: MetadataBlob,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum LoadResult {
     Previous(CrateNum),
     Loaded(Library),
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// A reference to `CrateMetadata` that can also give access to whole crate store when necessary.
 #[derive(Clone, Copy)]
@@ -135,7 +114,6 @@ pub(crate) struct CrateMetadataRef<'a> {
     pub cdata: &'a CrateMetadata,
     pub cstore: &'a CStore,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl std::ops::Deref for CrateMetadataRef<'_> {
     type Target = CrateMetadata;
@@ -144,7 +122,6 @@ impl std::ops::Deref for CrateMetadataRef<'_> {
         self.cdata
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=CrateDump | COMPLEXITY=32 | LINES=29 */
 
 struct CrateDump<'a>(&'a CStore);
 
@@ -174,7 +151,6 @@ impl<'a> std::fmt::Debug for CrateDump<'a> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 /// Reason that a crate is being sourced as a dependency.
 #[derive(Clone, Copy)]
@@ -193,7 +169,6 @@ enum CrateOrigin<'a> {
     /// Provided by `extern crate foo` or as part of the extern prelude.
     Extern,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=dep_root | COMPLEXITY=32 | LINES=29 */
 
 impl<'a> CrateOrigin<'a> {
     /// Return the dependency root, if any.
@@ -223,7 +198,6 @@ impl<'a> CrateOrigin<'a> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=from_tcx | COMPLEXITY=639 | LINES=1187 */
 
 impl CStore {
     pub fn from_tcx(tcx: TyCtxt<'_>) -> FreezeReadGuard<'_, CStore> {
@@ -1411,7 +1385,6 @@ impl CStore {
         self.maybe_resolve_crate(tcx, name, CrateDepKind::Explicit, CrateOrigin::Extern).ok()
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=fn_spans | COMPLEXITY=12 | LINES=22 */
 
 fn fn_spans(krate: &ast::Crate, name: Symbol) -> Vec<Span> {
     struct Finder {
@@ -1434,12 +1407,10 @@ fn fn_spans(krate: &ast::Crate, name: Symbol) -> Vec<Span> {
     visit::walk_crate(&mut f, krate);
     f.spans
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=format_dlopen_err | COMPLEXITY=3 | LINES=4 */
 
 fn format_dlopen_err(e: &(dyn std::error::Error + 'static)) -> String {
     e.sources().map(|e| format!(": {e}")).collect()
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=attempt_load_dylib | COMPLEXITY=18 | LINES=23 */
 
 fn attempt_load_dylib(path: &Path) -> Result<libloading::Library, libloading::Error> {
     #[cfg(target_os = "aix")]
@@ -1463,7 +1434,6 @@ fn attempt_load_dylib(path: &Path) -> Result<libloading::Library, libloading::Er
 
     unsafe { libloading::Library::new(&path) }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=load_dylib | COMPLEXITY=44 | LINES=53 */
 
 // On Windows the compiler would sometimes intermittently fail to open the
 // proc-macro DLL with `Error::LoadLibraryExW`. It is suspected that something in the
@@ -1517,13 +1487,11 @@ fn load_dylib(path: &Path, max_attempts: usize) -> Result<libloading::Library, S
     };
     Err(message)
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum DylibError {
     DlOpen(String, String),
     DlSym(String, String),
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl From<DylibError> for CrateError {
     fn from(err: DylibError) -> CrateError {
@@ -1533,7 +1501,6 @@ impl From<DylibError> for CrateError {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=20 */
 
 pub unsafe fn load_symbol_from_dylib<T: Copy>(
     path: &Path,

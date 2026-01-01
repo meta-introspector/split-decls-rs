@@ -1,26 +1,20 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/normalizes_to/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use rustc_type_ir::fast_reject::DeepRejectCtxt;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::lang_items::{SolverAdtLangItem, SolverLangItem, SolverTraitLangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_type_ir::solve::SizedTraitKind;
 use rustc_type_ir::{self as ty, Interner, NormalizesTo, PredicateKind, Upcast as _};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use crate::delegate::SolverDelegate;
 use crate::solve::assembly::structural_traits::{self, AsyncCallableRelevantTypes};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::solve::assembly::{self, Candidate};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::solve::inspect::ProbeKind;
 use crate::solve::{
     BuiltinImplSource, CandidateSource, Certainty, EvalCtxt, Goal, GoalSource, MaybeCause,
     NoSolution, QueryResult,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=instantiate_normalizes_to_term | COMPLEXITY=21 | LINES=67 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -88,7 +82,6 @@ where
             .expect("expected goal term to be fully unconstrained");
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=336 | LINES=884 */
 
 impl<D, I> assembly::GoalKind<D> for NormalizesTo<I>
 where
@@ -973,7 +966,6 @@ where
         unreachable!("`BikeshedGuaranteedNoDrop` does not have an associated type: {:?}", goal)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=translate_args | COMPLEXITY=13 | LINES=41 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

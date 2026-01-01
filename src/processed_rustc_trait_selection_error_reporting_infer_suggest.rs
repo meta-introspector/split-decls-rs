@@ -1,27 +1,19 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/suggest.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use core::ops::ControlFlow;
 
 use hir::def::CtorKind;
 use hir::intravisit::{Visitor, walk_expr, walk_stmt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use hir::{LetStmt, QPath};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{Applicability, Diag};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::{MatchSource, Node};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::traits::{MatchExpressionArmCause, ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self as ty, GenericArgKind, IsSuggestable, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use tracing::debug;
 
 use crate::error_reporting::TypeErrCtxt;
@@ -31,21 +23,18 @@ use crate::errors::{
     FunctionPointerSuggestion, SuggestAccessingField, SuggestRemoveSemiOrReturnBinding,
     SuggestTuplePatternMany, SuggestTuplePatternOne, TypeErrorAdditionalDiags,
 };
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 enum StatementAsExpression {
     CorrectType,
     NeedsBoxing,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum SuggestAsRefKind {
     Option,
     Result,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=collect_blocks | COMPLEXITY=393 | LINES=708 */
 
 impl<'tcx> TypeErrCtxt<'_, 'tcx> {
     pub(super) fn suggest_remove_semi_or_return_binding(
@@ -754,7 +743,6 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=could_remove_semicolon | COMPLEXITY=149 | LINES=208 */
 
 impl<'tcx> TypeErrCtxt<'_, 'tcx> {
     /// Be helpful when the user wrote `{... expr; }` and taking the `;` off

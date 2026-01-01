@@ -1,46 +1,34 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // An interpreter for MIR used in CTFE and by miri.
 
 #[macro_use]
 
 
 use std::io::{Read, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::num::NonZero;
 use std::{fmt, io};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{AddressSpace, Align, Endian, HasDataLayout, Size};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LitKind, Mutability};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sharded::ShardedHashMap;
 use crate::rustc_data_structures::sync::{AtomicU64, Lock};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Also make the error macros available from this module.
 pub use {
     err_exhaust, err_inval, err_machine_stop, err_ub, err_ub_custom, err_ub_format, err_unsup,
     err_unsup_format, throw_exhaust, throw_inval, throw_machine_stop, throw_ub, throw_ub_custom,
     throw_ub_format, throw_unsup, throw_unsup_format,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub use self::allocation::{
     AllocBytes, AllocError, AllocInit, AllocRange, AllocResult, Allocation, ConstAllocation,
     InitChunk, InitChunkIter, alloc_range,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 pub use self::error::{
     BadBytesAccess, CheckAlignMsg, CheckInAllocMsg, ErrorHandled, EvalStaticInitializerRawResult,
     EvalToAllocationRawResult, EvalToConstValueResult, EvalToValTreeResult, ExpectedKind,
@@ -49,16 +37,12 @@ pub use self::error::{
     ScalarSizeMismatch, UndefinedBehaviorInfo, UnsupportedOpInfo, ValTreeCreationError,
     ValidationErrorInfo, ValidationErrorKind, interp_ok,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::pointer::{CtfeProvenance, Pointer, PointerArithmetic, Provenance};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use self::value::Scalar;
 use crate::mir;
 use crate::ty::codec::{TyDecoder, TyEncoder};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::ty::print::with_no_trimmed_paths;
 use crate::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=GlobalId | COMPLEXITY=5 | LINES=14 */
 
 /// Uniquely identifies one of the following:
 /// - A constant
@@ -73,7 +57,6 @@ pub struct GlobalId<'tcx> {
     /// The index for promoted globals within their function's `mir::Body`.
     pub promoted: Option<mir::Promoted>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=display | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> GlobalId<'tcx> {
     pub fn display(self, tcx: TyCtxt<'tcx>) -> String {
@@ -85,7 +68,6 @@ impl<'tcx> GlobalId<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=LitToConstInput | COMPLEXITY=4 | LINES=11 */
 
 /// Input argument for `tcx.lit_to_const`.
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, HashStable)]
@@ -97,7 +79,6 @@ pub struct LitToConstInput<'tcx> {
     /// If the constant is negative.
     pub neg: bool,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=AllocId(pub | COMPLEXITY=11 | LINES=11 */
 
 #[derive(Copy, Clone, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct AllocId(pub NonZero<u64>);
@@ -109,7 +90,6 @@ impl fmt::Debug for AllocId {
         if f.alternate() { write!(f, "a{}", self.0) } else { write!(f, "alloc{}", self.0) }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // No "Display" since AllocIds are not usually user-visible.
 
@@ -121,7 +101,6 @@ enum AllocDiscriminant {
     Static,
     Type,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=specialized_encode_alloc_id | COMPLEXITY=25 | LINES=39 */
 
 pub fn specialized_encode_alloc_id<'tcx, E: TyEncoder<'tcx>>(
     encoder: &mut E,
@@ -161,14 +140,12 @@ pub fn specialized_encode_alloc_id<'tcx, E: TyEncoder<'tcx>>(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 enum State {
     Empty,
     Done(AllocId),
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=AllocDecodingState | COMPLEXITY=2 | LINES=7 */
 
 pub struct AllocDecodingState {
     // For each `AllocId`, we keep track of which decoding state it's currently in.
@@ -176,7 +153,6 @@ pub struct AllocDecodingState {
     // The offsets of each allocation in the data stream.
     data_offsets: Vec<u64>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new_decoding_session | COMPLEXITY=6 | LINES=14 */
 
 impl AllocDecodingState {
     #[inline]
@@ -191,13 +167,11 @@ impl AllocDecodingState {
         Self { decoding_state, data_offsets }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=AllocDecodingSession | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone)]
 pub struct AllocDecodingSession<'s> {
     state: &'s AllocDecodingState,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=decode_alloc_id | COMPLEXITY=43 | LINES=77 */
 
 impl<'s> AllocDecodingSession<'s> {
     /// Decodes an `AllocId` in a thread-safe way.
@@ -275,7 +249,6 @@ impl<'s> AllocDecodingSession<'s> {
         alloc_id
     }
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=21 */
 
 /// An allocation in the global (tcx-managed) memory can be either a function pointer,
 /// a static, or a "real" allocation with some data in it.
@@ -297,7 +270,6 @@ pub enum GlobalAlloc<'tcx> {
     /// is split into two segments, on 32 bit systems there are 4 segments, and so on.
     TypeId { ty: Ty<'tcx> },
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=unwrap_memory | COMPLEXITY=93 | LINES=138 */
 
 impl<'tcx> GlobalAlloc<'tcx> {
     /// Panics if the `GlobalAlloc` does not refer to an `GlobalAlloc::Memory`
@@ -436,7 +408,6 @@ impl<'tcx> GlobalAlloc<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=23 */
 
 pub const CTFE_ALLOC_SALT: usize = 0;
 
@@ -460,7 +431,6 @@ pub(crate) struct AllocMap<'tcx> {
     /// Always incremented; never gets smaller.
     next_id: AtomicU64,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=reserve | COMPLEXITY=6 | LINES=17 */
 
 impl<'tcx> AllocMap<'tcx> {
     pub(crate) fn new() -> Self {
@@ -478,7 +448,6 @@ impl<'tcx> AllocMap<'tcx> {
         AllocId(NonZero::new(next_id).unwrap())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=reserve_alloc_id | COMPLEXITY=75 | LINES=119 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Obtains a new allocation ID that can be referenced but does not
@@ -598,7 +567,6 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=write_target_uint | COMPLEXITY=7 | LINES=20 */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methods to access integers in the target endianness
@@ -619,7 +587,6 @@ pub fn write_target_uint(
     debug_assert!(target.len() == 0); // We should have filled the target buffer.
     Ok(())
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=read_target_uint | COMPLEXITY=9 | LINES=19 */
 
 #[inline]
 pub fn read_target_uint(endianness: Endian, mut source: &[u8]) -> Result<u128, io::Error> {

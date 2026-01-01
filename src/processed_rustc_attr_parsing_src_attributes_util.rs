@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::LitKind;
 use crate::rustc_complete::attr::AttributeExt;
 use crate::rustc_feature::is_builtin_attr_name;
 use crate::rustc_complete::RustcVersion;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::context::{AcceptContext, Stage};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=parse_version | COMPLEXITY=7 | LINES=17 */
 use crate::parser::ArgParser;
 
 /// Parse a rustc version number written inside string literal in an attribute,
@@ -26,12 +23,10 @@ pub fn parse_version(s: Symbol) -> Option<RustcVersion> {
     let patch = digits.next().unwrap_or("0").parse().ok()?;
     Some(RustcVersion { major, minor, patch })
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_builtin_attr | COMPLEXITY=2 | LINES=4 */
 
 pub fn is_builtin_attr(attr: &impl AttributeExt) -> bool {
     attr.is_doc_comment() || attr.ident().is_some_and(|ident| is_builtin_attr_name(ident.name))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_doc_alias_attrs_contain_symbol | COMPLEXITY=23 | LINES=30 */
 
 pub fn is_doc_alias_attrs_contain_symbol<'tcx, T: AttributeExt + 'tcx>(
     attrs: impl Iterator<Item = &'tcx T>,
@@ -62,7 +57,6 @@ pub fn is_doc_alias_attrs_contain_symbol<'tcx, T: AttributeExt + 'tcx>(
     }
     false
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 /// Parse a single integer.
 ///

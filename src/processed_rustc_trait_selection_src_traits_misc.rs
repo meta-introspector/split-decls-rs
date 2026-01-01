@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/misc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Miscellaneous type-system utilities that are too small to deserve their own modules.
 
 use std::assert_matches::assert_matches;
@@ -8,13 +7,10 @@ use hir::LangItem;
 use crate::rustc_complete::Mutability;
 use rustc_hir as hir;
 use crate::rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::regions::InferCtxtRegionExt;
 use crate::traits::{self, FulfillmentError, ObligationCause};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub enum CopyImplementationError<'tcx> {
     InfringingFields(Vec<(&'tcx ty::FieldDef, Ty<'tcx>, InfringingFieldsReason<'tcx>)>),
@@ -22,7 +18,6 @@ pub enum CopyImplementationError<'tcx> {
     HasDestructor,
     HasUnsafeFields,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub enum ConstParamTyImplementationError<'tcx> {
     UnsizedConstParamsFeatureRequired,
@@ -30,13 +25,11 @@ pub enum ConstParamTyImplementationError<'tcx> {
     InfrigingFields(Vec<(&'tcx ty::FieldDef, Ty<'tcx>, InfringingFieldsReason<'tcx>)>),
     NotAnAdtOrBuiltinAllowed,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum InfringingFieldsReason<'tcx> {
     Fulfill(Vec<FulfillmentError<'tcx>>),
     Regions(Vec<RegionResolutionError<'tcx>>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_allowed_to_implement_copy | COMPLEXITY=25 | LINES=58 */
 
 /// Checks that the fields of the type (an ADT) all implement copy.
 ///
@@ -95,7 +88,6 @@ pub fn type_allowed_to_implement_copy<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_allowed_to_implement_const_param_ty | COMPLEXITY=36 | LINES=95 */
 
 /// Checks that the fields of the type (an ADT) all implement `(Unsized?)ConstParamTy`.
 ///
@@ -191,7 +183,6 @@ pub fn type_allowed_to_implement_const_param_ty<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=all_fields_implement_trait | COMPLEXITY=42 | LINES=77 */
 
 /// Check that all fields of a given `adt` implement `lang_item` trait.
 pub fn all_fields_implement_trait<'tcx>(

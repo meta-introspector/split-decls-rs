@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/mapgen/covfun.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // For each function that was instrumented for coverage, we need to embed its
 // corresponding coverage mapping metadata inside the `__llvm_covfun`[^win]
 // linker section of the final binary.
@@ -11,24 +10,18 @@ use std::sync::Arc;
 
 use crate::rustc_abi::Align;
 use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods as _, ConstCodegenMethods};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::coverage::{
     BasicCoverageBlock, CovTerm, CoverageIdsInfo, Expression, FunctionCoverageInfo, Mapping,
     MappingKind, Op,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Instance, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{SourceFile, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_target::spec::HasTargetSpec;
 use tracing::debug;
 
 use crate::common::CodegenCx;
 use crate::coverageinfo::mapgen::{GlobalFileTable, VirtualFileMapping, spans};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::coverageinfo::{ffi, llvm_cov};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 use crate::llvm;
 
 /// Intermediate coverage metadata for a single function, used to help build
@@ -46,7 +39,6 @@ pub(crate) struct CovfunRecord<'tcx> {
     expressions: Vec<ffi::CounterExpression>,
     regions: ffi::Regions,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> CovfunRecord<'tcx> {
     /// Iterator that yields all source files referred to by this function's
@@ -55,7 +47,6 @@ impl<'tcx> CovfunRecord<'tcx> {
         self.virtual_file_mapping.local_file_table.iter().map(Arc::as_ref)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=30 */
 
 pub(crate) fn prepare_covfun_record<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -86,7 +77,6 @@ pub(crate) fn prepare_covfun_record<'tcx>(
 
     Some(covfun)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=prepare_expressions | COMPLEXITY=11 | LINES=22 */
 
 /// Convert the function's coverage-counter expressions into a form suitable for FFI.
 fn prepare_expressions(ids_info: &CoverageIdsInfo) -> Vec<ffi::CounterExpression> {
@@ -109,7 +99,6 @@ fn prepare_expressions(ids_info: &CoverageIdsInfo) -> Vec<ffi::CounterExpression
         })
         .collect::<Vec<_>>()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fill_region_tables | COMPLEXITY=42 | LINES=64 */
 
 /// Populates the mapping region tables in the current function's covfun record.
 fn fill_region_tables<'tcx>(
@@ -174,7 +163,6 @@ fn fill_region_tables<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=75 */
 
 /// Generates the contents of the covfun record for this function, which
 /// contains the function's coverage mapping data. The record is then stored

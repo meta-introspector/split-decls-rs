@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/closure.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // Code for type-checking closure expressions.
 
 use std::iter;
@@ -11,27 +10,20 @@ use rustc_hir as hir;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, InferResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgs, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::error_reporting::traits::ArgKind;
 use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{CoroutineTypes, Expectation, FnCtxt, check_fn};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ExpectedSig | COMPLEXITY=4 | LINES=8 */
 
 /// What signature do we *expect* the closure to have from context?
 #[derive(Debug, Clone, TypeFoldable, TypeVisitable)]
@@ -40,7 +32,6 @@ struct ExpectedSig<'tcx> {
     cause_span: Option<Span>,
     sig: ty::PolyFnSig<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ClosureSignatures | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Debug)]
 struct ClosureSignatures<'tcx> {
@@ -52,7 +43,6 @@ struct ClosureSignatures<'tcx> {
     /// explicit hidden types written by the user in the closure signature.
     liberated_sig: ty::FnSig<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=deduce_closure_signature | COMPLEXITY=418 | LINES=1104 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     #[instrument(skip(self, closure), level = "debug")]

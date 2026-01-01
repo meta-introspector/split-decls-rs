@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_ast/src/util/literal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Code related to parsing literals.
 
 use std::{ascii, fmt, str};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use rustc_literal_escaper::{
     MixedUnit, unescape_byte, unescape_byte_str, unescape_c_str, unescape_char, unescape_str,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ByteSymbol, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::ast::{self, LitKind, MetaItemLit, StrStyle};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::token::{self, Token};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=escape_string_symbol | COMPLEXITY=8 | LINES=8 */
 
 // Escapes a string, represented as a symbol. Reuses the original symbol,
 // avoiding interning, if no changes are required.
@@ -25,21 +19,18 @@ pub fn escape_string_symbol(symbol: Symbol) -> Symbol {
     let escaped = s.escape_default().to_string();
     if s == escaped { symbol } else { Symbol::intern(&escaped) }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=escape_char_symbol | COMPLEXITY=2 | LINES=6 */
 
 // Escapes a char.
 pub fn escape_char_symbol(ch: char) -> Symbol {
     let s: String = ch.escape_default().map(Into::<char>::into).collect();
     Symbol::intern(&s)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=escape_byte_str_symbol | COMPLEXITY=2 | LINES=6 */
 
 // Escapes a byte string.
 pub fn escape_byte_str_symbol(bytes: &[u8]) -> Symbol {
     let s = bytes.escape_ascii().to_string();
     Symbol::intern(&s)
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 pub enum LitError {
@@ -49,7 +40,6 @@ pub enum LitError {
     NonDecimalFloat(u32), // u32 is the base
     IntTooLarge(u32),     // u32 is the base
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from_token_lit | COMPLEXITY=53 | LINES=111 */
 
 impl LitKind {
     /// Converts literal token into a semantic literal.
@@ -161,7 +151,6 @@ impl LitKind {
         })
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=56 | LINES=63 */
 
 impl fmt::Display for LitKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -225,7 +214,6 @@ impl fmt::Display for LitKind {
         Ok(())
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from_token_lit | COMPLEXITY=13 | LINES=38 */
 
 impl MetaItemLit {
     /// Converts a token literal into a meta item literal.
@@ -264,7 +252,6 @@ impl MetaItemLit {
             .and_then(|token_lit| MetaItemLit::from_token_lit(token_lit, token.span).ok())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=strip_underscores | COMPLEXITY=5 | LINES=11 */
 
 fn strip_underscores(symbol: Symbol) -> Symbol {
     // Do not allocate a new string unless necessary.
@@ -276,7 +263,6 @@ fn strip_underscores(symbol: Symbol) -> Symbol {
     }
     symbol
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=filtered_float_lit | COMPLEXITY=17 | LINES=24 */
 
 fn filtered_float_lit(
     symbol: Symbol,
@@ -301,13 +287,11 @@ fn filtered_float_lit(
         None => LitKind::Float(symbol, ast::LitFloatType::Unsuffixed),
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=float_lit | COMPLEXITY=4 | LINES=5 */
 
 fn float_lit(symbol: Symbol, suffix: Option<Symbol>) -> Result<LitKind, LitError> {
     debug!("float_lit: {:?}, {:?}", symbol, suffix);
     filtered_float_lit(strip_underscores(symbol), suffix, 10)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=integer_lit | COMPLEXITY=25 | LINES=40 */
 
 fn integer_lit(symbol: Symbol, suffix: Option<Symbol>) -> Result<LitKind, LitError> {
     debug!("integer_lit: {:?}, {:?}", symbol, suffix);

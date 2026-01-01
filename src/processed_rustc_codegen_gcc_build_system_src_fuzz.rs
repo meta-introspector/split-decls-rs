@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/fuzz.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=show_usage | COMPLEXITY=2 | LINES=18 */
 use std::ffi::OsStr;
 use std::path::Path;
 
@@ -17,7 +16,6 @@ fn show_usage() {
     -j --jobs              : The number of threads to use during fuzzing"#
     );
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run | COMPLEXITY=28 | LINES=63 */
 
 pub fn run() -> Result<(), String> {
     // We skip binary name and the `fuzz` command.
@@ -81,7 +79,6 @@ pub fn run() -> Result<(), String> {
     fuzz_range(start, start + count, threads);
     Ok(())
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fuzz_range | COMPLEXITY=51 | LINES=80 */
 
 /// Fuzzes a range `start..end` with `threads`.
 fn fuzz_range(start: u64, end: u64, threads: usize) {
@@ -162,7 +159,6 @@ fn fuzz_range(start: u64, end: u64, threads: usize) {
     }
     drop(workers);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=debug_llvm | COMPLEXITY=16 | LINES=32 */
 
 /// Builds & runs a file with LLVM.
 fn debug_llvm(path: &std::path::Path) -> Result<Vec<u8>, String> {
@@ -195,7 +191,6 @@ fn debug_llvm(path: &std::path::Path) -> Result<Vec<u8>, String> {
     res.extend(output.stderr);
     Ok(res)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=release_gcc | COMPLEXITY=16 | LINES=34 */
 
 /// Builds & runs a file with GCC.
 fn release_gcc(path: &std::path::Path) -> Result<Vec<u8>, String> {
@@ -230,7 +225,6 @@ fn release_gcc(path: &std::path::Path) -> Result<Vec<u8>, String> {
     res.extend(output.stderr);
     Ok(res)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test | COMPLEXITY=2 | LINES=7 */
 type ResultCache = Option<(Vec<u8>, Vec<u8>)>;
 /// Generates a new rustlantis file, & compares the result of running it with GCC and LLVM.
 fn test(seed: u64, print_tmp_vars: bool) -> Result<Result<(), std::path::PathBuf>, String> {
@@ -238,7 +232,6 @@ fn test(seed: u64, print_tmp_vars: bool) -> Result<Result<(), std::path::PathBuf
     let source_file = generate(seed, print_tmp_vars)?;
     test_file(&source_file, true)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_cached | COMPLEXITY=18 | LINES=25 */
 /// Tests a file with a cached LLVM result. Used for reduction, when it is known
 /// that a given transformation should not change the execution result.
 fn test_cached(
@@ -264,7 +257,6 @@ fn test_cached(
         Ok(Ok(()))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=test_file | COMPLEXITY=2 | LINES=7 */
 fn test_file(
     source_file: &Path,
     remove_tmps: bool,
@@ -272,7 +264,6 @@ fn test_file(
     let mut uncached = None;
     test_cached(source_file, remove_tmps, &mut uncached)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=generate | COMPLEXITY=13 | LINES=23 */
 
 /// Generates a new rustlantis file for us to run tests on.
 fn generate(seed: u64, print_tmp_vars: bool) -> Result<std::path::PathBuf, String> {

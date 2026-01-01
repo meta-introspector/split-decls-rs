@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/abi/comments.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 // Annotate the clif ir with comments describing how arguments are passed into the current function
 // and where all locals are stored.
 
@@ -16,7 +15,6 @@ pub(super) fn add_args_header_comment(fx: &mut FunctionCx<'_, '_, '_>) {
         );
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=46 */
 
 pub(super) fn add_arg_comment<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -63,7 +61,6 @@ pub(super) fn add_arg_comment<'tcx>(
         ty = arg_layout.ty,
     ));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 pub(super) fn add_locals_header_comment(fx: &mut FunctionCx<'_, '_, '_>) {
     if fx.clif_comments.enabled() {
@@ -73,7 +70,6 @@ pub(super) fn add_locals_header_comment(fx: &mut FunctionCx<'_, '_, '_>) {
         );
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=25 */
 
 pub(super) fn add_local_place_comments<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/tagged_ptr/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ptr;
 
 use rustc_hashes::Hash128;
 
 use super::*;
 use crate::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// A tag type used in [`TaggedRef`] tests.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -16,7 +14,6 @@ enum Tag2 {
     B10 = 0b10,
     B11 = 0b11,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=into_usize | COMPLEXITY=18 | LINES=18 */
 
 unsafe impl Tag for Tag2 {
     const BITS: u32 = 2;
@@ -35,14 +32,12 @@ unsafe impl Tag for Tag2 {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<HCX> crate::stable_hasher::HashStable<HCX> for Tag2 {
     fn hash_stable(&self, hcx: &mut HCX, hasher: &mut crate::stable_hasher::StableHasher) {
         (*self as u8).hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=smoke | COMPLEXITY=2 | LINES=23 */
 
 #[test]
 fn smoke() {
@@ -66,7 +61,6 @@ fn smoke() {
     assert_eq!(*copy, 12);
     assert!(ptr::eq(copy.pointer(), reference));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable_hash_hashes_as_tuple | COMPLEXITY=4 | LINES=17 */
 
 #[test]
 fn stable_hash_hashes_as_tuple() {
@@ -84,18 +78,15 @@ fn stable_hash_hashes_as_tuple() {
 
     assert_eq!(hash_packed, hash_tupled);
 }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 
 /// Test that `new` does not compile if there is not enough alignment for the
 /// tag in the pointer.
 ///
 /// ```compile_fail,E0080
 /// use crate::rustc_data_structures::tagged_ptr::{TaggedRef, Tag};
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 ///
 /// #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// enum Tag2 { B00 = 0b00, B01 = 0b01, B10 = 0b10, B11 = 0b11 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=7 */
 ///
 /// unsafe impl Tag for Tag2 {
 ///     const BITS: u32 = 2;
@@ -103,7 +94,6 @@ fn stable_hash_hashes_as_tuple() {
 ///     fn into_usize(self) -> usize { todo!() }
 ///     unsafe fn from_usize(tag: usize) -> Self { todo!() }
 /// }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=11 */
 ///
 /// let value = 12u16;
 /// let reference = &value;

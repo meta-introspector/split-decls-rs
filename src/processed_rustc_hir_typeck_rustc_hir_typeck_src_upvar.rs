@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/upvar.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=36 */
 // ### Inferring borrow kinds for upvars
 //
 // Whenever there is a closure expression, we need to determine how each
@@ -36,33 +35,24 @@ use std::iter;
 
 use crate::rustc_abi::FIRST_VARIANT;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, MultiSpan};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection, ProjectionKind};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::mir::FakeReadCause;
 use crate::rustc_complete::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::{
     self, BorrowKind, ClosureSizeProfileData, Ty, TyCtxt, TypeVisitableExt as _, TypeckResults,
     UpvarArgs, UpvarCapture,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 use super::FnCtxt;
 use crate::expr_use_visitor as euv;
@@ -78,7 +68,6 @@ enum PlaceAncestryRelation {
     SamePlace,
     Divergent,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Intermediate format to store a captured `Place` and associated `ty::CaptureInfo`
 /// during capture analysis. Information in this map feeds into the minimum capture
@@ -93,7 +82,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         assert!(self.deferred_call_resolutions.borrow().is_empty());
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 /// Intermediate format to store the hir_id pointing to the use that resulted in the
 /// corresponding place being captured and a String which contains the captured value's
@@ -107,7 +95,6 @@ enum UpvarMigrationInfo {
         use_span: Span,
     },
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=MigrationWarningReason | COMPLEXITY=2 | LINES=12 */
 
 /// Reasons that we might issue a migration warning.
 #[derive(Clone, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -120,7 +107,6 @@ struct MigrationWarningReason {
     /// at a different time.
     drop_order: bool,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=migration_message | COMPLEXITY=13 | LINES=13 */
 
 impl MigrationWarningReason {
     fn migration_message(&self) -> String {
@@ -134,7 +120,6 @@ impl MigrationWarningReason {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=MigrationLintNote | COMPLEXITY=4 | LINES=8 */
 
 /// Intermediate format to store information needed to generate a note in the migration lint.
 struct MigrationLintNote {
@@ -143,7 +128,6 @@ struct MigrationLintNote {
     /// reasons why migration is needed for this capture
     reason: MigrationWarningReason,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=NeededMigration | COMPLEXITY=2 | LINES=7 */
 
 /// Intermediate format to store the hir id of the root variable and a HashSet containing
 /// information on why the root variable should be fully captured
@@ -151,12 +135,10 @@ struct NeededMigration {
     var_hir_id: HirId,
     diagnostics_info: Vec<MigrationLintNote>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=InferBorrowKindVisitor | COMPLEXITY=2 | LINES=4 */
 
 struct InferBorrowKindVisitor<'a, 'tcx> {
     fcx: &'a FnCtxt<'a, 'tcx>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=14 | LINES=20 */
 
 impl<'a, 'tcx> Visitor<'tcx> for InferBorrowKindVisitor<'a, 'tcx> {
     fn visit_expr(&mut self, expr: &'tcx hir::Expr<'tcx>) {
@@ -177,7 +159,6 @@ impl<'a, 'tcx> Visitor<'tcx> for InferBorrowKindVisitor<'a, 'tcx> {
         self.visit_body(body);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=analyze_closure | COMPLEXITY=1149 | LINES=2434 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Analysis starting point.

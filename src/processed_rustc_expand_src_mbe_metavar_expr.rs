@@ -1,19 +1,12 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/metavar_expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, Lit, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{TokenStream, TokenStreamIter, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LitIntType, LitKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::{Applicability, PResult};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=26 */
 
 use crate::errors;
 
@@ -40,7 +33,6 @@ pub(crate) enum MetaVarExpr {
     /// repetition. The `usize` is the depth.
     Len(usize),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=73 */
 
 impl MetaVarExpr {
     /// Attempt to parse a meta-variable expression from a token stream.
@@ -114,10 +106,8 @@ impl MetaVarExpr {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=2 */
 
 /// Checks if there are any remaining tokens (for example, `${ignore($valid, extra)}`) and create
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_trailing_tokens | COMPLEXITY=25 | LINES=36 */
 /// a diag with the correct arg count if so.
 fn check_trailing_tokens<'psess>(
     iter: &mut TokenStreamIter<'_>,
@@ -154,7 +144,6 @@ fn check_trailing_tokens<'psess>(
     };
     Err(psess.dcx().create_err(err))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=iter_span | COMPLEXITY=4 | LINES=9 */
 
 /// Returns a span encompassing all tokens in the iterator if there is at least one item.
 fn iter_span(iter: &TokenStreamIter<'_>) -> Option<Span> {
@@ -164,11 +153,9 @@ fn iter_span(iter: &TokenStreamIter<'_>) -> Option<Span> {
     let span = first_sp.with_hi(last_sp.hi());
     Some(span)
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3 */
 
 /// Indicates what is placed in a `concat` parameter. For example, literals
 /// (`${concat("foo", "bar")}`) or adhoc identifiers (`${concat(foo, bar)}`).
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 #[derive(Debug, Decodable, Encodable, PartialEq)]
 pub(crate) enum MetaVarExprConcatElem {
     /// Identifier WITHOUT a preceding dollar sign, which means that this identifier should be
@@ -180,7 +167,6 @@ pub(crate) enum MetaVarExprConcatElem {
     /// expanded and interpreted as a variable.
     Var(Ident),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=parse_concat | COMPLEXITY=30 | LINES=44 */
 
 /// Parse a meta-variable `concat` expression: `concat($metavar, ident, ...)`.
 fn parse_concat<'psess>(
@@ -225,7 +211,6 @@ fn parse_concat<'psess>(
     }
     Ok(MetaVarExpr::Concat(result.into()))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=parse_count | COMPLEXITY=10 | LINES=22 */
 
 /// Parse a meta-variable `count` expression: `count(ident[, depth])`
 fn parse_count<'psess>(
@@ -248,7 +233,6 @@ fn parse_count<'psess>(
     };
     Ok(MetaVarExpr::Count(ident, depth))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=parse_depth | COMPLEXITY=10 | LINES=23 */
 
 /// Parses the depth used by index(depth) and len(depth).
 fn parse_depth<'psess>(
@@ -272,7 +256,6 @@ fn parse_depth<'psess>(
         Err(psess.dcx().struct_span_err(span, msg))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=parse_ident | COMPLEXITY=2 | LINES=10 */
 
 /// Parses an generic ident
 fn parse_ident<'psess>(
@@ -283,7 +266,6 @@ fn parse_ident<'psess>(
     let token = parse_token(iter, psess, fallback_span)?;
     parse_ident_from_token(psess, token)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=parse_ident_from_token | COMPLEXITY=11 | LINES=23 */
 
 fn parse_ident_from_token<'psess>(
     psess: &'psess ParseSess,
@@ -307,7 +289,6 @@ fn parse_ident_from_token<'psess>(
     );
     Err(err)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=parse_token | COMPLEXITY=4 | LINES=14 */
 
 fn parse_token<'psess, 't>(
     iter: &mut TokenStreamIter<'t>,
@@ -322,7 +303,6 @@ fn parse_token<'psess, 't>(
     };
     Ok(token)
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=try_eat_comma | COMPLEXITY=8 | LINES=10 */
 
 /// Tries to move the iterator forward returning `true` if there is a comma. If not, then the
 /// iterator is not modified and the result is `false`.
@@ -333,7 +313,6 @@ fn try_eat_comma(iter: &mut TokenStreamIter<'_>) -> bool {
     }
     false
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=try_eat_dollar | COMPLEXITY=8 | LINES=10 */
 
 /// Tries to move the iterator forward returning `true` if there is a dollar sign. If not, then the
 /// iterator is not modified and the result is `false`.
@@ -344,7 +323,6 @@ fn try_eat_dollar(iter: &mut TokenStreamIter<'_>) -> bool {
     }
     false
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=eat_dollar | COMPLEXITY=5 | LINES=15 */
 
 /// Expects that the next item is a dollar sign.
 fn eat_dollar<'psess>(

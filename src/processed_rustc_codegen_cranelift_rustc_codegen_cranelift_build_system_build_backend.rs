@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/build_backend.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::env;
 use std::path::PathBuf;
 
 use crate::path::{Dirs, RelPath};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_info::get_file_name;
 use crate::shared_utils::{rustflags_from_env, rustflags_to_cmd_env};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::utils::{CargoProject, Compiler, LogGroup};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=37 */
 
 static CG_CLIF: CargoProject = CargoProject::new(&RelPath::source("."), "cg_clif");
 

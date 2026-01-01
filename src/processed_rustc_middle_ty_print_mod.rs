@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/print/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use hir::def::Namespace;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::sso::SsoHashSet;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ty::{self, GenericArg, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=print | COMPLEXITY=4 | LINES=11 */
 
 // `pretty` is a separate module only for organization.
 pub use self::pretty::*;
@@ -23,7 +18,6 @@ pub type PrintError = std::fmt::Error;
 pub trait Print<'tcx, P> {
     fn print(&self, p: &mut P) -> Result<(), PrintError>;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=85 | LINES=255 */
 
 /// A trait that "prints" user-facing type system entities: paths, types, lifetimes, constants,
 /// etc. "Printing" here means building up a representation of the entity's path, usually as a
@@ -279,7 +273,6 @@ pub trait Printer<'tcx>: Sized {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=characteristic_def_id_of_type_cached | COMPLEXITY=18 | LINES=58 */
 
 /// As a heuristic, when we see an impl, if we see that the
 /// 'self type' is a type defined in the same module as the impl,
@@ -338,25 +331,21 @@ fn characteristic_def_id_of_type_cached<'a>(
         | ty::Float(_) => None,
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=characteristic_def_id_of_type | COMPLEXITY=2 | LINES=3 */
 pub fn characteristic_def_id_of_type(ty: Ty<'_>) -> Option<DefId> {
     characteristic_def_id_of_type_cached(ty, &mut SsoHashSet::new())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=print | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, P: Printer<'tcx>> Print<'tcx, P> for ty::Region<'tcx> {
     fn print(&self, p: &mut P) -> Result<(), PrintError> {
         p.print_region(*self)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=print | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, P: Printer<'tcx>> Print<'tcx, P> for Ty<'tcx> {
     fn print(&self, p: &mut P) -> Result<(), PrintError> {
         p.print_type(*self)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=print | COMPLEXITY=30 | LINES=37 */
 
 impl<'tcx, P: Printer<'tcx> + std::fmt::Write> Print<'tcx, P> for ty::Instance<'tcx> {
     fn print(&self, cx: &mut P) -> Result<(), PrintError> {
@@ -394,21 +383,18 @@ impl<'tcx, P: Printer<'tcx> + std::fmt::Write> Print<'tcx, P> for ty::Instance<'
         Ok(())
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=print | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, P: Printer<'tcx>> Print<'tcx, P> for &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>> {
     fn print(&self, p: &mut P) -> Result<(), PrintError> {
         p.print_dyn_existential(self)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=print | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, P: Printer<'tcx>> Print<'tcx, P> for ty::Const<'tcx> {
     fn print(&self, p: &mut P) -> Result<(), PrintError> {
         p.print_const(*self)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=print | COMPLEXITY=10 | LINES=18 */
 
 impl<T> rustc_type_ir::ir_print::IrPrint<T> for TyCtxt<'_>
 where

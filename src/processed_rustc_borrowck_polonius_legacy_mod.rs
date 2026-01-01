@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/legacy/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // Functions dedicated to fact generation for the `-Zpolonius=legacy` datalog implementation.
 //
 // Will be removed in the future, once the in-tree `-Zpolonius=next` implementation reaches feature
@@ -9,11 +8,8 @@ use std::iter;
 
 use either::Either;
 use crate::rustc_complete::mir::{Body, Local, LocalKind, Location, START_BLOCK};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{GenericArg, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::move_paths::{InitKind, InitLocation, MoveData};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=55 */
 use tracing::debug;
 
 use crate::borrow_set::BorrowSet;
@@ -64,7 +60,6 @@ pub(crate) fn emit_facts<'tcx>(
     );
     emit_outlives_facts(facts, location_table, constraints);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=emit_move_facts | COMPLEXITY=42 | LINES=72 */
 
 /// Emit facts needed for move/init analysis: moves and assignments.
 fn emit_move_facts(
@@ -137,7 +132,6 @@ fn emit_move_facts(
         .path_moved_at_base
         .extend(move_data.moves.iter().map(|mo| (mo.path, location_table.mid_index(mo.source))));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=emit_universal_region_facts | COMPLEXITY=20 | LINES=43 */
 
 /// Emit universal regions facts, and their relations.
 fn emit_universal_region_facts(
@@ -181,7 +175,6 @@ fn emit_universal_region_facts(
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// For every potentially drop()-touched region `region` in `local`'s type
 /// (`kind`), emit a `drop_of_var_derefs_origin(local, origin)` fact.
@@ -200,7 +193,6 @@ pub(crate) fn emit_drop_facts<'tcx>(
         facts.drop_of_var_derefs_origin.push((local, region_vid.into()));
     });
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=emit_outlives_facts | COMPLEXITY=9 | LINES=26 */
 
 /// Emit facts about the outlives constraints: the `subset` base relation, i.e. not a transitive
 /// closure.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/visit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 // AST walker. Each overridden visit method has full control over what
 // happens with its node, it can do its own traversal of the node's children,
 // call `visit::walk_*` to apply the default traversal algorithm, or prevent
@@ -17,10 +16,8 @@
 
 pub use rustc_ast_ir::visit::VisitorResult;
 pub use rustc_ast_ir::{try_visit, visit_opt, walk_list, walk_visitable_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 use thin_vec::ThinVec;
 
 use crate::ast::*;
@@ -31,7 +28,6 @@ pub enum AssocCtxt {
     Trait,
     Impl { of_trait: bool },
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum FnCtxt {
@@ -39,7 +35,6 @@ pub enum FnCtxt {
     Foreign,
     Assoc(AssocCtxt),
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum BoundKind {
@@ -59,7 +54,6 @@ pub enum BoundKind {
     /// E.g., `trait A: B`
     SuperTraits,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=7 | LINES=10 */
 impl BoundKind {
     pub fn descr(self) -> &'static str {
         match self {
@@ -70,7 +64,6 @@ impl BoundKind {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum LifetimeCtxt {
@@ -81,7 +74,6 @@ pub enum LifetimeCtxt {
     /// Appears as a generic argument.
     GenericArg,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) trait Visitable<'a, V: Visitor<'a>> {
     type Extra: Copy;
@@ -89,7 +81,6 @@ pub(crate) trait Visitable<'a, V: Visitor<'a>> {
     #[must_use]
     fn visit(&'a self, visitor: &mut V, extra: Self::Extra) -> V::Result;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, V: Visitor<'a>, T: ?Sized> Visitable<'a, V> for Box<T>
 where
@@ -100,7 +91,6 @@ where
         (**self).visit(visitor, extra)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=8 | LINES=13 */
 
 impl<'a, V: Visitor<'a>, T> Visitable<'a, V> for Option<T>
 where
@@ -114,7 +104,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=6 | LINES=11 */
 
 impl<'a, V: Visitor<'a>, T> Visitable<'a, V> for Spanned<T>
 where
@@ -126,7 +115,6 @@ where
         node.visit(visitor, extra)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=8 | LINES=13 */
 
 impl<'a, V: Visitor<'a>, T> Visitable<'a, V> for [T]
 where
@@ -140,7 +128,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=8 | LINES=13 */
 
 impl<'a, V: Visitor<'a>, T> Visitable<'a, V> for Vec<T>
 where
@@ -154,7 +141,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, V: Visitor<'a>, T> Visitable<'a, V> for (T,)
 where
@@ -165,7 +151,6 @@ where
         self.0.visit(visitor, extra)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=5 | LINES=13 */
 
 impl<'a, V: Visitor<'a>, T1, T2> Visitable<'a, V> for (T1, T2)
 where
@@ -179,7 +164,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=5 | LINES=15 */
 
 impl<'a, V: Visitor<'a>, T1, T2, T3> Visitable<'a, V> for (T1, T2, T3)
 where
@@ -195,7 +179,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=6 | LINES=17 */
 
 impl<'a, V: Visitor<'a>, T1, T2, T3, T4> Visitable<'a, V> for (T1, T2, T3, T4)
 where
@@ -213,34 +196,29 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=walk_ref | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) trait Walkable<'a, V: Visitor<'a>> {
     #[must_use]
     fn walk_ref(&'a self, visitor: &mut V) -> V::Result;
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
 
 macro_rules! visit_visitable {
     ($visitor:expr, $($expr:expr),* $(,)?) => {{
         $(try_visit!(Visitable::visit($expr, $visitor, ()));)*
     }};
 }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! visit_visitable_with {
     ($visitor:expr, $expr:expr, $extra:expr $(,)?) => {
         try_visit!(Visitable::visit($expr, $visitor, $extra))
     };
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! walk_walkable {
     ($visitor:expr, $expr:expr, ) => {
         Walkable::walk_ref($expr, $visitor)
     };
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=12 | LINES=14 */
 
 macro_rules! impl_visitable {
     (|&$lt:lifetime $self:ident: $self_ty:ty,
@@ -255,7 +233,6 @@ macro_rules! impl_visitable {
         }
     };
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=walk_ref | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! impl_walkable {
     ($(<$K:ident: $Kb:ident>)? |&$lt:lifetime $self:ident: $self_ty:ty,
@@ -268,7 +245,6 @@ macro_rules! impl_walkable {
         }
     };
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 macro_rules! impl_visitable_noop {
     (<$lt:lifetime> $($ty:ty,)*) => {
@@ -279,7 +255,6 @@ macro_rules! impl_visitable_noop {
         )*
     };
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=16 | LINES=20 */
 
 macro_rules! impl_visitable_list {
     (<$lt:lifetime> $($ty:ty,)*) => {
@@ -300,7 +275,6 @@ macro_rules! impl_visitable_list {
         })*
     };
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 macro_rules! impl_visitable_direct {
     (<$lt:lifetime> $($ty:ty,)*) => {
@@ -311,7 +285,6 @@ macro_rules! impl_visitable_direct {
         );)*
     };
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=14 */
 
 macro_rules! impl_visitable_calling_walkable {
     (<$lt:lifetime>
@@ -326,7 +299,6 @@ macro_rules! impl_visitable_calling_walkable {
         })*
     };
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 macro_rules! define_named_walk {
     ($Visitor:ident<$lt:lifetime>
@@ -337,7 +309,6 @@ macro_rules! define_named_walk {
         })*
     };
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=header | COMPLEXITY=238 | LINES=805 */
 
 #[macro_export]
 macro_rules! common_visitor_and_walkers {
@@ -1143,7 +1114,6 @@ macro_rules! common_visitor_and_walkers {
         );
     };
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=14 | LINES=33 */
 
 common_visitor_and_walkers!(Visitor<'a>);
 
@@ -1177,7 +1147,6 @@ macro_rules! generate_list_visit_fns {
         )+
     }
 }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 generate_list_visit_fns! {
     visit_items, Box<Item>, visit_item;
@@ -1194,7 +1163,6 @@ generate_list_visit_fns! {
     visit_field_defs, FieldDef, visit_field_def;
     visit_arms, Arm, visit_arm;
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=walk_stmt | COMPLEXITY=11 | LINES=17 */
 
 pub fn walk_stmt<'a, V: Visitor<'a>>(visitor: &mut V, statement: &'a Stmt) -> V::Result {
     let Stmt { id, kind, span: _ } = statement;

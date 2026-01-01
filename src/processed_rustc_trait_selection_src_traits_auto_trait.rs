@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/auto_trait.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Support code for rustdoc and external tools.
 // You really don't want to be using this unless you need to.
 
@@ -7,18 +6,15 @@ use std::collections::VecDeque;
 use std::iter;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_infer::infer::DefineOpaqueTypes;
 use crate::rustc_complete::ty::{Region, RegionVid};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use tracing::debug;
 
 use super::*;
 use crate::errors::UnableToConstructConstantValue;
 use crate::infer::region_constraints::{ConstraintKind, RegionConstraintData};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::regions::OutlivesEnvironmentBuildExt;
 use crate::traits::project::ProjectAndUnifyResult;
 
@@ -28,33 +24,28 @@ pub enum RegionTarget<'tcx> {
     Region(Region<'tcx>),
     RegionVid(RegionVid),
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=RegionDeps | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default, Debug, Clone)]
 pub struct RegionDeps<'tcx> {
     pub larger: FxIndexSet<RegionTarget<'tcx>>,
     pub smaller: FxIndexSet<RegionTarget<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub enum AutoTraitResult<A> {
     ExplicitImpl,
     PositiveImpl(A),
     NegativeImpl,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AutoTraitInfo | COMPLEXITY=2 | LINES=6 */
 
 pub struct AutoTraitInfo<'cx> {
     pub full_user_env: ty::ParamEnv<'cx>,
     pub region_data: RegionConstraintData<'cx>,
     pub vid_to_region: FxIndexMap<ty::RegionVid, ty::Region<'cx>>,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=AutoTraitFinder | COMPLEXITY=2 | LINES=4 */
 
 pub struct AutoTraitFinder<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=386 | LINES=775 */
 
 impl<'tcx> AutoTraitFinder<'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>) -> Self {

@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/iter.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{CoroutineKind, DUMMY_NODE_ID, Expr, ast, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
@@ -22,7 +19,6 @@ pub(crate) fn expand<'cx>(
 
     ExpandResult::Ready(base::MacEager::expr(closure))
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=parse_closure | COMPLEXITY=16 | LINES=32 */
 
 fn parse_closure<'a>(
     cx: &mut ExtCtxt<'a>,

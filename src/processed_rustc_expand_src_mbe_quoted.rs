@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/quoted.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, NonterminalKind, Token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStreamIter;
 use crate::rustc_complete::{NodeId, tokenstream};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_feature::Features;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::errors;
 use crate::mbe::macro_parser::count_metavar_decls;
 use crate::mbe::{Delimited, KleeneOp, KleeneToken, MetaVarExpr, SequenceRepetition, TokenTree};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) const VALID_FRAGMENT_NAMES_MSG: &str = "valid fragment specifiers are \
     `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, \
@@ -30,7 +25,6 @@ pub(crate) enum RulePart {
     /// The right-hand side body, with metavar references and metavar expressions
     Body,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_pattern | COMPLEXITY=4 | LINES=12 */
 
 impl RulePart {
     #[inline(always)]
@@ -43,7 +37,6 @@ impl RulePart {
         matches!(self, Self::Body)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=52 | LINES=115 */
 
 /// Takes a `tokenstream::TokenStream` and returns a `Vec<self::TokenTree>`. Specifically, this
 /// takes a generic `TokenStream`, such as is used in the rest of the compiler, and returns a
@@ -159,7 +152,6 @@ fn parse(
     }
     result
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 /// Takes a `tokenstream::TokenTree` and returns a `self::TokenTree`. Like `parse`, but for a
 /// single token tree. Emits errors to `sess` if needed.
@@ -176,7 +168,6 @@ pub(super) fn parse_one_tt(
         .pop()
         .unwrap()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_emit_macro_metavar_expr_feature | COMPLEXITY=9 | LINES=8 */
 
 /// Asks for the `macro_metavar_expr` feature if it is not enabled
 fn maybe_emit_macro_metavar_expr_feature(features: &Features, sess: &Session, span: Span) {
@@ -185,7 +176,6 @@ fn maybe_emit_macro_metavar_expr_feature(features: &Features, sess: &Session, sp
         feature_err(sess, sym::macro_metavar_expr, span, msg).emit();
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=maybe_emit_macro_metavar_expr_concat_feature | COMPLEXITY=5 | LINES=7 */
 
 fn maybe_emit_macro_metavar_expr_concat_feature(features: &Features, sess: &Session, span: Span) {
     if !features.macro_metavar_expr_concat() {
@@ -193,7 +183,6 @@ fn maybe_emit_macro_metavar_expr_concat_feature(features: &Features, sess: &Sess
         feature_err(sess, sym::macro_metavar_expr_concat, span, msg).emit();
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse_tree | COMPLEXITY=145 | LINES=260 */
 
 /// Takes a `tokenstream::TokenTree` and returns a `self::TokenTree`. Specifically, this takes a
 /// generic `TokenTree`, such as is used in the rest of the compiler, and returns a `TokenTree`

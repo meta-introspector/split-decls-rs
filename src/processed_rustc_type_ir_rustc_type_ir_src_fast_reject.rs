@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/fast_reject.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::iter;
@@ -10,15 +9,12 @@ use rustc_ast_ir::Mutability;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 #[cfg(feature = "nightly")]
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::inherent::*;
 use crate::visit::TypeVisitableExt as _;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=34 */
 
 /// See `simplify_type`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -53,7 +49,6 @@ pub enum SimplifiedType<DefId> {
     Placeholder,
     Error,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=13 */
 
 #[cfg(feature = "nightly")]
 impl<HCX: Clone, DefId: HashStable<HCX>> ToStableHashKey<HCX> for SimplifiedType<DefId> {
@@ -67,11 +62,9 @@ impl<HCX: Clone, DefId: HashStable<HCX>> ToStableHashKey<HCX> for SimplifiedType
         hasher.finish()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 /// Generic parameters are pretty much just bound variables, e.g.
 /// the type of `fn foo<'a, T>(x: &'a T) -> u32 { ... }` can be thought of as
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=18 | LINES=25 */
 /// `for<'a, T> fn(&'a T) -> u32`.
 ///
 /// Typecheck of `foo` has to succeed for all possible generic arguments, so
@@ -97,7 +90,6 @@ pub enum TreatParams {
     // in the variant name. It is currently incorrectly used in diagnostics.
     AsRigid,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=simplify_type | COMPLEXITY=51 | LINES=77 */
 
 /// Tries to simplify a type by only returning the outermost injective¹ layer, if one exists.
 ///
@@ -175,7 +167,6 @@ pub fn simplify_type<I: Interner>(
         ty::Bound(..) | ty::Infer(_) => None,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=def | COMPLEXITY=7 | LINES=14 */
 
 impl<DefId> SimplifiedType<DefId> {
     pub fn def(self) -> Option<DefId> {
@@ -190,7 +181,6 @@ impl<DefId> SimplifiedType<DefId> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=DeepRejectCtxt | COMPLEXITY=5 | LINES=19 */
 
 /// Given generic arguments, could they be unified after
 /// replacing parameters with inference variables or placeholders.
@@ -210,7 +200,6 @@ pub struct DeepRejectCtxt<
 > {
     _interner: PhantomData<I>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=relate_rigid_rigid | COMPLEXITY=4 | LINES=7 */
 
 impl<I: Interner> DeepRejectCtxt<I, false, false> {
     /// Treat parameters in both the lhs and the rhs as rigid.
@@ -218,7 +207,6 @@ impl<I: Interner> DeepRejectCtxt<I, false, false> {
         DeepRejectCtxt { _interner: PhantomData }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=relate_infer_infer | COMPLEXITY=4 | LINES=7 */
 
 impl<I: Interner> DeepRejectCtxt<I, true, true> {
     /// Treat parameters in both the lhs and the rhs as infer vars.
@@ -226,7 +214,6 @@ impl<I: Interner> DeepRejectCtxt<I, true, true> {
         DeepRejectCtxt { _interner: PhantomData }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=relate_rigid_infer | COMPLEXITY=4 | LINES=7 */
 
 impl<I: Interner> DeepRejectCtxt<I, false, true> {
     /// Treat parameters in the lhs as rigid, and in rhs as infer vars.
@@ -234,7 +221,6 @@ impl<I: Interner> DeepRejectCtxt<I, false, true> {
         DeepRejectCtxt { _interner: PhantomData }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=args_may_unify | COMPLEXITY=173 | LINES=319 */
 
 impl<I: Interner, const INSTANTIATE_LHS_WITH_INFER: bool, const INSTANTIATE_RHS_WITH_INFER: bool>
     DeepRejectCtxt<I, INSTANTIATE_LHS_WITH_INFER, INSTANTIATE_RHS_WITH_INFER>

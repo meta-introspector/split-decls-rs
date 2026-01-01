@@ -1,27 +1,21 @@
 // SRC: ../rust/compiler/rustc_resolve/src/effective_visibilities.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::mem;
 
 use crate::rustc_complete::visit::Visitor;
 use crate::rustc_complete::{Crate, EnumDef, ast, visit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::Visibility;
 use tracing::info;
 
 use crate::{NameBinding, NameBindingKind, Resolver};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum ParentId<'ra> {
     Def(LocalDefId),
     Import(NameBinding<'ra>),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=level | COMPLEXITY=7 | LINES=9 */
 
 impl ParentId<'_> {
     fn level(self) -> Level {
@@ -31,7 +25,6 @@ impl ParentId<'_> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 pub(crate) struct EffectiveVisibilitiesVisitor<'a, 'ra, 'tcx> {
     r: &'a mut Resolver<'ra, 'tcx>,
@@ -44,7 +37,6 @@ pub(crate) struct EffectiveVisibilitiesVisitor<'a, 'ra, 'tcx> {
     current_private_vis: Visibility,
     changed: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=nearest_normal_mod | COMPLEXITY=12 | LINES=26 */
 
 impl Resolver<'_, '_> {
     fn nearest_normal_mod(&self, def_id: LocalDefId) -> LocalDefId {
@@ -71,7 +63,6 @@ impl Resolver<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=set_bindings_effective_visibilities | COMPLEXITY=83 | LINES=164 */
 
 impl<'a, 'ra, 'tcx> EffectiveVisibilitiesVisitor<'a, 'ra, 'tcx> {
     /// Fills the `Resolver::effective_visibilities` table with public & exported items
@@ -236,7 +227,6 @@ impl<'a, 'ra, 'tcx> EffectiveVisibilitiesVisitor<'a, 'ra, 'tcx> {
         self.update_def(def_id, self.r.tcx.local_visibility(def_id), ParentId::Def(parent_id));
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=27 | LINES=57 */
 
 impl<'a, 'ra, 'tcx> Visitor<'a> for EffectiveVisibilitiesVisitor<'a, 'ra, 'tcx> {
     fn visit_item(&mut self, item: &'a ast::Item) {

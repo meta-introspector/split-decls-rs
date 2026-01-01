@@ -1,17 +1,14 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/type_variable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::cmp;
 use std::marker::PhantomData;
 use std::ops::Range;
 
 use crate::rustc_data_structures::undo_log::Rollback;
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, Ty, TyVid};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
@@ -23,7 +20,6 @@ pub(crate) enum UndoLog<'tcx> {
     EqRelation(sv::UndoLog<ut::Delegate<TyVidEqKey<'tcx>>>),
     SubRelation(sv::UndoLog<ut::Delegate<TyVidSubKey>>),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 /// Convert from a specific kind of undo to the more general UndoLog
 impl<'tcx> From<sv::UndoLog<ut::Delegate<TyVidEqKey<'tcx>>>> for UndoLog<'tcx> {
@@ -31,7 +27,6 @@ impl<'tcx> From<sv::UndoLog<ut::Delegate<TyVidEqKey<'tcx>>>> for UndoLog<'tcx> {
         UndoLog::EqRelation(l)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 /// Convert from a specific kind of undo to the more general UndoLog
 impl<'tcx> From<sv::UndoLog<ut::Delegate<TyVidSubKey>>> for UndoLog<'tcx> {
@@ -39,21 +34,18 @@ impl<'tcx> From<sv::UndoLog<ut::Delegate<TyVidSubKey>>> for UndoLog<'tcx> {
         UndoLog::SubRelation(l)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> Rollback<sv::UndoLog<ut::Delegate<TyVidEqKey<'tcx>>>> for TypeVariableStorage<'tcx> {
     fn reverse(&mut self, undo: sv::UndoLog<ut::Delegate<TyVidEqKey<'tcx>>>) {
         self.eq_relations.reverse(undo)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> Rollback<sv::UndoLog<ut::Delegate<TyVidSubKey>>> for TypeVariableStorage<'tcx> {
     fn reverse(&mut self, undo: sv::UndoLog<ut::Delegate<TyVidSubKey>>) {
         self.sub_unification_table.reverse(undo)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> Rollback<UndoLog<'tcx>> for TypeVariableStorage<'tcx> {
     fn reverse(&mut self, undo: UndoLog<'tcx>) {
@@ -63,7 +55,6 @@ impl<'tcx> Rollback<UndoLog<'tcx>> for TypeVariableStorage<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=14 | LINES=29 */
 
 #[derive(Clone, Default)]
 pub(crate) struct TypeVariableStorage<'tcx> {
@@ -93,14 +84,12 @@ pub(crate) struct TypeVariableStorage<'tcx> {
     /// still want to suggest specifying the type of the argument.
     sub_unification_table: ut::UnificationTableStorage<TyVidSubKey>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct TypeVariableTable<'a, 'tcx> {
     storage: &'a mut TypeVariableStorage<'tcx>,
 
     undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TypeVariableOrigin | COMPLEXITY=6 | LINES=9 */
 
 #[derive(Copy, Clone, Debug)]
 pub struct TypeVariableOrigin {
@@ -110,20 +99,17 @@ pub struct TypeVariableOrigin {
     /// This should only be used for diagnostics.
     pub param_def_id: Option<DefId>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone)]
 pub(crate) struct TypeVariableData {
     origin: TypeVariableOrigin,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum TypeVariableValue<'tcx> {
     Known { value: Ty<'tcx> },
     Unknown { universe: ty::UniverseIndex },
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=18 */
 
 impl<'tcx> TypeVariableValue<'tcx> {
     /// If this value is known, returns the type it is known to be.
@@ -142,7 +128,6 @@ impl<'tcx> TypeVariableValue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> TypeVariableStorage<'tcx> {
     #[inline]
@@ -163,7 +148,6 @@ impl<'tcx> TypeVariableStorage<'tcx> {
         self.values.truncate(self.eq_relations.len());
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=eq_relations | COMPLEXITY=53 | LINES=144 */
 
 impl<'tcx> TypeVariableTable<'_, 'tcx> {
     /// Returns the origin that was given when `vid` was created.
@@ -308,7 +292,6 @@ impl<'tcx> TypeVariableTable<'_, 'tcx> {
             .collect()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -322,7 +305,6 @@ pub(crate) struct TyVidEqKey<'tcx> {
     // in the table, we map each ty-vid to one of these:
     phantom: PhantomData<TypeVariableValue<'tcx>>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=8 | LINES=7 */
 
 impl<'tcx> From<ty::TyVid> for TyVidEqKey<'tcx> {
     #[inline] // make this function eligible for inlining - it is quite hot.
@@ -330,7 +312,6 @@ impl<'tcx> From<ty::TyVid> for TyVidEqKey<'tcx> {
         TyVidEqKey { vid, phantom: PhantomData }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=index | COMPLEXITY=13 | LINES=18 */
 
 impl<'tcx> ut::UnifyKey for TyVidEqKey<'tcx> {
     type Value = TypeVariableValue<'tcx>;
@@ -349,13 +330,11 @@ impl<'tcx> ut::UnifyKey for TyVidEqKey<'tcx> {
         if a.vid.as_u32() < b.vid.as_u32() { Some((a, b)) } else { Some((b, a)) }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub(crate) struct TyVidSubKey {
     vid: ty::TyVid,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from | COMPLEXITY=8 | LINES=7 */
 
 impl From<ty::TyVid> for TyVidSubKey {
     #[inline] // make this function eligible for inlining - it is quite hot.
@@ -363,7 +342,6 @@ impl From<ty::TyVid> for TyVidSubKey {
         TyVidSubKey { vid }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=index | COMPLEXITY=8 | LINES=15 */
 
 impl ut::UnifyKey for TyVidSubKey {
     type Value = ();
@@ -379,7 +357,6 @@ impl ut::UnifyKey for TyVidSubKey {
         "TyVidSubKey"
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=unify_values | COMPLEXITY=23 | LINES=33 */
 
 impl<'tcx> ut::UnifyValue for TypeVariableValue<'tcx> {
     type Error = ut::NoError;

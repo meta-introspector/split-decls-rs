@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_hir/src/limit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fmt;
 use std::ops::{Div, Mul};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=Limit(pub | COMPLEXITY=8 | LINES=24 */
 
 /// New-type wrapper around `usize` for representing limits. Ensures that comparisons against
 /// limits are consistent throughout the compiler.
@@ -32,21 +28,18 @@ impl Limit {
         value <= self.0
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<usize> for Limit {
     fn from(value: usize) -> Self {
         Self::new(value)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for Limit {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.0.fmt(f)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=div | COMPLEXITY=5 | LINES=8 */
 
 impl Div<usize> for Limit {
     type Output = Limit;
@@ -55,7 +48,6 @@ impl Div<usize> for Limit {
         Limit::new(self.0 / rhs)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=mul | COMPLEXITY=5 | LINES=8 */
 
 impl Mul<usize> for Limit {
     type Output = Limit;
@@ -64,7 +56,6 @@ impl Mul<usize> for Limit {
         Limit::new(self.0 * rhs)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for Limit {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {

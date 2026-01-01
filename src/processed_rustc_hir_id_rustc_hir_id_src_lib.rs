@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_id/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Library containing Id types from `rustc_hir`, split out so crates can use it without depending
 // on all of `rustc_hir` (which is large and depends on other large things like `rustc_target`).
 #[allow(internal_features)]
@@ -7,21 +6,16 @@
 #[feature(rustc_attrs)]
 
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use crate::rustc_complete::HashStableContext;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, DefIndex, DefPathHash, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=OwnerId | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Encodable, Decodable)]
 pub struct OwnerId {
     pub def_id: LocalDefId,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=7 */
 
 impl Debug for OwnerId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -29,21 +23,18 @@ impl Debug for OwnerId {
         Debug::fmt(&self.def_id, f)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl From<OwnerId> for HirId {
     fn from(owner: OwnerId) -> HirId {
         HirId { owner, local_id: ItemLocalId::ZERO }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<OwnerId> for DefId {
     fn from(value: OwnerId) -> Self {
         value.to_def_id()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_def_id | COMPLEXITY=3 | LINES=7 */
 
 impl OwnerId {
     #[inline]
@@ -51,7 +42,6 @@ impl OwnerId {
         self.def_id.to_def_id()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=12 */
 
 impl crate::rustc_index::Idx for OwnerId {
     #[inline]
@@ -64,7 +54,6 @@ impl crate::rustc_index::Idx for OwnerId {
         self.def_id.local_def_index.as_usize()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<CTX: HashStableContext> HashStable<CTX> for OwnerId {
     #[inline]
@@ -72,7 +61,6 @@ impl<CTX: HashStableContext> HashStable<CTX> for OwnerId {
         self.to_stable_hash_key(hcx).hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for OwnerId {
     type KeyType = DefPathHash;
@@ -82,7 +70,6 @@ impl<CTX: HashStableContext> ToStableHashKey<CTX> for OwnerId {
         hcx.def_path_hash(self.to_def_id())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=HirId | COMPLEXITY=5 | LINES=17 */
 
 /// Uniquely identifies a node in the HIR of the current crate. It is
 /// composed of the `owner`, which is the `LocalDefId` of the directly enclosing
@@ -100,15 +87,12 @@ pub struct HirId {
     pub owner: OwnerId,
     pub local_id: ItemLocalId,
 }
-/* AST_META: AST_ID=14 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 // To ensure correctness of incremental compilation,
 // `HirId` must not implement `Ord` or `PartialOrd`.
 // See https://github.com/rust-lang/rust/issues/90317.
 impl !Ord for HirId {}
-/* AST_META: AST_ID=15 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !PartialOrd for HirId {}
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=8 */
 
 impl Debug for HirId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -117,7 +101,6 @@ impl Debug for HirId {
         write!(f, "HirId({:?}.{:?})", self.owner, self.local_id)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=expect_owner | COMPLEXITY=15 | LINES=27 */
 
 impl HirId {
     /// Signal local id which should never be used.
@@ -145,14 +128,12 @@ impl HirId {
         Self { owner: OwnerId { def_id: owner }, local_id: ItemLocalId::ZERO }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Display for HirId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{self:?}")
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=ItemLocalId | COMPLEXITY=4 | LINES=23 */
 
 crate::rustc_data_structures::define_stable_id_collections!(HirIdMap, HirIdSet, HirIdMapEntry, HirId);
 crate::rustc_data_structures::define_id_collections!(
@@ -176,13 +157,11 @@ crate::rustc_index::newtype_index! {
     #[orderable]
     pub struct ItemLocalId {}
 }
-/* AST_META: AST_ID=20 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 impl ItemLocalId {
     /// Signal local id which should never be used.
     pub const INVALID: ItemLocalId = ItemLocalId::MAX;
 }
-/* AST_META: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl StableOrd for ItemLocalId {
     const CAN_USE_UNSTABLE_SORT: bool = true;
@@ -191,15 +170,12 @@ impl StableOrd for ItemLocalId {
     // values and these are not changed by (de-)serialization.
     const THIS_IMPLEMENTATION_HAS_BEEN_TRIPLE_CHECKED: () = ();
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 /// The `HirId` corresponding to `CRATE_NODE_ID` and `CRATE_DEF_ID`.
 pub const CRATE_HIR_ID: HirId =
     HirId { owner: OwnerId { def_id: CRATE_DEF_ID }, local_id: ItemLocalId::ZERO };
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 pub const CRATE_OWNER_ID: OwnerId = OwnerId { def_id: CRATE_DEF_ID };
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=10 */
 
 impl<CTX: crate::rustc_span::HashStableContext> ToStableHashKey<CTX> for HirId {
     type KeyType = (DefPathHash, ItemLocalId);
@@ -210,7 +186,6 @@ impl<CTX: crate::rustc_span::HashStableContext> ToStableHashKey<CTX> for HirId {
         (def_path_hash, self.local_id)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for ItemLocalId {
     type KeyType = ItemLocalId;

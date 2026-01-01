@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/dump_mir.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // This pass just dumps MIR at a specified point.
 
 use std::fs::File;
 use std::io;
 
 use crate::rustc_complete::mir::{Body, write_mir_pretty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::{OutFileName, OutputType};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=name | COMPLEXITY=7 | LINES=14 */
 
 pub(super) struct Marker(pub &'static str);
 
@@ -24,7 +21,6 @@ impl<'tcx> crate::MirPass<'tcx> for Marker {
         false
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=emit_mir | COMPLEXITY=12 | LINES=17 */
 
 pub fn emit_mir(tcx: TyCtxt<'_>) -> io::Result<()> {
     match tcx.output_filenames(()).path(OutputType::Mir) {

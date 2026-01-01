@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/opaque_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
@@ -7,17 +6,12 @@ use crate::rustc_complete::intravisit;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::util::{CheckRegions, NotUniqueParam};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{DuplicateArg, NotParam};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OpaqueTypeCollector | COMPLEXITY=2 | LINES=14 */
 
 struct OpaqueTypeCollector<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -32,7 +26,6 @@ struct OpaqueTypeCollector<'tcx> {
 
     mode: CollectionMode,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 enum CollectionMode {
     /// For impl trait in assoc types we only permit collecting them from
@@ -44,7 +37,6 @@ enum CollectionMode {
     /// always defined by the current item.
     RpitAndAsyncFnOnly,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=100 | LINES=169 */
 
 impl<'tcx> OpaqueTypeCollector<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, item: LocalDefId) -> Self {
@@ -214,7 +206,6 @@ impl<'tcx> OpaqueTypeCollector<'tcx> {
         self.mode = CollectionMode::RpitAndAsyncFnOnly;
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> super::sig_types::SpannedTypeVisitor<'tcx> for OpaqueTypeCollector<'tcx> {
     #[instrument(skip(self), ret, level = "trace")]
@@ -222,7 +213,6 @@ impl<'tcx> super::sig_types::SpannedTypeVisitor<'tcx> for OpaqueTypeCollector<'t
         self.visit_spanned(span, value);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=60 | LINES=91 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for OpaqueTypeCollector<'tcx> {
     #[instrument(skip(self), ret, level = "trace")]
@@ -314,7 +304,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for OpaqueTypeCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=opaque_types_defined_by | COMPLEXITY=21 | LINES=56 */
 
 fn opaque_types_defined_by<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -371,7 +360,6 @@ fn opaque_types_defined_by<'tcx>(
     }
     tcx.mk_local_def_ids(&collector.opaques)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(super) fn provide(providers: &mut Providers) {
     *providers = Providers { opaque_types_defined_by, ..*providers };

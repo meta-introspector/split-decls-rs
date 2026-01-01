@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/promote_consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 // A pass that promotes borrows of constant rvalues.
 //
 // The rvalues considered constant are trees of temps, each with exactly one
@@ -15,27 +14,19 @@
 use std::assert_matches::assert_matches;
 use std::cell::Cell;
 use std::{cmp, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use either::{Left, Right};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_const_eval::check_consts::{ConstCx, qualifs};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, GenericArgs, List, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 /// A `MirPass` for promotion.
 ///
@@ -49,7 +40,6 @@ pub(super) struct PromoteTemps<'tcx> {
     // Must use `Cell` because `run_pass` takes `&self`, not `&mut self`.
     pub promoted_fragments: Cell<IndexVec<Promoted, Body<'tcx>>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=13 | LINES=27 */
 
 impl<'tcx> crate::MirPass<'tcx> for PromoteTemps<'tcx> {
     fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
@@ -77,7 +67,6 @@ impl<'tcx> crate::MirPass<'tcx> for PromoteTemps<'tcx> {
         true
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 /// State of a temporary during collection and promotion.
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -94,7 +83,6 @@ enum TempState {
     /// during promotion and needs cleanup.
     PromotedOut,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Candidate | COMPLEXITY=4 | LINES=8 */
 
 /// A "root candidate" for promotion, which will become the
 /// returned value in a promoted MIR, unless it's a subset
@@ -103,14 +91,12 @@ enum TempState {
 struct Candidate {
     location: Location,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Collector | COMPLEXITY=2 | LINES=6 */
 
 struct Collector<'a, 'tcx> {
     ccx: &'a ConstCx<'a, 'tcx>,
     temps: IndexVec<Local, TempState>,
     candidates: Vec<Candidate>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=45 | LINES=56 */
 
 impl<'tcx> Visitor<'tcx> for Collector<'_, 'tcx> {
     #[instrument(level = "debug", skip(self))]
@@ -167,7 +153,6 @@ impl<'tcx> Visitor<'tcx> for Collector<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=collect_temps_and_candidates | COMPLEXITY=6 | LINES=14 */
 
 fn collect_temps_and_candidates<'tcx>(
     ccx: &ConstCx<'_, 'tcx>,
@@ -182,7 +167,6 @@ fn collect_temps_and_candidates<'tcx>(
     }
     (collector.temps, collector.candidates)
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Validator | COMPLEXITY=3 | LINES=14 */
 
 /// Checks whether locals that appear in a promotion context (`Candidate`) are actually promotable.
 ///
@@ -197,7 +181,6 @@ struct Validator<'a, 'tcx> {
     /// not dead code. Here we cache the result of computing that set of basic blocks.
     promotion_safe_blocks: Option<FxHashSet<BasicBlock>>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'tcx> std::ops::Deref for Validator<'a, 'tcx> {
     type Target = ConstCx<'a, 'tcx>;
@@ -206,7 +189,6 @@ impl<'a, 'tcx> std::ops::Deref for Validator<'a, 'tcx> {
         self.ccx
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=Unpromotable; | COMPLEXITY=312 | LINES=509 */
 
 struct Unpromotable;
 
@@ -716,7 +698,6 @@ impl<'tcx> Validator<'_, 'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=validate_candidates | COMPLEXITY=3 | LINES=11 */
 
 fn validate_candidates(
     ccx: &ConstCx<'_, '_>,
@@ -728,7 +709,6 @@ fn validate_candidates(
     candidates.retain(|&candidate| validator.validate_candidate(candidate).is_ok());
     candidates
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Promoter | COMPLEXITY=5 | LINES=19 */
 
 struct Promoter<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -748,7 +728,6 @@ struct Promoter<'a, 'tcx> {
     /// This is initially false and then set by the visitor when it encounters a `Call` terminator.
     add_to_required: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new_block | COMPLEXITY=97 | LINES=229 */
 
 impl<'a, 'tcx> Promoter<'a, 'tcx> {
     fn new_block(&mut self) -> BasicBlock {
@@ -978,7 +957,6 @@ impl<'a, 'tcx> Promoter<'a, 'tcx> {
         self.promoted
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=16 | LINES=21 */
 
 /// Replaces all temporaries with their promoted counterparts.
 impl<'a, 'tcx> MutVisitor<'tcx> for Promoter<'a, 'tcx> {
@@ -1000,7 +978,6 @@ impl<'a, 'tcx> MutVisitor<'tcx> for Promoter<'a, 'tcx> {
         // Skipping `super_constant` as the visitor is otherwise only looking for locals.
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=promote_candidates | COMPLEXITY=46 | LINES=100 */
 
 fn promote_candidates<'tcx>(
     body: &mut Body<'tcx>,

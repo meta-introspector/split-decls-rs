@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_traits/src/coroutine_witnesses.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
 use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
 use crate::rustc_infer::traits::{Obligation, ObligationCause};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=37 */
 
 /// Return the set of types that should be taken into account when checking
 /// trait bounds on a coroutine's internal state. This properly replaces
@@ -47,7 +43,6 @@ pub(crate) fn coroutine_hidden_types<'tcx>(
         tcx.mk_bound_variable_kinds(&vars),
     ))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=compute_assumptions | COMPLEXITY=8 | LINES=46 */
 
 fn compute_assumptions<'tcx>(
     tcx: TyCtxt<'tcx>,

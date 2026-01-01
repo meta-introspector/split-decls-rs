@@ -1,32 +1,23 @@
 // SRC: ../rust/compiler/rustc_session/src/session.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::any::Any;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::str::FromStr;
 use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 use std::{env, io};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use rand::{RngCore, rng};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::flock;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::profiling::{SelfProfiler, SelfProfilerRef};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{DynSend, DynSync, Lock, MappedReadGuard, ReadGuard, RwLock};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::emitter::{
     DynEmitter, HumanEmitter, HumanReadableErrorType, OutputTheme, stderr_destination,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::json::JsonEmitter;
 use crate::rustc_complete::timings::TimingSectionHandler;
 use crate::rustc_complete::translation::Translator;
@@ -34,39 +25,31 @@ use crate::rustc_complete::{
     Diag, DiagCtxt, DiagCtxtHandle, DiagMessage, Diagnostic, ErrorGuaranteed, FatalAbort,
     LintEmitter, TerminalUrl, fallback_fluent_bundle,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::limit::Limit;
 use rustc_macros::HashStable_Generic;
 pub use crate::rustc_complete::def_id::StableCrateId;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileNameDisplayPreference, RealFileName, Span, Symbol};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_target::asm::InlineAsmArch;
 use crate::rustc_target::spec::{
     CodeModel, DebuginfoKind, PanicStrategy, RelocModel, RelroLevel, SanitizerSet,
     SmallDataThresholdSupport, SplitDebuginfo, StackProtector, SymbolVisibility, Target,
     TargetTuple, TlsModel, apple,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::code_stats::CodeStats;
 pub use crate::code_stats::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::config::{
     self, CoverageLevel, CoverageOptions, CrateType, DebugInfo, ErrorOutputType, FunctionReturn,
     Input, InstrumentCoverage, OptLevel, OutFileName, OutputType, RemapPathScopeComponents,
     SwitchWithOptPath,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::filesearch::FileSearch;
 use crate::lint::LintId;
 use crate::parse::{ParseSess, add_feature_diagnostics};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::search_paths::SearchPath;
 use crate::{errors, filesearch, lint};
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 /// The behavior of the CTFE engine when an error occurs with regards to backtraces.
 #[derive(Clone, Copy)]
@@ -79,7 +62,6 @@ pub enum CtfeBacktrace {
     /// Capture a backtrace at the point the error is created and immediately print it out.
     Immediate,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=Limits | COMPLEXITY=5 | LINES=14 */
 
 #[derive(Clone, Copy, Debug, HashStable_Generic)]
 pub struct Limits {
@@ -94,7 +76,6 @@ pub struct Limits {
     /// The maximum pattern complexity allowed (internal only).
     pub pattern_complexity_limit: Limit,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=CompilerIO | COMPLEXITY=2 | LINES=7 */
 
 pub struct CompilerIO {
     pub input: Input,
@@ -102,13 +83,11 @@ pub struct CompilerIO {
     pub output_file: Option<OutFileName>,
     pub temps_dir: Option<PathBuf>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=lint_groups_iter | COMPLEXITY=2 | LINES=5 */
 
 pub trait DynLintStore: Any + DynSync + DynSend {
     /// Provides a way to access lint groups without depending on `rustc_lint`
     fn lint_groups_iter(&self) -> Box<dyn Iterator<Item = LintGroup> + '_>;
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=Session | COMPLEXITY=18 | LINES=78 */
 
 /// Represents the data associated with a compilation
 /// session for a single crate.
@@ -187,7 +166,6 @@ pub struct Session {
     /// hard linked.
     pub invocation_temp: Option<String>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=emit_node_span_lint | COMPLEXITY=5 | LINES=14 */
 
 impl LintEmitter for &'_ Session {
     type Id = NodeId;
@@ -202,7 +180,6 @@ impl LintEmitter for &'_ Session {
         self.psess.buffer_lint(lint, span, node_id, decorator);
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Copy)]
 pub enum CodegenUnits {
@@ -215,7 +192,6 @@ pub enum CodegenUnits {
     /// CGUs.
     Default(usize),
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=as_usize | COMPLEXITY=7 | LINES=9 */
 
 impl CodegenUnits {
     pub fn as_usize(self) -> usize {
@@ -225,14 +201,12 @@ impl CodegenUnits {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=LintGroup | COMPLEXITY=2 | LINES=6 */
 
 pub struct LintGroup {
     pub name: &'static str,
     pub lints: Vec<LintId>,
     pub is_externally_loaded: bool,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=miri_unleashed_feature | COMPLEXITY=177 | LINES=365 */
 
 impl Session {
     pub fn miri_unleashed_feature(&self, span: Span, feature_gate: Option<Symbol>) {
@@ -598,7 +572,6 @@ impl Session {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=verbose_internals | COMPLEXITY=173 | LINES=347 */
 
 // JUSTIFICATION: defn of the suggested wrapper fns
 #[allow(rustc::bad_opt_access)]
@@ -946,7 +919,6 @@ impl Session {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=default_emitter | COMPLEXITY=38 | LINES=73 */
 
 // JUSTIFICATION: part of session construction
 #[allow(rustc::bad_opt_access)]
@@ -1020,7 +992,6 @@ fn default_emitter(
         ),
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=build_session | COMPLEXITY=53 | LINES=142 */
 
 // JUSTIFICATION: literally session construction
 #[allow(rustc::bad_opt_access)]
@@ -1163,7 +1134,6 @@ pub fn build_session(
 
     sess
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=validate_commandline_args_with_session_available | COMPLEXITY=213 | LINES=255 */
 
 /// Validate command line arguments with a `Session`.
 ///
@@ -1419,7 +1389,6 @@ fn validate_commandline_args_with_session_available(sess: &Session) {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 /// Holds data on the current incremental compilation session, if there is one.
 #[derive(Debug)]
@@ -1440,13 +1409,11 @@ enum IncrCompSession {
     /// not be used, since they might be invalid.
     InvalidBecauseOfErrors { session_directory: PathBuf },
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=EarlyDiagCtxt | COMPLEXITY=4 | LINES=5 */
 
 /// A wrapper around an [`DiagCtxt`] that is used for early error emissions.
 pub struct EarlyDiagCtxt {
     dcx: DiagCtxt,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=new | COMPLEXITY=16 | LINES=59 */
 
 impl EarlyDiagCtxt {
     pub fn new(output: ErrorOutputType) -> Self {
@@ -1506,7 +1473,6 @@ impl EarlyDiagCtxt {
         self.dcx.handle().struct_warn(msg)
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=mk_emitter | COMPLEXITY=18 | LINES=32 */
 
 fn mk_emitter(output: ErrorOutputType) -> Box<DynEmitter> {
     // FIXME(#100717): early errors aren't translated at the moment, so this is fine, but it will
@@ -1539,7 +1505,6 @@ fn mk_emitter(output: ErrorOutputType) -> Box<DynEmitter> {
     };
     emitter
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=for_scope | COMPLEXITY=2 | LINES=11 */
 
 pub trait RemapFileNameExt {
     type Output<'a>
@@ -1551,7 +1516,6 @@ pub trait RemapFileNameExt {
     /// One and only one scope should be passed to this method, it will panic otherwise.
     fn for_scope(&self, sess: &Session, scope: RemapPathScopeComponents) -> Self::Output<'_>;
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=for_scope | COMPLEXITY=10 | LINES=16 */
 
 impl RemapFileNameExt for crate::rustc_span::FileName {
     type Output<'a> = crate::rustc_span::FileNameDisplay<'a>;
@@ -1568,7 +1532,6 @@ impl RemapFileNameExt for crate::rustc_span::FileName {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=for_scope | COMPLEXITY=10 | LINES=16 */
 
 impl RemapFileNameExt for crate::rustc_span::RealFileName {
     type Output<'a> = &'a Path;

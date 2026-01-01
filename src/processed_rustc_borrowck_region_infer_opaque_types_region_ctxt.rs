@@ -1,24 +1,20 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/opaque_types/region_ctxt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::rc::Rc;
 
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_index::IndexVec;
 use crate::rustc_infer::infer::NllRegionVariableOrigin;
 use crate::rustc_complete::ty::{RegionVid, UniverseIndex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 
 use crate::BorrowckInferCtxt;
 use crate::constraints::ConstraintSccIndex;
 use crate::handle_placeholders::{SccAnnotations, region_definitions};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::region_infer::reverse_sccs::ReverseSccGraph;
 use crate::region_infer::values::RegionValues;
 use crate::region_infer::{
     ConstraintSccs, OutlivesConstraintSet, RegionDefinition, RegionTracker, Representative,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 use crate::type_check::MirTypeckRegionConstraints;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
 use crate::universal_regions::UniversalRegions;
@@ -34,7 +30,6 @@ pub(super) struct RegionCtxt<'a, 'tcx> {
     pub(super) rev_scc_graph: ReverseSccGraph,
     pub(super) scc_values: RegionValues<ConstraintSccIndex>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=105 */
 
 impl<'a, 'tcx> RegionCtxt<'a, 'tcx> {
     /// Creates a new `RegionCtxt` used to compute defining opaque type uses.

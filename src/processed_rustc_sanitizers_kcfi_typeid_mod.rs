@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_sanitizers/src/kcfi/typeid/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 // Type metadata identifiers for LLVM Kernel Control Flow Integrity (KCFI) and cross-language LLVM
 // KCFI support for the Rust compiler.
 //
@@ -9,12 +8,10 @@
 use std::hash::Hasher;
 
 use crate::rustc_complete::ty::{Instance, InstanceKind, ReifyReason, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::callconv::FnAbi;
 use twox_hash::XxHash64;
 
 pub use crate::cfi::typeid::{TypeIdOptions, itanium_cxx_abi};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=typeid_for_fnabi | COMPLEXITY=5 | LINES=13 */
 
 /// Returns a KCFI type metadata identifier for the specified FnAbi.
 pub fn typeid_for_fnabi<'tcx>(
@@ -28,7 +25,6 @@ pub fn typeid_for_fnabi<'tcx>(
     hash.write(itanium_cxx_abi::typeid_for_fnabi(tcx, fn_abi, options).as_bytes());
     hash.finish() as u32
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=typeid_for_instance | COMPLEXITY=20 | LINES=31 */
 
 /// Returns a KCFI type metadata identifier for the specified Instance.
 pub fn typeid_for_instance<'tcx>(

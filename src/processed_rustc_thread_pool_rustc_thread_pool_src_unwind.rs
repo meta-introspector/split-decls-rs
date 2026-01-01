@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/unwind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Package up unwind recovery. Note that if you are in some sensitive
 // place, you can use the `AbortIfPanic` helper to protect against
 // accidental panics in the rayon code itself.
 
 use std::any::Any;
 use std::panic::{self, AssertUnwindSafe};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use std::thread;
 
 /// Executes `f` and captures any panic, translating that panic into a
@@ -19,12 +17,10 @@ where
 {
     panic::catch_unwind(AssertUnwindSafe(func))
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(super) fn resume_unwinding(payload: Box<dyn Any + Send>) -> ! {
     panic::resume_unwind(payload)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=9 */
 
 pub(super) struct AbortIfPanic;
 

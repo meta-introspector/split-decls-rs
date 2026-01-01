@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/spawn/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::any::Any;
 use std::sync::Mutex;
 use std::sync::mpsc::channel;
 
 use super::{spawn, spawn_fifo};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{ThreadPoolBuilder, scope};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=spawn_then_join_in_worker | COMPLEXITY=3 | LINES=10 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -18,7 +15,6 @@ fn spawn_then_join_in_worker() {
     });
     assert_eq!(22, rx.recv().unwrap());
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=spawn_then_join_outside_worker | COMPLEXITY=2 | LINES=8 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -27,7 +23,6 @@ fn spawn_then_join_outside_worker() {
     spawn(move || tx.send(22).unwrap());
     assert_eq!(22, rx.recv().unwrap());
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=panic_fwd | COMPLEXITY=12 | LINES=26 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -54,7 +49,6 @@ fn panic_fwd() {
 
     assert_eq!(1, rx.recv().unwrap());
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=termination_while_things_are_executing | COMPLEXITY=7 | LINES=30 */
 
 /// Test what happens when the thread-pool is dropped but there are
 /// still active asynchronous tasks. We expect the thread-pool to stay
@@ -85,7 +79,6 @@ fn termination_while_things_are_executing() {
     let v = rx1.recv().unwrap();
     assert_eq!(v, 22);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=custom_panic_handler_and_spawn | COMPLEXITY=9 | LINES=28 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -114,7 +107,6 @@ fn custom_panic_handler_and_spawn() {
         panic!("did not receive a string from panic handler");
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=custom_panic_handler_and_nested_spawn | COMPLEXITY=17 | LINES=37 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -152,7 +144,6 @@ fn custom_panic_handler_and_nested_spawn() {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=19 | LINES=22 */
 
 macro_rules! test_order {
     ($outer_spawn:ident, $inner_spawn:ident) => {{
@@ -175,7 +166,6 @@ macro_rules! test_order {
         rx.iter().collect::<Vec<i32>>()
     }};
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=lifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -187,7 +177,6 @@ fn lifo_order() {
     let expected: Vec<i32> = (0..100).rev().collect(); // LIFO -> reversed
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -199,7 +188,6 @@ fn fifo_order() {
     let expected: Vec<i32> = (0..100).collect(); // FIFO -> natural order
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lifo_fifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -211,7 +199,6 @@ fn lifo_fifo_order() {
     let expected: Vec<i32> = (0..10).rev().flat_map(|i| (0..10).map(move |j| i * 10 + j)).collect();
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fifo_lifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -223,7 +210,6 @@ fn fifo_lifo_order() {
     let expected: Vec<i32> = (0..10).flat_map(|i| (0..10).rev().map(move |j| i * 10 + j)).collect();
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=7 */
 
 macro_rules! spawn_send {
     ($spawn:ident, $tx:ident, $i:expr) => {{
@@ -231,7 +217,6 @@ macro_rules! spawn_send {
         $spawn(move || tx.send($i).unwrap());
     }};
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=20 */
 
 /// Test mixed spawns pushing a series of numbers, interleaved such
 /// such that negative values are using the second kind of spawn.
@@ -252,7 +237,6 @@ macro_rules! test_mixed_order {
         rx.iter().collect::<Vec<i32>>()
     }};
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mixed_lifo_fifo_order | COMPLEXITY=2 | LINES=10 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -263,7 +247,6 @@ fn mixed_lifo_fifo_order() {
     let expected = vec![3, -1, 2, -2, 1, -3, 0];
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=mixed_fifo_lifo_order | COMPLEXITY=2 | LINES=10 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]

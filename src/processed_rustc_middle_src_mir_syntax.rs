@@ -1,33 +1,26 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/syntax.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // This defines the syntax of MIR, i.e., the set of available MIR operations, and other definitions
 // closely related to MIR semantics.
 // This is in a dedicated file so that changes to this file can be reviewed more carefully.
 // The intention is that this file only contains datatype declarations, no code.
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece, Mutability};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_complete::CoroutineKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::asm::InlineAsmRegOrRegClass;
 use smallvec::SmallVec;
 
 use super::{BasicBlock, Const, Local, UserTypeProjection};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mir::coverage::CoverageKind;
 use crate::ty::adjustment::PointerCoercion;
 use crate::ty::{self, GenericArgsRef, List, Region, Ty, UserTypeAnnotationIndex};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=28 | LINES=78 */
 
 /// Represents the "flavors" of MIR.
 ///
@@ -106,7 +99,6 @@ pub enum MirPhase {
     /// The phases of this dialect are described in `RuntimePhase`.
     Runtime(RuntimePhase),
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 /// See [`MirPhase::Analysis`].
 #[derive(Copy, Clone, TyEncodable, TyDecodable, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -129,7 +121,6 @@ pub enum AnalysisPhase {
     /// appear at all)
     PostCleanup = 1,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=24 */
 
 /// See [`MirPhase::Runtime`].
 #[derive(Copy, Clone, TyEncodable, TyDecodable, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -154,7 +145,6 @@ pub enum RuntimePhase {
     PostCleanup = 1,
     Optimized = 2,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=34 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Borrow kinds
@@ -189,7 +179,6 @@ pub enum BorrowKind {
     /// Data is mutable and not aliasable.
     Mut { kind: MutBorrowKind },
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, TyEncodable, TyDecodable)]
 #[derive(Hash, HashStable)]
@@ -206,7 +195,6 @@ pub enum RawPtrKind {
     /// to `RawPtrKind::Mut`, but will never incur a retag.
     FakeForPtrMetadata,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=50 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, TyEncodable, TyDecodable)]
 #[derive(Hash, HashStable)]
@@ -257,7 +245,6 @@ pub enum MutBorrowKind {
     /// borrow, it's just used when translating closures.
     ClosureCapture,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=37 | LINES=51 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, TyEncodable, TyDecodable)]
 #[derive(Hash, HashStable)]
@@ -309,7 +296,6 @@ pub enum FakeBorrowKind {
     /// ```
     Deep,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=62 | LINES=176 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Statements
@@ -486,7 +472,6 @@ pub enum StatementKind<'tcx> {
         reason: BackwardIncompatibleDropReason,
     },
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=36 */
 
 #[derive(
     Clone,
@@ -523,7 +508,6 @@ pub enum NonDivergingIntrinsic<'tcx> {
     /// I vaguely remember Ralf saying somewhere that he thought it should not be.
     CopyNonOverlapping(CopyNonOverlapping<'tcx>),
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 /// Describes what kind of retag is to be performed.
 #[derive(Copy, Clone, TyEncodable, TyDecodable, Debug, PartialEq, Eq, Hash, HashStable)]
@@ -538,7 +522,6 @@ pub enum RetagKind {
     /// A "normal" retag.
     Default,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=72 | LINES=107 */
 
 /// The `FakeReadCause` describes the type of pattern why a FakeRead statement exists.
 #[derive(Copy, Clone, TyEncodable, TyDecodable, Debug, Hash, HashStable, PartialEq)]
@@ -646,7 +629,6 @@ pub enum FakeReadCause {
     /// scope.
     ForIndex,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=CopyNonOverlapping | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, PartialEq, TyEncodable, TyDecodable, Hash, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -656,7 +638,6 @@ pub struct CopyNonOverlapping<'tcx> {
     /// Number of elements to copy from src to dest, not bytes.
     pub count: Operand<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 /// Represents how a [`TerminatorKind::Call`] was constructed.
 /// Used only for diagnostics.
@@ -679,7 +660,6 @@ pub enum CallSource {
     /// Normal function call, no special source
     Normal,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, TyEncodable, TyDecodable, Hash, HashStable, PartialEq)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -690,7 +670,6 @@ pub enum InlineAsmMacro {
     /// The `naked_asm!` macro
     NakedAsm,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=129 | LINES=317 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Terminators
@@ -1008,7 +987,6 @@ pub enum TerminatorKind<'tcx> {
         unwind: UnwindAction,
     },
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 #[derive(
     Clone,
@@ -1028,7 +1006,6 @@ pub enum BackwardIncompatibleDropReason {
     /// Used by the `macro_extended_temporary_scopes` lint.
     MacroExtendedScope,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=SwitchTargets | COMPLEXITY=6 | LINES=29 */
 
 #[derive(Debug, Clone, TyEncodable, TyDecodable, Hash, HashStable, PartialEq)]
 pub struct SwitchTargets {
@@ -1058,7 +1035,6 @@ pub struct SwitchTargets {
     // allocation, which is expensive if done frequently.
     pub(super) targets: SmallVec<[BasicBlock; 2]>,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 
 /// Action to be taken when a stack unwind happens.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
@@ -1078,7 +1054,6 @@ pub enum UnwindAction {
     /// Cleanups to be done.
     Cleanup(BasicBlock),
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// The reason we are terminating the process during unwinding.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
@@ -1090,7 +1065,6 @@ pub enum UnwindTerminateReason {
     /// triggered by the drop glue.
     InCleanup,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// Information about an assertion failure.
 #[derive(Clone, Hash, HashStable, PartialEq, Debug)]
@@ -1108,7 +1082,6 @@ pub enum AssertKind<O> {
     NullPointerDereference,
     InvalidEnumConstruction(O),
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=33 */
 
 #[derive(Clone, Debug, PartialEq, TyEncodable, TyDecodable, Hash, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -1142,7 +1115,6 @@ pub enum InlineAsmOperand<'tcx> {
         target_index: usize,
     },
 }
-/* AST_META: AST_ID=28 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=22 */
 
 /// Type for MIR `Assert` terminator error messages.
 pub type AssertMessage<'tcx> = AssertKind<Operand<'tcx>>;
@@ -1165,7 +1137,6 @@ pub type AssertMessage<'tcx> = AssertKind<Operand<'tcx>>;
 /// undecided aliasing model - we only include it here at all to acknowledge its existence.
 ///
 /// Each local naturally corresponds to the place `Place { local, projection: [] }`. This place has
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=36 */
 /// the address of the local's allocation and the type of the local.
 ///
 /// For places that are not locals, ie they have a non-empty list of projections, we define the
@@ -1202,7 +1173,6 @@ pub type AssertMessage<'tcx> = AssertKind<Operand<'tcx>>;
 ///    However, `Index` additionally takes a local from which the value of the index is computed at
 ///    runtime. Computing the value of the index involves interpreting the `Local` as a
 ///    `Place { local, projection: [] }`, and then computing its value as if done via
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=Place | COMPLEXITY=9 | LINES=25 */
 ///    [`Operand::Copy`]. The array/slice is then indexed with the resulting value. The local must
 ///    have type `usize`.
 ///  - [`Deref`](ProjectionElem::Deref): Derefs are the last type of projection, and the most
@@ -1228,7 +1198,6 @@ pub struct Place<'tcx> {
     /// projection out of a place (access a field, deref a pointer, etc)
     pub projection: &'tcx List<PlaceElem<'tcx>>,
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=32 | LINES=93 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
@@ -1322,7 +1291,6 @@ pub enum ProjectionElem<V, T> {
     /// `TypeId`.
     Subtype(T),
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=19 | LINES=52 */
 
 /// Alias for projections as they appear in places, where the base is a place
 /// and the index is a local.
@@ -1375,7 +1343,6 @@ pub enum Operand<'tcx> {
     /// Constants are already semantically values, and remain unchanged.
     Constant(Box<ConstOperand<'tcx>>),
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=ConstOperand | COMPLEXITY=6 | LINES=15 */
 
 #[derive(Clone, Copy, PartialEq, TyEncodable, TyDecodable, Hash, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -1391,7 +1358,6 @@ pub struct ConstOperand<'tcx> {
 
     pub const_: Const<'tcx>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=46 | LINES=137 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Rvalues
@@ -1529,7 +1495,6 @@ pub enum Rvalue<'tcx> {
     /// Wraps a value in an unsafe binder.
     WrapUnsafeBinder(Operand<'tcx>, Ty<'tcx>),
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=32 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
 pub enum CastKind {
@@ -1562,7 +1527,6 @@ pub enum CastKind {
     /// but running a transmute between differently-sized types is UB.
     Transmute,
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 /// Represents how a [`CastKind::PointerCoercion`] was constructed.
 /// Used only for diagnostics.
@@ -1573,7 +1537,6 @@ pub enum CoercionSource {
     /// The coercion was automatically inserted by the compiler.
     Implicit,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=34 */
 
 #[derive(Clone, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -1608,7 +1571,6 @@ pub enum AggregateKind<'tcx> {
     /// you may want an [`Rvalue::Cast`] with [`CastKind::PtrToPtr`] instead.
     RawPtr(Ty<'tcx>, Mutability),
 }
-/* AST_META: AST_ID=38 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
 pub enum NullOp<'tcx> {
@@ -1625,7 +1587,6 @@ pub enum NullOp<'tcx> {
     /// See the `contract_checks` intrinsic docs for details.
     ContractChecks,
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(HashStable, TyEncodable, TyDecodable, TypeFoldable, TypeVisitable)]
@@ -1644,7 +1605,6 @@ pub enum UnOp {
     /// Allowed only in [`MirPhase::Runtime`]; earlier it's an intrinsic.
     PtrMetadata,
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=26 | LINES=92 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
@@ -1737,7 +1697,6 @@ pub enum BinOp {
     /// The `ptr.offset` operator
     Offset,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 // Assignment operators, e.g. `+=`. See comments on the corresponding variants
 // in `BinOp` for details.
@@ -1754,7 +1713,6 @@ pub enum AssignOp {
     ShlAssign,
     ShrAssign,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=from | COMPLEXITY=10 | LINES=20 */
 
 // Sometimes `BinOp` and `AssignOp` need the same treatment. The operations
 // covered by `AssignOp` are a subset of those covered by `BinOp`, so it makes
@@ -1775,7 +1733,6 @@ impl From<AssignOp> for BinOp {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

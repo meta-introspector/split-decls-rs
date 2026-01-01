@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_ir/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 // Common utilities shared by both `rustc_ast` and `rustc_type_ir`.
 //
 // Don't depend on this crate directly; both of those crates should re-export
@@ -17,10 +16,8 @@ use std::fmt;
 
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "nightly")]
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -36,7 +33,6 @@ pub enum IntTy {
     I64,
     I128,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=name_str | COMPLEXITY=34 | LINES=59 */
 
 impl IntTy {
     pub fn name_str(&self) -> &'static str {
@@ -96,14 +92,12 @@ impl IntTy {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for IntTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.name_str())
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Copy)]
 #[cfg_attr(
@@ -118,7 +112,6 @@ pub enum UintTy {
     U64,
     U128,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=name_str | COMPLEXITY=34 | LINES=59 */
 
 impl UintTy {
     pub fn name_str(&self) -> &'static str {
@@ -178,14 +171,12 @@ impl UintTy {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for UintTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.name_str())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
@@ -198,7 +189,6 @@ pub enum FloatTy {
     F64,
     F128,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=name_str | COMPLEXITY=18 | LINES=30 */
 
 impl FloatTy {
     pub fn name_str(self) -> &'static str {
@@ -229,14 +219,12 @@ impl FloatTy {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for FloatTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.name_str())
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// The movability of a coroutine / closure literal:
 /// whether a coroutine contains self-references, causing it to be `!Unpin`.
@@ -251,7 +239,6 @@ pub enum Movability {
     /// Must not contain self-references, `Unpin`.
     Movable,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy)]
 #[cfg_attr(
@@ -263,7 +250,6 @@ pub enum Mutability {
     Not,
     Mut,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=invert | COMPLEXITY=35 | LINES=51 */
 
 impl Mutability {
     pub fn invert(self) -> Self {
@@ -315,7 +301,6 @@ impl Mutability {
         matches!(self, Self::Not)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy)]
 #[cfg_attr(

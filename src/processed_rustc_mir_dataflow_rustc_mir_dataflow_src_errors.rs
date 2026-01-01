@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_path_must_end_in_filename)]
@@ -10,7 +8,6 @@ pub(crate) struct PathMustEndInFilename {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_unknown_formatter)]
@@ -18,7 +15,6 @@ pub(crate) struct UnknownFormatter {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_duplicate_values_for)]
@@ -27,7 +23,6 @@ pub(crate) struct DuplicateValuesFor {
     pub span: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_requires_an_argument)]
@@ -36,7 +31,6 @@ pub(crate) struct RequiresAnArgument {
     pub span: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_stop_after_dataflow_ended_compilation)]
@@ -48,7 +42,6 @@ pub(crate) struct PeekMustBePlaceOrRefPlace {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_peek_must_be_not_temporary)]
@@ -56,7 +49,6 @@ pub(crate) struct PeekMustBeNotTemporary {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_peek_bit_not_set)]
@@ -64,7 +56,6 @@ pub(crate) struct PeekBitNotSet {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_peek_argument_not_a_local)]
@@ -72,7 +63,6 @@ pub(crate) struct PeekArgumentNotALocal {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_peek_argument_untracked)]

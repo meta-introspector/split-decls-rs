@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/example/mini_core_hello_world.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 // Adapted from https://github.com/sunfishcode/mir2cranelift/blob/master/rust-examples/nocore-hello-world.rs
 
 #[feature(
@@ -17,13 +16,11 @@ use mini_core::libc::*;
 unsafe extern "C" fn my_puts(s: *const u8) {
     puts(s);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=report | COMPLEXITY=2 | LINES=5 */
 
 #[lang = "termination"]
 trait Termination {
     fn report(self) -> i32;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=report | COMPLEXITY=10 | LINES=9 */
 
 impl Termination for () {
     fn report(self) -> i32 {
@@ -33,12 +30,10 @@ impl Termination for () {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=2 | LINES=4 */
 
 trait SomeTrait {
     fn object_safe(&self);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=10 | LINES=8 */
 
 impl SomeTrait for &'static str {
     fn object_safe(&self) {
@@ -47,19 +42,16 @@ impl SomeTrait for &'static str {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=NoisyDrop | COMPLEXITY=2 | LINES=5 */
 
 struct NoisyDrop {
     text: &'static str,
     inner: NoisyDropInner,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=NoisyDropUnsized | COMPLEXITY=2 | LINES=5 */
 
 struct NoisyDropUnsized {
     inner: NoisyDropInner,
     text: str,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=NoisyDropInner; | COMPLEXITY=10 | LINES=10 */
 
 struct NoisyDropInner;
 
@@ -70,7 +62,6 @@ impl Drop for NoisyDrop {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for NoisyDropInner {
     fn drop(&mut self) {
@@ -79,19 +70,16 @@ impl Drop for NoisyDropInner {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=object_safe | COMPLEXITY=5 | LINES=4 */
 
 impl SomeTrait for NoisyDrop {
     fn object_safe(&self) {}
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum Ordering {
     Less = -1,
     Equal = 0,
     Greater = 1,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=start | COMPLEXITY=20 | LINES=17 */
 
 #[lang = "start"]
 fn start<T: Termination + 'static>(
@@ -109,12 +97,10 @@ fn start<T: Termination + 'static>(
     main().report();
     0
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 static mut NUM: u8 = 6 * 7;
 
 static NUM_REF: &'static u8 = unsafe { &* &raw const NUM };
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=8 */
 
 macro_rules! assert {
     ($e:expr) => {
@@ -123,7 +109,6 @@ macro_rules! assert {
         }
     };
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=8 */
 
 macro_rules! assert_eq {
     ($l:expr, $r: expr) => {
@@ -132,38 +117,30 @@ macro_rules! assert_eq {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Unique | COMPLEXITY=2 | LINES=5 */
 
 struct Unique<T: ?Sized> {
     pointer: *const T,
     _marker: PhantomData<T>,
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: ?Sized, U: ?Sized> CoerceUnsized<Unique<U>> for Unique<T> where T: Unsize<U> {}
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 unsafe fn zeroed<T>() -> T {
     let mut uninit = MaybeUninit { uninit: () };
     intrinsics::write_bytes(&mut uninit.value.value as *mut T, 0, 1);
     uninit.value.value
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=take_f32 | COMPLEXITY=2 | LINES=2 */
 
 fn take_f32(_f: f32) {}
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=take_unique | COMPLEXITY=2 | LINES=1 */
 fn take_unique(_u: Unique<()>) {}
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=return_u128_pair | COMPLEXITY=2 | LINES=4 */
 
 fn return_u128_pair() -> (u128, u128) {
     (0, 0)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=call_return_u128_pair | COMPLEXITY=2 | LINES=4 */
 
 fn call_return_u128_pair() {
     return_u128_pair();
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=main | COMPLEXITY=58 | LINES=170 */
 
 fn main() {
     take_unique(Unique {
@@ -334,14 +311,12 @@ fn main() {
     #[cfg(not(jit))]
     test_tls();
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[repr(C)]
 enum c_void {
     _1,
     _2,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=pthread_attr_t | COMPLEXITY=2 | LINES=10 */
 
 type c_int = i32;
 type c_ulong = u64;
@@ -352,7 +327,6 @@ type pthread_t = c_ulong;
 struct pthread_attr_t {
     __size: [u64; 7],
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=pthread_attr_init | COMPLEXITY=2 | LINES=17 */
 
 #[link(name = "pthread")]
 extern "C" {
@@ -370,7 +344,6 @@ extern "C" {
         value: *mut *mut c_void
     ) -> c_int;
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 #[thread_local]
 #[cfg(not(jit))]
@@ -381,7 +354,6 @@ extern "C" fn mutate_tls(_: *mut c_void) -> *mut c_void {
     unsafe { TLS = 0; }
     0 as *mut c_void
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=test_tls | COMPLEXITY=14 | LINES=26 */
 
 #[cfg(not(jit))]
 fn test_tls() {
@@ -408,12 +380,10 @@ fn test_tls() {
         puts("TLS works!\n\0" as *const str as *const u8);
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 // Copied ui/issues/issue-61696.rs
 
 pub enum Infallible {}
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // The check that the `bool` field of `V1` is encoding a "niche variant"
 // (i.e. not `V1`, so `V3` or `V4`) used to be mathematically incorrect,
@@ -424,7 +394,6 @@ pub enum E1 {
     V3,
     V4,
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=43 */
 
 // Computing the discriminant used to be done using the niche type (here `u8`,
 // from the `bool` field of `V1`), overflowing for variants with large enough
@@ -468,7 +437,6 @@ pub enum E2<X> {
     V3,
     V4,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=check_niche_behavior | COMPLEXITY=11 | LINES=11 */
 
 #[allow(unreachable_patterns)]
 fn check_niche_behavior () {

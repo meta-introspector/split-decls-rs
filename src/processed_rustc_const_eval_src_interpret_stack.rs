@@ -1,35 +1,27 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/stack.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Manages the low-level pushing and popping of stack frames and the (de)allocation of local variables.
 // For handling of argument passing and return values, see the `call` module.
 use std::cell::Cell;
 use std::{fmt, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use either::{Either, Left, Right};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_hir as hir;
 use crate::rustc_complete::definitions::DefPathData;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_mir_dataflow::impls::always_storage_live_locals;
 use crate::rustc_complete::Span;
 use tracing::field::Empty;
 use tracing::{info_span, instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     AllocId, CtfeProvenance, Immediate, InterpCx, InterpResult, Machine, MemPlace, MemPlaceMeta,
     MemoryKind, Operand, PlaceTy, Pointer, Provenance, ReturnAction, Scalar, from_known_layout,
     interp_ok, throw_ub, throw_unsup,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{enter_trace_span, errors};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=SpanGuard(tracing::Span, | COMPLEXITY=11 | LINES=26 */
 
 // The Phantomdata exists to prevent this type from being `Send`. If it were sent across a thread
 // boundary and dropped in the other thread, it would exit the span in the other thread.
@@ -56,7 +48,6 @@ impl SpanGuard {
         });
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=6 | LINES=8 */
 
 impl Drop for SpanGuard {
     fn drop(&mut self) {
@@ -65,7 +56,6 @@ impl Drop for SpanGuard {
         });
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Frame | COMPLEXITY=15 | LINES=51 */
 
 /// A stack frame.
 pub struct Frame<'tcx, Prov: Provenance = CtfeProvenance, Extra = ()> {
@@ -117,7 +107,6 @@ pub struct Frame<'tcx, Prov: Provenance = CtfeProvenance, Extra = ()> {
     /// Needs to be public because ConstProp does unspeakable things to it.
     pub(super) loc: Either<mir::Location, Span>,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=15 */
 
 /// Where and how to continue when returning/unwinding from the current function.
 #[derive(Clone, Copy, Eq, PartialEq, Debug)] // Miri debug-prints these
@@ -133,7 +122,6 @@ pub enum ReturnContinuation {
     /// the entire `ecx` when it is done).
     Stop { cleanup: bool },
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=StackPopInfo | COMPLEXITY=2 | LINES=13 */
 
 /// Return type of [`InterpCx::pop_stack_frame_raw`].
 pub struct StackPopInfo<'tcx, Prov: Provenance> {
@@ -147,7 +135,6 @@ pub struct StackPopInfo<'tcx, Prov: Provenance> {
     /// [`return_place`](Frame::return_place) of the popped stack frame.
     pub return_place: PlaceTy<'tcx, Prov>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LocalState | COMPLEXITY=4 | LINES=9 */
 
 /// State of a local variable including a memoized layout
 #[derive(Clone)]
@@ -157,7 +144,6 @@ pub struct LocalState<'tcx, Prov: Provenance = CtfeProvenance> {
     /// Avoids computing the layout of locals that are never actually initialized.
     layout: Cell<Option<TyAndLayout<'tcx>>>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl<Prov: Provenance> std::fmt::Debug for LocalState<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -167,7 +153,6 @@ impl<Prov: Provenance> std::fmt::Debug for LocalState<'_, Prov> {
             .finish()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 /// Current value of a local variable
 ///
@@ -184,7 +169,6 @@ pub(super) enum LocalValue<Prov: Provenance = CtfeProvenance> {
     /// immediate values *and* never has its address taken.
     Live(Operand<Prov>),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=make_live_uninit | COMPLEXITY=23 | LINES=38 */
 
 impl<'tcx, Prov: Provenance> LocalState<'tcx, Prov> {
     pub fn make_live_uninit(&mut self) {
@@ -223,7 +207,6 @@ impl<'tcx, Prov: Provenance> LocalState<'tcx, Prov> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=FrameInfo | COMPLEXITY=2 | LINES=7 */
 
 /// What we store about a frame in an interpreter backtrace.
 #[derive(Clone, Debug)]
@@ -231,7 +214,6 @@ pub struct FrameInfo<'tcx> {
     pub instance: ty::Instance<'tcx>,
     pub span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=14 | LINES=16 */
 
 // FIXME: only used by miri, should be removed once translatable.
 impl<'tcx> fmt::Display for FrameInfo<'tcx> {
@@ -248,7 +230,6 @@ impl<'tcx> fmt::Display for FrameInfo<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=as_note | COMPLEXITY=13 | LINES=21 */
 
 impl<'tcx> FrameInfo<'tcx> {
     pub fn as_note(&self, tcx: TyCtxt<'tcx>) -> errors::FrameNote {
@@ -270,7 +251,6 @@ impl<'tcx> FrameInfo<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=with_extra | COMPLEXITY=4 | LINES=15 */
 
 impl<'tcx, Prov: Provenance> Frame<'tcx, Prov> {
     pub fn with_extra<Extra>(self, extra: Extra) -> Frame<'tcx, Prov, Extra> {
@@ -286,7 +266,6 @@ impl<'tcx, Prov: Provenance> Frame<'tcx, Prov> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=current_loc | COMPLEXITY=42 | LINES=80 */
 
 impl<'tcx, Prov: Provenance, Extra> Frame<'tcx, Prov, Extra> {
     /// Get the current location within the Frame.
@@ -367,7 +346,6 @@ impl<'tcx, Prov: Provenance, Extra> Frame<'tcx, Prov, Extra> {
         frames
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=storage_live_dyn | COMPLEXITY=123 | LINES=280 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Very low-level helper that pushes a stack frame without initializing
@@ -648,7 +626,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         interp_ok(layout)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=44 */
 
 impl<'tcx, Prov: Provenance> LocalState<'tcx, Prov> {
     pub(super) fn print(

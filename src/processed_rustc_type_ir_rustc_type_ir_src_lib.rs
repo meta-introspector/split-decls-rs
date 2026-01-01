@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 #[cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir")]
 // tidy-alphabetical-start
 #[allow(rustc::direct_use_of_rustc_type_ir)]
@@ -19,7 +18,6 @@ use std::hash::Hash;
 
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable, Encodable, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=58 */
 
 // These modules are `pub` since they are not glob-imported.
 #[cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir_inherent")]
@@ -47,7 +45,6 @@ pub use predicate::*;
 pub use predicate_kind::*;
 pub use region_kind::*;
 pub use rustc_ast_ir::{FloatTy, IntTy, Movability, Mutability, Pinnedness, UintTy};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=DebruijnIndex | COMPLEXITY=11 | LINES=54 */
 pub use ty_info::*;
 pub use ty_kind::*;
 pub use upcast::*;
@@ -102,7 +99,6 @@ crate::rustc_index::newtype_index! {
         const INNERMOST = 0;
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=shifted_in | COMPLEXITY=19 | LINES=64 */
 
 impl DebruijnIndex {
     /// Returns the resulting index when this value is moved into
@@ -167,7 +163,6 @@ impl DebruijnIndex {
         self.shifted_out(to_binder.as_u32() - INNERMOST.as_u32())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=debug_bound_var | COMPLEXITY=9 | LINES=12 */
 
 pub fn debug_bound_var<T: std::fmt::Write>(
     fmt: &mut T,
@@ -180,7 +175,6 @@ pub fn debug_bound_var<T: std::fmt::Write>(
         write!(fmt, "^{}_{:?}", debruijn.index(), var)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "nightly", derive(Decodable, Encodable, HashStable_NoContext))]
@@ -191,7 +185,6 @@ pub enum Variance {
     Contravariant, // T<A> <: T<B> iff B <: A -- e.g., function param type
     Bivariant,     // T<A> <: T<B>            -- e.g., unused type parameter
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=xform | COMPLEXITY=14 | LINES=60 */
 
 impl Variance {
     /// `a.xform(b)` combines the variance of a context with the
@@ -252,7 +245,6 @@ impl Variance {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=11 */
 
 impl fmt::Debug for Variance {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -264,7 +256,6 @@ impl fmt::Debug for Variance {
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UniverseIndex | COMPLEXITY=12 | LINES=44 */
 
 crate::rustc_index::newtype_index! {
     /// "Universes" are used during type- and trait-checking in the
@@ -309,7 +300,6 @@ crate::rustc_index::newtype_index! {
     #[gate_rustc_only]
     pub struct UniverseIndex {}
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=next_universe | COMPLEXITY=18 | LINES=40 */
 
 impl UniverseIndex {
     pub const ROOT: UniverseIndex = UniverseIndex::ZERO;
@@ -350,14 +340,12 @@ impl UniverseIndex {
         self == Self::ROOT
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl Default for UniverseIndex {
     fn default() -> Self {
         Self::ROOT
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BoundVar | COMPLEXITY=4 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     #[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
@@ -367,7 +355,6 @@ crate::rustc_index::newtype_index! {
     #[gate_rustc_only]
     pub struct BoundVar {}
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// Represents the various closure traits in the language. This
 /// will determine the type of the environment (`self`, in the
@@ -382,7 +369,6 @@ pub enum ClosureKind {
     FnMut,
     FnOnce,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=extends | COMPLEXITY=15 | LINES=26 */
 
 impl ClosureKind {
     /// This is the initial value used when doing upvar inference.
@@ -409,7 +395,6 @@ impl ClosureKind {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for ClosureKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

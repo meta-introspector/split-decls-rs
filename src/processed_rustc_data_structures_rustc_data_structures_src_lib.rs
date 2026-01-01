@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=44 */
 // Various data structures used by the Rust compiler. The intention
 // is that code in here should not be *specific* to rustc, so that
 // it can be easily unit tested and so forth.
@@ -44,7 +43,6 @@ use std::fmt;
 
 pub use atomic_ref::AtomicRef;
 pub use ena::{snapshot_vec, undo_log, unify};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=outline | COMPLEXITY=5 | LINES=48 */
 pub use crate::rustc_index::static_assert_size;
 
 
@@ -55,13 +53,11 @@ pub use crate::rustc_index::static_assert_size;
 pub fn outline<F: FnOnce() -> R, R>(f: F) -> R {
     f()
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=defer | COMPLEXITY=2 | LINES=5 */
 
 /// Returns a structure that calls `f` when dropped.
 pub fn defer<F: FnOnce()>(f: F) -> OnDrop<F> {
     OnDrop(Some(f))
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=OnDrop | COMPLEXITY=3 | LINES=10 */
 
 pub struct OnDrop<F: FnOnce()>(Option<F>);
 
@@ -72,7 +68,6 @@ impl<F: FnOnce()> OnDrop<F> {
         self.0.take();
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=8 | LINES=9 */
 
 impl<F: FnOnce()> Drop for OnDrop<F> {
     #[inline]
@@ -82,7 +77,6 @@ impl<F: FnOnce()> Drop for OnDrop<F> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=FatalErrorMarker; | COMPLEXITY=11 | LINES=20 */
 
 /// This is a marker for a fatal compiler error used with `resume_unwind`.
 pub struct FatalErrorMarker;
@@ -103,12 +97,10 @@ pub fn make_display(f: impl Fn(&mut fmt::Formatter<'_>) -> fmt::Result) -> impl 
 
     Printer { f }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=__noop_fix_for_windows_dllimport_issue | COMPLEXITY=2 | LINES=4 */
 
 // See comment in compiler/rustc_middle/src/tests.rs and issue #27438.
 #[doc(hidden)]
 pub fn __noop_fix_for_windows_dllimport_issue() {}
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=11 */
 
 #[macro_export]
 macro_rules! external_bitflags_debug {

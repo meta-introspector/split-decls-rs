@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/unreachable_prop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // A pass that propagates the unreachable terminator of a block to its predecessors
 // when all of their successors are unreachable. This is achieved through a
 // post-order traversal of the blocks.
@@ -10,7 +9,6 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=29 | LINES=50 */
 
 use crate::patch::MirPatch;
 
@@ -61,7 +59,6 @@ impl crate::MirPass<'_> for UnreachablePropagation {
         false
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=remove_successors_from_switch | COMPLEXITY=41 | LINES=94 */
 
 /// Return whether the current terminator is fully unreachable.
 fn remove_successors_from_switch<'tcx>(

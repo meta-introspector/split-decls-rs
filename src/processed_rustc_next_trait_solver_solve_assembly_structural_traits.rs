@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/assembly/structural_traits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 // Code which is used by built-in goals that match "structurally", such a auto
 // traits, `Copy`/`Clone`.
 
@@ -7,21 +6,17 @@ use derive_where::derive_where;
 use rustc_type_ir::data_structures::HashMap;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::lang_items::{SolverLangItem, SolverTraitLangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_type_ir::solve::SizedTraitKind;
 use rustc_type_ir::solve::inspect::ProbeKind;
 use rustc_type_ir::{
     self as ty, FallibleTypeFolder, Interner, Movability, Mutability, TypeFoldable,
     TypeSuperFoldable, Upcast as _, elaborate,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{AdtDestructorKind, EvalCtxt, Goal, NoSolution};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=87 */
 
 // Calculates the constituent types of a type for `auto trait` purposes.
 #[instrument(level = "trace", skip(ecx), ret)]
@@ -109,7 +104,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=71 | LINES=79 */
 
 #[instrument(level = "trace", skip(ecx), ret)]
 pub fn instantiate_constituent_tys_for_sizedness_trait<D, I>(
@@ -189,7 +183,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=82 */
 
 #[instrument(level = "trace", skip(ecx), ret)]
 pub fn instantiate_constituent_tys_for_copy_clone_trait<D, I>(
@@ -272,7 +265,6 @@ where
             .map_bound(|bound| bound.types.to_vec())),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=61 | LINES=138 */
 
 // Returns a binder of the tupled inputs types and output type from a builtin callable type.
 pub fn extract_tupled_inputs_and_output_from_callable<I: Interner>(
@@ -411,7 +403,6 @@ pub fn extract_tupled_inputs_and_output_from_callable<I: Interner>(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Relevant types for an async callable, including its inputs, output,
 /// and the return type you get from awaiting the output.
@@ -426,7 +417,6 @@ pub struct AsyncCallableRelevantTypes<I: Interner> {
     /// i.e. `f().await`.
     pub coroutine_return_ty: I::Ty,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=159 */
 
 // Returns a binder of the tupled inputs types, output type, and coroutine type
 // from a builtin coroutine-closure type. If we don't yet know the closure kind of
@@ -586,7 +576,6 @@ pub fn extract_tupled_inputs_and_output_from_async_callable<I: Interner>(
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fn_item_to_async_callable | COMPLEXITY=4 | LINES=23 */
 
 fn fn_item_to_async_callable<I: Interner>(
     cx: I,
@@ -610,7 +599,6 @@ fn fn_item_to_async_callable<I: Interner>(
         nested,
     ))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=coroutine_closure_to_certain_coroutine | COMPLEXITY=3 | LINES=21 */
 
 /// Given a coroutine-closure, project to its returned coroutine when we are *certain*
 /// that the closure's kind is compatible with the goal.
@@ -632,7 +620,6 @@ fn coroutine_closure_to_certain_coroutine<I: Interner>(
         args.coroutine_captures_by_ref_ty(),
     )
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=coroutine_closure_to_ambiguous_coroutine | COMPLEXITY=4 | LINES=35 */
 
 /// Given a coroutine-closure, project to its returned coroutine when we are *not certain*
 /// that the closure's kind is compatible with the goal, and therefore also don't know
@@ -668,7 +655,6 @@ fn coroutine_closure_to_ambiguous_coroutine<I: Interner>(
         tupled_upvars_ty,
     )
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=71 */
 
 /// This duplicates `extract_tupled_inputs_and_output_from_callable` but needs
 /// to return different information (namely, the def id and args) so that we can
@@ -740,7 +726,6 @@ pub fn extract_fn_def_from_const_callable<I: Interner>(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=81 */
 
 // NOTE: Keep this in sync with `evaluate_host_effect_for_destruct_goal` in
 // the old solver, for as long as that exists.
@@ -822,7 +807,6 @@ pub fn const_conditions_for_destruct<I: Interner>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 /// Assemble a list of predicates that would be present on a theoretical
 /// user impl for an object type. These predicates must be checked any time
@@ -835,10 +819,8 @@ pub fn const_conditions_for_destruct<I: Interner>(
 /// trait Foo: Baz {
 ///     type Bar: Copy;
 /// }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 ///
 /// trait Baz {}
-/* AST_META: AST_ID=18 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 /// ```
 ///
 /// For the dyn type `dyn Foo<Item = Ty>`, we can imagine there being a
@@ -852,10 +834,8 @@ pub fn const_conditions_for_destruct<I: Interner>(
 /// {
 ///     type Bar = Ty;
 /// }
-/* AST_META: AST_ID=19 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 ///
 /// impl Baz for dyn Foo<Item = Ty> {}
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=72 */
 /// ```
 ///
 /// However, in order to make such impls non-cyclical, we need to do an
@@ -928,7 +908,6 @@ where
         .chain(requirements.into_iter().map(|clause| Goal::new(cx, param_env, clause)))
         .collect())
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=ReplaceProjectionWith | COMPLEXITY=2 | LINES=8 */
 
 struct ReplaceProjectionWith<'a, 'b, I: Interner, D: SolverDelegate<Interner = I>> {
     ecx: &'a mut EvalCtxt<'b, D>,
@@ -937,7 +916,6 @@ struct ReplaceProjectionWith<'a, 'b, I: Interner, D: SolverDelegate<Interner = I
     mapping: &'a HashMap<I::DefId, Vec<ty::Binder<I, ty::ProjectionPredicate<I>>>>,
     nested: Vec<Goal<I, I::Predicate>>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=projection_may_match | COMPLEXITY=24 | LINES=67 */
 
 impl<D, I> ReplaceProjectionWith<'_, '_, I, D>
 where
@@ -1005,7 +983,6 @@ where
         Ok(Some(replacement.term))
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=13 | LINES=25 */
 
 /// Marker for bailing with ambiguity.
 pub(crate) struct Ambiguous;

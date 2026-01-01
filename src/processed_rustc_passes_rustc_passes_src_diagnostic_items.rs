@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/diagnostic_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // Detecting diagnostic items.
 //
 // Diagnostic items are items that are not language-inherent, but can reasonably be expected to
@@ -13,14 +12,10 @@
 
 use crate::rustc_complete::diagnostic_items::DiagnosticItems;
 use crate::rustc_complete::{Attribute, CRATE_OWNER_ID, OwnerId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=observe_item | COMPLEXITY=5 | LINES=10 */
 
 use crate::errors::DuplicateDiagnosticItemInCrate;
 
@@ -31,7 +26,6 @@ fn observe_item<'tcx>(tcx: TyCtxt<'tcx>, diagnostic_items: &mut DiagnosticItems,
         collect_item(tcx, diagnostic_items, name, owner.to_def_id());
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=collect_item | COMPLEXITY=8 | LINES=9 */
 
 fn collect_item(tcx: TyCtxt<'_>, items: &mut DiagnosticItems, name: Symbol, item_def_id: DefId) {
     items.id_to_name.insert(item_def_id, name);
@@ -41,7 +35,6 @@ fn collect_item(tcx: TyCtxt<'_>, items: &mut DiagnosticItems, name: Symbol, item
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=report_duplicate_item | COMPLEXITY=4 | LINES=18 */
 
 fn report_duplicate_item(
     tcx: TyCtxt<'_>,
@@ -60,7 +53,6 @@ fn report_duplicate_item(
         name,
     });
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=extract | COMPLEXITY=7 | LINES=7 */
 
 /// Extract the first `rustc_diagnostic_item = "$name"` out of a list of attributes.
 fn extract(attrs: &[Attribute]) -> Option<Symbol> {
@@ -68,7 +60,6 @@ fn extract(attrs: &[Attribute]) -> Option<Symbol> {
         if attr.has_name(sym::rustc_diagnostic_item) { attr.value_str() } else { None }
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=diagnostic_items | COMPLEXITY=5 | LINES=14 */
 
 /// Traverse and collect the diagnostic items in the current
 fn diagnostic_items(tcx: TyCtxt<'_>, _: LocalCrate) -> DiagnosticItems {
@@ -83,7 +74,6 @@ fn diagnostic_items(tcx: TyCtxt<'_>, _: LocalCrate) -> DiagnosticItems {
 
     diagnostic_items
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=all_diagnostic_items | COMPLEXITY=9 | LINES=21 */
 
 /// Traverse and collect all the diagnostic items in all crates.
 fn all_diagnostic_items(tcx: TyCtxt<'_>, (): ()) -> DiagnosticItems {
@@ -105,7 +95,6 @@ fn all_diagnostic_items(tcx: TyCtxt<'_>, (): ()) -> DiagnosticItems {
 
     items
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.diagnostic_items = diagnostic_items;

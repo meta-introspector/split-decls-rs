@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/gvn.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=74 */
 // Global value numbering.
 //
 // MIR may contain repeated and/or redundant computations. The objective of this pass is to detect
@@ -74,11 +73,9 @@
 // fn foo() -> u8 {
 //     **A // We want to replace by 63.
 // }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // fn bar() -> u8 {
 //     b"abc"[1] // We want to replace by 'b'.
 // }
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 // ```
 //
 // The `Value::Constant` variant stores a possibly unevaluated constant. Evaluating that constant
@@ -93,31 +90,25 @@ use std::borrow::Cow;
 use either::Either;
 use itertools::Itertools as _;
 use crate::rustc_abi::{self as abi, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, VariantIdx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_const_eval::const_eval::DummyMachine;
 use rustc_const_eval::interpret::{
     ImmTy, Immediate, InterpCx, MemPlaceMeta, MemoryKind, OpTy, Projectable, Scalar,
     intern_const_alloc_for_constprop,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexSet, MutableValues};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::{IndexVec, newtype_index};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::GlobalAlloc;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::layout::HasTypingEnv;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=22 | LINES=48 */
 
 use crate::ssa::SsaLocals;
 
@@ -166,19 +157,16 @@ impl<'tcx> crate::MirPass<'tcx> for GVN {
         false
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=VnIndex | COMPLEXITY=3 | LINES=4 */
 
 newtype_index! {
     struct VnIndex {}
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 enum AddressKind {
     Ref(BorrowKind),
     Address(RawPtrKind),
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=52 */
 
 #[derive(Debug, PartialEq, Eq, Hash)]
 enum Value<'tcx> {
@@ -231,7 +219,6 @@ enum Value<'tcx> {
         value: VnIndex,
     },
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=VnState | COMPLEXITY=5 | LINES=22 */
 
 struct VnState<'body, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -254,7 +241,6 @@ struct VnState<'body, 'tcx> {
     dominators: Dominators<BasicBlock>,
     reused_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=638 | LINES=1273 */
 
 impl<'body, 'tcx> VnState<'body, 'tcx> {
     fn new(
@@ -1528,7 +1514,6 @@ impl<'body, 'tcx> VnState<'body, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=op_to_prop_const | COMPLEXITY=40 | LINES=78 */
 
 fn op_to_prop_const<'tcx>(
     ecx: &mut InterpCx<'tcx, DummyMachine>,
@@ -1607,7 +1592,6 @@ fn op_to_prop_const<'tcx>(
 
     None
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_as_operand | COMPLEXITY=45 | LINES=86 */
 
 impl<'tcx> VnState<'_, 'tcx> {
     /// If either [`Self::try_as_constant`] as [`Self::try_as_place`] succeeds,
@@ -1694,7 +1678,6 @@ impl<'tcx> VnState<'_, 'tcx> {
             .copied()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=50 | LINES=80 */
 
 impl<'tcx> MutVisitor<'tcx> for VnState<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -1775,13 +1758,11 @@ impl<'tcx> MutVisitor<'tcx> for VnState<'_, 'tcx> {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=StorageRemover | COMPLEXITY=2 | LINES=5 */
 
 struct StorageRemover<'tcx> {
     tcx: TyCtxt<'tcx>,
     reused_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=18 | LINES=27 */
 
 impl<'tcx> MutVisitor<'tcx> for StorageRemover<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/solve.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
 use rustc_type_ir as ir;
@@ -9,7 +8,6 @@ use crate::ty::{
     self, FallibleTypeFolder, TyCtxt, TypeFoldable, TypeFolder, TypeVisitable, TypeVisitor,
     try_visit,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=PredefinedOpaques | COMPLEXITY=6 | LINES=18 */
 
 pub type Goal<'tcx, P> = ir::solve::Goal<TyCtxt<'tcx>, P>;
 pub type QueryInput<'tcx, P> = ir::solve::QueryInput<TyCtxt<'tcx>, P>;
@@ -28,7 +26,6 @@ impl<'tcx> std::ops::Deref for PredefinedOpaques<'tcx> {
         &self.0
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=ExternalConstraints | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, HashStable)]
 pub struct ExternalConstraints<'tcx>(
@@ -42,7 +39,6 @@ impl<'tcx> std::ops::Deref for ExternalConstraints<'tcx> {
         &self.0
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=20 | LINES=47 */
 
 // FIXME: Having to clone `region_constraints` for folding feels bad and
 // probably isn't great wrt performance.
@@ -90,7 +86,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ExternalConstraints<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ExternalConstraints<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
@@ -99,7 +94,6 @@ impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ExternalConstraints<'tcx> {
         self.normalization_nested_goals.visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=12 | LINES=26 */
 
 // FIXME: Having to clone `region_constraints` for folding feels bad and
 // probably isn't great wrt performance.
@@ -126,7 +120,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for PredefinedOpaques<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for PredefinedOpaques<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {

@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_interface/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::io;
 use std::path::Path;
 
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(interface_crate_name_does_not_match)]
@@ -15,14 +13,12 @@ pub(crate) struct CrateNameDoesNotMatch {
     pub(crate) crate_name: Symbol,
     pub(crate) attr_crate_name: Symbol,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(interface_crate_name_invalid)]
 pub(crate) struct CrateNameInvalid<'a> {
     pub(crate) crate_name: &'a str,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FerrisIdentifier | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(interface_ferris_identifier)]
@@ -33,7 +29,6 @@ pub struct FerrisIdentifier {
     pub first_span: Span,
     pub ferris_fix: &'static str,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=EmojiIdentifier | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(interface_emoji_identifier)]
@@ -42,7 +37,6 @@ pub struct EmojiIdentifier {
     pub spans: Vec<Span>,
     pub ident: Symbol,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MixedBinCrate; | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(interface_mixed_bin_crate)]
@@ -58,14 +52,12 @@ pub struct ErrorWritingDependencies<'a> {
     pub path: &'a Path,
     pub error: io::Error,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=InputFileWouldBeOverWritten | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(interface_input_file_would_be_overwritten)]
 pub struct InputFileWouldBeOverWritten<'a> {
     pub path: &'a Path,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=GeneratedFileConflictsWithDirectory | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(interface_generated_file_conflicts_with_directory)]
@@ -73,7 +65,6 @@ pub struct GeneratedFileConflictsWithDirectory<'a> {
     pub input_path: &'a Path,
     pub dir_path: &'a Path,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=TempsDirError; | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(interface_temps_dir_error)]
@@ -89,7 +80,6 @@ pub struct FailedWritingFile<'a> {
     pub path: &'a Path,
     pub error: io::Error,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ProcMacroCratePanicAbort; | COMPLEXITY=3 | LINES=29 */
 
 #[derive(Diagnostic)]
 #[diag(interface_proc_macro_crate_panic_abort)]

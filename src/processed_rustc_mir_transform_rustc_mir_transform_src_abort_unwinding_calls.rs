@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/abort_unwinding_calls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::InlineAsmOptions;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, TyCtxt, layout};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=81 | LINES=118 */
 use crate::rustc_target::spec::PanicStrategy;
 
 /// A pass that runs which is targeted at ensuring that codegen guarantees about

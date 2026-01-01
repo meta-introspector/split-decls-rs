@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_index_macros/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=newtype_index | COMPLEXITY=8 | LINES=40 */
 // tidy-alphabetical-start
 #[cfg_attr(feature = "nightly", allow(internal_features))]
 #[cfg_attr(feature = "nightly", feature(allow_internal_unstable))]

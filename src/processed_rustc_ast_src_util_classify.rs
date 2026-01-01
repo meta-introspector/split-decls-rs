@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_ast/src/util/classify.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Routines the parser and pretty-printer use to classify AST nodes.
 
 use crate::ast::ExprKind::*;
 use crate::ast::{self, MatchKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=25 */
 use crate::token::Delimiter;
 
 /// This classification determines whether various syntactic positions break out
@@ -30,11 +28,9 @@ use crate::token::Delimiter;
 ///     _ => $e |
 ///             ^
 /// }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=3 */
 /// ```
 ///
 /// If $e is something like `{}` or `if … {}`, then terminate the current
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=expr_is_complete | COMPLEXITY=6 | LINES=20 */
 /// arm and parse a new arm.
 ///
 /// If $e is something like `path::to` or `(…)`, continue parsing the same
@@ -55,7 +51,6 @@ pub fn expr_is_complete(e: &ast::Expr) -> bool {
             | ConstBlock(..)
     )
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 /// Does this expression require a semicolon to be treated as a statement?
 ///
@@ -65,15 +60,12 @@ pub fn expr_is_complete(e: &ast::Expr) -> bool {
 ///
 /// ```ignore (illustrative)
 /// if true {...} else {...}
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
 /// |x| 5
 /// ```
 ///
 /// isn't parsed as `(if true {...} else {...} | x) | 5`.
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 ///
 /// Surprising special case: even though braced macro calls like `m! {}`
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=7 */
 /// normally do not introduce a boundary when found at the head of a match arm,
 /// they do terminate the parsing of a statement.
 ///
@@ -81,10 +73,8 @@ pub fn expr_is_complete(e: &ast::Expr) -> bool {
 /// match ... {
 ///     _ => m! {} (),  // macro that expands to a function, which is then called
 /// }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 ///
 /// let _ = { m! {} () };  // macro call followed by unit
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=expr_requires_semi_to_be_stmt | COMPLEXITY=6 | LINES=7 */
 /// ```
 pub fn expr_requires_semi_to_be_stmt(e: &ast::Expr) -> bool {
     match &e.kind {
@@ -92,11 +82,9 @@ pub fn expr_requires_semi_to_be_stmt(e: &ast::Expr) -> bool {
         _ => !expr_is_complete(e),
     }
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 
 /// Returns whether the leftmost token of the given expression is the label of a
 /// labeled loop or block, such as in `'inner: loop { break 'inner 1 } + 1`.
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=13 */
 ///
 /// Such expressions are not allowed as the value of an unlabeled break.
 ///
@@ -110,7 +98,6 @@ pub fn expr_requires_semi_to_be_stmt(e: &ast::Expr) -> bool {
 ///
 ///     break ('inner: loop { break 'inner 1 }) + 1;  // okay
 /// }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=leading_labeled_expr | COMPLEXITY=16 | LINES=62 */
 /// ```
 pub fn leading_labeled_expr(mut expr: &ast::Expr) -> bool {
     loop {
@@ -173,7 +160,6 @@ pub fn leading_labeled_expr(mut expr: &ast::Expr) -> bool {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 pub enum TrailingBrace<'a> {
     /// Trailing brace in a macro call, like the one in `x as *const brace! {}`.
@@ -183,7 +169,6 @@ pub enum TrailingBrace<'a> {
     /// suggest wrapping the innermost expression in parentheses: `a + (B {})`.
     Expr(&'a ast::Expr),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=expr_trailing_brace | COMPLEXITY=24 | LINES=75 */
 
 /// If an expression ends with `}`, returns the innermost expression ending in the `}`
 pub fn expr_trailing_brace(mut expr: &ast::Expr) -> Option<TrailingBrace<'_>> {
@@ -259,7 +244,6 @@ pub fn expr_trailing_brace(mut expr: &ast::Expr) -> Option<TrailingBrace<'_>> {
                 break None;
             }
         }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=type_trailing_braced_mac_call | COMPLEXITY=11 | LINES=11 */
     }
 }
 
@@ -271,31 +255,26 @@ fn type_trailing_braced_mac_call(mut ty: &ast::Ty) -> Option<&ast::MacCall> {
             ast::TyKind::MacCall(mac) => {
                 break (mac.args.delim == Delimiter::Brace).then_some(mac);
             }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
             ast::TyKind::Ptr(mut_ty)
             | ast::TyKind::Ref(_, mut_ty)
             | ast::TyKind::PinnedRef(_, mut_ty) => {
                 ty = &mut_ty.ty;
             }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
             ast::TyKind::UnsafeBinder(binder) => {
                 ty = &binder.inner_ty;
             }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 
             ast::TyKind::FnPtr(fn_ty) => match &fn_ty.decl.output {
                 ast::FnRetTy::Default(_) => break None,
                 ast::FnRetTy::Ty(ret) => ty = ret,
             },
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 
             ast::TyKind::Path(_, path) => match path_return_type(path) {
                 Some(trailing_ty) => ty = trailing_ty,
                 None => break None,
             },
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=14 */
 
             ast::TyKind::TraitObject(bounds, _) | ast::TyKind::ImplTrait(_, bounds) => {
                 match bounds.last() {
@@ -310,7 +289,6 @@ fn type_trailing_braced_mac_call(mut ty: &ast::Ty) -> Option<&ast::MacCall> {
                     }
                 }
             }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=path_return_type | COMPLEXITY=14 | LINES=34 */
 
             ast::TyKind::Slice(..)
             | ast::TyKind::Array(..)

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/attr_wrapper.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::borrow::Cow;
 use std::mem;
 
@@ -7,18 +6,14 @@ use crate::rustc_complete::token::Token;
 use crate::rustc_complete::tokenstream::{
     AttrsTarget, LazyAttrTokenStream, NodeRange, ParserRange, Spacing, TokenCursor,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, AttrVec, Attribute, HasAttrs, HasTokens};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::PResult;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{DUMMY_SP, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 use super::{Capturing, ForceCollect, Parser, Trailing};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // When collecting tokens, this fully captures the start point. Usually its
 // just after outer attributes, but occasionally it's before.
@@ -28,13 +23,11 @@ pub(super) struct CollectPos {
     cursor_snapshot: TokenCursor,
     start_pos: u32,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) enum UsePreAttrPos {
     No,
     Yes,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=23 */
 
 /// A wrapper type to ensure that the parser handles outer attributes correctly.
 /// When we parse outer attributes, we need to ensure that we capture tokens
@@ -58,7 +51,6 @@ pub(super) struct AttrWrapper {
     // attributes.
     start_pos: Option<u32>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=30 */
 
 impl AttrWrapper {
     pub(super) fn new(attrs: AttrVec, start_pos: u32) -> AttrWrapper {
@@ -89,7 +81,6 @@ impl AttrWrapper {
         self.attrs.is_empty()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=has_cfg_or_cfg_attr | COMPLEXITY=5 | LINES=10 */
 
 /// Returns `true` if `attrs` contains a `cfg` or `cfg_attr` attribute
 fn has_cfg_or_cfg_attr(attrs: &[Attribute]) -> bool {
@@ -100,7 +91,6 @@ fn has_cfg_or_cfg_attr(attrs: &[Attribute]) -> bool {
         attr.ident().is_some_and(|ident| ident.name == sym::cfg || ident.name == sym::cfg_attr)
     })
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=150 | LINES=300 */
 
 impl<'a> Parser<'a> {
     pub(super) fn collect_pos(&self) -> CollectPos {
@@ -401,7 +391,6 @@ impl<'a> Parser<'a> {
         Ok(ret)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=needs_tokens | COMPLEXITY=8 | LINES=15 */
 
 /// Tokens are needed if:
 /// - any non-single-segment attributes (other than doc comments) are present,

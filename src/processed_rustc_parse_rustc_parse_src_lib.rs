@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 // The main parser interface.
 
 // tidy-alphabetical-start
@@ -15,22 +14,17 @@
 // tidy-alphabetical-end
 
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::str::Utf8Error;
 use std::sync::Arc;
 
 use rustc_ast as ast;
 use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AttrItem, Attribute, MetaItemInner, token};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::{Diag, EmissionGuarantee, FatalError, PResult, pluralize};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{FileName, SourceFile, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 pub use unicode_normalization::UNICODE_VERSION as UNICODE_NORMALIZATION_VERSION;
 
 pub const MACRO_ARGUMENTS: Option<&str> = Some("macro arguments");
@@ -44,7 +38,6 @@ use crate::lexer::StripTokens;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=unwrap_or_emit_fatal | COMPLEXITY=12 | LINES=13 */
 
 // Unwrap the result if `Ok`, otherwise emit the diagnostics and abort.
 pub fn unwrap_or_emit_fatal<T>(expr: Result<T, Vec<Diag<'_>>>) -> T {
@@ -58,7 +51,6 @@ pub fn unwrap_or_emit_fatal<T>(expr: Result<T, Vec<Diag<'_>>>) -> T {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new_parser_from_source_str | COMPLEXITY=3 | LINES=14 */
 
 /// Creates a new parser from a source string.
 ///
@@ -73,7 +65,6 @@ pub fn new_parser_from_source_str(
     let source_file = psess.source_map().new_source_file(name, source);
     new_parser_from_source_file(psess, source_file, strip_tokens)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new_parser_from_file | COMPLEXITY=13 | LINES=35 */
 
 /// Creates a new parser from a filename. On failure, the errors must be consumed via
 /// `unwrap_or_emit_fatal`, `emit`, `cancel`, etc., otherwise a panic will occur when they are
@@ -109,7 +100,6 @@ pub fn new_parser_from_file<'a>(
     });
     new_parser_from_source_file(psess, source_file, strip_tokens)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=utf8_error | COMPLEXITY=30 | LINES=43 */
 
 pub fn utf8_error<E: EmissionGuarantee>(
     sm: &SourceMap,
@@ -153,7 +143,6 @@ pub fn utf8_error<E: EmissionGuarantee>(
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new_parser_from_source_file | COMPLEXITY=6 | LINES=16 */
 
 /// Given a session and a `source_file`, return a parser. Returns any buffered errors from lexing
 /// the initial token stream.
@@ -170,7 +159,6 @@ fn new_parser_from_source_file(
     }
     Ok(parser)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=source_str_to_stream | COMPLEXITY=5 | LINES=17 */
 
 /// Given a source string, produces a sequence of token trees.
 ///
@@ -188,7 +176,6 @@ pub fn source_str_to_stream(
     // Alternatively, stop stripping shebangs here, too, if T-lang and crater approve.
     source_file_to_stream(psess, source_file, override_span, StripTokens::Shebang)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=source_file_to_stream | COMPLEXITY=5 | LINES=19 */
 
 /// Given a source file, produces a sequence of token trees.
 ///
@@ -208,7 +195,6 @@ fn source_file_to_stream<'psess>(
 
     lexer::lex_token_trees(psess, src.as_str(), source_file.start_pos, override_span, strip_tokens)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=parse_in | COMPLEXITY=5 | LINES=15 */
 
 /// Runs the given subparser `f` on the tokens of the given `attr`'s item.
 pub fn parse_in<'a, T>(
@@ -224,14 +210,12 @@ pub fn parse_in<'a, T>(
     }
     Ok(result)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fake_token_stream_for_item | COMPLEXITY=2 | LINES=6 */
 
 pub fn fake_token_stream_for_item(psess: &ParseSess, item: &ast::Item) -> TokenStream {
     let source = pprust::item_to_string(item);
     let filename = FileName::macro_expansion_source_code(&source);
     unwrap_or_emit_fatal(source_str_to_stream(psess, filename, source, Some(item.span)))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fake_token_stream_for_crate | COMPLEXITY=2 | LINES=11 */
 
 pub fn fake_token_stream_for_crate(psess: &ParseSess, krate: &ast::Crate) -> TokenStream {
     let source = pprust::crate_to_string_for_macros(krate);
@@ -243,7 +227,6 @@ pub fn fake_token_stream_for_crate(psess: &ParseSess, krate: &ast::Crate) -> Tok
         Some(krate.spans.inner_span),
     ))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=parse_cfg_attr | COMPLEXITY=22 | LINES=32 */
 
 pub fn parse_cfg_attr(
     cfg_attr: &Attribute,
@@ -276,7 +259,6 @@ pub fn parse_cfg_attr(
     }
     None
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_cfg_attr_bad_delim | COMPLEXITY=7 | LINES=10 */
 
 fn check_cfg_attr_bad_delim(psess: &ParseSess, span: DelimSpan, delim: Delimiter) {
     if let Delimiter::Parenthesis = delim {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/query/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 use std::fmt::Debug;
 use std::marker::PhantomData;
 use std::mem::transmute;
@@ -11,26 +10,20 @@ pub use self::job::{
     QueryInfo, QueryJob, QueryJobId, QueryJobInfo, QueryMap, break_query_cycles, print_query_stack,
     report_cycle,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub use self::caches::{DefIdCache, DefaultCache, QueryCache, SingleCache, VecCache};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::DiagInner;
 use rustc_hashes::Hash64;
 use crate::rustc_complete::def::DefKind;
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 
 pub use self::config::{HashResult, QueryConfig};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::dep_graph::{DepKind, DepNodeIndex, HasDepContext, SerializedDepNodeIndex};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=QueryStackFrame | COMPLEXITY=5 | LINES=20 */
 
 /// Description of a frame in the query stack.
 ///
@@ -51,7 +44,6 @@ pub struct QueryStackFrame<I> {
     /// A def-id that is extracted from a `Ty` in a query key
     pub def_id_for_ty_in_cycle: Option<DefId>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=26 */
 
 impl<I> QueryStackFrame<I> {
     #[inline]
@@ -78,7 +70,6 @@ impl<I> QueryStackFrame<I> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=QueryStackFrameExtra | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug)]
 pub struct QueryStackFrameExtra {
@@ -86,7 +77,6 @@ pub struct QueryStackFrameExtra {
     span: Option<Span>,
     pub def_kind: Option<DefKind>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=16 */
 
 impl QueryStackFrameExtra {
     #[inline]
@@ -103,7 +93,6 @@ impl QueryStackFrameExtra {
         self.span.unwrap_or(span)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=QueryStackDeferred | COMPLEXITY=4 | LINES=11 */
 
 /// Track a 'side effect' for a particular query.
 /// This is used to hold a closure which can create `QueryStackFrameExtra`.
@@ -115,7 +104,6 @@ pub struct QueryStackDeferred<'tcx> {
     // access it in the destructor.
     extract: Arc<dyn Fn() -> QueryStackFrameExtra + DynSync + DynSend>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=17 */
 
 impl<'tcx> QueryStackDeferred<'tcx> {
     pub fn new<C: Copy + DynSync + DynSend + 'tcx>(
@@ -133,14 +121,12 @@ impl<'tcx> QueryStackDeferred<'tcx> {
         (self.extract)()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> Debug for QueryStackDeferred<'tcx> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str("QueryStackDeferred")
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=18 */
 
 /// Tracks 'side effects' for a particular query.
 /// This struct is saved to disk along with the query result,
@@ -159,7 +145,6 @@ pub enum QuerySideEffect {
     /// effect dep node as a dependency.
     Diagnostic(DiagInner),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=jobserver_proxy | COMPLEXITY=12 | LINES=33 */
 
 pub trait QueryContext: HasDepContext {
     type QueryInfo: Clone;

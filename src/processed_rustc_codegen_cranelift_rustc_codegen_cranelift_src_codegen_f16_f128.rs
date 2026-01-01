@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/codegen_f16_f128.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 use crate::prelude::*;
 
 pub(crate) fn f16_to_f32(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
@@ -14,13 +13,11 @@ pub(crate) fn f16_to_f32(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value
         };
     fx.lib_call("__extendhfsf2", vec![arg_ty], vec![AbiParam::new(types::F32)], &[value])[0]
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=f16_to_f64 | COMPLEXITY=2 | LINES=5 */
 
 fn f16_to_f64(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let ret = f16_to_f32(fx, value);
     fx.bcx.ins().fpromote(types::F64, ret)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=15 */
 
 pub(crate) fn f32_to_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let ret_ty = if fx.tcx.sess.target.vendor == "apple" && fx.tcx.sess.target.arch == "x86_64" {
@@ -36,7 +33,6 @@ pub(crate) fn f32_to_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value
     )[0];
     if ret_ty == types::I16 { fx.bcx.ins().bitcast(types::F16, MemFlags::new(), ret) } else { ret }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=f64_to_f16 | COMPLEXITY=10 | LINES=15 */
 
 fn f64_to_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let ret_ty = if fx.tcx.sess.target.vendor == "apple" && fx.tcx.sess.target.arch == "x86_64" {
@@ -52,7 +48,6 @@ fn f64_to_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     )[0];
     if ret_ty == types::I16 { fx.bcx.ins().bitcast(types::F16, MemFlags::new(), ret) } else { ret }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=36 */
 
 pub(crate) fn fcmp(fx: &mut FunctionCx<'_, '_, '_>, cc: FloatCC, lhs: Value, rhs: Value) -> Value {
     let ty = fx.bcx.func.dfg.value_type(lhs);
@@ -89,7 +84,6 @@ pub(crate) fn fcmp(fx: &mut FunctionCx<'_, '_, '_>, cc: FloatCC, lhs: Value, rhs
         _ => unreachable!("{ty:?}"),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 pub(crate) fn codegen_f128_binop(
     fx: &mut FunctionCx<'_, '_, '_>,
@@ -111,14 +105,12 @@ pub(crate) fn codegen_f128_binop(
         &[lhs, rhs],
     )[0]
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) fn neg_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().bitcast(types::I16, MemFlags::new(), value);
     let bits = fx.bcx.ins().bxor_imm(bits, 0x8000);
     fx.bcx.ins().bitcast(types::F16, MemFlags::new(), bits)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) fn neg_f128(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().bitcast(types::I128, MemFlags::new(), value);
@@ -127,14 +119,12 @@ pub(crate) fn neg_f128(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().iconcat(low, high);
     fx.bcx.ins().bitcast(types::F128, MemFlags::new(), bits)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) fn abs_f16(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().bitcast(types::I16, MemFlags::new(), value);
     let bits = fx.bcx.ins().band_imm(bits, 0x7fff);
     fx.bcx.ins().bitcast(types::F16, MemFlags::new(), bits)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) fn abs_f128(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().bitcast(types::I128, MemFlags::new(), value);
@@ -143,7 +133,6 @@ pub(crate) fn abs_f128(fx: &mut FunctionCx<'_, '_, '_>, value: Value) -> Value {
     let bits = fx.bcx.ins().iconcat(low, high);
     fx.bcx.ins().bitcast(types::F128, MemFlags::new(), bits)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn copysign_f16(fx: &mut FunctionCx<'_, '_, '_>, lhs: Value, rhs: Value) -> Value {
     let lhs = fx.bcx.ins().bitcast(types::I16, MemFlags::new(), lhs);
@@ -153,7 +142,6 @@ pub(crate) fn copysign_f16(fx: &mut FunctionCx<'_, '_, '_>, lhs: Value, rhs: Val
     let res = fx.bcx.ins().bor(res, sign);
     fx.bcx.ins().bitcast(types::F16, MemFlags::new(), res)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn copysign_f128(fx: &mut FunctionCx<'_, '_, '_>, lhs: Value, rhs: Value) -> Value {
     let lhs = fx.bcx.ins().bitcast(types::I128, MemFlags::new(), lhs);
@@ -166,7 +154,6 @@ pub(crate) fn copysign_f128(fx: &mut FunctionCx<'_, '_, '_>, lhs: Value, rhs: Va
     let res = fx.bcx.ins().iconcat(low, high);
     fx.bcx.ins().bitcast(types::F128, MemFlags::new(), res)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=80 | LINES=103 */
 
 pub(crate) fn codegen_cast(
     fx: &mut FunctionCx<'_, '_, '_>,
@@ -270,7 +257,6 @@ pub(crate) fn codegen_cast(
         unreachable!("{from_ty:?} -> {to_ty:?}");
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) fn fma_f16(fx: &mut FunctionCx<'_, '_, '_>, x: Value, y: Value, z: Value) -> Value {
     let x = f16_to_f64(fx, x);
@@ -279,7 +265,6 @@ pub(crate) fn fma_f16(fx: &mut FunctionCx<'_, '_, '_>, x: Value, y: Value, z: Va
     let res = fx.bcx.ins().fma(x, y, z);
     f64_to_f16(fx, res)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn fmin_f128(fx: &mut FunctionCx<'_, '_, '_>, a: Value, b: Value) -> Value {
     fx.lib_call(
@@ -289,7 +274,6 @@ pub(crate) fn fmin_f128(fx: &mut FunctionCx<'_, '_, '_>, a: Value, b: Value) -> 
         &[a, b],
     )[0]
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn fmax_f128(fx: &mut FunctionCx<'_, '_, '_>, a: Value, b: Value) -> Value {
     fx.lib_call(

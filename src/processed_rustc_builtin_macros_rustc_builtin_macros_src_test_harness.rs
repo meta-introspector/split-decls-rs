@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/test_harness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Code that generates a test runner to run all the tests in a crate
 
 use std::mem;
@@ -9,24 +8,18 @@ use crate::rustc_complete::entry::EntryPointType;
 use crate::rustc_complete::mut_visit::*;
 use crate::rustc_complete::visit::Visitor;
 use crate::rustc_complete::{ModKind, attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::expand::{AstFragment, ExpansionConfig};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_feature::Features;
 use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::builtin::UNNAMEABLE_TEST_ITEMS;
 use crate::rustc_complete::hygiene::{AstPass, SyntaxContext, Transparency};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::spec::PanicStrategy;
 use smallvec::smallvec;
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Test | COMPLEXITY=2 | LINES=10 */
 use tracing::debug;
 
 use crate::errors;
@@ -37,7 +30,6 @@ struct Test {
     ident: Ident,
     name: Symbol,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TestCtxt | COMPLEXITY=2 | LINES=9 */
 
 struct TestCtxt<'a> {
     ext_cx: ExtCtxt<'a>,
@@ -47,7 +39,6 @@ struct TestCtxt<'a> {
     reexport_test_harness_main: Option<Symbol>,
     test_runner: Option<ast::Path>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=inject | COMPLEXITY=22 | LINES=49 */
 
 /// Traverse the crate, collecting all the test functions, eliding any
 /// existing main functions, and synthesizing a main test harness
@@ -97,13 +88,11 @@ pub fn inject(
         )
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TestHarnessGenerator | COMPLEXITY=2 | LINES=5 */
 
 struct TestHarnessGenerator<'a> {
     cx: TestCtxt<'a>,
     tests: Vec<Test>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=add_test_cases | COMPLEXITY=12 | LINES=24 */
 
 impl TestHarnessGenerator<'_> {
     fn add_test_cases(&mut self, node_id: ast::NodeId, span: Span, prev_tests: Vec<Test>) {
@@ -128,7 +117,6 @@ impl TestHarnessGenerator<'_> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_crate | COMPLEXITY=18 | LINES=37 */
 
 impl<'a> MutVisitor for TestHarnessGenerator<'a> {
     fn visit_crate(&mut self, c: &mut ast::Crate) {
@@ -166,12 +154,10 @@ impl<'a> MutVisitor for TestHarnessGenerator<'a> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=InnerItemLinter | COMPLEXITY=2 | LINES=4 */
 
 struct InnerItemLinter<'a> {
     sess: &'a Session,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=8 | LINES=13 */
 
 impl<'a> Visitor<'a> for InnerItemLinter<'_> {
     fn visit_item(&mut self, i: &'a ast::Item) {
@@ -185,7 +171,6 @@ impl<'a> Visitor<'a> for InnerItemLinter<'_> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=entry_point_type | COMPLEXITY=7 | LINES=9 */
 
 fn entry_point_type(item: &ast::Item, at_root: bool) -> EntryPointType {
     match &item.kind {
@@ -195,7 +180,6 @@ fn entry_point_type(item: &ast::Item, at_root: bool) -> EntryPointType {
         _ => EntryPointType::None,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=EntryPointCleaner | COMPLEXITY=2 | LINES=9 */
 
 /// A folder used to remove any entry points (like fn main) because the harness
 /// coroutine will provide its own
@@ -205,7 +189,6 @@ struct EntryPointCleaner<'a> {
     depth: usize,
     def_site: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=13 | LINES=27 */
 
 impl<'a> MutVisitor for EntryPointCleaner<'a> {
     fn visit_item(&mut self, item: &mut ast::Item) {
@@ -233,7 +216,6 @@ impl<'a> MutVisitor for EntryPointCleaner<'a> {
         };
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=generate_test_harness | COMPLEXITY=7 | LINES=37 */
 
 /// Crawl over the crate, inserting test reexports and the test main function
 fn generate_test_harness(
@@ -271,7 +253,6 @@ fn generate_test_harness(
 
     TestHarnessGenerator { cx, tests: Vec::new() }.visit_crate(krate);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 /// Creates a function item for use as the main function of a test build.
 /// This function will call the `test_runner` as specified by the crate attribute
@@ -288,7 +269,6 @@ fn generate_test_harness(
 ///         &test_const3,
 ///     ]);
 /// }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=mk_main | COMPLEXITY=31 | LINES=92 */
 /// ```
 ///
 /// Most of the Ident have the usual def-site hygiene for the AST pass. The
@@ -381,7 +361,6 @@ fn mk_main(cx: &mut TestCtxt<'_>) -> Box<ast::Item> {
     let main = AstFragment::Items(smallvec![main]);
     cx.ext_cx.monotonic_expander().fully_expand_fragment(main).make_items().pop().unwrap()
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=mk_tests_slice | COMPLEXITY=5 | LINES=20 */
 
 /// Creates a slice containing every test like so:
 /// &[&test1, &test2]
@@ -402,12 +381,10 @@ fn mk_tests_slice(cx: &TestCtxt<'_>, sp: Span) -> Box<ast::Expr> {
             .collect(),
     )
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=get_test_name | COMPLEXITY=2 | LINES=4 */
 
 fn get_test_name(i: &ast::Item) -> Option<Symbol> {
     attr::first_attr_value_str_by_name(&i.attrs, sym::rustc_test_marker)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_test_runner | COMPLEXITY=17 | LINES=18 */
 
 fn get_test_runner(dcx: DiagCtxtHandle<'_>, krate: &ast::Crate) -> Option<ast::Path> {
     let test_attr = attr::find_by_name(&krate.attrs, sym::test_runner)?;

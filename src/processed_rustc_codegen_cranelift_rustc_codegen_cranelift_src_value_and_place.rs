@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/value_and_place.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=codegen_field | COMPLEXITY=21 | LINES=56 */
 // Definition of [`CValue`] and [`CPlace`]
 
 use cranelift_codegen::entity::EntityRef;
@@ -56,13 +55,11 @@ fn codegen_field<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=scalar_pair_calculate_b_offset | COMPLEXITY=2 | LINES=5 */
 
 fn scalar_pair_calculate_b_offset(tcx: TyCtxt<'_>, a_scalar: Scalar, b_scalar: Scalar) -> Offset32 {
     let b_offset = a_scalar.size(&tcx).align_to(b_scalar.align(&tcx).abi);
     Offset32::new(b_offset.bytes().try_into().unwrap())
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// A read-only value
 #[derive(Debug, Copy, Clone)]
@@ -74,7 +71,6 @@ enum CValueInner {
     ByVal(Value),
     ByValPair(Value, Value),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=128 | LINES=273 */
 
 impl<'tcx> CValue<'tcx> {
     pub(crate) fn by_ref(ptr: Pointer, layout: TyAndLayout<'tcx>) -> CValue<'tcx> {
@@ -348,7 +344,6 @@ impl<'tcx> CValue<'tcx> {
         CValue(self.0, layout)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// A place where you can write a value to or read a value from
 #[derive(Debug, Copy, Clone)]
@@ -356,7 +351,6 @@ pub(crate) struct CPlace<'tcx> {
     inner: CPlaceInner,
     layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Copy, Clone)]
 enum CPlaceInner {
@@ -364,7 +358,6 @@ enum CPlaceInner {
     VarPair(Local, Variable, Variable),
     Addr(Pointer, Option<Value>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_cvalue_maybe_transmute | COMPLEXITY=257 | LINES=487 */
 
 impl<'tcx> CPlace<'tcx> {
     pub(crate) fn layout(&self) -> TyAndLayout<'tcx> {
@@ -852,7 +845,6 @@ impl<'tcx> CPlace<'tcx> {
         CPlace { inner: self.inner, layout }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=113 | LINES=154 */
 
 #[track_caller]
 pub(crate) fn assert_assignable<'tcx>(

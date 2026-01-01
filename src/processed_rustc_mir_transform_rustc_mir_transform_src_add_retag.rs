@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/add_retag.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // This pass adds validation calls (AcquireValid, ReleaseValid) where appropriate.
 // It has to be run really early, before transformations like inlining, because
 // introducing these calls *adds* UB -- so, conceptually, this pass is actually part
@@ -8,7 +7,6 @@
 
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=may_contain_reference | COMPLEXITY=14 | LINES=39 */
 
 pub(super) struct AddRetag;
 
@@ -48,7 +46,6 @@ fn may_contain_reference<'tcx>(ty: Ty<'tcx>, depth: u32, tcx: TyCtxt<'tcx>) -> b
         _ => true,
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=77 | LINES=139 */
 
 impl<'tcx> crate::MirPass<'tcx> for AddRetag {
     fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {

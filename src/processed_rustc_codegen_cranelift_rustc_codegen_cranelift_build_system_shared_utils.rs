@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/shared_utils.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=22 */
 // This file is used by both the build system as well as cargo-clif.rs
 
 // Adapted from https://github.com/rust-lang/cargo/blob/6dc1deaddf62c7748c9097c7ea88e9ec77ff1a1a/src/cargo/core/compiler/build_context/target_info.rs#L750-L77
@@ -22,7 +21,6 @@ pub(crate) fn rustflags_from_env(kind: &str) -> Vec<String> {
     // No rustflags to be collected from the environment
     Vec::new()
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn rustflags_to_cmd_env(cmd: &mut std::process::Command, kind: &str, flags: &[String]) {
     cmd.env(format!("CARGO_ENCODED_{}", kind), flags.join("\x1f"));

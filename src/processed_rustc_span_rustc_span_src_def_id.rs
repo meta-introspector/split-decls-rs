@@ -1,23 +1,17 @@
 // SRC: ../rust/compiler/rustc_span/src/def_id.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fmt;
 use std::hash::{BuildHasherDefault, Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_data_structures::AtomicRef;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unhash::Unhasher;
 use rustc_hashes::Hash64;
 use crate::rustc_index::Idx;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{HashStableContext, SpanDecoder, SpanEncoder, Symbol};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=CrateNum | COMPLEXITY=4 | LINES=9 */
 
 pub type StableCrateIdMap =
     indexmap::IndexMap<StableCrateId, CrateNum, BuildHasherDefault<Unhasher>>;
@@ -27,7 +21,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "crate{}"]
     pub struct CrateNum {}
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=22 */
 
 /// Item definitions in the currently-compiled crate would have the `CrateNum`
 /// `LOCAL_CRATE` in their `DefId`.
@@ -50,14 +43,12 @@ impl CrateNum {
         ModDefId::new_unchecked(DefId { krate: self, index: CRATE_DEF_INDEX })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for CrateNum {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::Display::fmt(&self.as_u32(), f)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=DefPathHash(pub | COMPLEXITY=21 | LINES=67 */
 
 /// A `DefPathHash` is a fixed-size representation of a `DefPath` that is
 /// stable across crate and compilation session boundaries. It consists of two
@@ -125,14 +116,12 @@ impl DefPathHash {
         DefPathHash(Fingerprint::new(stable_crate_id.0, local_hash))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl Default for DefPathHash {
     fn default() -> Self {
         DefPathHash(Fingerprint::ZERO)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 impl StableOrd for DefPathHash {
     const CAN_USE_UNSTABLE_SORT: bool = true;
@@ -140,7 +129,6 @@ impl StableOrd for DefPathHash {
     // `DefPathHash` sort order is not affected by (de)serialization.
     const THIS_IMPLEMENTATION_HAS_BEEN_TRIPLE_CHECKED: () = ();
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=StableCrateId(pub(crate) | COMPLEXITY=28 | LINES=69 */
 
 /// A [`StableCrateId`] is a 64-bit hash of a crate name, together with all
 /// `-Cmetadata` arguments, and some other data. It is to [`CrateNum`] what [`DefPathHash`] is to
@@ -210,14 +198,12 @@ impl StableCrateId {
         self.0.as_u64()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::LowerHex for StableCrateId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::LowerHex::fmt(&self.0, f)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DefIndex | COMPLEXITY=8 | LINES=13 */
 
 crate::rustc_index::newtype_index! {
     /// A DefIndex is an index into the hir-map for a crate, identifying a
@@ -231,7 +217,6 @@ crate::rustc_index::newtype_index! {
         const CRATE_DEF_INDEX = 0;
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DefId | COMPLEXITY=3 | LINES=21 */
 
 /// A `DefId` identifies a particular *definition*, by combining a crate
 /// index and a def index.
@@ -253,15 +238,12 @@ pub struct DefId {
     #[cfg(all(target_pointer_width = "64", target_endian = "big"))]
     pub index: DefIndex,
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 // To ensure correctness of incremental compilation,
 // `DefId` must not implement `Ord` or `PartialOrd`.
 // See https://github.com/rust-lang/rust/issues/90317.
 impl !Ord for DefId {}
-/* AST_META: AST_ID=17 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !PartialOrd for DefId {}
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=7 | LINES=25 */
 
 // On 64-bit systems, we can hash the whole `DefId` as one `u64` instead of two `u32`s. This
 // improves performance without impairing `FxHash` quality. So the below code gets compiled to a
@@ -287,7 +269,6 @@ impl Hash for DefId {
         (((self.krate.as_u32() as u64) << 32) | (self.index.as_u32() as u64)).hash(h)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=local | COMPLEXITY=18 | LINES=45 */
 
 impl DefId {
     /// Makes a local `DefId` from the given `DefIndex`.
@@ -333,19 +314,16 @@ impl DefId {
         self.is_local() && self.is_crate_root()
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<LocalDefId> for DefId {
     fn from(local: LocalDefId) -> DefId {
         local.to_def_id()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=default_def_id_debug | COMPLEXITY=2 | LINES=4 */
 
 pub fn default_def_id_debug(def_id: DefId, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     f.debug_struct("DefId").field("krate", &def_id.krate).field("index", &def_id.index).finish()
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 pub static DEF_ID_DEBUG: AtomicRef<fn(DefId, &mut fmt::Formatter<'_>) -> fmt::Result> =
     AtomicRef::new(&(default_def_id_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
@@ -355,7 +333,6 @@ impl fmt::Debug for DefId {
         (*DEF_ID_DEBUG)(*self, f)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=LocalDefId | COMPLEXITY=3 | LINES=13 */
 
 crate::rustc_data_structures::define_id_collections!(DefIdMap, DefIdSet, DefIdMapEntry, DefId);
 
@@ -369,18 +346,14 @@ crate::rustc_data_structures::define_id_collections!(DefIdMap, DefIdSet, DefIdMa
 pub struct LocalDefId {
     pub local_def_index: DefIndex,
 }
-/* AST_META: AST_ID=24 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 // To ensure correctness of incremental compilation,
 // `LocalDefId` must not implement `Ord` or `PartialOrd`.
 // See https://github.com/rust-lang/rust/issues/90317.
 impl !Ord for LocalDefId {}
-/* AST_META: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !PartialOrd for LocalDefId {}
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 pub const CRATE_DEF_ID: LocalDefId = LocalDefId { local_def_index: CRATE_DEF_INDEX };
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=11 */
 
 impl Idx for LocalDefId {
     #[inline]
@@ -392,7 +365,6 @@ impl Idx for LocalDefId {
         self.local_def_index.index()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=to_def_id | COMPLEXITY=5 | LINES=12 */
 
 impl LocalDefId {
     #[inline]
@@ -405,28 +377,24 @@ impl LocalDefId {
         self == CRATE_DEF_ID
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for LocalDefId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.to_def_id().fmt(f)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<E: SpanEncoder> Encodable<E> for LocalDefId {
     fn encode(&self, s: &mut E) {
         self.to_def_id().encode(s);
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: SpanDecoder> Decodable<D> for LocalDefId {
     fn decode(d: &mut D) -> LocalDefId {
         DefId::decode(d).expect_local()
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=14 */
 
 crate::rustc_data_structures::define_id_collections!(
     LocalDefIdMap,
@@ -441,7 +409,6 @@ impl<CTX: HashStableContext> HashStable<CTX> for DefId {
         hcx.def_path_hash(*self).hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<CTX: HashStableContext> HashStable<CTX> for LocalDefId {
     #[inline]
@@ -449,7 +416,6 @@ impl<CTX: HashStableContext> HashStable<CTX> for LocalDefId {
         hcx.def_path_hash(self.to_def_id()).local_hash().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<CTX: HashStableContext> HashStable<CTX> for CrateNum {
     #[inline]
@@ -457,7 +423,6 @@ impl<CTX: HashStableContext> HashStable<CTX> for CrateNum {
         self.as_def_id().to_stable_hash_key(hcx).stable_crate_id().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for DefId {
     type KeyType = DefPathHash;
@@ -467,7 +432,6 @@ impl<CTX: HashStableContext> ToStableHashKey<CTX> for DefId {
         hcx.def_path_hash(*self)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for LocalDefId {
     type KeyType = DefPathHash;
@@ -477,7 +441,6 @@ impl<CTX: HashStableContext> ToStableHashKey<CTX> for LocalDefId {
         hcx.def_path_hash(self.to_def_id())
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for CrateNum {
     type KeyType = DefPathHash;
@@ -487,7 +450,6 @@ impl<CTX: HashStableContext> ToStableHashKey<CTX> for CrateNum {
         self.as_def_id().to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: HashStableContext> ToStableHashKey<CTX> for DefPathHash {
     type KeyType = DefPathHash;
@@ -497,7 +459,6 @@ impl<CTX: HashStableContext> ToStableHashKey<CTX> for DefPathHash {
         *self
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=$Name(DefId); | COMPLEXITY=43 | LINES=80 */
 
 macro_rules! typed_def_id {
     ($Name:ident, $LocalName:ident) => {
@@ -578,24 +539,20 @@ macro_rules! typed_def_id {
         }
     };
 }
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 // N.B.: when adding new typed `DefId`s update the corresponding trait impls in
 // `crate::rustc_middle::dep_graph::def_node` for `DepNodeParams`.
 typed_def_id! { ModDefId, LocalModDefId }
-/* AST_META: AST_ID=41 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 impl LocalModDefId {
     pub const CRATE_DEF_ID: Self = Self::new_unchecked(CRATE_DEF_ID);
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=is_top_level_module | COMPLEXITY=3 | LINES=6 */
 
 impl ModDefId {
     pub fn is_top_level_module(self) -> bool {
         self.0.is_top_level_module()
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=is_top_level_module | COMPLEXITY=3 | LINES=6 */
 
 impl LocalModDefId {
     pub fn is_top_level_module(self) -> bool {

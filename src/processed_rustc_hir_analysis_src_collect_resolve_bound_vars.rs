@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/resolve_bound_vars.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 // Resolution of early vs late bound lifetimes.
 //
 // Name resolution for lifetimes is performed on the AST and embedded into HIR. From this
@@ -14,32 +13,22 @@ use std::ops::ControlFlow;
 
 use crate::rustc_complete::visit::walk_list;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, InferKind, Visitor, VisitorExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     self as hir, AmbigArg, GenericArg, GenericParam, GenericParamKind, HirId, LifetimeKind, Node,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_macros::extension;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::resolve_bound_vars::*;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeSuperVisitable, TypeVisitor};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, debug_span, instrument};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=early | COMPLEXITY=16 | LINES=32 */
 
 use crate::errors;
 
@@ -72,7 +61,6 @@ impl ResolvedArg {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BoundVarContext | COMPLEXITY=2 | LINES=7 */
 
 struct BoundVarContext<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -80,7 +68,6 @@ struct BoundVarContext<'a, 'tcx> {
     disambiguator: &'a mut DisambiguatorState,
     scope: ScopeRef<'a>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=92 */
 
 #[derive(Debug)]
 enum Scope<'a> {
@@ -173,7 +160,6 @@ enum Scope<'a> {
         opt_parent_item: Option<LocalDefId>,
     },
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=debug_truncated | COMPLEXITY=22 | LINES=44 */
 
 impl<'a> Scope<'a> {
     // A helper for debugging scopes without printing parent scopes
@@ -218,7 +204,6 @@ impl<'a> Scope<'a> {
         })
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Copy, Clone, Debug)]
 enum BinderScopeType {
@@ -235,7 +220,6 @@ enum BinderScopeType {
     /// The inner `for<>` has a scope of `Concatenating`.
     Concatenating,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 type ScopeRef<'a> = &'a Scope<'a>;
 
@@ -258,7 +242,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=resolve_bound_vars | COMPLEXITY=17 | LINES=37 */
 
 /// Computes the `ResolveBoundVars` map that contains data for an entire `Item`.
 /// You should not read the result of this query directly, but rather use
@@ -296,7 +279,6 @@ fn resolve_bound_vars(tcx: TyCtxt<'_>, local_def_id: hir::OwnerId) -> ResolveBou
     debug!(?rbv.opaque_captured_lifetimes);
     rbv
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=late_arg_as_bound_arg | COMPLEXITY=10 | LINES=11 */
 
 fn late_arg_as_bound_arg<'tcx>(param: &GenericParam<'tcx>) -> ty::BoundVariableKind {
     let def_id = param.def_id.to_def_id();
@@ -308,7 +290,6 @@ fn late_arg_as_bound_arg<'tcx>(param: &GenericParam<'tcx>) -> ty::BoundVariableK
         GenericParamKind::Const { .. } => ty::BoundVariableKind::Const,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=generic_param_def_as_bound_arg | COMPLEXITY=11 | LINES=15 */
 
 /// Turn a [`ty::GenericParamDef`] into a bound arg. Generally, this should only
 /// be used when turning early-bound vars into late-bound vars when lowering
@@ -324,7 +305,6 @@ fn generic_param_def_as_bound_arg(param: &ty::GenericParamDef) -> ty::BoundVaria
         ty::GenericParamDefKind::Const { .. } => ty::BoundVariableKind::Const,
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=opaque_captures_all_in_scope_lifetimes | COMPLEXITY=18 | LINES=14 */
 
 /// Whether this opaque always captures lifetimes in scope.
 /// Right now, this is all RPITIT and TAITs, and when the opaque
@@ -339,7 +319,6 @@ fn opaque_captures_all_in_scope_lifetimes<'tcx>(opaque: &'tcx hir::OpaqueTy<'tcx
         hir::OpaqueTyOrigin::FnReturn { in_trait_or_impl, .. } => in_trait_or_impl.is_some(),
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=poly_trait_ref_binder_info | COMPLEXITY=48 | LINES=90 */
 
 impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
     /// Returns the binders in scope and the type of `Binder` that should be created for a poly trait ref.
@@ -430,13 +409,11 @@ impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum NonLifetimeBinderAllowed {
     Deny(&'static str),
     Allow,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=330 | LINES=617 */
 
 impl<'a, 'tcx> Visitor<'tcx> for BoundVarContext<'a, 'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -1054,7 +1031,6 @@ impl<'a, 'tcx> Visitor<'tcx> for BoundVarContext<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=object_lifetime_default | COMPLEXITY=42 | LINES=52 */
 
 fn object_lifetime_default(tcx: TyCtxt<'_>, param_def_id: LocalDefId) -> ObjectLifetimeDefault {
     debug_assert_eq!(tcx.def_kind(param_def_id), DefKind::TyParam);
@@ -1107,7 +1083,6 @@ fn object_lifetime_default(tcx: TyCtxt<'_>, param_def_id: LocalDefId) -> ObjectL
         hir::GenericParamSource::Binder => ObjectLifetimeDefault::Empty,
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=with | COMPLEXITY=663 | LINES=1161 */
 
 impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
     fn with<F>(&mut self, wrap_scope: Scope<'_>, f: F)
@@ -2269,7 +2244,6 @@ impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=is_late_bound_map | COMPLEXITY=127 | LINES=225 */
 
 /// Detects late-bound lifetimes and inserts them into
 /// `late_bound`.
@@ -2495,7 +2469,6 @@ fn is_late_bound_map(
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=deny_non_region_late_bound | COMPLEXITY=16 | LINES=30 */
 
 fn deny_non_region_late_bound(
     tcx: TyCtxt<'_>,

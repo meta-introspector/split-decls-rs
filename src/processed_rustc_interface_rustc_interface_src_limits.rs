@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_interface/src/limits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // Registering limits:
 // - recursion_limit: there are various parts of the compiler that must impose arbitrary limits
 //   on how deeply they recurse to prevent stack overflow.
@@ -13,7 +12,6 @@
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::{Attribute, find_attr};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=20 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::Limits;
 
@@ -34,7 +32,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 // This one is separate because it must be read prior to macro expansion.
 pub(crate) fn get_recursion_limit(attrs: &[Attribute]) -> Limit {

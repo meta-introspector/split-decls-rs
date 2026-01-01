@@ -1,31 +1,24 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/generics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AttrVec, DUMMY_NODE_ID, GenericBounds, GenericParam, GenericParamKind, TyKind,
     WhereClause, token,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, PResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 use super::{ForceCollect, Parser, Trailing, UsePreAttrPos};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::errors::{
     self, MultipleWhereClauses, UnexpectedDefaultValueForLifetimeInGenericParameters,
     UnexpectedSelfInGenericParameters, WhereClauseBeforeTupleStructBody,
     WhereClauseBeforeTupleStructBodySugg,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::exp;
 
 enum PredicateKindOrStructBody {
     PredicateKind(ast::WherePredicateKind),
     StructBody(ThinVec<ast::FieldDef>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse_lt_param_bounds | COMPLEXITY=285 | LINES=559 */
 
 impl<'a> Parser<'a> {
     /// Parses bounds of a lifetime parameter `BOUND + BOUND + BOUND`, possibly with trailing `+`.

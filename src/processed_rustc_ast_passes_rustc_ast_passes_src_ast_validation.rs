@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_passes/src/ast_validation.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Validate AST before lowering it to HIR.
 //
 // This pass intends to check that the constructed AST is *syntactically valid* to allow the rest
@@ -12,7 +11,6 @@
 // mod foo {
 //     fn missing_body();
 // }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 // ```
 //
 // These checks are run post-expansion, after AST is frozen, to be able to check for erroneous
@@ -21,22 +19,16 @@
 
 use std::mem;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::str::FromStr;
 
 use itertools::{Either, Itertools};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{CanonAbi, ExternAbi, InterruptKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::visit::{AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, walk_list};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::*;
 use rustc_ast_pretty::pprust::{self, State};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::{DiagCtxtHandle, LintBuffer};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_feature::Features;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::BuiltinLintDiag;
@@ -44,28 +36,22 @@ use crate::rustc_complete::lint::builtin::{
     DEPRECATED_WHERE_CLAUSE_LOCATION, MISSING_ABI, MISSING_UNSAFE_ON_EXTERN,
     PATTERNS_IN_FNS_WITHOUT_BODY,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{AbiMap, AbiMapping};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::thin_vec;
 
 use crate::errors::{self, TildeConstReason};
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Is `self` allowed semantically as the first parameter in an `FnDecl`?
 enum SelfSemantic {
     Yes,
     No,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 enum TraitOrTraitImpl {
     Trait { span: Span, constness: Const },
     TraitImpl { constness: Const, polarity: ImplPolarity, trait_ref_span: Span },
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=constness | COMPLEXITY=9 | LINES=10 */
 
 impl TraitOrTraitImpl {
     fn constness(&self) -> Option<Span> {
@@ -76,7 +62,6 @@ impl TraitOrTraitImpl {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=AstValidator | COMPLEXITY=6 | LINES=29 */
 
 struct AstValidator<'a> {
     sess: &'a Session,
@@ -106,7 +91,6 @@ struct AstValidator<'a> {
 
     lint_buffer: &'a mut LintBuffer,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=with_in_trait_impl | COMPLEXITY=501 | LINES=831 */
 
 impl<'a> AstValidator<'a> {
     fn with_in_trait_impl(
@@ -938,7 +922,6 @@ impl<'a> AstValidator<'a> {
         self.visit_ident(ident);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=validate_generic_param_order | COMPLEXITY=52 | LINES=73 */
 
 /// Checks that generic parameters are in the correct order,
 /// which is lifetimes, then types and then consts. (`<'a, T, const N: usize>`)
@@ -1012,7 +995,6 @@ fn validate_generic_param_order(dcx: DiagCtxtHandle<'_>, generics: &[GenericPara
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=467 | LINES=683 */
 
 impl<'a> Visitor<'a> for AstValidator<'a> {
     fn visit_attribute(&mut self, attr: &Attribute) {
@@ -1696,7 +1678,6 @@ impl<'a> Visitor<'a> for AstValidator<'a> {
         )
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=deny_equality_constraints | COMPLEXITY=120 | LINES=164 */
 
 /// When encountering an equality constraint in a `where` clause, emit an error. If the code seems
 /// like it's setting an associated type, provide an appropriate suggestion.
@@ -1861,7 +1842,6 @@ fn deny_equality_constraints(
     }
     this.dcx().emit_err(err);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=4 | LINES=26 */
 
 pub fn check_crate(
     sess: &Session,

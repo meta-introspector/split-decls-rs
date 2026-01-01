@@ -1,23 +1,17 @@
 // SRC: ../rust/compiler/rustc_passes/src/entry.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::attr;
 use crate::rustc_complete::entry::EntryPointType;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{CRATE_HIR_ID, ItemId, Node};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::RemapFileNameExt;
 use crate::rustc_complete::config::{CrateType, EntryFnType, RemapPathScopeComponents, sigpipe};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{AttrOnlyInFunctions, ExternMain, MultipleRustcMain, NoMainErr};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=EntryContext | COMPLEXITY=2 | LINES=11 */
 
 struct EntryContext<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -29,7 +23,6 @@ struct EntryContext<'tcx> {
     /// main functions not defined at the top level. For diagnostics.
     non_main_fns: Vec<Span>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=entry_fn | COMPLEXITY=13 | LINES=21 */
 
 fn entry_fn(tcx: TyCtxt<'_>, (): ()) -> Option<(DefId, EntryFnType)> {
     let any_exe = tcx.crate_types().contains(&CrateType::Executable);
@@ -51,13 +44,11 @@ fn entry_fn(tcx: TyCtxt<'_>, (): ()) -> Option<(DefId, EntryFnType)> {
 
     configure_main(tcx, &ctxt)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=attr_span_by_symbol | COMPLEXITY=2 | LINES=5 */
 
 fn attr_span_by_symbol(ctxt: &EntryContext<'_>, id: ItemId, sym: Symbol) -> Option<Span> {
     let attrs = ctxt.tcx.hir_attrs(id.hir_id());
     attr::find_by_name(attrs, sym).map(|attr| attr.span())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_and_search_item | COMPLEXITY=27 | LINES=39 */
 
 fn check_and_search_item(id: ItemId, ctxt: &mut EntryContext<'_>) {
     if !matches!(ctxt.tcx.def_kind(id.owner_id), DefKind::Fn) {
@@ -97,7 +88,6 @@ fn check_and_search_item(id: ItemId, ctxt: &mut EntryContext<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=configure_main | COMPLEXITY=16 | LINES=24 */
 
 fn configure_main(tcx: TyCtxt<'_>, visitor: &EntryContext<'_>) -> Option<(DefId, EntryFnType)> {
     if let Some((local_def_id, _)) = visitor.rustc_main_fn {
@@ -122,7 +112,6 @@ fn configure_main(tcx: TyCtxt<'_>, visitor: &EntryContext<'_>) -> Option<(DefId,
         None
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=sigpipe | COMPLEXITY=6 | LINES=9 */
 
 fn sigpipe(tcx: TyCtxt<'_>) -> u8 {
     match tcx.sess.opts.unstable_opts.on_broken_pipe {
@@ -132,7 +121,6 @@ fn sigpipe(tcx: TyCtxt<'_>) -> u8 {
         crate::rustc_target::spec::OnBrokenPipe::Inherit => sigpipe::INHERIT,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=no_main_err | COMPLEXITY=6 | LINES=33 */
 
 fn no_main_err(tcx: TyCtxt<'_>, visitor: &EntryContext<'_>) {
     let sp = tcx.def_span(CRATE_DEF_ID);
@@ -166,7 +154,6 @@ fn no_main_err(tcx: TyCtxt<'_>, visitor: &EntryContext<'_>) {
         add_teach_note,
     });
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers { entry_fn, ..*providers };

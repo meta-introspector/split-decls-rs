@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/writeback.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 // During type inference, partially inferred terms are
 // represented using inference variables (ty::Infer). These don't appear in
 // the final [`ty::TypeckResults`] since all of the types should have been
@@ -14,32 +13,24 @@ use std::mem;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::unord::ExtendUnord;
 use crate::rustc_complete::{E0720, ErrorGuaranteed};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, HirId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, PointerCoercion};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::{
     self, DefiningScopeKind, OpaqueHiddenType, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     fold_regions,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
 use crate::rustc_trait_selection::opaque_types::opaque_type_has_defining_use_args;
 use crate::rustc_trait_selection::solve;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=62 */
 
 use crate::FnCtxt;
 
@@ -102,7 +93,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         self.tcx.arena.alloc(wbcx.typeck_results)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=WritebackCx | COMPLEXITY=2 | LINES=15 */
 
 /// The Writeback context. This visitor walks the HIR, checking the
 /// fn-specific typeck results to find inference variables. It resolves
@@ -118,7 +108,6 @@ struct WritebackCx<'cx, 'tcx> {
 
     rustc_dump_user_args: bool,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=79 | LINES=142 */
 
 impl<'cx, 'tcx> WritebackCx<'cx, 'tcx> {
     fn new(
@@ -261,7 +250,6 @@ impl<'cx, 'tcx> WritebackCx<'cx, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=67 | LINES=126 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Impl of Visitor for Resolver
@@ -388,7 +376,6 @@ impl<'cx, 'tcx> Visitor<'tcx> for WritebackCx<'cx, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=eval_closure_size | COMPLEXITY=219 | LINES=507 */
 
 impl<'cx, 'tcx> WritebackCx<'cx, 'tcx> {
     fn eval_closure_size(&mut self) {
@@ -896,26 +883,22 @@ impl<'cx, 'tcx> WritebackCx<'cx, 'tcx> {
         value
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_span | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) trait Locatable {
     fn to_span(&self, tcx: TyCtxt<'_>) -> Span;
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=to_span | COMPLEXITY=5 | LINES=6 */
 
 impl Locatable for Span {
     fn to_span(&self, _: TyCtxt<'_>) -> Span {
         *self
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=to_span | COMPLEXITY=5 | LINES=6 */
 
 impl Locatable for HirId {
     fn to_span(&self, tcx: TyCtxt<'_>) -> Span {
         tcx.hir_span(*self)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=Resolver | COMPLEXITY=2 | LINES=10 */
 
 struct Resolver<'cx, 'tcx> {
     fcx: &'cx FnCtxt<'cx, 'tcx>,
@@ -926,7 +909,6 @@ struct Resolver<'cx, 'tcx> {
     should_normalize: bool,
     nested_goals: &'cx mut Vec<Goal<'tcx, ty::Predicate<'tcx>>>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=35 | LINES=88 */
 
 impl<'cx, 'tcx> Resolver<'cx, 'tcx> {
     fn new(
@@ -1015,7 +997,6 @@ impl<'cx, 'tcx> Resolver<'cx, 'tcx> {
         value
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=10 | LINES=27 */
 
 impl<'cx, 'tcx> TypeFolder<TyCtxt<'tcx>> for Resolver<'cx, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -1043,13 +1024,11 @@ impl<'cx, 'tcx> TypeFolder<TyCtxt<'tcx>> for Resolver<'cx, 'tcx> {
         predicate.super_fold_with(self)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=EagerlyNormalizeConsts | COMPLEXITY=2 | LINES=5 */
 
 struct EagerlyNormalizeConsts<'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 impl<'tcx> EagerlyNormalizeConsts<'tcx> {
     fn new(fcx: &FnCtxt<'_, 'tcx>) -> Self {
         // FIXME(#132279, generic_const_exprs): Using `try_normalize_erasing_regions` here
@@ -1057,7 +1036,6 @@ impl<'tcx> EagerlyNormalizeConsts<'tcx> {
         EagerlyNormalizeConsts { tcx: fcx.tcx, typing_env: fcx.typing_env(fcx.param_env) }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for EagerlyNormalizeConsts<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -1068,7 +1046,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for EagerlyNormalizeConsts<'tcx> {
         self.tcx.try_normalize_erasing_regions(self.typing_env, ct).unwrap_or(ct)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=HasRecursiveOpaque | COMPLEXITY=2 | LINES=7 */
 
 struct HasRecursiveOpaque<'a, 'tcx> {
     def_id: LocalDefId,
@@ -1076,7 +1053,6 @@ struct HasRecursiveOpaque<'a, 'tcx> {
     opaques: &'a FxIndexMap<LocalDefId, ty::OpaqueHiddenType<'tcx>>,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=15 | LINES=24 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for HasRecursiveOpaque<'_, 'tcx> {
     type Result = ControlFlow<()>;

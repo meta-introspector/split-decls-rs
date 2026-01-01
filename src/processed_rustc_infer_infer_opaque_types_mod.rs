@@ -1,33 +1,24 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/opaque_types/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use hir::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_hir as hir;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::solve::Goal;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, BottomUpFolder, OpaqueHiddenType, OpaqueTypeKey, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{DefineOpaqueTypes, RegionVariableOrigin};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::errors::OpaqueHiddenTypeDiag;
 use crate::infer::{InferCtxt, InferOk};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{self, Obligation, PredicateObligations};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 
 pub use table::{OpaqueTypeStorage, OpaqueTypeStorageEntries, OpaqueTypeTable};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=replace_opaque_types_with_inference_vars | COMPLEXITY=83 | LINES=148 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// This is a backwards compatibility hack to prevent breaking changes from
@@ -176,7 +167,6 @@ impl<'tcx> InferCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=register_hidden_type | COMPLEXITY=84 | LINES=204 */
 
 impl<'tcx> InferCtxt<'tcx> {
     #[instrument(skip(self), level = "debug")]

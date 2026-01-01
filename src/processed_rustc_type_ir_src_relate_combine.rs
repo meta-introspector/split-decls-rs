@@ -1,18 +1,15 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/relate/combine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 use super::{
     ExpectedFound, RelateResult, StructurallyRelateAliases, TypeRelation,
     structurally_relate_consts, structurally_relate_tys,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::error::TypeError;
 use crate::inherent::*;
 use crate::solve::Goal;
 use crate::visit::TypeVisitableExt as _;
 use crate::{self as ty, InferCtxtLike, Interner, TypingMode, Upcast};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=span | COMPLEXITY=10 | LINES=29 */
 
 pub trait PredicateEmittingRelation<Infcx, I = <Infcx as InferCtxtLike>::Interner>:
     TypeRelation<I>
@@ -42,7 +39,6 @@ where
     /// Register `AliasRelate` obligation(s) that both types must be related to each other.
     fn register_alias_relate_predicate(&mut self, a: I::Ty, b: I::Ty);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=super_combine_tys | COMPLEXITY=49 | LINES=108 */
 
 pub fn super_combine_tys<Infcx, I, R>(
     infcx: &Infcx,
@@ -151,7 +147,6 @@ where
         _ => structurally_relate_tys(relation, a, b),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=super_combine_consts | COMPLEXITY=34 | LINES=73 */
 
 pub fn super_combine_consts<Infcx, I, R>(
     infcx: &Infcx,

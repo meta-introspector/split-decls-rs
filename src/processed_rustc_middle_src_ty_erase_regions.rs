@@ -1,24 +1,20 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/erase_regions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 use crate::query::Providers;
 use crate::ty::{
     self, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(super) fn provide(providers: &mut Providers) {
     *providers = Providers { erase_and_anonymize_regions_ty, ..*providers };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=erase_and_anonymize_regions_ty | COMPLEXITY=3 | LINES=6 */
 
 fn erase_and_anonymize_regions_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Ty<'tcx> {
     // N.B., use `super_fold_with` here. If we used `fold_with`, it
     // could invoke the `erase_and_anonymize_regions_ty` query recursively.
     ty.super_fold_with(&mut RegionEraserAndAnonymizerVisitor { tcx })
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=erase_and_anonymize_regions | COMPLEXITY=12 | LINES=19 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Returns an equivalent value with all free regions removed and
@@ -38,12 +34,10 @@ impl<'tcx> TyCtxt<'tcx> {
         value1
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=RegionEraserAndAnonymizerVisitor | COMPLEXITY=2 | LINES=4 */
 
 struct RegionEraserAndAnonymizerVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=37 | LINES=58 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for RegionEraserAndAnonymizerVisitor<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

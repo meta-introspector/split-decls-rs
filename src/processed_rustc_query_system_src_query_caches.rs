@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/query/caches.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::sync::OnceLock;
@@ -9,7 +8,6 @@ pub use crate::rustc_data_structures::vec_cache::VecCache;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_index::Idx;
 use crate::rustc_complete::def_id::{DefId, DefIndex};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=12 | LINES=24 */
 
 use crate::dep_graph::DepNodeIndex;
 
@@ -34,21 +32,18 @@ pub trait QueryCache: Sized {
 
     fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex));
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=DefaultCache | COMPLEXITY=6 | LINES=6 */
 
 /// In-memory cache for queries whose keys aren't suitable for any of the
 /// more specialized kinds of cache. Backed by a sharded hashmap.
 pub struct DefaultCache<K, V> {
     cache: ShardedHashMap<K, (V, DepNodeIndex)>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<K, V> Default for DefaultCache<K, V> {
     fn default() -> Self {
         DefaultCache { cache: Default::default() }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=14 | LINES=29 */
 
 impl<K, V> QueryCache for DefaultCache<K, V>
 where
@@ -78,21 +73,18 @@ where
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SingleCache | COMPLEXITY=4 | LINES=6 */
 
 /// In-memory cache for queries whose key type only has one value (e.g. `()`).
 /// The cache therefore only needs to store one query return value.
 pub struct SingleCache<V> {
     cache: OnceLock<(V, DepNodeIndex)>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<V> Default for SingleCache<V> {
     fn default() -> Self {
         SingleCache { cache: OnceLock::new() }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=11 | LINES=24 */
 
 impl<V> QueryCache for SingleCache<V>
 where
@@ -117,7 +109,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=DefIdCache | COMPLEXITY=4 | LINES=11 */
 
 /// In-memory cache for queries whose key is a [`DefId`].
 ///
@@ -129,14 +120,12 @@ pub struct DefIdCache<V> {
     local: VecCache<DefIndex, V, DepNodeIndex>,
     foreign: DefaultCache<DefId, V>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<V> Default for DefIdCache<V> {
     fn default() -> Self {
         DefIdCache { local: Default::default(), foreign: Default::default() }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=18 | LINES=33 */
 
 impl<V> QueryCache for DefIdCache<V>
 where
@@ -170,7 +159,6 @@ where
         self.foreign.iter(f);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=8 | LINES=23 */
 
 impl<K, V> QueryCache for VecCache<K, V, DepNodeIndex>
 where

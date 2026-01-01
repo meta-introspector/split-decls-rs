@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/debuginfo.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=debuginfo_locals | COMPLEXITY=5 | LINES=12 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
@@ -12,7 +11,6 @@ pub fn debuginfo_locals(body: &Body<'_>) -> DenseBitSet<Local> {
     }
     visitor.0
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=DebuginfoLocals(DenseBitSet | COMPLEXITY=5 | LINES=8 */
 
 struct DebuginfoLocals(DenseBitSet<Local>);
 

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/base_n/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=limits | COMPLEXITY=2 | LINES=8 */
 use super::*;
 
 #[test]
@@ -8,7 +7,6 @@ fn limits() {
     assert_eq!(Ok(u64::MAX), u64::from_str_radix(&u64::MAX.to_base(36), 36));
     assert_eq!(Ok(u32::MAX), u32::from_str_radix(&u32::MAX.to_base(36), 36));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_to_base | COMPLEXITY=14 | LINES=24 */
 
 #[test]
 fn test_to_base() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/canonical/canonicalizer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 // This module contains the "canonicalizer" itself.
 //
 // For an overview of what canonicalization is and how it fits into
@@ -15,7 +14,6 @@ use crate::rustc_complete::ty::{
     self, BoundVar, GenericArg, InferConst, List, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use smallvec::SmallVec;
 use tracing::debug;
 
@@ -23,7 +21,6 @@ use crate::infer::InferCtxt;
 use crate::infer::canonical::{
     Canonical, CanonicalQueryInput, CanonicalVarKind, OriginalQueryValues,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=canonicalize_query | COMPLEXITY=22 | LINES=108 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// Canonicalizes a query value `V`. When we canonicalize a query,
@@ -132,7 +129,6 @@ impl<'tcx> InferCtxt<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=canonicalize_free_region | COMPLEXITY=7 | LINES=20 */
 
 /// Controls how we canonicalize "free regions" that are not inference
 /// variables. This depends on what we are canonicalizing *for* --
@@ -153,7 +149,6 @@ trait CanonicalizeMode {
     // Do we preserve universe of variables.
     fn preserve_universes(&self) -> bool;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=CanonicalizeQueryResponse; | COMPLEXITY=23 | LINES=65 */
 
 struct CanonicalizeQueryResponse;
 
@@ -219,7 +214,6 @@ impl CanonicalizeMode for CanonicalizeQueryResponse {
         true
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=CanonicalizeUserTypeAnnotation; | COMPLEXITY=14 | LINES=31 */
 
 struct CanonicalizeUserTypeAnnotation;
 
@@ -251,7 +245,6 @@ impl CanonicalizeMode for CanonicalizeUserTypeAnnotation {
         false
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=CanonicalizeAllFreeRegions; | COMPLEXITY=7 | LINES=20 */
 
 struct CanonicalizeAllFreeRegions;
 
@@ -272,7 +265,6 @@ impl CanonicalizeMode for CanonicalizeAllFreeRegions {
         false
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=CanonicalizeFreeRegionsOtherThanStatic; | COMPLEXITY=11 | LINES=20 */
 
 struct CanonicalizeFreeRegionsOtherThanStatic;
 
@@ -293,7 +285,6 @@ impl CanonicalizeMode for CanonicalizeFreeRegionsOtherThanStatic {
         false
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Canonicalizer | COMPLEXITY=3 | LINES=22 */
 
 struct Canonicalizer<'cx, 'tcx> {
     /// Set to `None` to disable the resolution of inference variables.
@@ -316,7 +307,6 @@ struct Canonicalizer<'cx, 'tcx> {
 
     binder_index: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=119 | LINES=202 */
 
 impl<'cx, 'tcx> TypeFolder<TyCtxt<'tcx>> for Canonicalizer<'cx, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -519,7 +509,6 @@ impl<'cx, 'tcx> TypeFolder<TyCtxt<'tcx>> for Canonicalizer<'cx, 'tcx> {
         if c.flags().intersects(self.needs_canonical_flags) { c.super_fold_with(self) } else { c }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=canonicalize | COMPLEXITY=103 | LINES=279 */
 
 impl<'cx, 'tcx> Canonicalizer<'cx, 'tcx> {
     /// The main `canonicalize` method, shared impl of

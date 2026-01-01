@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::borrow::Cow;
 use std::fs::File;
 use std::hash::{DefaultHasher, Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{Read, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::path::PathBuf;
 
 use crate::rustc_complete::pluralize;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorOf, DefKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::limit::Limit;
 use rustc_macros::extension;
 pub use rustc_type_ir::error::ExpectedFound;
 
 use crate::ty::print::{FmtPrinter, Print, with_forced_trimmed_paths};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, Lift, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=76 | LINES=107 */
 
 pub type TypeError<'tcx> = rustc_type_ir::error::TypeError<TyCtxt<'tcx>>;
 
@@ -127,7 +121,6 @@ impl<'tcx> TypeError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=sort_string | COMPLEXITY=55 | LINES=96 */
 
 impl<'tcx> Ty<'tcx> {
     pub fn sort_string(self, tcx: TyCtxt<'tcx>) -> Cow<'static, str> {
@@ -224,7 +217,6 @@ impl<'tcx> Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=string_with_limit | COMPLEXITY=55 | LINES=101 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn string_with_limit<T>(self, t: T, length_limit: usize, ns: hir::def::Namespace) -> String

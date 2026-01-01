@@ -1,23 +1,19 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/opaque_types/table.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::Deref;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::undo_log::UndoLogs;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use crate::infer::snapshot::undo_log::{InferCtxtUndoLogs, UndoLog};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=OpaqueTypeStorage | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default, Debug, Clone)]
 pub struct OpaqueTypeStorage<'tcx> {
     opaque_types: FxIndexMap<OpaqueTypeKey<'tcx>, OpaqueHiddenType<'tcx>>,
     duplicate_entries: Vec<(OpaqueTypeKey<'tcx>, OpaqueHiddenType<'tcx>)>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=OpaqueTypeStorageEntries | COMPLEXITY=2 | LINES=10 */
 
 /// The number of entries in the opaque type storage at a given point.
 ///
@@ -28,14 +24,12 @@ pub struct OpaqueTypeStorageEntries {
     opaque_types: usize,
     duplicate_entries: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=needs_reevaluation | COMPLEXITY=5 | LINES=6 */
 
 impl rustc_type_ir::inherent::OpaqueTypeStorageEntries for OpaqueTypeStorageEntries {
     fn needs_reevaluation(self, canonicalized: usize) -> bool {
         self.opaque_types != canonicalized
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=35 | LINES=91 */
 
 impl<'tcx> OpaqueTypeStorage<'tcx> {
     #[instrument(level = "debug")]
@@ -127,7 +121,6 @@ impl<'tcx> OpaqueTypeStorage<'tcx> {
         OpaqueTypeTable { storage: self, undo_log }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=9 | LINES=8 */
 
 impl<'tcx> Drop for OpaqueTypeStorage<'tcx> {
     fn drop(&mut self) {
@@ -136,21 +129,18 @@ impl<'tcx> Drop for OpaqueTypeStorage<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=OpaqueTypeTable | COMPLEXITY=2 | LINES=6 */
 
 pub struct OpaqueTypeTable<'a, 'tcx> {
     storage: &'a mut OpaqueTypeStorage<'tcx>,
 
     undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=6 */
 impl<'tcx> Deref for OpaqueTypeTable<'_, 'tcx> {
     type Target = OpaqueTypeStorage<'tcx>;
     fn deref(&self) -> &Self::Target {
         self.storage
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=register | COMPLEXITY=8 | LINES=23 */
 
 impl<'a, 'tcx> OpaqueTypeTable<'a, 'tcx> {
     #[instrument(skip(self), level = "debug")]

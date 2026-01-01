@@ -1,28 +1,19 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/rustc_peek.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MetaItem;
 use crate::rustc_complete::mir::{self, Body, Local, Location};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::errors::{
     PeekArgumentNotALocal, PeekArgumentUntracked, PeekBitNotSet, PeekMustBeNotTemporary,
     PeekMustBePlaceOrRefPlace, StopAfterDataFlowEndedCompilation,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::framework::BitSetExt;
 use crate::impls::{MaybeInitializedPlaces, MaybeLiveLocals, MaybeUninitializedPlaces};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::move_paths::{HasMoveData, LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Analysis, JoinSemiLattice, ResultsCursor};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=has_rustc_mir_with | COMPLEXITY=14 | LINES=13 */
 
 fn has_rustc_mir_with(tcx: TyCtxt<'_>, def_id: DefId, name: Symbol) -> Option<MetaItem> {
     for attr in tcx.get_attrs(def_id, sym::rustc_mir) {
@@ -36,7 +27,6 @@ fn has_rustc_mir_with(tcx: TyCtxt<'_>, def_id: DefId, name: Symbol) -> Option<Me
     }
     None
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=sanity_check | COMPLEXITY=22 | LINES=36 */
 
 pub fn sanity_check<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
     let def_id = body.source.def_id();
@@ -73,7 +63,6 @@ pub fn sanity_check<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
         tcx.dcx().emit_fatal(StopAfterDataFlowEndedCompilation);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=sanity_check_via_rustc_peek | COMPLEXITY=33 | LINES=66 */
 
 /// This function scans `mir` for all calls to the intrinsic
 /// `rustc_peek` that have the expression form `rustc_peek(&expr)`.
@@ -140,7 +129,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=value_assigned_to_local | COMPLEXITY=5 | LINES=16 */
 
 /// If `stmt` is an assignment where the LHS is the given local (with no projections), returns the
 /// RHS of the assignment.
@@ -157,14 +145,12 @@ fn value_assigned_to_local<'a, 'tcx>(
 
     None
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug)]
 enum PeekCallKind {
     ByVal,
     ByRef,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from_arg_ty | COMPLEXITY=7 | LINES=9 */
 
 impl PeekCallKind {
     fn from_arg_ty(arg: Ty<'_>) -> Self {
@@ -174,7 +160,6 @@ impl PeekCallKind {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PeekCall | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug)]
 struct PeekCall {
@@ -182,7 +167,6 @@ struct PeekCall {
     kind: PeekCallKind,
     span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from_terminator | COMPLEXITY=25 | LINES=40 */
 
 impl PeekCall {
     fn from_terminator<'tcx>(
@@ -223,7 +207,6 @@ impl PeekCall {
         None
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=peek_at | COMPLEXITY=2 | LINES=10 */
 
 trait RustcPeekAt<'tcx>: Analysis<'tcx> {
     fn peek_at(
@@ -234,7 +217,6 @@ trait RustcPeekAt<'tcx>: Analysis<'tcx> {
         call: PeekCall,
     );
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=peek_at | COMPLEXITY=20 | LINES=28 */
 
 impl<'tcx, A, D> RustcPeekAt<'tcx> for A
 where
@@ -263,7 +245,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=peek_at | COMPLEXITY=12 | LINES=20 */
 
 impl<'tcx> RustcPeekAt<'tcx> for MaybeLiveLocals {
     fn peek_at(

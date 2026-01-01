@@ -1,32 +1,23 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Range;
 
 use crate::rustc_abi::{Align, HasDataLayout, Primitive, Scalar, Size, WrappingRange};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::common;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::interpret::{
     Allocation, ConstAllocation, ErrorHandled, InitChunk, Pointer, Scalar as InterpScalar,
     read_target_uint,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::mono::MonoItem;
 use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::common::CodegenCx;
 use crate::errors::SymbolAlreadyDefined;
@@ -34,7 +25,6 @@ use crate::type_::Type;
 use crate::type_of::LayoutLlvmExt;
 use crate::value::Value;
 use crate::{base, debuginfo, llvm};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=append_chunks_of_init_and_uninit_bytes | COMPLEXITY=53 | LINES=110 */
 
 pub(crate) fn const_alloc_to_llvm<'ll>(
     cx: &CodegenCx<'ll, '_>,
@@ -145,7 +135,6 @@ pub(crate) fn const_alloc_to_llvm<'ll>(
     // https://github.com/rust-lang/llvm-project/blob/acaea3d2bb8f351b740db7ebce7d7a40b9e21488/llvm/lib/Target/TargetLoweringObjectFile.cpp#L249-L280
     if let &[data] = &*llvals { data } else { cx.const_struct(&llvals, true) }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=codegen_static_initializer | COMPLEXITY=2 | LINES=8 */
 
 fn codegen_static_initializer<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -154,7 +143,6 @@ fn codegen_static_initializer<'ll, 'tcx>(
     let alloc = cx.tcx.eval_static_initializer(def_id)?;
     Ok((const_alloc_to_llvm(cx, alloc.inner(), /*static*/ true), alloc))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=set_global_alignment | COMPLEXITY=7 | LINES=10 */
 
 fn set_global_alignment<'ll>(cx: &CodegenCx<'ll, '_>, gv: &'ll Value, mut align: Align) {
     // The target may require greater alignment for globals than the type does.
@@ -165,7 +153,6 @@ fn set_global_alignment<'ll>(cx: &CodegenCx<'ll, '_>, gv: &'ll Value, mut align:
     }
     llvm::set_alignment(gv, align);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_and_apply_linkage | COMPLEXITY=36 | LINES=62 */
 
 fn check_and_apply_linkage<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -228,7 +215,6 @@ fn check_and_apply_linkage<'ll, 'tcx>(
         cx.declare_global(sym, llty)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=get_static_inner | COMPLEXITY=178 | LINES=333 */
 
 impl<'ll> CodegenCx<'ll, '_> {
     pub(crate) fn const_bitcast(&self, val: &'ll Value, ty: &'ll Type) -> &'ll Value {
@@ -562,7 +548,6 @@ impl<'ll> CodegenCx<'ll, '_> {
         self.compiler_used_statics.push(global);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=static_addr_of | COMPLEXITY=9 | LINES=17 */
 
 impl<'ll> StaticCodegenMethods for CodegenCx<'ll, '_> {
     /// Get a pointer to a global variable.

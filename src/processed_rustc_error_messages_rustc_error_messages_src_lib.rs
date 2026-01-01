@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_error_messages/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[doc(rust_logo)]
@@ -11,25 +10,18 @@ use std::borrow::Cow;
 use std::error::Error;
 use std::path::Path;
 use std::sync::{Arc, LazyLock};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, fs, io};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use fluent_bundle::FluentResource;
 pub use fluent_bundle::types::FluentType;
 pub use fluent_bundle::{self, FluentArgs, FluentError, FluentValue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use fluent_syntax::parser::ParserError;
 use intl_memoizer::concurrent::IntlLangMemoizer;
 use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use unic_langid::{LanguageIdentifier, langid};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new_bundle | COMPLEXITY=2 | LINES=10 */
 
 pub use diagnostic_impls::DiagArgFromDisplay;
 
@@ -39,7 +31,6 @@ pub type FluentBundle =
 fn new_bundle(locales: Vec<LanguageIdentifier>) -> FluentBundle {
     IntoDynSyncSend(fluent_bundle::bundle::FluentBundle::new_concurrent(locales))
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Debug)]
 pub enum TranslationBundleError {
@@ -58,7 +49,6 @@ pub enum TranslationBundleError {
     /// `$sysroot/share/locale/$locale` is not a directory.
     LocaleIsNotDir,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=19 | LINES=22 */
 
 impl fmt::Display for TranslationBundleError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -81,7 +71,6 @@ impl fmt::Display for TranslationBundleError {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=source | COMPLEXITY=10 | LINES=14 */
 
 impl Error for TranslationBundleError {
     fn source(&self) -> Option<&(dyn Error + 'static)> {
@@ -96,14 +85,12 @@ impl Error for TranslationBundleError {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<(FluentResource, Vec<ParserError>)> for TranslationBundleError {
     fn from((_, mut errs): (FluentResource, Vec<ParserError>)) -> Self {
         TranslationBundleError::ParseFtl(errs.pop().expect("failed ftl parse with no errors"))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=8 */
 
 impl From<Vec<FluentError>> for TranslationBundleError {
     fn from(mut errs: Vec<FluentError>) -> Self {
@@ -112,7 +99,6 @@ impl From<Vec<FluentError>> for TranslationBundleError {
         )
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fluent_bundle | COMPLEXITY=43 | LINES=94 */
 
 /// Returns Fluent bundle with the user's locale resources from
 /// `$sysroot/share/locale/$requested_locale/*.ftl`.
@@ -207,7 +193,6 @@ pub fn fluent_bundle(
     let bundle = Arc::new(bundle);
     Ok(Some(bundle))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=register_functions | COMPLEXITY=7 | LINES=9 */
 
 fn register_functions(bundle: &mut FluentBundle) {
     bundle
@@ -217,7 +202,6 @@ fn register_functions(bundle: &mut FluentBundle) {
         })
         .expect("Failed to add a function to the bundle.");
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fallback_fluent_bundle | COMPLEXITY=10 | LINES=29 */
 
 /// Type alias for the result of `fallback_fluent_bundle` - a reference-counted pointer to a lazily
 /// evaluated fluent bundle.
@@ -247,7 +231,6 @@ pub fn fallback_fluent_bundle(
         fallback_bundle
     })))
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=32 */
 
 /// Identifier for the Fluent message/attribute corresponding to a diagnostic message.
 type FluentId = Cow<'static, str>;
@@ -280,26 +263,22 @@ pub enum SubdiagMessage {
     /// <https://projectfluent.org/fluent/guide/attributes.html>
     FluentAttr(FluentId),
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<String> for SubdiagMessage {
     fn from(s: String) -> Self {
         SubdiagMessage::Str(Cow::Owned(s))
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=5 */
 impl From<&'static str> for SubdiagMessage {
     fn from(s: &'static str) -> Self {
         SubdiagMessage::Str(Cow::Borrowed(s))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=5 */
 impl From<Cow<'static, str>> for SubdiagMessage {
     fn from(s: Cow<'static, str>) -> Self {
         SubdiagMessage::Str(s)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=24 */
 
 /// Abstraction over a message in a diagnostic to support both translatable and non-translatable
 /// diagnostic messages.
@@ -324,7 +303,6 @@ pub enum DiagMessage {
     /// <https://projectfluent.org/fluent/guide/attributes.html>
     FluentIdentifier(FluentId, Option<FluentId>),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=with_subdiagnostic_message | COMPLEXITY=20 | LINES=33 */
 
 impl DiagMessage {
     /// Given a `SubdiagMessage` which may contain a Fluent attribute, create a new
@@ -358,26 +336,22 @@ impl DiagMessage {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<String> for DiagMessage {
     fn from(s: String) -> Self {
         DiagMessage::Str(Cow::Owned(s))
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=5 */
 impl From<&'static str> for DiagMessage {
     fn from(s: &'static str) -> Self {
         DiagMessage::Str(Cow::Borrowed(s))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=5 */
 impl From<Cow<'static, str>> for DiagMessage {
     fn from(s: Cow<'static, str>) -> Self {
         DiagMessage::Str(s)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=from | COMPLEXITY=15 | LINES=18 */
 
 /// Translating *into* a subdiagnostic message from a diagnostic message is a little strange - but
 /// the subdiagnostic functions (e.g. `span_label`) take a `SubdiagMessage` and the
@@ -396,7 +370,6 @@ impl From<DiagMessage> for SubdiagMessage {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=SpanLabel | COMPLEXITY=4 | LINES=14 */
 
 /// A span together with some additional data.
 #[derive(Clone, Debug)]
@@ -411,7 +384,6 @@ pub struct SpanLabel {
     /// What label should we attach to this span (if any)?
     pub label: Option<DiagMessage>,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=MultiSpan | COMPLEXITY=2 | LINES=14 */
 
 /// A collection of `Span`s.
 ///
@@ -426,7 +398,6 @@ pub struct MultiSpan {
     primary_spans: Vec<Span>,
     span_labels: Vec<(Span, DiagMessage)>,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=new | COMPLEXITY=60 | LINES=103 */
 
 impl MultiSpan {
     #[inline]
@@ -530,26 +501,22 @@ impl MultiSpan {
         Self { primary_spans: self.primary_spans.clone(), ..MultiSpan::new() }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Span> for MultiSpan {
     fn from(span: Span) -> MultiSpan {
         MultiSpan::from_span(span)
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Vec<Span>> for MultiSpan {
     fn from(spans: Vec<Span>) -> MultiSpan {
         MultiSpan::from_spans(spans)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=icu_locale_from_unic_langid | COMPLEXITY=2 | LINES=4 */
 
 fn icu_locale_from_unic_langid(lang: LanguageIdentifier) -> Option<icu_locale::Locale> {
     icu_locale::Locale::try_from_str(&lang.to_string()).ok()
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=fluent_value_from_str_list_sep_by_and | COMPLEXITY=24 | LINES=68 */
 
 pub fn fluent_value_from_str_list_sep_by_and(l: Vec<Cow<'_, str>>) -> FluentValue<'_> {
     // Fluent requires 'static value here for its AnyEq usages.
@@ -618,7 +585,6 @@ pub fn fluent_value_from_str_list_sep_by_and(l: Vec<Cow<'_, str>>) -> FluentValu
 
     FluentValue::Custom(Box::new(FluentStrListSepByAnd(l)))
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 /// Simplified version of `FluentArg` that can implement `Encodable` and `Decodable`. Collection of
 /// `DiagArg` are converted to `FluentArgs` (consuming the collection) at the start of diagnostic
@@ -639,7 +605,6 @@ pub enum DiagArgValue {
     Number(i32),
     StrListSepByAnd(Vec<Cow<'static, str>>),
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=14 */
 
 /// Converts a value of a type into a `DiagArg` (typically a field of an `Diag` struct).
 /// Implemented as a custom trait rather than `From` so that it is implemented on the type being
@@ -654,14 +619,12 @@ pub trait IntoDiagArg {
     /// value has no shortening logic that could be used, the argument can be safely ignored.
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> DiagArgValue;
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for DiagArgValue {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         self
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<DiagArgValue> for FluentValue<'static> {
     fn from(val: DiagArgValue) -> Self {

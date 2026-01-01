@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/eval_ctxt/probe.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::marker::PhantomData;
 
 use rustc_type_ir::search_graph::CandidateHeadUsages;
 use rustc_type_ir::{InferCtxtLike, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use tracing::instrument;
 
 use crate::delegate::SolverDelegate;
@@ -12,7 +10,6 @@ use crate::solve::assembly::Candidate;
 use crate::solve::{
     BuiltinImplSource, CandidateSource, EvalCtxt, NoSolution, QueryResult, inspect,
 };
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub struct ProbeCtxt<'me, 'a, D, I, F, T>
 where
@@ -23,7 +20,6 @@ where
     probe_kind: F,
     _result: PhantomData<T>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=53 */
 
 impl<D, I, F, T> ProbeCtxt<'_, '_, D, I, F, T>
 where
@@ -77,7 +73,6 @@ where
         r
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub struct TraitProbeCtxt<'me, 'a, D, I, F>
 where
@@ -87,7 +82,6 @@ where
     cx: ProbeCtxt<'me, 'a, D, I, F, QueryResult<I>>,
     source: CandidateSource<I>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 impl<D, I, F> TraitProbeCtxt<'_, '_, D, I, F>
 where
@@ -104,7 +98,6 @@ where
         result.map(|result| Candidate { source: self.source, result, head_usages })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=39 */
 
 impl<'a, D, I> EvalCtxt<'a, D, I>
 where

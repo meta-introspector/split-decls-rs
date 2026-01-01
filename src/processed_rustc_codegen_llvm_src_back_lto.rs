@@ -1,26 +1,18 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/back/lto.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::BTreeMap;
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fs::File;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ptr::NonNull;
 use std::sync::Arc;
 use std::{io, iter, slice};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use object::read::archive::ArchiveFile;
 use object::{Object, ObjectSection};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule, ThinShared};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::back::write::{CodegenContext, FatLtoInput};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_complete::DiagCtxtHandle;
@@ -28,20 +20,14 @@ use crate::rustc_complete::attrs::SanitizerSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::dep_graph::WorkProduct;
 use crate::rustc_complete::config::{self, Lto};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::back::write::{
     self, CodegenDiagnosticsStage, DiagnosticHandlers, bitcode_section_name, save_temp_bitcode,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{LlvmError, LtoBitcodeFromRlib};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self, build_string};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LlvmCodegenBackend, ModuleLlvm, SimpleCx};
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=prepare_lto | COMPLEXITY=51 | LINES=90 */
 
 /// We keep track of the computed LTO cache keys from the previous
 /// session to determine which CGUs we can reuse.
@@ -132,7 +118,6 @@ fn prepare_lto(
 
     (symbols_below_threshold, upstream_modules)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_bitcode_slice_from_object_data | COMPLEXITY=17 | LINES=25 */
 
 fn get_bitcode_slice_from_object_data<'a>(
     obj: &'a [u8],
@@ -158,7 +143,6 @@ fn get_bitcode_slice_from_object_data<'a>(
 
     section.data().map_err(|err| LtoBitcodeFromRlib { err: err.to_string() })
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// Performs fat LTO by merging all modules into a single one and returning it
 /// for further optimization.
@@ -176,7 +160,6 @@ pub(crate) fn run_fat(
         symbols_below_threshold.iter().map(|c| c.as_ptr()).collect::<Vec<_>>();
     fat_lto(cgcx, dcx, modules, upstream_modules, &symbols_below_threshold)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=25 */
 
 /// Performs thin LTO by performing necessary global analysis and returning two
 /// lists, one of the modules that need optimization and another for modules that
@@ -202,14 +185,12 @@ pub(crate) fn run_thin(
     }
     thin_lto(cgcx, dcx, modules, upstream_modules, cached_modules, &symbols_below_threshold)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) fn prepare_thin(module: ModuleCodegen<ModuleLlvm>) -> (String, ThinBuffer) {
     let name = module.name;
     let buffer = ThinBuffer::new(module.module_llvm.llmod(), true);
     (name, buffer)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fat_lto | COMPLEXITY=59 | LINES=120 */
 
 fn fat_lto(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -330,7 +311,6 @@ fn fat_lto(
 
     module
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=22 */
 
 pub(crate) struct Linker<'a>(&'a mut llvm::Linker<'a>);
 
@@ -353,7 +333,6 @@ impl<'a> Linker<'a> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for Linker<'_> {
     fn drop(&mut self) {
@@ -362,7 +341,6 @@ impl Drop for Linker<'_> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=thin_lto | COMPLEXITY=78 | LINES=184 */
 
 /// Prepare "thin" LTO to get run on these modules.
 ///
@@ -547,7 +525,6 @@ fn thin_lto(
         (opt_jobs, copy_jobs)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=enable_autodiff_settings | COMPLEXITY=27 | LINES=46 */
 
 fn enable_autodiff_settings(ad: &[config::AutoDiff]) {
     for val in ad {
@@ -594,7 +571,6 @@ fn enable_autodiff_settings(ad: &[config::AutoDiff]) {
     // FIXME(ZuseZ4): Test this, since it was added a long time ago.
     llvm::set_rust_rules(true);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=65 */
 
 pub(crate) fn run_pass_manager(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -660,21 +636,17 @@ pub(crate) fn run_pass_manager(
 
     debug!("lto done");
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=ModuleBuffer(&'static | COMPLEXITY=8 | LINES=4 */
 
 pub struct ModuleBuffer(&'static mut llvm::ModuleBuffer);
 
 unsafe impl Send for ModuleBuffer {}
-/* AST_META: AST_ID=26 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for ModuleBuffer {}
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 impl ModuleBuffer {
     pub(crate) fn new(m: &llvm::Module) -> ModuleBuffer {
         ModuleBuffer(unsafe { llvm::LLVMRustModuleBufferCreate(m) })
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=data | COMPLEXITY=10 | LINES=10 */
 
 impl ModuleBufferMethods for ModuleBuffer {
     fn data(&self) -> &[u8] {
@@ -685,7 +657,6 @@ impl ModuleBufferMethods for ModuleBuffer {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for ModuleBuffer {
     fn drop(&mut self) {
@@ -694,14 +665,11 @@ impl Drop for ModuleBuffer {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=ThinData(&'static | COMPLEXITY=8 | LINES=4 */
 
 pub struct ThinData(&'static mut llvm::ThinLTOData);
 
 unsafe impl Send for ThinData {}
-/* AST_META: AST_ID=31 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for ThinData {}
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for ThinData {
     fn drop(&mut self) {
@@ -710,14 +678,11 @@ impl Drop for ThinData {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=ThinBuffer(&'static | COMPLEXITY=8 | LINES=4 */
 
 pub struct ThinBuffer(&'static mut llvm::ThinLTOBuffer);
 
 unsafe impl Send for ThinBuffer {}
-/* AST_META: AST_ID=34 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for ThinBuffer {}
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=22 */
 
 impl ThinBuffer {
     pub(crate) fn new(m: &llvm::Module, is_thin: bool) -> ThinBuffer {
@@ -740,7 +705,6 @@ impl ThinBuffer {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=data | COMPLEXITY=10 | LINES=10 */
 
 impl ThinBufferMethods for ThinBuffer {
     fn data(&self) -> &[u8] {
@@ -751,7 +715,6 @@ impl ThinBufferMethods for ThinBuffer {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for ThinBuffer {
     fn drop(&mut self) {
@@ -760,7 +723,6 @@ impl Drop for ThinBuffer {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=58 | LINES=89 */
 
 pub(crate) fn optimize_thin_module(
     thin_module: ThinModule<LlvmCodegenBackend>,
@@ -849,7 +811,6 @@ pub(crate) fn optimize_thin_module(
     }
     module
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=ThinLTOKeysMap | COMPLEXITY=2 | LINES=7 */
 
 /// Maps LLVM module identifiers to their corresponding LLVM LTO cache keys
 #[derive(Debug, Default)]
@@ -857,7 +818,6 @@ struct ThinLTOKeysMap {
     // key = llvm name of importing module, value = LLVM cache key
     keys: BTreeMap<String, String>,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=save_to_file | COMPLEXITY=25 | LINES=45 */
 
 impl ThinLTOKeysMap {
     fn save_to_file(&self, path: &Path) -> io::Result<()> {
@@ -903,14 +863,12 @@ impl ThinLTOKeysMap {
         Self { keys }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=module_name_to_str | COMPLEXITY=5 | LINES=6 */
 
 fn module_name_to_str(c_str: &CStr) -> &str {
     c_str.to_str().unwrap_or_else(|e| {
         bug!("Encountered non-utf8 LLVM module name `{}`: {}", c_str.to_string_lossy(), e)
     })
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 pub(crate) fn parse_module<'a>(
     cx: &'a llvm::Context,

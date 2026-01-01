@@ -1,48 +1,34 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/compare_impl_item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use core::ops::ControlFlow;
 use std::borrow::Cow;
 use std::iter;
 
 use hir::def_id::{DefId, DefIdMap, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, ImplItemKind, intravisit};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{self, BoundRegionConversionTime, InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::util;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, BottomUpFolder, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
 use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::potentially_plural_count;
 use crate::errors::{LifetimesOrBoundsMismatchOnTrait, MethodShouldReturnFuture};
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 
 /// Call the query `tcx.compare_impl_item()` directly instead.
@@ -64,7 +50,6 @@ pub(super) fn compare_impl_item(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=compare_impl_method | COMPLEXITY=3 | LINES=20 */
 
 /// Checks that a method from an impl conforms to the signature of
 /// the same method as declared in the trait.
@@ -85,7 +70,6 @@ fn compare_impl_method<'tcx>(
     compare_method_predicate_entailment(tcx, impl_m, trait_m, impl_trait_ref)?;
     Ok(())
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_method_is_structurally_compatible | COMPLEXITY=3 | LINES=19 */
 
 /// Checks a bunch of different properties of the impl/trait methods for
 /// compatibility, such as asyncness, number of argument, self receiver kind,
@@ -105,7 +89,6 @@ fn check_method_is_structurally_compatible<'tcx>(
     check_region_bounds_on_impl_item(tcx, impl_m, trait_m, delay)?;
     Ok(())
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// This function is best explained by example. Consider a trait with its implementation:
 ///
@@ -114,7 +97,6 @@ fn check_method_is_structurally_compatible<'tcx>(
 ///     // `trait_m`
 ///     fn method<'a, M>(t: &'t T, m: &'a M) -> Self;
 /// }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 ///
 /// struct Foo;
 ///
@@ -122,7 +104,6 @@ fn check_method_is_structurally_compatible<'tcx>(
 ///     // `impl_m`
 ///     fn method<'b, N>(t: &'j &'i U, m: &'b N) -> Foo { Foo }
 /// }
-/* AST_META: AST_ID=19 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 /// ```
 ///
 /// We wish to decide if those two method types are compatible.
@@ -135,7 +116,6 @@ fn check_method_is_structurally_compatible<'tcx>(
 ///
 /// ```rust,ignore (pseudo-Rust)
 /// trait_to_impl_args = {'t => 'j, T => &'i U, Self => Foo}
-/* AST_META: AST_ID=20 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 /// ```
 ///
 /// We create a mapping `dummy_args` that maps from the impl type
@@ -147,7 +127,6 @@ fn check_method_is_structurally_compatible<'tcx>(
 ///
 /// ```rust,ignore (pseudo-Rust)
 /// impl_to_placeholder_args = {'i => 'i0, U => U0, N => N0 }
-/* AST_META: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 /// ```
 ///
 /// Now we can apply `placeholder_args` to the type of the impl method
@@ -167,7 +146,6 @@ fn check_method_is_structurally_compatible<'tcx>(
 ///
 /// ```rust,ignore (pseudo-Rust)
 /// trait_to_placeholder_args = { T => &'i0 U0, Self => Foo, M => N0 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=compare_method_predicate_entailment | COMPLEXITY=58 | LINES=234 */
 /// ```
 ///
 /// Applying this to the trait method type yields:
@@ -402,13 +380,11 @@ fn compare_method_predicate_entailment<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=RemapLateParam | COMPLEXITY=2 | LINES=5 */
 
 struct RemapLateParam<'tcx> {
     tcx: TyCtxt<'tcx>,
     mapping: FxIndexMap<ty::LateParamRegionKind, ty::LateParamRegionKind>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=10 | LINES=18 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for RemapLateParam<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -427,7 +403,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for RemapLateParam<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 
 /// Given a method def-id in an impl, compare the method signature of the impl
 /// against the trait that it's implementing. In doing so, infer the hidden types
@@ -447,12 +422,10 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for RemapLateParam<'tcx> {
 ///     fn bar() -> impl Deref<Target = impl Sized>;
 ///     //          ^- RPITIT #1        ^- RPITIT #2
 /// }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
 ///
 /// impl Foo for () {
 ///     fn bar() -> Box<String> { Box::new(String::new()) }
 /// }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=117 | LINES=341 */
 /// ```
 ///
 /// The hidden types for the RPITITs in `bar` would be inferred to:
@@ -794,7 +767,6 @@ pub(super) fn collect_return_position_impl_trait_in_trait_tys<'tcx>(
 
     Ok(&*tcx.arena.alloc(remapped_types))
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=ImplTraitInTraitCollector | COMPLEXITY=2 | LINES=8 */
 
 struct ImplTraitInTraitCollector<'a, 'tcx, E> {
     ocx: &'a ObligationCtxt<'a, 'tcx, E>,
@@ -803,7 +775,6 @@ struct ImplTraitInTraitCollector<'a, 'tcx, E> {
     param_env: ty::ParamEnv<'tcx>,
     body_id: LocalDefId,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=14 */
 
 impl<'a, 'tcx, E> ImplTraitInTraitCollector<'a, 'tcx, E>
 where
@@ -818,7 +789,6 @@ where
         ImplTraitInTraitCollector { ocx, types: FxIndexMap::default(), span, param_env, body_id }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=22 | LINES=53 */
 
 impl<'tcx, E> TypeFolder<TyCtxt<'tcx>> for ImplTraitInTraitCollector<'_, 'tcx, E>
 where
@@ -872,7 +842,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=RemapHiddenTyRegions | COMPLEXITY=7 | LINES=17 */
 
 struct RemapHiddenTyRegions<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -890,7 +859,6 @@ struct RemapHiddenTyRegions<'tcx> {
     /// Span of the return type. Useful for diagnostics.
     return_span: Span,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=44 | LINES=81 */
 
 impl<'tcx> ty::FallibleTypeFolder<TyCtxt<'tcx>> for RemapHiddenTyRegions<'tcx> {
     type Error = ErrorGuaranteed;
@@ -972,7 +940,6 @@ impl<'tcx> ty::FallibleTypeFolder<TyCtxt<'tcx>> for RemapHiddenTyRegions<'tcx> {
         ))
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=get_self_string | COMPLEXITY=17 | LINES=20 */
 
 /// Gets the string for an explicit self declaration, e.g. "self", "&self",
 /// etc.
@@ -993,7 +960,6 @@ where
         format!("self: {self_arg_ty}")
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=report_trait_method_mismatch | COMPLEXITY=52 | LINES=101 */
 
 fn report_trait_method_mismatch<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -1095,7 +1061,6 @@ fn report_trait_method_mismatch<'tcx>(
 
     diag.emit()
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=check_region_bounds_on_impl_item | COMPLEXITY=68 | LINES=111 */
 
 fn check_region_bounds_on_impl_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1207,14 +1172,12 @@ fn check_region_bounds_on_impl_item<'tcx>(
 
     Err(reported)
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[allow(unused)]
 enum LateEarlyMismatch<'tcx> {
     EarlyInImpl(DefId, DefId, ty::Region<'tcx>),
     LateInImpl(DefId, DefId, ty::Region<'tcx>),
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=check_region_late_boundedness | COMPLEXITY=76 | LINES=199 */
 
 fn check_region_late_boundedness<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1414,7 +1377,6 @@ fn check_region_late_boundedness<'tcx>(
 
     Some(diag.emit())
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=find_region_in_predicates | COMPLEXITY=17 | LINES=22 */
 
 fn find_region_in_predicates<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1437,7 +1399,6 @@ fn find_region_in_predicates<'tcx>(
 
     None
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=extract_spans_for_error_reporting | COMPLEXITY=12 | LINES=27 */
 
 #[instrument(level = "debug", skip(infcx))]
 fn extract_spans_for_error_reporting<'tcx>(
@@ -1465,7 +1426,6 @@ fn extract_spans_for_error_reporting<'tcx>(
         _ => (cause.span, tcx.hir_span_if_local(trait_m.def_id)),
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=compare_self_type | COMPLEXITY=42 | LINES=79 */
 
 fn compare_self_type<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1545,7 +1505,6 @@ fn compare_self_type<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Checks that the number of generics on a given assoc item in a trait impl is the same
 /// as the number of generics on the respective assoc item in the trait definition.
@@ -1556,7 +1515,6 @@ fn compare_self_type<'tcx>(
 ///     fn foo();
 ///     type Assoc<T>;
 /// }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 ///
 /// impl Trait for () {
 ///     fn foo<T>() {}
@@ -1564,7 +1522,6 @@ fn compare_self_type<'tcx>(
 ///     type Assoc = u32;
 ///     //~^ error
 /// }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=compare_number_of_generics | COMPLEXITY=93 | LINES=144 */
 /// ```
 ///
 /// Notably this does not error on `foo<T>` implemented as `foo<const N: u8>` or
@@ -1709,7 +1666,6 @@ fn compare_number_of_generics<'tcx>(
 
     if let Some(reported) = err_occurred { Err(reported) } else { Ok(()) }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=compare_number_of_method_arguments | COMPLEXITY=32 | LINES=81 */
 
 fn compare_number_of_method_arguments<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1791,7 +1747,6 @@ fn compare_number_of_method_arguments<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=compare_synthetic_generics | COMPLEXITY=59 | LINES=127 */
 
 fn compare_synthetic_generics<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1919,7 +1874,6 @@ fn compare_synthetic_generics<'tcx>(
     }
     if let Some(reported) = error_found { Err(reported) } else { Ok(()) }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Checks that all parameters in the generics of a given assoc item in a trait impl have
 /// the same kind as the respective generic parameter in the trait def.
@@ -1932,7 +1886,6 @@ fn compare_synthetic_generics<'tcx>(
 ///     fn baz<const N: u32>();
 ///     type Blah<T>;
 /// }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 ///
 /// impl Foo for () {
 ///     fn foo<const N: u64>() {}
@@ -1944,7 +1897,6 @@ fn compare_synthetic_generics<'tcx>(
 ///     type Blah<const N: i64> = u32;
 ///     //~^ error
 /// }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=compare_generic_param_kinds | COMPLEXITY=56 | LINES=81 */
 /// ```
 ///
 /// This function does not handle lifetime parameters
@@ -2026,7 +1978,6 @@ fn compare_generic_param_kinds<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=compare_impl_const | COMPLEXITY=3 | LINES=12 */
 
 fn compare_impl_const<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -2039,12 +1990,10 @@ fn compare_impl_const<'tcx>(
     check_region_bounds_on_impl_item(tcx, impl_const_item, trait_const_item, false)?;
     compare_const_predicate_entailment(tcx, impl_const_item, trait_const_item, impl_trait_ref)
 }
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 /// The equivalent of [compare_method_predicate_entailment], but for associated constants
 /// instead of associated functions.
 // FIXME(generic_const_items): If possible extract the common parts of `compare_{type,const}_predicate_entailment`.
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=compare_const_predicate_entailment | COMPLEXITY=30 | LINES=119 */
 #[instrument(level = "debug", skip(tcx))]
 fn compare_const_predicate_entailment<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -2164,7 +2113,6 @@ fn compare_const_predicate_entailment<'tcx>(
 
     ocx.resolve_regions_and_report_errors(impl_ct_def_id, param_env, [])
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=compare_impl_ty | COMPLEXITY=3 | LINES=14 */
 
 #[instrument(level = "debug", skip(tcx))]
 fn compare_impl_ty<'tcx>(
@@ -2179,7 +2127,6 @@ fn compare_impl_ty<'tcx>(
     compare_type_predicate_entailment(tcx, impl_ty, trait_ty, impl_trait_ref)?;
     check_type_bounds(tcx, trait_ty, impl_ty, impl_trait_ref)
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=compare_type_predicate_entailment | COMPLEXITY=36 | LINES=125 */
 
 /// The equivalent of [compare_method_predicate_entailment], but for associated types
 /// instead of associated functions.
@@ -2305,7 +2252,6 @@ fn compare_type_predicate_entailment<'tcx>(
     // lifetime parameters.
     ocx.resolve_regions_and_report_errors(impl_ty_def_id, param_env, [])
 }
-/* AST_META: AST_ID=54 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 /// Validate that `ProjectionCandidate`s created for this associated type will
 /// be valid.
@@ -2313,7 +2259,6 @@ fn compare_type_predicate_entailment<'tcx>(
 /// Usually given
 ///
 /// trait X { type Y: Copy } impl X for T { type Y = S; }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=52 | LINES=118 */
 ///
 /// We are able to normalize `<T as X>::Y` to `S`, and so when we check the
 /// impl is well-formed we have to prove `S: Copy`.
@@ -2432,7 +2377,6 @@ pub(super) fn check_type_bounds<'tcx>(
     // lifetime parameters.
     ocx.resolve_regions_and_report_errors(impl_ty_def_id, param_env, assumed_wf_types)
 }
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 /// Install projection predicates that allow GATs to project to their own
 /// definition types. This is not allowed in general in cases of default
@@ -2446,7 +2390,6 @@ pub(super) fn check_type_bounds<'tcx>(
 /// impl<A, B> Foo<u32> for (A, B) {
 ///     type Bar<C> = Wrapper<A, B, C>
 /// }
-/* AST_META: AST_ID=57 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 /// ```
 ///
 /// - `impl_trait_ref` would be `<(A, B) as Foo<u32>>`
@@ -2461,23 +2404,19 @@ pub(super) fn check_type_bounds<'tcx>(
 /// trait Family {
 ///     type Member<C: Eq>;
 /// }
-/* AST_META: AST_ID=58 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 ///
 /// impl Family for VecFamily {
 ///     type Member<C: Eq> = i32;
 /// }
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 /// ```
 /// Here, we would generate
 /// ```ignore (pseudo-rust)
 /// forall<C> { Normalize(<VecFamily as Family>::Member<C> => i32) }
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 /// ```
 ///
 /// when we really would like to generate
 /// ```ignore (pseudo-rust)
 /// forall<C> { Normalize(<VecFamily as Family>::Member<C> => i32) :- Implemented(C: Eq) }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=param_env_with_gat_bounds | COMPLEXITY=65 | LINES=131 */
 /// ```
 ///
 /// But, this is probably fine, because although the first clause can be used with types `C` that
@@ -2609,7 +2548,6 @@ fn param_env_with_gat_bounds<'tcx>(
 
     ty::ParamEnv::new(tcx.mk_clauses(&predicates))
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=try_report_async_mismatch | COMPLEXITY=19 | LINES=44 */
 
 /// Manually check here that `async fn foo()` wasn't matched against `fn foo()`,
 /// and extract a better error if so.

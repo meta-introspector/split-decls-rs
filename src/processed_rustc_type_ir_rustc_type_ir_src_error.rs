@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use derive_where::derive_where;
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::solve::NoSolution;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ExpectedFound | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[derive(TypeFoldable_Generic, TypeVisitable_Generic)]
@@ -14,14 +11,12 @@ pub struct ExpectedFound<T> {
     pub expected: T,
     pub found: T,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<T> ExpectedFound<T> {
     pub fn new(expected: T, found: T) -> Self {
         ExpectedFound { expected, found }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=41 */
 
 // Data structures used in type unification
 #[derive_where(Clone, Copy, PartialEq, Debug; I: Interner)]
@@ -63,10 +58,8 @@ pub enum TypeError<I: Interner> {
     /// Safe `#[target_feature]` functions are not assignable to safe function pointers.
     TargetFeatureCast(I::DefId),
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TypeError<I> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=involves_regions | COMPLEXITY=17 | LINES=34 */
 
 impl<I: Interner> TypeError<I> {
     pub fn involves_regions(self) -> bool {
@@ -101,7 +94,6 @@ impl<I: Interner> TypeError<I> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner> From<TypeError<I>> for NoSolution {
     fn from(_: TypeError<I>) -> NoSolution {

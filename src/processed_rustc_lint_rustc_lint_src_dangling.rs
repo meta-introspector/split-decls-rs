@@ -1,25 +1,16 @@
 // SRC: ../rust/compiler/rustc_lint/src/dangling.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::visit::{visit_opt, walk_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{FnKind, Visitor, walk_expr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Block, Body, Expr, ExprKind, FnDecl, FnRetTy, LangItem, TyKind, find_attr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{DanglingPointersFromLocals, DanglingPointersFromTemporaries};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=32 */
 
 declare_lint! {
     /// The `dangling_pointers_from_temporaries` lint detects getting a pointer to data
@@ -52,7 +43,6 @@ declare_lint! {
     Warn,
     "detects getting a pointer from a temporary"
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 declare_lint! {
     /// The `dangling_pointers_from_locals` lint detects getting a pointer to data
@@ -83,7 +73,6 @@ declare_lint! {
     Warn,
     "detects returning a pointer from a local variable"
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_fn | COMPLEXITY=40 | LINES=78 */
 
 /// FIXME: false negatives (i.e. the lint is not emitted when it should be)
 /// 1. Ways to get a temporary that are not recognized:
@@ -162,7 +151,6 @@ impl<'tcx> LateLintPass<'tcx> for DanglingPointers {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DanglingPointerLocalContext | COMPLEXITY=2 | LINES=8 */
 
 struct DanglingPointerLocalContext<'tcx> {
     body: LocalDefId,
@@ -171,13 +159,11 @@ struct DanglingPointerLocalContext<'tcx> {
     fn_ret_inner: Ty<'tcx>,
     fn_kind: &'static str,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=DanglingPointerReturnSearcher | COMPLEXITY=2 | LINES=5 */
 
 struct DanglingPointerReturnSearcher<'lcx, 'tcx> {
     cx: &'lcx LateContext<'tcx>,
     dcx: &'lcx DanglingPointerLocalContext<'tcx>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx> Visitor<'tcx> for DanglingPointerReturnSearcher<'_, 'tcx> {
     fn visit_expr(&mut self, expr: &'tcx Expr<'tcx>) -> Self::Result {
@@ -187,7 +173,6 @@ impl<'tcx> Visitor<'tcx> for DanglingPointerReturnSearcher<'_, 'tcx> {
         walk_expr(self, expr)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=lint_addr_of_local | COMPLEXITY=12 | LINES=31 */
 
 /// Look for `&<path_to_local_in_same_body>` pattern and emit lint for it
 fn lint_addr_of_local<'a>(
@@ -219,7 +204,6 @@ fn lint_addr_of_local<'a>(
         );
     }
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// This produces a dangling pointer:
 /// ```ignore (example)
@@ -235,7 +219,6 @@ fn lint_addr_of_local<'a>(
 /// But this does:
 /// ```ignore (example)
 /// foo({ let ptr = CString::new("hello").unwrap().as_ptr(); ptr })
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=DanglingPointerSearcher | COMPLEXITY=4 | LINES=11 */
 /// ```
 ///
 /// So we have to keep track of when we are inside of a function/method call argument.
@@ -247,7 +230,6 @@ struct DanglingPointerSearcher<'lcx, 'tcx> {
     /// See [the main doc][`Self`] for examples.
     inside_call_args: bool,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=16 | LINES=19 */
 
 impl Visitor<'_> for DanglingPointerSearcher<'_, '_> {
     fn visit_expr(&mut self, expr: &Expr<'_>) -> Self::Result {
@@ -267,7 +249,6 @@ impl Visitor<'_> for DanglingPointerSearcher<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=with_inside_call_args | COMPLEXITY=3 | LINES=13 */
 
 impl DanglingPointerSearcher<'_, '_> {
     fn with_inside_call_args<R>(
@@ -281,7 +262,6 @@ impl DanglingPointerSearcher<'_, '_> {
         result
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=lint_expr | COMPLEXITY=7 | LINES=23 */
 
 fn lint_expr(cx: &LateContext<'_>, expr: &Expr<'_>) {
     if let ExprKind::MethodCall(method, receiver, _args, _span) = expr.kind
@@ -305,7 +285,6 @@ fn lint_expr(cx: &LateContext<'_>, expr: &Expr<'_>) {
         )
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=is_temporary_rvalue | COMPLEXITY=12 | LINES=51 */
 
 fn is_temporary_rvalue(expr: &Expr<'_>) -> bool {
     match expr.kind {
@@ -357,7 +336,6 @@ fn is_temporary_rvalue(expr: &Expr<'_>) -> bool {
         ExprKind::Type(..) | ExprKind::Err(..) => false,
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=owns_allocation | COMPLEXITY=20 | LINES=24 */
 
 // Array, Vec, String, CString, MaybeUninit, Cell, Box<[_]>, Box<str>, Box<CStr>, UnsafeCell,
 // SyncUnsafeCell, or any of the above in arbitrary many nested Box'es.

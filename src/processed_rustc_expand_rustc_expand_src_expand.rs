@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_expand/src/expand.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Arc;
 use std::{iter, mem, slice};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_complete::mut_visit::*;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::visit::{self, AssocCtxt, Visitor, VisitorResult, try_visit, walk_list};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     self as ast, AssocItemKind, AstNodeWrapper, AttrArgs, AttrStyle, AttrVec, DUMMY_NODE_ID,
     ExprKind, ForeignItemKind, HasAttrs, HasNodeId, Inline, ItemKind, MacStmtStyle, MetaItemInner,
     MetaItemKind, ModKind, NodeId, PatKind, StmtKind, TyKind, token,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::{AttributeParser, Early, EvalConfigResult, ShouldEmit, validate_attr};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::PResult;
@@ -30,34 +25,27 @@ use crate::rustc_parse::parser::{
     AttemptLocalParseRecovery, CommaRecoveryMode, ForceCollect, Parser, RecoverColon, RecoverComma,
     token_descr,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::{UNUSED_ATTRIBUTES, UNUSED_DOC_COMMENTS};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::hygiene::SyntaxContext;
 use crate::rustc_complete::{ErrorGuaranteed, FileName, Ident, LocalExpnId, Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 
 use crate::base::*;
 use crate::config::{StripUnconfigured, attr_into_trace};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::errors::{
     EmptyDelegationMac, GlobDelegationOutsideImpls, GlobDelegationTraitlessQpath, IncompleteParse,
     RecursionLimitReached, RemoveExprNotSupported, RemoveNodeNotSupported, UnsupportedKeyValue,
     WrongFragmentKind,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::fluent_generated;
 use crate::mbe::diagnostics::annotate_err_with_kind;
 use crate::module::{
     DirOwnership, ParsedExternalMod, mod_dir_path, mod_file_path_from_attr, parse_external_mod,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::placeholders::{PlaceholderExpander, placeholder};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=$mut_visit_ast:ident; | COMPLEXITY=89 | LINES=143 */
 use crate::stats::*;
 
 macro_rules! ast_fragments {
@@ -201,7 +189,6 @@ macro_rules! ast_fragments {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=make_expr; | COMPLEXITY=31 | LINES=95 */
 
 ast_fragments! {
     Expr(Box<ast::Expr>) {
@@ -297,13 +284,11 @@ ast_fragments! {
         fn make_crate;
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
 pub enum SupportsMacroExpansion {
     No,
     Yes { supports_inner_attrs: bool },
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=supports_macro_expansion | COMPLEXITY=39 | LINES=97 */
 
 impl AstFragmentKind {
     pub(crate) fn dummy(self, span: Span, guar: ErrorGuaranteed) -> AstFragment {
@@ -401,14 +386,12 @@ impl AstFragmentKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Invocation | COMPLEXITY=2 | LINES=6 */
 
 pub struct Invocation {
     pub kind: InvocationKind,
     pub fragment_kind: AstFragmentKind,
     pub expansion_data: ExpansionData,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=25 */
 
 pub enum InvocationKind {
     Bang {
@@ -434,7 +417,6 @@ pub enum InvocationKind {
         of_trait: bool,
     },
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=placeholder_visibility | COMPLEXITY=15 | LINES=19 */
 
 impl InvocationKind {
     fn placeholder_visibility(&self) -> Option<ast::Visibility> {
@@ -454,7 +436,6 @@ impl InvocationKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=span | COMPLEXITY=21 | LINES=20 */
 
 impl Invocation {
     pub fn span(&self) -> Span {
@@ -475,13 +456,11 @@ impl Invocation {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=MacroExpander | COMPLEXITY=2 | LINES=5 */
 
 pub struct MacroExpander<'a, 'b> {
     pub cx: &'a mut ExtCtxt<'b>,
     monotonic: bool, // cf. `cx.monotonic_expander()`
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=354 | LINES=625 */
 
 impl<'a, 'b> MacroExpander<'a, 'b> {
     pub fn new(cx: &'a mut ExtCtxt<'b>, monotonic: bool) -> Self {
@@ -1107,7 +1086,6 @@ impl<'a, 'b> MacroExpander<'a, 'b> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=parse_ast_fragment | COMPLEXITY=43 | LINES=77 */
 
 pub fn parse_ast_fragment<'a>(
     this: &mut Parser<'a>,
@@ -1185,7 +1163,6 @@ pub fn parse_ast_fragment<'a>(
         | AstFragmentKind::Variants
         | AstFragmentKind::WherePredicates => panic!("unexpected AST fragment kind"),
     })
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=33 */
 }
 
 pub(crate) fn ensure_complete_parse<'a>(
@@ -1219,7 +1196,6 @@ pub(crate) fn ensure_complete_parse<'a>(
             add_semicolon,
         });
     }
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=22 | LINES=37 */
 }
 
 /// Wraps a call to `walk_*` / `walk_flat_map_*`
@@ -1257,7 +1233,6 @@ macro_rules! assign_id {
         $self.cx.current_expansion.lint_node_id = old_id;
         ret
     }};
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=7 | LINES=18 */
 }
 
 enum AddSemicolon {
@@ -1276,44 +1251,33 @@ trait InvocationCollectorNode: HasAttrs + HasNodeId + Sized {
     fn descr() -> &'static str {
         unreachable!()
     }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, _collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         unreachable!()
     }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=2 | LINES=3 */
     fn walk(&mut self, _collector: &mut InvocationCollector<'_, '_>) {
         unreachable!()
     }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         false
     }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=2 | LINES=3 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         unreachable!()
     }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=2 | LINES=3 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         None
     }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(_deleg: Box<ast::Delegation>) -> Self::ItemKind {
         unreachable!()
     }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=2 | LINES=3 */
     fn from_item(_item: ast::Item<Self::ItemKind>) -> Self {
         unreachable!()
     }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(_outputs: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         unreachable!()
     }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=pre_flat_map_node_collect_attr | COMPLEXITY=2 | LINES=1 */
     fn pre_flat_map_node_collect_attr(_cfg: &StripUnconfigured<'_>, _attr: &ast::Attribute) {}
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=post_flat_map_node_collect_bang | COMPLEXITY=2 | LINES=2 */
     fn post_flat_map_node_collect_bang(_output: &mut Self::OutputTy, _add_semicolon: AddSemicolon) {
     }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=wrap_flat_map_node_walk_flat_map | COMPLEXITY=2 | LINES=7 */
     fn wrap_flat_map_node_walk_flat_map(
         node: Self,
         collector: &mut InvocationCollector<'_, '_>,
@@ -1321,7 +1285,6 @@ trait InvocationCollectorNode: HasAttrs + HasNodeId + Sized {
     ) -> Result<Self::OutputTy, Self> {
         Ok(walk_flat_map(node, collector))
     }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=expand_cfg_false | COMPLEXITY=3 | LINES=8 */
     fn expand_cfg_false(
         &mut self,
         collector: &mut InvocationCollector<'_, '_>,
@@ -1330,14 +1293,12 @@ trait InvocationCollectorNode: HasAttrs + HasNodeId + Sized {
     ) {
         collector.cx.dcx().emit_err(RemoveNodeNotSupported { span, descr: Self::descr() });
     }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=declared_idents | COMPLEXITY=4 | LINES=6 */
 
     /// All of the identifiers (items) declared by this node.
     /// This is an approximation and should only be used for diagnostics.
     fn declared_idents(&self) -> Vec<Ident> {
         vec![]
     }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for Box<ast::Item> {
@@ -1345,45 +1306,36 @@ impl InvocationCollectorNode for Box<ast::Item> {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Item(self)
     }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_items()
     }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_item(collector, self)
     }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.kind, ItemKind::MacCall(..))
     }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=6 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         match self.kind {
             ItemKind::MacCall(mac) => (mac, self.attrs, AddSemicolon::No),
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=6 | LINES=6 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         match &self.kind {
             ItemKind::DelegationMac(deleg) => Some((deleg, self)),
             _ => None,
         }
     }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(deleg: Box<ast::Delegation>) -> Self::ItemKind {
         ItemKind::Delegation(deleg)
     }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=2 | LINES=3 */
     fn from_item(item: ast::Item<Self::ItemKind>) -> Self {
         Box::new(item)
     }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(items: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         items.flatten().collect()
     }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=wrap_flat_map_node_walk_flat_map | COMPLEXITY=38 | LINES=93 */
     fn wrap_flat_map_node_walk_flat_map(
         mut node: Self,
         collector: &mut InvocationCollector<'_, '_>,
@@ -1476,7 +1428,6 @@ impl InvocationCollectorNode for Box<ast::Item> {
         collector.cx.current_expansion.module = orig_module;
         res
     }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=declared_idents | COMPLEXITY=18 | LINES=21 */
 
     fn declared_idents(&self) -> Vec<Ident> {
         if let ItemKind::Use(ut) = &self.kind {
@@ -1498,7 +1449,6 @@ impl InvocationCollectorNode for Box<ast::Item> {
             self.kind.ident().into_iter().collect()
         }
     }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=TraitItemTag; | COMPLEXITY=5 | LINES=10 */
 }
 
 struct TraitItemTag;
@@ -1509,19 +1459,15 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, TraitItemTa
     fn to_annotatable(self) -> Annotatable {
         Annotatable::AssocItem(self.wrapped, AssocCtxt::Trait)
     }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_trait_items()
     }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_assoc_item(collector, self.wrapped, AssocCtxt::Trait)
     }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.wrapped.kind, AssocItemKind::MacCall(..))
     }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=7 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         let item = self.wrapped;
         match item.kind {
@@ -1529,26 +1475,21 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, TraitItemTa
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=6 | LINES=6 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         match &self.wrapped.kind {
             AssocItemKind::DelegationMac(deleg) => Some((deleg, &self.wrapped)),
             _ => None,
         }
     }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(deleg: Box<ast::Delegation>) -> Self::ItemKind {
         AssocItemKind::Delegation(deleg)
     }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=2 | LINES=3 */
     fn from_item(item: ast::Item<Self::ItemKind>) -> Self {
         AstNodeWrapper::new(Box::new(item), TraitItemTag)
     }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(items: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         items.flatten().collect()
     }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=ImplItemTag; | COMPLEXITY=6 | LINES=10 */
 }
 
 struct ImplItemTag;
@@ -1559,19 +1500,15 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, ImplItemTag
     fn to_annotatable(self) -> Annotatable {
         Annotatable::AssocItem(self.wrapped, AssocCtxt::Impl { of_trait: false })
     }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_impl_items()
     }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=3 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_assoc_item(collector, self.wrapped, AssocCtxt::Impl { of_trait: false })
     }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.wrapped.kind, AssocItemKind::MacCall(..))
     }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=7 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         let item = self.wrapped;
         match item.kind {
@@ -1579,26 +1516,21 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, ImplItemTag
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=6 | LINES=6 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         match &self.wrapped.kind {
             AssocItemKind::DelegationMac(deleg) => Some((deleg, &self.wrapped)),
             _ => None,
         }
     }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(deleg: Box<ast::Delegation>) -> Self::ItemKind {
         AssocItemKind::Delegation(deleg)
     }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=2 | LINES=3 */
     fn from_item(item: ast::Item<Self::ItemKind>) -> Self {
         AstNodeWrapper::new(Box::new(item), ImplItemTag)
     }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(items: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         items.flatten().collect()
     }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=TraitImplItemTag; | COMPLEXITY=6 | LINES=10 */
 }
 
 struct TraitImplItemTag;
@@ -1609,19 +1541,15 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, TraitImplIt
     fn to_annotatable(self) -> Annotatable {
         Annotatable::AssocItem(self.wrapped, AssocCtxt::Impl { of_trait: true })
     }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_trait_impl_items()
     }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=3 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_assoc_item(collector, self.wrapped, AssocCtxt::Impl { of_trait: true })
     }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.wrapped.kind, AssocItemKind::MacCall(..))
     }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=7 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         let item = self.wrapped;
         match item.kind {
@@ -1629,26 +1557,21 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::AssocItem>, TraitImplIt
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=6 | LINES=6 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         match &self.wrapped.kind {
             AssocItemKind::DelegationMac(deleg) => Some((deleg, &self.wrapped)),
             _ => None,
         }
     }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(deleg: Box<ast::Delegation>) -> Self::ItemKind {
         AssocItemKind::Delegation(deleg)
     }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=2 | LINES=3 */
     fn from_item(item: ast::Item<Self::ItemKind>) -> Self {
         AstNodeWrapper::new(Box::new(item), TraitImplItemTag)
     }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(items: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         items.flatten().collect()
     }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for Box<ast::ForeignItem> {
@@ -1656,26 +1579,21 @@ impl InvocationCollectorNode for Box<ast::ForeignItem> {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::ForeignItem(self)
     }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_foreign_items()
     }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_foreign_item(collector, self)
     }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.kind, ForeignItemKind::MacCall(..))
     }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=6 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         match self.kind {
             ForeignItemKind::MacCall(mac) => (mac, self.attrs, AddSemicolon::No),
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::Variant {
@@ -1683,15 +1601,12 @@ impl InvocationCollectorNode for ast::Variant {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Variant(self)
     }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_variants()
     }
-/* AST_META: AST_ID=84 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_variant(collector, self)
     }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::WherePredicate {
@@ -1699,15 +1614,12 @@ impl InvocationCollectorNode for ast::WherePredicate {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::WherePredicate(self)
     }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_where_predicates()
     }
-/* AST_META: AST_ID=87 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_where_predicate(collector, self)
     }
-/* AST_META: AST_ID=88 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::FieldDef {
@@ -1715,15 +1627,12 @@ impl InvocationCollectorNode for ast::FieldDef {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::FieldDef(self)
     }
-/* AST_META: AST_ID=89 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_field_defs()
     }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_field_def(collector, self)
     }
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::PatField {
@@ -1731,15 +1640,12 @@ impl InvocationCollectorNode for ast::PatField {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::PatField(self)
     }
-/* AST_META: AST_ID=92 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_pat_fields()
     }
-/* AST_META: AST_ID=93 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_pat_field(collector, self)
     }
-/* AST_META: AST_ID=94 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::ExprField {
@@ -1747,15 +1653,12 @@ impl InvocationCollectorNode for ast::ExprField {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::ExprField(self)
     }
-/* AST_META: AST_ID=95 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_expr_fields()
     }
-/* AST_META: AST_ID=96 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_expr_field(collector, self)
     }
-/* AST_META: AST_ID=97 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::Param {
@@ -1763,15 +1666,12 @@ impl InvocationCollectorNode for ast::Param {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Param(self)
     }
-/* AST_META: AST_ID=98 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_params()
     }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_param(collector, self)
     }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::GenericParam {
@@ -1779,15 +1679,12 @@ impl InvocationCollectorNode for ast::GenericParam {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::GenericParam(self)
     }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_generic_params()
     }
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_generic_param(collector, self)
     }
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::Arm {
@@ -1795,15 +1692,12 @@ impl InvocationCollectorNode for ast::Arm {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Arm(self)
     }
-/* AST_META: AST_ID=104 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_arms()
     }
-/* AST_META: AST_ID=105 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_arm(collector, self)
     }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=7 */
 }
 
 impl InvocationCollectorNode for ast::Stmt {
@@ -1811,15 +1705,12 @@ impl InvocationCollectorNode for ast::Stmt {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Stmt(Box::new(self))
     }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_stmts()
     }
-/* AST_META: AST_ID=108 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=3 */
     fn walk_flat_map(self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_flat_map_stmt(collector, self)
     }
-/* AST_META: AST_ID=109 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=6 | LINES=9 */
     fn is_mac_call(&self) -> bool {
         match &self.kind {
             StmtKind::MacCall(..) => true,
@@ -1829,7 +1720,6 @@ impl InvocationCollectorNode for ast::Stmt {
             StmtKind::Let(..) | StmtKind::Empty => false,
         }
     }
-/* AST_META: AST_ID=110 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=26 | LINES=24 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         // We pull macro invocations (both attributes and fn-like macro calls) out of their
         // `StmtKind`s and treat them as statement macro invocations, not as items or expressions.
@@ -1854,7 +1744,6 @@ impl InvocationCollectorNode for ast::Stmt {
         };
         (mac, attrs, if add_semicolon { AddSemicolon::Yes } else { AddSemicolon::No })
     }
-/* AST_META: AST_ID=111 | TYPE=FUNCTION | NAME=delegation | COMPLEXITY=10 | LINES=9 */
     fn delegation(&self) -> Option<(&ast::DelegationMac, &ast::Item<Self::ItemKind>)> {
         match &self.kind {
             StmtKind::Item(item) => match &item.kind {
@@ -1864,19 +1753,15 @@ impl InvocationCollectorNode for ast::Stmt {
             _ => None,
         }
     }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=delegation_item_kind | COMPLEXITY=2 | LINES=3 */
     fn delegation_item_kind(deleg: Box<ast::Delegation>) -> Self::ItemKind {
         ItemKind::Delegation(deleg)
     }
-/* AST_META: AST_ID=113 | TYPE=FUNCTION | NAME=from_item | COMPLEXITY=3 | LINES=3 */
     fn from_item(item: ast::Item<Self::ItemKind>) -> Self {
         ast::Stmt { id: ast::DUMMY_NODE_ID, span: item.span, kind: StmtKind::Item(Box::new(item)) }
     }
-/* AST_META: AST_ID=114 | TYPE=FUNCTION | NAME=flatten_outputs | COMPLEXITY=2 | LINES=3 */
     fn flatten_outputs(items: impl Iterator<Item = Self::OutputTy>) -> Self::OutputTy {
         items.flatten().collect()
     }
-/* AST_META: AST_ID=115 | TYPE=FUNCTION | NAME=post_flat_map_node_collect_bang | COMPLEXITY=8 | LINES=9 */
     fn post_flat_map_node_collect_bang(stmts: &mut Self::OutputTy, add_semicolon: AddSemicolon) {
         // If this is a macro invocation with a semicolon, then apply that
         // semicolon to the final statement produced by expansion.
@@ -1886,7 +1771,6 @@ impl InvocationCollectorNode for ast::Stmt {
             }
         }
     }
-/* AST_META: AST_ID=116 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=8 */
 }
 
 impl InvocationCollectorNode for ast::Crate {
@@ -1895,15 +1779,12 @@ impl InvocationCollectorNode for ast::Crate {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Crate(self)
     }
-/* AST_META: AST_ID=117 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_crate()
     }
-/* AST_META: AST_ID=118 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=2 | LINES=3 */
     fn walk(&mut self, collector: &mut InvocationCollector<'_, '_>) {
         walk_crate(collector, self)
     }
-/* AST_META: AST_ID=119 | TYPE=FUNCTION | NAME=expand_cfg_false | COMPLEXITY=5 | LINES=12 */
     fn expand_cfg_false(
         &mut self,
         collector: &mut InvocationCollector<'_, '_>,
@@ -1916,7 +1797,6 @@ impl InvocationCollectorNode for ast::Crate {
         // Standard prelude imports are left in the crate for backward compatibility.
         self.items.truncate(collector.cx.num_standard_library_imports);
     }
-/* AST_META: AST_ID=120 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=8 */
 }
 
 impl InvocationCollectorNode for ast::Ty {
@@ -1925,11 +1805,9 @@ impl InvocationCollectorNode for ast::Ty {
     fn to_annotatable(self) -> Annotatable {
         unreachable!()
     }
-/* AST_META: AST_ID=121 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_ty()
     }
-/* AST_META: AST_ID=122 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=6 | LINES=13 */
     fn walk(&mut self, collector: &mut InvocationCollector<'_, '_>) {
         // Save the pre-expanded name of this `ImplTrait`, so that later when defining
         // an APIT we use a name that doesn't have any placeholder fragments in it.
@@ -1943,18 +1821,15 @@ impl InvocationCollectorNode for ast::Ty {
         }
         walk_ty(collector, self)
     }
-/* AST_META: AST_ID=123 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.kind, ast::TyKind::MacCall(..))
     }
-/* AST_META: AST_ID=124 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=6 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         match self.kind {
             TyKind::MacCall(mac) => (mac, AttrVec::new(), AddSemicolon::No),
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=125 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=8 */
 }
 
 impl InvocationCollectorNode for ast::Pat {
@@ -1963,26 +1838,21 @@ impl InvocationCollectorNode for ast::Pat {
     fn to_annotatable(self) -> Annotatable {
         unreachable!()
     }
-/* AST_META: AST_ID=126 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_pat()
     }
-/* AST_META: AST_ID=127 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=2 | LINES=3 */
     fn walk(&mut self, collector: &mut InvocationCollector<'_, '_>) {
         walk_pat(collector, self)
     }
-/* AST_META: AST_ID=128 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.kind, PatKind::MacCall(..))
     }
-/* AST_META: AST_ID=129 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=6 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         match self.kind {
             PatKind::MacCall(mac) => (mac, AttrVec::new(), AddSemicolon::No),
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=130 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=5 | LINES=8 */
 }
 
 impl InvocationCollectorNode for ast::Expr {
@@ -1991,30 +1861,24 @@ impl InvocationCollectorNode for ast::Expr {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Expr(Box::new(self))
     }
-/* AST_META: AST_ID=131 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_expr()
     }
-/* AST_META: AST_ID=132 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=2 | LINES=3 */
     fn descr() -> &'static str {
         "an expression"
     }
-/* AST_META: AST_ID=133 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=2 | LINES=3 */
     fn walk(&mut self, collector: &mut InvocationCollector<'_, '_>) {
         walk_expr(collector, self)
     }
-/* AST_META: AST_ID=134 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.kind, ExprKind::MacCall(..))
     }
-/* AST_META: AST_ID=135 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=6 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         match self.kind {
             ExprKind::MacCall(mac) => (mac, self.attrs, AddSemicolon::No),
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=136 | TYPE=FUNCTION | NAME=OptExprTag; | COMPLEXITY=5 | LINES=9 */
 }
 
 struct OptExprTag;
@@ -2024,20 +1888,16 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::Expr>, OptExprTag> {
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Expr(self.wrapped)
     }
-/* AST_META: AST_ID=137 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         fragment.make_opt_expr()
     }
-/* AST_META: AST_ID=138 | TYPE=FUNCTION | NAME=walk_flat_map | COMPLEXITY=2 | LINES=4 */
     fn walk_flat_map(mut self, collector: &mut InvocationCollector<'_, '_>) -> Self::OutputTy {
         walk_expr(collector, &mut self.wrapped);
         Some(self.wrapped)
     }
-/* AST_META: AST_ID=139 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.wrapped.kind, ast::ExprKind::MacCall(..))
     }
-/* AST_META: AST_ID=140 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=7 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         let node = self.wrapped;
         match node.kind {
@@ -2045,11 +1905,9 @@ impl InvocationCollectorNode for AstNodeWrapper<Box<ast::Expr>, OptExprTag> {
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=141 | TYPE=FUNCTION | NAME=pre_flat_map_node_collect_attr | COMPLEXITY=2 | LINES=3 */
     fn pre_flat_map_node_collect_attr(cfg: &StripUnconfigured<'_>, attr: &ast::Attribute) {
         cfg.maybe_emit_expr_attr_err(attr);
     }
-/* AST_META: AST_ID=142 | TYPE=FUNCTION | NAME=MethodReceiverTag; | COMPLEXITY=5 | LINES=12 */
 }
 
 /// This struct is a hack to workaround unstable of `stmt_expr_attributes`.
@@ -2062,23 +1920,18 @@ impl InvocationCollectorNode for AstNodeWrapper<ast::Expr, MethodReceiverTag> {
     fn descr() -> &'static str {
         "an expression"
     }
-/* AST_META: AST_ID=143 | TYPE=FUNCTION | NAME=to_annotatable | COMPLEXITY=2 | LINES=3 */
     fn to_annotatable(self) -> Annotatable {
         Annotatable::Expr(Box::new(self.wrapped))
     }
-/* AST_META: AST_ID=144 | TYPE=FUNCTION | NAME=fragment_to_output | COMPLEXITY=2 | LINES=3 */
     fn fragment_to_output(fragment: AstFragment) -> Self::OutputTy {
         AstNodeWrapper::new(fragment.make_method_receiver_expr(), MethodReceiverTag)
     }
-/* AST_META: AST_ID=145 | TYPE=FUNCTION | NAME=walk | COMPLEXITY=2 | LINES=3 */
     fn walk(&mut self, collector: &mut InvocationCollector<'_, '_>) {
         walk_expr(collector, &mut self.wrapped)
     }
-/* AST_META: AST_ID=146 | TYPE=FUNCTION | NAME=is_mac_call | COMPLEXITY=2 | LINES=3 */
     fn is_mac_call(&self) -> bool {
         matches!(self.wrapped.kind, ast::ExprKind::MacCall(..))
     }
-/* AST_META: AST_ID=147 | TYPE=FUNCTION | NAME=take_mac_call | COMPLEXITY=6 | LINES=7 */
     fn take_mac_call(self) -> (Box<ast::MacCall>, ast::AttrVec, AddSemicolon) {
         let node = self.wrapped;
         match node.kind {
@@ -2086,7 +1939,6 @@ impl InvocationCollectorNode for AstNodeWrapper<ast::Expr, MethodReceiverTag> {
             _ => unreachable!(),
         }
     }
-/* AST_META: AST_ID=148 | TYPE=FUNCTION | NAME=build_single_delegations | COMPLEXITY=15 | LINES=16 */
 }
 
 fn build_single_delegations<'a, Node: InvocationCollectorNode>(
@@ -2103,7 +1955,6 @@ fn build_single_delegations<'a, Node: InvocationCollectorNode>(
         let kind = String::from(if from_glob { "glob" } else { "list" });
         ecx.dcx().emit_err(EmptyDelegationMac { span: item.span, kind });
     }
-/* AST_META: AST_ID=149 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=22 */
 
     suffixes.iter().map(move |&(ident, rename)| {
         let mut path = deleg.prefix.clone();
@@ -2126,7 +1977,6 @@ fn build_single_delegations<'a, Node: InvocationCollectorNode>(
             tokens: None,
         }
     })
-/* AST_META: AST_ID=150 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=9 | LINES=17 */
 }
 
 /// Required for `visit_node` obtained an owned `Node` from `&mut Node`.
@@ -2144,7 +1994,6 @@ impl DummyAstNode for ast::Crate {
             is_placeholder: Default::default(),
         }
     }
-/* AST_META: AST_ID=151 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=6 | LINES=11 */
 }
 
 impl DummyAstNode for ast::Ty {
@@ -2156,7 +2005,6 @@ impl DummyAstNode for ast::Ty {
             tokens: Default::default(),
         }
     }
-/* AST_META: AST_ID=152 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=6 | LINES=11 */
 }
 
 impl DummyAstNode for ast::Pat {
@@ -2168,21 +2016,18 @@ impl DummyAstNode for ast::Pat {
             tokens: Default::default(),
         }
     }
-/* AST_META: AST_ID=153 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=5 | LINES=6 */
 }
 
 impl DummyAstNode for ast::Expr {
     fn dummy() -> Self {
         ast::Expr::dummy()
     }
-/* AST_META: AST_ID=154 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=5 | LINES=6 */
 }
 
 impl DummyAstNode for AstNodeWrapper<ast::Expr, MethodReceiverTag> {
     fn dummy() -> Self {
         AstNodeWrapper::new(ast::Expr::dummy(), MethodReceiverTag)
     }
-/* AST_META: AST_ID=155 | TYPE=FUNCTION | NAME=InvocationCollector | COMPLEXITY=5 | LINES=17 */
 }
 
 struct InvocationCollector<'a, 'b> {
@@ -2200,7 +2045,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
             lint_node_id: self.cx.current_expansion.lint_node_id,
         }
     }
-/* AST_META: AST_ID=156 | TYPE=FUNCTION | NAME=collect | COMPLEXITY=9 | LINES=23 */
 
     fn collect(&mut self, fragment_kind: AstFragmentKind, kind: InvocationKind) -> AstFragment {
         let expn_id = LocalExpnId::fresh_empty();
@@ -2224,7 +2068,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
         ));
         placeholder(fragment_kind, NodeId::placeholder_from_expn_id(expn_id), vis)
     }
-/* AST_META: AST_ID=157 | TYPE=FUNCTION | NAME=collect_bang | COMPLEXITY=5 | LINES=7 */
 
     fn collect_bang(&mut self, mac: Box<ast::MacCall>, kind: AstFragmentKind) -> AstFragment {
         // cache the macro call span so that it can be
@@ -2232,7 +2075,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
         let span = mac.span();
         self.collect(kind, InvocationKind::Bang { mac, span })
     }
-/* AST_META: AST_ID=158 | TYPE=FUNCTION | NAME=collect_attr | COMPLEXITY=3 | LINES=9 */
 
     fn collect_attr(
         &mut self,
@@ -2242,7 +2084,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
     ) -> AstFragment {
         self.collect(kind, InvocationKind::Attr { attr, pos, item, derives })
     }
-/* AST_META: AST_ID=159 | TYPE=FUNCTION | NAME=collect_glob_delegation | COMPLEXITY=3 | LINES=9 */
 
     fn collect_glob_delegation(
         &mut self,
@@ -2252,7 +2093,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
     ) -> AstFragment {
         self.collect(kind, InvocationKind::GlobDelegation { item, of_trait })
     }
-/* AST_META: AST_ID=160 | TYPE=FUNCTION | NAME=take_first_attr | COMPLEXITY=29 | LINES=53 */
 
     /// If `item` is an attribute invocation, remove the attribute and return it together with
     /// its position and derives following it. We have to collect the derives in order to resolve
@@ -2306,7 +2146,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
 
         attr
     }
-/* AST_META: AST_ID=161 | TYPE=FUNCTION | NAME=check_attributes | COMPLEXITY=27 | LINES=61 */
 
     // Detect use of feature-gated or invalid attributes on macro invocations
     // since they will not be detected after macro expansion.
@@ -2368,7 +2207,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
             }
         }
     }
-/* AST_META: AST_ID=162 | TYPE=FUNCTION | NAME=expand_cfg_true | COMPLEXITY=6 | LINES=17 */
 
     fn expand_cfg_true(
         &mut self,
@@ -2386,7 +2224,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
 
         res
     }
-/* AST_META: AST_ID=163 | TYPE=FUNCTION | NAME=expand_cfg_attr | COMPLEXITY=6 | LINES=10 */
 
     fn expand_cfg_attr(&self, node: &mut impl HasAttrs, attr: &ast::Attribute, pos: usize) {
         node.visit_attrs(|attrs| {
@@ -2397,7 +2234,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
             }
         });
     }
-/* AST_META: AST_ID=164 | TYPE=FUNCTION | NAME=flat_map_node | COMPLEXITY=62 | LINES=92 */
 
     fn flat_map_node<Node: InvocationCollectorNode<OutputTy: Default>>(
         &mut self,
@@ -2490,7 +2326,6 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
             };
         }
     }
-/* AST_META: AST_ID=165 | TYPE=FUNCTION | NAME=visit_node | COMPLEXITY=28 | LINES=43 */
 
     fn visit_node<Node: InvocationCollectorNode<OutputTy: Into<Node>> + DummyAstNode>(
         &mut self,
@@ -2534,14 +2369,12 @@ impl<'a, 'b> InvocationCollector<'a, 'b> {
             };
         }
     }
-/* AST_META: AST_ID=166 | TYPE=FUNCTION | NAME=flat_map_item | COMPLEXITY=5 | LINES=6 */
 }
 
 impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
     fn flat_map_item(&mut self, node: Box<ast::Item>) -> SmallVec<[Box<ast::Item>; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=167 | TYPE=FUNCTION | NAME=flat_map_assoc_item | COMPLEXITY=11 | LINES=16 */
 
     fn flat_map_assoc_item(
         &mut self,
@@ -2558,7 +2391,6 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
             }
         }
     }
-/* AST_META: AST_ID=168 | TYPE=FUNCTION | NAME=flat_map_foreign_item | COMPLEXITY=2 | LINES=7 */
 
     fn flat_map_foreign_item(
         &mut self,
@@ -2566,12 +2398,10 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
     ) -> SmallVec<[Box<ast::ForeignItem>; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=169 | TYPE=FUNCTION | NAME=flat_map_variant | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_variant(&mut self, node: ast::Variant) -> SmallVec<[ast::Variant; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=170 | TYPE=FUNCTION | NAME=flat_map_where_predicate | COMPLEXITY=2 | LINES=7 */
 
     fn flat_map_where_predicate(
         &mut self,
@@ -2579,27 +2409,22 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
     ) -> SmallVec<[ast::WherePredicate; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=171 | TYPE=FUNCTION | NAME=flat_map_field_def | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_field_def(&mut self, node: ast::FieldDef) -> SmallVec<[ast::FieldDef; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=172 | TYPE=FUNCTION | NAME=flat_map_pat_field | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_pat_field(&mut self, node: ast::PatField) -> SmallVec<[ast::PatField; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=173 | TYPE=FUNCTION | NAME=flat_map_expr_field | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_expr_field(&mut self, node: ast::ExprField) -> SmallVec<[ast::ExprField; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=174 | TYPE=FUNCTION | NAME=flat_map_param | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_param(&mut self, node: ast::Param) -> SmallVec<[ast::Param; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=175 | TYPE=FUNCTION | NAME=flat_map_generic_param | COMPLEXITY=2 | LINES=7 */
 
     fn flat_map_generic_param(
         &mut self,
@@ -2607,12 +2432,10 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
     ) -> SmallVec<[ast::GenericParam; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=176 | TYPE=FUNCTION | NAME=flat_map_arm | COMPLEXITY=2 | LINES=4 */
 
     fn flat_map_arm(&mut self, node: ast::Arm) -> SmallVec<[ast::Arm; 1]> {
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=177 | TYPE=FUNCTION | NAME=flat_map_stmt | COMPLEXITY=25 | LINES=29 */
 
     fn flat_map_stmt(&mut self, node: ast::Stmt) -> SmallVec<[ast::Stmt; 1]> {
         // FIXME: invocations in semicolon-less expressions positions are expanded as expressions,
@@ -2642,22 +2465,18 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
 
         self.flat_map_node(node)
     }
-/* AST_META: AST_ID=178 | TYPE=FUNCTION | NAME=visit_crate | COMPLEXITY=2 | LINES=4 */
 
     fn visit_crate(&mut self, node: &mut ast::Crate) {
         self.visit_node(node)
     }
-/* AST_META: AST_ID=179 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=2 | LINES=4 */
 
     fn visit_ty(&mut self, node: &mut ast::Ty) {
         self.visit_node(node)
     }
-/* AST_META: AST_ID=180 | TYPE=FUNCTION | NAME=visit_pat | COMPLEXITY=2 | LINES=4 */
 
     fn visit_pat(&mut self, node: &mut ast::Pat) {
         self.visit_node(node)
     }
-/* AST_META: AST_ID=181 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=5 | LINES=8 */
 
     fn visit_expr(&mut self, node: &mut ast::Expr) {
         // FIXME: Feature gating is performed inconsistently between `Expr` and `OptExpr`.
@@ -2666,17 +2485,14 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
         }
         ensure_sufficient_stack(|| self.visit_node(node))
     }
-/* AST_META: AST_ID=182 | TYPE=FUNCTION | NAME=visit_method_receiver_expr | COMPLEXITY=2 | LINES=4 */
 
     fn visit_method_receiver_expr(&mut self, node: &mut ast::Expr) {
         self.visit_node(AstNodeWrapper::from_mut(node, MethodReceiverTag))
     }
-/* AST_META: AST_ID=183 | TYPE=FUNCTION | NAME=filter_map_expr | COMPLEXITY=2 | LINES=4 */
 
     fn filter_map_expr(&mut self, node: Box<ast::Expr>) -> Option<Box<ast::Expr>> {
         self.flat_map_node(AstNodeWrapper::new(node, OptExprTag))
     }
-/* AST_META: AST_ID=184 | TYPE=FUNCTION | NAME=visit_block | COMPLEXITY=2 | LINES=9 */
 
     fn visit_block(&mut self, node: &mut ast::Block) {
         let orig_dir_ownership = mem::replace(
@@ -2686,7 +2502,6 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
         walk_block(self, node);
         self.cx.current_expansion.dir_ownership = orig_dir_ownership;
     }
-/* AST_META: AST_ID=185 | TYPE=FUNCTION | NAME=visit_id | COMPLEXITY=5 | LINES=8 */
 
     fn visit_id(&mut self, id: &mut NodeId) {
         // We may have already assigned a `NodeId`
@@ -2695,7 +2510,6 @@ impl<'a, 'b> MutVisitor for InvocationCollector<'a, 'b> {
             *id = self.cx.resolver.next_node_id();
         }
     }
-/* AST_META: AST_ID=186 | TYPE=FUNCTION | NAME=ExpansionConfig | COMPLEXITY=10 | LINES=28 */
 }
 
 pub struct ExpansionConfig<'feat> {
@@ -2724,5 +2538,4 @@ impl ExpansionConfig<'_> {
             proc_macro_backtrace: false,
         }
     }
-/* AST_META: AST_ID=187 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=1 */
 }

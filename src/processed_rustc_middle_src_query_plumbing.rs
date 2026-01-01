@@ -1,29 +1,22 @@
 // SRC: ../rust/compiler/rustc_middle/src/query/plumbing.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Deref;
 
 use crate::rustc_data_structures::sync::{AtomicU64, WorkerLocal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::hir_id::OwnerId;
 use rustc_macros::HashStable;
 use rustc_query_system::HandleCycleError;
 use rustc_query_system::dep_graph::{DepNodeIndex, SerializedDepNodeIndex};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub(crate) use rustc_query_system::query::QueryJobId;
 use rustc_query_system::query::*;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::dep_graph;
 use crate::dep_graph::DepKind;
 use crate::query::on_disk_cache::{CacheEncoder, EncodedDepNodeIndex, OnDiskCache};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::query::{
     DynamicQueries, ExternProviders, Providers, QueryArenas, QueryCaches, QueryEngine, QueryStates,
 };
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=DynamicQuery | COMPLEXITY=4 | LINES=28 */
 use crate::ty::TyCtxt;
 
 pub struct DynamicQuery<'tcx, C: QueryCache> {
@@ -52,7 +45,6 @@ pub struct DynamicQuery<'tcx, C: QueryCache> {
         fn(tcx: TyCtxt<'tcx>, cycle_error: &CycleError, guar: ErrorGuaranteed) -> C::Value,
     pub format_value: fn(&C::Value) -> String,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=QuerySystemFns | COMPLEXITY=2 | LINES=12 */
 
 pub struct QuerySystemFns {
     pub engine: QueryEngine,
@@ -65,7 +57,6 @@ pub struct QuerySystemFns {
     ),
     pub try_mark_green: for<'tcx> fn(tcx: TyCtxt<'tcx>, dep_node: &dep_graph::DepNode) -> bool,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=QuerySystem | COMPLEXITY=7 | LINES=17 */
 
 pub struct QuerySystem<'tcx> {
     pub states: QueryStates<'tcx>,
@@ -83,14 +74,12 @@ pub struct QuerySystem<'tcx> {
 
     pub jobs: AtomicU64,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TyCtxtAt | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 pub struct TyCtxtAt<'tcx> {
     pub tcx: TyCtxt<'tcx>,
     pub span: Span,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Deref for TyCtxtAt<'tcx> {
     type Target = TyCtxt<'tcx>;
@@ -99,21 +88,18 @@ impl<'tcx> Deref for TyCtxtAt<'tcx> {
         &self.tcx
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=TyCtxtEnsureOk | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 #[must_use]
 pub struct TyCtxtEnsureOk<'tcx> {
     pub tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=TyCtxtEnsureDone | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 #[must_use]
 pub struct TyCtxtEnsureDone<'tcx> {
     pub tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=ensure_ok | COMPLEXITY=34 | LINES=65 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Wrapper that calls queries in a special "ensure OK" mode, for callers
@@ -179,7 +165,6 @@ impl<'tcx> TyCtxt<'tcx> {
         (self.query_system.fns.try_mark_green)(self, dep_node)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=query_get_at | COMPLEXITY=6 | LINES=18 */
 
 #[inline(always)]
 pub fn query_get_at<'tcx, Cache>(
@@ -198,7 +183,6 @@ where
         None => execute_query(tcx, span, key, QueryMode::Get).unwrap(),
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=query_ensure | COMPLEXITY=6 | LINES=16 */
 
 #[inline]
 pub fn query_ensure<'tcx, Cache>(
@@ -215,7 +199,6 @@ pub fn query_ensure<'tcx, Cache>(
         execute_query(tcx, DUMMY_SP, key, QueryMode::Ensure { check_cache });
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=query_ensure_error_guaranteed | COMPLEXITY=11 | LINES=29 */
 
 #[inline]
 pub fn query_ensure_error_guaranteed<'tcx, Cache, T>(
@@ -245,7 +228,6 @@ where
             .unwrap_or(Ok(()))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! query_ensure {
     ([]$($args:tt)*) => {
@@ -258,14 +240,12 @@ macro_rules! query_ensure {
         query_ensure!([$($modifiers)*]$($args)*)
     };
 }
-/* AST_META: AST_ID=19 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=10 | LINES=6 */
 
 macro_rules! query_helper_param_ty {
     (DefId) => { impl IntoQueryParam<DefId> };
     (LocalDefId) => { impl IntoQueryParam<LocalDefId> };
     ($K:ty) => { $K };
 }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! query_if_arena {
     ([] $arena:tt $no_arena:tt) => {
@@ -278,7 +258,6 @@ macro_rules! query_if_arena {
         query_if_arena!([$($modifiers)*]$($args)*)
     };
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=14 */
 
 /// If `separate_provide_extern`, then the key can be projected to its
 /// local key via `<$K as AsLocalKey>::LocalKey`.
@@ -293,7 +272,6 @@ macro_rules! local_key_if_separate_extern {
         local_key_if_separate_extern!([$($modifiers)*] $($K)*)
     };
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=15 */
 
 macro_rules! separate_provide_extern_decl {
     ([][$name:ident]) => {
@@ -309,7 +287,6 @@ macro_rules! separate_provide_extern_decl {
         separate_provide_extern_decl!([$($modifiers)*][$($args)*])
     };
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! ensure_ok_result {
     ( [] ) => {
@@ -322,7 +299,6 @@ macro_rules! ensure_ok_result {
         ensure_ok_result!( [$($modifiers)*] )
     };
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! separate_provide_extern_default {
     ([][$name:ident]) => {
@@ -335,7 +311,6 @@ macro_rules! separate_provide_extern_default {
         separate_provide_extern_default!([$($modifiers)*][$($args)*])
     };
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=provided_to_erased | COMPLEXITY=98 | LINES=232 */
 
 macro_rules! define_callbacks {
     (
@@ -568,7 +543,6 @@ macro_rules! define_callbacks {
         }
     };
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! hash_result {
     ([]) => {{
@@ -581,7 +555,6 @@ macro_rules! hash_result {
         hash_result!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=43 | LINES=57 */
 
 macro_rules! define_feedable {
     ($($(#[$attr:meta])* [$($modifiers:tt)*] fn $name:ident($($K:tt)*) -> $V:ty,)*) => {
@@ -639,7 +612,6 @@ macro_rules! define_feedable {
         })*
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=into_query_param | COMPLEXITY=51 | LINES=82 */
 
 // Each of these queries corresponds to a function pointer field in the
 // `Providers` struct for requesting a value of that type, and a method
@@ -722,7 +694,6 @@ mod sealed {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=CyclePlaceholder(pub | COMPLEXITY=10 | LINES=17 */
 
 pub use sealed::IntoQueryParam;
 
@@ -740,7 +711,6 @@ pub(crate) fn default_query(name: &str, key: &dyn std::fmt::Debug) -> ! {
         If that's not the case, {name} was likely never assigned to a provider function.\n",
     )
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 #[cold]
 pub(crate) fn default_extern_query(name: &str, key: &dyn std::fmt::Debug) -> ! {

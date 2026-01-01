@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse/src/lexer/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=26 */
 use crate::rustc_complete::token::Delimiter;
 use crate::rustc_complete::Diag;
 use crate::rustc_complete::parse::ParseSess;
@@ -26,7 +25,6 @@ pub(super) struct TokenTreeDiagInfo {
     /// for detecting if blocks are empty and only braces.
     pub matching_block_spans: Vec<(Span, Span)>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 pub(super) fn same_indentation_level(sm: &SourceMap, open_sp: Span, close_sp: Span) -> bool {
     match (sm.span_to_margin(open_sp), sm.span_to_margin(close_sp)) {
@@ -34,7 +32,6 @@ pub(super) fn same_indentation_level(sm: &SourceMap, open_sp: Span, close_sp: Sp
         _ => false,
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=68 | LINES=121 */
 
 // When we get a `)` or `]` for `{`, we should emit help message here
 // it's more friendly compared to report `unmatched error` in later phase

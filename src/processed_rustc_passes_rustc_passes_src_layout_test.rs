@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_passes/src/layout_test.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{HasDataLayout, TargetDataLayout};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Attribute;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::TyCtxtInferExt;
 use crate::rustc_trait_selection::traits;
@@ -21,7 +16,6 @@ use crate::errors::{
     LayoutAbi, LayoutAlign, LayoutHomogeneousAggregate, LayoutInvalidAttribute, LayoutOf,
     LayoutSize, UnrecognizedArgument,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test_layout | COMPLEXITY=21 | LINES=19 */
 
 pub fn test_layout(tcx: TyCtxt<'_>) {
     if !tcx.features().rustc_attrs() {
@@ -41,7 +35,6 @@ pub fn test_layout(tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=ensure_wf | COMPLEXITY=7 | LINES=31 */
 
 pub fn ensure_wf<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -73,7 +66,6 @@ pub fn ensure_wf<'tcx>(
         true
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dump_layout_of | COMPLEXITY=42 | LINES=65 */
 
 fn dump_layout_of(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
     let typing_env = ty::TypingEnv::post_analysis(tcx, item_def_id);
@@ -139,34 +131,29 @@ fn dump_layout_of(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UnwrapLayoutCx | COMPLEXITY=2 | LINES=5 */
 
 struct UnwrapLayoutCx<'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for UnwrapLayoutCx<'tcx> {
     fn handle_layout_err(&self, err: LayoutError<'tcx>, span: Span, ty: Ty<'tcx>) -> ! {
         span_bug!(span, "`#[rustc_layout(..)]` test resulted in `layout_of({ty}) = Err({err})`",);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTyCtxt<'tcx> for UnwrapLayoutCx<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTypingEnv<'tcx> for UnwrapLayoutCx<'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         self.typing_env
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasDataLayout for UnwrapLayoutCx<'tcx> {
     fn data_layout(&self) -> &TargetDataLayout {

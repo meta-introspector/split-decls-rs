@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Errors emitted by ty_utils
 
 use crate::rustc_complete::codes::*;
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{GenericArg, Ty};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::Span;
 
 #[derive(Diagnostic)]
@@ -14,7 +11,6 @@ use crate::rustc_complete::Span;
 pub(crate) struct NeedsDropOverflow<'tcx> {
     pub query_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_generic_constant_too_complex)]
@@ -27,7 +23,6 @@ pub(crate) struct GenericConstantTooComplex {
     #[subdiagnostic]
     pub sub: GenericConstantTooComplexSub,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=48 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum GenericConstantTooComplexSub {
@@ -76,7 +71,6 @@ pub(crate) enum GenericConstantTooComplexSub {
     #[label(ty_utils_operation_not_supported)]
     OperationNotSupported(#[primary_span] Span),
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_unexpected_fnptr_associated_item)]
@@ -84,14 +78,12 @@ pub(crate) struct UnexpectedFnPtrAssociatedItem {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_zero_length_simd_type)]
 pub(crate) struct ZeroLengthSimdType<'tcx> {
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_oversized_simd_type)]
@@ -99,7 +91,6 @@ pub(crate) struct OversizedSimdType<'tcx> {
     pub ty: Ty<'tcx>,
     pub max_lanes: u64,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_non_primitive_simd_type)]
@@ -107,7 +98,6 @@ pub(crate) struct NonPrimitiveSimdType<'tcx> {
     pub ty: Ty<'tcx>,
     pub e_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_impl_trait_duplicate_arg)]
@@ -119,7 +109,6 @@ pub(crate) struct DuplicateArg<'tcx> {
     #[note]
     pub opaque_span: Span,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_impl_trait_not_param, code = E0792)]

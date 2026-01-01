@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=24 */
 // "Collection" is the process of determining the type and other external
 // details of each item in Rust. Collection is specifically concerned
 // with *inter-procedural* things -- for example, for a function
@@ -24,49 +23,35 @@ use std::ops::Bound;
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::Recovered;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, E0228, ErrorGuaranteed, StashKey, struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{InferKind, Visitor, VisitorExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, GenericParamKind, HirId, Node, PreciseCapturingArgKind, find_attr};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{DynCompatibilityViolation, ObligationCause};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::util::{Discr, IntTypeExt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, AdtKind, Const, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, TypingMode, fold_regions,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{
     FulfillmentError, ObligationCtxt, hir_ty_lowering_dyn_compatibility_violations,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::errors;
 use crate::hir_ty_lowering::{
     FeedConstTy, HirTyLowerer, InherentAssocCandidate, RegionInferReason,
 };
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=48 */
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -109,7 +94,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=35 */
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -145,7 +129,6 @@ pub(crate) struct ItemCtxt<'tcx> {
     item_def_id: LocalDefId,
     tainted_by_errors: Cell<Option<ErrorGuaranteed>>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -156,7 +139,6 @@ pub(crate) struct HirPlaceholderCollector {
     // that may try to turn that const infer into a type parameter.
     pub may_contain_const_infer: bool,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_infer | COMPLEXITY=8 | LINES=10 */
 
 impl<'v> Visitor<'v> for HirPlaceholderCollector {
     fn visit_infer(&mut self, _inf_id: HirId, inf_span: Span, kind: InferKind<'v>) -> Self::Result {
@@ -167,7 +149,6 @@ impl<'v> Visitor<'v> for HirPlaceholderCollector {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=placeholder_type_error_diag | COMPLEXITY=49 | LINES=72 */
 
 fn placeholder_type_error_diag<'cx, 'tcx>(
     cx: &'cx dyn HirTyLowerer<'tcx>,
@@ -240,7 +221,6 @@ fn placeholder_type_error_diag<'cx, 'tcx>(
 
     err
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=bad_placeholder | COMPLEXITY=11 | LINES=14 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Utility types and common code for the above passes.
@@ -255,7 +235,6 @@ fn bad_placeholder<'cx, 'tcx>(
     spans.sort();
     cx.dcx().create_err(errors::PlaceholderNotAllowedItemSignatures { spans, kind })
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_tainted_by_errors | COMPLEXITY=26 | LINES=63 */
 
 impl<'tcx> ItemCtxt<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, item_def_id: LocalDefId) -> ItemCtxt<'tcx> {
@@ -319,7 +298,6 @@ impl<'tcx> ItemCtxt<'tcx> {
         diag.emit()
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=107 | LINES=264 */
 
 impl<'tcx> HirTyLowerer<'tcx> for ItemCtxt<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -584,7 +562,6 @@ impl<'tcx> HirTyLowerer<'tcx> for ItemCtxt<'tcx> {
         hir_ty_lowering_dyn_compatibility_violations(self.tcx, trait_def_id)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_new_lifetime_name | COMPLEXITY=12 | LINES=31 */
 
 /// Synthesize a new lifetime name that doesn't clash with any of the lifetimes already present.
 fn get_new_lifetime_name<'tcx>(
@@ -616,14 +593,12 @@ fn get_new_lifetime_name<'tcx>(
     // If all single char lifetime names are present, we wrap around and double the chars.
     (1..).flat_map(a_to_z_repeat_n).find(|lt| !existing_lifetimes.contains(lt.as_str())).unwrap()
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) fn lower_variant_ctor(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     tcx.ensure_ok().generics_of(def_id);
     tcx.ensure_ok().type_of(def_id);
     tcx.ensure_ok().predicates_of(def_id);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=40 */
 
 pub(super) fn lower_enum_variant_types(tcx: TyCtxt<'_>, def_id: DefId) {
     let def = tcx.adt_def(def_id);
@@ -664,48 +639,41 @@ pub(super) fn lower_enum_variant_types(tcx: TyCtxt<'_>, def_id: DefId) {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=NestedSpan | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 struct NestedSpan {
     span: Span,
     nested_field_span: Span,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=to_field_already_declared_nested_help | COMPLEXITY=4 | LINES=6 */
 
 impl NestedSpan {
     fn to_field_already_declared_nested_help(&self) -> errors::FieldAlreadyDeclaredNestedHelp {
         errors::FieldAlreadyDeclaredNestedHelp { span: self.span }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum FieldDeclSpan {
     NotNested(Span),
     Nested(NestedSpan),
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Span> for FieldDeclSpan {
     fn from(span: Span) -> Self {
         Self::NotNested(span)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<NestedSpan> for FieldDeclSpan {
     fn from(span: NestedSpan) -> Self {
         Self::Nested(span)
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=FieldUniquenessCheckContext | COMPLEXITY=2 | LINES=5 */
 
 struct FieldUniquenessCheckContext<'tcx> {
     tcx: TyCtxt<'tcx>,
     seen_fields: FxIndexMap<Ident, FieldDeclSpan>,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=new | COMPLEXITY=26 | LINES=56 */
 
 impl<'tcx> FieldUniquenessCheckContext<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> Self {
@@ -762,7 +730,6 @@ impl<'tcx> FieldUniquenessCheckContext<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=lower_variant | COMPLEXITY=12 | LINES=44 */
 
 fn lower_variant<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -807,7 +774,6 @@ fn lower_variant<'tcx>(
             }),
     )
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=adt_def | COMPLEXITY=22 | LINES=60 */
 
 fn adt_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AdtDef<'_> {
     use crate::rustc_complete::*;
@@ -868,7 +834,6 @@ fn adt_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AdtDef<'_> {
     };
     tcx.mk_adt_def(def_id.to_def_id(), kind, variants, repr)
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=trait_def | COMPLEXITY=75 | LINES=146 */
 
 fn trait_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::TraitDef {
     let item = tcx.hir_expect_item(def_id);
@@ -1015,7 +980,6 @@ fn trait_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::TraitDef {
         deny_explicit_impl,
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=fn_sig | COMPLEXITY=46 | LINES=89 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 fn fn_sig(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, ty::PolyFnSig<'_>> {
@@ -1105,7 +1069,6 @@ fn fn_sig(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, ty::PolyFn
     };
     ty::EarlyBinder::bind(output)
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=lower_fn_sig_recovering_infer_ret_ty | COMPLEXITY=6 | LINES=20 */
 
 fn lower_fn_sig_recovering_infer_ret_ty<'tcx>(
     icx: &ItemCtxt<'tcx>,
@@ -1126,7 +1089,6 @@ fn lower_fn_sig_recovering_infer_ret_ty<'tcx>(
         None,
     )
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=recover_infer_ret_ty | COMPLEXITY=37 | LINES=84 */
 
 fn recover_infer_ret_ty<'tcx>(
     icx: &ItemCtxt<'tcx>,
@@ -1211,7 +1173,6 @@ fn recover_infer_ret_ty<'tcx>(
         fn_sig.abi,
     ))
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=suggest_impl_trait | COMPLEXITY=46 | LINES=112 */
 
 pub fn suggest_impl_trait<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -1324,7 +1285,6 @@ pub fn suggest_impl_trait<'tcx>(
     }
     None
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=impl_trait_header | COMPLEXITY=8 | LINES=24 */
 
 fn impl_trait_header(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::ImplTraitHeader<'_>> {
     let icx = ItemCtxt::new(tcx, def_id);
@@ -1349,7 +1309,6 @@ fn impl_trait_header(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::ImplTrai
         }
     })
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=check_impl_constness | COMPLEXITY=20 | LINES=37 */
 
 fn check_impl_constness(
     tcx: TyCtxt<'_>,
@@ -1387,7 +1346,6 @@ fn check_impl_constness(
         adding: (),
     });
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=polarity_of_impl | COMPLEXITY=16 | LINES=23 */
 
 fn polarity_of_impl(
     tcx: TyCtxt<'_>,
@@ -1411,7 +1369,6 @@ fn polarity_of_impl(
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=early_bound_lifetimes_from_generics | COMPLEXITY=8 | LINES=15 */
 
 /// Returns the early-bound lifetimes declared in this generics
 /// listing. For anything other than fns/methods, this is just all
@@ -1427,7 +1384,6 @@ fn early_bound_lifetimes_from_generics<'a, 'tcx>(
         _ => false,
     })
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=compute_sig_of_foreign_fn_decl | COMPLEXITY=19 | LINES=35 */
 
 fn compute_sig_of_foreign_fn_decl<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1463,7 +1419,6 @@ fn compute_sig_of_foreign_fn_decl<'tcx>(
 
     fty
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=coroutine_kind | COMPLEXITY=8 | LINES=14 */
 
 fn coroutine_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<hir::CoroutineKind> {
     match tcx.hir_node_by_def_id(def_id) {
@@ -1478,7 +1433,6 @@ fn coroutine_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<hir::CoroutineK
         _ => None,
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=coroutine_for_closure | COMPLEXITY=8 | LINES=23 */
 
 fn coroutine_for_closure(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DefId {
     let &crate::rustc_hir::Closure { kind: hir::ClosureKind::CoroutineClosure(_), body, .. } =
@@ -1502,7 +1456,6 @@ fn coroutine_for_closure(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DefId {
 
     def_id.to_def_id()
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=opaque_ty_origin | COMPLEXITY=16 | LINES=14 */
 
 fn opaque_ty_origin<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> hir::OpaqueTyOrigin<DefId> {
     match tcx.hir_node_by_def_id(def_id).expect_opaque_ty().origin {
@@ -1517,7 +1470,6 @@ fn opaque_ty_origin<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> hir::OpaqueT
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=rendered_precise_capturing_args | COMPLEXITY=17 | LINES=23 */
 
 fn rendered_precise_capturing_args<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1541,7 +1493,6 @@ fn rendered_precise_capturing_args<'tcx>(
         _ => None,
     })
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=const_param_default | COMPLEXITY=9 | LINES=22 */
 
 fn const_param_default<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1564,7 +1515,6 @@ fn const_param_default<'tcx>(
         .lower_const_arg(default_ct, FeedConstTy::Param(def_id.to_def_id(), identity_args));
     ty::EarlyBinder::bind(ct)
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=anon_const_kind | COMPLEXITY=19 | LINES=24 */
 
 fn anon_const_kind<'tcx>(tcx: TyCtxt<'tcx>, def: LocalDefId) -> ty::AnonConstKind {
     let hir_id = tcx.local_def_id_to_hir_id(def);

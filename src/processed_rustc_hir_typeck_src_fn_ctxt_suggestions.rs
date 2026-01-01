@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/suggestions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // ignore-tidy-filelength
 use core::cmp::min;
 use core::iter;
@@ -8,16 +7,13 @@ use hir::def_id::LocalDefId;
 use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{
     self as hir, Arm, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, ExprKind,
     GenericBound, HirId, Node, PatExpr, PatExprKind, Path, QPath, Stmt, StmtKind, TyKind,
     WherePredicateKind, expr_needs_parens,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
 use crate::rustc_hir_analysis::suggest_impl_trait;
 use crate::rustc_complete::middle::stability::EvalResult;
@@ -27,26 +23,21 @@ use crate::rustc_complete::ty::{
     self, Article, Binder, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, Upcast,
     suggest_constraining_type_params,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{ExpnKind, Ident, MacroKind, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::FnCtxt;
 use crate::fn_ctxt::crate::rustc_span::BytePos;
 use crate::method::probe;
 use crate::method::probe::{IsSuggestion, Mode, ProbeScope};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{errors, fluent_generated as fluent};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=deconstruct_option_or_result | COMPLEXITY=1361 | LINES=2507 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn body_fn_sig(&self) -> Option<ty::FnSig<'tcx>> {
@@ -2554,7 +2545,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
             }
         }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=25 */
 
         false
     }
@@ -2580,18 +2570,15 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             ty::Adt(adt, args) => (adt, args, ".unwrap()"),
             _ => return false,
         };
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
         if !self.tcx.is_diagnostic_item(sym::NonZero, adt.did()) {
             return false;
         }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
         let int_type = args.type_at(0);
         if !self.may_coerce(expr_ty, int_type) {
             return false;
         }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=can_use_as_ref | COMPLEXITY=12 | LINES=33 */
 
         err.multipart_suggestion(
             format!("consider calling `{}::new`", sym::NonZero),
@@ -2625,31 +2612,25 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let hir::ExprKind::Path(hir::QPath::Resolved(_, path)) = expr.kind else {
             return None;
         };
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
         let hir::def::Res::Local(local_id) = path.res else {
             return None;
         };
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
         let Node::Param(hir::Param { hir_id: param_hir_id, .. }) =
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
             self.tcx.parent_hir_node(local_id)
         else {
             return None;
         };
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
         let Node::Expr(hir::Expr {
             hir_id: expr_hir_id,
             kind: hir::ExprKind::Closure(hir::Closure { fn_decl: closure_fn_decl, .. }),
             ..
         }) = self.tcx.parent_hir_node(*param_hir_id)
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         else {
             return None;
         };
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
         let hir = self.tcx.parent_hir_node(*expr_hir_id);
         let closure_params_len = closure_fn_decl.inputs.len();
@@ -2658,13 +2639,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 kind: hir::ExprKind::MethodCall(method_path, receiver, ..),
                 ..
             }),
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
             1,
         ) = (hir, closure_params_len)
         else {
             return None;
         };
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
         let self_ty = self.typeck_results.borrow().expr_ty(receiver);
         let name = method_path.ident.name;
@@ -2676,17 +2655,14 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
             _ => false,
         };
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
         if is_as_ref_able {
             Some((
                 vec![(method_path.ident.span.shrink_to_lo(), "as_ref().".to_string())],
                 "consider using `as_ref` instead",
             ))
         } else {
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             None
         }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=38 */
     }
 
     /// This function is used to determine potential "simple" improvements or users' errors and
@@ -2725,12 +2701,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         if sp.in_external_macro(sm) {
             return None;
         }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
         let replace_prefix = |s: &str, old: &str, new: &str| {
             s.strip_prefix(old).map(|stripped| new.to_string() + stripped)
         };
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=253 | LINES=380 */
 
         // `ExprKind::DropTemps` is semantically irrelevant for these suggestions.
         let expr = expr.peel_drop_temps();
@@ -3111,7 +3085,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
             _ => {}
         }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=is_else_if_block | COMPLEXITY=5 | LINES=7 */
         None
     }
 
@@ -3119,12 +3092,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     fn is_else_if_block(&self, expr: &hir::Expr<'_>) -> bool {
         if let hir::ExprKind::If(..) = expr.kind
             && let Node::Expr(hir::Expr { kind: hir::ExprKind::If(_, _, Some(else_expr)), .. }) =
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
                 self.tcx.parent_hir_node(expr.hir_id)
         {
             return else_expr.hir_id == expr.hir_id;
         }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
         false
     }
 
@@ -3140,14 +3111,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // Ignore if span is from within a macro.
             return false;
         }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=2 */
 
         let span = if let hir::ExprKind::Lit(lit) = &expr.kind { lit.span } else { expr.span };
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let Ok(src) = self.tcx.sess.source_map().span_to_snippet(span) else {
             return false;
         };
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=23 */
 
         // If casting this expression to a given numeric type would be appropriate in case of a type
         // mismatch.
@@ -3171,7 +3139,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 return false;
             }
         };
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=30 */
 
         if let hir::ExprKind::Call(path, args) = &expr.kind
             && let (hir::ExprKind::Path(hir::QPath::TypeRelative(base_ty, path_segment)), 1) =
@@ -3202,7 +3169,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
             }
         }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=16 | LINES=23 */
 
         let msg = format!(
             "you can convert {} `{}` to {} `{}`",
@@ -3226,10 +3192,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             sugg.push((expr.span.shrink_to_lo(), "(".to_string()));
             ")"
         } else {
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             ""
         };
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=16 */
 
         let mut cast_suggestion = sugg.clone();
         cast_suggestion.push((expr.span.shrink_to_hi(), format!("{close_paren} as {expected_ty}")));
@@ -3246,24 +3210,19 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 let len = src.split('.').next().unwrap().len();
                 span.with_lo(span.lo() + BytePos(len as u32))
             } else {
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
                 let len = src.trim_end_matches(&checked_ty.to_string()).len();
                 span.with_lo(span.lo() + BytePos(len as u32))
             },
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
             if self.precedence(expr) < ExprPrecedence::Unambiguous {
                 // Readd `)`
                 format!("{expected_ty})")
             } else {
-/* AST_META: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
                 expected_ty.to_string()
             },
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
         ));
         let literal_is_ty_suffixed = |expr: &hir::Expr<'_>| {
             if let hir::ExprKind::Lit(lit) = &expr.kind { lit.node.is_suffixed() } else { false }
         };
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=22 | LINES=45 */
         let is_negative_int =
             |expr: &hir::Expr<'_>| matches!(expr.kind, hir::ExprKind::Unary(hir::UnOp::Neg, ..));
         let is_uint = |ty: Ty<'_>| matches!(ty.kind(), ty::Uint(..));
@@ -3309,7 +3268,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 };
                 err.multipart_suggestion_verbose(msg, suggestion, Applicability::MachineApplicable);
             };
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=29 | LINES=35 */
 
         let suggest_to_change_suffix_or_into =
             |err: &mut Diag<'_>, found_to_exp_is_fallible: bool, exp_to_found_is_fallible: bool| {
@@ -3345,7 +3303,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 };
                 err.multipart_suggestion_verbose(msg, suggestion, Applicability::MachineApplicable);
             };
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=114 | LINES=158 */
 
         match (expected_ty.kind(), checked_ty.kind()) {
             (ty::Int(exp), ty::Int(found)) => {
@@ -3504,7 +3461,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
             _ => false,
         }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
     }
 
     /// Identify when the user has written `foo..bar()` instead of `foo.bar()`.
@@ -3518,18 +3474,15 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         if !hir::is_range_literal(expr) {
             return;
         }
-/* AST_META: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
         let hir::ExprKind::Struct(hir::QPath::LangItem(LangItem::Range, ..), [start, end], _) =
             expr.kind
         else {
             return;
         };
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
         if let hir::Node::ExprField(_) = self.tcx.parent_hir_node(expr.hir_id) {
             // Ignore `Foo { field: a..Default::default() }`
             return;
         }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
         let mut expr = end.expr;
         let mut expectation = Some(expected_ty);
         while let hir::ExprKind::MethodCall(_, rcvr, ..) = expr.kind {
@@ -3540,35 +3493,27 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // cannot guide the method probe.
             expectation = None;
         }
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::ExprKind::Call(method_name, _) = expr.kind else {
             return;
         };
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let ty::Adt(adt, _) = checked_ty.kind() else {
             return;
         };
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
         if self.tcx.lang_items().range_struct() != Some(adt.did()) {
             return;
         }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
         if let ty::Adt(adt, _) = expected_ty.kind()
             && self.tcx.is_lang_item(adt.did(), LangItem::Range)
         {
             return;
         }
-/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
         // Check if start has method named end.
         let hir::ExprKind::Path(hir::QPath::Resolved(None, p)) = method_name.kind else {
             return;
         };
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
         let [hir::PathSegment { ident, .. }] = p.segments else {
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             return;
         };
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
         let self_ty = self.typeck_results.borrow().expr_ty(start.expr);
         let Ok(_pick) = self.lookup_probe_for_diagnostic(
             *ident,
@@ -3579,7 +3524,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         ) else {
             return;
         };
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
         let mut sugg = ".";
         let mut span = start.expr.span.between(end.expr.span);
         if span.lo() + BytePos(2) == span.hi() {
@@ -3588,7 +3532,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             span = span.with_lo(span.lo() + BytePos(1));
             sugg = "";
         }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
         err.span_suggestion_verbose(
             span,
             "you likely meant to write a method call instead of a range",
@@ -3609,47 +3552,36 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         if !checked_ty.is_unit() {
             return;
         }
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::ExprKind::Path(hir::QPath::Resolved(None, path)) = expr.kind else {
             return;
         };
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::def::Res::Local(hir_id) = path.res else {
             return;
         };
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::Node::Pat(pat) = self.tcx.hir_node(hir_id) else {
             return;
         };
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
         let hir::Node::LetStmt(hir::LetStmt { ty: None, init: Some(init), .. }) =
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
             self.tcx.parent_hir_node(pat.hir_id)
         else {
             return;
         };
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::ExprKind::Block(block, None) = init.kind else {
             return;
         };
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
         if block.expr.is_some() {
             return;
         }
-/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
         let [.., stmt] = block.stmts else {
             err.span_label(block.span, "this empty block is missing a tail expression");
             return;
         };
-/* AST_META: AST_ID=66 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let hir::StmtKind::Semi(tail_expr) = stmt.kind else {
             return;
         };
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         let Some(ty) = self.node_ty_opt(tail_expr.hir_id) else {
             return;
         };
-/* AST_META: AST_ID=68 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
         if self.can_eq(self.param_env, expected_ty, ty)
             // FIXME: this happens with macro calls. Need to figure out why the stmt
             // `println!();` doesn't include the `;` in its `Span`. (#133845)
@@ -3664,10 +3596,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 Applicability::MachineApplicable,
             );
         } else {
-/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             err.span_label(block.span, "this block is missing a tail expression");
         }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=28 */
     }
 
     pub(crate) fn suggest_swapping_lhs_and_rhs(
@@ -3696,6 +3626,5 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 );
             }
         }
-/* AST_META: AST_ID=71 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
     }
 }

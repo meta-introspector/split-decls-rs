@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/mono_checks/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // This implements a single query, `check_mono_fn`, that gets fired for each
 // monomorphization of all functions. This lets us implement monomorphization-time
 // checks in a way that is friendly to incremental compilation.
 
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{Instance, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=check_mono_item | COMPLEXITY=2 | LINES=9 */
 
 
 fn check_mono_item<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) {
@@ -14,7 +12,6 @@ fn check_mono_item<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) {
     abi_check::check_feature_dependent_abi(tcx, instance, body);
     move_check::check_moves(tcx, instance, body);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 pub(super) fn provide(providers: &mut Providers) {
     *providers = Providers {

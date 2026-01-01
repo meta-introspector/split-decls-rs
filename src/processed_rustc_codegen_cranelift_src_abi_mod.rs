@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/abi/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // Handling of everything related to the calling convention. Also fills `fx.local_map`.
 
 
@@ -7,11 +6,9 @@ use std::borrow::Cow;
 use std::mem;
 
 use cranelift_codegen::ir::{ArgumentPurpose, SigRef};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use cranelift_codegen::isa::CallConv;
 use cranelift_module::ModuleError;
 use crate::rustc_abi::{CanonAbi, ExternAbi, X86Call};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 use crate::rustc_codegen_ssa::base::is_call_from_compiler_builtins_to_upstream_monomorphization;
 use crate::rustc_codegen_ssa::errors::CompilerBuiltinsCannotCall;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
@@ -21,7 +18,6 @@ use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_target::callconv::{FnAbi, PassMode};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=clif_sig_from_fn_abi | COMPLEXITY=4 | LINES=21 */
 use smallvec::SmallVec;
 
 use self::pass_mode::*;
@@ -43,7 +39,6 @@ fn clif_sig_from_fn_abi<'tcx>(
 
     Signature { params, returns, call_conv }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=30 */
 
 pub(crate) fn conv_to_call_conv(
     sess: &Session,
@@ -74,7 +69,6 @@ pub(crate) fn conv_to_call_conv(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 pub(crate) fn get_function_sig<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -88,7 +82,6 @@ pub(crate) fn get_function_sig<'tcx>(
         &FullyMonomorphizedLayoutCx(tcx).fn_abi_of_instance(inst, ty::List::empty()),
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=21 */
 
 /// Instance must be monomorphized
 pub(crate) fn import_function<'tcx>(
@@ -110,7 +103,6 @@ pub(crate) fn import_function<'tcx>(
         Err(err) => Err::<_, _>(err).unwrap(),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lib_call_unadjusted | COMPLEXITY=38 | LINES=87 */
 
 impl<'tcx> FunctionCx<'_, '_, 'tcx> {
     /// Instance must be monomorphized
@@ -198,7 +190,6 @@ impl<'tcx> FunctionCx<'_, '_, 'tcx> {
         results
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=make_local_place | COMPLEXITY=14 | LINES=28 */
 
 /// Make a [`CPlace`] capable of holding value of the specified type.
 fn make_local_place<'tcx>(
@@ -227,7 +218,6 @@ fn make_local_place<'tcx>(
 
     place
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=67 | LINES=136 */
 
 pub(crate) fn codegen_fn_prelude<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, start_block: Block) {
     fx.bcx.append_block_params_for_function_params(start_block);
@@ -364,13 +354,11 @@ pub(crate) fn codegen_fn_prelude<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, start_
 
     fx.bcx.ins().jump(*fx.block_map.get(START_BLOCK).unwrap(), &[]);
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CallArgument | COMPLEXITY=2 | LINES=5 */
 
 struct CallArgument<'tcx> {
     value: CValue<'tcx>,
     is_owned: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=codegen_call_argument_operand | COMPLEXITY=3 | LINES=11 */
 
 // FIXME avoid intermediate `CValue` before calling `adjust_arg_for_abi`
 fn codegen_call_argument_operand<'tcx>(
@@ -382,7 +370,6 @@ fn codegen_call_argument_operand<'tcx>(
         is_owned: matches!(operand, Operand::Move(_)),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=adjust_call_for_c_variadic | COMPLEXITY=179 | LINES=325 */
 
 pub(crate) fn codegen_terminator_call<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -708,7 +695,6 @@ pub(crate) fn codegen_terminator_call<'tcx>(
         fx.bcx.func.dfg.signatures[sig_ref].params = abi_params;
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=86 */
 
 pub(crate) fn codegen_drop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -795,7 +781,6 @@ pub(crate) fn codegen_drop<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=28 */
 
 pub(crate) fn lib_call_arg_param(tcx: TyCtxt<'_>, ty: Type, is_signed: bool) -> AbiParam {
     let param = AbiParam::new(ty);

@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_infer/src/traits/project.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Code for projecting associated types out of trait references.
 
 use crate::rustc_data_structures::snapshot_map::{self, SnapshotMapRef, SnapshotMapStorage};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::undo_log::Rollback;
 use crate::rustc_complete::traits::EvaluationResult;
 use crate::rustc_complete::ty;
 use tracing::{debug, info};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=MismatchedProjectionTypes | COMPLEXITY=2 | LINES=11 */
 
 use super::PredicateObligations;
 use crate::infer::snapshot::undo_log::InferCtxtUndoLogs;
@@ -20,14 +17,12 @@ pub(crate) type UndoLog<'tcx> =
 pub struct MismatchedProjectionTypes<'tcx> {
     pub err: ty::error::TypeError<'tcx>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Normalized | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 pub struct Normalized<'tcx, T> {
     pub value: T,
     pub obligations: PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=with | COMPLEXITY=4 | LINES=8 */
 
 pub type NormalizedTerm<'tcx> = Normalized<'tcx, ty::Term<'tcx>>;
 
@@ -36,7 +31,6 @@ impl<'tcx, T> Normalized<'tcx, T> {
         Normalized { value, obligations: self.obligations }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ProjectionCache | COMPLEXITY=11 | LINES=36 */
 
 // # Cache
 
@@ -73,27 +67,23 @@ pub struct ProjectionCache<'a, 'tcx> {
     map: &'a mut SnapshotMapStorage<ProjectionCacheKey<'tcx>, ProjectionCacheEntry<'tcx>>,
     undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ProjectionCacheStorage | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Default)]
 pub struct ProjectionCacheStorage<'tcx> {
     map: SnapshotMapStorage<ProjectionCacheKey<'tcx>, ProjectionCacheEntry<'tcx>>,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ProjectionCacheKey | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
 pub struct ProjectionCacheKey<'tcx> {
     term: ty::AliasTerm<'tcx>,
     param_env: ty::ParamEnv<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> ProjectionCacheKey<'tcx> {
     pub fn new(term: ty::AliasTerm<'tcx>, param_env: ty::ParamEnv<'tcx>) -> Self {
         Self { term, param_env }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=37 */
 
 #[derive(Clone, Debug)]
 pub enum ProjectionCacheEntry<'tcx> {
@@ -131,7 +121,6 @@ pub enum ProjectionCacheEntry<'tcx> {
         complete: Option<EvaluationResult>,
     },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 impl<'tcx> ProjectionCacheStorage<'tcx> {
     #[inline]
@@ -142,7 +131,6 @@ impl<'tcx> ProjectionCacheStorage<'tcx> {
         ProjectionCache { map: &mut self.map, undo_log }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=map | COMPLEXITY=58 | LINES=107 */
 
 impl<'tcx> ProjectionCache<'_, 'tcx> {
     #[inline]
@@ -250,7 +238,6 @@ impl<'tcx> ProjectionCache<'_, 'tcx> {
         assert!(!fresh, "never started projecting `{key:?}`");
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> Rollback<UndoLog<'tcx>> for ProjectionCacheStorage<'tcx> {
     fn reverse(&mut self, undo: UndoLog<'tcx>) {

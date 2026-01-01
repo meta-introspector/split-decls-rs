@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/stmt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
@@ -9,7 +8,6 @@ use tracing::debug;
 
 use crate::builder::scope::BreakableTarget;
 use crate::builder::{BlockAnd, BlockAndExtension, BlockFrame, Builder};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=94 | LINES=195 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Builds a block of MIR statements to evaluate the THIR `expr`.

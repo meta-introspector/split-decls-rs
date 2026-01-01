@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_public/src/mir/mono.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{Debug, Formatter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::io;
 
 use crate::rustc_public_bridge::bridge;
@@ -11,9 +9,7 @@ use crate::abi::FnAbi;
 use crate::crate_def::CrateDef;
 use crate::mir::Body;
 use crate::ty::{Allocation, ClosureDef, ClosureKind, FnDef, GenericArgs, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CrateItem, DefId, Error, IndexedVal, ItemKind, Opaque, Symbol, with};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub enum MonoItem {
@@ -21,7 +17,6 @@ pub enum MonoItem {
     Static(StaticDef),
     GlobalAsm(Opaque),
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Instance | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Serialize)]
 pub struct Instance {
@@ -31,7 +26,6 @@ pub struct Instance {
     /// Do not use this field directly.
     pub def: InstanceDef,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub enum InstanceKind {
@@ -45,7 +39,6 @@ pub enum InstanceKind {
     /// A compiler generated shim.
     Shim,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=args | COMPLEXITY=77 | LINES=141 */
 
 impl Instance {
     /// Get the arguments this instance was instantiated with.
@@ -187,7 +180,6 @@ impl Instance {
         if let Some(body) = self.body() { body.dump(w, &self.name()) } else { Ok(()) }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=10 */
 
 impl Debug for Instance {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
@@ -198,7 +190,6 @@ impl Debug for Instance {
             .finish()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=11 | LINES=17 */
 
 /// Try to convert a crate item into an instance.
 /// The item cannot be generic in order to be converted into an instance.
@@ -216,7 +207,6 @@ impl TryFrom<CrateItem> for Instance {
         })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=12 | LINES=16 */
 
 /// Try to convert an instance into a crate item.
 /// Only user defined instances can be converted.
@@ -233,28 +223,24 @@ impl TryFrom<Instance> for CrateItem {
         })
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Instance> for MonoItem {
     fn from(value: Instance) -> Self {
         MonoItem::Fn(value)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<StaticDef> for MonoItem {
     fn from(value: StaticDef) -> Self {
         MonoItem::Static(value)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<StaticDef> for CrateItem {
     fn from(value: StaticDef) -> Self {
         CrateItem(value.0)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=InstanceDef(usize); | COMPLEXITY=5 | LINES=9 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize)]
 pub struct InstanceDef(usize);
@@ -264,14 +250,12 @@ impl CrateDef for InstanceDef {
         with(|context| context.instance_def_id(*self))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 crate_def! {
     /// Holds information about a static variable definition.
     #[derive(Serialize)]
     pub StaticDef;
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=10 | LINES=12 */
 
 impl TryFrom<CrateItem> for StaticDef {
     type Error = crate::Error;
@@ -284,7 +268,6 @@ impl TryFrom<CrateItem> for StaticDef {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=5 | LINES=8 */
 
 impl TryFrom<Instance> for StaticDef {
     type Error = crate::Error;
@@ -293,7 +276,6 @@ impl TryFrom<Instance> for StaticDef {
         StaticDef::try_from(CrateItem::try_from(value)?)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<StaticDef> for Instance {
     fn from(value: StaticDef) -> Self {
@@ -301,7 +283,6 @@ impl From<StaticDef> for Instance {
         with(|cx| cx.mono_instance(value.def_id()))
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=4 | LINES=12 */
 
 impl StaticDef {
     /// Return the type of this static definition.
@@ -314,7 +295,6 @@ impl StaticDef {
         with(|cx| cx.eval_static_initializer(*self))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=to_val | COMPLEXITY=6 | LINES=9 */
 
 impl IndexedVal for InstanceDef {
     fn to_val(index: usize) -> Self {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/counters/balanced_flow.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=47 */
 // A control-flow graph can be said to have “balanced flow” if the flow
 // (execution count) of each node is equal to the sum of its in-edge flows,
 // and also equal to the sum of its out-edge flows.
@@ -47,7 +46,6 @@ pub(crate) struct BalancedFlowGraph<G: graph::DirectedGraph> {
     sink_edge_nodes: DenseBitSet<G::Node>,
     pub(crate) sink: G::Node,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=35 */
 
 impl<G: graph::DirectedGraph> BalancedFlowGraph<G> {
     /// Creates a balanced view of an underlying graph, by adding a synthetic
@@ -83,7 +81,6 @@ impl<G: graph::DirectedGraph> BalancedFlowGraph<G> {
         BalancedFlowGraph { graph, sink_edge_nodes, sink }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=16 */
 
 impl<G> graph::DirectedGraph for BalancedFlowGraph<G>
 where
@@ -100,7 +97,6 @@ where
         self.sink.index() + 1
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=start_node | COMPLEXITY=5 | LINES=9 */
 
 impl<G> graph::StartNode for BalancedFlowGraph<G>
 where
@@ -110,7 +106,6 @@ where
         self.graph.start_node()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=10 | LINES=24 */
 
 impl<G> graph::Successors for BalancedFlowGraph<G>
 where

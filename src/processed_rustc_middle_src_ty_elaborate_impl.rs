@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/elaborate_impl.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use rustc_type_ir::elaborate::Elaboratable;
 
 use crate::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
     fn predicate(&self) -> ty::Predicate<'tcx> {
@@ -25,7 +23,6 @@ impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
         clause
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
     fn predicate(&self) -> ty::Predicate<'tcx> {
@@ -46,7 +43,6 @@ impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
         clause.as_predicate()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> Elaboratable<TyCtxt<'tcx>> for (ty::Predicate<'tcx>, Span) {
     fn predicate(&self) -> ty::Predicate<'tcx> {
@@ -67,7 +63,6 @@ impl<'tcx> Elaboratable<TyCtxt<'tcx>> for (ty::Predicate<'tcx>, Span) {
         (clause.as_predicate(), self.1)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> Elaboratable<TyCtxt<'tcx>> for (ty::Clause<'tcx>, Span) {
     fn predicate(&self) -> ty::Predicate<'tcx> {

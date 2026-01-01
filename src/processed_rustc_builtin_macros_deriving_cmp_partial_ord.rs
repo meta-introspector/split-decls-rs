@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/cmp/partial_ord.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ExprKind, ItemKind, MetaItem, PatKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
 use crate::deriving::{path_std, pathvec_std};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=62 */
 
 pub(crate) fn expand_deriving_partial_ord(
     cx: &ExtCtxt<'_>,
@@ -74,7 +69,6 @@ pub(crate) fn expand_deriving_partial_ord(
     };
     trait_def.expand(cx, mitem, item, push)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cs_partial_cmp | COMPLEXITY=42 | LINES=87 */
 
 fn cs_partial_cmp(
     cx: &ExtCtxt<'_>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/return-tuple.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=int_cast | COMPLEXITY=2 | LINES=21 */
 // Compiler:
 //
 // Run-time:
@@ -21,7 +20,6 @@ fn int_cast(a: u16, b: i16) -> (u8, u16, u32, usize, i8, i16, i32, isize, u8, u3
         b as u32,
     )
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
 
 #[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {

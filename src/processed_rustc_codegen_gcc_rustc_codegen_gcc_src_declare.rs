@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/declare.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, ToRValue};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gccjit::{Function, FunctionType, GlobalKind, LValue, RValue, Type};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::Symbol;
 use crate::rustc_target::callconv::FnAbi;
 
 use crate::abi::{FnAbiGcc, FnAbiGccExt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=get_or_insert_global | COMPLEXITY=43 | LINES=144 */
 use crate::context::CodegenCx;
 use crate::intrinsic::llvm;
 
@@ -156,7 +152,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         self.globals.borrow().get(name).cloned()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=declare_raw_fn | COMPLEXITY=44 | LINES=105 */
 
 /// Declare a function.
 ///
@@ -262,7 +257,6 @@ fn declare_raw_fn<'gcc>(
     // FIXME(antoyo): invalid cast.
     func
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=mangle_name | COMPLEXITY=10 | LINES=23 */
 
 // FIXME(antoyo): this is a hack because libgccjit currently only supports alpha, num and _.
 // Unsupported characters: `$`, `.` and `*`.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/types/improper_ctypes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::iter;
 use std::ops::ControlFlow;
 
@@ -10,25 +9,19 @@ use crate::rustc_complete::DiagMessage;
 use crate::rustc_complete::def::CtorKind;
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::{self as hir, AmbigArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self, Adt, AdtDef, AdtKind, GenericArgsRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::debug;
 
 use super::repr_nullable_ptr;
 use crate::lints::{ImproperCTypes, UsesPowerAlignment};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext, fluent_generated as fluent};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=27 */
 
 declare_lint! {
     /// The `improper_ctypes` lint detects incorrect use of types in foreign
@@ -56,7 +49,6 @@ declare_lint! {
     Warn,
     "proper use of libc types in foreign modules"
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=27 */
 
 declare_lint! {
     /// The `improper_ctypes_definitions` lint detects incorrect use of
@@ -84,7 +76,6 @@ declare_lint! {
     Warn,
     "proper use of libc types in foreign item definitions"
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=55 */
 
 declare_lint! {
     /// The `uses_power_alignment` lint detects specific `repr(C)`
@@ -140,7 +131,6 @@ declare_lint! {
     Warn,
     "Structs do not follow the power alignment rule under repr(C)"
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=15 */
 
 declare_lint_pass!(ImproperCTypesLint => [
     IMPROPER_CTYPES,
@@ -156,7 +146,6 @@ declare_lint_pass!(ImproperCTypesLint => [
 /// Adding a data-carrying variant to an existing C-like enum that is passed to C is "unlikely",
 /// so we don't need the lint to account for it.
 /// e.g. going from enum Foo { A, B, C } to enum Foo { A, B, C, D(u32) }.
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=22 */
 pub(crate) fn check_non_exhaustive_variant(
     non_exhaustive_variant_list: bool,
     variant: &ty::VariantDef,
@@ -179,13 +168,11 @@ pub(crate) fn check_non_exhaustive_variant(
 
     ControlFlow::Continue(())
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=variant_has_complex_ctor | COMPLEXITY=2 | LINES=5 */
 
 fn variant_has_complex_ctor(variant: &ty::VariantDef) -> bool {
     // CtorKind::Const means a "unit" ctor
     !matches!(variant.ctor_kind(), Some(CtorKind::Const))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_arg_for_power_alignment | COMPLEXITY=20 | LINES=33 */
 
 /// Per-struct-field function that checks if a struct definition follows
 /// the Power alignment Rule (see the `check_struct_for_power_alignment` function).
@@ -219,7 +206,6 @@ fn check_arg_for_power_alignment<'tcx>(cx: &LateContext<'tcx>, ty: Ty<'tcx>) -> 
     }
     return false;
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=check_struct_for_power_alignment | COMPLEXITY=18 | LINES=36 */
 
 /// Check a struct definition for respect of the Power alignment Rule (as in PowerPC),
 /// which should be respected in the "aix" target OS.
@@ -256,21 +242,18 @@ fn check_struct_for_power_alignment<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 enum CItemKind {
     Declaration,
     Definition,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 enum FfiResult<'tcx> {
     FfiSafe,
     FfiPhantom(Ty<'tcx>),
     FfiUnsafe { ty: Ty<'tcx>, reason: DiagMessage, help: Option<DiagMessage> },
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=VisitorState: | COMPLEXITY=6 | LINES=22 */
 
 /// The result when a type has been checked but perhaps not completely. `None` indicates that
 /// FFI safety/unsafety has not yet been determined, `Some(res)` indicates that the safety/unsafety
@@ -293,7 +276,6 @@ bitflags! {
         const THEORETICAL = 0b010000;
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=argument_from_fnmode | COMPLEXITY=32 | LINES=69 */
 
 impl VisitorState {
     // The values that can be set.
@@ -363,7 +345,6 @@ impl VisitorState {
         self.contains(Self::THEORETICAL) || self.is_in_defined_function()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=ImproperCTypesVisitor | COMPLEXITY=3 | LINES=14 */
 
 /// Visitor used to recursively traverse MIR types and evaluate FFI-safety.
 /// It uses ``check_*`` methods as entrypoints to be called elsewhere,
@@ -378,7 +359,6 @@ struct ImproperCTypesVisitor<'a, 'tcx> {
     base_ty: Ty<'tcx>,
     base_fn_mode: CItemKind,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=260 | LINES=402 */
 
 impl<'a, 'tcx> ImproperCTypesVisitor<'a, 'tcx> {
     fn new(cx: &'a LateContext<'tcx>, base_ty: Ty<'tcx>, base_fn_mode: CItemKind) -> Self {
@@ -781,7 +761,6 @@ impl<'a, 'tcx> ImproperCTypesVisitor<'a, 'tcx> {
         self.visit_type(state, ty)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_type_for_external_abi_fnptr | COMPLEXITY=81 | LINES=183 */
 
 impl<'tcx> ImproperCTypesLint {
     /// Find any fn-ptr types with external ABIs in `ty`, and FFI-checks them.
@@ -965,11 +944,9 @@ impl<'tcx> ImproperCTypesLint {
         cx.emit_span_lint(lint, sp, ImproperCTypes { ty, desc, label: sp, help, note, span_note });
     }
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 /// `ImproperCTypesDefinitions` checks items outside of foreign items (e.g. stuff that isn't in
 /// `extern "C" { }` blocks):
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=check_foreign_item | COMPLEXITY=60 | LINES=107 */
 ///
 /// - `extern "<abi>" fn` definitions are checked in the same way as the
 ///   `ImproperCtypesDeclarations` visitor checks functions if `<abi>` is external (e.g. "C").

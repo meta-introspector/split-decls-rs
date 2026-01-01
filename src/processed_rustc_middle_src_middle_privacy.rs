@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/privacy.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // A pass that checks to make sure private fields and methods aren't used
 // outside their scopes. This pass will also generate a set of exported items
 // which are available for use externally when compiled as a library.
@@ -7,17 +6,13 @@
 use std::hash::Hash;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def::DefKind;
 use rustc_macros::HashStable;
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ty::{TyCtxt, Visibility};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 /// Represents the levels of effective visibility an item can have.
 ///
@@ -36,14 +31,12 @@ pub enum Level {
     /// Item is directly accessible, without help of reexports.
     Direct,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=all_levels | COMPLEXITY=3 | LINES=6 */
 
 impl Level {
     pub fn all_levels() -> [Level; 4] {
         [Level::Direct, Level::Reexported, Level::Reachable, Level::ReachableThroughImplTrait]
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=EffectiveVisibility | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, HashStable)]
 pub struct EffectiveVisibility {
@@ -52,7 +45,6 @@ pub struct EffectiveVisibility {
     reachable: Visibility,
     reachable_through_impl_trait: Visibility,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=at_level | COMPLEXITY=24 | LINES=45 */
 
 impl EffectiveVisibility {
     pub fn at_level(&self, level: Level) -> &Visibility {
@@ -98,14 +90,12 @@ impl EffectiveVisibility {
         self
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=EffectiveVisibilities | COMPLEXITY=4 | LINES=6 */
 
 /// Holds a map of effective visibilities for reachable HIR nodes.
 #[derive(Clone, Debug)]
 pub struct EffectiveVisibilities<Id = LocalDefId> {
     map: FxIndexMap<Id, EffectiveVisibility>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_public_at_level | COMPLEXITY=68 | LINES=101 */
 
 impl EffectiveVisibilities {
     pub fn is_public_at_level(&self, id: LocalDefId, level: Level) -> bool {
@@ -207,7 +197,6 @@ impl EffectiveVisibilities {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=31 | LINES=70 */
 
 impl<Id: Eq + Hash> EffectiveVisibilities<Id> {
     pub fn iter(&self) -> impl Iterator<Item = (&Id, &EffectiveVisibility)> {
@@ -278,14 +267,12 @@ impl<Id: Eq + Hash> EffectiveVisibilities<Id> {
         changed
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<Id> Default for EffectiveVisibilities<Id> {
     fn default() -> Self {
         EffectiveVisibilities { map: Default::default() }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=7 */
 
 impl<'a> HashStable<StableHashingContext<'a>> for EffectiveVisibilities {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {

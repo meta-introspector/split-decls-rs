@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/builtin.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Check properties that are required by built-in traits and set
 // up data structures required by type-checking/codegen.
 
@@ -8,31 +7,24 @@ use std::collections::BTreeMap;
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::ItemKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_infer::infer::{self, RegionResolutionError, SubregionOrigin, TyCtxtInferExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::Obligation;
 use crate::rustc_complete::ty::adjustment::CoerceUnsizedInfo;
 use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeVisitableExt, TypingMode, suggest_constraining_type_params,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::traits::misc::{
     ConstParamTyImplementationError, CopyImplementationError, InfringingFieldsReason,
     type_allowed_to_implement_const_param_ty, type_allowed_to_implement_copy,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=30 */
 use tracing::debug;
 
 use crate::errors;
@@ -63,7 +55,6 @@ pub(super) fn check_trait<'tcx>(
     )?;
     Ok(())
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Checker | COMPLEXITY=2 | LINES=7 */
 
 struct Checker<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -71,7 +62,6 @@ struct Checker<'tcx> {
     impl_def_id: LocalDefId,
     impl_header: ty::ImplTraitHeader<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=10 */
 
 impl<'tcx> Checker<'tcx> {
     fn check(
@@ -82,7 +72,6 @@ impl<'tcx> Checker<'tcx> {
         if Some(self.trait_def_id) == trait_def_id { f(self) } else { Ok(()) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_implementation_of_drop | COMPLEXITY=11 | LINES=18 */
 
 fn visit_implementation_of_drop(checker: &Checker<'_>) -> Result<(), ErrorGuaranteed> {
     let tcx = checker.tcx;
@@ -101,7 +90,6 @@ fn visit_implementation_of_drop(checker: &Checker<'_>) -> Result<(), ErrorGuaran
         trait_: tcx.item_name(checker.impl_header.trait_ref.skip_binder().def_id),
     }))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_implementation_of_copy | COMPLEXITY=25 | LINES=48 */
 
 fn visit_implementation_of_copy(checker: &Checker<'_>) -> Result<(), ErrorGuaranteed> {
     let tcx = checker.tcx;
@@ -150,7 +138,6 @@ fn visit_implementation_of_copy(checker: &Checker<'_>) -> Result<(), ErrorGuaran
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_implementation_of_const_param_ty | COMPLEXITY=19 | LINES=52 */
 
 fn visit_implementation_of_const_param_ty(
     checker: &Checker<'_>,
@@ -203,7 +190,6 @@ fn visit_implementation_of_const_param_ty(
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_implementation_of_coerce_unsized | COMPLEXITY=7 | LINES=11 */
 
 fn visit_implementation_of_coerce_unsized(checker: &Checker<'_>) -> Result<(), ErrorGuaranteed> {
     let tcx = checker.tcx;
@@ -215,7 +201,6 @@ fn visit_implementation_of_coerce_unsized(checker: &Checker<'_>) -> Result<(), E
     // course.
     tcx.ensure_ok().coerce_unsized_info(impl_did)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=is_from_coerce_pointee_derive | COMPLEXITY=2 | LINES=7 */
 
 fn is_from_coerce_pointee_derive(tcx: TyCtxt<'_>, span: Span) -> bool {
     span.ctxt()
@@ -223,7 +208,6 @@ fn is_from_coerce_pointee_derive(tcx: TyCtxt<'_>, span: Span) -> bool {
         .macro_def_id
         .is_some_and(|def_id| tcx.is_diagnostic_item(sym::CoercePointee, def_id))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_implementation_of_dispatch_from_dyn | COMPLEXITY=81 | LINES=166 */
 
 fn visit_implementation_of_dispatch_from_dyn(checker: &Checker<'_>) -> Result<(), ErrorGuaranteed> {
     let tcx = checker.tcx;
@@ -390,7 +374,6 @@ fn visit_implementation_of_dispatch_from_dyn(checker: &Checker<'_>) -> Result<()
         _ => Err(tcx.dcx().emit_err(errors::CoerceUnsizedNonStruct { span, trait_name })),
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=87 | LINES=215 */
 
 pub(crate) fn coerce_unsized_info<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -606,7 +589,6 @@ pub(crate) fn coerce_unsized_info<'tcx>(
 
     Ok(CoerceUnsizedInfo { custom_kind: kind })
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=infringing_fields_error | COMPLEXITY=67 | LINES=123 */
 
 fn infringing_fields_error<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -730,7 +712,6 @@ fn infringing_fields_error<'tcx>(
 
     err.emit()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_implementation_of_coerce_pointee_validity | COMPLEXITY=22 | LINES=29 */
 
 fn visit_implementation_of_coerce_pointee_validity(
     checker: &Checker<'_>,

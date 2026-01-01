@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/lib_features.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Detecting lib features (i.e., features that are not lang features).
 //
 // These are declared using stability attributes (e.g., `#[stable (..)]` and `#[unstable (..)]`),
@@ -9,24 +8,18 @@
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{Attribute, StabilityLevel, StableSince};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{FeaturePreviouslyDeclared, FeatureStableTwice};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=LibFeatureCollector | COMPLEXITY=2 | LINES=5 */
 
 struct LibFeatureCollector<'tcx> {
     tcx: TyCtxt<'tcx>,
     lib_features: LibFeatures,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=52 | LINES=73 */
 
 impl<'tcx> LibFeatureCollector<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> LibFeatureCollector<'tcx> {
@@ -100,7 +93,6 @@ impl<'tcx> LibFeatureCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=9 | LINES=14 */
 
 impl<'tcx> Visitor<'tcx> for LibFeatureCollector<'tcx> {
     type NestedFilter = nested_filter::All;
@@ -115,7 +107,6 @@ impl<'tcx> Visitor<'tcx> for LibFeatureCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=lib_features | COMPLEXITY=5 | LINES=12 */
 
 fn lib_features(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> LibFeatures {
     // If `staged_api` is not enabled then we aren't allowed to define lib
@@ -128,7 +119,6 @@ fn lib_features(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> LibFeatures {
     tcx.hir_walk_attributes(&mut collector);
     collector.lib_features
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.lib_features = lib_features;

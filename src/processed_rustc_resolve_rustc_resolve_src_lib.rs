@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=27 */
 // This crate is responsible for the part of name resolution that doesn't require type checker.
 //
 // Module structure of the crate is built here.
@@ -27,59 +26,42 @@
 // tidy-alphabetical-end
 
 use std::cell::{Cell, Ref, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::BTreeSet;
 use std::fmt;
 use std::sync::Arc;
 
 use diagnostics::{ImportSuggestion, LabelSuggestion, Suggestion};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use effective_visibilities::EffectiveVisibilitiesVisitor;
 use errors::{ParamKindInEnumDiscriminant, ParamKindInNonTrivialAnonConst};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use imports::{Import, ImportData, ImportKind, NameResolution, PendingBinding};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use late::{
     ForwardGenericParamBanReason, HasGenericParams, PathSource, PatternSource,
     UnnecessaryQualification,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use macros::{MacroRulesBinding, MacroRulesScope, MacroRulesScopeRef};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_arena::{DroplessArena, TypedArena};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::node_id::NodeMap;
 use crate::rustc_complete::{
     self as ast, AngleBracketedArg, CRATE_NODE_ID, Crate, Expr, ExprKind, GenericArg, GenericArgs,
     LitKind, NodeId, Path, attr,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{FreezeReadGuard, FreezeWriteGuard};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, ErrCode, ErrorGuaranteed, LintBuffer};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{DeriveResolution, SyntaxExtension, SyntaxExtensionKind};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::BUILTIN_ATTRIBUTES;
 use crate::rustc_complete::attrs::StrippedCfgItem;
 use crate::rustc_complete::def::Namespace::{self, *};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def::{
     self, CtorOf, DefKind, DocLinkResMap, LifetimeRes, MacroKinds, NonMacroAttrKind, PartialRes,
     PerNS,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::definitions::DisambiguatorState;
 use crate::rustc_complete::{PrimTy, TraitCandidate};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_metadata::creader::CStore;
 use crate::rustc_complete::metadata::ModChild;
@@ -90,16 +72,12 @@ use crate::rustc_complete::ty::{
     self, DelegationFnSig, Feed, MainDefinition, RegisteredTools, ResolverAstLowering,
     ResolverGlobalCtxt, TyCtxt, TyCtxtFeed, Visibility,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::PRIVATE_MACRO_USE;
 use crate::rustc_complete::hygiene::{ExpnId, LocalExpnId, MacroKind, SyntaxContext, Transparency};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 use tracing::debug;
 
 type Res = def::Res<NodeId>;
@@ -108,28 +86,24 @@ type Res = def::Res<NodeId>;
 pub use macros::registered_tools_ast;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 enum Weak {
     Yes,
     No,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 enum Determinacy {
     Determined,
     Undetermined,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=determined | COMPLEXITY=7 | LINES=6 */
 
 impl Determinacy {
     fn determined(determined: bool) -> Determinacy {
         if determined { Determinacy::Determined } else { Determinacy::Undetermined }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=31 */
 
 /// A specific scope in which a name can be looked up.
 #[derive(Clone, Copy, Debug)]
@@ -161,7 +135,6 @@ enum Scope<'ra> {
     /// Built-in types.
     BuiltinTypes,
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Names from different contexts may want to visit different subsets of all specific scopes
 /// with different restrictions when looking up the resolution.
@@ -176,7 +149,6 @@ enum ScopeSet<'ra> {
     /// Same as `All(MacroNS)`, but with the given macro kind restriction.
     Macro(MacroKind),
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=ParentScope | COMPLEXITY=8 | LINES=12 */
 
 /// Everything you need to know about a name's location to resolve it.
 /// Serves as a starting point for the scope visitor.
@@ -189,7 +161,6 @@ struct ParentScope<'ra> {
     macro_rules: MacroRulesScopeRef<'ra>,
     derives: &'ra [ast::Path],
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=module | COMPLEXITY=4 | LINES=13 */
 
 impl<'ra> ParentScope<'ra> {
     /// Creates a parent scope with the passed argument used as the module scope component,
@@ -203,7 +174,6 @@ impl<'ra> ParentScope<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=InvocationParent | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Debug, Clone)]
 struct InvocationParent {
@@ -211,7 +181,6 @@ struct InvocationParent {
     impl_trait_context: ImplTraitContext,
     in_attr: bool,
 }
-/* AST_META: AST_ID=31 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 impl InvocationParent {
     const ROOT: Self = Self {
@@ -220,7 +189,6 @@ impl InvocationParent {
         in_attr: false,
     };
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Debug, Clone)]
 enum ImplTraitContext {
@@ -228,7 +196,6 @@ enum ImplTraitContext {
     Universal,
     InBinding,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 /// Used for tracking import use types which will be used for redundant import checking.
 ///
@@ -241,7 +208,6 @@ enum ImplTraitContext {
 ///     let s = Box::new(32);
 ///     drop(s);
 /// }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 /// ```
 ///
 /// Used::Other is for other situations like module-relative uses.
@@ -250,7 +216,6 @@ enum Used {
     Scope,
     Other,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=BindingError | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 struct BindingError {
@@ -259,7 +224,6 @@ struct BindingError {
     target: Vec<ast::Pat>,
     could_be_path: bool,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=90 */
 
 #[derive(Debug)]
 enum ResolutionError<'ra> {
@@ -350,7 +314,6 @@ enum ResolutionError<'ra> {
     /// A never pattern has a binding.
     BindingInNeverPattern,
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 enum VisResolutionError<'a> {
     Relative2018(Span, &'a ast::Path),
@@ -360,7 +323,6 @@ enum VisResolutionError<'a> {
     Indeterminate(Span),
     ModuleOnly(Span),
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=Segment | COMPLEXITY=3 | LINES=14 */
 
 /// A minimal representation of a path segment. We use this in resolve because we synthesize 'path
 /// segments' which don't have the rest of an AST or HIR `PathSegment`.
@@ -375,7 +337,6 @@ struct Segment {
     has_lifetime_args: bool,
     args_span: Span,
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=from_path | COMPLEXITY=9 | LINES=30 */
 
 impl Segment {
     fn from_path(path: &Path) -> Vec<Segment> {
@@ -406,7 +367,6 @@ impl Segment {
         names_to_string(segments.iter().map(|seg| seg.ident.name))
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=from | COMPLEXITY=16 | LINES=28 */
 
 impl<'a> From<&'a ast::PathSegment> for Segment {
     fn from(seg: &'a ast::PathSegment) -> Segment {
@@ -435,7 +395,6 @@ impl<'a> From<&'a ast::PathSegment> for Segment {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// An intermediate resolution result.
 ///
@@ -447,7 +406,6 @@ enum LexicalScopeBinding<'ra> {
     Item(NameBinding<'ra>),
     Res(Res),
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=res | COMPLEXITY=7 | LINES=9 */
 
 impl<'ra> LexicalScopeBinding<'ra> {
     fn res(self) -> Res {
@@ -457,7 +415,6 @@ impl<'ra> LexicalScopeBinding<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 enum ModuleOrUniformRoot<'ra> {
@@ -478,7 +435,6 @@ enum ModuleOrUniformRoot<'ra> {
     /// are always split into two parts, the first of which should be some kind of module.
     CurrentScope,
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 #[derive(Debug)]
 enum PathResult<'ra> {
@@ -509,7 +465,6 @@ enum PathResult<'ra> {
         error_implied_by_parse_error: bool,
     },
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=failed | COMPLEXITY=9 | LINES=23 */
 
 impl<'ra> PathResult<'ra> {
     fn failed(
@@ -533,7 +488,6 @@ impl<'ra> PathResult<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=27 */
 
 #[derive(Debug)]
 enum ModuleKind {
@@ -560,7 +514,6 @@ enum ModuleKind {
     ///   constructors).
     Def(DefKind, DefId, Option<Symbol>),
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=name | COMPLEXITY=7 | LINES=10 */
 
 impl ModuleKind {
     /// Get name of the module.
@@ -571,7 +524,6 @@ impl ModuleKind {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=BindingKey | COMPLEXITY=13 | LINES=18 */
 
 /// A key that identifies a binding in a given `Module`.
 ///
@@ -590,7 +542,6 @@ struct BindingKey {
     /// also zero, even for underscore names, so for underscores the lookup will never succeed.
     disambiguator: u32,
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=15 */
 
 impl BindingKey {
     fn new(ident: Ident, ns: Namespace) -> Self {
@@ -606,7 +557,6 @@ impl BindingKey {
         BindingKey { ident: Macros20NormalizedIdent::new(ident), ns, disambiguator }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=ModuleData | COMPLEXITY=15 | LINES=50 */
 
 type Resolutions<'ra> = RefCell<FxIndexMap<BindingKey, &'ra RefCell<NameResolution<'ra>>>>;
 
@@ -657,7 +607,6 @@ struct ModuleData<'ra> {
     /// like `self` (not yet used), or `crate`/`$crate` (for root modules).
     self_binding: Option<NameBinding<'ra>>,
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=Module | COMPLEXITY=6 | LINES=19 */
 
 /// All modules are unique and allocated on a same arena,
 /// so we can use referential equality to compare them.
@@ -677,7 +626,6 @@ impl std::hash::Hash for ModuleData<'_> {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=31 */
 
 impl<'ra> ModuleData<'ra> {
     fn new(
@@ -709,7 +657,6 @@ impl<'ra> ModuleData<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=for_each_child | COMPLEXITY=65 | LINES=99 */
 
 impl<'ra> Module<'ra> {
     fn for_each_child<'tcx, R: AsRef<Resolver<'ra, 'tcx>>>(
@@ -809,7 +756,6 @@ impl<'ra> Module<'ra> {
         true
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'ra> std::ops::Deref for Module<'ra> {
     type Target = ModuleData<'ra>;
@@ -818,7 +764,6 @@ impl<'ra> std::ops::Deref for Module<'ra> {
         &self.0
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=9 */
 
 impl<'ra> fmt::Debug for Module<'ra> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -828,7 +773,6 @@ impl<'ra> fmt::Debug for Module<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=NameBindingData | COMPLEXITY=3 | LINES=13 */
 
 /// Records a possibly-private value, type, or module definition.
 #[derive(Clone, Copy, Debug)]
@@ -842,7 +786,6 @@ struct NameBindingData<'ra> {
     span: Span,
     vis: Visibility<DefId>,
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=6 | LINES=17 */
 
 /// All name bindings are unique and allocated on a same arena,
 /// so we can use referential equality to compare them.
@@ -860,14 +803,12 @@ impl std::hash::Hash for NameBindingData<'_> {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=58 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, Copy, Debug)]
 enum NameBindingKind<'ra> {
     Res(Res),
     Import { binding: NameBinding<'ra>, import: Import<'ra> },
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=is_import | COMPLEXITY=4 | LINES=7 */
 
 impl<'ra> NameBindingKind<'ra> {
     /// Is this a name binding of an import?
@@ -875,7 +816,6 @@ impl<'ra> NameBindingKind<'ra> {
         matches!(*self, NameBindingKind::Import { .. })
     }
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=PrivacyError | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Debug)]
 struct PrivacyError<'ra> {
@@ -888,7 +828,6 @@ struct PrivacyError<'ra> {
     single_nested: bool,
     source: Option<ast::Expr>,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UseError | COMPLEXITY=5 | LINES=18 */
 
 #[derive(Debug)]
 struct UseError<'a> {
@@ -907,7 +846,6 @@ struct UseError<'a> {
     /// Whether the expected source is a call
     is_call: bool,
 }
-/* AST_META: AST_ID=62 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum AmbiguityKind {
@@ -919,7 +857,6 @@ enum AmbiguityKind {
     GlobVsExpanded,
     MoreExpandedVsOuter,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=13 | LINES=22 */
 
 impl AmbiguityKind {
     fn descr(self) -> &'static str {
@@ -942,7 +879,6 @@ impl AmbiguityKind {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Miscellaneous bits of metadata for better ambiguity error reporting.
 #[derive(Clone, Copy, PartialEq)]
@@ -952,7 +888,6 @@ enum AmbiguityErrorMisc {
     FromPrelude,
     None,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=AmbiguityError | COMPLEXITY=2 | LINES=10 */
 
 struct AmbiguityError<'ra> {
     kind: AmbiguityKind,
@@ -963,7 +898,6 @@ struct AmbiguityError<'ra> {
     misc2: AmbiguityErrorMisc,
     warning: bool,
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=res | COMPLEXITY=74 | LINES=115 */
 
 impl<'ra> NameBindingData<'ra> {
     fn res(&self) -> Res {
@@ -1079,7 +1013,6 @@ impl<'ra> NameBindingData<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=ExternPreludeEntry | COMPLEXITY=2 | LINES=9 */
 
 struct ExternPreludeEntry<'ra> {
     /// Binding from an `extern crate` item.
@@ -1089,7 +1022,6 @@ struct ExternPreludeEntry<'ra> {
     /// Binding from an `--extern` flag, lazily populated on first use.
     flag_binding: Option<Cell<(PendingBinding<'ra>, /* finalized */ bool)>>,
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=introduced_by_item | COMPLEXITY=5 | LINES=13 */
 
 impl ExternPreludeEntry<'_> {
     fn introduced_by_item(&self) -> bool {
@@ -1103,34 +1035,29 @@ impl ExternPreludeEntry<'_> {
         }
     }
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=DeriveData | COMPLEXITY=2 | LINES=6 */
 
 struct DeriveData {
     resolutions: Vec<DeriveResolution>,
     helper_attrs: Vec<(usize, Ident)>,
     has_derive_copy: bool,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=MacroData | COMPLEXITY=2 | LINES=6 */
 
 struct MacroData {
     ext: Arc<SyntaxExtension>,
     nrules: usize,
     macro_rules: bool,
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl MacroData {
     fn new(ext: Arc<SyntaxExtension>) -> MacroData {
         MacroData { ext, nrules: 0, macro_rules: false }
     }
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=ResolverOutputs | COMPLEXITY=2 | LINES=5 */
 
 pub struct ResolverOutputs {
     pub global_ctxt: ResolverGlobalCtxt,
     pub ast_lowering: ResolverAstLowering,
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=Resolver | COMPLEXITY=69 | LINES=215 */
 
 /// The main resolver class.
 ///
@@ -1346,7 +1273,6 @@ pub struct Resolver<'ra, 'tcx> {
     // for APITs, so we don't want to leak details of resolution into these names.
     impl_trait_names: FxHashMap<NodeId, Symbol>,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=ResolverArenas | COMPLEXITY=5 | LINES=13 */
 
 /// This provides memory for the rest of the crate. The `'ra` lifetime that is
 /// used by many types in this crate is an abbreviation of `ResolverArenas`.
@@ -1360,7 +1286,6 @@ pub struct ResolverArenas<'ra> {
     macros: TypedArena<MacroData>,
     dropless: DroplessArena,
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=new_res_binding | COMPLEXITY=27 | LINES=87 */
 
 impl<'ra> ResolverArenas<'ra> {
     fn new_res_binding(
@@ -1448,21 +1373,18 @@ impl<'ra> ResolverArenas<'ra> {
         self.dropless.alloc_from_iter(spans)
     }
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=as_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'ra, 'tcx> AsMut<Resolver<'ra, 'tcx>> for Resolver<'ra, 'tcx> {
     fn as_mut(&mut self) -> &mut Resolver<'ra, 'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=5 | LINES=6 */
 
 impl<'ra, 'tcx> AsRef<Resolver<'ra, 'tcx>> for Resolver<'ra, 'tcx> {
     fn as_ref(&self) -> &Resolver<'ra, 'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=opt_local_def_id | COMPLEXITY=40 | LINES=91 */
 
 impl<'tcx> Resolver<'_, 'tcx> {
     fn opt_local_def_id(&self, node: NodeId) -> Option<LocalDefId> {
@@ -1554,7 +1476,6 @@ impl<'tcx> Resolver<'_, 'tcx> {
             .unwrap()
     }
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=new | COMPLEXITY=426 | LINES=928 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     pub fn new(
@@ -2483,7 +2404,6 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
         self.main_def = Some(MainDefinition { res, is_import, span });
     }
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=names_to_string | COMPLEXITY=11 | LINES=14 */
 
 fn names_to_string(names: impl Iterator<Item = Symbol>) -> String {
     let mut result = String::new();
@@ -2498,12 +2418,10 @@ fn names_to_string(names: impl Iterator<Item = Symbol>) -> String {
     }
     result
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=path_names_to_string | COMPLEXITY=2 | LINES=4 */
 
 fn path_names_to_string(path: &Path) -> String {
     names_to_string(path.segments.iter().map(|seg| seg.ident.name))
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=module_to_string | COMPLEXITY=18 | LINES=26 */
 
 /// A somewhat inefficient routine to obtain the name of a module.
 fn module_to_string(mut module: Module<'_>) -> Option<String> {
@@ -2530,7 +2448,6 @@ fn module_to_string(mut module: Module<'_>) -> Option<String> {
     }
     Some(names_to_string(names.iter().rev().copied()))
 }
-/* AST_META: AST_ID=83 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 enum Stage {
@@ -2542,7 +2459,6 @@ enum Stage {
     /// and all macros are expanded.
     Late,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=Finalize | COMPLEXITY=15 | LINES=19 */
 
 #[derive(Copy, Clone, Debug)]
 struct Finalize {
@@ -2562,7 +2478,6 @@ struct Finalize {
     /// Finalizing early or late resolution.
     stage: Stage = Stage::Early,
 }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=10 */
 
 impl Finalize {
     fn new(node_id: NodeId, path_span: Span) -> Finalize {
@@ -2573,12 +2488,10 @@ impl Finalize {
         Finalize { node_id, path_span, root_span, .. }
     }
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=2 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     providers.registered_tools = macros::registered_tools;
 }
-/* AST_META: AST_ID=87 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=28 | LINES=53 */
 
 mod ref_mut {
     use std::ops::Deref;
@@ -2632,7 +2545,6 @@ mod ref_mut {
         }
     }
 }
-/* AST_META: AST_ID=88 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 /// A wrapper around `&mut Resolver` that may be mutable or immutable, depending on a conditions.
 ///

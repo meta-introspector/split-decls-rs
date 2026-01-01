@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/single_use_consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=51 | LINES=86 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 
@@ -91,28 +89,24 @@ impl<'tcx> crate::MirPass<'tcx> for SingleUseConsts {
         true
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=LocationPair | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 struct LocationPair {
     init_loc: Option<Location>,
     use_loc: Option<Location>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl LocationPair {
     fn new() -> Self {
         Self { init_loc: None, use_loc: None }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=SingleUseConstsFinder | COMPLEXITY=2 | LINES=6 */
 
 struct SingleUseConstsFinder {
     ineligible_locals: DenseBitSet<Local>,
     locations: IndexVec<Local, LocationPair>,
     locals_in_debug_info: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_assign | COMPLEXITY=38 | LINES=57 */
 
 impl<'tcx> Visitor<'tcx> for SingleUseConstsFinder {
     fn visit_assign(&mut self, place: &Place<'tcx>, rvalue: &Rvalue<'tcx>, location: Location) {
@@ -170,14 +164,12 @@ impl<'tcx> Visitor<'tcx> for SingleUseConstsFinder {
         self.ineligible_locals.insert(local);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LocalReplacer | COMPLEXITY=2 | LINES=6 */
 
 struct LocalReplacer<'tcx> {
     tcx: TyCtxt<'tcx>,
     local: Local,
     operand: Option<Operand<'tcx>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=17 | LINES=34 */
 
 impl<'tcx> MutVisitor<'tcx> for LocalReplacer<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

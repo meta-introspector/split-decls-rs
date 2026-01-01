@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Defines lang items.
 //
 // Language items are items that represent concepts intrinsic to the language
@@ -12,15 +11,11 @@
 use crate::rustc_complete::attr::AttributeExt;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::def_id::DefId;
 use crate::{MethodKind, Target};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LanguageItems | COMPLEXITY=3 | LINES=12 */
 
 /// All of the lang items, defined or not.
 /// Defined lang items can come from the current crate or its dependencies.
@@ -33,7 +28,6 @@ pub struct LanguageItems {
     /// Lang items that were not found during collection.
     pub missing: Vec<LangItem>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=40 */
 
 impl LanguageItems {
     /// Construct an empty collection of lang items and no missing ones.
@@ -74,7 +68,6 @@ impl LanguageItems {
             .filter_map(|(i, id)| id.map(|id| (LangItem::from_u32(i as u32).unwrap(), id)))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from_u32 | COMPLEXITY=50 | LINES=76 */
 
 // The actual lang items defined come at the end of this file in one handy table.
 // So you probably just want to nip down to the end.
@@ -151,14 +144,12 @@ macro_rules! language_item_table {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<CTX> HashStable<CTX> for LangItem {
     fn hash_stable(&self, _: &mut CTX, hasher: &mut StableHasher) {
         ::std::hash::Hash::hash(self, hasher);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=extract | COMPLEXITY=11 | LINES=12 */
 
 /// Extracts the first `lang = "$name"` out of a list of attributes.
 /// The `#[panic_handler]` attribute is also extracted out when found.
@@ -171,7 +162,6 @@ pub fn extract(attrs: &[impl AttributeExt]) -> Option<(Symbol, Span)> {
         })
     })
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=92 | LINES=281 */
 
 language_item_table! {
 //  Variant name,            Name,                     Getter method name,         Target                  Generic requirements;
@@ -453,7 +443,6 @@ language_item_table! {
     // Reborrowing related lang-items
     Reborrow,                sym::reborrow,            reborrow,                   Target::Trait,          GenericRequirement::Exact(0);
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 /// The requirement imposed on the generics of a lang item
 pub enum GenericRequirement {
@@ -464,7 +453,6 @@ pub enum GenericRequirement {
     /// The number of generics must match precisely as stipulated
     Exact(usize),
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=58 */
 
 pub static FN_TRAITS: &'static [LangItem] = &[LangItem::Fn, LangItem::FnMut, LangItem::FnOnce];
 

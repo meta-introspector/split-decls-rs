@@ -1,24 +1,15 @@
 // SRC: ../rust/compiler/rustc_lint/src/non_local_def.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Body, HirId, Item, ItemKind, Node, Path, TyKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ExpnKind, Span, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{NonLocalDefinitionsCargoUpdateNote, NonLocalDefinitionsDiag};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext, fluent_generated as fluent};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=35 */
 
 declare_lint! {
     /// The `non_local_definitions` lint checks for `impl` blocks and `#[macro_export]`
@@ -54,13 +45,11 @@ declare_lint! {
     "checks for non-local definitions",
     report_in_external_macro
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub(crate) struct NonLocalDefinitions {
     body_depth: u32,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_body | COMPLEXITY=99 | LINES=212 */
 
 impl_lint_pass!(NonLocalDefinitions => [NON_LOCAL_DEFINITIONS]);
 
@@ -273,13 +262,11 @@ impl<'tcx> LateLintPass<'tcx> for NonLocalDefinitions {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=PathCollector | COMPLEXITY=2 | LINES=5 */
 
 /// Simple hir::Path collector
 struct PathCollector<'tcx> {
     paths: Vec<Path<'tcx>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_path | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Visitor<'tcx> for PathCollector<'tcx> {
     fn visit_path(&mut self, path: &Path<'tcx>, _id: HirId) {
@@ -287,7 +274,6 @@ impl<'tcx> Visitor<'tcx> for PathCollector<'tcx> {
         intravisit::walk_path(self, path)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=path_has_local_parent | COMPLEXITY=7 | LINES=21 */
 
 /// Given a path, this checks if the if the parent resolution def id corresponds to
 /// the def id of the parent impl definition (the direct one and the outermost one).
@@ -309,7 +295,6 @@ fn path_has_local_parent(
         .opt_def_id()
         .is_some_and(|did| did_has_local_parent(did, cx.tcx, impl_parent, outermost_impl_parent))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=did_has_local_parent | COMPLEXITY=10 | LINES=26 */
 
 /// Given a def id this checks if the parent def id (modulo modules) correspond to
 /// the def id of the parent impl definition (the direct one and the outermost one).
@@ -336,7 +321,6 @@ fn did_has_local_parent(
     .map(|parent_did| parent_did == impl_parent || Some(parent_did) == outermost_impl_parent)
     .unwrap_or(false)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=peel_parent_while | COMPLEXITY=10 | LINES=17 */
 
 /// Given a `DefId` checks if it satisfies `f` if it does check with it's parent and continue
 /// until it doesn't satisfies `f` and return the last `DefId` checked.
@@ -354,7 +338,6 @@ fn peel_parent_while(
 
     Some(did)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=path_span_without_args | COMPLEXITY=8 | LINES=9 */
 
 /// Return for a given `Path` the span until the last args
 fn path_span_without_args(path: &Path<'_>) -> Span {
@@ -364,7 +347,6 @@ fn path_span_without_args(path: &Path<'_>) -> Span {
         path.span
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=path_name_to_string | COMPLEXITY=4 | LINES=5 */
 
 /// Return a "error message-able" ident for the last segment of the `Path`
 fn path_name_to_string(path: &Path<'_>) -> String {

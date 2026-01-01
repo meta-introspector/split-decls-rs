@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/structural_impls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // This module contains implementations of the `Lift`, `TypeFoldable` and
 // `TypeVisitable` traits for various types in the Rust compiler. Most are
 // written by hand, though we've recently added some macros and proc-macros
 // to help with the tedium.
 
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::marker::PhantomData;
 
 use crate::rustc_abi::TyAndLayout;
@@ -14,18 +12,14 @@ use crate::rustc_complete::def::Namespace;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::source_map::Spanned;
 use rustc_type_ir::{ConstKind, TypeFolder, VisitorResult, try_visit};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{GenericArg, GenericArgKind, Pattern, Region};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mir::PlaceElem;
 use crate::ty::print::{FmtPrinter, Printer, with_no_trimmed_paths};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::ty::{
     self, FallibleTypeFolder, Lift, Term, TermKind, Ty, TyCtxt, TypeFoldable, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitor,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=13 */
 
 impl fmt::Debug for ty::TraitDef {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -39,7 +33,6 @@ impl fmt::Debug for ty::TraitDef {
         })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=13 */
 
 impl<'tcx> fmt::Debug for ty::AdtDef<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -53,7 +46,6 @@ impl<'tcx> fmt::Debug for ty::AdtDef<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=7 */
 
 impl fmt::Debug for ty::UpvarId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -61,21 +53,18 @@ impl fmt::Debug for ty::UpvarId {
         write!(f, "UpvarId({:?};`{}`;{:?})", self.var_path.hir_id, name, self.closure_expr_id)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> fmt::Debug for ty::adjustment::Adjustment<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?} -> {}", self.kind, self.target)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> fmt::Debug for ty::adjustment::PatAdjustment<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{} -> {:?}", self.source, self.kind)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=14 | LINES=15 */
 
 impl fmt::Debug for ty::BoundRegionKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -91,14 +80,12 @@ impl fmt::Debug for ty::BoundRegionKind {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for ty::LateParamRegion {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "ReLateParam({:?}, {:?})", self.scope, self.kind)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=16 | LINES=15 */
 
 impl fmt::Debug for ty::LateParamRegionKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -114,42 +101,36 @@ impl fmt::Debug for ty::LateParamRegionKind {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> fmt::Debug for Ty<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         with_no_trimmed_paths!(fmt::Debug::fmt(self.kind(), f))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for ty::ParamTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}/#{}", self.name, self.index)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for ty::ParamConst {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}/#{}", self.name, self.index)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Debug for ty::Predicate<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self.kind())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Debug for ty::Clause<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self.kind())
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=37 | LINES=32 */
 
 impl<'tcx> fmt::Debug for ty::consts::Expr<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -182,7 +163,6 @@ impl<'tcx> fmt::Debug for ty::consts::Expr<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=12 */
 
 impl<'tcx> fmt::Debug for ty::Const<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -195,7 +175,6 @@ impl<'tcx> fmt::Debug for ty::Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=9 */
 
 impl fmt::Debug for ty::BoundTy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -205,7 +184,6 @@ impl fmt::Debug for ty::BoundTy {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=10 */
 
 impl<T: fmt::Debug> fmt::Debug for ty::Placeholder<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -216,7 +194,6 @@ impl<T: fmt::Debug> fmt::Debug for ty::Placeholder<T> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl<'tcx> fmt::Debug for GenericArg<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -227,14 +204,12 @@ impl<'tcx> fmt::Debug for GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Debug for Region<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self.kind())
     }
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Atomic structs
@@ -262,7 +237,6 @@ TrivialLiftImpls! {
     rustc_type_ir::PredicatePolarity,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=51 */
 
 // For some things about which the type library does not know, or does not
 // provide any traversal implementations, we need to provide a traversal
@@ -314,7 +288,6 @@ TrivialTypeTraversalImpls! {
     crate::rustc_target::asm::InlineAsmRegOrRegClass,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 // For some things about which the type library does not know, or does not
 // provide any traversal implementations, we need to provide a traversal
@@ -328,7 +301,6 @@ TrivialTypeTraversalAndLiftImpls! {
     crate::rustc_hir::def_id::DefId,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=5 | LINES=10 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Lift implementations
@@ -339,7 +311,6 @@ impl<'tcx> Lift<TyCtxt<'tcx>> for PhantomData<&()> {
         Some(PhantomData)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=9 | LINES=10 */
 
 impl<'tcx, T: Lift<TyCtxt<'tcx>>> Lift<TyCtxt<'tcx>> for Option<T> {
     type Lifted = Option<T::Lifted>;
@@ -350,7 +321,6 @@ impl<'tcx, T: Lift<TyCtxt<'tcx>>> Lift<TyCtxt<'tcx>> for Option<T> {
         })
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=9 | LINES=10 */
 
 impl<'a, 'tcx> Lift<TyCtxt<'tcx>> for Term<'a> {
     type Lifted = ty::Term<'tcx>;
@@ -361,7 +331,6 @@ impl<'a, 'tcx> Lift<TyCtxt<'tcx>> for Term<'a> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=9 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Traversal implementations.
@@ -371,7 +340,6 @@ impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::AdtDef<'tcx> {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=15 | LINES=15 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Pattern<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -387,14 +355,12 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Pattern<'tcx> {
         if pat == *self { self } else { folder.cx().mk_pat(pat) }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for Pattern<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         (**self).visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Ty<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -408,14 +374,12 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Ty<'tcx> {
         folder.fold_ty(self)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for Ty<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_ty(*self)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=34 | LINES=91 */
 
 impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for Ty<'tcx> {
     fn try_super_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -507,7 +471,6 @@ impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for Ty<'tcx> {
         if *self.kind() == kind { self } else { folder.cx().mk_ty_from_kind(kind) }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=16 | LINES=51 */
 
 impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for Ty<'tcx> {
     fn super_visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
@@ -559,7 +522,6 @@ impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Region<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -573,14 +535,12 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Region<'tcx> {
         folder.fold_region(self)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::Region<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_region(*self)
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -594,7 +554,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
         folder.fold_predicate(self)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=14 */
 
 // FIXME(clause): This is wonky
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
@@ -609,7 +568,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
         folder.fold_predicate(self.as_predicate()).expect_clause()
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -623,21 +581,18 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
         folder.fold_clauses(self)
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_predicate(*self)
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_predicate(self.as_predicate())
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=7 | LINES=15 */
 
 impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
     fn try_super_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -653,28 +608,24 @@ impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
         folder.cx().reuse_or_mk_predicate(self, new)
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
     fn super_visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         self.kind().visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_clauses(self)
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
     fn super_visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         self.as_slice().visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
     fn try_super_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -688,7 +639,6 @@ impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Clauses<'tcx> {
         ty::util::fold_list(self, folder, |tcx, v| tcx.mk_clauses(v))
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Const<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -702,14 +652,12 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for ty::Const<'tcx> {
         folder.fold_const(self)
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for ty::Const<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_const(*self)
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=24 | LINES=35 */
 
 impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Const<'tcx> {
     fn try_super_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -745,7 +693,6 @@ impl<'tcx> TypeSuperFoldable<TyCtxt<'tcx>> for ty::Const<'tcx> {
         if kind != self.kind() { folder.cx().mk_ct_from_kind(kind) } else { self }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=10 | LINES=16 */
 
 impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for ty::Const<'tcx> {
     fn super_visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
@@ -762,14 +709,12 @@ impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for ty::Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for crate::rustc_span::ErrorGuaranteed {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_error(*self)
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for crate::rustc_span::ErrorGuaranteed {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -783,14 +728,12 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for crate::rustc_span::ErrorGuaranteed {
         self
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for TyAndLayout<'tcx, Ty<'tcx>> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_ty(self.ty)
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, T: TypeVisitable<TyCtxt<'tcx>> + Debug + Clone> TypeVisitable<TyCtxt<'tcx>>
     for Spanned<T>
@@ -800,7 +743,6 @@ impl<'tcx, T: TypeVisitable<TyCtxt<'tcx>> + Debug + Clone> TypeVisitable<TyCtxt<
         self.span.visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=9 | LINES=18 */
 
 impl<'tcx, T: TypeFoldable<TyCtxt<'tcx>> + Debug + Clone> TypeFoldable<TyCtxt<'tcx>>
     for Spanned<T>
@@ -819,7 +761,6 @@ impl<'tcx, T: TypeFoldable<TyCtxt<'tcx>> + Debug + Clone> TypeFoldable<TyCtxt<'t
         Spanned { node: self.node.fold_with(folder), span: self.span.fold_with(folder) }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for &'tcx ty::List<LocalDefId> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -833,7 +774,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for &'tcx ty::List<LocalDefId> {
         self
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=14 | LINES=22 */
 
 macro_rules! list_fold {
     ($($ty:ty : $mk:ident),+ $(,)?) => {
@@ -856,7 +796,6 @@ macro_rules! list_fold {
         )*
     }
 }
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 list_fold! {
     &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>> : mk_poly_existential_predicates,

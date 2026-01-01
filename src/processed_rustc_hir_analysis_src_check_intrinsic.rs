@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/intrinsic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // Type-checking for the `#[rustc_intrinsic]` intrinsics that the compiler exposes.
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::DiagMessage;
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::check::check_function_signature;
 use crate::errors::{UnrecognizedIntrinsicFunction, WrongNumberOfGenericArgumentsToIntrinsic};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=equate_intrinsic_type | COMPLEXITY=22 | LINES=46 */
 
 fn equate_intrinsic_type<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -63,7 +57,6 @@ fn equate_intrinsic_type<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=intrinsic_operation_unsafety | COMPLEXITY=21 | LINES=100 */
 
 /// Returns the unsafety of the given intrinsic.
 fn intrinsic_operation_unsafety(tcx: TyCtxt<'_>, intrinsic_id: LocalDefId) -> hir::Safety {
@@ -164,7 +157,6 @@ fn intrinsic_operation_unsafety(tcx: TyCtxt<'_>, intrinsic_id: LocalDefId) -> hi
 
     is_in_list
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=104 | LINES=526 */
 
 /// Remember to add all intrinsics here, in `compiler/rustc_codegen_llvm/src/intrinsic.rs`,
 /// and in `library/core/src/intrinsics.rs`.

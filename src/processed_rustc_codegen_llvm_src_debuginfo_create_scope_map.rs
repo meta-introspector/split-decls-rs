@@ -1,28 +1,21 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/create_scope_map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::collections::hash_map::Entry;
 
 use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::{Body, SourceScope};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::DebugInfo;
 use crate::rustc_complete::{BytePos, DUMMY_SP, hygiene};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::metadata::file_metadata;
 use super::utils::DIB;
 use crate::common::CodegenCx;
 use crate::llvm;
 use crate::llvm::debuginfo::{DILocation, DIScope};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=41 */
 
 /// Produces DIScope DIEs for each MIR Scope which has variables defined in it.
 // FIXME(eddyb) almost all of this should be in `crate::rustc_codegen_ssa::mir::debuginfo`.
@@ -64,7 +57,6 @@ pub(crate) fn compute_mir_scopes<'ll, 'tcx>(
     }
     assert!(instantiated.count() == mir.source_scopes.len());
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=make_mir_scope | COMPLEXITY=62 | LINES=128 */
 
 fn make_mir_scope<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,

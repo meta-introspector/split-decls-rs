@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/derive.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_expand::base::{
     Annotatable, DeriveResolution, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::AttributeTemplate;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::cfg_eval::cfg_eval;
 use crate::errors;
@@ -19,7 +15,6 @@ use crate::errors;
 pub(crate) struct Expander {
     pub is_const: bool,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=41 | LINES=86 */
 
 impl MultiItemModifier for Expander {
     fn expand(
@@ -106,7 +101,6 @@ impl MultiItemModifier for Expander {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dummy_annotatable | COMPLEXITY=3 | LINES=13 */
 
 // The cheapest `Annotatable` to construct.
 fn dummy_annotatable() -> Annotatable {
@@ -120,7 +114,6 @@ fn dummy_annotatable() -> Annotatable {
         colon_span: None,
     })
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=report_bad_target | COMPLEXITY=15 | LINES=22 */
 
 fn report_bad_target(
     sess: &Session,
@@ -143,7 +136,6 @@ fn report_bad_target(
     }
     Ok(())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=report_unexpected_meta_item_lit | COMPLEXITY=11 | LINES=12 */
 
 fn report_unexpected_meta_item_lit(sess: &Session, lit: &ast::MetaItemLit) {
     let help = match lit.kind {
@@ -156,7 +148,6 @@ fn report_unexpected_meta_item_lit(sess: &Session, lit: &ast::MetaItemLit) {
     };
     sess.dcx().emit_err(errors::BadDeriveLit { span: lit.span, help });
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=report_path_args | COMPLEXITY=11 | LINES=14 */
 
 fn report_path_args(sess: &Session, meta: &ast::MetaItem) {
     let span = meta.span.with_lo(meta.path.span.hi());

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/intrinsics/simd.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=report_simd_type_validation_error | COMPLEXITY=5 | LINES=18 */
 // Codegen SIMD intrinsics.
 
 use cranelift_codegen::ir::immediates::Offset32;
@@ -18,7 +17,6 @@ fn report_simd_type_validation_error(
     // Prevent verifier error
     fx.bcx.ins().trap(TrapCode::user(1 /* unreachable */).unwrap());
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=491 | LINES=1099 */
 
 pub(super) fn codegen_simd_intrinsic_call<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

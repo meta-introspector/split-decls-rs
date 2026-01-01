@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_feature/src/builtin_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Built-in attributes and `cfg` flag gating.
 
 use std::sync::LazyLock;
@@ -12,7 +11,6 @@ use crate::rustc_complete::AttrStyle;
 use crate::rustc_complete::attrs::EncodeCrossCrate;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=find_gated_cfg | COMPLEXITY=8 | LINES=58 */
 
 use crate::Features;
 
@@ -71,7 +69,6 @@ const GATED_CFGS: &[GatedCfg] = &[
 pub fn find_gated_cfg(pred: impl Fn(Symbol) -> bool) -> Option<&'static GatedCfg> {
     GATED_CFGS.iter().find(|(cfg_sym, ..)| pred(*cfg_sym))
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 // If you change this, please modify `src/doc/unstable-book` as well. You must
 // move that documentation into the relevant place in the other docs, and
@@ -86,7 +83,6 @@ pub enum AttributeType {
     /// Builtin attribute that is only allowed at the crate level
     CrateLevel,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum AttributeSafety {
@@ -100,7 +96,6 @@ pub enum AttributeSafety {
     /// earlier editions, but become unsafe in later ones.
     Unsafe { unsafe_since: Option<Edition> },
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 #[derive(Clone, Debug, Copy)]
 pub enum AttributeGate {
@@ -118,7 +113,6 @@ pub enum AttributeGate {
     /// Ungated attribute, can be used on all release channels
     Ungated,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=AttributeTemplate | COMPLEXITY=5 | LINES=19 */
 
 // FIXME(jdonszelmann): move to crate::rustc_hir::attrs
 /// A template that the attribute input must match.
@@ -138,7 +132,6 @@ pub struct AttributeTemplate {
     /// A link to the document for this attribute.
     pub docs: Option<&'static str>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=suggestions | COMPLEXITY=34 | LINES=27 */
 
 impl AttributeTemplate {
     pub fn suggestions(&self, style: AttrStyle, name: impl std::fmt::Display) -> Vec<String> {
@@ -166,7 +159,6 @@ impl AttributeTemplate {
         suggestions
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=21 | LINES=51 */
 
 /// How to handle multiple duplicate attributes on the same item.
 #[derive(Clone, Copy, Default)]
@@ -218,7 +210,6 @@ pub enum AttributeDuplicates {
     /// `ErrorPreceding`.
     FutureWarnPreceding,
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=33 | LINES=35 */
 
 /// A convenience macro for constructing attribute templates.
 /// E.g., `template!(Word, List: "description")` means that the attribute
@@ -254,7 +245,6 @@ macro_rules! template {
         word: $word, list: $list, one_of: $one_of, name_value_str: $name_value_str, docs: $link,
     } };
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=36 */
 
 macro_rules! ungated {
     (unsafe($edition:ident) $attr:ident, $typ:expr, $tpl:expr, $duplicates:expr, $encode_cross_crate:expr $(,)?) => {
@@ -291,7 +281,6 @@ macro_rules! ungated {
         }
     };
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=33 | LINES=67 */
 
 macro_rules! gated {
     (unsafe $attr:ident, $typ:expr, $tpl:expr, $duplicates:expr, $encode_cross_crate:expr, $gate:ident, $message:expr $(,)?) => {
@@ -359,7 +348,6 @@ macro_rules! gated {
         }
     };
 }
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=38 */
 
 macro_rules! rustc_attr {
     (TEST, $attr:ident, $typ:expr, $tpl:expr, $duplicate:expr, $encode_cross_crate:expr $(,)?) => {
@@ -398,14 +386,12 @@ macro_rules! rustc_attr {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! experimental {
     ($attr:ident) => {
         concat!("the `#[", stringify!($attr), "]` attribute is an experimental feature")
     };
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=BuiltinAttribute | COMPLEXITY=2 | LINES=14 */
 
 pub struct BuiltinAttribute {
     pub name: Symbol,
@@ -420,7 +406,6 @@ pub struct BuiltinAttribute {
     pub duplicates: AttributeDuplicates,
     pub gate: AttributeGate,
 }
-/* AST_META: AST_ID=15 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=122 | LINES=885 */
 
 /// Attributes that have a special meaning to rustc or rustdoc.
 #[rustfmt::skip]
@@ -1306,7 +1291,6 @@ pub static BUILTIN_ATTRIBUTES: &[BuiltinAttribute] = &[
             from the standard library for diagnostic purposes"],
         },
     },
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_builtin_attr_name | COMPLEXITY=33 | LINES=209 */
     gated!(
         // Used in resolve:
         prelude_import, Normal, template!(Word), WarnFollowing,
@@ -1516,7 +1500,6 @@ pub static BUILTIN_ATTRIBUTES: &[BuiltinAttribute] = &[
 pub fn is_builtin_attr_name(name: Symbol) -> bool {
     BUILTIN_ATTRIBUTE_MAP.get(&name).is_some()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=encode_cross_crate | COMPLEXITY=6 | LINES=10 */
 
 /// Whether this builtin attribute is encoded cross crate.
 /// This means it can be used cross crate.
@@ -1527,7 +1510,6 @@ pub fn encode_cross_crate(name: Symbol) -> bool {
         true
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_valid_for_get_attr | COMPLEXITY=6 | LINES=8 */
 
 pub fn is_valid_for_get_attr(name: Symbol) -> bool {
     BUILTIN_ATTRIBUTE_MAP.get(&name).is_some_and(|attr| match attr.duplicates {
@@ -1536,7 +1518,6 @@ pub fn is_valid_for_get_attr(name: Symbol) -> bool {
         DuplicatesOk | WarnFollowingWordOnly => false,
     })
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 pub static BUILTIN_ATTRIBUTE_MAP: LazyLock<FxHashMap<Symbol, &BuiltinAttribute>> =
     LazyLock::new(|| {
@@ -1548,7 +1529,6 @@ pub static BUILTIN_ATTRIBUTE_MAP: LazyLock<FxHashMap<Symbol, &BuiltinAttribute>>
         }
         map
     });
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_stable_diagnostic_attribute | COMPLEXITY=6 | LINES=7 */
 
 pub fn is_stable_diagnostic_attribute(sym: Symbol, _features: &Features) -> bool {
     match sym {

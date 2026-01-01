@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/helpers.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=word_space | COMPLEXITY=18 | LINES=49 */
 use std::borrow::Cow;
 
 use crate::pp::Printer;

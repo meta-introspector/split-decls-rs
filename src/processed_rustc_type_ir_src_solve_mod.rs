@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/solve/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use std::hash::Hash;
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::lang_items::SolverTraitLangItem;
 use crate::search_graph::PathKind;
 use crate::{self as ty, Canonical, CanonicalVarValues, Interner, Upcast};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=NoSolution; | COMPLEXITY=8 | LINES=32 */
 
 pub type CanonicalInput<I, T = <I as Interner>::Predicate> =
     ty::CanonicalQueryInput<I, QueryInput<I, T>>;
@@ -46,10 +42,8 @@ pub struct Goal<I: Interner, P> {
     pub param_env: I::ParamEnv,
     pub predicate: P,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, P: Eq> Eq for Goal<I, P> {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=11 */
 
 impl<I: Interner, P> Goal<I, P> {
     pub fn new(cx: I, param_env: I::ParamEnv, predicate: impl Upcast<I, P>) -> Goal<I, P> {
@@ -61,7 +55,6 @@ impl<I: Interner, P> Goal<I, P> {
         Goal { param_env: self.param_env, predicate: predicate.upcast(cx) }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=23 | LINES=39 */
 
 /// Why a specific goal has to be proven.
 ///
@@ -101,7 +94,6 @@ pub enum GoalSource {
     /// details.
     NormalizeGoal(PathKind),
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=QueryInput | COMPLEXITY=2 | LINES=12 */
 
 #[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, Goal<I, P>)]
 #[derive_where(Copy; I: Interner, Goal<I, P>: Copy)]
@@ -114,10 +106,8 @@ pub struct QueryInput<I: Interner, P> {
     pub goal: Goal<I, P>,
     pub predefined_opaques_in_body: I::PredefinedOpaques,
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, P: Eq> Eq for QueryInput<I, P> {}
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=PredefinedOpaquesData | COMPLEXITY=2 | LINES=11 */
 
 /// Opaques that are defined in the inference context before a query is called.
 #[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
@@ -129,10 +119,8 @@ impl<I: Interner, P: Eq> Eq for QueryInput<I, P> {}
 pub struct PredefinedOpaquesData<I: Interner> {
     pub opaque_types: Vec<(ty::OpaqueTypeKey<I>, I::Ty)>,
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for PredefinedOpaquesData<I> {}
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=64 */
 
 /// Possible ways the given goal can be proven.
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
@@ -197,10 +185,8 @@ pub enum CandidateSource<I: Interner> {
     // FIXME: Merge this with the forced ambiguity candidates, so those don't use `Misc`.
     CoherenceUnknowable,
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CandidateSource<I> {}
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
 pub enum ParamEnvSource {
@@ -209,7 +195,6 @@ pub enum ParamEnvSource {
     // Not considered unless there are non-global param-env candidates too.
     Global,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 #[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
 #[cfg_attr(
@@ -230,7 +215,6 @@ pub enum BuiltinImplSource {
     /// The index is only used for winnowing.
     TraitUpcasting(usize),
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Response | COMPLEXITY=2 | LINES=10 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -241,10 +225,8 @@ pub struct Response<I: Interner> {
     /// Additional constraints returned by this query.
     pub external_constraints: I::ExternalConstraints,
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for Response<I> {}
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ExternalConstraintsData | COMPLEXITY=2 | LINES=10 */
 
 /// Additional constraints returned on success.
 #[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
@@ -255,10 +237,8 @@ pub struct ExternalConstraintsData<I: Interner> {
     pub opaque_types: Vec<(ty::OpaqueTypeKey<I>, I::Ty)>,
     pub normalization_nested_goals: NestedNormalizationGoals<I>,
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ExternalConstraintsData<I> {}
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=3 | LINES=8 */
 
 impl<I: Interner> ExternalConstraintsData<I> {
     pub fn is_empty(&self) -> bool {
@@ -267,7 +247,6 @@ impl<I: Interner> ExternalConstraintsData<I> {
             && self.normalization_nested_goals.is_empty()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=NestedNormalizationGoals | COMPLEXITY=4 | LINES=7 */
 
 #[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -275,7 +254,6 @@ impl<I: Interner> ExternalConstraintsData<I> {
 pub struct NestedNormalizationGoals<I: Interner>(pub Vec<(GoalSource, Goal<I, I::Predicate>)>);
 
 impl<I: Interner> Eq for NestedNormalizationGoals<I> {}
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=4 | LINES=10 */
 
 impl<I: Interner> NestedNormalizationGoals<I> {
     pub fn empty() -> Self {
@@ -286,7 +264,6 @@ impl<I: Interner> NestedNormalizationGoals<I> {
         self.0.is_empty()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
 #[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
@@ -294,7 +271,6 @@ pub enum Certainty {
     Yes,
     Maybe(MaybeCause),
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=and | COMPLEXITY=16 | LINES=29 */
 
 impl Certainty {
     pub const AMBIGUOUS: Certainty = Certainty::Maybe(MaybeCause::Ambiguity);
@@ -324,7 +300,6 @@ impl Certainty {
         Certainty::Maybe(MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: false })
     }
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Why we failed to evaluate a goal.
 #[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
@@ -337,7 +312,6 @@ pub enum MaybeCause {
     /// We gave up due to an overflow, most often by hitting the recursion limit.
     Overflow { suggest_increasing_limit: bool, keep_constraints: bool },
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=and | COMPLEXITY=28 | LINES=53 */
 
 impl MaybeCause {
     fn and(self, other: MaybeCause) -> MaybeCause {
@@ -391,7 +365,6 @@ impl MaybeCause {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Indicates that a `impl Drop for Adt` is `const` or not.
 #[derive(Debug)]
@@ -399,7 +372,6 @@ pub enum AdtDestructorKind {
     NotConst,
     Const,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Which sizedness trait - `Sized`, `MetaSized`? `PointeeSized` is omitted as it is removed during
 /// lowering.
@@ -411,7 +383,6 @@ pub enum SizedTraitKind {
     /// `MetaSized` trait
     MetaSized,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=require_lang_item | COMPLEXITY=7 | LINES=10 */
 
 impl SizedTraitKind {
     /// Returns `DefId` of corresponding language item.

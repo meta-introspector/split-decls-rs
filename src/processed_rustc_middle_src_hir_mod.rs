@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/hir/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // HIR datatypes. See the [rustc dev guide] for more info.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/hir.html
@@ -8,22 +7,16 @@
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{DynSend, DynSync, try_par_for_each_in};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lints::DelayedLint;
 use crate::rustc_complete::*;
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, ExpnId, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::query::Providers;
 use crate::ty::{EarlyBinder, ImplSubject, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ModuleItems | COMPLEXITY=9 | LINES=19 */
 
 /// Gather the LocalDefId for each item-like within a module, including items contained within
 /// bodies. The Ids are in visitor order. This is used to partition a pass between modules.
@@ -43,7 +36,6 @@ pub struct ModuleItems {
     // only filled with hir_crate_items, not with hir_module_items
     delayed_lint_items: Box<[OwnerId]>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=free_items | COMPLEXITY=23 | LINES=96 */
 
 impl ModuleItems {
     /// Returns all non-associated locally defined items in all modules.
@@ -140,7 +132,6 @@ impl ModuleItems {
         try_par_for_each_in(&self.opaques[..], |&&id| f(id))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parent_module | COMPLEXITY=35 | LINES=77 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn parent_module(self, id: HirId) -> LocalModDefId {
@@ -218,7 +209,6 @@ impl<'tcx> TyCtxt<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Hashes | COMPLEXITY=4 | LINES=8 */
 
 /// Hashes computed by [`TyCtxt::hash_owner_nodes`] if necessary.
 #[derive(Clone, Copy, Debug)]
@@ -227,7 +217,6 @@ pub struct Hashes {
     pub attrs_hash: Option<Fingerprint>,
     pub delayed_lints_hash: Option<Fingerprint>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=39 | LINES=74 */
 
 pub fn provide(providers: &mut Providers) {
     providers.hir_crate_items = map::hir_crate_items;

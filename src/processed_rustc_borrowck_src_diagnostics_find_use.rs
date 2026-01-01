@@ -1,19 +1,13 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/find_use.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::collections::VecDeque;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, Body, Local, Location};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{RegionVid, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::def_use::{self, DefUse};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::region_infer::{Cause, RegionInferenceContext};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn find<'tcx>(
     body: &Body<'tcx>,
@@ -26,7 +20,6 @@ pub(crate) fn find<'tcx>(
 
     uf.find()
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UseFinder | COMPLEXITY=2 | LINES=8 */
 
 struct UseFinder<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -35,7 +28,6 @@ struct UseFinder<'a, 'tcx> {
     region_vid: RegionVid,
     start_point: Location,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=find | COMPLEXITY=37 | LINES=66 */
 
 impl<'a, 'tcx> UseFinder<'a, 'tcx> {
     fn find(&mut self) -> Option<Cause> {
@@ -102,7 +94,6 @@ impl<'a, 'tcx> UseFinder<'a, 'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=DefUseVisitor | COMPLEXITY=2 | LINES=7 */
 
 struct DefUseVisitor<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -110,14 +101,12 @@ struct DefUseVisitor<'a, 'tcx> {
     region_vid: RegionVid,
     def_use_result: Option<DefUseResult>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 enum DefUseResult {
     Def,
     UseLive { local: Local },
     UseDrop { local: Local },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=19 | LINES=22 */
 
 impl<'a, 'tcx> Visitor<'tcx> for DefUseVisitor<'a, 'tcx> {
     fn visit_local(&mut self, local: Local, context: PlaceContext, _: Location) {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/stability.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // A pass that annotates every item and method with its stability level,
 // propagating default levels lexically from parent to children ast nodes.
 
@@ -7,24 +6,16 @@ use std::num::NonZero;
 
 use crate::rustc_complete::NodeId;
 use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, LintBuffer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::GateIssue;
 use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, ConstStability, DefaultBodyStability, HirId, Stability};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable, Subdiagnostic};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::builtin::{DEPRECATED, DEPRECATED_IN_FUTURE, SOFT_UNSTABLE};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{BuiltinLintDiag, DeprecatedSinceKind, Level, Lint};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err_issue;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use tracing::debug;
 
 pub use self::StabilityLevel::*;
@@ -36,7 +27,6 @@ pub enum StabilityLevel {
     Unstable,
     Stable,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone)]
 pub enum UnstableKind {
@@ -45,7 +35,6 @@ pub enum UnstableKind {
     /// Enforcing const stability of an item
     Const(Span),
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=DeprecationEntry | COMPLEXITY=4 | LINES=10 */
 
 /// An entry in the `depr_map`.
 #[derive(Copy, Clone, HashStable, Debug, Encodable, Decodable)]
@@ -56,7 +45,6 @@ pub struct DeprecationEntry {
     /// `DefId`'s.
     origin: Option<LocalDefId>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=local | COMPLEXITY=11 | LINES=17 */
 
 impl DeprecationEntry {
     pub fn local(attr: Deprecation, def_id: LocalDefId) -> DeprecationEntry {
@@ -74,7 +62,6 @@ impl DeprecationEntry {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=report_unstable | COMPLEXITY=27 | LINES=35 */
 
 pub fn report_unstable(
     sess: &Session,
@@ -110,12 +97,10 @@ pub fn report_unstable(
         err.emit();
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=deprecation_lint | COMPLEXITY=6 | LINES=4 */
 
 fn deprecation_lint(is_in_effect: bool) -> &'static Lint {
     if is_in_effect { DEPRECATED } else { DEPRECATED_IN_FUTURE }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DeprecationSuggestion | COMPLEXITY=3 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -131,7 +116,6 @@ pub struct DeprecationSuggestion {
     pub kind: String,
     pub suggestion: Symbol,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Deprecated | COMPLEXITY=2 | LINES=10 */
 
 pub struct Deprecated {
     pub sub: Option<DeprecationSuggestion>,
@@ -142,7 +126,6 @@ pub struct Deprecated {
     pub note: Option<Symbol>,
     pub since_kind: DeprecatedSinceKind,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=22 | LINES=26 */
 
 impl<'a, G: EmissionGuarantee> crate::rustc_errors::LintDiagnostic<'a, G> for Deprecated {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
@@ -169,7 +152,6 @@ impl<'a, G: EmissionGuarantee> crate::rustc_errors::LintDiagnostic<'a, G> for De
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=deprecated_since_kind | COMPLEXITY=14 | LINES=18 */
 
 fn deprecated_since_kind(is_in_effect: bool, since: DeprecatedSince) -> DeprecatedSinceKind {
     if is_in_effect {
@@ -188,7 +170,6 @@ fn deprecated_since_kind(is_in_effect: bool, since: DeprecatedSince) -> Deprecat
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=early_report_macro_deprecation | COMPLEXITY=7 | LINES=22 */
 
 pub fn early_report_macro_deprecation(
     lint_buffer: &mut LintBuffer,
@@ -211,7 +192,6 @@ pub fn early_report_macro_deprecation(
     };
     lint_buffer.buffer_lint(deprecation_lint(is_in_effect), node_id, span, diag);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=late_report_deprecation | COMPLEXITY=20 | LINES=42 */
 
 fn late_report_deprecation(
     tcx: TyCtxt<'_>,
@@ -254,7 +234,6 @@ fn late_report_deprecation(
     };
     tcx.emit_node_span_lint(lint, hir_id, method_span, diag);
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 /// Result of `TyCtxt::eval_stability`.
 pub enum EvalResult {
@@ -273,7 +252,6 @@ pub enum EvalResult {
     /// The item does not have the `#[stable]` or `#[unstable]` marker assigned.
     Unmarked,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=suggestion_for_allocator_api | COMPLEXITY=16 | LINES=26 */
 
 // See issue #83250.
 fn suggestion_for_allocator_api(
@@ -300,7 +278,6 @@ fn suggestion_for_allocator_api(
     }
     None
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 /// An override option for eval_stability.
 pub enum AllowUnstable {
@@ -309,7 +286,6 @@ pub enum AllowUnstable {
     /// Handle the item normally
     No,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=eval_stability | COMPLEXITY=183 | LINES=356 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates the stability of an item.

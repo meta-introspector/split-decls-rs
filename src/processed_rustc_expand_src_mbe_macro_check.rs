@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/macro_check.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 // Checks that meta-variables in macro definition are correctly declared and used.
 //
 // # What is checked
@@ -8,7 +7,6 @@
 //
 // ```compile_fail
 // macro_rules! foo { ($x:tt $x:tt) => { $x }; }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 // ```
 //
 // This check is sound (no false-negative) and complete (no false-positive).
@@ -17,7 +15,6 @@
 //
 // ```
 // macro_rules! foo { () => { $x }; }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=8 */
 // ```
 //
 // This check is also done at macro instantiation but only if the branch is taken.
@@ -26,7 +23,6 @@
 //
 // ```
 // macro_rules! foo { ($($x:tt)*) => { $x }; }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=8 */
 // ```
 //
 // This check is also done at macro instantiation but only if the branch is taken.
@@ -35,7 +31,6 @@
 //
 // ```
 // macro_rules! foo { ($($x:tt)+) => { $($x)* }; }
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=21 */
 // ```
 //
 // This check is not done at macro instantiation.
@@ -57,7 +52,6 @@
 //
 // ```
 // macro_rules! foo { ($name:ident) => { $name! bar { ($x:tt) => { $x }; } }; }
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=9 */
 // foo!(macro_rules);
 // ```
 //
@@ -67,7 +61,6 @@
 //
 // ```
 // macro_rules! foo { () => { stringify!(macro_rules! bar { () => { $x }; }) }; }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=20 | LINES=12 */
 // ```
 //
 // ## Examples of false negative
@@ -80,7 +73,6 @@
 //
 // ```
 // macro_rules! foo { ($d:tt) => { macro_rules! bar { ($y:tt) => { $d z }; } }; }
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=34 */
 // ```
 //
 // # How it is checked
@@ -115,21 +107,17 @@
 // bound.
 
 use crate::rustc_complete::token::{Delimiter, IdentIsRaw, Token, TokenKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_NODE_ID, NodeId};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::META_VARIABLE_MISUSE;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{ErrorGuaranteed, MacroRulesNormalizedIdent, Span, kw};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 
 use crate::errors;
 use crate::mbe::{KleeneToken, TokenTree};
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// Stack represented as linked list.
 ///
@@ -145,7 +133,6 @@ enum Stack<'a, T> {
         prev: &'a Stack<'a, T>,
     },
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=5 | LINES=12 */
 
 impl<'a, T> Stack<'a, T> {
     /// Returns whether a stack is empty.
@@ -158,7 +145,6 @@ impl<'a, T> Stack<'a, T> {
         Stack::Push { top, prev: self }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=next | COMPLEXITY=11 | LINES=15 */
 
 impl<'a, T> Iterator for &'a Stack<'a, T> {
     type Item = &'a T;
@@ -174,7 +160,6 @@ impl<'a, T> Iterator for &'a Stack<'a, T> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=9 */
 
 impl From<&Stack<'_, KleeneToken>> for SmallVec<[KleeneToken; 1]> {
     fn from(ops: &Stack<'_, KleeneToken>) -> SmallVec<[KleeneToken; 1]> {
@@ -184,7 +169,6 @@ impl From<&Stack<'_, KleeneToken>> for SmallVec<[KleeneToken; 1]> {
         ops
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=BinderInfo | COMPLEXITY=2 | LINES=8 */
 
 /// Information attached to a meta-variable binder in LHS.
 struct BinderInfo {
@@ -193,7 +177,6 @@ struct BinderInfo {
     /// The stack of Kleene operators (outermost first).
     ops: SmallVec<[KleeneToken; 1]>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=MacroState | COMPLEXITY=2 | LINES=11 */
 
 /// An environment of meta-variables to their binder information.
 type Binders = FxHashMap<MacroRulesNormalizedIdent, BinderInfo>;
@@ -205,7 +188,6 @@ struct MacroState<'a> {
     /// The stack of Kleene operators (outermost first) where we entered the macro definition.
     ops: SmallVec<[KleeneToken; 1]>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=23 */
 
 /// Checks that meta-variables are used correctly in one rule of a macro definition.
 ///
@@ -229,7 +211,6 @@ pub(super) fn check_meta_variables(
     check_occurrences(psess, node_id, rhs, &Stack::Empty, &binders, &Stack::Empty, &mut guar);
     guar.map_or(Ok(()), Err)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=check_binders | COMPLEXITY=48 | LINES=79 */
 
 /// Checks `lhs` as part of the LHS of a macro definition, extends `binders` with new binders, and
 /// sets `valid` to false in case of errors.
@@ -309,7 +290,6 @@ fn check_binders(
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=get_binder_info | COMPLEXITY=2 | LINES=14 */
 
 /// Returns the binder information of a meta-variable.
 ///
@@ -324,7 +304,6 @@ fn get_binder_info<'a>(
 ) -> Option<&'a BinderInfo> {
     binders.get(&name).or_else(|| macros.find_map(|state| state.binders.get(&name)))
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_occurrences | COMPLEXITY=17 | LINES=45 */
 
 /// Checks `rhs` as part of the RHS of a macro definition and sets `valid` to false in case of
 /// errors.
@@ -370,7 +349,6 @@ fn check_occurrences(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=20 */
 
 /// Represents the processed prefix of a nested macro.
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -391,7 +369,6 @@ enum NestedMacroState {
     /// The keyword `macro` followed by a name and a token delimited by parentheses was processed.
     MacroNameParen,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=check_nested_occurrences | COMPLEXITY=47 | LINES=120 */
 
 /// Checks `tts` as part of the RHS of a macro definition, tries to recognize nested macro
 /// definitions, and sets `valid` to false in case of errors.
@@ -512,13 +489,11 @@ fn check_nested_occurrences(
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 /// Checks the body of nested macro, returns where the check stopped, and sets `valid` to false in
 /// case of errors.
 ///
 /// The token trees are checked as long as they look like a list of (LHS) => {RHS} token trees. This
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 /// check is a best-effort to detect a macro definition. It returns the position in `tts` where we
 /// stopped checking because we detected we were not in a macro definition anymore.
 ///
@@ -527,7 +502,6 @@ fn check_nested_occurrences(
 /// - `node_id` is used to emit lints
 /// - `macro_rules` specifies whether the macro is `macro_rules`
 /// - `tts` is checked as a list of (LHS) => {RHS}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=check_nested_macro | COMPLEXITY=24 | LINES=39 */
 /// - `macros` is the stack of outer macros
 /// - `guar` is set in case of errors
 fn check_nested_macro(
@@ -567,7 +541,6 @@ fn check_nested_macro(
     }
     i
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=check_ops_is_prefix | COMPLEXITY=15 | LINES=41 */
 
 /// Checks that a meta-variable occurrence is valid.
 ///
@@ -609,7 +582,6 @@ fn check_ops_is_prefix(
     }
     buffer_lint(psess, span.into(), node_id, BuiltinLintDiag::UnknownMacroVariable(name));
 }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Returns whether `binder_ops` is a prefix of `occurrence_ops`.
 ///
@@ -619,7 +591,6 @@ fn check_ops_is_prefix(
 /// Consider $i in the following example:
 /// ```ignore (illustrative)
 /// ( $( $i:ident = $($j:ident),+ );* ) => { $($( $i += $j; )+)* }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=ops_is_prefix | COMPLEXITY=17 | LINES=35 */
 /// ```
 /// It occurs under the Kleene stack ["*", "+"] and is bound under ["*"] only.
 ///
@@ -655,7 +626,6 @@ fn ops_is_prefix(
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=buffer_lint | COMPLEXITY=5 | LINES=7 */
 
 fn buffer_lint(psess: &ParseSess, span: MultiSpan, node_id: NodeId, diag: BuiltinLintDiag) {
     // Macros loaded from other crates have dummy node ids.

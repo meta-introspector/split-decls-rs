@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/thread_pool/mod.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // Contains support for user-managed thread pools, represented by the
 // the [`ThreadPool`] type (see that struct for details).
 //
@@ -10,15 +9,11 @@ use std::fmt;
 use std::sync::Arc;
 
 use crate::broadcast::{self, BroadcastContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::registry::{Registry, ThreadSpawn, WorkerThread};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::scope::{do_in_place_scope, do_in_place_scope_fifo};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::{
     Scope, ScopeFifo, ThreadPoolBuildError, ThreadPoolBuilder, join, scope, scope_fifo, spawn,
 };
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ThreadPool | COMPLEXITY=6 | LINES=37 */
 
 
 /// Represents a user created [thread-pool].
@@ -55,7 +50,6 @@ use crate::{
 pub struct ThreadPool {
     registry: Arc<Registry>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=115 | LINES=356 */
 
 impl ThreadPool {
     #[deprecated(note = "Use `ThreadPoolBuilder::build`")]
@@ -412,14 +406,12 @@ impl ThreadPool {
         registry.wait_until_stopped();
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=6 */
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
         self.registry.terminate();
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl fmt::Debug for ThreadPool {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -429,7 +421,6 @@ impl fmt::Debug for ThreadPool {
             .finish()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=current_thread_index | COMPLEXITY=19 | LINES=31 */
 
 /// If called from a Rayon worker thread, returns the index of that
 /// thread within its current pool; if not called from a Rayon thread,
@@ -461,7 +452,6 @@ pub fn current_thread_index() -> Option<usize> {
         Some(curr.index())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=current_thread_has_pending_tasks | COMPLEXITY=8 | LINES=14 */
 
 /// If called from a Rayon worker thread, indicates whether that
 /// thread's local deque still has pending tasks. Otherwise, returns
@@ -476,7 +466,6 @@ pub fn current_thread_has_pending_tasks() -> Option<bool> {
         Some(!curr.local_deque_is_empty())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=yield_now | COMPLEXITY=16 | LINES=19 */
 
 /// Cooperatively yields execution to Rayon.
 ///
@@ -496,7 +485,6 @@ pub fn yield_now() -> Option<Yield> {
         Some(thread.yield_now())
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=yield_local | COMPLEXITY=14 | LINES=17 */
 
 /// Cooperatively yields execution to local Rayon work.
 ///
@@ -514,7 +502,6 @@ pub fn yield_local() -> Option<Yield> {
         Some(thread.yield_local())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Result of [`yield_now()`] or [`yield_local()`].
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

@@ -1,25 +1,17 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ffi::{CStr, c_char, c_uint};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::marker::PhantomData;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::str;
 
 use crate::rustc_abi::{HasDataLayout, Size, TargetDataLayout, VariantIdx};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::back::versioned_llvm_target;
 use crate::rustc_codegen_ssa::base::{wants_msvc_seh, wants_wasm_eh};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::errors as ssa_errors;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use crate::rustc_complete::def_id::DefId;
@@ -28,22 +20,16 @@ use crate::rustc_complete::mir::mono::CodegenUnit;
 use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{
     BranchProtection, CFGuard, CFProtection, CrateType, DebugInfo, FunctionReturn, PAuthKey, PacRet,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_symbol_mangling::mangle_internal_symbol;
 use crate::rustc_target::spec::{HasTargetSpec, RelocModel, SmallDataThresholdSupport, Target, TlsModel};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use smallvec::SmallVec;
 
 use crate::back::write::to_llvm_code_model;
@@ -53,7 +39,6 @@ use crate::llvm::Metadata;
 use crate::type_::Type;
 use crate::value::Value;
 use crate::{attributes, common, coverageinfo, debuginfo, llvm, llvm_util};
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// `TyCtxt` (and related cache datastructures) can't be move between threads.
 /// However, there are various cx related functions which we want to be available to the builder and
@@ -64,14 +49,12 @@ pub(crate) struct SCx<'ll> {
     pub llcx: &'ll llvm::Context,
     pub isize_ty: &'ll Type,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=borrow | COMPLEXITY=5 | LINES=6 */
 
 impl<'ll> Borrow<SCx<'ll>> for FullCx<'ll, '_> {
     fn borrow(&self) -> &SCx<'ll> {
         &self.scx
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<'ll, 'tcx> Deref for FullCx<'ll, 'tcx> {
     type Target = SimpleCx<'ll>;
@@ -81,7 +64,6 @@ impl<'ll, 'tcx> Deref for FullCx<'ll, 'tcx> {
         &self.scx
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=11 */
 
 pub(crate) struct GenericCx<'ll, T: Borrow<SCx<'ll>>>(T, PhantomData<SCx<'ll>>);
 
@@ -93,7 +75,6 @@ impl<'ll, T: Borrow<SCx<'ll>>> Deref for GenericCx<'ll, T> {
         &self.0
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=7 */
 
 impl<'ll, T: Borrow<SCx<'ll>>> DerefMut for GenericCx<'ll, T> {
     #[inline]
@@ -101,7 +82,6 @@ impl<'ll, T: Borrow<SCx<'ll>>> DerefMut for GenericCx<'ll, T> {
         &mut self.0
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=66 */
 
 pub(crate) type SimpleCx<'ll> = GenericCx<'ll, SCx<'ll>>;
 
@@ -168,7 +148,6 @@ pub(crate) struct FullCx<'ll, 'tcx> {
     /// compute the correct mangled symbol name to insert into the asm.
     pub renamed_statics: RefCell<FxHashMap<DefId, &'ll Value>>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_llvm_tls_model | COMPLEXITY=6 | LINES=10 */
 
 fn to_llvm_tls_model(tls_model: TlsModel) -> llvm::ThreadLocalMode {
     match tls_model {
@@ -179,7 +158,6 @@ fn to_llvm_tls_model(tls_model: TlsModel) -> llvm::ThreadLocalMode {
         TlsModel::Emulated => llvm::ThreadLocalMode::GeneralDynamic,
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=236 | LINES=394 */
 
 pub(crate) unsafe fn create_module<'ll>(
     tcx: TyCtxt<'_>,
@@ -573,7 +551,6 @@ pub(crate) unsafe fn create_module<'ll>(
 
     llmod
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=129 */
 
 impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
     pub(crate) fn new(
@@ -703,7 +680,6 @@ impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
         llvm::set_section(g, c"llvm.metadata");
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 impl<'ll> SimpleCx<'ll> {
     pub(crate) fn get_type_of_global(&self, val: &'ll Value) -> &'ll Type {
         unsafe { llvm::LLVMGlobalGetValueType(val) }
@@ -712,7 +688,6 @@ impl<'ll> SimpleCx<'ll> {
         common::val_ty(v)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 impl<'ll> SimpleCx<'ll> {
     pub(crate) fn new(
         llmod: &'ll llvm::Module,
@@ -723,7 +698,6 @@ impl<'ll> SimpleCx<'ll> {
         Self(SCx { llmod, llcx, isize_ty }, PhantomData)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=47 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     pub(crate) fn get_metadata_value(&self, metadata: &'ll Metadata) -> &'ll Value {
@@ -771,7 +745,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=vtables | COMPLEXITY=70 | LINES=130 */
 
 impl<'ll, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
     fn vtables(
@@ -902,7 +875,6 @@ impl<'ll, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=declare_intrinsic | COMPLEXITY=22 | LINES=56 */
 
 impl<'ll> CodegenCx<'ll, '_> {
     pub(crate) fn get_intrinsic(
@@ -959,7 +931,6 @@ impl<'ll> CodegenCx<'ll, '_> {
         eh_catch_typeinfo
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 impl CodegenCx<'_, '_> {
     /// Generates a new symbol name with the given prefix. This symbol name must
@@ -976,7 +947,6 @@ impl CodegenCx<'_, '_> {
         name
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     /// A wrapper for [`llvm::LLVMSetMetadata`], but it takes `Metadata` as a parameter instead of `Value`.
@@ -990,7 +960,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         llvm::LLVMSetMetadata(val, kind_id.into(), node);
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl HasDataLayout for CodegenCx<'_, '_> {
     #[inline]
@@ -998,7 +967,6 @@ impl HasDataLayout for CodegenCx<'_, '_> {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=7 */
 
 impl HasTargetSpec for CodegenCx<'_, '_> {
     #[inline]
@@ -1006,7 +974,6 @@ impl HasTargetSpec for CodegenCx<'_, '_> {
         &self.tcx.sess.target
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTyCtxt<'tcx> for CodegenCx<'_, 'tcx> {
     #[inline]
@@ -1014,14 +981,12 @@ impl<'tcx> ty::layout::HasTyCtxt<'tcx> for CodegenCx<'_, 'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, 'll> HasTypingEnv<'tcx> for CodegenCx<'ll, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=11 | LINES=11 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for CodegenCx<'_, 'tcx> {
     #[inline]
@@ -1033,7 +998,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for CodegenCx<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=26 | LINES=27 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for CodegenCx<'_, 'tcx> {
     #[inline]

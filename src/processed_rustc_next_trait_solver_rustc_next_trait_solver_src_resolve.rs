@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/resolve.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_type_ir::data_structures::DelayedMap;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::{
     self as ty, InferCtxtLike, Interner, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=EagerResolver | COMPLEXITY=3 | LINES=17 */
 
 use crate::delegate::SolverDelegate;
 
@@ -24,7 +22,6 @@ where
     /// mutable state.
     cache: DelayedMap<I::Ty, I::Ty>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=eager_resolve_vars | COMPLEXITY=6 | LINES=12 */
 
 pub fn eager_resolve_vars<D: SolverDelegate, T: TypeFoldable<D::Interner>>(
     delegate: &D,
@@ -37,14 +34,12 @@ pub fn eager_resolve_vars<D: SolverDelegate, T: TypeFoldable<D::Interner>>(
         value
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, D: SolverDelegate> EagerResolver<'a, D> {
     fn new(delegate: &'a D) -> Self {
         EagerResolver { delegate, cache: Default::default() }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=57 | LINES=68 */
 
 impl<D: SolverDelegate<Interner = I>, I: Interner> TypeFolder<I> for EagerResolver<'_, D> {
     fn cx(&self) -> I {

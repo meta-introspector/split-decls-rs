@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_query_system/src/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(query_system_cycle_stack_middle)]
@@ -14,7 +11,6 @@ pub(crate) struct CycleStack {
     pub span: Span,
     pub desc: String,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone)]
 pub enum HandleCycleError {
@@ -23,7 +19,6 @@ pub enum HandleCycleError {
     DelayBug,
     Stash,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum StackCount {
@@ -32,7 +27,6 @@ pub(crate) enum StackCount {
     #[note(query_system_cycle_stack_multiple)]
     Multiple,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum Alias {
@@ -43,7 +37,6 @@ pub(crate) enum Alias {
     #[note(query_system_cycle_recursive_trait_alias)]
     Trait,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(query_system_cycle_usage)]
@@ -52,7 +45,6 @@ pub(crate) struct CycleUsage {
     pub span: Span,
     pub usage: String,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(query_system_cycle, code = E0391)]
@@ -71,7 +63,6 @@ pub(crate) struct Cycle {
     #[note]
     pub note_span: (),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(query_system_reentrant)]
@@ -86,7 +77,6 @@ pub(crate) struct IncrementCompilation {
     pub run_cmd: String,
     pub dep_node: String,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=QueryOverflow | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[help]
@@ -99,7 +89,6 @@ pub struct QueryOverflow {
     pub suggested_limit: Limit,
     pub crate_name: Symbol,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=QueryOverflowNote | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(query_system_overflow_note)]

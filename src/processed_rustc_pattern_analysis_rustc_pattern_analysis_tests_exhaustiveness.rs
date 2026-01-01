@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/tests/exhaustiveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Test exhaustiveness checking.
 
 #[allow(unused_crate_dependencies)]
@@ -7,7 +6,6 @@
 use common::*;
 use crate::rustc_pattern_analysis::MatchArm;
 use crate::rustc_pattern_analysis::pat::{DeconstructedPat, WitnessPat};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run | COMPLEXITY=7 | LINES=23 */
 use crate::rustc_pattern_analysis::usefulness::PlaceValidity;
 
 #[macro_use]
@@ -30,14 +28,12 @@ fn run(
     .unwrap();
     report.non_exhaustiveness_witnesses
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=6 */
 
 /// Analyze a match made of these patterns. Panics if there are no patterns
 fn check(patterns: Vec<DeconstructedPat<Cx>>) -> Vec<WitnessPat<Cx>> {
     let ty = *patterns[0].ty();
     run(ty, patterns, true)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=assert_exhaustive | COMPLEXITY=6 | LINES=8 */
 
 #[track_caller]
 fn assert_exhaustive(patterns: Vec<DeconstructedPat<Cx>>) {
@@ -46,21 +42,18 @@ fn assert_exhaustive(patterns: Vec<DeconstructedPat<Cx>>) {
         panic!("non-exhaustive match: missing {witnesses:?}");
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=assert_non_exhaustive | COMPLEXITY=2 | LINES=6 */
 
 #[track_caller]
 fn assert_non_exhaustive(patterns: Vec<DeconstructedPat<Cx>>) {
     let witnesses = check(patterns);
     assert!(!witnesses.is_empty())
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use WhichWitnesses::*;
 enum WhichWitnesses {
     AllOfThem,
     OnlySome,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=assert_witnesses | COMPLEXITY=3 | LINES=14 */
 
 #[track_caller]
 /// We take the type as input to support empty matches.
@@ -75,7 +68,6 @@ fn assert_witnesses(
     let witnesses: Vec<_> = witnesses.iter().map(|w| format!("{w:?}")).collect();
     assert_eq!(witnesses, expected)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=test_int_ranges | COMPLEXITY=2 | LINES=22 */
 
 #[test]
 fn test_int_ranges() {
@@ -98,7 +90,6 @@ fn test_int_ranges() {
         10..
     ));
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=test_nested | COMPLEXITY=6 | LINES=23 */
 
 #[test]
 fn test_nested() {
@@ -122,7 +113,6 @@ fn test_nested() {
         Struct(Variant.1, Variant.1),
     ));
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_witnesses | COMPLEXITY=5 | LINES=67 */
 
 #[test]
 fn test_witnesses() {
@@ -190,7 +180,6 @@ fn test_witnesses() {
     // Assert we put `true` before `false`.
     assert_witnesses(AllOfThem, Ty::Bool, Vec::new(), vec!["true", "false"]);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=test_empty | COMPLEXITY=2 | LINES=14 */
 
 #[test]
 fn test_empty() {

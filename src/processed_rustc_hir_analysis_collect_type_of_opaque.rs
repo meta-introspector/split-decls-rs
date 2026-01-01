@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/type_of/opaque.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir, Expr, ImplItem, Item, Node, TraitItem, def, intravisit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::{self, DefiningScopeKind, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::opaque_types::report_item_does_not_constrain_error;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=46 */
 
 use crate::errors::UnconstrainedOpaqueType;
 
@@ -57,7 +53,6 @@ pub(super) fn find_opaque_ty_constraints_for_impl_trait_in_assoc_type(
         Ty::new_error(tcx, guar)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 /// Checks "defining uses" of opaque `impl Trait` types to ensure that they meet the restrictions
 /// laid for "higher-order pattern unification".
@@ -70,15 +65,12 @@ pub(super) fn find_opaque_ty_constraints_for_impl_trait_in_assoc_type(
 ///
 /// // Okay -- `Foo` is applied to two distinct, generic types.
 /// fn a<T, U>() -> Foo<T, U> { .. }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 ///
 /// // Not okay -- `Foo` is applied to `T` twice.
 /// fn b<T>() -> Foo<T, T> { .. }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 ///
 /// // Not okay -- `Foo` is applied to a non-generic type.
 /// fn b<T>() -> Foo<T, u32> { .. }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=27 */
 /// ```
 #[instrument(skip(tcx), level = "debug")]
 pub(super) fn find_opaque_ty_constraints_for_tait(
@@ -106,7 +98,6 @@ pub(super) fn find_opaque_ty_constraints_for_tait(
         Ty::new_error(tcx, guar)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=TaitConstraintLocator | COMPLEXITY=3 | LINES=16 */
 
 struct TaitConstraintLocator<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -123,7 +114,6 @@ struct TaitConstraintLocator<'tcx> {
 
     opaque_types_from: DefiningScopeKind,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=insert_found | COMPLEXITY=55 | LINES=90 */
 
 impl<'tcx> TaitConstraintLocator<'tcx> {
     fn insert_found(&mut self, hidden_ty: ty::OpaqueHiddenType<'tcx>) {
@@ -214,7 +204,6 @@ impl<'tcx> TaitConstraintLocator<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=12 | LINES=32 */
 
 impl<'tcx> intravisit::Visitor<'tcx> for TaitConstraintLocator<'tcx> {
     type NestedFilter = nested_filter::All;
@@ -247,7 +236,6 @@ impl<'tcx> intravisit::Visitor<'tcx> for TaitConstraintLocator<'tcx> {
         intravisit::walk_foreign_item(self, it);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=43 */
 
 pub(super) fn find_opaque_ty_constraints_for_rpit<'tcx>(
     tcx: TyCtxt<'tcx>,

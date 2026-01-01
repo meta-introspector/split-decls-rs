@@ -1,31 +1,24 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/trait_impl_difference.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 // Error Reporting for `impl` items that do not match the obligations from their `trait`.
 
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def::{Namespace, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{Visitor, walk_ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::infer::SubregionOrigin;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::error::ExpectedFound;
 use crate::rustc_complete::ty::print::RegionHighlightMode;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::error_reporting::infer::nice_region_error::placeholder_error::Highlighted;
 use crate::errors::{ConsiderBorrowingParamHelp, RelationshipHelp, TraitImplDiff};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{RegionResolutionError, ValuePairs};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=emit_err | COMPLEXITY=46 | LINES=107 */
 
 impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
     /// Print the error message for lifetime errors when the `impl` doesn't conform to the `trait`.
@@ -133,13 +126,11 @@ impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
         self.tcx().dcx().emit_err(diag)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TypeParamSpanVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct TypeParamSpanVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     types: Vec<Span>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=27 | LINES=35 */
 
 impl<'tcx> Visitor<'tcx> for TypeParamSpanVisitor<'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;

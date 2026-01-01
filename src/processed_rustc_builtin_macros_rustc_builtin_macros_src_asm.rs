@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use lint::BuiltinLintDiag;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{AsmMacro, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::*;
 use crate::rustc_index::bit_set::GrowableBitSet;
@@ -13,16 +10,12 @@ use crate::rustc_parse::parser::asm::*;
 use crate::rustc_complete::lint;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{ErrorGuaranteed, InnerSpan, Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::asm::InlineAsmArch;
 use smallvec::smallvec;
 use {rustc_ast as ast, rustc_parse_format as parse};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::util::{ExprToSpannedString, expr_to_spanned_string};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{errors, fluent_generated as fluent};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ValidatedAsmArgs | COMPLEXITY=4 | LINES=11 */
 
 /// Validated assembly arguments, ready for macro expansion.
 struct ValidatedAsmArgs {
@@ -34,7 +27,6 @@ struct ValidatedAsmArgs {
     options: ast::InlineAsmOptions,
     pub options_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_args | COMPLEXITY=2 | LINES=10 */
 
 fn parse_args<'a>(
     ecx: &ExtCtxt<'a>,
@@ -45,7 +37,6 @@ fn parse_args<'a>(
     let args = parse_asm_args(&mut ecx.new_parser_from_tts(tts), sp, asm_macro)?;
     validate_asm_args(ecx, asm_macro, args)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=validate_asm_args | COMPLEXITY=158 | LINES=235 */
 
 fn validate_asm_args<'a>(
     ecx: &ExtCtxt<'a>,
@@ -281,7 +272,6 @@ fn validate_asm_args<'a>(
 
     Ok(validated)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=expand_preparsed_asm | COMPLEXITY=228 | LINES=409 */
 
 fn expand_preparsed_asm(
     ecx: &mut ExtCtxt<'_>,

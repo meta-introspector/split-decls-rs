@@ -1,35 +1,27 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/allocation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // The virtual memory representation of the MIR interpreter.
 
 
 use std::borrow::Cow;
 use std::hash::Hash;
 use std::ops::{Deref, DerefMut, Range};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, hash, ptr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use either::{Left, Right};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use init_mask::*;
 pub use init_mask::{InitChunk, InitChunkIter};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use provenance_map::*;
 use crate::rustc_abi::{Align, HasDataLayout, Size};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     AllocId, BadBytesAccess, CtfeProvenance, InterpErrorKind, InterpResult, Pointer,
     PointerArithmetic, Provenance, ResourceExhaustionInfo, Scalar, ScalarSizeMismatch,
     UndefinedBehaviorInfo, UnsupportedOpInfo, interp_ok, read_target_uint, write_target_uint,
 };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=8 | LINES=34 */
 use crate::ty;
 
 /// Functionality required for the bytes of an `Allocation`.
@@ -64,7 +56,6 @@ pub trait AllocBytes: Clone + fmt::Debug + Deref<Target = [u8]> + DerefMut<Targe
     /// - references returned from `deref()`, as long as there was no write.
     fn as_ptr(&self) -> *const u8;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=18 | LINES=24 */
 
 /// Default `bytes` for `Allocation` is a `Box<u8>`.
 impl AllocBytes for Box<[u8]> {
@@ -89,7 +80,6 @@ impl AllocBytes for Box<[u8]> {
         Box::as_ptr(self).cast()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Allocation | COMPLEXITY=21 | LINES=33 */
 
 /// This type represents an Allocation in the Miri/CTFE core engine.
 ///
@@ -123,7 +113,6 @@ pub struct Allocation<Prov: Provenance = CtfeProvenance, Extra = (), Bytes = Box
     /// Extra state for the machine.
     pub extra: Extra,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AllocFlags | COMPLEXITY=4 | LINES=9 */
 
 /// Helper struct that packs an alignment, mutability, and "all bytes are zero" flag together.
 ///
@@ -133,7 +122,6 @@ struct AllocFlags {
     mutability: Mutability,
     all_zero: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=11 | LINES=19 */
 
 impl<E: Encoder> Encodable<E> for AllocFlags {
     fn encode(&self, encoder: &mut E) {
@@ -153,7 +141,6 @@ impl<E: Encoder> Encodable<E> for AllocFlags {
         flags.encode(encoder);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=11 | LINES=18 */
 
 impl<D: Decoder> Decodable<D> for AllocFlags {
     fn decode(decoder: &mut D) -> Self {
@@ -172,7 +159,6 @@ impl<D: Decoder> Decodable<D> for AllocFlags {
         AllocFlags { align, mutability, all_zero }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=all_zero | COMPLEXITY=13 | LINES=23 */
 
 /// Efficiently detect whether a slice of `u8` is all zero.
 ///
@@ -196,7 +182,6 @@ fn all_zero(buf: &[u8]) -> bool {
     // all-zero case because it is so well-understood by autovectorization.
     buf.iter().fold(true, |acc, b| acc & (*b == 0))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=12 | LINES=20 */
 
 /// Custom encoder for [`Allocation`] to more efficiently represent the case where all bytes are 0.
 impl<Prov: Provenance, Extra, E: Encoder> Encodable<E> for Allocation<Prov, Extra, Box<[u8]>>
@@ -217,7 +202,6 @@ where
         self.extra.encode(encoder);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=12 | LINES=20 */
 
 impl<Prov: Provenance, Extra, D: Decoder> Decodable<D> for Allocation<Prov, Extra, Box<[u8]>>
 where
@@ -238,7 +222,6 @@ where
         Self { bytes, provenance, init_mask, align, mutability, extra }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=20 | LINES=48 */
 
 /// This is the maximum size we will hash at a time, when interning an `Allocation` and its
 /// `InitMask`. Note, we hash that amount of bytes twice: at the start, and at the end of a buffer.
@@ -287,7 +270,6 @@ impl hash::Hash for Allocation {
         mutability.hash(state);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=ConstAllocation | COMPLEXITY=8 | LINES=20 */
 
 /// Interned types generally have an `Outer` type and an `Inner` type, where
 /// `Outer` is a newtype around `Interned<Inner>`, and all the operations are
@@ -308,14 +290,12 @@ impl<'tcx> fmt::Debug for ConstAllocation<'tcx> {
         write!(f, "ConstAllocation {{ .. }}")
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=inner | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> ConstAllocation<'tcx> {
     pub fn inner(self) -> &'tcx Allocation {
         self.0.0
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// We have our own error type that does not know about the `AllocId`; that information
 /// is added when converting to `InterpError`.
@@ -330,7 +310,6 @@ pub enum AllocError {
     /// Using uninitialized data where it is not allowed.
     InvalidUninitBytes(Option<BadBytesAccess>),
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 pub type AllocResult<T = ()> = Result<T, AllocError>;
 
 impl From<ScalarSizeMismatch> for AllocError {
@@ -338,7 +317,6 @@ impl From<ScalarSizeMismatch> for AllocError {
         AllocError::ScalarSizeMismatch(s)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=to_interp_error | COMPLEXITY=9 | LINES=20 */
 
 impl AllocError {
     pub fn to_interp_error<'tcx>(self, alloc_id: AllocId) -> InterpErrorKind<'tcx> {
@@ -359,7 +337,6 @@ impl AllocError {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=AllocRange | COMPLEXITY=2 | LINES=7 */
 
 /// The information that makes up a memory access: offset and size.
 #[derive(Copy, Clone)]
@@ -367,21 +344,18 @@ pub struct AllocRange {
     pub start: Size,
     pub size: Size,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for AllocRange {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "[{:#x}..{:#x}]", self.start.bytes(), self.end().bytes())
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=alloc_range | COMPLEXITY=5 | LINES=6 */
 
 /// Free-starting constructor for less syntactic overhead.
 #[inline(always)]
 pub fn alloc_range(start: Size, size: Size) -> AllocRange {
     AllocRange { start, size }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<Range<Size>> for AllocRange {
     #[inline]
@@ -389,7 +363,6 @@ impl From<Range<Size>> for AllocRange {
         alloc_range(r.start, r.end - r.start) // `Size` subtraction (overflow-checked)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<Range<usize>> for AllocRange {
     #[inline]
@@ -397,7 +370,6 @@ impl From<Range<usize>> for AllocRange {
         AllocRange::from(Size::from_bytes(r.start)..Size::from_bytes(r.end))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=end | COMPLEXITY=9 | LINES=16 */
 
 impl AllocRange {
     #[inline(always)]
@@ -414,14 +386,12 @@ impl AllocRange {
         range
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Whether a new allocation should be initialized with zero-bytes.
 pub enum AllocInit {
     Uninit,
     Zero,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=35 | LINES=109 */
 
 // The constructors are all without extra; the extra gets added by a machine hook later.
 impl<Prov: Provenance, Bytes: AllocBytes> Allocation<Prov, (), Bytes> {
@@ -531,7 +501,6 @@ impl<Prov: Provenance, Bytes: AllocBytes> Allocation<Prov, (), Bytes> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=adjust_from_tcx | COMPLEXITY=10 | LINES=36 */
 
 impl Allocation {
     /// Adjust allocation from the ones in `tcx` to a custom Machine instance
@@ -568,7 +537,6 @@ impl Allocation {
         })
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=len | COMPLEXITY=10 | LINES=29 */
 
 /// Raw accessors. Provide access to otherwise private bytes.
 impl<Prov: Provenance, Extra, Bytes: AllocBytes> Allocation<Prov, Extra, Bytes> {
@@ -598,7 +566,6 @@ impl<Prov: Provenance, Extra, Bytes: AllocBytes> Allocation<Prov, Extra, Bytes> 
         &self.provenance
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=get_bytes_unchecked | COMPLEXITY=24 | LINES=101 */
 
 /// Byte accessors.
 impl<Prov: Provenance, Extra, Bytes: AllocBytes> Allocation<Prov, Extra, Bytes> {
@@ -700,7 +667,6 @@ impl<Prov: Provenance, Extra, Bytes: AllocBytes> Allocation<Prov, Extra, Bytes> 
         self.bytes.as_ptr()
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=mark_init | COMPLEXITY=100 | LINES=193 */
 
 /// Reading and writing.
 impl<Prov: Provenance, Extra, Bytes: AllocBytes> Allocation<Prov, Extra, Bytes> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/query/erase.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::ffi::OsStr;
 use std::intrinsics::transmute_unchecked;
 use std::mem::MaybeUninit;
@@ -11,9 +10,7 @@ use crate::query::CyclePlaceholder;
 use crate::traits::solve;
 use crate::ty::adjustment::CoerceUnsizedInfo;
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{mir, traits};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Erased | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone)]
 pub struct Erased<T: Copy> {
@@ -21,12 +18,10 @@ pub struct Erased<T: Copy> {
     // in `data` since we aren't actually storing a `T`.
     data: MaybeUninit<T>,
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub trait EraseType: Copy {
     type Result: Copy;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=erase | COMPLEXITY=21 | LINES=27 */
 
 // Allow `type_alias_bounds` since compilation will fail without `EraseType`.
 #[allow(type_alias_bounds)]
@@ -54,7 +49,6 @@ pub fn erase<T: EraseType>(src: T) -> Erase<T> {
         data: unsafe { transmute_unchecked::<T, MaybeUninit<T::Result>>(src) },
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=restore | COMPLEXITY=10 | LINES=13 */
 
 /// Restores an erased value.
 #[inline(always)]
@@ -68,85 +62,69 @@ pub fn restore<T: EraseType>(value: Erase<T>) -> T {
     // the right size.
     unsafe { transmute_unchecked::<MaybeUninit<T::Result>, T>(value.data) }
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for &'_ T {
     type Result = [u8; size_of::<&'static ()>()];
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for &'_ [T] {
     type Result = [u8; size_of::<&'static [()]>()];
 }
-/* AST_META: AST_ID=9 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for &'_ OsStr {
     type Result = [u8; size_of::<&'static OsStr>()];
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for &'_ ty::List<T> {
     type Result = [u8; size_of::<&'static ty::List<()>>()];
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for &'_ ty::ListWithCachedTypeInfo<T> {
     type Result = [u8; size_of::<&'static ty::ListWithCachedTypeInfo<()>>()];
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<I: crate::rustc_index::Idx, T> EraseType for &'_ crate::rustc_index::IndexSlice<I, T> {
     type Result = [u8; size_of::<&'static crate::rustc_index::IndexSlice<u32, ()>>()];
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ T, traits::query::NoSolution> {
     type Result = [u8; size_of::<Result<&'static (), traits::query::NoSolution>>()];
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ [T], traits::query::NoSolution> {
     type Result = [u8; size_of::<Result<&'static [()], traits::query::NoSolution>>()];
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ T, crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<Result<&'static (), crate::rustc_errors::ErrorGuaranteed>>()];
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ [T], crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<Result<&'static [()], crate::rustc_errors::ErrorGuaranteed>>()];
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ T, traits::CodegenObligationError> {
     type Result = [u8; size_of::<Result<&'static (), traits::CodegenObligationError>>()];
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Result<&'_ T, &'_ ty::layout::FnAbiError<'_>> {
     type Result = [u8; size_of::<Result<&'static (), &'static ty::layout::FnAbiError<'static>>>()];
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<
         Result<(&'static (), crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
-/* AST_META: AST_ID=20 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl EraseType for Result<Option<ty::Instance<'_>>, crate::rustc_errors::ErrorGuaranteed> {
     type Result =
         [u8; size_of::<Result<Option<ty::Instance<'static>>, crate::rustc_errors::ErrorGuaranteed>>()];
 }
-/* AST_META: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed>>()];
 }
-/* AST_META: AST_ID=22 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl EraseType
     for Result<Option<ty::EarlyBinder<'_, ty::Const<'_>>>, crate::rustc_errors::ErrorGuaranteed>
@@ -155,17 +133,14 @@ impl EraseType
         Result<Option<ty::EarlyBinder<'static, ty::Const<'static>>>, crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
-/* AST_META: AST_ID=23 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<ty::GenericArg<'_>, traits::query::NoSolution> {
     type Result = [u8; size_of::<Result<ty::GenericArg<'static>, traits::query::NoSolution>>()];
 }
-/* AST_META: AST_ID=24 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<bool, &ty::layout::LayoutError<'_>> {
     type Result = [u8; size_of::<Result<bool, &'static ty::layout::LayoutError<'static>>>()];
 }
-/* AST_META: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 impl EraseType for Result<crate::rustc_abi::TyAndLayout<'_, Ty<'_>>, &ty::layout::LayoutError<'_>> {
     type Result = [u8; size_of::<
@@ -175,114 +150,92 @@ impl EraseType for Result<crate::rustc_abi::TyAndLayout<'_, Ty<'_>>, &ty::layout
         >,
     >()];
 }
-/* AST_META: AST_ID=26 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<mir::ConstAlloc<'_>, mir::interpret::ErrorHandled> {
     type Result = [u8; size_of::<Result<mir::ConstAlloc<'static>, mir::interpret::ErrorHandled>>()];
 }
-/* AST_META: AST_ID=27 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<mir::ConstValue, mir::interpret::ErrorHandled> {
     type Result = [u8; size_of::<Result<mir::ConstValue, mir::interpret::ErrorHandled>>()];
 }
-/* AST_META: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for EvalToValTreeResult<'_> {
     type Result = [u8; size_of::<EvalToValTreeResult<'static>>()];
 }
-/* AST_META: AST_ID=29 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl EraseType for Result<&'_ ty::List<Ty<'_>>, ty::util::AlwaysRequiresDrop> {
     type Result =
         [u8; size_of::<Result<&'static ty::List<Ty<'static>>, ty::util::AlwaysRequiresDrop>>()];
 }
-/* AST_META: AST_ID=30 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Result<ty::EarlyBinder<'_, Ty<'_>>, CyclePlaceholder> {
     type Result = [u8; size_of::<Result<ty::EarlyBinder<'static, Ty<'_>>, CyclePlaceholder>>()];
 }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Option<&'_ T> {
     type Result = [u8; size_of::<Option<&'static ()>>()];
 }
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> EraseType for Option<&'_ [T]> {
     type Result = [u8; size_of::<Option<&'static [()]>>()];
 }
-/* AST_META: AST_ID=33 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Option<&'_ OsStr> {
     type Result = [u8; size_of::<Option<&'static OsStr>>()];
 }
-/* AST_META: AST_ID=34 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Option<mir::DestructuredConstant<'_>> {
     type Result = [u8; size_of::<Option<mir::DestructuredConstant<'static>>>()];
 }
-/* AST_META: AST_ID=35 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Option<ty::ImplTraitHeader<'_>> {
     type Result = [u8; size_of::<Option<ty::ImplTraitHeader<'static>>>()];
 }
-/* AST_META: AST_ID=36 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for Option<ty::EarlyBinder<'_, Ty<'_>>> {
     type Result = [u8; size_of::<Option<ty::EarlyBinder<'static, Ty<'static>>>>()];
 }
-/* AST_META: AST_ID=37 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for crate::rustc_hir::MaybeOwner<'_> {
     type Result = [u8; size_of::<crate::rustc_hir::MaybeOwner<'static>>()];
 }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: EraseType> EraseType for ty::EarlyBinder<'_, T> {
     type Result = T::Result;
 }
-/* AST_META: AST_ID=39 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for ty::Binder<'_, ty::FnSig<'_>> {
     type Result = [u8; size_of::<ty::Binder<'static, ty::FnSig<'static>>>()];
 }
-/* AST_META: AST_ID=40 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl EraseType for ty::Binder<'_, ty::CoroutineWitnessTypes<TyCtxt<'_>>> {
     type Result =
         [u8; size_of::<ty::Binder<'static, ty::CoroutineWitnessTypes<TyCtxt<'static>>>>()];
 }
-/* AST_META: AST_ID=41 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl EraseType for ty::Binder<'_, &'_ ty::List<Ty<'_>>> {
     type Result = [u8; size_of::<ty::Binder<'static, &'static ty::List<Ty<'static>>>>()];
 }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T0, T1> EraseType for (&'_ T0, &'_ T1) {
     type Result = [u8; size_of::<(&'static (), &'static ())>()];
 }
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T0> EraseType for (solve::QueryResult<'_>, &'_ T0) {
     type Result = [u8; size_of::<(solve::QueryResult<'static>, &'static ())>()];
 }
-/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T0, T1> EraseType for (&'_ T0, &'_ [T1]) {
     type Result = [u8; size_of::<(&'static (), &'static [()])>()];
 }
-/* AST_META: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T0, T1> EraseType for (&'_ [T0], &'_ [T1]) {
     type Result = [u8; size_of::<(&'static [()], &'static [()])>()];
 }
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T0> EraseType for (&'_ T0, Result<(), ErrorGuaranteed>) {
     type Result = [u8; size_of::<(&'static (), Result<(), ErrorGuaranteed>)>()];
 }
-/* AST_META: AST_ID=47 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=11 | LINES=10 */
 
 macro_rules! trivial {
     ($($ty:ty),+ $(,)?) => {
@@ -293,7 +246,6 @@ macro_rules! trivial {
         )*
     }
 }
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=108 */
 
 trivial! {
     (),
@@ -402,7 +354,6 @@ trivial! {
     u32,
     usize,
 }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=10 */
 
 macro_rules! tcx_lifetime {
     ($($($fake_path:ident)::+),+ $(,)?) => {
@@ -413,7 +364,6 @@ macro_rules! tcx_lifetime {
         )*
     }
 }
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=41 */
 
 tcx_lifetime! {
     crate::rustc_middle::middle::exported_symbols::ExportedSymbol,

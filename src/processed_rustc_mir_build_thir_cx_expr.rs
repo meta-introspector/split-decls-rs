@@ -1,38 +1,28 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/cx/expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use itertools::Itertools;
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::UnsafeBinderCastKind;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_index::Idx;
 use crate::rustc_complete::hir::place::{
     Place as HirPlace, PlaceBase as HirPlaceBase, ProjectionKind as HirProjectionKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::mir::{self, AssignOp, BinOp, BorrowKind, UnOp};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InlineConstArgs, InlineConstArgsParts, ScalarInt, Ty, UpvarArgs,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info, instrument, trace};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=apply_adjustment | COMPLEXITY=775 | LINES=1441 */
 
 use crate::errors::*;
 use crate::thir::cx::ThirBuildCx;
@@ -1474,12 +1464,10 @@ impl<'tcx> ThirBuildCx<'tcx> {
             .collect()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_borrow_kind | COMPLEXITY=2 | LINES=4 */
 
 trait ToBorrowKind {
     fn to_borrow_kind(&self) -> BorrowKind;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_borrow_kind | COMPLEXITY=16 | LINES=15 */
 
 impl ToBorrowKind for AutoBorrowMutability {
     fn to_borrow_kind(&self) -> BorrowKind {
@@ -1495,7 +1483,6 @@ impl ToBorrowKind for AutoBorrowMutability {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_borrow_kind | COMPLEXITY=10 | LINES=9 */
 
 impl ToBorrowKind for hir::Mutability {
     fn to_borrow_kind(&self) -> BorrowKind {
@@ -1505,7 +1492,6 @@ impl ToBorrowKind for hir::Mutability {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=bin_op | COMPLEXITY=10 | LINES=22 */
 
 fn bin_op(op: hir::BinOpKind) -> BinOp {
     match op {
@@ -1528,7 +1514,6 @@ fn bin_op(op: hir::BinOpKind) -> BinOp {
         _ => bug!("no equivalent for ast binop {:?}", op),
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=assign_op | COMPLEXITY=7 | LINES=15 */
 
 fn assign_op(op: hir::AssignOpKind) -> AssignOp {
     match op {

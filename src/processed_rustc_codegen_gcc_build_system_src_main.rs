@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/main.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, process};
-/* AST_META: AST_ID=2 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=9 | LINES=24 */
 
 const BUILD_DIR: &str = "build";
 
@@ -13,7 +11,6 @@ macro_rules! arg_error {
         std::process::exit(1);
     }};
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=usage | COMPLEXITY=9 | LINES=25 */
 
 fn usage() {
     println!(
@@ -39,7 +36,6 @@ Commands:
         abi-test   : Runs the abi-cafe test suite on the codegen, checking for ABI compatibility with LLVM"
     );
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 pub enum Command {
     Cargo,
@@ -54,7 +50,6 @@ pub enum Command {
     Fuzz,
     AbiTest,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=main | COMPLEXITY=31 | LINES=49 */
 
 fn main() {
     if env::var("RUST_BACKTRACE").is_err() {

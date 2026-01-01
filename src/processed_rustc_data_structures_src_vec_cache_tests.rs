@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/vec_cache/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=vec_cache_empty | COMPLEXITY=5 | LINES=10 */
 use super::*;
 
 #[test]
@@ -10,7 +9,6 @@ fn vec_cache_empty() {
         assert!(cache.lookup(&key).is_none());
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=vec_cache_insert_and_check | COMPLEXITY=2 | LINES=7 */
 
 #[test]
 fn vec_cache_insert_and_check() {
@@ -18,7 +16,6 @@ fn vec_cache_insert_and_check() {
     cache.complete(0, 1, 2);
     assert_eq!(cache.lookup(&0), Some((1, 2)));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=sparse_inserts | COMPLEXITY=12 | LINES=23 */
 
 #[test]
 fn sparse_inserts() {
@@ -42,7 +39,6 @@ fn sparse_inserts() {
         assert_eq!(cache.lookup(&key), Some((shift, key)));
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=concurrent_stress_check | COMPLEXITY=10 | LINES=17 */
 
 #[test]
 fn concurrent_stress_check() {
@@ -60,7 +56,6 @@ fn concurrent_stress_check() {
         assert_eq!(cache.lookup(&idx), Some((idx, idx)));
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=slot_entries_table | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn slot_entries_table() {
@@ -73,7 +68,6 @@ fn slot_entries_table() {
         ]
     );
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=slot_index_exhaustive | COMPLEXITY=14 | LINES=26 */
 
 #[test]
 #[cfg(not(miri))]

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_infer/src/traits/engine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Debug;
 
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::ty::{self, Ty, Upcast};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ObligationCause, PredicateObligation, PredicateObligations};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=19 */
 use crate::infer::InferCtxt;
 use crate::traits::Obligation;
 
@@ -27,7 +24,6 @@ pub enum ScrubbedTraitError<'tcx> {
     /// returned by the new solver.
     Cycle(PredicateObligations<'tcx>),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_true_error | COMPLEXITY=7 | LINES=9 */
 
 impl<'tcx> ScrubbedTraitError<'tcx> {
     pub fn is_true_error(&self) -> bool {
@@ -37,7 +33,6 @@ impl<'tcx> ScrubbedTraitError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=register_bound | COMPLEXITY=18 | LINES=68 */
 
 pub trait TraitEngine<'tcx, E: 'tcx>: 'tcx {
     /// Requires that `ty` must implement the trait with `def_id` in
@@ -106,7 +101,6 @@ pub trait TraitEngine<'tcx, E: 'tcx>: 'tcx {
         infcx: &InferCtxt<'tcx>,
     ) -> PredicateObligations<'tcx>;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_solver_error | COMPLEXITY=2 | LINES=4 */
 
 pub trait FromSolverError<'tcx, E>: Debug + 'tcx {
     fn from_solver_error(infcx: &InferCtxt<'tcx>, error: E) -> Self;

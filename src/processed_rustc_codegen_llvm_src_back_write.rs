@@ -1,70 +1,51 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/back/write.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ptr::null_mut;
 use std::sync::Arc;
 use std::{fs, slice, str};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use libc::{c_char, c_int, c_void, size_t};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use llvm::{
     LLVMRustLLVMHasZlibCompressionForDebugSymbols, LLVMRustLLVMHasZstdCompressionForDebugSymbols,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::back::link::ensure_removed;
 use crate::rustc_codegen_ssa::back::versioned_llvm_target;
 use crate::rustc_codegen_ssa::back::write::{
     BitcodeSection, CodegenContext, EmitObj, ModuleConfig, TargetMachineFactoryConfig,
     TargetMachineFactoryFn,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::base::wants_wasm_eh;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_codegen_ssa::{CompiledModule, ModuleCodegen, ModuleKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use crate::rustc_complete::{DiagCtxtHandle, Level};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_fs_util::{link_or_copy, path_to_c_string};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{
     self, Lto, OutputType, Passes, RemapPathScopeComponents, SplitDwarfKind, SwitchWithOptPath,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, InnerSpan, Pos, SpanData, SyntaxContext, sym};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{CodeModel, FloatAbi, RelocModel, SanitizerSet, SplitDebuginfo, TlsModel};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::back::lto::ThinBuffer;
 use crate::back::owned_target_machine::OwnedTargetMachine;
 use crate::back::profiling::{
     LlvmSelfProfiler, selfprofile_after_pass_callback, selfprofile_before_pass_callback,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::common::AsCCharPtr;
 use crate::errors::{
     CopyBitcode, FromLlvmDiag, FromLlvmOptimizationDiag, LlvmError, UnknownCompression,
     WithLlvmError, WriteBytecode,
 };
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::llvm::diagnostic::OptimizationDiagnosticKind::*;
 use crate::llvm::{self, DiagnosticInfo};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::type_::Type;
 use crate::{LlvmCodegenBackend, ModuleLlvm, base, common, llvm_util};
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 pub(crate) fn llvm_err<'a>(dcx: DiagCtxtHandle<'_>, err: LlvmError<'a>) -> ! {
     match llvm::last_error() {
@@ -72,7 +53,6 @@ pub(crate) fn llvm_err<'a>(dcx: DiagCtxtHandle<'_>, err: LlvmError<'a>) -> ! {
         None => dcx.emit_fatal(err),
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=write_output_file | COMPLEXITY=29 | LINES=50 */
 
 fn write_output_file<'ll>(
     dcx: DiagCtxtHandle<'_>,
@@ -123,7 +103,6 @@ fn write_output_file<'ll>(
 
     result.into_result().unwrap_or_else(|()| llvm_err(dcx, LlvmError::WriteOutput { path: output }))
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 pub(crate) fn create_informational_target_machine(
     sess: &Session,
@@ -136,7 +115,6 @@ pub(crate) fn create_informational_target_machine(
     target_machine_factory(sess, config::OptLevel::No, &features)(config)
         .unwrap_or_else(|err| llvm_err(sess.dcx(), err))
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 
 pub(crate) fn create_target_machine(tcx: TyCtxt<'_>, mod_name: &str) -> OwnedTargetMachine {
     let split_dwarf_file = if tcx.sess.target_can_use_split_dwarf() {
@@ -164,7 +142,6 @@ pub(crate) fn create_target_machine(tcx: TyCtxt<'_>, mod_name: &str) -> OwnedTar
     )(config)
     .unwrap_or_else(|err| llvm_err(tcx.dcx(), err))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=to_llvm_opt_settings | COMPLEXITY=7 | LINES=12 */
 
 fn to_llvm_opt_settings(cfg: config::OptLevel) -> (llvm::CodeGenOptLevel, llvm::CodeGenOptSize) {
     use self::config::OptLevel::*;
@@ -177,7 +154,6 @@ fn to_llvm_opt_settings(cfg: config::OptLevel) -> (llvm::CodeGenOptLevel, llvm::
         SizeMin => (llvm::CodeGenOptLevel::Default, llvm::CodeGenOptSizeAggressive),
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=to_pass_builder_opt_level | COMPLEXITY=6 | LINES=12 */
 
 fn to_pass_builder_opt_level(cfg: config::OptLevel) -> llvm::PassBuilderOptLevel {
     use config::OptLevel::*;
@@ -190,7 +166,6 @@ fn to_pass_builder_opt_level(cfg: config::OptLevel) -> llvm::PassBuilderOptLevel
         SizeMin => llvm::PassBuilderOptLevel::Oz,
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=to_llvm_relocation_model | COMPLEXITY=7 | LINES=13 */
 
 fn to_llvm_relocation_model(relocation_model: RelocModel) -> llvm::RelocModel {
     match relocation_model {
@@ -204,7 +179,6 @@ fn to_llvm_relocation_model(relocation_model: RelocModel) -> llvm::RelocModel {
         RelocModel::RopiRwpi => llvm::RelocModel::ROPI_RWPI,
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub(crate) fn to_llvm_code_model(code_model: Option<CodeModel>) -> llvm::CodeModel {
     match code_model {
@@ -216,7 +190,6 @@ pub(crate) fn to_llvm_code_model(code_model: Option<CodeModel>) -> llvm::CodeMod
         None => llvm::CodeModel::None,
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=to_llvm_float_abi | COMPLEXITY=6 | LINES=8 */
 
 fn to_llvm_float_abi(float_abi: Option<FloatAbi>) -> llvm::FloatAbi {
     match float_abi {
@@ -225,7 +198,6 @@ fn to_llvm_float_abi(float_abi: Option<FloatAbi>) -> llvm::FloatAbi {
         Some(FloatAbi::Hard) => llvm::FloatAbi::Hard,
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=131 */
 
 pub(crate) fn target_machine_factory(
     sess: &Session,
@@ -357,7 +329,6 @@ pub(crate) fn target_machine_factory(
         )
     })
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 pub(crate) fn save_temp_bitcode(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -375,7 +346,6 @@ pub(crate) fn save_temp_bitcode(
     );
     write_bitcode_to_file(module, &path)
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=write_bitcode_to_file | COMPLEXITY=7 | LINES=8 */
 
 fn write_bitcode_to_file(module: &ModuleCodegen<ModuleLlvm>, path: &Path) {
     unsafe {
@@ -383,7 +353,6 @@ fn write_bitcode_to_file(module: &ModuleCodegen<ModuleLlvm>, path: &Path) {
         llvm::LLVMWriteBitcodeToFile(llmod, path.as_ptr());
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// In what context is a dignostic handler being attached to a codegen unit?
 pub(crate) enum CodegenDiagnosticsStage {
@@ -394,14 +363,12 @@ pub(crate) enum CodegenDiagnosticsStage {
     /// Code generation.
     Codegen,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct DiagnosticHandlers<'a> {
     data: *mut (&'a CodegenContext<LlvmCodegenBackend>, DiagCtxtHandle<'a>),
     llcx: &'a llvm::Context,
     old_handler: Option<&'a llvm::DiagnosticHandler>,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=58 */
 
 impl<'a> DiagnosticHandlers<'a> {
     pub(crate) fn new(
@@ -460,7 +427,6 @@ impl<'a> DiagnosticHandlers<'a> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=9 */
 
 impl<'a> Drop for DiagnosticHandlers<'a> {
     fn drop(&mut self) {
@@ -470,7 +436,6 @@ impl<'a> Drop for DiagnosticHandlers<'a> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=report_inline_asm | COMPLEXITY=13 | LINES=29 */
 
 fn report_inline_asm(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -500,7 +465,6 @@ fn report_inline_asm(
     let msg = msg.strip_prefix("error: ").unwrap_or(&msg).to_string();
     cgcx.diag_emitter.inline_asm_error(span, msg, level, source);
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=48 | LINES=47 */
 
 unsafe extern "C" fn diagnostic_handler(info: &DiagnosticInfo, user: *mut c_void) {
     if user.is_null() {
@@ -548,7 +512,6 @@ unsafe extern "C" fn diagnostic_handler(info: &DiagnosticInfo, user: *mut c_void
         llvm::diagnostic::UnknownDiagnostic(..) => {}
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=get_pgo_gen_path | COMPLEXITY=12 | LINES=15 */
 
 fn get_pgo_gen_path(config: &ModuleConfig) -> Option<CString> {
     match config.pgo_gen {
@@ -564,7 +527,6 @@ fn get_pgo_gen_path(config: &ModuleConfig) -> Option<CString> {
         SwitchWithOptPath::Disabled => None,
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=get_pgo_use_path | COMPLEXITY=2 | LINES=7 */
 
 fn get_pgo_use_path(config: &ModuleConfig) -> Option<CString> {
     config
@@ -572,7 +534,6 @@ fn get_pgo_use_path(config: &ModuleConfig) -> Option<CString> {
         .as_ref()
         .map(|path_buf| CString::new(path_buf.to_string_lossy().as_bytes()).unwrap())
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=get_pgo_sample_use_path | COMPLEXITY=2 | LINES=7 */
 
 fn get_pgo_sample_use_path(config: &ModuleConfig) -> Option<CString> {
     config
@@ -580,12 +541,10 @@ fn get_pgo_sample_use_path(config: &ModuleConfig) -> Option<CString> {
         .as_ref()
         .map(|path_buf| CString::new(path_buf.to_string_lossy().as_bytes()).unwrap())
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=get_instr_profile_output_path | COMPLEXITY=2 | LINES=4 */
 
 fn get_instr_profile_output_path(config: &ModuleConfig) -> Option<CString> {
     config.instrument_coverage.then(|| c"default_%m_%p.profraw".to_owned())
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 // PreAD will run llvm opts but disable size increasing opts (vectorization, loop unrolling)
 // DuringAD is the same as above, but also runs the enzyme opt and autodiff passes.
@@ -596,7 +555,6 @@ pub(crate) enum AutodiffStage {
     DuringAD,
     PostAD,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=151 */
 
 pub(crate) unsafe fn llvm_optimize(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -748,7 +706,6 @@ pub(crate) unsafe fn llvm_optimize(
     };
     result.into_result().unwrap_or_else(|()| llvm_err(dcx, LlvmError::RunLlvmPasses))
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=53 | LINES=88 */
 
 // Unsafe due to LLVM calls.
 pub(crate) fn optimize(
@@ -837,7 +794,6 @@ pub(crate) fn optimize(
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=113 | LINES=226 */
 
 pub(crate) fn codegen(
     cgcx: &CodegenContext<LlvmCodegenBackend>,
@@ -1063,7 +1019,6 @@ pub(crate) fn codegen(
         cgcx.invocation_temp.as_deref(),
     )
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=create_section_with_flags_asm | COMPLEXITY=119 | LINES=201 */
 
 fn create_section_with_flags_asm(section_name: &str, section_flags: &str, data: &[u8]) -> Vec<u8> {
     let mut asm = format!(".section {section_name},\"{section_flags}\"\n").into_bytes();

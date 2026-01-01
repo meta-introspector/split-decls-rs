@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_hir/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 #[allow(rustc::symbol_intern_string_literal)]
 
 use rustc_hashes::Hash64;
 use crate::rustc_complete::def_id::{DefPathHash, StableCrateId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Symbol, create_session_globals_then};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::definitions::{DefKey, DefPathData, DisambiguatedDefPathData};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=def_path_hash_depends_on_crate_id | COMPLEXITY=10 | LINES=37 */
 
 #[test]
 fn def_path_hash_depends_on_crate_id() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/stmt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::borrow::Cow;
 use std::mem;
 use std::ops::Bound;
@@ -7,35 +6,25 @@ use std::ops::Bound;
 use ast::Label;
 use rustc_ast as ast;
 use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::util::classify::{self, TrailingBrace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::visit::{Visitor, walk_expr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     AttrStyle, AttrVec, Block, BlockCheckMode, DUMMY_NODE_ID, Expr, ExprKind, HasAttrs, Local,
     LocalKind, MacCall, MacCallStmt, MacStmtStyle, Recovered, Stmt, StmtKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, PResult};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::attr::InnerAttrForbiddenReason;
 use super::diagnostics::AttemptLocalParseRecovery;
 use super::pat::{PatternLocation, RecoverComma};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use super::path::PathStyle;
 use super::{
     AttrWrapper, BlockMode, FnContext, FnParseMode, ForceCollect, Parser, Restrictions,
     SemiColonMode, Trailing, UsePreAttrPos,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{self, MalformedLoopLabel};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse_stmt | COMPLEXITY=671 | LINES=1137 */
 use crate::exp;
 
 impl<'a> Parser<'a> {

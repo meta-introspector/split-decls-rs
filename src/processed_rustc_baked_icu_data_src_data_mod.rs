@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_baked_icu_data/src/data/mod.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // @generated
 include!("list_and_v1.rs.data");
 /// Marks a type as a data provider. You can then use macros like
@@ -12,7 +11,6 @@ include!("list_and_v1.rs.data");
 ///     make_provider!(MyProvider);
 ///     impl_core_helloworld_v1!(MyProvider);
 /// }
-/* AST_META: AST_ID=2 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 /// ```
 #[doc(hidden)]
 #[macro_export]
@@ -26,7 +24,6 @@ macro_rules! __make_provider {
         icu_provider::marker::impl_data_provider_never_marker!($name);
     };
 }
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=15 */
 #[doc(inline)]
 pub use __make_provider as make_provider;
 /// This macro requires the following crates:

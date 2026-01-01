@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/operand.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Functions concerning immediate values and operands, and reading from operands.
 // All high-level functions to read from memory work on operands as sources.
 
 use std::assert_matches::assert_matches;
 
 use either::{Either, Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_abi as abi;
 use crate::rustc_abi::{BackendRepr, HasDataLayout, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::Namespace;
 use crate::rustc_complete::mir::interpret::ScalarSizeMismatch;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{ConstInt, ScalarInt, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug, ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::field::Empty;
 use tracing::trace;
@@ -29,7 +22,6 @@ use super::{
     OffsetMode, PlaceTy, Pointer, Projectable, Provenance, Scalar, alloc_range, err_ub,
     from_known_layout, interp_ok, mir_assign_valid_types, throw_ub,
 };
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 use crate::enter_trace_span;
 
 /// An `Immediate` represents a single immediate self-contained Rust value.
@@ -49,7 +41,6 @@ pub enum Immediate<Prov: Provenance = CtfeProvenance> {
     /// A value of fully uninitialized memory. Can have arbitrary size and layout, but must be sized.
     Uninit,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov: Provenance> From<Scalar<Prov>> for Immediate<Prov> {
     #[inline(always)]
@@ -57,7 +48,6 @@ impl<Prov: Provenance> From<Scalar<Prov>> for Immediate<Prov> {
         Immediate::Scalar(val)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new_pointer_with_meta | COMPLEXITY=85 | LINES=139 */
 
 impl<Prov: Provenance> Immediate<Prov> {
     pub fn new_pointer_with_meta(
@@ -197,7 +187,6 @@ impl<Prov: Provenance> Immediate<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ImmTy | COMPLEXITY=4 | LINES=8 */
 
 // ScalarPair needs a type to interpret, so we often have an immediate and a type together
 // as input for binary and cast operations.
@@ -206,7 +195,6 @@ pub struct ImmTy<'tcx, Prov: Provenance = CtfeProvenance> {
     imm: Immediate<Prov>,
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=34 | LINES=42 */
 
 impl<Prov: Provenance> std::fmt::Display for ImmTy<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -249,7 +237,6 @@ impl<Prov: Provenance> std::fmt::Display for ImmTy<'_, Prov> {
         })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
 
 impl<Prov: Provenance> std::fmt::Debug for ImmTy<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -260,7 +247,6 @@ impl<Prov: Provenance> std::fmt::Debug for ImmTy<'_, Prov> {
             .finish()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, Prov: Provenance> std::ops::Deref for ImmTy<'tcx, Prov> {
     type Target = Immediate<Prov>;
@@ -269,7 +255,6 @@ impl<'tcx, Prov: Provenance> std::ops::Deref for ImmTy<'tcx, Prov> {
         &self.imm
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from_scalar | COMPLEXITY=90 | LINES=190 */
 
 impl<'tcx, Prov: Provenance> ImmTy<'tcx, Prov> {
     #[inline]
@@ -460,7 +445,6 @@ impl<'tcx, Prov: Provenance> ImmTy<'tcx, Prov> {
         ImmTy::from_immediate(inner_val, layout)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=10 | LINES=33 */
 
 impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for ImmTy<'tcx, Prov> {
     #[inline(always)]
@@ -494,7 +478,6 @@ impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for ImmTy<'tcx, Prov> {
         interp_ok(self.clone().into())
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// An `Operand` is the result of computing a `mir::Operand`. It can be immediate,
 /// or still in memory. The latter is an optimization, to delay reading that chunk of
@@ -504,14 +487,12 @@ pub(super) enum Operand<Prov: Provenance = CtfeProvenance> {
     Immediate(Immediate<Prov>),
     Indirect(MemPlace<Prov>),
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=OpTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 pub struct OpTy<'tcx, Prov: Provenance = CtfeProvenance> {
     op: Operand<Prov>, // Keep this private; it helps enforce invariants.
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
 
 impl<Prov: Provenance> std::fmt::Debug for OpTy<'_, Prov> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -522,7 +503,6 @@ impl<Prov: Provenance> std::fmt::Debug for OpTy<'_, Prov> {
             .finish()
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl<'tcx, Prov: Provenance> From<ImmTy<'tcx, Prov>> for OpTy<'tcx, Prov> {
     #[inline(always)]
@@ -530,7 +510,6 @@ impl<'tcx, Prov: Provenance> From<ImmTy<'tcx, Prov>> for OpTy<'tcx, Prov> {
         OpTy { op: Operand::Immediate(val.imm), layout: val.layout }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl<'tcx, Prov: Provenance> From<MPlaceTy<'tcx, Prov>> for OpTy<'tcx, Prov> {
     #[inline(always)]
@@ -538,7 +517,6 @@ impl<'tcx, Prov: Provenance> From<MPlaceTy<'tcx, Prov>> for OpTy<'tcx, Prov> {
         OpTy { op: Operand::Indirect(*mplace.mplace()), layout: mplace.layout }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 impl<'tcx, Prov: Provenance> OpTy<'tcx, Prov> {
     #[inline(always)]
@@ -546,7 +524,6 @@ impl<'tcx, Prov: Provenance> OpTy<'tcx, Prov> {
         &self.op
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=21 | LINES=46 */
 
 impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for OpTy<'tcx, Prov> {
     #[inline(always)]
@@ -593,7 +570,6 @@ impl<'tcx, Prov: Provenance> Projectable<'tcx, Prov> for OpTy<'tcx, Prov> {
         interp_ok(self.clone())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=read_immediate_from_mplace_raw | COMPLEXITY=148 | LINES=323 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Try reading an immediate in memory; this is interesting particularly for `ScalarPair`.
@@ -917,7 +893,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         interp_ok(OpTy { op: Operand::Immediate(imm), layout })
     }
 }
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

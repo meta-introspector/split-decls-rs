@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/at.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=28 */
 // A nice interface for working with the infcx. The basic idea is to
 // do `infcx.at(cause, param_env)`, which sets the "cause" of the
 // operation as well as the surrounding parameter environment. Then
@@ -28,16 +27,13 @@
 // things. (That system should probably be refactored.)
 
 use relate::lattice::{LatticeOp, LatticeOpKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::relate::solver_relating::RelateExt as NextSolverRelate;
 use crate::rustc_complete::ty::{Const, ImplSubject, TypingMode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::*;
 use crate::infer::relate::type_relating::TypeRelating;
 use crate::infer::relate::{Relate, TypeRelation};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::traits::Obligation;
 use crate::traits::solve::Goal;
 
@@ -50,7 +46,6 @@ pub enum DefineOpaqueTypes {
     Yes,
     No,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=At | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy)]
 pub struct At<'a, 'tcx> {
@@ -58,7 +53,6 @@ pub struct At<'a, 'tcx> {
     pub cause: &'a ObligationCause<'tcx>,
     pub param_env: ty::ParamEnv<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=at | COMPLEXITY=13 | LINES=61 */
 
 impl<'tcx> InferCtxt<'tcx> {
     #[inline]
@@ -120,12 +114,10 @@ impl<'tcx> InferCtxt<'tcx> {
         forked
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=2 | LINES=4 */
 
 pub trait ToTrace<'tcx>: Relate<TyCtxt<'tcx>> + Copy {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx>;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=sup | COMPLEXITY=46 | LINES=186 */
 
 impl<'a, 'tcx> At<'a, 'tcx> {
     /// Makes `actual <: expected`. For example, if type-checking a
@@ -312,7 +304,6 @@ impl<'a, 'tcx> At<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=13 | LINES=17 */
 
 impl<'tcx> ToTrace<'tcx> for ImplSubject<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -330,7 +321,6 @@ impl<'tcx> ToTrace<'tcx> for ImplSubject<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToTrace<'tcx> for Ty<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -340,14 +330,12 @@ impl<'tcx> ToTrace<'tcx> for Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToTrace<'tcx> for ty::Region<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
         TypeTrace { cause: cause.clone(), values: ValuePairs::Regions(ExpectedFound::new(a, b)) }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToTrace<'tcx> for Const<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -357,7 +345,6 @@ impl<'tcx> ToTrace<'tcx> for Const<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=16 | LINES=20 */
 
 impl<'tcx> ToTrace<'tcx> for ty::GenericArg<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -378,21 +365,18 @@ impl<'tcx> ToTrace<'tcx> for ty::GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToTrace<'tcx> for ty::Term<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
         TypeTrace { cause: cause.clone(), values: ValuePairs::Terms(ExpectedFound::new(a, b)) }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToTrace<'tcx> for ty::TraitRef<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
         TypeTrace { cause: cause.clone(), values: ValuePairs::TraitRefs(ExpectedFound::new(a, b)) }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToTrace<'tcx> for ty::AliasTy<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -402,14 +386,12 @@ impl<'tcx> ToTrace<'tcx> for ty::AliasTy<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToTrace<'tcx> for ty::AliasTerm<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
         TypeTrace { cause: cause.clone(), values: ValuePairs::Aliases(ExpectedFound::new(a, b)) }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> ToTrace<'tcx> for ty::FnSig<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -422,14 +404,12 @@ impl<'tcx> ToTrace<'tcx> for ty::FnSig<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToTrace<'tcx> for ty::PolyFnSig<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
         TypeTrace { cause: cause.clone(), values: ValuePairs::PolySigs(ExpectedFound::new(a, b)) }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToTrace<'tcx> for ty::PolyExistentialTraitRef<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -439,7 +419,6 @@ impl<'tcx> ToTrace<'tcx> for ty::PolyExistentialTraitRef<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> ToTrace<'tcx> for ty::ExistentialTraitRef<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -452,7 +431,6 @@ impl<'tcx> ToTrace<'tcx> for ty::ExistentialTraitRef<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToTrace<'tcx> for ty::PolyExistentialProjection<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {
@@ -462,7 +440,6 @@ impl<'tcx> ToTrace<'tcx> for ty::PolyExistentialProjection<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=to_trace | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> ToTrace<'tcx> for ty::ExistentialProjection<'tcx> {
     fn to_trace(cause: &ObligationCause<'tcx>, a: Self, b: Self) -> TypeTrace<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::*;
@@ -7,7 +6,6 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
 use crate::rustc_complete::config::FmtDebug;
 use crate::rustc_complete::{DesugaringKind, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=try_inline_lit | COMPLEXITY=67 | LINES=139 */
 
 use super::LoweringContext;
 
@@ -147,7 +145,6 @@ impl<'hir> LoweringContext<'_, 'hir> {
         fmt
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=flatten_format_args | COMPLEXITY=38 | LINES=77 */
 
 /// Flattens nested `format_args!()` into one.
 ///
@@ -225,14 +222,12 @@ fn flatten_format_args(mut fmt: Cow<'_, FormatArgs>) -> Cow<'_, FormatArgs> {
     }
     fmt
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
 enum ArgumentType {
     Format(FormatTrait),
     Usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=make_argument | COMPLEXITY=12 | LINES=37 */
 
 /// Generate a hir expression representing an argument to a format_args invocation.
 ///
@@ -270,7 +265,6 @@ fn make_argument<'hir>(
     ));
     ctx.expr_call_mut(sp, new_fn, std::slice::from_ref(arg))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=make_count | COMPLEXITY=17 | LINES=58 */
 
 /// Generate a hir expression for a format_args Count.
 ///
@@ -329,7 +323,6 @@ fn make_count<'hir>(
         None => ctx.expr_lang_item_type_relative(sp, hir::LangItem::FormatCount, sym::Implied),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Generate a hir expression for a format_args placeholder specification.
 ///
@@ -342,7 +335,6 @@ fn make_count<'hir>(
 ///         precision: <core::fmt::rt::Count::…>,
 ///         width: <core::fmt::rt::Count::…>,
 ///     }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=make_format_spec | COMPLEXITY=23 | LINES=61 */
 /// ```
 fn make_format_spec<'hir>(
     ctx: &mut LoweringContext<'_, 'hir>,
@@ -404,7 +396,6 @@ fn make_format_spec<'hir>(
     let fields = ctx.arena.alloc_from_iter([position, flags, precision, width]);
     ctx.expr(sp, hir::ExprKind::Struct(placeholder, fields, hir::StructTailExpr::None))
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=expand_format_args | COMPLEXITY=92 | LINES=224 */
 
 fn expand_format_args<'hir>(
     ctx: &mut LoweringContext<'_, 'hir>,
@@ -629,7 +620,6 @@ fn expand_format_args<'hir>(
         call
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=for_all_argument_indexes | COMPLEXITY=18 | LINES=19 */
 
 fn for_all_argument_indexes(template: &mut [FormatArgsPiece], mut f: impl FnMut(&mut usize)) {
     for piece in template {

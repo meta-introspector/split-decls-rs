@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/tests/complexity.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=21 */
 // Test the pattern complexity limit.
 
 #[allow(unused_crate_dependencies)]
@@ -20,7 +19,6 @@ fn check(patterns: &[DeconstructedPat<Cx>], complexity_limit: usize) -> Result<(
     compute_match_usefulness(arms.as_slice(), ty, PlaceValidity::ValidOnly, complexity_limit, false)
         .map(|_report| ())
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=assert_complexity | COMPLEXITY=5 | LINES=7 */
 
 /// Asserts that analyzing this match takes exactly `complexity` steps.
 #[track_caller]
@@ -28,7 +26,6 @@ fn assert_complexity(patterns: Vec<DeconstructedPat<Cx>>, complexity: usize) {
     assert!(check(&patterns, complexity).is_ok());
     assert!(check(&patterns, complexity - 1).is_err());
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=11 */
 
 /// Construct a match like:
 /// ```ignore(illustrative)
@@ -40,7 +37,6 @@ fn assert_complexity(patterns: Vec<DeconstructedPat<Cx>>, complexity: usize) {
 ///     ...
 ///     _ => {}
 /// }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=diagonal_match | COMPLEXITY=7 | LINES=10 */
 /// ```
 fn diagonal_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     let struct_ty = Ty::BigStruct { arity, ty: &Ty::Bool };
@@ -51,7 +47,6 @@ fn diagonal_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     patterns.push(pat!(struct_ty; _));
     patterns
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=25 | LINES=16 */
 
 /// Construct a match like:
 /// ```ignore(illustrative)
@@ -68,7 +63,6 @@ fn diagonal_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
 ///     ...
 ///     _ => {}
 /// }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=diagonal_exponential_match | COMPLEXITY=11 | LINES=13 */
 /// ```
 fn diagonal_exponential_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     let struct_ty = Ty::BigStruct { arity, ty: &Ty::Bool };
@@ -82,7 +76,6 @@ fn diagonal_exponential_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     patterns.push(pat!(struct_ty; _));
     patterns
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_diagonal_struct_match | COMPLEXITY=2 | LINES=10 */
 
 #[test]
 fn test_diagonal_struct_match() {
@@ -93,7 +86,6 @@ fn test_diagonal_struct_match() {
     // This case goes exponential.
     assert!(check(&diagonal_exponential_match(10), 10000).is_err());
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=10 */
 
 /// Construct a match like:
 /// ```ignore(illustrative)
@@ -104,7 +96,6 @@ fn test_diagonal_struct_match() {
 ///     ...
 ///     _ => {}
 /// }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=big_enum | COMPLEXITY=6 | LINES=10 */
 /// ```
 fn big_enum(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     let enum_ty = Ty::BigEnum { arity, ty: &Ty::Bool };
@@ -115,7 +106,6 @@ fn big_enum(arity: usize) -> Vec<DeconstructedPat<Cx>> {
     patterns.push(pat!(enum_ty; _));
     patterns
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_big_enum | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn test_big_enum() {

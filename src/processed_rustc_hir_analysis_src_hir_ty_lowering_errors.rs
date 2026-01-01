@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::codes::*;
@@ -9,31 +7,23 @@ use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, SuggestionStyle, listify, pluralize,
     struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, HirId, PolyTraitRef};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::fast_reject::{TreatParams, simplify_type};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{PrintPolyTraitRefExt as _, PrintTraitRefExt as _};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, AdtDef, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt,
     suggest_constraining_type_param,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
 use crate::rustc_trait_selection::traits::{
     FulfillmentError, dyn_compatibility_violations_for_assoc_item,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use smallvec::SmallVec;
 use tracing::debug;
 
@@ -42,10 +32,8 @@ use crate::errors::{
     self, AssocItemConstraintsNotAllowedHere, ManualImplementation, MissingTypeParams,
     ParenthesizedFnTraitExpansion, TraitObjectDeclaredWithNoTraits,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::fluent_generated as fluent;
 use crate::hir_ty_lowering::{AssocItemQSelf, HirTyLowerer};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=report_assoc_kind_mismatch | COMPLEXITY=732 | LINES=1373 */
 
 impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     /// Check for duplicate relaxed bounds and relaxed bounds of non-default traits.
@@ -1419,7 +1407,6 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         self.dcx().emit_err(TraitObjectDeclaredWithNoTraits { span, trait_alias_span })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=prohibit_assoc_item_constraint | COMPLEXITY=86 | LINES=169 */
 
 /// Emit an error for the given associated item constraint.
 pub fn prohibit_assoc_item_constraint(
@@ -1589,7 +1576,6 @@ pub fn prohibit_assoc_item_constraint(
 
     err.emit()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=49 */
 
 pub(crate) fn fn_trait_to_string(
     tcx: TyCtxt<'_>,
@@ -1639,7 +1625,6 @@ pub(crate) fn fn_trait_to_string(
         format!("{}<{}, Output={}>", trait_segment.ident, args, ret)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 
 /// Used for generics args error extend.
 pub enum GenericsArgsErrExtend<'tcx> {
@@ -1659,7 +1644,6 @@ pub enum GenericsArgsErrExtend<'tcx> {
     DefVariant(&'tcx [hir::PathSegment<'tcx>]),
     None,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=generics_args_err_extend | COMPLEXITY=113 | LINES=209 */
 
 fn generics_args_err_extend<'a>(
     tcx: TyCtxt<'_>,
@@ -1869,7 +1853,6 @@ fn generics_args_err_extend<'a>(
         _ => {}
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 pub(crate) fn assoc_tag_str(assoc_tag: ty::AssocTag) -> &'static str {
     match assoc_tag {

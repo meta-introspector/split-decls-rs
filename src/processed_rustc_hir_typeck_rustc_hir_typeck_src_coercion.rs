@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/coercion.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=27 */
 // # Type Coercion
 //
 // Under certain circumstances we will coerce from one type to another,
@@ -27,7 +26,6 @@
 // fn foo<T>(a: T, b: T) {
 //     // ...
 // }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 //
 // foo(&7i32, &mut 7i32);
 // // This compiles, as we first infer `T` to be `&i32`,
@@ -42,39 +40,29 @@ use std::ops::Deref;
 
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
 use crate::rustc_infer::infer::relate::RelateResult;
 use crate::rustc_infer::infer::{DefineOpaqueTypes, InferOk, InferResult, RegionVariableOrigin};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::{
     MatchExpressionArmCause, Obligation, PredicateObligation, PredicateObligations, SelectionError,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::infer::InferCtxtExt as _;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{
     self, ImplSource, NormalizeExt, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Coerce | COMPLEXITY=11 | LINES=21 */
 
 use crate::FnCtxt;
 use crate::errors::SuggestBoxingForReturnImplTrait;
@@ -96,7 +84,6 @@ struct Coerce<'a, 'tcx> {
     /// between places and values.
     coerce_never: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Deref for Coerce<'a, 'tcx> {
     type Target = FnCtxt<'a, 'tcx>;
@@ -104,7 +91,6 @@ impl<'a, 'tcx> Deref for Coerce<'a, 'tcx> {
         self.fcx
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=coerce_mutbls | COMPLEXITY=6 | LINES=11 */
 
 type CoerceResult<'tcx> = InferResult<'tcx, (Vec<Adjustment<'tcx>>, Ty<'tcx>)>;
 
@@ -116,7 +102,6 @@ fn coerce_mutbls<'tcx>(
 ) -> RelateResult<'tcx, ()> {
     if from_mutbl >= to_mutbl { Ok(()) } else { Err(TypeError::Mutability) }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=success | COMPLEXITY=3 | LINES=9 */
 
 /// This always returns `Ok(...)`.
 fn success<'tcx>(
@@ -126,7 +111,6 @@ fn success<'tcx>(
 ) -> CoerceResult<'tcx> {
     Ok(InferOk { value: (adj, target), obligations })
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=483 | LINES=910 */
 
 impl<'f, 'tcx> Coerce<'f, 'tcx> {
     fn new(
@@ -1037,7 +1021,6 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=try_find_coercion_lub | COMPLEXITY=176 | LINES=318 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Attempt to coerce an expression to a type, and return the
@@ -1356,7 +1339,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=can_coerce | COMPLEXITY=2 | LINES=14 */
 
 /// Check whether `ty` can be coerced to `output_ty`.
 /// Used from clippy.
@@ -1371,7 +1353,6 @@ pub fn can_coerce<'tcx>(
     let fn_ctxt = FnCtxt::new(&root_ctxt, param_env, body_id);
     fn_ctxt.may_coerce(ty, output_ty)
 }
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=40 */
 
 /// CoerceMany encapsulates the pattern you should use when you have
 /// many expressions that are all getting coerced to a common
@@ -1412,7 +1393,6 @@ pub fn can_coerce<'tcx>(
 ///     let expr_ty = fcx.check_expr_with_expectation(expr, expected);
 ///     coerce.coerce(fcx, &cause, expr, expr_ty);
 /// }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 /// let final_ty = coerce.complete(fcx);
 /// ```
 pub(crate) struct CoerceMany<'tcx, 'exprs, E: AsCoercionSite> {
@@ -1421,7 +1401,6 @@ pub(crate) struct CoerceMany<'tcx, 'exprs, E: AsCoercionSite> {
     expressions: Expressions<'tcx, 'exprs, E>,
     pushed: usize,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// The type of a `CoerceMany` that is storing up the expressions into
 /// a buffer. We use this in `check/mod.rs` for things like `break`.
@@ -1431,7 +1410,6 @@ enum Expressions<'tcx, 'exprs, E: AsCoercionSite> {
     Dynamic(Vec<&'tcx hir::Expr<'tcx>>),
     UpFront(&'exprs [E]),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=make | COMPLEXITY=242 | LINES=596 */
 
 impl<'tcx, 'exprs, E: AsCoercionSite> CoerceMany<'tcx, 'exprs, E> {
     /// The usual case; collect the set of expressions dynamically.

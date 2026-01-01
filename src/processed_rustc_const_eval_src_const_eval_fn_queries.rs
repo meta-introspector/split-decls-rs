@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/fn_queries.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=parent_impl_or_trait_constness | COMPLEXITY=13 | LINES=17 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::TyCtxt;
 
@@ -21,7 +19,6 @@ fn parent_impl_or_trait_constness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::C
         _ => hir::Constness::NotConst,
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=constness | COMPLEXITY=25 | LINES=30 */
 
 /// Checks whether a function-like definition is considered to be `const`.
 fn constness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Constness {
@@ -52,7 +49,6 @@ fn constness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Constness {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_promotable_const_fn | COMPLEXITY=15 | LINES=18 */
 
 fn is_promotable_const_fn(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
     tcx.is_const_fn(def_id)
@@ -71,7 +67,6 @@ fn is_promotable_const_fn(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
             None => false,
         }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers { constness, is_promotable_const_fn, ..*providers };

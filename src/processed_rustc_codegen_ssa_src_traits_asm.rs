@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=39 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::ty::Instance;
 use crate::rustc_complete::Span;
@@ -41,7 +39,6 @@ pub enum InlineAsmOperandRef<'tcx, B: BackendTypes + ?Sized> {
         label: B::BasicBlock,
     },
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 #[derive(Debug)]
 pub enum GlobalAsmOperandRef<'tcx> {
@@ -49,7 +46,6 @@ pub enum GlobalAsmOperandRef<'tcx> {
     SymFn { instance: Instance<'tcx> },
     SymStatic { def_id: DefId },
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=codegen_inline_asm | COMPLEXITY=2 | LINES=14 */
 
 pub trait AsmBuilderMethods<'tcx>: BackendTypes {
     /// Take an inline assembly expression and splat it out via LLVM
@@ -64,7 +60,6 @@ pub trait AsmBuilderMethods<'tcx>: BackendTypes {
         catch_funclet: Option<(Self::BasicBlock, Option<&Self::Funclet>)>,
     );
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=codegen_global_asm | COMPLEXITY=3 | LINES=17 */
 
 pub trait AsmCodegenMethods<'tcx> {
     fn codegen_global_asm(

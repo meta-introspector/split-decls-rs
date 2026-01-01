@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_session/src/options.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::BTreeMap;
 use std::num::{IntErrorKind, NonZero};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::path::PathBuf;
 use std::str;
 
@@ -11,26 +9,21 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::profiling::TimePassesFormat;
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use crate::rustc_complete::{ColorConfig, LanguageIdentifier, TerminalUrl};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{RealFileName, SourceFileHashAlgorithm};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, SymbolVisibility,
     TargetTuple, TlsModel,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::config::*;
 use crate::search_paths::SearchPath;
 use crate::utils::NativeLib;
 use crate::{EarlyDiagCtxt, lint};
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=11 */
 
 macro_rules! insert {
     ($opt_name:ident, $opt_expr:expr, $sub_hashes:expr) => {
@@ -42,7 +35,6 @@ macro_rules! insert {
         }
     };
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=19 | LINES=11 */
 
 macro_rules! hash_opt {
     ($opt_name:ident, $opt_expr:expr, $sub_hashes:expr, $_for_crate_hash: ident, [UNTRACKED]) => {{}};
@@ -54,7 +46,6 @@ macro_rules! hash_opt {
     }};
     ($opt_name:ident, $opt_expr:expr, $sub_hashes:expr, $_for_crate_hash: ident, [SUBSTRUCT]) => {{}};
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=14 */
 
 macro_rules! hash_substruct {
     ($opt_name:ident, $opt_expr:expr, $error_format:expr, $for_crate_hash:expr, $hasher:expr, [UNTRACKED]) => {{}};
@@ -69,7 +60,6 @@ macro_rules! hash_substruct {
         );
     };
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ExtendedTargetModifierInfo | COMPLEXITY=7 | LINES=13 */
 
 /// Extended target modifier info.
 /// For example, when external target modifier is '-Zregparm=2':
@@ -83,7 +73,6 @@ pub struct ExtendedTargetModifierInfo {
     /// Flag parsed technical value
     pub tech_value: String,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TargetModifier | COMPLEXITY=2 | LINES=10 */
 
 /// A recorded -Zopt_name=opt_value (or -Copt_name=opt_value)
 /// which alter the ABI or effectiveness of exploit mitigations.
@@ -94,7 +83,6 @@ pub struct TargetModifier {
     /// User-provided option value (before parsing)
     pub value_name: String,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=44 */
 
 mod target_modifier_consistency_check {
     use super::*;
@@ -139,7 +127,6 @@ mod target_modifier_consistency_check {
         true
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=24 | LINES=29 */
 
 impl TargetModifier {
     pub fn extend(&self) -> ExtendedTargetModifierInfo {
@@ -169,7 +156,6 @@ impl TargetModifier {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=tmod_push_impl | COMPLEXITY=6 | LINES=10 */
 
 fn tmod_push_impl(
     opt: OptionsTargetModifiers,
@@ -180,7 +166,6 @@ fn tmod_push_impl(
         tmods.push(TargetModifier { opt, value_name: v.clone() })
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=12 */
 
 macro_rules! tmod_push {
     ($struct_name:ident, $tmod_enum_name:ident, $opt_name:ident, $opt_expr:expr, $init:expr, $mods:expr, $tmod_vals:expr) => {
@@ -193,7 +178,6 @@ macro_rules! tmod_push {
         }
     };
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=29 */
 
 macro_rules! gather_tmods {
     ($struct_name:ident, $tmod_enum_name:ident, $opt_name:ident, $opt_expr:expr, $init:expr, $mods:expr, $tmod_vals:expr,
@@ -223,7 +207,6 @@ macro_rules! gather_tmods {
     ($struct_name:ident, $tmod_enum_name:ident, $opt_name:ident, $opt_expr:expr, $init:expr, $mods:expr, $tmod_vals:expr,
         [TRACKED_NO_CRATE_HASH], []) => {{}};
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=10 */
 
 macro_rules! gather_tmods_top_level {
     ($_opt_name:ident, $opt_expr:expr, $mods:expr, $tmod_vals:expr, [SUBSTRUCT $substruct_enum:ident]) => {
@@ -234,7 +217,6 @@ macro_rules! gather_tmods_top_level {
     };
     ($opt_name:ident, $opt_expr:expr, $mods:expr, $tmod_vals:expr, [$non_substruct:ident]) => {};
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Macro for generating OptionsTargetsModifiers top-level enum with impl.
 /// Will generate something like:
@@ -243,7 +225,6 @@ macro_rules! gather_tmods_top_level {
 ///     CodegenOptions(CodegenOptionsTargetModifiers),
 ///     UnstableOptions(UnstableOptionsTargetModifiers),
 /// }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 /// impl OptionsTargetModifiers {
 ///     pub fn reparse(&self, user_value: &str) -> ExtendedTargetModifierInfo {
 ///         match self {
@@ -256,7 +237,6 @@ macro_rules! gather_tmods_top_level {
 ///         UnstableOptionsTargetModifiers::is_target_modifier(flag_name)
 ///     }
 /// }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=reparse | COMPLEXITY=40 | LINES=67 */
 /// ```
 macro_rules! top_level_tmod_enum {
     ($( {$($optinfo:tt)*} ),* $(,)*) => {
@@ -324,7 +304,6 @@ macro_rules! top_level_tmod_enum {
         }
     };
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=Options | COMPLEXITY=20 | LINES=57 */
 
 macro_rules! top_level_options {
     ( $( #[$top_level_attr:meta] )* pub struct Options { $(
@@ -381,7 +360,6 @@ macro_rules! top_level_options {
         }
     );
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=Options | COMPLEXITY=41 | LINES=137 */
 
 top_level_options!(
     /// The top-level command-line options struct.
@@ -519,7 +497,6 @@ top_level_options!(
 
         verbose: bool [TRACKED_NO_CRATE_HASH],
     }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 );
 
 macro_rules! tmod_enum_opt {
@@ -530,7 +507,6 @@ macro_rules! tmod_enum_opt {
         None
     };
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=reparse | COMPLEXITY=52 | LINES=84 */
 
 macro_rules! tmod_enum {
     ($tmod_enum_name:ident, $prefix:expr, $( {$($optinfo:tt)*} ),* $(,)*) => {
@@ -615,7 +591,6 @@ macro_rules! tmod_enum {
         }
     };
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=$struct_name | COMPLEXITY=31 | LINES=84 */
 
 /// Defines all `CodegenOptions`/`DebuggingOptions` fields and parsers all at once. The goal of this
 /// macro is to define an interface that can be programmatically used by the option parser
@@ -700,7 +675,6 @@ macro_rules! options {
     }
 
 ) }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=instrument_coverage | COMPLEXITY=3 | LINES=8 */
 
 impl CodegenOptions {
     // JUSTIFICATION: defn of the suggested wrapper fn
@@ -709,7 +683,6 @@ impl CodegenOptions {
         self.instrument_coverage
     }
 }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=14 */
 
 // Sometimes different options need to build a common structure.
 // That structure can be kept in one of the options' fields, the others become dummy.
@@ -724,7 +697,6 @@ macro_rules! redirect_field {
         $cg.$field
     };
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=OptionDesc | COMPLEXITY=6 | LINES=14 */
 
 type OptionSetter<O> = fn(&mut O, v: Option<&str>) -> bool;
 type OptionDescrs<O> = &'static [OptionDesc<O>];
@@ -739,7 +711,6 @@ pub struct OptionDesc<O> {
     is_deprecated_and_do_nothing: bool,
     tmod: Option<OptionsTargetModifiers>,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=name | COMPLEXITY=4 | LINES=10 */
 
 impl<O> OptionDesc<O> {
     pub fn name(&self) -> &'static str {
@@ -750,7 +721,6 @@ impl<O> OptionDesc<O> {
         self.desc
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=build_options | COMPLEXITY=50 | LINES=56 */
 
 #[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
 fn build_options<O: Default>(
@@ -807,7 +777,6 @@ fn build_options<O: Default>(
     }
     op
 }
-/* AST_META: AST_ID=31 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=18 | LINES=103 */
 
 #[allow(non_upper_case_globals)]
 mod desc {
@@ -911,7 +880,6 @@ mod desc {
         "either a boolean (`yes`, `no`, `on`, `off`, etc), or `nll` (default: `nll`)";
     pub(crate) const parse_align: &str = "a number that is a power of 2 between 1 and 2^29";
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=739 | LINES=1153 */
 
 pub mod parse {
     use std::str::FromStr;
@@ -2065,7 +2033,6 @@ pub mod parse {
         true
     }
 }
-/* AST_META: AST_ID=33 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=41 | LINES=146 */
 
 options! {
     CodegenOptions, CodegenOptionsTargetModifiers, CG_OPTIONS, cgopts, "C", "codegen",
@@ -2212,7 +2179,6 @@ options! {
     // - compiler/rustc_interface/src/tests.rs
     // - src/doc/rustc/src/codegen-options/index.md
 }
-/* AST_META: AST_ID=34 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=244 | LINES=586 */
 
 options! {
     UnstableOptions, UnstableOptionsTargetModifiers, Z_OPTIONS, dbopts, "Z", "unstable",

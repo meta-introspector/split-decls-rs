@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::util::case::Case;
 use crate::rustc_complete::{
     self as ast, BoundAsyncness, BoundConstness, BoundPolarity, DUMMY_NODE_ID, FnPtrTy, FnRetTy,
@@ -9,29 +7,21 @@ use crate::rustc_complete::{
     Pinnedness, PolyTraitRef, PreciseCapturingArg, TraitBoundModifiers, TraitObjectSyntax, Ty,
     TyKind, UnsafeBinderTy,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::{Applicability, Diag, PResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{Parser, PathStyle, SeqSep, TokenType, Trailing};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::errors::{
     self, AttributeOnEmptyType, AttributeOnType, DynAfterMut, ExpectedFnPathFoundFnKeyword,
     ExpectedMutOrConstInRawPointerType, FnPtrWithGenerics, FnPtrWithGenericsSugg,
     HelpUseLatestEdition, InvalidDynKeyword, LifetimeAfterMut, NeedPlusAfterTraitObjectLifetime,
     NestedCVariadicType, ReturnTypesUseThinArrow,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::parser::item::FrontMatterParsingMode;
 use crate::parser::{FnContext, FnParseMode};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{exp, maybe_recover_from_interpolated_ty_qpath};
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Signals whether parsing a type should allow `+`.
 ///
@@ -43,29 +33,24 @@ pub(super) enum AllowPlus {
     Yes,
     No,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 pub(super) enum RecoverQPath {
     Yes,
     No,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) enum RecoverQuestionMark {
     Yes,
     No,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Signals whether parsing a type should recover `->`.
 ///
 /// More specifically, when parsing a function like:
 /// ```compile_fail
 /// fn foo() => u8 { 0 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// fn bar(): u8 { 0 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 /// ```
 /// The compiler will try to recover interpreting `foo() => u8` as `foo() -> u8` when calling
 /// `parse_ty` with anything except `RecoverReturnSign::No`, and it will try to recover `bar(): u8`
@@ -76,7 +61,6 @@ pub(super) enum RecoverReturnSign {
     OnlyFatArrow,
     No,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=can_recover | COMPLEXITY=14 | LINES=14 */
 
 impl RecoverReturnSign {
     /// [RecoverReturnSign::Yes] allows for recovering `fn foo() => u8` and `fn foo(): u8`,
@@ -91,7 +75,6 @@ impl RecoverReturnSign {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // Is `...` (`CVarArgs`) legal at this level of type parsing?
 #[derive(PartialEq)]
@@ -99,7 +82,6 @@ enum AllowCVariadic {
     Yes,
     No,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=can_continue_type_after_non_fn_ident | COMPLEXITY=4 | LINES=9 */
 
 /// Returns `true` if `IDENT t` can start a type -- `IDENT::a::b`, `IDENT<u8, u8>`,
 /// `IDENT<<u8 as Trait>::AssocTy>`.
@@ -109,7 +91,6 @@ enum AllowCVariadic {
 fn can_continue_type_after_non_fn_ident(t: &Token) -> bool {
     t == &token::PathSep || t == &token::Lt || t == &token::Shl
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=can_begin_dyn_bound_in_edition_2015 | COMPLEXITY=3 | LINES=12 */
 
 fn can_begin_dyn_bound_in_edition_2015(t: &Token) -> bool {
     // `!`, `const`, `[`, `async` are deliberately not part of this list to
@@ -122,7 +103,6 @@ fn can_begin_dyn_bound_in_edition_2015(t: &Token) -> bool {
         || t.is_keyword(kw::For)
         || t == &TokenKind::OpenParen
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_ty | COMPLEXITY=680 | LINES=1419 */
 
 impl<'a> Parser<'a> {
     /// Parses a type.

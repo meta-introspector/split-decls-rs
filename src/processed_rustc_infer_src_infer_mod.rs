@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::fmt;
 
 pub use at::DefineOpaqueTypes;
@@ -10,56 +8,42 @@ pub use freshen::TypeFreshener;
 use lexical_region_resolve::LexicalRegionResolutions;
 pub use lexical_region_resolve::RegionResolutionError;
 pub use opaque_types::{OpaqueTypeStorage, OpaqueTypeStorageEntries, OpaqueTypeTable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use region_constraints::{
     GenericKind, RegionConstraintCollector, RegionConstraintStorage, VarInfos, VerifyBound,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use relate::StructurallyRelateAliases;
 pub use relate::combine::PredicateEmittingRelation;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::unify as ut;
 use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::extension;
 pub use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::infer::canonical::{CanonicalQueryInput, CanonicalVarValues};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::traits::select;
 use crate::rustc_complete::traits::solve::Goal;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::ty::{
     self, BoundVarReplacerDelegate, ConstVid, FloatVid, GenericArg, GenericArgKind, GenericArgs,
     GenericArgsRef, GenericParamDefKind, InferConst, IntVid, OpaqueHiddenType, OpaqueTypeKey,
     PseudoCanonicalInput, Term, TermKind, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitable, TypeVisitableExt, TypingEnv, TypingMode, fold_regions,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use snapshot::undo_log::InferCtxtUndoLogs;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use type_variable::TypeVariableOrigin;
 
 use crate::infer::snapshot::undo_log::UndoLog;
 use crate::infer::unify_key::{ConstVariableOrigin, ConstVariableValue, ConstVidKey};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::traits::{
     self, ObligationCause, ObligationInspector, PredicateObligation, PredicateObligations,
     TraitEngine,
 };
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=InferOk | COMPLEXITY=5 | LINES=30 */
 
 
 /// `InferOk<'tcx, ()>` is used a lot. It may seem like a useless wrapper
@@ -75,7 +59,6 @@ pub struct InferOk<'tcx, T> {
     pub value: T,
     pub obligations: PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=InferCtxtInner | COMPLEXITY=25 | LINES=94 */
 pub type InferResult<'tcx, T> = Result<InferOk<'tcx, T>, TypeError<'tcx>>;
 
 pub(crate) type FixupResult<T> = Result<T, FixupError>; // "fixup result"
@@ -170,7 +153,6 @@ pub struct InferCtxtInner<'tcx> {
     /// Caches for opaque type inference.
     opaque_type_storage: OpaqueTypeStorage<'tcx>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=19 | LINES=77 */
 
 impl<'tcx> InferCtxtInner<'tcx> {
     fn new() -> InferCtxtInner<'tcx> {
@@ -248,7 +230,6 @@ impl<'tcx> InferCtxtInner<'tcx> {
             .with_log(&mut self.undo_log)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=InferCtxt | COMPLEXITY=24 | LINES=83 */
 
 pub struct InferCtxt<'tcx> {
     pub tcx: TyCtxt<'tcx>,
@@ -332,7 +313,6 @@ pub struct InferCtxt<'tcx> {
 
     pub obligation_inspector: Cell<Option<ObligationInspector<'tcx>>>,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 /// See the `error_reporting` module for more details.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, TypeFoldable, TypeVisitable)]
@@ -345,7 +325,6 @@ pub enum ValuePairs<'tcx> {
     ExistentialTraitRef(ExpectedFound<ty::PolyExistentialTraitRef<'tcx>>),
     ExistentialProjection(ExpectedFound<ty::PolyExistentialProjection<'tcx>>),
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=8 | LINES=13 */
 
 impl<'tcx> ValuePairs<'tcx> {
     pub fn ty(&self) -> Option<(Ty<'tcx>, Ty<'tcx>)> {
@@ -359,7 +338,6 @@ impl<'tcx> ValuePairs<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=TypeTrace | COMPLEXITY=4 | LINES=10 */
 
 /// The trace designates the path through inference that we took to
 /// encounter an error or subtyping constraint.
@@ -370,7 +348,6 @@ pub struct TypeTrace<'tcx> {
     pub cause: ObligationCause<'tcx>,
     pub values: ValuePairs<'tcx>,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=44 */
 
 /// The origin of a `r1 <= r2` constraint.
 ///
@@ -415,7 +392,6 @@ pub enum SubregionOrigin<'tcx> {
 
     AscribeUserTypeProvePredicate(Span),
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=to_constraint_category | COMPLEXITY=8 | LINES=14 */
 
 // `SubregionOrigin` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
@@ -430,7 +406,6 @@ impl<'tcx> SubregionOrigin<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// Times when we replace bound regions with existentials:
 #[derive(Clone, Copy, Debug)]
@@ -444,7 +419,6 @@ pub enum BoundRegionConversionTime {
     /// when projecting an associated type
     AssocTypeProjection(DefId),
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=39 */
 
 /// Reasons to create a region inference variable.
 ///
@@ -484,7 +458,6 @@ pub enum RegionVariableOrigin {
     /// during NLL region processing.
     Nll(NllRegionVariableOrigin),
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum NllRegionVariableOrigin {
@@ -501,13 +474,11 @@ pub enum NllRegionVariableOrigin {
         name: Option<Symbol>,
     },
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=FixupError | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone, Debug)]
 pub struct FixupError {
     unresolved: TyOrConstInferVar,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=19 */
 
 impl fmt::Display for FixupError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -527,7 +498,6 @@ impl fmt::Display for FixupError {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=TypeOutlivesConstraint | COMPLEXITY=4 | LINES=8 */
 
 /// See the `region_obligations` field for more information.
 #[derive(Clone, Debug)]
@@ -536,7 +506,6 @@ pub struct TypeOutlivesConstraint<'tcx> {
     pub sup_type: Ty<'tcx>,
     pub origin: SubregionOrigin<'tcx>,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=InferCtxtBuilder | COMPLEXITY=2 | LINES=11 */
 
 /// Used to configure inference contexts before their creation.
 pub struct InferCtxtBuilder<'tcx> {
@@ -548,7 +517,6 @@ pub struct InferCtxtBuilder<'tcx> {
     /// which affects things like which solver is used in `predicate_may_hold`.
     next_trait_solver: bool,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=infer_ctxt | COMPLEXITY=4 | LINES=13 */
 
 #[extension(pub trait TyCtxtInferExt<'tcx>)]
 impl<'tcx> TyCtxt<'tcx> {
@@ -562,7 +530,6 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=with_next_trait_solver | COMPLEXITY=17 | LINES=76 */
 
 impl<'tcx> InferCtxtBuilder<'tcx> {
     pub fn with_next_trait_solver(mut self, next_trait_solver: bool) -> Self {
@@ -639,7 +606,6 @@ impl<'tcx> InferCtxtBuilder<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=into_value_registering_obligations | COMPLEXITY=4 | LINES=13 */
 
 impl<'tcx, T> InferOk<'tcx, T> {
     /// Extracts `value`, registering any obligations into `fulfill_cx`.
@@ -653,14 +619,12 @@ impl<'tcx, T> InferOk<'tcx, T> {
         value
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=into_obligations | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> InferOk<'tcx, ()> {
     pub fn into_obligations(self) -> PredicateObligations<'tcx> {
         self.obligations
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=dcx | COMPLEXITY=371 | LINES=806 */
 
 impl<'tcx> InferCtxt<'tcx> {
     pub fn dcx(&self) -> DiagCtxtHandle<'_> {
@@ -1467,7 +1431,6 @@ impl<'tcx> InferCtxt<'tcx> {
         self.obligation_inspector.set(Some(inspector));
     }
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 /// Helper for [InferCtxt::ty_or_const_infer_var_changed] (see comment on that), currently
 /// used only for `traits::fulfill`'s list of `stalled_on` inference variables.
@@ -1483,7 +1446,6 @@ pub enum TyOrConstInferVar {
     /// Equivalent to `ty::ConstKind::Infer(ty::InferConst::Var(_))`.
     Const(ConstVid),
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=maybe_from_generic_arg | COMPLEXITY=37 | LINES=43 */
 
 impl<'tcx> TyOrConstInferVar {
     /// Tries to extract an inference variable from a type or a constant, returns `None`
@@ -1527,15 +1489,12 @@ impl<'tcx> TyOrConstInferVar {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
 /// Replace `{integer}` with `i32` and `{float}` with `f64`.
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=InferenceLiteralEraser | COMPLEXITY=4 | LINES=4 */
 /// Used only for diagnostics.
 struct InferenceLiteralEraser<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=10 | LINES=14 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for InferenceLiteralEraser<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -1550,7 +1509,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for InferenceLiteralEraser<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=span | COMPLEXITY=10 | LINES=32 */
 
 impl<'tcx> TypeTrace<'tcx> {
     pub fn span(&self) -> Span {
@@ -1583,7 +1541,6 @@ impl<'tcx> TypeTrace<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=span | COMPLEXITY=25 | LINES=56 */
 
 impl<'tcx> SubregionOrigin<'tcx> {
     pub fn span(&self) -> Span {
@@ -1640,7 +1597,6 @@ impl<'tcx> SubregionOrigin<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=span | COMPLEXITY=8 | LINES=16 */
 
 impl RegionVariableOrigin {
     pub fn span(&self) -> Span {
@@ -1657,7 +1613,6 @@ impl RegionVariableOrigin {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=find_block_span | COMPLEXITY=21 | LINES=30 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// Given a [`hir::Block`], get the span of its last expression or

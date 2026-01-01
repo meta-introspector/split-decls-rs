@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/obligations.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=36 */
 // Code that handles "type-outlives" constraints like `T: 'a`. This
 // is based on the `push_outlives_components` function defined in rustc_infer,
 // but it adds a bit of heuristics on top, in particular to deal with
@@ -36,12 +35,10 @@
 //
 // ```
 // fn bar<T>(a: T, b: impl for<'a> Fn(&'a T)) {}
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 // fn foo<T>(x: T) {
 //     bar(x, |y| { /* ... */})
 //     //      ^ closure arg
 // }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 // ```
 //
 // Here, the type of `y` may involve inference variables and the
@@ -57,7 +54,6 @@
 //
 // ```
 // fn foo<U, F: for<'a> FnMut(&'a U)>(_f: F) {}
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // ```
 //
 // the type of the closure's first argument would be `&'a ?U`. We
@@ -69,15 +65,12 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, GenericArgKind, GenericArgsRef, PolyTypeOutlivesPredicate, Region, Ty, TyCtxt,
     TypeFoldable as _, TypeVisitableExt,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::smallvec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use super::env::OutlivesEnvironment;
 use crate::infer::outlives::env::RegionBoundPairs;
@@ -87,9 +80,7 @@ use crate::infer::snapshot::undo_log::UndoLog;
 use crate::infer::{
     self, GenericKind, InferCtxt, SubregionOrigin, TypeOutlivesConstraint, VerifyBound,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=register_outlives_constraint | COMPLEXITY=71 | LINES=176 */
 
 impl<'tcx> InferCtxt<'tcx> {
     pub fn register_outlives_constraint(
@@ -266,7 +257,6 @@ impl<'tcx> InferCtxt<'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TypeOutlives | COMPLEXITY=7 | LINES=17 */
 
 /// The `TypeOutlives` struct has the job of "lowering" a `T: 'a`
 /// obligation into a series of `'a: 'b` constraints and "verify"s, as
@@ -284,7 +274,6 @@ where
     tcx: TyCtxt<'tcx>,
     verify_bound: VerifyBoundCx<'cx, 'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=push_sub_region_constraint | COMPLEXITY=2 | LINES=18 */
 
 pub trait TypeOutlivesDelegate<'tcx> {
     fn push_sub_region_constraint(
@@ -303,7 +292,6 @@ pub trait TypeOutlivesDelegate<'tcx> {
         bound: VerifyBound<'tcx>,
     );
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=97 | LINES=262 */
 
 impl<'cx, 'tcx, D> TypeOutlives<'cx, 'tcx, D>
 where
@@ -566,7 +554,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=push_sub_region_constraint | COMPLEXITY=7 | LINES=22 */
 
 impl<'cx, 'tcx> TypeOutlivesDelegate<'tcx> for &'cx InferCtxt<'tcx> {
     fn push_sub_region_constraint(

@@ -1,23 +1,14 @@
 // SRC: ../rust/compiler/rustc_lint/src/opaque_hidden_inferred_bound.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{PrintTraitPredicateExt as _, TraitPredPrintModifiersAndPath};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, BottomUpFolder, Ty, TypeFoldable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, kw};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=55 */
 
 declare_lint! {
     /// The `opaque_hidden_inferred_bound` lint detects cases in which nested
@@ -73,7 +64,6 @@ declare_lint! {
     Warn,
     "detects the use of nested `impl Trait` types in associated type bounds that are not general enough"
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_ty | COMPLEXITY=63 | LINES=137 */
 
 declare_lint_pass!(OpaqueHiddenInferredBound => [OPAQUE_HIDDEN_INFERRED_BOUND]);
 
@@ -211,7 +201,6 @@ impl<'tcx> LateLintPass<'tcx> for OpaqueHiddenInferredBound {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=OpaqueHiddenInferredBoundLint | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_opaque_hidden_inferred_bound)]
@@ -223,7 +212,6 @@ struct OpaqueHiddenInferredBoundLint<'tcx> {
     #[subdiagnostic]
     add_bound: Option<AddBound<'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=AddBound | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(

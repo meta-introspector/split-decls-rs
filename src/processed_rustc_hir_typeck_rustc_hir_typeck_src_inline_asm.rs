@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/inline_asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_complete::InlineAsmTemplatePiece;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, Article, FloatTy, IntTy, Ty, TyCtxt, TypeVisitableExt, UintTy};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::asm::{
     InlineAsmReg, InlineAsmRegClass, InlineAsmRegOrRegClass, InlineAsmType, ModifierInfo,
 };
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 
 use crate::FnCtxt;
@@ -26,7 +21,6 @@ pub(crate) struct InlineAsmCtxt<'a, 'tcx> {
     target_features: &'tcx FxIndexSet<Symbol>,
     fcx: &'a FnCtxt<'a, 'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 enum NonAsmTypeReason<'tcx> {
     UnevaluatedSIMDArrayLength(DefId, ty::Const<'tcx>),
@@ -35,7 +29,6 @@ enum NonAsmTypeReason<'tcx> {
     NotSizedPtr(Ty<'tcx>),
     EmptySIMDArray(Ty<'tcx>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=354 | LINES=525 */
 
 impl<'a, 'tcx> InlineAsmCtxt<'a, 'tcx> {
     pub(crate) fn new(fcx: &'a FnCtxt<'a, 'tcx>, def_id: LocalDefId) -> Self {

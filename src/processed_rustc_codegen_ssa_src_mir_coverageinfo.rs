@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/coverageinfo.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=19 */
 use crate::rustc_complete::mir::SourceScope;
 use crate::rustc_complete::mir::coverage::CoverageKind;
 

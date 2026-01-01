@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/emitter.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // The current rustc diagnostics emitter.
 //
 // An `Emitter` takes care of generating the output from a `Diag` struct.
@@ -11,48 +10,36 @@
 
 use std::borrow::Cow;
 use std::cmp::{Reverse, max, min};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::error::Report;
 use std::io::prelude::*;
 use std::io::{self, IsTerminal};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::iter;
 use std::path::Path;
 use std::sync::Arc;
 
 use derive_setters::Setters;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_error_messages::{FluentArgs, SpanLabel};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_lexer;
 use crate::rustc_lint_defs::pluralize;
 use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{FileLines, FileName, SourceFile, Span, char_width, str_width};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use termcolor::{Buffer, BufferWriter, Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace, warn};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::registry::Registry;
 use crate::snippet::{
     Annotation, AnnotationColumn, AnnotationType, Line, MultilineAnnotation, Style, StyledString,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::styled_buffer::StyledBuffer;
 use crate::timings::TimingRecord;
 use crate::translation::{Translator, to_fluent_args};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     CodeSuggestion, DiagInner, DiagMessage, ErrCode, Level, MultiSpan, Subdiag,
     SubstitutionHighlight, SuggestionStyle, TerminalUrl,
 };
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Default column width, used in tests and when terminal dimensions cannot be determined.
 const DEFAULT_COLUMN_WIDTH: usize = 140;
@@ -65,14 +52,12 @@ pub enum HumanReadableErrorType {
     AnnotateSnippet,
     Short,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=short | COMPLEXITY=3 | LINES=6 */
 
 impl HumanReadableErrorType {
     pub fn short(&self) -> bool {
         *self == HumanReadableErrorType::Short
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Margin | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Clone, Copy, Debug)]
 struct Margin {
@@ -93,7 +78,6 @@ struct Margin {
     /// same line as the span.
     pub label_right: usize,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=1793 | LINES=3604 */
 
 impl Margin {
     fn new(

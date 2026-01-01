@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/type_.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[cfg(feature = "master")]
 use std::convert::TryInto;
 
 #[cfg(feature = "master")]
 use gccjit::CType;
 use gccjit::{RValue, Struct, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{AddressSpace, Align, Integer, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::common::TypeKind;
 use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, DerivedTypeCodegenMethods, TypeMembershipCodegenMethods,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=type_ix | COMPLEXITY=44 | LINES=111 */
 
 use crate::common::TypeReflection;
 use crate::context::CodegenCx;
@@ -128,7 +123,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         typ
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=type_i8 | COMPLEXITY=143 | LINES=192 */
 
 impl<'gcc, 'tcx> BaseTypeCodegenMethods for CodegenCx<'gcc, 'tcx> {
     fn type_i8(&self) -> Type<'gcc> {
@@ -321,7 +315,6 @@ impl<'gcc, 'tcx> BaseTypeCodegenMethods for CodegenCx<'gcc, 'tcx> {
         self.context.new_array_type(None, ty, len)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_padding_filler | COMPLEXITY=10 | LINES=27 */
 
 impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
     pub fn type_padding_filler(&self, size: Size, align: Align) -> Type<'gcc> {
@@ -349,7 +342,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         self.context.new_opaque_struct_type(None, name)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=struct_fields | COMPLEXITY=17 | LINES=41 */
 
 pub fn struct_fields<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -391,6 +383,5 @@ pub fn struct_fields<'gcc, 'tcx>(
 
     (result, packed)
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'gcc, 'tcx> TypeMembershipCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {}

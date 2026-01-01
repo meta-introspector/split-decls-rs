@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/outlives/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::{self, CratePredicatesMap, GenericArgKind, TyCtxt, Upcast};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=44 */
 use crate::rustc_complete::Span;
 
 
@@ -44,7 +42,6 @@ pub(super) fn inferred_outlives_of(
         _ => &[],
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=49 */
 
 pub(super) fn inferred_outlives_crate(tcx: TyCtxt<'_>, (): ()) -> CratePredicatesMap<'_> {
     // Compute a map from each ADT (struct/enum/union) and lazy type alias to

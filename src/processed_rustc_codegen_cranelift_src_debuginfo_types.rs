@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Adapted from https://github.com/rust-lang/rust/blob/10a7aa14fed9b528b74b0f098c4899c37c09a9c7/compiler/rustc_codegen_llvm/src/debuginfo/metadata.rs
 
 use gimli::write::{AttributeValue, UnitEntryId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::debuginfo::type_names;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{DebugContext, FullyMonomorphizedLayoutCx};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub(crate) struct TypeDebugContext<'tcx> {
     type_map: FxHashMap<Ty<'tcx>, UnitEntryId>,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=10 */
 
 /// Returns from the enclosing function if the type debuginfo node with the given
 /// unique ID can be found in the type map.
@@ -28,7 +23,6 @@ macro_rules! return_if_type_created_in_meantime {
         }
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=basic_type | COMPLEXITY=51 | LINES=186 */
 
 impl DebugContext {
     pub(crate) fn debug_type<'tcx>(

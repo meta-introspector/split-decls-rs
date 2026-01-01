@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/pattern.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 use std::fmt;
 
 use crate::rustc_data_structures::intern::Interned;
@@ -8,7 +7,6 @@ use rustc_type_ir::ir_print::IrPrint;
 use rustc_type_ir::{
     FlagComputation, Flags, {self as ir},
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=Pattern | COMPLEXITY=28 | LINES=42 */
 
 use super::TyCtxt;
 use crate::ty;
@@ -51,7 +49,6 @@ impl<'tcx> Flags for Pattern<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> std::ops::Deref for Pattern<'tcx> {
     type Target = PatternKind<'tcx>;
@@ -60,14 +57,12 @@ impl<'tcx> std::ops::Deref for Pattern<'tcx> {
         &*self.0
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Debug for Pattern<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", **self)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=print | COMPLEXITY=38 | LINES=49 */
 
 impl<'tcx> IrPrint<PatternKind<'tcx>> for TyCtxt<'tcx> {
     fn print(t: &PatternKind<'tcx>, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -117,7 +112,6 @@ impl<'tcx> IrPrint<PatternKind<'tcx>> for TyCtxt<'tcx> {
         Self::print(t, fmt)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> rustc_type_ir::inherent::IntoKind for Pattern<'tcx> {
     type Kind = PatternKind<'tcx>;

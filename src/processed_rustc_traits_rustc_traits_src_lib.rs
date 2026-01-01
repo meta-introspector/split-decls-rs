@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_traits/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=29 */
 // Queries that are independent from the main solver code.
 
 // tidy-alphabetical-start

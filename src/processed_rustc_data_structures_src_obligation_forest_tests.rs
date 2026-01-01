@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/obligation_forest/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=as_cache_key | COMPLEXITY=5 | LINES=13 */
 use std::fmt;
 
 use thin_vec::thin_vec;
@@ -13,20 +12,17 @@ impl<'a> super::ForestObligation for &'a str {
         self
     }
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=ClosureObligationProcessor | COMPLEXITY=2 | LINES=6 */
 
 struct ClosureObligationProcessor<OF, BF, O, E> {
     process_obligation: OF,
     _process_backedge: BF,
     marker: PhantomData<(O, E)>,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=TestOutcome | COMPLEXITY=2 | LINES=5 */
 
 struct TestOutcome<O, E> {
     pub completed: Vec<O>,
     pub errors: Vec<Error<O, E>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=20 */
 
 impl<O, E> OutcomeTrait for TestOutcome<O, E>
 where
@@ -47,7 +43,6 @@ where
         self.errors.push(error)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=C | COMPLEXITY=3 | LINES=13 */
 
 #[allow(non_snake_case)]
 fn C<OF, BF, O>(of: OF, bf: BF) -> ClosureObligationProcessor<OF, BF, O, &'static str>
@@ -61,7 +56,6 @@ where
         marker: PhantomData,
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=needs_process_obligation | COMPLEXITY=8 | LINES=34 */
 
 impl<OF, BF, O, E> ObligationProcessor for ClosureObligationProcessor<OF, BF, O, E>
 where
@@ -96,7 +90,6 @@ where
         Ok(())
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=push_pop | COMPLEXITY=48 | LINES=81 */
 
 #[test]
 fn push_pop() {
@@ -178,7 +171,6 @@ fn push_pop() {
     assert_eq!(ok, vec!["D.2", "D.2.i"]);
     assert_eq!(err, vec![Error { error: "D is for dumb", backtrace: vec!["D.1.i", "D.1", "D"] }]);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=success_in_grandchildren | COMPLEXITY=34 | LINES=70 */
 
 // Test that if a tree with grandchildren succeeds, everything is
 // reported as expected:
@@ -249,7 +241,6 @@ fn success_in_grandchildren() {
     assert!(ok.is_empty());
     assert!(err.is_empty());
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_errors_no_throw | COMPLEXITY=9 | LINES=23 */
 
 #[test]
 fn to_errors_no_throw() {
@@ -273,7 +264,6 @@ fn to_errors_no_throw() {
     assert_eq!(errors[2].backtrace, vec!["A.3", "A"]);
     assert_eq!(errors.len(), 3);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=diamond | COMPLEXITY=47 | LINES=94 */
 
 #[test]
 fn diamond() {
@@ -368,7 +358,6 @@ fn diamond() {
     let errors = forest.to_errors(());
     assert_eq!(errors.len(), 0);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=done_dependency | COMPLEXITY=17 | LINES=34 */
 
 #[test]
 fn done_dependency() {
@@ -403,7 +392,6 @@ fn done_dependency() {
     assert_eq!(ok, vec!["(A,B,C): Sized"]);
     assert_eq!(err.len(), 0);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=orphan | COMPLEXITY=36 | LINES=61 */
 
 #[test]
 fn orphan() {
@@ -465,7 +453,6 @@ fn orphan() {
     let errors = forest.to_errors(());
     assert_eq!(errors.len(), 0);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=simultaneous_register_and_error | COMPLEXITY=18 | LINES=34 */
 
 #[test]
 fn simultaneous_register_and_error() {

@@ -1,51 +1,37 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Borrow checker diagnostics.
 
 use std::collections::BTreeMap;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, MultiSpan, listify};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, Namespace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     self as hir, CoroutineKind, GenericBound, LangItem, WhereBoundPredicate, WherePredicateKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{BoundRegionConversionTime, NllRegionVariableOrigin};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::SelectionError;
 use crate::rustc_complete::mir::{
     AggregateKind, CallSource, ConstOperand, ConstraintCategory, FakeReadCause, Local, LocalInfo,
     LocalKind, Location, Operand, Place, PlaceRef, PlaceTy, ProjectionElem, Rvalue, Statement,
     StatementKind, Terminator, TerminatorKind, VarDebugInfoContents, find_self_call,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::Print;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::move_paths::{InitLocation, LookupResult, MoveOutIndex};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::builtin::MACRO_EXTENDED_TEMPORARY_SCOPES;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::traits::call_kind::{CallDesugaringKind, call_kind};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{
     FulfillmentError, FulfillmentErrorCode, type_known_to_meet_bound_modulo_regions,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use tracing::debug;
 
 use super::MirBorrowckCtxt;
@@ -57,20 +43,15 @@ use crate::session_diagnostics::{
     CaptureArgLabel, CaptureReasonLabel, CaptureReasonNote, CaptureReasonSuggest, CaptureVarCause,
     CaptureVarKind, CaptureVarPathUseCause, OnClosureNote,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 
 
 pub(crate) use bound_region_errors::{ToUniverseInfo, UniverseInfo};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub(crate) use move_errors::{IllegalMoveOriginKind, MoveError};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub(crate) use mutability_errors::AccessKind;
 pub(crate) use outlives_suggestion::OutlivesSuggestionBuilder;
 pub(crate) use region_errors::{ErrorConstraintInfo, RegionErrorKind, RegionErrors};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub(crate) use region_name::{RegionName, RegionNameSource};
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 pub(crate) use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
 
 pub(super) struct DescribePlaceOpt {
@@ -80,7 +61,6 @@ pub(super) struct DescribePlaceOpt {
     /// For example `x` tuple. if it's `true` `x.0`. Otherwise `x`
     including_tuple_field: bool,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) struct IncludingTupleField(pub(super) bool);
 
@@ -88,7 +68,6 @@ enum BufferedDiag<'infcx> {
     Error(Diag<'infcx>),
     NonError(Diag<'infcx, ()>),
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=sort_span | COMPLEXITY=7 | LINES=9 */
 
 impl<'infcx> BufferedDiag<'infcx> {
     fn sort_span(&self) -> Span {
@@ -98,7 +77,6 @@ impl<'infcx> BufferedDiag<'infcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=24 */
 
 #[derive(Default)]
 pub(crate) struct BorrowckDiagnosticsBuffer<'infcx, 'tcx> {
@@ -123,14 +101,12 @@ pub(crate) struct BorrowckDiagnosticsBuffer<'infcx, 'tcx> {
     /// Buffer of diagnostics to be reported. A mixture of error and non-error diagnostics.
     buffered_diags: Vec<BufferedDiag<'infcx>>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 impl<'infcx, 'tcx> BorrowckDiagnosticsBuffer<'infcx, 'tcx> {
     pub(crate) fn buffer_non_error(&mut self, diag: Diag<'infcx, ()>) {
         self.buffered_diags.push(BufferedDiag::NonError(diag));
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=local_name | COMPLEXITY=62 | LINES=106 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     pub(crate) fn buffer_error(&mut self, diag: Diag<'infcx>) {
@@ -237,7 +213,6 @@ impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=describe_name | COMPLEXITY=877 | LINES=1387 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     /// Adds a suggestion when a closure is invoked twice with a moved variable or when a closure

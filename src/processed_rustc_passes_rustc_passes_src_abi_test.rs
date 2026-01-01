@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_passes/src/abi_test.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Attribute;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::layout::{FnAbiError, LayoutError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::sym;
 use crate::rustc_target::callconv::FnAbi;
 
 use super::layout_test::ensure_wf;
 use crate::errors::{AbiInvalidAttribute, AbiNe, AbiOf, UnrecognizedArgument};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_abi | COMPLEXITY=22 | LINES=22 */
 
 pub fn test_abi(tcx: TyCtxt<'_>) {
     if !tcx.features().rustc_attrs() {
@@ -37,7 +33,6 @@ pub fn test_abi(tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=unwrap_fn_abi | COMPLEXITY=8 | LINES=16 */
 
 fn unwrap_fn_abi<'tcx>(
     abi: Result<&'tcx FnAbi<'tcx, Ty<'tcx>>, &'tcx FnAbiError<'tcx>>,
@@ -54,7 +49,6 @@ fn unwrap_fn_abi<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dump_abi_of_fn_item | COMPLEXITY=23 | LINES=46 */
 
 fn dump_abi_of_fn_item(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
     let typing_env = ty::TypingEnv::post_analysis(tcx, item_def_id);
@@ -101,7 +95,6 @@ fn dump_abi_of_fn_item(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribut
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_abi_eq | COMPLEXITY=5 | LINES=14 */
 
 fn test_abi_eq<'tcx>(abi1: &'tcx FnAbi<'tcx, Ty<'tcx>>, abi2: &'tcx FnAbi<'tcx, Ty<'tcx>>) -> bool {
     if abi1.conv != abi2.conv
@@ -116,7 +109,6 @@ fn test_abi_eq<'tcx>(abi1: &'tcx FnAbi<'tcx, Ty<'tcx>>, abi2: &'tcx FnAbi<'tcx, 
     abi1.ret.eq_abi(&abi2.ret)
         && abi1.args.iter().zip(abi2.args.iter()).all(|(arg1, arg2)| arg1.eq_abi(arg2))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dump_abi_of_fn_type | COMPLEXITY=35 | LINES=86 */
 
 fn dump_abi_of_fn_type(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
     let typing_env = ty::TypingEnv::post_analysis(tcx, item_def_id);

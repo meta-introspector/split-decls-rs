@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/intravisit.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=33 | LINES=68 */
 // HIR walker for walking the contents of nodes.
 //
 // Here are the three available patterns for the visitor strategy,
@@ -68,10 +67,8 @@
 
 use crate::rustc_complete::Label;
 use crate::rustc_complete::visit::{VisitorResult, try_visit, visit_opt, walk_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=into_visitor | COMPLEXITY=2 | LINES=7 */
 
 use crate::hir::*;
 
@@ -79,7 +76,6 @@ pub trait IntoVisitor<'hir> {
     type Visitor: Visitor<'hir>;
     fn into_visitor(&self) -> Self::Visitor;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum FnKind<'a> {
@@ -92,7 +88,6 @@ pub enum FnKind<'a> {
     /// `|x, y| {}`
     Closure,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=header | COMPLEXITY=10 | LINES=18 */
 
 impl<'a> FnKind<'a> {
     pub fn header(&self) -> Option<&FnHeader> {
@@ -111,7 +106,6 @@ impl<'a> FnKind<'a> {
         self.header().map_or(IsAsync::NotAsync, |header| header.asyncness)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hir_node | COMPLEXITY=5 | LINES=13 */
 
 /// HIR things retrievable from `TyCtxt`, avoiding an explicit dependence on
 /// `TyCtxt`. The only impls are for `!` (where these functions are never
@@ -125,7 +119,6 @@ pub trait HirTyCtxt<'hir> {
     fn hir_impl_item(&self, id: ImplItemId) -> &'hir ImplItem<'hir>;
     fn hir_foreign_item(&self, id: ForeignItemId) -> &'hir ForeignItem<'hir>;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=hir_node | COMPLEXITY=11 | LINES=22 */
 
 // Used when no tcx is actually available, forcing manual implementation of nested visitors.
 impl<'hir> HirTyCtxt<'hir> for ! {
@@ -148,7 +141,6 @@ impl<'hir> HirTyCtxt<'hir> for ! {
         unreachable!();
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=None(()); | COMPLEXITY=15 | LINES=41 */
 
 pub mod nested_filter {
     use super::HirTyCtxt;
@@ -190,7 +182,6 @@ pub mod nested_filter {
         const INTRA: bool = false;
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=139 | LINES=319 */
 
 use nested_filter::NestedFilter;
 
@@ -510,7 +501,6 @@ pub trait Visitor<'v>: Sized {
         walk_inline_asm(self, asm, id)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_ty_unambig | COMPLEXITY=5 | LINES=19 */
 
 pub trait VisitorExt<'v>: Visitor<'v> {
     /// Extension trait method to visit types in unambiguous positions, this is not
@@ -530,16 +520,13 @@ pub trait VisitorExt<'v>: Visitor<'v> {
         walk_unambig_const_arg(self, c)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<'v, V: Visitor<'v>> VisitorExt<'v> for V {}
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=walk_param | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_param<'v, V: Visitor<'v>>(visitor: &mut V, param: &'v Param<'v>) -> V::Result {
     let Param { hir_id, pat, ty_span: _, span: _ } = param;
     try_visit!(visitor.visit_id(*hir_id));
     visitor.visit_pat(pat)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=walk_item | COMPLEXITY=44 | LINES=108 */
 
 pub fn walk_item<'v, V: Visitor<'v>>(visitor: &mut V, item: &'v Item<'v>) -> V::Result {
     let Item { owner_id: _, kind, span: _, vis_span: _, has_delayed_lints: _ } = item;
@@ -648,26 +635,22 @@ pub fn walk_item<'v, V: Visitor<'v>>(visitor: &mut V, item: &'v Item<'v>) -> V::
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=walk_body | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_body<'v, V: Visitor<'v>>(visitor: &mut V, body: &Body<'v>) -> V::Result {
     let Body { params, value } = body;
     walk_list!(visitor, visit_param, *params);
     visitor.visit_expr(*value)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=walk_ident | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_ident<'v, V: Visitor<'v>>(visitor: &mut V, ident: Ident) -> V::Result {
     visitor.visit_name(ident.name)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=walk_mod | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_mod<'v, V: Visitor<'v>>(visitor: &mut V, module: &'v Mod<'v>) -> V::Result {
     let Mod { spans: _, item_ids } = module;
     walk_list!(visitor, visit_nested_item, item_ids.iter().copied());
     V::Result::output()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=walk_foreign_item | COMPLEXITY=13 | LINES=25 */
 
 pub fn walk_foreign_item<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -693,7 +676,6 @@ pub fn walk_foreign_item<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=walk_local | COMPLEXITY=4 | LINES=12 */
 
 pub fn walk_local<'v, V: Visitor<'v>>(visitor: &mut V, local: &'v LetStmt<'v>) -> V::Result {
     // Intentionally visiting the expr first - the initialization expr
@@ -706,7 +688,6 @@ pub fn walk_local<'v, V: Visitor<'v>>(visitor: &mut V, local: &'v LetStmt<'v>) -
     visit_opt!(visitor, visit_ty_unambig, *ty);
     V::Result::output()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=walk_block | COMPLEXITY=3 | LINES=8 */
 
 pub fn walk_block<'v, V: Visitor<'v>>(visitor: &mut V, block: &'v Block<'v>) -> V::Result {
     let Block { stmts, expr, hir_id, rules: _, span: _, targeted_by_break: _ } = block;
@@ -715,7 +696,6 @@ pub fn walk_block<'v, V: Visitor<'v>>(visitor: &mut V, block: &'v Block<'v>) -> 
     visit_opt!(visitor, visit_expr, *expr);
     V::Result::output()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=walk_stmt | COMPLEXITY=8 | LINES=12 */
 
 pub fn walk_stmt<'v, V: Visitor<'v>>(visitor: &mut V, statement: &'v Stmt<'v>) -> V::Result {
     let Stmt { kind, hir_id, span: _ } = statement;
@@ -728,7 +708,6 @@ pub fn walk_stmt<'v, V: Visitor<'v>>(visitor: &mut V, statement: &'v Stmt<'v>) -
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=walk_arm | COMPLEXITY=3 | LINES=8 */
 
 pub fn walk_arm<'v, V: Visitor<'v>>(visitor: &mut V, arm: &'v Arm<'v>) -> V::Result {
     let Arm { hir_id, span: _, pat, guard, body } = arm;
@@ -737,7 +716,6 @@ pub fn walk_arm<'v, V: Visitor<'v>>(visitor: &mut V, arm: &'v Arm<'v>) -> V::Res
     visit_opt!(visitor, visit_expr, *guard);
     visitor.visit_expr(*body)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=walk_ty_pat | COMPLEXITY=9 | LINES=14 */
 
 pub fn walk_ty_pat<'v, V: Visitor<'v>>(visitor: &mut V, pattern: &'v TyPat<'v>) -> V::Result {
     let TyPat { kind, hir_id, span: _ } = pattern;
@@ -752,7 +730,6 @@ pub fn walk_ty_pat<'v, V: Visitor<'v>>(visitor: &mut V, pattern: &'v TyPat<'v>) 
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=walk_pat | COMPLEXITY=19 | LINES=44 */
 
 pub fn walk_pat<'v, V: Visitor<'v>>(visitor: &mut V, pattern: &'v Pat<'v>) -> V::Result {
     let Pat { hir_id, kind, span, default_binding_modes: _ } = pattern;
@@ -797,7 +774,6 @@ pub fn walk_pat<'v, V: Visitor<'v>>(visitor: &mut V, pattern: &'v Pat<'v>) -> V:
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=walk_pat_field | COMPLEXITY=3 | LINES=7 */
 
 pub fn walk_pat_field<'v, V: Visitor<'v>>(visitor: &mut V, field: &'v PatField<'v>) -> V::Result {
     let PatField { hir_id, ident, pat, is_shorthand: _, span: _ } = field;
@@ -805,7 +781,6 @@ pub fn walk_pat_field<'v, V: Visitor<'v>>(visitor: &mut V, field: &'v PatField<'
     try_visit!(visitor.visit_ident(*ident));
     visitor.visit_pat(*pat)
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=walk_pat_expr | COMPLEXITY=8 | LINES=10 */
 
 pub fn walk_pat_expr<'v, V: Visitor<'v>>(visitor: &mut V, expr: &'v PatExpr<'v>) -> V::Result {
     let PatExpr { hir_id, span, kind } = expr;
@@ -816,14 +791,12 @@ pub fn walk_pat_expr<'v, V: Visitor<'v>>(visitor: &mut V, expr: &'v PatExpr<'v>)
         PatExprKind::Path(qpath) => visitor.visit_qpath(qpath, *hir_id, *span),
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=walk_anon_const | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_anon_const<'v, V: Visitor<'v>>(visitor: &mut V, constant: &'v AnonConst) -> V::Result {
     let AnonConst { hir_id, def_id: _, body, span: _ } = constant;
     try_visit!(visitor.visit_id(*hir_id));
     visitor.visit_nested_body(*body)
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=walk_inline_const | COMPLEXITY=3 | LINES=9 */
 
 pub fn walk_inline_const<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -833,7 +806,6 @@ pub fn walk_inline_const<'v, V: Visitor<'v>>(
     try_visit!(visitor.visit_id(*hir_id));
     visitor.visit_nested_body(*body)
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=walk_expr | COMPLEXITY=60 | LINES=139 */
 
 pub fn walk_expr<'v, V: Visitor<'v>>(visitor: &mut V, expression: &'v Expr<'v>) -> V::Result {
     let Expr { hir_id, kind, span } = expression;
@@ -973,7 +945,6 @@ pub fn walk_expr<'v, V: Visitor<'v>>(visitor: &mut V, expression: &'v Expr<'v>) 
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=walk_expr_field | COMPLEXITY=3 | LINES=7 */
 
 pub fn walk_expr_field<'v, V: Visitor<'v>>(visitor: &mut V, field: &'v ExprField<'v>) -> V::Result {
     let ExprField { hir_id, ident, expr, span: _, is_shorthand: _ } = field;
@@ -981,7 +952,6 @@ pub fn walk_expr_field<'v, V: Visitor<'v>>(visitor: &mut V, field: &'v ExprField
     try_visit!(visitor.visit_ident(*ident));
     visitor.visit_expr(*expr)
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 /// We track whether an infer var is from a [`Ty`], [`ConstArg`], or [`GenericArg`] so that
 /// HIR visitors overriding [`Visitor::visit_infer`] can determine what kind of infer is being visited
 pub enum InferKind<'hir> {
@@ -989,7 +959,6 @@ pub enum InferKind<'hir> {
     Const(&'hir ConstArg<'hir>),
     Ambig(&'hir InferArg),
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=walk_generic_arg | COMPLEXITY=8 | LINES=15 */
 
 pub fn walk_generic_arg<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1005,7 +974,6 @@ pub fn walk_generic_arg<'v, V: Visitor<'v>>(
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=walk_unambig_ty | COMPLEXITY=8 | LINES=10 */
 
 pub fn walk_unambig_ty<'v, V: Visitor<'v>>(visitor: &mut V, typ: &'v Ty<'v>) -> V::Result {
     match typ.try_as_ambig_ty() {
@@ -1016,7 +984,6 @@ pub fn walk_unambig_ty<'v, V: Visitor<'v>>(visitor: &mut V, typ: &'v Ty<'v>) -> 
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=walk_ty | COMPLEXITY=26 | LINES=52 */
 
 pub fn walk_ty<'v, V: Visitor<'v>>(visitor: &mut V, typ: &'v Ty<'v, AmbigArg>) -> V::Result {
     let Ty { hir_id, span: _, kind } = typ;
@@ -1069,7 +1036,6 @@ pub fn walk_ty<'v, V: Visitor<'v>>(visitor: &mut V, typ: &'v Ty<'v, AmbigArg>) -
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=walk_unambig_const_arg | COMPLEXITY=8 | LINES=13 */
 
 pub fn walk_unambig_const_arg<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1083,7 +1049,6 @@ pub fn walk_unambig_const_arg<'v, V: Visitor<'v>>(
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=walk_const_arg | COMPLEXITY=7 | LINES=12 */
 
 pub fn walk_const_arg<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1096,7 +1061,6 @@ pub fn walk_const_arg<'v, V: Visitor<'v>>(
         ConstArgKind::Anon(anon) => visitor.visit_anon_const(*anon),
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=walk_generic_param | COMPLEXITY=22 | LINES=34 */
 
 pub fn walk_generic_param<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1131,7 +1095,6 @@ pub fn walk_generic_param<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=walk_const_param_default | COMPLEXITY=2 | LINES=7 */
 
 pub fn walk_const_param_default<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1139,7 +1102,6 @@ pub fn walk_const_param_default<'v, V: Visitor<'v>>(
 ) -> V::Result {
     visitor.visit_const_arg_unambig(ct)
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=walk_generics | COMPLEXITY=3 | LINES=13 */
 
 pub fn walk_generics<'v, V: Visitor<'v>>(visitor: &mut V, generics: &'v Generics<'v>) -> V::Result {
     let &Generics {
@@ -1153,7 +1115,6 @@ pub fn walk_generics<'v, V: Visitor<'v>>(visitor: &mut V, generics: &'v Generics
     walk_list!(visitor, visit_where_predicate, predicates);
     V::Result::output()
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=walk_where_predicate | COMPLEXITY=15 | LINES=33 */
 
 pub fn walk_where_predicate<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1187,7 +1148,6 @@ pub fn walk_where_predicate<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=walk_fn_decl | COMPLEXITY=3 | LINES=10 */
 
 pub fn walk_fn_decl<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1198,7 +1158,6 @@ pub fn walk_fn_decl<'v, V: Visitor<'v>>(
     walk_list!(visitor, visit_ty_unambig, *inputs);
     visitor.visit_fn_ret_ty(output)
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=walk_fn_ret_ty | COMPLEXITY=5 | LINES=7 */
 
 pub fn walk_fn_ret_ty<'v, V: Visitor<'v>>(visitor: &mut V, ret_ty: &'v FnRetTy<'v>) -> V::Result {
     if let FnRetTy::Return(output_ty) = *ret_ty {
@@ -1206,7 +1165,6 @@ pub fn walk_fn_ret_ty<'v, V: Visitor<'v>>(visitor: &mut V, ret_ty: &'v FnRetTy<'
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=walk_fn | COMPLEXITY=2 | LINES=12 */
 
 pub fn walk_fn<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1219,7 +1177,6 @@ pub fn walk_fn<'v, V: Visitor<'v>>(
     try_visit!(walk_fn_kind(visitor, function_kind));
     visitor.visit_nested_body(body_id)
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=walk_fn_kind | COMPLEXITY=8 | LINES=10 */
 
 pub fn walk_fn_kind<'v, V: Visitor<'v>>(visitor: &mut V, function_kind: FnKind<'v>) -> V::Result {
     match function_kind {
@@ -1230,7 +1187,6 @@ pub fn walk_fn_kind<'v, V: Visitor<'v>>(visitor: &mut V, function_kind: FnKind<'
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=walk_use | COMPLEXITY=7 | LINES=12 */
 
 pub fn walk_use<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1243,7 +1199,6 @@ pub fn walk_use<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=walk_trait_item | COMPLEXITY=17 | LINES=46 */
 
 pub fn walk_trait_item<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1290,12 +1245,10 @@ pub fn walk_trait_item<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=walk_trait_item_ref | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_trait_item_ref<'v, V: Visitor<'v>>(visitor: &mut V, id: TraitItemId) -> V::Result {
     visitor.visit_nested_trait_item(id)
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=walk_impl_item | COMPLEXITY=18 | LINES=39 */
 
 pub fn walk_impl_item<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1335,17 +1288,14 @@ pub fn walk_impl_item<'v, V: Visitor<'v>>(
         ImplItemKind::Type(ref ty) => visitor.visit_ty_unambig(ty),
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=walk_foreign_item_ref | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_foreign_item_ref<'v, V: Visitor<'v>>(visitor: &mut V, id: ForeignItemId) -> V::Result {
     visitor.visit_nested_foreign_item(id)
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=walk_impl_item_ref | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_impl_item_ref<'v, V: Visitor<'v>>(visitor: &mut V, id: ImplItemId) -> V::Result {
     visitor.visit_nested_impl_item(id)
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=walk_trait_ref | COMPLEXITY=3 | LINES=9 */
 
 pub fn walk_trait_ref<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1355,7 +1305,6 @@ pub fn walk_trait_ref<'v, V: Visitor<'v>>(
     try_visit!(visitor.visit_id(*hir_ref_id));
     visitor.visit_path(*path, *hir_ref_id)
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=walk_param_bound | COMPLEXITY=7 | LINES=14 */
 
 pub fn walk_param_bound<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1370,7 +1319,6 @@ pub fn walk_param_bound<'v, V: Visitor<'v>>(
         }
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=walk_precise_capturing_arg | COMPLEXITY=8 | LINES=14 */
 
 pub fn walk_precise_capturing_arg<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1385,7 +1333,6 @@ pub fn walk_precise_capturing_arg<'v, V: Visitor<'v>>(
         }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=walk_poly_trait_ref | COMPLEXITY=3 | LINES=9 */
 
 pub fn walk_poly_trait_ref<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1395,7 +1342,6 @@ pub fn walk_poly_trait_ref<'v, V: Visitor<'v>>(
     walk_list!(visitor, visit_generic_param, *bound_generic_params);
     visitor.visit_trait_ref(trait_ref)
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=walk_opaque_ty | COMPLEXITY=3 | LINES=7 */
 
 pub fn walk_opaque_ty<'v, V: Visitor<'v>>(visitor: &mut V, opaque: &'v OpaqueTy<'v>) -> V::Result {
     let &OpaqueTy { hir_id, def_id: _, bounds, origin: _, span: _ } = opaque;
@@ -1403,7 +1349,6 @@ pub fn walk_opaque_ty<'v, V: Visitor<'v>>(visitor: &mut V, opaque: &'v OpaqueTy<
     walk_list!(visitor, visit_param_bound, bounds);
     V::Result::output()
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=walk_struct_def | COMPLEXITY=2 | LINES=9 */
 
 pub fn walk_struct_def<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1413,19 +1358,16 @@ pub fn walk_struct_def<'v, V: Visitor<'v>>(
     walk_list!(visitor, visit_field_def, struct_definition.fields());
     V::Result::output()
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=walk_field_def | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_field_def<'v, V: Visitor<'v>>(
     visitor: &mut V,
     FieldDef { hir_id, ident, ty, default, span: _, vis_span: _, def_id: _, safety: _ }: &'v FieldDef<'v>,
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 ) -> V::Result {
     try_visit!(visitor.visit_id(*hir_id));
     try_visit!(visitor.visit_ident(*ident));
     visit_opt!(visitor, visit_anon_const, default);
     visitor.visit_ty_unambig(*ty)
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=walk_enum_def | COMPLEXITY=3 | LINES=9 */
 
 pub fn walk_enum_def<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1435,7 +1377,6 @@ pub fn walk_enum_def<'v, V: Visitor<'v>>(
     walk_list!(visitor, visit_variant, *variants);
     V::Result::output()
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=walk_variant | COMPLEXITY=3 | LINES=9 */
 
 pub fn walk_variant<'v, V: Visitor<'v>>(visitor: &mut V, variant: &'v Variant<'v>) -> V::Result {
     let Variant { ident, hir_id, def_id: _, data, disr_expr, span: _ } = variant;
@@ -1445,26 +1386,22 @@ pub fn walk_variant<'v, V: Visitor<'v>>(visitor: &mut V, variant: &'v Variant<'v
     visit_opt!(visitor, visit_anon_const, disr_expr);
     V::Result::output()
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=walk_label | COMPLEXITY=3 | LINES=5 */
 
 pub fn walk_label<'v, V: Visitor<'v>>(visitor: &mut V, label: &'v Label) -> V::Result {
     let Label { ident } = label;
     visitor.visit_ident(*ident)
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=walk_inf | COMPLEXITY=3 | LINES=5 */
 
 pub fn walk_inf<'v, V: Visitor<'v>>(visitor: &mut V, inf: &'v InferArg) -> V::Result {
     let InferArg { hir_id, span: _ } = inf;
     visitor.visit_id(*hir_id)
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=walk_lifetime | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_lifetime<'v, V: Visitor<'v>>(visitor: &mut V, lifetime: &'v Lifetime) -> V::Result {
     let Lifetime { hir_id, ident, kind: _, source: _, syntax: _ } = lifetime;
     try_visit!(visitor.visit_id(*hir_id));
     visitor.visit_ident(*ident)
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=walk_qpath | COMPLEXITY=9 | LINES=18 */
 
 pub fn walk_qpath<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1483,14 +1420,12 @@ pub fn walk_qpath<'v, V: Visitor<'v>>(
         QPath::LangItem(..) => V::Result::output(),
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=walk_path | COMPLEXITY=3 | LINES=6 */
 
 pub fn walk_path<'v, V: Visitor<'v>>(visitor: &mut V, path: &Path<'v>) -> V::Result {
     let Path { segments, span: _, res: _ } = path;
     walk_list!(visitor, visit_path_segment, *segments);
     V::Result::output()
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=walk_path_segment | COMPLEXITY=3 | LINES=11 */
 
 pub fn walk_path_segment<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1502,7 +1437,6 @@ pub fn walk_path_segment<'v, V: Visitor<'v>>(
     visit_opt!(visitor, visit_generic_args, *args);
     V::Result::output()
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=walk_generic_args | COMPLEXITY=3 | LINES=10 */
 
 pub fn walk_generic_args<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1513,7 +1447,6 @@ pub fn walk_generic_args<'v, V: Visitor<'v>>(
     walk_list!(visitor, visit_assoc_item_constraint, *constraints);
     V::Result::output()
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=walk_assoc_item_constraint | COMPLEXITY=15 | LINES=20 */
 
 pub fn walk_assoc_item_constraint<'v, V: Visitor<'v>>(
     visitor: &mut V,
@@ -1534,7 +1467,6 @@ pub fn walk_assoc_item_constraint<'v, V: Visitor<'v>>(
     }
     V::Result::output()
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=walk_defaultness | COMPLEXITY=2 | LINES=7 */
 
 pub fn walk_defaultness<'v, V: Visitor<'v>>(_: &mut V, _: &'v Defaultness) -> V::Result {
     // No visitable content here: this fn exists so you can call it if
@@ -1542,7 +1474,6 @@ pub fn walk_defaultness<'v, V: Visitor<'v>>(_: &mut V, _: &'v Defaultness) -> V:
     // would be to walk it.
     V::Result::output()
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=walk_inline_asm | COMPLEXITY=25 | LINES=32 */
 
 pub fn walk_inline_asm<'v, V: Visitor<'v>>(
     visitor: &mut V,

@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/config.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env as std_env, fs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use boml::Toml;
 use boml::types::TomlValue;
@@ -14,7 +11,6 @@ use crate::utils::{
     create_dir, create_symlink, get_os_name, get_sysroot_dir, run_command_with_output,
     rustc_version_info, split_args,
 };
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Default, PartialEq, Eq, Clone, Copy, Debug)]
 pub enum Channel {
@@ -22,7 +18,6 @@ pub enum Channel {
     Debug,
     Release,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=9 */
 
 impl Channel {
     pub fn as_str(self) -> &'static str {
@@ -32,19 +27,16 @@ impl Channel {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=failed_config_parsing | COMPLEXITY=4 | LINES=4 */
 
 fn failed_config_parsing(config_file: &Path, err: &str) -> Result<ConfigFile, String> {
     Err(format!("Failed to parse `{}`: {}", config_file.display(), err))
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ConfigFile | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 pub struct ConfigFile {
     gcc_path: Option<String>,
     download_gccjit: Option<bool>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=38 | LINES=59 */
 
 impl ConfigFile {
     pub fn new(config_file: &Path) -> Result<Self, String> {
@@ -104,7 +96,6 @@ impl ConfigFile {
         Ok(config)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ConfigInfo | COMPLEXITY=10 | LINES=28 */
 
 #[derive(Default, Debug, Clone)]
 pub struct ConfigInfo {
@@ -133,7 +124,6 @@ pub struct ConfigInfo {
     pub backend: Option<String>,
     pub features: Vec<String>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parse_argument | COMPLEXITY=244 | LINES=366 */
 
 impl ConfigInfo {
     /// Returns `true` if the argument was taken into account.
@@ -500,7 +490,6 @@ impl ConfigInfo {
         );
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=download_gccjit | COMPLEXITY=31 | LINES=61 */
 
 fn download_gccjit(
     commit: &str,

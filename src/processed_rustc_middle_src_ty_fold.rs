@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/fold.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::def_id::DefId;
 use rustc_type_ir::data_structures::DelayedMap;
@@ -8,7 +7,6 @@ use crate::ty::{
     self, Binder, BoundConst, BoundTy, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=BottomUpFolder | COMPLEXITY=2 | LINES=15 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Some sample folders
@@ -24,7 +22,6 @@ where
     pub lt_op: G,
     pub ct_op: H,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=9 | LINES=27 */
 
 impl<'tcx, F, G, H> TypeFolder<TyCtxt<'tcx>> for BottomUpFolder<'tcx, F, G, H>
 where
@@ -52,7 +49,6 @@ where
         (self.ct_op)(ct)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=replace_region | COMPLEXITY=3 | LINES=14 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Bound vars replacer
@@ -67,7 +63,6 @@ pub trait BoundVarReplacerDelegate<'tcx> {
     fn replace_ty(&mut self, bt: ty::BoundTy) -> Ty<'tcx>;
     fn replace_const(&mut self, bc: ty::BoundConst) -> ty::Const<'tcx>;
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=FnMutDelegate | COMPLEXITY=4 | LINES=9 */
 
 /// A simple delegate taking 3 mutable functions. The used functions must
 /// always return the same result for each bound variable, no matter how
@@ -77,7 +72,6 @@ pub struct FnMutDelegate<'a, 'tcx> {
     pub types: &'a mut (dyn FnMut(ty::BoundTy) -> Ty<'tcx> + 'a),
     pub consts: &'a mut (dyn FnMut(ty::BoundConst) -> ty::Const<'tcx> + 'a),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=replace_region | COMPLEXITY=7 | LINES=12 */
 
 impl<'a, 'tcx> BoundVarReplacerDelegate<'tcx> for FnMutDelegate<'a, 'tcx> {
     fn replace_region(&mut self, br: ty::BoundRegion) -> ty::Region<'tcx> {
@@ -90,7 +84,6 @@ impl<'a, 'tcx> BoundVarReplacerDelegate<'tcx> for FnMutDelegate<'a, 'tcx> {
         (self.consts)(bc)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=BoundVarReplacer | COMPLEXITY=5 | LINES=15 */
 
 /// Replaces the escaping bound vars (late bound regions or bound types) in a type.
 struct BoundVarReplacer<'tcx, D> {
@@ -106,14 +99,12 @@ struct BoundVarReplacer<'tcx, D> {
     /// for the delegate how often its methods get used.
     cache: DelayedMap<(ty::DebruijnIndex, Ty<'tcx>), Ty<'tcx>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx, D: BoundVarReplacerDelegate<'tcx>> BoundVarReplacer<'tcx, D> {
     fn new(tcx: TyCtxt<'tcx>, delegate: D) -> Self {
         BoundVarReplacer { tcx, current_index: ty::INNERMOST, delegate, cache: Default::default() }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=57 | LINES=78 */
 
 impl<'tcx, D> TypeFolder<TyCtxt<'tcx>> for BoundVarReplacer<'tcx, D>
 where
@@ -192,7 +183,6 @@ where
         if c.has_vars_bound_at_or_above(self.current_index) { c.super_fold_with(self) } else { c }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=instantiate_bound_regions | COMPLEXITY=56 | LINES=183 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Replaces all regions bound by the given `Binder` with the

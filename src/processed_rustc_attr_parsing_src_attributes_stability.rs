@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/stability.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::num::NonZero;
 
 use crate::rustc_complete::ErrorGuaranteed;
@@ -7,12 +6,10 @@ use crate::rustc_complete::{
     DefaultBodyStability, MethodKind, PartialConstStability, Stability, StabilityLevel,
     StableSince, Target, UnstableReason, VERSION_PLACEHOLDER,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::prelude::*;
 use super::util::parse_version;
 use crate::session_diagnostics::{self, UnsupportedLiteralReason};
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=10 */
 
 macro_rules! reject_outside_std {
     ($cx: ident) => {
@@ -23,7 +20,6 @@ macro_rules! reject_outside_std {
         }
     };
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
     Allow(Target::Fn),
@@ -32,14 +28,10 @@ const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
     Allow(Target::Union),
     Allow(Target::Method(MethodKind::Inherent)),
     Allow(Target::Method(MethodKind::Trait { body: false })),
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
     Allow(Target::Method(MethodKind::Trait { body: true })),
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
     Allow(Target::Method(MethodKind::TraitImpl)),
     Allow(Target::Impl { of_trait: false }),
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
     Allow(Target::Impl { of_trait: true }),
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
     Allow(Target::MacroDef),
     Allow(Target::Crate),
     Allow(Target::Mod),
@@ -64,7 +56,6 @@ pub(crate) struct StabilityParser {
     allowed_through_unstable_modules: Option<Symbol>,
     stability: Option<(Stability, Span)>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_duplicate | COMPLEXITY=8 | LINES=12 */
 
 impl StabilityParser {
     /// Checks, and emits an error when a stability (or unstability) was already set, which would be a duplicate.
@@ -77,7 +68,6 @@ impl StabilityParser {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=46 | LINES=79 */
 
 impl<S: Stage> AttributeParser<S> for StabilityParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[
@@ -157,14 +147,12 @@ impl<S: Stage> AttributeParser<S> for StabilityParser {
         Some(AttributeKind::Stability { stability, span })
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // FIXME(jdonszelmann) change to Single
 #[derive(Default)]
 pub(crate) struct BodyStabilityParser {
     stability: Option<(DefaultBodyStability, Span)>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=16 | LINES=23 */
 
 impl<S: Stage> AttributeParser<S> for BodyStabilityParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[(
@@ -188,7 +176,6 @@ impl<S: Stage> AttributeParser<S> for BodyStabilityParser {
         Some(AttributeKind::BodyStability { stability, span })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 pub(crate) struct ConstStabilityIndirectParser;
 impl<S: Stage> NoArgsAttributeParser<S> for ConstStabilityIndirectParser {
@@ -200,14 +187,12 @@ impl<S: Stage> NoArgsAttributeParser<S> for ConstStabilityIndirectParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = |_| AttributeKind::ConstStabilityIndirect;
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 pub(crate) struct ConstStabilityParser {
     promotable: bool,
     stability: Option<(PartialConstStability, Span)>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=check_duplicate | COMPLEXITY=8 | LINES=12 */
 
 impl ConstStabilityParser {
     /// Checks, and emits an error when a stability (or unstability) was already set, which would be a duplicate.
@@ -220,7 +205,6 @@ impl ConstStabilityParser {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=28 | LINES=56 */
 
 impl<S: Stage> AttributeParser<S> for ConstStabilityParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[
@@ -277,7 +261,6 @@ impl<S: Stage> AttributeParser<S> for ConstStabilityParser {
         Some(AttributeKind::ConstStability { stability, span })
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=insert_value_into_option_or_error | COMPLEXITY=10 | LINES=24 */
 
 /// Tries to insert the value of a `key = value` meta item into an option.
 ///
@@ -302,7 +285,6 @@ fn insert_value_into_option_or_error<S: Stage>(
         None
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=76 */
 
 /// Read the content of a `stable`/`rustc_const_stable` attribute, and return the feature name and
 /// its stability information.
@@ -379,7 +361,6 @@ pub(crate) fn parse_stability<S: Stage>(
         Err(ErrorGuaranteed { .. }) => None,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=60 | LINES=111 */
 
 // Read the content of a `unstable`/`rustc_const_unstable`/`rustc_default_body_unstable`
 /// attribute, and return the feature name and its stability information.

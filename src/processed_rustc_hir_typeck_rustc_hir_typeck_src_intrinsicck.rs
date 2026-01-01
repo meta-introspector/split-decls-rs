@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/intrinsicck.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use hir::HirId;
 use crate::rustc_abi::Primitive::Pointer;
 use crate::rustc_abi::VariantIdx;
@@ -9,9 +8,7 @@ use rustc_hir as hir;
 use crate::rustc_index::Idx;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{LayoutError, SizeSkeleton};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=unpack_option_like | COMPLEXITY=17 | LINES=29 */
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::trace;
 
@@ -41,7 +38,6 @@ fn unpack_option_like<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Ty<'tcx> {
 
     ty
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=skeleton_string | COMPLEXITY=29 | LINES=31 */
 
 /// Try to display a sensible error with as much information as possible.
 fn skeleton_string<'tcx>(
@@ -73,7 +69,6 @@ fn skeleton_string<'tcx>(
         Err(err) => err.to_string(),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_transmute | COMPLEXITY=37 | LINES=73 */
 
 fn check_transmute<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -147,7 +142,6 @@ fn check_transmute<'tcx>(
         err.emit();
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub(crate) fn check_transmutes(tcx: TyCtxt<'_>, owner: LocalDefId) {
     assert!(!tcx.is_typeck_child(owner.to_def_id()));

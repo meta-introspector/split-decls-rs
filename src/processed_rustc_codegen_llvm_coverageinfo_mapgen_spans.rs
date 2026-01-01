@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/mapgen/spans.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{BytePos, Pos, SourceFile, Span};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 use tracing::debug;
 
 use crate::coverageinfo::ffi;
@@ -21,7 +19,6 @@ pub(crate) struct Coords {
     /// 1-based ending column (in bytes) of the source code span. High bit must be unset.
     pub(crate) end_col: u32,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 impl Coords {
     /// Attaches a local file ID to these coordinates to produce an `ffi::CoverageSpan`.
@@ -31,7 +28,6 @@ impl Coords {
         ffi::CoverageSpan { file_id, start_line, start_col, end_line, end_col }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=45 */
 
 /// Converts the span into its start line and column, and end line and column.
 ///
@@ -77,7 +73,6 @@ pub(crate) fn make_coords(source_map: &SourceMap, file: &SourceFile, span: Span)
         end_col: end_col as u32,
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_coords | COMPLEXITY=13 | LINES=33 */
 
 /// If `llvm-cov` sees a source region that is improperly ordered (end < start),
 /// it will immediately exit with a fatal error. To prevent that from happening,

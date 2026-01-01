@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/loops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::collections::BTreeMap;
 use std::fmt;
 
@@ -9,22 +8,18 @@ use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Destination, Node, find_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::hygiene::DesugaringKind;
 use crate::rustc_complete::{BytePos, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::errors::{
     BreakInsideClosure, BreakInsideCoroutine, BreakNonLoop, ConstContinueBadLabel,
     ContinueLabeledBlock, OutsideLoop, OutsideLoopSuggestion, UnlabeledCfInWhileCondition,
     UnlabeledInLabeledBlock,
 };
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=26 */
 
 /// The context in which a block is encountered.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -51,7 +46,6 @@ enum Context {
         labeled_block: Destination,
     },
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=BlockInfo | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone)]
 struct BlockInfo {
@@ -59,14 +53,12 @@ struct BlockInfo {
     spans: Vec<Span>,
     suggs: Vec<Span>,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 enum BreakContextKind {
     Break,
     Continue,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl fmt::Display for BreakContextKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -77,7 +69,6 @@ impl fmt::Display for BreakContextKind {
         .fmt(f)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CheckLoopVisitor | COMPLEXITY=9 | LINES=11 */
 
 #[derive(Clone)]
 struct CheckLoopVisitor<'tcx> {
@@ -89,7 +80,6 @@ struct CheckLoopVisitor<'tcx> {
     cx_stack: Vec<Context>,
     block_breaks: BTreeMap<Span, BlockInfo>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
 
 pub(crate) fn check<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &'tcx hir::Body<'tcx>) {
     let mut check =
@@ -101,7 +91,6 @@ pub(crate) fn check<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &'tcx hir
     check.with_context(cx, |v| v.visit_body(body));
     check.report_outside_loop_error();
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=144 | LINES=226 */
 
 impl<'hir> Visitor<'hir> for CheckLoopVisitor<'hir> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -328,7 +317,6 @@ impl<'hir> Visitor<'hir> for CheckLoopVisitor<'hir> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=with_context | COMPLEXITY=75 | LINES=133 */
 
 impl<'hir> CheckLoopVisitor<'hir> {
     fn with_context<F>(&mut self, cx: Context, f: F)

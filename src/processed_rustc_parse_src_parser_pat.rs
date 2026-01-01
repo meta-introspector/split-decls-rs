@@ -1,33 +1,23 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/pat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Bound;
 
 use crate::rustc_complete::mut_visit::{self, MutVisitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token::NtPatKind::*;
 use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_complete::visit::{self, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, Arm, AttrVec, BindingMode, ByRef, Expr, ExprKind, LocalKind, MacCall, Mutability,
     Pat, PatField, PatFieldsRest, PatKind, Path, QSelf, RangeEnd, RangeSyntax, Stmt, StmtKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::{Applicability, Diag, DiagArgValue, PResult, StashKey};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::source_map::{Spanned, respan};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ForceCollect, Parser, PathStyle, Restrictions, Trailing, UsePreAttrPos};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 use crate::errors::{
     self, AmbiguousRangePattern, AtDotDotInStructPattern, AtInStructPattern,
     DotDotDotForRemainingFields, DotDotDotRangeToPatternNotAllowed, DotDotDotRestPattern,
@@ -40,11 +30,8 @@ use crate::errors::{
     UnexpectedParenInRangePat, UnexpectedParenInRangePatSugg,
     UnexpectedVertVertBeforeFunctionParam, UnexpectedVertVertInPattern, WrapInParens,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::parser::expr::{DestructuredFloat, could_be_unclosed_char_literal};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{exp, maybe_recover_from_interpolated_ty_qpath};
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(PartialEq, Copy, Clone)]
 pub enum Expected {
@@ -53,7 +40,6 @@ pub enum Expected {
     Identifier,
     BindingPattern,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_string_or_fallback | COMPLEXITY=7 | LINES=13 */
 
 impl Expected {
     // FIXME(#100717): migrate users of this to proper localization
@@ -67,7 +53,6 @@ impl Expected {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 const WHILE_PARSING_OR_MSG: &str = "while parsing this or-pattern starting here";
 
@@ -77,7 +62,6 @@ pub enum RecoverComma {
     Yes,
     No,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Whether or not to recover a `:` when parsing patterns that were meant to be paths.
 #[derive(PartialEq, Copy, Clone)]
@@ -85,7 +69,6 @@ pub enum RecoverColon {
     Yes,
     No,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Whether or not to recover a `a, b` when parsing patterns as `(a, b)` or that *and* `a | b`.
 #[derive(PartialEq, Copy, Clone)]
@@ -93,7 +76,6 @@ pub enum CommaRecoveryMode {
     LikelyTuple,
     EitherTupleOrPipe,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The result of `eat_or_separator`. We want to distinguish which case we are in to avoid
 /// emitting duplicate diagnostics.
@@ -106,7 +88,6 @@ enum EatOrResult {
     /// We did not eat anything (i.e. the current token is not `|` or `||`).
     None,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// The syntax location of a given pattern. Used for diagnostics.
 #[derive(Clone, Copy)]
@@ -114,7 +95,6 @@ pub enum PatternLocation {
     LetBinding,
     FunctionParameter,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_pat_allow_top_guard | COMPLEXITY=129 | LINES=241 */
 
 impl<'a> Parser<'a> {
     /// Parses a pattern.
@@ -356,7 +336,6 @@ impl<'a> Parser<'a> {
 
     /// Recover if `|` or `||` is the current token and we have one of the
     /// tokens `=>`, `if`, `=`, `:`, `;`, `,`, `]`, `)`, or `}` ahead of us.
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=recover_trailing_vert | COMPLEXITY=18 | LINES=38 */
     ///
     /// These tokens all indicate that we reached the end of the or-pattern
     /// list and can now reliably say that the `|` was an illegal trailing vert.
@@ -395,7 +374,6 @@ impl<'a> Parser<'a> {
             _ => false,
         }
     }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=maybe_recover_trailing_expr | COMPLEXITY=50 | LINES=126 */
 
     /// Ensures that the last parsed pattern (or pattern range bound) is not followed by an expression.
     ///
@@ -522,7 +500,6 @@ impl<'a> Parser<'a> {
             span,
         ))
     }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=PatVisitor | COMPLEXITY=114 | LINES=186 */
 
     /// Called by [`Parser::parse_stmt_without_recovery`], used to add statement-aware subdiagnostics to the errors stashed
     /// by [`Parser::maybe_recover_trailing_expr`].
@@ -709,7 +686,6 @@ impl<'a> Parser<'a> {
         // Starts the visit.
         PatVisitor { parser: self, stmt, arm: None, field: None }.visit_stmt(stmt);
     }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=eat_metavar_pat | COMPLEXITY=12 | LINES=21 */
 
     fn eat_metavar_pat(&mut self) -> Option<Box<Pat>> {
         // Must try both kinds of pattern nonterminals.
@@ -731,7 +707,6 @@ impl<'a> Parser<'a> {
             None
         }
     }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=parse_pat_with_range_pat | COMPLEXITY=126 | LINES=177 */
 
     /// Parses a pattern, with a setting whether modern range patterns (e.g., `a..=b`, `a..b` are
     /// allowed).
@@ -909,7 +884,6 @@ impl<'a> Parser<'a> {
 
         Ok(pat)
     }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=recover_dotdotdot_rest_pat | COMPLEXITY=5 | LINES=14 */
 
     /// Recover from a typoed `...` pattern that was encountered
     /// Ref: Issue #70388
@@ -924,7 +898,6 @@ impl<'a> Parser<'a> {
         });
         PatKind::Rest
     }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=recover_intersection_pat | COMPLEXITY=18 | LINES=50 */
 
     /// Try to recover the more general form `intersect ::= $pat_lhs @ $pat_rhs`.
     ///
@@ -975,7 +948,6 @@ impl<'a> Parser<'a> {
         rhs.span = whole_span;
         Ok(rhs)
     }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=ban_pat_range_if_ambiguous | COMPLEXITY=13 | LINES=20 */
 
     /// Ban a range pattern if it has an ambiguous interpretation.
     fn ban_pat_range_if_ambiguous(&self, pat: &Pat) {
@@ -996,7 +968,6 @@ impl<'a> Parser<'a> {
             },
         });
     }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=parse_pat_deref | COMPLEXITY=7 | LINES=18 */
 
     /// Parse `&pat` / `&mut pat`.
     fn parse_pat_deref(&mut self, expected: Option<Expected>) -> PResult<'a, PatKind> {
@@ -1015,7 +986,6 @@ impl<'a> Parser<'a> {
         let subpat = self.parse_pat_with_range_pat(false, expected, None)?;
         Ok(PatKind::Ref(subpat, mutbl))
     }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=parse_pat_tuple_or_parens | COMPLEXITY=30 | LINES=67 */
 
     /// Parse a tuple or parenthesis pattern.
     fn parse_pat_tuple_or_parens(&mut self) -> PResult<'a, PatKind> {
@@ -1083,7 +1053,6 @@ impl<'a> Parser<'a> {
             Some((guar, _)) => PatKind::Err(guar),
         })
     }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=parse_pat_ident_mut | COMPLEXITY=14 | LINES=37 */
 
     /// Parse a mutable binding with the `mut` token already eaten.
     fn parse_pat_ident_mut(&mut self) -> PResult<'a, PatKind> {
@@ -1121,7 +1090,6 @@ impl<'a> Parser<'a> {
         }
         Ok(pat.kind)
     }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=make_all_value_bindings_mutable | COMPLEXITY=12 | LINES=21 */
 
     /// Turn all by-value immutable bindings in a pattern into mutable bindings.
     /// Returns `true` if any change was made.
@@ -1143,7 +1111,6 @@ impl<'a> Parser<'a> {
         add_mut.visit_pat(pat);
         add_mut.0
     }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=ban_mut_general_pat | COMPLEXITY=8 | LINES=12 */
 
     /// Error on `mut $pat` where `$pat` is not an ident.
     fn ban_mut_general_pat(&self, lo: Span, pat: &Pat, changed_any_binding: bool) {
@@ -1156,7 +1123,6 @@ impl<'a> Parser<'a> {
             InvalidMutInPattern::NonIdent { span: lo.until(pat.span) }
         });
     }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=recover_additional_muts | COMPLEXITY=11 | LINES=13 */
 
     /// Eat any extraneous `mut`s and error + recover if we ate any.
     fn recover_additional_muts(&mut self) {
@@ -1170,7 +1136,6 @@ impl<'a> Parser<'a> {
         let suggestion = span.with_hi(self.token.span.lo());
         self.dcx().emit_err(RepeatedMutInPattern { span, suggestion });
     }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=parse_pat_mac_invoc | COMPLEXITY=3 | LINES=8 */
 
     /// Parse macro invocation
     fn parse_pat_mac_invoc(&mut self, path: Path) -> PResult<'a, PatKind> {
@@ -1179,7 +1144,6 @@ impl<'a> Parser<'a> {
         let mac = Box::new(MacCall { path, args });
         Ok(PatKind::MacCall(mac))
     }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=fatal_unexpected_non_pat | COMPLEXITY=9 | LINES=21 */
 
     fn fatal_unexpected_non_pat(
         &mut self,
@@ -1201,7 +1165,6 @@ impl<'a> Parser<'a> {
 
         Err(err)
     }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=parse_range_end | COMPLEXITY=13 | LINES=14 */
 
     /// Parses the range pattern end form `".." | "..." | "..=" ;`.
     fn parse_range_end(&mut self) -> Option<Spanned<RangeEnd>> {
@@ -1216,7 +1179,6 @@ impl<'a> Parser<'a> {
         };
         Some(respan(self.prev_token.span, re))
     }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=parse_pat_range_begin_with | COMPLEXITY=10 | LINES=21 */
 
     /// Parse a range pattern `$begin $form $end?` where `$form = ".." | "..." | "..=" ;`.
     /// `$begin $form` has already been parsed.
@@ -1238,7 +1200,6 @@ impl<'a> Parser<'a> {
         };
         Ok(PatKind::Range(Some(begin), end, re))
     }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=32 */
 
     pub(super) fn inclusive_range_with_incorrect_end(&mut self) -> ErrorGuaranteed {
         let tok = &self.token;
@@ -1271,7 +1232,6 @@ impl<'a> Parser<'a> {
             }),
         }
     }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=parse_pat_range_to | COMPLEXITY=9 | LINES=13 */
 
     /// Parse a range-to pattern, `..X` or `..=X` where `X` remains to be parsed.
     ///
@@ -1285,7 +1245,6 @@ impl<'a> Parser<'a> {
         }
         Ok(PatKind::Range(None, Some(end), re))
     }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=is_pat_range_end_start | COMPLEXITY=6 | LINES=17 */
 
     /// Is the token `dist` away from the current suitable as the start of a range patterns end?
     fn is_pat_range_end_start(&self, dist: usize) -> bool {
@@ -1303,7 +1262,6 @@ impl<'a> Parser<'a> {
                     && self.is_pat_range_end_start(dist + 1))
             })
     }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=parse_pat_range_end | COMPLEXITY=25 | LINES=45 */
 
     /// Parse a range pattern end bound
     fn parse_pat_range_end(&mut self) -> PResult<'a, Box<Expr>> {
@@ -1349,7 +1307,6 @@ impl<'a> Parser<'a> {
             None => bound,
         })
     }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=is_start_of_pat_with_path | COMPLEXITY=4 | LINES=7 */
 
     /// Is this the start of a pattern beginning with a path?
     fn is_start_of_pat_with_path(&mut self) -> bool {
@@ -1357,7 +1314,6 @@ impl<'a> Parser<'a> {
         // Just for recovery (see `can_be_ident`).
         || self.token.is_ident() && !self.token.is_bool_lit() && !self.token.is_keyword(kw::In)
     }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=can_be_ident_pat | COMPLEXITY=5 | LINES=15 */
 
     /// Would `parse_pat_ident` be appropriate here?
     fn can_be_ident_pat(&mut self) -> bool {
@@ -1373,7 +1329,6 @@ impl<'a> Parser<'a> {
             | token::PathSep // A tuple / struct variant pattern.
             | token::Bang)) // A macro expanding to a pattern.
     }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=parse_pat_ident | COMPLEXITY=27 | LINES=51 */
 
     /// Parses `ident` or `ident @ pat`.
     /// Used by the copy foo and ref foo patterns to give a good
@@ -1425,10 +1380,8 @@ impl<'a> Parser<'a> {
         };
         Ok(pat)
     }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
     /// Parse a struct ("record") pattern (e.g. `Foo { ... }` or `Foo::Bar { ... }`).
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=parse_pat_struct | COMPLEXITY=12 | LINES=16 */
     fn parse_pat_struct(&mut self, qself: Option<Box<QSelf>>, path: Path) -> PResult<'a, PatKind> {
         if qself.is_some() {
             // Feature gate the use of qualified paths in patterns
@@ -1445,7 +1398,6 @@ impl<'a> Parser<'a> {
         self.bump();
         Ok(PatKind::Struct(qself, path, fields, etc))
     }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=parse_pat_tuple_struct | COMPLEXITY=7 | LINES=20 */
 
     /// Parse tuple struct or tuple variant pattern (e.g. `Foo(...)` or `Foo::Bar(...)`).
     fn parse_pat_tuple_struct(
@@ -1466,7 +1418,6 @@ impl<'a> Parser<'a> {
         }
         Ok(PatKind::TupleStruct(qself, path, fields))
     }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=isnt_pattern_start | COMPLEXITY=5 | LINES=18 */
 
     /// Are we sure this could not possibly be the start of a pattern?
     ///
@@ -1485,7 +1436,6 @@ impl<'a> Parser<'a> {
         ]
         .contains(&self.token.kind)
     }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=parse_pat_builtin | COMPLEXITY=8 | LINES=15 */
 
     fn parse_pat_builtin(&mut self) -> PResult<'a, PatKind> {
         self.parse_builtin(|self_, _lo, ident| {
@@ -1501,7 +1451,6 @@ impl<'a> Parser<'a> {
             })
         })
     }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=parse_pat_box | COMPLEXITY=13 | LINES=29 */
 
     /// Parses `box pat`
     fn parse_pat_box(&mut self) -> PResult<'a, PatKind> {
@@ -1531,7 +1480,6 @@ impl<'a> Parser<'a> {
             Ok(PatKind::Box(pat))
         }
     }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=parse_pat_fields | COMPLEXITY=104 | LINES=173 */
 
     /// Parses the fields of a struct-like pattern.
     fn parse_pat_fields(&mut self) -> PResult<'a, (ThinVec<PatField>, PatFieldsRest)> {
@@ -1705,7 +1653,6 @@ impl<'a> Parser<'a> {
         }
         Ok((fields, etc))
     }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=report_misplaced_at_in_struct_pat | COMPLEXITY=13 | LINES=17 */
 
     #[deny(rustc::untranslatable_diagnostic)]
     fn report_misplaced_at_in_struct_pat(&self, prev_field: Ident) -> Diag<'a> {
@@ -1723,10 +1670,8 @@ impl<'a> Parser<'a> {
             self.dcx().create_err(AtInStructPattern { span })
         }
     }
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
     /// If the user writes `S { ref field: name }` instead of `S { field: ref name }`, we suggest
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=recover_misplaced_pattern_modifiers | COMPLEXITY=4 | LINES=8 */
     /// the correct code.
     fn recover_misplaced_pattern_modifiers(&self, fields: &ThinVec<PatField>, err: &mut Diag<'a>) {
         if let Some(last) = fields.iter().last()
@@ -1735,12 +1680,10 @@ impl<'a> Parser<'a> {
             && binding != BindingMode::NONE
             && self.token == token::Colon
             // We found `ref mut? ident:`, try to parse a `name,` or `name }`.
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
             && let Some(name_span) = self.look_ahead(1, |t| t.is_ident().then(|| t.span))
             && self.look_ahead(2, |t| {
                 t == &token::Comma || t == &token::CloseBrace
             })
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
         {
             let span = last.pat.span.with_hi(ident.span.lo());
             // We have `S { ref field: name }` instead of `S { field: ref name }`
@@ -1753,7 +1696,6 @@ impl<'a> Parser<'a> {
                 Applicability::MachineApplicable,
             );
         }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=recover_bad_dot_dot | COMPLEXITY=7 | LINES=8 */
     }
 
     /// Recover on `...` or `_` as if it were `..` to avoid further errors.
@@ -1762,11 +1704,9 @@ impl<'a> Parser<'a> {
         if self.token == token::DotDot {
             return;
         }
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
         let token_str = pprust::token_to_string(&self.token);
         self.dcx().emit_err(DotDotDotForRemainingFields { span: self.token.span, token_str });
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=parse_pat_field | COMPLEXITY=9 | LINES=18 */
     }
 
     fn parse_pat_field(&mut self, lo: Span, attrs: AttrVec) -> PResult<'a, PatField> {
@@ -1785,7 +1725,6 @@ impl<'a> Parser<'a> {
             hi = pat.span;
             (pat, fieldname, false)
         } else {
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
             // Parsing a pattern of the form `(box) (ref) (mut) fieldname`.
             let is_box = self.eat_keyword(exp!(Box));
             let boxed_span = self.token.span;
@@ -1800,7 +1739,6 @@ impl<'a> Parser<'a> {
                 if is_box { self.mk_pat(lo.to(hi), PatKind::Box(fieldpat)) } else { fieldpat };
             (subpat, fieldname, true)
         };
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
         Ok(PatField {
             ident: fieldname,
@@ -1811,7 +1749,6 @@ impl<'a> Parser<'a> {
             span: lo.to(hi),
             is_placeholder: false,
         })
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
     }
 
     pub(super) fn mk_pat_ident(&self, span: Span, ann: BindingMode, ident: Ident) -> Box<Pat> {
@@ -1820,6 +1757,5 @@ impl<'a> Parser<'a> {
 
     pub(super) fn mk_pat(&self, span: Span, kind: PatKind) -> Box<Pat> {
         Box::new(Pat { kind, span, id: ast::DUMMY_NODE_ID, tokens: None })
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
     }
 }

@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/into.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // See docs in build/expr/mod.rs
 
 use crate::rustc_complete::{AsmMacro, InlineAsmOptions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
@@ -12,21 +10,15 @@ use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builder::expr::category::{Category, RvalueFunc};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::builder::matches::{DeclareLetBindings, HasMatchGuard};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::builder::{BlockAnd, BlockAndExtension, BlockFrame, Builder, NeedsTemporary};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{LoopMatchArmWithGuard, LoopMatchUnsupportedType};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_supported_loop_match_type | COMPLEXITY=381 | LINES=813 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Compile `expr`, storing the result into `destination`, which

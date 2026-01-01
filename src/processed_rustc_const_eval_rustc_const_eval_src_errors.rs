@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::borrow::Cow;
 use std::fmt::Write;
 
@@ -9,20 +8,15 @@ use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Diag, DiagArgValue, DiagMessage, Diagnostic, EmissionGuarantee, Level, MultiSpan, Subdiagnostic,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ConstContext;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::interpret::{
     CtfeProvenance, ExpectedKind, InterpErrorKind, InvalidMetaKind, InvalidProgramInfo,
     Misalignment, Pointer, PointerKind, ResourceExhaustionInfo, UndefinedBehaviorInfo,
     UnsupportedOpInfo, ValidationErrorInfo,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Mutability, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 use crate::fluent_generated as fluent;
 use crate::interpret::InternKind;
@@ -34,7 +28,6 @@ pub(crate) struct DanglingPtrInFinal {
     pub span: Span,
     pub kind: InternKind,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_nested_static_in_thread_local)]
@@ -42,7 +35,6 @@ pub(crate) struct NestedStaticInThreadLocal {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_mutable_ptr_in_final)]
@@ -51,7 +43,6 @@ pub(crate) struct MutablePtrInFinal {
     pub span: Span,
     pub kind: InternKind,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_const_heap_ptr_in_final)]
@@ -60,7 +51,6 @@ pub(crate) struct ConstHeapPtrInFinal {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_partial_pointer_in_final)]
@@ -70,7 +60,6 @@ pub(crate) struct PartialPtrInFinal {
     pub span: Span,
     pub kind: InternKind,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unstable_in_stable_exposed)]
@@ -89,7 +78,6 @@ pub(crate) struct UnstableInStableExposed {
     )]
     pub attr_span: Span,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_thread_local_access, code = E0625)]
@@ -97,7 +85,6 @@ pub(crate) struct ThreadLocalAccessErr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_raw_ptr_to_int)]
@@ -107,7 +94,6 @@ pub(crate) struct RawPtrToIntErr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_raw_ptr_comparison)]
@@ -116,7 +102,6 @@ pub(crate) struct RawPtrComparisonErr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_panic_non_str)]
@@ -124,7 +109,6 @@ pub(crate) struct PanicNonStrErr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unallowed_fn_pointer_call)]
@@ -133,7 +117,6 @@ pub(crate) struct UnallowedFnPointerCall {
     pub span: Span,
     pub kind: ConstContext,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unstable_const_fn)]
@@ -142,7 +125,6 @@ pub(crate) struct UnstableConstFn {
     pub span: Span,
     pub def_path: String,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unstable_const_trait)]
@@ -151,7 +133,6 @@ pub(crate) struct UnstableConstTrait {
     pub span: Span,
     pub def_path: String,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unstable_intrinsic)]
@@ -167,7 +148,6 @@ pub(crate) struct UnstableIntrinsic {
     )]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unmarked_const_item_exposed)]
@@ -177,7 +157,6 @@ pub(crate) struct UnmarkedConstItemExposed {
     pub span: Span,
     pub def_path: String,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unmarked_intrinsic_exposed)]
@@ -187,7 +166,6 @@ pub(crate) struct UnmarkedIntrinsicExposed {
     pub span: Span,
     pub def_path: String,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_mutable_borrow_escaping, code = E0764)]
@@ -200,7 +178,6 @@ pub(crate) struct MutableBorrowEscaping {
     pub span: Span,
     pub kind: ConstContext,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_fmt_macro_call, code = E0015)]
@@ -210,7 +187,6 @@ pub(crate) struct NonConstFmtMacroCall {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_fn_call, code = E0015)]
@@ -222,7 +198,6 @@ pub(crate) struct NonConstFnCall {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_intrinsic)]
@@ -232,7 +207,6 @@ pub(crate) struct NonConstIntrinsic {
     pub name: Symbol,
     pub kind: ConstContext,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unallowed_op_in_const_context)]
@@ -241,7 +215,6 @@ pub(crate) struct UnallowedOpInConstContext {
     pub span: Span,
     pub msg: String,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unallowed_heap_allocations, code = E0010)]
@@ -253,7 +226,6 @@ pub(crate) struct UnallowedHeapAllocations {
     #[note(const_eval_teach_note)]
     pub teach: bool,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_unallowed_inline_asm, code = E0015)]
@@ -262,7 +234,6 @@ pub(crate) struct UnallowedInlineAsm {
     pub span: Span,
     pub kind: ConstContext,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_interior_mutable_borrow_escaping, code = E0492)]
@@ -275,7 +246,6 @@ pub(crate) struct InteriorMutableBorrowEscaping {
     pub span: Span,
     pub kind: ConstContext,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=LongRunning | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(const_eval_long_running)]
@@ -284,7 +254,6 @@ pub struct LongRunning {
     #[help]
     pub item_span: Span,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=LongRunningWarn | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_long_running)]
@@ -297,7 +266,6 @@ pub struct LongRunningWarn {
     // Used for evading `-Z deduplicate-diagnostics`.
     pub force_duplicate: usize,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(const_eval_non_const_impl)]
@@ -305,7 +273,6 @@ pub(crate) struct NonConstImplNote {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=FrameNote | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone)]
 pub struct FrameNote {
@@ -315,7 +282,6 @@ pub struct FrameNote {
     pub instance: String,
     pub has_label: bool,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=9 | LINES=17 */
 
 impl Subdiagnostic for FrameNote {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -333,7 +299,6 @@ impl Subdiagnostic for FrameNote {
         diag.span_note(span, msg);
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=RawBytesNote | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(const_eval_raw_bytes)]
@@ -342,7 +307,6 @@ pub struct RawBytesNote {
     pub align: u64,
     pub bytes: String,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=NonConstMatchEq | COMPLEXITY=2 | LINES=13 */
 
 // FIXME(fee1-dead) do not use stringly typed `ConstContext`
 
@@ -356,7 +320,6 @@ pub struct NonConstMatchEq<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=NonConstForLoopIntoIter | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_for_loop_into_iter, code = E0015)]
@@ -367,7 +330,6 @@ pub struct NonConstForLoopIntoIter<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=NonConstQuestionBranch | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_question_branch, code = E0015)]
@@ -378,7 +340,6 @@ pub struct NonConstQuestionBranch<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=NonConstQuestionFromResidual | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_question_from_residual, code = E0015)]
@@ -389,7 +350,6 @@ pub struct NonConstQuestionFromResidual<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=NonConstTryBlockFromOutput | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_try_block_from_output, code = E0015)]
@@ -400,7 +360,6 @@ pub struct NonConstTryBlockFromOutput<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=NonConstAwait | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_await, code = E0015)]
@@ -411,7 +370,6 @@ pub struct NonConstAwait<'tcx> {
     pub kind: ConstContext,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=NonConstClosure | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_closure, code = E0015)]
@@ -423,7 +381,6 @@ pub struct NonConstClosure {
     pub note: Option<NonConstClosureNote>,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub enum NonConstClosureNote {
@@ -437,7 +394,6 @@ pub enum NonConstClosureNote {
     #[note(const_eval_closure_call)]
     Closure,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=ConsiderDereferencing | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(const_eval_consider_dereferencing, applicability = "machine-applicable")]
@@ -448,7 +404,6 @@ pub struct ConsiderDereferencing {
     #[suggestion_part(code = "{deref}")]
     pub rhs_span: Span,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=NonConstOperator | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_operator, code = E0015)]
@@ -460,7 +415,6 @@ pub struct NonConstOperator {
     pub sugg: Option<ConsiderDereferencing>,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=NonConstDerefCoercion | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_non_const_deref_coercion, code = E0015)]
@@ -475,7 +429,6 @@ pub struct NonConstDerefCoercion<'tcx> {
     pub deref_target: Option<Span>,
     pub non_or_conditionally: &'static str,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=LiveDrop | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(const_eval_live_drop, code = E0493)]
@@ -488,7 +441,6 @@ pub struct LiveDrop<'tcx> {
     #[label(const_eval_dropped_at_label)]
     pub dropped_at: Span,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=7 | LINES=21 */
 
 pub trait ReportErrorExt {
     /// Returns the diagnostic message for this error.
@@ -510,7 +462,6 @@ pub trait ReportErrorExt {
         })
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=103 | LINES=187 */
 
 impl<'a> ReportErrorExt for UndefinedBehaviorInfo<'a> {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -698,7 +649,6 @@ impl<'a> ReportErrorExt for UndefinedBehaviorInfo<'a> {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=132 | LINES=189 */
 
 impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -888,7 +838,6 @@ impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=23 | LINES=40 */
 
 impl ReportErrorExt for UnsupportedOpInfo {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -929,7 +878,6 @@ impl ReportErrorExt for UnsupportedOpInfo {
         }
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=17 | LINES=23 */
 
 impl<'tcx> ReportErrorExt for InterpErrorKind<'tcx> {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -953,7 +901,6 @@ impl<'tcx> ReportErrorExt for InterpErrorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=21 | LINES=25 */
 
 impl<'tcx> ReportErrorExt for InvalidProgramInfo<'tcx> {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -979,7 +926,6 @@ impl<'tcx> ReportErrorExt for InvalidProgramInfo<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=11 | LINES=13 */
 
 impl ReportErrorExt for ResourceExhaustionInfo {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -993,7 +939,6 @@ impl ReportErrorExt for ResourceExhaustionInfo {
     }
     fn add_args<G: EmissionGuarantee>(self, _: &mut Diag<'_, G>) {}
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11 */
 
 impl crate::rustc_errors::IntoDiagArg for InternKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {

@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_lint/src/unqualified_local_imports.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::kw;
 
 use crate::{LateContext, LateLintPass, LintContext, lints};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=37 */
 
 declare_lint! {
     /// The `unqualified_local_imports` lint checks for `use` items that import a local item using a
@@ -45,7 +41,6 @@ declare_lint! {
     "`use` of a local item without leading `self::`, `super::`, or `crate::`",
     @feature_gate = unqualified_local_imports;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=28 | LINES=41 */
 
 declare_lint_pass!(UnqualifiedLocalImports => [UNQUALIFIED_LOCAL_IMPORTS]);
 

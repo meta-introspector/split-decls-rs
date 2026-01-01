@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/attrs/data_structures.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::borrow::Cow;
 use std::path::PathBuf;
 
@@ -7,22 +6,17 @@ pub use ReprAttr::*;
 use crate::rustc_abi::Align;
 use crate::rustc_complete::token::CommentKind;
 use crate::rustc_complete::{AttrStyle, ast};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::hygiene::Transparency;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 pub use crate::rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 
 use crate::attrs::pretty_printing::PrintAttribute;
 use crate::limit::Limit;
 use crate::{DefaultBodyStability, PartialConstStability, RustcVersion, Stability};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Copy, Clone, PartialEq, Encodable, Decodable, Debug, HashStable_Generic, PrintAttribute)]
 pub enum InlineAttr {
@@ -38,7 +32,6 @@ pub enum InlineAttr {
         reason: Option<Symbol>,
     },
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=always | COMPLEXITY=8 | LINES=9 */
 
 impl InlineAttr {
     pub fn always(&self) -> bool {
@@ -48,14 +41,12 @@ impl InlineAttr {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Encodable, Decodable, Debug, PartialEq, Eq, HashStable_Generic)]
 pub enum InstructionSetAttr {
     ArmA32,
     ArmT32,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Default, PrintAttribute)]
 #[derive(Encodable, Decodable, HashStable_Generic)]
@@ -70,14 +61,12 @@ pub enum OptimizeAttr {
     /// `#[optimize(size)]`
     Size,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=do_not_optimize | COMPLEXITY=3 | LINES=6 */
 
 impl OptimizeAttr {
     pub fn do_not_optimize(&self) -> bool {
         matches!(self, Self::DoNotOptimize)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(PartialEq, Debug, Encodable, Decodable, Copy, Clone, HashStable_Generic, PrintAttribute)]
 pub enum ReprAttr {
@@ -89,13 +78,11 @@ pub enum ReprAttr {
     ReprTransparent,
     ReprAlign(Align),
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum TransparencyError {
     UnknownTransparency(Symbol, Span),
     MultipleTransparencyAttrs(Span, Span),
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Eq, PartialEq, Debug, Copy, Clone)]
 #[derive(Encodable, Decodable, HashStable_Generic, PrintAttribute)]
@@ -103,7 +90,6 @@ pub enum IntType {
     SignedInt(ast::IntTy),
     UnsignedInt(ast::UintTy),
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Deprecation | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Copy, Debug, Encodable, Decodable, Clone, HashStable_Generic, PrintAttribute)]
 pub struct Deprecation {
@@ -115,7 +101,6 @@ pub struct Deprecation {
     /// This is currently unstable.
     pub suggestion: Option<Symbol>,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 /// Release in which an API is deprecated.
 #[derive(Copy, Debug, Encodable, Decodable, Clone, HashStable_Generic, PrintAttribute)]
@@ -132,7 +117,6 @@ pub enum DeprecatedSince {
     /// unspecified and required. An error has already been emitted.
     Err,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Successfully-parsed value of a `#[coverage(..)]` attribute.
 #[derive(Copy, Debug, Eq, PartialEq, Encodable, Decodable, Clone)]
@@ -141,7 +125,6 @@ pub enum CoverageAttrKind {
     On,
     Off,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_in_effect | COMPLEXITY=11 | LINES=20 */
 
 impl Deprecation {
     /// Whether an item marked with #[deprecated(since = "X")] is currently
@@ -162,7 +145,6 @@ impl Deprecation {
         matches!(self.since, DeprecatedSince::RustcVersion(_))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// There are three valid forms of the attribute:
 /// `#[used]`, which is semantically equivalent to `#[used(linker)]` except that the latter is currently unstable.
@@ -174,7 +156,6 @@ pub enum UsedBy {
     Compiler,
     Linker,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Encodable, Decodable, Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(HashStable_Generic, PrintAttribute)]
@@ -182,14 +163,12 @@ pub enum MacroUseArgs {
     UseAll,
     UseSpecific(ThinVec<Ident>),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl Default for MacroUseArgs {
     fn default() -> Self {
         Self::UseSpecific(ThinVec::new())
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=StrippedCfgItem | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Clone, Encodable, Decodable, HashStable_Generic)]
 pub struct StrippedCfgItem<ModId = DefId> {
@@ -197,14 +176,12 @@ pub struct StrippedCfgItem<ModId = DefId> {
     pub ident: Ident,
     pub cfg: (CfgEntry, Span),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=map_mod_id | COMPLEXITY=4 | LINES=6 */
 
 impl<ModId> StrippedCfgItem<ModId> {
     pub fn map_mod_id<New>(self, f: impl FnOnce(ModId) -> New) -> StrippedCfgItem<New> {
         StrippedCfgItem { parent_module: f(self.parent_module), ident: self.ident, cfg: self.cfg }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 #[derive(Encodable, Decodable, Clone, Debug, PartialEq, Eq, Hash)]
 #[derive(HashStable_Generic, PrintAttribute)]
@@ -216,7 +193,6 @@ pub enum CfgEntry {
     NameValue { name: Symbol, name_span: Span, value: Option<(Symbol, Span)>, span: Span },
     Version(Option<RustcVersion>, Span),
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 /// Possible values for the `#[linkage]` attribute, allowing to specify the
 /// linkage type for a `MonoItem`.
@@ -235,7 +211,6 @@ pub enum Linkage {
     WeakAny,
     WeakODR,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Decodable, Debug, Encodable, PartialEq)]
 #[derive(HashStable_Generic, PrintAttribute)]
@@ -244,7 +219,6 @@ pub enum MirDialect {
     Built,
     Runtime,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11 */
 
 impl IntoDiagArg for MirDialect {
     fn into_diag_arg(self, _path: &mut Option<PathBuf>) -> DiagArgValue {
@@ -256,7 +230,6 @@ impl IntoDiagArg for MirDialect {
         DiagArgValue::Str(Cow::Borrowed(arg))
     }
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Decodable, Debug, Encodable, PartialEq)]
 #[derive(HashStable_Generic, PrintAttribute)]
@@ -265,7 +238,6 @@ pub enum MirPhase {
     PostCleanup,
     Optimized,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11 */
 
 impl IntoDiagArg for MirPhase {
     fn into_diag_arg(self, _path: &mut Option<PathBuf>) -> DiagArgValue {
@@ -277,7 +249,6 @@ impl IntoDiagArg for MirPhase {
         DiagArgValue::Str(Cow::Borrowed(arg))
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=29 */
 
 /// Different ways that the PE Format can decorate a symbol name.
 /// From <https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#import-name-type>
@@ -307,7 +278,6 @@ pub enum PeImportNameType {
     /// trailing characters) are skipped.
     Undecorated,
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=47 */
 
 #[derive(
     Copy,
@@ -355,7 +325,6 @@ pub enum NativeLibKind {
     /// The library kind wasn't specified, `Dylib` is currently used as a default.
     Unspecified,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=has_modifiers | COMPLEXITY=17 | LINES=28 */
 
 impl NativeLibKind {
     pub fn has_modifiers(&self) -> bool {
@@ -384,7 +353,6 @@ impl NativeLibKind {
         )
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=LinkEntry | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Debug, Encodable, Decodable, Clone, HashStable_Generic, PrintAttribute)]
 pub struct LinkEntry {
@@ -395,7 +363,6 @@ pub struct LinkEntry {
     pub verbatim: Option<bool>,
     pub import_name_type: Option<(PeImportNameType, Span)>,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 /// Represents parsed *built-in* inert attributes.
 ///
@@ -415,7 +382,6 @@ pub struct LinkEntry {
 /// #[repr(C)]
 /// #[repr(packed)]
 /// struct S { }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=52 | LINES=309 */
 /// ```
 /// This is equivalent to `#[repr(C, packed)]` and results in a single [`AttributeKind::Repr`] containing
 /// both `C` and `packed` annotations. This collapsing happens during parsing and is reflected in the

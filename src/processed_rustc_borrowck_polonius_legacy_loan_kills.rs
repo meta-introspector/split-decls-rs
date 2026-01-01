@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/legacy/loan_kills.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::{
     Body, Local, Location, Place, PlaceRef, ProjectionElem, Rvalue, Statement, StatementKind,
     Terminator, TerminatorKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use super::{PoloniusFacts, PoloniusLocationTable};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 use crate::borrow_set::BorrowSet;
 use crate::places_conflict;
 
@@ -27,7 +24,6 @@ pub(super) fn emit_loan_kills<'tcx>(
         visitor.visit_basic_block_data(bb, data);
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=LoanKillsGenerator | COMPLEXITY=2 | LINES=8 */
 
 struct LoanKillsGenerator<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -36,7 +32,6 @@ struct LoanKillsGenerator<'a, 'tcx> {
     borrow_set: &'a BorrowSet<'tcx>,
     body: &'a Body<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=21 | LINES=54 */
 
 impl<'a, 'tcx> Visitor<'tcx> for LoanKillsGenerator<'a, 'tcx> {
     fn visit_statement(&mut self, statement: &Statement<'tcx>, location: Location) {
@@ -91,7 +86,6 @@ impl<'a, 'tcx> Visitor<'tcx> for LoanKillsGenerator<'a, 'tcx> {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=record_killed_borrows_for_place | COMPLEXITY=45 | LINES=61 */
 
 impl<'tcx> LoanKillsGenerator<'_, 'tcx> {
     /// Records the borrows on the specified place as `killed`. For example, when assigning to a

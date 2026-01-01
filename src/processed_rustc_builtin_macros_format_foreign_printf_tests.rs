@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/format_foreign/printf/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{Format as F, Num as N, Substitution as S, iter_subs, parse_next_substitution as pns};
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 macro_rules! assert_eq_pnsat {
     ($lhs:expr, $rhs:expr) => {
@@ -11,7 +9,6 @@ macro_rules! assert_eq_pnsat {
         )
     };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_escape | COMPLEXITY=2 | LINES=9 */
 
 #[test]
 fn test_escape() {
@@ -21,7 +18,6 @@ fn test_escape() {
     assert_eq!(pns("%% leading escape"), Some((S::Escape((0, 2)), " leading escape")));
     assert_eq!(pns("trailing escape %%"), Some((S::Escape((16, 18)), "")));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_parse | COMPLEXITY=41 | LINES=77 */
 
 #[test]
 fn test_parse() {
@@ -99,7 +95,6 @@ fn test_parse() {
     assert_pns_eq_sub!("%-8ld",
         { None, "-", Some(N::Num(8)), None, Some("l"), "d", (0, 5), });
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_iter | COMPLEXITY=4 | LINES=10 */
 
 #[test]
 fn test_iter() {
@@ -110,7 +105,6 @@ fn test_iter() {
         vec![Some("{}"), None, Some("{:.*}"), None]
     );
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test_translation | COMPLEXITY=35 | LINES=39 */
 
 /// Checks that the translations are what we expect.
 #[test]

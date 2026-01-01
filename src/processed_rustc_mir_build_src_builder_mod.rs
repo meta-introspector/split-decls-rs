@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // This module used to be named `build`, but that was causing GitHub's
 // "Go to file" feature to silently ignore all files in the module, probably
 // because it assumes that "build" is a build-output directory.
@@ -7,10 +6,8 @@
 
 use itertools::Itertools;
 use crate::rustc_abi::{ExternAbi, FieldIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::attr;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sorted_map::SortedIndexMultiMap;
@@ -18,25 +15,17 @@ use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, ItemLocalId, Node, find_attr};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::bit_set::GrowableBitSet;
 use crate::rustc_index::{Idx, IndexSlice, IndexVec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::hir::place::PlaceBase as HirPlaceBase;
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::{self, ExprId, LintLevel, LocalVarId, Param, ParamId, PatKind, Thir};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ScalarInt, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 
 use crate::builder::expr::as_place::PlaceBuilder;
 use crate::builder::scope::DropKind;
@@ -56,7 +45,6 @@ pub(crate) fn closure_saved_names_of_captured_variables<'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=build_mir | COMPLEXITY=25 | LINES=49 */
 
 /// Create the MIR for a given `DefId`, including unreachable code. Do not call
 /// this directly; instead use the cached version via `mir_built`.
@@ -106,7 +94,6 @@ pub fn build_mir<'tcx>(tcx: TyCtxt<'tcx>, def: LocalDefId) -> Body<'tcx> {
 
     body
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 ///////////////////////////////////////////////////////////////////////////
 // BuildMir -- walks a crate, looking for fn items and methods to build MIR from
@@ -136,7 +123,6 @@ enum BlockFrame {
     /// Examples: `foo(EXPR)`, `match EXPR { ... }`
     SubExpr,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=is_tail_expr | COMPLEXITY=16 | LINES=17 */
 
 impl BlockFrame {
     fn is_tail_expr(&self) -> bool {
@@ -154,7 +140,6 @@ impl BlockFrame {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=BlockContext(Vec | COMPLEXITY=35 | LINES=81 */
 
 #[derive(Debug)]
 struct BlockContext(Vec<BlockFrame>);
@@ -236,7 +221,6 @@ struct Builder<'a, 'tcx> {
     /// Only present if coverage is enabled and this function is eligible.
     coverage_info: Option<coverageinfo::CoverageInfoBuilder>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Capture | COMPLEXITY=2 | LINES=9 */
 
 type CaptureMap<'tcx> = SortedIndexMultiMap<usize, ItemLocalId, Capture<'tcx>>;
 
@@ -246,7 +230,6 @@ struct Capture<'tcx> {
     use_place: Place<'tcx>,
     mutability: Mutability,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=14 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
@@ -261,7 +244,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         self.var_indices[&id].local_id(for_guard)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=28 | LINES=56 */
 
 impl BlockContext {
     fn new() -> Self {
@@ -318,7 +300,6 @@ impl BlockContext {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 #[derive(Debug)]
 enum LocalsForNode {
@@ -338,20 +319,17 @@ enum LocalsForNode {
     ///   `for_arm_body`).
     ForGuard { ref_for_guard: Local, for_arm_body: Local },
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=GuardFrameLocal | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 struct GuardFrameLocal {
     id: LocalVarId,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl GuardFrameLocal {
     fn new(id: LocalVarId) -> Self {
         GuardFrameLocal { id }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=GuardFrame | COMPLEXITY=16 | LINES=16 */
 
 #[derive(Debug)]
 struct GuardFrame {
@@ -368,7 +346,6 @@ struct GuardFrame {
     /// here, when building for FIXME.
     locals: Vec<GuardFrameLocal>,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 /// `ForGuard` indicates whether we are talking about:
 ///   1. The variable for use outside of guard expressions, or
@@ -379,7 +356,6 @@ enum ForGuard {
     RefWithinGuard,
     OutsideGuard,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=local_id | COMPLEXITY=12 | LINES=19 */
 
 impl LocalsForNode {
     fn local_id(&self, for_guard: ForGuard) -> Local {
@@ -399,17 +375,14 @@ impl LocalsForNode {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=CFG | COMPLEXITY=2 | LINES=4 */
 
 struct CFG<'tcx> {
     basic_blocks: IndexVec<BasicBlock, BasicBlockData<'tcx>>,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=ScopeId | COMPLEXITY=3 | LINES=4 */
 
 crate::rustc_index::newtype_index! {
     struct ScopeId {}
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 #[derive(Debug)]
 enum NeedsTemporary {
@@ -422,7 +395,6 @@ enum NeedsTemporary {
     /// for now. It is always safe to fall back to this.
     Maybe,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=BlockAnd | COMPLEXITY=6 | LINES=18 */
 
 ///////////////////////////////////////////////////////////////////////////
 /// The `BlockAnd` "monad" packages up the new basic block along with a
@@ -441,13 +413,11 @@ impl BlockAnd<()> {
         block
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=and | COMPLEXITY=2 | LINES=5 */
 
 trait BlockAndExtension {
     fn and<T>(self, v: T) -> BlockAnd<T>;
     fn unit(self) -> BlockAnd<()>;
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=and | COMPLEXITY=6 | LINES=10 */
 
 impl BlockAndExtension for BasicBlock {
     fn and<T>(self, v: T) -> BlockAnd<T> {
@@ -458,7 +428,6 @@ impl BlockAndExtension for BasicBlock {
         BlockAnd(self, ())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 /// Update a block pointer and return the value.
 /// Use it like `let x = unpack!(block = self.foo(block, foo))`.
@@ -469,7 +438,6 @@ macro_rules! unpack {
         v
     }};
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=construct_fn | COMPLEXITY=36 | LINES=109 */
 
 ///////////////////////////////////////////////////////////////////////////
 /// the main entry point for building MIR for a function
@@ -579,7 +547,6 @@ fn construct_fn<'tcx>(
 
     body
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=construct_const | COMPLEXITY=18 | LINES=48 */
 
 fn construct_const<'a, 'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -628,7 +595,6 @@ fn construct_const<'a, 'tcx>(
 
     builder.finish()
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=construct_error | COMPLEXITY=48 | LINES=129 */
 
 /// Construct MIR for an item that has had errors in type checking.
 ///
@@ -758,7 +724,6 @@ fn construct_error(tcx: TyCtxt<'_>, def_id: LocalDefId, guar: ErrorGuaranteed) -
         Some(guar),
     )
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=new | COMPLEXITY=122 | LINES=334 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     fn new(
@@ -1093,12 +1058,10 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=parse_float_into_constval | COMPLEXITY=2 | LINES=4 */
 
 fn parse_float_into_constval(num: Symbol, float_ty: ty::FloatTy, neg: bool) -> Option<ConstValue> {
     parse_float_into_scalar(num, float_ty, neg).map(|s| ConstValue::Scalar(s.into()))
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=46 | LINES=72 */
 
 pub(crate) fn parse_float_into_scalar(
     num: Symbol,
@@ -1171,7 +1134,6 @@ pub(crate) fn parse_float_into_scalar(
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=16 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Builder methods are broken up into modules, depending on what kind

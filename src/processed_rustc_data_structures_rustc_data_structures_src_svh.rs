@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/svh.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // Calculation and management of a Strict Version Hash for crates
 //
 // The SVH is used for incremental compilation to track when HIR
@@ -10,7 +9,6 @@
 use std::fmt;
 
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Svh | COMPLEXITY=2 | LINES=8 */
 
 use crate::fingerprint::Fingerprint;
 use crate::stable_hasher;
@@ -19,7 +17,6 @@ use crate::stable_hasher;
 pub struct Svh {
     hash: Fingerprint,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=17 */
 
 impl Svh {
     /// Creates a new `Svh` given the hash. If you actually want to
@@ -37,14 +34,12 @@ impl Svh {
         format!("{:032x}", self.hash.as_u128())
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for Svh {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.pad(&self.to_hex())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=8 */
 
 impl<T> stable_hasher::HashStable<T> for Svh {
     #[inline]

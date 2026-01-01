@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/generics_of.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, HirId, Node};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::{Span, Symbol, kw};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=208 | LINES=387 */
 
 use crate::delegation::inherit_generics_for_delegation_item;
 use crate::middle::resolve_bound_vars as rbv;
@@ -404,7 +398,6 @@ pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
         has_late_bound_regions: has_late_bound_regions(tcx, node),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy)]
 enum ParamDefaultPolicy {
@@ -413,7 +406,6 @@ enum ParamDefaultPolicy {
     FutureCompatForbidden,
     Forbidden,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=param_default_policy | COMPLEXITY=24 | LINES=34 */
 
 fn param_default_policy(node: Node<'_>) -> Option<ParamDefaultPolicy> {
     use crate::rustc_complete::*;
@@ -448,7 +440,6 @@ fn param_default_policy(node: Node<'_>) -> Option<ParamDefaultPolicy> {
         _ => return None,
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=has_late_bound_regions | COMPLEXITY=40 | LINES=74 */
 
 fn has_late_bound_regions<'tcx>(tcx: TyCtxt<'tcx>, node: Node<'tcx>) -> Option<Span> {
     struct LateBoundRegionsDetector<'tcx> {
@@ -523,13 +514,11 @@ fn has_late_bound_regions<'tcx>(tcx: TyCtxt<'tcx>, node: Node<'tcx>) -> Option<S
     let generics = node.generics()?;
     has_late_bound_regions(tcx, generics, decl)
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=AnonConstInParamTyDetector | COMPLEXITY=2 | LINES=5 */
 
 struct AnonConstInParamTyDetector {
     in_param_ty: bool,
     ct: HirId,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_generic_param | COMPLEXITY=15 | LINES=23 */
 
 impl<'v> Visitor<'v> for AnonConstInParamTyDetector {
     type Result = ControlFlow<()>;

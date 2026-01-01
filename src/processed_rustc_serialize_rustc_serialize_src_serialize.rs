@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_serialize/src/serialize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Support code for encoding and decoding types.
 
 use std::borrow::Cow;
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet, VecDeque};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::hash::{BuildHasher, Hash};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::marker::{PhantomData, PointeeSized};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::num::NonZero;
 use std::path;
 use std::rc::Rc;
 use std::sync::Arc;
 
 use rustc_hashes::{Hash64, Hash128};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{Array, SmallVec};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=emit_usize | COMPLEXITY=18 | LINES=74 */
 use thin_vec::ThinVec;
 
 /// A byte that [cannot occur in UTF8 sequences][utf8]. Used to mark the end of a string.
@@ -94,7 +87,6 @@ pub trait Encoder {
 
     fn emit_raw_bytes(&mut self, s: &[u8]);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=read_usize | COMPLEXITY=18 | LINES=66 */
 
 // Note: all the methods in this trait are infallible, which may be surprising.
 // They used to be fallible (i.e. return a `Result`) but many of the impls just
@@ -161,7 +153,6 @@ pub trait Decoder {
     fn peek_byte(&self) -> u8;
     fn position(&self) -> usize;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=9 | LINES=15 */
 
 /// Trait for types that can be serialized
 ///
@@ -177,7 +168,6 @@ pub trait Decoder {
 pub trait Encodable<S: Encoder>: PointeeSized {
     fn encode(&self, s: &mut S);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=9 | LINES=15 */
 
 /// Trait for types that can be deserialized
 ///
@@ -193,7 +183,6 @@ pub trait Encodable<S: Encoder>: PointeeSized {
 pub trait Decodable<D: Decoder>: Sized {
     fn decode(d: &mut D) -> Self;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=16 | LINES=18 */
 
 macro_rules! direct_serialize_impls {
     ($($ty:ident $emit_method:ident $read_method:ident),*) => {
@@ -212,7 +201,6 @@ macro_rules! direct_serialize_impls {
         )*
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 direct_serialize_impls! {
     usize emit_usize read_usize,
@@ -232,7 +220,6 @@ direct_serialize_impls! {
     bool emit_bool read_bool,
     char emit_char read_char
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=9 */
 
 impl<S: Encoder, T: ?Sized + PointeeSized> Encodable<S> for &T
 where
@@ -242,78 +229,66 @@ where
         (**self).encode(s)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for ! {
     fn encode(&self, _s: &mut S) {
         unreachable!();
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder> Decodable<D> for ! {
     fn decode(_d: &mut D) -> ! {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for NonZero<u32> {
     fn encode(&self, s: &mut S) {
         s.emit_u32(self.get());
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder> Decodable<D> for NonZero<u32> {
     fn decode(d: &mut D) -> Self {
         NonZero::new(d.read_u32()).unwrap()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for str {
     fn encode(&self, s: &mut S) {
         s.emit_str(self);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for String {
     fn encode(&self, s: &mut S) {
         s.emit_str(&self);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder> Decodable<D> for String {
     fn decode(d: &mut D) -> String {
         d.read_str().to_owned()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=4 */
 
 impl<S: Encoder> Encodable<S> for () {
     fn encode(&self, _s: &mut S) {}
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=4 */
 
 impl<D: Decoder> Decodable<D> for () {
     fn decode(_: &mut D) {}
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=4 */
 
 impl<S: Encoder, T> Encodable<S> for PhantomData<T> {
     fn encode(&self, _s: &mut S) {}
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T> Decodable<D> for PhantomData<T> {
     fn decode(_: &mut D) -> PhantomData<T> {
         PhantomData
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Box<[T]> {
     fn decode(d: &mut D) -> Box<[T]> {
@@ -321,21 +296,18 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for Box<[T]> {
         v.into_boxed_slice()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for Rc<T> {
     fn encode(&self, s: &mut S) {
         (**self).encode(s);
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Rc<T> {
     fn decode(d: &mut D) -> Rc<T> {
         Rc::new(Decodable::decode(d))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for [T] {
     default fn encode(&self, s: &mut S) {
@@ -345,14 +317,12 @@ impl<S: Encoder, T: Encodable<S>> Encodable<S> for [T] {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for Vec<T> {
     fn encode(&self, s: &mut S) {
         self.as_slice().encode(s);
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Vec<T> {
     default fn decode(d: &mut D) -> Vec<T> {
@@ -360,14 +330,12 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for Vec<T> {
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>, const N: usize> Encodable<S> for [T; N] {
     fn encode(&self, s: &mut S) {
         self.as_slice().encode(s);
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=8 | LINES=12 */
 
 impl<D: Decoder, const N: usize> Decodable<D> for [u8; N] {
     fn decode(d: &mut D) -> [u8; N] {
@@ -380,7 +348,6 @@ impl<D: Decoder, const N: usize> Decodable<D> for [u8; N] {
         v
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=10 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for Cow<'_, [T]>
 where
@@ -391,7 +358,6 @@ where
         slice.encode(s);
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=10 */
 
 impl<D: Decoder, T: Decodable<D> + ToOwned> Decodable<D> for Cow<'static, [T]>
 where
@@ -402,7 +368,6 @@ where
         Cow::Owned(v)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<S: Encoder> Encodable<S> for Cow<'_, str> {
     fn encode(&self, s: &mut S) {
@@ -410,7 +375,6 @@ impl<S: Encoder> Encodable<S> for Cow<'_, str> {
         val.encode(s)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder> Decodable<D> for Cow<'_, str> {
     fn decode(d: &mut D) -> Cow<'static, str> {
@@ -418,7 +382,6 @@ impl<D: Decoder> Decodable<D> for Cow<'_, str> {
         Cow::Owned(v)
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=10 | LINES=12 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for Option<T> {
     fn encode(&self, s: &mut S) {
@@ -431,7 +394,6 @@ impl<S: Encoder, T: Encodable<S>> Encodable<S> for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=11 | LINES=10 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Option<T> {
     fn decode(d: &mut D) -> Option<T> {
@@ -442,7 +404,6 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=11 | LINES=15 */
 
 impl<S: Encoder, T1: Encodable<S>, T2: Encodable<S>> Encodable<S> for Result<T1, T2> {
     fn encode(&self, s: &mut S) {
@@ -458,7 +419,6 @@ impl<S: Encoder, T1: Encodable<S>, T2: Encodable<S>> Encodable<S> for Result<T1,
         }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=11 | LINES=10 */
 
 impl<D: Decoder, T1: Decodable<D>, T2: Decodable<D>> Decodable<D> for Result<T1, T2> {
     fn decode(d: &mut D) -> Result<T1, T2> {
@@ -469,12 +429,10 @@ impl<D: Decoder, T1: Decodable<D>, T2: Decodable<D>> Decodable<D> for Result<T1,
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 
 macro_rules! peel {
     ($name:ident, $($other:ident,)*) => (tuple! { $($other,)* })
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=18 | LINES=19 */
 
 macro_rules! tuple {
     () => ();
@@ -494,24 +452,20 @@ macro_rules! tuple {
         peel! { $($name,)+ }
     )
 }
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 tuple! { T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for path::Path {
     fn encode(&self, e: &mut S) {
         self.to_str().unwrap().encode(e);
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder> Encodable<S> for path::PathBuf {
     fn encode(&self, e: &mut S) {
         path::Path::encode(self, e);
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder> Decodable<D> for path::PathBuf {
     fn decode(d: &mut D) -> path::PathBuf {
@@ -519,70 +473,60 @@ impl<D: Decoder> Decodable<D> for path::PathBuf {
         path::PathBuf::from(bytes)
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S> + Copy> Encodable<S> for Cell<T> {
     fn encode(&self, s: &mut S) {
         self.get().encode(s);
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T: Decodable<D> + Copy> Decodable<D> for Cell<T> {
     fn decode(d: &mut D) -> Cell<T> {
         Cell::new(Decodable::decode(d))
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for RefCell<T> {
     fn encode(&self, s: &mut S) {
         self.borrow().encode(s);
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for RefCell<T> {
     fn decode(d: &mut D) -> RefCell<T> {
         RefCell::new(Decodable::decode(d))
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for Arc<T> {
     fn encode(&self, s: &mut S) {
         (**self).encode(s);
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Arc<T> {
     fn decode(d: &mut D) -> Arc<T> {
         Arc::new(Decodable::decode(d))
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: ?Sized + Encodable<S>> Encodable<S> for Box<T> {
     fn encode(&self, s: &mut S) {
         (**self).encode(s)
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Box<T> {
     fn decode(d: &mut D) -> Box<T> {
         Box::new(Decodable::decode(d))
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, A: Array<Item: Encodable<S>>> Encodable<S> for SmallVec<A> {
     fn encode(&self, s: &mut S) {
         self.as_slice().encode(s);
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, A: Array<Item: Decodable<D>>> Decodable<D> for SmallVec<A> {
     fn decode(d: &mut D) -> SmallVec<A> {
@@ -590,14 +534,12 @@ impl<D: Decoder, A: Array<Item: Decodable<D>>> Decodable<D> for SmallVec<A> {
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for ThinVec<T> {
     fn encode(&self, s: &mut S) {
         self.as_slice().encode(s);
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for ThinVec<T> {
     fn decode(d: &mut D) -> ThinVec<T> {
@@ -605,7 +547,6 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for ThinVec<T> {
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=9 */
 
 impl<S: Encoder, T: Encodable<S>> Encodable<S> for VecDeque<T> {
     fn encode(&self, s: &mut S) {
@@ -615,7 +556,6 @@ impl<S: Encoder, T: Encodable<S>> Encodable<S> for VecDeque<T> {
         }
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for VecDeque<T> {
     fn decode(d: &mut D) -> VecDeque<T> {
@@ -623,7 +563,6 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for VecDeque<T> {
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=14 */
 
 impl<S: Encoder, K, V> Encodable<S> for BTreeMap<K, V>
 where
@@ -638,7 +577,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=11 */
 
 impl<D: Decoder, K, V> Decodable<D> for BTreeMap<K, V>
 where
@@ -650,7 +588,6 @@ where
         (0..len).map(|_| (Decodable::decode(d), Decodable::decode(d))).collect()
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=12 */
 
 impl<S: Encoder, T> Encodable<S> for BTreeSet<T>
 where
@@ -663,7 +600,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=10 */
 
 impl<D: Decoder, T> Decodable<D> for BTreeSet<T>
 where
@@ -674,7 +610,6 @@ where
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=15 */
 
 impl<E: Encoder, K, V, S> Encodable<E> for HashMap<K, V, S>
 where
@@ -690,7 +625,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=12 */
 
 impl<D: Decoder, K, V, S> Decodable<D> for HashMap<K, V, S>
 where
@@ -703,7 +637,6 @@ where
         (0..len).map(|_| (Decodable::decode(d), Decodable::decode(d))).collect()
     }
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=13 */
 
 impl<E: Encoder, T, S> Encodable<E> for HashSet<T, S>
 where
@@ -717,7 +650,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=11 */
 
 impl<D: Decoder, T, S> Decodable<D> for HashSet<T, S>
 where
@@ -729,7 +661,6 @@ where
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=15 */
 
 impl<E: Encoder, K, V, S> Encodable<E> for indexmap::IndexMap<K, V, S>
 where
@@ -745,7 +676,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=12 */
 
 impl<D: Decoder, K, V, S> Decodable<D> for indexmap::IndexMap<K, V, S>
 where
@@ -758,7 +688,6 @@ where
         (0..len).map(|_| (Decodable::decode(d), Decodable::decode(d))).collect()
     }
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=13 */
 
 impl<E: Encoder, T, S> Encodable<E> for indexmap::IndexSet<T, S>
 where
@@ -772,7 +701,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=11 */
 
 impl<D: Decoder, T, S> Decodable<D> for indexmap::IndexSet<T, S>
 where
@@ -784,7 +712,6 @@ where
         (0..len).map(|_| Decodable::decode(d)).collect()
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<E: Encoder, T: Encodable<E>> Encodable<E> for Rc<[T]> {
     fn encode(&self, s: &mut E) {
@@ -792,7 +719,6 @@ impl<E: Encoder, T: Encodable<E>> Encodable<E> for Rc<[T]> {
         slice.encode(s);
     }
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Rc<[T]> {
     fn decode(d: &mut D) -> Rc<[T]> {
@@ -800,7 +726,6 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for Rc<[T]> {
         vec.into()
     }
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<E: Encoder, T: Encodable<E>> Encodable<E> for Arc<[T]> {
     fn encode(&self, s: &mut E) {
@@ -808,7 +733,6 @@ impl<E: Encoder, T: Encodable<E>> Encodable<E> for Arc<[T]> {
         slice.encode(s);
     }
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder, T: Decodable<D>> Decodable<D> for Arc<[T]> {
     fn decode(d: &mut D) -> Arc<[T]> {
@@ -816,7 +740,6 @@ impl<D: Decoder, T: Decodable<D>> Decodable<D> for Arc<[T]> {
         vec.into()
     }
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<S: Encoder> Encodable<S> for Hash64 {
     #[inline]
@@ -824,7 +747,6 @@ impl<S: Encoder> Encodable<S> for Hash64 {
         s.emit_raw_bytes(&self.as_u64().to_le_bytes());
     }
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<S: Encoder> Encodable<S> for Hash128 {
     #[inline]
@@ -832,7 +754,6 @@ impl<S: Encoder> Encodable<S> for Hash128 {
         s.emit_raw_bytes(&self.as_u128().to_le_bytes());
     }
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder> Decodable<D> for Hash64 {
     #[inline]
@@ -840,7 +761,6 @@ impl<D: Decoder> Decodable<D> for Hash64 {
         Self::new(u64::from_le_bytes(d.read_raw_bytes(8).try_into().unwrap()))
     }
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder> Decodable<D> for Hash128 {
     #[inline]

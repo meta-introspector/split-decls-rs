@@ -1,50 +1,34 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/print/pretty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cell::Cell;
 use std::fmt::{self, Write as _};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::iter;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{ExternAbi, Size};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def::{self, CtorKind, DefKind, Namespace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefIdMap, DefIdSet, LOCAL_CRATE, ModDefId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefKey, DefPathDataName};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Lift, extension};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::cstore::{ExternCrate, ExternCrateSource};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileNameDisplayPreference, Ident, Symbol, kw, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::{Upcast as _, elaborate};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 use smallvec::SmallVec;
 
 // `pretty` is a separate module only for organization.
 use super::*;
 use crate::mir::interpret::{AllocRange, GlobalAlloc, Pointer, Provenance, Scalar};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::query::{IntoQueryParam, Providers};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::ty::{
     ConstInt, Expr, GenericArgKind, ParamConst, ScalarInt, Term, TermKind, TraitPredicate,
     TypeFoldable, TypeSuperFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=11 */
 
 thread_local! {
     static FORCE_IMPL_FILENAME_LINE: Cell<bool> = const { Cell::new(false) };
@@ -56,7 +40,6 @@ thread_local! {
     static NO_VISIBLE_PATH_IF_DOC_HIDDEN: Cell<bool> = const { Cell::new(false) };
     static RTN_MODE: Cell<RtnMode> = const { Cell::new(RtnMode::ForDiagnostic) };
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 /// Rendering style for RTN types.
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -68,7 +51,6 @@ pub enum RtnMode {
     /// Print the RTN type as a value path, i.e. `T::method(..): ...`.
     ForSuggestion,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=$helper(bool); | COMPLEXITY=18 | LINES=33 */
 
 macro_rules! define_helper {
     ($($(#[$a:meta])* fn $name:ident($helper:ident, $tl:ident);)+) => {
@@ -102,7 +84,6 @@ macro_rules! define_helper {
         )+
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=with_reduced_queries | COMPLEXITY=20 | LINES=37 */
 
 define_helper!(
     /// Avoids running select queries during any prints that occur
@@ -140,14 +121,12 @@ impl RtnModeHelper {
         RtnModeHelper(RTN_MODE.with(|c| c.replace(mode)))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=6 */
 
 impl Drop for RtnModeHelper {
     fn drop(&mut self) {
         RTN_MODE.with(|c| c.set(self.0))
     }
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 /// Print types for the purposes of a suggestion.
 ///
@@ -157,7 +136,6 @@ pub macro with_types_for_suggestion($e:expr) {{
     let _guard = $crate::ty::print::pretty::RtnModeHelper::with(RtnMode::ForSuggestion);
     $e
 }}
-/* AST_META: AST_ID=22 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 /// Print types for the purposes of a signature suggestion.
 ///
@@ -166,7 +144,6 @@ pub macro with_types_for_signature($e:expr) {{
     let _guard = $crate::ty::print::pretty::RtnModeHelper::with(RtnMode::ForSignature);
     $e
 }}
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 /// Avoids running any queries during prints.
 pub macro with_no_queries($e:expr) {{
@@ -176,14 +153,12 @@ pub macro with_no_queries($e:expr) {{
         ))
     ))
 }}
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum WrapBinderMode {
     ForAll,
     Unsafe,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=start_str | COMPLEXITY=7 | LINES=8 */
 impl WrapBinderMode {
     pub fn start_str(self) -> &'static str {
         match self {
@@ -192,7 +167,6 @@ impl WrapBinderMode {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=RegionHighlightMode | COMPLEXITY=4 | LINES=23 */
 
 /// The "region highlights" are used to control region printing during
 /// specific error messages. When a "region highlight" is enabled, it
@@ -216,7 +190,6 @@ pub struct RegionHighlightMode<'tcx> {
     /// reference `x`.
     highlight_bound_region: Option<(ty::BoundRegionKind, usize)>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=maybe_highlighting_region | COMPLEXITY=29 | LINES=52 */
 
 impl<'tcx> RegionHighlightMode<'tcx> {
     /// If `region` and `number` are both `Some`, invokes
@@ -269,7 +242,6 @@ impl<'tcx> RegionHighlightMode<'tcx> {
         self.highlight_bound_region = Some((br, number));
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=pretty_print_value_path | COMPLEXITY=1816 | LINES=3272 */
 
 /// Trait for printers that pretty-print using `fmt::Write` to the printer.
 pub trait PrettyPrinter<'tcx>: Printer<'tcx> + fmt::Write {

@@ -1,28 +1,20 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/typeck_root_ctxt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Deref;
 
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir, HirId, HirIdMap, LangItem};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, InferOk, OpaqueTypeStorageEntries, TyCtxtInferExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::LocalDefIdMap;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, PredicateObligation, TraitEngine, TraitEngineExt as _,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 use super::callee::DeferredCallResolution;
 
@@ -38,7 +30,6 @@ pub(crate) struct InferVarInfo {
     /// _>::AssocType = ?T`
     pub output: bool,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 /// Data shared between a "typeck root" and its nested bodies,
 /// e.g. closures defined within the function. For example:
@@ -46,7 +37,6 @@ pub(crate) struct InferVarInfo {
 /// fn foo() {
 ///     bar(move || { ... })
 /// }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=50 */
 /// ```
 /// Here, the function `foo()` and the closure passed to
 /// `bar()` will each have their own `FnCtxt`, but they will
@@ -97,7 +87,6 @@ pub(crate) struct TypeckRootCtxt<'tcx> {
 
     pub(super) infer_var_info: RefCell<UnordMap<ty::TyVid, InferVarInfo>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Deref for TypeckRootCtxt<'tcx> {
     type Target = InferCtxt<'tcx>;
@@ -105,7 +94,6 @@ impl<'tcx> Deref for TypeckRootCtxt<'tcx> {
         &self.infcx
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=update_infer_var_info | COMPLEXITY=35 | LINES=97 */
 
 impl<'tcx> TypeckRootCtxt<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> Self {

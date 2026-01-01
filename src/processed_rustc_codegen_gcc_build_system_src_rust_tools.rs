@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/rust_tools.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::collections::HashMap;
 use std::ffi::OsStr;
 #[cfg(unix)]
@@ -8,7 +7,6 @@ use std::path::PathBuf;
 
 use crate::config::ConfigInfo;
 use crate::utils::{get_toolchain, rustc_toolchain_version_info, rustc_version_info};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=args | COMPLEXITY=11 | LINES=15 */
 
 fn args(command: &str) -> Result<Option<Vec<String>>, String> {
     // We skip the binary and the "cargo"/"rustc" option.
@@ -24,7 +22,6 @@ fn args(command: &str) -> Result<Option<Vec<String>>, String> {
     }
     Ok(Some(args))
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=usage | COMPLEXITY=3 | LINES=11 */
 
 fn usage(command: &str) {
     println!(
@@ -36,7 +33,6 @@ fn usage(command: &str) {
 "#,
     )
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=RustcTools | COMPLEXITY=2 | LINES=7 */
 
 struct RustcTools {
     env: HashMap<String, String>,
@@ -44,7 +40,6 @@ struct RustcTools {
     toolchain: String,
     config: ConfigInfo,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=35 | LINES=54 */
 
 impl RustcTools {
     fn new(command: &str) -> Result<Option<Self>, String> {
@@ -99,7 +94,6 @@ impl RustcTools {
         Ok(Some(Self { toolchain, args, env, config }))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=exec | COMPLEXITY=13 | LINES=20 */
 
 fn exec(input: &[&dyn AsRef<OsStr>], env: &HashMap<String, String>) -> Result<(), String> {
     #[cfg(unix)]
@@ -120,7 +114,6 @@ fn exec(input: &[&dyn AsRef<OsStr>], env: &HashMap<String, String>) -> Result<()
         Ok(())
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=run_cargo | COMPLEXITY=6 | LINES=11 */
 
 pub fn run_cargo() -> Result<(), String> {
     let Some(mut tools) = RustcTools::new("cargo")? else { return Ok(()) };
@@ -132,7 +125,6 @@ pub fn run_cargo() -> Result<(), String> {
     }
     exec(&command, &tools.env)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=run_rustc | COMPLEXITY=6 | LINES=9 */
 
 pub fn run_rustc() -> Result<(), String> {
     let Some(tools) = RustcTools::new("rustc")? else { return Ok(()) };

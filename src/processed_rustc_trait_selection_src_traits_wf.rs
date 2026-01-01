@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/wf.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 // Core logic responsible for determining what it means for various type system
 // primitives to be "well formed". Actually checking whether these primitives are
 // well formed is performed elsewhere (e.g. during type checking or item well formedness
@@ -11,20 +10,15 @@ use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self, GenericArgsRef, Term, TermKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=obligations | COMPLEXITY=43 | LINES=68 */
 
 use crate::infer::InferCtxt;
 use crate::traits;
@@ -93,7 +87,6 @@ pub fn obligations<'tcx>(
     debug!("wf::obligations({:?}, body_id={:?}) ~~> {:?}", term, body_id, result);
     Some(result)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=unnormalized_obligations | COMPLEXITY=14 | LINES=33 */
 
 /// Compute the predicates that are required for a type to be well-formed.
 ///
@@ -127,7 +120,6 @@ pub fn unnormalized_obligations<'tcx>(
     wf.add_wf_preds_for_term(term);
     Some(wf.out)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=trait_obligations | COMPLEXITY=8 | LINES=26 */
 
 /// Returns the obligations that make this trait reference
 /// well-formed. For example, if there is a trait `Set` defined like
@@ -154,7 +146,6 @@ pub fn trait_obligations<'tcx>(
     debug!(obligations = ?wf.out);
     wf.normalize(infcx)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=clause_obligations | COMPLEXITY=27 | LINES=57 */
 
 /// Returns the requirements for `clause` to be well-formed.
 ///
@@ -212,7 +203,6 @@ pub fn clause_obligations<'tcx>(
 
     wf.normalize(infcx)
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=WfPredicates | COMPLEXITY=2 | LINES=10 */
 
 struct WfPredicates<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
@@ -223,7 +213,6 @@ struct WfPredicates<'a, 'tcx> {
     recursion_depth: usize,
     item: Option<&'tcx hir::Item<'tcx>>,
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Controls whether we "elaborate" supertraits and so forth on the WF
 /// predicates. This is a kind of hack to address #43784. The
@@ -231,13 +220,9 @@ struct WfPredicates<'a, 'tcx> {
 ///
 /// ```ignore (illustrative)
 /// trait Foo: Copy { }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// trait Bar: Foo { }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<T: Bar> Foo for T { }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<T> Bar for T { }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 /// ```
 ///
 /// Here, in the `Foo` impl, we will check that `T: Copy` holds -- but
@@ -257,7 +242,6 @@ enum Elaborate {
     All,
     None,
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Points the cause span of a super predicate at the relevant associated type.
 ///
@@ -267,7 +251,6 @@ enum Elaborate {
 /// impl TargetTrait for TargetType {
 ///    type Assoc = SomeType;
 /// }
-/* AST_META: AST_ID=17 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 /// ```
 ///
 /// And a super predicate of `TargetTrait` that has any of the following forms:
@@ -283,7 +266,6 @@ enum Elaborate {
 ///     type Assoc = SomeType;
 /// //               ^^^^^^^^ this span
 /// }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=extend_cause_with_original_assoc_item_obligation | COMPLEXITY=43 | LINES=64 */
 /// ```
 ///
 /// Note that bounds that can be expressed as associated item bounds are **not**
@@ -348,7 +330,6 @@ fn extend_cause_with_original_assoc_item_obligation<'tcx>(
         _ => {}
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=149 | LINES=384 */
 
 impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -733,7 +714,6 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=114 | LINES=333 */
 
 impl<'a, 'tcx> TypeVisitor<TyCtxt<'tcx>> for WfPredicates<'a, 'tcx> {
     fn visit_ty(&mut self, t: Ty<'tcx>) -> Self::Result {
@@ -1067,7 +1047,6 @@ impl<'a, 'tcx> TypeVisitor<TyCtxt<'tcx>> for WfPredicates<'a, 'tcx> {
         bug!("predicate should not be checked for well-formedness");
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=object_region_bounds | COMPLEXITY=23 | LINES=56 */
 
 /// Given an object type like `SomeTrait + Send`, computes the lifetime
 /// bounds that must hold on the elided self type. These are derived

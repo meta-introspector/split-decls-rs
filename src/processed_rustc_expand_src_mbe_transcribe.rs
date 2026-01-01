@@ -1,41 +1,30 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/transcribe.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::mem;
 
 use crate::rustc_complete::token::{
     self, Delimiter, IdentIsRaw, InvisibleOrigin, Lit, LitKind, MetaVarKind, Token, TokenKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ExprKind, StmtKind, TyKind, UnOp};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{Diag, DiagCtxtHandle, PResult, pluralize};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_parse::lexer::nfc_normalize;
 use crate::rustc_parse::parser::ParseNtResult;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::hygiene::{LocalExpnId, Transparency};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     Ident, MacroRulesNormalizedIdent, Span, Symbol, SyntaxContext, sym, with_metavar_spans,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::errors::{
     CountRepetitionMisplaced, MetaVarsDifSeqMatchers, MustRepeatOnce, MveUnrecognizedVar,
     NoSyntaxVarsExprRepeat, VarStillRepeating,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mbe::macro_parser::NamedMatch;
 use crate::mbe::macro_parser::NamedMatch::*;
 use crate::mbe::metavar_expr::{MetaVarExprConcatElem, RAW_IDENT_ERR};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mbe::{self, KleeneOp, MetaVarExpr};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TranscrCtx | COMPLEXITY=11 | LINES=43 */
 
 /// Context needed to perform transcription of metavariable expressions.
 struct TranscrCtx<'psess, 'itp> {
@@ -79,7 +68,6 @@ struct TranscrCtx<'psess, 'itp> {
     /// new entry.
     result_stack: Vec<Vec<TokenTree>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visited_dspan | COMPLEXITY=3 | LINES=9 */
 
 impl<'psess> TranscrCtx<'psess, '_> {
     /// Span marked with the correct expansion and transparency.
@@ -89,7 +77,6 @@ impl<'psess> TranscrCtx<'psess, '_> {
         span
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Marker | COMPLEXITY=2 | LINES=7 */
 
 /// A Marker adds the given mark to the syntax context.
 struct Marker {
@@ -97,7 +84,6 @@ struct Marker {
     transparency: Transparency,
     cache: FxHashMap<SyntaxContext, SyntaxContext>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mark_span | COMPLEXITY=7 | LINES=16 */
 
 impl Marker {
     /// Mark a span with the stored expansion ID and transparency.
@@ -114,22 +100,18 @@ impl Marker {
         });
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// An iterator over the token trees in a delimited token tree (`{ ... }`) or a sequence (`$(...)`).
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Frame | COMPLEXITY=2 | LINES=5 */
 struct Frame<'a> {
     tts: &'a [mbe::TokenTree],
     idx: usize,
     kind: FrameKind,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 enum FrameKind {
     Delimited { delim: Delimiter, span: DelimSpan, spacing: DelimSpacing },
     Sequence { sep: Option<Token>, kleene_op: KleeneOp },
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new_delimited | COMPLEXITY=9 | LINES=18 */
 
 impl<'a> Frame<'a> {
     fn new_delimited(src: &'a mbe::Delimited, span: DelimSpan, spacing: DelimSpacing) -> Frame<'a> {
@@ -148,7 +130,6 @@ impl<'a> Frame<'a> {
         Frame { tts: &src.tts, idx: 0, kind: FrameKind::Sequence { sep, kleene_op } }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=next | COMPLEXITY=5 | LINES=10 */
 
 impl<'a> Iterator for Frame<'a> {
     type Item = &'a mbe::TokenTree;
@@ -159,7 +140,6 @@ impl<'a> Iterator for Frame<'a> {
         res
     }
 }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 /// This can do Macro-By-Example transcription.
 /// - `interp` is a map of meta-variables to the tokens (non-terminals) they matched in the
@@ -172,7 +152,6 @@ impl<'a> Iterator for Frame<'a> {
 /// macro_rules! foo {
 ///     ($id:ident) => { println!("{}", stringify!($id)); }
 /// }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=68 | LINES=136 */
 ///
 /// foo!(bar);
 /// ```
@@ -309,7 +288,6 @@ pub(super) fn transcribe<'a>(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=transcribe_sequence | COMPLEXITY=26 | LINES=53 */
 
 /// Turn `$(...)*` sequences into tokens.
 fn transcribe_sequence<'tx, 'itp>(
@@ -363,7 +341,6 @@ fn transcribe_sequence<'tx, 'itp>(
 
     Ok(())
 }
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 
 /// Find the matched nonterminal from the macro invocation, and use it to replace
 /// the meta-var.
@@ -374,7 +351,6 @@ fn transcribe_sequence<'tx, 'itp>(
 /// macro_rules! idents {
 ///     ($($a:ident,)*) => { stringify!($($a)*) }
 /// }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=transcribe_metavar | COMPLEXITY=62 | LINES=140 */
 /// ```
 /// `$a` has no whitespace after it and will be marked `JointHidden`. If you then
 /// call `idents!(x,y,z,)`, each of `x`, `y`, and `z` will be marked as `Joint`. So
@@ -515,10 +491,8 @@ fn transcribe_metavar<'tx>(
     tscx.result.push(tt);
     Ok(())
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// Turn `${expr(...)}` metavariable expressionss into tokens.
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=transcribe_metavar_expr | COMPLEXITY=21 | LINES=43 */
 fn transcribe_metavar_expr<'tx>(
     tscx: &mut TranscrCtx<'tx, '_>,
     dspan: DelimSpan,
@@ -562,10 +536,8 @@ fn transcribe_metavar_expr<'tx>(
     tscx.result.push(tt);
     Ok(())
 }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// Handle the `${concat(...)}` metavariable expression.
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=metavar_expr_concat | COMPLEXITY=31 | LINES=54 */
 fn metavar_expr_concat<'tx>(
     tscx: &mut TranscrCtx<'tx, '_>,
     dspan: DelimSpan,
@@ -620,7 +592,6 @@ fn metavar_expr_concat<'tx>(
         Spacing::Alone,
     ))
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=maybe_use_metavar_location | COMPLEXITY=53 | LINES=89 */
 
 /// Store the metavariable span for this original span into a side table.
 /// FIXME: Try to put the metavariable span into `SpanData` instead of a side table (#118517).
@@ -710,7 +681,6 @@ fn maybe_use_metavar_location(
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=lookup_cur_matched | COMPLEXITY=11 | LINES=23 */
 
 /// Lookup the meta-var named `ident` and return the matched token tree from the invocation using
 /// the set of matches `interpolations`.
@@ -734,7 +704,6 @@ fn lookup_cur_matched<'a>(
         matched
     })
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 /// An accumulator over a TokenTree to be used with `fold`. During transcription, we need to make
 /// sure that the size of each sequence and all of its nested sequences are the same as the sizes
@@ -753,7 +722,6 @@ enum LockstepIterSize {
     /// Two `Constraint`s on the same sequence had different lengths. This is an error.
     Contradiction(String),
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=with | COMPLEXITY=22 | LINES=30 */
 
 impl LockstepIterSize {
     /// Find incompatibilities in matcher/invocation sizes.
@@ -784,7 +752,6 @@ impl LockstepIterSize {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=lockstep_iter_size | COMPLEXITY=37 | LINES=52 */
 
 /// Given a `tree`, make sure that all sequences have the same length as the matches for the
 /// appropriate meta-vars in `interpolations`.
@@ -837,20 +804,15 @@ fn lockstep_iter_size(
         TokenTree::Token(..) => LockstepIterSize::Unconstrained,
     }
 }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 /// Used solely by the `count` meta-variable expression, counts the outermost repetitions at a
 /// given optional nested depth.
 ///
 /// For example, a macro parameter of `$( { $( $foo:ident ),* } )*` called with `{ a, b } { c }`:
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 ///
 /// * `[ $( ${count(foo)} ),* ]` will return [2, 1] with a, b = 2 and c = 1
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// * `[ $( ${count(foo, 0)} ),* ]` will be the same as `[ $( ${count(foo)} ),* ]`
-/* AST_META: AST_ID=37 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// * `[ $( ${count(foo, 1)} ),* ]` will return an error because `${count(foo, 1)}` is
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=count_repetitions | COMPLEXITY=41 | LINES=60 */
 ///   declared inside a single repetition and the index `1` implies two nested repetitions.
 fn count_repetitions<'dx>(
     dcx: DiagCtxtHandle<'dx>,
@@ -911,7 +873,6 @@ fn count_repetitions<'dx>(
 
     count(depth_user, depth_max, matched)
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=matched_from_ident | COMPLEXITY=3 | LINES=14 */
 
 /// Returns a `NamedMatch` item declared on the LHS given an arbitrary [Ident]
 fn matched_from_ident<'ctx, 'interp, 'rslt>(
@@ -926,7 +887,6 @@ where
     let key = MacroRulesNormalizedIdent::new(ident);
     interp.get(&key).ok_or_else(|| dcx.create_err(MveUnrecognizedVar { span, key }))
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=out_of_bounds_err | COMPLEXITY=10 | LINES=17 */
 
 /// Used by meta-variable expressions when an user input is out of the actual declared bounds. For
 /// example, index(999999) in an repetition of only three elements.
@@ -944,7 +904,6 @@ fn out_of_bounds_err<'a>(dcx: DiagCtxtHandle<'a>, max: usize, span: Span, ty: &s
     };
     dcx.struct_span_err(span, msg)
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=extract_symbol_from_pnr | COMPLEXITY=41 | LINES=61 */
 
 /// Extracts an metavariable symbol that can be an identifier, a token tree or a literal.
 fn extract_symbol_from_pnr<'a>(

@@ -1,26 +1,20 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Errors emitted by codegen_ssa
 
 use std::borrow::Cow;
 use std::ffi::OsString;
 use std::io::Error;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::process::ExitStatus;
 
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::LayoutError;
 use crate::rustc_complete::ty::{FloatTy, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 use crate::assert_module_sources::CguReuse;
 use crate::back::command::Command;
@@ -36,7 +30,6 @@ pub(crate) struct IncorrectCguReuseType<'a> {
     pub expected_reuse: CguReuse,
     pub at_least: u8,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_cgu_not_recorded)]
@@ -44,7 +37,6 @@ pub(crate) struct CguNotRecorded<'a> {
     pub cgu_user_name: &'a str,
     pub cgu_name: &'a str,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=AutodiffWithoutLto; | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_autodiff_without_lto)]
@@ -57,7 +49,6 @@ pub(crate) struct UnknownReuseKind {
     pub span: Span,
     pub kind: Symbol,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_missing_query_depgraph)]
@@ -65,7 +56,6 @@ pub(crate) struct MissingQueryDepGraph {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_malformed_cgu_name)]
@@ -75,7 +65,6 @@ pub(crate) struct MalformedCguName {
     pub user_path: String,
     pub crate_name: String,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_no_module_named)]
@@ -86,7 +75,6 @@ pub(crate) struct NoModuleNamed<'a> {
     pub cgu_name: Symbol,
     pub cgu_names: String,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_field_associated_value_expected)]
@@ -95,7 +83,6 @@ pub(crate) struct FieldAssociatedValueExpected {
     pub span: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_no_field)]
@@ -104,28 +91,24 @@ pub(crate) struct NoField {
     pub span: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_lib_def_write_failure)]
 pub(crate) struct LibDefWriteFailure {
     pub error: Error,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_version_script_write_failure)]
 pub(crate) struct VersionScriptWriteFailure {
     pub error: Error,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_symbol_file_write_failure)]
 pub(crate) struct SymbolFileWriteFailure {
     pub error: Error,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_ld64_unimplemented_modifier)]
@@ -144,14 +127,12 @@ pub(crate) struct L4BenderExportingSymbolsUnimplemented;
 pub(crate) struct NoNatvisDirectory {
     pub error: Error,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_no_saved_object_file)]
 pub(crate) struct NoSavedObjectFile<'a> {
     pub cgu_name: &'a str,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_requires_rust_abi, code = E0737)]
@@ -159,7 +140,6 @@ pub(crate) struct RequiresRustAbi {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unsupported_instruction_set, code = E0779)]
@@ -167,7 +147,6 @@ pub(crate) struct UnsupportedInstructionSet {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_invalid_instruction_set, code = E0779)]
@@ -175,7 +154,6 @@ pub(crate) struct InvalidInstructionSet {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_bare_instruction_set, code = E0778)]
@@ -183,7 +161,6 @@ pub(crate) struct BareInstructionSet {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_multiple_instruction_set, code = E0779)]
@@ -191,7 +168,6 @@ pub(crate) struct MultipleInstructionSet {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_expected_name_value_pair)]
@@ -199,7 +175,6 @@ pub(crate) struct ExpectedNameValuePair {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unexpected_parameter_name)]
@@ -210,7 +185,6 @@ pub(crate) struct UnexpectedParameterName {
     pub prefix_nops: Symbol,
     pub entry_nops: Symbol,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_invalid_literal_value)]
@@ -219,7 +193,6 @@ pub(crate) struct InvalidLiteralValue {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_out_of_range_integer)]
@@ -228,7 +201,6 @@ pub(crate) struct OutOfRangeInteger {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_copy_path_buf)]
@@ -237,7 +209,6 @@ pub(crate) struct CopyPathBuf {
     pub output_path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=CopyPath | COMPLEXITY=2 | LINES=9 */
 
 // Reports Paths using `Debug` implementation rather than Path's `Display` implementation.
 #[derive(Diagnostic)]
@@ -247,14 +218,12 @@ pub struct CopyPath<'a> {
     to: DebugArgPath<'a>,
     error: Error,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a> CopyPath<'a> {
     pub fn new(from: &'a Path, to: &'a Path, error: Error) -> CopyPath<'a> {
         CopyPath { from: DebugArgPath(from), to: DebugArgPath(to), error }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=DebugArgPath | COMPLEXITY=6 | LINES=8 */
 
 struct DebugArgPath<'a>(pub &'a Path);
 
@@ -263,35 +232,30 @@ impl IntoDiagArg for DebugArgPath<'_> {
         DiagArgValue::Str(Cow::Owned(format!("{:?}", self.0)))
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=BinaryOutputToTty | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_binary_output_to_tty)]
 pub struct BinaryOutputToTty {
     pub shorthand: &'static str,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=IgnoringEmitPath | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_ignoring_emit_path)]
 pub struct IgnoringEmitPath {
     pub extension: &'static str,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=IgnoringOutput | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_ignoring_output)]
 pub struct IgnoringOutput {
     pub extension: &'static str,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_create_temp_dir)]
 pub(crate) struct CreateTempDir {
     pub error: Error,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_add_native_library)]
@@ -299,7 +263,6 @@ pub(crate) struct AddNativeLibrary {
     pub library_path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_multiple_external_func_decl)]
@@ -309,7 +272,6 @@ pub(crate) struct MultipleExternalFuncDecl<'a> {
     pub function: Symbol,
     pub library_name: &'a str,
 }
-/* AST_META: AST_ID=38 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 #[derive(Diagnostic)]
 pub enum LinkRlibError {
@@ -325,7 +287,6 @@ pub enum LinkRlibError {
     #[diag(codegen_ssa_rlib_incompatible_dependency_formats)]
     IncompatibleDependencyFormats { ty1: String, ty2: String, list1: String, list2: String },
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=67 | LINES=128 */
 
 pub(crate) struct ThorinErrorWrapper(pub thorin::Error);
 
@@ -454,7 +415,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for ThorinErrorWrapper {
         }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct LinkingFailed<'a> {
     pub linker_path: &'a Path,
@@ -464,7 +424,6 @@ pub(crate) struct LinkingFailed<'a> {
     pub verbose: bool,
     pub sysroot_dir: PathBuf,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=97 | LINES=122 */
 
 impl<G: EmissionGuarantee> Diagnostic<'_, G> for LinkingFailed<'_> {
     fn into_diag(mut self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
@@ -587,7 +546,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for LinkingFailed<'_> {
         diag
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=6 | LINES=16 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_link_exe_unexpected_error)]
@@ -604,7 +562,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for LinkExeStatusStackBufferOve
         diag
     }
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_repair_vs_build_tools)]
@@ -629,7 +586,6 @@ pub(crate) struct LinkerNotFound {
     pub linker_path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unable_to_exe_linker)]
@@ -640,7 +596,6 @@ pub(crate) struct UnableToExeLinker {
     pub error: Error,
     pub command_formatted: String,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=28 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_msvc_missing_linker)]
@@ -669,14 +624,12 @@ pub(crate) struct ProcessingDymutilFailed {
     pub status: ExitStatus,
     pub output: String,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unable_to_run_dsymutil)]
 pub(crate) struct UnableToRunDsymutil {
     pub error: Error,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_stripping_debug_info_failed)]
@@ -686,7 +639,6 @@ pub(crate) struct StrippingDebugInfoFailed<'a> {
     pub status: ExitStatus,
     pub output: String,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unable_to_run)]
@@ -694,7 +646,6 @@ pub(crate) struct UnableToRun<'a> {
     pub util: &'a str,
     pub error: Error,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_linker_file_stem)]
@@ -709,7 +660,6 @@ pub(crate) struct StaticLibraryNativeArtifacts;
 pub(crate) struct StaticLibraryNativeArtifactsToFile<'a> {
     pub path: &'a Path,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_link_script_unavailable)]
@@ -721,7 +671,6 @@ pub(crate) struct LinkScriptWriteFailure {
     pub path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_failed_to_write)]
@@ -729,7 +678,6 @@ pub(crate) struct FailedToWrite {
     pub path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unable_to_write_debugger_visualizer)]
@@ -737,7 +685,6 @@ pub(crate) struct UnableToWriteDebuggerVisualizer {
     pub path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_rlib_archive_build_failure)]
@@ -745,7 +692,6 @@ pub(crate) struct RlibArchiveBuildFailure {
     pub path: PathBuf,
     pub error: Error,
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=28 */
 
 #[derive(Diagnostic)]
 // Public for rustc_codegen_llvm::back::archive
@@ -774,14 +720,12 @@ pub enum ExtractBundledLibsError<'a> {
     #[diag(codegen_ssa_extract_bundled_libs_write_file)]
     ExtractSection { rlib: &'a Path, error: Box<dyn std::error::Error> },
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_read_file)]
 pub(crate) struct ReadFileError {
     pub message: std::io::Error,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=ArchiveBuildFailure | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unsupported_link_self_contained)]
@@ -794,7 +738,6 @@ pub struct ArchiveBuildFailure {
     pub path: PathBuf,
     pub error: std::io::Error,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UnknownArchiveKind | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unknown_archive_kind)]
@@ -802,7 +745,6 @@ pub struct ArchiveBuildFailure {
 pub struct UnknownArchiveKind<'a> {
     pub kind: &'a str,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_multiple_main_functions)]
@@ -811,14 +753,12 @@ pub(crate) struct MultipleMainFunctions {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_invalid_windows_subsystem)]
 pub(crate) struct InvalidWindowsSubsystem {
     pub subsystem: Symbol,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_shuffle_indices_evaluation)]
@@ -826,7 +766,6 @@ pub(crate) struct ShuffleIndicesEvaluation {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=61 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=56 | LINES=340 */
 
 #[derive(Diagnostic)]
 pub enum InvalidMonomorphization<'tcx> {
@@ -1167,13 +1106,11 @@ pub enum InvalidMonomorphization<'tcx> {
         vector_type: Ty<'tcx>,
     },
 }
-/* AST_META: AST_ID=62 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum ExpectedPointerMutability {
     Mut,
     Not,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=9 */
 
 impl IntoDiagArg for ExpectedPointerMutability {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
@@ -1183,7 +1120,6 @@ impl IntoDiagArg for ExpectedPointerMutability {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_target_feature_safe_trait)]
@@ -1194,7 +1130,6 @@ pub(crate) struct TargetFeatureSafeTrait {
     #[label(codegen_ssa_label_def)]
     pub def: Span,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=ForbiddenTargetFeatureAttr | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_forbidden_target_feature_attr)]
@@ -1204,7 +1139,6 @@ pub struct ForbiddenTargetFeatureAttr<'a> {
     pub feature: &'a str,
     pub reason: &'a str,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=FailedToGetLayout | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_failed_to_get_layout)]
@@ -1214,7 +1148,6 @@ pub struct FailedToGetLayout<'tcx> {
     pub ty: Ty<'tcx>,
     pub err: LayoutError<'tcx>,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_dlltool_fail_import_library)]
@@ -1224,14 +1157,12 @@ pub(crate) struct DlltoolFailImportLibrary<'a> {
     pub stdout: Cow<'a, str>,
     pub stderr: Cow<'a, str>,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_error_writing_def_file)]
 pub(crate) struct ErrorWritingDEFFile {
     pub error: std::io::Error,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_error_calling_dlltool)]
@@ -1239,14 +1170,12 @@ pub(crate) struct ErrorCallingDllTool<'a> {
     pub dlltool_path: Cow<'a, str>,
     pub error: std::io::Error,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_error_creating_remark_dir)]
 pub(crate) struct ErrorCreatingRemarkDir {
     pub error: std::io::Error,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=CompilerBuiltinsCannotCall | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_compiler_builtins_cannot_call)]
@@ -1256,7 +1185,6 @@ pub struct CompilerBuiltinsCannotCall {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_error_creating_import_library)]
@@ -1264,7 +1192,6 @@ pub(crate) struct ErrorCreatingImportLibrary<'a> {
     pub lib_name: &'a str,
     pub error: String,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_aix_strip_not_used)]
@@ -1284,7 +1211,6 @@ pub(crate) enum XcrunError {
         stderr: String,
     },
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic, Debug)]
 #[diag(codegen_ssa_xcrun_sdk_path_warning)]
@@ -1293,7 +1219,6 @@ pub(crate) struct XcrunSdkPathWarning {
     pub sdk_name: &'static str,
     pub stderr: String,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(codegen_ssa_aarch64_softfloat_neon)]
@@ -1305,7 +1230,6 @@ pub(crate) struct Aarch64SoftfloatNeon;
 pub(crate) struct UnknownCTargetFeaturePrefix<'a> {
     pub feature: &'a str,
 }
-/* AST_META: AST_ID=76 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum PossibleFeature<'a> {
@@ -1314,7 +1238,6 @@ pub(crate) enum PossibleFeature<'a> {
     #[help(codegen_ssa_consider_filing_feature_request)]
     None,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unknown_ctarget_feature)]
@@ -1324,7 +1247,6 @@ pub(crate) struct UnknownCTargetFeature<'a> {
     #[subdiagnostic]
     pub rust_feature: PossibleFeature<'a>,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_unstable_ctarget_feature)]
@@ -1332,7 +1254,6 @@ pub(crate) struct UnknownCTargetFeature<'a> {
 pub(crate) struct UnstableCTargetFeature<'a> {
     pub feature: &'a str,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_forbidden_ctarget_feature)]
@@ -1343,14 +1264,12 @@ pub(crate) struct ForbiddenCTargetFeature<'a> {
     pub enabled: &'a str,
     pub reason: &'a str,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=TargetFeatureDisableOrEnable | COMPLEXITY=2 | LINES=6 */
 
 pub struct TargetFeatureDisableOrEnable<'a> {
     pub features: &'a [&'a str],
     pub span: Option<Span>,
     pub missing_features: Option<MissingFeatures>,
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=MissingFeatures; | COMPLEXITY=12 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 #[help(codegen_ssa_missing_features)]
@@ -1369,7 +1288,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for TargetFeatureDisableOrEnable<'_
         diag
     }
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_no_mangle_nameless)]
@@ -1378,7 +1296,6 @@ pub(crate) struct NoMangleNameless {
     pub span: Span,
     pub definition: String,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_feature_not_valid)]
@@ -1390,7 +1307,6 @@ pub(crate) struct FeatureNotValid<'a> {
     #[help]
     pub plus_hint: bool,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=1 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(codegen_ssa_lto_disallowed)]

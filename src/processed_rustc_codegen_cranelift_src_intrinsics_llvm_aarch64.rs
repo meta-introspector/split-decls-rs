@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/intrinsics/llvm_aarch64.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Emulate AArch64 LLVM intrinsics
 
 use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::asm::*;
 
 use crate::inline_asm::{CInlineAsmOperand, codegen_inline_asm_inner};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=190 | LINES=509 */
 use crate::intrinsics::*;
 use crate::prelude::*;
 

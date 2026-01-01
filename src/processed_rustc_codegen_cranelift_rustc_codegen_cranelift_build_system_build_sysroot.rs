@@ -1,22 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/build_sysroot.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::process::Command;
 use std::{env, fs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::path::{Dirs, RelPath};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::prepare::apply_patches;
 use crate::rustc_info::{get_default_sysroot, get_file_name};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::utils::{
     CargoProject, Compiler, LogGroup, ensure_empty_dir, spawn_and_wait, try_hard_link,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CodegenBackend, SysrootKind, config};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=100 */
 
 pub(crate) fn build_sysroot(
     dirs: &Dirs,
@@ -117,14 +110,12 @@ pub(crate) fn build_sysroot(
     }
     target_compiler
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=SysrootTarget | COMPLEXITY=2 | LINES=6 */
 
 #[must_use]
 struct SysrootTarget {
     triple: String,
     libs: Vec<PathBuf>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=install_into_sysroot | COMPLEXITY=9 | LINES=15 */
 
 impl SysrootTarget {
     fn install_into_sysroot(&self, sysroot: &Path) {
@@ -140,7 +131,6 @@ impl SysrootTarget {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=build_sysroot_for_triple | COMPLEXITY=10 | LINES=19 */
 
 static STDLIB_SRC: RelPath = RelPath::build("stdlib");
 static STANDARD_LIBRARY: CargoProject =
@@ -160,7 +150,6 @@ fn build_sysroot_for_triple(
         SysrootKind::Clif => build_clif_sysroot_for_triple(dirs, compiler, cg_clif_dylib_path),
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=build_llvm_sysroot_for_triple | COMPLEXITY=14 | LINES=34 */
 
 fn build_llvm_sysroot_for_triple(compiler: Compiler) -> SysrootTarget {
     let default_sysroot = crate::rustc_info::get_default_sysroot(&compiler.rustc);
@@ -195,7 +184,6 @@ fn build_llvm_sysroot_for_triple(compiler: Compiler) -> SysrootTarget {
 
     target_libs
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=build_clif_sysroot_for_triple | COMPLEXITY=45 | LINES=75 */
 
 fn build_clif_sysroot_for_triple(
     dirs: &Dirs,
@@ -271,7 +259,6 @@ fn build_clif_sysroot_for_triple(
 
     target_libs
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=build_rtstartup | COMPLEXITY=16 | LINES=35 */
 
 fn build_rtstartup(dirs: &Dirs, compiler: &Compiler) -> Option<SysrootTarget> {
     if !config::get_bool("keep_sysroot") {

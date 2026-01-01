@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/emit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Write the debuginfo into an object file.
 
 use cranelift_module::{DataId, FuncId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use cranelift_object::ObjectProduct;
 use gimli::write::{Address, AttributeValue, EndianVec, Result, Sections, Writer};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gimli::{RunTimeEndian, SectionId};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 use crate::rustc_data_structures::fx::FxHashMap;
 
 use super::DebugContext;
@@ -19,14 +15,12 @@ pub(super) fn address_for_func(func_id: FuncId) -> Address {
     assert!(symbol & 1 << 31 == 0);
     Address::Symbol { symbol: symbol as usize, addend: 0 }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 pub(super) fn address_for_data(data_id: DataId) -> Address {
     let symbol = data_id.as_u32();
     assert!(symbol & 1 << 31 == 0);
     Address::Symbol { symbol: (symbol | 1 << 31) as usize, addend: 0 }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=30 */
 
 impl DebugContext {
     pub(crate) fn emit(&mut self, product: &mut ObjectProduct) {
@@ -57,7 +51,6 @@ impl DebugContext {
         });
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone)]
 pub(crate) struct DebugReloc {
@@ -67,14 +60,12 @@ pub(crate) struct DebugReloc {
     pub(crate) addend: i64,
     pub(crate) kind: object::RelocationKind,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 pub(crate) enum DebugRelocName {
     Section(SectionId),
     Symbol(usize),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// A [`Writer`] that collects all necessary relocations.
 #[derive(Clone)]
@@ -82,7 +73,6 @@ pub(super) struct WriterRelocate {
     pub(super) relocs: Vec<DebugReloc>,
     pub(super) writer: EndianVec<RunTimeEndian>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=rust_eh_personality | COMPLEXITY=30 | LINES=47 */
 
 impl WriterRelocate {
     pub(super) fn new(endian: RunTimeEndian) -> Self {
@@ -130,7 +120,6 @@ impl WriterRelocate {
         self.writer.into_vec()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=endian | COMPLEXITY=53 | LINES=115 */
 
 impl Writer for WriterRelocate {
     type Endian = RunTimeEndian;

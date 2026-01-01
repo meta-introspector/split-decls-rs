@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/lattice.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 // Traits used to represent [lattices] for use as the domain of a dataflow analysis.
 //
 // # Overview
@@ -7,18 +6,14 @@
 // The most common lattice is a powerset of some set `S`, ordered by [set inclusion]. The [Hasse
 // diagram] for the powerset of a set with two elements (`X` and `Y`) is shown below. Note that
 // distinct elements at the same height in a Hasse diagram (e.g. `{X}` and `{Y}`) are
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // *incomparable*, not equal.
 //
 // ```text
 //      {X, Y}    <- top
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 //       /  \
 //    {X}    {Y}
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 //       \  /
 //        {}      <- bottom
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 //
 // ```
 //
@@ -46,7 +41,6 @@
 
 use crate::rustc_index::Idx;
 use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=join | COMPLEXITY=7 | LINES=15 */
 
 use crate::framework::BitSetExt;
 
@@ -62,7 +56,6 @@ pub trait JoinSemiLattice: Eq {
     /// The lattice join operator is abbreviated as `∨`.
     fn join(&mut self, other: &Self) -> bool;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_bottom | COMPLEXITY=2 | LINES=7 */
 
 /// A set that has a "bottom" element, which is less than or equal to any other element.
 pub trait HasBottom {
@@ -70,13 +63,11 @@ pub trait HasBottom {
 
     fn is_bottom(&self) -> bool;
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 /// A set that has a "top" element, which is greater than or equal to any other element.
 pub trait HasTop {
     const TOP: Self;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=join | COMPLEXITY=7 | LINES=9 */
 
 /// A `DenseBitSet` represents the lattice formed by the powerset of all possible values of the
 /// index type `T` ordered by inclusion. Equivalently, it is a tuple of "two-point" lattices, one
@@ -86,14 +77,12 @@ impl<T: Idx> JoinSemiLattice for DenseBitSet<T> {
         self.union(other)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=join | COMPLEXITY=5 | LINES=6 */
 
 impl<T: Idx> JoinSemiLattice for MixedBitSet<T> {
     fn join(&mut self, other: &Self) -> bool {
         self.union(other)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
 
 /// Extends a type `T` with top and bottom elements to make it a partially ordered set in which no
 /// value of `T` is comparable with any other.
@@ -115,7 +104,6 @@ pub enum FlatSet<T> {
     Elem(T),
     Top,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=join | COMPLEXITY=11 | LINES=16 */
 
 impl<T: Clone + Eq> JoinSemiLattice for FlatSet<T> {
     fn join(&mut self, other: &Self) -> bool {
@@ -132,7 +120,6 @@ impl<T: Clone + Eq> JoinSemiLattice for FlatSet<T> {
         true
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_bottom | COMPLEXITY=5 | LINES=8 */
 
 impl<T> HasBottom for FlatSet<T> {
     const BOTTOM: Self = Self::Bottom;
@@ -141,12 +128,10 @@ impl<T> HasBottom for FlatSet<T> {
         matches!(self, Self::Bottom)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> HasTop for FlatSet<T> {
     const TOP: Self = Self::Top;
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 /// Extend a lattice with a bottom value to represent an unreachable execution.
 ///
@@ -157,14 +142,12 @@ pub enum MaybeReachable<T> {
     Unreachable,
     Reachable(T),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_reachable | COMPLEXITY=3 | LINES=6 */
 
 impl<T> MaybeReachable<T> {
     pub fn is_reachable(&self) -> bool {
         matches!(self, MaybeReachable::Reachable(_))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=7 | LINES=14 */
 
 impl<S> MaybeReachable<S> {
     /// Return whether the current state contains the given element. If the state is unreachable,
@@ -179,14 +162,12 @@ impl<S> MaybeReachable<S> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=5 | LINES=6 */
 
 impl<T, S: BitSetExt<T>> BitSetExt<T> for MaybeReachable<S> {
     fn contains(&self, elem: T) -> bool {
         self.contains(elem)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=16 | LINES=18 */
 
 impl<V: Clone> Clone for MaybeReachable<V> {
     fn clone(&self) -> Self {
@@ -205,7 +186,6 @@ impl<V: Clone> Clone for MaybeReachable<V> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=join | COMPLEXITY=10 | LINES=14 */
 
 impl<T: JoinSemiLattice + Clone> JoinSemiLattice for MaybeReachable<T> {
     fn join(&mut self, other: &Self) -> bool {

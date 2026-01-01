@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/variance/terms.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 // Representing terms
 //
 // Terms are structured as a straightforward tree. Rather than rely on
@@ -16,9 +15,7 @@ use std::fmt;
 use rustc_arena::DroplessArena;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 use tracing::debug;
 
 use self::VarianceTerm::*;
@@ -34,7 +31,6 @@ pub(crate) enum VarianceTerm<'a> {
     TransformTerm(VarianceTermPtr<'a>, VarianceTermPtr<'a>),
     InferredTerm(InferredIndex),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=15 | LINES=13 */
 
 impl<'a> fmt::Debug for VarianceTerm<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -48,7 +44,6 @@ impl<'a> fmt::Debug for VarianceTerm<'a> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 
 /// The first pass over the crate simply builds up the set of inferreds.
 
@@ -68,7 +63,6 @@ pub(crate) struct TermsContext<'a, 'tcx> {
     /// Maps from an InferredIndex to the term for that variable.
     pub inferred_terms: Vec<VarianceTermPtr<'a>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=46 */
 
 pub(crate) fn determine_parameters_to_be_inferred<'a, 'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -115,7 +109,6 @@ pub(crate) fn determine_parameters_to_be_inferred<'a, 'tcx>(
 
     terms_cx
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=lang_items | COMPLEXITY=3 | LINES=15 */
 
 fn lang_items(tcx: TyCtxt<'_>) -> Vec<(LocalDefId, Vec<ty::Variance>)> {
     let lang_items = tcx.lang_items();
@@ -131,7 +124,6 @@ fn lang_items(tcx: TyCtxt<'_>) -> Vec<(LocalDefId, Vec<ty::Variance>)> {
         })
         .collect()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_inferreds_for_item | COMPLEXITY=11 | LINES=25 */
 
 impl<'a, 'tcx> TermsContext<'a, 'tcx> {
     fn add_inferreds_for_item(&mut self, def_id: LocalDefId) {

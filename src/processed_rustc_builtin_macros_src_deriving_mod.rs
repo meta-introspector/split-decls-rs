@@ -1,31 +1,23 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // The compiler code necessary to implement the `#[derive]` extensions.
 
 use rustc_ast as ast;
 use crate::rustc_complete::{GenericArg, MetaItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, MultiItemModifier};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 macro path_local($x:ident) {
     generic::ty::Path::new_local(sym::$x)
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 macro pathvec_std($($rest:ident)::+) {{
     vec![ $( sym::$rest ),+ ]
 }}
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 macro path_std($($x:tt)*) {
     generic::ty::Path::new( pathvec_std!( $($x)* ) )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=21 | LINES=68 */
 
 
 #[path = "cmp/eq.rs"]
@@ -82,7 +74,6 @@ impl MultiItemModifier for BuiltinDerive {
         ExpandResult::Ready(items)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=call_intrinsic | COMPLEXITY=2 | LINES=12 */
 
 /// Constructs an expression that calls an intrinsic
 fn call_intrinsic(
@@ -95,7 +86,6 @@ fn call_intrinsic(
     let path = cx.std_path(&[sym::intrinsics, intrinsic]);
     cx.expr_call_global(span, path, args)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=call_unreachable | COMPLEXITY=4 | LINES=15 */
 
 /// Constructs an expression that calls the `unreachable` intrinsic.
 fn call_unreachable(cx: &ExtCtxt<'_>, span: Span) -> Box<ast::Expr> {
@@ -111,7 +101,6 @@ fn call_unreachable(cx: &ExtCtxt<'_>, span: Span) -> Box<ast::Expr> {
         tokens: None,
     }))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=assert_ty_bounds | COMPLEXITY=2 | LINES=13 */
 
 fn assert_ty_bounds(
     cx: &ExtCtxt<'_>,

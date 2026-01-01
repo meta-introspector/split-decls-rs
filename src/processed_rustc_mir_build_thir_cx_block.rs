@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/cx/block.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=mirror_stmts | COMPLEXITY=51 | LINES=123 */
 use rustc_hir as hir;
 use crate::rustc_index::Idx;
 use crate::rustc_complete::middle::region;

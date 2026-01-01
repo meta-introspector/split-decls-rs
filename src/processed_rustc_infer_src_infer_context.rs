@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Definition of `InferCtxtLike` from the librarified type layer.
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::relate::RelateResult;
 use crate::rustc_complete::ty::relate::combine::PredicateEmittingRelation;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     BoundRegionConversionTime, InferCtxt, OpaqueTypeStorageEntries, RegionVariableOrigin,
     SubregionOrigin,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=124 | LINES=320 */
 
 impl<'tcx> rustc_type_ir::InferCtxtLike for InferCtxt<'tcx> {
     type Interner = TyCtxt<'tcx>;

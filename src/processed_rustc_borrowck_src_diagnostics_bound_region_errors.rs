@@ -1,42 +1,34 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/bound_region_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt;
 use std::rc::Rc;
 
 use crate::rustc_complete::Diag;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::region_constraints::{Constraint, ConstraintKind, RegionConstraintData};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::infer::{
     InferCtxt, RegionResolutionError, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt as _,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::ObligationCause;
 use crate::rustc_infer::traits::query::{
     CanonicalTypeOpAscribeUserTypeGoal, CanonicalTypeOpDeeplyNormalizeGoal,
     CanonicalTypeOpNormalizeGoal, CanonicalTypeOpProvePredicateGoal,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{
     self, RePlaceholder, Region, RegionVid, Ty, TyCtxt, TypeFoldable, UniverseIndex,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 use rustc_traits::{type_op_ascribe_user_type_with_span, type_op_prove_predicate_with_cause};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::MirBorrowckCtxt;
 use crate::region_infer::values::RegionElement;
 use crate::session_diagnostics::{
     HigherRankedErrorCause, HigherRankedLifetimeError, HigherRankedSubtypeError,
 };
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 /// What operation a universe was created for.
 #[derive(Clone)]
@@ -48,7 +40,6 @@ pub(crate) enum UniverseInfo<'tcx> {
     /// Any other reason.
     Other,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=42 */
 
 impl<'tcx> UniverseInfo<'tcx> {
     pub(crate) fn other() -> UniverseInfo<'tcx> {
@@ -91,12 +82,10 @@ impl<'tcx> UniverseInfo<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) trait ToUniverseInfo<'tcx> {
     fn to_universe_info(self, base_universe: ty::UniverseIndex) -> UniverseInfo<'tcx>;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> ToUniverseInfo<'tcx> for crate::type_check::InstantiateOpaqueType<'tcx> {
     fn to_universe_info(self, base_universe: ty::UniverseIndex) -> UniverseInfo<'tcx> {
@@ -106,14 +95,12 @@ impl<'tcx> ToUniverseInfo<'tcx> for crate::type_check::InstantiateOpaqueType<'tc
         }))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToUniverseInfo<'tcx> for CanonicalTypeOpProvePredicateGoal<'tcx> {
     fn to_universe_info(self, base_universe: ty::UniverseIndex) -> UniverseInfo<'tcx> {
         UniverseInfo::TypeOp(Rc::new(PredicateQuery { canonical_query: self, base_universe }))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx, T: Copy + fmt::Display + TypeFoldable<TyCtxt<'tcx>> + 'tcx> ToUniverseInfo<'tcx>
     for CanonicalTypeOpNormalizeGoal<'tcx, T>
@@ -122,7 +109,6 @@ impl<'tcx, T: Copy + fmt::Display + TypeFoldable<TyCtxt<'tcx>> + 'tcx> ToUnivers
         UniverseInfo::TypeOp(Rc::new(NormalizeQuery { canonical_query: self, base_universe }))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx, T: Copy + fmt::Display + TypeFoldable<TyCtxt<'tcx>> + 'tcx> ToUniverseInfo<'tcx>
     for CanonicalTypeOpDeeplyNormalizeGoal<'tcx, T>
@@ -131,21 +117,18 @@ impl<'tcx, T: Copy + fmt::Display + TypeFoldable<TyCtxt<'tcx>> + 'tcx> ToUnivers
         UniverseInfo::TypeOp(Rc::new(DeeplyNormalizeQuery { canonical_query: self, base_universe }))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> ToUniverseInfo<'tcx> for CanonicalTypeOpAscribeUserTypeGoal<'tcx> {
     fn to_universe_info(self, base_universe: ty::UniverseIndex) -> UniverseInfo<'tcx> {
         UniverseInfo::TypeOp(Rc::new(AscribeUserTypeQuery { canonical_query: self, base_universe }))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=to_universe_info | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> ToUniverseInfo<'tcx> for ! {
     fn to_universe_info(self, _base_universe: ty::UniverseIndex) -> UniverseInfo<'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=17 | LINES=68 */
 
 #[allow(unused_lifetimes)]
 pub(crate) trait TypeOpInfo<'tcx> {
@@ -214,13 +197,11 @@ pub(crate) trait TypeOpInfo<'tcx> {
         mbcx.buffer_error(nice_error.unwrap_or_else(|| self.fallback_error(tcx, span)));
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=PredicateQuery | COMPLEXITY=2 | LINES=5 */
 
 struct PredicateQuery<'tcx> {
     canonical_query: CanonicalTypeOpProvePredicateGoal<'tcx>,
     base_universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=11 | LINES=36 */
 
 impl<'tcx> TypeOpInfo<'tcx> for PredicateQuery<'tcx> {
     fn fallback_error(&self, tcx: TyCtxt<'tcx>, span: Span) -> Diag<'tcx> {
@@ -257,13 +238,11 @@ impl<'tcx> TypeOpInfo<'tcx> for PredicateQuery<'tcx> {
         Some(diag)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=NormalizeQuery | COMPLEXITY=2 | LINES=5 */
 
 struct NormalizeQuery<'tcx, T> {
     canonical_query: CanonicalTypeOpNormalizeGoal<'tcx, T>,
     base_universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=15 | LINES=48 */
 
 impl<'tcx, T> TypeOpInfo<'tcx> for NormalizeQuery<'tcx, T>
 where
@@ -312,13 +291,11 @@ where
         Some(diag)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=DeeplyNormalizeQuery | COMPLEXITY=2 | LINES=5 */
 
 struct DeeplyNormalizeQuery<'tcx, T> {
     canonical_query: CanonicalTypeOpDeeplyNormalizeGoal<'tcx, T>,
     base_universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=12 | LINES=42 */
 
 impl<'tcx, T> TypeOpInfo<'tcx> for DeeplyNormalizeQuery<'tcx, T>
 where
@@ -361,13 +338,11 @@ where
         Some(diag)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=AscribeUserTypeQuery | COMPLEXITY=2 | LINES=5 */
 
 struct AscribeUserTypeQuery<'tcx> {
     canonical_query: CanonicalTypeOpAscribeUserTypeGoal<'tcx>,
     base_universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=10 | LINES=33 */
 
 impl<'tcx> TypeOpInfo<'tcx> for AscribeUserTypeQuery<'tcx> {
     fn fallback_error(&self, tcx: TyCtxt<'tcx>, span: Span) -> Diag<'tcx> {
@@ -401,7 +376,6 @@ impl<'tcx> TypeOpInfo<'tcx> for AscribeUserTypeQuery<'tcx> {
         Some(diag)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=fallback_error | COMPLEXITY=10 | LINES=34 */
 
 impl<'tcx> TypeOpInfo<'tcx> for crate::type_check::InstantiateOpaqueType<'tcx> {
     fn fallback_error(&self, tcx: TyCtxt<'tcx>, span: Span) -> Diag<'tcx> {
@@ -436,7 +410,6 @@ impl<'tcx> TypeOpInfo<'tcx> for crate::type_check::InstantiateOpaqueType<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=try_extract_error_from_fulfill_cx | COMPLEXITY=3 | LINES=23 */
 
 #[instrument(skip(ocx), level = "debug")]
 fn try_extract_error_from_fulfill_cx<'a, 'tcx>(
@@ -460,7 +433,6 @@ fn try_extract_error_from_fulfill_cx<'a, 'tcx>(
         |vid| ocx.infcx.universe_of_region(ty::Region::new_var(ocx.infcx.tcx, vid)),
     )
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_extract_error_from_region_constraints | COMPLEXITY=39 | LINES=90 */
 
 #[instrument(level = "debug", skip(infcx, region_var_origin, universe_of_region))]
 fn try_extract_error_from_region_constraints<'a, 'tcx>(

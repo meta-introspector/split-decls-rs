@@ -1,39 +1,30 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/layout.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ops::Bound;
 use std::{cmp, fmt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::rustc_abi::{
     AddressSpace, Align, ExternAbi, FieldIdx, FieldsShape, HasDataLayout, LayoutData, PointeeInfo,
     PointerKind, Primitive, ReprOptions, Scalar, Size, TagEncoding, TargetDataLayout,
     TyAbiInterface, VariantIdx, Variants,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_error_messages::DiagMessage;
 use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_target::callconv::FnAbi;
 use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, PanicStrategy, Target, X86Abi};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_abi as abi, rustc_hir as hir};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::query::TyCtxtAt;
 use crate::ty::normalize_erasing_regions::NormalizationError;
 use crate::ty::{self, CoroutineArgsExt, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=52 | LINES=91 */
 
 #[extension(pub trait IntegerExt)]
 impl abi::Integer {
@@ -125,7 +116,6 @@ impl abi::Integer {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=13 | LINES=24 */
 
 #[extension(pub trait FloatExt)]
 impl abi::Float {
@@ -150,7 +140,6 @@ impl abi::Float {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=15 | LINES=28 */
 
 #[extension(pub trait PrimitiveExt)]
 impl Primitive {
@@ -179,7 +168,6 @@ impl Primitive {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 
 /// The first half of a wide pointer.
 ///
@@ -207,7 +195,6 @@ pub enum ValidityRequirement {
     /// True uninitialized memory.
     Uninit,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from_intrinsic | COMPLEXITY=7 | LINES=11 */
 
 impl ValidityRequirement {
     pub fn from_intrinsic(intrinsic: Symbol) -> Option<Self> {
@@ -219,7 +206,6 @@ impl ValidityRequirement {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=11 */
 
 impl fmt::Display for ValidityRequirement {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -231,7 +217,6 @@ impl fmt::Display for ValidityRequirement {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=31 */
 
 #[derive(Copy, Clone, Debug, HashStable, TyEncodable, TyDecodable)]
 pub enum LayoutError<'tcx> {
@@ -263,7 +248,6 @@ pub enum LayoutError<'tcx> {
     /// A type has cyclic layout, i.e. the type contains itself without indirection.
     Cycle(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=19 | LINES=32 */
 
 impl<'tcx> LayoutError<'tcx> {
     pub fn diagnostic_message(&self) -> DiagMessage {
@@ -296,7 +280,6 @@ impl<'tcx> LayoutError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=22 | LINES=24 */
 
 // FIXME: Once the other errors that embed this error have been converted to translatable
 // diagnostics, this Display impl should be removed.
@@ -321,28 +304,24 @@ impl<'tcx> fmt::Display for LayoutError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> IntoDiagArg for LayoutError<'tcx> {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         self.to_string().into_diag_arg(&mut None)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=LayoutCx | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 pub struct LayoutCx<'tcx> {
     pub calc: abi::LayoutCalculator<TyCtxt<'tcx>>,
     pub typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> LayoutCx<'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>, typing_env: ty::TypingEnv<'tcx>) -> Self {
         Self { calc: abi::LayoutCalculator::new(tcx), typing_env }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
 
 /// Type size "skeleton", i.e., the only information determining a type's size.
 /// While this is conservative, (aside from constant sizes, only pointers,
@@ -370,7 +349,6 @@ pub enum SizeSkeleton<'tcx> {
         tail: Ty<'tcx>,
     },
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=compute | COMPLEXITY=128 | LINES=190 */
 
 impl<'tcx> SizeSkeleton<'tcx> {
     pub fn compute(
@@ -561,12 +539,10 @@ impl<'tcx> SizeSkeleton<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=2 | LINES=4 */
 
 pub trait HasTyCtxt<'tcx>: HasDataLayout {
     fn tcx(&self) -> TyCtxt<'tcx>;
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=3 | LINES=10 */
 
 pub trait HasTypingEnv<'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx>;
@@ -577,7 +553,6 @@ pub trait HasTypingEnv<'tcx> {
         self.typing_env().param_env
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> HasDataLayout for TyCtxt<'tcx> {
     #[inline]
@@ -585,14 +560,12 @@ impl<'tcx> HasDataLayout for TyCtxt<'tcx> {
         &self.data_layout
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for TyCtxt<'tcx> {
     fn target_spec(&self) -> &Target {
         &self.sess.target
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=x86_abi_opt | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> HasX86AbiOpt for TyCtxt<'tcx> {
     fn x86_abi_opt(&self) -> X86Abi {
@@ -602,7 +575,6 @@ impl<'tcx> HasX86AbiOpt for TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> HasTyCtxt<'tcx> for TyCtxt<'tcx> {
     #[inline]
@@ -610,7 +582,6 @@ impl<'tcx> HasTyCtxt<'tcx> for TyCtxt<'tcx> {
         *self
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> HasDataLayout for TyCtxtAt<'tcx> {
     #[inline]
@@ -618,14 +589,12 @@ impl<'tcx> HasDataLayout for TyCtxtAt<'tcx> {
         &self.data_layout
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for TyCtxtAt<'tcx> {
     fn target_spec(&self) -> &Target {
         &self.sess.target
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> HasTyCtxt<'tcx> for TyCtxtAt<'tcx> {
     #[inline]
@@ -633,42 +602,36 @@ impl<'tcx> HasTyCtxt<'tcx> for TyCtxtAt<'tcx> {
         **self
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTypingEnv<'tcx> for LayoutCx<'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         self.typing_env
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasDataLayout for LayoutCx<'tcx> {
     fn data_layout(&self) -> &TargetDataLayout {
         self.calc.cx.data_layout()
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for LayoutCx<'tcx> {
     fn target_spec(&self) -> &Target {
         self.calc.cx.target_spec()
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=x86_abi_opt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasX86AbiOpt for LayoutCx<'tcx> {
     fn x86_abi_opt(&self) -> X86Abi {
         self.calc.cx.x86_abi_opt()
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTyCtxt<'tcx> for LayoutCx<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
         self.calc.cx
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=2 | LINES=7 */
 
 pub trait MaybeResult<T> {
     type Error;
@@ -676,7 +639,6 @@ pub trait MaybeResult<T> {
     fn from(x: Result<T, Self::Error>) -> Self;
     fn to_result(self) -> Result<T, Self::Error>;
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=11 */
 
 impl<T> MaybeResult<T> for T {
     type Error = !;
@@ -688,7 +650,6 @@ impl<T> MaybeResult<T> for T {
         Ok(self)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=11 */
 
 impl<T, E> MaybeResult<T> for Result<T, E> {
     type Error = E;
@@ -700,7 +661,6 @@ impl<T, E> MaybeResult<T> for Result<T, E> {
         self
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=layout_tcx_at_span | COMPLEXITY=11 | LINES=31 */
 
 pub type TyAndLayout<'tcx> = crate::rustc_abi::TyAndLayout<'tcx, Ty<'tcx>>;
 
@@ -732,7 +692,6 @@ pub trait LayoutOfHelpers<'tcx>: HasDataLayout + HasTyCtxt<'tcx> + HasTypingEnv<
         ty: Ty<'tcx>,
     ) -> <Self::LayoutOfResult as MaybeResult<TyAndLayout<'tcx>>>::Error;
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=layout_of | COMPLEXITY=12 | LINES=25 */
 
 /// Blanket extension trait for contexts that can compute layouts of types.
 pub trait LayoutOf<'tcx>: LayoutOfHelpers<'tcx> {
@@ -758,10 +717,8 @@ pub trait LayoutOf<'tcx>: LayoutOfHelpers<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, C: LayoutOfHelpers<'tcx>> LayoutOf<'tcx> for C {}
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=14 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for LayoutCx<'tcx> {
     type LayoutOfResult = Result<TyAndLayout<'tcx>, &'tcx LayoutError<'tcx>>;
@@ -776,7 +733,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for LayoutCx<'tcx> {
         self.tcx().arena.alloc(err)
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=ty_and_layout_for_variant | COMPLEXITY=241 | LINES=410 */
 
 impl<'tcx, C> TyAbiInterface<'tcx, C> for Ty<'tcx>
 where
@@ -1187,7 +1143,6 @@ where
         matches!(this.ty.kind(), ty::Adt(def, _) if def.repr().transparent())
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=fn_can_unwind | COMPLEXITY=57 | LINES=104 */
 
 /// Calculates whether a function's ABI can unwind or not.
 ///
@@ -1292,7 +1247,6 @@ pub fn fn_can_unwind(tcx: TyCtxt<'_>, fn_def_id: Option<DefId>, abi: ExternAbi) 
         Rust | RustCall | RustCold => tcx.sess.panic_strategy() == PanicStrategy::Unwind,
     }
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Error produced by attempting to compute or adjust a `FnAbi`.
 #[derive(Copy, Clone, Debug, HashStable)]
@@ -1300,7 +1254,6 @@ pub enum FnAbiError<'tcx> {
     /// Error produced by a `layout_of` call, while computing `FnAbi` initially.
     Layout(LayoutError<'tcx>),
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=9 | LINES=8 */
 
 impl<'a, 'b, G: EmissionGuarantee> Diagnostic<'a, G> for FnAbiError<'b> {
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
@@ -1309,7 +1262,6 @@ impl<'a, 'b, G: EmissionGuarantee> Diagnostic<'a, G> for FnAbiError<'b> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 
 // FIXME(eddyb) maybe use something like this for an unified `fn_abi_of`, not
 // just for error handling.
@@ -1318,7 +1270,6 @@ pub enum FnAbiRequest<'tcx> {
     OfFnPtr { sig: ty::PolyFnSig<'tcx>, extra_args: &'tcx ty::List<Ty<'tcx>> },
     OfInstance { instance: ty::Instance<'tcx>, extra_args: &'tcx ty::List<Ty<'tcx>> },
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=8 | LINES=22 */
 
 /// Trait for contexts that want to be able to compute `FnAbi`s.
 /// This automatically gives access to `FnAbiOf`, through a blanket `impl`.
@@ -1341,7 +1292,6 @@ pub trait FnAbiOfHelpers<'tcx>: LayoutOfHelpers<'tcx> {
         fn_abi_request: FnAbiRequest<'tcx>,
     ) -> <Self::FnAbiOfResult as MaybeResult<&'tcx FnAbi<'tcx, Ty<'tcx>>>>::Error;
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=fn_abi_of_fn_ptr | COMPLEXITY=25 | LINES=58 */
 
 /// Blanket extension trait for contexts that can compute `FnAbi`s.
 pub trait FnAbiOf<'tcx>: FnAbiOfHelpers<'tcx> {
@@ -1400,10 +1350,8 @@ pub trait FnAbiOf<'tcx>: FnAbiOfHelpers<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx, C: FnAbiOfHelpers<'tcx>> FnAbiOf<'tcx> for C {}
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=offset_of_subfield | COMPLEXITY=15 | LINES=34 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn offset_of_subfield<I>(

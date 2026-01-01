@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_incremental/src/persist/dirty_clean.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=Assertion | COMPLEXITY=129 | LINES=286 */
 // Debugging code to test fingerprints computed for query results. For each node marked with
 // `#[rustc_clean]` we will compare the fingerprint from the current and from the previous
 // compilation session as appropriate:
@@ -286,7 +285,6 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
                     _ => self.tcx.dcx().emit_fatal(errors::UndefinedCleanDirtyItem {
                         span: attr.span(),
                         kind: format!("{:?}", item.kind),
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=16 */
                     }),
                 }
             }
@@ -303,7 +301,6 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
             _ => self.tcx.dcx().emit_fatal(errors::UndefinedCleanDirty {
                 span: attr.span(),
                 kind: format!("{node:?}"),
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=resolve_labels | COMPLEXITY=22 | LINES=30 */
             }),
         };
         let labels =
@@ -334,16 +331,13 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
     fn dep_node_str(&self, dep_node: &DepNode) -> String {
         if let Some(def_id) = dep_node.extract_def_id(self.tcx) {
             format!("{:?}({})", dep_node.kind, self.tcx.def_path_str(def_id))
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
         } else {
             format!("{:?}({:?})", dep_node.kind, dep_node.hash)
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=assert_dirty | COMPLEXITY=3 | LINES=5 */
         }
     }
 
     fn assert_dirty(&self, item_span: Span, dep_node: DepNode) {
         debug!("assert_dirty({:?})", dep_node);
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=assert_clean | COMPLEXITY=7 | LINES=11 */
 
         if self.tcx.dep_graph.is_green(&dep_node) {
             let dep_node_str = self.dep_node_str(&dep_node);
@@ -355,7 +349,6 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
 
     fn assert_clean(&self, item_span: Span, dep_node: DepNode) {
         debug!("assert_clean({:?})", dep_node);
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=assert_loaded_from_disk | COMPLEXITY=7 | LINES=11 */
 
         if self.tcx.dep_graph.is_red(&dep_node) {
             let dep_node_str = self.dep_node_str(&dep_node);
@@ -367,7 +360,6 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
 
     fn assert_loaded_from_disk(&self, item_span: Span, dep_node: DepNode) {
         debug!("assert_loaded_from_disk({:?})", dep_node);
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=26 | LINES=37 */
 
         if !self.tcx.dep_graph.debug_was_loaded_from_disk(dep_node) {
             let dep_node_str = self.dep_node_str(&dep_node);
@@ -405,16 +397,13 @@ impl<'tcx> DirtyCleanVisitor<'tcx> {
 /// a cfg flag called `foo`.
 fn check_config(tcx: TyCtxt<'_>, attr: &Attribute) -> bool {
     debug!("check_config(attr={:?})", attr);
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
     let config = &tcx.sess.psess.config;
     debug!("check_config: config={:?}", config);
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=5 */
     let mut cfg = None;
     for item in attr.meta_item_list().unwrap_or_else(ThinVec::new) {
         if item.has_name(CFG) {
             let value = expect_associated_value(tcx, &item);
             debug!("check_config: searching for cfg {:?}", value);
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=expect_associated_value | COMPLEXITY=47 | LINES=62 */
             cfg = Some(config.contains(&(value, None)));
         } else if !(item.has_name(EXCEPT) || item.has_name(LOADED_FROM_DISK)) {
             tcx.dcx().emit_err(errors::UnknownRustcCleanArgument { span: item.span() });

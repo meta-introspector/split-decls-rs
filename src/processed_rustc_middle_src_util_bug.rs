@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/util/bug.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // These functions are used by macro expansion for `bug!` and `span_bug!`.
 
 use std::fmt;
 use std::panic::{Location, panic_any};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::Span;
 
 use crate::ty::{TyCtxt, tls};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=bug_fmt | COMPLEXITY=4 | LINES=8 */
 
 // This wrapper makes for more compact code at callsites than calling `opt_span_buf_fmt` directly.
 #[cold]
@@ -19,7 +16,6 @@ use crate::ty::{TyCtxt, tls};
 pub fn bug_fmt(args: fmt::Arguments<'_>) -> ! {
     opt_span_bug_fmt(None::<Span>, args, Location::caller());
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=span_bug_fmt | COMPLEXITY=4 | LINES=8 */
 
 // This wrapper makes for more compact code at callsites than calling `opt_span_buf_fmt` directly.
 #[cold]
@@ -28,7 +24,6 @@ pub fn bug_fmt(args: fmt::Arguments<'_>) -> ! {
 pub fn span_bug_fmt<S: Into<MultiSpan>>(span: S, args: fmt::Arguments<'_>) -> ! {
     opt_span_bug_fmt(Some(span), args, Location::caller());
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=opt_span_bug_fmt | COMPLEXITY=10 | LINES=19 */
 
 #[track_caller]
 fn opt_span_bug_fmt<S: Into<MultiSpan>>(
@@ -48,7 +43,6 @@ fn opt_span_bug_fmt<S: Into<MultiSpan>>(
         },
     )
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=trigger_delayed_bug | COMPLEXITY=4 | LINES=10 */
 
 /// A query to trigger a delayed bug. Clearly, if one has a `tcx` one can already trigger a
 /// delayed bug, so what is the point of this? It exists to help us test the interaction of delayed
@@ -59,7 +53,6 @@ pub fn trigger_delayed_bug(tcx: TyCtxt<'_>, key: crate::rustc_hir::def_id::DefId
         "delayed bug triggered by #[rustc_delayed_bug_from_inside_query]",
     );
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=4 */
 
 pub fn provide(providers: &mut crate::query::Providers) {
     *providers = crate::query::Providers { trigger_delayed_bug, ..*providers };

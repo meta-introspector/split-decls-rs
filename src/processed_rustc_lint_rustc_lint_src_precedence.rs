@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_lint/src/precedence.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token::LitKind;
 use crate::rustc_complete::{Expr, ExprKind, MethodCall, UnOp};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::lints::{
     AmbiguousNegativeLiteralsCurrentBehaviorSuggestion, AmbiguousNegativeLiteralsDiag,
     AmbiguousNegativeLiteralsNegativeLiteralSuggestion,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EarlyContext, EarlyLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=25 */
 
 declare_lint! {
     /// The `ambiguous_negative_literals` lint checks for cases that are
@@ -38,7 +33,6 @@ declare_lint! {
     "ambiguous negative literals operations",
     report_in_external_macro
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=18 | LINES=37 */
 
 declare_lint_pass!(Precedence => [AMBIGUOUS_NEGATIVE_LITERALS]);
 

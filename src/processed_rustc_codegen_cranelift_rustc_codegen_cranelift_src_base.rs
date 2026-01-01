@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/base.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Codegen of a single function
 
 use cranelift_codegen::CodegenError;
 use cranelift_codegen::ir::UserFuncName;
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use cranelift_module::ModuleError;
 use crate::rustc_complete::InlineAsmOptions;
 use crate::rustc_codegen_ssa::base::is_call_from_compiler_builtins_to_upstream_monomorphization;
@@ -14,16 +12,13 @@ use crate::rustc_index::IndexVec;
 use crate::rustc_complete::ty::TypeVisitableExt;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 
 use crate::constant::ConstantCx;
 use crate::debuginfo::{FunctionDebugContext, TypeDebugContext};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::prelude::*;
 use crate::pretty_clif::CommentWriter;
 use crate::{codegen_f16_f128, enable_verifier};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) struct CodegenedFunction {
     symbol_name: String,
@@ -32,7 +27,6 @@ pub(crate) struct CodegenedFunction {
     clif_comments: CommentWriter,
     func_debug_cx: Option<FunctionDebugContext>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=106 */
 
 pub(crate) fn codegen_fn<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -139,7 +133,6 @@ pub(crate) fn codegen_fn<'tcx>(
 
     CodegenedFunction { symbol_name, func_id, func, clif_comments, func_debug_cx }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=58 | LINES=110 */
 
 pub(crate) fn compile_fn(
     cx: &mut crate::CodegenCx,
@@ -250,7 +243,6 @@ pub(crate) fn compile_fn(
         }
     });
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=verify_func | COMPLEXITY=17 | LINES=22 */
 
 fn verify_func(tcx: TyCtxt<'_>, writer: &crate::pretty_clif::CommentWriter, func: &Function) {
     if !enable_verifier(tcx.sess) {
@@ -273,7 +265,6 @@ fn verify_func(tcx: TyCtxt<'_>, writer: &crate::pretty_clif::CommentWriter, func
         }
     });
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=codegen_fn_body | COMPLEXITY=148 | LINES=305 */
 
 fn codegen_fn_body(fx: &mut FunctionCx<'_, '_, '_>, start_block: Block) {
     let arg_uninhabited = fx
@@ -579,7 +570,6 @@ fn codegen_fn_body(fx: &mut FunctionCx<'_, '_, '_>, start_block: Block) {
         };
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=codegen_stmt | COMPLEXITY=200 | LINES=406 */
 
 fn codegen_stmt<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, cur_block: Block, stmt: &Statement<'tcx>) {
     let _print_guard = crate::PrintOnPanic(|| format!("stmt {:?}", stmt));
@@ -986,7 +976,6 @@ fn codegen_stmt<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, cur_block: Block, stmt:
         },
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=codegen_array_len | COMPLEXITY=9 | LINES=14 */
 
 fn codegen_array_len<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, place: CPlace<'tcx>) -> Value {
     match *place.layout().ty.kind() {
@@ -1001,7 +990,6 @@ fn codegen_array_len<'tcx>(fx: &mut FunctionCx<'_, '_, 'tcx>, place: CPlace<'tcx
         _ => bug!("Rvalue::Len({:?})", place),
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=71 */
 
 pub(crate) fn codegen_place<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -1073,7 +1061,6 @@ pub(crate) fn codegen_place<'tcx>(
 
     cplace
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 pub(crate) fn codegen_operand<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -1087,7 +1074,6 @@ pub(crate) fn codegen_operand<'tcx>(
         Operand::Constant(const_) => crate::constant::codegen_constant_operand(fx, const_),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 pub(crate) fn codegen_panic_nounwind<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -1106,7 +1092,6 @@ pub(crate) fn codegen_panic_nounwind<'tcx>(
         span,
     );
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) fn codegen_unwind_terminate<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -1115,7 +1100,6 @@ pub(crate) fn codegen_unwind_terminate<'tcx>(
 ) {
     codegen_panic_inner(fx, reason.lang_item(), &[], UnwindAction::Unreachable, span);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=codegen_panic_inner | COMPLEXITY=6 | LINES=32 */
 
 fn codegen_panic_inner<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

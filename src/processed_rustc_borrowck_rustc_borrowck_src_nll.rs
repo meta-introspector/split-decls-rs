@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/nll.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // The entry point of the NLL borrow checker.
 
 use std::io;
@@ -8,21 +7,17 @@ use std::rc::Rc;
 use std::str::FromStr;
 
 use polonius_engine::{Algorithm, AllFacts, Output};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::mir::pretty::PrettyPrintMirOptions;
 use crate::rustc_complete::mir::{Body, MirDumper, PassWhere, Promoted};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_mir_dataflow::move_paths::MoveData;
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_complete::config::MirIncludeSpans;
 use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::borrow_set::BorrowSet;
 use crate::consumers::RustcFacts;
@@ -31,9 +26,7 @@ use crate::handle_placeholders::compute_sccs_applying_placeholder_outlives_const
 use crate::polonius::legacy::{
     PoloniusFacts, PoloniusFactsExt, PoloniusLocationTable, PoloniusOutput,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::polonius::{PoloniusContext, PoloniusDiagnosticsContext};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::region_infer::RegionInferenceContext;
 use crate::type_check::MirTypeckRegionConstraints;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
@@ -42,7 +35,6 @@ use crate::{
     BorrowCheckRootCtxt, BorrowckInferCtxt, ClosureOutlivesSubject, ClosureRegionRequirements,
     polonius, renumber,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// The output of `nll::compute_regions`. This includes the computed `RegionInferenceContext`, any
 /// closure requirements to propagate, and any generated errors.
@@ -57,7 +49,6 @@ pub(crate) struct NllOutput<'tcx> {
     /// localized typeck and liveness constraints.
     pub polonius_diagnostics: Option<PoloniusDiagnosticsContext>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
 
 /// Rewrites the regions in the MIR to use NLL variables, also scraping out the set of universal
 /// regions (e.g., region parameters) declared on the function. That set will need to be given to
@@ -84,7 +75,6 @@ pub(crate) fn replace_regions_in_mir<'tcx>(
 
     universal_regions
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=32 */
 
 /// Computes the closure requirements given the current inference state.
 ///
@@ -117,7 +107,6 @@ pub(crate) fn compute_closure_requirements_modulo_opaques<'tcx>(
     let (closure_region_requirements, _nll_errors) = regioncx.solve(infcx, body, None);
     closure_region_requirements
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=85 */
 
 /// Computes the (non-lexical) regions from the input MIR.
 ///
@@ -203,7 +192,6 @@ pub(crate) fn compute_regions<'tcx>(
         polonius_diagnostics,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=50 */
 
 /// `-Zdump-mir=nll` dumps MIR annotated with NLL specific information:
 /// - free regions
@@ -254,7 +242,6 @@ pub(super) fn dump_nll_mir<'tcx>(
         regioncx.dump_graphviz_scc_constraints(tcx, &mut file)?;
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=45 */
 
 /// Produces the actual NLL MIR sections to emit during the dumping process.
 pub(crate) fn emit_nll_mir<'tcx>(
@@ -300,7 +287,6 @@ pub(crate) fn emit_nll_mir<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=51 */
 
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
@@ -352,7 +338,6 @@ pub(super) fn dump_annotation<'tcx, 'infcx>(
     // FIXME(@lcnr): We currently don't dump the inferred hidden types here.
     err.emit();
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=for_each_region_constraint | COMPLEXITY=15 | LINES=20 */
 
 fn for_each_region_constraint<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -373,7 +358,6 @@ fn for_each_region_constraint<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=description | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) trait ConstraintDescription {
     fn description(&self) -> &'static str;

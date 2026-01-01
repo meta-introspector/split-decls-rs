@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/thinvec.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // This is a copy-paste of `Vec::extract_if` for `ThinVec`.
 //
 // FIXME: <https://github.com/Gankra/thin-vec/pull/66> is merged, this can be removed.
 
 use std::{ptr, slice};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=ExtractIf | COMPLEXITY=7 | LINES=16 */
 
 use thin_vec::ThinVec;
 
@@ -22,7 +20,6 @@ pub struct ExtractIf<'a, T, F> {
     /// The filter test predicate.
     pred: F,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=16 */
 
 impl<'a, T, F> ExtractIf<'a, T, F>
 where
@@ -39,7 +36,6 @@ where
         ExtractIf { vec, idx: 0, del: 0, old_len, pred: filter }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=next | COMPLEXITY=22 | LINES=34 */
 
 impl<T, F> Iterator for ExtractIf<'_, T, F>
 where
@@ -74,7 +70,6 @@ where
         (0, Some(self.old_len - self.idx))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=14 | LINES=21 */
 
 impl<A, F> Drop for ExtractIf<'_, A, F> {
     fn drop(&mut self) {

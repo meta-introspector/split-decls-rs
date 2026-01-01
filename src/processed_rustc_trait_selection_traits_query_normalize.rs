@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // Code for the 'normalization' query. This consists of a wrapper
 // which folds deeply, invoking the underlying
 // `normalize_canonicalized_projection_ty` query when it encounters projections.
@@ -13,10 +12,8 @@ use crate::rustc_complete::ty::{
     self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, info, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use super::NoSolution;
 use crate::error_reporting::InferCtxtErrorExt;
@@ -24,12 +21,10 @@ use crate::error_reporting::traits::OverflowCause;
 use crate::infer::at::At;
 use crate::infer::canonical::OriginalQueryValues;
 use crate::infer::{InferCtxt, InferOk};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::traits::normalize::needs_normalization;
 use crate::traits::{
     BoundVarReplacer, Normalized, ObligationCause, PlaceholderReplacer, ScrubbedTraitError,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=query_normalize | COMPLEXITY=42 | LINES=94 */
 
 #[extension(pub trait QueryNormalizeExt<'tcx>)]
 impl<'a, 'tcx> At<'a, 'tcx> {
@@ -124,7 +119,6 @@ impl<'a, 'tcx> At<'a, 'tcx> {
         result.map(|value| Normalized { value, obligations: normalizer.obligations })
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MaxEscapingBoundVarVisitor | COMPLEXITY=2 | LINES=7 */
 
 // Visitor to find the maximum escaping bound var
 struct MaxEscapingBoundVarVisitor {
@@ -132,7 +126,6 @@ struct MaxEscapingBoundVarVisitor {
     outer_index: ty::DebruijnIndex,
     escaping: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=24 | LINES=36 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for MaxEscapingBoundVarVisitor {
     fn visit_binder<T: TypeVisitable<TyCtxt<'tcx>>>(&mut self, t: &ty::Binder<'tcx, T>) {
@@ -169,7 +162,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for MaxEscapingBoundVarVisitor {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=QueryNormalizer | COMPLEXITY=2 | LINES=10 */
 
 struct QueryNormalizer<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
@@ -180,7 +172,6 @@ struct QueryNormalizer<'a, 'tcx> {
     anon_depth: usize,
     universes: Vec<Option<ty::UniverseIndex>>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=99 | LINES=188 */
 
 impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for QueryNormalizer<'a, 'tcx> {
     type Error = NoSolution;

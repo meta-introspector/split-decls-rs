@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/obligation_forest/graphviz.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::env::var_os;
 use std::fs::File;
 use std::path::Path;
 use std::sync::atomic::{AtomicUsize, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use rustc_graphviz as dot;
 
 use crate::obligation_forest::{ForestObligation, ObligationForest};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=dump_graphviz | COMPLEXITY=10 | LINES=31 */
 
 impl<O: ForestObligation> ObligationForest<O> {
     /// Creates a graphviz representation of the obligation forest. Given a directory this will
@@ -41,7 +38,6 @@ impl<O: ForestObligation> ObligationForest<O> {
         dot::render(&self, &mut gv_file).unwrap();
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=12 | LINES=24 */
 
 impl<'a, O: ForestObligation + 'a> dot::Labeller<'a> for &'a ObligationForest<O> {
     type Node = usize;
@@ -66,7 +62,6 @@ impl<'a, O: ForestObligation + 'a> dot::Labeller<'a> for &'a ObligationForest<O>
         dot::LabelText::LabelStr("".into())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=10 | LINES=27 */
 
 impl<'a, O: ForestObligation + 'a> dot::GraphWalk<'a> for &'a ObligationForest<O> {
     type Node = usize;

@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/global_asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // The AOT driver uses [`cranelift_object`] to write object files suitable for linking into a
 // standalone executable.
 
 use std::io::Write;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{AsmCodegenMethods, GlobalAsmOperandRef};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{OutputFilenames, OutputType};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_target::asm::InlineAsmArch;
 
 use crate::prelude::*;
@@ -28,7 +22,6 @@ pub(crate) struct GlobalAsmContext<'a, 'tcx> {
     pub tcx: TyCtxt<'tcx>,
     pub global_asm: &'a mut String,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=codegen_global_asm | COMPLEXITY=12 | LINES=17 */
 
 impl<'tcx> AsmCodegenMethods<'tcx> for GlobalAsmContext<'_, 'tcx> {
     fn codegen_global_asm(
@@ -46,7 +39,6 @@ impl<'tcx> AsmCodegenMethods<'tcx> for GlobalAsmContext<'_, 'tcx> {
         if self.tcx.sess.target.is_like_darwin { format!("_{symbol_name}") } else { symbol_name }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=14 | LINES=14 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for GlobalAsmContext<'_, 'tcx> {
     #[inline]
@@ -61,7 +53,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for GlobalAsmContext<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for GlobalAsmContext<'_, 'tcx> {
     #[inline]
@@ -74,28 +65,24 @@ impl<'tcx> FnAbiOfHelpers<'tcx> for GlobalAsmContext<'_, 'tcx> {
         FullyMonomorphizedLayoutCx(self.tcx).handle_fn_abi_err(err, span, fn_abi_request)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTyCtxt<'tcx> for GlobalAsmContext<'_, 'tcx> {
     fn tcx<'b>(&'b self) -> TyCtxt<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> crate::rustc_abi::HasDataLayout for GlobalAsmContext<'_, 'tcx> {
     fn data_layout(&self) -> &crate::rustc_abi::TargetDataLayout {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTypingEnv<'tcx> for GlobalAsmContext<'_, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=codegen_global_asm_inner | COMPLEXITY=41 | LINES=60 */
 
 fn codegen_global_asm_inner<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -156,7 +143,6 @@ fn codegen_global_asm_inner<'tcx>(
         global_asm.push_str(".att_syntax\n\n");
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 pub(crate) struct GlobalAsmConfig {
@@ -164,7 +150,6 @@ pub(crate) struct GlobalAsmConfig {
     target: String,
     pub(crate) output_filenames: Arc<OutputFilenames>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=15 */
 
 impl GlobalAsmConfig {
     pub(crate) fn new(tcx: TyCtxt<'_>) -> Self {
@@ -180,7 +165,6 @@ impl GlobalAsmConfig {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=86 */
 
 pub(crate) fn compile_global_asm(
     config: &GlobalAsmConfig,
@@ -267,7 +251,6 @@ pub(crate) fn compile_global_asm(
 
     Ok(Some(global_asm_object_file))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 pub(crate) fn add_file_stem_postfix(mut path: PathBuf, postfix: &str) -> PathBuf {
     let mut new_filename = path.file_stem().unwrap().to_owned();

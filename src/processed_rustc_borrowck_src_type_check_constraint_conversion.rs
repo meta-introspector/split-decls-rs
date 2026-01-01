@@ -1,35 +1,27 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/constraint_conversion.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::SubregionOrigin;
 use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
 use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
 use crate::rustc_infer::infer::outlives::obligations::{TypeOutlives, TypeOutlivesDelegate};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::region_constraints::{GenericKind, VerifyBound};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::query::type_op::DeeplyNormalize;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self, GenericArgKind, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, elaborate, fold_regions,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::constraints::OutlivesConstraint;
 use crate::region_infer::TypeTest;
 use crate::type_check::{Locations, MirTypeckRegionConstraints};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::universal_regions::UniversalRegions;
 use crate::{
     BorrowckInferCtxt, ClosureOutlivesSubject, ClosureRegionRequirements, ConstraintCategory,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
 
 pub(crate) struct ConstraintConversion<'a, 'tcx> {
     infcx: &'a BorrowckInferCtxt<'tcx>,
@@ -52,7 +44,6 @@ pub(crate) struct ConstraintConversion<'a, 'tcx> {
     from_closure: bool,
     constraints: &'a mut MirTypeckRegionConstraints<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=107 | LINES=258 */
 
 impl<'a, 'tcx> ConstraintConversion<'a, 'tcx> {
     pub(crate) fn new(
@@ -311,7 +302,6 @@ impl<'a, 'tcx> ConstraintConversion<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=push_sub_region_constraint | COMPLEXITY=7 | LINES=27 */
 
 impl<'a, 'b, 'tcx> TypeOutlivesDelegate<'tcx> for &'a mut ConstraintConversion<'b, 'tcx> {
     fn push_sub_region_constraint(

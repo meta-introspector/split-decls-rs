@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/fingerprint/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=combine_commutative_is_order_independent | COMPLEXITY=6 | LINES=14 */
 use super::*;
 
 // Check that `combine_commutative` is order independent.

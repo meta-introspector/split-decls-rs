@@ -1,44 +1,29 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/metadata/enums/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::borrow::Cow;
 
 use crate::rustc_abi::{FieldIdx, TagEncoding, VariantIdx, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::debuginfo::type_names::{compute_debuginfo_type_name, cpp_like_debuginfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::traits::MiscCodegenMethods;
 use crate::rustc_complete::def::CtorKind;
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::CoroutineLayout;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty, VariantDef};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::type_map::{DINodeCreationResult, UniqueTypeId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{SmallVec, size_and_align_of};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::debuginfo::metadata::type_map::{self, Stub};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::debuginfo::metadata::{
     UNKNOWN_LINE_NUMBER, build_field_di_node, build_generic_type_param_di_nodes,
     file_metadata_from_def_id, type_di_node, unknown_file_metadata,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::debuginfo::utils::{DIB, create_DIArray, get_namespace_for_item};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::debuginfo::{DIFlags, DIType};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self};
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=26 */
 
 
 pub(super) fn build_enum_type_di_node<'ll, 'tcx>(
@@ -63,7 +48,6 @@ pub(super) fn build_enum_type_di_node<'ll, 'tcx>(
         native::build_enum_type_di_node(cx, unique_type_id)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub(super) fn build_coroutine_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -75,7 +59,6 @@ pub(super) fn build_coroutine_di_node<'ll, 'tcx>(
         native::build_coroutine_di_node(cx, unique_type_id)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=build_c_style_enum_di_node | COMPLEXITY=12 | LINES=30 */
 
 /// Build the debuginfo node for a C-style enum, i.e. an enum the variants of which have no fields.
 ///
@@ -106,7 +89,6 @@ fn build_c_style_enum_di_node<'ll, 'tcx>(
         already_stored_in_typemap: false,
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=build_enumeration_type_di_node | COMPLEXITY=23 | LINES=57 */
 
 /// Build a DW_TAG_enumeration_type debuginfo node, with the given base type and variants.
 /// This is a helper function and does not register anything in the type map by itself.
@@ -164,7 +146,6 @@ fn build_enumeration_type_di_node<'ll, 'tcx>(
         )
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=build_enum_variant_struct_type_di_node | COMPLEXITY=37 | LINES=116 */
 
 /// Build the debuginfo node for the struct type describing a single variant of an enum.
 ///
@@ -281,7 +262,6 @@ fn build_enum_variant_struct_type_di_node<'ll, 'tcx>(
     )
     .di_node
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=build_coroutine_variant_struct_type_di_node | COMPLEXITY=21 | LINES=105 */
 
 /// Build the struct type for describing a single coroutine state.
 /// See [build_coroutine_variant_struct_type_di_node].
@@ -387,7 +367,6 @@ fn build_coroutine_variant_struct_type_di_node<'ll, 'tcx>(
     )
     .di_node
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone)]
 enum DiscrResult {
@@ -395,14 +374,12 @@ enum DiscrResult {
     Value(u128),
     Range(u128, u128),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=opt_single_val | COMPLEXITY=7 | LINES=6 */
 
 impl DiscrResult {
     fn opt_single_val(&self) -> Option<u128> {
         if let Self::Value(d) = *self { Some(d) } else { None }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=compute_discriminant_value | COMPLEXITY=22 | LINES=46 */
 
 /// Returns the discriminant value corresponding to the variant index.
 ///

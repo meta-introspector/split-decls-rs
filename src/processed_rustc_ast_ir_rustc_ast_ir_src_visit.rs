@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_ir/src/visit.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=output | COMPLEXITY=4 | LINES=10 */
 use core::ops::ControlFlow;
 
 /// Similar to the `Try` trait, but also implemented for `()`.
@@ -10,7 +9,6 @@ pub trait VisitorResult {
     fn from_branch(b: ControlFlow<Self::Residual>) -> Self;
     fn branch(self) -> ControlFlow<Self::Residual>;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=output | COMPLEXITY=8 | LINES=15 */
 
 impl VisitorResult for () {
     #[cfg(feature = "nightly")]
@@ -26,7 +24,6 @@ impl VisitorResult for () {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=output | COMPLEXITY=8 | LINES=17 */
 
 impl<T> VisitorResult for ControlFlow<T> {
     type Residual = T;
@@ -44,7 +41,6 @@ impl<T> VisitorResult for ControlFlow<T> {
         self
     }
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=13 */
 
 #[macro_export]
 macro_rules! try_visit {
@@ -58,7 +54,6 @@ macro_rules! try_visit {
         }
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=9 */
 
 #[macro_export]
 macro_rules! visit_opt {
@@ -68,7 +63,6 @@ macro_rules! visit_opt {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=9 */
 
 #[macro_export]
 macro_rules! walk_list {
@@ -78,7 +72,6 @@ macro_rules! walk_list {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=9 */
 
 #[macro_export]
 macro_rules! walk_visitable_list {

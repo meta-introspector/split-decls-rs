@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/proc_macro_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 use crate::prelude::*;
 
 const PROC_MACRO_ALLOWED_TARGETS: AllowedTargets =
@@ -12,7 +11,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ProcMacroParser {
     const ALLOWED_TARGETS: AllowedTargets = PROC_MACRO_ALLOWED_TARGETS;
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::ProcMacro;
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct ProcMacroAttributeParser;
 impl<S: Stage> NoArgsAttributeParser<S> for ProcMacroAttributeParser {
@@ -21,7 +19,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ProcMacroAttributeParser {
     const ALLOWED_TARGETS: AllowedTargets = PROC_MACRO_ALLOWED_TARGETS;
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::ProcMacroAttribute;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=7 | LINES=21 */
 
 pub(crate) struct ProcMacroDeriveParser;
 impl<S: Stage> SingleAttributeParser<S> for ProcMacroDeriveParser {
@@ -43,7 +40,6 @@ impl<S: Stage> SingleAttributeParser<S> for ProcMacroDeriveParser {
         })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=7 | LINES=15 */
 
 pub(crate) struct RustcBuiltinMacroParser;
 impl<S: Stage> SingleAttributeParser<S> for RustcBuiltinMacroParser {
@@ -59,7 +55,6 @@ impl<S: Stage> SingleAttributeParser<S> for RustcBuiltinMacroParser {
         Some(AttributeKind::RustcBuiltinMacro { builtin_name, helper_attrs, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parse_derive_like | COMPLEXITY=42 | LINES=83 */
 
 fn parse_derive_like<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,

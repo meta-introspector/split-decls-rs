@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/ast_traits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // A set of traits implemented for various AST nodes,
 // typically those used in AST fragments during macro expansion.
 // The traits are not implemented exhaustively, only when actually necessary.
@@ -13,14 +12,12 @@ use crate::{
     FieldDef, ForeignItem, GenericParam, Item, NodeId, Param, Pat, PatField, Path, Stmt, StmtKind,
     Ty, Variant, Visibility, WherePredicate,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=node_id | COMPLEXITY=4 | LINES=6 */
 
 /// A trait for AST nodes having an ID.
 pub trait HasNodeId {
     fn node_id(&self) -> NodeId;
     fn node_id_mut(&mut self) -> &mut NodeId;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=node_id | COMPLEXITY=13 | LINES=15 */
 
 macro_rules! impl_has_node_id {
     ($($T:ty),+ $(,)?) => {
@@ -36,7 +33,6 @@ macro_rules! impl_has_node_id {
         )+
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=node_id | COMPLEXITY=6 | LINES=28 */
 
 impl_has_node_id!(
     Arm,
@@ -65,14 +61,12 @@ impl<T: HasNodeId> HasNodeId for Box<T> {
         (**self).node_id_mut()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=4 | LINES=6 */
 
 /// A trait for AST nodes having (or not having) collected tokens.
 pub trait HasTokens {
     fn tokens(&self) -> Option<&LazyAttrTokenStream>;
     fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>>;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=13 | LINES=15 */
 
 macro_rules! impl_has_tokens {
     ($($T:ty),+ $(,)?) => {
@@ -88,7 +82,6 @@ macro_rules! impl_has_tokens {
         )+
     };
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=13 | LINES=15 */
 
 macro_rules! impl_has_tokens_none {
     ($($T:ty),+ $(,)?) => {
@@ -104,7 +97,6 @@ macro_rules! impl_has_tokens_none {
         )+
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=7 | LINES=21 */
 
 impl_has_tokens!(AssocItem, AttrItem, Block, Expr, ForeignItem, Item, Pat, Path, Ty, Visibility);
 impl_has_tokens_none!(
@@ -126,7 +118,6 @@ impl<T: HasTokens> HasTokens for Option<T> {
         self.as_mut().and_then(|inner| inner.tokens_mut())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=6 | LINES=9 */
 
 impl<T: HasTokens> HasTokens for Box<T> {
     fn tokens(&self) -> Option<&LazyAttrTokenStream> {
@@ -136,7 +127,6 @@ impl<T: HasTokens> HasTokens for Box<T> {
         (**self).tokens_mut()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=15 | LINES=21 */
 
 impl HasTokens for StmtKind {
     fn tokens(&self) -> Option<&LazyAttrTokenStream> {
@@ -158,7 +148,6 @@ impl HasTokens for StmtKind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=6 | LINES=9 */
 
 impl HasTokens for Stmt {
     fn tokens(&self) -> Option<&LazyAttrTokenStream> {
@@ -168,7 +157,6 @@ impl HasTokens for Stmt {
         self.kind.tokens_mut()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=19 | LINES=19 */
 
 impl HasTokens for Attribute {
     fn tokens(&self) -> Option<&LazyAttrTokenStream> {
@@ -188,7 +176,6 @@ impl HasTokens for Attribute {
         })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=7 | LINES=14 */
 
 /// A trait for AST nodes having (or not having) attributes.
 pub trait HasAttrs {
@@ -203,7 +190,6 @@ pub trait HasAttrs {
     fn attrs(&self) -> &[Attribute];
     fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec));
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=14 | LINES=19 */
 
 macro_rules! impl_has_attrs {
     (const SUPPORTS_CUSTOM_INNER_ATTRS: bool = $inner:literal, $($T:ty),+ $(,)?) => {
@@ -223,7 +209,6 @@ macro_rules! impl_has_attrs {
         )+
     };
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=13 | LINES=14 */
 
 macro_rules! impl_has_attrs_none {
     ($($T:ty),+ $(,)?) => {
@@ -238,7 +223,6 @@ macro_rules! impl_has_attrs_none {
         )+
     };
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=7 | LINES=31 */
 
 impl_has_attrs!(
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = true,
@@ -270,7 +254,6 @@ impl<T: HasAttrs> HasAttrs for Box<T> {
         (**self).visit_attrs(f);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=9 | LINES=12 */
 
 impl<T: HasAttrs> HasAttrs for Option<T> {
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = T::SUPPORTS_CUSTOM_INNER_ATTRS;
@@ -283,7 +266,6 @@ impl<T: HasAttrs> HasAttrs for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=16 | LINES=26 */
 
 impl HasAttrs for StmtKind {
     // This might be a `StmtKind::Item`, which contains
@@ -310,7 +292,6 @@ impl HasAttrs for StmtKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=6 | LINES=10 */
 
 impl HasAttrs for Stmt {
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = StmtKind::SUPPORTS_CUSTOM_INNER_ATTRS;
@@ -321,7 +302,6 @@ impl HasAttrs for Stmt {
         self.kind.visit_attrs(f);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=AstNodeWrapper | COMPLEXITY=4 | LINES=7 */
 
 /// A newtype around an AST node that implements the traits above if the node implements them.
 #[repr(transparent)]
@@ -329,7 +309,6 @@ pub struct AstNodeWrapper<Wrapped, Tag> {
     pub wrapped: Wrapped,
     pub tag: PhantomData<Tag>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=11 */
 
 impl<Wrapped, Tag> AstNodeWrapper<Wrapped, Tag> {
     pub fn new(wrapped: Wrapped, _tag: Tag) -> AstNodeWrapper<Wrapped, Tag> {
@@ -341,7 +320,6 @@ impl<Wrapped, Tag> AstNodeWrapper<Wrapped, Tag> {
         unsafe { &mut *<*mut Wrapped>::cast(wrapped) }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 // FIXME: remove after `stmt_expr_attributes` is stabilized.
 impl<T, Tag> From<AstNodeWrapper<Box<T>, Tag>> for AstNodeWrapper<T, Tag> {
@@ -349,7 +327,6 @@ impl<T, Tag> From<AstNodeWrapper<Box<T>, Tag>> for AstNodeWrapper<T, Tag> {
         AstNodeWrapper { wrapped: *value.wrapped, tag: value.tag }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=node_id | COMPLEXITY=6 | LINES=9 */
 
 impl<Wrapped: HasNodeId, Tag> HasNodeId for AstNodeWrapper<Wrapped, Tag> {
     fn node_id(&self) -> NodeId {
@@ -359,7 +336,6 @@ impl<Wrapped: HasNodeId, Tag> HasNodeId for AstNodeWrapper<Wrapped, Tag> {
         self.wrapped.node_id_mut()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=6 | LINES=10 */
 
 impl<Wrapped: HasAttrs, Tag> HasAttrs for AstNodeWrapper<Wrapped, Tag> {
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = Wrapped::SUPPORTS_CUSTOM_INNER_ATTRS;
@@ -370,7 +346,6 @@ impl<Wrapped: HasAttrs, Tag> HasAttrs for AstNodeWrapper<Wrapped, Tag> {
         self.wrapped.visit_attrs(f);
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl<Wrapped: fmt::Debug, Tag> fmt::Debug for AstNodeWrapper<Wrapped, Tag> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

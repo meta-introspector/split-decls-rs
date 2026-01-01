@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/stable/abi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Conversion of internal Rust compiler `rustc_target` and `rustc_abi` items to stable ones.
 
 #[allow(rustc::usage_of_qualified_ty)]
 
 use crate::rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_complete::ty;
 use crate::rustc_public_bridge::Tables;
 use crate::rustc_public_bridge::context::CompilerCtxt;
@@ -16,14 +14,11 @@ use crate::abi::{
     IntegerType, Layout, LayoutShape, PassMode, Primitive, ReprFlags, ReprOptions, Scalar,
     TagEncoding, TyAndLayout, ValueAbi, VariantsShape, WrappingRange,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::compiler_interface::BridgeTys;
 use crate::target::MachineSize as Size;
 use crate::ty::{Align, VariantIdx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::unstable::Stable;
 use crate::{IndexedVal, opaque};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::VariantIdx {
     type T = VariantIdx;
@@ -31,7 +26,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::VariantIdx {
         VariantIdx::to_val(self.as_usize())
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Endian {
     type T = crate::target::Endian;
@@ -43,7 +37,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Endian {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::TyAndLayout<'tcx, ty::Ty<'tcx>> {
     type T = TyAndLayout;
@@ -56,7 +49,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::TyAndLayout<'tcx, ty::Ty<'tcx>> {
         TyAndLayout { ty: self.ty.stable(tables, cx), layout: self.layout.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Layout<'tcx> {
     type T = Layout;
@@ -69,7 +61,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Layout<'tcx> {
         tables.layout_id(cx.lift(*self).unwrap())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=18 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::LayoutData<crate::rustc_abi::FieldIdx, crate::rustc_abi::VariantIdx> {
     type T = LayoutShape;
@@ -88,7 +79,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::LayoutData<crate::rustc_abi::Field
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=20 */
 
 impl<'tcx> Stable<'tcx> for callconv::FnAbi<'tcx, ty::Ty<'tcx>> {
     type T = FnAbi;
@@ -109,7 +99,6 @@ impl<'tcx> Stable<'tcx> for callconv::FnAbi<'tcx, ty::Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for callconv::ArgAbi<'tcx, ty::Ty<'tcx>> {
     type T = ArgAbi;
@@ -126,7 +115,6 @@ impl<'tcx> Stable<'tcx> for callconv::ArgAbi<'tcx, ty::Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=25 | LINES=36 */
 
 impl<'tcx> Stable<'tcx> for CanonAbi {
     type T = CallConvention;
@@ -163,7 +151,6 @@ impl<'tcx> Stable<'tcx> for CanonAbi {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=22 */
 
 impl<'tcx> Stable<'tcx> for callconv::PassMode {
     type T = PassMode;
@@ -186,7 +173,6 @@ impl<'tcx> Stable<'tcx> for callconv::PassMode {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=21 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::FieldsShape<crate::rustc_abi::FieldIdx> {
     type T = FieldsShape;
@@ -208,7 +194,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::FieldsShape<crate::rustc_abi::Fiel
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=25 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Variants<crate::rustc_abi::FieldIdx, crate::rustc_abi::VariantIdx> {
     type T = VariantsShape;
@@ -234,7 +219,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Variants<crate::rustc_abi::FieldId
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=13 | LINES=21 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::TagEncoding<crate::rustc_abi::VariantIdx> {
     type T = TagEncoding;
@@ -256,7 +240,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::TagEncoding<crate::rustc_abi::Vari
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=21 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::BackendRepr {
     type T = ValueAbi;
@@ -278,7 +261,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::BackendRepr {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Size {
     type T = Size;
@@ -287,7 +269,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Size {
         Size::from_bits(self.bits_usize())
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Align {
     type T = Align;
@@ -296,7 +277,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Align {
         self.bytes()
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=14 | LINES=18 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Scalar {
     type T = Scalar;
@@ -315,7 +295,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Scalar {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=14 | LINES=20 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Primitive {
     type T = Primitive;
@@ -336,7 +315,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Primitive {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::AddressSpace {
     type T = AddressSpace;
@@ -345,7 +323,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::AddressSpace {
         AddressSpace(self.0)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=14 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Integer {
     type T = IntegerLength;
@@ -360,7 +337,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Integer {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::Float {
     type T = FloatLength;
@@ -374,7 +350,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::Float {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::WrappingRange {
     type T = WrappingRange;
@@ -383,7 +358,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::WrappingRange {
         WrappingRange { start: self.start, end: self.end }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::ReprFlags {
     type T = ReprFlags;
@@ -401,7 +375,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::ReprFlags {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=13 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::IntegerType {
     type T = IntegerType;
@@ -419,7 +392,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::IntegerType {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::ReprOptions {
     type T = ReprOptions;

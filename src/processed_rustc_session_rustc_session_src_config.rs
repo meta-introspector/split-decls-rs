@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/config.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // Contains infrastructure for configuring the compiler, including parsing
 // command-line options.
 
@@ -8,55 +7,40 @@
 use std::collections::btree_map::{
     Iter as BTreeMapIter, Keys as BTreeMapKeysIter, Values as BTreeMapValuesIter,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::collections::{BTreeMap, BTreeSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ffi::OsStr;
 use std::hash::Hash;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::str::{self, FromStr};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::sync::LazyLock;
 use std::{cmp, fmt, fs, iter};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use externs::{ExternOpt, split_extern_opt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{StableHasher, StableOrd, ToStableHashKey};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::emitter::HumanReadableErrorType;
 use crate::rustc_complete::{ColorConfig, DiagArgValue, DiagCtxtFlags, IntoDiagArg};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::edition::{DEFAULT_EDITION, EDITION_NAME_LIST, Edition, LATEST_STABLE_EDITION};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::source_map::FilePathMapping;
 use crate::rustc_complete::{
     FileName, FileNameDisplayPreference, FileNameEmbeddablePreference, RealFileName,
     SourceFileHashAlgorithm, Symbol, sym,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::spec::{
     FramePointer, LinkSelfContainedComponents, LinkerFeatures, SplitDebuginfo, Target, TargetTuple,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 pub use crate::config::cfg::{Cfg, CheckCfg, ExpectedValues};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::config::native_libs::parse_native_libs;
 use crate::errors::FileWriteFail;
 pub use crate::options::*;
 use crate::search_paths::SearchPath;
 use crate::utils::CanonicalizedPath;
 use crate::{EarlyDiagCtxt, HashStableContext, Session, filesearch, lint};
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=47 */
 
 
 pub const PRINT_KINDS: &[(&str, PrintKind)] = &[
@@ -100,7 +84,6 @@ pub enum Strip {
     /// Strip all symbols.
     Symbols,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// The different settings that the `-C control-flow-guard` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -114,7 +97,6 @@ pub enum CFGuard {
     /// Emit Control Flow Guard metadata and checks.
     Checks,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 
 /// The different settings that the `-Z cf-protection` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -131,7 +113,6 @@ pub enum CFProtection {
     /// Emit control-flow protection for both branches and returns.
     Full,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Hash, HashStable_Generic)]
 pub enum OptLevel {
@@ -148,7 +129,6 @@ pub enum OptLevel {
     /// `-Copt-level=z`
     SizeMin,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 /// This is what the `LtoCli` values get mapped to after resolving defaults and
 /// and taking other command line options into account.
@@ -169,7 +149,6 @@ pub enum Lto {
     /// Do a full-crate-graph (inter-crate) LTO with "fat" LTO.
     Fat,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 /// The different settings that the `-C lto` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -187,7 +166,6 @@ pub enum LtoCli {
     /// No `-C lto` flag passed
     Unspecified,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// The different settings that the `-C instrument-coverage` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -197,7 +175,6 @@ pub enum InstrumentCoverage {
     /// `-C instrument-coverage` or `-C instrument-coverage=yes`
     Yes,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=CoverageOptions | COMPLEXITY=5 | LINES=13 */
 
 /// Individual flag values controlled by `-Zcoverage-options`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Default)]
@@ -211,7 +188,6 @@ pub struct CoverageOptions {
     /// reproduce it from actual source code.
     pub discard_all_spans_in_codegen: bool,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=26 */
 
 /// Controls whether branch coverage is enabled.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
@@ -238,7 +214,6 @@ pub enum CoverageLevel {
     /// sufficiently complete, or if it is making MC/DC changes difficult.
     Condition,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // The different settings that the `-Z offload` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -246,7 +221,6 @@ pub enum Offload {
     /// Enable the llvm offload pipeline
     Enable,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=34 */
 
 /// The different settings that the `-Z autodiff` flag can have.
 #[derive(Clone, PartialEq, Hash, Debug)]
@@ -281,7 +255,6 @@ pub enum AutoDiff {
     /// Runs Enzyme's aggressive inlining
     Inline,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=InstrumentXRay | COMPLEXITY=7 | LINES=19 */
 
 /// Settings for `-Z instrument-xray` flag.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
@@ -301,7 +274,6 @@ pub struct InstrumentXRay {
     /// `-Z instrument-xray=skip-exit`, do not instrument function exit
     pub skip_exit: bool,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, PartialEq, Hash, Debug)]
 pub enum LinkerPluginLto {
@@ -309,7 +281,6 @@ pub enum LinkerPluginLto {
     LinkerPluginAuto,
     Disabled,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=enabled | COMPLEXITY=7 | LINES=9 */
 
 impl LinkerPluginLto {
     pub fn enabled(&self) -> bool {
@@ -319,7 +290,6 @@ impl LinkerPluginLto {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=LinkSelfContained | COMPLEXITY=6 | LINES=30 */
 
 /// The different values `-C link-self-contained` can take: a list of individually enabled or
 /// disabled components used during linking, coming from the rustc distribution, instead of being
@@ -350,7 +320,6 @@ pub struct LinkSelfContained {
     /// `false` shortcuts.
     disabled_components: LinkSelfContainedComponents,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=on | COMPLEXITY=59 | LINES=99 */
 
 impl LinkSelfContained {
     /// Incorporates an enabled or disabled component as specified on the CLI, if possible.
@@ -450,7 +419,6 @@ impl LinkSelfContained {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=LinkerFeaturesCli | COMPLEXITY=3 | LINES=17 */
 
 /// The different values that `-C linker-features` can take on the CLI: a list of individually
 /// enabled or disabled features used during linking.
@@ -468,7 +436,6 @@ pub struct LinkerFeaturesCli {
     /// The linker features that are disabled on the CLI, using the `-feature` syntax.
     pub disabled: LinkerFeatures,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=58 */
 
 impl LinkerFeaturesCli {
     /// Accumulates an enabled or disabled feature as specified on the CLI, if possible.
@@ -527,7 +494,6 @@ impl LinkerFeaturesCli {
         Ok(())
     }
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Used with `-Z assert-incr-state`.
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -540,7 +506,6 @@ pub enum IncrementalStateAssertion {
     /// Did not load an existing session directory.
     NotLoaded,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=LocationDetail | COMPLEXITY=2 | LINES=8 */
 
 /// The different settings that can be enabled via the `-Z location-detail` flag.
 #[derive(Copy, Clone, PartialEq, Hash, Debug)]
@@ -549,14 +514,12 @@ pub struct LocationDetail {
     pub line: bool,
     pub column: bool,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl LocationDetail {
     pub(crate) fn all() -> Self {
         Self { file: true, line: true, column: true }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 /// Values for the `-Z fmt-debug` flag.
 #[derive(Copy, Clone, PartialEq, Hash, Debug)]
@@ -568,21 +531,18 @@ pub enum FmtDebug {
     /// `#[derive(Debug)]` and `{:?}` are no-ops
     None,
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 impl FmtDebug {
     pub(crate) fn all() -> [Symbol; 3] {
         [sym::full, sym::none, sym::shallow]
     }
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Hash, Debug)]
 pub enum SwitchWithOptPath {
     Enabled(Option<PathBuf>),
     Disabled,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=enabled | COMPLEXITY=7 | LINES=9 */
 
 impl SwitchWithOptPath {
     pub fn enabled(&self) -> bool {
@@ -592,7 +552,6 @@ impl SwitchWithOptPath {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, HashStable_Generic)]
 #[derive(Encodable, Decodable)]
@@ -601,7 +560,6 @@ pub enum SymbolManglingVersion {
     V0,
     Hashed,
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Hash)]
 pub enum DebugInfo {
@@ -611,7 +569,6 @@ pub enum DebugInfo {
     Limited,
     Full,
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Hash)]
 pub enum DebugInfoCompression {
@@ -619,7 +576,6 @@ pub enum DebugInfoCompression {
     Zlib,
     Zstd,
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=9 | LINES=11 */
 
 impl ToString for DebugInfoCompression {
     fn to_string(&self) -> String {
@@ -631,7 +587,6 @@ impl ToString for DebugInfoCompression {
         .to_owned()
     }
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Hash)]
 pub enum MirStripDebugInfo {
@@ -639,7 +594,6 @@ pub enum MirStripDebugInfo {
     LocalsInTinyFunctions,
     AllLocals,
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=19 */
 
 /// Split debug-information is enabled by `-C split-debuginfo`, this enum is only used if split
 /// debug-information is enabled (in either `Packed` or `Unpacked` modes), and the platform
@@ -659,7 +613,6 @@ pub enum SplitDwarfKind {
     /// which is ignored by the linker.
     Split,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=from_str | COMPLEXITY=9 | LINES=12 */
 
 impl FromStr for SplitDwarfKind {
     type Err = ();
@@ -672,7 +625,6 @@ impl FromStr for SplitDwarfKind {
         })
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=65 | LINES=121 */
 
 macro_rules! define_output_types {
     (
@@ -794,7 +746,6 @@ macro_rules! define_output_types {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=18 | LINES=78 */
 
 define_output_types! {
     Assembly => {
@@ -873,7 +824,6 @@ define_output_types! {
         compatible_with_cgus_and_single_output: false
     },
 }
-/* AST_META: AST_ID=50 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 /// The type of diagnostics output to generate.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -893,7 +843,6 @@ pub enum ErrorOutputType {
         color_config: ColorConfig,
     },
 }
-/* AST_META: AST_ID=51 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Clone, Hash, Debug)]
 pub enum ResolveDocLinks {
@@ -906,7 +855,6 @@ pub enum ResolveDocLinks {
     /// Resolve doc links on all items.
     All,
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=OutputTypes(BTreeMap | COMPLEXITY=34 | LINES=71 */
 
 /// Use tree-based collections to cheaply get a deterministic `Hash` implementation.
 /// *Do not* switch `BTreeMap` out for an unsorted container type! That would break
@@ -978,7 +926,6 @@ impl OutputTypes {
         })
     }
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=Externs(BTreeMap | COMPLEXITY=14 | LINES=33 */
 
 /// Use tree-based collections to cheaply get a deterministic `Hash` implementation.
 /// *Do not* switch `BTreeMap` or `BTreeSet` out for an unsorted container type! That
@@ -1012,7 +959,6 @@ pub struct ExternEntry {
     /// `--extern force:extras=/path/to/lib/libstd.rlib`
     pub force: bool,
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 #[derive(Clone, Debug)]
 pub enum ExternLocation {
@@ -1028,7 +974,6 @@ pub enum ExternLocation {
     /// Added via `--extern prelude_name=some_file.rlib`
     ExactPaths(BTreeSet<CanonicalizedPath>),
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=15 */
 
 impl Externs {
     /// Used for testing.
@@ -1044,7 +989,6 @@ impl Externs {
         self.0.iter()
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=19 */
 
 impl ExternEntry {
     fn new(location: ExternLocation) -> ExternEntry {
@@ -1064,14 +1008,12 @@ impl ExternEntry {
         }
     }
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=PrintRequest | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Debug)]
 pub struct PrintRequest {
     pub kind: PrintKind,
     pub out: OutFileName,
 }
-/* AST_META: AST_ID=58 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=30 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub enum PrintKind {
@@ -1102,7 +1044,6 @@ pub enum PrintKind {
     TlsModels,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=NextSolverConfig | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
 pub struct NextSolverConfig {
@@ -1112,7 +1053,6 @@ pub struct NextSolverConfig {
     /// This is only `true` if `coherence` is also enabled.
     pub globally: bool = false,
 }
-/* AST_META: AST_ID=60 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Clone)]
 pub enum Input {
@@ -1126,7 +1066,6 @@ pub enum Input {
         input: String,
     },
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=filestem | COMPLEXITY=29 | LINES=37 */
 
 impl Input {
     pub fn filestem(&self) -> &str {
@@ -1164,14 +1103,12 @@ impl Input {
         }
     }
 }
-/* AST_META: AST_ID=62 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Hash, Debug, HashStable_Generic, PartialEq, Encodable, Decodable)]
 pub enum OutFileName {
     Real(PathBuf),
     Stdout,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=parent | COMPLEXITY=50 | LINES=69 */
 
 impl OutFileName {
     pub fn parent(&self) -> Option<&Path> {
@@ -1241,7 +1178,6 @@ impl OutFileName {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=OutputFilenames | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Hash, Debug, HashStable_Generic, Encodable, Decodable)]
 pub struct OutputFilenames {
@@ -1254,7 +1190,6 @@ pub struct OutputFilenames {
     temps_directory: Option<PathBuf>,
     pub outputs: OutputTypes,
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=maybe_strip_file_name | COMPLEXITY=11 | LINES=32 */
 
 pub const RLINK_EXT: &str = "rlink";
 pub const RUST_CGU_EXT: &str = "rcgu";
@@ -1287,7 +1222,6 @@ fn maybe_strip_file_name(mut path: PathBuf) -> PathBuf {
     }
     path
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=new | COMPLEXITY=56 | LINES=136 */
 impl OutputFilenames {
     pub fn new(
         out_directory: PathBuf,
@@ -1424,7 +1358,6 @@ impl OutputFilenames {
         }
     }
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=RemapPathScopeComponents: | COMPLEXITY=8 | LINES=17 */
 
 bitflags::bitflags! {
     /// Scopes used to determined if it need to apply to --remap-path-prefix
@@ -1442,14 +1375,12 @@ bitflags::bitflags! {
         const OBJECT = Self::MACRO.bits() | Self::DEBUGINFO.bits();
     }
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=Sysroot | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug)]
 pub struct Sysroot {
     pub explicit: Option<PathBuf>,
     pub default: PathBuf,
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=16 */
 
 impl Sysroot {
     pub fn new(explicit: Option<PathBuf>) -> Sysroot {
@@ -1466,7 +1397,6 @@ impl Sysroot {
         self.explicit.as_deref().into_iter().chain(iter::once(&*self.default))
     }
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=host_tuple | COMPLEXITY=7 | LINES=12 */
 
 pub fn host_tuple() -> &'static str {
     // Get the host triple out of the build environment. This ensures that our
@@ -1479,7 +1409,6 @@ pub fn host_tuple() -> &'static str {
     // calling that (at runtime) the host triple.
     (option_env!("CFG_COMPILER_HOST_TRIPLE")).expect("CFG_COMPILER_HOST_TRIPLE")
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=file_path_mapping | COMPLEXITY=11 | LINES=21 */
 
 fn file_path_mapping(
     remap_path_prefix: Vec<(PathBuf, PathBuf)>,
@@ -1501,7 +1430,6 @@ fn file_path_mapping(
         },
     )
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=default | COMPLEXITY=9 | LINES=51 */
 
 impl Default for Options {
     fn default() -> Options {
@@ -1553,7 +1481,6 @@ impl Default for Options {
         }
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=build_dep_graph | COMPLEXITY=21 | LINES=34 */
 
 impl Options {
     /// Returns `true` if there is a reason to build the dep graph.
@@ -1588,7 +1515,6 @@ impl Options {
         self.cg.symbol_mangling_version.unwrap_or(SymbolManglingVersion::Legacy)
     }
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=dcx_flags | COMPLEXITY=12 | LINES=27 */
 
 impl UnstableOptions {
     pub fn dcx_flags(&self, can_emit_warnings: bool) -> DiagCtxtFlags {
@@ -1616,7 +1542,6 @@ impl UnstableOptions {
         self.checksum_hash_algorithm
     }
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 // The type of entry function, so users can have their own entry functions
 #[derive(Copy, Clone, PartialEq, Hash, Debug, HashStable_Generic)]
@@ -1631,7 +1556,6 @@ pub enum EntryFnType {
         sigpipe: u8,
     },
 }
-/* AST_META: AST_ID=76 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Copy, PartialEq, PartialOrd, Clone, Ord, Eq, Hash, Debug, Encodable, Decodable)]
 #[derive(HashStable_Generic)]
@@ -1644,7 +1568,6 @@ pub enum CrateType {
     ProcMacro,
     Sdylib,
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=has_metadata | COMPLEXITY=7 | LINES=12 */
 
 impl CrateType {
     pub fn has_metadata(self) -> bool {
@@ -1657,14 +1580,12 @@ impl CrateType {
         }
     }
 }
-/* AST_META: AST_ID=78 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Hash, Debug, PartialEq, Eq)]
 pub enum Passes {
     Some(Vec<String>),
     All,
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=13 | LINES=16 */
 
 impl Passes {
     fn is_empty(&self) -> bool {
@@ -1681,14 +1602,12 @@ impl Passes {
         }
     }
 }
-/* AST_META: AST_ID=80 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Hash, Debug, PartialEq)]
 pub enum PAuthKey {
     A,
     B,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=PacRet | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Hash, Debug, PartialEq)]
 pub struct PacRet {
@@ -1696,19 +1615,16 @@ pub struct PacRet {
     pub pc: bool,
     pub key: PAuthKey,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=BranchProtection | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Hash, Debug, PartialEq, Default)]
 pub struct BranchProtection {
     pub bti: bool,
     pub pac_ret: Option<PacRet>,
 }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) const fn default_lib_output() -> CrateType {
     CrateType::Rlib
 }
-/* AST_META: AST_ID=84 | TYPE=FUNCTION | NAME=build_configuration | COMPLEXITY=2 | LINES=10 */
 
 pub fn build_configuration(sess: &Session, mut user_cfg: Cfg) -> Cfg {
     // First disallow some configuration given on the command line
@@ -1719,7 +1635,6 @@ pub fn build_configuration(sess: &Session, mut user_cfg: Cfg) -> Cfg {
     user_cfg.extend(cfg::default_configuration(sess));
     user_cfg
 }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=build_target_config | COMPLEXITY=19 | LINES=28 */
 
 pub fn build_target_config(
     early_dcx: &EarlyDiagCtxt,
@@ -1748,14 +1663,12 @@ pub fn build_target_config(
         }
     }
 }
-/* AST_META: AST_ID=86 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub enum OptionStability {
     Stable,
     Unstable,
 }
-/* AST_META: AST_ID=87 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=25 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub enum OptionKind {
@@ -1781,7 +1694,6 @@ pub enum OptionKind {
     /// The `hint` string must be empty.
     FlagMulti,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=RustcOptGroup | COMPLEXITY=9 | LINES=22 */
 
 pub struct RustcOptGroup {
     /// The "primary" name for this option. Normally equal to `long_name`,
@@ -1804,7 +1716,6 @@ pub struct RustcOptGroup {
     /// should still be printed by `rustc --help -v`.
     pub is_verbose_help_only: bool,
 }
-/* AST_META: AST_ID=89 | TYPE=FUNCTION | NAME=is_stable | COMPLEXITY=13 | LINES=21 */
 
 impl RustcOptGroup {
     pub fn is_stable(&self) -> bool {
@@ -1826,7 +1737,6 @@ impl RustcOptGroup {
         self.long_name
     }
 }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=make_opt | COMPLEXITY=9 | LINES=25 */
 
 pub fn make_opt(
     stability: OptionStability,
@@ -1852,7 +1762,6 @@ pub fn make_opt(
         is_verbose_help_only: false,
     }
 }
-/* AST_META: AST_ID=91 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 static EDITION_STRING: LazyLock<String> = LazyLock::new(|| {
     format!(
@@ -1860,7 +1769,6 @@ static EDITION_STRING: LazyLock<String> = LazyLock::new(|| {
 The default is {DEFAULT_EDITION} and the latest stable edition is {LATEST_STABLE_EDITION}."
     )
 });
-/* AST_META: AST_ID=92 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 static PRINT_HELP: LazyLock<String> = LazyLock::new(|| {
     format!(
@@ -1869,7 +1777,6 @@ static PRINT_HELP: LazyLock<String> = LazyLock::new(|| {
         PRINT_KINDS.iter().map(|(name, _)| format!("{name}")).collect::<Vec<_>>().join("|")
     )
 });
-/* AST_META: AST_ID=93 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 static EMIT_HELP: LazyLock<String> = LazyLock::new(|| {
     let mut result =
@@ -1882,7 +1789,6 @@ static EMIT_HELP: LazyLock<String> = LazyLock::new(|| {
 
     result
 });
-/* AST_META: AST_ID=94 | TYPE=FUNCTION | NAME=rustc_optgroups | COMPLEXITY=22 | LINES=146 */
 
 /// Returns all rustc command line options, including metadata for
 /// each option, such as whether the option is stable.
@@ -2029,7 +1935,6 @@ pub fn rustc_optgroups() -> Vec<RustcOptGroup> {
 
     options
 }
-/* AST_META: AST_ID=95 | TYPE=FUNCTION | NAME=get_cmd_lint_options | COMPLEXITY=16 | LINES=32 */
 
 pub fn get_cmd_lint_options(
     early_dcx: &EarlyDiagCtxt,
@@ -2062,7 +1967,6 @@ pub fn get_cmd_lint_options(
 
     (lint_opts, describe_lints, lint_cap)
 }
-/* AST_META: AST_ID=96 | TYPE=FUNCTION | NAME=parse_color | COMPLEXITY=10 | LINES=16 */
 
 /// Parses the `--color` flag.
 pub fn parse_color(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches) -> ColorConfig {
@@ -2079,7 +1983,6 @@ pub fn parse_color(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches) -> Col
         )),
     }
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=JsonConfig | COMPLEXITY=2 | LINES=12 */
 
 /// Possible json config files
 pub struct JsonConfig {
@@ -2092,7 +1995,6 @@ pub struct JsonConfig {
     pub json_unused_externs: JsonUnusedExterns,
     json_future_incompat: bool,
 }
-/* AST_META: AST_ID=98 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// Report unused externs in event stream
 #[derive(Copy, Clone)]
@@ -2104,7 +2006,6 @@ pub enum JsonUnusedExterns {
     /// Report, and also exit with failure status for deny/forbid
     Loud,
 }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=12 | LINES=16 */
 
 impl JsonUnusedExterns {
     pub fn is_enabled(&self) -> bool {
@@ -2121,7 +2022,6 @@ impl JsonUnusedExterns {
         }
     }
 }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=parse_json | COMPLEXITY=21 | LINES=46 */
 
 /// Parse the `--json` flag.
 ///
@@ -2168,7 +2068,6 @@ pub fn parse_json(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches) -> Json
         json_future_incompat,
     }
 }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=parse_error_format | COMPLEXITY=42 | LINES=60 */
 
 /// Parses the `--error-format` flag.
 pub fn parse_error_format(
@@ -2229,7 +2128,6 @@ pub fn parse_error_format(
 
     error_format
 }
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=parse_crate_edition | COMPLEXITY=22 | LINES=26 */
 
 pub fn parse_crate_edition(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches) -> Edition {
     let edition = match matches.opt_str("edition") {
@@ -2256,7 +2154,6 @@ pub fn parse_crate_edition(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches
 
     edition
 }
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=check_error_format_stability | COMPLEXITY=17 | LINES=20 */
 
 fn check_error_format_stability(
     early_dcx: &EarlyDiagCtxt,
@@ -2277,7 +2174,6 @@ fn check_error_format_stability(
     };
     early_dcx.early_fatal(format!("`--error-format={format}` is unstable"))
 }
-/* AST_META: AST_ID=104 | TYPE=FUNCTION | NAME=parse_output_types | COMPLEXITY=23 | LINES=32 */
 
 fn parse_output_types(
     early_dcx: &EarlyDiagCtxt,
@@ -2310,7 +2206,6 @@ fn parse_output_types(
     }
     OutputTypes(output_types)
 }
-/* AST_META: AST_ID=105 | TYPE=FUNCTION | NAME=split_out_file_name | COMPLEXITY=6 | LINES=8 */
 
 fn split_out_file_name(arg: &str) -> (&str, Option<OutFileName>) {
     match arg.split_once('=') {
@@ -2319,7 +2214,6 @@ fn split_out_file_name(arg: &str) -> (&str, Option<OutFileName>) {
         Some((kind, path)) => (kind, Some(OutFileName::Real(PathBuf::from(path)))),
     }
 }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=should_override_cgus_and_disable_thinlto | COMPLEXITY=32 | LINES=45 */
 
 fn should_override_cgus_and_disable_thinlto(
     early_dcx: &EarlyDiagCtxt,
@@ -2365,7 +2259,6 @@ fn should_override_cgus_and_disable_thinlto(
 
     (disable_local_thinlto, codegen_units)
 }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=collect_print_requests | COMPLEXITY=26 | LINES=51 */
 
 fn collect_print_requests(
     early_dcx: &EarlyDiagCtxt,
@@ -2417,7 +2310,6 @@ fn collect_print_requests(
 
     prints
 }
-/* AST_META: AST_ID=108 | TYPE=FUNCTION | NAME=check_print_request_stability | COMPLEXITY=6 | LINES=13 */
 
 fn check_print_request_stability(
     early_dcx: &EarlyDiagCtxt,
@@ -2431,7 +2323,6 @@ fn check_print_request_stability(
         ));
     }
 }
-/* AST_META: AST_ID=109 | TYPE=FUNCTION | NAME=is_print_request_stable | COMPLEXITY=6 | LINES=12 */
 
 fn is_print_request_stable(print_kind: PrintKind) -> bool {
     match print_kind {
@@ -2444,7 +2335,6 @@ fn is_print_request_stable(print_kind: PrintKind) -> bool {
         _ => true,
     }
 }
-/* AST_META: AST_ID=110 | TYPE=FUNCTION | NAME=emit_unknown_print_request_help | COMPLEXITY=16 | LINES=26 */
 
 fn emit_unknown_print_request_help(early_dcx: &EarlyDiagCtxt, req: &str, is_nightly: bool) -> ! {
     let prints = PRINT_KINDS
@@ -2471,7 +2361,6 @@ fn emit_unknown_print_request_help(early_dcx: &EarlyDiagCtxt, req: &str, is_nigh
     diag.help(format!("for more information, see the rustc book: https://doc.rust-lang.org/rustc/command-line-arguments.html#--print-print-compiler-information"));
     diag.emit()
 }
-/* AST_META: AST_ID=111 | TYPE=FUNCTION | NAME=parse_target_triple | COMPLEXITY=12 | LINES=13 */
 
 pub fn parse_target_triple(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches) -> TargetTuple {
     match matches.opt_str("target") {
@@ -2485,7 +2374,6 @@ pub fn parse_target_triple(early_dcx: &EarlyDiagCtxt, matches: &getopts::Matches
         _ => TargetTuple::from_tuple(host_tuple()),
     }
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=parse_opt_level | COMPLEXITY=27 | LINES=40 */
 
 fn parse_opt_level(
     early_dcx: &EarlyDiagCtxt,
@@ -2526,7 +2414,6 @@ fn parse_opt_level(
         }
     }
 }
-/* AST_META: AST_ID=113 | TYPE=FUNCTION | NAME=select_debuginfo | COMPLEXITY=14 | LINES=13 */
 
 fn select_debuginfo(matches: &getopts::Matches, cg: &CodegenOptions) -> DebugInfo {
     let max_g = matches.opt_positions("g").into_iter().max();
@@ -2540,7 +2427,6 @@ fn select_debuginfo(matches: &getopts::Matches, cg: &CodegenOptions) -> DebugInf
         .max();
     if max_g > max_c { DebugInfo::Full } else { cg.debuginfo }
 }
-/* AST_META: AST_ID=114 | TYPE=FUNCTION | NAME=parse_assert_incr_state | COMPLEXITY=12 | LINES=14 */
 
 fn parse_assert_incr_state(
     early_dcx: &EarlyDiagCtxt,
@@ -2555,7 +2441,6 @@ fn parse_assert_incr_state(
         None => None,
     }
 }
-/* AST_META: AST_ID=115 | TYPE=FUNCTION | NAME=parse_externs | COMPLEXITY=58 | LINES=97 */
 
 pub fn parse_externs(
     early_dcx: &EarlyDiagCtxt,
@@ -2653,7 +2538,6 @@ pub fn parse_externs(
     }
     Externs(externs)
 }
-/* AST_META: AST_ID=116 | TYPE=FUNCTION | NAME=parse_remap_path_prefix | COMPLEXITY=16 | LINES=25 */
 
 fn parse_remap_path_prefix(
     early_dcx: &EarlyDiagCtxt,
@@ -2679,7 +2563,6 @@ fn parse_remap_path_prefix(
     };
     mapping
 }
-/* AST_META: AST_ID=117 | TYPE=FUNCTION | NAME=parse_logical_env | COMPLEXITY=12 | LINES=17 */
 
 fn parse_logical_env(
     early_dcx: &EarlyDiagCtxt,
@@ -2697,7 +2580,6 @@ fn parse_logical_env(
 
     vars
 }
-/* AST_META: AST_ID=118 | TYPE=FUNCTION | NAME=build_session_options | COMPLEXITY=153 | LINES=353 */
 
 // JUSTIFICATION: before wrapper fn is available
 #[allow(rustc::bad_opt_access)]
@@ -3051,7 +2933,6 @@ pub fn build_session_options(early_dcx: &mut EarlyDiagCtxt, matches: &getopts::M
         target_modifiers,
     }
 }
-/* AST_META: AST_ID=119 | TYPE=FUNCTION | NAME=parse_pretty | COMPLEXITY=10 | LINES=32 */
 
 fn parse_pretty(early_dcx: &EarlyDiagCtxt, unstable_opts: &UnstableOptions) -> Option<PpMode> {
     use PpMode::*;
@@ -3084,7 +2965,6 @@ fn parse_pretty(early_dcx: &EarlyDiagCtxt, unstable_opts: &UnstableOptions) -> O
     debug!("got unpretty option: {first:?}");
     Some(first)
 }
-/* AST_META: AST_ID=120 | TYPE=FUNCTION | NAME=make_crate_type_option | COMPLEXITY=4 | LINES=12 */
 
 pub fn make_crate_type_option() -> RustcOptGroup {
     make_opt(
@@ -3097,7 +2977,6 @@ pub fn make_crate_type_option() -> RustcOptGroup {
         "<bin|lib|rlib|dylib|cdylib|staticlib|proc-macro>",
     )
 }
-/* AST_META: AST_ID=121 | TYPE=FUNCTION | NAME=parse_crate_types_from_list | COMPLEXITY=19 | LINES=29 */
 
 pub fn parse_crate_types_from_list(list_list: Vec<String>) -> Result<Vec<CrateType>, String> {
     let mut crate_types: Vec<CrateType> = Vec::new();
@@ -3127,7 +3006,6 @@ pub fn parse_crate_types_from_list(list_list: Vec<String>) -> Result<Vec<CrateTy
 
     Ok(crate_types)
 }
-/* AST_META: AST_ID=122 | TYPE=FUNCTION | NAME=is_unstable_enabled | COMPLEXITY=46 | LINES=72 */
 
 pub mod nightly_options {
     use crate::rustc_feature::UnstableFeatures;
@@ -3200,7 +3078,6 @@ pub mod nightly_options {
         }
     }
 }
-/* AST_META: AST_ID=123 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=14 */
 
 impl fmt::Display for CrateType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -3215,14 +3092,12 @@ impl fmt::Display for CrateType {
         }
     }
 }
-/* AST_META: AST_ID=124 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for CrateType {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         self.to_string().into_diag_arg(&mut None)
     }
 }
-/* AST_META: AST_ID=125 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum PpSourceMode {
@@ -3237,7 +3112,6 @@ pub enum PpSourceMode {
     /// `-Zunpretty=expanded,hygiene`
     ExpandedHygiene,
 }
-/* AST_META: AST_ID=126 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum PpHirMode {
@@ -3248,7 +3122,6 @@ pub enum PpHirMode {
     /// `-Zunpretty=hir,typed`
     Typed,
 }
-/* AST_META: AST_ID=127 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=26 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 /// Pretty print mode
@@ -3275,7 +3148,6 @@ pub enum PpMode {
     /// `-Zunpretty=stable-mir`
     StableMir,
 }
-/* AST_META: AST_ID=128 | TYPE=FUNCTION | NAME=needs_ast_map | COMPLEXITY=9 | LINES=25 */
 
 impl PpMode {
     pub fn needs_ast_map(&self) -> bool {
@@ -3301,14 +3173,12 @@ impl PpMode {
         matches!(*self, Hir(PpHirMode::Typed) | Mir | StableMir | MirCFG | ThirTree | ThirFlat)
     }
 }
-/* AST_META: AST_ID=129 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Hash, PartialEq, Eq, Debug)]
 pub enum WasiExecModel {
     Command,
     Reactor,
 }
-/* AST_META: AST_ID=130 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=88 | LINES=254 */
 
 /// Command-line arguments passed to the compiler have to be incorporated with
 /// the dependency tracking system for incremental compilation. This module
@@ -3563,7 +3433,6 @@ pub(crate) mod dep_tracking {
         }
     }
 }
-/* AST_META: AST_ID=131 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Default behavior to use in out-of-memory situations.
 #[derive(Clone, Copy, PartialEq, Hash, Debug, Encodable, Decodable, HashStable_Generic)]
@@ -3574,7 +3443,6 @@ pub enum OomStrategy {
     /// Abort the process immediately.
     Abort,
 }
-/* AST_META: AST_ID=132 | TYPE=FUNCTION | NAME=should_panic | COMPLEXITY=7 | LINES=11 */
 
 impl OomStrategy {
     pub const SYMBOL: &'static str = "__rust_alloc_error_handler_should_panic_v2";
@@ -3586,7 +3454,6 @@ impl OomStrategy {
         }
     }
 }
-/* AST_META: AST_ID=133 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// How to run proc-macro code when building this crate
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -3597,7 +3464,6 @@ pub enum ProcMacroExecutionStrategy {
     /// Run the proc-macro code on a different thread.
     CrossThread,
 }
-/* AST_META: AST_ID=134 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 /// How to perform collapse macros debug info
 /// if-ext - if macro from different crate (related to callsite code)
@@ -3617,7 +3483,6 @@ pub enum CollapseMacroDebuginfo {
     /// Collapse debuginfo for the macro
     Yes = 3,
 }
-/* AST_META: AST_ID=135 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Which format to use for `-Z dump-mono-stats`
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
@@ -3627,7 +3492,6 @@ pub enum DumpMonoStatsFormat {
     /// Emit structured JSON
     Json,
 }
-/* AST_META: AST_ID=136 | TYPE=FUNCTION | NAME=extension | COMPLEXITY=7 | LINES=9 */
 
 impl DumpMonoStatsFormat {
     pub fn extension(self) -> &'static str {
@@ -3637,7 +3501,6 @@ impl DumpMonoStatsFormat {
         }
     }
 }
-/* AST_META: AST_ID=137 | TYPE=STRUCT | NAME=PatchableFunctionEntry | COMPLEXITY=2 | LINES=10 */
 
 /// `-Z patchable-function-entry` representation - how many nops to put before and after function
 /// entry.
@@ -3648,7 +3511,6 @@ pub struct PatchableFunctionEntry {
     /// Nops after the entry
     entry: u8,
 }
-/* AST_META: AST_ID=138 | TYPE=FUNCTION | NAME=from_total_and_prefix_nops | COMPLEXITY=10 | LINES=19 */
 
 impl PatchableFunctionEntry {
     pub fn from_total_and_prefix_nops(
@@ -3668,7 +3530,6 @@ impl PatchableFunctionEntry {
         self.entry
     }
 }
-/* AST_META: AST_ID=139 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 /// `-Zpolonius` values, enabling the borrow checker polonius analysis, and which version: legacy,
 /// or future prototype.
@@ -3684,7 +3545,6 @@ pub enum Polonius {
     /// In-tree prototype, extending the NLL infrastructure.
     Next,
 }
-/* AST_META: AST_ID=140 | TYPE=FUNCTION | NAME=is_legacy_enabled | COMPLEXITY=4 | LINES=12 */
 
 impl Polonius {
     /// Returns whether the legacy version of polonius is enabled
@@ -3697,7 +3557,6 @@ impl Polonius {
         matches!(self, Polonius::Next)
     }
 }
-/* AST_META: AST_ID=141 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Hash, Debug)]
 pub enum InliningThreshold {
@@ -3705,14 +3564,12 @@ pub enum InliningThreshold {
     Sometimes(usize),
     Never,
 }
-/* AST_META: AST_ID=142 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl Default for InliningThreshold {
     fn default() -> Self {
         Self::Sometimes(100)
     }
 }
-/* AST_META: AST_ID=143 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// The different settings that the `-Zfunction-return` flag can have.
 #[derive(Clone, Copy, PartialEq, Hash, Debug, Default)]
@@ -3724,7 +3581,6 @@ pub enum FunctionReturn {
     /// Replace returns with jumps to thunk, without emitting the thunk.
     ThunkExtern,
 }
-/* AST_META: AST_ID=144 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Whether extra span comments are included when dumping MIR, via the `-Z mir-include-spans` flag.
 /// By default, only enabled in the NLL MIR dumps, and disabled in all other passes.
@@ -3737,7 +3593,6 @@ pub enum MirIncludeSpans {
     #[default]
     Nll,
 }
-/* AST_META: AST_ID=145 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=9 | LINES=10 */
 
 impl MirIncludeSpans {
     /// Unless opting into extra comments for all passes, they can be considered disabled.

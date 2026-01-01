@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/rvalue_scopes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use hir::Node;
 use hir::def_id::DefId;
 use rustc_hir as hir;
@@ -7,7 +6,6 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::region::{
     ScopeCompatibility, RvalueCandidate, Scope, ScopeTree,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=record_rvalue_scope_rec | COMPLEXITY=23 | LINES=50 */
 use crate::rustc_complete::ty::RvalueScopes;
 use tracing::debug;
 
@@ -58,7 +56,6 @@ fn record_rvalue_scope_rec(
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=record_rvalue_scope | COMPLEXITY=4 | LINES=9 */
 fn record_rvalue_scope(
     rvalue_scopes: &mut RvalueScopes,
     expr: &hir::Expr<'_>,
@@ -68,7 +65,6 @@ fn record_rvalue_scope(
     record_rvalue_scope_rec(rvalue_scopes, expr, candidate.lifetime, candidate.compat)
     // FIXME(@dingxiangfei2009): handle the candidates in the function call arguments
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=16 */
 
 pub(crate) fn resolve_rvalue_scopes<'a, 'tcx>(
     fcx: &'a FnCtxt<'a, 'tcx>,

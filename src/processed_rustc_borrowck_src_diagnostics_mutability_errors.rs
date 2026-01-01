@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/mutability_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
@@ -7,13 +6,10 @@ use core::ops::ControlFlow;
 
 use either::Either;
 use hir::{ExprKind, Param};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_complete::{Applicability, Diag};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{self as hir, BindingMode, ByRef, Node};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::place::PlaceBase;
 use crate::rustc_complete::mir::visit::PlaceContext;
@@ -22,27 +18,21 @@ use crate::rustc_complete::mir::{
     Mutability, Operand, Place, PlaceRef, ProjectionElem, RawPtrKind, Rvalue, Statement,
     StatementKind, TerminatorKind,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt, Upcast};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, DesugaringKind, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::diagnostics::BorrowedContentSource;
 use crate::{MirBorrowckCtxt, session_diagnostics};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub(crate) enum AccessKind {
     MutableBorrow,
     Mutate,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=find_assignments | COMPLEXITY=15 | LINES=27 */
 
 /// Finds all statements that assign directly to local (i.e., X = ...) and returns their
 /// locations.
@@ -70,7 +60,6 @@ fn find_assignments(body: &Body<'_>, local: Local) -> Vec<Location> {
     visitor.visit_body(body);
     visitor.locations
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=suggest_map_index_mut_alternatives | COMPLEXITY=763 | LINES=1369 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     pub(crate) fn report_mutability_error(
@@ -1440,12 +1429,10 @@ impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BindingFinder | COMPLEXITY=2 | LINES=4 */
 
 struct BindingFinder {
     span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_stmt | COMPLEXITY=16 | LINES=23 */
 
 impl<'tcx> Visitor<'tcx> for BindingFinder {
     type Result = ControlFlow<hir::HirId>;
@@ -1469,7 +1456,6 @@ impl<'tcx> Visitor<'tcx> for BindingFinder {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mut_borrow_of_mutable_ref | COMPLEXITY=25 | LINES=27 */
 
 fn mut_borrow_of_mutable_ref(local_decl: &LocalDecl<'_>, local_name: Option<Symbol>) -> bool {
     debug!("local_info: {:?}, ty.kind(): {:?}", local_decl.local_info, local_decl.ty.kind());
@@ -1497,7 +1483,6 @@ fn mut_borrow_of_mutable_ref(local_decl: &LocalDecl<'_>, local_name: Option<Symb
         _ => false,
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=suggest_ampmut_self | COMPLEXITY=9 | LINES=9 */
 
 fn suggest_ampmut_self(tcx: TyCtxt<'_>, span: Span) -> (Span, String) {
     match tcx.sess.source_map().span_to_snippet(span) {
@@ -1507,7 +1492,6 @@ fn suggest_ampmut_self(tcx: TyCtxt<'_>, span: Span) -> (Span, String) {
         _ => (span, "&mut self".to_string()),
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=21 */
 
 enum AmpMutSugg {
     /// Type suggestion. Changes `&self` to `&mut self`, `x: &T` to `x: &mut T`,
@@ -1529,7 +1513,6 @@ enum AmpMutSugg {
     },
     ChangeBinding,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=suggest_ampmut | COMPLEXITY=70 | LINES=123 */
 
 // When we want to suggest a user change a local variable to be a `&mut`, there
 // are three potential "obvious" things to highlight:
@@ -1653,13 +1636,11 @@ fn suggest_ampmut<'tcx>(
 
     Some(AmpMutSugg::ChangeBinding)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_closure_like | COMPLEXITY=2 | LINES=5 */
 
 /// If the type is a `Coroutine`, `Closure`, or `CoroutineClosure`
 fn is_closure_like(ty: Ty<'_>) -> bool {
     ty.is_closure() || ty.is_coroutine() || ty.is_coroutine_closure()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=get_mut_span_in_struct_field | COMPLEXITY=8 | LINES=27 */
 
 /// Given a field that needs to be mutable, returns a span where the " mut " could go.
 /// This function expects the local to be a reference to a struct in order to produce a span.
@@ -1687,7 +1668,6 @@ fn get_mut_span_in_struct_field<'tcx>(
 
     None
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=suggest_ref_mut | COMPLEXITY=6 | LINES=13 */
 
 /// If possible, suggest replacing `ref` with `ref mut`.
 fn suggest_ref_mut(tcx: TyCtxt<'_>, span: Span) -> Option<Span> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=versioned_llvm_target | COMPLEXITY=9 | LINES=30 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::Session;

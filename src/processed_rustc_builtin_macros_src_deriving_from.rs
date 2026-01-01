@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/from.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::{ItemKind, VariantData};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::{Bounds, Path, PathKind, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::deriving::generic::{
     BlockOrExpr, FieldlessVariantsStrategy, MethodDef, SubstructureFields, TraitDef,
     combine_substructure,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=121 */
 use crate::deriving::pathvec_std;
 use crate::errors;
 

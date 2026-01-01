@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_null.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 
 use crate::check_pointers::{BorrowedFieldProjectionMode, PointerCheck, check_pointers};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=7 | LINES=22 */
 
 pub(super) struct CheckNull;
 
@@ -32,7 +28,6 @@ impl<'tcx> crate::MirPass<'tcx> for CheckNull {
         true
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=insert_null_check | COMPLEXITY=30 | LINES=109 */
 
 fn insert_null_check<'tcx>(
     tcx: TyCtxt<'tcx>,

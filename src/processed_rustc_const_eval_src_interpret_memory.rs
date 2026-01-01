@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/memory.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // The memory subsystem.
 //
 // Generally, we use `Pointer` to denote memory addresses. However, some operations
@@ -10,24 +9,17 @@
 
 use std::assert_matches::assert_matches;
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::cell::Cell;
 use std::collections::VecDeque;
 use std::{fmt, ptr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{Align, HasDataLayout, Size};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::display_allocation;
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, throw_ub_format};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use super::{
     AllocBytes, AllocId, AllocInit, AllocMap, AllocRange, Allocation, CheckAlignMsg,
@@ -35,7 +27,6 @@ use super::{
     Misalignment, Pointer, PointerArithmetic, Provenance, Scalar, alloc_range, err_ub,
     err_ub_custom, interp_ok, throw_ub, throw_ub_custom, throw_unsup, throw_unsup_format,
 };
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 use crate::const_eval::ConstEvalErrKind;
 use crate::fluent_generated as fluent;
 
@@ -48,7 +39,6 @@ pub enum MemoryKind<T> {
     /// Additional memory kinds a machine wishes to distinguish from the builtin ones.
     Machine(T),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=may_leak | COMPLEXITY=9 | LINES=11 */
 
 impl<T: MayLeak> MayLeak for MemoryKind<T> {
     #[inline]
@@ -60,7 +50,6 @@ impl<T: MayLeak> MayLeak for MemoryKind<T> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=10 */
 
 impl<T: fmt::Display> fmt::Display for MemoryKind<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -71,7 +60,6 @@ impl<T: fmt::Display> fmt::Display for MemoryKind<T> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// The return value of `get_alloc_info` indicates the "kind" of the allocation.
 #[derive(Copy, Clone, PartialEq, Debug)]
@@ -87,7 +75,6 @@ pub enum AllocKind {
     /// A dead allocation.
     Dead,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=AllocInfo | COMPLEXITY=2 | LINES=9 */
 
 /// Metadata about an `AllocId`.
 #[derive(Copy, Clone, PartialEq, Debug)]
@@ -97,14 +84,12 @@ pub struct AllocInfo {
     pub kind: AllocKind,
     pub mutbl: Mutability,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl AllocInfo {
     fn new(size: Size, align: Align, kind: AllocKind, mutbl: Mutability) -> Self {
         Self { size, align, kind, mutbl }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// The value of a function pointer.
 #[derive(Debug, Copy, Clone)]
@@ -112,7 +97,6 @@ pub enum FnVal<'tcx, Other> {
     Instance(Instance<'tcx>),
     Other(Other),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=as_instance | COMPLEXITY=8 | LINES=11 */
 
 impl<'tcx, Other> FnVal<'tcx, Other> {
     pub fn as_instance(self) -> InterpResult<'tcx, Instance<'tcx>> {
@@ -124,7 +108,6 @@ impl<'tcx, Other> FnVal<'tcx, Other> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=Memory | COMPLEXITY=21 | LINES=30 */
 
 // `Memory` has to depend on the `Machine` because some of its operations
 // (e.g., `get`) call a `Machine` hook.
@@ -155,7 +138,6 @@ pub struct Memory<'tcx, M: Machine<'tcx>> {
     /// Needless to say, this must only be set with great care!
     validation_in_progress: Cell<bool>,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=AllocRef | COMPLEXITY=4 | LINES=10 */
 
 /// A reference to some allocation that was already bounds-checked for the given region
 /// and had the on-access machine hooks run.
@@ -166,7 +148,6 @@ pub struct AllocRef<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes = Box<[
     tcx: TyCtxt<'tcx>,
     alloc_id: AllocId,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=AllocRefMut | COMPLEXITY=4 | LINES=8 */
 /// A reference to some allocation that was already bounds-checked for the given region
 /// and had the on-access machine hooks run.
 pub struct AllocRefMut<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes = Box<[u8]>> {
@@ -175,7 +156,6 @@ pub struct AllocRefMut<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes = Bo
     tcx: TyCtxt<'tcx>,
     alloc_id: AllocId,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=16 */
 
 impl<'tcx, M: Machine<'tcx>> Memory<'tcx, M> {
     pub fn new() -> Self {
@@ -192,7 +172,6 @@ impl<'tcx, M: Machine<'tcx>> Memory<'tcx, M> {
         &self.alloc_map
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=global_root_pointer | COMPLEXITY=216 | LINES=468 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Call this to turn untagged "global" pointers (obtained via `tcx`) into
@@ -661,7 +640,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         self.check_misalign(self.is_ptr_misaligned(ptr, align), CheckAlignMsg::AccessedPtr)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=remove_unreachable_allocs | COMPLEXITY=10 | LINES=11 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// This function is used by Miri's provenance GC to remove unreachable entries from the dead_alloc_map.
@@ -673,7 +651,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         self.memory.dead_alloc_map.retain(|id, _| reachable_allocs.contains(id));
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_global_alloc | COMPLEXITY=267 | LINES=558 */
 
 /// Allocation accessors
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
@@ -1232,7 +1209,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         self.memory.validation_in_progress.get()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=DumpAllocs | COMPLEXITY=4 | LINES=7 */
 
 #[doc(hidden)]
 /// There's no way to use this directly, it's just a helper struct for the `dump_alloc(s)` methods.
@@ -1240,7 +1216,6 @@ pub struct DumpAllocs<'a, 'tcx, M: Machine<'tcx>> {
     ecx: &'a InterpCx<'tcx, M>,
     allocs: Vec<AllocId>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=51 | LINES=74 */
 
 impl<'a, 'tcx, M: Machine<'tcx>> std::fmt::Debug for DumpAllocs<'a, 'tcx, M> {
     fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -1315,7 +1290,6 @@ impl<'a, 'tcx, M: Machine<'tcx>> std::fmt::Debug for DumpAllocs<'a, 'tcx, M> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=15 | LINES=42 */
 
 /// Reading and writing.
 impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>
@@ -1358,7 +1332,6 @@ impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>
         self.alloc.clear_provenance(&self.tcx, self.range);
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=read_scalar | COMPLEXITY=10 | LINES=41 */
 
 impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes> AllocRef<'a, 'tcx, Prov, Extra, Bytes> {
     /// `range` is relative to this allocation reference, not the base of the allocation.
@@ -1400,7 +1373,6 @@ impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes> AllocRef<'a, 'tcx, Pr
         !self.alloc.provenance().range_empty(self.range, &self.tcx)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=read_bytes_ptr_strip_provenance | COMPLEXITY=93 | LINES=223 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Reads the given number of bytes from memory, and strips their provenance if possible.
@@ -1624,7 +1596,6 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         interp_ok(())
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=scalar_may_be_null | COMPLEXITY=55 | LINES=101 */
 
 /// Machine pointer introspection.
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {

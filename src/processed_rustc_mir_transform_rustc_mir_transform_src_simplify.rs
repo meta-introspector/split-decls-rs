@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/simplify.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=23 */
 // A number of passes which remove various redundancies in the CFG.
 //
 // The `SimplifyCfg` pass gets rid of unnecessary blocks in the CFG, whereas the `SimplifyLocals`
@@ -23,11 +22,9 @@
 //   fn example() {
 //       let _a: char = { return; };
 //   }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // ```
 //
 // Here the block (`{ return; }`) has the return type `char`, rather than `()`, but the MIR we
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 // naively generate still contains the `_a = ()` write in the unreachable block "after" the
 // return.
 //
@@ -40,15 +37,12 @@
 
 use itertools::Itertools as _;
 use crate::rustc_index::{Idx, IndexSlice, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 pub(super) enum SimplifyCfg {
     Initial,
@@ -63,7 +57,6 @@ pub(super) enum SimplifyCfg {
     MakeShim,
     AfterUnreachableEnumBranching,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=name | COMPLEXITY=9 | LINES=17 */
 
 impl SimplifyCfg {
     fn name(&self) -> &'static str {
@@ -81,7 +74,6 @@ impl SimplifyCfg {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 pub(super) fn simplify_cfg<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     if CfgSimplifier::new(tcx, body).simplify() {
@@ -94,7 +86,6 @@ pub(super) fn simplify_cfg<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     // FIXME: Should probably be moved into some kind of pass manager
     body.basic_blocks.as_mut_preserves_cfg().shrink_to_fit();
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=name | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx> crate::MirPass<'tcx> for SimplifyCfg {
     fn name(&self) -> &'static str {
@@ -110,14 +101,12 @@ impl<'tcx> crate::MirPass<'tcx> for SimplifyCfg {
         false
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=CfgSimplifier | COMPLEXITY=2 | LINES=6 */
 
 struct CfgSimplifier<'a, 'tcx> {
     preserve_switch_reads: bool,
     basic_blocks: &'a mut IndexSlice<BasicBlock, BasicBlockData<'tcx>>,
     pred_count: IndexVec<BasicBlock, u32>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=118 | LINES=201 */
 
 impl<'a, 'tcx> CfgSimplifier<'a, 'tcx> {
     fn new(tcx: TyCtxt<'tcx>, body: &'a mut Body<'tcx>) -> Self {
@@ -319,7 +308,6 @@ impl<'a, 'tcx> CfgSimplifier<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 pub(super) fn simplify_duplicate_switch_targets(terminator: &mut Terminator<'_>) {
     if let TerminatorKind::SwitchInt { targets, .. } = &mut terminator.kind {
@@ -332,7 +320,6 @@ pub(super) fn simplify_duplicate_switch_targets(terminator: &mut Terminator<'_>)
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=66 */
 
 pub(super) fn remove_dead_blocks(body: &mut Body<'_>) {
     let should_deduplicate_unreachable = |bbdata: &BasicBlockData<'_>| {
@@ -399,14 +386,12 @@ pub(super) fn remove_dead_blocks(body: &mut Body<'_>) {
         block.terminator_mut().successors_mut(|target| *target = replacements[target.index()]);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) enum SimplifyLocals {
     BeforeConstProp,
     AfterGVN,
     Final,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=name | COMPLEXITY=28 | LINES=45 */
 
 impl<'tcx> crate::MirPass<'tcx> for SimplifyLocals {
     fn name(&self) -> &'static str {
@@ -452,7 +437,6 @@ impl<'tcx> crate::MirPass<'tcx> for SimplifyLocals {
         false
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 pub(super) fn remove_unused_definitions<'tcx>(body: &mut Body<'tcx>) {
     // First, we're going to get a count of *actual* uses for every `Local`.
@@ -465,7 +449,6 @@ pub(super) fn remove_unused_definitions<'tcx>(body: &mut Body<'tcx>) {
     // fixedpoint where there are no more unused locals.
     remove_unused_definitions_helper(&mut used_locals, body);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=make_local_map | COMPLEXITY=14 | LINES=24 */
 
 /// Construct the mapping while swapping out unused stuff out from the `vec`.
 fn make_local_map<V>(
@@ -490,7 +473,6 @@ fn make_local_map<V>(
     local_decls.truncate(used.index());
     map
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UsedLocals | COMPLEXITY=2 | LINES=7 */
 
 /// Keeps track of used & unused locals.
 struct UsedLocals {
@@ -498,7 +480,6 @@ struct UsedLocals {
     arg_count: u32,
     use_count: IndexVec<Local, u32>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=18 | LINES=47 */
 
 impl UsedLocals {
     /// Determines which locals are used & unused in the given body.
@@ -546,7 +527,6 @@ impl UsedLocals {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=28 | LINES=43 */
 
 impl<'tcx> Visitor<'tcx> for UsedLocals {
     fn visit_statement(&mut self, statement: &Statement<'tcx>, location: Location) {
@@ -590,7 +570,6 @@ impl<'tcx> Visitor<'tcx> for UsedLocals {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=remove_unused_definitions_helper | COMPLEXITY=23 | LINES=39 */
 
 /// Removes unused definitions. Updates the used locals to reflect the changes made.
 fn remove_unused_definitions_helper(used_locals: &mut UsedLocals, body: &mut Body<'_>) {
@@ -630,13 +609,11 @@ fn remove_unused_definitions_helper(used_locals: &mut UsedLocals, body: &mut Bod
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=LocalUpdater | COMPLEXITY=2 | LINES=5 */
 
 struct LocalUpdater<'tcx> {
     map: IndexVec<Local, Option<Local>>,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> MutVisitor<'tcx> for LocalUpdater<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

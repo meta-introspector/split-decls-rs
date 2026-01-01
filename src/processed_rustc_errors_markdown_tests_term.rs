@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_errors/src/markdown/tests/term.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::io::BufWriter;
 use std::path::PathBuf;
 
 use termcolor::{BufferWriter, ColorChoice};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_wrapping_write | COMPLEXITY=10 | LINES=58 */
 
 use super::*;
 
@@ -63,7 +61,6 @@ fn test_wrapping_write() {
 
     assert_eq!(out, WRAPPED);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_output | COMPLEXITY=12 | LINES=29 */
 
 #[test]
 fn test_output() {

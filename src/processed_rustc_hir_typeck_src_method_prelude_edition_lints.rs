@@ -1,28 +1,21 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/method/prelude_edition_lints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Write;
 
 use hir::def_id::DefId;
 use hir::{HirId, ItemKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::join_path_idents;
 use crate::rustc_complete::Applicability;
 use rustc_hir as hir;
 use crate::rustc_lint::{ARRAY_INTO_ITER, BOXED_SLICE_INTO_ITER};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::builtin::{RUST_2021_PRELUDE_COLLISIONS, RUST_2024_PRELUDE_COLLISIONS};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, STDLIB_STABLE_CRATES, Span, kw, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::FnCtxt;
 use crate::method::probe::{self, Pick};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=trait_path_or_bare_name | COMPLEXITY=248 | LINES=424 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(super) fn lint_edition_dependent_dot_call(

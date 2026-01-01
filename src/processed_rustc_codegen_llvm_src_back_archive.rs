@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/back/archive.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // A helper class for dealing with static archives
 
 use std::ffi::{CStr, c_char, c_void};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::io;
 
 use crate::rustc_codegen_ssa::back::archive::{
     ArArchiveBuilder, ArchiveBuilder, ArchiveBuilderBuilder, DEFAULT_OBJECT_READER, ObjectReader,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new_archive_builder | COMPLEXITY=5 | LINES=12 */
 use crate::rustc_complete::Session;
 
 use crate::llvm;
@@ -22,7 +19,6 @@ impl ArchiveBuilderBuilder for LlvmArchiveBuilderBuilder {
         Box::new(ArArchiveBuilder::new(sess, &LLVM_OBJECT_READER))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 // The object crate doesn't know how to get symbols for LLVM bitcode and COFF bigobj files.
 // As such we need to use LLVM for them.
@@ -34,7 +30,6 @@ static LLVM_OBJECT_READER: ObjectReader = ObjectReader {
     is_any_arm64_coff: llvm_is_any_arm64_coff,
     get_xcoff_member_alignment: DEFAULT_OBJECT_READER.get_xcoff_member_alignment,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=get_llvm_object_symbols | COMPLEXITY=62 | LINES=59 */
 
 #[deny(unsafe_op_in_unsafe_fn)]
 fn get_llvm_object_symbols(
@@ -94,17 +89,14 @@ fn get_llvm_object_symbols(
         )) as Box<io::Error>) as *mut c_void
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=llvm_is_64_bit_object_file | COMPLEXITY=7 | LINES=4 */
 
 fn llvm_is_64_bit_object_file(buf: &[u8]) -> bool {
     unsafe { llvm::LLVMRustIs64BitSymbolicFile(buf.as_ptr(), buf.len()) }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=llvm_is_ec_object_file | COMPLEXITY=7 | LINES=4 */
 
 fn llvm_is_ec_object_file(buf: &[u8]) -> bool {
     unsafe { llvm::LLVMRustIsECObject(buf.as_ptr(), buf.len()) }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=llvm_is_any_arm64_coff | COMPLEXITY=7 | LINES=4 */
 
 fn llvm_is_any_arm64_coff(buf: &[u8]) -> bool {
     unsafe { llvm::LLVMRustIsAnyArm64Coff(buf.as_ptr(), buf.len()) }

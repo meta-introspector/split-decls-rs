@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=38 */
 // Various checks
 //
 // # Note
@@ -20,7 +19,6 @@ use crate::rustc_complete::util::Providers;
 #[cfg(debug_assertions)]
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=2 | LINES=15 */
 
 pub fn provide(providers: &mut Providers) {
     check_attr::provide(providers);

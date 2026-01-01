@@ -1,22 +1,18 @@
 // SRC: ../rust/compiler/rustc_errors/src/styled_buffer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Code for creating styled buffers
 
 use crate::snippet::{Style, StyledString};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub(crate) struct StyledBuffer {
     lines: Vec<Vec<StyledChar>>,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=StyledChar | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone)]
 struct StyledChar {
     chr: char,
     style: Style,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 impl StyledChar {
     const SPACE: Self = StyledChar::new(' ', Style::NoStyle);
@@ -25,7 +21,6 @@ impl StyledChar {
         StyledChar { chr, style }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=ensure_lines | COMPLEXITY=90 | LINES=141 */
 
 impl StyledBuffer {
     pub(crate) fn new() -> StyledBuffer {

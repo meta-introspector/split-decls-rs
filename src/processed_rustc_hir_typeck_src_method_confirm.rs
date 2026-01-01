@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/method/confirm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::ops::Deref;
 
 use rustc_hir as hir;
@@ -8,39 +7,29 @@ use crate::rustc_complete::def_id::DefId;
 use crate::rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_hir_analysis::hir_ty_lowering::{
     FeedConstTy, GenericArgsLowerer, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::infer::{
     BoundRegionConversionTime, DefineOpaqueTypes, InferOk, RegionVariableOrigin,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_lint::builtin::SUPERTRAIT_ITEM_SHADOWING_USAGE;
 use crate::rustc_complete::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, UserArgs,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::traits;
 use tracing::debug;
 
 use super::{MethodCallee, probe};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{SupertraitItemShadowee, SupertraitItemShadower, SupertraitItemShadowing};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{FnCtxt, callee};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ConfirmContext | COMPLEXITY=2 | LINES=8 */
 
 struct ConfirmContext<'a, 'tcx> {
     fcx: &'a FnCtxt<'a, 'tcx>,
@@ -49,7 +38,6 @@ struct ConfirmContext<'a, 'tcx> {
     call_expr: &'tcx hir::Expr<'tcx>,
     skip_record_for_diagnostics: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Deref for ConfirmContext<'a, 'tcx> {
     type Target = FnCtxt<'a, 'tcx>;
@@ -57,14 +45,12 @@ impl<'a, 'tcx> Deref for ConfirmContext<'a, 'tcx> {
         self.fcx
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub(crate) struct ConfirmResult<'tcx> {
     pub callee: MethodCallee<'tcx>,
     pub illegal_sized_bound: Option<Span>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=34 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn confirm_method(
@@ -99,7 +85,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         confirm_cx.confirm(unadjusted_self_ty, pick, segment)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=319 | LINES=673 */
 
 impl<'a, 'tcx> ConfirmContext<'a, 'tcx> {
     fn new(

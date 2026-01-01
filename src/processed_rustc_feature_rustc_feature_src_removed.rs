@@ -1,21 +1,17 @@
 // SRC: ../rust/compiler/rustc_feature/src/removed.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // List of the removed feature gates.
 
 use std::num::{NonZero, NonZeroU32};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=RemovedFeature | COMPLEXITY=2 | LINES=6 */
 
 pub struct RemovedFeature {
     pub feature: Feature,
     pub reason: Option<&'static str>,
     pub pull: Option<NonZero<u32>>,
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 macro_rules! opt_nonzero_u32 {
     () => {
@@ -25,7 +21,6 @@ macro_rules! opt_nonzero_u32 {
         Some(NonZeroU32::new($val).unwrap())
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 macro_rules! declare_features {
     ($(
@@ -45,7 +40,6 @@ macro_rules! declare_features {
         ];
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=180 */
 
 #[rustfmt::skip]
 declare_features! (
@@ -226,7 +220,6 @@ declare_features! (
     (removed, panic_implementation, "1.28.0", Some(44489),
      Some("subsumed by `#[panic_handler]`"), 53619),
     /// Allows `extern "platform-intrinsic" { ... }`.
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=90 */
     (removed, platform_intrinsics, "1.78.0", Some(27731),
      Some("SIMD intrinsics use the regular intrinsics ABI now"), 121516),
     /// Allows using `#[plugin(myplugin)]`.

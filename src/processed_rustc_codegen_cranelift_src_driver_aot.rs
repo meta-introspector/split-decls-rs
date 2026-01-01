@@ -1,76 +1,60 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/driver/aot.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // The AOT driver uses [`cranelift_object`] to write object files suitable for linking into a
 // standalone executable.
 
 use std::env;
 use std::fs::{self, File};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::io::BufWriter;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::sync::Arc;
 use std::thread::JoinHandle;
 
 use cranelift_object::{ObjectBuilder, ObjectModule};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::assert_module_sources::CguReuse;
 use crate::rustc_codegen_ssa::back::link::ensure_removed;
 use crate::rustc_codegen_ssa::base::determine_cgu_reuse;
 use crate::rustc_codegen_ssa::{
     CodegenResults, CompiledModule, CrateInfo, ModuleKind, errors as ssa_errors,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{IntoDynSyncSend, par_map};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::Linkage as RLinkage;
 use crate::rustc_metadata::fs::copy_to_stdout;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::mono::{CodegenUnit, MonoItem, MonoItemData, Visibility};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{DebugInfo, OutFileName, OutputFilenames, OutputType};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::CodegenCx;
 use crate::base::CodegenedFunction;
 use crate::concurrency_limiter::{ConcurrencyLimiter, ConcurrencyLimiterToken};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::debuginfo::TypeDebugContext;
 use crate::global_asm::{GlobalAsmConfig, GlobalAsmContext};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=disable_incr_cache | COMPLEXITY=2 | LINES=6 */
 use crate::prelude::*;
 use crate::unwind_module::UnwindModule;
 
 fn disable_incr_cache() -> bool {
     env::var("CG_CLIF_DISABLE_INCR_CACHE").as_deref() == Ok("1")
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ModuleCodegenResult | COMPLEXITY=2 | LINES=6 */
 
 struct ModuleCodegenResult {
     module_regular: CompiledModule,
     module_global_asm: Option<CompiledModule>,
     existing_work_product: Option<(WorkProductId, WorkProduct)>,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum OngoingModuleCodegen {
     Sync(Result<ModuleCodegenResult, String>),
     Async(JoinHandle<Result<ModuleCodegenResult, String>>),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<HCX> HashStable<HCX> for OngoingModuleCodegen {
     fn hash_stable(&self, _: &mut HCX, _: &mut StableHasher) {
         // do nothing
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) struct OngoingCodegen {
     modules: Vec<OngoingModuleCodegen>,
@@ -78,7 +62,6 @@ pub(crate) struct OngoingCodegen {
     crate_info: CrateInfo,
     concurrency_limiter: ConcurrencyLimiter,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=76 */
 
 impl OngoingCodegen {
     pub(crate) fn join(
@@ -155,7 +138,6 @@ impl OngoingCodegen {
         (codegen_results, work_products)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=produce_final_output_artifacts | COMPLEXITY=132 | LINES=185 */
 
 // Adapted from https://github.com/rust-lang/rust/blob/73476d49904751f8d90ce904e16dfbc278083d2c/compiler/rustc_codegen_ssa/src/back/write.rs#L547C1-L706C2
 fn produce_final_output_artifacts(
@@ -341,7 +323,6 @@ fn produce_final_output_artifacts(
     //  - #crate#.bc
     // These are used in linking steps and will be cleaned up afterward.
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=make_module | COMPLEXITY=3 | LINES=19 */
 
 fn make_module(sess: &Session, name: String) -> UnwindModule<ObjectModule> {
     let isa = crate::build_isa(sess, false);
@@ -361,7 +342,6 @@ fn make_module(sess: &Session, name: String) -> UnwindModule<ObjectModule> {
 
     UnwindModule::new(ObjectModule::new(builder), true)
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=emit_cgu | COMPLEXITY=10 | LINES=42 */
 
 fn emit_cgu(
     output_filenames: &OutputFilenames,
@@ -404,7 +384,6 @@ fn emit_cgu(
         existing_work_product: None,
     })
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=emit_module | COMPLEXITY=26 | LINES=56 */
 
 fn emit_module(
     output_filenames: &OutputFilenames,
@@ -461,7 +440,6 @@ fn emit_module(
         links_from_incr_cache: Vec::new(),
     })
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=reuse_workproduct_for_cgu | COMPLEXITY=25 | LINES=67 */
 
 fn reuse_workproduct_for_cgu(
     tcx: TyCtxt<'_>,
@@ -529,7 +507,6 @@ fn reuse_workproduct_for_cgu(
         existing_work_product: Some((cgu.work_product_id(), work_product)),
     })
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=codegen_cgu_content | COMPLEXITY=30 | LINES=68 */
 
 fn codegen_cgu_content(
     tcx: TyCtxt<'_>,
@@ -598,7 +575,6 @@ fn codegen_cgu_content(
 
     (cx, codegened_functions)
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=module_codegen | COMPLEXITY=13 | LINES=64 */
 
 fn module_codegen(
     tcx: TyCtxt<'_>,
@@ -663,7 +639,6 @@ fn module_codegen(
         codegen_result
     }))
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=emit_allocator_module | COMPLEXITY=11 | LINES=24 */
 
 fn emit_allocator_module(tcx: TyCtxt<'_>) -> Option<CompiledModule> {
     let mut allocator_module = make_module(tcx.sess, "allocator_shim".to_string());
@@ -688,7 +663,6 @@ fn emit_allocator_module(tcx: TyCtxt<'_>) -> Option<CompiledModule> {
         None
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=83 */
 
 pub(crate) fn run_aot(tcx: TyCtxt<'_>) -> Box<OngoingCodegen> {
     // FIXME handle `-Ctarget-cpu=native`

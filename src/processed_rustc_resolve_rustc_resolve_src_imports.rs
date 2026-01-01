@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/imports.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // A bunch of methods and structures more or less related to resolving imports.
 
 use std::cell::Cell;
@@ -7,16 +6,12 @@ use std::mem;
 
 use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, MultiSpan, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, DefKind, PartialRes};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::metadata::{ModChild, Reexport};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::Visibility;
 use crate::rustc_complete::lint::BuiltinLintDiag;
@@ -24,32 +19,26 @@ use crate::rustc_complete::lint::builtin::{
     AMBIGUOUS_GLOB_REEXPORTS, EXPORTED_PRIVATE_DEPENDENCIES, HIDDEN_GLOB_REEXPORTS,
     PUB_USE_OF_PRIVATE_EXTERN_CRATE, REDUNDANT_IMPORTS, UNUSED_IMPORTS,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::hygiene::LocalExpnId;
 use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 use tracing::debug;
 
 use crate::Namespace::{self, *};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::diagnostics::{DiagMode, Suggestion, import_candidates};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::errors::{
     CannotBeReexportedCratePublic, CannotBeReexportedCratePublicNS, CannotBeReexportedPrivate,
     CannotBeReexportedPrivateNS, CannotDetermineImportResolution, CannotGlobImportAllCrates,
     ConsiderAddingMacroExport, ConsiderMarkingAsPub, ConsiderMarkingAsPubCrate,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::{
     AmbiguityError, AmbiguityKind, BindingKey, CmResolver, Determinacy, Finalize, ImportSuggestion,
     Module, ModuleOrUniformRoot, NameBinding, NameBindingData, NameBindingKind, ParentScope,
     PathResult, PerNS, ResolutionError, Resolver, ScopeSet, Segment, Used, module_to_string,
     names_to_string,
 };
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 type Res = def::Res<NodeId>;
 
@@ -60,7 +49,6 @@ pub(crate) enum PendingBinding<'ra> {
     #[default]
     Pending,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 impl<'ra> PendingBinding<'ra> {
     pub(crate) fn binding(self) -> Option<NameBinding<'ra>> {
@@ -70,7 +58,6 @@ impl<'ra> PendingBinding<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=22 | LINES=47 */
 
 /// Contains data for specific kinds of imports.
 #[derive(Clone)]
@@ -118,7 +105,6 @@ pub(crate) enum ImportKind<'ra> {
     },
     MacroExport,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=26 | LINES=36 */
 
 /// Manually implement `Debug` for `ImportKind` because the `source/target_bindings`
 /// contain `Cell`s which can introduce infinite loops while printing.
@@ -155,7 +141,6 @@ impl<'ra> std::fmt::Debug for ImportKind<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=48 */
 
 /// One import.
 #[derive(Debug, Clone)]
@@ -204,7 +189,6 @@ pub(crate) struct ImportData<'ra> {
     /// Span of the visibility.
     pub vis_span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=6 | LINES=17 */
 
 /// All imports are unique and allocated on a same arena,
 /// so we can use referential equality to compare them.
@@ -222,7 +206,6 @@ impl std::hash::Hash for ImportData<'_> {
         unreachable!()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=simplify | COMPLEXITY=30 | LINES=33 */
 
 impl<'ra> ImportData<'ra> {
     pub(crate) fn is_glob(&self) -> bool {
@@ -256,7 +239,6 @@ impl<'ra> ImportData<'ra> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=12 */
 
 /// Records information about the resolution of a name in a namespace of a module.
 #[derive(Clone, Default, Debug)]
@@ -269,7 +251,6 @@ pub(crate) struct NameResolution<'ra> {
     /// The glob binding for this name, if it is known to exist.
     pub glob_binding: Option<NameBinding<'ra>>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=17 */
 
 impl<'ra> NameResolution<'ra> {
     /// Returns the binding for the name if it is known or None if it not known.
@@ -287,7 +268,6 @@ impl<'ra> NameResolution<'ra> {
         self.non_glob_binding.or(self.glob_binding)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UnresolvedImportError | COMPLEXITY=3 | LINES=14 */
 
 /// An error that may be transformed into a diagnostic later. Used to combine multiple unresolved
 /// import errors within the same use tree into a single diagnostic.
@@ -302,7 +282,6 @@ struct UnresolvedImportError {
     /// comes from `PathRes::Failed { module }`
     module: Option<DefId>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=pub_use_of_private_extern_crate_hack | COMPLEXITY=15 | LINES=17 */
 
 // Reexports of the form `pub use foo as bar;` where `foo` is `extern crate foo;`
 // are permitted for backward-compatibility under a deprecation lint.
@@ -320,7 +299,6 @@ fn pub_use_of_private_extern_crate_hack(
         _ => None,
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new_ambiguity_binding | COMPLEXITY=754 | LINES=1279 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     /// Given a binding and an import that resolves to it,
@@ -1600,7 +1578,6 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=import_path_to_string | COMPLEXITY=21 | LINES=20 */
 
 fn import_path_to_string(names: &[Ident], import_kind: &ImportKind<'_>, span: Span) -> String {
     let pos = names.iter().position(|p| span == p.span && p.name != kw::PathRoot);
@@ -1621,7 +1598,6 @@ fn import_path_to_string(names: &[Ident], import_kind: &ImportKind<'_>, span: Sp
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=import_kind_to_string | COMPLEXITY=10 | LINES=10 */
 
 fn import_kind_to_string(import_kind: &ImportKind<'_>) -> String {
     match import_kind {

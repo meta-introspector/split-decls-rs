@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/find_anon_type.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use core::ops::ControlFlow;
 
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::resolve_bound_vars as rbv;
 use crate::rustc_complete::ty::{self, Region, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 use tracing::debug;
 
 /// This function calls the `visit_ty` method for the parameters
@@ -26,7 +21,6 @@ use tracing::debug;
 /// ```compile_fail
 /// fn foo(x: &mut Vec<&u8>, y: &u8)
 ///    { x.push(y); }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=find_anon_type | COMPLEXITY=5 | LINES=18 */
 /// ```
 /// The function returns the nested type corresponding to the anonymous region
 /// for e.g., `&u8` and `Vec<&u8>`.
@@ -45,7 +39,6 @@ pub fn find_anon_type<'tcx>(
         .find_map(|arg| find_component_for_bound_region(tcx, arg, anon_reg.region_def_id))
         .map(|ty| (ty, fn_sig))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=find_component_for_bound_region | COMPLEXITY=3 | LINES=12 */
 
 // This method creates a FindNestedTypeVisitor which returns the type corresponding
 // to the anonymous region.
@@ -58,7 +51,6 @@ fn find_component_for_bound_region<'tcx>(
         .visit_ty_unambig(arg)
         .break_value()
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=FindNestedTypeVisitor | COMPLEXITY=9 | LINES=14 */
 
 // The FindNestedTypeVisitor captures the corresponding `hir::Ty` of the
 // anonymous region. The example above would lead to a conflict between
@@ -73,7 +65,6 @@ struct FindNestedTypeVisitor<'tcx> {
     region_def_id: DefId,
     current_index: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=54 | LINES=94 */
 
 impl<'tcx> Visitor<'tcx> for FindNestedTypeVisitor<'tcx> {
     type Result = ControlFlow<&'tcx hir::Ty<'tcx>>;
@@ -168,7 +159,6 @@ impl<'tcx> Visitor<'tcx> for FindNestedTypeVisitor<'tcx> {
         intravisit::walk_ty(self, arg)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TyPathVisitor | COMPLEXITY=7 | LINES=12 */
 
 // The visitor captures the corresponding `hir::Ty` of the anonymous region
 // in the case of structs ie. `hir::TyKind::Path`.
@@ -181,7 +171,6 @@ struct TyPathVisitor<'tcx> {
     region_def_id: DefId,
     current_index: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=27 | LINES=51 */
 
 impl<'tcx> Visitor<'tcx> for TyPathVisitor<'tcx> {
     type Result = ControlFlow<()>;

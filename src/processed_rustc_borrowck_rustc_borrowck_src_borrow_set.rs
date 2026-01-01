@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/borrow_set.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::ops::Index;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, Body, Local, Location, traversal};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{RegionVid, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=BorrowSet | COMPLEXITY=6 | LINES=25 */
 use crate::rustc_mir_dataflow::move_paths::MoveData;
 use tracing::debug;
 
@@ -38,7 +33,6 @@ pub struct BorrowSet<'tcx> {
 
     pub(crate) locals_state_at_exit: LocalsStateAtExit,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=location_map | COMPLEXITY=7 | LINES=19 */
 
 // These methods are public to support borrowck consumers.
 impl<'tcx> BorrowSet<'tcx> {
@@ -58,7 +52,6 @@ impl<'tcx> BorrowSet<'tcx> {
         &self.locals_state_at_exit
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Index<BorrowIndex> for BorrowSet<'tcx> {
     type Output = BorrowData<'tcx>;
@@ -67,7 +60,6 @@ impl<'tcx> Index<BorrowIndex> for BorrowSet<'tcx> {
         &self.location_map[index.as_usize()]
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Location where a two-phase borrow is activated, if a borrow
 /// is in fact a two-phase borrow.
@@ -77,7 +69,6 @@ pub enum TwoPhaseActivation {
     NotActivated,
     ActivatedAt(Location),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=BorrowData | COMPLEXITY=5 | LINES=17 */
 
 #[derive(Debug, Clone)]
 pub struct BorrowData<'tcx> {
@@ -95,7 +86,6 @@ pub struct BorrowData<'tcx> {
     /// Place to which the borrow was stored
     pub(crate) assigned_place: mir::Place<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=reserve_location | COMPLEXITY=9 | LINES=27 */
 
 // These methods are public to support borrowck consumers.
 impl<'tcx> BorrowData<'tcx> {
@@ -123,7 +113,6 @@ impl<'tcx> BorrowData<'tcx> {
         self.assigned_place
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=15 | LINES=16 */
 
 impl<'tcx> fmt::Display for BorrowData<'tcx> {
     fn fmt(&self, w: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -140,13 +129,11 @@ impl<'tcx> fmt::Display for BorrowData<'tcx> {
         write!(w, "&{:?} {}{:?}", self.region, kind, self.borrowed_place)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
 pub enum LocalsStateAtExit {
     AllAreInvalidated,
     SomeAreInvalidated { has_storage_dead_or_moved: DenseBitSet<Local> },
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=build | COMPLEXITY=20 | LINES=31 */
 
 impl LocalsStateAtExit {
     fn build<'tcx>(
@@ -178,7 +165,6 @@ impl LocalsStateAtExit {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=build | COMPLEXITY=16 | LINES=54 */
 
 impl<'tcx> BorrowSet<'tcx> {
     pub fn build(
@@ -233,7 +219,6 @@ impl<'tcx> BorrowSet<'tcx> {
         self.location_map.get_index_of(location).map(BorrowIndex::from)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=GatherBorrows | COMPLEXITY=3 | LINES=20 */
 
 struct GatherBorrows<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -254,7 +239,6 @@ struct GatherBorrows<'a, 'tcx> {
 
     locals_state_at_exit: LocalsStateAtExit,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_assign | COMPLEXITY=46 | LINES=96 */
 
 impl<'a, 'tcx> Visitor<'tcx> for GatherBorrows<'a, 'tcx> {
     fn visit_assign(
@@ -351,7 +335,6 @@ impl<'a, 'tcx> Visitor<'tcx> for GatherBorrows<'a, 'tcx> {
         self.super_rvalue(rvalue, location)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=insert_as_pending_if_two_phase | COMPLEXITY=27 | LINES=59 */
 
 impl<'a, 'tcx> GatherBorrows<'a, 'tcx> {
     /// If this is a two-phase borrow, then we will record it

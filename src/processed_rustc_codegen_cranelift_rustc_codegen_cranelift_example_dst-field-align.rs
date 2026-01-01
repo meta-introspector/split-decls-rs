@@ -1,35 +1,29 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/dst-field-align.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=Foo | COMPLEXITY=2 | LINES=6 */
 // run-pass
 #[allow(dead_code)]
 struct Foo<T: ?Sized> {
     a: u16,
     b: T,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=get | COMPLEXITY=2 | LINES=4 */
 
 trait Bar {
     fn get(&self) -> usize;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=get | COMPLEXITY=5 | LINES=6 */
 
 impl Bar for usize {
     fn get(&self) -> usize {
         *self
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Baz | COMPLEXITY=2 | LINES=4 */
 
 struct Baz<T: ?Sized> {
     a: T,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=HasDrop | COMPLEXITY=2 | LINES=5 */
 
 struct HasDrop<T: ?Sized> {
     ptr: Box<usize>,
     data: T,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=main | COMPLEXITY=12 | LINES=41 */
 
 fn main() {
     // Test that zero-offset works properly

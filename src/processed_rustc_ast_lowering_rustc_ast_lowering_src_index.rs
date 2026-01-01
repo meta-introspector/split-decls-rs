@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/index.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use intravisit::InferKind;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::*;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=NodeCollector | COMPLEXITY=2 | LINES=16 */
 
 /// A visitor that walks over the HIR and collects `Node`s into a HIR map.
 struct NodeCollector<'a, 'hir> {
@@ -30,7 +26,6 @@ struct NodeCollector<'a, 'hir> {
 
     owner: OwnerId,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=44 */
 
 #[instrument(level = "debug", skip(tcx, bodies))]
 pub(super) fn index_hir<'hir>(
@@ -75,7 +70,6 @@ pub(super) fn index_hir<'hir>(
 
     (collector.nodes, collector.parenting)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=32 | LINES=54 */
 
 impl<'a, 'hir> NodeCollector<'a, 'hir> {
     #[instrument(level = "debug", skip(self))]
@@ -130,7 +124,6 @@ impl<'a, 'hir> NodeCollector<'a, 'hir> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_nested_item | COMPLEXITY=105 | LINES=302 */
 
 impl<'a, 'hir> Visitor<'hir> for NodeCollector<'a, 'hir> {
     /// Because we want to track parent items and so forth, enable

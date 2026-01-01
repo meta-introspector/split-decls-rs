@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/post_drop_elaboration.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::{self, BasicBlock, Location};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=checking_enabled | COMPLEXITY=10 | LINES=23 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::sym;
 use tracing::trace;
@@ -26,7 +24,6 @@ pub fn checking_enabled(ccx: &ConstCx<'_, '_>) -> bool {
 
     ccx.tcx.features().const_precise_live_drops()
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=check_live_drops | COMPLEXITY=15 | LINES=26 */
 
 /// Look for live drops in a const context.
 ///
@@ -53,12 +50,10 @@ pub fn check_live_drops<'tcx>(tcx: TyCtxt<'tcx>, body: &mir::Body<'tcx>) {
 
     visitor.visit_body(body);
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=CheckLiveDrops | COMPLEXITY=2 | LINES=4 */
 
 struct CheckLiveDrops<'mir, 'tcx> {
     checker: Checker<'mir, 'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_basic_block_data | COMPLEXITY=32 | LINES=42 */
 
 impl<'tcx> Visitor<'tcx> for CheckLiveDrops<'_, 'tcx> {
     fn visit_basic_block_data(&mut self, bb: BasicBlock, block: &mir::BasicBlockData<'tcx>) {

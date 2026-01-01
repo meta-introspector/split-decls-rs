@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/build.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::fs;
 use std::path::Path;
 
 use crate::config::{Channel, ConfigInfo};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::utils::{
     create_dir, get_sysroot_dir, run_command, run_command_with_output_and_env, walk_dir,
 };
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=BuildArg | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Default)]
 struct BuildArg {
@@ -18,7 +15,6 @@ struct BuildArg {
     config_info: ConfigInfo,
     build_sysroot: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=20 | LINES=38 */
 
 impl BuildArg {
     /// Creates a new `BuildArg` instance by parsing command-line arguments.
@@ -57,7 +53,6 @@ impl BuildArg {
         println!("    --help                 : Show this help");
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cleanup_sysroot_previous_build | COMPLEXITY=21 | LINES=44 */
 
 fn cleanup_sysroot_previous_build(library_dir: &Path) {
     // Cleanup for previous run
@@ -102,7 +97,6 @@ fn cleanup_sysroot_previous_build(library_dir: &Path) {
         false,
     );
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=build_sysroot | COMPLEXITY=32 | LINES=72 */
 
 pub fn build_sysroot(env: &HashMap<String, String>, config: &ConfigInfo) -> Result<(), String> {
     let start_dir = get_sysroot_dir();
@@ -175,7 +169,6 @@ pub fn build_sysroot(env: &HashMap<String, String>, config: &ConfigInfo) -> Resu
 
     Ok(())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=build_codegen | COMPLEXITY=23 | LINES=44 */
 
 fn build_codegen(args: &mut BuildArg) -> Result<(), String> {
     let mut env = HashMap::new();
@@ -220,7 +213,6 @@ fn build_codegen(args: &mut BuildArg) -> Result<(), String> {
     }
     Ok(())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=run | COMPLEXITY=6 | LINES=11 */
 
 /// Executes the build process.
 pub fn run() -> Result<(), String> {

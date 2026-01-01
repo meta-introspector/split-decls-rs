@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/intrinsics/mod.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=13 */
 // Codegen of intrinsics. This includes functions marked with the `#[rustc_intrinsic]` attribute
 // and LLVM intrinsics that have symbol names starting with `llvm.`.
 
@@ -13,7 +12,6 @@ macro_rules! intrinsic_args {
         };
     }
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 
 use cranelift_codegen::ir::AtomicRmwOp;
@@ -21,10 +19,8 @@ use crate::rustc_complete::ty;
 use crate::rustc_complete::ty::GenericArgsRef;
 use crate::rustc_complete::ty::layout::ValidityRequirement;
 use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=bug_on_incorrect_arg_count | COMPLEXITY=5 | LINES=9 */
 
 pub(crate) use self::llvm::codegen_llvm_intrinsic_call;
 use crate::cast::clif_intcast;
@@ -34,7 +30,6 @@ use crate::prelude::*;
 fn bug_on_incorrect_arg_count(intrinsic: impl std::fmt::Display) -> ! {
     bug!("wrong number of args for intrinsic {}", intrinsic);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=report_atomic_type_validation_error | COMPLEXITY=4 | LINES=17 */
 
 fn report_atomic_type_validation_error<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -52,7 +47,6 @@ fn report_atomic_type_validation_error<'tcx>(
     // Prevent verifier error
     fx.bcx.ins().trap(TrapCode::user(1 /* unreachable */).unwrap());
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 pub(crate) fn clif_vector_type<'tcx>(tcx: TyCtxt<'tcx>, layout: TyAndLayout<'tcx>) -> Type {
     let (element, count) = match layout.backend_repr {
@@ -62,7 +56,6 @@ pub(crate) fn clif_vector_type<'tcx>(tcx: TyCtxt<'tcx>, layout: TyAndLayout<'tcx
 
     scalar_to_clif_type(tcx, element).by(u32::try_from(count).unwrap()).unwrap()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=simd_for_each_lane | COMPLEXITY=6 | LINES=24 */
 
 fn simd_for_each_lane<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -87,7 +80,6 @@ fn simd_for_each_lane<'tcx>(
         ret.place_lane(fx, lane_idx).write_cvalue(fx, res_lane);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=simd_pair_for_each_lane_typed | COMPLEXITY=6 | LINES=24 */
 
 fn simd_pair_for_each_lane_typed<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -112,7 +104,6 @@ fn simd_pair_for_each_lane_typed<'tcx>(
         ret.place_lane(fx, lane_idx).write_cvalue(fx, res_lane);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=simd_pair_for_each_lane | COMPLEXITY=6 | LINES=27 */
 
 fn simd_pair_for_each_lane<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -140,7 +131,6 @@ fn simd_pair_for_each_lane<'tcx>(
         ret.place_lane(fx, lane_idx).write_cvalue(fx, res_lane);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=simd_horizontal_pair_for_each_lane | COMPLEXITY=11 | LINES=30 */
 
 fn simd_horizontal_pair_for_each_lane<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -171,7 +161,6 @@ fn simd_horizontal_pair_for_each_lane<'tcx>(
         ret.place_lane(fx, lane_idx).write_cvalue(fx, res_lane);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=simd_trio_for_each_lane | COMPLEXITY=7 | LINES=29 */
 
 fn simd_trio_for_each_lane<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -201,7 +190,6 @@ fn simd_trio_for_each_lane<'tcx>(
         ret.place_lane(fx, lane_idx).write_cvalue(fx, res_lane);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=simd_reduce | COMPLEXITY=10 | LINES=21 */
 
 fn simd_reduce<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -223,7 +211,6 @@ fn simd_reduce<'tcx>(
     let res = CValue::by_val(res_val, lane_layout);
     ret.write_cvalue(fx, res);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=simd_reduce_bool | COMPLEXITY=10 | LINES=26 */
 
 // FIXME move all uses to `simd_reduce`
 fn simd_reduce_bool<'tcx>(
@@ -250,7 +237,6 @@ fn simd_reduce_bool<'tcx>(
     let res = CValue::by_val(res_val, ret.layout());
     ret.write_cvalue(fx, res);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=bool_to_zero_or_max_uint | COMPLEXITY=9 | LINES=24 */
 
 fn bool_to_zero_or_max_uint<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -275,7 +261,6 @@ fn bool_to_zero_or_max_uint<'tcx>(
 
     res
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=39 */
 
 pub(crate) fn codegen_intrinsic_call<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -315,7 +300,6 @@ pub(crate) fn codegen_intrinsic_call<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=codegen_float_intrinsic_call | COMPLEXITY=68 | LINES=207 */
 
 fn codegen_float_intrinsic_call<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -523,7 +507,6 @@ fn codegen_float_intrinsic_call<'tcx>(
 
     true
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=codegen_regular_intrinsic_call | COMPLEXITY=336 | LINES=970 */
 
 fn codegen_regular_intrinsic_call<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

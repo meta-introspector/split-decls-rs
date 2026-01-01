@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/llvm/enzyme_ffi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[expect(dead_code)]
 
 use libc::{c_char, c_uint};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::MetadataKindId;
 use super::ffi::{AttributeKind, BasicBlock, Metadata, Module, Type, Value};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{Bool, Builder};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=35 */
 
 #[link(name = "llvm-wrapper", kind = "static")]
 unsafe extern "C" {
@@ -45,7 +41,6 @@ unsafe extern "C" {
     ) -> Option<&Value>;
 
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 unsafe extern "C" {
     // Enzyme
@@ -56,7 +51,6 @@ unsafe extern "C" {
     pub(crate) fn LLVMGetParams(Fnc: &Value, params: *mut &Value);
     pub(crate) fn LLVMGetNamedFunction(M: &Module, Name: *const c_char) -> Option<&Value>;
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[repr(C)]
 #[derive(Copy, Clone, PartialEq)]
@@ -65,7 +59,6 @@ pub(crate) enum LLVMRustVerifierFailureAction {
     LLVMPrintMessageAction = 1,
     LLVMReturnStatusAction = 2,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=71 | LINES=75 */
 
 #[cfg(llvm_enzyme)]
 pub(crate) use self::Enzyme_AD::*;
@@ -141,7 +134,6 @@ pub(crate) mod Enzyme_AD {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=36 */
 
 #[cfg(not(llvm_enzyme))]
 pub(crate) use self::Fallback_AD::*;

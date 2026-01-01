@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/flags.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::inherent::*;
 use crate::visit::Flags;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=TypeFlags: | COMPLEXITY=25 | LINES=134 */
 
 bitflags::bitflags! {
     /// Flags that we track on types. These flags are propagated upwards
@@ -138,7 +136,6 @@ bitflags::bitflags! {
         const HAS_TY_CORO                 = 1 << 24;
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=FlagComputation | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Debug)]
 pub struct FlagComputation<I> {
@@ -149,7 +146,6 @@ pub struct FlagComputation<I> {
 
     interner: std::marker::PhantomData<I>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=159 | LINES=358 */
 
 impl<I: Interner> FlagComputation<I> {
     fn new() -> FlagComputation<I> {

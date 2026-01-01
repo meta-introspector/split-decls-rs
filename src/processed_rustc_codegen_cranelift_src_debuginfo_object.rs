@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/object.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use cranelift_module::{DataId, FuncId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use cranelift_object::ObjectProduct;
 use gimli::SectionId;
 use object::write::{Relocation, StandardSegment};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use object::{RelocationEncoding, RelocationFlags, SectionKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashMap;
 
 use crate::debuginfo::{DebugReloc, DebugRelocName};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=add_debug_section | COMPLEXITY=2 | LINES=12 */
 
 pub(super) trait WriteDebugInfo {
     type SectionId: Copy;
@@ -24,7 +19,6 @@ pub(super) trait WriteDebugInfo {
         reloc: &DebugReloc,
     );
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=add_debug_section | COMPLEXITY=39 | LINES=71 */
 
 impl WriteDebugInfo for ObjectProduct {
     type SectionId = (object::write::SectionId, object::write::SymbolId);

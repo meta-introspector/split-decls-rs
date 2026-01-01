@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // ignore-tidy-filelength
 // FIXME: we should move the field error reporting code somewhere else.
 
@@ -8,10 +7,8 @@
 // See [`crate::rustc_hir_analysis::check`] for more context on type checking in general.
 
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::codes::*;
@@ -19,47 +16,32 @@ use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, StashKey, Subdiagnostic, listify, pluralize,
     struct_span_code_err,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{CtorKind, DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{ExprKind, HirId, QPath, find_attr};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_hir_analysis::NoVariantNamed;
 use crate::rustc_hir_analysis::hir_ty_lowering::{FeedConstTy, HirTyLowerer as _};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{self, DefineOpaqueTypes, InferOk, RegionVariableOrigin};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::query::NoSolution;
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AllowTwoPhase};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AdtKind, GenericArgsRef, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::hygiene::DesugaringKind;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::Expectation::{self, ExpectCastableToType, ExpectHasType, NoExpectation};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::coercion::{CoerceMany, DynamicCoerceMany};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::errors::{
     AddressOfTemporaryTaken, BaseExpressionDoubleDot, BaseExpressionDoubleDotAddExpr,
     BaseExpressionDoubleDotRemove, CantDereference, FieldMultiplySpecifiedInInitializer,
@@ -67,12 +49,10 @@ use crate::errors::{
     NoFieldOnVariant, ReturnLikeStatementKind, ReturnStmtOutsideOfFnBody, StructExprNonExhaustive,
     TypeMismatchFruTypo, YieldExprOutsideOfCoroutine,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     BreakableCtxt, CoroutineTypes, Diverges, FnCtxt, GatherLocalsVisitor, Needs,
     TupleArgumentsFlag, cast, fatally_break_rust, report_unexpected_variant_res, type_error_struct,
 };
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=check_expr_with_expectation_and_needs | COMPLEXITY=1947 | LINES=3961 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn precedence(&self, expr: &hir::Expr<'_>) -> ExprPrecedence {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/constructor.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=25 */
 // As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
 // fields. This file defines a `Constructor` enum and various operations to manipulate them.
 //
@@ -25,7 +24,6 @@
 //     (50..=150, false) => {}
 //     (0 ..=200, _) => {}
 // }
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=33 */
 // ```
 //
 // In this example we can restrict specialization to 5 cases: `0..50`, `50..=100`, `101..=150`,
@@ -59,13 +57,11 @@
 //
 // ```
 // enum Direction { North, South, East, West }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 // # let wind = (Direction::North, 0u8);
 // match wind {
 //     (Direction::North, 50..) => {}
 //     (_, _) => {}
 // }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 // ```
 //
 // Here we expect constructor splitting to output two cases: `North`, and "everything else". This
@@ -86,16 +82,13 @@
 // ## Empty types, empty constructors, and the `exhaustive_patterns` feature
 //
 // An empty type is a type that has no valid value, like `!`, `enum Void {}`, or `Result<!, !>`.
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 // They require careful handling.
 //
 // First, for soundness reasons related to the possible existence of invalid values, by default we
 // don't treat empty types as empty. We force them to be matched with wildcards. Except if the
 // `exhaustive_patterns` feature is turned on, in which case we do treat them as empty. And also
 // except if the type has no constructors (like `enum Void {}` but not like `Result<!, !>`), we
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
 // specifically allow `match void {}` to be exhaustive. There are additionally considerations of
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=14 */
 // place validity that are handled in `crate::usefulness`. Yes this is a bit tricky.
 //
 // The second thing is that regardless of the above, it is always allowed to use all the
@@ -110,7 +103,6 @@
 //     Some(_) => {}
 //   }
 // }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 // fn bar(x: &[!]) -> u32 {
 //   match x {
 //     [] => 1,
@@ -118,7 +110,6 @@
 //     [_, _] => 3,
 //   }
 // }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 // ```
 //
 // Moreover, take the following:
@@ -130,7 +121,6 @@
 // match x {
 //   None => {}
 // }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=41 */
 // ```
 //
 // On a normal type, we would identify `Some` as missing and tell the user. If `x: Option<!>`
@@ -172,12 +162,10 @@
 //     }
 // }
 // # }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // ```
 //
 // Pattern-matching has no knowledge that e.g. `false as u8 == 0`, so the values we consider in the
 // algorithm look like `U8AsBool { b: true, n: 2 }`. In other words, for the most part a union is
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 // treated like a struct with the same fields. The difference lies in how we construct witnesses of
 // non-exhaustiveness.
 //
@@ -190,15 +178,12 @@
 // [`SplitConstructorSet`], we give each `Opaque` constructor a unique id so we can recognize it.
 
 use std::cmp::{self, Ordering, max, min};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::iter::once;
 
 use rustc_apfloat::ieee::{DoubleS, HalfS, IeeeFloat, QuadS, SingleS};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 use smallvec::SmallVec;
 
 use self::Constructor::*;
@@ -212,14 +197,12 @@ enum Presence {
     Unseen,
     Seen,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum RangeEnd {
     Included,
     Excluded,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl fmt::Display for RangeEnd {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -229,7 +212,6 @@ impl fmt::Display for RangeEnd {
         })
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 /// A possibly infinite integer. Values are encoded such that the ordering on `u128` matches the
 /// natural order on the original type. For example, `-128i8` is encoded as `0` and `127i8` as
@@ -242,7 +224,6 @@ pub enum MaybeInfiniteInt {
     Finite(u128),
     PosInfinity,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new_finite_uint | COMPLEXITY=34 | LINES=49 */
 
 impl MaybeInfiniteInt {
     pub fn new_finite_uint(bits: u128) -> Self {
@@ -292,7 +273,6 @@ impl MaybeInfiniteInt {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=IntRange | COMPLEXITY=4 | LINES=11 */
 
 /// An exclusive interval, used for precise integer exhaustiveness checking. `IntRange`s always
 /// store a contiguous range.
@@ -304,7 +284,6 @@ pub struct IntRange {
     pub lo: MaybeInfiniteInt, // Must not be `PosInfinity`.
     pub hi: MaybeInfiniteInt, // Must not be `NegInfinity`.
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=is_singleton | COMPLEXITY=57 | LINES=129 */
 
 impl IntRange {
     /// Best effort; will not know that e.g. `255u8..` is a singleton.
@@ -434,7 +413,6 @@ impl IntRange {
             })
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=21 */
 
 /// Note: this will render signed ranges incorrectly. To render properly, convert to a pattern
 /// first.
@@ -456,7 +434,6 @@ impl fmt::Debug for IntRange {
         Ok(())
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum SliceKind {
@@ -469,7 +446,6 @@ pub enum SliceKind {
     /// and everything in between is a wildcard `_`.
     VarLen(usize, usize),
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=arity | COMPLEXITY=12 | LINES=17 */
 
 impl SliceKind {
     pub fn arity(self) -> usize {
@@ -487,7 +463,6 @@ impl SliceKind {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=Slice | COMPLEXITY=8 | LINES=9 */
 
 /// A constructor for array and slice patterns.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -497,7 +472,6 @@ pub struct Slice {
     /// The kind of pattern it is: fixed-length `[x, y]` or variable length `[x, .., y]`.
     pub(crate) kind: SliceKind,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=new | COMPLEXITY=119 | LINES=183 */
 
 impl Slice {
     pub fn new(array_len: Option<usize>, kind: SliceKind) -> Self {
@@ -681,7 +655,6 @@ impl Slice {
         })
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=OpaqueId(u32); | COMPLEXITY=4 | LINES=12 */
 
 /// A globally unique id to distinguish `Opaque` patterns.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -694,7 +667,6 @@ impl OpaqueId {
         OpaqueId(OPAQUE_ID.fetch_add(1, Ordering::SeqCst))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=28 | LINES=63 */
 
 /// A value can be decomposed into a constructor applied to some fields. This struct represents
 /// the constructor. See also `Fields`.
@@ -758,7 +730,6 @@ pub enum Constructor<Cx: PatCx> {
     /// we skip the column entirely so we don't observe its emptiness. Only used for specialization.
     PrivateUninhabited,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=12 | LINES=28 */
 
 impl<Cx: PatCx> Clone for Constructor<Cx> {
     fn clone(&self) -> Self {
@@ -787,7 +758,6 @@ impl<Cx: PatCx> Clone for Constructor<Cx> {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=as_bool | COMPLEXITY=145 | LINES=198 */
 
 impl<Cx: PatCx> Constructor<Cx> {
     pub(crate) fn is_non_exhaustive(&self) -> bool {
@@ -986,7 +956,6 @@ impl<Cx: PatCx> Constructor<Cx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Debug, Clone, Copy)]
 pub enum VariantVisibility {
@@ -1000,7 +969,6 @@ pub enum VariantVisibility {
     /// it first.
     Empty,
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=32 */
 
 /// Describes the set of all constructors for a type. For details, in particular about the emptiness
 /// of constructors, see the top of the file.
@@ -1033,7 +1001,6 @@ pub enum ConstructorSet<Cx: PatCx> {
     /// The type has no constructors (not even empty ones). This is `!` and empty enums.
     NoConstructors,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=SplitConstructorSet | COMPLEXITY=13 | LINES=28 */
 
 /// Describes the result of analyzing the constructors in a column of a match.
 ///
@@ -1062,7 +1029,6 @@ pub struct SplitConstructorSet<Cx: PatCx> {
     pub missing: Vec<Constructor<Cx>>,
     pub missing_empty: Vec<Constructor<Cx>>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=split | COMPLEXITY=145 | LINES=189 */
 
 impl<Cx: PatCx> ConstructorSet<Cx> {
     /// This analyzes a column of constructors to 1/ determine which constructors of the type (if

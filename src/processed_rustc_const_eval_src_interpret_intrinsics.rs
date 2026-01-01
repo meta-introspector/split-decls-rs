@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/intrinsics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Intrinsics and other functions that the interpreter executes without
 // looking at their MIR. Intrinsics/functions supported here are shared by CTFE
 // and miri.
@@ -7,20 +6,13 @@
 use std::assert_matches::assert_matches;
 
 use crate::rustc_abi::{FieldIdx, HasDataLayout, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, read_target_uint, write_target_uint};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BinOp, ConstValue, NonDivergingIntrinsic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use tracing::trace;
 
 use super::memory::MemoryKind;
@@ -30,7 +22,6 @@ use super::{
     PointerArithmetic, Provenance, Scalar, err_ub_custom, err_unsup_format, interp_ok, throw_inval,
     throw_ub_custom, throw_ub_format,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::fluent_generated as fluent;
 
 /// Directly returns an `Allocation` containing an absolute path representation of the given type.
@@ -40,7 +31,6 @@ pub(crate) fn alloc_type_name<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> (AllocId
     let len = bytes.len().try_into().unwrap();
     (tcx.allocate_bytes_dedup(bytes, CTFE_ALLOC_SALT), len)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=write_type_id | COMPLEXITY=347 | LINES=1006 */
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Generates a value of `TypeId` for `ty` in-place.
     fn write_type_id(

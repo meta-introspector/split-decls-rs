@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/prepare.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ffi::OsStr;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::process::Command;
 use std::{fs, io};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::path::{Dirs, RelPath};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::utils::{copy_dir_recursively, ensure_empty_dir, spawn_and_wait};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) fn prepare(dirs: &Dirs) {
     std::fs::create_dir_all(&dirs.download_dir).unwrap();
     crate::tests::RAND_REPO.fetch(dirs);
     crate::tests::REGEX_REPO.fetch(dirs);
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) struct GitRepo {
     url: GitRepoUrl,
@@ -27,12 +20,10 @@ pub(crate) struct GitRepo {
     content_hash: &'static str,
     patch_name: &'static str,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 enum GitRepoUrl {
     Github { user: &'static str, repo: &'static str },
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=hash_file | COMPLEXITY=3 | LINES=14 */
 
 // Note: This uses a hasher which is not cryptographically secure. This is fine as the hash is meant
 // to protect against accidental modification and outdated downloads, not against manipulation.
@@ -47,7 +38,6 @@ fn hash_file(file: &std::path::Path) -> u64 {
     Hash::hash_slice(&contents, &mut hasher);
     std::hash::Hasher::finish(&hasher)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash_dir | COMPLEXITY=13 | LINES=28 */
 
 fn hash_dir(dir: &std::path::Path) -> u64 {
     let mut sub_hashes = std::collections::BTreeMap::new();
@@ -76,7 +66,6 @@ fn hash_dir(dir: &std::path::Path) -> u64 {
     }
     std::hash::Hasher::finish(&hasher)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=download_dir | COMPLEXITY=66 | LINES=94 */
 
 impl GitRepo {
     pub(crate) const fn github(
@@ -171,7 +160,6 @@ impl GitRepo {
         );
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=clone_repo | COMPLEXITY=14 | LINES=23 */
 
 fn clone_repo(download_dir: &Path, repo: &str, rev: &str) {
     eprintln!("[CLONE] {}", repo);
@@ -195,7 +183,6 @@ fn clone_repo(download_dir: &Path, repo: &str, rev: &str) {
 
     std::fs::remove_dir_all(download_dir.join(".git")).unwrap();
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=init_git_repo | COMPLEXITY=2 | LINES=14 */
 
 fn init_git_repo(repo_dir: &Path) {
     let mut git_init_cmd = git_command(repo_dir, "init");
@@ -210,7 +197,6 @@ fn init_git_repo(repo_dir: &Path) {
     git_commit_cmd.arg("-m").arg("Initial commit").arg("-q").arg("--no-verify");
     spawn_and_wait(git_commit_cmd);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=get_patches | COMPLEXITY=4 | LINES=20 */
 
 fn get_patches(dirs: &Dirs, crate_name: &str) -> Vec<PathBuf> {
     let mut patches: Vec<_> = fs::read_dir(dirs.source_dir.join("patches"))
@@ -231,7 +217,6 @@ fn get_patches(dirs: &Dirs, crate_name: &str) -> Vec<PathBuf> {
     patches.sort();
     patches
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=31 */
 
 pub(crate) fn apply_patches(dirs: &Dirs, crate_name: &str, source_dir: &Path, target_dir: &Path) {
     // FIXME avoid copy and patch if src, patches and target are unchanged
@@ -263,7 +248,6 @@ pub(crate) fn apply_patches(dirs: &Dirs, crate_name: &str, source_dir: &Path, ta
         spawn_and_wait(apply_patch_cmd);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=git_command | COMPLEXITY=6 | LINES=19 */
 
 #[must_use]
 fn git_command<'a>(repo_dir: impl Into<Option<&'a Path>>, cmd: &str) -> Command {

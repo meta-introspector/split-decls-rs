@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/inhabitedness/inhabited_predicate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_macros::HashStable;
 use smallvec::SmallVec;
 use tracing::instrument;
 
 use crate::ty::context::TyCtxt;
 use crate::ty::{self, DefId, OpaqueTypeKey, Ty, TypingEnv};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 /// Represents whether some type is inhabited in a given context.
 /// Examples of uninhabited types are `!`, `enum Void {}`, or a struct
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=25 */
 /// containing either of those types.
 /// A type's inhabitedness may depend on the `ParamEnv` as well as what types
 /// are visible in the current module.
@@ -36,7 +33,6 @@ pub enum InhabitedPredicate<'tcx> {
     /// A OR B
     Or(&'tcx [InhabitedPredicate<'tcx>; 2]),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=apply | COMPLEXITY=155 | LINES=240 */
 
 impl<'tcx> InhabitedPredicate<'tcx> {
     /// Returns true if the corresponding type is inhabited in the given `ParamEnv` and module.
@@ -277,7 +273,6 @@ impl<'tcx> InhabitedPredicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=try_and | COMPLEXITY=9 | LINES=14 */
 
 // this is basically like `f(a)? && f(b)?` but different in the case of
 // `Ok(false) && Err(_) -> Ok(false)`
@@ -292,7 +287,6 @@ fn try_and<T, E>(a: T, b: T, mut f: impl FnMut(T) -> Result<bool, E>) -> Result<
         (Err(e), _) | (_, Err(e)) => Err(e),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=try_or | COMPLEXITY=9 | LINES=12 */
 
 fn try_or<T, E>(a: T, b: T, mut f: impl FnMut(T) -> Result<bool, E>) -> Result<bool, E> {
     let a = f(a);

@@ -1,24 +1,16 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/legacy.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::mem::{self, discriminant};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hashes::Hash64;
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::print::{PrettyPrinter, Print, PrintError, Printer};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, Instance, ReifyReason, Ty, TyCtxt, TypeVisitableExt,
 };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=71 | LINES=100 */
 use tracing::debug;
 
 pub(super) fn mangle<'tcx>(
@@ -119,7 +111,6 @@ pub(super) fn mangle<'tcx>(
 
     p.path.finish(hash)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=get_symbol_hash | COMPLEXITY=20 | LINES=60 */
 
 fn get_symbol_hash<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -180,7 +171,6 @@ fn get_symbol_hash<'tcx>(
         hasher.finish::<Hash64>()
     })
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=SymbolPath | COMPLEXITY=7 | LINES=19 */
 
 // Follow C++ namespace-mangling style, see
 // https://en.wikipedia.org/wiki/Name_mangling for more info.
@@ -200,7 +190,6 @@ struct SymbolPath {
     result: String,
     temp_buf: String,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=13 | LINES=23 */
 
 impl SymbolPath {
     fn new() -> Self {
@@ -224,7 +213,6 @@ impl SymbolPath {
         self.result
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=LegacySymbolMangler | COMPLEXITY=2 | LINES=11 */
 
 struct LegacySymbolMangler<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -236,7 +224,6 @@ struct LegacySymbolMangler<'tcx> {
     // logically within one component.
     keep_within_component: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=110 | LINES=237 */
 
 // HACK(eddyb) this relies on using the `fmt` interface to get
 // `PrettyPrinter` aka pretty printing of e.g. types in paths,
@@ -474,7 +461,6 @@ impl<'tcx> Printer<'tcx> for LegacySymbolMangler<'tcx> {
         self.default_print_impl_path(impl_def_id, self_ty, impl_trait_ref)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=should_print_optional_region | COMPLEXITY=15 | LINES=36 */
 
 impl<'tcx> PrettyPrinter<'tcx> for LegacySymbolMangler<'tcx> {
     fn should_print_optional_region(&self, _region: ty::Region<'_>) -> bool {
@@ -511,7 +497,6 @@ impl<'tcx> PrettyPrinter<'tcx> for LegacySymbolMangler<'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=write_str | COMPLEXITY=43 | LINES=61 */
 
 impl fmt::Write for LegacySymbolMangler<'_> {
     fn write_str(&mut self, s: &str) -> fmt::Result {

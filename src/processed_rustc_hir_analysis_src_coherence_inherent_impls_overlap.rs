@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/inherent_impls_overlap.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
@@ -10,11 +8,8 @@ use crate::rustc_complete::def_id::DefId;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::traits::specialization_graph::OverlapMode;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Symbol};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{self, SkipLeakCheck};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 use smallvec::SmallVec;
 use tracing::debug;
 
@@ -29,18 +24,15 @@ pub(crate) fn crate_inherent_impls_overlap_check(
     }
     res
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=InherentOverlapChecker | COMPLEXITY=2 | LINES=4 */
 
 struct InherentOverlapChecker<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=RegionId | COMPLEXITY=3 | LINES=5 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     pub struct RegionId {}
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=impls_have_common_items | COMPLEXITY=162 | LINES=311 */
 
 impl<'tcx> InherentOverlapChecker<'tcx> {
     /// Checks whether any associated items in impls 1 and 2 share the same identifier and

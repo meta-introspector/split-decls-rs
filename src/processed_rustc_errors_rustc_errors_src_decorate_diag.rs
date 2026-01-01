@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_errors/src/decorate_diag.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 /// This module provides types and traits for buffering lints until later in compilation.
 use crate::rustc_complete::node_id::NodeId;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_error_messages::MultiSpan;
 use crate::rustc_lint_defs::{BuiltinLintDiag, Lint, LintId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{DynSend, LintDiagnostic, LintDiagnosticBox};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// We can't implement `LintDiagnostic` for `BuiltinLintDiag`, because decorating some of its
 /// variants requires types we don't have yet. So, handle that case separately.
@@ -16,17 +13,14 @@ pub enum DecorateDiagCompat {
     Dynamic(Box<dyn for<'a> LintDiagnosticBox<'a, ()> + DynSend + 'static>),
     Builtin(BuiltinLintDiag),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl std::fmt::Debug for DecorateDiagCompat {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("DecorateDiagCompat").finish()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl !LintDiagnostic<'_, ()> for BuiltinLintDiag {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<D: for<'a> LintDiagnostic<'a, ()> + DynSend + 'static> From<D> for DecorateDiagCompat {
     #[inline]
@@ -34,7 +28,6 @@ impl<D: for<'a> LintDiagnostic<'a, ()> + DynSend + 'static> From<D> for Decorate
         Self::Dynamic(Box::new(d))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<BuiltinLintDiag> for DecorateDiagCompat {
     #[inline]
@@ -42,7 +35,6 @@ impl From<BuiltinLintDiag> for DecorateDiagCompat {
         Self::Builtin(b)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=BufferedEarlyLint | COMPLEXITY=5 | LINES=18 */
 
 /// Lints that are buffered up early on in the `Session` before the
 /// `LintLevels` is calculated.
@@ -61,13 +53,11 @@ pub struct BufferedEarlyLint {
     /// Customization of the `Diag<'_>` for the lint.
     pub diagnostic: DecorateDiagCompat,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LintBuffer | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default, Debug)]
 pub struct LintBuffer {
     pub map: FxIndexMap<NodeId, Vec<BufferedEarlyLint>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=add_early_lint | COMPLEXITY=7 | LINES=26 */
 
 impl LintBuffer {
     pub fn add_early_lint(&mut self, early_lint: BufferedEarlyLint) {

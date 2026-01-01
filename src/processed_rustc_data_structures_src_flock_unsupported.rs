@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flock/unsupported.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=Lock(()); | COMPLEXITY=4 | LINES=16 */
 use std::io;
 use std::path::Path;
 

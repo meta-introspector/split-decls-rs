@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/jump_threading.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 // A jump threading optimization.
 //
 // This optimization seeks to replace join-then-switch control flow patterns by straight jumps
@@ -14,14 +13,10 @@
 //
 // The algorithm maintains a set of replacement conditions:
 // - `conditions[place]` contains `Condition { value, polarity: Eq, target }`
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 //   if assigning `value` to `place` turns the `SwitchInt` into `Goto { target }`.
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 // - `conditions[place]` contains `Condition { value, polarity: Ne, target }`
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 //   if assigning anything different from `value` to `place` turns the `SwitchInt`
 //   into `Goto { target }`.
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
 //
 // In this file, we denote as `place ?= value` the existence of a replacement condition
 // on `place` with given `value`, irrespective of the polarity and target of that
@@ -44,7 +39,6 @@
 use rustc_arena::DroplessArena;
 use rustc_const_eval::const_eval::DummyMachine;
 use rustc_const_eval::interpret::{ImmTy, Immediate, InterpCx, OpTy, Projectable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
@@ -53,13 +47,10 @@ use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::lattice::HasBottom;
 use crate::rustc_mir_dataflow::value_analysis::{Map, PlaceIndex, State, TrackElem};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=28 | LINES=59 */
 
 use crate::cost_checker::CostChecker;
 
@@ -119,7 +110,6 @@ impl<'tcx> crate::MirPass<'tcx> for JumpThreading {
         false
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ThreadingOpportunity | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Debug)]
 struct ThreadingOpportunity {
@@ -128,7 +118,6 @@ struct ThreadingOpportunity {
     /// The `SwitchInt` will be replaced by `Goto { target }`.
     target: BasicBlock,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TOFinder | COMPLEXITY=2 | LINES=12 */
 
 struct TOFinder<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -141,7 +130,6 @@ struct TOFinder<'a, 'tcx> {
     arena: &'a DroplessArena,
     opportunities: Vec<ThreadingOpportunity>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Condition | COMPLEXITY=2 | LINES=9 */
 
 /// Represent the following statement. If we can prove that the current local is equal/not-equal
 /// to `value`, jump to `target`.
@@ -151,21 +139,18 @@ struct Condition {
     polarity: Polarity,
     target: BasicBlock,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 enum Polarity {
     Ne,
     Eq,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=matches | COMPLEXITY=3 | LINES=6 */
 
 impl Condition {
     fn matches(&self, value: ScalarInt) -> bool {
         (self.value == value) == (self.polarity == Polarity::Eq)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=ConditionSet | COMPLEXITY=5 | LINES=11 */
 
 #[derive(Copy, Clone, Debug)]
 struct ConditionSet<'a>(&'a [Condition]);
@@ -177,7 +162,6 @@ impl HasBottom for ConditionSet<'_> {
         self.0.is_empty()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=19 */
 
 impl<'a> ConditionSet<'a> {
     fn iter(self) -> impl Iterator<Item = Condition> {
@@ -197,7 +181,6 @@ impl<'a> ConditionSet<'a> {
         Some(ConditionSet(set))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=272 | LINES=504 */
 
 impl<'a, 'tcx> TOFinder<'a, 'tcx> {
     fn is_empty(&self, state: &State<ConditionSet<'a>>) -> bool {
@@ -702,7 +685,6 @@ impl<'a, 'tcx> TOFinder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=OpportunitySet | COMPLEXITY=4 | LINES=9 */
 
 struct OpportunitySet {
     opportunities: Vec<ThreadingOpportunity>,
@@ -712,7 +694,6 @@ struct OpportunitySet {
     /// Cache the number of predecessors for each block, as we clear the basic block cache..
     predecessors: IndexVec<BasicBlock, usize>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=65 | LINES=127 */
 
 impl OpportunitySet {
     fn new(body: &Body<'_>, opportunities: Vec<ThreadingOpportunity>) -> OpportunitySet {
@@ -840,7 +821,6 @@ impl OpportunitySet {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=predecessor_count | COMPLEXITY=4 | LINES=7 */
 
 fn predecessor_count(body: &Body<'_>) -> IndexVec<BasicBlock, usize> {
     let mut predecessors: IndexVec<_, _> =
@@ -848,7 +828,6 @@ fn predecessor_count(body: &Body<'_>) -> IndexVec<BasicBlock, usize> {
     predecessors[START_BLOCK] += 1; // Account for the implicit entry edge.
     predecessors
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum Update {
     Incr,

@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/queries.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::lint;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::{
     ErrorHandled, EvalToAllocationRawResult, EvalToConstValueResult, GlobalId, ReportedErrorInfo,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mir::interpret::ValTreeCreationError;
 use crate::ty::{self, ConstToValTreeResult, GenericArgs, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{error, mir};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=const_eval_poly | COMPLEXITY=109 | LINES=220 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates a constant without providing any generic parameters. This is useful to evaluate consts

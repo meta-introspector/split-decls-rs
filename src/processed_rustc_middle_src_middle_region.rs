@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/region.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 // This file declares the `ScopeTree` type, which describes
 // the parent links in the region hierarchy.
 //
@@ -14,11 +13,8 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
 use crate::rustc_complete::{HirId, HirIdMap, Node};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 use tracing::debug;
 
 use crate::mir::BackwardIncompatibleDropReason;
@@ -38,7 +34,6 @@ use crate::ty::TyCtxt;
 /// see discussion with `ScopeTree`.
 ///
 /// `Remainder { block, statement_index }` represents
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 /// the scope of user code running immediately after the initializer
 /// expression for the indexed statement, until the end of the block.
 ///
@@ -46,7 +41,6 @@ use crate::ty::TyCtxt;
 ///
 /// ```text
 /// let a = f().g( 'b: { let x = d(); let y = d(); x.h(y)  }   ) ;
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Scope | COMPLEXITY=21 | LINES=47 */
 ///
 ///                                                              +-+ (D12.)
 ///                                                        +-+       (D11.)
@@ -94,7 +88,6 @@ pub struct Scope {
     pub local_id: hir::ItemLocalId,
     pub data: ScopeData,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=20 */
 
 impl fmt::Debug for Scope {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -115,7 +108,6 @@ impl fmt::Debug for Scope {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=21 | LINES=34 */
 
 #[derive(Clone, PartialEq, PartialOrd, Eq, Ord, Hash, Debug, Copy, TyEncodable, TyDecodable)]
 #[derive(HashStable)]
@@ -150,7 +142,6 @@ pub enum ScopeData {
     /// Scope following a `let id = expr;` binding in a block.
     Remainder(FirstStatementIndex),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=FirstStatementIndex | COMPLEXITY=12 | LINES=24 */
 
 crate::rustc_index::newtype_index! {
     /// Represents a subscope of `block` for a binding that is introduced
@@ -175,7 +166,6 @@ crate::rustc_index::newtype_index! {
     #[orderable]
     pub struct FirstStatementIndex {}
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hir_id | COMPLEXITY=21 | LINES=38 */
 
 // compilation error if size of `ScopeData` is not the same as a `u32`
 crate::rustc_data_structures::static_assert_size!(ScopeData, 4);
@@ -214,7 +204,6 @@ impl Scope {
         span
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ScopeTree | COMPLEXITY=13 | LINES=35 */
 
 /// The region scope tree encodes information about region relationships.
 #[derive(Default, Debug, HashStable)]
@@ -250,7 +239,6 @@ pub struct ScopeTree {
     /// temporary values that will receive backwards-incompatible drop orders.
     pub backwards_incompatible_scope: UnordMap<hir::ItemLocalId, Scope>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=RvalueCandidate | COMPLEXITY=4 | LINES=11 */
 
 /// See the `rvalue_candidates` field for more information on rvalue
 /// candidates in general.
@@ -262,7 +250,6 @@ pub struct RvalueCandidate {
     pub lifetime: Option<Scope>,
     pub compat: ScopeCompatibility,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Marks extended temporary scopes that will be shortened by #145838 and thus need to be linted on
 /// by the `macro_extended_temporary_scopes` future-incompatibility warning.
@@ -275,7 +262,6 @@ pub enum ScopeCompatibility {
     /// initializer.
     FutureCompatible,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=record_scope_parent | COMPLEXITY=85 | LINES=111 */
 
 impl ScopeTree {
     pub fn record_scope_parent(&mut self, child: Scope, parent: Option<Scope>) {

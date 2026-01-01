@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::collections::VecDeque;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_infer::infer::InferCtxt;
@@ -15,11 +13,9 @@ use crate::rustc_complete::ty::{
     self, PolyTraitPredicate, PredicatePolarity, SizedTraitKind, TraitPredicate, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use rustc_next_trait_solver::placeholder::BoundVarReplacer;
 use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 use tracing::debug;
 
 /// Return the trait and projection predicates that come from eagerly expanding the
@@ -33,7 +29,6 @@ use tracing::debug;
 ///
 /// ```rust,ignore (fails)
 /// trait Bar {}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand_trait_aliases | COMPLEXITY=24 | LINES=59 */
 /// trait Foo = Bar + Bar;
 ///
 /// let dyn_incompatible: dyn Foo; // bad, two `Bar` principals.
@@ -93,7 +88,6 @@ pub fn expand_trait_aliases<'tcx>(
 
     (trait_preds, projection_preds)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=upcast_choices | COMPLEXITY=8 | LINES=19 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Other
@@ -113,7 +107,6 @@ pub fn upcast_choices<'tcx>(
 
     supertraits(tcx, source_trait_ref).filter(|r| r.def_id() == target_trait_def_id).collect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 
 pub(crate) fn closure_trait_ref_and_return_type<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -130,7 +123,6 @@ pub(crate) fn closure_trait_ref_and_return_type<'tcx>(
     let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty, arguments_tuple]);
     sig.map_bound(|sig| (trait_ref, sig.output()))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn coroutine_trait_ref_and_outputs<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -142,7 +134,6 @@ pub(crate) fn coroutine_trait_ref_and_outputs<'tcx>(
     let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty, sig.resume_ty]);
     (trait_ref, sig.yield_ty, sig.return_ty)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn future_trait_ref_and_outputs<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -154,7 +145,6 @@ pub(crate) fn future_trait_ref_and_outputs<'tcx>(
     let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty]);
     (trait_ref, sig.return_ty)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn iterator_trait_ref_and_outputs<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -166,7 +156,6 @@ pub(crate) fn iterator_trait_ref_and_outputs<'tcx>(
     let trait_ref = ty::TraitRef::new(tcx, iterator_def_id, [self_ty]);
     (trait_ref, sig.yield_ty)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn async_iterator_trait_ref_and_outputs<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -178,19 +167,16 @@ pub(crate) fn async_iterator_trait_ref_and_outputs<'tcx>(
     let trait_ref = ty::TraitRef::new(tcx, async_iterator_def_id, [self_ty]);
     (trait_ref, sig.yield_ty)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=impl_item_is_final | COMPLEXITY=2 | LINES=5 */
 
 pub fn impl_item_is_final(tcx: TyCtxt<'_>, assoc_item: &ty::AssocItem) -> bool {
     assoc_item.defaultness(tcx).is_final()
         && tcx.defaultness(assoc_item.container_id(tcx)).is_final()
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum TupleArgumentsFlag {
     Yes,
     No,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=with_replaced_escaping_bound_vars | COMPLEXITY=8 | LINES=40 */
 
 /// Executes `f` on `value` after replacing all escaping bound variables with placeholders
 /// and then replaces these placeholders with the original bound variables in the result.
@@ -231,7 +217,6 @@ pub fn with_replaced_escaping_bound_vars<
         f(value)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PlaceholderReplacer | COMPLEXITY=2 | LINES=10 */
 
 /// The inverse of [`BoundVarReplacer`]: replaces placeholders with the bound vars from which they came.
 pub struct PlaceholderReplacer<'a, 'tcx> {
@@ -242,7 +227,6 @@ pub struct PlaceholderReplacer<'a, 'tcx> {
     universe_indices: &'a [Option<ty::UniverseIndex>],
     current_index: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=replace_placeholders | COMPLEXITY=5 | LINES=21 */
 
 impl<'a, 'tcx> PlaceholderReplacer<'a, 'tcx> {
     pub fn replace_placeholders<T: TypeFoldable<TyCtxt<'tcx>>>(
@@ -264,7 +248,6 @@ impl<'a, 'tcx> PlaceholderReplacer<'a, 'tcx> {
         value.fold_with(&mut replacer)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=71 | LINES=117 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for PlaceholderReplacer<'_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -382,7 +365,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for PlaceholderReplacer<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=sizedness_fast_path | COMPLEXITY=36 | LINES=48 */
 
 pub fn sizedness_fast_path<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -431,7 +413,6 @@ pub fn sizedness_fast_path<'tcx>(
 
     false
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=38 */
 
 /// To improve performance, sizedness traits are not elaborated and so special-casing is required
 /// in the trait solver to find a `Sized` candidate for a `MetaSized` obligation. Returns the

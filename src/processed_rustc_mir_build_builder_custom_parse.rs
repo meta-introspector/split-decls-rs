@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/custom/parse.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use super::{PResult, ParseCtxt, ParseError};
-/* AST_META: AST_ID=3 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 
 /// Helper macro for parsing custom MIR.
@@ -20,9 +17,7 @@ use super::{PResult, ParseCtxt, ParseError};
 ///     expr_id, // what you're matching against
 ///     "assignment", // the thing you're trying to parse
 ///     @call("mir_assign", args) => { args[0] }, // match invocations of the `mir_assign` special function
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=1 */
 ///     ExprKind::Assign { lhs, .. } => { lhs }, // match thir assignment expressions
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=37 | LINES=48 */
 ///     // no need for fallthrough case - reasonable error is automatically generated
 /// )
 /// ```
@@ -71,7 +66,6 @@ macro_rules! parse_by_kind {
         }
     }};
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=preparse | COMPLEXITY=137 | LINES=264 */
 pub(crate) use parse_by_kind;
 
 impl<'a, 'tcx> ParseCtxt<'a, 'tcx> {

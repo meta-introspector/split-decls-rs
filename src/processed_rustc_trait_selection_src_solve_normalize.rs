@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt::Debug;
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
@@ -7,21 +6,17 @@ use crate::rustc_infer::infer::InferCtxt;
 use crate::rustc_infer::infer::at::At;
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_infer::traits::{FromSolverError, Obligation, TraitEngine};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::{
     self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt, UniverseIndex,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use super::{FulfillmentCtxt, NextSolverError};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::error_reporting::traits::OverflowCause;
 use crate::traits::{BoundVarReplacer, PlaceholderReplacer, ScrubbedTraitError};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=deeply_normalize | COMPLEXITY=2 | LINES=11 */
 
 /// Deeply normalize all aliases in `value`. This does not handle inference and expects
 /// its input to be already fully resolved.
@@ -33,7 +28,6 @@ where
     assert!(!value.has_escaping_bound_vars());
     deeply_normalize_with_skipped_universes(at, value, vec![])
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=deeply_normalize_with_skipped_universes | COMPLEXITY=3 | LINES=24 */
 
 /// Deeply normalize all aliases in `value`. This does not handle inference and expects
 /// its input to be already fully resolved.
@@ -58,7 +52,6 @@ where
 
     Ok(value)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals | COMPLEXITY=11 | LINES=31 */
 
 /// Deeply normalize all aliases in `value`. This does not handle inference and expects
 /// its input to be already fully resolved.
@@ -90,7 +83,6 @@ where
     let errors = folder.fulfill_cx.select_all_or_error(at.infcx);
     if errors.is_empty() { Ok((value, folder.stalled_coroutine_goals)) } else { Err(errors) }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NormalizationFolder | COMPLEXITY=2 | LINES=8 */
 
 struct NormalizationFolder<'me, 'tcx, E> {
     at: At<'me, 'tcx>,
@@ -99,7 +91,6 @@ struct NormalizationFolder<'me, 'tcx, E> {
     universes: Vec<Option<UniverseIndex>>,
     stalled_coroutine_goals: Vec<Goal<'tcx, ty::Predicate<'tcx>>>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=normalize_alias_term | COMPLEXITY=25 | LINES=74 */
 
 impl<'tcx, E> NormalizationFolder<'_, 'tcx, E>
 where
@@ -174,7 +165,6 @@ where
         Ok(())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=29 | LINES=77 */
 
 impl<'tcx, E> FallibleTypeFolder<TyCtxt<'tcx>> for NormalizationFolder<'_, 'tcx, E>
 where
@@ -252,7 +242,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 // Deeply normalize a value and return it
 pub(crate) fn deeply_normalize_for_diagnostics<'tcx, T: TypeFoldable<TyCtxt<'tcx>>>(
@@ -264,12 +253,10 @@ pub(crate) fn deeply_normalize_for_diagnostics<'tcx, T: TypeFoldable<TyCtxt<'tcx
         at: infcx.at(&ObligationCause::dummy(), param_env),
     })
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DeeplyNormalizeForDiagnosticsFolder | COMPLEXITY=2 | LINES=4 */
 
 struct DeeplyNormalizeForDiagnosticsFolder<'a, 'tcx> {
     at: At<'a, 'tcx>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=19 | LINES=36 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for DeeplyNormalizeForDiagnosticsFolder<'_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

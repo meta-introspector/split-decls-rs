@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/expand/typetree.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 // This module contains the definition of the `TypeTree` and `Type` structs.
 // They are thin Rust wrappers around the TypeTrees used by Enzyme as the LLVM based autodiff
 // backend. The Enzyme TypeTrees currently have various limitations and should be rewritten, so the
@@ -9,11 +8,8 @@
 // information from rustc to help Enzyme. For a full explanation of their design it is necessary to
 // analyze the implementation in Enzyme core itself. As a rough summary, `-1` in Enzyme speech means
 // everywhere. That is `{0:-1: Float}` means at index 0 you have a ptr, if you dereference it it
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 // will be floats everywhere. Thus `* f32`. If you have `{-1:int}` it means int's everywhere,
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 // e.g. [i32; N]. `{0:-1:-1 float}` then means one pointer at offset 0, if you dereference it there
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 // will be only pointers, if you dereference these new pointers they will point to array of floats.
 // Generally, it allows byte-specific descriptions.
 // FIXME: This description might be partly inaccurate and should be extended, along with
@@ -27,7 +23,6 @@
 use std::fmt;
 
 use crate::expand::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Copy, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub enum Kind {
@@ -39,7 +34,6 @@ pub enum Kind {
     Double,
     Unknown,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=TypeTree(pub | COMPLEXITY=11 | LINES=24 */
 
 #[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub struct TypeTree(pub Vec<Type>);
@@ -64,14 +58,12 @@ impl TypeTree {
         Self(ints)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=FncTree | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub struct FncTree {
     pub args: Vec<TypeTree>,
     pub ret: TypeTree,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Type | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub struct Type {
@@ -80,7 +72,6 @@ pub struct Type {
     pub kind: Kind,
     pub child: TypeTree,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=add_offset | COMPLEXITY=8 | LINES=11 */
 
 impl Type {
     pub fn add_offset(self, add: isize) -> Self {
@@ -92,7 +83,6 @@ impl Type {
         Self { size: self.size, kind: self.kind, child: self.child, offset }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for Type {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

@@ -1,30 +1,23 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/move_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{Applicability, Diag};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{self as hir, CaptureBy, ExprKind, HirId, Node};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::move_paths::{LookupResult, MovePathIndex};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{BytePos, DUMMY_SP, ExpnKind, MacroKind, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::MirBorrowckCtxt;
 use crate::diagnostics::{CapturedMessageOpt, DescribePlaceOpt, UseSpans};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=20 */
 use crate::prefixes::PrefixSet;
 
 #[derive(Debug)]
@@ -45,7 +38,6 @@ pub(crate) enum IllegalMoveOriginKind<'tcx> {
     /// Illegal move due to attempt to move out of a slice or array.
     InteriorOfSliceOrArray { ty: Ty<'tcx>, is_index: bool },
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 pub(crate) struct MoveError<'tcx> {
@@ -53,7 +45,6 @@ pub(crate) struct MoveError<'tcx> {
     location: Location,
     kind: IllegalMoveOriginKind<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 impl<'tcx> MoveError<'tcx> {
     pub(crate) fn new(
@@ -64,7 +55,6 @@ impl<'tcx> MoveError<'tcx> {
         MoveError { place, location, kind }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=22 | LINES=41 */
 
 // Often when desugaring a pattern match we may have many individual moves in
 // MIR that are all part of one operation from the user's point-of-view. For
@@ -106,7 +96,6 @@ enum GroupedMoveError<'tcx> {
         kind: IllegalMoveOriginKind<'tcx>,
     },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=group_move_errors | COMPLEXITY=474 | LINES=845 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     pub(crate) fn report_move_errors(&mut self) {

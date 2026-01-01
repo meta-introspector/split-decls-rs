@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/points.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{BasicBlock, Body, Location};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=DenseLocationMap | COMPLEXITY=2 | LINES=12 */
 
 /// Maps between a `Location` and a `PointIndex` (and vice versa).
 pub struct DenseLocationMap {
@@ -16,7 +13,6 @@ pub struct DenseLocationMap {
 
     num_points: usize,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=26 | LINES=69 */
 
 impl DenseLocationMap {
     #[inline]
@@ -86,7 +82,6 @@ impl DenseLocationMap {
         index.index() < self.num_points
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=PointIndex | COMPLEXITY=4 | LINES=8 */
 
 crate::rustc_index::newtype_index! {
     /// A single integer representing a `Location` in the MIR control-flow

@@ -1,52 +1,36 @@
 // SRC: ../rust/compiler/rustc_middle/src/query/on_disk_cache.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::hash_map::Entry;
 use std::mem;
 use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::sync::{HashMapExt, Lock, RwLock};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::unhash::UnhashMap;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::definitions::DefPathHash;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_query_system::query::QuerySideEffect;
 use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::hygiene::{
     ExpnId, HygieneDecodeContext, HygieneEncodeContext, SyntaxContext, SyntaxContextKey,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{
     BytePos, ByteSymbol, CachingSourceMapView, ExpnData, ExpnHash, Pos, RelativeBytePos,
     SourceFile, Span, SpanDecoder, SpanEncoder, StableSourceFileId, Symbol,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::dep_graph::{DepNodeIndex, SerializedDepNodeIndex};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::interpret::{AllocDecodingSession, AllocDecodingState};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mir::mono::MonoItem;
 use crate::mir::{self, interpret};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::codec::{RefDecodable, TyDecoder, TyEncoder};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=OnDiskCache | COMPLEXITY=10 | LINES=68 */
 
 const TAG_FILE_FOOTER: u128 = 0xC0FFEE_C0FFEE_C0FFEE_C0FFEE_C0FFEE;
 
@@ -115,7 +99,6 @@ pub struct OnDiskCache {
     // compilation session.
     foreign_expn_data: UnhashMap<ExpnHash, u32>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=Footer | COMPLEXITY=5 | LINES=17 */
 
 // This type is used only for serialization and deserialization.
 #[derive(Encodable, Decodable)]
@@ -133,7 +116,6 @@ struct Footer {
     expn_data: UnhashMap<ExpnHash, AbsoluteBytePos>,
     foreign_expn_data: UnhashMap<ExpnHash, u32>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=SourceFileIndex(u32); | COMPLEXITY=5 | LINES=20 */
 
 pub type EncodedDepNodeIndex = Vec<(SerializedDepNodeIndex, AbsoluteBytePos)>;
 
@@ -154,14 +136,12 @@ impl AbsoluteBytePos {
         self.0 as usize
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=EncodedSourceFileId | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Encodable, Decodable, Clone, Debug)]
 struct EncodedSourceFileId {
     stable_source_file_id: StableSourceFileId,
     stable_crate_id: StableCrateId,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=10 */
 
 impl EncodedSourceFileId {
     #[inline]
@@ -172,7 +152,6 @@ impl EncodedSourceFileId {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=71 | LINES=282 */
 
 impl OnDiskCache {
     /// Creates a new `OnDiskCache` instance from the serialized data in `data`.
@@ -455,7 +434,6 @@ impl OnDiskCache {
         f(&mut decoder)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=CacheDecoder | COMPLEXITY=5 | LINES=17 */
 
 //- DECODING -------------------------------------------------------------------
 
@@ -473,7 +451,6 @@ pub struct CacheDecoder<'a, 'tcx> {
     foreign_expn_data: &'a UnhashMap<ExpnHash, u32>,
     hygiene_context: &'a HygieneDecodeContext,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=file_index_to_file | COMPLEXITY=20 | LINES=54 */
 
 impl<'a, 'tcx> CacheDecoder<'a, 'tcx> {
     #[inline]
@@ -528,7 +505,6 @@ impl<'a, 'tcx> CacheDecoder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=decode_tagged | COMPLEXITY=3 | LINES=21 */
 
 // Decodes something that was encoded with `encode_tagged()` and verify that the
 // tag matches and the correct amount of bytes was read.
@@ -550,7 +526,6 @@ where
 
     value
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=interner | COMPLEXITY=14 | LINES=45 */
 
 impl<'a, 'tcx> TyDecoder<'tcx> for CacheDecoder<'a, 'tcx> {
     const CLEAR_CROSS_CRATE: bool = false;
@@ -596,7 +571,6 @@ impl<'a, 'tcx> TyDecoder<'tcx> for CacheDecoder<'a, 'tcx> {
         alloc_decoding_session.decode_alloc_id(self)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=8 | LINES=11 */
 
 crate::implement_ty_decoder!(CacheDecoder<'a, 'tcx>);
 
@@ -608,7 +582,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for Vec<u8> {
         Decodable::decode(&mut d.opaque)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=decode_syntax_context | COMPLEXITY=56 | LINES=143 */
 
 impl<'a, 'tcx> SpanDecoder for CacheDecoder<'a, 'tcx> {
     fn decode_syntax_context(&mut self) -> SyntaxContext {
@@ -752,7 +725,6 @@ impl<'a, 'tcx> SpanDecoder for CacheDecoder<'a, 'tcx> {
         panic!("cannot decode `AttrId` with `CacheDecoder`");
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx UnordSet<LocalDefId> {
     #[inline]
@@ -760,7 +732,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx UnordSet<LocalDefId> 
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
     for &'tcx UnordMap<DefId, ty::EarlyBinder<'tcx, Ty<'tcx>>>
@@ -770,7 +741,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
     for &'tcx IndexVec<mir::Promoted, mir::Body<'tcx>>
@@ -780,7 +750,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [(ty::Clause<'tcx>, Span)] {
     #[inline]
@@ -788,7 +757,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [(ty::Clause<'tcx>, S
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [crate::rustc_ast::InlineAsmTemplatePiece] {
     #[inline]
@@ -796,7 +764,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [crate::rustc_ast::In
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [Spanned<MonoItem<'tcx>>] {
     #[inline]
@@ -804,7 +771,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [Spanned<MonoItem<'tc
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
     for &'tcx crate::traits::specialization_graph::Graph
@@ -814,7 +780,6 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>>
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=12 | LINES=11 */
 
 macro_rules! impl_ref_decoder {
     (<$tcx:tt> $($ty:ty,)*) => {
@@ -826,7 +791,6 @@ macro_rules! impl_ref_decoder {
         })*
     };
 }
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 impl_ref_decoder! {<'tcx>
     Span,
@@ -838,7 +802,6 @@ impl_ref_decoder! {<'tcx>
     (crate::rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, crate::rustc_middle::middle::exported_symbols::SymbolExportInfo),
     ty::DeducedParamAttrs,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=CacheEncoder | COMPLEXITY=5 | LINES=16 */
 
 //- ENCODING -------------------------------------------------------------------
 
@@ -855,7 +818,6 @@ pub struct CacheEncoder<'a, 'tcx> {
     // Used for both `Symbol`s and `ByteSymbol`s.
     symbol_index_table: FxHashMap<u32, usize>,
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=source_file_index | COMPLEXITY=21 | LINES=55 */
 
 impl<'a, 'tcx> CacheEncoder<'a, 'tcx> {
     #[inline]
@@ -911,7 +873,6 @@ impl<'a, 'tcx> CacheEncoder<'a, 'tcx> {
         self.encoder.finish()
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=encode_syntax_context | COMPLEXITY=33 | LINES=75 */
 
 impl<'a, 'tcx> SpanEncoder for CacheEncoder<'a, 'tcx> {
     fn encode_syntax_context(&mut self, syntax_context: SyntaxContext) {
@@ -987,7 +948,6 @@ impl<'a, 'tcx> SpanEncoder for CacheEncoder<'a, 'tcx> {
         bug!("encoding `DefIndex` without context");
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=position | COMPLEXITY=9 | LINES=23 */
 
 impl<'a, 'tcx> TyEncoder<'tcx> for CacheEncoder<'a, 'tcx> {
     const CLEAR_CROSS_CRATE: bool = false;
@@ -1011,7 +971,6 @@ impl<'a, 'tcx> TyEncoder<'tcx> for CacheEncoder<'a, 'tcx> {
         index.encode(self);
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 macro_rules! encoder_methods {
     ($($name:ident($ty:ty);)*) => {
@@ -1021,7 +980,6 @@ macro_rules! encoder_methods {
         })*
     }
 }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 impl<'a, 'tcx> Encoder for CacheEncoder<'a, 'tcx> {
     encoder_methods! {
@@ -1041,7 +999,6 @@ impl<'a, 'tcx> Encoder for CacheEncoder<'a, 'tcx> {
         emit_raw_bytes(&[u8]);
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=7 | LINES=10 */
 
 // This ensures that the `Encodable<opaque::FileEncoder>::encode` specialization for byte slices
 // is used when a `CacheEncoder` having an `opaque::FileEncoder` is passed to `Encodable::encode`.

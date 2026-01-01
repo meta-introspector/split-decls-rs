@@ -1,20 +1,14 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/prototype.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Attributes that are only used on function prototypes.
 
 use crate::rustc_feature::{AttributeTemplate, template};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Target;
 use crate::rustc_complete::attrs::{AttributeKind, MirDialect, MirPhase};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{AttributeOrder, OnDuplicate};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::attributes::SingleAttributeParser;
 use crate::context::{AcceptContext, Stage};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=27 | LINES=58 */
 use crate::parser::ArgParser;
 use crate::target_checking::AllowedTargets;
 use crate::target_checking::Policy::Allow;
@@ -73,7 +67,6 @@ impl<S: Stage> SingleAttributeParser<S> for CustomMirParser {
         Some(AttributeKind::CustomMir(dialect, phase, cx.attr_span))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extract_value | COMPLEXITY=8 | LINES=29 */
 
 fn extract_value<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,
@@ -103,7 +96,6 @@ fn extract_value<S: Stage>(
 
     *out_val = Some((value_sym, val.value_span));
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_dialect | COMPLEXITY=8 | LINES=22 */
 
 fn parse_dialect<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,
@@ -126,7 +118,6 @@ fn parse_dialect<S: Stage>(
 
     Some((dialect, span))
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parse_phase | COMPLEXITY=8 | LINES=22 */
 
 fn parse_phase<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,

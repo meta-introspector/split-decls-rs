@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Various code related to computing outlives relations.
 
 use crate::rustc_data_structures::undo_log::UndoLogs;
 use crate::rustc_complete::traits::query::{NoSolution, OutlivesBound};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty;
 use tracing::instrument;
 
 use self::env::OutlivesEnvironment;
 use super::region_constraints::{RegionConstraintData, UndoLog};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{InferCtxt, RegionResolutionError, SubregionOrigin};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=explicit_outlives_bounds | COMPLEXITY=3 | LINES=21 */
 use crate::infer::free_regions::RegionRelations;
 use crate::infer::lexical_region_resolve;
 use crate::infer::region_constraints::ConstraintKind;
@@ -29,7 +25,6 @@ pub fn explicit_outlives_bounds<'tcx>(
         .filter_map(ty::Binder::no_bound_vars)
         .map(|ty::OutlivesPredicate(r_a, r_b)| OutlivesBound::RegionSubRegion(r_b, r_a))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=resolve_regions_with_normalize | COMPLEXITY=31 | LINES=94 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// Process the region constraints and return any errors that

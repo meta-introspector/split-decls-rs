@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/abi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::iter;
 
 use crate::rustc_abi::Primitive::Pointer;
 use crate::rustc_abi::{BackendRepr, ExternAbi, PointerKind, Scalar, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use rustc_hir as hir;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::bug;
@@ -12,22 +10,18 @@ use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::layout::{
     FnAbiError, HasTyCtxt, HasTypingEnv, LayoutCx, LayoutOf, TyAndLayout, fn_can_unwind,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_target::callconv::{
     AbiMap, ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, FnAbi, PassMode,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 use tracing::debug;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { fn_abi_of_fn_ptr, fn_abi_of_instance, ..*providers };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fn_sig_for_fn_abi | COMPLEXITY=89 | LINES=219 */
 
 // NOTE(eddyb) this is private to avoid using it from outside of
 // `fn_abi_of_instance` - any other uses are either too high-level
@@ -247,7 +241,6 @@ fn fn_sig_for_fn_abi<'tcx>(
         _ => bug!("unexpected type {:?} in Instance::fn_sig", ty),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fn_abi_of_fn_ptr | COMPLEXITY=3 | LINES=13 */
 
 fn fn_abi_of_fn_ptr<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -261,7 +254,6 @@ fn fn_abi_of_fn_ptr<'tcx>(
         None,
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fn_abi_of_instance | COMPLEXITY=3 | LINES=13 */
 
 fn fn_abi_of_instance<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -275,7 +267,6 @@ fn fn_abi_of_instance<'tcx>(
         Some(instance),
     )
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=arg_attrs_for_rust_scalar | COMPLEXITY=73 | LINES=97 */
 
 // Handle safe Rust thin and wide pointers.
 fn arg_attrs_for_rust_scalar<'tcx>(
@@ -373,7 +364,6 @@ fn arg_attrs_for_rust_scalar<'tcx>(
 
     attrs
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fn_abi_sanity_check | COMPLEXITY=72 | LINES=100 */
 
 /// Ensure that the ABI makes basic sense.
 fn fn_abi_sanity_check<'tcx>(
@@ -474,7 +464,6 @@ fn fn_abi_sanity_check<'tcx>(
     }
     fn_arg_sanity_check(cx, fn_abi, spec_abi, &fn_abi.ret);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fn_abi_new_uncached | COMPLEXITY=49 | LINES=117 */
 
 #[tracing::instrument(level = "debug", skip(cx, instance))]
 fn fn_abi_new_uncached<'tcx>(
@@ -592,7 +581,6 @@ fn fn_abi_new_uncached<'tcx>(
     fn_abi_sanity_check(cx, &fn_abi, sig.abi);
     Ok(tcx.arena.alloc(fn_abi))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fn_abi_adjust_for_abi | COMPLEXITY=51 | LINES=71 */
 
 #[tracing::instrument(level = "trace", skip(cx))]
 fn fn_abi_adjust_for_abi<'tcx>(
@@ -664,7 +652,6 @@ fn fn_abi_adjust_for_abi<'tcx>(
         fn_abi.adjust_for_foreign_abi(cx, abi);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=make_thin_self_ptr | COMPLEXITY=20 | LINES=46 */
 
 #[tracing::instrument(level = "debug", skip(cx))]
 fn make_thin_self_ptr<'tcx>(

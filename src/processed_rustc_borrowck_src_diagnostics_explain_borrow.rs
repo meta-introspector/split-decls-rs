@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/explain_borrow.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Print diagnostics to explain why values are borrowed.
 
 #[allow(rustc::diagnostic_outside_of_impl)]
@@ -8,7 +7,6 @@
 use std::assert_matches::assert_matches;
 
 use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use rustc_hir as hir;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_infer::infer::NllRegionVariableOrigin;
@@ -17,26 +15,19 @@ use crate::rustc_complete::mir::{
     Body, CallSource, CastKind, ConstraintCategory, FakeReadCause, Local, LocalInfo, Location,
     Operand, Place, Rvalue, Statement, StatementKind, TerminatorKind,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DesugaringKind, Span, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
 use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{RegionName, UseSpans, find_use};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::borrow_set::BorrowData;
 use crate::constraints::OutlivesConstraint;
 use crate::nll::ConstraintDescription;
 use crate::region_infer::{BlameConstraint, Cause};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{MirBorrowckCtxt, WriteKind};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Debug)]
 pub(crate) enum BorrowExplanation<'tcx> {
@@ -57,7 +48,6 @@ pub(crate) enum BorrowExplanation<'tcx> {
     },
     Unexplained,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) enum LaterUseKind {
@@ -67,7 +57,6 @@ pub(crate) enum LaterUseKind {
     FakeLetRead,
     Other,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=FindLetExpr | COMPLEXITY=276 | LINES=451 */
 
 impl<'tcx> BorrowExplanation<'tcx> {
     pub(crate) fn is_explained(&self) -> bool {
@@ -519,7 +508,6 @@ impl<'tcx> BorrowExplanation<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=suggest_rewrite_if_let | COMPLEXITY=35 | LINES=46 */
 
 fn suggest_rewrite_if_let<G: EmissionGuarantee>(
     tcx: TyCtxt<'_>,
@@ -566,7 +554,6 @@ fn suggest_rewrite_if_let<G: EmissionGuarantee>(
             Applicability::MaybeIncorrect,
         );
     }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=free_region_constraint_info | COMPLEXITY=5 | LINES=20 */
 }
 
 impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
@@ -587,7 +574,6 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
 
         (category, from_closure, cause.span, outlived_fr_name, path)
     }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=82 | LINES=139 */
 
     /// Returns structured explanation for *why* the borrow contains the
     /// point from `location`. This is key for the "3-point errors"
@@ -727,7 +713,6 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=later_use_kind | COMPLEXITY=77 | LINES=102 */
 
     /// Determine how the borrow was later used.
     /// First span returned points to the location of the conflicting use
@@ -830,7 +815,6 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=was_captured_by_trait_object | COMPLEXITY=121 | LINES=136 */
 
     /// Checks if a borrowed value was captured by a trait object. We do this by
     /// looking forward in the MIR from the reserve location and checking if we see
@@ -967,5 +951,4 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
         // We didn't find anything and ran out of locations to check.
         false
     }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=1 */
 }

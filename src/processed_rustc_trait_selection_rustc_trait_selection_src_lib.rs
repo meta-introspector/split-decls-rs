@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=4 | LINES=42 */
 // This crate defines the trait resolution method.
 //
 // - **Traits.** Trait resolution is implemented in the `traits` module.

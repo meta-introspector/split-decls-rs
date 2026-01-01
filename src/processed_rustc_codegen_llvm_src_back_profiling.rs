@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/back/profiling.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ffi::{CStr, c_void};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::os::raw::c_char;
 use std::sync::Arc;
 
 use measureme::event_id::SEPARATOR_BYTE;
 use measureme::{EventId, StringComponent, StringId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::profiling::{SelfProfiler, TimingGuard};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=llvm_args_to_string_id | COMPLEXITY=6 | LINES=15 */
 
 fn llvm_args_to_string_id(profiler: &SelfProfiler, pass_name: &str, ir_name: &str) -> EventId {
     let pass_name = profiler.get_or_alloc_cached_string(pass_name);
@@ -25,14 +21,12 @@ fn llvm_args_to_string_id(profiler: &SelfProfiler, pass_name: &str, ir_name: &st
     }
     EventId::from_label(profiler.alloc_string(components.as_slice()))
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct LlvmSelfProfiler<'a> {
     profiler: Arc<SelfProfiler>,
     stack: Vec<TimingGuard<'a>>,
     llvm_pass_event_kind: StringId,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=before_pass_callback | COMPLEXITY=7 | LINES=16 */
 
 impl<'a> LlvmSelfProfiler<'a> {
     pub(crate) fn new(profiler: Arc<SelfProfiler>) -> Self {
@@ -49,7 +43,6 @@ impl<'a> LlvmSelfProfiler<'a> {
         self.stack.pop();
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=13 */
 
 pub(crate) unsafe extern "C" fn selfprofile_before_pass_callback(
     llvm_self_profiler: *mut c_void,
@@ -63,7 +56,6 @@ pub(crate) unsafe extern "C" fn selfprofile_before_pass_callback(
         llvm_self_profiler.before_pass_callback(pass_name, ir_name);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5 */
 
 pub(crate) unsafe extern "C" fn selfprofile_after_pass_callback(llvm_self_profiler: *mut c_void) {
     let llvm_self_profiler = unsafe { &mut *(llvm_self_profiler as *mut LlvmSelfProfiler<'_>) };

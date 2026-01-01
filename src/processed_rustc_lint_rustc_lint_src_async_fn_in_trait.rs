@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/async_fn_in_trait.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::traits::suggestions::suggest_desugaring_async_fn_to_impl_future_in_trait;
 
 use crate::lints::AsyncFnInTraitDiag;
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=78 */
 
 declare_lint! {
     /// The `async_fn_in_trait` lint detects use of `async fn` in the
@@ -86,7 +83,6 @@ declare_lint! {
     Warn,
     "use of `async fn` in definition of a publicly-reachable trait"
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_trait_item | COMPLEXITY=22 | LINES=45 */
 
 declare_lint_pass!(
     /// Lint for use of `async fn` in the definition of a publicly-reachable

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/dataflow_const_prop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // A constant propagation optimization pass based on dataflow analysis.
 //
 // Currently, this pass only propagates scalar values.
@@ -8,35 +7,25 @@ use std::assert_matches::assert_matches;
 use std::fmt::Formatter;
 
 use crate::rustc_abi::{BackendRepr, FIRST_VARIANT, FieldIdx, Size, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_const_eval::const_eval::{DummyMachine, throw_machine_stop_str};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_const_eval::interpret::{
     ImmTy, Immediate, InterpCx, OpTy, PlaceTy, Projectable, interp_ok,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::{InterpResult, Scalar};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::fmt::DebugWithContext;
 use crate::rustc_mir_dataflow::lattice::{FlatSet, HasBottom};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_mir_dataflow::value_analysis::{
     Map, PlaceIndex, State, TrackElem, ValueOrPlace, debug_with_context,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, ResultsVisitor, visit_reachable_results};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, debug_span, instrument};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=21 | LINES=51 */
 
 // These constants are somewhat random guesses and have not been optimized.
 // If `tcx.sess.mir_opt_level() >= 4`, we ignore the limits (this can become very expensive).
@@ -88,7 +77,6 @@ impl<'tcx> crate::MirPass<'tcx> for DataflowConstProp {
         false
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ConstAnalysis | COMPLEXITY=3 | LINES=12 */
 
 // Note: Currently, places that have their reference taken cannot be tracked. Although this would
 // be possible, it has to rely on some aliasing model, which we are not ready to commit to yet.
@@ -101,7 +89,6 @@ struct ConstAnalysis<'a, 'tcx> {
     ecx: InterpCx<'tcx, DummyMachine>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=28 | LINES=57 */
 
 impl<'tcx> Analysis<'tcx> for ConstAnalysis<'_, 'tcx> {
     type Domain = State<FlatSet<Scalar>>;
@@ -159,7 +146,6 @@ impl<'tcx> Analysis<'tcx> for ConstAnalysis<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=338 | LINES=599 */
 
 impl<'a, 'tcx> ConstAnalysis<'a, 'tcx> {
     fn new(tcx: TyCtxt<'tcx>, body: &'a Body<'tcx>, map: Map<'tcx>) -> Self {
@@ -759,7 +745,6 @@ impl<'a, 'tcx> ConstAnalysis<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=16 | LINES=24 */
 
 /// This is used to visualize the dataflow analysis.
 impl<'tcx> DebugWithContext<ConstAnalysis<'_, 'tcx>> for State<FlatSet<Scalar>> {
@@ -784,7 +769,6 @@ impl<'tcx> DebugWithContext<ConstAnalysis<'_, 'tcx>> for State<FlatSet<Scalar>> 
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Patch | COMPLEXITY=5 | LINES=12 */
 
 struct Patch<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -797,7 +781,6 @@ struct Patch<'tcx> {
     /// Stores the assigned values for assignments where the Rvalue is constant.
     assignments: FxHashMap<Location, Const<'tcx>>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=make_operand | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> Patch<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>) -> Self {
@@ -808,13 +791,11 @@ impl<'tcx> Patch<'tcx> {
         Operand::Constant(Box::new(ConstOperand { span: DUMMY_SP, user_ty: None, const_ }))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=Collector | COMPLEXITY=2 | LINES=5 */
 
 struct Collector<'a, 'tcx> {
     patch: Patch<'tcx>,
     local_decls: &'a LocalDecls<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=try_make_constant | COMPLEXITY=21 | LINES=44 */
 
 impl<'a, 'tcx> Collector<'a, 'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, local_decls: &'a LocalDecls<'tcx>) -> Self {
@@ -859,7 +840,6 @@ impl<'a, 'tcx> Collector<'a, 'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=propagatable_scalar | COMPLEXITY=6 | LINES=16 */
 
 #[instrument(level = "trace", skip(map), ret)]
 fn propagatable_scalar(
@@ -876,7 +856,6 @@ fn propagatable_scalar(
         None
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=try_write_constant | COMPLEXITY=53 | LINES=103 */
 
 #[instrument(level = "trace", skip(ecx, state, map), ret)]
 fn try_write_constant<'tcx>(
@@ -980,7 +959,6 @@ fn try_write_constant<'tcx>(
 
     interp_ok(())
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_after_early_statement_effect | COMPLEXITY=29 | LINES=58 */
 
 impl<'tcx> ResultsVisitor<'tcx, ConstAnalysis<'_, 'tcx>> for Collector<'_, 'tcx> {
     #[instrument(level = "trace", skip(self, analysis, statement))]
@@ -1039,7 +1017,6 @@ impl<'tcx> ResultsVisitor<'tcx, ConstAnalysis<'_, 'tcx>> for Collector<'_, 'tcx>
             .visit_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=39 | LINES=48 */
 
 impl<'tcx> MutVisitor<'tcx> for Patch<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -1088,7 +1065,6 @@ impl<'tcx> MutVisitor<'tcx> for Patch<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=OperandCollector | COMPLEXITY=2 | LINES=7 */
 
 struct OperandCollector<'a, 'b, 'tcx> {
     state: &'a State<FlatSet<Scalar>>,
@@ -1096,7 +1072,6 @@ struct OperandCollector<'a, 'b, 'tcx> {
     ecx: &'a mut InterpCx<'tcx, DummyMachine>,
     map: &'a Map<'tcx>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=visit_projection_elem | COMPLEXITY=20 | LINES=30 */
 
 impl<'tcx> Visitor<'tcx> for OperandCollector<'_, '_, 'tcx> {
     fn visit_projection_elem(

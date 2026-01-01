@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/command.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // A thin wrapper around `Command` in the standard library which allows us to
 // read the arguments that are built up.
 
 use std::ffi::{OsStr, OsString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{self, Output};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, io, mem};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 use crate::rustc_target::spec::LldFlavor;
 
@@ -20,7 +16,6 @@ pub(crate) struct Command {
     env_remove: Vec<OsString>,
     env_clear: bool,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone)]
 enum Program {
@@ -28,7 +23,6 @@ enum Program {
     CmdBatScript(OsString),
     Lld(OsString, LldFlavor),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=_new | COMPLEXITY=73 | LINES=183 */
 
 impl Command {
     pub(crate) fn new<P: AsRef<OsStr>>(program: P) -> Command {
@@ -212,7 +206,6 @@ impl Command {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for Command {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

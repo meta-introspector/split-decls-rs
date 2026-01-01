@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/machine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // This module contains everything needed to instantiate an interpreter.
 // This separation exists to ensure that no fancy miri features like
 // interpreting common C functions leak into CTFE.
 
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Debug;
 use std::hash::Hash;
 
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_apfloat::{Float, FloatConvert};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{mir, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_target::callconv::FnAbi;
 
@@ -26,7 +21,6 @@ use super::{
     CtfeProvenance, EnteredTraceSpan, FnArg, Frame, ImmTy, InterpCx, InterpResult, MPlaceTy,
     MemoryKind, Misalignment, OpTy, PlaceTy, Pointer, Provenance, RangeSet, interp_ok, throw_unsup,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 /// Data returned by [`Machine::after_stack_pop`], and consumed by
 /// [`InterpCx::return_from_current_stack_frame`] to determine what actions should be done when
@@ -46,13 +40,11 @@ pub enum ReturnAction {
     /// Returned by [`InterpCx::pop_stack_frame_raw`] when no cleanup should be done.
     NoCleanup,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=may_leak | COMPLEXITY=2 | LINES=5 */
 
 /// Whether this kind of memory is allowed to leak
 pub trait MayLeak: Copy {
     fn may_leak(self) -> bool;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=contains_key | COMPLEXITY=12 | LINES=49 */
 
 /// The functionality needed by memory to manage its allocations
 pub trait AllocMap<K: Hash + Eq, V> {
@@ -102,7 +94,6 @@ pub trait AllocMap<K: Hash + Eq, V> {
         self.get_mut_or(k, || Err(())).ok()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=enforce_alignment | COMPLEXITY=139 | LINES=525 */
 
 /// Methods of this trait signifies a point where CTFE evaluation would fail
 /// and some use case dependent behaviour can instead be applied.
@@ -628,7 +619,6 @@ pub trait Machine<'tcx>: Sized {
         ()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=ignore_optional_overflow_checks | COMPLEXITY=30 | LINES=134 */
 
 /// A lot of the flexibility above is just needed for `Miri`, but all "compile-time" machines
 /// (CTFE and ConstProp) use the same instance. Here, we share that code.

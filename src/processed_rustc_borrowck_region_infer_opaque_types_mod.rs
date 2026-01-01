@@ -1,35 +1,28 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/opaque_types/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::iter;
 use std::rc::Rc;
 
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
 use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin, OpaqueTypeStorageEntries};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::ObligationCause;
 use rustc_macros::extension;
 use crate::rustc_complete::mir::{Body, ConcreteOpaqueTypes, ConstraintCategory};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::{
     self, DefiningScopeKind, EarlyBinder, FallibleTypeFolder, GenericArg, GenericArgsRef,
     OpaqueHiddenType, OpaqueTypeKey, Region, RegionVid, Ty, TyCtxt, TypeFoldable,
     TypeSuperFoldable, TypeVisitableExt, fold_regions,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::opaque_types::{
     NonDefiningUseReason, opaque_type_has_defining_use_args,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::solve::NoSolution;
 use crate::rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use super::reverse_sccs::ReverseSccGraph;
 use crate::BorrowckInferCtxt;
@@ -38,9 +31,7 @@ use crate::session_diagnostics::LifetimeMismatchOpaqueParam;
 use crate::type_check::canonical::fully_perform_op_raw;
 use crate::type_check::free_region_relations::UniversalRegionRelations;
 use crate::type_check::{Locations, MirTypeckRegionConstraints};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::universal_regions::{RegionClassification, UniversalRegions};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
 
 
 use member_constraints::apply_member_constraints;
@@ -65,7 +56,6 @@ pub(crate) enum DeferredOpaqueTypeError<'tcx> {
         opaque_type_key: OpaqueTypeKey<'tcx>,
     },
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=28 */
 
 /// We eagerly map all regions to NLL vars here, as we need to make sure we've
 /// introduced nll vars for all used placeholders.
@@ -94,7 +84,6 @@ pub(crate) fn clone_and_resolve_opaque_types<'tcx>(
         .collect::<Vec<_>>();
     (opaque_types_storage_num_entries, opaque_types)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=nll_var_to_universal_region | COMPLEXITY=14 | LINES=40 */
 
 /// Maps an NLL var to a deterministically chosen equal universal region.
 ///
@@ -135,7 +124,6 @@ fn nll_var_to_universal_region<'tcx>(
         NllRegionVariableOrigin::Existential { .. } => None,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=add_concrete_opaque_type | COMPLEXITY=18 | LINES=29 */
 
 /// Collect all defining uses of opaque types inside of this typeck root. This
 /// expects the hidden type to be mapped to the definition parameters of the opaque
@@ -165,7 +153,6 @@ fn add_concrete_opaque_type<'tcx>(
         concrete_opaque_types.0.insert(def_id, hidden_ty);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=get_concrete_opaque_type | COMPLEXITY=2 | LINES=7 */
 
 fn get_concrete_opaque_type<'tcx>(
     concrete_opaque_types: &ConcreteOpaqueTypes<'tcx>,
@@ -173,7 +160,6 @@ fn get_concrete_opaque_type<'tcx>(
 ) -> Option<EarlyBinder<'tcx, OpaqueHiddenType<'tcx>>> {
     concrete_opaque_types.0.get(&def_id).map(|ty| EarlyBinder::bind(*ty))
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DefiningUse | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Debug)]
 struct DefiningUse<'tcx> {
@@ -184,7 +170,6 @@ struct DefiningUse<'tcx> {
     arg_regions: Vec<RegionVid>,
     hidden_type: OpaqueHiddenType<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=49 */
 
 /// This computes the actual hidden types of the opaque types and maps them to their
 /// definition sites. Outside of registering the computed concrete types this function
@@ -234,7 +219,6 @@ pub(crate) fn compute_concrete_opaque_types<'tcx>(
     );
     errors
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=collect_defining_uses | COMPLEXITY=26 | LINES=60 */
 
 #[instrument(level = "debug", skip_all, ret)]
 fn collect_defining_uses<'tcx>(
@@ -295,7 +279,6 @@ fn collect_defining_uses<'tcx>(
 
     defining_uses
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=compute_concrete_types_from_defining_uses | COMPLEXITY=35 | LINES=93 */
 
 #[instrument(level = "debug", skip(rcx, concrete_opaque_types, defining_uses, errors))]
 fn compute_concrete_types_from_defining_uses<'tcx>(
@@ -389,7 +372,6 @@ fn compute_concrete_types_from_defining_uses<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ToArgRegionsFolder | COMPLEXITY=11 | LINES=17 */
 
 /// A folder to map the regions in the hidden type to their corresponding `arg_regions`.
 ///
@@ -407,7 +389,6 @@ struct ToArgRegionsFolder<'a, 'tcx> {
     erase_unknown_regions: bool,
     arg_regions: &'a [RegionVid],
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=13 | LINES=32 */
 
 impl<'a, 'tcx> ToArgRegionsFolder<'a, 'tcx> {
     fn new(
@@ -440,7 +421,6 @@ impl<'a, 'tcx> ToArgRegionsFolder<'a, 'tcx> {
         }))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=42 | LINES=67 */
 impl<'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for ToArgRegionsFolder<'_, 'tcx> {
     type Error = RegionVid;
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -508,7 +488,6 @@ impl<'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for ToArgRegionsFolder<'_, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=94 */
 
 /// This function is what actually applies member constraints to the borrowck
 /// state. It is also responsible to check all uses of the opaques in their
@@ -603,7 +582,6 @@ pub(crate) fn apply_computed_concrete_opaque_types<'tcx>(
     }
     errors
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=25 */
 
 /// In theory `apply_concrete_opaque_types` could introduce new uses of opaque types.
 /// We do not check these new uses so this could be unsound.
@@ -629,7 +607,6 @@ pub(crate) fn detect_opaque_types_added_while_handling_opaque_types<'tcx>(
 
     let _ = infcx.take_opaque_types();
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=62 */
 
 impl<'tcx> RegionInferenceContext<'tcx> {
     /// Map the regions in the type to named regions. This is similar to what
@@ -692,7 +669,6 @@ impl<'tcx> RegionInferenceContext<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=infer_opaque_definition_from_instantiation | COMPLEXITY=14 | LINES=51 */
 
 #[extension(pub trait InferCtxtExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {

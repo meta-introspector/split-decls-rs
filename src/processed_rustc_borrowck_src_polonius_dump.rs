@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/dump.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::io;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::pretty::{MirDumper, PassWhere, PrettyPrintMirOptions};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Location};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{RegionVid, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_mir_dataflow::points::PointIndex;
 use crate::rustc_complete::config::MirIncludeSpans;
 
@@ -19,11 +14,9 @@ use crate::constraints::OutlivesConstraint;
 use crate::polonius::{
     LocalizedOutlivesConstraint, LocalizedOutlivesConstraintSet, PoloniusDiagnosticsContext,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::region_infer::values::LivenessValues;
 use crate::type_check::Locations;
 use crate::{BorrowckInferCtxt, ClosureRegionRequirements, RegionInferenceContext};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=54 */
 
 /// `-Zdump-mir=polonius` dumps MIR annotated with NLL and polonius specific information.
 pub(crate) fn dump_polonius_mir<'tcx>(
@@ -78,7 +71,6 @@ pub(crate) fn dump_polonius_mir<'tcx>(
         )?;
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=emit_polonius_dump | COMPLEXITY=12 | LINES=84 */
 
 /// The polonius dump consists of:
 /// - the NLL MIR
@@ -163,7 +155,6 @@ fn emit_polonius_dump<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_html_mir | COMPLEXITY=200 | LINES=312 */
 
 /// Emits the polonius MIR, as escaped HTML.
 fn emit_html_mir<'tcx>(

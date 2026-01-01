@@ -1,20 +1,13 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/mono_checks/abi_check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // This module ensures that if a function's ABI requires a particular target feature,
 // that target feature is enabled both on the callee and all callers.
 use crate::rustc_abi::{BackendRepr, CanonAbi, RegKind, X86Call};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{CRATE_HIR_ID, HirId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, Location, traversal};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, InstanceKind, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{FnAbi, PassMode};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=uses_vector_registers | COMPLEXITY=10 | LINES=13 */
 
 use crate::errors;
 
@@ -28,7 +21,6 @@ fn uses_vector_registers(mode: &PassMode, repr: &BackendRepr) -> bool {
         PassMode::Direct(..) | PassMode::Pair(..) => matches!(repr, BackendRepr::SimdVector { .. }),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=do_check_simd_vector_abi | COMPLEXITY=31 | LINES=57 */
 
 /// Checks whether a certain function ABI is compatible with the target features currently enabled
 /// for a certain function.
@@ -86,7 +78,6 @@ fn do_check_simd_vector_abi<'tcx>(
         });
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_instance_abi | COMPLEXITY=16 | LINES=27 */
 
 /// Checks that the ABI of a given instance of a function does not contain vector-passed arguments
 /// or return values for which the corresponding target feature is not enabled.
@@ -114,7 +105,6 @@ fn check_instance_abi<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) {
     };
     do_check_simd_vector_abi(tcx, abi, instance.def_id(), /*is_call*/ false, loc);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_call_site_abi | COMPLEXITY=18 | LINES=38 */
 
 /// Checks that a call expression does not try to pass a vector-passed argument which requires a
 /// target feature that the caller does not have, as doing so causes UB because of ABI mismatch.
@@ -153,7 +143,6 @@ fn check_call_site_abi<'tcx>(
     };
     do_check_simd_vector_abi(tcx, callee_abi, caller.def_id(), /*is_call*/ true, loc);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_callees_abi | COMPLEXITY=17 | LINES=32 */
 
 fn check_callees_abi<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>, body: &mir::Body<'tcx>) {
     // Check all function call terminators.
@@ -186,7 +175,6 @@ fn check_callees_abi<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>, body: &m
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn check_feature_dependent_abi<'tcx>(
     tcx: TyCtxt<'tcx>,

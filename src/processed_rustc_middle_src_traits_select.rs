@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/select.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Candidate selection. See the [rustc dev guide] for more information on how this works.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
@@ -7,12 +6,10 @@
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_query_system::cache::Cache;
 
 use self::EvaluationResult::*;
 use super::{SelectionError, SelectionResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=34 */
 use crate::ty;
 
 pub type SelectionCache<'tcx, ENV> =
@@ -47,14 +44,11 @@ pub type EvaluationCache<'tcx, ENV> = Cache<(ENV, ty::PolyTraitPredicate<'tcx>),
 ///
 /// ```rust, ignore
 /// trait AsDebug { type Out: fmt::Debug; fn debug(self) -> Self::Out; }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
 /// impl<T: fmt::Debug> AsDebug for T {
 ///     type Out = T;
 ///     fn debug(self) -> fmt::Debug { self }
 /// }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// fn foo<T: AsDebug>(t: T) { println!("{:?}", <T as AsDebug>::debug(t)); }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=22 */
 /// ```
 ///
 /// we can't just use the impl to resolve the `<T as AsDebug>` obligation
@@ -77,18 +71,13 @@ pub type EvaluationCache<'tcx, ENV> = Cache<(ENV, ty::PolyTraitPredicate<'tcx>),
 ///
 /// ```rust, ignore
 /// pub trait Foo<T> { fn foo(&self) -> T; }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
 /// impl<T> Foo<()> for T { fn foo(&self) { } }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
 /// impl Foo<bool> for bool { fn foo(&self) -> bool { *self } }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 ///
 /// pub fn foo<T>(t: T) where T: Foo<bool> {
 ///     println!("{:?}", <T as Foo<_>>::foo(&t));
 /// }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// fn main() { foo(false); }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=95 */
 /// ```
 ///
 /// Here the obligation `<T as Foo<$0>>` can be matched by both the blanket
@@ -184,7 +173,6 @@ pub enum SelectionCandidate<'tcx> {
 
     BikeshedGuaranteedNoDropCandidate,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=39 */
 
 /// The result of trait evaluation. The order is important
 /// here as the evaluation of a list is the maximum of the
@@ -224,7 +212,6 @@ pub enum EvaluationResult {
     /// Evaluation failed.
     EvaluatedToErr,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=must_apply_considering_regions | COMPLEXITY=20 | LINES=38 */
 
 impl EvaluationResult {
     /// Returns `true` if this evaluation result is known to apply, even
@@ -263,7 +250,6 @@ impl EvaluationResult {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Indicates that trait evaluation caused overflow and in which pass.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, HashStable)]
@@ -271,14 +257,12 @@ pub enum OverflowError {
     Error(ErrorGuaranteed),
     Canonical,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ErrorGuaranteed> for OverflowError {
     fn from(e: ErrorGuaranteed) -> OverflowError {
         OverflowError::Error(e)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> From<OverflowError> for SelectionError<'tcx> {
     fn from(overflow_error: OverflowError) -> SelectionError<'tcx> {

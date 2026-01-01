@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/path.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=28 */
 use crate::prelude::*;
 
 pub(crate) struct PathParser;

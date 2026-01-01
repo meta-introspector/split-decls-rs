@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_lint/src/for_loops_over_fallibles.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use hir::{Expr, Pat};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::traits::ObligationCause;
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::lints::{
     ForLoopsOverFalliblesDiag, ForLoopsOverFalliblesLoopSub, ForLoopsOverFalliblesQuestionMark,
     ForLoopsOverFalliblesSuggestion,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=31 | LINES=30 */
 
 declare_lint! {
     /// The `for_loops_over_fallibles` lint checks for `for` loops over `Option` or `Result` values.
@@ -50,7 +43,6 @@ declare_lint! {
     Warn,
     "for-looping over an `Option` or a `Result`, which is more clearly expressed as an `if let`"
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=42 | LINES=63 */
 
 declare_lint_pass!(ForLoopsOverFallibles => [FOR_LOOPS_OVER_FALLIBLES]);
 
@@ -114,7 +106,6 @@ impl<'tcx> LateLintPass<'tcx> for ForLoopsOverFallibles {
         );
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=extract_for_loop | COMPLEXITY=7 | LINES=16 */
 
 fn extract_for_loop<'tcx>(expr: &Expr<'tcx>) -> Option<(&'tcx Pat<'tcx>, &'tcx Expr<'tcx>)> {
     if let hir::ExprKind::DropTemps(e) = expr.kind
@@ -131,7 +122,6 @@ fn extract_for_loop<'tcx>(expr: &Expr<'tcx>) -> Option<(&'tcx Pat<'tcx>, &'tcx E
         None
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=extract_iterator_next_call | COMPLEXITY=8 | LINES=17 */
 
 fn extract_iterator_next_call<'tcx>(
     cx: &LateContext<'_>,
@@ -149,7 +139,6 @@ fn extract_iterator_next_call<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=suggest_question_mark | COMPLEXITY=14 | LINES=44 */
 
 fn suggest_question_mark<'tcx>(
     cx: &LateContext<'tcx>,

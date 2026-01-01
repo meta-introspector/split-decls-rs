@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/add_call_guards.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
@@ -11,7 +9,6 @@ pub(super) enum AddCallGuards {
     AllCallEdges,
     CriticalCallEdges,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=58 | LINES=93 */
 pub(super) use self::AddCallGuards::*;
 
 /**
@@ -105,7 +102,6 @@ impl<'tcx> crate::MirPass<'tcx> for AddCallGuards {
         true
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=generates_invoke | COMPLEXITY=8 | LINES=8 */
 
 /// Returns true if this unwind action is code generated as an invoke as opposed to a call.
 fn generates_invoke(unwind: UnwindAction) -> bool {

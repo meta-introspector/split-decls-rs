@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/work_queue.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=WorkQueue | COMPLEXITY=7 | LINES=15 */
 use std::collections::VecDeque;
 
 use crate::rustc_index::Idx;
@@ -15,7 +14,6 @@ pub struct WorkQueue<T: Idx> {
     deque: VecDeque<T>,
     set: DenseBitSet<T>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=with_none | COMPLEXITY=17 | LINES=30 */
 
 impl<T: Idx> WorkQueue<T> {
     /// Creates a new work queue that starts empty, where elements range from (0..len).

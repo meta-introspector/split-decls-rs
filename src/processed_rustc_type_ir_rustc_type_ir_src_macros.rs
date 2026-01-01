@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/macros.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=21 | LINES=36 */
 /// Used for types that are `Copy` and which **do not care arena
 /// allocated data** (i.e., don't need to be folded).
 #[macro_export]
@@ -36,7 +35,6 @@ macro_rules! TrivialTypeTraversalImpls {
         )+
     };
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Atomic structs

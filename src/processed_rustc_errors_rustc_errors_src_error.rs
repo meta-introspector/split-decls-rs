@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_errors/src/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::borrow::Cow;
 use std::error::Error;
 use std::fmt;
 
 use crate::rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_error_messages::{FluentArgs, FluentError};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 #[derive(Debug)]
 pub enum TranslateError<'args> {
@@ -21,7 +18,6 @@ pub enum TranslateError<'args> {
         fallback: Box<TranslateError<'args>>,
     },
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=message | COMPLEXITY=18 | LINES=34 */
 
 impl<'args> TranslateError<'args> {
     pub fn message(id: &'args Cow<'args, str>, args: &'args FluentArgs<'args>) -> Self {
@@ -56,7 +52,6 @@ impl<'args> TranslateError<'args> {
         Self::Two { primary: Box::new(self), fallback: Box::new(fallback) }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Debug)]
 pub enum TranslateErrorKind<'args> {
@@ -66,7 +61,6 @@ pub enum TranslateErrorKind<'args> {
     ValueMissing,
     Fluent { errs: Vec<FluentError> },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=73 | LINES=75 */
 
 impl fmt::Display for TranslateError<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -142,6 +136,5 @@ impl fmt::Display for TranslateError<'_> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=7 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Error for TranslateError<'_> {}

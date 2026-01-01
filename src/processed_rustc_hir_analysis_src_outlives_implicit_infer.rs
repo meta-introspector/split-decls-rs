@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/outlives/implicit_infer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::ty::{self, GenericArg, GenericArgKind, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=107 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
@@ -112,7 +110,6 @@ pub(super) fn infer_predicates(
 
     global_inferred_outlives
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=insert_required_predicates_to_be_wf | COMPLEXITY=35 | LINES=116 */
 
 fn insert_required_predicates_to_be_wf<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -229,7 +226,6 @@ fn insert_required_predicates_to_be_wf<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Check the explicit predicates declared on the type.
 ///
@@ -239,12 +235,10 @@ fn insert_required_predicates_to_be_wf<'tcx>(
 /// struct Outer<'a, T> {
 ///     field: Inner<T>,
 /// }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 ///
 /// struct Inner<U> where U: 'static, U: Outer {
 ///     // ...
 /// }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_explicit_predicates | COMPLEXITY=34 | LINES=73 */
 /// ```
 /// Here, we should fetch the explicit predicates, which
 /// will give us `U: 'static` and `U: Outer`. The latter we
@@ -318,7 +312,6 @@ fn check_explicit_predicates<'tcx>(
         insert_outlives_predicate(tcx, predicate.0, predicate.1, span, required_predicates);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Check the inferred predicates declared on the type.
 ///
@@ -328,12 +321,10 @@ fn check_explicit_predicates<'tcx>(
 /// struct Outer<'a, T> {
 ///     outer: Inner<'a, T>,
 /// }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 ///
 /// struct Inner<'b, U> {
 ///     inner: &'b U,
 /// }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_inferred_predicates | COMPLEXITY=12 | LINES=29 */
 /// ```
 ///
 /// Here, when processing the type of field `outer`, we would request the

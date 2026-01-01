@@ -1,23 +1,17 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/query.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, CoverageAttrKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, CoverageIdsInfo, CoverageKind, MappingKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Statement, StatementKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::trace;
 
 use crate::coverage::counters::node_flow::make_node_counters;
 use crate::coverage::counters::{CoverageCounters, transcribe_counters};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Registers query/hook implementations related to coverage.
 pub(crate) fn provide(providers: &mut Providers) {
@@ -25,7 +19,6 @@ pub(crate) fn provide(providers: &mut Providers) {
     providers.queries.coverage_attr_on = coverage_attr_on;
     providers.queries.coverage_ids_info = coverage_ids_info;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_eligible_for_coverage | COMPLEXITY=32 | LINES=27 */
 
 /// Hook implementation for [`TyCtxt::is_eligible_for_coverage`].
 fn is_eligible_for_coverage(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
@@ -53,7 +46,6 @@ fn is_eligible_for_coverage(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
 
     true
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=coverage_attr_on | COMPLEXITY=24 | LINES=31 */
 
 /// Query implementation for `coverage_attr_on`.
 fn coverage_attr_on(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
@@ -85,7 +77,6 @@ fn coverage_attr_on(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         None => true,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=coverage_ids_info | COMPLEXITY=36 | LINES=65 */
 
 /// Query implementation for `coverage_ids_info`.
 fn coverage_ids_info<'tcx>(
@@ -151,7 +142,6 @@ fn coverage_ids_info<'tcx>(
         expressions,
     })
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=all_coverage_in_mir_body | COMPLEXITY=9 | LINES=11 */
 
 fn all_coverage_in_mir_body<'a, 'tcx>(
     body: &'a Body<'tcx>,
@@ -163,7 +153,6 @@ fn all_coverage_in_mir_body<'a, 'tcx>(
         }
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_inlined | COMPLEXITY=2 | LINES=5 */
 
 fn is_inlined(body: &Body<'_>, statement: &Statement<'_>) -> bool {
     let scope_data = &body.source_scopes[statement.source_info.scope];

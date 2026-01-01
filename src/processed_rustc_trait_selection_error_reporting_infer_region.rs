@@ -1,29 +1,22 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/region.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::iter;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{
     Applicability, Diag, E0309, E0310, E0311, E0803, Subdiagnostic, struct_span_code_err,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{self as hir, ParamName};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{
     self, IsSuggestable, Region, Ty, TyCtxt, TypeVisitableExt as _, Upcast as _,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, ErrorGuaranteed, Span, Symbol, kw};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use super::ObligationCauseAsDiagArg;
 use super::nice_region_error::find_anon_type;
@@ -33,14 +26,12 @@ use crate::errors::{
     self, FulfillReqLifetime, LfBoundNotSatisfied, OutlivesBound, OutlivesContent,
     RefLongerThanData, RegionOriginNote, WhereClauseSuggestions, note_and_explain,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::fluent_generated as fluent;
 use crate::infer::region_constraints::GenericKind;
 use crate::infer::{
     BoundRegionConversionTime, InferCtxt, RegionResolutionError, RegionVariableOrigin,
     SubregionOrigin,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=report_region_errors | COMPLEXITY=481 | LINES=1024 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub fn report_region_errors(
@@ -1065,7 +1056,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=27 */
 
 pub(super) fn note_and_explain_region<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1093,7 +1083,6 @@ pub(super) fn note_and_explain_region<'tcx>(
 
     emit_msg_span(err, prefix, description, span, suffix);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=explain_free_region | COMPLEXITY=2 | LINES=13 */
 
 fn explain_free_region<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1107,7 +1096,6 @@ fn explain_free_region<'tcx>(
 
     label_msg_span(err, prefix, description, span, suffix);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=msg_span_from_named_region | COMPLEXITY=39 | LINES=61 */
 
 fn msg_span_from_named_region<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1169,7 +1157,6 @@ fn msg_span_from_named_region<'tcx>(
         _ => bug!("{:?}", region),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=emit_msg_span | COMPLEXITY=9 | LINES=16 */
 
 fn emit_msg_span(
     err: &mut Diag<'_>,
@@ -1186,7 +1173,6 @@ fn emit_msg_span(
         err.note(message);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=label_msg_span | COMPLEXITY=9 | LINES=16 */
 
 fn label_msg_span(
     err: &mut Diag<'_>,
@@ -1203,7 +1189,6 @@ fn label_msg_span(
         err.note(message);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=unexpected_hidden_region_diagnostic | COMPLEXITY=32 | LINES=83 */
 
 #[instrument(level = "trace", skip(infcx))]
 pub fn unexpected_hidden_region_diagnostic<'a, 'tcx>(
@@ -1287,7 +1272,6 @@ pub fn unexpected_hidden_region_diagnostic<'a, 'tcx>(
 
     err
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=suggest_precise_capturing | COMPLEXITY=91 | LINES=164 */
 
 fn suggest_precise_capturing<'tcx>(
     tcx: TyCtxt<'tcx>,

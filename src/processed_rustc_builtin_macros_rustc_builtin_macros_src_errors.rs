@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, MultiSpan, SingleLabelManySpans,
     Subdiagnostic,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_requires_cfg_pattern)]
@@ -18,7 +14,6 @@ pub(crate) struct RequiresCfgPattern {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_expected_one_cfg_pattern)]
@@ -26,7 +21,6 @@ pub(crate) struct OneCfgPattern {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_alloc_error_must_be_fn)]
@@ -34,7 +28,6 @@ pub(crate) struct AllocErrorMustBeFn {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_assert_requires_boolean)]
@@ -43,7 +36,6 @@ pub(crate) struct AssertRequiresBoolean {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_assert_requires_expression)]
@@ -53,7 +45,6 @@ pub(crate) struct AssertRequiresExpression {
     #[suggestion(code = "", applicability = "maybe-incorrect")]
     pub(crate) token: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_assert_missing_comma)]
@@ -63,7 +54,6 @@ pub(crate) struct AssertMissingComma {
     #[suggestion(code = ", ", applicability = "maybe-incorrect", style = "short")]
     pub(crate) comma: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 pub(crate) enum CfgAccessibleInvalid {
@@ -76,7 +66,6 @@ pub(crate) enum CfgAccessibleInvalid {
     #[diag(builtin_macros_cfg_accessible_has_args)]
     HasArguments(#[primary_span] Span),
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_cfg_accessible_indeterminate)]
@@ -84,7 +73,6 @@ pub(crate) struct CfgAccessibleIndeterminate {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_missing_literal)]
@@ -93,7 +81,6 @@ pub(crate) struct ConcatMissingLiteral {
     #[primary_span]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytestr)]
@@ -101,7 +88,6 @@ pub(crate) struct ConcatBytestr {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_c_str_lit)]
@@ -109,7 +95,6 @@ pub(crate) struct ConcatCStrLit {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_export_macro_rules)]
@@ -117,7 +102,6 @@ pub(crate) struct ExportMacroRules {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_proc_macro)]
@@ -125,7 +109,6 @@ pub(crate) struct ProcMacro {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_trace_macros)]
@@ -133,7 +116,6 @@ pub(crate) struct TraceMacros {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_bench_sig)]
@@ -141,7 +123,6 @@ pub(crate) struct BenchSig {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_alloc_must_statics)]
@@ -149,7 +130,6 @@ pub(crate) struct AllocMustStatics {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=66 */
 
 pub(crate) use autodiff::*;
 
@@ -216,7 +196,6 @@ mod autodiff {
         pub(crate) span: Span,
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub(crate) use ad_fallback::*;
 mod ad_fallback {
@@ -228,7 +207,6 @@ mod ad_fallback {
         pub(crate) span: Span,
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_invalid)]
@@ -241,7 +219,6 @@ pub(crate) struct ConcatBytesInvalid {
     #[note(builtin_macros_c_str_note)]
     pub(crate) cs_note: Option<()>,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=41 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ConcatBytesInvalidSuggestion {
@@ -283,7 +260,6 @@ pub(crate) enum ConcatBytesInvalidSuggestion {
         snippet: String,
     },
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_oob)]
@@ -291,7 +267,6 @@ pub(crate) struct ConcatBytesOob {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_non_u8)]
@@ -299,7 +274,6 @@ pub(crate) struct ConcatBytesNonU8 {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_missing_literal)]
@@ -308,7 +282,6 @@ pub(crate) struct ConcatBytesMissingLiteral {
     #[primary_span]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_array)]
@@ -319,7 +292,6 @@ pub(crate) struct ConcatBytesArray {
     #[help]
     pub(crate) bytestr: bool,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_concat_bytes_bad_repeat)]
@@ -327,7 +299,6 @@ pub(crate) struct ConcatBytesBadRepeat {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_bad_derive_target, code = E0774)]
@@ -338,12 +309,10 @@ pub(crate) struct BadDeriveTarget {
     #[label(builtin_macros_label2)]
     pub(crate) item: Span,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_tests_not_support)]
 pub(crate) struct TestsNotSupport {}
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_unexpected_lit, code = E0777)]
@@ -354,7 +323,6 @@ pub(crate) struct BadDeriveLit {
     #[subdiagnostic]
     pub help: BadDeriveLitHelp,
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum BadDeriveLitHelp {
@@ -363,7 +331,6 @@ pub(crate) enum BadDeriveLitHelp {
     #[help(builtin_macros_other)]
     Other,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_derive_path_args_list)]
@@ -372,7 +339,6 @@ pub(crate) struct DerivePathArgsList {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_derive_path_args_value)]
@@ -381,7 +347,6 @@ pub(crate) struct DerivePathArgsValue {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_no_default_variant, code = E0665)]
@@ -393,7 +358,6 @@ pub(crate) struct NoDefaultVariant {
     #[subdiagnostic]
     pub(crate) suggs: Vec<NoDefaultVariantSugg>,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(builtin_macros_suggestion, code = "#[default] ", applicability = "maybe-incorrect")]
@@ -401,7 +365,6 @@ pub(crate) struct NoDefaultVariantSugg {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_multiple_defaults)]
@@ -416,7 +379,6 @@ pub(crate) struct MultipleDefaults {
     #[subdiagnostic]
     pub suggs: Vec<MultipleDefaultsSugg>,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -429,7 +391,6 @@ pub(crate) struct MultipleDefaultsSugg {
     pub(crate) spans: Vec<Span>,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_non_unit_default)]
@@ -439,7 +400,6 @@ pub(crate) struct NonUnitDefault {
     pub(crate) span: Span,
     pub(crate) post: &'static str,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_non_exhaustive_default)]
@@ -450,7 +410,6 @@ pub(crate) struct NonExhaustiveDefault {
     #[label]
     pub(crate) non_exhaustive: Span,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_multiple_default_attrs)]
@@ -468,7 +427,6 @@ pub(crate) struct MultipleDefaultAttrs {
     #[subdiagnostic]
     pub(crate) sugg: MultipleDefaultAttrsSugg,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -480,7 +438,6 @@ pub(crate) struct MultipleDefaultAttrsSugg {
     #[suggestion_part(code = "")]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_default_arg)]
@@ -489,7 +446,6 @@ pub(crate) struct DefaultHasArg {
     #[suggestion(code = "#[default]", style = "hidden", applicability = "maybe-incorrect")]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_derive_from_wrong_target)]
@@ -499,7 +455,6 @@ pub(crate) struct DeriveFromWrongTarget<'a> {
     pub(crate) span: MultiSpan,
     pub(crate) kind: &'a str,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_derive_from_wrong_field_count)]
@@ -509,7 +464,6 @@ pub(crate) struct DeriveFromWrongFieldCount {
     pub(crate) span: MultiSpan,
     pub(crate) multiple_fields: bool,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_derive_macro_call)]
@@ -517,7 +471,6 @@ pub(crate) struct DeriveMacroCall {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_cannot_derive_union)]
@@ -525,7 +478,6 @@ pub(crate) struct DeriveUnion {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_env_takes_args)]
@@ -533,13 +485,11 @@ pub(crate) struct EnvTakesArgs {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct EnvNotDefinedWithUserMessage {
     pub(crate) span: Span,
     pub(crate) msg_from_user: Symbol,
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=6 | LINES=14 */
 
 // Hand-written implementation to support custom user messages.
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for EnvNotDefinedWithUserMessage {
@@ -554,7 +504,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for EnvNotDefinedWithUserMessag
         diag
     }
 }
-/* AST_META: AST_ID=51 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 
 #[derive(Diagnostic)]
 pub(crate) enum EnvNotDefined<'a> {
@@ -575,7 +524,6 @@ pub(crate) enum EnvNotDefined<'a> {
         var_expr: &'a crate::rustc_ast::Expr,
     },
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_env_not_unicode)]
@@ -584,7 +532,6 @@ pub(crate) struct EnvNotUnicode {
     pub(crate) span: Span,
     pub(crate) var: Symbol,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_requires_string)]
@@ -592,7 +539,6 @@ pub(crate) struct FormatRequiresString {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_duplicate_arg)]
@@ -605,7 +551,6 @@ pub(crate) struct FormatDuplicateArg {
     pub(crate) duplicate: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_positional_after_named)]
@@ -616,7 +561,6 @@ pub(crate) struct PositionalAfterNamed {
     #[label(builtin_macros_named_args)]
     pub(crate) args: Vec<Span>,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_string_invalid)]
@@ -633,14 +577,12 @@ pub(crate) struct InvalidFormatString {
     #[subdiagnostic]
     pub(crate) sugg_: Option<InvalidFormatStringSuggestion>,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(builtin_macros_note)]
 pub(crate) struct InvalidFormatStringNote {
     pub(crate) note: String,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(builtin_macros_second_label)]
@@ -649,7 +591,6 @@ pub(crate) struct InvalidFormatStringLabel {
     pub(crate) span: Span,
     pub(crate) label: String,
 }
-/* AST_META: AST_ID=59 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=37 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidFormatStringSuggestion {
@@ -687,7 +628,6 @@ pub(crate) enum InvalidFormatStringSuggestion {
         replacement: String,
     },
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_no_arg_named)]
@@ -698,7 +638,6 @@ pub(crate) struct FormatNoArgNamed {
     pub(crate) span: Span,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_unknown_trait)]
@@ -710,7 +649,6 @@ pub(crate) struct FormatUnknownTrait<'a> {
     #[subdiagnostic]
     pub(crate) suggs: Vec<FormatUnknownTraitSugg>,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -725,7 +663,6 @@ pub(crate) struct FormatUnknownTraitSugg {
     pub fmt: &'static str,
     pub trait_name: &'static str,
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_unused_arg)]
@@ -735,7 +672,6 @@ pub(crate) struct FormatUnusedArg {
     pub(crate) span: Span,
     pub(crate) named: bool,
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=11 */
 
 // Allow the singular form to be a subdiagnostic of the multiple-unused
 // form of diagnostic.
@@ -747,7 +683,6 @@ impl Subdiagnostic for FormatUnusedArg {
         diag.span_label(self.span, msg);
     }
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_unused_args)]
@@ -759,7 +694,6 @@ pub(crate) struct FormatUnusedArgs {
     #[subdiagnostic]
     pub(crate) unused_labels: Vec<FormatUnusedArg>,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_pos_mismatch)]
@@ -771,7 +705,6 @@ pub(crate) struct FormatPositionalMismatch {
     #[subdiagnostic]
     pub(crate) highlight: SingleLabelManySpans,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_format_redundant_args)]
@@ -786,7 +719,6 @@ pub(crate) struct FormatRedundantArgs {
     #[subdiagnostic]
     pub(crate) sugg: Option<FormatRedundantArgsSugg>,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(builtin_macros_suggestion, applicability = "machine-applicable")]
@@ -794,7 +726,6 @@ pub(crate) struct FormatRedundantArgsSugg {
     #[suggestion_part(code = "")]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_test_case_non_item)]
@@ -802,7 +733,6 @@ pub(crate) struct TestCaseNonItem {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_test_bad_fn)]
@@ -813,7 +743,6 @@ pub(crate) struct TestBadFn {
     pub(crate) cause: Span,
     pub(crate) kind: &'static str,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_explicit_register_name)]
@@ -821,7 +750,6 @@ pub(crate) struct AsmExplicitRegisterName {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_mutually_exclusive)]
@@ -831,7 +759,6 @@ pub(crate) struct AsmMutuallyExclusive {
     pub(crate) opt1: &'static str,
     pub(crate) opt2: &'static str,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_pure_combine)]
@@ -839,7 +766,6 @@ pub(crate) struct AsmPureCombine {
     #[primary_span]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_pure_no_output)]
@@ -847,7 +773,6 @@ pub(crate) struct AsmPureNoOutput {
     #[primary_span]
     pub(crate) spans: Vec<Span>,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_modifier_invalid)]
@@ -855,7 +780,6 @@ pub(crate) struct AsmModifierInvalid {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_attribute_not_supported)]
@@ -863,7 +787,6 @@ pub(crate) struct AsmAttributeNotSupported {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_duplicate_arg)]
@@ -875,7 +798,6 @@ pub(crate) struct AsmDuplicateArg {
     pub(crate) prev: Span,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_pos_after)]
@@ -888,7 +810,6 @@ pub(crate) struct AsmPositionalAfter {
     #[label(builtin_macros_explicit)]
     pub(crate) explicit: Vec<Span>,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_noreturn)]
@@ -896,7 +817,6 @@ pub(crate) struct AsmNoReturn {
     #[primary_span]
     pub(crate) outputs_sp: Vec<Span>,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_no_matched_argument_name)]
@@ -905,7 +825,6 @@ pub(crate) struct AsmNoMatchedArgumentName {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_mayunwind)]
@@ -913,13 +832,11 @@ pub(crate) struct AsmMayUnwind {
     #[primary_span]
     pub(crate) labels_sp: Vec<Span>,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct AsmClobberNoReg {
     pub(crate) spans: Vec<Span>,
     pub(crate) clobbers: Vec<Span>,
 }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=6 | LINES=18 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AsmClobberNoReg {
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
@@ -938,7 +855,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AsmClobberNoReg {
             .with_span_labels(self.spans, &lbl2)
     }
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_opt_already_provided)]
@@ -950,7 +866,6 @@ pub(crate) struct AsmOptAlreadyprovided {
     #[suggestion(code = "", applicability = "machine-applicable", style = "tool-only")]
     pub(crate) span_with_comma: Span,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_unsupported_option)]
@@ -963,7 +878,6 @@ pub(crate) struct AsmUnsupportedOption {
     pub(crate) span_with_comma: Span,
     pub(crate) macro_name: &'static str,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_asm_unsupported_clobber_abi)]
@@ -972,7 +886,6 @@ pub(crate) struct AsmUnsupportedClobberAbi {
     pub(crate) spans: Vec<Span>,
     pub(crate) macro_name: &'static str,
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_test_runner_invalid)]
@@ -980,7 +893,6 @@ pub(crate) struct TestRunnerInvalid {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_test_runner_nargs)]
@@ -988,7 +900,6 @@ pub(crate) struct TestRunnerNargs {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_expected_comma_in_list)]
@@ -996,7 +907,6 @@ pub(crate) struct ExpectedCommaInList {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_only_one_argument)]
@@ -1005,7 +915,6 @@ pub(crate) struct OnlyOneArgument<'a> {
     pub span: Span,
     pub name: &'a str,
 }
-/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_takes_no_arguments)]
@@ -1014,7 +923,6 @@ pub(crate) struct TakesNoArguments<'a> {
     pub span: Span,
     pub name: &'a str,
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_proc_macro_attribute_only_usable_with_crate_type)]
@@ -1023,7 +931,6 @@ pub(crate) struct AttributeOnlyUsableWithCrateType<'a> {
     pub span: Span,
     pub path: &'a str,
 }
-/* AST_META: AST_ID=93 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_source_uitls_expected_item)]
@@ -1032,7 +939,6 @@ pub(crate) struct ExpectedItem<'a> {
     pub span: Span,
     pub token: &'a str,
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_naked_functions_testing_attribute, code = E0736)]
@@ -1043,7 +949,6 @@ pub(crate) struct NakedFunctionTestingAttribute {
     #[label]
     pub testing_span: Span,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_non_generic_pointee)]
@@ -1051,7 +956,6 @@ pub(crate) struct NonGenericPointee {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_expected_other)]
@@ -1061,7 +965,6 @@ pub(crate) struct AsmExpectedOther {
     pub(crate) span: Span,
     pub(crate) is_inline_asm: bool,
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_cfg_select_no_matches)]
@@ -1069,7 +972,6 @@ pub(crate) struct CfgSelectNoMatches {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_cfg_select_unreachable)]

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/neon.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 // Most of these tests are copied from https://github.com/japaric/stdsimd/blob/0f4413d01c4f0c3ffbc5a69e9a37fbc7235b31a9/coresimd/arm/neon.rs
 
 #[feature(portable_simd)]
@@ -19,7 +18,6 @@ unsafe fn test_vpmin_s8() {
     let r: i8x8 = transmute(vpmin_s8(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_s16() {
@@ -29,7 +27,6 @@ unsafe fn test_vpmin_s16() {
     let r: i16x4 = transmute(vpmin_s16(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_s32() {
@@ -39,7 +36,6 @@ unsafe fn test_vpmin_s32() {
     let r: i32x2 = transmute(vpmin_s32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_u8() {
@@ -49,7 +45,6 @@ unsafe fn test_vpmin_u8() {
     let r: u8x8 = transmute(vpmin_u8(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_u16() {
@@ -59,7 +54,6 @@ unsafe fn test_vpmin_u16() {
     let r: u16x4 = transmute(vpmin_u16(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_u32() {
@@ -69,7 +63,6 @@ unsafe fn test_vpmin_u32() {
     let r: u32x2 = transmute(vpmin_u32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmin_f32() {
@@ -79,7 +72,6 @@ unsafe fn test_vpmin_f32() {
     let r: f32x2 = transmute(vpmin_f32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_s8() {
@@ -89,7 +81,6 @@ unsafe fn test_vpmax_s8() {
     let r: i8x8 = transmute(vpmax_s8(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_s16() {
@@ -99,7 +90,6 @@ unsafe fn test_vpmax_s16() {
     let r: i16x4 = transmute(vpmax_s16(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_s32() {
@@ -109,7 +99,6 @@ unsafe fn test_vpmax_s32() {
     let r: i32x2 = transmute(vpmax_s32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_u8() {
@@ -119,7 +108,6 @@ unsafe fn test_vpmax_u8() {
     let r: u8x8 = transmute(vpmax_u8(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_u16() {
@@ -129,7 +117,6 @@ unsafe fn test_vpmax_u16() {
     let r: u16x4 = transmute(vpmax_u16(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_u32() {
@@ -139,7 +126,6 @@ unsafe fn test_vpmax_u32() {
     let r: u32x2 = transmute(vpmax_u32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpmax_f32() {
@@ -149,7 +135,6 @@ unsafe fn test_vpmax_f32() {
     let r: f32x2 = transmute(vpmax_f32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_s16() {
@@ -159,7 +144,6 @@ unsafe fn test_vpadd_s16() {
     let e = i16x4::from([3, 7, -1, -5]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_s32() {
     let a = i32x2::from([1, 2]);
@@ -168,7 +152,6 @@ unsafe fn test_vpadd_s32() {
     let e = i32x2::from([3, -1]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_s8() {
     let a = i8x8::from([1, 2, 3, 4, 5, 6, 7, 8]);
@@ -177,7 +160,6 @@ unsafe fn test_vpadd_s8() {
     let e = i8x8::from([3, 7, 11, 15, -1, -5, -9, -13]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_u16() {
     let a = u16x4::from([1, 2, 3, 4]);
@@ -186,7 +168,6 @@ unsafe fn test_vpadd_u16() {
     let e = u16x4::from([3, 7, 61, 65]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_u32() {
     let a = u32x2::from([1, 2]);
@@ -195,7 +176,6 @@ unsafe fn test_vpadd_u32() {
     let e = u32x2::from([3, 61]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vpadd_u8() {
     let a = u8x8::from([1, 2, 3, 4, 5, 6, 7, 8]);
@@ -204,7 +184,6 @@ unsafe fn test_vpadd_u8() {
     let e = u8x8::from([3, 7, 11, 15, 61, 65, 69, 73]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vqsub_u8() {
@@ -214,7 +193,6 @@ unsafe fn test_vqsub_u8() {
     let e = u8x8::from([0, 1, 2, 3, 0, 0, 0, 218]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vqadd_u8() {
@@ -224,7 +202,6 @@ unsafe fn test_vqadd_u8() {
     let e = u8x8::from([31, 3, 4, 5, 39, 0xff, 43, 0xff]);
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vmaxq_f32() {
@@ -235,7 +212,6 @@ unsafe fn test_vmaxq_f32() {
     let r: f32x4 = transmute(vmaxq_f32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vminq_f32() {
@@ -246,7 +222,6 @@ unsafe fn test_vminq_f32() {
     let r: f32x4 = transmute(vminq_f32(transmute(a), transmute(b)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vaddvq_f32() {
@@ -256,7 +231,6 @@ unsafe fn test_vaddvq_f32() {
     let r = vaddvq_f32(transmute(a));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "aarch64")]
 unsafe fn test_vrndnq_f32() {
@@ -266,7 +240,6 @@ unsafe fn test_vrndnq_f32() {
     let r: f32x4 = transmute(vrndnq_f32(transmute(a)));
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=main | COMPLEXITY=8 | LINES=35 */
 
 #[cfg(target_arch = "aarch64")]
 fn main() {
@@ -302,7 +275,6 @@ fn main() {
         test_vrndnq_f32();
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=main | COMPLEXITY=2 | LINES=3 */
 
 #[cfg(not(target_arch = "aarch64"))]
 fn main() {}

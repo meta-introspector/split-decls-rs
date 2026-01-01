@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/outlives_suggestion.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 // Contains utilities for generating suggestions for borrowck errors related to unsatisfied
 // outlives constraints.
 
@@ -15,7 +14,6 @@ use smallvec::SmallVec;
 use tracing::debug;
 
 use super::{ErrorConstraintInfo, RegionName, RegionNameSource};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 use crate::MirBorrowckCtxt;
 
 /// The different things we could suggest.
@@ -29,7 +27,6 @@ enum SuggestedConstraint {
     /// 'a: 'static i.e. 'a = 'static and the user should just use 'static
     Static(RegionName),
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Collects information about outlives constraints that needed to be added for a given MIR node
 /// corresponding to a function definition.
@@ -44,7 +41,6 @@ pub(crate) struct OutlivesSuggestionBuilder {
     /// suggestion message.
     constraints_to_add: BTreeMap<RegionVid, Vec<RegionVid>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=region_name_is_suggestable | COMPLEXITY=119 | LINES=216 */
 
 impl OutlivesSuggestionBuilder {
     /// Returns `true` iff the `RegionNameSource` is a valid source for an outlives

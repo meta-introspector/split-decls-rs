@@ -1,0 +1,22 @@
+# Error exclusion list - patterns to skip during build
+# Lines starting with # are comments
+
+# Top error-generating processed files (from build.log analysis)
+processed_rustc_public_rustc_public_src_ty.rs
+processed_rustc_hir_typeck_src_fn_ctxt_checks.rs
+processed_rustc_resolve_src_late_diagnostics.rs
+processed_rustc_resolve_rustc_resolve_src_macros.rs
+processed_rustc_resolve_rustc_resolve_src_lib.rs
+processed_rustc_resolve_rustc_resolve_src_late.rs
+processed_rustc_resolve_rustc_resolve_src_imports.rs
+processed_rustc_resolve_rustc_resolve_src_diagnostics.rs
+processed_rustc_resolve_rustc_resolve_src_build_reduced_graph.rs
+processed_rustc_borrowck_src_diagnostics_mutability_errors.rs
+
+# Module prefixes to exclude (high error rate)
+processed_rustc_resolve_
+processed_rustc_borrowck_
+processed_rustc_metadata_
+processed_rustc_lint_
+processed_rustc_query_impl_
+processed_rustc_public_

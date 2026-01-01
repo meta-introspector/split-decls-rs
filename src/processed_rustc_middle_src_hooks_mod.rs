@@ -1,21 +1,16 @@
 // SRC: ../rust/compiler/rustc_middle/src/hooks/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // "Hooks" let you write `tcx` methods in downstream crates and call them in this crate, reducing
 // the amount of code that needs to be in this crate (which is already very big). This is somewhat
 // similar to queries, but queries come with a lot of machinery for caching and incremental
 // compilation, whereas hooks are just plain function pointers without any of the query magic.
 
 use crate::rustc_complete::def_id::{DefId, DefPathHash};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::StableCrateId;
 use crate::rustc_complete::def_id::{CrateNum, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ExpnHash, ExpnId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::mir;
 use crate::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=24 | LINES=36 */
 
 macro_rules! declare_hooks {
     ($($(#[$attr:meta])*hook $name:ident($($arg:ident: $K:ty),*) -> $V:ty;)*) => {
@@ -52,7 +47,6 @@ macro_rules! declare_hooks {
         }
     };
 }
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=23 | LINES=57 */
 
 declare_hooks! {
     /// Tries to destructure an `mir::Const` ADT or array into its variant index
@@ -110,7 +104,6 @@ declare_hooks! {
     /// This checks non-recursive runtime validity.
     hook validate_scalar_in_layout(scalar: crate::ty::ScalarInt, ty: Ty<'tcx>) -> bool;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default_hook | COMPLEXITY=5 | LINES=7 */
 
 #[cold]
 fn default_hook(name: &str, args: &dyn std::fmt::Debug) -> ! {

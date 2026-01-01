@@ -1,19 +1,13 @@
 // SRC: ../rust/compiler/rustc_lint/src/ptr_nulls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::LitKind;
 use crate::rustc_complete::{BinOpKind, Expr, ExprKind, TyKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::RawPtr;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{InvalidNullArgumentsDiag, UselessPtrNullChecksDiag};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::utils::peel_casts;
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=25 */
 
 declare_lint! {
     /// The `useless_ptr_null_checks` lint checks for useless null checks against pointers
@@ -39,7 +33,6 @@ declare_lint! {
     Warn,
     "useless checking of non-null-typed pointer"
 }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=23 */
 
 declare_lint! {
     /// The `invalid_null_arguments` lint checks for invalid usage of null pointers in arguments.
@@ -63,7 +56,6 @@ declare_lint! {
     Deny,
     "invalid null pointer in arguments"
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=useless_check | COMPLEXITY=38 | LINES=54 */
 
 declare_lint_pass!(PtrNullChecks => [USELESS_PTR_NULL_CHECKS, INVALID_NULL_ARGUMENTS]);
 
@@ -118,7 +110,6 @@ fn useless_check<'a, 'tcx: 'a>(
         };
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_null_ptr | COMPLEXITY=12 | LINES=19 */
 
 /// Checks if the given expression is a null pointer (modulo casting)
 fn is_null_ptr<'tcx>(cx: &LateContext<'tcx>, expr: &'tcx Expr<'_>) -> Option<Span> {
@@ -138,7 +129,6 @@ fn is_null_ptr<'tcx>(cx: &LateContext<'tcx>, expr: &'tcx Expr<'_>) -> Option<Spa
         None
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=74 | LINES=127 */
 
 impl<'tcx> LateLintPass<'tcx> for PtrNullChecks {
     fn check_expr(&mut self, cx: &LateContext<'tcx>, expr: &'tcx Expr<'_>) {

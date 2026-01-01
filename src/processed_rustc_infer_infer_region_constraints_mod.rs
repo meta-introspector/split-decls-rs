@@ -1,32 +1,23 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/region_constraints/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // See `README.md`.
 
 use std::ops::Range;
 use std::{cmp, fmt, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::undo_log::UndoLogs;
 use crate::rustc_data_structures::unify as ut;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ReBound, ReStatic, ReVar, Region, RegionVid, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use self::CombineMapType::*;
 use self::UndoLog::*;
 use super::{RegionVariableOrigin, Rollback, SubregionOrigin};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::snapshot::undo_log::{InferCtxtUndoLogs, Snapshot};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::unify_key::{RegionVariableValue, RegionVidKey};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=RegionConstraintStorage | COMPLEXITY=5 | LINES=34 */
 
 
 #[derive(Clone, Default)]
@@ -60,13 +51,11 @@ pub struct RegionConstraintStorage<'tcx> {
     /// to micro-optimize `take_and_reset_data`
     any_unifications: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=RegionConstraintCollector | COMPLEXITY=2 | LINES=5 */
 
 pub struct RegionConstraintCollector<'a, 'tcx> {
     storage: &'a mut RegionConstraintStorage<'tcx>,
     undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=RegionConstraintData | COMPLEXITY=3 | LINES=21 */
 
 pub type VarInfos = IndexVec<RegionVid, RegionVariableInfo>;
 
@@ -88,7 +77,6 @@ pub struct RegionConstraintData<'tcx> {
     /// inference variables.
     pub verifys: Vec<Verify<'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 /// Represents a constraint that influences the inference process.
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
@@ -109,7 +97,6 @@ pub enum ConstraintKind {
     /// inference is complete.
     RegSubReg,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Constraint | COMPLEXITY=2 | LINES=10 */
 
 /// Represents a constraint that influences the inference process.
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
@@ -120,14 +107,12 @@ pub struct Constraint<'tcx> {
     // If `kind` is `VarSubVar` or `RegSubVar`, this must be a `ReVar`.
     pub sup: Region<'tcx>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=involves_placeholders | COMPLEXITY=3 | LINES=6 */
 
 impl Constraint<'_> {
     pub fn involves_placeholders(&self) -> bool {
         self.sub.is_placeholder() || self.sup.is_placeholder()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Verify | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug, Clone)]
 pub struct Verify<'tcx> {
@@ -136,7 +121,6 @@ pub struct Verify<'tcx> {
     pub region: Region<'tcx>,
     pub bound: VerifyBound<'tcx>,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, TypeFoldable, TypeVisitable)]
 pub enum GenericKind<'tcx> {
@@ -144,14 +128,12 @@ pub enum GenericKind<'tcx> {
     Placeholder(ty::PlaceholderType),
     Alias(ty::AliasTy<'tcx>),
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Describes the things that some `GenericKind` value `G` is known to
 /// outlive. Each variant of `VerifyBound` can be thought of as a
 /// function:
 /// ```ignore (pseudo-rust)
 /// fn(min: Region) -> bool { .. }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 /// ```
 /// where `true` means that the region `min` meets that `G: min`.
 /// (False means nothing.)
@@ -162,7 +144,6 @@ pub enum GenericKind<'tcx> {
 /// fn(min: Region) -> bool {
 ///    ('a: min) || ('b: min)
 /// }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=17 | LINES=47 */
 /// ```
 /// This is described with an `AnyRegion('a, 'b)` node.
 #[derive(Debug, Clone, TypeFoldable, TypeVisitable)]
@@ -210,7 +191,6 @@ pub enum VerifyBound<'tcx> {
     /// we don't know which.
     AllBounds(Vec<VerifyBound<'tcx>>),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=38 */
 
 /// This is a "conditional bound" that checks the result of inference
 /// and supplies a bound if it ended up being relevant. It's used in situations
@@ -249,7 +229,6 @@ pub enum VerifyBound<'tcx> {
 ///         }
 ///     }
 /// }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=VerifyIfEq | COMPLEXITY=7 | LINES=9 */
 /// ```
 #[derive(Debug, Copy, Clone, TypeFoldable, TypeVisitable)]
 pub struct VerifyIfEq<'tcx> {
@@ -259,14 +238,12 @@ pub struct VerifyIfEq<'tcx> {
     /// Bound that applies if `ty` is equal.
     pub bound: Region<'tcx>,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub(crate) struct TwoRegions<'tcx> {
     a: Region<'tcx>,
     b: Region<'tcx>,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Copy, Clone, PartialEq)]
 pub(crate) enum UndoLog<'tcx> {
@@ -282,14 +259,12 @@ pub(crate) enum UndoLog<'tcx> {
     /// We added a GLB/LUB "combination variable".
     AddCombination(CombineMapType, TwoRegions<'tcx>),
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq)]
 pub(crate) enum CombineMapType {
     Lub,
     Glb,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=RegionVariableInfo | COMPLEXITY=11 | LINES=20 */
 
 type CombineMap<'tcx> = FxHashMap<TwoRegions<'tcx>, RegionVid>;
 
@@ -310,12 +285,10 @@ pub struct RegionVariableInfo {
     // changes in `lexical_region_resolve`.
     pub universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct RegionSnapshot {
     any_unifications: bool,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 impl<'tcx> RegionConstraintStorage<'tcx> {
     #[inline]
@@ -326,7 +299,6 @@ impl<'tcx> RegionConstraintStorage<'tcx> {
         RegionConstraintCollector { storage: self, undo_log }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=num_region_vars | COMPLEXITY=180 | LINES=349 */
 
 impl<'tcx> RegionConstraintCollector<'_, 'tcx> {
     pub fn num_region_vars(&self) -> usize {
@@ -676,14 +648,12 @@ impl<'tcx> RegionConstraintCollector<'_, 'tcx> {
         ut::UnificationTable::with_log(&mut self.storage.unification_table, self.undo_log)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for RegionSnapshot {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "RegionSnapshot")
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=10 */
 
 impl<'tcx> fmt::Debug for GenericKind<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -694,7 +664,6 @@ impl<'tcx> fmt::Debug for GenericKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=10 */
 
 impl<'tcx> fmt::Display for GenericKind<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -705,7 +674,6 @@ impl<'tcx> fmt::Display for GenericKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=7 | LINES=10 */
 
 impl<'tcx> GenericKind<'tcx> {
     pub fn to_ty(&self, tcx: TyCtxt<'tcx>) -> Ty<'tcx> {
@@ -716,7 +684,6 @@ impl<'tcx> GenericKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=must_hold | COMPLEXITY=22 | LINES=32 */
 
 impl<'tcx> VerifyBound<'tcx> {
     pub fn must_hold(&self) -> bool {
@@ -749,7 +716,6 @@ impl<'tcx> VerifyBound<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> RegionConstraintData<'tcx> {
     /// Returns `true` if this region constraint data contains no constraints, and `false`
@@ -759,7 +725,6 @@ impl<'tcx> RegionConstraintData<'tcx> {
         constraints.is_empty() && verifys.is_empty()
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=15 | LINES=25 */
 
 impl<'tcx> Rollback<UndoLog<'tcx>> for RegionConstraintStorage<'tcx> {
     fn reverse(&mut self, undo: UndoLog<'tcx>) {

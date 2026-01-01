@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/lang_tests_common.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // The common code for `tests/lang_tests_*.rs`
 
 #[allow(clippy::uninlined_format_args)]
 
 use std::env::{self, current_dir};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 use std::process::Command;
 
 use boml::Toml;
@@ -21,7 +18,6 @@ pub enum Profile {
     Debug,
     Release,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=main_inner | COMPLEXITY=51 | LINES=130 */
 
 pub fn main_inner(profile: Profile) {
     let tempdir = TempDir::new().expect("temp dir");

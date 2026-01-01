@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/decoder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Decoding metadata from a single crate's metadata
 
 use std::iter::TrustedLen;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, OnceLock};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{io, mem};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(super) use cstore_impl::provide;
 use rustc_ast as ast;
@@ -18,37 +14,28 @@ use crate::rustc_data_structures::owned_slice::OwnedSlice;
 use crate::rustc_data_structures::sync::Lock;
 use crate::rustc_data_structures::unhash::UnhashMap;
 use crate::rustc_expand::base::{SyntaxExtension, SyntaxExtensionKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::proc_macro::{AttrProcMacro, BangProcMacro, DeriveProcMacro};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Safety;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::def_id::{CRATE_DEF_INDEX, LOCAL_CRATE};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPath, DefPathData};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::diagnostic_items::DiagnosticItems;
 use crate::rustc_index::Idx;
 use crate::rustc_complete::middle::lib_features::LibFeatures;
 use crate::rustc_complete::mir::interpret::{AllocDecodingSession, AllocDecodingState};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::Visibility;
 use crate::rustc_complete::ty::codec::TyDecoder;
 use crate::rustc_complete::{bug, implement_ty_decoder};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_proc_macro::bridge::client::ProcMacro;
 use crate::rustc_serialize::opaque::MemDecoder;
 use crate::rustc_serialize::{Decodable, Decoder};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::TargetModifier;
 use crate::rustc_complete::cstore::{CrateSource, ExternCrate};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::hygiene::HygieneDecodeContext;
 use crate::rustc_complete::{
     BytePos, ByteSymbol, DUMMY_SP, Pos, SpanData, SpanDecoder, Symbol, SyntaxContext, kw,
 };
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=21 */
 use tracing::debug;
 
 use crate::creader::CStore;
@@ -69,7 +56,6 @@ impl std::ops::Deref for MetadataBlob {
         &self.0[..]
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=13 */
 
 impl MetadataBlob {
     /// Runs the [`MemDecoder`] validation and if it passes, constructs a new [`MetadataBlob`].
@@ -83,7 +69,6 @@ impl MetadataBlob {
         &self.0
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=31 | LINES=72 */
 
 /// A map from external crate numbers (as decoded from some crate file) to
 /// local crate numbers (as generated during this session). Each external
@@ -156,7 +141,6 @@ pub(crate) struct CrateMetadata {
     /// If this is `None`, then the crate was injected (e.g., by the allocator).
     extern_crate: Option<ExternCrate>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=ImportedSourceFile | COMPLEXITY=5 | LINES=12 */
 
 /// Holds information about a crate::rustc_span::SourceFile imported from another crate.
 /// See `imported_source_file()` for more information.
@@ -169,7 +153,6 @@ struct ImportedSourceFile {
     /// The imported SourceFile's representation within the local source_map
     translated_source_file: Arc<crate::rustc_span::SourceFile>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 pub(super) struct DecodeContext<'a, 'tcx> {
     opaque: MemDecoder<'a>,
@@ -183,7 +166,6 @@ pub(super) struct DecodeContext<'a, 'tcx> {
     // Used for decoding interpret::AllocIds in a cached & thread-safe manner.
     alloc_decoding_session: Option<AllocDecodingSession<'a>>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=12 | LINES=37 */
 
 /// Abstract over the various ways one can create metadata decoders.
 pub(super) trait Metadata<'a, 'tcx>: Copy {
@@ -221,7 +203,6 @@ pub(super) trait Metadata<'a, 'tcx>: Copy {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Metadata<'a, 'tcx> for &'a MetadataBlob {
     #[inline]
@@ -229,7 +210,6 @@ impl<'a, 'tcx> Metadata<'a, 'tcx> for &'a MetadataBlob {
         self
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=6 | LINES=13 */
 
 impl<'a, 'tcx> Metadata<'a, 'tcx> for (&'a MetadataBlob, &'tcx Session) {
     #[inline]
@@ -243,7 +223,6 @@ impl<'a, 'tcx> Metadata<'a, 'tcx> for (&'a MetadataBlob, &'tcx Session) {
         Some(sess)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=6 | LINES=11 */
 
 impl<'a, 'tcx> Metadata<'a, 'tcx> for CrateMetadataRef<'a> {
     #[inline]
@@ -255,7 +234,6 @@ impl<'a, 'tcx> Metadata<'a, 'tcx> for CrateMetadataRef<'a> {
         Some(self)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=7 | LINES=15 */
 
 impl<'a, 'tcx> Metadata<'a, 'tcx> for (CrateMetadataRef<'a>, &'tcx Session) {
     #[inline]
@@ -271,7 +249,6 @@ impl<'a, 'tcx> Metadata<'a, 'tcx> for (CrateMetadataRef<'a>, &'tcx Session) {
         Some(self.1)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=blob | COMPLEXITY=7 | LINES=15 */
 
 impl<'a, 'tcx> Metadata<'a, 'tcx> for (CrateMetadataRef<'a>, TyCtxt<'tcx>) {
     #[inline]
@@ -287,7 +264,6 @@ impl<'a, 'tcx> Metadata<'a, 'tcx> for (CrateMetadataRef<'a>, TyCtxt<'tcx>) {
         Some(self.1)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=3 | LINES=12 */
 
 impl<T: ParameterizedOverTcx> LazyValue<T> {
     #[inline]
@@ -300,14 +276,12 @@ impl<T: ParameterizedOverTcx> LazyValue<T> {
         T::Value::decode(&mut dcx)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=DecodeIterator | COMPLEXITY=2 | LINES=6 */
 
 struct DecodeIterator<'a, 'tcx, T> {
     elem_counter: std::ops::Range<usize>,
     dcx: DecodeContext<'a, 'tcx>,
     _phantom: PhantomData<fn() -> T>,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=next | COMPLEXITY=6 | LINES=14 */
 
 impl<'a, 'tcx, T: Decodable<DecodeContext<'a, 'tcx>>> Iterator for DecodeIterator<'a, 'tcx, T> {
     type Item = T;
@@ -322,7 +296,6 @@ impl<'a, 'tcx, T: Decodable<DecodeContext<'a, 'tcx>>> Iterator for DecodeIterato
         self.elem_counter.size_hint()
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=len | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'tcx, T: Decodable<DecodeContext<'a, 'tcx>>> ExactSizeIterator
     for DecodeIterator<'a, 'tcx, T>
@@ -331,13 +304,11 @@ impl<'a, 'tcx, T: Decodable<DecodeContext<'a, 'tcx>>> ExactSizeIterator
         self.elem_counter.len()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 unsafe impl<'a, 'tcx, T: Decodable<DecodeContext<'a, 'tcx>>> TrustedLen
     for DecodeIterator<'a, 'tcx, T>
 {
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=4 | LINES=15 */
 
 impl<T: ParameterizedOverTcx> LazyArray<T> {
     #[inline]
@@ -353,7 +324,6 @@ impl<T: ParameterizedOverTcx> LazyArray<T> {
         DecodeIterator { elem_counter: (0..self.num_elems), dcx, _phantom: PhantomData }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=30 | LINES=85 */
 
 impl<'a, 'tcx> DecodeContext<'a, 'tcx> {
     #[inline]
@@ -439,7 +409,6 @@ impl<'a, 'tcx> DecodeContext<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=interner | COMPLEXITY=18 | LINES=47 */
 
 impl<'a, 'tcx> TyDecoder<'tcx> for DecodeContext<'a, 'tcx> {
     const CLEAR_CROSS_CRATE: bool = true;
@@ -487,7 +456,6 @@ impl<'a, 'tcx> TyDecoder<'tcx> for DecodeContext<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for ExpnIndex {
     #[inline]
@@ -495,7 +463,6 @@ impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for ExpnIndex {
         ExpnIndex::from_u32(d.read_u32())
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=decode_attr_id | COMPLEXITY=44 | LINES=121 */
 
 impl<'a, 'tcx> SpanDecoder for DecodeContext<'a, 'tcx> {
     fn decode_attr_id(&mut self) -> crate::rustc_span::AttrId {
@@ -617,7 +584,6 @@ impl<'a, 'tcx> SpanDecoder for DecodeContext<'a, 'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=44 | LINES=105 */
 
 impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for SpanData {
     fn decode(decoder: &mut DecodeContext<'a, 'tcx>) -> SpanData {
@@ -723,21 +689,18 @@ impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for SpanData {
         SpanData { lo, hi, ctxt, parent: None }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx> Decodable<DecodeContext<'a, 'tcx>> for &'tcx [(ty::Clause<'tcx>, Span)] {
     fn decode(d: &mut DecodeContext<'a, 'tcx>) -> Self {
         ty::codec::RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx, T> Decodable<DecodeContext<'a, 'tcx>> for LazyValue<T> {
     fn decode(decoder: &mut DecodeContext<'a, 'tcx>) -> Self {
         decoder.read_lazy()
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=9 | LINES=8 */
 
 impl<'a, 'tcx, T> Decodable<DecodeContext<'a, 'tcx>> for LazyArray<T> {
     #[inline]
@@ -746,7 +709,6 @@ impl<'a, 'tcx, T> Decodable<DecodeContext<'a, 'tcx>> for LazyArray<T> {
         if len == 0 { LazyArray::default() } else { decoder.read_lazy_array(len) }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'tcx, I: Idx, T> Decodable<DecodeContext<'a, 'tcx>> for LazyTable<I, T> {
     fn decode(decoder: &mut DecodeContext<'a, 'tcx>) -> Self {
@@ -755,7 +717,6 @@ impl<'a, 'tcx, I: Idx, T> Decodable<DecodeContext<'a, 'tcx>> for LazyTable<I, T>
         decoder.read_lazy_table(width, len)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=root_pos | COMPLEXITY=132 | LINES=236 */
 
 implement_ty_decoder!(DecodeContext<'a, 'tcx>);
 
@@ -992,7 +953,6 @@ impl MetadataBlob {
         Ok(())
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=32 */
 
 impl CrateRoot {
     pub(crate) fn is_proc_macro_crate(&self) -> bool {
@@ -1025,7 +985,6 @@ impl CrateRoot {
         self.target_modifiers.decode(metadata)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=missing | COMPLEXITY=367 | LINES=873 */
 
 impl<'a> CrateMetadataRef<'a> {
     fn missing(self, descr: &str, id: DefIndex) -> ! {
@@ -1899,7 +1858,6 @@ impl<'a> CrateMetadataRef<'a> {
             .decode(self)
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=num_def_ids | COMPLEXITY=64 | LINES=195 */
 
 impl CrateMetadata {
     pub(crate) fn new(

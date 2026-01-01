@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_lint/src/drop_forget_useless.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Arm, Expr, ExprKind, Node, StmtKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::sym;
 
 use crate::lints::{
     DropCopyDiag, DropRefDiag, ForgetCopyDiag, ForgetRefDiag, UndroppedManuallyDropsDiag,
     UndroppedManuallyDropsSuggestion, UseLetUnderscoreIgnoreSuggestion,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=28 */
 
 declare_lint! {
     /// The `dropping_references` lint checks for calls to `std::mem::drop` with a reference
@@ -42,7 +37,6 @@ declare_lint! {
     Warn,
     "calls to `std::mem::drop` with a reference instead of an owned value"
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=23 */
 
 declare_lint! {
     /// The `forgetting_references` lint checks for calls to `std::mem::forget` with a reference
@@ -66,7 +60,6 @@ declare_lint! {
     Warn,
     "calls to `std::mem::forget` with a reference instead of an owned value"
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=24 */
 
 declare_lint! {
     /// The `dropping_copy_types` lint checks for calls to `std::mem::drop` with a value
@@ -91,7 +84,6 @@ declare_lint! {
     Warn,
     "calls to `std::mem::drop` with a value that implements Copy"
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=28 */
 
 declare_lint! {
     /// The `forgetting_copy_types` lint checks for calls to `std::mem::forget` with a value
@@ -120,7 +112,6 @@ declare_lint! {
     Warn,
     "calls to `std::mem::forget` with a value that implements Copy"
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=22 */
 
 declare_lint! {
     /// The `undropped_manually_drops` lint check for calls to `std::mem::drop` with
@@ -143,7 +134,6 @@ declare_lint! {
     Deny,
     "calls to `std::mem::drop` with `std::mem::ManuallyDrop` instead of it's inner value"
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=47 | LINES=91 */
 
 declare_lint_pass!(DropForgetUseless => [DROPPING_REFERENCES, FORGETTING_REFERENCES, DROPPING_COPY_TYPES, FORGETTING_COPY_TYPES, UNDROPPED_MANUALLY_DROPS]);
 
@@ -235,7 +225,6 @@ impl<'tcx> LateLintPass<'tcx> for DropForgetUseless {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 // Dropping returned value of a function, as in the following snippet is considered idiomatic, see
 // rust-lang/rust-clippy#9482 for examples.
@@ -245,7 +234,6 @@ impl<'tcx> LateLintPass<'tcx> for DropForgetUseless {
 //     <pat> => drop(fn_with_side_effect_and_returning_some_value()),
 //     ..
 // }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_single_call_in_arm | COMPLEXITY=9 | LINES=13 */
 // ```
 fn is_single_call_in_arm<'tcx>(
     cx: &LateContext<'tcx>,

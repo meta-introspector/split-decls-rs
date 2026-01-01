@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sync/lock.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 // This module implements a lock which only uses synchronization if `might_be_dyn_thread_safe` is true.
 // It implements `DynSend` and `DynSync` instead of the typical `Send` and `Sync` traits.
 
@@ -10,21 +9,17 @@ pub enum Mode {
     NoSync,
     Sync,
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use std::cell::{Cell, UnsafeCell};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::intrinsics::unlikely;
 use std::marker::PhantomData;
 use std::mem::ManuallyDrop;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use parking_lot::RawMutex;
 use parking_lot::lock_api::RawMutex as _;
 
 use crate::sync::{DynSend, DynSync, mode};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LockGuard | COMPLEXITY=4 | LINES=11 */
 
 /// A guard holding mutable access to a `Lock` which is in a locked state.
 #[must_use = "if unused the Lock will immediately unlock"]
@@ -36,7 +31,6 @@ pub struct LockGuard<'a, T> {
     /// to the original lock operation.
     mode: Mode,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=10 */
 
 impl<'a, T: 'a> Deref for LockGuard<'a, T> {
     type Target = T;
@@ -47,7 +41,6 @@ impl<'a, T: 'a> Deref for LockGuard<'a, T> {
         unsafe { &*self.lock.data.get() }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=10 | LINES=8 */
 
 impl<'a, T: 'a> DerefMut for LockGuard<'a, T> {
     #[inline]
@@ -56,7 +49,6 @@ impl<'a, T: 'a> DerefMut for LockGuard<'a, T> {
         unsafe { &mut *self.lock.data.get() }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=21 | LINES=17 */
 
 impl<'a, T: 'a> Drop for LockGuard<'a, T> {
     #[inline]
@@ -74,7 +66,6 @@ impl<'a, T: 'a> Drop for LockGuard<'a, T> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 
 union ModeUnion {
     /// Indicates if the cell is locked. Only used if `Lock.mode` is `NoSync`.
@@ -83,7 +74,6 @@ union ModeUnion {
     /// A lock implementation that's only used if `Lock.mode` is `Sync`.
     sync: ManuallyDrop<RawMutex>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=15 | LINES=15 */
 
 /// The value representing a locked state for the `Cell`.
 const LOCKED: bool = true;
@@ -99,7 +89,6 @@ pub struct Lock<T> {
     mode_union: ModeUnion,
     data: UnsafeCell<T>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=68 | LINES=78 */
 
 impl<T> Lock<T> {
     #[inline(always)]
@@ -178,12 +167,9 @@ impl<T> Lock<T> {
         unsafe { self.lock_assume(self.mode) }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl<T: DynSend> DynSend for Lock<T> {}
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<T: DynSend> DynSync for Lock<T> {}
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=with_lock | COMPLEXITY=5 | LINES=20 */
 
 impl<T> Lock<T> {
     #[inline(always)]
@@ -204,7 +190,6 @@ impl<T> Lock<T> {
         self.lock()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<T: Default> Default for Lock<T> {
     #[inline]
@@ -212,7 +197,6 @@ impl<T: Default> Default for Lock<T> {
         Lock::new(T::default())
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=15 | LINES=18 */
 
 impl<T: fmt::Debug> fmt::Debug for Lock<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

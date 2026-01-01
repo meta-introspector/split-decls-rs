@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_passes/src/liveness/rwu_table.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter;
 
 use crate::liveness::{LiveNode, Variable};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy)]
 pub(super) struct RWU {
@@ -11,7 +9,6 @@ pub(super) struct RWU {
     pub(super) writer: bool,
     pub(super) used: bool,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 /// Conceptually, this is like a `Vec<Vec<RWU>>`. But the number of
 /// RWU's can get very large, so it uses a more compact representation.
@@ -33,7 +30,6 @@ pub(super) struct RWUTable {
     /// Number of words per each live node.
     live_node_words: usize,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=word_and_shift | COMPLEXITY=46 | LINES=115 */
 
 impl RWUTable {
     const RWU_READER: u8 = 0b0001;

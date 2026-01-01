@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/symbol/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=interner_tests | COMPLEXITY=3 | LINES=16 */
 use super::*;
 use crate::create_default_session_globals_then;
 
@@ -16,7 +15,6 @@ fn interner_tests() {
     // dog is still at zero
     assert_eq!(i.intern_str("dog"), Symbol::new(0));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=without_first_quote_test | COMPLEXITY=3 | LINES=8 */
 
 #[test]
 fn without_first_quote_test() {

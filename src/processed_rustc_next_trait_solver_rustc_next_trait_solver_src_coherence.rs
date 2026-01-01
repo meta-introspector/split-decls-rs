@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/coherence.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
@@ -9,7 +8,6 @@ use rustc_type_ir::{
     self as ty, InferCtxtLike, Interner, TrivialTypeTraversalImpls, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 use tracing::instrument;
 
 /// Whether we do the orphan check relative to this crate or to some remote crate.
@@ -18,7 +16,6 @@ pub enum InCrate {
     Local { mode: OrphanCheckMode },
     Remote,
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum OrphanCheckMode {
@@ -34,14 +31,12 @@ pub enum OrphanCheckMode {
     /// [#99554]: https://github.com/rust-lang/rust/issues/99554
     Compat,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone)]
 pub enum Conflict {
     Upstream,
     Downstream,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=trait_ref_is_knowable | COMPLEXITY=23 | LINES=55 */
 
 /// Returns whether all impls which would apply to the `trait_ref`
 /// e.g. `Ty: Trait<Arg>` are already known in the local crate.
@@ -97,22 +92,18 @@ where
         Ok(Err(Conflict::Upstream))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=trait_ref_is_local_or_fundamental | COMPLEXITY=2 | LINES=4 */
 
 pub fn trait_ref_is_local_or_fundamental<I: Interner>(tcx: I, trait_ref: ty::TraitRef<I>) -> bool {
     trait_ref.def_id.is_local() || tcx.trait_is_fundamental(trait_ref.def_id)
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 TrivialTypeTraversalImpls! { IsFirstInputType, }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone)]
 pub enum IsFirstInputType {
     No,
     Yes,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl From<bool> for IsFirstInputType {
     fn from(b: bool) -> IsFirstInputType {
@@ -122,21 +113,18 @@ impl From<bool> for IsFirstInputType {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive_where(Debug; I: Interner, T: Debug)]
 pub enum OrphanCheckErr<I: Interner, T> {
     NonLocalInputType(Vec<(I::Ty, IsFirstInputType)>),
     UncoveredTyParams(UncoveredTyParams<I, T>),
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UncoveredTyParams | COMPLEXITY=2 | LINES=6 */
 
 #[derive_where(Debug; I: Interner, T: Debug)]
 pub struct UncoveredTyParams<I: Interner, T> {
     pub uncovered: T,
     pub local_ty: Option<I::Ty>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=orphan_check_trait_ref | COMPLEXITY=75 | LINES=130 */
 
 /// Checks whether a trait-ref is potentially implementable by a crate.
 ///
@@ -267,7 +255,6 @@ where
         },
     })
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=OrphanChecker | COMPLEXITY=4 | LINES=10 */
 
 struct OrphanChecker<'a, Infcx, I: Interner, F> {
     infcx: &'a Infcx,
@@ -278,7 +265,6 @@ struct OrphanChecker<'a, Infcx, I: Interner, F> {
     search_first_local_ty: bool,
     non_local_tys: Vec<(I::Ty, IsFirstInputType)>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=38 */
 
 impl<'a, Infcx, I, F, E> OrphanChecker<'a, Infcx, I, F>
 where
@@ -317,14 +303,12 @@ where
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum OrphanCheckEarlyExit<I: Interner, E> {
     NormalizationFailure(E),
     UncoveredTyParam(I::Ty),
     LocalTy(I::Ty),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_region | COMPLEXITY=102 | LINES=178 */
 
 impl<'a, Infcx, I, F, E> TypeVisitor<I> for OrphanChecker<'a, Infcx, I, F>
 where

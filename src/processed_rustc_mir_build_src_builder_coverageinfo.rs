@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/coverageinfo.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::assert_matches::assert_matches;
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::mir::coverage::{BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BasicBlock, SourceInfo, UnOp};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::thir::{ExprId, ExprKind, Pat, Thir};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::def_id::LocalDefId;
 
 use crate::builder::{Builder, CFG};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 /// Collects coverage-related information during MIR building, to eventually be
 /// turned into a function's [`CoverageInfoHi`] when MIR building is complete.
@@ -27,13 +22,11 @@ pub(crate) struct CoverageInfoBuilder {
     /// Present if branch coverage is enabled.
     branch_info: Option<BranchInfo>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=BranchInfo | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 struct BranchInfo {
     branch_spans: Vec<BranchSpan>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=NotInfo | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Clone, Copy)]
 struct NotInfo {
@@ -44,13 +37,11 @@ struct NotInfo {
     /// expressions relative to `enclosing_not` (inclusive of `enclosing_not`).
     is_flipped: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=BlockMarkerGen | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 struct BlockMarkerGen {
     num_block_markers: usize,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=next_block_marker_id | COMPLEXITY=6 | LINES=24 */
 
 impl BlockMarkerGen {
     fn next_block_marker_id(&mut self) -> BlockMarkerId {
@@ -75,7 +66,6 @@ impl BlockMarkerGen {
         id
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_with_not_info | COMPLEXITY=65 | LINES=108 */
 
 impl CoverageInfoBuilder {
     /// Creates a new coverage info builder, but only if coverage instrumentation
@@ -184,7 +174,6 @@ impl CoverageInfoBuilder {
         Box::new(CoverageInfoHi { num_block_markers, branch_spans })
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=52 | LINES=101 */
 
 impl<'tcx> Builder<'_, 'tcx> {
     /// If condition coverage is enabled, inject extra blocks and marker statements

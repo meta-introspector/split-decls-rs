@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/inspect/build.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // Building proof trees incrementally during trait solving.
 //
 // This code is *a bit* of a mess and can hopefully be
@@ -11,12 +10,10 @@ use std::marker::PhantomData;
 use derive_where::derive_where;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::eval_ctxt::canonical;
 use crate::solve::{Certainty, Goal, GoalSource, QueryResult, inspect};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 /// We need to know whether to build a prove tree while evaluating. We
 /// pass a `ProofTreeBuilder` with `state: Some(None)` into the search
@@ -34,7 +31,6 @@ where
     state: Option<Box<Option<inspect::Probe<I>>>>,
     _infcx: PhantomData<D>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=50 */
 
 impl<D: SolverDelegate<Interner = I>, I: Interner> ProofTreeBuilder<D> {
     pub(crate) fn new() -> ProofTreeBuilder<D> {
@@ -85,7 +81,6 @@ impl<D: SolverDelegate<Interner = I>, I: Interner> ProofTreeBuilder<D> {
         self.state.unwrap().unwrap()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct EvaluationStepBuilder<D, I = <D as SolverDelegate>::Interner>
 where
@@ -95,7 +90,6 @@ where
     state: Option<Box<WipEvaluationStep<I>>>,
     _infcx: PhantomData<D>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=WipEvaluationStep | COMPLEXITY=2 | LINES=13 */
 
 #[derive_where(PartialEq, Eq, Debug; I: Interner)]
 struct WipEvaluationStep<I: Interner> {
@@ -109,7 +103,6 @@ struct WipEvaluationStep<I: Interner> {
     probe_depth: usize,
     evaluation: WipProbe<I>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=current_evaluation_scope | COMPLEXITY=18 | LINES=21 */
 
 impl<I: Interner> WipEvaluationStep<I> {
     fn current_evaluation_scope(&mut self) -> &mut WipProbe<I> {
@@ -131,7 +124,6 @@ impl<I: Interner> WipEvaluationStep<I> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=WipProbe | COMPLEXITY=2 | LINES=8 */
 
 #[derive_where(PartialEq, Debug; I: Interner)]
 struct WipProbe<I: Interner> {
@@ -140,10 +132,8 @@ struct WipProbe<I: Interner> {
     kind: Option<inspect::ProbeKind<I>>,
     final_state: Option<inspect::CanonicalState<I, ()>>,
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for WipProbe<I> {}
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=4 | LINES=10 */
 
 impl<I: Interner> WipProbe<I> {
     fn finalize(self) -> inspect::Probe<I> {
@@ -154,7 +144,6 @@ impl<I: Interner> WipProbe<I> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive_where(PartialEq, Debug; I: Interner)]
 enum WipProbeStep<I: Interner> {
@@ -163,10 +152,8 @@ enum WipProbeStep<I: Interner> {
     MakeCanonicalResponse { shallow_certainty: Certainty },
     RecordImplArgs { impl_args: inspect::CanonicalState<I, I::GenericArgs> },
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for WipProbeStep<I> {}
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=14 | LINES=15 */
 
 impl<I: Interner> WipProbeStep<I> {
     fn finalize(self) -> inspect::ProbeStep<I> {
@@ -182,7 +169,6 @@ impl<I: Interner> WipProbeStep<I> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=as_mut | COMPLEXITY=55 | LINES=119 */
 
 impl<D: SolverDelegate<Interner = I>, I: Interner> EvaluationStepBuilder<D> {
     pub(crate) fn new_noop() -> EvaluationStepBuilder<D> {

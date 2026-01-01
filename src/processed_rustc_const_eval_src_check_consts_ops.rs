@@ -1,38 +1,30 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/ops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Concrete error types for all operations which may be invalid in a certain const context.
 
 use hir::{ConstContext, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Diag;
 use crate::rustc_complete::codes::*;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::traits::{ImplSource, Obligation, ObligationCause};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::CallSource;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, Closure, FnDef, FnPtr, GenericArgKind, GenericArgsRef, Param, TraitRef, Ty,
     suggest_constraining_type_param,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::add_feature_diagnostics;
 use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::error_reporting::traits::call_kind::{
     CallDesugaringKind, CallKind, call_kind,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::traits::SelectionContext;
 use tracing::debug;
 
 use super::ConstCx;
 use crate::{errors, fluent_generated};
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Status {
@@ -51,7 +43,6 @@ pub enum Status {
     },
     Forbidden,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Clone, Copy)]
 pub enum DiagImportance {
@@ -61,7 +52,6 @@ pub enum DiagImportance {
     /// An operation that causes const-checking to fail, but is usually a side-effect of a `Primary` operation elsewhere.
     Secondary,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=4 | LINES=14 */
 
 /// An operation that is *not allowed* in a const context.
 pub trait NonConstOp<'tcx>: std::fmt::Debug {
@@ -76,7 +66,6 @@ pub trait NonConstOp<'tcx>: std::fmt::Debug {
 
     fn build_error(&self, ccx: &ConstCx<'_, 'tcx>, span: Span) -> Diag<'tcx>;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=9 */
 
 /// A function call where the callee is a pointer.
 #[derive(Debug)]
@@ -86,7 +75,6 @@ impl<'tcx> NonConstOp<'tcx> for FnCallIndirect {
         ccx.dcx().create_err(errors::UnallowedFnPointerCall { span, kind: ccx.const_kind() })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// A call to a function that is in a trait, or has trait bounds that make it conditionally-const.
 #[derive(Debug)]
@@ -96,7 +84,6 @@ pub(crate) struct ConditionallyConstCall<'tcx> {
     pub span: Span,
     pub call_source: CallSource,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=11 | LINES=31 */
 
 impl<'tcx> NonConstOp<'tcx> for ConditionallyConstCall<'tcx> {
     fn status_in_item(&self, _ccx: &ConstCx<'_, 'tcx>) -> Status {
@@ -128,7 +115,6 @@ impl<'tcx> NonConstOp<'tcx> for ConditionallyConstCall<'tcx> {
         diag
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// A function call where the callee is not marked as `const`.
 #[derive(Debug, Clone, Copy)]
@@ -138,7 +124,6 @@ pub(crate) struct FnCallNonConst<'tcx> {
     pub span: Span,
     pub call_source: CallSource,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=32 | LINES=67 */
 
 impl<'tcx> NonConstOp<'tcx> for FnCallNonConst<'tcx> {
     // FIXME: make this translatable
@@ -206,7 +191,6 @@ impl<'tcx> NonConstOp<'tcx> for FnCallNonConst<'tcx> {
         err
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=build_error_for_const_call | COMPLEXITY=94 | LINES=179 */
 
 /// Build an error message reporting that a function call is not const (or only
 /// conditionally const). In case that this call is desugared (like an operator
@@ -386,7 +370,6 @@ fn build_error_for_const_call<'tcx>(
 
     err
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 /// A call to an `#[unstable]` const fn, `#[rustc_const_unstable]` function or trait.
 ///
@@ -402,7 +385,6 @@ pub(crate) struct CallUnstable {
     /// true if `def_id` is the function we are calling, false if `def_id` is an unstable trait.
     pub is_function_call: bool,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=14 | LINES=28 */
 
 impl<'tcx> NonConstOp<'tcx> for CallUnstable {
     fn status_in_item(&self, _ccx: &ConstCx<'_, 'tcx>) -> Status {
@@ -431,14 +413,12 @@ impl<'tcx> NonConstOp<'tcx> for CallUnstable {
         err
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// A call to an intrinsic that is just not const-callable at all.
 #[derive(Debug)]
 pub(crate) struct IntrinsicNonConst {
     pub name: Symbol,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> NonConstOp<'tcx> for IntrinsicNonConst {
     fn build_error(&self, ccx: &ConstCx<'_, 'tcx>, span: Span) -> Diag<'tcx> {
@@ -449,7 +429,6 @@ impl<'tcx> NonConstOp<'tcx> for IntrinsicNonConst {
         })
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// A call to an intrinsic that is just not const-callable at all.
 #[derive(Debug)]
@@ -458,7 +437,6 @@ pub(crate) struct IntrinsicUnstable {
     pub feature: Symbol,
     pub const_stable_indirect: bool,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> NonConstOp<'tcx> for IntrinsicUnstable {
     fn status_in_item(&self, _ccx: &ConstCx<'_, 'tcx>) -> Status {
@@ -481,7 +459,6 @@ impl<'tcx> NonConstOp<'tcx> for IntrinsicUnstable {
         })
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=22 | LINES=31 */
 
 #[derive(Debug)]
 pub(crate) struct Coroutine(pub hir::CoroutineKind);
@@ -513,7 +490,6 @@ impl<'tcx> NonConstOp<'tcx> for Coroutine {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=12 */
 
 #[derive(Debug)]
 pub(crate) struct HeapAllocation;
@@ -526,7 +502,6 @@ impl<'tcx> NonConstOp<'tcx> for HeapAllocation {
         })
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=8 */
 
 #[derive(Debug)]
 pub(crate) struct InlineAsm;
@@ -535,7 +510,6 @@ impl<'tcx> NonConstOp<'tcx> for InlineAsm {
         ccx.dcx().create_err(errors::UnallowedInlineAsm { span, kind: ccx.const_kind() })
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 pub(crate) struct LiveDrop<'tcx> {
@@ -543,7 +517,6 @@ pub(crate) struct LiveDrop<'tcx> {
     pub dropped_ty: Ty<'tcx>,
     pub needs_non_const_drop: bool,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=19 | LINES=35 */
 impl<'tcx> NonConstOp<'tcx> for LiveDrop<'tcx> {
     fn status_in_item(&self, _ccx: &ConstCx<'_, 'tcx>) -> Status {
         if self.needs_non_const_drop {
@@ -579,7 +552,6 @@ impl<'tcx> NonConstOp<'tcx> for LiveDrop<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=importance | COMPLEXITY=14 | LINES=16 */
 
 #[derive(Debug)]
 /// A borrow of a type that contains an `UnsafeCell` somewhere. The borrow might escape to
@@ -596,7 +568,6 @@ impl<'tcx> NonConstOp<'tcx> for EscapingCellBorrow {
         ccx.dcx().create_err(errors::InteriorMutableBorrowEscaping { span, kind: ccx.const_kind() })
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=status_in_item | COMPLEXITY=13 | LINES=22 */
 
 #[derive(Debug)]
 /// This op is for `&mut` borrows in the trailing expression of a constant
@@ -619,7 +590,6 @@ impl<'tcx> NonConstOp<'tcx> for EscapingMutBorrow {
         ccx.dcx().create_err(errors::MutableBorrowEscaping { span, kind: ccx.const_kind() })
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=9 */
 
 /// A call to a `panic()` lang item where the first argument is _not_ a `&str`.
 #[derive(Debug)]
@@ -629,7 +599,6 @@ impl<'tcx> NonConstOp<'tcx> for PanicNonStr {
         ccx.dcx().create_err(errors::PanicNonStrErr { span })
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=9 | LINES=12 */
 
 /// Comparing raw pointers for equality.
 /// Not currently intended to ever be allowed, even behind a feature gate: operation depends on
@@ -642,7 +611,6 @@ impl<'tcx> NonConstOp<'tcx> for RawPtrComparison {
         ccx.dcx().create_err(errors::RawPtrComparisonErr { span })
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=11 */
 
 /// Casting raw pointer or function pointer to an integer.
 /// Not currently intended to ever be allowed, even behind a feature gate: operation depends on
@@ -654,7 +622,6 @@ impl<'tcx> NonConstOp<'tcx> for RawPtrToIntCast {
         ccx.dcx().create_err(errors::RawPtrToIntErr { span })
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=build_error | COMPLEXITY=6 | LINES=9 */
 
 /// An access to a thread-local `static`.
 #[derive(Debug)]

@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/pattern/const_to_pat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use core::ops::ControlFlow;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use rustc_apfloat::Float;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::Diag;
@@ -16,25 +14,20 @@ use crate::rustc_infer::traits::Obligation;
 use crate::rustc_complete::mir::interpret::ErrorHandled;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::thir::{FieldPat, Pat, PatKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitableExt, TypeVisitor, ValTree,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::ObligationCause;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::PatCtxt;
 use crate::errors::{
     ConstPatternDependsOnGenericParameter, CouldNotEvalConstPattern, InvalidPattern, NaNPattern,
     PointerPattern, TypeNotPartialEq, TypeNotStructural, UnionPattern, UnsizedPattern,
 };
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=26 */
 
 impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
     /// Converts a constant to a pattern (if possible).
@@ -61,7 +54,6 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ConstToPat | COMPLEXITY=2 | LINES=9 */
 
 struct ConstToPat<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -71,7 +63,6 @@ struct ConstToPat<'tcx> {
 
     c: ty::Const<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=173 | LINES=288 */
 
 impl<'tcx> ConstToPat<'tcx> {
     fn new(pat_ctxt: &PatCtxt<'_, 'tcx>, id: hir::HirId, span: Span, c: ty::Const<'tcx>) -> Self {
@@ -360,7 +351,6 @@ impl<'tcx> ConstToPat<'tcx> {
         Box::new(Pat { span, ty, kind })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=extend_type_not_partial_eq | COMPLEXITY=70 | LINES=107 */
 
 /// Given a type with type parameters, visit every ADT looking for types that need to
 /// `#[derive(PartialEq)]` for it to be a structural type.
@@ -468,7 +458,6 @@ fn extend_type_not_partial_eq<'tcx>(
         ));
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=PartialEqImplStatus | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 struct PartialEqImplStatus {
@@ -477,7 +466,6 @@ struct PartialEqImplStatus {
     structural_partial_eq: bool,
     non_blanket_impl: Option<DefId>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=type_has_partial_eq_impl | COMPLEXITY=20 | LINES=52 */
 
 #[instrument(level = "trace", skip(tcx), ret)]
 fn type_has_partial_eq_impl<'tcx>(

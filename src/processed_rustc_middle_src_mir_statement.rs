@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/statement.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Functionality for statements, operands, places, and things that appear in them.
 
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Statement | COMPLEXITY=2 | LINES=15 */
 
 use super::interpret::GlobalAlloc;
 use super::*;
@@ -19,7 +17,6 @@ pub struct Statement<'tcx> {
     pub source_info: SourceInfo,
     pub kind: StatementKind<'tcx>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=make_nop | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> Statement<'tcx> {
     /// Changes a statement to a nop. This is both faster than deleting instructions and avoids
@@ -32,7 +29,6 @@ impl<'tcx> Statement<'tcx> {
         Statement { source_info, kind }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=as_assign_mut | COMPLEXITY=22 | LINES=36 */
 
 impl<'tcx> StatementKind<'tcx> {
     /// Returns a simple string representation of a `StatementKind` variant, independent of any
@@ -69,7 +65,6 @@ impl<'tcx> StatementKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=PlaceTy | COMPLEXITY=4 | LINES=10 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Places
@@ -80,7 +75,6 @@ pub struct PlaceTy<'tcx> {
     /// Downcast to a particular variant of an enum or a coroutine, if included.
     pub variant_index: Option<VariantIdx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_ty | COMPLEXITY=96 | LINES=159 */
 
 // At least on 64 bit systems, `PlaceTy` should not be larger than two or three pointers.
 #[cfg(target_pointer_width = "64")]
@@ -240,7 +234,6 @@ impl<'tcx> PlaceTy<'tcx> {
         answer
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_indirect | COMPLEXITY=59 | LINES=92 */
 
 impl<V, T> ProjectionElem<V, T> {
     /// Returns `true` if the target of this projection may refer to a different region of memory
@@ -333,7 +326,6 @@ impl<V, T> ProjectionElem<V, T> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=PlaceRef | COMPLEXITY=8 | LINES=10 */
 
 /// Alias for projections as they appear in `UserTypeProjection`, where we
 /// need neither the `V` parameter for `Index` nor the `T` for `Field`.
@@ -344,14 +336,12 @@ pub struct PlaceRef<'tcx> {
     pub local: Local,
     pub projection: &'tcx [PlaceElem<'tcx>],
 }
-/* AST_META: AST_ID=9 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 // Once we stop implementing `Ord` for `DefId`,
 // this impl will be unnecessary. Until then, we'll
 // leave this impl in place to prevent re-adding a
 // dependency on the `Ord` impl for `DefId`
 impl<'tcx> !PartialOrd for PlaceRef<'tcx> {}
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=return_place | COMPLEXITY=29 | LINES=86 */
 
 impl<'tcx> Place<'tcx> {
     // FIXME change this to a const fn by also making List::empty a const fn.
@@ -438,7 +428,6 @@ impl<'tcx> Place<'tcx> {
         Place::ty_from(self.local, self.projection, local_decls, tcx)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl From<Local> for Place<'_> {
     #[inline]
@@ -446,7 +435,6 @@ impl From<Local> for Place<'_> {
         Place { local, projection: List::empty() }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=local_or_deref_local | COMPLEXITY=48 | LINES=102 */
 
 impl<'tcx> PlaceRef<'tcx> {
     /// Finds the innermost `Local` from this `Place`, *if* it is either a local itself or
@@ -549,7 +537,6 @@ impl<'tcx> PlaceRef<'tcx> {
         Place::ty_from(self.local, self.projection, local_decls, tcx)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl From<Local> for PlaceRef<'_> {
     #[inline]
@@ -557,7 +544,6 @@ impl From<Local> for PlaceRef<'_> {
         PlaceRef { local, projection: &[] }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=function_handle | COMPLEXITY=61 | LINES=109 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Operands
@@ -667,7 +653,6 @@ impl<'tcx> Operand<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=check_static_ptr | COMPLEXITY=14 | LINES=20 */
 
 impl<'tcx> ConstOperand<'tcx> {
     pub fn check_static_ptr(&self, tcx: TyCtxt<'_>) -> Option<DefId> {
@@ -688,7 +673,6 @@ impl<'tcx> ConstOperand<'tcx> {
         self.const_.ty()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Rvalues
@@ -697,7 +681,6 @@ pub enum RvalueInitializationState {
     Shallow,
     Deep,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_safe_to_remove | COMPLEXITY=42 | LINES=105 */
 
 impl<'tcx> Rvalue<'tcx> {
     /// Returns true if rvalue can be safely removed when the result is unused.
@@ -803,7 +786,6 @@ impl<'tcx> Rvalue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=mutability | COMPLEXITY=24 | LINES=33 */
 
 impl BorrowKind {
     pub fn mutability(&self) -> Mutability {
@@ -837,7 +819,6 @@ impl BorrowKind {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=7 | LINES=9 */
 
 impl<'tcx> NullOp<'tcx> {
     pub fn ty(&self, tcx: TyCtxt<'tcx>) -> Ty<'tcx> {
@@ -847,7 +828,6 @@ impl<'tcx> NullOp<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=7 | LINES=9 */
 
 impl<'tcx> UnOp {
     pub fn ty(&self, tcx: TyCtxt<'tcx>, arg_ty: Ty<'tcx>) -> Ty<'tcx> {
@@ -857,7 +837,6 @@ impl<'tcx> UnOp {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=38 | LINES=100 */
 
 impl<'tcx> BinOp {
     pub fn ty(&self, tcx: TyCtxt<'tcx>, lhs_ty: Ty<'tcx>, rhs_ty: Ty<'tcx>) -> Ty<'tcx> {
@@ -958,7 +937,6 @@ impl<'tcx> BinOp {
         })
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl From<Mutability> for RawPtrKind {
     fn from(other: Mutability) -> Self {
@@ -968,7 +946,6 @@ impl From<Mutability> for RawPtrKind {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=is_fake | COMPLEXITY=18 | LINES=28 */
 
 impl RawPtrKind {
     pub fn is_fake(self) -> bool {

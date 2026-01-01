@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/conflict_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // ignore-tidy-filelength
 
 #[allow(rustc::diagnostic_outside_of_impl)]
@@ -10,18 +9,13 @@ use std::ops::ControlFlow;
 
 use either::Either;
 use hir::{ClosureKind, Path};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, MultiSpan, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{Visitor, walk_block, walk_expr};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, LangItem, PatField};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::nested_filter::OnlyBodies;
 use crate::rustc_complete::mir::{
@@ -30,20 +24,15 @@ use crate::rustc_complete::mir::{
     Operand, Place, PlaceRef, PlaceTy, ProjectionElem, Rvalue, Statement, StatementKind,
     Terminator, TerminatorKind, VarBindingForm, VarDebugInfoContents,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
 use crate::rustc_complete::ty::{
     self, PredicateKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitor, Upcast,
     suggest_constraining_type_params,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::move_paths::{InitKind, MoveOutIndex, MovePathIndex};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::hygiene::DesugaringKind;
 use crate::rustc_complete::{BytePos, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
 use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
@@ -52,22 +41,15 @@ use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtE
 use crate::rustc_trait_selection::traits::{
     Obligation, ObligationCause, ObligationCtxt, supertrait_def_ids,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::explain_borrow::{BorrowExplanation, LaterUseKind};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{DescribePlaceOpt, RegionName, RegionNameSource, UseSpans};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::borrow_set::{BorrowData, TwoPhaseActivation};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::diagnostics::conflict_errors::StorageDeadOrDrop::LocalStorageDead;
 use crate::diagnostics::{CapturedMessageOpt, call_kind, find_all_local_uses};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::prefixes::IsPrefixOf;
 use crate::{InitializationRequiringAction, MirBorrowckCtxt, WriteKind, borrowck_errors};
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=MoveSite | COMPLEXITY=6 | LINES=11 */
 
 #[derive(Debug)]
 struct MoveSite {
@@ -79,7 +61,6 @@ struct MoveSite {
     /// of error to the move site.
     traversed_back_edge: bool,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Which case a StorageDeadOrDrop is for.
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -88,7 +69,6 @@ enum StorageDeadOrDrop<'tcx> {
     BoxedStorageDead,
     Destructor(Ty<'tcx>),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=suggest_ref_or_clone | COMPLEXITY=2553 | LINES=4548 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     pub(crate) fn report_use_of_moved_or_uninitialized(

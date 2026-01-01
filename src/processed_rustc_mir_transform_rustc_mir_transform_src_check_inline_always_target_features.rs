@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_inline_always_target_features.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, TerminatorKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=5 | LINES=10 */
 
 use crate::pass_manager::MirLint;
 
@@ -17,7 +13,6 @@ impl<'tcx> MirLint<'tcx> for CheckInlineAlwaysTargetFeature {
         check_inline_always_target_features(tcx, body)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_inline_always_target_features | COMPLEXITY=41 | LINES=74 */
 
 /// `#[target_feature]`-annotated functions can be marked `#[inline]` and will only be inlined if
 /// the target features match (as well as all of the other inlining heuristics). `#[inline(always)]`

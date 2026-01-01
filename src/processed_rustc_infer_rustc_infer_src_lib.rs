@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=3 | LINES=30 */
 // This crates defines the type inference engine.
 //
 // - **Type inference.** The type inference code can be found in the `infer` module;

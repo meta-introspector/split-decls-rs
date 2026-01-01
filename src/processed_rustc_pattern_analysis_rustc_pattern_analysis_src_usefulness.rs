@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/usefulness.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=53 */
 // # Match exhaustiveness and redundancy algorithm
 //
 // This file contains the logic for exhaustiveness and usefulness checking for pattern-matching.
@@ -53,7 +52,6 @@
 //     None => {},          // useful: `None` is matched by this but not the branches above
 // }
 // # }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=13 */
 // ```
 //
 // This is also enough to compute exhaustiveness: a match is exhaustive iff the wildcard `_`
@@ -67,7 +65,6 @@
 //     // not exhaustive: `_` is useful because it matches `Some(1)`
 // }
 // # }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // ```
 //
 //
@@ -76,7 +73,6 @@
 // In the value `Pair(Some(0), true)`, `Pair` is called the constructor of the value, and `Some(0)`
 // and `true` are its fields. Every matchable value can be decomposed in this way. Examples of
 // constructors are: `Some`, `None`, `(,)` (the 2-tuple constructor), `Foo {..}` (the constructor
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=18 */
 // for a struct `Foo`), and `2` (the constructor for the number `2`).
 //
 // Each constructor takes a fixed number of fields; this is called its arity. `Pair` and `(,)` have
@@ -95,7 +91,6 @@
 // - `matches!(v, _) := true`
 // - `matches!((v0,  v1), (p0,  p1)) := matches!(v0, p0) && matches!(v1, p1)`
 // - `matches!(Foo { bar: v0, baz: v1 }, Foo { bar: p0, baz: p1 }) := matches!(v0, p0) && matches!(v1, p1)`
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=34 */
 // - `matches!(Ok(v0), Ok(p0)) := matches!(v0, p0)`
 // - `matches!(Ok(v0), Err(p0)) := false` (incompatible variants)
 // - `matches!(v, 1..=100) := matches!(v, 1) || ... || matches!(v, 100)`
@@ -130,7 +125,6 @@
 //
 //   - `specialize(Variant1, Variant1(p0, p1, p2)) := (p0, p1, p2)`
 //   - `specialize(Foo{ bar, baz, quz }, Foo { bar: p0, baz: p1, .. }) := (p0, p1, _)`
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=27 | LINES=67 */
 //   - `specialize([,,,], [p0, .., p1]) := (p0, _, _, p1)`
 //
 // We get the following property: for any values `v_1, .., v_n` of appropriate types, we have:
@@ -198,7 +192,6 @@
 // Let's take the following example:
 // ```compile_fail,E0004
 // # enum Enum { Variant1(()), Variant2(Option<bool>, u32)}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 // # use Enum::*;
 // # fn foo(x: Enum) {
 // match x {
@@ -207,7 +200,6 @@
 //     Variant2(Some(_), 0) => {} // `q`
 // }
 // # }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=36 | LINES=76 */
 // ```
 //
 // To compute the usefulness of `q`, we would proceed as follows:
@@ -284,7 +276,6 @@
 //     (50..=150, false) => {}
 //     (0 ..=200, _) => {}
 // }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // ```
 //
 // In this example, trying any of `0`, `1`, .., `49` will give the same specialized matrix, and
@@ -294,13 +285,11 @@
 //
 // ```
 // enum Direction { North, South, East, West }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 // # let wind = (Direction::North, 0u8);
 // match wind {
 //     (Direction::North, 50..) => {}
 //     (_, _) => {}
 // }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
 // ```
 //
 // In this example, trying any of `South`, `East`, `West` will give the same specialized matrix. By
@@ -323,7 +312,6 @@
 //     (true, _) => 1,
 //     (_, true) => 2,
 // };
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=24 */
 // ```
 //
 // Consider the value `(true, true)`:
@@ -348,13 +336,11 @@
 //
 // ```compile_fail,E0004
 // enum Direction { North, South, East, West }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 // # let wind = (Direction::North, 0u8);
 // match wind {
 //     (Direction::North, _) => 1,
 //     (_, 50..) => 2,
 // };
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=31 */
 // ```
 //
 // Here `South`, `East` and `West` are missing in the first column, and `0..50`  is missing in the
@@ -386,7 +372,6 @@
 //     (true, _, true) => 1,
 //     (_, true, _) => 2,
 // };
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=61 */
 // ```
 //
 // ```text
@@ -448,7 +433,6 @@
 //     (_, _, _, true, ..) => 4,
 //     ...
 // }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=18 */
 // ```
 //
 // Without considering relevancy, we would explore all 2^n combinations of the `true` and `Missing`
@@ -467,7 +451,6 @@
 // match foo {
 //     (true, true) => {}
 // }
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=28 */
 // ```
 //
 // we only report `(false, _)` as missing. This was a deliberate choice made early in the
@@ -496,11 +479,9 @@
 //
 // * literals (`1`, `true`, `"foo"`)
 // * named or inline consts (`FOO`, `const { 5 + 6 }`)
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 //
 // The latter are converted into the corresponding patterns by a previous phase. For example
 // `const_to_pat(const { [1, 2, 3] })` becomes an `Array(vec![Const(1), Const(2), Const(3)])`
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=17 */
 // pattern. This gets problematic when comparing the constant via `==` would behave differently
 // from matching on the constant converted to a pattern. The situation around this is currently
 // unclear and the lang team is working on clarifying what we want to do there. In any case, there
@@ -518,7 +499,6 @@
 //
 // ```rust
 // enum Void {}
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=7 */
 // let x: u8 = 0;
 // let ptr: *const Void = &x as *const u8 as *const Void;
 // unsafe {
@@ -526,7 +506,6 @@
 //         _ => println!("Reachable!"),
 //     }
 // }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // ```
 //
 // In this example, `ptr` is a valid pointer pointing to a place with invalid data. The `_` pattern
@@ -537,7 +516,6 @@
 // ```rust
 // # #[derive(Copy, Clone)]
 // # enum Void {}
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=7 */
 // # let x: u8 = 0;
 // # let ptr: *const Void = &x as *const u8 as *const Void;
 // # unsafe {
@@ -545,7 +523,6 @@
 //     _a => println!("Unreachable!"),
 // }
 // # }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 // ```
 //
 // Here the binding loads the value of type `Void` from the `*ptr` place. In this example, this
@@ -553,7 +530,6 @@
 // `*ptr`. Either way, this arm will never be taken.
 //
 // Finally, let's consider the empty match `match *ptr {}`. If we consider this exhaustive, then
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=35 */
 // having invalid data at `*ptr` is invalid. In other words, the empty match is semantically
 // equivalent to the `_a => ...` match. In the interest of explicitness, we prefer the case with an
 // arm, hence we won't tell the user to remove the `_a` arm. In other words, the `_a` arm is
@@ -589,7 +565,6 @@
 //     Pair(Some(0), false) => 3,
 // }
 // # }
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=31 | LINES=149 */
 // ```
 //
 // We keep track of the original row for illustration purposes, this is not what the algorithm
@@ -739,25 +714,18 @@ use std::fmt;
 #[cfg(feature = "rustc")]
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_hash::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=28 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use self::PlaceValidity::*;
 use crate::constructor::{Constructor, ConstructorSet, IntRange};
-/* AST_META: AST_ID=29 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::pat::{DeconstructedPat, PatId, PatOrWild, WitnessPat};
-/* AST_META: AST_ID=30 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{MatchArm, PatCx, PrivateUninhabitedField, checks};
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=ensure_sufficient_stack | COMPLEXITY=2 | LINES=4 */
 #[cfg(not(feature = "rustc"))]
 pub fn ensure_sufficient_stack<R>(f: impl FnOnce() -> R) -> R {
     f()
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=BranchPatUsefulness | COMPLEXITY=16 | LINES=15 */
 
 /// A pattern is a "branch" if it is the immediate child of an or-pattern, or if it is the whole
 /// pattern of a match arm. These are the patterns that can be meaningfully considered "redundant",
@@ -773,7 +741,6 @@ struct BranchPatUsefulness<'p, Cx: PatCx> {
     /// - at the end of the algorithm, if `!self.useful`, their union covers this pattern.
     covered_by: FxHashSet<&'p DeconstructedPat<Cx>>,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=update | COMPLEXITY=30 | LINES=42 */
 
 impl<'p, Cx: PatCx> BranchPatUsefulness<'p, Cx> {
     /// Update `self` with the usefulness information found in `row`.
@@ -816,14 +783,12 @@ impl<'p, Cx: PatCx> BranchPatUsefulness<'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<'p, Cx: PatCx> Default for BranchPatUsefulness<'p, Cx> {
     fn default() -> Self {
         Self { useful: Default::default(), covered_by: Default::default() }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UsefulnessCtxt | COMPLEXITY=7 | LINES=14 */
 
 /// Context that provides information for usefulness checking.
 struct UsefulnessCtxt<'a, 'p, Cx: PatCx> {
@@ -838,7 +803,6 @@ struct UsefulnessCtxt<'a, 'p, Cx: PatCx> {
     complexity_limit: usize,
     complexity_level: usize,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=increase_complexity_level | COMPLEXITY=7 | LINES=11 */
 
 impl<'a, 'p, Cx: PatCx> UsefulnessCtxt<'a, 'p, Cx> {
     fn increase_complexity_level(&mut self, complexity_add: usize) -> Result<(), Cx::Error> {
@@ -850,7 +814,6 @@ impl<'a, 'p, Cx: PatCx> UsefulnessCtxt<'a, 'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=PlaceCtxt | COMPLEXITY=2 | LINES=7 */
 
 /// Context that provides information local to a place under investigation.
 struct PlaceCtxt<'a, Cx: PatCx> {
@@ -858,23 +821,19 @@ struct PlaceCtxt<'a, Cx: PatCx> {
     /// Type of the place under investigation.
     ty: &'a Cx::Ty,
 }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'a, Cx: PatCx> Copy for PlaceCtxt<'a, Cx> {}
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=5 */
 impl<'a, Cx: PatCx> Clone for PlaceCtxt<'a, Cx> {
     fn clone(&self) -> Self {
         Self { cx: self.cx, ty: self.ty }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, Cx: PatCx> fmt::Debug for PlaceCtxt<'a, Cx> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt.debug_struct("PlaceCtxt").field("ty", self.ty).finish()
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=ctor_arity | COMPLEXITY=4 | LINES=9 */
 
 impl<'a, Cx: PatCx> PlaceCtxt<'a, Cx> {
     fn ctor_arity(&self, ctor: &Constructor<Cx>) -> usize {
@@ -884,7 +843,6 @@ impl<'a, Cx: PatCx> PlaceCtxt<'a, Cx> {
         WitnessPat::wild_from_ctor(self.cx, ctor, self.ty.clone())
     }
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Track whether a given place (aka column) is known to contain a valid value or not.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
@@ -892,7 +850,6 @@ pub enum PlaceValidity {
     ValidOnly,
     MaybeInvalid,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=from_bool | COMPLEXITY=15 | LINES=27 */
 
 impl PlaceValidity {
     pub fn from_bool(is_valid_only: bool) -> Self {
@@ -920,7 +877,6 @@ impl PlaceValidity {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=10 */
 
 impl fmt::Display for PlaceValidity {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -931,7 +887,6 @@ impl fmt::Display for PlaceValidity {
         write!(f, "{s}")
     }
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=PlaceInfo | COMPLEXITY=3 | LINES=14 */
 
 /// Data about a place under investigation. Its methods contain a lot of the logic used to analyze
 /// the constructors in the matrix.
@@ -946,7 +901,6 @@ struct PlaceInfo<Cx: PatCx> {
     /// Whether the place is the scrutinee itself or a subplace of it.
     is_scrutinee: bool,
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=specialize | COMPLEXITY=47 | LINES=105 */
 
 impl<Cx: PatCx> PlaceInfo<Cx> {
     /// Given a constructor for the current place, we return one `PlaceInfo` for each field of the
@@ -1052,7 +1006,6 @@ impl<Cx: PatCx> PlaceInfo<Cx> {
         Ok((split_ctors, missing_ctors))
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=11 */
 
 impl<Cx: PatCx> Clone for PlaceInfo<Cx> {
     fn clone(&self) -> Self {
@@ -1064,7 +1017,6 @@ impl<Cx: PatCx> Clone for PlaceInfo<Cx> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=PatStack | COMPLEXITY=7 | LINES=13 */
 
 /// Represents a pattern-tuple under investigation.
 // The three lifetimes are:
@@ -1078,14 +1030,12 @@ struct PatStack<'p, Cx: PatCx> {
     /// to skip a case entirely. This is purely an optimization. See at the top for details.
     relevant: bool,
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
 
 impl<'p, Cx: PatCx> Clone for PatStack<'p, Cx> {
     fn clone(&self) -> Self {
         Self { pats: self.pats.clone(), relevant: self.relevant }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=from_pattern | COMPLEXITY=36 | LINES=56 */
 
 impl<'p, Cx: PatCx> PatStack<'p, Cx> {
     fn from_pattern(pat: &'p DeconstructedPat<Cx>) -> Self {
@@ -1142,7 +1092,6 @@ impl<'p, Cx: PatCx> PatStack<'p, Cx> {
         Ok(PatStack { pats: new_pats, relevant: self.relevant && ctor_is_relevant })
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=11 */
 
 impl<'p, Cx: PatCx> fmt::Debug for PatStack<'p, Cx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -1154,7 +1103,6 @@ impl<'p, Cx: PatCx> fmt::Debug for PatStack<'p, Cx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=MatrixRow | COMPLEXITY=17 | LINES=36 */
 
 /// A row of the matrix.
 #[derive(Clone)]
@@ -1191,7 +1139,6 @@ struct MatrixRow<'p, Cx: PatCx> {
     /// [`BranchPatUsefulness`])
     head_is_branch: bool,
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=new | COMPLEXITY=26 | LINES=59 */
 
 impl<'p, Cx: PatCx> MatrixRow<'p, Cx> {
     fn new(arm: &MatchArm<'p, Cx>, arm_id: usize) -> Self {
@@ -1251,14 +1198,12 @@ impl<'p, Cx: PatCx> MatrixRow<'p, Cx> {
         })
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'p, Cx: PatCx> fmt::Debug for MatrixRow<'p, Cx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.pats.fmt(f)
     }
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=Matrix | COMPLEXITY=6 | LINES=24 */
 
 /// A 2D matrix. Represents a list of pattern-tuples under investigation.
 ///
@@ -1283,7 +1228,6 @@ struct Matrix<'p, Cx: PatCx> {
     /// of the file for details on relevancy.
     wildcard_row_is_relevant: bool,
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=push | COMPLEXITY=57 | LINES=112 */
 
 impl<'p, Cx: PatCx> Matrix<'p, Cx> {
     /// Pushes a new row to the matrix. Internal method, prefer [`Matrix::new`].
@@ -1396,7 +1340,6 @@ impl<'p, Cx: PatCx> Matrix<'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=28 | LINES=47 */
 
 /// Pretty-printer for matrices of patterns, example:
 ///
@@ -1444,7 +1387,6 @@ impl<'p, Cx: PatCx> fmt::Debug for Matrix<'p, Cx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=23 */
 
 /// A witness-tuple of non-exhaustiveness for error reporting, represented as a list of patterns (in
 /// reverse order of construction).
@@ -1468,7 +1410,6 @@ impl<'p, Cx: PatCx> fmt::Debug for Matrix<'p, Cx> {
 ///    Pair(_, false) => {}
 /// }
 /// # }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=WitnessStack | COMPLEXITY=9 | LINES=39 */
 /// ```
 ///
 /// We'll perform the following steps (among others):
@@ -1508,7 +1449,6 @@ impl<Cx: PatCx> Clone for WitnessStack<Cx> {
         Self(self.0.clone())
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=single_pattern | COMPLEXITY=22 | LINES=58 */
 
 impl<Cx: PatCx> WitnessStack<Cx> {
     /// Asserts that the witness contains a single pattern, and returns it.
@@ -1567,7 +1507,6 @@ impl<Cx: PatCx> WitnessStack<Cx> {
         }
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=WitnessMatrix | COMPLEXITY=13 | LINES=18 */
 
 /// Represents a set of pattern-tuples that are witnesses of non-exhaustiveness for error
 /// reporting. This has similar invariants as `Matrix` does.
@@ -1586,7 +1525,6 @@ impl<Cx: PatCx> Clone for WitnessMatrix<Cx> {
         Self(self.0.clone())
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=31 | LINES=65 */
 
 impl<Cx: PatCx> WitnessMatrix<Cx> {
     /// New matrix with no witnesses.
@@ -1652,7 +1590,6 @@ impl<Cx: PatCx> WitnessMatrix<Cx> {
         self.0.extend(other.0)
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=collect_overlapping_range_endpoints | COMPLEXITY=41 | LINES=69 */
 
 /// Collect ranges that overlap like `lo..=overlap`/`overlap..=hi`. Must be called during
 /// exhaustiveness checking, if we find a singleton range after constructor splitting. This reuses
@@ -1722,7 +1659,6 @@ fn collect_overlapping_range_endpoints<'p, Cx: PatCx>(
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=collect_non_contiguous_range_endpoints | COMPLEXITY=19 | LINES=27 */
 
 /// Collect ranges that have a singleton gap between them.
 fn collect_non_contiguous_range_endpoints<'p, Cx: PatCx>(
@@ -1750,7 +1686,6 @@ fn collect_non_contiguous_range_endpoints<'p, Cx: PatCx>(
         cx.lint_non_contiguous_range_endpoints(pat_before, *gap_range, oneafter.as_slice());
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=compute_exhaustiveness_and_usefulness | COMPLEXITY=85 | LINES=111 */
 
 /// The core of the algorithm.
 ///
@@ -1862,7 +1797,6 @@ fn compute_exhaustiveness_and_usefulness<'a, 'p, Cx: PatCx>(
 
     Ok(ret)
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=RedundancyExplanation | COMPLEXITY=2 | LINES=9 */
 
 /// Indicates why a given pattern is considered redundant.
 #[derive(Clone, Debug)]
@@ -1872,7 +1806,6 @@ pub struct RedundancyExplanation<'p, Cx: PatCx> {
     /// to intersect this pattern.
     pub covered_by: Vec<&'p DeconstructedPat<Cx>>,
 }
-/* AST_META: AST_ID=67 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 /// Indicates whether or not a given arm is useful.
 #[derive(Clone, Debug)]
@@ -1885,7 +1818,6 @@ pub enum Usefulness<'p, Cx: PatCx> {
     /// expression.
     Redundant(RedundancyExplanation<'p, Cx>),
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UsefulnessReport | COMPLEXITY=13 | LINES=12 */
 
 /// The output of checking a match for exhaustiveness and arm usefulness.
 pub struct UsefulnessReport<'p, Cx: PatCx> {
@@ -1898,7 +1830,6 @@ pub struct UsefulnessReport<'p, Cx: PatCx> {
     /// is a value matched by both arms. This may miss real intersections.
     pub arm_intersections: Vec<DenseBitSet<usize>>,
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=compute_match_usefulness | COMPLEXITY=30 | LINES=59 */
 
 /// Computes whether a match is exhaustive and which of its arms are useful.
 #[instrument(skip(tycx, arms), level = "debug")]

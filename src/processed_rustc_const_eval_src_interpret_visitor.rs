@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/visitor.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 // Visitor for a run-time value with a given layout: Traverse enums, structs and other compound
 // types until we arrive at the leaves, with custom handling for primitive types.
 
 use std::num::NonZero;
 
 use crate::rustc_abi::{FieldIdx, FieldsShape, VariantIdx, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::interpret::InterpResult;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::trace;
 
 use super::{InterpCx, MPlaceTy, Machine, Projectable, interp_ok, throw_inval};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=ecx | COMPLEXITY=75 | LINES=196 */
 
 /// How to traverse a value and what to do when we are at the leaves.
 pub trait ValueVisitor<'tcx, M: Machine<'tcx>>: Sized {

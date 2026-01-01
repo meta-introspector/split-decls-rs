@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc/src/main.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=63 | LINES=78 */
 // We need this feature as it changes `dylib` linking behavior and allows us to link to `rustc_driver`.
 #[feature(rustc_private)]
 // Several crates are depended upon but unused so that they are present in the sysroot

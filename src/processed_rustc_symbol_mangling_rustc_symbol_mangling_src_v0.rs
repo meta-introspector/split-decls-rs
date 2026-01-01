@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/v0.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt::Write;
 use std::hash::Hasher;
 use std::iter;
 use std::ops::Range;
 
 use crate::rustc_abi::{ExternAbi, Integer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_data_structures::base_n::ToBaseN;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::intern::Interned;
@@ -15,18 +13,14 @@ use rustc_hashes::Hash64;
 use rustc_hir as hir;
 use crate::rustc_complete::def::CtorKind;
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::IntegerExt;
 use crate::rustc_complete::ty::print::{Print, PrintError, Printer};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, FloatTy, GenericArg, GenericArgKind, Instance, IntTy, ReifyReason, Ty, TyCtxt,
     TypeVisitable, TypeVisitableExt, UintTy,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=60 */
 use crate::rustc_complete::sym;
 
 pub(super) fn mangle<'tcx>(
@@ -87,7 +81,6 @@ pub(super) fn mangle<'tcx>(
     }
     std::mem::take(&mut p.out)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=mangle_internal_symbol | COMPLEXITY=13 | LINES=49 */
 
 pub fn mangle_internal_symbol<'tcx>(tcx: TyCtxt<'tcx>, item_name: &str) -> String {
     match item_name {
@@ -137,7 +130,6 @@ pub fn mangle_internal_symbol<'tcx>(tcx: TyCtxt<'tcx>, item_name: &str) -> Strin
 
     std::mem::take(&mut p.out)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 pub(super) fn mangle_typeid_for_trait_ref<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -157,7 +149,6 @@ pub(super) fn mangle_typeid_for_trait_ref<'tcx>(
     p.print_def_path(trait_ref.def_id, &[]).unwrap();
     std::mem::take(&mut p.out)
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=BinderLevel | COMPLEXITY=3 | LINES=14 */
 
 struct BinderLevel {
     /// The range of distances from the root of what's
@@ -172,7 +163,6 @@ struct BinderLevel {
     /// the innermost depth at its use site.
     lifetime_depths: Range<u32>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=V0SymbolMangler | COMPLEXITY=4 | LINES=14 */
 
 struct V0SymbolMangler<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -187,7 +177,6 @@ struct V0SymbolMangler<'tcx> {
     types: FxHashMap<Ty<'tcx>, usize>,
     consts: FxHashMap<ty::Const<'tcx>, usize>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=push | COMPLEXITY=34 | LINES=99 */
 
 impl<'tcx> V0SymbolMangler<'tcx> {
     fn push(&mut self, s: &str) {
@@ -287,7 +276,6 @@ impl<'tcx> V0SymbolMangler<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=327 | LINES=668 */
 
 impl<'tcx> Printer<'tcx> for V0SymbolMangler<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -956,7 +944,6 @@ impl<'tcx> Printer<'tcx> for V0SymbolMangler<'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 /// Push a `_`-terminated base 62 integer, using the format
 /// specified in the RFC as `<base-62-number>`, that is:
 /// * `x = 0` is encoded as just the `"_"` terminator
@@ -968,14 +955,12 @@ pub(crate) fn push_integer_62(x: u64, output: &mut String) {
     }
     output.push('_');
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) fn encode_integer_62(x: u64) -> String {
     let mut output = String::new();
     push_integer_62(x, &mut output);
     output
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=42 */
 
 pub(crate) fn push_ident(ident: &str, output: &mut String) {
     let mut use_punycode = false;

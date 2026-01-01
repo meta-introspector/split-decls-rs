@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/constant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::BackendRepr;
 use crate::rustc_complete::mir::interpret::ErrorHandled;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=eval_mir_constant | COMPLEXITY=41 | LINES=103 */
 
 use super::FunctionCx;
 use crate::errors;

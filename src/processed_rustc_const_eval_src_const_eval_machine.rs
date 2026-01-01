@@ -1,36 +1,25 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/machine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::hash::Hash;
 
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, IndexEntry};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, CRATE_HIR_ID, LangItem};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::AssertMessage;
 use crate::rustc_complete::mir::interpret::ReportedErrorInfo;
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::layout::{HasTypingEnv, TyAndLayout, ValidityRequirement};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_target::callconv::FnAbi;
 use tracing::debug;
 
 use super::error::*;
 use crate::errors::{LongRunning, LongRunningWarn};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::fluent_generated as fluent;
 use crate::interpret::{
     self, AllocId, AllocInit, AllocRange, ConstAllocation, CtfeProvenance, FnArg, Frame,
@@ -38,7 +27,6 @@ use crate::interpret::{
     compile_time_machine, err_inval, interp_ok, throw_exhaust, throw_inval, throw_ub,
     throw_ub_custom, throw_unsup, throw_unsup_format,
 };
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=CompileTimeMachine | COMPLEXITY=18 | LINES=42 */
 
 /// When hitting this many interpreted terminators we emit a deny by default lint
 /// that notfies the user that their constant takes a long time to evaluate. If that's
@@ -81,7 +69,6 @@ pub struct CompileTimeMachine<'tcx> {
     /// A cache of "data range" computations for unions (i.e., the offsets of non-padding bytes).
     union_data_ranges: FxHashMap<Ty<'tcx>, RangeSet>,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone)]
 pub enum CheckAlignment {
@@ -91,21 +78,18 @@ pub enum CheckAlignment {
     /// Hard error when dereferencing a misaligned pointer.
     Error,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq)]
 pub(crate) enum CanAccessMutGlobal {
     No,
     Yes,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=6 */
 
 impl From<bool> for CanAccessMutGlobal {
     fn from(value: bool) -> Self {
         if value { Self::Yes } else { Self::No }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 impl<'tcx> CompileTimeMachine<'tcx> {
     pub(crate) fn new(
@@ -122,7 +106,6 @@ impl<'tcx> CompileTimeMachine<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=contains_key | COMPLEXITY=24 | LINES=59 */
 
 impl<K: Hash + Eq, V> interpret::AllocMap<K, V> for FxIndexMap<K, V> {
     #[inline(always)]
@@ -182,7 +165,6 @@ impl<K: Hash + Eq, V> interpret::AllocMap<K, V> for FxIndexMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub type CompileTimeInterpCx<'tcx> = InterpCx<'tcx, CompileTimeMachine<'tcx>>;
 
@@ -194,7 +176,6 @@ pub enum MemoryKind {
         was_made_global: bool,
     },
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=16 | LINES=10 */
 
 impl fmt::Display for MemoryKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -205,7 +186,6 @@ impl fmt::Display for MemoryKind {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=may_leak | COMPLEXITY=10 | LINES=9 */
 
 impl interpret::MayLeak for MemoryKind {
     #[inline(always)]
@@ -215,7 +195,6 @@ impl interpret::MayLeak for MemoryKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=may_leak | COMPLEXITY=5 | LINES=8 */
 
 impl interpret::MayLeak for ! {
     #[inline(always)]
@@ -224,7 +203,6 @@ impl interpret::MayLeak for ! {
         self
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=location_triple_for_span | COMPLEXITY=103 | LINES=185 */
 
 impl<'tcx> CompileTimeInterpCx<'tcx> {
     fn location_triple_for_span(&self, span: Span) -> (Symbol, u32, u32) {
@@ -410,7 +388,6 @@ impl<'tcx> CompileTimeInterpCx<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=best_lint_scope | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> CompileTimeMachine<'tcx> {
     #[inline(always)]
@@ -420,7 +397,6 @@ impl<'tcx> CompileTimeMachine<'tcx> {
         self.stack.iter().find_map(|frame| frame.lint_root(tcx)).unwrap_or(CRATE_HIR_ID)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=enforce_alignment | COMPLEXITY=219 | LINES=481 */
 
 impl<'tcx> interpret::Machine<'tcx> for CompileTimeMachine<'tcx> {
     compile_time_machine!(<'tcx>);
@@ -902,7 +878,6 @@ impl<'tcx> interpret::Machine<'tcx> for CompileTimeMachine<'tcx> {
     fn get_default_alloc_params(&self) -> <Self::Bytes as mir::interpret::AllocBytes>::AllocParams {
     }
 }
-/* AST_META: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 // Please do not add any code below the above `Machine` trait impl. I (oli-obk) plan more cleanups
 // so we can end up having a file with just that impl, but for now, let's keep the impl discoverable

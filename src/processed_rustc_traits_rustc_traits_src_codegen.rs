@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_traits/src/codegen.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // This file contains various trait resolution methods used by codegen.
 // They all assume regions can be erased and monomorphic types. It
 // seems likely that they should eventually be merged into more
@@ -9,13 +8,11 @@ use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::traits::CodegenObligationError;
 use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::traits::{
     ImplSource, Obligation, ObligationCause, ObligationCtxt, ScrubbedTraitError, SelectionContext,
     SelectionError,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=79 */
 use tracing::debug;
 
 /// Attempts to resolve an obligation to an `ImplSource`. The result is

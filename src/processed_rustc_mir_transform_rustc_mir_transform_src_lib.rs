@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 // tidy-alphabetical-start
 #[feature(array_windows)]
 #[feature(assert_matches)]
@@ -17,13 +16,11 @@
 use hir::ConstContext;
 use required_consts::RequiredConstsVisitor;
 use rustc_const_eval::check_consts::{self, ConstCx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_const_eval::util;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::steal::Steal;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorKind, DefKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::{
@@ -31,16 +28,12 @@ use crate::rustc_complete::mir::{
     MirPhase, Operand, Place, ProjectionElem, Promoted, RuntimePhase, Rvalue, START_BLOCK,
     SourceInfo, Statement, StatementKind, TerminatorKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::{bug, query, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_mir_build::builder::build_mir;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use tracing::debug;
 
 #[macro_use]
@@ -48,7 +41,6 @@ use tracing::debug;
 use std::sync::LazyLock;
 
 use pass_manager::{self as pm, Lint, MirLint, MirPass, WithMinOptLevel};
-/* AST_META: AST_ID=8 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=7 | LINES=35 */
 
 
 /// We import passes via this macro so that we can have a static list of pass names
@@ -71,7 +63,6 @@ use pass_manager::{self as pm, Lint, MirLint, MirPass, WithMinOptLevel};
 ///         /* omitted */
 ///     };
 /// }
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=32 */
 /// ```
 macro_rules! declare_passes {
     (
@@ -102,7 +93,6 @@ macro_rules! declare_passes {
         ].into_iter().collect());
     };
 }
-/* AST_META: AST_ID=10 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=15 | LINES=91 */
 
 declare_passes! {
     // This pass is public to allow external drivers to perform MIR cleanup
@@ -135,10 +125,8 @@ declare_passes! {
         Final
     };
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=25 */
 
 pub fn provide(providers: &mut Providers) {
     coverage::query::provide(providers);
@@ -164,7 +152,6 @@ pub fn provide(providers: &mut Providers) {
         ..providers.queries
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=remap_mir_for_const_eval_select | COMPLEXITY=35 | LINES=72 */
 
 fn remap_mir_for_const_eval_select<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -237,18 +224,15 @@ fn remap_mir_for_const_eval_select<'tcx>(
     }
     body
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=take_array | COMPLEXITY=2 | LINES=5 */
 
 fn take_array<T, const N: usize>(b: &mut Box<[T]>) -> Result<[T; N], Box<[T]>> {
     let b: Box<[T; N]> = std::mem::take(b).try_into()?;
     Ok(*b)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=is_mir_available | COMPLEXITY=2 | LINES=4 */
 
 fn is_mir_available(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     tcx.mir_keys(()).contains(&def_id)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mir_keys | COMPLEXITY=24 | LINES=35 */
 
 /// Finds the full set of `DefId`s within the current crate that have
 /// MIR associated with them.
@@ -284,7 +268,6 @@ fn mir_keys(tcx: TyCtxt<'_>, (): ()) -> FxIndexSet<LocalDefId> {
 
     set
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=mir_const_qualif | COMPLEXITY=17 | LINES=30 */
 
 fn mir_const_qualif(tcx: TyCtxt<'_>, def: LocalDefId) -> ConstQualifs {
     // N.B., this `borrow()` is guaranteed to be valid (i.e., the value
@@ -315,7 +298,6 @@ fn mir_const_qualif(tcx: TyCtxt<'_>, def: LocalDefId) -> ConstQualifs {
     // when deciding to promote a reference to a `const` for now.
     validator.qualifs_in_return_place()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=mir_built | COMPLEXITY=7 | LINES=28 */
 
 fn mir_built(tcx: TyCtxt<'_>, def: LocalDefId) -> &Steal<Body<'_>> {
     let mut body = build_mir(tcx, def);
@@ -344,7 +326,6 @@ fn mir_built(tcx: TyCtxt<'_>, def: LocalDefId) -> &Steal<Body<'_>> {
     );
     tcx.alloc_steal_mir(body)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=mir_promoted | COMPLEXITY=24 | LINES=57 */
 
 /// Compute the main MIR body and the list of MIR bodies of the promoteds.
 fn mir_promoted(
@@ -402,13 +383,11 @@ fn mir_promoted(
     let promoted = promote_pass.promoted_fragments.into_inner();
     (tcx.alloc_steal_mir(body), tcx.alloc_steal_promoted(promoted))
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=mir_for_ctfe | COMPLEXITY=2 | LINES=5 */
 
 /// Compute the MIR that is used during CTFE (and thus has no optimizations run on it)
 fn mir_for_ctfe(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &Body<'_> {
     tcx.arena.alloc(inner_mir_for_ctfe(tcx, def_id))
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=inner_mir_for_ctfe | COMPLEXITY=13 | LINES=25 */
 
 fn inner_mir_for_ctfe(tcx: TyCtxt<'_>, def: LocalDefId) -> Body<'_> {
     // FIXME: don't duplicate this between the optimized_mir/mir_for_ctfe queries
@@ -434,7 +413,6 @@ fn inner_mir_for_ctfe(tcx: TyCtxt<'_>, def: LocalDefId) -> Body<'_> {
 
     body
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=mir_drops_elaborated_and_const_checked | COMPLEXITY=36 | LINES=55 */
 
 /// Obtain just the main MIR (no promoteds) and run some cleanups on it. This also runs
 /// mir borrowck *before* doing so in order to ensure that borrowck can be run and doesn't
@@ -490,7 +468,6 @@ fn mir_drops_elaborated_and_const_checked(tcx: TyCtxt<'_>, def: LocalDefId) -> &
 
     tcx.alloc_steal_mir(body)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=run_analysis_to_runtime_passes | COMPLEXITY=12 | LINES=34 */
 
 // Made public so that `mir_drops_elaborated_and_const_checked` can be overridden
 // by custom rustc drivers, running all the steps by themselves. See #114628.
@@ -525,7 +502,6 @@ pub fn run_analysis_to_runtime_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'
     run_runtime_cleanup_passes(tcx, body);
     assert!(body.phase == MirPhase::Runtime(RuntimePhase::PostCleanup));
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=run_analysis_cleanup_passes | COMPLEXITY=3 | LINES=21 */
 
 // FIXME(JakobDegen): Can we make these lists of passes consts?
 
@@ -547,7 +523,6 @@ fn run_analysis_cleanup_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
         pm::Optimizations::Allowed,
     );
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=run_runtime_lowering_passes | COMPLEXITY=5 | LINES=29 */
 
 /// Returns the sequence of passes that lowers analysis to runtime MIR.
 fn run_runtime_lowering_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
@@ -577,7 +552,6 @@ fn run_runtime_lowering_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     ];
     pm::run_passes_no_validate(tcx, body, passes, Some(MirPhase::Runtime(RuntimePhase::Initial)));
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=run_runtime_cleanup_passes | COMPLEXITY=8 | LINES=23 */
 
 /// Returns the sequence of passes that do the initial cleanup of runtime MIR.
 fn run_runtime_cleanup_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
@@ -601,7 +575,6 @@ fn run_runtime_cleanup_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
         decl.local_info = ClearCrossCrate::Clear;
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=o1 | COMPLEXITY=24 | LINES=90 */
 
 pub(crate) fn run_optimization_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     fn o1<T>(x: T) -> WithMinOptLevel<T> {
@@ -692,13 +665,11 @@ pub(crate) fn run_optimization_passes<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'
         optimizations,
     );
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=optimized_mir | COMPLEXITY=4 | LINES=5 */
 
 /// Optimize the MIR and prepare it for codegen.
 fn optimized_mir(tcx: TyCtxt<'_>, did: LocalDefId) -> &Body<'_> {
     tcx.arena.alloc(inner_optimized_mir(tcx, did))
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=inner_optimized_mir | COMPLEXITY=29 | LINES=44 */
 
 fn inner_optimized_mir(tcx: TyCtxt<'_>, did: LocalDefId) -> Body<'_> {
     if tcx.is_constructor(did.to_def_id()) {
@@ -743,7 +714,6 @@ fn inner_optimized_mir(tcx: TyCtxt<'_>, did: LocalDefId) -> Body<'_> {
 
     body
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=promoted_mir | COMPLEXITY=12 | LINES=19 */
 
 /// Fetch all the promoteds of an item and prepare their MIR bodies to be ready for
 /// constant evaluation once all generic parameters become known.

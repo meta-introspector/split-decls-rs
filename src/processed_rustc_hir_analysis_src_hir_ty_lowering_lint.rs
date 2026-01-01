@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/lint.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::TraitObjectSyntax;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Diag, EmissionGuarantee, ErrorGuaranteed, StashKey, Suggestions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Namespace, Res};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=maybe_suggest_add_generic_impl_trait | COMPLEXITY=283 | LINES=528 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_lint_defs::Applicability;
 use crate::rustc_lint_defs::builtin::BARE_TRAIT_OBJECTS;

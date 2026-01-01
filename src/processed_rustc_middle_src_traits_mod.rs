@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 // Trait Resolution. See the [rustc dev guide] for more information on how this works.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
@@ -7,33 +6,25 @@
 
 use std::borrow::Cow;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{
     Decodable, Encodable, HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 pub use self::select::{EvaluationCache, EvaluationResult, OverflowError, SelectionCache};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::mir::ConstraintCategory;
 pub use crate::traits::solve::BuiltinImplSource;
 use crate::ty::abstract_const::NotConstEvaluatable;
 use crate::ty::{self, AdtKind, GenericArgsRef, Ty};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=ObligationCause | COMPLEXITY=14 | LINES=24 */
 
 /// The reason why we incurred this obligation; used for error reporting.
 ///
@@ -58,7 +49,6 @@ pub struct ObligationCause<'tcx> {
 
     code: ObligationCauseCodeHandle<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=8 | LINES=12 */
 
 // This custom hash function speeds up hashing for `Obligation` deduplication
 // greatly by skipping the `code` field, which can be large and complex. That
@@ -71,7 +61,6 @@ impl Hash for ObligationCause<'_> {
         self.span.hash(state);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=31 | LINES=78 */
 
 impl<'tcx> ObligationCause<'tcx> {
     #[inline]
@@ -150,7 +139,6 @@ impl<'tcx> ObligationCause<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ObligationCauseCodeHandle | COMPLEXITY=4 | LINES=9 */
 
 /// A compact form of `ObligationCauseCode`.
 #[derive(Clone, PartialEq, Eq, Default, HashStable)]
@@ -160,7 +148,6 @@ pub struct ObligationCauseCodeHandle<'tcx> {
     /// the time). `Some` otherwise.
     code: Option<Arc<ObligationCauseCode<'tcx>>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> std::fmt::Debug for ObligationCauseCodeHandle<'tcx> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -168,7 +155,6 @@ impl<'tcx> std::fmt::Debug for ObligationCauseCodeHandle<'tcx> {
         cause.fmt(f)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=into | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx> ObligationCauseCode<'tcx> {
     #[inline(always)]
@@ -178,7 +164,6 @@ impl<'tcx> ObligationCauseCode<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> std::ops::Deref for ObligationCauseCodeHandle<'tcx> {
     type Target = ObligationCauseCode<'tcx>;
@@ -187,7 +172,6 @@ impl<'tcx> std::ops::Deref for ObligationCauseCodeHandle<'tcx> {
         self.code.as_deref().unwrap_or(&ObligationCauseCode::Misc)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=73 | LINES=245 */
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]
@@ -433,7 +417,6 @@ pub enum ObligationCauseCode<'tcx> {
     /// be place expressions because we can't store them in MIR locals as temporaries.
     UnsizedNonPlaceExpr(Span),
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// Whether a value can be extracted into a const.
 /// Used for diagnostics around array repeat expressions.
@@ -445,7 +428,6 @@ pub enum IsConstable {
     /// Use of a const ctor
     Ctor,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
 
 /// The 'location' at which we try to perform HIR-based wf checking.
 /// This information is used to obtain an `hir::Ty`, which
@@ -468,7 +450,6 @@ pub enum WellFormedLoc {
         param_idx: usize,
     },
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=peel_derives | COMPLEXITY=42 | LINES=61 */
 
 impl<'tcx> ObligationCauseCode<'tcx> {
     /// Returns the base obligation, ignoring derived obligations.
@@ -530,7 +511,6 @@ impl<'tcx> ObligationCauseCode<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=MatchExpressionArmCause | COMPLEXITY=17 | LINES=27 */
 
 // `ObligationCauseCode` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
@@ -558,7 +538,6 @@ pub struct MatchExpressionArmCause<'tcx> {
     /// Is the expectation of this match expression an RPIT?
     pub tail_defines_return_position_impl_trait: Option<LocalDefId>,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=PatternOriginExpr | COMPLEXITY=6 | LINES=19 */
 
 /// Information about the origin expression of a pattern, relevant to diagnostics.
 /// Fields here refer to the scrutinee of a pattern.
@@ -578,7 +557,6 @@ pub struct PatternOriginExpr {
     /// a prefix suggestion (i.e., dereference) to be valid.
     pub peeled_prefix_suggestion_parentheses: bool,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=DerivedCause | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]
@@ -592,7 +570,6 @@ pub struct DerivedCause<'tcx> {
     /// The parent trait had this cause.
     pub parent_code: ObligationCauseCodeHandle<'tcx>,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=ImplDerivedCause | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]
@@ -607,7 +584,6 @@ pub struct ImplDerivedCause<'tcx> {
     pub impl_def_predicate_index: Option<usize>,
     pub span: Span,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=DerivedHostCause | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]
@@ -621,7 +597,6 @@ pub struct DerivedHostCause<'tcx> {
     /// The parent trait had this cause.
     pub parent_code: ObligationCauseCodeHandle<'tcx>,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=ImplDerivedHostCause | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]
@@ -631,7 +606,6 @@ pub struct ImplDerivedHostCause<'tcx> {
     pub impl_def_id: DefId,
     pub span: Span,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 #[derive(Clone, Debug, PartialEq, Eq, TypeVisitable)]
 pub enum SelectionError<'tcx> {
@@ -654,7 +628,6 @@ pub enum SelectionError<'tcx> {
     /// Error for a `ConstArgHasType` goal
     ConstArgHasWrongType { ct: ty::Const<'tcx>, ct_ty: Ty<'tcx>, expected_ty: Ty<'tcx> },
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=SignatureMismatchData | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, PartialEq, Eq, TypeVisitable)]
 pub struct SignatureMismatchData<'tcx> {
@@ -662,7 +635,6 @@ pub struct SignatureMismatchData<'tcx> {
     pub expected_trait_ref: ty::TraitRef<'tcx>,
     pub terr: ty::error::TypeError<'tcx>,
 }
-/* AST_META: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 /// When performing resolution, it is typically the case that there
 /// can be one of three outcomes:
@@ -681,11 +653,8 @@ pub type SelectionResult<'tcx, T> = Result<Option<T>, SelectionError<'tcx>>;
 ///
 /// ```ignore (illustrative)
 /// impl<T:Clone> Clone<T> for Option<T> { ... } // Impl_1
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<T:Clone> Clone<T> for Box<T> { ... }    // Impl_2
-/* AST_META: AST_ID=30 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl Clone for i32 { ... }                   // Impl_3
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 ///
 /// fn foo<T: Clone>(concrete: Option<Box<i32>>, param: T, mixed: Option<T>) {
 ///     // Case A: ImplSource points at a specific impl. Only possible when
@@ -700,7 +669,6 @@ pub type SelectionResult<'tcx, T> = Result<Option<T>, SelectionError<'tcx>>;
 ///     // Case C: A mix of cases A and B.
 ///     mixed.clone();    // ImplSource(Impl_1, [ImplSource::Param])
 /// }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 /// ```
 ///
 /// ### The type parameter `N`
@@ -721,7 +689,6 @@ pub enum ImplSource<'tcx, N> {
     /// Successful resolution for a builtin impl.
     Builtin(BuiltinImplSource, ThinVec<N>),
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=nested_obligations | COMPLEXITY=26 | LINES=40 */
 
 impl<'tcx, N> ImplSource<'tcx, N> {
     pub fn nested_obligations(self) -> ThinVec<N> {
@@ -762,7 +729,6 @@ impl<'tcx, N> ImplSource<'tcx, N> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=ImplSourceUserDefinedData | COMPLEXITY=5 | LINES=18 */
 
 /// Identifies a particular impl in the source, along with a set of
 /// generic parameters from the impl's type/lifetime parameters. The
@@ -781,7 +747,6 @@ pub struct ImplSourceUserDefinedData<'tcx, N> {
     pub args: GenericArgsRef<'tcx>,
     pub nested: ThinVec<N>,
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=25 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, HashStable, PartialOrd, Ord)]
 pub enum DynCompatibilityViolation {
@@ -807,7 +772,6 @@ pub enum DynCompatibilityViolation {
     /// GAT
     GAT(Symbol, Span),
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=error_msg | COMPLEXITY=61 | LINES=122 */
 
 impl DynCompatibilityViolation {
     pub fn error_msg(&self) -> Cow<'static, str> {
@@ -930,7 +894,6 @@ impl DynCompatibilityViolation {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum DynCompatibilityViolationSolution {
@@ -943,7 +906,6 @@ pub enum DynCompatibilityViolationSolution {
     ChangeToRefSelf(Symbol, Span),
     MoveToAnotherTrait(Symbol),
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=add_to | COMPLEXITY=19 | LINES=42 */
 
 impl DynCompatibilityViolationSolution {
     pub fn add_to<G: EmissionGuarantee>(self, err: &mut Diag<'_, G>) {
@@ -986,7 +948,6 @@ impl DynCompatibilityViolationSolution {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=28 */
 
 /// Reasons a method might not be dyn-compatible.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, HashStable, PartialOrd, Ord)]
@@ -1015,7 +976,6 @@ pub enum MethodViolationCode {
     /// the method's receiver (`self` argument) can't be dispatched on
     UndispatchableReceiver(Option<Span>),
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 /// These are the error cases for `codegen_select_candidate`.
 #[derive(Copy, Clone, Debug, Hash, HashStable, Encodable, Decodable)]

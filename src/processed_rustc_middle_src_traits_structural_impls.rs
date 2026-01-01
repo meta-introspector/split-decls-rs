@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/structural_impls.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=21 */
 use std::fmt;
 
 use crate::traits;
@@ -21,7 +20,6 @@ impl<'tcx, N: fmt::Debug> fmt::Debug for traits::ImplSource<'tcx, N> {
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=10 */
 
 impl<'tcx, N: fmt::Debug> fmt::Debug for traits::ImplSourceUserDefinedData<'tcx, N> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/lint.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // This pass statically detects code which has undefined behaviour or is likely to be erroneous.
 // It can be used to locate problems in MIR building or optimizations. It assumes that all code
 // can be executed, so it has false positives.
@@ -9,13 +8,10 @@ use std::borrow::Cow;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_mir_dataflow::impls::{MaybeStorageDead, MaybeStorageLive, always_storage_live_locals};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, ResultsCursor};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
 
 pub(super) fn lint_body<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>, when: String) {
     let always_live_locals = &always_storage_live_locals(body);
@@ -42,7 +38,6 @@ pub(super) fn lint_body<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>, when: String
         lint.visit_basic_block_data(bb, data);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Lint | COMPLEXITY=2 | LINES=11 */
 
 struct Lint<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -54,7 +49,6 @@ struct Lint<'a, 'tcx> {
     maybe_storage_dead: ResultsCursor<'a, 'tcx, MaybeStorageDead<'a>>,
     places: FxHashSet<PlaceRef<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=7 | LINES=17 */
 
 impl<'a, 'tcx> Lint<'a, 'tcx> {
     #[track_caller]
@@ -72,7 +66,6 @@ impl<'a, 'tcx> Lint<'a, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=68 | LINES=85 */
 
 impl<'a, 'tcx> Visitor<'tcx> for Lint<'a, 'tcx> {
     fn visit_local(&mut self, local: Local, context: PlaceContext, location: Location) {

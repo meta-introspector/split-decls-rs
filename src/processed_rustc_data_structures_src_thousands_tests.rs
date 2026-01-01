@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/thousands/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_format_with_underscores | COMPLEXITY=3 | LINES=13 */
 use super::*;
 
 #[test]
@@ -13,7 +12,6 @@ fn test_format_with_underscores() {
     assert_eq!("-1b", format_with_underscores("-1b".to_string()));
     assert_eq!("-3_456xyz", format_with_underscores("-3456xyz".to_string()));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_usize_with_underscores | COMPLEXITY=3 | LINES=13 */
 
 #[test]
 fn test_usize_with_underscores() {
@@ -27,7 +25,6 @@ fn test_usize_with_underscores() {
     assert_eq!("1_000_000", usize_with_underscores(1_000_000));
     assert_eq!("12_345_678", usize_with_underscores(12_345_678));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_isize_with_underscores | COMPLEXITY=3 | LINES=13 */
 
 #[test]
 fn test_isize_with_underscores() {
@@ -41,7 +38,6 @@ fn test_isize_with_underscores() {
     assert_eq!("1_000_000", isize_with_underscores(1_000_000));
     assert_eq!("-12_345_678", isize_with_underscores(-12_345_678));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_f64p1_with_underscores | COMPLEXITY=3 | LINES=13 */
 
 #[test]
 fn test_f64p1_with_underscores() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 /// Lang items used by the new trait solver. This can be mapped to whatever internal
 /// representation of `LangItem`s used in the underlying compiler implementation.
 pub enum SolverLangItem {
@@ -15,7 +14,6 @@ pub enum SolverLangItem {
     Metadata,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub enum SolverAdtLangItem {
     // tidy-alphabetical-start
@@ -23,7 +21,6 @@ pub enum SolverAdtLangItem {
     Poll,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=33 */
 
 pub enum SolverTraitLangItem {
     // tidy-alphabetical-start

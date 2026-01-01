@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/structural_match.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingMode};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=has_structural_eq_impl | COMPLEXITY=18 | LINES=27 */
 
 /// This method returns true if and only if `adt_ty` itself has been marked as
 /// eligible for structural-match: namely, if it implements
@@ -34,7 +31,6 @@ fn has_structural_eq_impl<'tcx>(tcx: TyCtxt<'tcx>, adt_ty: Ty<'tcx>) -> bool {
     //    now, so we do not want unconditional errors here.
     ocx.select_all_or_error().is_empty()
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.has_structural_eq_impl = has_structural_eq_impl;

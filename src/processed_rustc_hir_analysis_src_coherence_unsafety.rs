@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/unsafety.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Unsafety checker: every impl either implements a trait defined in this
 // crate or pertains to a type defined in this crate.
 
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::struct_span_code_err;
 use crate::rustc_complete::{LangItem, Safety};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::ImplPolarity::*;
 use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
 use crate::rustc_complete::ty::{ImplTraitHeader, TraitDef, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=76 | LINES=113 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::LocalDefId;
 

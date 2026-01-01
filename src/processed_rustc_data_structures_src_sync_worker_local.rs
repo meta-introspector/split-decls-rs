@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sync/worker_local.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::cell::{Cell, OnceCell};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=RegistryId(*const | COMPLEXITY=13 | LINES=29 */
 use std::num::NonZero;
 use std::ops::Deref;
 use std::ptr;
@@ -31,13 +29,11 @@ impl RegistryId {
         if id == self { index } else { outline(|| panic!("Unable to verify registry association")) }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=RegistryData | COMPLEXITY=2 | LINES=5 */
 
 struct RegistryData {
     thread_limit: NonZero<usize>,
     threads: Mutex<usize>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Registry(Arc | COMPLEXITY=3 | LINES=10 */
 
 /// Represents a list of threads which can access worker locals.
 #[derive(Clone)]
@@ -48,13 +44,11 @@ thread_local! {
     /// This allows the `WorkerLocal` type to clone the registry in its constructor.
     static REGISTRY: OnceCell<Registry> = const { OnceCell::new() };
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ThreadData | COMPLEXITY=2 | LINES=5 */
 
 struct ThreadData {
     registry_id: Cell<RegistryId>,
     index: Cell<usize>,
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 thread_local! {
     /// A thread local which contains the identifier of `REGISTRY` but allows for faster access.
@@ -64,7 +58,6 @@ thread_local! {
         index: Cell::new(0),
     }};
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=24 | LINES=40 */
 
 impl Registry {
     /// Creates a registry which can hold up to `thread_limit` threads.
@@ -105,7 +98,6 @@ impl Registry {
         RegistryId(&*self.0)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=WorkerLocal | COMPLEXITY=4 | LINES=8 */
 
 /// Holds worker local values for each possible thread in a registry. You can only access the
 /// worker local value through the `Deref` impl on the registry associated with the thread it was
@@ -114,14 +106,12 @@ pub struct WorkerLocal<T> {
     locals: Box<[CacheAligned<T>]>,
     registry: Registry,
 }
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=6 */
 
 // This is safe because the `deref` call will return a reference to a `T` unique to each thread
 // or it will panic for threads without an associated local. So there isn't a need for `T` to do
 // it's own synchronization. The `verify` method on `RegistryId` has an issue where the id
 // can be reused, but `WorkerLocal` has a reference to `Registry` which will prevent any reuse.
 unsafe impl<T: Send> Sync for WorkerLocal<T> {}
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=19 */
 
 impl<T> WorkerLocal<T> {
     /// Creates a new worker local where the `initial` closure computes the
@@ -141,7 +131,6 @@ impl<T> WorkerLocal<T> {
         self.locals.into_vec().into_iter().map(|local| local.0)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=11 */
 
 impl<T> Deref for WorkerLocal<T> {
     type Target = T;
@@ -153,7 +142,6 @@ impl<T> Deref for WorkerLocal<T> {
         unsafe { &self.locals.get_unchecked(self.registry.id().verify()).0 }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl<T: Default> Default for WorkerLocal<T> {
     fn default() -> Self {

@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_passes/src/upvars.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Upvar (closure capture) collection from cross-body HIR uses of `Res::Local`s.
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self, HirId};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=30 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Span;
@@ -40,14 +36,12 @@ pub(crate) fn provide(providers: &mut Providers) {
         }
     };
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LocalCollector | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 struct LocalCollector {
     // FIXME(eddyb) perhaps use `ItemLocalId` instead?
     locals: FxHashSet<HirId>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_pat | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx> Visitor<'tcx> for LocalCollector {
     fn visit_pat(&mut self, pat: &'tcx hir::Pat<'tcx>) {
@@ -57,14 +51,12 @@ impl<'tcx> Visitor<'tcx> for LocalCollector {
         intravisit::walk_pat(self, pat);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CaptureCollector | COMPLEXITY=2 | LINES=6 */
 
 struct CaptureCollector<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     locals: &'a FxHashSet<HirId>,
     upvars: FxIndexMap<HirId, hir::Upvar>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_local_use | COMPLEXITY=7 | LINES=8 */
 
 impl CaptureCollector<'_, '_> {
     fn visit_local_use(&mut self, var_id: HirId, span: Span) {
@@ -73,7 +65,6 @@ impl CaptureCollector<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_path | COMPLEXITY=21 | LINES=30 */
 
 impl<'tcx> Visitor<'tcx> for CaptureCollector<'_, 'tcx> {
     fn visit_path(&mut self, path: &hir::Path<'tcx>, _: HirId) {

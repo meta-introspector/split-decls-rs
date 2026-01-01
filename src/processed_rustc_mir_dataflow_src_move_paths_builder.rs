@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/move_paths/builder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::mem;
 
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 use super::{
     Init, InitIndex, InitKind, InitLocation, LocationMap, LookupResult, MoveData, MoveOut,
     MoveOutIndex, MovePath, MovePathIndex, MovePathLookup,
 };
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=MoveDataBuilder | COMPLEXITY=2 | LINES=8 */
 
 struct MoveDataBuilder<'a, 'tcx, F> {
     body: &'a Body<'tcx>,
@@ -25,7 +20,6 @@ struct MoveDataBuilder<'a, 'tcx, F> {
     data: MoveData<'tcx>,
     filter: F,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=50 */
 
 impl<'a, 'tcx, F: Fn(Ty<'tcx>) -> bool> MoveDataBuilder<'a, 'tcx, F> {
     fn new(body: &'a Body<'tcx>, tcx: TyCtxt<'tcx>, filter: F) -> Self {
@@ -76,7 +70,6 @@ impl<'a, 'tcx, F: Fn(Ty<'tcx>) -> bool> MoveDataBuilder<'a, 'tcx, F> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new_move_path | COMPLEXITY=7 | LINES=24 */
 
 fn new_move_path<'tcx>(
     move_paths: &mut IndexVec<MovePathIndex, MovePath<'tcx>>,
@@ -101,14 +94,12 @@ fn new_move_path<'tcx>(
 
     move_path
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum MovePathResult {
     Path(MovePathIndex),
     Union(MovePathIndex),
     Error,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=move_path_for | COMPLEXITY=112 | LINES=199 */
 
 impl<'a, 'tcx, F: Fn(Ty<'tcx>) -> bool> MoveDataBuilder<'a, 'tcx, F> {
     /// This creates a MovePath for a given place, returning an `MovePathError`
@@ -308,7 +299,6 @@ impl<'a, 'tcx, F: Fn(Ty<'tcx>) -> bool> MoveDataBuilder<'a, 'tcx, F> {
         self.data
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 pub(super) fn gather_moves<'tcx>(
     body: &Body<'tcx>,
@@ -331,7 +321,6 @@ pub(super) fn gather_moves<'tcx>(
 
     builder.finalize()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=gather_args | COMPLEXITY=196 | LINES=291 */
 
 impl<'a, 'tcx, F: Fn(Ty<'tcx>) -> bool> MoveDataBuilder<'a, 'tcx, F> {
     fn gather_args(&mut self) {

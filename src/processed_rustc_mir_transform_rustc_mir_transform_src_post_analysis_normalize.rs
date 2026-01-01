@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/post_analysis_normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Normalizes MIR in `TypingMode::PostAnalysis` mode, most notably revealing
 // its opaques. We also only normalize specializable associated items once in
 // `PostAnalysis` mode.
@@ -7,7 +6,6 @@
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=8 | LINES=15 */
 
 pub(super) struct PostAnalysisNormalize;
 
@@ -23,13 +21,11 @@ impl<'tcx> crate::MirPass<'tcx> for PostAnalysisNormalize {
         true
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=PostAnalysisNormalizeVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct PostAnalysisNormalizeVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=28 | LINES=54 */
 
 impl<'tcx> MutVisitor<'tcx> for PostAnalysisNormalizeVisitor<'tcx> {
     #[inline]

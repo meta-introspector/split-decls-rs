@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_errors/src/snippet.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Code for annotating snippets.
 
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{Level, Loc};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, PartialOrd, Ord, PartialEq, Eq)]
 pub(crate) struct Line {
     pub line_index: usize,
     pub annotations: Vec<Annotation>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=20 */
 
 #[derive(Clone, Copy, Debug, PartialOrd, Ord, PartialEq, Eq, Default)]
 pub(crate) struct AnnotationColumn {
@@ -34,14 +30,12 @@ pub(crate) struct AnnotationColumn {
     /// are correct. (motivated by <https://github.com/rust-lang/rust/issues/109537>)
     pub file: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl AnnotationColumn {
     pub(crate) fn from_loc(loc: &Loc) -> AnnotationColumn {
         AnnotationColumn { display: loc.col_display, file: loc.col.0 }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Debug, PartialOrd, Ord, PartialEq, Eq)]
 pub(crate) struct MultilineAnnotation {
@@ -54,7 +48,6 @@ pub(crate) struct MultilineAnnotation {
     pub label: Option<String>,
     pub overlaps_exactly: bool,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=54 */
 
 impl MultilineAnnotation {
     pub(crate) fn increase_depth(&mut self) {
@@ -109,7 +102,6 @@ impl MultilineAnnotation {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
 
 #[derive(Clone, Debug, PartialOrd, Ord, PartialEq, Eq)]
 pub(crate) enum AnnotationType {
@@ -136,7 +128,6 @@ pub(crate) enum AnnotationType {
     // `draw_multiline_line`.
     MultilineLine(usize),
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 
 #[derive(Clone, Debug, PartialOrd, Ord, PartialEq, Eq)]
 pub(crate) struct Annotation {
@@ -159,7 +150,6 @@ pub(crate) struct Annotation {
     /// smaller span.
     pub annotation_type: AnnotationType,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=63 */
 
 impl Annotation {
     /// Whether this annotation is a vertical line placeholder.

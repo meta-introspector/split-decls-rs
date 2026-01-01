@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/visitor.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BasicBlock, Location, traversal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{Analysis, Direction, Results};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit_results | COMPLEXITY=8 | LINES=26 */
 
 /// Calls the corresponding method in `ResultsVisitor` for every location in a `mir::Body` with the
 /// dataflow state at that location.
@@ -31,7 +28,6 @@ pub fn visit_results<'mir, 'tcx, A>(
         A::Direction::visit_results_in_block(&mut state, block, block_data, analysis, vis);
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit_reachable_results | COMPLEXITY=4 | LINES=13 */
 
 /// Like `visit_results`, but only for reachable blocks.
 pub fn visit_reachable_results<'mir, 'tcx, A>(
@@ -45,7 +41,6 @@ pub fn visit_reachable_results<'mir, 'tcx, A>(
     let blocks = traversal::reachable(body).map(|(bb, _)| bb);
     visit_results(body, blocks, analysis, results, vis)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_block_start | COMPLEXITY=15 | LINES=54 */
 
 /// A visitor over the results of an `Analysis`. Use this when you want to inspect domain values in
 /// many or all locations; use `ResultsCursor` if you want to inspect domain values only in certain

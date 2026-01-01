@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/codegen_fn_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 
 use crate::rustc_abi::Align;
 use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_target::spec::SanitizerSet;
 
 use crate::ty::{InstanceKind, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=codegen_instance_attrs | COMPLEXITY=12 | LINES=19 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn codegen_instance_attrs(
@@ -31,7 +27,6 @@ impl<'tcx> TyCtxt<'tcx> {
         attrs
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CodegenFnAttrs | COMPLEXITY=15 | LINES=44 */
 
 #[derive(Clone, TyEncodable, TyDecodable, HashStable, Debug)]
 pub struct CodegenFnAttrs {
@@ -76,7 +71,6 @@ pub struct CodegenFnAttrs {
     /// the function entry.
     pub patchable_function_entry: Option<PatchableFunctionEntry>,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 #[derive(Copy, Clone, Debug, TyEncodable, TyDecodable, HashStable, PartialEq, Eq)]
 pub enum TargetFeatureKind {
@@ -88,7 +82,6 @@ pub enum TargetFeatureKind {
     /// The feature is added by the unsafe `force_target_feature` attribute.
     Forced,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=TargetFeature | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, TyEncodable, TyDecodable, HashStable)]
 pub struct TargetFeature {
@@ -97,7 +90,6 @@ pub struct TargetFeature {
     /// The way this feature was enabled.
     pub kind: TargetFeatureKind,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=PatchableFunctionEntry | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, TyEncodable, TyDecodable, HashStable)]
 pub struct PatchableFunctionEntry {
@@ -106,7 +98,6 @@ pub struct PatchableFunctionEntry {
     /// Nops after entry, but before body
     entry: u8,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_config | COMPLEXITY=8 | LINES=15 */
 
 impl PatchableFunctionEntry {
     pub fn from_config(config: crate::rustc_session::config::PatchableFunctionEntry) -> Self {
@@ -122,7 +113,6 @@ impl PatchableFunctionEntry {
         self.entry
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=CodegenFnAttrFlags(u32); | COMPLEXITY=12 | LINES=52 */
 
 #[derive(Clone, Copy, PartialEq, Eq, TyEncodable, TyDecodable, HashStable)]
 pub struct CodegenFnAttrFlags(u32);
@@ -175,9 +165,7 @@ bitflags::bitflags! {
         const FOREIGN_ITEM              = 1 << 16;
     }
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 crate::rustc_data_structures::external_bitflags_debug! { CodegenFnAttrFlags }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=contains_extern_indicator | COMPLEXITY=23 | LINES=46 */
 
 impl CodegenFnAttrs {
     pub const EMPTY: &'static Self = &Self::new();

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/reachable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
 // Finds local items that are "reachable", which means that other crates need access to their
 // compiled code or their *runtime* MIR. (Compile-time MIR is always encoded anyway, so we don't
 // worry about that here.)
@@ -29,21 +28,14 @@ use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
 use crate::rustc_complete::Node;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::privacy::{self, Level};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{ConstAllocation, ErrorHandled, GlobalAlloc};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, ExistentialTraitRef, TyCtxt};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=recursively_reachable | COMPLEXITY=6 | LINES=11 */
 use rustc_privacy::DefIdVisitor;
 use crate::rustc_complete::config::CrateType;
 use tracing::debug;
@@ -55,7 +47,6 @@ fn recursively_reachable(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
         || tcx.cross_crate_inlinable(def_id)
         || tcx.is_const_fn(def_id)
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ReachableContext | COMPLEXITY=9 | LINES=15 */
 
 // Information needed while computing reachability.
 struct ReachableContext<'tcx> {
@@ -71,7 +62,6 @@ struct ReachableContext<'tcx> {
     // Whether any output of this compilation is a library
     any_library: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_nested_body | COMPLEXITY=31 | LINES=52 */
 
 impl<'tcx> Visitor<'tcx> for ReachableContext<'tcx> {
     fn visit_nested_body(&mut self, body: hir::BodyId) {
@@ -124,7 +114,6 @@ impl<'tcx> Visitor<'tcx> for ReachableContext<'tcx> {
         intravisit::walk_inline_asm(self, asm, id);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=183 | LINES=251 */
 
 impl<'tcx> ReachableContext<'tcx> {
     /// Gets the type-checking results for the current body.
@@ -376,7 +365,6 @@ impl<'tcx> ReachableContext<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=6 | LINES=17 */
 
 impl<'tcx> DefIdVisitor<'tcx> for ReachableContext<'tcx> {
     type Result = ();
@@ -394,7 +382,6 @@ impl<'tcx> DefIdVisitor<'tcx> for ReachableContext<'tcx> {
         self.propagate_item(Res::Def(self.tcx.def_kind(def_id), def_id))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=17 | LINES=34 */
 
 fn check_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -429,7 +416,6 @@ fn check_item<'tcx>(
     worklist
         .extend(tcx.provided_trait_methods(trait_def_id).map(|assoc| assoc.def_id.expect_local()));
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=has_custom_linkage | COMPLEXITY=6 | LINES=17 */
 
 fn has_custom_linkage(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     // Anything which has custom linkage gets thrown on the worklist no
@@ -447,7 +433,6 @@ fn has_custom_linkage(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         || codegen_attrs.flags.contains(CodegenFnAttrFlags::USED_COMPILER)
         || codegen_attrs.flags.contains(CodegenFnAttrFlags::USED_LINKER)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=reachable_set | COMPLEXITY=31 | LINES=68 */
 
 /// See module-level doc comment above.
 fn reachable_set(tcx: TyCtxt<'_>, (): ()) -> LocalDefIdSet {
@@ -516,7 +501,6 @@ fn reachable_set(tcx: TyCtxt<'_>, (): ()) -> LocalDefIdSet {
     // Return the set of reachable symbols.
     reachable_context.reachable_symbols
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { reachable_set, ..*providers };

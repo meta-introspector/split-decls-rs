@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/intrinsic/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[cfg(feature = "master")]
 use std::iter;
@@ -7,36 +6,28 @@ use std::iter;
 #[cfg(feature = "master")]
 use gccjit::Type;
 use gccjit::{ComparisonOp, Function, FunctionType, RValue, ToRValue, UnaryOp};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[cfg(feature = "master")]
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_abi::{BackendRepr, HasDataLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_codegen_ssa::MemFlags;
 use crate::rustc_codegen_ssa::base::wants_msvc_seh;
 use crate::rustc_codegen_ssa::common::IntPredicate;
 use crate::rustc_codegen_ssa::errors::InvalidMonomorphization;
 use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[cfg(feature = "master")]
 use crate::rustc_codegen_ssa::traits::MiscCodegenMethods;
 use crate::rustc_codegen_ssa::traits::{
     ArgAbiBuilderMethods, BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods,
     IntrinsicCallBuilderMethods,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 #[cfg(feature = "master")]
 use crate::rustc_complete::ty::layout::FnAbiOf;
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::ty::{self, Instance, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{ArgAbi, PassMode};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_target::spec::PanicStrategy;
 
 #[cfg(feature = "master")]
@@ -44,7 +35,6 @@ use crate::abi::FnAbiGccExt;
 use crate::abi::GccType;
 use crate::builder::Builder;
 use crate::common::{SignType, TypeReflection};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get_simple_intrinsic | COMPLEXITY=18 | LINES=94 */
 use crate::context::CodegenCx;
 use crate::intrinsic::simd::generic_simd_intrinsic;
 use crate::type_of::LayoutGccExt;
@@ -139,7 +129,6 @@ fn get_simple_intrinsic<'gcc, 'tcx>(
     };
     Some(cx.context.get_builtin_function(gcc_name))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=get_simple_function | COMPLEXITY=17 | LINES=66 */
 
 // TODO(antoyo): We can probably remove these and use the fallback intrinsic implementation.
 fn get_simple_function<'gcc, 'tcx>(
@@ -206,7 +195,6 @@ fn get_simple_function<'gcc, 'tcx>(
         false,
     ))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=get_simple_function_f128 | COMPLEXITY=10 | LINES=28 */
 
 fn get_simple_function_f128<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -235,7 +223,6 @@ fn get_simple_function_f128<'gcc, 'tcx>(
         false,
     ))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=get_simple_function_f128_2args | COMPLEXITY=10 | LINES=28 */
 
 fn get_simple_function_f128_2args<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -264,7 +251,6 @@ fn get_simple_function_f128_2args<'gcc, 'tcx>(
         false,
     ))
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=f16_builtin | COMPLEXITY=9 | LINES=35 */
 
 fn f16_builtin<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -300,7 +286,6 @@ fn f16_builtin<'gcc, 'tcx>(
     let result = cx.context.new_call(None, func, &args);
     cx.context.new_cast(None, result, cx.type_f16())
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=codegen_intrinsic_call | COMPLEXITY=148 | LINES=390 */
 
 impl<'a, 'gcc, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tcx> {
     fn codegen_intrinsic_call(
@@ -691,7 +676,6 @@ impl<'a, 'gcc, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tc
         unimplemented!();
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=store_fn_arg | COMPLEXITY=6 | LINES=20 */
 
 impl<'a, 'gcc, 'tcx> ArgAbiBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tcx> {
     fn store_fn_arg(
@@ -712,7 +696,6 @@ impl<'a, 'gcc, 'tcx> ArgAbiBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tcx> {
         arg_abi.store(self, val, dst)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=store | COMPLEXITY=2 | LINES=15 */
 
 pub trait ArgAbiExt<'gcc, 'tcx> {
     fn store(
@@ -728,7 +711,6 @@ pub trait ArgAbiExt<'gcc, 'tcx> {
         dst: PlaceRef<'tcx, RValue<'gcc>>,
     );
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=store | COMPLEXITY=62 | LINES=101 */
 
 impl<'gcc, 'tcx> ArgAbiExt<'gcc, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
     /// Stores a direct/indirect value described by this ArgAbi into a
@@ -830,7 +812,6 @@ impl<'gcc, 'tcx> ArgAbiExt<'gcc, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=int_type_width_signed | COMPLEXITY=16 | LINES=31 */
 
 fn int_type_width_signed<'gcc, 'tcx>(
     ty: Ty<'tcx>,
@@ -862,7 +843,6 @@ fn int_type_width_signed<'gcc, 'tcx>(
         _ => None,
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=bit_reverse | COMPLEXITY=164 | LINES=487 */
 
 impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
     fn bit_reverse(&mut self, width: u64, value: RValue<'gcc>) -> RValue<'gcc> {
@@ -1350,7 +1330,6 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=try_intrinsic | COMPLEXITY=10 | LINES=23 */
 
 fn try_intrinsic<'a, 'b, 'gcc, 'tcx>(
     bx: &'b mut Builder<'a, 'gcc, 'tcx>,
@@ -1374,7 +1353,6 @@ fn try_intrinsic<'a, 'b, 'gcc, 'tcx>(
         unimplemented!();
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=codegen_gnu_try | COMPLEXITY=18 | LINES=76 */
 
 // Definition of the standard `try` function for Rust using the GNU-like model
 // of exceptions (e.g., the normal semantics of LLVM's `landingpad` and `invoke`
@@ -1451,7 +1429,6 @@ fn codegen_gnu_try<'gcc, 'tcx>(
     let ret = bx.call(llty, None, None, func, &[try_func, data, catch_func], None, None);
     OperandValue::Immediate(ret).store(bx, dest);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_rust_try_fn | COMPLEXITY=30 | LINES=51 */
 
 // Helper function used to get a handle to the `__rust_try` function used to
 // catch exceptions.
@@ -1503,7 +1480,6 @@ fn get_rust_try_fn<'a, 'gcc, 'tcx>(
     cx.rust_try_fn.set(Some(rust_try));
     rust_try
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=gen_fn | COMPLEXITY=5 | LINES=22 */
 
 // Helper function to give a Block to a closure to codegen a shim function.
 // This is currently primarily used for the `try` intrinsic functions above.

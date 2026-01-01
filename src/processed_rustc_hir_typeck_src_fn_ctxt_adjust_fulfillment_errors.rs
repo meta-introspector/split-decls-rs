@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/adjust_fulfillment_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ops::ControlFlow;
 
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_infer::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, kw};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_trait_selection::traits;
 
 use crate::FnCtxt;
@@ -21,14 +17,12 @@ enum ClauseFlavor {
     /// Predicate comes from `const_conditions`.
     Const,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum ParamTerm {
     Ty(ty::ParamTy),
     Const(ty::ParamConst),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=index | COMPLEXITY=7 | LINES=9 */
 
 impl ParamTerm {
     fn index(self) -> usize {
@@ -38,7 +32,6 @@ impl ParamTerm {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=point_at_expr_if_possible | COMPLEXITY=452 | LINES=1013 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn adjust_fulfillment_error_for_expr_obligation(
@@ -1052,7 +1045,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 generic_argument_type,
             );
         }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=find_param_in_ty | COMPLEXITY=13 | LINES=21 */
 
         // At this point, none of the basic patterns matched.
         // One major possibility which remains is that we have a function call.
@@ -1074,7 +1066,6 @@ fn find_param_in_ty<'tcx>(
         if arg == param_to_point_at {
             return true;
         }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
         if let ty::GenericArgKind::Type(ty) = arg.kind()
             && let ty::Alias(ty::Projection | ty::Inherent, ..) = ty.kind()
         {
@@ -1086,7 +1077,6 @@ fn find_param_in_ty<'tcx>(
             // in some UI tests.
             walk.skip_current_subtree();
         }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_iterator_singleton | COMPLEXITY=8 | LINES=11 */
     }
     false
 }

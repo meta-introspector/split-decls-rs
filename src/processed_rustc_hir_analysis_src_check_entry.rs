@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/entry.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::Not;
 
 use crate::rustc_abi::ExternAbi;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::{Node, find_attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::config::EntryFnType;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 
 use super::check_function_signature;
 use crate::errors;
@@ -28,7 +23,6 @@ pub(crate) fn check_for_entry_fn(tcx: TyCtxt<'_>) {
         _ => {}
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_main_fn_ty | COMPLEXITY=107 | LINES=172 */
 
 fn check_main_fn_ty(tcx: TyCtxt<'_>, main_def_id: DefId) {
     let main_fnsig = tcx.fn_sig(main_def_id).instantiate_identity();

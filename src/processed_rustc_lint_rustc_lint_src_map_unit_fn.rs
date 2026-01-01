@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_lint/src/map_unit_fn.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Expr, ExprKind, Stmt, StmtKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::sym;
 
 use crate::lints::MappingToUnit;
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
 
 declare_lint! {
     /// The `map_unit_fn` lint checks for `Iterator::map` receive
@@ -41,7 +36,6 @@ declare_lint! {
     Warn,
     "`Iterator::map` call that discard the iterator's values"
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_stmt | COMPLEXITY=21 | LINES=44 */
 
 declare_lint_pass!(MapUnitFn => [MAP_UNIT_FN]);
 
@@ -86,7 +80,6 @@ impl<'tcx> LateLintPass<'tcx> for MapUnitFn {
         );
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_impl_slice | COMPLEXITY=5 | LINES=9 */
 
 fn is_impl_slice(cx: &LateContext<'_>, expr: &Expr<'_>) -> bool {
     if let Some(method_id) = cx.typeck_results().type_dependent_def_id(expr.hir_id)

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/search_graph/stack.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::ops::Index;
 
 use derive_where::derive_where;
@@ -8,14 +7,12 @@ use crate::rustc_index::IndexVec;
 use crate::search_graph::{
     AvailableDepth, CandidateHeadUsages, Cx, CycleHeads, HeadUsages, NestedGoals, PathKind,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[gate_rustc_only]
     pub(super) struct StackDepth {}
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=44 */
 
 /// Stack entries of the evaluation stack. Its fields tend to be lazily updated
 /// when popping a child goal or completely immutable.
@@ -60,7 +57,6 @@ pub(super) struct StackEntry<X: Cx> {
     /// The nested goals of this goal, see the doc comment of the type.
     pub nested_goals: NestedGoals<X>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// The stack of goals currently being computed.
 ///
@@ -72,7 +68,6 @@ pub(super) struct StackEntry<X: Cx> {
 pub(super) struct Stack<X: Cx> {
     entries: IndexVec<StackDepth, StackEntry<X>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=49 */
 
 impl<X: Cx> Stack<X> {
     pub(super) fn is_empty(&self) -> bool {
@@ -122,7 +117,6 @@ impl<X: Cx> Stack<X> {
         self.entries.iter_enumerated().find(|(_, e)| e.input == input).map(|(idx, _)| idx)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=7 */
 
 impl<X: Cx> Index<StackDepth> for Stack<X> {
     type Output = StackEntry<X>;

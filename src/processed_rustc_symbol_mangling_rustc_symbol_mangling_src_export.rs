@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/export.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::assert_matches::debug_assert_matches;
 
 use crate::rustc_abi::IntegerType;
@@ -7,14 +6,11 @@ use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash128;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::symbol::{Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=2 | LINES=4 */
 
 trait AbiHashStable<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=12 | LINES=10 */
 macro_rules! default_hash_impl {
     ($($t:ty,)+) => {
         $(impl<'tcx> AbiHashStable<'tcx> for $t {
@@ -25,10 +21,8 @@ macro_rules! default_hash_impl {
         })*
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 default_hash_impl! { u8, u64, usize, }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=9 | LINES=7 */
 
 impl<'tcx> AbiHashStable<'tcx> for bool {
     #[inline]
@@ -36,7 +30,6 @@ impl<'tcx> AbiHashStable<'tcx> for bool {
         (if *self { 1u8 } else { 0u8 }).abi_hash(tcx, hasher);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> AbiHashStable<'tcx> for str {
     #[inline]
@@ -44,7 +37,6 @@ impl<'tcx> AbiHashStable<'tcx> for str {
         self.as_bytes().abi_hash(tcx, hasher);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> AbiHashStable<'tcx> for Symbol {
     #[inline]
@@ -52,7 +44,6 @@ impl<'tcx> AbiHashStable<'tcx> for Symbol {
         self.as_str().abi_hash(tcx, hasher);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx, T: AbiHashStable<'tcx>> AbiHashStable<'tcx> for [T] {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher) {
@@ -62,7 +53,6 @@ impl<'tcx, T: AbiHashStable<'tcx>> AbiHashStable<'tcx> for [T] {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=39 | LINES=76 */
 
 impl<'tcx> AbiHashStable<'tcx> for Ty<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher) {
@@ -139,7 +129,6 @@ impl<'tcx> AbiHashStable<'tcx> for Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx> AbiHashStable<'tcx> for ty::FnSig<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher) {
@@ -149,14 +138,12 @@ impl<'tcx> AbiHashStable<'tcx> for ty::FnSig<'tcx> {
         self.safety.is_safe().abi_hash(tcx, hasher);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> AbiHashStable<'tcx> for ty::GenericArg<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher) {
         self.kind().abi_hash(tcx, hasher);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=abi_hash | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> AbiHashStable<'tcx> for ty::GenericArgKind<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher) {
@@ -166,7 +153,6 @@ impl<'tcx> AbiHashStable<'tcx> for ty::GenericArgKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 
 pub(crate) fn compute_hash_of_export_fn<'tcx>(
     tcx: TyCtxt<'tcx>,

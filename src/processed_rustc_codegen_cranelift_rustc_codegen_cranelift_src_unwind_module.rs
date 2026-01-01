@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/unwind_module.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use cranelift_codegen::Context;
 use cranelift_codegen::control::ControlPlane;
 use cranelift_codegen::ir::Signature;
 use cranelift_codegen::isa::{TargetFrontendConfig, TargetIsa};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use cranelift_module::{
     DataDescription, DataId, FuncId, FuncOrDataId, Linkage, Module, ModuleDeclarations,
     ModuleReloc, ModuleResult,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use cranelift_object::{ObjectModule, ObjectProduct};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::UnwindContext;
 
@@ -20,7 +16,6 @@ pub(crate) struct UnwindModule<T> {
     pub(crate) module: T,
     unwind_context: UnwindContext,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 impl<T: Module> UnwindModule<T> {
     pub(crate) fn new(mut module: T, pic_eh_frame: bool) -> Self {
@@ -28,7 +23,6 @@ impl<T: Module> UnwindModule<T> {
         UnwindModule { module, unwind_context }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 impl UnwindModule<ObjectModule> {
     pub(crate) fn finish(self) -> ObjectProduct {
@@ -37,7 +31,6 @@ impl UnwindModule<ObjectModule> {
         product
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[cfg(feature = "jit")]
 impl UnwindModule<cranelift_jit::JITModule> {
@@ -47,7 +40,6 @@ impl UnwindModule<cranelift_jit::JITModule> {
         self.module
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=isa | COMPLEXITY=18 | LINES=70 */
 
 impl<T: Module> Module for UnwindModule<T> {
     fn isa(&self) -> &dyn TargetIsa {

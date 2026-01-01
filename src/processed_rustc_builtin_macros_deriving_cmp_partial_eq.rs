@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/cmp/partial_eq.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BinOpKind, BorrowKind, Expr, ExprKind, MetaItem, Mutability};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
 use crate::deriving::{path_local, path_std};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=56 */
 
 /// Expands a `#[derive(PartialEq)]` attribute into an implementation for the
 /// target item.
@@ -68,7 +63,6 @@ pub(crate) fn expand_deriving_partial_eq(
     };
     trait_def.expand(cx, mitem, item, push)
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=27 */
 
 /// Generates the equality expression for a struct or enum variant when deriving
 /// `PartialEq`.
@@ -96,7 +90,6 @@ pub(crate) fn expand_deriving_partial_eq(
 ///     field_1: &'static str,
 ///     field_2: i32,
 /// }
-/* AST_META: AST_ID=7 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 /// ```
 ///
 /// ### Example 2
@@ -104,7 +97,6 @@ pub(crate) fn expand_deriving_partial_eq(
 /// mod ty {
 ///     pub type i32 = i32;
 /// }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 ///
 /// // Here, `field_2` is of type `ty::i32`, which is a type alias for `i32`.
 /// // However, the function will not reorder the fields because the symbol for
@@ -115,7 +107,6 @@ pub(crate) fn expand_deriving_partial_eq(
 ///     field_1: &'static str,
 ///     field_2: ty::i32,
 /// }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=get_substructure_equality_expr | COMPLEXITY=17 | LINES=60 */
 /// ```
 ///
 /// For enums, the discriminant is compared first, then the rest of the fields.
@@ -176,7 +167,6 @@ fn get_substructure_equality_expr(
         ),
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get_field_equality_expr | COMPLEXITY=12 | LINES=25 */
 
 /// Generates an equality comparison expression for a single struct or enum
 /// field.
@@ -202,7 +192,6 @@ fn get_field_equality_expr(cx: &ExtCtxt<'_>, field: &FieldInfo) -> Box<Expr> {
         wrap_block_expr(cx, peel_refs(rhs)),
     )
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=peel_refs | COMPLEXITY=5 | LINES=12 */
 
 /// Removes all leading immutable references from an expression.
 ///
@@ -215,7 +204,6 @@ fn peel_refs(mut expr: &Box<Expr>) -> Box<Expr> {
     }
     expr.clone()
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=wrap_block_expr | COMPLEXITY=5 | LINES=12 */
 
 /// Wraps a block expression in parentheses to ensure valid AST in macro
 /// expansion output.

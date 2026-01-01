@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/latch.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::marker::PhantomData;
 use std::ops::Deref;
 use std::sync::atomic::{AtomicUsize, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, Condvar, Mutex};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::job::JobRef;
 use crate::registry::{Registry, WorkerThread};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=44 */
 
 /// We define various kinds of latches, which are all a primitive signaling
 /// mechanism. A latch starts as false. Eventually someone calls `set()` and
@@ -54,12 +50,10 @@ pub(super) trait Latch {
     /// actions other than `set` itself.
     unsafe fn set(this: *const Self);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=as_core_latch | COMPLEXITY=2 | LINES=4 */
 
 pub(super) trait AsCoreLatch {
     fn as_core_latch(&self) -> &CoreLatch;
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 
 /// Latch is not set, owning thread is awake
 const UNSET: usize = 0;
@@ -82,7 +76,6 @@ const SET: usize = 3;
 pub(super) struct CoreLatch {
     state: AtomicUsize,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=38 | LINES=52 */
 
 impl CoreLatch {
     #[inline]
@@ -135,7 +128,6 @@ impl CoreLatch {
         self.state.load(Ordering::Acquire) == SET
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=as_core_latch | COMPLEXITY=5 | LINES=7 */
 
 impl AsCoreLatch for CoreLatch {
     #[inline]
@@ -143,7 +135,6 @@ impl AsCoreLatch for CoreLatch {
         self
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Spin latches are the simplest, most efficient kind, but they do
 /// not support a `wait()` operation. They just have a boolean flag
@@ -154,7 +145,6 @@ pub(super) struct SpinLatch<'r> {
     target_worker_index: usize,
     cross: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=24 */
 
 impl<'r> SpinLatch<'r> {
     /// Creates a new spin latch that is owned by `thread`. This means
@@ -179,7 +169,6 @@ impl<'r> SpinLatch<'r> {
         SpinLatch { cross: true, ..SpinLatch::new(thread) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=as_core_latch | COMPLEXITY=5 | LINES=7 */
 
 impl<'r> AsCoreLatch for SpinLatch<'r> {
     #[inline]
@@ -187,7 +176,6 @@ impl<'r> AsCoreLatch for SpinLatch<'r> {
         &self.core_latch
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=48 | LINES=34 */
 
 impl<'r> Latch for SpinLatch<'r> {
     #[inline]
@@ -222,7 +210,6 @@ impl<'r> Latch for SpinLatch<'r> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// A Latch starts as false and eventually becomes true. You can block
 /// until it becomes true.
@@ -231,7 +218,6 @@ pub(super) struct LockLatch {
     m: Mutex<bool>,
     v: Condvar,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=24 */
 
 impl LockLatch {
     #[inline]
@@ -256,7 +242,6 @@ impl LockLatch {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=9 */
 
 impl Latch for LockLatch {
     #[inline]
@@ -266,7 +251,6 @@ impl Latch for LockLatch {
         unsafe { (*this).v.notify_all() };
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// Once latches are used to implement one-time blocking, primarily
 /// for the termination flag of the threads in the pool.
@@ -284,7 +268,6 @@ impl Latch for LockLatch {
 pub(super) struct OnceLatch {
     core_latch: CoreLatch,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=20 */
 
 impl OnceLatch {
     #[inline]
@@ -305,7 +288,6 @@ impl OnceLatch {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=as_core_latch | COMPLEXITY=5 | LINES=7 */
 
 impl AsCoreLatch for OnceLatch {
     #[inline]
@@ -313,7 +295,6 @@ impl AsCoreLatch for OnceLatch {
         &self.core_latch
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Counting latches are used to implement scopes. They track a
 /// counter. Unlike other latches, calling `set()` does not
@@ -325,7 +306,6 @@ pub(super) struct CountLatch {
     counter: AtomicUsize,
     kind: CountLatchKind,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=20 */
 
 enum CountLatchKind {
     /// A latch for scopes created on a rayon thread which will participate in work-
@@ -346,7 +326,6 @@ enum CountLatchKind {
     /// A latch for scopes created on a non-rayon thread which will block to wait.
     Blocking { latch: LockLatch },
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=13 */
 
 impl std::fmt::Debug for CountLatchKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -360,7 +339,6 @@ impl std::fmt::Debug for CountLatchKind {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=45 */
 
 impl CountLatch {
     pub(super) fn new(owner: Option<&WorkerThread>) -> Self {
@@ -406,7 +384,6 @@ impl CountLatch {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=43 | LINES=19 */
 
 impl Latch for CountLatch {
     #[inline]
@@ -426,24 +403,20 @@ impl Latch for CountLatch {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 /// `&L` without any implication of `dereferenceable` for `Latch::set`
 pub(super) struct LatchRef<'a, L> {
     inner: *const L,
     marker: PhantomData<&'a L>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<L> LatchRef<'_, L> {
     pub(super) fn new(inner: &L) -> LatchRef<'_, L> {
         LatchRef { inner, marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl<L: Sync> Sync for LatchRef<'_, L> {}
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=12 | LINES=9 */
 
 impl<L> Deref for LatchRef<'_, L> {
     type Target = L;
@@ -453,7 +426,6 @@ impl<L> Deref for LatchRef<'_, L> {
         unsafe { &*self.inner }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=7 */
 
 impl<L: Latch> Latch for LatchRef<'_, L> {
     #[inline]

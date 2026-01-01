@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_span/src/edition.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::str::FromStr;
 
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=33 */
 
 /// The edition of the compiler. (See [RFC 2052](https://github.com/rust-lang/rfcs/blob/master/text/2052-epochs.md).)
 #[derive(Clone, Copy, Hash, PartialEq, PartialOrd, Debug, Encodable, Decodable, Eq)]
@@ -38,7 +36,6 @@ pub enum Edition {
     /// must also be behind a feature gate.
     EditionFuture,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=28 */
 
 // Must be in order from oldest to newest.
 pub const ALL_EDITIONS: &[Edition] = &[
@@ -67,7 +64,6 @@ impl fmt::Display for Edition {
         write!(f, "{s}")
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=lint_name | COMPLEXITY=19 | LINES=47 */
 
 impl Edition {
     pub fn lint_name(self) -> &'static str {
@@ -115,7 +111,6 @@ impl Edition {
         self >= Edition::EditionFuture
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_str | COMPLEXITY=9 | LINES=14 */
 
 impl FromStr for Edition {
     type Err = ();

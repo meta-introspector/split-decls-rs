@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/base.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::collections::HashSet;
 use std::env;
 use std::sync::Arc;
 use std::time::Instant;
 
 use gccjit::{CType, Context, FunctionType, GlobalKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 use crate::rustc_codegen_ssa::ModuleCodegen;
 use crate::rustc_codegen_ssa::base::maybe_create_entry_wrapper;
 use crate::rustc_codegen_ssa::mono_item::MonoItemExt;
@@ -21,12 +19,10 @@ use crate::rustc_complete::Symbol;
 #[cfg(feature = "master")]
 use crate::rustc_target::spec::SymbolVisibility;
 use crate::rustc_target::spec::{PanicStrategy, RelocModel};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::builder::Builder;
 use crate::context::CodegenCx;
 use crate::{GccContext, LockedTargetInfo, SyncContext, gcc_util, new_context};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visibility_to_gcc | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(feature = "master")]
 pub fn visibility_to_gcc(visibility: Visibility) -> gccjit::Visibility {
@@ -36,7 +32,6 @@ pub fn visibility_to_gcc(visibility: Visibility) -> gccjit::Visibility {
         Visibility::Protected => gccjit::Visibility::Protected,
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=symbol_visibility_to_gcc | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(feature = "master")]
 pub fn symbol_visibility_to_gcc(visibility: SymbolVisibility) -> gccjit::Visibility {
@@ -46,7 +41,6 @@ pub fn symbol_visibility_to_gcc(visibility: SymbolVisibility) -> gccjit::Visibil
         SymbolVisibility::Interposable => gccjit::Visibility::Default,
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=global_linkage_to_gcc | COMPLEXITY=7 | LINES=14 */
 
 pub fn global_linkage_to_gcc(linkage: Linkage) -> GlobalKind {
     match linkage {
@@ -61,7 +55,6 @@ pub fn global_linkage_to_gcc(linkage: Linkage) -> GlobalKind {
         Linkage::Common => unimplemented!(),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=linkage_to_gcc | COMPLEXITY=7 | LINES=15 */
 
 pub fn linkage_to_gcc(linkage: Linkage) -> FunctionType {
     match linkage {
@@ -77,7 +70,6 @@ pub fn linkage_to_gcc(linkage: Linkage) -> FunctionType {
         Linkage::Common => unimplemented!(),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=compile_codegen_unit | COMPLEXITY=83 | LINES=186 */
 
 pub fn compile_codegen_unit(
     tcx: TyCtxt<'_>,
@@ -264,7 +256,6 @@ pub fn compile_codegen_unit(
 
     (module, cost)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=add_pic_option | COMPLEXITY=13 | LINES=21 */
 
 pub fn add_pic_option<'gcc>(context: &Context<'gcc>, relocation_model: RelocModel) {
     match relocation_model {

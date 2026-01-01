@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public_bridge/src/bridge.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 // Defines a set of traits that is used for abstracting
 // rustc_public's components that are needed in rustc_public_bridge.
 //
@@ -10,18 +9,15 @@ use std::fmt::Debug;
 
 use super::context::CompilerCtxt;
 use super::{Bridge, Tables};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=5 */
 
 pub trait Error {
     fn new(msg: String) -> Self;
     fn from_internal<T: Debug>(err: T) -> Self;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=4 */
 
 pub trait Prov<B: Bridge> {
     fn new(aid: B::AllocId) -> Self;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=11 */
 
 pub trait Allocation<B: Bridge> {
     fn new<'tcx>(
@@ -33,7 +29,6 @@ pub trait Allocation<B: Bridge> {
         cx: &CompilerCtxt<'tcx, B>,
     ) -> Self;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! make_bridge_trait {
     ($name:ident) => {
@@ -42,7 +37,6 @@ macro_rules! make_bridge_trait {
         }
     };
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=21 */
 
 make_bridge_trait!(CrateItem);
 make_bridge_trait!(AdtDef);

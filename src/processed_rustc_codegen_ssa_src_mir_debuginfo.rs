@@ -1,30 +1,21 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/debuginfo.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::hash_map::Entry;
 use std::marker::PhantomData;
 use std::ops::Range;
 
 use crate::rustc_abi::{BackendRepr, FieldIdx, FieldsShape, Size, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Instance, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::DebugInfo;
 use crate::rustc_complete::{BytePos, Span, Symbol, hygiene, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{FunctionCx, LocalRef, PerLocalVarDebugInfoIndexVec};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=FunctionDebugContext | COMPLEXITY=2 | LINES=9 */
 use crate::traits::*;
 
 pub struct FunctionDebugContext<'tcx, S, L> {
@@ -34,14 +25,12 @@ pub struct FunctionDebugContext<'tcx, S, L> {
     /// Maps from an inlined function to its debug info declaration.
     pub inlined_function_scopes: FxHashMap<Instance<'tcx>, S>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 pub enum VariableKind {
     ArgumentVariable(usize /*index*/),
     LocalVariable,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=PerLocalVarDebugInfo | COMPLEXITY=5 | LINES=17 */
 
 /// Like `mir::VarDebugInfo`, but within a `mir::Local`.
 #[derive(Clone)]
@@ -59,7 +48,6 @@ pub struct PerLocalVarDebugInfo<'tcx, D> {
     /// `.place.projection` from `mir::VarDebugInfo`.
     pub projection: &'tcx ty::List<mir::PlaceElem<'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ConstDebugInfo | COMPLEXITY=2 | LINES=11 */
 
 /// Information needed to emit a constant.
 pub struct ConstDebugInfo<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> {
@@ -71,7 +59,6 @@ pub struct ConstDebugInfo<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> {
     pub fragment: Option<Range<Size>>,
     pub _phantom: PhantomData<&'a ()>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=DebugScope | COMPLEXITY=4 | LINES=13 */
 
 #[derive(Clone, Copy, Debug)]
 pub struct DebugScope<S, L> {
@@ -85,7 +72,6 @@ pub struct DebugScope<S, L> {
     pub file_start_pos: BytePos,
     pub file_end_pos: BytePos,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=adjust_dbg_scope_for_span | COMPLEXITY=8 | LINES=20 */
 
 impl<'tcx, S: Copy, L: Copy> DebugScope<S, L> {
     /// DILocations inherit source file name from the parent DIScope. Due to macro expansions
@@ -106,7 +92,6 @@ impl<'tcx, S: Copy, L: Copy> DebugScope<S, L> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=2 | LINES=8 */
 
 trait DebugInfoOffsetLocation<'tcx, Bx> {
     fn deref(&self, bx: &mut Bx) -> Self;
@@ -115,7 +100,6 @@ trait DebugInfoOffsetLocation<'tcx, Bx> {
     fn project_constant_index(&self, bx: &mut Bx, offset: u64) -> Self;
     fn downcast(&self, bx: &mut Bx, variant: VariantIdx) -> Self;
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=25 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> DebugInfoOffsetLocation<'tcx, Bx>
     for PlaceRef<'tcx, Bx::Value>
@@ -141,7 +125,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> DebugInfoOffsetLocation<'tcx, Bx>
         self.project_downcast(bx, variant)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=11 | LINES=26 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> DebugInfoOffsetLocation<'tcx, Bx>
     for TyAndLayout<'tcx>
@@ -168,7 +151,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> DebugInfoOffsetLocation<'tcx, Bx>
         self.for_variant(bx.cx(), variant)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=DebugInfoOffset | COMPLEXITY=2 | LINES=10 */
 
 struct DebugInfoOffset<T> {
     /// Offset from the `base` used to calculate the debuginfo offset.
@@ -179,7 +161,6 @@ struct DebugInfoOffset<T> {
     /// The final location debuginfo should point to.
     result: T,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=calculate_debuginfo_offset | COMPLEXITY=25 | LINES=52 */
 
 fn calculate_debuginfo_offset<
     'a,
@@ -232,7 +213,6 @@ fn calculate_debuginfo_offset<
 
     DebugInfoOffset { direct_offset, indirect_offsets, result: place }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=set_debug_loc | COMPLEXITY=212 | LINES=378 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     pub fn set_debug_loc(&self, bx: &mut Bx, source_info: mir::SourceInfo) {

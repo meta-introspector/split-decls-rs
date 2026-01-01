@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/relate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::iter;
 
 use derive_where::derive_where;
 use rustc_ast_ir::Mutability;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::fold::TypeFoldable;
 use crate::inherent::*;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 
 pub type RelateResult<I, T> = Result<T, TypeError<I>>;
@@ -28,7 +24,6 @@ pub enum StructurallyRelateAliases {
     Yes,
     No,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=25 */
 
 /// Extra information about why we ended up with a particular variance.
 /// This is only used to add more information to error messages, and
@@ -54,10 +49,8 @@ pub enum VarianceDiagInfo<I: Interner> {
         param_index: u32,
     },
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for VarianceDiagInfo<I> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=xform | COMPLEXITY=8 | LINES=12 */
 
 impl<I: Interner> VarianceDiagInfo<I> {
     /// Mirrors `Variance::xform` - used to 'combine' the existing
@@ -70,7 +63,6 @@ impl<I: Interner> VarianceDiagInfo<I> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=19 | LINES=53 */
 
 pub trait TypeRelation<I: Interner>: Sized {
     fn cx(&self) -> I;
@@ -124,12 +116,10 @@ pub trait TypeRelation<I: Interner>: Sized {
     where
         T: Relate<I>;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=2 | LINES=4 */
 
 pub trait Relate<I: Interner>: TypeFoldable<I> + PartialEq + Copy {
     fn relate<R: TypeRelation<I>>(relation: &mut R, a: Self, b: Self) -> RelateResult<I, Self>;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=relate_args_invariantly | COMPLEXITY=3 | LINES=14 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Relate impls
@@ -144,7 +134,6 @@ pub fn relate_args_invariantly<I: Interner, R: TypeRelation<I>>(
         relation.relate_with_variance(ty::Invariant, VarianceDiagInfo::default(), a, b)
     }))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=relate_args_with_variances | COMPLEXITY=9 | LINES=25 */
 
 pub fn relate_args_with_variances<I: Interner, R: TypeRelation<I>>(
     relation: &mut R,
@@ -170,7 +159,6 @@ pub fn relate_args_with_variances<I: Interner, R: TypeRelation<I>>(
 
     cx.mk_args_from_iter(params)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=34 | LINES=64 */
 
 impl<I: Interner> Relate<I> for ty::FnSig<I> {
     fn relate<R: TypeRelation<I>>(
@@ -235,7 +223,6 @@ impl<I: Interner> Relate<I> for ty::FnSig<I> {
         })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=15 | LINES=27 */
 
 impl<I: Interner> Relate<I> for ty::AliasTy<I> {
     fn relate<R: TypeRelation<I>>(
@@ -263,7 +250,6 @@ impl<I: Interner> Relate<I> for ty::AliasTy<I> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=17 | LINES=37 */
 
 impl<I: Interner> Relate<I> for ty::AliasTerm<I> {
     fn relate<R: TypeRelation<I>>(
@@ -301,7 +287,6 @@ impl<I: Interner> Relate<I> for ty::AliasTerm<I> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=11 | LINES=30 */
 
 impl<I: Interner> Relate<I> for ty::ExistentialProjection<I> {
     fn relate<R: TypeRelation<I>>(
@@ -332,7 +317,6 @@ impl<I: Interner> Relate<I> for ty::ExistentialProjection<I> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=11 | LINES=20 */
 
 impl<I: Interner> Relate<I> for ty::TraitRef<I> {
     fn relate<R: TypeRelation<I>>(
@@ -353,7 +337,6 @@ impl<I: Interner> Relate<I> for ty::TraitRef<I> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=11 | LINES=20 */
 
 impl<I: Interner> Relate<I> for ty::ExistentialTraitRef<I> {
     fn relate<R: TypeRelation<I>>(
@@ -374,7 +357,6 @@ impl<I: Interner> Relate<I> for ty::ExistentialTraitRef<I> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=structurally_relate_tys | COMPLEXITY=110 | LINES=196 */
 
 /// Relates `a` and `b` structurally, calling the relation for all nested values.
 /// Any semantic equality, e.g. of projections, and inference variables have to be
@@ -571,7 +553,6 @@ pub fn structurally_relate_tys<I: Interner, R: TypeRelation<I>>(
         _ => Err(TypeError::Sorts(ExpectedFound::new(a, b))),
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=structurally_relate_consts | COMPLEXITY=53 | LINES=80 */
 
 /// Relates `a` and `b` structurally, calling the relation for all nested values.
 /// Any semantic equality, e.g. of unevaluated consts, and inference variables have
@@ -652,7 +633,6 @@ pub fn structurally_relate_consts<I: Interner, R: TypeRelation<I>>(
     };
     if is_match { Ok(a) } else { Err(TypeError::ConstMismatch(ExpectedFound::new(a, b))) }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=5 | LINES=10 */
 
 impl<I: Interner, T: Relate<I>> Relate<I> for ty::Binder<I, T> {
     fn relate<R: TypeRelation<I>>(
@@ -663,7 +643,6 @@ impl<I: Interner, T: Relate<I>> Relate<I> for ty::Binder<I, T> {
         relation.binders(a, b)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=10 | LINES=14 */
 
 impl<I: Interner> Relate<I> for ty::TraitPredicate<I> {
     fn relate<R: TypeRelation<I>>(

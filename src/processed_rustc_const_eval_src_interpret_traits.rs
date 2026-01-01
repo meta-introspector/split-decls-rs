@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/traits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{InterpResult, Pointer};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ExistentialPredicateStableCmpExt, Ty, TyCtxt, VtblEntry};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::trace;
 
 use super::util::ensure_monomorphic_enough;
 use super::{
     InterpCx, MPlaceTy, Machine, MemPlaceMeta, OffsetMode, Projectable, interp_ok, throw_ub,
 };
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=get_vtable_ptr | COMPLEXITY=47 | LINES=120 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Creates a dynamic vtable for the given type and vtable origin. This is used only for

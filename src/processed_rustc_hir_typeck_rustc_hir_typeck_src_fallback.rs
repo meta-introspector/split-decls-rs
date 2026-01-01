@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fallback.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::cell::OnceCell;
 use std::ops::ControlFlow;
 
@@ -7,29 +6,21 @@ use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::graph::iterate::DepthFirstSearch;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
 use crate::rustc_data_structures::graph::{self};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordBag, UnordMap, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{InferKind, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::debug;
 
 use crate::typeck_root_ctxt::InferVarInfo;
 use crate::{FnCtxt, errors};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Copy, Clone)]
 pub(crate) enum DivergingFallbackBehavior {
@@ -43,7 +34,6 @@ pub(crate) enum DivergingFallbackBehavior {
     /// Don't fallback at all
     NoFallback,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fallback_types | COMPLEXITY=236 | LINES=559 */
 
 impl<'tcx> FnCtxt<'_, 'tcx> {
     /// Performs type inference fallback, setting `FnCtxt::fallback_has_occurred`
@@ -603,7 +593,6 @@ impl<'tcx> FnCtxt<'_, 'tcx> {
         errors::SuggestAnnotations { suggestions }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AnnotateUnitFallbackVisitor | COMPLEXITY=2 | LINES=7 */
 
 /// Try to walk the HIR to find a place to insert a useful suggestion
 /// to preserve fallback to `()` in 2024.
@@ -611,7 +600,6 @@ struct AnnotateUnitFallbackVisitor<'a, 'tcx> {
     reachable_vids: FxHashSet<ty::TyVid>,
     fcx: &'a FnCtxt<'a, 'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=suggest_for_segment | COMPLEXITY=24 | LINES=40 */
 impl<'tcx> AnnotateUnitFallbackVisitor<'_, 'tcx> {
     // For a given path segment, if it's missing a turbofish, try to suggest adding
     // one so we can constrain an argument to `()`. To keep the suggestion simple,
@@ -652,7 +640,6 @@ impl<'tcx> AnnotateUnitFallbackVisitor<'_, 'tcx> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_infer | COMPLEXITY=43 | LINES=96 */
 impl<'tcx> Visitor<'tcx> for AnnotateUnitFallbackVisitor<'_, 'tcx> {
     type Result = ControlFlow<errors::SuggestAnnotation>;
 
@@ -749,7 +736,6 @@ impl<'tcx> Visitor<'tcx> for AnnotateUnitFallbackVisitor<'_, 'tcx> {
         hir::intravisit::walk_local(self, local)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug, Copy, Clone)]
 pub(crate) enum UnsafeUseReason {
@@ -759,7 +745,6 @@ pub(crate) enum UnsafeUseReason {
     UnionField,
     Deref,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 
 /// Finds all type variables which are passed to an `unsafe` operation.
 ///
@@ -774,11 +759,9 @@ pub(crate) enum UnsafeUseReason {
 ///         //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -- hir_id, span, reason
 ///     }
 /// }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 /// ```
 ///
 /// `compute_unsafe_infer_vars` will return `{ id(?X) -> (hir_id, span, Call) }`
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=compute_unsafe_infer_vars | COMPLEXITY=76 | LINES=135 */
 fn compute_unsafe_infer_vars<'a, 'tcx>(
     fcx: &'a FnCtxt<'a, 'tcx>,
     body_id: LocalDefId,

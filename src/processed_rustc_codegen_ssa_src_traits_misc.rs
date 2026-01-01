@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/misc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cell::RefCell;
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ty::{self, Instance, Ty};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=vtables | COMPLEXITY=8 | LINES=25 */
 use crate::rustc_complete::Session;
 
 use super::BackendTypes;

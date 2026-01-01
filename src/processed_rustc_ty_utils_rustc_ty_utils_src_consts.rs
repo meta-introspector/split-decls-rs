@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter;
 
 use crate::rustc_abi::{FIRST_VARIANT, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
@@ -13,15 +11,11 @@ use crate::rustc_complete::thir::visit;
 use crate::rustc_complete::thir::visit::Visitor;
 use crate::rustc_complete::ty::abstract_const::CastKind;
 use crate::rustc_complete::ty::{self, Expr, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, thir};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{GenericConstantTooComplex, GenericConstantTooComplexSub};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=destructure_const | COMPLEXITY=28 | LINES=58 */
 
 /// Destructures array, ADT or tuple constants into the constants
 /// of their fields.
@@ -80,7 +74,6 @@ fn destructure_const<'tcx>(
 
     ty::DestructuredConst { variant, fields }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_binop | COMPLEXITY=6 | LINES=11 */
 
 /// We do not allow all binary operations in abstract consts, so filter disallowed ones.
 fn check_binop(op: mir::BinOp) -> bool {
@@ -92,7 +85,6 @@ fn check_binop(op: mir::BinOp) -> bool {
         Offset => false,
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_unop | COMPLEXITY=6 | LINES=9 */
 
 /// While we currently allow all unary operations, we still want to explicitly guard against
 /// future changes here.
@@ -102,7 +94,6 @@ fn check_unop(op: mir::UnOp) -> bool {
         Not | Neg | PtrMetadata => true,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=recurse_build | COMPLEXITY=130 | LINES=177 */
 
 fn recurse_build<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -280,13 +271,11 @@ fn recurse_build<'tcx>(
         }
     })
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=IsThirPolymorphic | COMPLEXITY=2 | LINES=5 */
 
 struct IsThirPolymorphic<'a, 'tcx> {
     is_poly: bool,
     thir: &'a thir::Thir<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=error | COMPLEXITY=3 | LINES=14 */
 
 fn error(
     tcx: TyCtxt<'_>,
@@ -301,7 +290,6 @@ fn error(
 
     Err(reported)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=maybe_supported_error | COMPLEXITY=3 | LINES=14 */
 
 fn maybe_supported_error(
     tcx: TyCtxt<'_>,
@@ -316,7 +304,6 @@ fn maybe_supported_error(
 
     Err(reported)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=expr_is_poly | COMPLEXITY=77 | LINES=81 */
 
 impl<'a, 'tcx> IsThirPolymorphic<'a, 'tcx> {
     fn expr_is_poly(&mut self, expr: &thir::Expr<'tcx>) -> bool {
@@ -398,7 +385,6 @@ impl<'a, 'tcx> IsThirPolymorphic<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=14 | LINES=22 */
 
 impl<'a, 'tcx> visit::Visitor<'a, 'tcx> for IsThirPolymorphic<'a, 'tcx> {
     fn thir(&self) -> &'a thir::Thir<'tcx> {
@@ -421,7 +407,6 @@ impl<'a, 'tcx> visit::Visitor<'a, 'tcx> for IsThirPolymorphic<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=thir_abstract_const | COMPLEXITY=17 | LINES=33 */
 
 /// Builds an abstract const, do not use this directly, but use `AbstractConst::new` instead.
 fn thir_abstract_const<'tcx>(
@@ -455,7 +440,6 @@ fn thir_abstract_const<'tcx>(
 
     Ok(Some(ty::EarlyBinder::bind(recurse_build(tcx, body, body_id, root_span)?)))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { destructure_const, thir_abstract_const, ..*providers };

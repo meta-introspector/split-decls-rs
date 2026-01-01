@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23 */
 // The WIP public interface to rustc internals.
 //
 // For more information see <https://github.com/rust-lang/project-stable-mir>
@@ -23,7 +22,6 @@
 
 use std::fmt::Debug;
 use std::{fmt, io};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 pub(crate) use crate::rustc_public_bridge::IndexedVal;
 use crate::rustc_public_bridge::Tables;
@@ -35,13 +33,10 @@ use serde::Serialize;
 
 use crate::compiler_interface::with;
 pub use crate::crate_def::{CrateDef, CrateDefItems, CrateDefType, DefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use crate::error::*;
 use crate::mir::mono::StaticDef;
 use crate::mir::{Body, Mutability};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{AssocItem, FnDef, ForeignModuleDef, ImplDef, ProvenanceMap, Span, TraitDef, Ty};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=26 */
 use crate::unstable::Stable;
 
 #[macro_use]
@@ -58,7 +53,6 @@ impl Debug for DefId {
         f.debug_struct("DefId").field("id", &self.0).field("name", &self.name()).finish()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=to_val | COMPLEXITY=6 | LINES=10 */
 
 impl IndexedVal for DefId {
     fn to_val(index: usize) -> Self {
@@ -69,7 +63,6 @@ impl IndexedVal for DefId {
         self.0
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Crate | COMPLEXITY=2 | LINES=20 */
 
 /// A list of crate items.
 pub type CrateItems = Vec<CrateItem>;
@@ -90,7 +83,6 @@ pub struct Crate {
     pub name: Symbol,
     pub is_local: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=foreign_modules | COMPLEXITY=8 | LINES=27 */
 
 impl Crate {
     /// The list of foreign modules in this crate.
@@ -118,7 +110,6 @@ impl Crate {
         with(|cx| cx.crate_statics(self.id))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug, Hash, Serialize)]
 pub enum ItemKind {
@@ -127,14 +118,12 @@ pub enum ItemKind {
     Const,
     Ctor(CtorKind),
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug, Hash, Serialize)]
 pub enum CtorKind {
     Const,
     Fn,
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub type Filename = String;
 
@@ -143,7 +132,6 @@ crate_def_with_ty! {
     #[derive(Serialize)]
     pub CrateItem;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=expect_body | COMPLEXITY=26 | LINES=44 */
 
 impl CrateItem {
     /// This will return the body of an item or panic if it's not available.
@@ -188,7 +176,6 @@ impl CrateItem {
             .dump(w, &self.name())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=entry_fn | COMPLEXITY=6 | LINES=7 */
 
 /// Return the function where execution starts if the current
 /// crate defines that. This is usually `main`, but could be
@@ -196,41 +183,34 @@ impl CrateItem {
 pub fn entry_fn() -> Option<CrateItem> {
     with(|cx| cx.entry_fn())
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=local_crate | COMPLEXITY=2 | LINES=5 */
 
 /// Access to the local crate.
 pub fn local_crate() -> Crate {
     with(|cx| cx.local_crate())
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=find_crates | COMPLEXITY=4 | LINES=5 */
 
 /// Try to find a crate or crates if multiple crates exist from given name.
 pub fn find_crates(name: &str) -> Vec<Crate> {
     with(|cx| cx.find_crates(name))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=external_crates | COMPLEXITY=2 | LINES=5 */
 
 /// Try to find a crate with the given name.
 pub fn external_crates() -> Vec<Crate> {
     with(|cx| cx.external_crates())
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=all_local_items | COMPLEXITY=2 | LINES=5 */
 
 /// Retrieve all items in the local crate that have a MIR associated with them.
 pub fn all_local_items() -> CrateItems {
     with(|cx| cx.all_local_items())
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=all_trait_decls | COMPLEXITY=2 | LINES=4 */
 
 pub fn all_trait_decls() -> TraitDecls {
     with(|cx| cx.all_trait_decls())
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=all_trait_impls | COMPLEXITY=2 | LINES=4 */
 
 pub fn all_trait_impls() -> ImplTraitDecls {
     with(|cx| cx.all_trait_impls())
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=Opaque(String); | COMPLEXITY=8 | LINES=10 */
 
 /// A type that provides internal information but that can still be used for debug purpose.
 #[derive(Clone, PartialEq, Eq, Hash, Serialize)]
@@ -241,19 +221,16 @@ impl std::fmt::Display for Opaque {
         write!(f, "{}", self.0)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl std::fmt::Debug for Opaque {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=opaque | COMPLEXITY=3 | LINES=4 */
 
 pub fn opaque<T: Debug>(value: &T) -> Opaque {
     Opaque(format!("{value:?}"))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=10 */
 
 macro_rules! bridge_impl {
     ($name: ident, $ty: ty) => {
@@ -264,7 +241,6 @@ macro_rules! bridge_impl {
         }
     };
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=27 */
 
 bridge_impl!(CrateItem, crate::CrateItem);
 bridge_impl!(AdtDef, crate::ty::AdtDef);
@@ -292,7 +268,6 @@ impl crate::rustc_public_bridge::bridge::Prov<compiler_interface::BridgeTys> for
         Self(aid)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=22 */
 
 impl crate::rustc_public_bridge::bridge::Allocation<compiler_interface::BridgeTys>
     for crate::ty::Allocation

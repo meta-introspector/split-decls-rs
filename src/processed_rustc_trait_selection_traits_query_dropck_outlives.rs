@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/dropck_outlives.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_infer::traits::query::type_op::DropckOutlives;
 use crate::rustc_complete::traits::query::{DropckConstraint, DropckOutlivesResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, EarlyBinder, ParamEnvAnd, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::solve::NextSolverError;
 use crate::traits::query::NoSolution;
 use crate::traits::query::normalize::QueryNormalizeExt;
 use crate::traits::{FromSolverError, Normalized, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=trivial_dropck_outlives | COMPLEXITY=36 | LINES=79 */
 
 /// This returns true if the type `ty` is "trivial" for
 /// dropck-outlives -- that is, if it doesn't require any types to
@@ -94,7 +89,6 @@ pub fn trivial_dropck_outlives<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> bool {
         | ty::UnsafeBinder(_) => false,
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=compute_dropck_outlives_inner | COMPLEXITY=6 | LINES=11 */
 
 pub fn compute_dropck_outlives_inner<'tcx>(
     ocx: &ObligationCtxt<'_, 'tcx>,
@@ -106,7 +100,6 @@ pub fn compute_dropck_outlives_inner<'tcx>(
         Err(_) => Err(NoSolution),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_dropck_outlives_with_errors | COMPLEXITY=67 | LINES=147 */
 
 pub fn compute_dropck_outlives_with_errors<'tcx, E>(
     ocx: &ObligationCtxt<'_, 'tcx, E>,
@@ -254,7 +247,6 @@ where
     debug!("dropck_outlives: result = {:#?}", result);
     Ok(result)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dtorck_constraint_for_ty_inner | COMPLEXITY=91 | LINES=176 */
 
 /// Returns a set of constraints that needs to be satisfied in
 /// order for `ty` to be valid for destruction.

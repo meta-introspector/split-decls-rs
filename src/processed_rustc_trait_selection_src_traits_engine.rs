@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/engine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::cell::RefCell;
 use std::fmt::Debug;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::at::ToTrace;
 use crate::rustc_infer::infer::canonical::{
     Canonical, CanonicalQueryResponse, CanonicalVarValues, QueryResponse,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, InferOk, RegionResolutionError, TypeTrace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
 use crate::rustc_complete::arena::ArenaAllocatable;
@@ -21,20 +17,16 @@ use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::relate::Relate;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast, Variance};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{FromSolverError, FulfillmentContext, ScrubbedTraitError, TraitEngine};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::regions::InferCtxtRegionExt;
 use crate::solve::{FulfillmentCtxt as NextFulfillmentCtxt, NextSolverError};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::traits::fulfill::OldSolverError;
 use crate::traits::{
     FulfillmentError, NormalizeExt, Obligation, ObligationCause, PredicateObligation,
     StructurallyNormalizeExt,
 };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=18 */
 
 #[extension(pub trait TraitEngineExt<'tcx, E>)]
 impl<'tcx, E> dyn TraitEngine<'tcx, E>
@@ -53,7 +45,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ObligationCtxt | COMPLEXITY=4 | LINES=7 */
 
 /// Used if you want to have pleasant experience when dealing
 /// with obligations outside of hir or mir typeck.
@@ -61,21 +52,18 @@ pub struct ObligationCtxt<'a, 'tcx, E = ScrubbedTraitError<'tcx>> {
     pub infcx: &'a InferCtxt<'tcx>,
     engine: RefCell<Box<dyn TraitEngine<'tcx, E>>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new_with_diagnostics | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> ObligationCtxt<'a, 'tcx, FulfillmentError<'tcx>> {
     pub fn new_with_diagnostics(infcx: &'a InferCtxt<'tcx>) -> Self {
         Self { infcx, engine: RefCell::new(<dyn TraitEngine<'tcx, _>>::new(infcx)) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> ObligationCtxt<'a, 'tcx, ScrubbedTraitError<'tcx>> {
     pub fn new(infcx: &'a InferCtxt<'tcx>) -> Self {
         Self { infcx, engine: RefCell::new(<dyn TraitEngine<'tcx, _>>::new(infcx)) }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=register_obligation | COMPLEXITY=45 | LINES=193 */
 
 impl<'a, 'tcx, E> ObligationCtxt<'a, 'tcx, E>
 where
@@ -269,7 +257,6 @@ where
         self.infcx.resolve_regions(body_id, param_env, assumed_wf_tys)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=assumed_wf_types_and_report_errors | COMPLEXITY=3 | LINES=11 */
 
 impl<'tcx> ObligationCtxt<'_, 'tcx, FulfillmentError<'tcx>> {
     pub fn assumed_wf_types_and_report_errors(
@@ -281,7 +268,6 @@ impl<'tcx> ObligationCtxt<'_, 'tcx, FulfillmentError<'tcx>> {
             .map_err(|errors| self.infcx.err_ctxt().report_fulfillment_errors(errors))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=make_canonicalized_query_response | COMPLEXITY=4 | LINES=18 */
 
 impl<'tcx> ObligationCtxt<'_, 'tcx, ScrubbedTraitError<'tcx>> {
     pub fn make_canonicalized_query_response<T>(
@@ -300,7 +286,6 @@ impl<'tcx> ObligationCtxt<'_, 'tcx, ScrubbedTraitError<'tcx>> {
         )
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=assumed_wf_types | COMPLEXITY=28 | LINES=83 */
 
 impl<'tcx, E> ObligationCtxt<'_, 'tcx, E>
 where

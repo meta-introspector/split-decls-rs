@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/ref_prop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::borrow::Cow;
 
 use crate::rustc_data_structures::fx::FxHashSet;
@@ -11,12 +10,9 @@ use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_mir_dataflow::Analysis;
 use crate::rustc_mir_dataflow::impls::{MaybeStorageDead, always_storage_live_locals};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::ssa::{SsaLocals, StorageLiveLocals};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=27 | LINES=75 */
 
 /// Propagate references using SSA analysis.
 ///
@@ -92,7 +88,6 @@ impl<'tcx> crate::MirPass<'tcx> for ReferencePropagation {
         false
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=move_to_copy_pointers | COMPLEXITY=22 | LINES=32 */
 
 /// The SSA analysis done by [`SsaLocals`] treats [`Operand::Move`] as a read, even though in
 /// general [`Operand::Move`] represents pass-by-pointer where the callee can overwrite the
@@ -125,7 +120,6 @@ fn move_to_copy_pointers<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=propagate_ssa | COMPLEXITY=6 | LINES=18 */
 
 fn propagate_ssa<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> bool {
     let typing_env = body.typing_env(tcx);
@@ -144,7 +138,6 @@ fn propagate_ssa<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> bool {
 
     replacer.any_replacement
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 enum Value<'tcx> {
@@ -154,7 +147,6 @@ enum Value<'tcx> {
     /// The boolean indicates whether the reference is mutable, subject the uniqueness rule.
     Pointer(Place<'tcx>, bool),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=compute_replacement | COMPLEXITY=114 | LINES=210 */
 
 /// For each local, save the place corresponding to `*local`.
 #[instrument(level = "trace", skip(tcx, body, ssa))]
@@ -365,7 +357,6 @@ fn compute_replacement<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fully_replaceable_locals | COMPLEXITY=13 | LINES=20 */
 
 /// Compute the set of locals that can be fully replaced.
 ///
@@ -386,7 +377,6 @@ fn fully_replaceable_locals(ssa: &SsaLocals) -> DenseBitSet<Local> {
 
     replaceable
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Replacer | COMPLEXITY=2 | LINES=9 */
 
 /// Utility to help performing substitution of `*pattern` by `target`.
 struct Replacer<'tcx> {
@@ -396,7 +386,6 @@ struct Replacer<'tcx> {
     allowed_replacements: FxHashSet<(Local, Location)>,
     any_replacement: bool,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=47 | LINES=64 */
 
 impl<'tcx> MutVisitor<'tcx> for Replacer<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

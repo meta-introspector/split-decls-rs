@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/universal_regions.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Code to extract the universally quantified regions declared on a
 // function and the relationships between them. For example:
 //
 // ```
 // fn foo<'a, 'b, 'c: 'b>() { }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // ```
 //
 // here we would return a map assigning each of `{'a, 'b, 'c}`
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 // to an index, as well as the `FreeRegionMap` which can compute
 // relationships between them.
 //
@@ -27,7 +24,6 @@ use crate::rustc_complete::Diag;
 use crate::rustc_complete::BodyOwnerKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::IndexVec;
 use crate::rustc_infer::infer::NllRegionVariableOrigin;
@@ -37,13 +33,9 @@ use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, InlineConstArgs, InlineConstArgsParts, RegionVid, Ty,
     TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=54 */
 
 use crate::BorrowckInferCtxt;
 use crate::renumber::RegionCtxt;
@@ -98,7 +90,6 @@ pub(crate) struct UniversalRegions<'tcx> {
 
     pub resume_ty: Option<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=43 */
 
 /// The "defining type" for this MIR. The key feature of the "defining
 /// type" is that it contains the information needed to derive all the
@@ -142,7 +133,6 @@ pub(crate) enum DefiningTy<'tcx> {
     // operands, which aren't associated with a body otherwise.
     GlobalAsm(DefId),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=67 */
 
 impl<'tcx> DefiningTy<'tcx> {
     /// Returns a list of all the upvar types for this MIR. If this is
@@ -210,7 +200,6 @@ impl<'tcx> DefiningTy<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UniversalRegionIndices | COMPLEXITY=8 | LINES=22 */
 
 #[derive(Debug)]
 #[derive(Clone)] // FIXME(#146079)
@@ -233,7 +222,6 @@ struct UniversalRegionIndices<'tcx> {
     /// outlives errors, as they are likely bogus.
     pub encountered_re_error: Cell<Option<ErrorGuaranteed>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=43 */
 
 #[derive(Debug, PartialEq)]
 pub(crate) enum RegionClassification {
@@ -277,7 +265,6 @@ pub(crate) enum RegionClassification {
     /// scope).
     Local,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=74 | LINES=184 */
 
 const FIRST_GLOBAL_INDEX: usize = 0;
 
@@ -462,13 +449,11 @@ impl<'tcx> UniversalRegions<'tcx> {
         self.indices.encountered_re_error.get()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UniversalRegionsBuilder | COMPLEXITY=2 | LINES=5 */
 
 struct UniversalRegionsBuilder<'infcx, 'tcx> {
     infcx: &'infcx BorrowckInferCtxt<'tcx>,
     mir_def: LocalDefId,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=build | COMPLEXITY=134 | LINES=397 */
 
 const FR: NllRegionVariableOrigin = NllRegionVariableOrigin::FreeRegion;
 
@@ -866,7 +851,6 @@ impl<'cx, 'tcx> UniversalRegionsBuilder<'cx, 'tcx> {
         inputs_and_output
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=replace_free_regions_with_nll_infer_vars | COMPLEXITY=8 | LINES=40 */
 
 #[extension(trait InferCtxtExt<'tcx>)]
 impl<'tcx> BorrowckInferCtxt<'tcx> {
@@ -907,7 +891,6 @@ impl<'tcx> BorrowckInferCtxt<'tcx> {
         value
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=insert_late_bound_region | COMPLEXITY=23 | LINES=50 */
 
 impl<'tcx> UniversalRegionIndices<'tcx> {
     /// Initially, the `UniversalRegionIndices` map contains only the
@@ -958,7 +941,6 @@ impl<'tcx> UniversalRegionIndices<'tcx> {
         fold_regions(tcx, value, |region, _| ty::Region::new_var(tcx, self.to_region_vid(region)))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=for_each_late_bound_region_in_recursive_scope | COMPLEXITY=10 | LINES=22 */
 
 /// Iterates over the late-bound regions defined on `mir_def_id` and all of its
 /// parents, up to the typeck root, and invokes `f` with the liberated form
@@ -981,7 +963,6 @@ fn for_each_late_bound_region_in_recursive_scope<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=for_each_late_bound_region_in_item | COMPLEXITY=25 | LINES=38 */
 
 /// Iterates over the late-bound regions defined on `mir_def_id` and all of its
 /// parents, up to the typeck root, and invokes `f` with the liberated form

@@ -1,38 +1,31 @@
 // SRC: ../rust/compiler/rustc_expand/src/config.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Conditional compilation stripping.
 
 use std::iter;
 
 use crate::rustc_complete::token::{Delimiter, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::tokenstream::{
     AttrTokenStream, AttrTokenTree, LazyAttrTokenStream, Spacing, TokenTree,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AttrKind, AttrStyle, Attribute, HasAttrs, HasTokens, MetaItem, MetaItemInner,
     NodeId, NormalAttr,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_attr_parsing as attr;
 use rustc_attr_parsing::validate_attr::deny_builtin_meta_unsafety;
 use rustc_attr_parsing::{
     AttributeParser, CFG_TEMPLATE, EvalConfigResult, ShouldEmit, eval_config_entry, parse_cfg_attr,
     validate_attr,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_feature::{
     ACCEPTED_LANG_FEATURES, AttributeSafety, EnabledLangFeature, EnabledLibFeature, Features,
     REMOVED_LANG_FEATURES, UNSTABLE_LANG_FEATURES,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{STDLIB_STABLE_CRATES, Span, Symbol, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use thin_vec::ThinVec;
 use tracing::instrument;
 
@@ -41,7 +34,6 @@ use crate::errors::{
     FeatureRemovedReason, InvalidCfg, MalformedFeatureAttribute, MalformedFeatureAttributeHelp,
     RemoveExprNotSupported,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=StripUnconfigured | COMPLEXITY=4 | LINES=11 */
 
 /// A folder that strips out items that do not belong in the current configuration.
 pub struct StripUnconfigured<'a> {
@@ -53,7 +45,6 @@ pub struct StripUnconfigured<'a> {
     pub config_tokens: bool,
     pub lint_node_id: NodeId,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=features | COMPLEXITY=70 | LINES=110 */
 
 pub fn features(sess: &Session, krate_attrs: &[Attribute], crate_name: Symbol) -> Features {
     fn feature_list(attr: &Attribute) -> ThinVec<ast::MetaItemInner> {
@@ -164,7 +155,6 @@ pub fn features(sess: &Session, krate_attrs: &[Attribute], crate_name: Symbol) -
 
     features
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=pre_configure_attrs | COMPLEXITY=5 | LINES=19 */
 
 pub fn pre_configure_attrs(sess: &Session, attrs: &[Attribute]) -> ast::AttrVec {
     let strip_unconfigured = StripUnconfigured {
@@ -184,7 +174,6 @@ pub fn pre_configure_attrs(sess: &Session, attrs: &[Attribute]) -> ast::AttrVec 
         })
         .collect()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 
 pub(crate) fn attr_into_trace(mut attr: Attribute, trace_name: Symbol) -> Attribute {
     match &mut attr.kind {
@@ -198,7 +187,6 @@ pub(crate) fn attr_into_trace(mut attr: Attribute, trace_name: Symbol) -> Attrib
     }
     attr
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=10 */
 
 #[macro_export]
 macro_rules! configure {
@@ -209,7 +197,6 @@ macro_rules! configure {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=configure | COMPLEXITY=148 | LINES=291 */
 
 impl<'a> StripUnconfigured<'a> {
     pub fn configure<T: HasAttrs + HasTokens>(&self, mut node: T) -> Option<T> {
@@ -501,7 +488,6 @@ impl<'a> StripUnconfigured<'a> {
         self.try_configure_tokens(&mut *expr);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=parse_cfg | COMPLEXITY=19 | LINES=26 */
 
 /// FIXME: Still used by Rustdoc, should be removed after
 pub fn parse_cfg<'a>(meta_item: &'a MetaItem, sess: &Session) -> Option<&'a MetaItemInner> {
@@ -528,7 +514,6 @@ pub fn parse_cfg<'a>(meta_item: &'a MetaItem, sess: &Session) -> Option<&'a Meta
         },
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=is_cfg | COMPLEXITY=2 | LINES=4 */
 
 fn is_cfg(attr: &Attribute) -> bool {
     attr.has_name(sym::cfg)

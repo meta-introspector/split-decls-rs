@@ -1,26 +1,21 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flock/windows.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fs::{File, OpenOptions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::io;
 use std::os::windows::prelude::*;
 use std::path::Path;
 
 use tracing::debug;
 use windows::Win32::Foundation::{ERROR_INVALID_FUNCTION, HANDLE};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use windows::Win32::Storage::FileSystem::{
     FILE_SHARE_DELETE, FILE_SHARE_READ, FILE_SHARE_WRITE, LOCK_FILE_FLAGS, LOCKFILE_EXCLUSIVE_LOCK,
     LOCKFILE_FAIL_IMMEDIATELY, LockFileEx,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=2 | LINES=6 */
 use windows::Win32::System::IO::OVERLAPPED;
 
 #[derive(Debug)]
 pub struct Lock {
     _file: File,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=34 | LINES=67 */
 
 impl Lock {
     pub fn new(p: &Path, wait: bool, create: bool, exclusive: bool) -> io::Result<Lock> {
@@ -88,7 +83,6 @@ impl Lock {
         err.raw_os_error() == Some(ERROR_INVALID_FUNCTION.0 as i32)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 
 // Note that we don't need a Drop impl on Windows: The file is unlocked
 // automatically when it's closed.

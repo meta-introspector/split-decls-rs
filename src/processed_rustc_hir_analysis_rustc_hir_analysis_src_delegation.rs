@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/delegation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // Support inheriting generic parameters and predicates for function delegation.
 //
 // For more information about delegation design, see the tracking issue #118212.
@@ -9,13 +8,10 @@ use std::assert_matches::debug_assert_matches;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=ParamIndexRemapper | COMPLEXITY=2 | LINES=7 */
 
 type RemapTable = FxHashMap<u32, u32>;
 
@@ -23,7 +19,6 @@ struct ParamIndexRemapper<'tcx> {
     tcx: TyCtxt<'tcx>,
     remap_table: RemapTable,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=23 | LINES=41 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for ParamIndexRemapper<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -65,7 +60,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for ParamIndexRemapper<'tcx> {
         ct.super_fold_with(self)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum FnKind {
@@ -74,7 +68,6 @@ enum FnKind {
     AssocTrait,
     AssocTraitImpl,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fn_kind | COMPLEXITY=8 | LINES=12 */
 
 fn fn_kind<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId) -> FnKind {
     debug_assert_matches!(tcx.def_kind(def_id), DefKind::Fn | DefKind::AssocFn);
@@ -87,7 +80,6 @@ fn fn_kind<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId) -> FnKind {
         _ => FnKind::Free,
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 /// Given the current context(caller and callee `FnKind`), it specifies
 /// the policy of predicates and generic parameters inheritance.
@@ -108,7 +100,6 @@ enum InheritanceKind {
     /// and predicates are copied.
     Own,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=build_generics | COMPLEXITY=28 | LINES=72 */
 
 fn build_generics<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -181,7 +172,6 @@ fn build_generics<'tcx>(
         has_late_bound_regions: sig_generics.has_late_bound_regions,
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=build_predicates | COMPLEXITY=23 | LINES=61 */
 
 fn build_predicates<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -243,7 +233,6 @@ fn build_predicates<'tcx>(
 
     ty::GenericPredicates { parent, predicates: tcx.arena.alloc_from_iter(preds) }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=build_generic_args | COMPLEXITY=7 | LINES=19 */
 
 fn build_generic_args<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -263,7 +252,6 @@ fn build_generic_args<'tcx>(
     let mut folder = ParamIndexRemapper { tcx, remap_table };
     args.fold_with(&mut folder)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=create_generic_args | COMPLEXITY=13 | LINES=50 */
 
 fn create_generic_args<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -314,21 +302,18 @@ fn create_generic_args<'tcx>(
         | (_, FnKind::AssocInherentImpl) => unreachable!(),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // FIXME(fn_delegation): Move generics inheritance to the AST->HIR lowering.
 // For now, generic parameters are not propagated to the generated call,
 // which leads to inference errors:
 //
 // fn foo<T>(x: i32) {}
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 //
 // reuse foo as bar;
 // desugaring:
 // fn bar<T>() {
 //   foo::<_>() // ERROR: type annotations needed
 // }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=33 */
 pub(crate) fn inherit_generics_for_delegation_item<'tcx>(
     tcx: TyCtxt<'tcx>,
     def_id: LocalDefId,
@@ -362,7 +347,6 @@ pub(crate) fn inherit_generics_for_delegation_item<'tcx>(
         | (_, FnKind::AssocInherentImpl) => unreachable!(),
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=40 */
 
 pub(crate) fn inherit_predicates_for_delegation_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -403,7 +387,6 @@ pub(crate) fn inherit_predicates_for_delegation_item<'tcx>(
         | (_, FnKind::AssocInherentImpl) => unreachable!(),
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_constraints | COMPLEXITY=13 | LINES=29 */
 
 fn check_constraints<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -433,7 +416,6 @@ fn check_constraints<'tcx>(
 
     ret
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
 
 pub(crate) fn inherit_sig_for_delegation_item<'tcx>(
     tcx: TyCtxt<'tcx>,

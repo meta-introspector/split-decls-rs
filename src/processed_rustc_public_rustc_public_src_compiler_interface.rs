@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/compiler_interface.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // Define the interface with the Rust compiler.
 //
 // rustc_public users should not use any of the items in this module directly.
@@ -10,34 +9,25 @@ use std::cell::Cell;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_public_bridge::context::CompilerCtxt;
 use crate::rustc_public_bridge::{Bridge, Container};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::abi::{FnAbi, Layout, LayoutShape, ReprOptions};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::crate_def::Attribute;
 use crate::mir::alloc::{AllocId, GlobalAlloc};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::mono::{Instance, InstanceDef, StaticDef};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::{BinOp, Body, Place, UnOp};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::target::{MachineInfo, MachineSize};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::ty::{
     AdtDef, AdtKind, Allocation, ClosureDef, ClosureKind, CoroutineDef, Discr, FieldDef, FnDef,
     ForeignDef, ForeignItemKind, ForeignModule, ForeignModuleDef, GenericArgs, GenericPredicates,
     Generics, ImplDef, ImplTrait, IntrinsicDef, LineInfo, MirConst, PolyFnSig, RigidTy, Span,
     TraitDecl, TraitDef, Ty, TyConst, TyConstId, TyKind, UintTy, VariantDef, VariantIdx,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::unstable::{RustcInternal, Stable, new_item_kind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     AssocItems, Crate, CrateDef, CrateItem, CrateItems, CrateNum, DefId, Error, Filename,
     ImplTraitDecls, ItemKind, Symbol, TraitDecls, alloc, mir,
 };
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=BridgeTys; | COMPLEXITY=6 | LINES=38 */
 
 pub struct BridgeTys;
 
@@ -76,7 +66,6 @@ impl Bridge for BridgeTys {
 
     type Allocation = crate::ty::Allocation;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=entry_fn | COMPLEXITY=64 | LINES=250 */
 
 /// Public API for querying compiler information.
 ///
@@ -327,7 +316,6 @@ pub(crate) trait CompilerInterface {
     /// Get all associated items of a definition.
     fn associated_items(&self, def_id: DefId) -> AssocItems;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=entry_fn | COMPLEXITY=204 | LINES=743 */
 
 impl<'tcx> CompilerInterface for Container<'tcx, BridgeTys> {
     fn entry_fn(&self) -> Option<CrateItem> {
@@ -1071,7 +1059,6 @@ impl<'tcx> CompilerInterface for Container<'tcx, BridgeTys> {
         cx.associated_items(did).iter().map(|assoc| assoc.stable(&mut *tables, cx)).collect()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 // A thread local variable that stores a pointer to [`CompilerInterface`].
 scoped_tls::scoped_thread_local!(static TLV: Cell<*const ()>);
@@ -1087,7 +1074,6 @@ where
         TLV.set(&Cell::new(ptr), || Ok(f()))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 /// Execute the given function with access the [`CompilerInterface`].
 ///
@@ -1101,7 +1087,6 @@ pub(crate) fn with<R>(f: impl FnOnce(&dyn CompilerInterface) -> R) -> R {
         f(unsafe { *(ptr as *const &dyn CompilerInterface) })
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=smir_crate | COMPLEXITY=3 | LINES=11 */
 
 fn smir_crate<'tcx>(
     cx: &CompilerCtxt<'tcx, BridgeTys>,

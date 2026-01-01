@@ -1,30 +1,23 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/op.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Code related to processing overloaded binary and unary operators.
 
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::ObligationCauseCode;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{FulfillmentError, Obligation, ObligationCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=enforce_builtin_binop_types | COMPLEXITY=534 | LINES=1007 */
 
 use super::FnCtxt;
 use super::method::MethodCallee;
@@ -1032,7 +1025,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lang_item_for_binop | COMPLEXITY=19 | LINES=39 */
 
 fn lang_item_for_binop(tcx: TyCtxt<'_>, op: Op) -> (Symbol, Option<hir::def_id::DefId>) {
     let lang = tcx.lang_items();
@@ -1072,7 +1064,6 @@ fn lang_item_for_binop(tcx: TyCtxt<'_>, op: Op) -> (Symbol, Option<hir::def_id::
         },
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=lang_item_for_unop | COMPLEXITY=6 | LINES=9 */
 
 fn lang_item_for_unop(tcx: TyCtxt<'_>, op: hir::UnOp) -> (Symbol, Option<hir::def_id::DefId>) {
     let lang = tcx.lang_items();
@@ -1082,7 +1073,6 @@ fn lang_item_for_unop(tcx: TyCtxt<'_>, op: hir::UnOp) -> (Symbol, Option<hir::de
         hir::UnOp::Deref => bug!("Deref is not overloadable"),
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 // Binary operator categories. These categories summarize the behavior
 // with respect to the builtin operations supported.
@@ -1107,7 +1097,6 @@ enum BinOpCategory {
     /// which produce the input type
     Comparison,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=13 */
 
 impl From<hir::BinOpKind> for BinOpCategory {
     fn from(op: hir::BinOpKind) -> BinOpCategory {
@@ -1121,7 +1110,6 @@ impl From<hir::BinOpKind> for BinOpCategory {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=11 */
 
 impl From<hir::AssignOpKind> for BinOpCategory {
     fn from(op: hir::AssignOpKind) -> BinOpCategory {
@@ -1133,7 +1121,6 @@ impl From<hir::AssignOpKind> for BinOpCategory {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// An assignment op (e.g. `a += b`), or a binary op (e.g. `a + b`).
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -1141,7 +1128,6 @@ enum Op {
     BinOp(hir::BinOp),
     AssignOp(hir::AssignOp),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=span | COMPLEXITY=18 | LINES=23 */
 
 impl Op {
     fn span(&self) -> Span {
@@ -1165,7 +1151,6 @@ impl Op {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=deref_ty_if_possible | COMPLEXITY=6 | LINES=8 */
 
 /// Dereferences a single level of immutable referencing.
 fn deref_ty_if_possible(ty: Ty<'_>) -> Ty<'_> {
@@ -1174,7 +1159,6 @@ fn deref_ty_if_possible(ty: Ty<'_>) -> Ty<'_> {
         _ => ty,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_builtin_binop | COMPLEXITY=24 | LINES=47 */
 
 /// Returns `true` if this is a built-in arithmetic operation (e.g., u32
 /// + u32, i16x4 == i16x4) and false if these types would have to be

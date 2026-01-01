@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_lexer/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use expect_test::{Expect, expect};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=check_raw_str | COMPLEXITY=3 | LINES=10 */
 
 use super::*;
 
@@ -12,26 +10,22 @@ fn check_raw_str(s: &str, expected: Result<u8, RawStrError>) {
     let res = cursor.raw_double_quoted_string(0);
     assert_eq!(res, expected);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_naked_raw_str | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_naked_raw_str() {
     check_raw_str(r#""abc""#, Ok(0));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_raw_no_start | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_raw_no_start() {
     check_raw_str(r##""abc"#"##, Ok(0));
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_too_many_terminators | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn test_too_many_terminators() {
     // this error is handled in the parser later
     check_raw_str(r###"#"abc"##"###, Ok(1));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test_unterminated | COMPLEXITY=12 | LINES=35 */
 
 #[test]
 fn test_unterminated() {
@@ -67,7 +61,6 @@ fn test_unterminated_no_pound() {
         Err(RawStrError::NoTerminator { expected: 0, found: 0, possible_terminator_offset: None }),
     );
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_too_many_hashes | COMPLEXITY=4 | LINES=16 */
 
 #[test]
 fn test_too_many_hashes() {
@@ -84,7 +77,6 @@ fn test_too_many_hashes() {
     // One more hash sign (256 = 2^8) becomes too many.
     check_raw_str(&s2, Err(RawStrError::TooManyDelimiters { found: u32::from(max_count) + 1 }));
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=test_valid_shebang | COMPLEXITY=4 | LINES=47 */
 
 // https://github.com/rust-lang/rust/issues/70528
 #[test]
@@ -132,14 +124,12 @@ fn test_valid_shebang() {
     let input = "\n#[attribute]";
     assert_eq!(strip_shebang(input), None);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_lexing | COMPLEXITY=3 | LINES=6 */
 
 fn check_lexing(src: &str, frontmatter_allowed: FrontmatterAllowed, expect: Expect) {
     let actual: String =
         tokenize(src, frontmatter_allowed).map(|token| format!("{:?}\n", token)).collect();
     expect.assert_eq(&actual)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=smoke_test | COMPLEXITY=27 | LINES=29 */
 
 #[test]
 fn smoke_test() {
@@ -169,7 +159,6 @@ fn smoke_test() {
         "#]],
     )
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=comment_flavors | COMPLEXITY=32 | LINES=39 */
 
 #[test]
 fn comment_flavors() {
@@ -209,7 +198,6 @@ fn comment_flavors() {
         "#]],
     )
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=nested_block_comments | COMPLEXITY=7 | LINES=12 */
 
 #[test]
 fn nested_block_comments() {
@@ -222,7 +210,6 @@ fn nested_block_comments() {
         "#]],
     )
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=characters | COMPLEXITY=14 | LINES=15 */
 
 #[test]
 fn characters() {
@@ -238,7 +225,6 @@ fn characters() {
         "#]],
     );
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=lifetime | COMPLEXITY=4 | LINES=11 */
 
 #[test]
 fn lifetime() {
@@ -250,7 +236,6 @@ fn lifetime() {
         "#]],
     );
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=raw_string | COMPLEXITY=5 | LINES=11 */
 
 #[test]
 fn raw_string() {
@@ -262,7 +247,6 @@ fn raw_string() {
         "#]],
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=literal_suffixes | COMPLEXITY=55 | LINES=48 */
 
 #[test]
 fn literal_suffixes() {
@@ -311,7 +295,6 @@ br###"raw"###suffix
         "#]],
     )
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=frontmatter_allowed | COMPLEXITY=17 | LINES=29 */
 
 #[test]
 fn frontmatter_allowed() {
@@ -341,7 +324,6 @@ fn main() {}
         "#]],
     )
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=frontmatter_disallowed | COMPLEXITY=37 | LINES=46 */
 
 #[test]
 fn frontmatter_disallowed() {

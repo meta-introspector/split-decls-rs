@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/known_panics_lint.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // A lint that checks for known panics like overflows, division by zero,
 // out-of-bound access etc. Uses const propagation to determine the values of
 // operands during checks.
@@ -7,12 +6,10 @@
 use std::fmt::Debug;
 
 use crate::rustc_abi::{BackendRepr, FieldIdx, HasDataLayout, Size, TargetDataLayout, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_const_eval::const_eval::DummyMachine;
 use rustc_const_eval::interpret::{
     ImmTy, InterpCx, InterpResult, Projectable, Scalar, format_interp_error, interp_ok,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def::DefKind;
@@ -20,18 +17,13 @@ use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::layout::{LayoutError, LayoutOf, LayoutOfHelpers, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ConstInt, ScalarInt, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{AssertLint, AssertLintKind};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=28 | LINES=36 */
 
 pub(super) struct KnownPanicsLint;
 
@@ -68,7 +60,6 @@ impl<'tcx> crate::MirLint<'tcx> for KnownPanicsLint {
         trace!("KnownPanicsLint done for {:?}", def_id);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ConstPropagator | COMPLEXITY=2 | LINES=14 */
 
 /// Visits MIR nodes, performs const propagation
 /// and runs lint checks as it goes
@@ -83,7 +74,6 @@ struct ConstPropagator<'mir, 'tcx> {
     written_only_inside_own_block_locals: FxHashSet<Local>,
     can_const_prop: IndexVec<Local, ConstPropMode>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 #[derive(Debug, Clone)]
 enum Value<'tcx> {
@@ -91,14 +81,12 @@ enum Value<'tcx> {
     Aggregate { variant: VariantIdx, fields: IndexVec<FieldIdx, Value<'tcx>> },
     Uninit,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> From<ImmTy<'tcx>> for Value<'tcx> {
     fn from(v: ImmTy<'tcx>) -> Self {
         Self::Immediate(v)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=project | COMPLEXITY=41 | LINES=59 */
 
 impl<'tcx> Value<'tcx> {
     fn project(
@@ -158,7 +146,6 @@ impl<'tcx> Value<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for ConstPropagator<'_, 'tcx> {
     type LayoutOfResult = Result<TyAndLayout<'tcx>, LayoutError<'tcx>>;
@@ -168,7 +155,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for ConstPropagator<'_, 'tcx> {
         err
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl HasDataLayout for ConstPropagator<'_, '_> {
     #[inline]
@@ -176,7 +162,6 @@ impl HasDataLayout for ConstPropagator<'_, '_> {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTyCtxt<'tcx> for ConstPropagator<'_, 'tcx> {
     #[inline]
@@ -184,7 +169,6 @@ impl<'tcx> ty::layout::HasTyCtxt<'tcx> for ConstPropagator<'_, 'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTypingEnv<'tcx> for ConstPropagator<'_, 'tcx> {
     #[inline]
@@ -192,7 +176,6 @@ impl<'tcx> ty::layout::HasTypingEnv<'tcx> for ConstPropagator<'_, 'tcx> {
         self.typing_env
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=new | COMPLEXITY=255 | LINES=518 */
 
 impl<'mir, 'tcx> ConstPropagator<'mir, 'tcx> {
     fn new(body: &'mir Body<'tcx>, tcx: TyCtxt<'tcx>) -> ConstPropagator<'mir, 'tcx> {
@@ -711,7 +694,6 @@ impl<'mir, 'tcx> ConstPropagator<'mir, 'tcx> {
         Some(())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_body | COMPLEXITY=112 | LINES=156 */
 
 impl<'tcx> Visitor<'tcx> for ConstPropagator<'_, 'tcx> {
     fn visit_body(&mut self, body: &Body<'tcx>) {
@@ -868,7 +850,6 @@ impl<'tcx> Visitor<'tcx> for ConstPropagator<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=17 */
 
 /// The maximum number of bytes that we'll allocate space for a local or the return value.
 /// Needed for #66397, because otherwise we eval into large places and that can cause OOM or just
@@ -886,7 +867,6 @@ enum ConstPropMode {
     /// referencing it either for reading or writing will not get propagated.
     NoPropagation,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=CanConstProp | COMPLEXITY=2 | LINES=8 */
 
 /// A visitor that determines locals in a MIR body
 /// that can be const propagated
@@ -895,7 +875,6 @@ struct CanConstProp {
     // False at the beginning. Once set, no more assignments are allowed to that local.
     found_assignment: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check | COMPLEXITY=38 | LINES=46 */
 
 impl CanConstProp {
     /// Returns true if `local` can be propagated
@@ -942,7 +921,6 @@ impl CanConstProp {
         cpv.can_const_prop
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_place | COMPLEXITY=41 | LINES=70 */
 
 impl<'tcx> Visitor<'tcx> for CanConstProp {
     fn visit_place(&mut self, place: &Place<'tcx>, mut context: PlaceContext, loc: Location) {

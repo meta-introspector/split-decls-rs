@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sharded.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::borrow::Borrow;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{iter, mem};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use either::Either;
 use hashbrown::hash_table::{Entry, HashTable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::fx::FxHasher;
 use crate::sync::{CacheAligned, Lock, LockGuard, Mode, is_dyn_thread_safe};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 // 32 shards is sufficient to reduce contention on an 8-core Ryzen 7 1700,
 // but this should be tested on higher core count CPUs. How the `Sharded` type gets used
@@ -27,7 +22,6 @@ pub enum Sharded<T> {
     Single(Lock<T>),
     Shards(Box<[CacheAligned<Lock<T>>; SHARDS]>),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<T: Default> Default for Sharded<T> {
     #[inline]
@@ -35,7 +29,6 @@ impl<T: Default> Default for Sharded<T> {
         Self::new(T::default)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=75 | LINES=102 */
 
 impl<T> Sharded<T> {
     #[inline]
@@ -138,7 +131,6 @@ impl<T> Sharded<T> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=shards | COMPLEXITY=5 | LINES=9 */
 
 #[inline]
 pub fn shards() -> usize {
@@ -148,7 +140,6 @@ pub fn shards() -> usize {
 
     1
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=with_capacity | COMPLEXITY=4 | LINES=11 */
 
 pub type ShardedHashMap<K, V> = Sharded<HashTable<(K, V)>>;
 
@@ -160,7 +151,6 @@ impl<K: Eq, V> ShardedHashMap<K, V> {
         self.lock_shards().map(|shard| shard.len()).sum()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get | COMPLEXITY=18 | LINES=50 */
 
 impl<K: Eq + Hash, V> ShardedHashMap<K, V> {
     #[inline]
@@ -211,7 +201,6 @@ impl<K: Eq + Hash, V> ShardedHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=intern_ref | COMPLEXITY=16 | LINES=40 */
 
 impl<K: Eq + Hash + Copy> ShardedHashMap<K, ()> {
     #[inline]
@@ -252,13 +241,11 @@ impl<K: Eq + Hash + Copy> ShardedHashMap<K, ()> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=into_pointer | COMPLEXITY=2 | LINES=5 */
 
 pub trait IntoPointer {
     /// Returns a pointer which outlives `self`.
     fn into_pointer(&self) -> *const ();
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=contains_pointer_to | COMPLEXITY=3 | LINES=9 */
 
 impl<K: Eq + Hash + Copy + IntoPointer> ShardedHashMap<K, ()> {
     pub fn contains_pointer_to<T: Hash + IntoPointer>(&self, value: &T) -> bool {
@@ -268,7 +255,6 @@ impl<K: Eq + Hash + Copy + IntoPointer> ShardedHashMap<K, ()> {
         shard.find(hash, |(k, ())| k.into_pointer() == value).is_some()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=make_hash | COMPLEXITY=2 | LINES=7 */
 
 #[inline]
 pub fn make_hash<K: Hash + ?Sized>(val: &K) -> u64 {
@@ -276,7 +262,6 @@ pub fn make_hash<K: Hash + ?Sized>(val: &K) -> u64 {
     val.hash(&mut state);
     state.finish()
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=table_entry | COMPLEXITY=2 | LINES=13 */
 
 #[inline]
 fn table_entry<'a, K, V, Q>(
@@ -290,7 +275,6 @@ where
 {
     table.entry(hash, move |(k, _)| k.borrow() == key, |(k, _)| make_hash(k))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=get_shard_hash | COMPLEXITY=5 | LINES=13 */
 
 /// Get a shard with a pre-computed hash value. If `get_shard_by_value` is
 /// ever used in combination with `get_shard_by_hash` on a single `Sharded`

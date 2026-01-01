@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/traits/structural_impls.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=14 */
 use std::fmt;
 
 use crate::rustc_complete::ty;
@@ -14,7 +13,6 @@ impl<'tcx, T: fmt::Debug> fmt::Debug for Normalized<'tcx, T> {
         write!(f, "Normalized({:?}, {:?})", self.value, self.obligations)
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=16 | LINES=14 */
 
 impl<'tcx, O: fmt::Debug> fmt::Debug for traits::Obligation<'tcx, O> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -29,7 +27,6 @@ impl<'tcx, O: fmt::Debug> fmt::Debug for traits::Obligation<'tcx, O> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Debug for traits::MismatchedProjectionTypes<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

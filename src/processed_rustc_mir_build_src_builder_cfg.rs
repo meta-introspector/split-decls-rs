@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/cfg.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=137 */
 // Routines for manipulating the control-flow graph.
 
 use crate::rustc_complete::mir::*;

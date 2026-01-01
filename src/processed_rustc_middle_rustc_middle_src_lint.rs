@@ -1,22 +1,15 @@
 // SRC: ../rust/compiler/rustc_middle/src/lint.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::cmp;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_complete::{Diag, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{HirId, ItemLocalId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::builtin::{self, FORBIDDEN_LINT_GROUPS};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{FutureIncompatibilityReason, Level, Lint, LintExpectationId, LintId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, kw};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=23 */
 use tracing::instrument;
 
 use crate::ty::TyCtxt;
@@ -40,7 +33,6 @@ pub enum LintLevelSource {
     /// (The actual level may be lower due to `--cap-lints`.)
     CommandLine(Symbol, Level),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=name | COMPLEXITY=15 | LINES=18 */
 
 impl LintLevelSource {
     pub fn name(&self) -> Symbol {
@@ -59,7 +51,6 @@ impl LintLevelSource {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LevelAndSource | COMPLEXITY=4 | LINES=8 */
 
 /// Convenience helper for moving things around together that frequently are paired
 #[derive(Copy, Clone, Debug, HashStable, Encodable, Decodable)]
@@ -68,7 +59,6 @@ pub struct LevelAndSource {
     pub lint_id: Option<LintExpectationId>,
     pub src: LintLevelSource,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ShallowLintLevelMap | COMPLEXITY=6 | LINES=10 */
 
 /// Return type for the `shallow_lint_levels_on` query.
 ///
@@ -79,7 +69,6 @@ pub struct ShallowLintLevelMap {
     pub expectations: Vec<(LintExpectationId, LintExpectation)>,
     pub specs: SortedMap<ItemLocalId, FxIndexMap<LintId, LevelAndSource>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=reveal_actual_level | COMPLEXITY=32 | LINES=52 */
 
 /// From an initial level and source, verify the effect of special annotations:
 /// `warnings` lint level and lint caps.
@@ -132,7 +121,6 @@ pub fn reveal_actual_level(
 
     (level, lint_id)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=probe_for_lint_level | COMPLEXITY=31 | LINES=51 */
 
 impl ShallowLintLevelMap {
     /// Perform a deep probe in the HIR tree looking for the actual level for the lint.
@@ -184,7 +172,6 @@ impl ShallowLintLevelMap {
         LevelAndSource { level, lint_id, src }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=lint_level_at_node | COMPLEXITY=5 | LINES=7 */
 
 impl TyCtxt<'_> {
     /// Fetch and return the user-visible lint level for the given lint at the given HirId.
@@ -192,7 +179,6 @@ impl TyCtxt<'_> {
         self.shallow_lint_levels_on(id.owner).lint_level_id_at_node(self, LintId::of(lint), id)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=LintExpectation | COMPLEXITY=16 | LINES=20 */
 
 /// This struct represents a lint expectation and holds all required information
 /// to emit the `unfulfilled_lint_expectations` lint if it is unfulfilled after
@@ -213,7 +199,6 @@ pub struct LintExpectation {
     /// goes for `rustdoc`. This will be `None` for rustc lints
     pub lint_tool: Option<Symbol>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=11 */
 
 impl LintExpectation {
     pub fn new(
@@ -225,7 +210,6 @@ impl LintExpectation {
         Self { reason, emission_span, is_unfulfilled_lint_expectations, lint_tool }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=explain_lint_level_source | COMPLEXITY=60 | LINES=75 */
 
 fn explain_lint_level_source(
     sess: &Session,
@@ -301,7 +285,6 @@ fn explain_lint_level_source(
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=lint_level | COMPLEXITY=96 | LINES=173 */
 
 /// The innermost function for emitting lints.
 ///

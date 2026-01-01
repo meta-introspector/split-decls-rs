@@ -1,26 +1,20 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::mem;
 
 use crate::rustc_complete::{Diag, DiagArgName, DiagArgValue, DiagMessage, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::AssertKind;
 use crate::rustc_complete::mir::interpret::{AllocId, Provenance, ReportedErrorInfo, UndefinedBehaviorInfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::ConstInt;
 use crate::rustc_complete::ty::layout::LayoutError;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::CompileTimeMachine;
 use crate::errors::{self, FrameNote, ReportErrorExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::interpret::{
     CtfeProvenance, ErrorHandled, Frame, InterpCx, InterpErrorInfo, InterpErrorKind,
     MachineStopType, Pointer, err_inval, err_machine_stop,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=25 */
 
 /// The CTFE machine has some custom error kinds.
 #[derive(Clone, Debug)]
@@ -46,7 +40,6 @@ pub enum ConstEvalErrKind {
     /// beginning of an object.
     ConstMakeGlobalWithOffset(Pointer<Option<CtfeProvenance>>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=26 | LINES=43 */
 
 impl MachineStopType for ConstEvalErrKind {
     fn diagnostic_message(&self) -> DiagMessage {
@@ -90,7 +83,6 @@ impl MachineStopType for ConstEvalErrKind {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into | COMPLEXITY=5 | LINES=7 */
 
 /// The errors become [`InterpErrorKind::MachineStop`] when being raised.
 impl<'tcx> Into<InterpErrorInfo<'tcx>> for ConstEvalErrKind {
@@ -98,7 +90,6 @@ impl<'tcx> Into<InterpErrorInfo<'tcx>> for ConstEvalErrKind {
         err_machine_stop!(self).into()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=get_span_and_frames | COMPLEXITY=41 | LINES=67 */
 
 pub fn get_span_and_frames<'tcx>(
     tcx: TyCtxtAt<'tcx>,
@@ -166,7 +157,6 @@ pub fn get_span_and_frames<'tcx>(
 
     (span, frames)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=70 */
 
 /// Create a diagnostic for a const eval error.
 ///
@@ -237,7 +227,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 /// Emit a lint from a const-eval situation, with a backtrace.
 // Even if this is unused, please don't remove it -- chances are we will need to emit a lint during const-eval again in the future!

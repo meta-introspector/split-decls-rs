@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/operator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use either::Either;
 use crate::rustc_abi::Size;
 use rustc_apfloat::{Float, FloatConvert};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::NullOp;
 use crate::rustc_complete::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{self, FloatTy, ScalarInt, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::sym;
 use tracing::trace;
 
 use super::{ImmTy, InterpCx, Machine, MemPlaceMeta, interp_ok, throw_ub};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=three_way_compare | COMPLEXITY=309 | LINES=531 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     fn three_way_compare<T: Ord>(&self, lhs: T, rhs: T) -> ImmTy<'tcx, M::Provenance> {

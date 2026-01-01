@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_hir/src/stable_hash_impls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::def_id::DefPathHash;
 
 use crate::HashIgnoredAttrId;
 use crate::hir::{
     AttributeMap, BodyId, Crate, ForeignItemId, ImplItemId, ItemId, OwnerNodes, TraitItemId,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=hash_attr_id | COMPLEXITY=4 | LINES=9 */
 use crate::hir_id::ItemLocalId;
 use crate::lints::DelayedLints;
 
@@ -18,7 +15,6 @@ use crate::lints::DelayedLints;
 pub trait HashStableContext: crate::rustc_ast::HashStableContext + crate::rustc_abi::HashStableContext {
     fn hash_attr_id(&mut self, id: &HashIgnoredAttrId, hasher: &mut StableHasher);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=6 | LINES=10 */
 
 impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for BodyId {
     type KeyType = (DefPathHash, ItemLocalId);
@@ -29,7 +25,6 @@ impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for BodyId {
         hir_id.to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ItemId {
     type KeyType = DefPathHash;
@@ -39,7 +34,6 @@ impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ItemId {
         self.owner_id.def_id.to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for TraitItemId {
     type KeyType = DefPathHash;
@@ -49,7 +43,6 @@ impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for TraitItemId {
         self.owner_id.def_id.to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ImplItemId {
     type KeyType = DefPathHash;
@@ -59,7 +52,6 @@ impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ImplItemId {
         self.owner_id.def_id.to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ForeignItemId {
     type KeyType = DefPathHash;
@@ -69,7 +61,6 @@ impl<HirCtx: crate::HashStableContext> ToStableHashKey<HirCtx> for ForeignItemId
         self.owner_id.def_id.to_stable_hash_key(hcx)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=12 | LINES=19 */
 
 // The following implementations of HashStable for `ItemId`, `TraitItemId`, and
 // `ImplItemId` deserve special attention. Normally we do not hash `NodeId`s within
@@ -89,7 +80,6 @@ impl<'tcx, HirCtx: crate::HashStableContext> HashStable<HirCtx> for OwnerNodes<'
         opt_hash_including_bodies.unwrap().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=7 */
 
 impl<HirCtx: crate::HashStableContext> HashStable<HirCtx> for DelayedLints {
     fn hash_stable(&self, hcx: &mut HirCtx, hasher: &mut StableHasher) {
@@ -97,7 +87,6 @@ impl<HirCtx: crate::HashStableContext> HashStable<HirCtx> for DelayedLints {
         opt_hash.unwrap().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx, HirCtx: crate::HashStableContext> HashStable<HirCtx> for AttributeMap<'tcx> {
     fn hash_stable(&self, hcx: &mut HirCtx, hasher: &mut StableHasher) {
@@ -107,7 +96,6 @@ impl<'tcx, HirCtx: crate::HashStableContext> HashStable<HirCtx> for AttributeMap
         opt_hash.unwrap().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=7 */
 
 impl<HirCtx: crate::HashStableContext> HashStable<HirCtx> for Crate<'_> {
     fn hash_stable(&self, hcx: &mut HirCtx, hasher: &mut StableHasher) {
@@ -115,7 +103,6 @@ impl<HirCtx: crate::HashStableContext> HashStable<HirCtx> for Crate<'_> {
         opt_hir_hash.unwrap().hash_stable(hcx, hasher)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<HirCtx: crate::HashStableContext> HashStable<HirCtx> for HashIgnoredAttrId {
     fn hash_stable(&self, hcx: &mut HirCtx, hasher: &mut StableHasher) {

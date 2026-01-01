@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=29 */
 // tidy-alphabetical-start
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
@@ -29,16 +28,12 @@ use std::sync::Arc;
 
 use cranelift_codegen::isa::TargetIsa;
 use cranelift_codegen::settings::{self, Configurable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_codegen_ssa::{CodegenResults, TargetConfig};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::OutputFilenames;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=62 */
 
 pub use crate::config::*;
 use crate::prelude::*;
@@ -72,7 +67,6 @@ mod prelude {
     pub(crate) use crate::pointer::Pointer;
     pub(crate) use crate::value_and_place::{CPlace, CValue};
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=PrintOnPanic | COMPLEXITY=9 | LINES=9 */
 
 struct PrintOnPanic<F: Fn() -> String>(F);
 impl<F: Fn() -> String> Drop for PrintOnPanic<F> {
@@ -82,7 +76,6 @@ impl<F: Fn() -> String> Drop for PrintOnPanic<F> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CodegenCx | COMPLEXITY=2 | LINES=12 */
 
 /// The codegen context holds any information shared between the codegen of individual functions
 /// inside a single codegen unit with the exception of the Cranelift [`Module`](cranelift_module::Module).
@@ -95,7 +88,6 @@ struct CodegenCx {
     debug_context: Option<DebugContext>,
     cgu_name: Symbol,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=21 */
 
 impl CodegenCx {
     fn new(tcx: TyCtxt<'_>, isa: &dyn TargetIsa, debug_info: bool, cgu_name: Symbol) -> Self {
@@ -117,12 +109,10 @@ impl CodegenCx {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CraneliftCodegenBackend | COMPLEXITY=2 | LINES=4 */
 
 pub struct CraneliftCodegenBackend {
     pub config: Option<BackendConfig>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=locale_resource | COMPLEXITY=56 | LINES=105 */
 
 impl CodegenBackend for CraneliftCodegenBackend {
     fn locale_resource(&self) -> &'static str {
@@ -228,7 +218,6 @@ impl CodegenBackend for CraneliftCodegenBackend {
         ongoing_codegen.downcast::<driver::aot::OngoingCodegen>().unwrap().join(sess, outputs)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=enable_verifier | COMPLEXITY=6 | LINES=10 */
 
 /// Determine if the Cranelift ir verifier should run.
 ///
@@ -239,7 +228,6 @@ fn enable_verifier(sess: &Session) -> bool {
         || cfg!(debug_assertions)
         || env::var("CG_CLIF_ENABLE_VERIFIER").as_deref() == Ok("1")
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=target_triple | COMPLEXITY=7 | LINES=7 */
 
 fn target_triple(sess: &Session) -> target_lexicon::Triple {
     match sess.target.llvm_target.parse() {
@@ -247,7 +235,6 @@ fn target_triple(sess: &Session) -> target_lexicon::Triple {
         Err(err) => sess.dcx().fatal(format!("target not recognized: {}", err)),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=build_isa | COMPLEXITY=74 | LINES=107 */
 
 fn build_isa(sess: &Session, jit: bool) -> Arc<dyn TargetIsa + 'static> {
     use target_lexicon::BinaryFormat;
@@ -355,7 +342,6 @@ fn build_isa(sess: &Session, jit: bool) -> Arc<dyn TargetIsa + 'static> {
         Err(err) => sess.dcx().fatal(format!("failed to build TargetIsa: {}", err)),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=__rustc_codegen_backend | COMPLEXITY=5 | LINES=6 */
 
 /// This is the entrypoint for a hot plugged rustc_codegen_cranelift
 #[unsafe(no_mangle)]

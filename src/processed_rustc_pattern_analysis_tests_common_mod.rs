@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/tests/common/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 #[allow(dead_code, unreachable_pub)]
 use crate::rustc_pattern_analysis::constructor::{
     Constructor, ConstructorSet, IntRange, MaybeInfiniteInt, RangeEnd, VariantVisibility,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_pattern_analysis::pat::DeconstructedPat;
 use crate::rustc_pattern_analysis::usefulness::{PlaceValidity, UsefulnessReport};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_pattern_analysis::{MatchArm, PatCx, PrivateUninhabitedField};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=init_tracing | COMPLEXITY=5 | LINES=17 */
 
 /// Sets up `tracing` for easier debugging. Tries to look like the `rustc` setup.
 fn init_tracing() {
@@ -27,7 +23,6 @@ fn init_tracing() {
         )
         .try_init();
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 pub(super) const UNIT: Ty = Ty::Tuple(&[]);
 pub(super) const NEVER: Ty = Ty::Enum(&[]);
@@ -50,7 +45,6 @@ pub(super) enum Ty {
     /// Like `Enum` but non-exhaustive.
     NonExhaustiveEnum(&'static [Ty]),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=69 | LINES=96 */
 
 /// The important logic.
 impl Ty {
@@ -147,7 +141,6 @@ impl Ty {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 /// Compute usefulness in our simple context (and set up tracing for easier debugging).
 pub(super) fn compute_match_usefulness<'p>(
@@ -166,13 +159,11 @@ pub(super) fn compute_match_usefulness<'p>(
         complexity_limit,
     )
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub(super) struct Cx {
     exhaustive_witnesses: bool,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_exhaustive_patterns_feature_on | COMPLEXITY=19 | LINES=59 */
 
 /// The context for pattern analysis. Forwards anything interesting to `Ty` methods.
 impl PatCx for Cx {
@@ -232,7 +223,6 @@ impl PatCx for Cx {
         panic!("`crate::rustc_pattern_analysis::tests` currently doesn't test deref pattern errors")
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 /// Construct a single pattern; see `pats!()`.
 #[allow(unused_macros)]
@@ -242,12 +232,10 @@ macro_rules! pat {
         vec.pop().unwrap()
     }};
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 /// A macro to construct patterns. Called like `pats!(type_expr; pattern, pattern, ..)` and returns
 /// a `Vec<DeconstructedPat>`. A pattern can be nested and looks like `Constructor(pat, pat)` or
 /// `Constructor { .i: pat, .j: pat }`, where `Constructor` is `Struct`, `Variant.i` (with index
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 /// `i`), as well as booleans and integer ranges.
 ///
 /// The general structure of the macro is a tt-muncher with several stages identified with
@@ -255,7 +243,6 @@ macro_rules! pat {
 /// around) which is passed down and modified as needed. We then parse token-trees from
 /// left-to-right. Non-trivial recursion happens when we parse the arguments to a pattern: we
 /// recurse to parse the tokens inside `{..}`/`(..)`, and then we continue parsing anything that
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=68 | LINES=140 */
 /// follows.
 macro_rules! pats {
     // Entrypoint

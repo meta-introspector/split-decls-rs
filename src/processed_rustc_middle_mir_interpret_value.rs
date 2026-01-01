@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/value.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt;
 
 use either::{Either, Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{HasDataLayout, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     AllocId, CtfeProvenance, InterpResult, Pointer, PointerArithmetic, Provenance,
     ScalarSizeMismatch, interp_ok,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=22 */
 use crate::ty::ScalarInt;
 
 /// A `Scalar` represents an immediate, primitive value existing outside of a
@@ -39,7 +33,6 @@ pub enum Scalar<Prov = CtfeProvenance> {
     /// that we always have readily available.
     Ptr(Pointer<Prov>, u8),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=14 */
 
 #[cfg(target_pointer_width = "64")]
 crate::rustc_data_structures::static_assert_size!(Scalar, 24);
@@ -54,7 +47,6 @@ impl<Prov: Provenance> fmt::Debug for Scalar<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=9 */
 
 impl<Prov: Provenance> fmt::Display for Scalar<Prov> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -64,7 +56,6 @@ impl<Prov: Provenance> fmt::Display for Scalar<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=9 */
 
 impl<Prov: Provenance> fmt::LowerHex for Scalar<Prov> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -74,7 +65,6 @@ impl<Prov: Provenance> fmt::LowerHex for Scalar<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov> From<Half> for Scalar<Prov> {
     #[inline(always)]
@@ -82,7 +72,6 @@ impl<Prov> From<Half> for Scalar<Prov> {
         Scalar::from_f16(f)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov> From<Single> for Scalar<Prov> {
     #[inline(always)]
@@ -90,7 +79,6 @@ impl<Prov> From<Single> for Scalar<Prov> {
         Scalar::from_f32(f)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov> From<Double> for Scalar<Prov> {
     #[inline(always)]
@@ -98,7 +86,6 @@ impl<Prov> From<Double> for Scalar<Prov> {
         Scalar::from_f64(f)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov> From<Quad> for Scalar<Prov> {
     #[inline(always)]
@@ -106,7 +93,6 @@ impl<Prov> From<Quad> for Scalar<Prov> {
         Scalar::from_f128(f)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<Prov> From<ScalarInt> for Scalar<Prov> {
     #[inline(always)]
@@ -114,7 +100,6 @@ impl<Prov> From<ScalarInt> for Scalar<Prov> {
         Scalar::Int(ptr)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from_pointer | COMPLEXITY=72 | LINES=167 */
 
 impl<Prov> Scalar<Prov> {
     #[inline(always)]
@@ -282,7 +267,6 @@ impl<Prov> Scalar<Prov> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=to_pointer | COMPLEXITY=108 | LINES=197 */
 
 impl<'tcx, Prov: Provenance> Scalar<Prov> {
     pub fn to_pointer(self, cx: &impl HasDataLayout) -> InterpResult<'tcx, Pointer<Option<Prov>>> {

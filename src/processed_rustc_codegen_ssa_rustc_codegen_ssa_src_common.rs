@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/common.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[allow(non_camel_case_types)]
 
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::attrs::PeImportNameType;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{self, Instance, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::cstore::{DllCallingConvention, DllImport};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 use crate::rustc_complete::Span;
 use crate::rustc_target::spec::Target;
 
@@ -29,7 +25,6 @@ pub enum IntPredicate {
     IntSLT,
     IntSLE,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=20 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum RealPredicate {
@@ -50,7 +45,6 @@ pub enum RealPredicate {
     RealUNE,
     RealPredicateTrue,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum AtomicRmwBinOp {
@@ -66,14 +60,12 @@ pub enum AtomicRmwBinOp {
     AtomicUMax,
     AtomicUMin,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum SynchronizationScope {
     SingleThread,
     CrossThread,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=23 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum TypeKind {
@@ -97,7 +89,6 @@ pub enum TypeKind {
     BFloat,
     X86_AMX,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=12 | LINES=20 */
 
 // FIXME(mw): Anything that is produced via DepGraph::with_task() must implement
 //            the HashStable trait. Normally DepGraph::with_task() calls are
@@ -118,7 +109,6 @@ mod temp_stable_hash_impls {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn build_langcall<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &Bx,
@@ -130,7 +120,6 @@ pub(crate) fn build_langcall<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     let instance = ty::Instance::mono(tcx, def_id);
     (bx.fn_abi_of_instance(instance, ty::List::empty()), bx.get_fn_addr(instance), instance)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=26 */
 
 pub(crate) fn shift_mask_val<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -157,7 +146,6 @@ pub(crate) fn shift_mask_val<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         _ => bug!("shift_mask_val: expected Integer or Vector, found {:?}", kind),
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=asm_const_to_str | COMPLEXITY=16 | LINES=24 */
 
 pub fn asm_const_to_str<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -182,12 +170,10 @@ pub fn asm_const_to_str<'tcx>(
         _ => span_bug!(sp, "asm const has bad type {}", ty_and_layout.ty),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_mingw_gnu_toolchain | COMPLEXITY=2 | LINES=4 */
 
 pub fn is_mingw_gnu_toolchain(target: &Target) -> bool {
     target.vendor == "pc" && target.os == "windows" && target.env == "gnu" && target.abi.is_empty()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=i686_decorated_name | COMPLEXITY=45 | LINES=63 */
 
 pub fn i686_decorated_name(
     dll_import: &DllImport,

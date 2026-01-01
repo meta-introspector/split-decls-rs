@@ -1,46 +1,32 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/callee.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter;
 
 use crate::rustc_abi::{CanonAbi, ExternAbi};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, StashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, CtorKind, Namespace, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, HirId, LangItem};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_hir_analysis::autoderef::Autoderef;
 use crate::rustc_infer::infer::BoundRegionConversionTime;
 use crate::rustc_infer::traits::{Obligation, ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{AbiMap, AbiMapping};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
 use crate::rustc_trait_selection::infer::InferCtxtExt as _;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::method::MethodCallee;
 use super::method::probe::ProbeScope;
 use super::{Expectation, FnCtxt, TupleArgumentsFlag};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{errors, fluent_generated};
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=25 */
 
 /// Checks that it is legal to call methods of the trait corresponding
 /// to `trait_id` (this only cares about the trait, not the specific
@@ -66,7 +52,6 @@ pub(crate) fn check_legal_trait_for_method_call(
     }
     tcx.ensure_ok().coherent_trait(trait_id)
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 enum CallStep<'tcx> {
@@ -75,7 +60,6 @@ enum CallStep<'tcx> {
     /// Call overloading when callee implements one of the Fn* traits.
     Overloaded(MethodCallee<'tcx>),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_overloaded_call_step | COMPLEXITY=392 | LINES=900 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn check_expr_call(
@@ -976,7 +960,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         method.sig.output()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 pub(crate) struct DeferredCallResolution<'tcx> {
@@ -986,7 +969,6 @@ pub(crate) struct DeferredCallResolution<'tcx> {
     adjustments: Vec<Adjustment<'tcx>>,
     fn_sig: ty::FnSig<'tcx>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=52 */
 
 impl<'a, 'tcx> DeferredCallResolution<'tcx> {
     pub(crate) fn resolve(self, fcx: &FnCtxt<'a, 'tcx>) {

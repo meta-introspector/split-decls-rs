@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/graph/linked_graph/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::{Debug, LinkedGraph, NodeIndex};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=create_graph | COMPLEXITY=3 | LINES=32 */
 
 type TestGraph = LinkedGraph<&'static str, &'static str>;
 
@@ -36,7 +34,6 @@ fn create_graph() -> TestGraph {
 
     return graph;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=each_node | COMPLEXITY=3 | LINES=11 */
 
 #[test]
 fn each_node() {
@@ -48,7 +45,6 @@ fn each_node() {
         true
     });
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=each_edge | COMPLEXITY=3 | LINES=10 */
 
 #[test]
 fn each_edge() {
@@ -59,7 +55,6 @@ fn each_edge() {
         true
     });
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_adjacent_edges | COMPLEXITY=29 | LINES=46 */
 
 fn test_adjacent_edges<N: PartialEq + Debug, E: PartialEq + Debug>(
     graph: &LinkedGraph<N, E>,
@@ -106,14 +101,12 @@ fn test_adjacent_edges<N: PartialEq + Debug, E: PartialEq + Debug>(
     }
     assert_eq!(counter, expected_outgoing.len());
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=each_adjacent_from_a | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn each_adjacent_from_a() {
     let graph = create_graph();
     test_adjacent_edges(&graph, NodeIndex(0), "A", &[], &[("AB", "B")]);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=each_adjacent_from_b | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn each_adjacent_from_b() {
@@ -126,14 +119,12 @@ fn each_adjacent_from_b() {
         &[("BD", "D"), ("BC", "C")],
     );
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=each_adjacent_from_c | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn each_adjacent_from_c() {
     let graph = create_graph();
     test_adjacent_edges(&graph, NodeIndex(2), "C", &[("EC", "E"), ("BC", "B")], &[]);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=each_adjacent_from_d | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn each_adjacent_from_d() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/definitions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // For each definition, we track the following data. A definition
 // here is defined somewhat circularly as "something with a `DefId`",
 // but it generally corresponds to things like structs, enums, etc.
@@ -7,7 +6,6 @@
 // expressions) that are mostly just leftovers.
 
 use std::fmt::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::hash::Hash;
 
 use crate::rustc_data_structures::stable_hasher::StableHasher;
@@ -15,15 +13,11 @@ use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub use crate::def_id::DefPathHash;
 use crate::def_id::{CRATE_DEF_INDEX, CrateNum, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=DefPathTable | COMPLEXITY=5 | LINES=14 */
 use crate::def_path_hash_map::DefPathHashMap;
 
 /// The `DefPathTable` maps `DefIndex`es to `DefKey`s and vice versa.
@@ -38,7 +32,6 @@ pub struct DefPathTable {
     def_path_hashes: IndexVec<DefIndex, Hash64>,
     def_path_hash_to_index: DefPathHashMap,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=25 | LINES=65 */
 
 impl DefPathTable {
     fn new(stable_crate_id: StableCrateId) -> DefPathTable {
@@ -104,13 +97,11 @@ impl DefPathTable {
             .map(move |(index, key)| (index, key, self.def_path_hash(index)))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=DisambiguatorState | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub struct DisambiguatorState {
     next: UnordMap<(LocalDefId, DefPathData), u32>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=14 */
 
 impl DisambiguatorState {
     pub fn new() -> Self {
@@ -125,7 +116,6 @@ impl DisambiguatorState {
         this
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Definitions | COMPLEXITY=4 | LINES=8 */
 
 /// The definition table containing node definitions.
 /// It holds the `DefPathTable` for `LocalDefId`s/`DefPath`s.
@@ -134,7 +124,6 @@ impl DisambiguatorState {
 pub struct Definitions {
     table: DefPathTable,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=DefKey | COMPLEXITY=2 | LINES=12 */
 
 /// A unique identifier that we can use to lookup a definition
 /// precisely. It combines the index of the definition's parent (if
@@ -147,7 +136,6 @@ pub struct DefKey {
     /// The identifier of this node.
     pub disambiguated_data: DisambiguatedDefPathData,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=get_opt_name | COMPLEXITY=10 | LINES=34 */
 
 impl DefKey {
     pub(crate) fn compute_stable_hash(&self, parent: DefPathHash) -> DefPathHash {
@@ -182,7 +170,6 @@ impl DefKey {
         self.disambiguated_data.data.get_opt_name()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=DisambiguatedDefPathData | COMPLEXITY=7 | LINES=12 */
 
 /// A pair of `DefPathData` and an integer disambiguator. The integer is
 /// normally `0`, but in the event that there are multiple defs with the
@@ -195,7 +182,6 @@ pub struct DisambiguatedDefPathData {
     pub data: DefPathData,
     pub disambiguator: u32,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=as_sym | COMPLEXITY=30 | LINES=21 */
 
 impl DisambiguatedDefPathData {
     pub fn as_sym(&self, verbose: bool) -> Symbol {
@@ -217,7 +203,6 @@ impl DisambiguatedDefPathData {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DefPath | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, Encodable, Decodable)]
 pub struct DefPath {
@@ -227,7 +212,6 @@ pub struct DefPath {
     /// The crate root this path is relative to.
     pub krate: CrateNum,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=make | COMPLEXITY=33 | LINES=57 */
 
 impl DefPath {
     pub fn make<FN>(krate: CrateNum, start_index: DefIndex, mut get_key: FN) -> DefPath
@@ -285,7 +269,6 @@ impl DefPath {
         s
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=14 | LINES=47 */
 
 /// New variants should only be added in synchronization with `enum DefKind`.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Encodable, Decodable)]
@@ -333,7 +316,6 @@ pub enum DefPathData {
     /// Additional static data referred to by a static.
     NestedStatic,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=def_path_table | COMPLEXITY=50 | LINES=125 */
 
 impl Definitions {
     pub fn def_path_table(&self) -> &DefPathTable {
@@ -459,14 +441,12 @@ impl Definitions {
         self.table.def_path_hashes.len()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum DefPathDataName {
     Named(Symbol),
     Anon { namespace: Symbol },
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=get_opt_name | COMPLEXITY=33 | LINES=64 */
 
 impl DefPathData {
     pub fn get_opt_name(&self) -> Option<Symbol> {
@@ -531,7 +511,6 @@ impl DefPathData {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=19 | LINES=10 */
 
 impl fmt::Display for DefPathData {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

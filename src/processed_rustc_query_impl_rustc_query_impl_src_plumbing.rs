@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_impl/src/plumbing.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // The implementation of the query system itself. This defines the macros that
 // generate the actual methods on tcx which find and execute the provider,
 // manage the caches, and so forth.
@@ -8,9 +7,7 @@ use std::num::NonZero;
 
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
 use crate::rustc_complete::limit::Limit;
@@ -20,30 +17,22 @@ use crate::rustc_complete::dep_graph::{
     self, DepContext, DepKind, DepKindStruct, DepNode, DepNodeIndex, SerializedDepNodeIndex,
     dep_kinds,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::Key;
 use crate::rustc_complete::query::on_disk_cache::{
     AbsoluteBytePos, CacheDecoder, CacheEncoder, EncodedDepNodeIndex,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::codec::TyEncoder;
 use crate::rustc_complete::ty::print::with_reduced_queries;
 use crate::rustc_complete::ty::tls::{self, ImplicitCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_query_system::dep_graph::{DepNodeParams, HasDepContext};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_query_system::ich::StableHashingContext;
 use rustc_query_system::query::{
     QueryCache, QueryConfig, QueryContext, QueryJobId, QueryMap, QuerySideEffect,
     QueryStackDeferred, QueryStackFrame, QueryStackFrameExtra, force_query,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_query_system::{QueryOverflow, QueryOverflowNote};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=QueryCtxt | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 
 use crate::QueryConfigRestored;
@@ -52,7 +41,6 @@ use crate::QueryConfigRestored;
 pub struct QueryCtxt<'tcx> {
     pub tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 
 impl<'tcx> QueryCtxt<'tcx> {
     #[inline]
@@ -60,7 +48,6 @@ impl<'tcx> QueryCtxt<'tcx> {
         QueryCtxt { tcx }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> std::ops::Deref for QueryCtxt<'tcx> {
     type Target = TyCtxt<'tcx>;
@@ -70,7 +57,6 @@ impl<'tcx> std::ops::Deref for QueryCtxt<'tcx> {
         &self.tcx
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=dep_context | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> HasDepContext for QueryCtxt<'tcx> {
     type Deps = crate::rustc_middle::dep_graph::DepsType;
@@ -81,7 +67,6 @@ impl<'tcx> HasDepContext for QueryCtxt<'tcx> {
         &self.tcx
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=jobserver_proxy | COMPLEXITY=56 | LINES=120 */
 
 impl<'tcx> QueryContext for QueryCtxt<'tcx> {
     type QueryInfo = QueryStackDeferred<'tcx>;
@@ -202,12 +187,10 @@ impl<'tcx> QueryContext for QueryCtxt<'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(super) fn try_mark_green<'tcx>(tcx: TyCtxt<'tcx>, dep_node: &dep_graph::DepNode) -> bool {
     tcx.dep_graph.try_mark_green(QueryCtxt::new(tcx), dep_node).is_some()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 pub(super) fn encode_all_query_results<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -218,7 +201,6 @@ pub(super) fn encode_all_query_results<'tcx>(
         encode(tcx, encoder, query_result_index);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=query_key_hash_verify_all | COMPLEXITY=9 | LINES=10 */
 
 pub fn query_key_hash_verify_all<'tcx>(tcx: TyCtxt<'tcx>) {
     if tcx.sess().opts.unstable_opts.incremental_verify_ich || cfg!(debug_assertions) {
@@ -229,7 +211,6 @@ pub fn query_key_hash_verify_all<'tcx>(tcx: TyCtxt<'tcx>) {
         })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=18 */
 
 macro_rules! handle_cycle_error {
     ([]) => {{
@@ -248,7 +229,6 @@ macro_rules! handle_cycle_error {
         handle_cycle_error!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! is_anon {
     ([]) => {{
@@ -261,7 +241,6 @@ macro_rules! is_anon {
         is_anon!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! is_eval_always {
     ([]) => {{
@@ -274,7 +253,6 @@ macro_rules! is_eval_always {
         is_eval_always!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! depth_limit {
     ([]) => {{
@@ -287,7 +265,6 @@ macro_rules! depth_limit {
         depth_limit!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! feedable {
     ([]) => {{
@@ -300,7 +277,6 @@ macro_rules! feedable {
         feedable!([$($modifiers)*])
     };
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! hash_result {
     ([][$V:ty]) => {{
@@ -313,7 +289,6 @@ macro_rules! hash_result {
         hash_result!([$($modifiers)*][$($args)*])
     };
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=16 */
 
 macro_rules! call_provider {
     ([][$tcx:expr, $name:ident, $key:expr]) => {{
@@ -330,7 +305,6 @@ macro_rules! call_provider {
         call_provider!([$($modifiers)*][$($args)*])
     };
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! should_ever_cache_on_disk {
     ([]$yes:tt $no:tt) => {{
@@ -343,7 +317,6 @@ macro_rules! should_ever_cache_on_disk {
         should_ever_cache_on_disk!([$($modifiers)*]$yes $no)
     };
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=create_query_frame_extra | COMPLEXITY=20 | LINES=39 */
 
 fn create_query_frame_extra<'tcx, K: Key + Copy + 'tcx>(
     (tcx, key, kind, name, do_describe): (
@@ -383,7 +356,6 @@ fn create_query_frame_extra<'tcx, K: Key + Copy + 'tcx>(
     };
     QueryStackFrameExtra::new(description, span, def_kind)
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=28 */
 
 pub(crate) fn create_query_frame<
     'tcx,
@@ -412,7 +384,6 @@ pub(crate) fn create_query_frame<
 
     QueryStackFrame::new(info, kind, hash, def_id, def_id_for_ty_in_cycle)
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 
 pub(crate) fn encode_query_results<'a, 'tcx, Q>(
     query: Q::Config,
@@ -440,7 +411,6 @@ pub(crate) fn encode_query_results<'a, 'tcx, Q>(
         }
     });
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
 
 pub(crate) fn query_key_hash_verify<'tcx>(
     query: impl QueryConfig<QueryCtxt<'tcx>>,
@@ -469,7 +439,6 @@ pub(crate) fn query_key_hash_verify<'tcx>(
         }
     });
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=try_load_from_on_disk_cache | COMPLEXITY=10 | LINES=14 */
 
 fn try_load_from_on_disk_cache<'tcx, Q>(query: Q, tcx: TyCtxt<'tcx>, dep_node: DepNode)
 where
@@ -484,7 +453,6 @@ where
         let _ = query.execute_query(tcx, key);
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 pub(crate) fn loadable_from_disk<'tcx>(tcx: TyCtxt<'tcx>, id: SerializedDepNodeIndex) -> bool {
     if let Some(cache) = tcx.query_system.on_disk_cache.as_ref() {
@@ -493,7 +461,6 @@ pub(crate) fn loadable_from_disk<'tcx>(tcx: TyCtxt<'tcx>, id: SerializedDepNodeI
         false
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 pub(crate) fn try_load_from_disk<'tcx, V>(
     tcx: TyCtxt<'tcx>,
@@ -518,7 +485,6 @@ where
 
     value
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=force_from_dep_node | COMPLEXITY=10 | LINES=30 */
 
 fn force_from_dep_node<'tcx, Q>(query: Q, tcx: TyCtxt<'tcx>, dep_node: DepNode) -> bool
 where
@@ -549,7 +515,6 @@ where
         false
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=31 */
 
 pub(crate) fn query_callback<'tcx, Q>(is_anon: bool, is_eval_always: bool) -> DepKindStruct<'tcx>
 where
@@ -581,7 +546,6 @@ where
         name: Q::NAME,
     }
 }
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=10 */
 
 macro_rules! item_if_cached {
     ([] $tokens:tt) => {};
@@ -592,7 +556,6 @@ macro_rules! item_if_cached {
         item_if_cached! { [$($modifiers)*] $tokens }
     };
 }
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! expand_if_cached {
     ([], $tokens:expr) => {{
@@ -605,7 +568,6 @@ macro_rules! expand_if_cached {
         expand_if_cached!([$($modifiers)*], $tokens)
     };
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Don't show the backtrace for query system by default
 /// use `RUST_BACKTRACE=full` to show all the backtraces
@@ -618,7 +580,6 @@ where
     std::hint::black_box(());
     result
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=config | COMPLEXITY=128 | LINES=372 */
 
 // NOTE: `$V` isn't used here, but we still need to match on it so it can be passed to other macros
 // invoked by `rustc_with_all_queries`.

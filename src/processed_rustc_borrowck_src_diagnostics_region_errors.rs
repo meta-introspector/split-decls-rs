@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/region_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Error reporting machinery for lifetime errors.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use rustc_hir as hir;
 use crate::rustc_complete::GenericBound::Trait;
 use crate::rustc_complete::QPath::Resolved;
@@ -13,45 +11,33 @@ use crate::rustc_complete::def::Res::Def;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::{PolyTraitRef, TyKind, WhereBoundPredicate};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{NllRegionVariableOrigin, SubregionOrigin};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::place::PlaceBase;
 use crate::rustc_complete::mir::{AnnotationSource, ConstraintCategory, ReturnConstraint};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, GenericArgs, Region, RegionVid, Ty, TyCtxt, TypeFoldable, TypeVisitor, fold_regions,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::infer::nice_region_error::{
     self, HirTraitObjectVisitor, NiceRegionError, TraitObjectVisitor, find_anon_type,
     find_param_with_region, suggest_adding_lifetime_params,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{Obligation, ObligationCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{OutlivesSuggestionBuilder, RegionName, RegionNameSource};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::nll::ConstraintDescription;
 use crate::region_infer::values::RegionElement;
 use crate::region_infer::{BlameConstraint, TypeTest};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::session_diagnostics::{
     FnMutError, FnMutReturnTypeErr, GenericDoesNotLiveLongEnough, LifetimeOutliveErr,
     LifetimeReturnCategoryErr, RequireStaticErr, VarHereDenote,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::universal_regions::DefiningTy;
 use crate::{MirBorrowckCtxt, borrowck_errors, fluent_generated as fluent};
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=description | COMPLEXITY=16 | LINES=28 */
 
 impl<'tcx> ConstraintDescription for ConstraintCategory<'tcx> {
     fn description(&self) -> &'static str {
@@ -80,7 +66,6 @@ impl<'tcx> ConstraintDescription for ConstraintCategory<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 
 /// A collection of errors encountered during region inference. This is needed to efficiently
 /// report errors after borrow checking.
@@ -108,14 +93,12 @@ impl<'tcx> RegionErrors<'tcx> {
         self.0.into_iter()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl std::fmt::Debug for RegionErrors<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_tuple("RegionErrors").field(&self.0).finish()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 #[derive(Clone, Debug)]
 pub(crate) enum RegionErrorKind<'tcx> {
@@ -145,7 +128,6 @@ pub(crate) enum RegionErrorKind<'tcx> {
         is_reported: bool,
     },
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Information about the various region constraints involved in a borrow checker error.
 #[derive(Clone, Debug)]
@@ -158,7 +140,6 @@ pub(crate) struct ErrorConstraintInfo<'tcx> {
     pub(super) category: ConstraintCategory<'tcx>,
     pub(super) span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=name_regions | COMPLEXITY=498 | LINES=1050 */
 
 impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     /// Converts a region inference variable into a `ty::Region` that

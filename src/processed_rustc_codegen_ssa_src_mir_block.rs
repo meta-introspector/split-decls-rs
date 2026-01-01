@@ -1,48 +1,32 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/block.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::cmp;
 
 use crate::rustc_abi::{Align, BackendRepr, ExternAbi, HasDataLayout, Reg, Size, WrappingRange};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_lint_defs::builtin::TAIL_CALL_TRACK_CALLER;
 use crate::rustc_complete::mir::{self, AssertKind, InlineAsmMacro, SwitchTargets, UnwindTerminateReason};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf, ValidityRequirement};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_target::callconv::{ArgAbi, CastTarget, FnAbi, PassMode};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::operand::OperandRef;
 use super::operand::OperandValue::{Immediate, Pair, Ref, ZeroSized};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{CachedLlbb, FunctionCx, LocalRef};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::base::{self, is_call_from_compiler_builtins_to_upstream_monomorphization};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{self, IntPredicate};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::errors::CompilerBuiltinsCannotCall;
 use crate::traits::*;
 use crate::{MemFlags, meth};
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 // Indicates if we are in the middle of merging a BB's successor into it. This
 // can happen when BB jumps directly to its successor and the successor has no
@@ -52,7 +36,6 @@ enum MergingSucc {
     False,
     True,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Indicates to the call terminator codegen whether a call
 /// is a normal call or an explicit tail call.
@@ -61,7 +44,6 @@ enum CallKind {
     Normal,
     Tail,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=TerminatorCodegenHelper | COMPLEXITY=4 | LINES=7 */
 
 /// Used by `FunctionCx::codegen_terminator` for emitting common patterns
 /// e.g., creating a basic block, calling a function, etc.
@@ -69,7 +51,6 @@ struct TerminatorCodegenHelper<'tcx> {
     bb: mir::BasicBlock,
     terminator: &'tcx mir::Terminator<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=funclet | COMPLEXITY=167 | LINES=304 */
 
 impl<'a, 'tcx> TerminatorCodegenHelper<'tcx> {
     /// Returns the appropriate `Funclet` for the current funclet, if on MSVC,
@@ -374,7 +355,6 @@ impl<'a, 'tcx> TerminatorCodegenHelper<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=codegen_resume_terminator | COMPLEXITY=760 | LINES=1613 */
 
 /// Codegen implementations for some terminator variants.
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
@@ -1988,7 +1968,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 enum ReturnDest<'tcx, V> {
     /// Do nothing; the return value is indirect or ignored.
@@ -2000,7 +1979,6 @@ enum ReturnDest<'tcx, V> {
     /// Store a direct return value to an operand local place.
     DirectOperand(mir::Local),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=load_cast | COMPLEXITY=7 | LINES=23 */
 
 fn load_cast<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -2024,7 +2002,6 @@ fn load_cast<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         bx.load(cast_ty, ptr, align)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=store_cast | COMPLEXITY=7 | LINES=21 */
 
 pub fn store_cast<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_place_mention.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=16 | LINES=27 */
 // This pass removes `PlaceMention` statement, which has no effect at codegen.
 
 use crate::rustc_complete::mir::*;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/private.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=PrivateMarker; | COMPLEXITY=11 | LINES=18 */
 // The public parts of this private module are used to create traits
 // that cannot be implemented outside of our own crate. This way we
 // can feel free to extend those traits without worrying about it
@@ -18,7 +17,6 @@ macro_rules! private_decl {
         fn __rayon_private__(&self) -> crate::private::PrivateMarker;
     };
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=__rayon_private__ | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! private_impl {
     () => {

@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/snapshot/fudge.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Range;
 
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, ConstVid, FloatVid, IntVid, RegionVid, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use tracing::instrument;
 use ut::UnifyKey;
 
 use super::VariableLengths;
 use crate::infer::type_variable::TypeVariableOrigin;
 use crate::infer::unify_key::{ConstVariableValue, ConstVidKey};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{ConstVariableOrigin, InferCtxt, RegionVariableOrigin, UnificationTable};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=vars_since_snapshot | COMPLEXITY=2 | LINES=11 */
 
 fn vars_since_snapshot<'tcx, T>(
     table: &UnificationTable<'_, 'tcx, T>,
@@ -29,7 +24,6 @@ where
 {
     T::from_index(snapshot_var_len as u32)..T::from_index(table.len() as u32)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=const_vars_since_snapshot | COMPLEXITY=11 | LINES=20 */
 
 fn const_vars_since_snapshot<'tcx>(
     table: &mut UnificationTable<'_, 'tcx, ConstVidKey<'tcx>>,
@@ -50,7 +44,6 @@ fn const_vars_since_snapshot<'tcx>(
             .collect(),
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fudge_inference_if_ok | COMPLEXITY=29 | LINES=80 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// This rather funky routine is used while processing expected
@@ -131,7 +124,6 @@ impl<'tcx> InferCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=SnapshotVarData | COMPLEXITY=2 | LINES=8 */
 
 struct SnapshotVarData {
     region_vars: (Range<RegionVid>, Vec<RegionVariableOrigin>),
@@ -140,7 +132,6 @@ struct SnapshotVarData {
     float_vars: Range<FloatVid>,
     const_vars: (Range<ConstVid>, Vec<ConstVariableOrigin>),
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=29 */
 
 impl SnapshotVarData {
     fn new(infcx: &InferCtxt<'_>, vars_pre_snapshot: VariableLengths) -> SnapshotVarData {
@@ -170,13 +161,11 @@ impl SnapshotVarData {
             && const_vars.0.is_empty()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=InferenceFudger | COMPLEXITY=2 | LINES=5 */
 
 struct InferenceFudger<'a, 'tcx> {
     infcx: &'a InferCtxt<'tcx>,
     snapshot_vars: SnapshotVarData,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=66 | LINES=90 */
 
 impl<'a, 'tcx> TypeFolder<TyCtxt<'tcx>> for InferenceFudger<'a, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/simplify_comparison_integral.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::iter;
 
 use crate::rustc_complete::bug;
@@ -8,9 +7,7 @@ use crate::rustc_complete::mir::{
     BasicBlock, BinOp, Body, Operand, Place, Rvalue, Statement, StatementKind, SwitchTargets,
     TerminatorKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=88 | LINES=141 */
 use tracing::trace;
 
 /// Pass to convert `if` conditions on integrals into switches on the integral.
@@ -152,12 +149,10 @@ impl<'tcx> crate::MirPass<'tcx> for SimplifyComparisonIntegral {
         false
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=OptimizationFinder | COMPLEXITY=2 | LINES=4 */
 
 struct OptimizationFinder<'a, 'tcx> {
     body: &'a Body<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=find_optimizations | COMPLEXITY=28 | LINES=51 */
 
 impl<'tcx> OptimizationFinder<'_, 'tcx> {
     fn find_optimizations(&self) -> Vec<OptimizationInfo<'tcx>> {
@@ -209,7 +204,6 @@ impl<'tcx> OptimizationFinder<'_, 'tcx> {
             .collect()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=find_branch_value_info | COMPLEXITY=16 | LINES=23 */
 
 fn find_branch_value_info<'tcx>(
     left: &Operand<'tcx>,
@@ -233,7 +227,6 @@ fn find_branch_value_info<'tcx>(
         _ => None,
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=OptimizationInfo | COMPLEXITY=5 | LINES=21 */
 
 #[derive(Debug)]
 struct OptimizationInfo<'tcx> {

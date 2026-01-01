@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Compiler:
 //
 // Run-time:
@@ -7,7 +6,6 @@
 
 #[cfg(target_arch = "x86_64")]
 use std::arch::{asm, global_asm};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=add_asm | COMPLEXITY=2 | LINES=15 */
 
 #[cfg(target_arch = "x86_64")]
 global_asm!(
@@ -23,7 +21,6 @@ add_asm:
 extern "C" {
     fn add_asm(a: i64, b: i64) -> i64;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 #[cfg(target_arch = "x86_64")]
 pub unsafe fn mem_cpy(dst: *mut u8, src: *const u8, len: usize) {
@@ -35,7 +32,6 @@ pub unsafe fn mem_cpy(dst: *mut u8, src: *const u8, len: usize) {
         options(preserves_flags, nostack)
     );
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=asm | COMPLEXITY=129 | LINES=198 */
 
 #[cfg(target_arch = "x86_64")]
 fn asm() {
@@ -234,11 +230,9 @@ fn asm() {
         );
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=asm | COMPLEXITY=2 | LINES=3 */
 
 #[cfg(not(target_arch = "x86_64"))]
 fn asm() {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=main | COMPLEXITY=2 | LINES=4 */
 
 fn main() {
     asm();

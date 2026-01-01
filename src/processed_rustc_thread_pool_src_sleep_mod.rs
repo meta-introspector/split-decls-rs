@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/sleep/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // Code that decides when workers should go to sleep. See README.md
 // for an overview.
 
 use std::sync::atomic::Ordering;
 use std::sync::{Condvar, Mutex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::thread;
 
 use crossbeam_utils::CachePadded;
@@ -16,7 +14,6 @@ use crate::registry::WorkerThread;
 
 pub(crate) use self::counters::THREADS_MAX;
 use self::counters::{AtomicCounters, JobsEventCounter};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=SleepData | COMPLEXITY=2 | LINES=13 */
 
 struct SleepData {
     /// The number of threads in the thread pool.
@@ -30,7 +27,6 @@ struct SleepData {
     /// This doesn't include threads blocked by this module.
     blocked_threads: usize,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=10 */
 
 impl SleepData {
     /// Checks if the conditions for a deadlock holds and if so calls the deadlock handler
@@ -41,7 +37,6 @@ impl SleepData {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=17 */
 
 /// The `Sleep` struct is embedded into each registry. It governs the waking and sleeping
 /// of workers. It has callbacks that are invoked periodically at significant events,
@@ -59,7 +54,6 @@ pub(super) struct Sleep {
 
     data: Mutex<SleepData>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// An instance of this struct is created when a thread becomes idle.
 /// It is consumed when the thread finds work, and passed by `&mut`
@@ -77,7 +71,6 @@ pub(super) struct IdleState {
     /// Set to `INVALID_SLEEPY_COUNTER` otherwise.
     jobs_counter: JobsEventCounter,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=WorkerSleepState | COMPLEXITY=4 | LINES=10 */
 
 /// The "sleep state" for an individual worker.
 #[derive(Default)]
@@ -88,7 +81,6 @@ struct WorkerSleepState {
 
     condvar: Condvar,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=announce_sleepy | COMPLEXITY=133 | LINES=298 */
 
 const ROUNDS_UNTIL_SLEEPY: u32 = 32;
 const ROUNDS_UNTIL_SLEEPING: u32 = ROUNDS_UNTIL_SLEEPY + 1;
@@ -387,7 +379,6 @@ impl Sleep {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=wake_fully | COMPLEXITY=4 | LINES=12 */
 
 impl IdleState {
     fn wake_fully(&mut self) {

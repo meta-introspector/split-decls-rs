@@ -1,36 +1,27 @@
 // SRC: ../rust/compiler/rustc_lint/src/foreign_modules.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::FIRST_VARIANT;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, AdtDef, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::declare_lint;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{BuiltinClashingExtern, BuiltinClashingExternSub};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LintVec, types};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { clashing_extern_declarations, ..*providers };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn get_lints() -> LintVec {
     vec![CLASHING_EXTERN_DECLARATIONS]
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=clashing_extern_declarations | COMPLEXITY=5 | LINES=7 */
 
 fn clashing_extern_declarations(tcx: TyCtxt<'_>, (): ()) {
     let mut lint = ClashingExternDeclarations::new();
@@ -38,7 +29,6 @@ fn clashing_extern_declarations(tcx: TyCtxt<'_>, (): ()) {
         lint.check_foreign_item(tcx, id);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=40 */
 
 declare_lint! {
     /// The `clashing_extern_declarations` lint detects when an `extern fn`
@@ -79,7 +69,6 @@ declare_lint! {
     Warn,
     "detects when an extern fn has been declared with the same name but different types"
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ClashingExternDeclarations | COMPLEXITY=7 | LINES=9 */
 
 struct ClashingExternDeclarations {
     /// Map of function symbol name to the first-seen hir id for that symbol name.. If seen_decls
@@ -89,7 +78,6 @@ struct ClashingExternDeclarations {
     // `impl_lint_pass` macro doesn't currently support lints parametric over a lifetime.
     seen_decls: UnordMap<Symbol, hir::OwnerId>,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
 
 /// Differentiate between whether the name for an extern decl came from the link_name attribute or
 /// just from declaration itself. This is important because we don't want to report clashes on
@@ -101,7 +89,6 @@ enum SymbolName {
     /// No link name, so just the name of the symbol.
     Normal(Symbol),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=get_name | COMPLEXITY=7 | LINES=8 */
 
 impl SymbolName {
     fn get_name(&self) -> Symbol {
@@ -110,7 +97,6 @@ impl SymbolName {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=34 | LINES=76 */
 
 impl ClashingExternDeclarations {
     pub(crate) fn new() -> Self {
@@ -187,7 +173,6 @@ impl ClashingExternDeclarations {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=name_of_extern_decl | COMPLEXITY=14 | LINES=23 */
 
 /// Get the name of the symbol that's linked against for a given extern declaration. That is,
 /// the name specified in a #[link_name = ...] attribute if one was specified, else, just the
@@ -211,7 +196,6 @@ fn name_of_extern_decl(tcx: TyCtxt<'_>, fi: hir::OwnerId) -> SymbolName {
         SymbolName::Normal(tcx.item_name(fi.to_def_id()))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=get_relevant_span | COMPLEXITY=8 | LINES=9 */
 
 /// We want to ensure that we use spans for both decls that include where the
 /// name was defined, whether that was from the link_name attribute or not.
@@ -221,7 +205,6 @@ fn get_relevant_span(tcx: TyCtxt<'_>, fi: hir::OwnerId) -> Span {
         SymbolName::Link(_, annot_span) => annot_span,
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=structurally_same_type | COMPLEXITY=7 | LINES=23 */
 
 /// Checks whether two types are structurally the same enough that the declarations shouldn't
 /// clash. We need this so we don't emit a lint when two modules both declare an extern struct,
@@ -245,7 +228,6 @@ fn structurally_same_type<'tcx>(
     }
     result
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=structurally_same_type_impl | COMPLEXITY=80 | LINES=164 */
 
 fn structurally_same_type_impl<'tcx>(
     seen_types: &mut UnordSet<(Ty<'tcx>, Ty<'tcx>)>,

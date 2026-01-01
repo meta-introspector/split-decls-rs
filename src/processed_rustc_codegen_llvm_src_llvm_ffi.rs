@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/llvm/ffi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=15 */
 // Bindings to the LLVM-C API (`LLVM*`), and to our own `extern "C"` wrapper
 // functions around the unstable LLVM C++ API (`LLVMRust*`).
 //
@@ -15,14 +14,12 @@
 #[allow(non_camel_case_types)]
 
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::marker::PhantomData;
 use std::num::NonZero;
 use std::ptr;
 
 use bitflags::bitflags;
 use libc::{c_char, c_int, c_uchar, c_uint, c_ulonglong, c_void, size_t};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use rustc_macros::TryFromU32;
 use crate::rustc_target::spec::SymbolVisibility;
 
@@ -32,7 +29,6 @@ use super::debuginfo::{
     DIFile, DIFlags, DIGlobalVariableExpression, DILocation, DISPFlags, DIScope, DISubprogram,
     DISubrange, DITemplateTypeParameter, DIType, DIVariable, DebugEmissionKind, DebugNameTableKind,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::llvm;
 
 /// In the LLVM-C API, boolean values are passed as `typedef int LLVMBool`,
@@ -45,7 +41,6 @@ use crate::llvm;
 pub(crate) struct Bool {
     value: c_int,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 pub(crate) const TRUE: Bool = Bool::TRUE;
 pub(crate) const FALSE: Bool = Bool::FALSE;
@@ -65,7 +60,6 @@ impl Bool {
         self.value != Self::FALSE.value
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=11 */
 
 impl Debug for Bool {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -77,7 +71,6 @@ impl Debug for Bool {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=to_llvm_bool | COMPLEXITY=4 | LINES=8 */
 
 /// Convenience trait to convert `bool` to `llvm::Bool` with an explicit method call.
 ///
@@ -86,7 +79,6 @@ impl Debug for Bool {
 pub(crate) trait ToLlvmBool: Copy {
     fn to_llvm_bool(self) -> llvm::Bool;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=to_llvm_bool | COMPLEXITY=5 | LINES=7 */
 
 impl ToLlvmBool for bool {
     #[inline(always)]
@@ -94,7 +86,6 @@ impl ToLlvmBool for bool {
         llvm::Bool::from_bool(self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 /// Wrapper for a raw enum value returned from LLVM's C APIs.
 ///
@@ -108,7 +99,6 @@ pub(crate) struct RawEnum<T> {
     /// We don't own or consume a `T`, but we can produce one.
     _rust_side_type: PhantomData<fn() -> T>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 impl<T: TryFrom<u32>> RawEnum<T> {
     #[track_caller]
@@ -120,7 +110,6 @@ impl<T: TryFrom<u32>> RawEnum<T> {
         T::try_from(self.value).expect("enum value returned by LLVM should be known")
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq)]
 #[repr(C)]
@@ -129,7 +118,6 @@ pub(crate) enum LLVMRustResult {
     Success,
     Failure,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=25 */
 
 /// Must match the layout of `LLVMRustModuleFlagMergeBehavior`.
 ///
@@ -155,7 +143,6 @@ pub(crate) enum ModuleFlagMergeBehavior {
     Max = 7,
     Min = 8,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 // Consts for the LLVM CallConv type, pre-cast to usize.
 
@@ -169,7 +156,6 @@ pub(crate) enum TailCallKind {
     MustTail = 2,
     NoTail = 3,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 
 /// LLVM CallingConv::ID. Should we wrap this?
 ///
@@ -197,7 +183,6 @@ pub(crate) enum CallConv {
     AvrInterrupt = 85,
     AmdgpuKernel = 91,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=27 */
 
 /// Must match the layout of `LLVMLinkage`.
 #[derive(Copy, Clone, PartialEq, TryFromU32)]
@@ -225,7 +210,6 @@ pub(crate) enum Linkage {
     LinkerPrivateLinkage = 15,
     LinkerPrivateWeakLinkage = 16,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 /// Must match the layout of `LLVMVisibility`.
 #[repr(C)]
@@ -235,7 +219,6 @@ pub(crate) enum Visibility {
     Hidden = 1,
     Protected = 2,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 impl Visibility {
     pub(crate) fn from_generic(visibility: SymbolVisibility) -> Self {
@@ -246,7 +229,6 @@ impl Visibility {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// LLVMUnnamedAddr
 #[repr(C)]
@@ -256,7 +238,6 @@ pub(crate) enum UnnamedAddr {
     Local,
     Global,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// LLVMDLLStorageClass
 #[derive(Copy, Clone)]
@@ -268,7 +249,6 @@ pub(crate) enum DLLStorageClass {
     #[allow(dead_code)]
     DllExport = 2, // Function to be accessible from DLL.
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=53 */
 
 /// Must match the layout of `LLVMRustAttributeKind`.
 /// Semantically a subset of the C++ enum llvm::Attribute::AttrKind,
@@ -322,7 +302,6 @@ pub(crate) enum AttributeKind {
     DeadOnReturn = 44,
     CapturesReadOnly = 45,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 /// LLVMIntPredicate
 #[derive(Copy, Clone)]
@@ -339,7 +318,6 @@ pub(crate) enum IntPredicate {
     IntSLT = 40,
     IntSLE = 41,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 impl IntPredicate {
     pub(crate) fn from_generic(intpre: crate::rustc_codegen_ssa::common::IntPredicate) -> Self {
@@ -358,7 +336,6 @@ impl IntPredicate {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=22 */
 
 /// LLVMRealPredicate
 #[derive(Copy, Clone)]
@@ -381,7 +358,6 @@ pub(crate) enum RealPredicate {
     RealUNE = 14,
     RealPredicateTrue = 15,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=24 */
 
 impl RealPredicate {
     pub(crate) fn from_generic(realp: crate::rustc_codegen_ssa::common::RealPredicate) -> Self {
@@ -406,7 +382,6 @@ impl RealPredicate {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=31 */
 
 /// Must match the layout of `LLVMTypeKind`.
 ///
@@ -438,7 +413,6 @@ pub(crate) enum TypeKind {
     BFloat = 18,
     X86_AMX = 19,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
 
 impl TypeKind {
     pub(crate) fn to_generic(self) -> crate::rustc_codegen_ssa::common::TypeKind {
@@ -466,7 +440,6 @@ impl TypeKind {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 /// LLVMAtomicRmwBinOp
 #[derive(Copy, Clone)]
@@ -484,7 +457,6 @@ pub(crate) enum AtomicRmwBinOp {
     AtomicUMax = 9,
     AtomicUMin = 10,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=19 */
 
 impl AtomicRmwBinOp {
     pub(crate) fn from_generic(op: crate::rustc_codegen_ssa::common::AtomicRmwBinOp) -> Self {
@@ -504,7 +476,6 @@ impl AtomicRmwBinOp {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 /// LLVMAtomicOrdering
 #[derive(Copy, Clone)]
@@ -521,7 +492,6 @@ pub(crate) enum AtomicOrdering {
     AcquireRelease = 6,
     SequentiallyConsistent = 7,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 impl AtomicOrdering {
     pub(crate) fn from_generic(ao: crate::rustc_middle::ty::AtomicOrdering) -> Self {
@@ -535,7 +505,6 @@ impl AtomicOrdering {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// LLVMRustFileType
 #[derive(Copy, Clone)]
@@ -544,7 +513,6 @@ pub(crate) enum FileType {
     AssemblyFile,
     ObjectFile,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 /// LLVMMetadataType
 #[derive(Copy, Clone)]
@@ -570,7 +538,6 @@ pub(crate) enum MetadataType {
     MD_noundef = 29,
     MD_kcfi_type = 36,
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 /// Must match the layout of `LLVMInlineAsmDialect`.
 #[derive(Copy, Clone, PartialEq)]
@@ -579,7 +546,6 @@ pub(crate) enum AsmDialect {
     Att,
     Intel,
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// LLVMRustCodeGenOptLevel
 #[derive(Copy, Clone, PartialEq)]
@@ -590,7 +556,6 @@ pub(crate) enum CodeGenOptLevel {
     Default,
     Aggressive,
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// LLVMRustPassBuilderOptLevel
 #[repr(C)]
@@ -602,7 +567,6 @@ pub(crate) enum PassBuilderOptLevel {
     Os,
     Oz,
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// LLVMRustOptStage
 #[derive(PartialEq)]
@@ -614,7 +578,6 @@ pub(crate) enum OptStage {
     ThinLTO,
     FatLTO,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 /// LLVMRustSanitizerOptions
 #[repr(C)]
@@ -635,7 +598,6 @@ pub(crate) struct SanitizerOptions {
     pub sanitize_kernel_address: bool,
     pub sanitize_kernel_address_recover: bool,
 }
-/* AST_META: AST_ID=38 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// LLVMRustRelocModel
 #[derive(Copy, Clone, PartialEq)]
@@ -648,7 +610,6 @@ pub(crate) enum RelocModel {
     RWPI,
     ROPI_RWPI,
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// LLVMRustFloatABI
 #[derive(Copy, Clone, PartialEq)]
@@ -658,7 +619,6 @@ pub(crate) enum FloatAbi {
     Soft,
     Hard,
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// LLVMRustCodeModel
 #[derive(Copy, Clone)]
@@ -671,7 +631,6 @@ pub(crate) enum CodeModel {
     Large,
     None,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=23 */
 
 /// LLVMRustDiagnosticKind
 #[derive(Copy, Clone)]
@@ -695,7 +654,6 @@ pub(crate) enum DiagnosticKind {
     Unsupported,
     SrcMgr,
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// LLVMRustDiagnosticLevel
 #[derive(Copy, Clone)]
@@ -707,7 +665,6 @@ pub(crate) enum DiagnosticLevel {
     Note,
     Remark,
 }
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 unsafe extern "C" {
     // LLVMRustThinLTOData
@@ -716,7 +673,6 @@ unsafe extern "C" {
     // LLVMRustThinLTOBuffer
     pub(crate) type ThinLTOBuffer;
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// LLVMRustThinLTOModule
 #[repr(C)]
@@ -725,7 +681,6 @@ pub(crate) struct ThinLTOModule {
     pub data: *const u8,
     pub len: usize,
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// LLVMThreadLocalMode
 #[derive(Copy, Clone)]
@@ -738,7 +693,6 @@ pub(crate) enum ThreadLocalMode {
     InitialExec,
     LocalExec,
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// LLVMRustChecksumKind
 #[derive(Copy, Clone)]
@@ -749,7 +703,6 @@ pub(crate) enum ChecksumKind {
     SHA1,
     SHA256,
 }
-/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// LLVMRustMemoryEffects
 #[derive(Copy, Clone)]
@@ -759,7 +712,6 @@ pub(crate) enum MemoryEffects {
     ReadOnly,
     InaccessibleMemOnly,
 }
-/* AST_META: AST_ID=48 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=74 */
 
 /// LLVMOpcode
 #[derive(Copy, Clone, PartialEq, Eq)]
@@ -834,18 +786,15 @@ pub(crate) enum Opcode {
     CleanupPad = 64,
     CatchSwitch = 65,
 }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 unsafe extern "C" {
     type Opaque;
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=InvariantOpaque | COMPLEXITY=2 | LINES=5 */
 #[repr(C)]
 struct InvariantOpaque<'a> {
     _marker: PhantomData<&'a mut &'a ()>,
     _opaque: Opaque,
 }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 // Opaque pointer types
 unsafe extern "C" {
@@ -859,7 +808,6 @@ unsafe extern "C" {
     pub(crate) type BasicBlock;
     pub(crate) type Comdat;
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 #[repr(C)]
 pub(crate) struct Builder<'a>(InvariantOpaque<'a>);
 #[repr(C)]
@@ -867,13 +815,11 @@ pub(crate) struct PassManager<'a>(InvariantOpaque<'a>);
 unsafe extern "C" {
     pub type TargetMachine;
 }
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 unsafe extern "C" {
     pub(crate) type Twine;
     pub(crate) type DiagnosticInfo;
     pub(crate) type SMDiagnostic;
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 /// Opaque pointee of `LLVMOperandBundleRef`.
 #[repr(C)]
 pub(crate) struct OperandBundle<'a>(InvariantOpaque<'a>);
@@ -883,7 +829,6 @@ pub(crate) struct Linker<'a>(InvariantOpaque<'a>);
 unsafe extern "C" {
     pub(crate) type DiagnosticHandler;
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=75 | LINES=166 */
 
 pub(crate) type DiagnosticHandlerTy = unsafe extern "C" fn(&DiagnosticInfo, *mut c_void);
 
@@ -1050,7 +995,6 @@ pub(crate) mod debuginfo {
         None,
     }
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 // These values **must** match with LLVMRustAllocKindFlags
 bitflags! {
@@ -1066,7 +1010,6 @@ bitflags! {
         const Aligned = 1 << 5;
     }
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=GEPNoWrapFlags | COMPLEXITY=6 | LINES=11 */
 
 // These values **must** match with LLVMGEPNoWrapFlags
 bitflags! {
@@ -1078,12 +1021,10 @@ bitflags! {
         const NUW = 1 << 2;
     }
 }
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 unsafe extern "C" {
     pub(crate) type ModuleBuffer;
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=from | COMPLEXITY=22 | LINES=18 */
 
 pub(crate) type SelfProfileBeforePassCallback =
     unsafe extern "C" fn(*mut c_void, *const c_char, *const c_char);
@@ -1102,7 +1043,6 @@ impl From<MetadataType> for MetadataKindId {
         Self(value as c_uint)
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=60 | LINES=785 */
 
 unsafe extern "C" {
     // Create and destroy contexts.
@@ -1888,7 +1828,6 @@ unsafe extern "C" {
         Name: *const c_char,
     ) -> &'a Value;
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=44 */
 
 // FFI bindings for `DIBuilder` functions in the LLVM-C API.
 // Try to keep these in the same order as in `llvm/include/llvm-c/DebugInfo.h`.
@@ -1933,7 +1872,6 @@ unsafe extern "C" {
         InlinedAt: Option<&'ll Metadata>,
     ) -> &'ll Metadata;
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=63 | LINES=819 */
 
 #[link(name = "llvm-wrapper", kind = "static")]
 unsafe extern "C" {

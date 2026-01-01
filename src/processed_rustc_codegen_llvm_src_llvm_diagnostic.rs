@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/llvm/diagnostic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // LLVM diagnostic reports.
 
 use libc::c_uint;
@@ -8,7 +7,6 @@ use crate::rustc_complete::InnerSpan;
 pub(crate) use self::Diagnostic::*;
 use self::OptimizationDiagnosticKind::*;
 use super::{DiagnosticInfo, SMDiagnostic};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::value::Value;
 
 #[derive(Copy, Clone, Debug)]
@@ -21,7 +19,6 @@ pub(crate) enum OptimizationDiagnosticKind {
     OptimizationFailure,
     OptimizationRemarkOther,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) struct OptimizationDiagnostic<'ll> {
     pub kind: OptimizationDiagnosticKind,
@@ -33,7 +30,6 @@ pub(crate) struct OptimizationDiagnostic<'ll> {
     pub filename: String,
     pub message: String,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=44 */
 
 impl<'ll> OptimizationDiagnostic<'ll> {
     unsafe fn unpack(kind: OptimizationDiagnosticKind, di: &'ll DiagnosticInfo) -> Self {
@@ -78,14 +74,12 @@ impl<'ll> OptimizationDiagnostic<'ll> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct SrcMgrDiagnostic {
     pub level: super::DiagnosticLevel,
     pub message: String,
     pub source: Option<(String, Vec<InnerSpan>)>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=40 */
 
 impl SrcMgrDiagnostic {
     pub(crate) unsafe fn unpack(diag: &SMDiagnostic) -> SrcMgrDiagnostic {
@@ -126,7 +120,6 @@ impl SrcMgrDiagnostic {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone)]
 pub(crate) struct InlineAsmDiagnostic {
@@ -135,7 +128,6 @@ pub(crate) struct InlineAsmDiagnostic {
     pub message: String,
     pub source: Option<(String, Vec<InnerSpan>)>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=31 */
 
 impl InlineAsmDiagnostic {
     unsafe fn unpackInlineAsm(di: &DiagnosticInfo) -> Self {
@@ -167,7 +159,6 @@ impl InlineAsmDiagnostic {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 pub(crate) enum Diagnostic<'ll> {
     Optimization(OptimizationDiagnostic<'ll>),
@@ -180,7 +171,6 @@ pub(crate) enum Diagnostic<'ll> {
     #[expect(dead_code)]
     UnknownDiagnostic(&'ll DiagnosticInfo),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=47 */
 
 impl<'ll> Diagnostic<'ll> {
     pub(crate) unsafe fn unpack(di: &'ll DiagnosticInfo) -> Self {

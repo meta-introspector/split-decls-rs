@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_session/src/search_paths.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=SearchPath | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_target::spec::TargetTuple;
 
 use crate::EarlyDiagCtxt;
@@ -17,7 +14,6 @@ pub struct SearchPath {
     pub dir: PathBuf,
     pub files: FilesIndex,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=FilesIndex(Vec | COMPLEXITY=11 | LINES=35 */
 
 /// [FilesIndex] contains paths that can be efficiently looked up with (prefix, suffix) pairs.
 #[derive(Clone, Debug)]
@@ -53,7 +49,6 @@ impl FilesIndex {
         self.0.retain(|(k, _)| prefixes.iter().any(|prefix| k.starts_with(prefix)));
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=SearchPathFile | COMPLEXITY=3 | LINES=16 */
 /// The obvious implementation of `SearchPath::files` is a `Vec<PathBuf>`. But
 /// it is searched repeatedly by `find_library_crate`, and the searches involve
 /// checking the prefix and suffix of the filename of each `PathBuf`. This is
@@ -70,7 +65,6 @@ pub struct SearchPathFile {
     pub path: Arc<Path>,
     pub file_name_str: Arc<str>,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(PartialEq, Clone, Copy, Debug, Hash, Eq, Encodable, Decodable, HashStable_Generic)]
 pub enum PathKind {
@@ -81,7 +75,6 @@ pub enum PathKind {
     ExternFlag,
     All,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=matches | COMPLEXITY=7 | LINES=9 */
 
 impl PathKind {
     pub fn matches(&self, kind: PathKind) -> bool {
@@ -91,7 +84,6 @@ impl PathKind {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from_cli_opt | COMPLEXITY=46 | LINES=72 */
 
 impl SearchPath {
     pub fn from_cli_opt(

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/declare.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 // Declare various LLVM values.
 //
 // Prefer using functions and methods from this module rather than calling LLVM
@@ -19,9 +18,7 @@ use itertools::Itertools;
 use crate::rustc_codegen_ssa::traits::TypeMembershipCodegenMethods;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::ty::{Instance, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_sanitizers::{cfi, kcfi};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_target::callconv::FnAbi;
 use smallvec::SmallVec;
 use tracing::debug;
@@ -29,13 +26,11 @@ use tracing::debug;
 use crate::abi::FnAbiLlvmExt;
 use crate::common::AsCCharPtr;
 use crate::context::{CodegenCx, GenericCx, SCx, SimpleCx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::llvm::AttributePlace::Function;
 use crate::llvm::Visibility;
 use crate::type_::Type;
 use crate::value::Value;
 use crate::{attributes, llvm};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=24 */
 
 /// Declare a function with a SimpleCx.
 ///
@@ -60,7 +55,6 @@ pub(crate) fn declare_simple_fn<'ll>(
 
     llfn
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=28 */
 
 /// Declare a function.
 ///
@@ -89,7 +83,6 @@ pub(crate) fn declare_raw_fn<'ll, 'tcx>(
 
     llfn
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=18 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     /// Declare a global value.
@@ -108,7 +101,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=116 */
 
 impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
     /// Declare a C ABI function.
@@ -225,7 +217,6 @@ impl<'ll, 'tcx> CodegenCx<'ll, 'tcx> {
         llfn
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=38 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     /// Declare a global with an intention to define it.

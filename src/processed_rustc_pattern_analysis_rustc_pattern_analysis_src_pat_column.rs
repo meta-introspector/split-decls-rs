@@ -1,11 +1,7 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/pat_column.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::constructor::{Constructor, SplitConstructorSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::pat::{DeconstructedPat, PatOrWild};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{MatchArm, PatCx};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=PatternColumn | COMPLEXITY=5 | LINES=14 */
 
 /// A column of patterns in a match, where a column is the intuitive notion of "subpatterns that
 /// inspect the same subvalue/place".
@@ -20,7 +16,6 @@ pub struct PatternColumn<'p, Cx: PatCx> {
     /// This must not contain an or-pattern. `expand_and_push` takes care to expand them.
     patterns: Vec<&'p DeconstructedPat<Cx>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=73 */
 
 impl<'p, Cx: PatCx> PatternColumn<'p, Cx> {
     pub fn new(arms: &[MatchArm<'p, Cx>]) -> Self {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/edit_distance/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_edit_distance | COMPLEXITY=6 | LINES=21 */
 #[allow(rustc::symbol_intern_string_literal)]
 
 use super::*;
@@ -21,7 +20,6 @@ fn test_edit_distance() {
     assert_eq!(edit_distance(b, c, usize::MAX), Some(1));
     assert_eq!(edit_distance(c, b, usize::MAX), Some(1));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_edit_distance_limit | COMPLEXITY=2 | LINES=8 */
 
 #[test]
 fn test_edit_distance_limit() {
@@ -30,7 +28,6 @@ fn test_edit_distance_limit() {
     assert_eq!(edit_distance("abc", "xyz", 3), Some(3));
     assert_eq!(edit_distance("abc", "xyz", 2), None);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_method_name_similarity_score | COMPLEXITY=3 | LINES=11 */
 
 #[test]
 fn test_method_name_similarity_score() {
@@ -42,7 +39,6 @@ fn test_method_name_similarity_score() {
     assert_eq!(edit_distance_with_substrings("abc", "xyz", 3), Some(3));
     assert_eq!(edit_distance_with_substrings("abcdef", "abcdef", 2), Some(0));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_find_best_match_for_name | COMPLEXITY=5 | LINES=32 */
 
 #[test]
 fn test_find_best_match_for_name() {
@@ -75,7 +71,6 @@ fn test_find_best_match_for_name() {
         );
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_precise_algorithm | COMPLEXITY=2 | LINES=10 */
 
 #[test]
 fn test_precise_algorithm() {

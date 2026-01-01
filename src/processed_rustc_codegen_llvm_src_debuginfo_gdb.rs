@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/gdb.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // .debug_gdb_scripts binary section.
 
 use crate::rustc_codegen_ssa::base::collect_debugger_visualizers_transitive;
@@ -8,7 +7,6 @@ use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerType;
 use crate::rustc_complete::config::{CrateType, DebugInfo};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 use crate::builder::Builder;
 use crate::common::CodegenCx;
@@ -28,7 +26,6 @@ pub(crate) fn insert_reference_to_gdb_debug_scripts_section_global(bx: &mut Buil
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=57 */
 
 /// Allocates the global variable responsible for the .debug_gdb_scripts binary
 /// section.
@@ -86,7 +83,6 @@ pub(crate) fn get_or_insert_gdb_debug_scripts_section_global<'ll>(
         }
     })
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=34 */
 
 pub(crate) fn needs_gdb_debug_scripts_section(cx: &CodegenCx<'_, '_>) -> bool {
     // To ensure the section `__rustc_debug_gdb_scripts_section__` will not create

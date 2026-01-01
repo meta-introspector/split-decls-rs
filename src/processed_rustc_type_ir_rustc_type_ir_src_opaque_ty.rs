@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/opaque_ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::inherent::*;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=OpaqueTypeKey | COMPLEXITY=2 | LINES=11 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -21,10 +17,8 @@ pub struct OpaqueTypeKey<I: Interner> {
     pub def_id: I::LocalDefId,
     pub args: I::GenericArgs,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for OpaqueTypeKey<I> {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=iter_captured_args | COMPLEXITY=16 | LINES=30 */
 
 impl<I: Interner> OpaqueTypeKey<I> {
     pub fn iter_captured_args(self, cx: I) -> impl Iterator<Item = (usize, I::GenericArg)> {

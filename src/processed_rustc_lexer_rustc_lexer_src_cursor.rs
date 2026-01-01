@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_lexer/src/cursor.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::str::Chars;
 
 pub enum FrontmatterAllowed {
     Yes,
     No,
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Cursor | COMPLEXITY=2 | LINES=13 */
 
 /// Peekable iterator over a char sequence.
 ///
@@ -20,7 +18,6 @@ pub struct Cursor<'a> {
     #[cfg(debug_assertions)]
     prev: char,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=38 | LINES=106 */
 
 pub(crate) const EOF_CHAR: char = '\0';
 

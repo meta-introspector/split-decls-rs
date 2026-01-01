@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/lexical_region_resolve/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Lexical region resolution.
 
 use std::fmt;
@@ -8,29 +7,22 @@ use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::graph::linked_graph::{
     Direction, INCOMING, LinkedGraph, NodeIndex, OUTGOING,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, ReBound, ReEarlyParam, ReErased, ReError, ReLateParam, RePlaceholder, ReStatic, ReVar,
     Region, RegionVid, Ty, TyCtxt, TypeFoldable, fold_regions,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::outlives::test_type_match;
 use crate::infer::region_constraints::{
     Constraint, ConstraintKind, GenericKind, RegionConstraintData, VarInfos, VerifyBound,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{RegionRelations, RegionVariableOrigin, SubregionOrigin};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 /// This function performs lexical region resolution given a complete
 /// set of constraints and variable origins. It performs a fixed-point
@@ -48,7 +40,6 @@ pub(crate) fn resolve<'tcx>(
     let values = resolver.infer_variable_values(&mut errors);
     (values, errors)
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Contains the result of lexical region resolution. Offers methods
 /// to lookup up the final value of a region variable.
@@ -56,7 +47,6 @@ pub(crate) fn resolve<'tcx>(
 pub(crate) struct LexicalRegionResolutions<'tcx> {
     pub(crate) values: IndexVec<RegionVid, VarValue<'tcx>>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum VarValue<'tcx> {
@@ -70,7 +60,6 @@ pub(crate) enum VarValue<'tcx> {
     Value(Region<'tcx>),
     ErrorValue,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=41 */
 
 #[derive(Clone, Debug)]
 pub enum RegionResolutionError<'tcx> {
@@ -112,7 +101,6 @@ pub enum RegionResolutionError<'tcx> {
 
     CannotNormalize(ty::PolyTypeOutlivesPredicate<'tcx>, SubregionOrigin<'tcx>),
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=origin | COMPLEXITY=8 | LINES=12 */
 
 impl<'tcx> RegionResolutionError<'tcx> {
     pub fn origin(&self) -> &SubregionOrigin<'tcx> {
@@ -125,13 +113,11 @@ impl<'tcx> RegionResolutionError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=RegionAndOrigin | COMPLEXITY=2 | LINES=5 */
 
 struct RegionAndOrigin<'tcx> {
     region: Region<'tcx>,
     origin: SubregionOrigin<'tcx>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=LexicalResolver | COMPLEXITY=2 | LINES=8 */
 
 type RegionGraph<'tcx> = LinkedGraph<(), Constraint<'tcx>>;
 
@@ -140,7 +126,6 @@ struct LexicalResolver<'cx, 'tcx> {
     var_infos: VarInfos,
     data: RegionConstraintData<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=469 | LINES=846 */
 
 impl<'cx, 'tcx> LexicalResolver<'cx, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -987,14 +972,12 @@ impl<'cx, 'tcx> LexicalResolver<'cx, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<'tcx> fmt::Debug for RegionAndOrigin<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "RegionAndOrigin({:?},{:?})", self.region, self.origin)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=normalize | COMPLEXITY=17 | LINES=34 */
 
 impl<'tcx> LexicalRegionResolutions<'tcx> {
     fn normalize<T>(&self, tcx: TyCtxt<'tcx>, value: T) -> T

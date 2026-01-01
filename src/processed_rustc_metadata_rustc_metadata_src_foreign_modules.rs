@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_metadata/src/foreign_modules.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=28 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;

@@ -1,21 +1,17 @@
 // SRC: ../rust/compiler/rustc_lint/src/default_could_be_derived.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{Applicability, Diag};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::ty;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::symbol::sym;
 
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=40 */
 
 declare_lint! {
     /// The `default_overrides_default_fields` lint checks for manual `impl` blocks of the
@@ -56,7 +52,6 @@ declare_lint! {
     "detect `Default` impl that should use the type's default field values",
     @feature_gate = default_field_values;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_impl_item | COMPLEXITY=64 | LINES=107 */
 
 #[derive(Default)]
 pub(crate) struct DefaultCouldBeDerived;
@@ -164,7 +159,6 @@ impl<'tcx> LateLintPass<'tcx> for DefaultCouldBeDerived {
         });
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=mk_lint | COMPLEXITY=26 | LINES=46 */
 
 fn mk_lint(
     tcx: TyCtxt<'_>,

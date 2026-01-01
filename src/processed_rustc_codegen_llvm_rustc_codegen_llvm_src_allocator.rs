@@ -1,25 +1,20 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/allocator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use libc::c_uint;
 use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods as _;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::{DebugInfo, OomStrategy};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_symbol_mangling::mangle_internal_symbol;
 use smallvec::SmallVec;
 
 use crate::builder::SBuilder;
 use crate::declare::declare_simple_fn;
 use crate::llvm::{self, FALSE, TRUE, Type, Value};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{SimpleCx, attributes, debuginfo, llvm_util};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=87 */
 
 pub(crate) unsafe fn codegen(
     tcx: TyCtxt<'_>,
@@ -107,7 +102,6 @@ pub(crate) unsafe fn codegen(
         dbg_cx.finalize(tcx.sess);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=create_const_value_function | COMPLEXITY=8 | LINES=28 */
 
 fn create_const_value_function(
     tcx: TyCtxt<'_>,
@@ -136,7 +130,6 @@ fn create_const_value_function(
     let mut bx = SBuilder::build(&cx, llbb);
     bx.ret(value);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=create_wrapper_function | COMPLEXITY=30 | LINES=83 */
 
 fn create_wrapper_function(
     tcx: TyCtxt<'_>,

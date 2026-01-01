@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/custom.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 
 use crate::rustc_complete::ErrorGuaranteed;
@@ -7,7 +6,6 @@ use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::region_constraints::RegionConstraintData;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=CustomTypeOp | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_complete::Span;
 use tracing::info;
 
@@ -20,7 +18,6 @@ pub struct CustomTypeOp<F> {
     closure: F,
     description: &'static str,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=9 */
 
 impl<F> CustomTypeOp<F> {
     pub fn new<'tcx, R>(closure: F, description: &'static str) -> Self
@@ -30,7 +27,6 @@ impl<F> CustomTypeOp<F> {
         CustomTypeOp { closure, description }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fully_perform | COMPLEXITY=12 | LINES=27 */
 
 impl<'tcx, F, R> super::TypeOp<'tcx> for CustomTypeOp<F>
 where
@@ -58,14 +54,12 @@ where
         Ok(scrape_region_constraints(infcx, root_def_id, self.description, span, self.closure)?.0)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<F> fmt::Debug for CustomTypeOp<F> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.description.fmt(f)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=scrape_region_constraints | COMPLEXITY=26 | LINES=75 */
 
 /// Executes `op` and then scrapes out all the "old style" region
 /// constraints that result, creating query-region-constraints.

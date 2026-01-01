@@ -1,29 +1,22 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/static_impl_trait.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Error Reporting for static impl Traits.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{Visitor, VisitorExt, walk_ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as hir, AmbigArg, GenericBound, GenericParam, GenericParamKind, Item, ItemKind, Lifetime,
     LifetimeKind, LifetimeParamKind, MissingLifetimeKind, Node, TyKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::errors::ButNeedsToSatisfy;
 use crate::infer::{RegionResolutionError, SubregionOrigin};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=suggest_new_region_bound | COMPLEXITY=282 | LINES=411 */
 
 impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
     /// Print the error message for lifetime errors when the return type is a static `impl Trait`,

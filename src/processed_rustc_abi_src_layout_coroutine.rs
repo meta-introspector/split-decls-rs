@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_abi/src/layout/coroutine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=24 */
 // Coroutine layout logic.
 //
 // When laying out coroutines, we divide our saved local fields into two
@@ -24,17 +23,13 @@
 use std::iter;
 
 use crate::rustc_index::bit_set::{BitMatrix, DenseBitSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexSlice, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::{
     BackendRepr, FieldsShape, HasDataLayout, Integer, LayoutData, Primitive, ReprOptions, Scalar,
     StructKind, TagEncoding, Variants, WrappingRange,
 };
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Overlap eligibility and variant assignment for each CoroutineSavedLocal.
 #[derive(Clone, Debug, PartialEq)]
@@ -43,7 +38,6 @@ enum SavedLocalEligibility<VariantIdx, FieldIdx> {
     Assigned(VariantIdx),
     Ineligible(Option<FieldIdx>),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=coroutine_saved_local_eligibility | COMPLEXITY=70 | LINES=97 */
 
 /// Compute the eligibility and assignment of each local.
 fn coroutine_saved_local_eligibility<VariantIdx: Idx, FieldIdx: Idx, LocalIdx: Idx>(
@@ -141,7 +135,6 @@ fn coroutine_saved_local_eligibility<VariantIdx: Idx, FieldIdx: Idx, LocalIdx: I
 
     (ineligible_locals, assignments)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=66 | LINES=184 */
 
 /// Compute the full coroutine layout.
 pub(super) fn layout<

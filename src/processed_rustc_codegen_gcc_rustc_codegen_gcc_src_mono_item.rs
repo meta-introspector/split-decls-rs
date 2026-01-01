@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/mono_item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, VarAttribute};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::PreDefineCodegenMethods;
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::mono::Visibility;
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::context::CodegenCx;
 use crate::type_of::LayoutGccExt;
 use crate::{attributes, base};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=predefine_static | COMPLEXITY=23 | LINES=65 */
 
 impl<'gcc, 'tcx> PreDefineCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
     #[cfg_attr(not(feature = "master"), allow(unused_variables))]

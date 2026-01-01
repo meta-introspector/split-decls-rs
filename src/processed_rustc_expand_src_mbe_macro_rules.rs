@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/macro_rules.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 use std::collections::hash_map::Entry;
 use std::sync::Arc;
 use std::{mem, slice};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use ast::token::IdentIsRaw;
 use crate::rustc_complete::token::NtPatKind::*;
 use crate::rustc_complete::token::TokenKind::*;
 use crate::rustc_complete::token::{self, Delimiter, NonterminalKind, Token, TokenKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{self, DelimSpan, TokenStream};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, NodeId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_feature::Features;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
@@ -29,42 +22,29 @@ use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_lint_defs::builtin::{
     RUST_2021_INCOMPATIBLE_OR_PATTERNS, SEMICOLON_IN_EXPRESSIONS_FROM_MACROS,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_parse::exp;
 use crate::rustc_parse::parser::{Parser, Recovery};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::{ParseSess, feature_err};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::Transparency;
 use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace, trace_span};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::diagnostics::{FailedMacro, failed_to_match_macro};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::macro_parser::{NamedMatches, NamedParseResult};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{SequenceRepetition, diagnostics};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::base::{
     AttrProcMacro, DummyResult, ExpandResult, ExtCtxt, MacResult, MacroExpanderResult,
     SyntaxExtension, SyntaxExtensionKind, TTMacroExpander,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::errors;
 use crate::expand::{AstFragment, AstFragmentKind, ensure_complete_parse, parse_ast_fragment};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mbe::macro_check::check_meta_variables;
 use crate::mbe::macro_parser::{Error, ErrorReported, Failure, MatcherLoc, Success, TtParser};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mbe::quoted::{RulePart, parse_one_tt};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mbe::transcribe::transcribe;
 use crate::mbe::{self, KleeneOp};
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 pub(crate) struct ParserAnyMacro<'a> {
     parser: Parser<'a>,
@@ -79,7 +59,6 @@ pub(crate) struct ParserAnyMacro<'a> {
     /// Whether or not this macro is defined in the current crate
     is_local: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=68 */
 
 impl<'a> ParserAnyMacro<'a> {
     pub(crate) fn make(mut self: Box<ParserAnyMacro<'a>>, kind: AstFragmentKind) -> AstFragment {
@@ -148,7 +127,6 @@ impl<'a> ParserAnyMacro<'a> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=15 */
 
 pub(super) enum MacroRule {
     /// A function-style rule, for use with `m!()`
@@ -164,7 +142,6 @@ pub(super) enum MacroRule {
     /// A derive rule, for use with `#[m]`
     Derive { body: Vec<MatcherLoc>, body_span: Span, rhs: mbe::TokenTree },
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=MacroRulesMacroExpander | COMPLEXITY=2 | LINES=9 */
 
 pub struct MacroRulesMacroExpander {
     node_id: NodeId,
@@ -174,7 +151,6 @@ pub struct MacroRulesMacroExpander {
     kinds: MacroKinds,
     rules: Vec<MacroRule>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=get_unused_rule | COMPLEXITY=44 | LINES=75 */
 
 impl MacroRulesMacroExpander {
     pub fn get_unused_rule(&self, rule_i: usize) -> Option<(&Ident, MultiSpan)> {
@@ -250,7 +226,6 @@ impl MacroRulesMacroExpander {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=20 */
 
 impl TTMacroExpander for MacroRulesMacroExpander {
     fn expand<'cx>(
@@ -271,7 +246,6 @@ impl TTMacroExpander for MacroRulesMacroExpander {
         ))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=5 | LINES=22 */
 
 impl AttrProcMacro for MacroRulesMacroExpander {
     fn expand(
@@ -294,7 +268,6 @@ impl AttrProcMacro for MacroRulesMacroExpander {
         )
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=DummyExpander(ErrorGuaranteed); | COMPLEXITY=5 | LINES=13 */
 
 struct DummyExpander(ErrorGuaranteed);
 
@@ -308,13 +281,11 @@ impl TTMacroExpander for DummyExpander {
         ExpandResult::Ready(DummyResult::any(span, self.0))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=trace_macros_note | COMPLEXITY=2 | LINES=5 */
 
 fn trace_macros_note(cx_expansions: &mut FxIndexMap<Span, Vec<String>>, sp: Span, message: String) {
     let sp = sp.macro_backtrace().last().map_or(sp, |trace| trace.call_site);
     cx_expansions.entry(sp).or_default().push(message);
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=build_failure | COMPLEXITY=10 | LINES=24 */
 
 pub(super) trait Tracker<'matcher> {
     /// The contents of `ParseResult::Failure`.
@@ -339,7 +310,6 @@ pub(super) trait Tracker<'matcher> {
         Recovery::Forbidden
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=build_failure | COMPLEXITY=6 | LINES=14 */
 
 /// A noop tracker that is used in the hot path of the expansion, has zero overhead thanks to
 /// monomorphization.
@@ -354,7 +324,6 @@ impl<'matcher> Tracker<'matcher> for NoopTracker {
         "none"
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=expand_macro | COMPLEXITY=42 | LINES=76 */
 
 /// Expands the rules based macro defined by `rules` for a given input `arg`.
 #[instrument(skip(cx, transparency, arg, rules))]
@@ -431,7 +400,6 @@ fn expand_macro<'cx>(
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=expand_macro_attr | COMPLEXITY=32 | LINES=70 */
 
 /// Expands the rules based macro defined by `rules` for a given attribute `args` and `body`.
 #[instrument(skip(cx, transparency, args, body, rules))]
@@ -502,14 +470,12 @@ fn expand_macro_attr(
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) enum CanRetry {
     Yes,
     /// We are not allowed to retry macro expansion as a fatal error has been emitted already.
     No(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=80 */
 
 /// Try expanding the macro. Returns the index of the successful arm and its named_matches if it was successful,
 /// and nothing if it failed. On failure, it's the callers job to use `track` accordingly to record all errors
@@ -590,7 +556,6 @@ pub(super) fn try_match_macro<'matcher, T: Tracker<'matcher>>(
 
     Err(CanRetry::Yes)
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=55 */
 
 /// Try expanding the macro attribute. Returns the index of the successful arm and its
 /// named_matches if it was successful, and nothing if it failed. On failure, it's the caller's job
@@ -646,7 +611,6 @@ pub(super) fn try_match_macro_attr<'matcher, T: Tracker<'matcher>>(
 
     Err(CanRetry::Yes)
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=38 */
 
 /// Try expanding the macro derive. Returns the index of the successful arm and its
 /// named_matches if it was successful, and nothing if it failed. On failure, it's the caller's job
@@ -685,7 +649,6 @@ pub(super) fn try_match_macro_derive<'matcher, T: Tracker<'matcher>>(
 
     Err(CanRetry::Yes)
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=compile_declarative_macro | COMPLEXITY=111 | LINES=148 */
 
 /// Converts a macro item into a syntax extension.
 pub fn compile_declarative_macro(
@@ -834,7 +797,6 @@ pub fn compile_declarative_macro(
     let exp = MacroRulesMacroExpander { name: ident, kinds, span, node_id, transparency, rules };
     (mk_syn_ext(SyntaxExtensionKind::MacroRules(Arc::new(exp))), nrules)
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=check_no_eof | COMPLEXITY=5 | LINES=13 */
 
 fn check_no_eof(sess: &Session, p: &Parser<'_>, msg: &'static str) -> Option<ErrorGuaranteed> {
     if p.token == token::Eof {
@@ -848,7 +810,6 @@ fn check_no_eof(sess: &Session, p: &Parser<'_>, msg: &'static str) -> Option<Err
     }
     None
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=check_args_parens | COMPLEXITY=8 | LINES=13 */
 
 fn check_args_parens(sess: &Session, rule_kw: Symbol, args: &tokenstream::TokenTree) {
     // This does not handle the non-delimited case; that gets handled separately by `check_lhs`.
@@ -862,7 +823,6 @@ fn check_args_parens(sess: &Session, rule_kw: Symbol, args: &tokenstream::TokenT
         });
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=check_args_empty | COMPLEXITY=9 | LINES=10 */
 
 fn check_args_empty(sess: &Session, args: &tokenstream::TokenTree) -> Result<(), ErrorGuaranteed> {
     match args {
@@ -873,14 +833,12 @@ fn check_args_empty(sess: &Session, args: &tokenstream::TokenTree) -> Result<(),
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=check_lhs | COMPLEXITY=2 | LINES=6 */
 
 fn check_lhs(sess: &Session, node_id: NodeId, lhs: &mbe::TokenTree) -> Result<(), ErrorGuaranteed> {
     let e1 = check_lhs_nt_follows(sess, node_id, lhs);
     let e2 = check_lhs_no_empty_seq(sess, slice::from_ref(lhs));
     e1.and(e2)
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=check_lhs_nt_follows | COMPLEXITY=7 | LINES=15 */
 
 fn check_lhs_nt_follows(
     sess: &Session,
@@ -896,7 +854,6 @@ fn check_lhs_nt_follows(
         Err(sess.dcx().span_err(lhs.span(), msg))
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=is_empty_token_tree | COMPLEXITY=26 | LINES=31 */
 
 fn is_empty_token_tree(sess: &Session, seq: &mbe::SequenceRepetition) -> bool {
     if seq.separator.is_some() {
@@ -928,7 +885,6 @@ fn is_empty_token_tree(sess: &Session, seq: &mbe::SequenceRepetition) -> bool {
         is_empty
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=check_redundant_vis_repetition | COMPLEXITY=11 | LINES=31 */
 
 /// Checks if a `vis` nonterminal fragment is unnecessarily wrapped in an optional repetition.
 ///
@@ -960,7 +916,6 @@ fn check_redundant_vis_repetition(
         );
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=check_lhs_no_empty_seq | COMPLEXITY=19 | LINES=27 */
 
 /// Checks that the lhs contains no repetition which could match an empty token
 /// tree, because then the matcher would hang indefinitely.
@@ -988,7 +943,6 @@ fn check_lhs_no_empty_seq(sess: &Session, tts: &[mbe::TokenTree]) -> Result<(), 
 
     Ok(())
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=check_rhs | COMPLEXITY=6 | LINES=7 */
 
 fn check_rhs(sess: &Session, rhs: &mbe::TokenTree) -> Result<(), ErrorGuaranteed> {
     match *rhs {
@@ -996,7 +950,6 @@ fn check_rhs(sess: &Session, rhs: &mbe::TokenTree) -> Result<(), ErrorGuaranteed
         _ => Err(sess.dcx().span_err(rhs.span(), "macro rhs must be delimited")),
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=check_matcher | COMPLEXITY=2 | LINES=11 */
 
 fn check_matcher(
     sess: &Session,
@@ -1008,7 +961,6 @@ fn check_matcher(
     check_matcher_core(sess, node_id, &first_sets, matcher, &empty_suffix)?;
     Ok(())
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=has_compile_error_macro | COMPLEXITY=17 | LINES=23 */
 
 fn has_compile_error_macro(rhs: &mbe::TokenTree) -> bool {
     match rhs {
@@ -1032,7 +984,6 @@ fn has_compile_error_macro(rhs: &mbe::TokenTree) -> bool {
         _ => false,
     }
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=FirstSets | COMPLEXITY=12 | LINES=22 */
 
 // `The FirstSets` for a matcher is a mapping from subsequences in the
 // matcher to the FIRST set for that subsequence.
@@ -1055,7 +1006,6 @@ struct FirstSets<'tt> {
     // use a slow path).
     first: FxHashMap<Span, Option<TokenSet<'tt>>>,
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=new | COMPLEXITY=81 | LINES=141 */
 
 impl<'tt> FirstSets<'tt> {
     fn new(tts: &'tt [mbe::TokenTree]) -> FirstSets<'tt> {
@@ -1197,7 +1147,6 @@ impl<'tt> FirstSets<'tt> {
         first
     }
 }
-/* AST_META: AST_ID=51 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=16 */
 
 // Most `mbe::TokenTree`s are preexisting in the matcher, but some are defined
 // implicitly, such as opening/closing delimiters and sequence repetition ops.
@@ -1214,7 +1163,6 @@ enum TtHandle<'tt> {
     /// `&mbe::TokenTree`.
     Token(mbe::TokenTree),
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=from_token | COMPLEXITY=9 | LINES=18 */
 
 impl<'tt> TtHandle<'tt> {
     fn from_token(tok: Token) -> Self {
@@ -1233,14 +1181,12 @@ impl<'tt> TtHandle<'tt> {
         }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=6 */
 
 impl<'tt> PartialEq for TtHandle<'tt> {
     fn eq(&self, other: &TtHandle<'tt>) -> bool {
         self.get() == other.get()
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=10 | LINES=16 */
 
 impl<'tt> Clone for TtHandle<'tt> {
     fn clone(&self) -> Self {
@@ -1257,7 +1203,6 @@ impl<'tt> Clone for TtHandle<'tt> {
         }
     }
 }
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=8 */
 
 // A set of `mbe::TokenTree`s, which may include `TokenTree::Match`s
 // (for macro-by-example syntactic variables). It also carries the
@@ -1266,9 +1211,7 @@ impl<'tt> Clone for TtHandle<'tt> {
 //
 // The First set is computed on submatchers like `$($a:expr b),* $(c)* d`,
 // which has corresponding FIRST = {$a:expr, c, d}.
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 // Likewise, `$($a:expr b),* $(c)+ d` has FIRST = {$a:expr, c}.
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=TokenSet | COMPLEXITY=4 | LINES=7 */
 //
 // (Notably, we must allow for *-op to occur zero times.)
 #[derive(Clone, Debug)]
@@ -1276,7 +1219,6 @@ struct TokenSet<'tt> {
     tokens: Vec<TtHandle<'tt>>,
     maybe_empty: bool,
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=42 | LINES=62 */
 
 impl<'tt> TokenSet<'tt> {
     // Returns a set for the empty sequence.
@@ -1339,7 +1281,6 @@ impl<'tt> TokenSet<'tt> {
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=check_matcher_core | COMPLEXITY=121 | LINES=216 */
 
 // Checks that `matcher` is internally consistent and that it
 // can legally be followed by a token `N`, for all `N` in `follow`.
@@ -1556,7 +1497,6 @@ fn check_matcher_core<'tt>(
     errored?;
     Ok(last)
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=token_can_be_followed_by_any | COMPLEXITY=7 | LINES=9 */
 
 fn token_can_be_followed_by_any(tok: &mbe::TokenTree) -> bool {
     if let mbe::TokenTree::MetaVarDecl { kind, .. } = *tok {
@@ -1566,7 +1506,6 @@ fn token_can_be_followed_by_any(tok: &mbe::TokenTree) -> bool {
         true
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=frag_can_be_followed_by_any | COMPLEXITY=7 | LINES=13 */
 
 /// Returns `true` if a fragment of type `frag` can be followed by any sort of
 /// token. We use this (among other things) as a useful approximation
@@ -1580,7 +1519,6 @@ fn frag_can_be_followed_by_any(kind: NonterminalKind) -> bool {
     matches!(
         kind,
         NonterminalKind::Item           // always terminated by `}` or `;`
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=is_in_follow | COMPLEXITY=12 | LINES=26 */
         | NonterminalKind::Block        // exactly one token tree
         | NonterminalKind::Ident        // exactly one token tree
         | NonterminalKind::Literal      // exactly one token tree
@@ -1607,14 +1545,12 @@ fn is_in_follow(tok: &mbe::TokenTree, kind: NonterminalKind) -> IsInFollow {
     use mbe::TokenTree;
 
     if let TokenTree::Token(Token { kind, .. }) = tok
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
         && kind.close_delim().is_some()
     {
         // closing a token tree can never be matched by any fragment;
         // iow, we always require that `(` and `)` match, etc.
         IsInFollow::Yes
     } else {
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=84 | LINES=102 */
         match kind {
             NonterminalKind::Item => {
                 // since items *must* be followed by either a `;` or a `}`, we can
@@ -1717,7 +1653,6 @@ fn is_in_follow(tok: &mbe::TokenTree, kind: NonterminalKind) -> IsInFollow {
                 }
             }
         }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=quoted_tt_to_string | COMPLEXITY=10 | LINES=8 */
     }
 }
 
@@ -1726,7 +1661,6 @@ fn quoted_tt_to_string(tt: &mbe::TokenTree) -> String {
         mbe::TokenTree::Token(token) => pprust::token_to_string(token).into(),
         mbe::TokenTree::MetaVar(_, name) => format!("${name}"),
         mbe::TokenTree::MetaVarDecl { name, kind, .. } => format!("${name}:{kind}"),
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=is_defined_in_current_crate | COMPLEXITY=6 | LINES=22 */
         _ => panic!(
             "{}",
             "unexpected mbe::TokenTree::{Sequence or Delimited} \

@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/deref_into_dyn_supertrait.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::supertraits;
 
 use crate::lints::{SupertraitAsDerefTarget, SupertraitAsDerefTargetLabel};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=46 */
 
 declare_lint! {
     /// The `deref_into_dyn_supertrait` lint is emitted whenever there is a `Deref` implementation
@@ -59,7 +53,6 @@ declare_lint! {
     Allow,
     "`Deref` implementation with a supertrait trait object for output is shadowed by trait upcasting",
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=20 | LINES=53 */
 
 declare_lint_pass!(DerefIntoDynSupertrait => [DEREF_INTO_DYN_SUPERTRAIT]);
 

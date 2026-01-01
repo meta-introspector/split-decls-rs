@@ -1,30 +1,21 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, VarAttribute, Visibility};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gccjit::{Function, GlobalKind, LValue, RValue, ToRValue, Type};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{self as abi, Align, HasDataLayout, Primitive, Size, WrappingRange};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, ConstCodegenMethods, StaticCodegenMethods,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::interpret::{
     self, ConstAllocation, ErrorHandled, Scalar as InterpScalar, read_target_uint,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::ty::{self, Instance};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=set_global_alignment | COMPLEXITY=8 | LINES=19 */
 use crate::rustc_complete::def_id::DefId;
 
 use crate::base;
@@ -44,7 +35,6 @@ fn set_global_alignment<'gcc, 'tcx>(
     }
     gv.set_alignment(align.bytes() as i32);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=static_addr_of | COMPLEXITY=60 | LINES=120 */
 
 impl<'gcc, 'tcx> StaticCodegenMethods for CodegenCx<'gcc, 'tcx> {
     fn static_addr_of(&self, cv: RValue<'gcc>, align: Align, kind: Option<&str>) -> RValue<'gcc> {
@@ -165,7 +155,6 @@ impl<'gcc, 'tcx> StaticCodegenMethods for CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=add_used_global | COMPLEXITY=62 | LINES=133 */
 
 impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
     /// Add a global value to a list to be stored in the `llvm.used` variable, an array of i8*.
@@ -299,7 +288,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         global
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=68 */
 /// Converts a given const alloc to a gcc Rvalue, without any caching or deduplication.
 /// YOU SHOULD NOT call this function directly - that may break the semantics of Rust.
 /// Use `const_data_from_alloc` instead.
@@ -368,7 +356,6 @@ pub(crate) fn const_alloc_to_gcc_uncached<'gcc>(
     // FIXME(bjorn3) avoid wrapping in a struct when there is only a single element.
     cx.const_struct(&llvals, true)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=codegen_static_initializer | COMPLEXITY=2 | LINES=8 */
 
 fn codegen_static_initializer<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,
@@ -377,7 +364,6 @@ fn codegen_static_initializer<'gcc, 'tcx>(
     let alloc = cx.tcx.eval_static_initializer(def_id)?;
     Ok((cx.const_data_from_alloc(alloc), alloc))
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=check_and_apply_linkage | COMPLEXITY=21 | LINES=44 */
 
 fn check_and_apply_linkage<'gcc, 'tcx>(
     cx: &CodegenCx<'gcc, 'tcx>,

@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/nrvo.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // See the docs for [`RenameReturnPlace`].
 
 use crate::rustc_complete::Mutability;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BasicBlock, Local, Location};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 /// This pass looks for MIR that always copies the same local into the return place and eliminates
 /// the copy by renaming all uses of that local to `_0`.
@@ -27,7 +23,6 @@ use tracing::{debug, trace};
 ///     init(&mut buf);
 ///     buf
 /// }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=33 | LINES=54 */
 /// ```
 ///
 /// For now, this pass is very simple and only capable of eliminating a single copy. A more general
@@ -82,7 +77,6 @@ impl<'tcx> crate::MirPass<'tcx> for RenameReturnPlace {
         false
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=local_eligible_for_nrvo | COMPLEXITY=30 | LINES=41 */
 
 /// MIR that is eligible for the NRVO must fulfill two conditions:
 ///   1. The return place must not be read prior to the `Return` terminator.
@@ -124,7 +118,6 @@ fn local_eligible_for_nrvo(body: &mir::Body<'_>) -> Option<Local> {
 
     copied_to_return_place
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=find_local_assigned_to_return_place | COMPLEXITY=16 | LINES=22 */
 
 fn find_local_assigned_to_return_place(start: BasicBlock, body: &mir::Body<'_>) -> Option<Local> {
     let mut block = start;
@@ -147,7 +140,6 @@ fn find_local_assigned_to_return_place(start: BasicBlock, body: &mir::Body<'_>) 
 
     None
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=as_local_assigned_to_return_place | COMPLEXITY=11 | LINES=14 */
 
 // If this statement is an assignment of an unprojected local to the return place,
 // return that local.
@@ -162,13 +154,11 @@ fn as_local_assigned_to_return_place(stmt: &mir::Statement<'_>) -> Option<Local>
 
     None
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=RenameToReturnPlace | COMPLEXITY=2 | LINES=5 */
 
 struct RenameToReturnPlace<'tcx> {
     to_rename: Local,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=31 | LINES=47 */
 
 /// Replaces all uses of `self.to_rename` with `_0`.
 impl<'tcx> MutVisitor<'tcx> for RenameToReturnPlace<'tcx> {
@@ -216,7 +206,6 @@ impl<'tcx> MutVisitor<'tcx> for RenameToReturnPlace<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=IsReturnPlaceRead(bool); | COMPLEXITY=3 | LINES=10 */
 
 struct IsReturnPlaceRead(bool);
 
@@ -227,7 +216,6 @@ impl IsReturnPlaceRead {
         vis.0
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=13 | LINES=17 */
 
 impl<'tcx> Visitor<'tcx> for IsReturnPlaceRead {
     fn visit_local(&mut self, l: Local, ctxt: PlaceContext, _: Location) {

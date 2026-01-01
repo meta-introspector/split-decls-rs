@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/hash.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{MetaItem, Mutability};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
 use crate::deriving::{path_std, pathvec_std};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=40 */
 
 pub(crate) fn expand_deriving_hash(
     cx: &ExtCtxt<'_>,
@@ -52,7 +47,6 @@ pub(crate) fn expand_deriving_hash(
 
     hash_trait_def.expand(cx, mitem, item, push);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hash_substructure | COMPLEXITY=13 | LINES=31 */
 
 fn hash_substructure(cx: &ExtCtxt<'_>, trait_span: Span, substr: &Substructure<'_>) -> BlockOrExpr {
     let [state_expr] = substr.nonselflike_args else {

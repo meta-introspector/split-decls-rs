@@ -1,23 +1,16 @@
 // SRC: ../rust/compiler/rustc_lint/src/transmute.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::LitKind;
 use crate::rustc_complete::Applicability;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::LintDiagnostic;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, impl_lint_pass};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::sym;
 
 use crate::lints::{IntegerToPtrTransmutes, IntegerToPtrTransmutesSuggestion};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=34 */
 
 declare_lint! {
     /// The `ptr_to_integer_transmute_in_consts` lint detects pointer to integer
@@ -52,7 +45,6 @@ declare_lint! {
     Warn,
     "detects pointer to integer transmutes in const functions and associated constants",
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=24 */
 
 declare_lint! {
     /// The `unnecessary_transmutes` lint detects transmutations that have safer alternatives.
@@ -77,7 +69,6 @@ declare_lint! {
     Warn,
     "detects transmutes that can also be achieved by other operations"
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=35 */
 
 declare_lint! {
     /// The `integer_to_ptr_transmutes` lint detects integer to pointer
@@ -113,7 +104,6 @@ declare_lint! {
     Warn,
     "detects integer to pointer transmutes",
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=13 | LINES=31 */
 
 pub(crate) struct CheckTransmutes;
 
@@ -145,7 +135,6 @@ impl<'tcx> LateLintPass<'tcx> for CheckTransmutes {
         check_int_to_ptr_transmute(cx, expr, arg, src, dst);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_int_to_ptr_transmute | COMPLEXITY=45 | LINES=58 */
 
 /// Check for transmutes from integer to pointers (*const/*mut and &/&mut).
 ///
@@ -204,7 +193,6 @@ fn check_int_to_ptr_transmute<'tcx>(
         },
     );
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=check_ptr_transmute_in_const | COMPLEXITY=12 | LINES=34 */
 
 /// Check for transmutes that exhibit undefined behavior.
 /// For example, transmuting pointers to integers in a const context.
@@ -239,7 +227,6 @@ fn check_ptr_transmute_in_const<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_unnecessary_transmute | COMPLEXITY=59 | LINES=139 */
 
 /// Check for transmutes that overlap with stdlib methods.
 /// For example, transmuting `[u8; 4]` to `u32`.
@@ -379,7 +366,6 @@ fn check_unnecessary_transmute<'tcx>(
         }
     });
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=1 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_undefined_transmute)]

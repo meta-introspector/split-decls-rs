@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/select/_match.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::infer::relate::{
     self, Relate, RelateResult, TypeRelation, structurally_relate_tys,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, InferConst, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
 use tracing::instrument;
 
 /// A type "A" *matches* "B" if the fresh types in B could be
@@ -29,14 +25,12 @@ use tracing::instrument;
 pub(crate) struct MatchAgainstFreshVars<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> MatchAgainstFreshVars<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>) -> MatchAgainstFreshVars<'tcx> {
         MatchAgainstFreshVars { tcx }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=32 | LINES=85 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for MatchAgainstFreshVars<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

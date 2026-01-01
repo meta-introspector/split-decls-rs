@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/checks.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Contains checks that must be run to validate matches before performing usefulness analysis.
 
 use crate::constructor::Constructor::*;
 use crate::pat_column::PatternColumn;
 use crate::{MatchArm, PatCx};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 
 /// Validate that deref patterns and normal constructors aren't used to match on the same place.
 pub(crate) fn detect_mixed_deref_pat_ctors<'p, Cx: PatCx>(
@@ -15,7 +13,6 @@ pub(crate) fn detect_mixed_deref_pat_ctors<'p, Cx: PatCx>(
     let pat_column = PatternColumn::new(arms);
     detect_mixed_deref_pat_ctors_inner(cx, &pat_column)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=detect_mixed_deref_pat_ctors_inner | COMPLEXITY=24 | LINES=36 */
 
 fn detect_mixed_deref_pat_ctors_inner<'p, Cx: PatCx>(
     cx: &Cx,

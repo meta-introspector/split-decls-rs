@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::ops::ControlFlow;
 use std::sync::Arc;
 
@@ -9,20 +8,14 @@ use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{HirId, Target, find_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::errors::report_lit_error;
 use crate::rustc_complete::source_map::{Spanned, respan};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use visit::{Visitor, walk_expr};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use super::errors::{
     AsyncCoroutinesNotSupported, AwaitOnlyInAsyncFnAndBlocks, ClosureCannotBeStatic,
@@ -30,18 +23,13 @@ use super::errors::{
     InclusiveRangeWithNoEnd, MatchArmWithNoBody, NeverPatternWithBody, NeverPatternWithGuard,
     UnderscoreExprLhsAssign,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use super::{
     GenericArgsMode, ImplTraitContext, LoweringContext, ParamMode, ResolverAstLoweringExt,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{InvalidLegacyConstGenericArg, UseConstGenericArg, YieldInClosure};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AllowReturnTypeNotation, FnDeclKind, ImplTraitPosition, fluent_generated};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=WillCreateDefIdsVisitor | COMPLEXITY=2 | LINES=2 */
 
 struct WillCreateDefIdsVisitor {}
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_anon_const | COMPLEXITY=13 | LINES=21 */
 
 impl<'v> crate::rustc_ast::visit::Visitor<'v> for WillCreateDefIdsVisitor {
     type Result = ControlFlow<Span>;
@@ -63,7 +51,6 @@ impl<'v> crate::rustc_ast::visit::Visitor<'v> for WillCreateDefIdsVisitor {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=lower_exprs | COMPLEXITY=886 | LINES=2267 */
 
 impl<'hir> LoweringContext<'_, 'hir> {
     fn lower_exprs(&mut self, exprs: &[Box<Expr>]) -> &'hir [hir::Expr<'hir>] {
@@ -2331,7 +2318,6 @@ impl<'hir> LoweringContext<'_, 'hir> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// Used by [`LoweringContext::make_lowered_await`] to customize the desugaring based on what kind
 /// of future we are awaiting.

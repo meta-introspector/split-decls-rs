@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/outlives.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // The outlives relation `T: 'a` or `'a: 'b`. This code frequently
 // refers to rules defined in RFC 1214 (`OutlivesFooBar`), so see that
 // RFC for reference.
 
 use derive_where::derive_where;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::data_structures::SsoHashSet;
 use crate::inherent::*;
 use crate::visit::{TypeSuperVisitable, TypeVisitable, TypeVisitableExt as _, TypeVisitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=41 */
 
 #[derive_where(Debug; I: Interner)]
 pub enum Component<I: Interner> {
@@ -55,7 +51,6 @@ pub enum Component<I: Interner> {
     // the future without breaking backwards compat.
     EscapingAlias(Vec<Component<I>>),
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=push_outlives_components | COMPLEXITY=5 | LINES=10 */
 
 /// Push onto `out` all the things that must outlive `'a` for the condition
 /// `ty0: 'a` to hold. Note that `ty0` must be a **fully resolved type**.
@@ -66,14 +61,12 @@ pub fn push_outlives_components<I: Interner>(
 ) {
     ty.visit_with(&mut OutlivesCollector { cx, out, visited: Default::default() });
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OutlivesCollector | COMPLEXITY=2 | LINES=6 */
 
 struct OutlivesCollector<'a, I: Interner> {
     cx: I,
     out: &'a mut SmallVec<[Component<I>; 4]>,
     visited: SsoHashSet<I::Ty>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=65 | LINES=150 */
 
 impl<I: Interner> TypeVisitor<I> for OutlivesCollector<'_, I> {
     #[cfg(not(feature = "nightly"))]
@@ -224,7 +217,6 @@ impl<I: Interner> TypeVisitor<I> for OutlivesCollector<'_, I> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=compute_alias_components_recursive | COMPLEXITY=12 | LINES=22 */
 
 /// Collect [Component]s for *all* the args of `alias_ty`.
 ///

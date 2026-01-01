@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/inline.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // Inlining pass for MIR functions.
 
 use std::assert_matches::debug_assert_matches;
 use std::iter;
 use std::ops::{Range, RangeFrom};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{ExternAbi, FieldIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{InlineAttr, OptimizeAttr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_index::Idx;
@@ -20,20 +16,15 @@ use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Instance, InstanceKind, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{DebugInfo, OptLevel};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument, trace, trace_span};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::cost_checker::{CostChecker, is_call_like};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::deref_separator::deref_finder;
 use crate::simplify::simplify_cfg;
 use crate::validate::validate_types;
 use crate::{check_inline, util};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CallSite | COMPLEXITY=2 | LINES=13 */
 
 
 const HISTORY_DEPTH_LIMIT: usize = 20;
@@ -46,7 +37,6 @@ struct CallSite<'tcx> {
     block: BasicBlock,
     source_info: SourceInfo,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=Inline; | COMPLEXITY=21 | LINES=35 */
 
 // Made public so that `mir_drops_elaborated_and_const_checked` can be overridden
 // by custom rustc drivers, running all the steps by themselves. See #114628.
@@ -82,7 +72,6 @@ impl<'tcx> crate::MirPass<'tcx> for Inline {
         false
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=ForceInline; | COMPLEXITY=4 | LINES=8 */
 
 pub struct ForceInline;
 
@@ -91,7 +80,6 @@ impl ForceInline {
         matches!(tcx.codegen_fn_attrs(def_id).inline, InlineAttr::Force { .. })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=13 | LINES=24 */
 
 impl<'tcx> crate::MirPass<'tcx> for ForceInline {
     fn is_enabled(&self, _: &crate::rustc_session::Session) -> bool {
@@ -116,7 +104,6 @@ impl<'tcx> crate::MirPass<'tcx> for ForceInline {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=42 */
 
 trait Inliner<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def_id: DefId, body: &Body<'tcx>) -> Self;
@@ -159,7 +146,6 @@ trait Inliner<'tcx> {
     /// Called when inlining failed or was not performed.
     fn on_inline_failure(&self, callsite: &CallSite<'tcx>, reason: &'static str);
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=ForceInliner | COMPLEXITY=7 | LINES=15 */
 
 struct ForceInliner<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -175,7 +161,6 @@ struct ForceInliner<'tcx> {
     /// Indicates that the caller body has been modified.
     changed: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=41 | LINES=105 */
 
 impl<'tcx> Inliner<'tcx> for ForceInliner<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def_id: DefId, body: &Body<'tcx>) -> Self {
@@ -281,7 +266,6 @@ impl<'tcx> Inliner<'tcx> for ForceInliner<'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=NormalInliner | COMPLEXITY=9 | LINES=22 */
 
 struct NormalInliner<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -304,14 +288,12 @@ struct NormalInliner<'tcx> {
     /// and thus we can inline less into it as it'll be inlined itself.
     caller_is_inline_forwarder: bool,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=past_depth_limit | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> NormalInliner<'tcx> {
     fn past_depth_limit(&self) -> bool {
         self.history.len() > HISTORY_DEPTH_LIMIT || self.top_down_counter > TOP_DOWN_DEPTH_LIMIT
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=107 | LINES=198 */
 
 impl<'tcx> Inliner<'tcx> for NormalInliner<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def_id: DefId, body: &Body<'tcx>) -> Self {
@@ -510,7 +492,6 @@ impl<'tcx> Inliner<'tcx> for NormalInliner<'tcx> {
 
     fn on_inline_failure(&self, _: &CallSite<'tcx>, _: &'static str) {}
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=inline | COMPLEXITY=9 | LINES=18 */
 
 fn inline<'tcx, T: Inliner<'tcx>>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> bool {
     let def_id = body.source.def_id();
@@ -529,7 +510,6 @@ fn inline<'tcx, T: Inliner<'tcx>>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> b
     process_blocks(&mut inliner, body, blocks);
     inliner.changed()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=process_blocks | COMPLEXITY=19 | LINES=31 */
 
 fn process_blocks<'tcx, I: Inliner<'tcx>>(
     inliner: &mut I,
@@ -561,7 +541,6 @@ fn process_blocks<'tcx, I: Inliner<'tcx>>(
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=resolve_callsite | COMPLEXITY=28 | LINES=53 */
 
 fn resolve_callsite<'tcx, I: Inliner<'tcx>>(
     inliner: &I,
@@ -615,7 +594,6 @@ fn resolve_callsite<'tcx, I: Inliner<'tcx>>(
 
     None
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=try_inlining | COMPLEXITY=51 | LINES=103 */
 
 /// Attempts to inline a callsite into the caller body. When successful returns basic blocks
 /// containing the inlined body. Otherwise returns an error describing why inlining didn't take
@@ -719,7 +697,6 @@ fn try_inlining<'tcx, I: Inliner<'tcx>>(
 
     Ok(new_blocks)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=check_mir_is_available | COMPLEXITY=55 | LINES=96 */
 
 fn check_mir_is_available<'tcx, I: Inliner<'tcx>>(
     inliner: &I,
@@ -816,7 +793,6 @@ fn check_mir_is_available<'tcx, I: Inliner<'tcx>>(
         Ok(())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=check_codegen_attributes | COMPLEXITY=30 | LINES=53 */
 
 /// Returns an error if inlining is not possible based on codegen attributes alone. A success
 /// indicates that inlining decision should be based on other criteria.
@@ -870,7 +846,6 @@ fn check_codegen_attributes<'tcx, I: Inliner<'tcx>>(
 
     Ok(())
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=inline_call | COMPLEXITY=84 | LINES=182 */
 
 fn inline_call<'tcx, I: Inliner<'tcx>>(
     inliner: &I,
@@ -1053,7 +1028,6 @@ fn inline_call<'tcx, I: Inliner<'tcx>>(
         // took its items.
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=make_call_args | COMPLEXITY=22 | LINES=77 */
 
 fn make_call_args<'tcx, I: Inliner<'tcx>>(
     inliner: &I,
@@ -1131,7 +1105,6 @@ fn make_call_args<'tcx, I: Inliner<'tcx>>(
             .collect()
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=create_temp_if_necessary | COMPLEXITY=14 | LINES=28 */
 
 /// If `arg` is already a temporary, returns it. Otherwise, introduces a fresh temporary `T` and an
 /// instruction `T = arg`, and returns `T`.
@@ -1160,7 +1133,6 @@ fn create_temp_if_necessary<'tcx, I: Inliner<'tcx>>(
     ));
     local
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=new_call_temp | COMPLEXITY=8 | LINES=22 */
 
 /// Introduces a new temporary into the caller body that is live for the duration of the call.
 fn new_call_temp<'tcx>(
@@ -1183,7 +1155,6 @@ fn new_call_temp<'tcx>(
 
     local
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=Integrator | COMPLEXITY=3 | LINES=22 */
 
 /**
  * Integrator.
@@ -1206,7 +1177,6 @@ struct Integrator<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     always_live_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=map_local | COMPLEXITY=35 | LINES=47 */
 
 impl Integrator<'_, '_> {
     fn map_local(&self, local: Local) -> Local {
@@ -1254,7 +1224,6 @@ impl Integrator<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=89 | LINES=133 */
 
 impl<'tcx> MutVisitor<'tcx> for Integrator<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -1388,7 +1357,6 @@ impl<'tcx> MutVisitor<'tcx> for Integrator<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=try_instance_mir | COMPLEXITY=14 | LINES=20 */
 
 #[instrument(skip(tcx), level = "debug")]
 fn try_instance_mir<'tcx>(
@@ -1409,7 +1377,6 @@ fn try_instance_mir<'tcx>(
     }
     Ok(tcx.instance_mir(instance))
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=body_is_forwarder | COMPLEXITY=21 | LINES=34 */
 
 fn body_is_forwarder(body: &Body<'_>) -> bool {
     let TerminatorKind::Call { target, .. } = body.basic_blocks[START_BLOCK].terminator().kind

@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 use crate::rustc_complete::Span;
 
 use crate::error_reporting::TypeErrCtxt;
@@ -14,7 +11,6 @@ use crate::infer::RegionResolutionError;
 pub use different_lifetimes::suggest_adding_lifetime_params;
 pub use find_anon_type::find_anon_type;
 pub use static_impl_trait::{HirTraitObjectVisitor, TraitObjectVisitor, suggest_new_region_bound};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_report_nice_region_error | COMPLEXITY=3 | LINES=11 */
 pub use util::find_param_with_region;
 
 impl<'cx, 'tcx> TypeErrCtxt<'cx, 'tcx> {
@@ -26,7 +22,6 @@ impl<'cx, 'tcx> TypeErrCtxt<'cx, 'tcx> {
         NiceRegionError::new(self, generic_param_scope, error.clone()).try_report()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=NiceRegionError | COMPLEXITY=2 | LINES=9 */
 
 pub struct NiceRegionError<'cx, 'tcx> {
     cx: &'cx TypeErrCtxt<'cx, 'tcx>,
@@ -36,7 +31,6 @@ pub struct NiceRegionError<'cx, 'tcx> {
     error: Option<RegionResolutionError<'tcx>>,
     regions: Option<(Span, ty::Region<'tcx>, ty::Region<'tcx>)>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=20 | LINES=54 */
 
 impl<'cx, 'tcx> NiceRegionError<'cx, 'tcx> {
     pub fn new(

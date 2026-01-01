@@ -1,58 +1,40 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/base.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cmp;
 use std::collections::BTreeSet;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use itertools::Itertools;
 use crate::rustc_abi::FIRST_VARIANT;
 use rustc_ast as ast;
 use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::profiling::{get_resident_set_size, print_time_passes_entry};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{IntoDynSyncSend, par_map};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::attrs::OptimizeAttr;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{ItemId, Target};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::dependency_format::Dependencies;
 use crate::rustc_complete::middle::exported_symbols::{self, SymbolExportKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::middle::lang_items;
 use crate::rustc_complete::mir::BinOp;
 use crate::rustc_complete::mir::interpret::ErrorHandled;
 use crate::rustc_complete::mir::mono::{CodegenUnit, CodegenUnitNameBuilder, MonoItem, MonoItemPartitions};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{self, CrateType, EntryFnType};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_symbol_mangling::mangle_internal_symbol;
 use crate::rustc_trait_selection::infer::{BoundRegionConversionTime, TyCtxtInferExt};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::assert_module_sources::CguReuse;
 use crate::back::link::are_upstream_rust_objects_already_included;
@@ -60,9 +42,7 @@ use crate::back::write::{
     ComputedLtoType, OngoingCodegen, compute_per_cgu_lto_type, start_async_codegen,
     submit_codegened_module_to_llvm, submit_post_lto_module_to_llvm, submit_pre_lto_module_to_llvm,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{self, IntPredicate, RealPredicate, TypeKind};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::meth::load_vtable;
 use crate::mir::operand::OperandValue;
 use crate::mir::place::PlaceRef;
@@ -70,7 +50,6 @@ use crate::traits::*;
 use crate::{
     CachedModuleCodegen, CodegenLintLevels, CrateInfo, ModuleCodegen, ModuleKind, errors, meth, mir,
 };
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 
 pub(crate) fn bin_op_to_icmp_predicate(op: BinOp, signed: bool) -> IntPredicate {
     match (op, signed) {
@@ -87,7 +66,6 @@ pub(crate) fn bin_op_to_icmp_predicate(op: BinOp, signed: bool) -> IntPredicate 
         op => bug!("bin_op_to_icmp_predicate: expected comparison operator, found {:?}", op),
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 pub(crate) fn bin_op_to_fcmp_predicate(op: BinOp) -> RealPredicate {
     match op {
@@ -100,7 +78,6 @@ pub(crate) fn bin_op_to_fcmp_predicate(op: BinOp) -> RealPredicate {
         op => bug!("bin_op_to_fcmp_predicate: expected comparison operator, found {:?}", op),
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=compare_simd_types | COMPLEXITY=10 | LINES=28 */
 
 pub fn compare_simd_types<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -129,7 +106,6 @@ pub fn compare_simd_types<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     // by the target architecture.
     bx.sext(cmp, ret_ty)
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=validate_trivial_unsize | COMPLEXITY=17 | LINES=44 */
 
 /// Codegen takes advantage of the additional assumption, where if the
 /// principal trait def id of what's being casted doesn't change,
@@ -174,7 +150,6 @@ pub fn validate_trivial_unsize<'tcx>(
         _ => false,
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=unsized_info | COMPLEXITY=36 | LINES=68 */
 
 /// Retrieves the information we are losing (making dynamic) in an unsizing
 /// adjustment.
@@ -243,7 +218,6 @@ fn unsized_info<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         _ => bug!("unsized_info: invalid unsizing {:?} -> {:?}", source, target),
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=45 */
 
 /// Coerces `src` to `dst_ty`. `src_ty` must be a pointer.
 pub(crate) fn unsize_ptr<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
@@ -289,7 +263,6 @@ pub(crate) fn unsize_ptr<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         _ => bug!("unsize_ptr: called on bad types"),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=42 */
 
 /// Coerces `src`, which is a reference to a value of type `src_ty`,
 /// to a value of type `dst_ty`, and stores the result in `dst`.
@@ -332,7 +305,6 @@ pub(crate) fn coerce_unsized_into<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         _ => bug!("coerce_unsized_into: invalid coercion {:?} -> {:?}", src_ty, dst_ty,),
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=54 */
 
 /// Returns `rhs` sufficiently masked, truncated, and/or extended so that it can be used to shift
 /// `lhs`: it has the same size as `lhs`, and the value, when interpreted unsigned (no matter its
@@ -387,7 +359,6 @@ pub(crate) fn build_shift_expr_rhs<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         rhs
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=wants_wasm_eh | COMPLEXITY=4 | LINES=8 */
 
 // Returns `true` if this session's target will use native wasm
 // exceptions. This means that the VM does the unwinding for
@@ -396,7 +367,6 @@ pub fn wants_wasm_eh(sess: &Session) -> bool {
     sess.target.is_like_wasm
         && (sess.target.os != "emscripten" || sess.opts.unstable_opts.emscripten_wasm_eh)
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=wants_msvc_seh | COMPLEXITY=6 | LINES=9 */
 
 /// Returns `true` if this session's target will use SEH-based unwinding.
 ///
@@ -406,7 +376,6 @@ pub fn wants_wasm_eh(sess: &Session) -> bool {
 pub fn wants_msvc_seh(sess: &Session) -> bool {
     sess.target.is_like_msvc
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Returns `true` if this session's target requires the new exception
 /// handling LLVM IR instructions (catchpad / cleanuppad / ... instead
@@ -414,7 +383,6 @@ pub fn wants_msvc_seh(sess: &Session) -> bool {
 pub(crate) fn wants_new_eh_instructions(sess: &Session) -> bool {
     wants_wasm_eh(sess) || wants_msvc_seh(sess)
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn codegen_instance<'a, 'tcx: 'a, Bx: BuilderMethods<'a, 'tcx>>(
     cx: &'a Bx::CodegenCx,
@@ -427,7 +395,6 @@ pub(crate) fn codegen_instance<'a, 'tcx: 'a, Bx: BuilderMethods<'a, 'tcx>>(
 
     mir::codegen_mir::<Bx>(cx, instance);
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=codegen_global_asm | COMPLEXITY=52 | LINES=69 */
 
 pub fn codegen_global_asm<'tcx, Cx>(cx: &mut Cx, item_id: ItemId)
 where
@@ -497,7 +464,6 @@ where
         span_bug!(item.span, "Mismatch between hir::Item type and MonoItem type")
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=maybe_create_entry_wrapper | COMPLEXITY=37 | LINES=107 */
 
 /// Creates the `main` function which will initialize the rust runtime and call
 /// users main function.
@@ -605,7 +571,6 @@ pub fn maybe_create_entry_wrapper<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         llfn
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=get_argc_argv | COMPLEXITY=15 | LINES=30 */
 
 /// Obtain the `argc` and `argv` values to pass to the rust start function
 /// (i.e., the "start" lang item).
@@ -636,7 +601,6 @@ fn get_argc_argv<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(bx: &mut Bx) -> (Bx::Va
         (arg_argc, arg_argv)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=collect_debugger_visualizers_transitive | COMPLEXITY=9 | LINES=23 */
 
 /// This function returns all of the debugger visualizers specified for the
 /// current crate as well as all upstream crates transitively that match the
@@ -660,7 +624,6 @@ pub fn collect_debugger_visualizers_transitive(
         .cloned()
         .collect::<BTreeSet<_>>()
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=allocator_kind_for_codegen | COMPLEXITY=17 | LINES=20 */
 
 /// Decide allocator kind to codegen. If `Some(_)` this will be the same as
 /// `tcx.allocator_kind`, but it may be `None` in more cases (e.g. if using
@@ -681,7 +644,6 @@ pub fn allocator_kind_for_codegen(tcx: TyCtxt<'_>) -> Option<AllocatorKind> {
     });
     if all_crate_types_any_dynamic_crate { None } else { tcx.allocator_kind(()) }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 /// Decide if this particular crate type needs an allocator shim linked in.
 /// This may return true even when allocator_kind_for_codegen returns false. In
@@ -695,7 +657,6 @@ pub(crate) fn needs_allocator_shim_for_linking(
         dependency_formats[&crate_type].iter().any(|&linkage| linkage == Linkage::Dynamic);
     !any_dynamic_crate
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=codegen_crate | COMPLEXITY=78 | LINES=195 */
 
 pub fn codegen_crate<B: ExtraBackendMethods>(
     backend: B,
@@ -891,7 +852,6 @@ pub fn codegen_crate<B: ExtraBackendMethods>(
     ongoing_codegen.check_for_errors(tcx.sess);
     ongoing_codegen
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=is_call_from_compiler_builtins_to_upstream_monomorphization | COMPLEXITY=11 | LINES=28 */
 
 /// Returns whether a call from the current crate to the [`Instance`] would produce a call
 /// from `compiler_builtins` to a symbol the linker must resolve.
@@ -920,7 +880,6 @@ pub fn is_call_from_compiler_builtins_to_upstream_monomorphization<'tcx>(
         && !is_llvm_intrinsic(tcx, def_id)
         && !tcx.should_codegen_locally(instance)
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=new | COMPLEXITY=87 | LINES=181 */
 
 impl CrateInfo {
     pub fn new(tcx: TyCtxt<'_>, target_cpu: String) -> CrateInfo {
@@ -1102,7 +1061,6 @@ impl CrateInfo {
         info
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=35 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.backend_optimization_level = |tcx, cratenum| {
@@ -1138,7 +1096,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         tcx.sess.opts.optimize
     };
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=determine_cgu_reuse | COMPLEXITY=27 | LINES=44 */
 
 pub fn determine_cgu_reuse<'tcx>(tcx: TyCtxt<'tcx>, cgu: &CodegenUnit<'tcx>) -> CguReuse {
     if !tcx.dep_graph.is_fully_enabled() {

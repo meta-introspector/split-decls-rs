@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/util/caller_location.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use crate::const_eval::{CanAccessMutGlobal, CompileTimeInterpCx, mk_eval_cx_to_read_const_val};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=alloc_caller_location | COMPLEXITY=23 | LINES=45 */
 use crate::interpret::*;
 
 /// Allocate a `const core::panic::Location` with the provided filename and line/column numbers.
@@ -56,7 +52,6 @@ fn alloc_caller_location<'tcx>(
 
     location
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
 
 pub(crate) fn const_caller_location_provider(
     tcx: TyCtxt<'_>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/constraints.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
 use crate::rustc_complete::ty::RegionVid;
 use crate::rustc_mir_dataflow::points::PointIndex;
 
@@ -26,7 +25,6 @@ pub(crate) struct LocalizedOutlivesConstraint {
     pub target: RegionVid,
     pub to: PointIndex,
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// A container of [LocalizedOutlivesConstraint]s that can be turned into a traversable
 /// `rustc_data_structures` graph.
@@ -34,7 +32,6 @@ pub(crate) struct LocalizedOutlivesConstraint {
 pub(crate) struct LocalizedOutlivesConstraintSet {
     pub outlives: Vec<LocalizedOutlivesConstraint>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 impl LocalizedOutlivesConstraintSet {
     pub(crate) fn push(&mut self, constraint: LocalizedOutlivesConstraint) {

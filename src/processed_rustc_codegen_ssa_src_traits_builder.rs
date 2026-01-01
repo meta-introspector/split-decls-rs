@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/builder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::assert_matches;
 use std::ops::Deref;
 
 use crate::rustc_abi::{Align, Scalar, Size, WrappingRange};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{AtomicOrdering, Instance, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::Span;
 use crate::rustc_target::callconv::FnAbi;
@@ -22,16 +18,11 @@ use super::debuginfo::DebugInfoBuilderMethods;
 use super::intrinsic::IntrinsicCallBuilderMethods;
 use super::misc::MiscCodegenMethods;
 use super::type_::{ArgAbiBuilderMethods, BaseTypeCodegenMethods, LayoutTypeCodegenMethods};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{CodegenMethods, StaticBuilderMethods};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::MemFlags;
 use crate::common::{AtomicRmwBinOp, IntPredicate, RealPredicate, SynchronizationScope, TypeKind};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum OverflowOp {
@@ -39,7 +30,6 @@ pub enum OverflowOp {
     Sub,
     Mul,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=build | COMPLEXITY=161 | LINES=585 */
 
 pub trait BuilderMethods<'a, 'tcx>:
     Sized

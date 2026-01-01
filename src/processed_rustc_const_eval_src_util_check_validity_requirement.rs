@@ -1,21 +1,14 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/util/check_validity_requirement.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{BackendRepr, FieldsShape, Scalar, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::layout::{
     HasTyCtxt, LayoutCx, LayoutError, LayoutOf, TyAndLayout, ValidityRequirement,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::DUMMY_SP;
 
 use crate::const_eval::{CanAccessMutGlobal, CheckAlignment, CompileTimeMachine};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::interpret::{InterpCx, MemoryKind};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_validity_requirement | COMPLEXITY=15 | LINES=32 */
 
 /// Determines if this type permits "raw" initialization by just transmuting some memory into an
 /// instance of `T`.
@@ -48,7 +41,6 @@ pub fn check_validity_requirement<'tcx>(
         check_validity_requirement_lax(layout, &layout_cx, kind)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_validity_requirement_strict | COMPLEXITY=15 | LINES=38 */
 
 /// Implements the 'strict' version of the [`check_validity_requirement`] checks; see that function
 /// for details.
@@ -87,7 +79,6 @@ fn check_validity_requirement_strict<'tcx>(
     .discard_err()
     .is_some()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_validity_requirement_lax | COMPLEXITY=72 | LINES=92 */
 
 /// Implements the 'lax' (default) version of the [`check_validity_requirement`] checks; see that
 /// function for details.
@@ -180,7 +171,6 @@ fn check_validity_requirement_lax<'tcx>(
 
     Ok(true)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=29 */
 
 pub(crate) fn validate_scalar_in_layout<'tcx>(
     tcx: TyCtxt<'tcx>,

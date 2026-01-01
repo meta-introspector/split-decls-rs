@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/interface.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::borrow::Cow;
 
 use rustc_ast as ast;
 use crate::rustc_complete::NodeId;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_feature::{AttributeTemplate, Features};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::lints::AttributeLint;
 use crate::rustc_complete::{AttrArgs, AttrItem, AttrPath, Attribute, HashIgnoredAttrId, Target};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::context::{AcceptContext, FinalizeContext, SharedContext, Stage};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::parser::{ArgParser, MetaItemParser, PathParser};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Early, Late, OmitDoc, ShouldEmit};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AttributeParser | COMPLEXITY=7 | LINES=14 */
 
 /// Context created once, for example as part of the ast lowering
 /// context, through which all attributes can be lowered.
@@ -35,7 +28,6 @@ pub struct AttributeParser<'sess, S: Stage = Late> {
     /// Used in cases where we want the lowering infrastructure for parse just a single attribute.
     parse_only: Option<Symbol>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_limited | COMPLEXITY=25 | LINES=126 */
 
 impl<'sess> AttributeParser<'sess, Early> {
     /// This method allows you to parse attributes *before* you have access to features or tools.
@@ -162,7 +154,6 @@ impl<'sess> AttributeParser<'sess, Early> {
         parse_fn(&mut cx, args)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=99 | LINES=208 */
 
 impl<'sess, S: Stage> AttributeParser<'sess, S> {
     pub fn new(

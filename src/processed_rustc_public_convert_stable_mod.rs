@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/stable/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=22 */
 // Conversion of internal Rust compiler items to stable ones.
 
 use crate::rustc_abi::FieldIdx;
@@ -19,7 +18,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_hir::Safety {
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Stable<'tcx> for FieldIdx {
     type T = usize;
@@ -27,7 +25,6 @@ impl<'tcx> Stable<'tcx> for FieldIdx {
         self.as_usize()
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=10 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineSource {
     type T = crate::mir::CoroutineSource;
@@ -40,7 +37,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineSource {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=34 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineKind {
     type T = crate::mir::CoroutineKind;
@@ -75,7 +71,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineKind {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_span::Symbol {
     type T = crate::Symbol;
@@ -84,7 +79,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_span::Symbol {
         self.to_string()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_span::Span {
     type T = crate::ty::Span;

@@ -1,17 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{self, Command};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::atomic::{AtomicBool, Ordering};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fs, io};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::path::{Dirs, RelPath};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::shared_utils::rustflags_to_cmd_env;
 
 #[derive(Clone, Debug)]
@@ -24,7 +18,6 @@ pub(crate) struct Compiler {
     pub(crate) triple: String,
     pub(crate) runner: Vec<String>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=56 */
 
 impl Compiler {
     pub(crate) fn set_cross_linker_and_runner(&mut self) {
@@ -81,13 +74,11 @@ impl Compiler {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct CargoProject {
     source: &'static RelPath,
     target: &'static str,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=base_cmd | COMPLEXITY=26 | LINES=79 */
 
 impl CargoProject {
     pub(crate) const fn new(path: &'static RelPath, target: &'static str) -> CargoProject {
@@ -167,7 +158,6 @@ impl CargoProject {
         self.build_cmd("run", compiler, dirs)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 #[track_caller]
 pub(crate) fn try_hard_link(src: impl AsRef<Path>, dst: impl AsRef<Path>) {
@@ -177,7 +167,6 @@ pub(crate) fn try_hard_link(src: impl AsRef<Path>, dst: impl AsRef<Path>) {
         fs::copy(src, dst).unwrap(); // Fallback to copying if hardlinking failed
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 #[track_caller]
 pub(crate) fn spawn_and_wait(mut cmd: Command) {
@@ -187,7 +176,6 @@ pub(crate) fn spawn_and_wait(mut cmd: Command) {
         process::exit(1);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=43 | LINES=30 */
 
 /// Create the specified directory if it doesn't exist yet and delete all contents.
 pub(crate) fn ensure_empty_dir(path: &Path) {
@@ -218,7 +206,6 @@ pub(crate) fn ensure_empty_dir(path: &Path) {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=18 */
 
 pub(crate) fn copy_dir_recursively(from: &Path, to: &Path) {
     for entry in fs::read_dir(from).unwrap() {
@@ -237,13 +224,11 @@ pub(crate) fn copy_dir_recursively(from: &Path, to: &Path) {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 static IN_GROUP: AtomicBool = AtomicBool::new(false);
 pub(crate) struct LogGroup {
     is_gha: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 impl LogGroup {
     pub(crate) fn guard(name: &str) -> LogGroup {
@@ -257,7 +242,6 @@ impl LogGroup {
         LogGroup { is_gha }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=8 | LINES=9 */
 
 impl Drop for LogGroup {
     fn drop(&mut self) {

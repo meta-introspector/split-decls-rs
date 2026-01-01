@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_fluent_macro/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[allow(rustc::default_hash_types)]
@@ -21,17 +20,14 @@ use proc_macro::TokenStream;
 ///
 /// ```ignore (rust)
 /// fluent_messages! { "./typeck.ftl" }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 /// ```
 /// ..where `typeck.ftl` has the following contents..
 ///
 /// ```fluent
 /// typeck_field_multiply_specified_in_initializer =
 ///     field `{$ident}` specified more than once
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 ///     .label = used more than once
 ///     .label_previous_use = first use of `{$ident}`
-/* AST_META: AST_ID=4 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 /// ```
 /// ...then the macro parse the Fluent resource, emitting a diagnostic if it fails to do so, and
 /// will generate the following code:
@@ -50,7 +46,6 @@ use proc_macro::TokenStream;
 ///             );
 ///     }
 /// }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fluent_messages | COMPLEXITY=3 | LINES=23 */
 /// ```
 /// When emitting a diagnostic, the generated constants can be used as follows:
 ///

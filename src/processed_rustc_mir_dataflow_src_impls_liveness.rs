@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/impls/liveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::{
     self, CallReturnPlaces, Local, Location, Place, StatementKind, TerminatorEdges,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{Analysis, Backward, GenKill};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=MaybeLiveLocals; | COMPLEXITY=24 | LINES=75 */
 
 /// A [live-variable dataflow analysis][liveness].
 ///
@@ -85,7 +81,6 @@ impl<'tcx> Analysis<'tcx> for MaybeLiveLocals {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=TransferFunction | COMPLEXITY=24 | LINES=36 */
 
 pub struct TransferFunction<'a>(pub &'a mut DenseBitSet<Local>);
 
@@ -122,7 +117,6 @@ impl<'tcx> Visitor<'tcx> for TransferFunction<'_> {
         DefUse::apply(self.0, local.into(), context);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=YieldResumeEffect | COMPLEXITY=6 | LINES=13 */
 
 struct YieldResumeEffect<'a>(&'a mut DenseBitSet<Local>);
 
@@ -136,7 +130,6 @@ impl<'tcx> Visitor<'tcx> for YieldResumeEffect<'_> {
         DefUse::apply(self.0, local.into(), context);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Eq, PartialEq, Clone)]
 pub enum DefUse {
@@ -149,7 +142,6 @@ pub enum DefUse {
     /// Non-use, like debuginfo.
     NonUse,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=apply | COMPLEXITY=31 | LINES=61 */
 
 impl DefUse {
     fn apply(state: &mut DenseBitSet<Local>, place: Place<'_>, context: PlaceContext) {
@@ -211,7 +203,6 @@ impl DefUse {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=MaybeTransitiveLiveLocals | COMPLEXITY=6 | LINES=9 */
 
 /// Like `MaybeLiveLocals`, but does not mark locals as live if they are used in a dead assignment.
 ///
@@ -221,7 +212,6 @@ impl DefUse {
 pub struct MaybeTransitiveLiveLocals<'a> {
     always_live: &'a DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=10 */
 
 impl<'a> MaybeTransitiveLiveLocals<'a> {
     /// The `always_alive` set is the set of locals to which all stores should unconditionally be
@@ -232,7 +222,6 @@ impl<'a> MaybeTransitiveLiveLocals<'a> {
         MaybeTransitiveLiveLocals { always_live }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=37 | LINES=83 */
 
 impl<'a, 'tcx> Analysis<'tcx> for MaybeTransitiveLiveLocals<'a> {
     type Domain = DenseBitSet<Local>;

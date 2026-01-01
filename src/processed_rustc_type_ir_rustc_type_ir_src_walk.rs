@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/walk.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // An iterator over the type substructure.
 // WARNING: this does not keep track of the region depth.
 
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use tracing::debug;
 
 use crate::data_structures::SsoHashSet;
 use crate::inherent::*;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=TypeWalker | COMPLEXITY=5 | LINES=18 */
 
 // The TypeWalker's stack is hot enough that it's worth going to some effort to
 // avoid heap allocations.
@@ -29,7 +26,6 @@ pub struct TypeWalker<I: Interner> {
     last_subtree: usize,
     pub visited: SsoHashSet<I::GenericArg>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=22 */
 
 impl<I: Interner> TypeWalker<I> {
     pub fn new(root: I::GenericArg) -> Self {
@@ -52,7 +48,6 @@ impl<I: Interner> TypeWalker<I> {
         self.stack.truncate(self.last_subtree);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=next | COMPLEXITY=14 | LINES=17 */
 
 impl<I: Interner> Iterator for TypeWalker<I> {
     type Item = I::GenericArg;
@@ -70,7 +65,6 @@ impl<I: Interner> Iterator for TypeWalker<I> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=push_inner | COMPLEXITY=45 | LINES=102 */
 
 /// We push `GenericArg`s on the stack in reverse order so as to
 /// maintain a pre-order traversal. As of the time of this
@@ -173,7 +167,6 @@ fn push_inner<I: Interner>(stack: &mut TypeWalkerStack<I>, parent: I::GenericArg
         },
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=push_ty_pat | COMPLEXITY=12 | LINES=14 */
 
 fn push_ty_pat<I: Interner>(stack: &mut TypeWalkerStack<I>, pat: I::Pat) {
     match pat.kind() {

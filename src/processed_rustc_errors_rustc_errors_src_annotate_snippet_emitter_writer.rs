@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/annotate_snippet_emitter_writer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // Emit diagnostics using the `annotate-snippets` library
 //
 // This is the equivalent of `./emitter.rs` but making use of the
@@ -10,7 +9,6 @@
 use std::sync::Arc;
 
 use annotate_snippets::{Renderer, Snippet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_error_messages::FluentArgs;
 use crate::rustc_complete::SourceFile;
 use crate::rustc_complete::source_map::SourceMap;
@@ -19,11 +17,9 @@ use crate::emitter::FileWithAnnotatedLines;
 use crate::registry::Registry;
 use crate::snippet::Line;
 use crate::translation::{Translator, to_fluent_args};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::{
     CodeSuggestion, DiagInner, DiagMessage, Emitter, ErrCode, Level, MultiSpan, Style, Subdiag,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=AnnotateSnippetEmitter | COMPLEXITY=2 | LINES=13 */
 
 /// Generates diagnostics using annotate-snippet
 pub struct AnnotateSnippetEmitter {
@@ -37,7 +33,6 @@ pub struct AnnotateSnippetEmitter {
 
     macro_backtrace: bool,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=emit_diagnostic | COMPLEXITY=12 | LINES=39 */
 
 impl Emitter for AnnotateSnippetEmitter {
     /// The entry point for the diagnostics generation
@@ -77,13 +72,11 @@ impl Emitter for AnnotateSnippetEmitter {
         &self.translator
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=source_string | COMPLEXITY=4 | LINES=5 */
 
 /// Provides the source string for the given `line` of `file`
 fn source_string(file: Arc<SourceFile>, line: &Line) -> String {
     file.get_line(line.line_index - 1).map(|a| a.to_string()).unwrap_or_default()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=annotation_level_for_level | COMPLEXITY=8 | LINES=16 */
 
 /// Maps [`crate::Level`] to [`annotate_snippets::Level`]
 fn annotation_level_for_level(level: Level) -> annotate_snippets::Level {
@@ -100,7 +93,6 @@ fn annotation_level_for_level(level: Level) -> annotate_snippets::Level {
         Level::Expect => panic!("Should not call with Expect"),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=46 | LINES=103 */
 
 impl AnnotateSnippetEmitter {
     pub fn new(

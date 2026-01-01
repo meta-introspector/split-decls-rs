@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/on_unimplemented_format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt;
 use std::ops::Range;
 
 use errors::*;
 use crate::rustc_complete::ty::print::TraitRefPrintSugared;
 use crate::rustc_complete::ty::{GenericParamDefKind, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_parse_format::{
     Argument, FormatSpec, ParseError, ParseMode, Parser, Piece as RpfPiece, Position,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{InnerSpan, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FormatString | COMPLEXITY=2 | LINES=12 */
 
 /// Like [std::fmt::Arguments] this is a string that has been parsed into "pieces",
 /// either as string pieces or dynamic arguments.
@@ -27,14 +23,12 @@ pub struct FormatString {
     /// The formatting string was parsed successfully but with warnings
     pub warnings: Vec<FormatWarning>,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 enum Piece {
     Lit(String),
     Arg(FormatArg),
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=18 */
 
 #[derive(Debug)]
 enum FormatArg {
@@ -53,7 +47,6 @@ enum FormatArg {
     /// What the user typed, if it doesn't match anything we can use.
     AsIs(String),
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 pub enum Ctx<'tcx> {
     // `#[rustc_on_unimplemented]`
@@ -61,7 +54,6 @@ pub enum Ctx<'tcx> {
     // `#[diagnostic::...]`
     DiagnosticOnUnimplemented { tcx: TyCtxt<'tcx>, trait_def_id: DefId },
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 #[derive(Debug)]
 pub enum FormatWarning {
@@ -70,7 +62,6 @@ pub enum FormatWarning {
     InvalidSpecifier { name: String, span: Span },
     FutureIncompat { span: Span, help: String },
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_warning | COMPLEXITY=31 | LINES=48 */
 
 impl FormatWarning {
     pub fn emit_warning<'tcx>(&self, tcx: TyCtxt<'tcx>, item_def_id: DefId) {
@@ -119,7 +110,6 @@ impl FormatWarning {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// Arguments to fill a [FormatString] with.
 ///
@@ -138,14 +128,12 @@ impl FormatWarning {
 /// pub trait FromResidual<R = <Self as Try>::Residual> {
 ///    ...
 /// }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 ///
 /// async fn an_async_function() -> u32 {
 ///     let x: Option<u32> = None;
 ///     x?; //~ ERROR the `?` operator
 ///     22
 /// }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 ///  ```
 /// it will look like this:
 ///
@@ -156,7 +144,6 @@ impl FormatWarning {
 ///     item_context: "an async function",
 ///     generic_args: [("Self", "u32"), ("R", "Option<Infallible>")],
 /// }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=FormatArgs | COMPLEXITY=2 | LINES=8 */
 /// ```
 #[derive(Debug)]
 pub struct FormatArgs<'tcx> {
@@ -165,7 +152,6 @@ pub struct FormatArgs<'tcx> {
     pub item_context: &'static str,
     pub generic_args: Vec<(Symbol, String)>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=span | COMPLEXITY=44 | LINES=71 */
 
 impl FormatString {
     pub fn span(&self) -> Span {
@@ -237,7 +223,6 @@ impl FormatString {
         ret
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=parse_arg | COMPLEXITY=49 | LINES=58 */
 
 fn parse_arg<'tcx>(
     arg: &Argument<'_>,
@@ -296,7 +281,6 @@ fn parse_arg<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=warn_on_format_spec | COMPLEXITY=9 | LINES=18 */
 
 /// `#[rustc_on_unimplemented]` and `#[diagnostic::...]` don't actually do anything
 /// with specifiers, so emit a warning if they are used.
@@ -315,13 +299,10 @@ fn warn_on_format_spec(
         warnings.push(FormatWarning::InvalidSpecifier { span, name: spec.ty.into() })
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=slice_span | COMPLEXITY=3 | LINES=2 */
 
 fn slice_span(input: Span, Range { start, end }: Range<usize>, is_source_literal: bool) -> Span {
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=2 */
     if is_source_literal { input.from_inner(InnerSpan { start, end }) } else { input }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UnknownFormatParameterForOnUnimplementedAttr | COMPLEXITY=4 | LINES=30 */
 
 pub mod errors {
     use rustc_macros::LintDiagnostic;

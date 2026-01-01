@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/opaque_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_infer::traits::ObligationCause;
 use crate::rustc_complete::ty::{
     self, DefiningScopeKind, EarlyBinder, OpaqueHiddenType, OpaqueTypeKey, TypeVisitableExt,
     TypingMode,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
 use crate::rustc_trait_selection::opaque_types::{
     NonDefiningUseReason, opaque_type_has_defining_use_args, report_item_does_not_constrain_error,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::solve;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 use crate::FnCtxt;
 
@@ -44,7 +40,6 @@ impl<'tcx> FnCtxt<'_, 'tcx> {
         self.apply_computed_concrete_opaque_types(&opaque_types);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 enum UsageKind<'tcx> {
     None,
@@ -52,7 +47,6 @@ enum UsageKind<'tcx> {
     UnconstrainedHiddenType(OpaqueHiddenType<'tcx>),
     HasDefiningUse,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=merge | COMPLEXITY=10 | LINES=23 */
 
 impl<'tcx> UsageKind<'tcx> {
     fn merge(&mut self, other: UsageKind<'tcx>) {
@@ -76,7 +70,6 @@ impl<'tcx> UsageKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_concrete_opaque_types | COMPLEXITY=77 | LINES=168 */
 
 impl<'tcx> FnCtxt<'_, 'tcx> {
     fn compute_concrete_opaque_types(

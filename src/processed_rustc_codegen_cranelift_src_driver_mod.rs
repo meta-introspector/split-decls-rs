@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/driver/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 // Drivers are responsible for calling [`codegen_fn`] or [`codegen_static`] for each mono item and
 // performing any further actions like JIT executing or writing object files.
 //
@@ -9,7 +8,6 @@
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=predefine_mono_items | COMPLEXITY=21 | LINES=47 */
 
 use crate::prelude::*;
 
@@ -55,7 +53,6 @@ fn predefine_mono_items<'tcx>(
         }
     });
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=MeasuremeProfiler(SelfProfilerRef); | COMPLEXITY=2 | LINES=7 */
 
 struct MeasuremeProfiler(SelfProfilerRef);
 
@@ -63,7 +60,6 @@ struct TimingGuard {
     profiler: std::mem::ManuallyDrop<SelfProfilerRef>,
     inner: Option<crate::rustc_data_structures::profiling::TimingGuard<'static>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=9 */
 
 impl Drop for TimingGuard {
     fn drop(&mut self) {
@@ -73,7 +69,6 @@ impl Drop for TimingGuard {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=start_pass | COMPLEXITY=12 | LINES=14 */
 
 impl cranelift_codegen::timing::Profiler for MeasuremeProfiler {
     fn start_pass(&self, pass: cranelift_codegen::timing::Pass) -> Box<dyn std::any::Any> {

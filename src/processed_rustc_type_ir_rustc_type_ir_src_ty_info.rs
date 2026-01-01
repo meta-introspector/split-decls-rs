@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/ty_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cmp::Ordering;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::Deref;
 
 #[cfg(feature = "nightly")]
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 #[cfg(feature = "nightly")]
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{DebruijnIndex, TypeFlags};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=WithCachedTypeInfo | COMPLEXITY=15 | LINES=44 */
 
 /// A helper type that you can wrap round your own type in order to automatically
 /// cache the stable hash, type flags and debruijn index on creation and
@@ -57,7 +53,6 @@ pub struct WithCachedTypeInfo<T> {
     /// (exclusive).
     pub outer_exclusive_binder: DebruijnIndex,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=7 */
 
 impl<T: PartialEq> PartialEq for WithCachedTypeInfo<T> {
     #[inline]
@@ -65,24 +60,20 @@ impl<T: PartialEq> PartialEq for WithCachedTypeInfo<T> {
         self.internee.eq(&other.internee)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: Eq> Eq for WithCachedTypeInfo<T> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=partial_cmp | COMPLEXITY=5 | LINES=6 */
 
 impl<T: Ord> PartialOrd for WithCachedTypeInfo<T> {
     fn partial_cmp(&self, other: &WithCachedTypeInfo<T>) -> Option<Ordering> {
         Some(self.internee.cmp(&other.internee))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cmp | COMPLEXITY=5 | LINES=6 */
 
 impl<T: Ord> Ord for WithCachedTypeInfo<T> {
     fn cmp(&self, other: &WithCachedTypeInfo<T>) -> Ordering {
         self.internee.cmp(&other.internee)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<T> Deref for WithCachedTypeInfo<T> {
     type Target = T;
@@ -92,7 +83,6 @@ impl<T> Deref for WithCachedTypeInfo<T> {
         &self.internee
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=8 | LINES=12 */
 
 impl<T: Hash> Hash for WithCachedTypeInfo<T> {
     #[inline]
@@ -105,7 +95,6 @@ impl<T: Hash> Hash for WithCachedTypeInfo<T> {
         self.internee.hash(s)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=20 | LINES=28 */
 
 #[cfg(feature = "nightly")]
 impl<T: HashStable<CTX>, CTX> HashStable<CTX> for WithCachedTypeInfo<T> {

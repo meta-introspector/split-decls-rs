@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_interface/src/interface.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::path::PathBuf;
 use std::result;
 use std::sync::Arc;
 
 use crate::rustc_complete::{LitKind, MetaItemKind, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::jobserver::{self, Proxy};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use crate::rustc_complete::registry::Registry;
 use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_lint::LintStore;
 use crate::rustc_complete::ty;
 use crate::rustc_complete::ty::CurrentGcx;
@@ -25,14 +20,10 @@ use crate::rustc_parse::parser::attr::AllowLeadingUnsafe;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::query::print_query_stack;
 use crate::rustc_complete::config::{self, Cfg, CheckCfg, ExpectedValues, Input, OutFileName};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, lint};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::source_map::{FileLoader, RealFileLoader, SourceMapInputs};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileName, sym};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Compiler | COMPLEXITY=3 | LINES=24 */
 use tracing::trace;
 
 use crate::util;
@@ -57,7 +48,6 @@ pub struct Compiler {
     /// A jobserver reference which we pass on to `GlobalCtxt`.
     pub(crate) jobserver_proxy: Arc<Proxy>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=47 | LINES=57 */
 
 /// Converts strings provided as `--cfg [cfgspec]` into a `Cfg`.
 pub(crate) fn parse_cfg(dcx: DiagCtxtHandle<'_>, cfgs: Vec<String>) -> Cfg {
@@ -115,7 +105,6 @@ pub(crate) fn parse_cfg(dcx: DiagCtxtHandle<'_>, cfgs: Vec<String>) -> Cfg {
                 error!(r#"expected `key` or `key="value"`"#);
             }
         })
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
         .collect::<Cfg>()
 }
 
@@ -126,7 +115,6 @@ pub(crate) fn parse_check_cfg(dcx: DiagCtxtHandle<'_>, specs: Vec<String>) -> Ch
     let exhaustive_names = !specs.is_empty();
     let exhaustive_values = !specs.is_empty();
     let mut check_cfg = CheckCfg { exhaustive_names, exhaustive_values, ..CheckCfg::default() };
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=150 | LINES=193 */
 
     for s in specs {
         let psess = ParseSess::with_fatal_emitter(
@@ -320,7 +308,6 @@ pub(crate) fn parse_check_cfg(dcx: DiagCtxtHandle<'_>, specs: Vec<String>) -> Ch
             }
         }
     }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=Config | COMPLEXITY=25 | LINES=87 */
 
     check_cfg
 }
@@ -408,7 +395,6 @@ pub(crate) fn initialize_checked_jobserver(early_dcx: &EarlyDiagCtxt) {
             .with_note("the build environment is likely misconfigured")
             .emit()
     });
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=run_compiler | COMPLEXITY=5 | LINES=32 */
 }
 
 // JUSTIFICATION: before session exists, only config
@@ -441,7 +427,6 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
         config.opts.unstable_opts.threads,
         &config.extra_symbols,
         SourceMapInputs { file_loader, path_mapping, hash_kind, checksum_hash_kind },
-/* AST_META: AST_ID=15 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=50 | LINES=134 */
         |current_gcx, jobserver_proxy| {
             // The previous `early_dcx` can't be reused here because it doesn't
             // impl `Send`. Creating a new one is fine.
@@ -576,7 +561,6 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
 
             res
         },
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_print_query_stack | COMPLEXITY=12 | LINES=26 */
     )
 }
 
@@ -603,7 +587,6 @@ pub fn try_print_query_stack(
             0
         }
     });
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
     if let Some(limit_frames) = limit_frames
         && all_frames > limit_frames
@@ -613,8 +596,6 @@ pub fn try_print_query_stack(
             all_frames - limit_frames
         );
     } else {
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
         eprintln!("end of query stack");
     }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=1 */
 }

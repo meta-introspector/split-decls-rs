@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/consts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_abi as abi;
 use crate::rustc_complete::mir::interpret::{ConstAllocation, Scalar};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=const_null | COMPLEXITY=8 | LINES=43 */
 
 use super::BackendTypes;
 

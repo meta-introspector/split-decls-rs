@@ -1,39 +1,26 @@
 // SRC: ../rust/compiler/rustc_interface/src/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::env::consts::{DLL_PREFIX, DLL_SUFFIX};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::atomic::{AtomicBool, Ordering};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, OnceLock};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, thread};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use rustc_ast as ast;
 use rustc_attr_parsing::{ShouldEmit, validate_attr};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::sync;
 use crate::rustc_complete::LintBuffer;
 use crate::rustc_metadata::{DylibError, load_symbol_from_dylib};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::CurrentGcx;
 use crate::rustc_complete::config::{Cfg, OutFileName, OutputFilenames, OutputTypes, Sysroot, host_tuple};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{self, BuiltinLintDiag};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::output::{CRATE_TYPES, categorize_crate_type};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{EarlyDiagCtxt, Session, filesearch};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::SourceMapInputs;
 use crate::rustc_complete::{SessionGlobals, Symbol, sym};
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=44 */
 use crate::rustc_target::spec::Target;
 use tracing::info;
 
@@ -78,7 +65,6 @@ pub(crate) fn add_configuration(
         cfg.insert((tf, Some(sym::crt_dash_static)));
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=28 */
 
 /// Ensures that all target features required by the ABI are present.
 /// Must be called after `unstable_target_features` has been populated!
@@ -107,7 +93,6 @@ pub(crate) fn check_abi_required_features(sess: &Session) {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=init_stack_size | COMPLEXITY=11 | LINES=33 */
 
 pub static STACK_SIZE: OnceLock<usize> = OnceLock::new();
 pub const DEFAULT_STACK_SIZE: usize = 8 * 1024 * 1024;
@@ -141,7 +126,6 @@ fn init_stack_size(early_dcx: &EarlyDiagCtxt) -> usize {
             .unwrap_or(DEFAULT_STACK_SIZE)
     })
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=run_in_thread_with_globals | COMPLEXITY=15 | LINES=39 */
 
 fn run_in_thread_with_globals<F: FnOnce(CurrentGcx, Arc<Proxy>) -> R + Send, R: Send>(
     thread_stack_size: usize,
@@ -181,7 +165,6 @@ fn run_in_thread_with_globals<F: FnOnce(CurrentGcx, Arc<Proxy>) -> R + Send, R: 
         }
     })
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=120 */
 
 pub(crate) fn run_in_thread_pool_with_globals<
     F: FnOnce(CurrentGcx, Arc<Proxy>) -> R + Send,
@@ -302,7 +285,6 @@ pub(crate) fn run_in_thread_pool_with_globals<
         })
     })
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=load_backend_from_dylib | COMPLEXITY=17 | LINES=17 */
 
 #[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
 fn load_backend_from_dylib(early_dcx: &EarlyDiagCtxt, path: &Path) -> MakeBackendFn {
@@ -320,7 +302,6 @@ fn load_backend_from_dylib(early_dcx: &EarlyDiagCtxt, path: &Path) -> MakeBacken
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=get_codegen_backend | COMPLEXITY=21 | LINES=33 */
 
 /// Get the codegen backend based on the name and specified sysroot.
 ///
@@ -354,7 +335,6 @@ pub fn get_codegen_backend(
     // the case, we get UB.
     unsafe { load() }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=rustc_path | COMPLEXITY=14 | LINES=17 */
 
 // This is used for rustdoc, but it uses similar machinery to codegen backend
 // loading, so we leave the code here. It is potentially useful for other tools
@@ -372,7 +352,6 @@ pub fn rustc_path<'a>(sysroot: &Sysroot) -> Option<&'a Path> {
         })
         .as_deref()
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=get_codegen_sysroot | COMPLEXITY=45 | LINES=92 */
 
 #[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
 fn get_codegen_sysroot(
@@ -465,7 +444,6 @@ fn get_codegen_sysroot(
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=45 */
 
 pub(crate) fn check_attr_crate_type(
     sess: &Session,
@@ -511,7 +489,6 @@ pub(crate) fn check_attr_crate_type(
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=multiple_output_types_to_stdout | COMPLEXITY=10 | LINES=24 */
 
 fn multiple_output_types_to_stdout(
     output_types: &OutputTypes,
@@ -536,7 +513,6 @@ fn multiple_output_types_to_stdout(
         named_types > 1 || unnamed_types > 1 && single_output_file_is_stdout
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=build_output_filenames | COMPLEXITY=26 | LINES=65 */
 
 pub fn build_output_filenames(attrs: &[ast::Attribute], sess: &Session) -> OutputFilenames {
     if multiple_output_types_to_stdout(
@@ -602,13 +578,11 @@ pub fn build_output_filenames(attrs: &[ast::Attribute], sess: &Session) -> Outpu
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 /// Returns a version string such as "1.46.0 (04488afe3 2020-08-24)" when invoked by an in-tree tool.
 pub macro version_str() {
     option_env!("CFG_VERSION")
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=rustc_version_str | COMPLEXITY=4 | LINES=5 */
 
 /// Returns the version string for `rustc` itself (which may be different from a tool version).
 pub fn rustc_version_str() -> Option<&'static str> {

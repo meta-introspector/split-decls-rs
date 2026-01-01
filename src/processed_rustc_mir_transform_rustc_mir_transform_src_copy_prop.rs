@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/copy_prop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_index::IndexSlice;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=20 | LINES=55 */
 
 use crate::ssa::SsaLocals;
 
@@ -62,7 +60,6 @@ impl<'tcx> crate::MirPass<'tcx> for CopyProp {
         false
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fully_moved_locals | COMPLEXITY=17 | LINES=35 */
 
 /// `SsaLocals` computed equivalence classes between locals considering copy/move assignments.
 ///
@@ -98,7 +95,6 @@ fn fully_moved_locals(ssa: &SsaLocals, body: &Body<'_>) -> DenseBitSet<Local> {
 
     fully_moved
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Replacer | COMPLEXITY=2 | LINES=8 */
 
 /// Utility to help performing substitution of `*pattern` by `target`.
 struct Replacer<'a, 'tcx> {
@@ -107,7 +103,6 @@ struct Replacer<'a, 'tcx> {
     storage_to_remove: DenseBitSet<Local>,
     copy_classes: &'a IndexSlice<Local, Local>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=25 | LINES=52 */
 
 impl<'tcx> MutVisitor<'tcx> for Replacer<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_type_ir_macros/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use quote::{ToTokens, quote};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use syn::visit_mut::VisitMut;
 use syn::{Attribute, parse_quote};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=has_ignore_attr | COMPLEXITY=11 | LINES=28 */
 use synstructure::decl_derive;
 
 decl_derive!(
@@ -33,7 +30,6 @@ fn has_ignore_attr(attrs: &[Attribute], name: &'static str, meta: &'static str) 
 
     ignored
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=type_visitable_derive | COMPLEXITY=26 | LINES=41 */
 
 fn type_visitable_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::TokenStream {
     if let syn::Data::Union(_) = s.ast().data {
@@ -75,7 +71,6 @@ fn type_visitable_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::Tok
         },
     )
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=type_foldable_derive | COMPLEXITY=41 | LINES=69 */
 
 fn type_foldable_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::TokenStream {
     if let syn::Data::Union(_) = s.ast().data {
@@ -145,7 +140,6 @@ fn type_foldable_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::Toke
         },
     )
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=lift_derive | COMPLEXITY=29 | LINES=52 */
 
 fn lift_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::TokenStream {
     if let syn::Data::Union(_) = s.ast().data {
@@ -198,7 +192,6 @@ fn lift_derive(mut s: synstructure::Structure<'_>) -> proc_macro2::TokenStream {
         },
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=lift | COMPLEXITY=17 | LINES=20 */
 
 fn lift(mut ty: syn::Type) -> syn::Type {
     struct ItoJ;

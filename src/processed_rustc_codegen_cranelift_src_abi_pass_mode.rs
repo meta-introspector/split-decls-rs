@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/abi/pass_mode.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Argument passing
 
 use cranelift_codegen::ir::ArgumentPurpose;
 use crate::rustc_abi::{Reg, RegKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::callconv::{
     ArgAbi, ArgAttributes, ArgExtension as RustcArgExtension, CastTarget, PassMode,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=get_abi_param | COMPLEXITY=2 | LINES=8 */
 
 use crate::prelude::*;
 use crate::value_and_place::assert_assignable;
@@ -19,7 +15,6 @@ pub(super) trait ArgAbiExt<'tcx> {
     fn get_abi_param(&self, tcx: TyCtxt<'tcx>) -> SmallVec<[AbiParam; 2]>;
     fn get_abi_return(&self, tcx: TyCtxt<'tcx>) -> (Option<AbiParam>, Vec<AbiParam>);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=reg_to_abi_param | COMPLEXITY=8 | LINES=17 */
 
 fn reg_to_abi_param(reg: Reg) -> AbiParam {
     let clif_ty = match (reg.kind, reg.size.bytes()) {
@@ -37,7 +32,6 @@ fn reg_to_abi_param(reg: Reg) -> AbiParam {
     };
     AbiParam::new(clif_ty)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=apply_attrs_to_abi_param | COMPLEXITY=6 | LINES=8 */
 
 fn apply_attrs_to_abi_param(param: AbiParam, arg_attrs: ArgAttributes) -> AbiParam {
     match arg_attrs.arg_ext {
@@ -46,7 +40,6 @@ fn apply_attrs_to_abi_param(param: AbiParam, arg_attrs: ArgAttributes) -> AbiPar
         RustcArgExtension::Sext => param.sext(),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=cast_target_to_abi_params | COMPLEXITY=21 | LINES=54 */
 
 fn cast_target_to_abi_params(cast: &CastTarget) -> SmallVec<[(Size, AbiParam); 2]> {
     if let Some(offset_from_start) = cast.rest_offset {
@@ -101,7 +94,6 @@ fn cast_target_to_abi_params(cast: &CastTarget) -> SmallVec<[(Size, AbiParam); 2
 
     res
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=get_abi_param | COMPLEXITY=64 | LINES=105 */
 
 impl<'tcx> ArgAbiExt<'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
     fn get_abi_param(&self, tcx: TyCtxt<'tcx>) -> SmallVec<[AbiParam; 2]> {
@@ -207,7 +199,6 @@ impl<'tcx> ArgAbiExt<'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 
 pub(super) fn to_casted_value<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -228,7 +219,6 @@ pub(super) fn to_casted_value<'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=28 */
 
 pub(super) fn from_casted_value<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -257,7 +247,6 @@ pub(super) fn from_casted_value<'tcx>(
     assert_eq!(block_params_iter.next(), None, "Leftover block param");
     CValue::by_ref(ptr, layout)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=34 */
 
 /// Get a set of values to be passed as function arguments.
 pub(super) fn adjust_arg_for_abi<'tcx>(
@@ -292,7 +281,6 @@ pub(super) fn adjust_arg_for_abi<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=57 */
 
 /// Create a [`CValue`] containing the value of a function parameter adding clif function parameters
 /// as necessary.

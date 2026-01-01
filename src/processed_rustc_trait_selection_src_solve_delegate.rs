@@ -1,30 +1,23 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/delegate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::Deref;
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
 use crate::rustc_infer::infer::canonical::{
     Canonical, CanonicalExt as _, CanonicalQueryInput, CanonicalVarKind, CanonicalVarValues,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::traits::solve::Certainty;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeVisitableExt as _, TypingMode,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::traits::{EvaluateConstErr, ObligationCause, sizedness_fast_path, specialization_graph};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=SolverDelegate | COMPLEXITY=10 | LINES=10 */
 
 #[repr(transparent)]
 pub struct SolverDelegate<'tcx>(InferCtxt<'tcx>);
@@ -35,7 +28,6 @@ impl<'a, 'tcx> From<&'a InferCtxt<'tcx>> for &'a SolverDelegate<'tcx> {
         unsafe { std::mem::transmute(infcx) }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Deref for SolverDelegate<'tcx> {
     type Target = InferCtxt<'tcx>;
@@ -44,7 +36,6 @@ impl<'tcx> Deref for SolverDelegate<'tcx> {
         &self.0
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=137 | LINES=280 */
 
 impl<'tcx> rustc_next_trait_solver::delegate::SolverDelegate for SolverDelegate<'tcx> {
     type Infcx = InferCtxt<'tcx>;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/bench.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::env;
 use std::io::Write;
 use std::path::Path;
@@ -9,7 +8,6 @@ use crate::path::Dirs;
 use crate::prepare::GitRepo;
 use crate::rustc_info::get_file_name;
 use crate::utils::{Compiler, spawn_and_wait};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=58 | LINES=111 */
 
 static SIMPLE_RAYTRACER_REPO: GitRepo = GitRepo::github(
     "ebobby",
@@ -121,7 +119,6 @@ pub(crate) fn benchmark(dirs: &Dirs, compiler: &Compiler) {
         gha_step_summary.write_all(b"\n").unwrap();
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=hyperfine_command | COMPLEXITY=18 | LINES=34 */
 
 #[must_use]
 fn hyperfine_command(

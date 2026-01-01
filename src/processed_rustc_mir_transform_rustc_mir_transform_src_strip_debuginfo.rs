@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/strip_debuginfo.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=23 | LINES=38 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::MirStripDebugInfo;

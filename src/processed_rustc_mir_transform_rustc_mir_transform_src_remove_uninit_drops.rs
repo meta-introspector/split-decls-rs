@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_uninit_drops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_index::bit_set::MixedBitSet;
 use crate::rustc_complete::mir::{Body, TerminatorKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, VariantDef};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::impls::MaybeInitializedPlaces;
 use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, MaybeReachable, move_path_children_matching};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=28 | LINES=63 */
 
 /// Removes `Drop` terminators whose target is known to be uninitialized at
 /// that point.
@@ -74,7 +69,6 @@ impl<'tcx> crate::MirPass<'tcx> for RemoveUninitDrops {
         true
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_needs_drop_and_init | COMPLEXITY=34 | LINES=73 */
 
 fn is_needs_drop_and_init<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -148,7 +142,6 @@ fn is_needs_drop_and_init<'tcx>(
         _ => true,
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=variant_needs_drop | COMPLEXITY=3 | LINES=12 */
 
 fn variant_needs_drop<'tcx>(
     tcx: TyCtxt<'tcx>,

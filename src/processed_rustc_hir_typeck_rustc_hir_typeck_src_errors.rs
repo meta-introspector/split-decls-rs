@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // Errors emitted by `rustc_hir_typeck`.
 
 use std::borrow::Cow;
@@ -11,17 +10,12 @@ use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, DiagSymbolList, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::ExprKind;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 use crate::fluent_generated as fluent;
 
@@ -42,7 +36,6 @@ pub(crate) struct BaseExpressionDoubleDot {
     #[subdiagnostic]
     pub remove_dots: Option<BaseExpressionDoubleDotRemove>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -55,7 +48,6 @@ pub(crate) struct BaseExpressionDoubleDotRemove {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -68,7 +60,6 @@ pub(crate) struct BaseExpressionDoubleDotAddExpr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_field_multiply_specified_in_initializer, code = E0062)]
@@ -80,7 +71,6 @@ pub(crate) struct FieldMultiplySpecifiedInInitializer {
     pub prev_span: Span,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_return_stmt_outside_of_fn_body, code = E0572)]
@@ -93,13 +83,11 @@ pub(crate) struct ReturnStmtOutsideOfFnBody {
     pub encl_fn_span: Option<Span>,
     pub statement_kind: ReturnLikeStatementKind,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum ReturnLikeStatementKind {
     Return,
     Become,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12 */
 
 impl IntoDiagArg for ReturnLikeStatementKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
@@ -112,7 +100,6 @@ impl IntoDiagArg for ReturnLikeStatementKind {
         DiagArgValue::Str(kind)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_rustcall_incorrect_args)]
@@ -120,7 +107,6 @@ pub(crate) struct RustCallIncorrectArgs {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_yield_expr_outside_of_coroutine, code = E0627)]
@@ -128,7 +114,6 @@ pub(crate) struct YieldExprOutsideOfCoroutine {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_struct_expr_non_exhaustive, code = E0639)]
@@ -137,7 +122,6 @@ pub(crate) struct StructExprNonExhaustive {
     pub span: Span,
     pub what: &'static str,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_functional_record_update_on_non_struct, code = E0436)]
@@ -145,7 +129,6 @@ pub(crate) struct FunctionalRecordUpdateOnNonStruct {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_address_of_temporary_taken, code = E0745)]
@@ -154,7 +137,6 @@ pub(crate) struct AddressOfTemporaryTaken {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=23 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum AddReturnTypeSuggestion {
@@ -178,7 +160,6 @@ pub(crate) enum AddReturnTypeSuggestion {
         span: Span,
     },
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ExpectedReturnTypeLabel<'tcx> {
@@ -194,7 +175,6 @@ pub(crate) enum ExpectedReturnTypeLabel<'tcx> {
         expected: Ty<'tcx>,
     },
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_explicit_destructor, code = E0040)]
@@ -205,7 +185,6 @@ pub(crate) struct ExplicitDestructorCall {
     #[subdiagnostic]
     pub sugg: ExplicitDestructorCallSugg,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ExplicitDestructorCallSugg {
@@ -219,7 +198,6 @@ pub(crate) enum ExplicitDestructorCallSugg {
         hi: Span,
     },
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_missing_parentheses_in_range, code = E0689)]
@@ -232,7 +210,6 @@ pub(crate) struct MissingParenthesesInRange<'tcx> {
     #[subdiagnostic]
     pub add_missing_parentheses: Option<AddMissingParenthesesInRange>,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=34 */
 
 #[derive(LintDiagnostic)]
 pub(crate) enum NeverTypeFallbackFlowingIntoUnsafe {
@@ -267,7 +244,6 @@ pub(crate) enum NeverTypeFallbackFlowingIntoUnsafe {
         sugg: SuggestAnnotations,
     },
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[help]
@@ -279,7 +255,6 @@ pub(crate) struct DependencyOnUnitNeverTypeFallback<'tcx> {
     #[subdiagnostic]
     pub sugg: SuggestAnnotations,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone)]
 pub(crate) enum SuggestAnnotation {
@@ -288,13 +263,11 @@ pub(crate) enum SuggestAnnotation {
     Local(Span),
     Turbo(Span, usize, usize),
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone)]
 pub(crate) struct SuggestAnnotations {
     pub suggestions: Vec<SuggestAnnotation>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=25 | LINES=39 */
 impl Subdiagnostic for SuggestAnnotations {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
         if self.suggestions.is_empty() {
@@ -334,7 +307,6 @@ impl Subdiagnostic for SuggestAnnotations {
         );
     }
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -349,7 +321,6 @@ pub(crate) struct AddMissingParenthesesInRange {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct TypeMismatchFruTypo {
     /// Span of the LHS of the range
@@ -359,7 +330,6 @@ pub(crate) struct TypeMismatchFruTypo {
     /// Rendered expression of the RHS of the range
     pub expr: Option<String>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=23 */
 
 impl Subdiagnostic for TypeMismatchFruTypo {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -383,7 +353,6 @@ impl Subdiagnostic for TypeMismatchFruTypo {
         );
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_typeck_lossy_provenance_int2ptr)]
@@ -394,7 +363,6 @@ pub(crate) struct LossyProvenanceInt2Ptr<'tcx> {
     #[subdiagnostic]
     pub sugg: LossyProvenanceInt2PtrSuggestion,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_ptr_cast_add_auto_to_object, code = E0804)]
@@ -407,7 +375,6 @@ pub(crate) struct PtrCastAddAutoToObject {
     pub traits_len: usize,
     pub traits: DiagSymbolList<String>,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(hir_typeck_suggestion, applicability = "has-placeholders")]
@@ -417,7 +384,6 @@ pub(crate) struct LossyProvenanceInt2PtrSuggestion {
     #[suggestion_part(code = ")")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_typeck_lossy_provenance_ptr2int)]
@@ -428,7 +394,6 @@ pub(crate) struct LossyProvenancePtr2Int<'tcx> {
     #[subdiagnostic]
     pub sugg: LossyProvenancePtr2IntSuggestion<'tcx>,
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=34 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum LossyProvenancePtr2IntSuggestion<'tcx> {
@@ -463,7 +428,6 @@ pub(crate) enum LossyProvenancePtr2IntSuggestion<'tcx> {
         cast_span: Span,
     },
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum HelpUseLatestEdition {
@@ -474,7 +438,6 @@ pub(crate) enum HelpUseLatestEdition {
     #[note(hir_typeck_note_edition_guide)]
     Standalone { edition: Edition },
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 impl HelpUseLatestEdition {
     pub(crate) fn new() -> Self {
@@ -486,7 +449,6 @@ impl HelpUseLatestEdition {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_no_field_on_type, code = E0609)]
@@ -496,7 +458,6 @@ pub(crate) struct NoFieldOnType<'tcx> {
     pub(crate) ty: Ty<'tcx>,
     pub(crate) field: Ident,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_no_field_on_variant, code = E0609)]
@@ -511,7 +472,6 @@ pub(crate) struct NoFieldOnVariant<'tcx> {
     #[label(hir_typeck_no_field_on_variant_field)]
     pub(crate) field_span: Span,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_cant_dereference, code = E0614)]
@@ -521,7 +481,6 @@ pub(crate) struct CantDereference<'tcx> {
     pub(crate) span: Span,
     pub(crate) ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_expected_array_or_slice, code = E0529)]
@@ -536,7 +495,6 @@ pub(crate) struct ExpectedArrayOrSlice<'tcx> {
     #[subdiagnostic]
     pub(crate) slicing: Option<SlicingSuggestion>,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -549,7 +507,6 @@ pub(crate) struct AsDerefSuggestion {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -562,7 +519,6 @@ pub(crate) struct SlicingSuggestion {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_invalid_callee, code = E0618)]
@@ -572,7 +528,6 @@ pub(crate) struct InvalidCallee<'tcx> {
     pub ty: Ty<'tcx>,
     pub found: String,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_int_to_fat, code = E0606)]
@@ -587,7 +542,6 @@ pub(crate) struct IntToWide<'tcx> {
     pub expr_if_nightly: Option<Span>,
     pub known_wide: bool,
 }
-/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=40 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum OptionResultRefMismatch {
@@ -628,14 +582,12 @@ pub(crate) enum OptionResultRefMismatch {
     //     expr_ty: Ty<'tcx>,
     // },
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct RemoveSemiForCoerce {
     pub expr: Span,
     pub ret: Span,
     pub semi: Span,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=6 | LINES=17 */
 
 impl Subdiagnostic for RemoveSemiForCoerce {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -653,7 +605,6 @@ impl Subdiagnostic for RemoveSemiForCoerce {
         );
     }
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_union_pat_multiple_fields)]
@@ -661,7 +612,6 @@ pub(crate) struct UnionPatMultipleFields {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_union_pat_dotdot)]
@@ -669,7 +619,6 @@ pub(crate) struct UnionPatDotDot {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -684,7 +633,6 @@ pub(crate) struct UseIsEmpty<'tcx> {
     pub hi: Span,
     pub expr_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_arg_mismatch_indeterminate)]
@@ -692,7 +640,6 @@ pub(crate) struct ArgMismatchIndeterminate {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=53 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=40 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum SuggestBoxing {
@@ -733,7 +680,6 @@ pub(crate) enum SuggestBoxing {
         end: Span,
     },
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -746,7 +692,6 @@ pub(crate) struct SuggestPtrNullMut {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_typeck_trivial_cast)]
@@ -756,7 +701,6 @@ pub(crate) struct TrivialCast<'tcx> {
     pub expr_ty: Ty<'tcx>,
     pub cast_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) struct BreakNonLoop<'a> {
     pub span: Span,
@@ -768,7 +712,6 @@ pub(crate) struct BreakNonLoop<'a> {
     pub break_expr_kind: &'a ExprKind<'a>,
     pub break_expr_span: Span,
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=24 | LINES=42 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'_, G> for BreakNonLoop<'a> {
     #[track_caller]
@@ -811,7 +754,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'_, G> for BreakNonLoop<'a> {
         diag
     }
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_continue_labeled_block, code = E0696)]
@@ -822,7 +764,6 @@ pub(crate) struct ContinueLabeledBlock {
     #[label(hir_typeck_block_label)]
     pub block_span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_break_inside_closure, code = E0267)]
@@ -834,7 +775,6 @@ pub(crate) struct BreakInsideClosure<'a> {
     pub closure_span: Span,
     pub name: &'a str,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_break_inside_coroutine, code = E0267)]
@@ -848,7 +788,6 @@ pub(crate) struct BreakInsideCoroutine<'a> {
     pub kind: &'a str,
     pub source: &'a str,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_outside_loop, code = E0268)]
@@ -861,7 +800,6 @@ pub(crate) struct OutsideLoop<'a> {
     #[subdiagnostic]
     pub suggestion: Option<OutsideLoopSuggestion>,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(hir_typeck_outside_loop_suggestion, applicability = "maybe-incorrect")]
 pub(crate) struct OutsideLoopSuggestion {
@@ -870,7 +808,6 @@ pub(crate) struct OutsideLoopSuggestion {
     #[suggestion_part(code = " 'block")]
     pub break_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_unlabeled_in_labeled_block, code = E0695)]
@@ -880,7 +817,6 @@ pub(crate) struct UnlabeledInLabeledBlock<'a> {
     pub span: Span,
     pub cf_type: &'a str,
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_unlabeled_cf_in_while_condition, code = E0590)]
@@ -890,7 +826,6 @@ pub(crate) struct UnlabeledCfInWhileCondition<'a> {
     pub span: Span,
     pub cf_type: &'a str,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_no_associated_item, code = E0599)]
@@ -903,7 +838,6 @@ pub(crate) struct NoAssociatedItem<'tcx> {
     pub ty: Ty<'tcx>,
     pub trait_missing_method: bool,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[note(hir_typeck_candidate_trait_note)]
@@ -914,7 +848,6 @@ pub(crate) struct CandidateTraitNote {
     pub item_name: Ident,
     pub action_or_ty: String,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_cannot_cast_to_bool, code = E0054)]
@@ -925,7 +858,6 @@ pub(crate) struct CannotCastToBool<'tcx> {
     #[subdiagnostic]
     pub help: CannotCastToBoolHelp,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_cast_enum_drop)]
@@ -935,7 +867,6 @@ pub(crate) struct CastEnumDrop<'tcx> {
     pub expr_ty: Ty<'tcx>,
     pub cast_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_cast_unknown_pointer, code = E0641)]
@@ -946,13 +877,11 @@ pub(crate) struct CastUnknownPointer {
     #[subdiagnostic]
     pub sub: CastUnknownPointerSub,
 }
-/* AST_META: AST_ID=70 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum CastUnknownPointerSub {
     To(Span),
     From(Span),
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=17 */
 
 impl crate::rustc_errors::Subdiagnostic for CastUnknownPointerSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -970,7 +899,6 @@ impl crate::rustc_errors::Subdiagnostic for CastUnknownPointerSub {
         }
     }
 }
-/* AST_META: AST_ID=72 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CannotCastToBoolHelp {
@@ -984,7 +912,6 @@ pub(crate) enum CannotCastToBoolHelp {
     #[label(hir_typeck_label)]
     Unsupported(#[primary_span] Span),
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_ctor_is_private, code = E0603)]
@@ -993,7 +920,6 @@ pub(crate) struct CtorIsPrivate {
     pub span: Span,
     pub def: String,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(hir_typeck_deref_is_empty)]
@@ -1002,7 +928,6 @@ pub(crate) struct DerefImplsIsEmpty<'tcx> {
     pub span: Span,
     pub deref_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1019,7 +944,6 @@ pub(crate) struct SuggestConvertViaMethod<'tcx> {
     pub expected: Ty<'tcx>,
     pub found: Ty<'tcx>,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(hir_typeck_note_caller_chooses_ty_for_ty_param)]
@@ -1027,7 +951,6 @@ pub(crate) struct NoteCallerChoosesTyForTyParam<'tcx> {
     pub ty_param_name: Symbol,
     pub found_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=77 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum SuggestBoxingForReturnImplTrait {
@@ -1046,7 +969,6 @@ pub(crate) enum SuggestBoxingForReturnImplTrait {
         ends: Vec<Span>,
     },
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_self_ctor_from_outer_item, code = E0401)]
@@ -1058,7 +980,6 @@ pub(crate) struct SelfCtorFromOuterItem {
     #[subdiagnostic]
     pub sugg: Option<ReplaceWithName>,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_typeck_self_ctor_from_outer_item)]
@@ -1068,7 +989,6 @@ pub(crate) struct SelfCtorFromOuterItemLint {
     #[subdiagnostic]
     pub sugg: Option<ReplaceWithName>,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(hir_typeck_suggestion, code = "{name}", applicability = "machine-applicable")]
@@ -1077,7 +997,6 @@ pub(crate) struct ReplaceWithName {
     pub span: Span,
     pub name: String,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_cast_thin_pointer_to_wide_pointer, code = E0607)]
@@ -1089,7 +1008,6 @@ pub(crate) struct CastThinPointerToWidePointer<'tcx> {
     #[note(hir_typeck_teach_help)]
     pub(crate) teach: bool,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_pass_to_variadic_function, code = E0617)]
@@ -1103,7 +1021,6 @@ pub(crate) struct PassToVariadicFunction<'a, 'tcx> {
     #[note(hir_typeck_teach_help)]
     pub(crate) teach: bool,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_fn_item_to_variadic_function, code = E0617)]
@@ -1116,7 +1033,6 @@ pub(crate) struct PassFnItemToVariadicFunction {
     pub sugg_span: Span,
     pub replace: String,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1130,7 +1046,6 @@ pub(crate) struct ReplaceCommaWithSemicolon {
     pub comma_span: Span,
     pub descr: &'static str,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_typeck_supertrait_item_shadowing)]
@@ -1142,7 +1057,6 @@ pub(crate) struct SupertraitItemShadowing {
     #[subdiagnostic]
     pub shadowee: SupertraitItemShadowee,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(hir_typeck_supertrait_item_shadower)]
@@ -1151,7 +1065,6 @@ pub(crate) struct SupertraitItemShadower {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=87 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum SupertraitItemShadowee {
@@ -1168,7 +1081,6 @@ pub(crate) enum SupertraitItemShadowee {
         traits: DiagSymbolList,
     },
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_register_type_unstable)]
@@ -1177,7 +1089,6 @@ pub(crate) struct RegisterTypeUnstable<'a> {
     pub span: Span,
     pub ty: Ty<'a>,
 }
-/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_naked_asm_outside_naked_fn)]
@@ -1185,7 +1096,6 @@ pub(crate) struct NakedAsmOutsideNakedFn {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_no_patterns)]
@@ -1193,7 +1103,6 @@ pub(crate) struct NoPatterns {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_params_not_allowed)]
@@ -1202,14 +1111,12 @@ pub(crate) struct ParamsNotAllowed {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct NakedFunctionsAsmBlock {
     pub span: Span,
     pub multiple_asms: Vec<Span>,
     pub non_asms: Vec<Span>,
 }
-/* AST_META: AST_ID=93 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=12 | LINES=16 */
 
 impl<G: EmissionGuarantee> Diagnostic<'_, G> for NakedFunctionsAsmBlock {
     #[track_caller]
@@ -1226,7 +1133,6 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for NakedFunctionsAsmBlock {
         diag
     }
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_naked_functions_must_naked_asm, code = E0787)]
@@ -1235,7 +1141,6 @@ pub(crate) struct NakedFunctionsMustNakedAsm {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_abi_cannot_be_called)]
@@ -1245,7 +1150,6 @@ pub(crate) struct AbiCannotBeCalled {
     pub span: Span,
     pub abi: ExternAbi,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(hir_typeck_const_continue_bad_label)]

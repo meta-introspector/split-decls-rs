@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/const_evaluatable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 // Checking that constant values used in types can be successfully evaluated.
 //
 // For concrete constants, this is fairly simple as we can just try and evaluate it.
@@ -17,11 +16,8 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable, TypeVisitableExt, TypeVisitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_const_evaluatable | COMPLEXITY=89 | LINES=134 */
 
 use super::EvaluateConstErr;
 use crate::traits::ObligationCtxt;
@@ -156,7 +152,6 @@ pub fn is_const_evaluatable<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=satisfied_from_param_env | COMPLEXITY=60 | LINES=73 */
 
 #[instrument(skip(infcx, tcx), level = "debug")]
 fn satisfied_from_param_env<'tcx>(

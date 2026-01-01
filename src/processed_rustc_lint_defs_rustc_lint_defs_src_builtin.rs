@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint_defs/src/builtin.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Some lints that are built in to the compiler.
 //
 // These are the built-in lints that are emitted direct in the main
@@ -12,7 +11,6 @@
 use crate::rustc_complete::edition::Edition;
 
 use crate::{FutureIncompatibilityReason, declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=137 */
 
 declare_lint_pass! {
     /// Does nothing as a lint pass, but registers some `Lint`s
@@ -150,7 +148,6 @@ declare_lint_pass! {
         // tidy-alphabetical-end
     ]
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=37 */
 
 declare_lint! {
     /// The `forbidden_lint_groups` lint detects violations of
@@ -188,7 +185,6 @@ declare_lint! {
         report_in_deps: true,
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=38 */
 
 declare_lint! {
     /// The `ill_formed_attribute_input` lint detects ill-formed attribute
@@ -227,7 +223,6 @@ declare_lint! {
     };
     crate_level_only
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=37 */
 
 declare_lint! {
     /// The `conflicting_repr_hints` lint detects [`repr` attributes] with
@@ -265,7 +260,6 @@ declare_lint! {
         report_in_deps: true,
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=38 */
 
 declare_lint! {
     /// The `meta_variable_misuse` lint detects possible meta-variable misuse
@@ -304,7 +298,6 @@ declare_lint! {
     Allow,
     "possible meta-variable misuse at macro definition"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=61 */
 
 declare_lint! {
     /// The `incomplete_include` lint detects the use of the [`include!`]
@@ -366,7 +359,6 @@ declare_lint! {
     Deny,
     "trailing content in included file"
 }
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=27 */
 
 declare_lint! {
     /// The `arithmetic_overflow` lint detects that an arithmetic operation
@@ -394,7 +386,6 @@ declare_lint! {
     "arithmetic operation overflows",
     @eval_always = true
 }
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=25 */
 
 declare_lint! {
     /// The `unconditional_panic` lint detects an operation that will cause a
@@ -420,7 +411,6 @@ declare_lint! {
     "operation will cause a panic at runtime",
     @eval_always = true
 }
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 declare_lint! {
     /// The `unused_imports` lint detects imports that are never used.
@@ -443,7 +433,6 @@ declare_lint! {
     Warn,
     "imports that are never used"
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 declare_lint! {
     /// The `redundant_imports` lint detects imports that are redundant due to being
@@ -469,7 +458,6 @@ declare_lint! {
     Allow,
     "imports that are redundant due to being imported already"
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=41 */
 
 declare_lint! {
     /// The `must_not_suspend` lint guards against values that shouldn't be held across suspend points
@@ -511,7 +499,6 @@ declare_lint! {
     "use of a `#[must_not_suspend]` value across a yield point",
     @feature_gate = must_not_suspend;
 }
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=36 */
 
 declare_lint! {
     /// The `unused_extern_crates` lint guards against `extern crate` items
@@ -548,7 +535,6 @@ declare_lint! {
     Allow,
     "extern crates that are never used"
 }
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=50 */
 
 declare_lint! {
     /// The `unused_crate_dependencies` lint detects crate dependencies that
@@ -599,7 +585,6 @@ declare_lint! {
     "crate dependencies that are never used",
     crate_level_only
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=35 */
 
 declare_lint! {
     /// The `unused_qualifications` lint detects unnecessarily qualified
@@ -635,7 +620,6 @@ declare_lint! {
     Allow,
     "detects unnecessarily qualified names"
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 declare_lint! {
     /// The `unknown_lints` lint detects unrecognized lint attributes.
@@ -659,7 +643,6 @@ declare_lint! {
     "unrecognized lint attribute",
     @eval_always = true
 }
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=26 */
 
 declare_lint! {
     /// The `unfulfilled_lint_expectations` lint detects when a lint expectation is
@@ -686,7 +669,6 @@ declare_lint! {
     Warn,
     "unfulfilled lint expectation"
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=22 */
 
 declare_lint! {
     /// The `unused_variables` lint detects variables which are not used in
@@ -709,7 +691,6 @@ declare_lint! {
     Warn,
     "detect variables which are not used in any way"
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=23 */
 
 declare_lint! {
     /// The `unused_assignments` lint detects assignments that will never be read.
@@ -733,7 +714,6 @@ declare_lint! {
     Warn,
     "detect assignments that will never be read"
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=42 */
 
 declare_lint! {
     /// The `dead_code` lint detects unused, unexported items.
@@ -776,7 +756,6 @@ declare_lint! {
     Warn,
     "detect unused, unexported items"
 }
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=28 */
 
 declare_lint! {
     /// The `unused_attributes` lint detects attributes that were not used by
@@ -805,7 +784,6 @@ declare_lint! {
     Warn,
     "detects attributes that were not used by the compiler"
 }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=23 */
 
 declare_lint! {
     /// The `unreachable_code` lint detects unreachable code paths.
@@ -829,7 +807,6 @@ declare_lint! {
     "detects unreachable code paths",
     report_in_external_macro
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=26 */
 
 declare_lint! {
     /// The `unreachable_patterns` lint detects unreachable patterns.
@@ -856,7 +833,6 @@ declare_lint! {
     Warn,
     "detects unreachable patterns"
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=28 */
 
 declare_lint! {
     /// The `overlapping_range_endpoints` lint detects `match` arms that have [range patterns] that
@@ -885,7 +861,6 @@ declare_lint! {
     Warn,
     "detects range patterns with overlapping endpoints"
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=29 */
 
 declare_lint! {
     /// The `non_contiguous_range_endpoints` lint detects likely off-by-one errors when using
@@ -915,7 +890,6 @@ declare_lint! {
     Warn,
     "detects off-by-one errors with exclusive range patterns"
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=45 */
 
 declare_lint! {
     /// The `bindings_with_variant_name` lint detects pattern bindings with
@@ -961,7 +935,6 @@ declare_lint! {
     Deny,
     "detects pattern bindings with the same name as one of the matched variants"
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=33 */
 
 declare_lint! {
     /// The `unused_macros` lint detects macros that were not used.
@@ -995,7 +968,6 @@ declare_lint! {
     Warn,
     "detects macros that were not used"
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=40 */
 
 declare_lint! {
     /// The `unused_macro_rules` lint detects macro rules that were not used.
@@ -1036,7 +1008,6 @@ declare_lint! {
     Allow,
     "detects macro rules that were not used"
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=24 */
 
 declare_lint! {
     /// The `warnings` lint allows you to change the level of other
@@ -1061,7 +1032,6 @@ declare_lint! {
     Warn,
     "mass-change the level for lints which produce warnings"
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 declare_lint! {
     /// The `unused_features` lint detects unused or unknown features found in
@@ -1077,7 +1047,6 @@ declare_lint! {
     Warn,
     "unused features found in crate-level `#[feature]` directives"
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=25 */
 
 declare_lint! {
     /// The `stable_features` lint detects a [`feature` attribute] that
@@ -1103,7 +1072,6 @@ declare_lint! {
     Warn,
     "stable features found in `#[feature]` directive"
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 declare_lint! {
     /// The `unknown_crate_types` lint detects an unknown crate type found in
@@ -1129,7 +1097,6 @@ declare_lint! {
     "unknown crate type found in `#[crate_type]` directive",
     crate_level_only
 }
-/* AST_META: AST_ID=33 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=37 */
 
 declare_lint! {
     /// The `trivial_casts` lint detects trivial casts which could be replaced
@@ -1167,7 +1134,6 @@ declare_lint! {
     Allow,
     "detects trivial casts which could be removed"
 }
-/* AST_META: AST_ID=34 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=35 */
 
 declare_lint! {
     /// The `trivial_numeric_casts` lint detects trivial numeric casts of types
@@ -1203,7 +1169,6 @@ declare_lint! {
     Allow,
     "detects trivial casts of numeric types which could be removed"
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=1519 | LINES=4079 */
 
 declare_lint! {
     /// The `exported_private_dependencies` lint detects private dependencies

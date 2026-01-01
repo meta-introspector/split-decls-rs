@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/debuginfo/type_names.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=compute_debuginfo_type_name | COMPLEXITY=455 | LINES=815 */
 // Type Names for Debug Info.
 
 // Notes on targeting MSVC:

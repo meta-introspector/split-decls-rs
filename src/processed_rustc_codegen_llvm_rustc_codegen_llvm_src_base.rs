@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/base.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=34 */
 // Codegen the MIR to the LLVM IR.
 //
 // Hopefully useful general knowledge about codegen:
@@ -34,13 +33,11 @@ use crate::builder::Builder;
 use crate::context::CodegenCx;
 use crate::value::Value;
 use crate::{attributes, llvm};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 
 pub(crate) struct ValueIter<'ll> {
     cur: Option<&'ll Value>,
     step: unsafe extern "C" fn(&'ll Value) -> Option<&'ll Value>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=next | COMPLEXITY=13 | LINES=12 */
 
 impl<'ll> Iterator for ValueIter<'ll> {
     type Item = &'ll Value;
@@ -53,12 +50,10 @@ impl<'ll> Iterator for ValueIter<'ll> {
         old
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 
 pub(crate) fn iter_globals(llmod: &llvm::Module) -> ValueIter<'_> {
     unsafe { ValueIter { cur: llvm::LLVMGetFirstGlobal(llmod), step: llvm::LLVMGetNextGlobal } }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=module_codegen | COMPLEXITY=45 | LINES=90 */
 
 pub(crate) fn compile_codegen_unit(
     tcx: TyCtxt<'_>,
@@ -149,14 +144,12 @@ pub(crate) fn compile_codegen_unit(
 
     (module, cost)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 pub(crate) fn set_link_section(llval: &Value, attrs: &CodegenFnAttrs) {
     let Some(sect) = attrs.link_section else { return };
     let buf = SmallCStr::new(sect.as_str());
     llvm::set_section(llval, &buf);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 
 pub(crate) fn linkage_to_llvm(linkage: Linkage) -> llvm::Linkage {
     match linkage {
@@ -171,7 +164,6 @@ pub(crate) fn linkage_to_llvm(linkage: Linkage) -> llvm::Linkage {
         Linkage::Common => llvm::Linkage::CommonLinkage,
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 pub(crate) fn visibility_to_llvm(linkage: Visibility) -> llvm::Visibility {
     match linkage {
@@ -180,7 +172,6 @@ pub(crate) fn visibility_to_llvm(linkage: Visibility) -> llvm::Visibility {
         Visibility::Protected => llvm::Visibility::Protected,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=9 */
 
 pub(crate) fn set_variable_sanitizer_attrs(llval: &Value, attrs: &CodegenFnAttrs) {
     if attrs.no_sanitize.contains(SanitizerSet::ADDRESS) {

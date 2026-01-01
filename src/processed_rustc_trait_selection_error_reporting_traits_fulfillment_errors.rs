@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/fulfillment_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use core::ops::ControlFlow;
 use std::borrow::Cow;
 use std::path::PathBuf;
@@ -7,7 +6,6 @@ use std::path::PathBuf;
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::ast::LitKind;
 use crate::rustc_complete::{LitIntType, TraitObjectSyntax};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::codes::*;
@@ -15,59 +13,44 @@ use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, Level, MultiSpan, StashKey, StringPart, Suggestions,
     pluralize, struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::{self as hir, LangItem, Node};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferOk, TypeTrace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_infer::traits::ImplSource;
 use crate::rustc_infer::traits::solve::Goal;
 use crate::rustc_complete::traits::SignatureMismatchData;
 use crate::rustc_complete::traits::select::OverflowError;
 use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt, PrintTraitPredicateExt as _, PrintTraitRefExt as _,
     with_forced_trimmed_paths,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, GenericArgKind, TraitRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt, Upcast,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, DUMMY_SP, STDLIB_STABLE_CRATES, Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::on_unimplemented::{AppendConstMessage, OnUnimplementedNote};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::suggestions::get_explanation_based_on_obligation;
 use super::{
     ArgKind, CandidateSimilarity, FindExprBySpan, GetSafeTransmuteErrorAndReason, ImplCandidate,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::error_reporting::TypeErrCtxt;
 use crate::error_reporting::infer::TyCategory;
 use crate::error_reporting::traits::report_dyn_incompatibility;
 use crate::errors::{ClosureFnMutLabel, ClosureFnOnceLabel, ClosureKindMismatch, CoroClosureNotFn};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{self, InferCtxt, InferCtxtExt as _};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::traits::{
     MismatchedProjectionTypes, NormalizeExt, Obligation, ObligationCause, ObligationCauseCode,
     ObligationCtxt, PredicateObligation, SelectionContext, SelectionError, elaborate,
     specialization_graph,
 };
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=report_selection_error | COMPLEXITY=353 | LINES=725 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     /// The `root_obligation` parameter should be the `root_obligation` field
@@ -793,7 +776,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         err.emit()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=report_host_effect_error | COMPLEXITY=267 | LINES=578 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub(super) fn apply_do_not_recommend(
@@ -1372,7 +1354,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         diag
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=can_match_trait | COMPLEXITY=1005 | LINES=2092 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     fn can_match_trait(

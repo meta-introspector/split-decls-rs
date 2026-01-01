@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/link/raw_dylib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fs;
 use std::io::{BufWriter, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_abi::Endian;
 use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash128;
 use crate::rustc_complete::attrs::NativeLibKind;
@@ -22,7 +17,6 @@ use crate::back::archive::ImportLibraryItem;
 use crate::back::link::ArchiveBuilderBuilder;
 use crate::errors::ErrorCreatingImportLibrary;
 use crate::{NativeLib, common, errors};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=collate_raw_dylibs_windows | COMPLEXITY=39 | LINES=42 */
 
 /// Extract all symbols defined in raw-dylib libraries, collated by library name.
 ///
@@ -65,7 +59,6 @@ fn collate_raw_dylibs_windows<'a>(
         })
         .collect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=60 */
 
 pub(super) fn create_raw_dylib_dll_import_libs<'a>(
     sess: &Session,
@@ -126,7 +119,6 @@ pub(super) fn create_raw_dylib_dll_import_libs<'a>(
         })
         .collect()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=collate_raw_dylibs_elf | COMPLEXITY=26 | LINES=38 */
 
 /// Extract all symbols defined in raw-dylib libraries, collated by library name.
 ///
@@ -165,7 +157,6 @@ fn collate_raw_dylibs_elf<'a>(
         })
         .collect()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=53 */
 
 pub(super) fn create_raw_dylib_elf_stub_shared_objects<'a>(
     sess: &Session,
@@ -219,7 +210,6 @@ pub(super) fn create_raw_dylib_elf_stub_shared_objects<'a>(
         })
         .collect()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=create_elf_raw_dylib_stub | COMPLEXITY=105 | LINES=248 */
 
 /// Create an ELF .so stub file for raw-dylib.
 /// It exports all the provided symbols, but is otherwise empty.

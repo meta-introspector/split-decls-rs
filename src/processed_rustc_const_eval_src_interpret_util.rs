@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::mir::interpret::{AllocInit, Allocation, GlobalAlloc, InterpResult, Pointer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{TyCtxt, TypeVisitable, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::{InterpCx, MPlaceTy, MemoryKind, interp_ok, throw_inval};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::const_eval::{CompileTimeInterpCx, CompileTimeMachine, InterpretationResult};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 /// Checks whether a type contains generic parameters which must be instantiated.
 ///
@@ -27,7 +22,6 @@ where
     }
     interp_ok(())
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=make_result | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> InterpretationResult<'tcx> for mir::interpret::ConstAllocation<'tcx> {
     fn make_result(
@@ -39,7 +33,6 @@ impl<'tcx> InterpretationResult<'tcx> for mir::interpret::ConstAllocation<'tcx> 
         ecx.tcx.mk_const_alloc(alloc)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 pub(crate) fn create_static_alloc<'tcx>(
     ecx: &mut CompileTimeInterpCx<'tcx>,
@@ -60,7 +53,6 @@ pub(crate) fn create_static_alloc<'tcx>(
     assert!(ecx.memory.alloc_map.insert(alloc_id, (MemoryKind::Stack, alloc)).is_none());
     interp_ok(ecx.ptr_to_mplace(Pointer::from(alloc_id).into(), layout))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=or_if_tracing_disabled | COMPLEXITY=7 | LINES=10 */
 
 /// A marker trait returned by [crate::interpret::Machine::enter_trace_span], identifying either a
 /// real [tracing::span::EnteredSpan] in case tracing is enabled, or the dummy type `()` when
@@ -71,20 +63,17 @@ pub trait EnteredTraceSpan {
     /// tracing is disabled.
     fn or_if_tracing_disabled(self, f: impl FnOnce()) -> Self;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=or_if_tracing_disabled | COMPLEXITY=5 | LINES=6 */
 impl EnteredTraceSpan for () {
     fn or_if_tracing_disabled(self, f: impl FnOnce()) -> Self {
         f(); // tracing is disabled, execute the function
         self
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=or_if_tracing_disabled | COMPLEXITY=5 | LINES=5 */
 impl EnteredTraceSpan for tracing::span::EnteredSpan {
     fn or_if_tracing_disabled(self, _f: impl FnOnce()) -> Self {
         self // tracing is enabled, don't execute anything
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=26 | LINES=83 */
 
 /// Shortand for calling [crate::interpret::Machine::enter_trace_span] on a [tracing::info_span!].
 /// This is supposed to be compiled out when [crate::interpret::Machine::enter_trace_span] has the

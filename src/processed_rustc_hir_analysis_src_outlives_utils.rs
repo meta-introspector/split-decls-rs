@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/outlives/utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArg, GenericArgKind, Region, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=140 */
 use crate::rustc_complete::Span;
 use smallvec::smallvec;
 
@@ -147,7 +143,6 @@ pub(crate) fn insert_outlives_predicate<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_free_region | COMPLEXITY=15 | LINES=39 */
 
 fn is_free_region(region: Region<'_>) -> bool {
     // First, screen for regions that might appear in a type header.

@@ -1,27 +1,18 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/_match.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir, ExprKind, HirId, PatKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir_pretty::ty_to_string;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::traits::{
     MatchExpressionArmCause, ObligationCause, ObligationCauseCode,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::coercion::{AsCoercionSite, CoerceMany};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Diverges, Expectation, FnCtxt, GatherLocalsVisitor, Needs};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=explain_never_type_coerced_to_unit | COMPLEXITY=270 | LINES=522 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     #[instrument(skip(self), level = "debug", ret)]
@@ -544,7 +535,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         Some(def_id)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=arms_contain_ref_bindings | COMPLEXITY=2 | LINES=4 */
 
 fn arms_contain_ref_bindings<'tcx>(arms: &'tcx [hir::Arm<'tcx>]) -> Option<hir::Mutability> {
     arms.iter().filter_map(|a| a.pat.contains_explicit_ref_binding()).max()

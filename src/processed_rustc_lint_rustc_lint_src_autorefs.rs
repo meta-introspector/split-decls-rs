@@ -1,22 +1,15 @@
 // SRC: ../rust/compiler/rustc_lint/src/autorefs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BorrowKind, UnOp};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Expr, ExprKind, Mutability};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow, OverloadedDeref};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::sym;
 
 use crate::lints::{
     ImplicitUnsafeAutorefsDiag, ImplicitUnsafeAutorefsMethodNote, ImplicitUnsafeAutorefsOrigin,
     ImplicitUnsafeAutorefsSuggestion,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=46 */
 
 declare_lint! {
     /// The `dangerous_implicit_autorefs` lint checks for implicitly taken references
@@ -63,7 +56,6 @@ declare_lint! {
     "implicit reference to a dereference of a raw pointer",
     report_in_external_macro
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=43 | LINES=82 */
 
 declare_lint_pass!(ImplicitAutorefs => [DANGEROUS_IMPLICIT_AUTOREFS]);
 
@@ -146,7 +138,6 @@ impl<'tcx> LateLintPass<'tcx> for ImplicitAutorefs {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=peel_place_mappers | COMPLEXITY=9 | LINES=11 */
 
 /// Peels expressions from `expr` that can map a place.
 fn peel_place_mappers<'tcx>(mut expr: &'tcx Expr<'tcx>) -> &'tcx Expr<'tcx> {
@@ -158,7 +149,6 @@ fn peel_place_mappers<'tcx>(mut expr: &'tcx Expr<'tcx>) -> &'tcx Expr<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=peel_derefs_adjustments | COMPLEXITY=6 | LINES=10 */
 
 /// Peel derefs adjustments until the last last element.
 fn peel_derefs_adjustments<'a>(mut adjs: &'a [Adjustment<'a>]) -> &'a [Adjustment<'a>] {
@@ -169,14 +159,12 @@ fn peel_derefs_adjustments<'a>(mut adjs: &'a [Adjustment<'a>]) -> &'a [Adjustmen
     }
     adjs
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=has_implicit_borrow | COMPLEXITY=7 | LINES=6 */
 
 /// Test if some adjustment has some implicit borrow.
 ///
 /// Returns `Some((mutability, was_an_overloaded_deref))` if the argument adjustment is
 /// an implicit borrow (or has an implicit borrow via an overloaded deref).
 fn has_implicit_borrow(Adjustment { kind, .. }: &Adjustment<'_>) -> Option<(Mutability, bool)> {
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
     match kind {
         &Adjust::Deref(Some(OverloadedDeref { mutbl, .. })) => Some((mutbl, true)),
         &Adjust::Borrow(AutoBorrow::Ref(mutbl)) => Some((mutbl.into(), false)),

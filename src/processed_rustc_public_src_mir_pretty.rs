@@ -1,31 +1,23 @@
 // SRC: ../rust/compiler/rustc_public/src/mir/pretty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Implement methods to pretty print rustc_public's IR body.
 use std::fmt::Debug;
 use std::io::Write;
 use std::{fmt, io, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use fmt::{Display, Formatter};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{AggregateKind, AssertMessage, BinOp, BorrowKind, FakeBorrowKind, TerminatorKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mir::{
     Operand, Place, RawPtrKind, Rvalue, StatementKind, UnwindAction, VarDebugInfoContents,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{AdtKind, AssocKind, MirConst, Ty, TyConst};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Body, CrateDef, IndexedVal, Mutability, with};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl Display for Ty {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         with(|ctx| write!(f, "{}", ctx.ty_pretty(*self)))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
 
 impl Display for AssocKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
@@ -37,14 +29,12 @@ impl Display for AssocKind {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl Debug for Place {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         with(|ctx| write!(f, "{}", ctx.place_pretty(self)))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=52 */
 
 pub(crate) fn function_body<W: Write>(writer: &mut W, body: &Body, name: &str) -> io::Result<()> {
     write!(writer, "fn {name}(")?;
@@ -97,7 +87,6 @@ pub(crate) fn function_body<W: Write>(writer: &mut W, body: &Body, name: &str) -
     writeln!(writer, "}}")?;
     Ok(())
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pretty_statement | COMPLEXITY=40 | LINES=39 */
 
 fn pretty_statement<W: Write>(writer: &mut W, statement: &StatementKind) -> io::Result<()> {
     const INDENT: &str = "        ";
@@ -137,7 +126,6 @@ fn pretty_statement<W: Write>(writer: &mut W, statement: &StatementKind) -> io::
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=pretty_terminator | COMPLEXITY=29 | LINES=43 */
 
 fn pretty_terminator<W: Write>(writer: &mut W, terminator: &TerminatorKind) -> io::Result<()> {
     pretty_terminator_head(writer, terminator)?;
@@ -181,7 +169,6 @@ fn pretty_terminator<W: Write>(writer: &mut W, terminator: &TerminatorKind) -> i
 
     writeln!(writer, ";")
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=pretty_terminator_head | COMPLEXITY=37 | LINES=33 */
 
 fn pretty_terminator_head<W: Write>(writer: &mut W, terminator: &TerminatorKind) -> io::Result<()> {
     use self::TerminatorKind::*;
@@ -215,7 +202,6 @@ fn pretty_terminator_head<W: Write>(writer: &mut W, terminator: &TerminatorKind)
         InlineAsm { .. } => write!(writer, "{INDENT}InlineAsm"),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=pretty_successor_labels | COMPLEXITY=23 | LINES=25 */
 
 fn pretty_successor_labels(terminator: &TerminatorKind) -> Vec<String> {
     use self::TerminatorKind::*;
@@ -241,7 +227,6 @@ fn pretty_successor_labels(terminator: &TerminatorKind) -> Vec<String> {
         InlineAsm { destination: Some(_), .. } => vec!["goto".into(), "unwind".into()],
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=pretty_assert_message | COMPLEXITY=93 | LINES=97 */
 
 fn pretty_assert_message<W: Write>(writer: &mut W, msg: &AssertMessage) -> io::Result<()> {
     match msg {
@@ -339,7 +324,6 @@ fn pretty_assert_message<W: Write>(writer: &mut W, msg: &AssertMessage) -> io::R
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=pretty_operand | COMPLEXITY=10 | LINES=12 */
 
 fn pretty_operand(operand: &Operand) -> String {
     match operand {
@@ -352,17 +336,14 @@ fn pretty_operand(operand: &Operand) -> String {
         Operand::Constant(cnst) => pretty_mir_const(&cnst.const_),
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=pretty_mir_const | COMPLEXITY=2 | LINES=4 */
 
 fn pretty_mir_const(literal: &MirConst) -> String {
     with(|cx| cx.mir_const_pretty(literal))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=pretty_ty_const | COMPLEXITY=2 | LINES=4 */
 
 fn pretty_ty_const(ct: &TyConst) -> String {
     with(|cx| cx.ty_const_pretty(ct.id))
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=pretty_rvalue | COMPLEXITY=51 | LINES=53 */
 
 fn pretty_rvalue<W: Write>(writer: &mut W, rval: &Rvalue) -> io::Result<()> {
     match rval {
@@ -416,7 +397,6 @@ fn pretty_rvalue<W: Write>(writer: &mut W, rval: &Rvalue) -> io::Result<()> {
         Rvalue::Use(op) => write!(writer, "{}", pretty_operand(op)),
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=pretty_aggregate | COMPLEXITY=47 | LINES=56 */
 
 fn pretty_aggregate<W: Write>(
     writer: &mut W,
@@ -473,7 +453,6 @@ fn pretty_aggregate<W: Write>(
     }
     write!(writer, "{suffix}")
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=pretty_mut | COMPLEXITY=6 | LINES=7 */
 
 fn pretty_mut(mutability: Mutability) -> &'static str {
     match mutability {
@@ -481,7 +460,6 @@ fn pretty_mut(mutability: Mutability) -> &'static str {
         Mutability::Mut => "mut ",
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=pretty_raw_ptr_kind | COMPLEXITY=6 | LINES=8 */
 
 fn pretty_raw_ptr_kind(kind: RawPtrKind) -> &'static str {
     match kind {

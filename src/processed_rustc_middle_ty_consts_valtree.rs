@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/consts/valtree.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt;
 use std::ops::Deref;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::def::Namespace;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::ScalarInt;
 use crate::mir::interpret::{ErrorHandled, Scalar};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::print::{FmtPrinter, PrettyPrinter};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=32 */
 
 /// This datastructure is used to represent the value of constants used in the type system.
 ///
@@ -47,7 +42,6 @@ pub enum ValTreeKind<'tcx> {
     /// ZST types are represented as an empty slice.
     Branch(Box<[ValTree<'tcx>]>),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=unwrap_leaf | COMPLEXITY=26 | LINES=36 */
 
 impl<'tcx> ValTreeKind<'tcx> {
     #[inline]
@@ -84,7 +78,6 @@ impl<'tcx> ValTreeKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=ValTree | COMPLEXITY=11 | LINES=33 */
 
 /// An interned valtree. Use this rather than `ValTreeKind`, whenever possible.
 ///
@@ -118,7 +111,6 @@ impl<'tcx> ValTree<'tcx> {
         tcx.intern_valtree(ValTreeKind::Leaf(i))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> Deref for ValTree<'tcx> {
     type Target = &'tcx ValTreeKind<'tcx>;
@@ -128,14 +120,12 @@ impl<'tcx> Deref for ValTree<'tcx> {
         &self.0.0
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for ValTree<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         (**self).fmt(f)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Value | COMPLEXITY=5 | LINES=18 */
 
 /// `Ok(Err(ty))` indicates the constant was fine, but the valtree couldn't be constructed
 /// because the value contains something of type `ty` that is not valtree-compatible.
@@ -154,7 +144,6 @@ pub struct Value<'tcx> {
     pub ty: Ty<'tcx>,
     pub valtree: ValTree<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_to_bits | COMPLEXITY=34 | LINES=54 */
 
 impl<'tcx> Value<'tcx> {
     /// Attempts to extract the raw bits from the constant.
@@ -209,7 +198,6 @@ impl<'tcx> Value<'tcx> {
         ))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::ValueConst<TyCtxt<'tcx>> for Value<'tcx> {
     fn ty(self) -> Ty<'tcx> {
@@ -220,7 +208,6 @@ impl<'tcx> rustc_type_ir::inherent::ValueConst<TyCtxt<'tcx>> for Value<'tcx> {
         self.valtree
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=11 */
 
 impl<'tcx> fmt::Display for Value<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

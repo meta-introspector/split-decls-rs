@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/patch.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=24 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::Span;
@@ -26,7 +24,6 @@ pub(crate) struct MirPatch<'tcx> {
     body_span: Span,
     next_local: usize,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=source_info_for_index | COMPLEXITY=128 | LINES=270 */
 
 impl<'tcx> MirPatch<'tcx> {
     /// Creates a new, empty patch.

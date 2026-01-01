@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/declare.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=predefine_static | COMPLEXITY=3 | LINES=21 */
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::mir::mono::Visibility;

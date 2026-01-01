@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/errors/precise_captures.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::E0799;
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_param_not_captured)]
@@ -15,7 +13,6 @@ pub(crate) struct ParamNotCaptured {
     pub param_span: Span,
     pub kind: &'static str,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_self_ty_not_captured)]
@@ -26,7 +23,6 @@ pub(crate) struct SelfTyNotCaptured {
     #[label]
     pub trait_span: Span,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_lifetime_not_captured)]
@@ -38,7 +34,6 @@ pub(crate) struct LifetimeNotCaptured {
     #[label]
     pub opaque_span: Span,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_lifetime_implicitly_captured)]
@@ -48,7 +43,6 @@ pub(crate) struct LifetimeImplicitlyCaptured {
     #[label(hir_analysis_param_label)]
     pub param_span: Span,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_bad_precise_capture)]
@@ -58,7 +52,6 @@ pub(crate) struct BadPreciseCapture {
     pub kind: &'static str,
     pub found: String,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_precise_capture_self_alias, code = E0799)]
@@ -69,7 +62,6 @@ pub(crate) struct PreciseCaptureSelfAlias {
     pub self_span: Span,
     pub what: &'static str,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_duplicate_precise_capture)]
@@ -80,7 +72,6 @@ pub(crate) struct DuplicatePreciseCapture {
     #[label]
     pub second_span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_lifetime_must_be_first)]

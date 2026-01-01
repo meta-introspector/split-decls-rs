@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pprust/state/item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use ast::StaticItem;
 use itertools::{Itertools, Position};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use rustc_ast as ast;
 use crate::rustc_complete::ModKind;
 use crate::rustc_complete::Ident;
@@ -11,19 +9,16 @@ use crate::pp::BoxMarker;
 use crate::pp::Breaks::Inconsistent;
 use crate::pprust::state::fixup::FixupContext;
 use crate::pprust::state::{AnnNode, INDENT_UNIT, PrintState, State};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum DelegationKind<'a> {
     Single,
     List(&'a [(Ident, Option<Ident>)]),
     Glob,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visibility_qualified | COMPLEXITY=4 | LINES=4 */
 
 fn visibility_qualified(vis: &ast::Visibility, s: &str) -> String {
     format!("{}{}", State::to_string(|s| s.print_visibility(vis)), s)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=print_foreign_mod | COMPLEXITY=370 | LINES=861 */
 
 impl<'a> State<'a> {
     fn print_foreign_mod(&mut self, nmod: &ast::ForeignMod, attrs: &[ast::Attribute]) {

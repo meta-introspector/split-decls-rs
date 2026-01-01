@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/free_regions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // This module handles the relationships between "free regions", i.e., lifetime parameters.
 // Ordinarily, free regions are unrelated to one another, but they can be related via implied
 // or explicit bounds. In that case, we track the bounds using the `TransitiveRelation` type,
@@ -7,7 +6,6 @@
 
 use crate::rustc_data_structures::transitive_relation::TransitiveRelation;
 use crate::rustc_complete::ty::{Region, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use tracing::debug;
 
 /// Combines a `FreeRegionMap` and a `TyCtxt`.
@@ -20,7 +18,6 @@ pub(crate) struct RegionRelations<'a, 'tcx> {
     /// Free-region relationships.
     pub free_regions: &'a FreeRegionMap<'tcx>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, 'tcx> RegionRelations<'a, 'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, free_regions: &'a FreeRegionMap<'tcx>) -> Self {
@@ -31,7 +28,6 @@ impl<'a, 'tcx> RegionRelations<'a, 'tcx> {
         self.free_regions.lub_param_regions(self.tcx, r_a, r_b)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FreeRegionMap | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug)]
 pub struct FreeRegionMap<'tcx> {
@@ -41,7 +37,6 @@ pub struct FreeRegionMap<'tcx> {
     /// in this relation, not scopes.
     pub(crate) relation: TransitiveRelation<Region<'tcx>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=elements | COMPLEXITY=32 | LINES=66 */
 
 impl<'tcx> FreeRegionMap<'tcx> {
     pub fn elements(&self) -> impl Iterator<Item = Region<'tcx>> {

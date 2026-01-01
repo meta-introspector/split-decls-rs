@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/timings.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 use std::time::Instant;
 
 use crate::rustc_data_structures::fx::FxHashSet;
@@ -15,7 +14,6 @@ pub enum TimingSection {
     /// Time spent linking.
     Linking,
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=TimingRecord | COMPLEXITY=2 | LINES=8 */
 
 /// Section with attached timestamp
 #[derive(Copy, Clone, Debug)]
@@ -24,7 +22,6 @@ pub struct TimingRecord {
     /// Microseconds elapsed since some predetermined point in time (~start of the rustc process).
     pub timestamp: u128,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=from_origin | COMPLEXITY=6 | LINES=14 */
 
 impl TimingRecord {
     fn from_origin(origin: Instant, section: TimingSection) -> Self {
@@ -39,7 +36,6 @@ impl TimingRecord {
         self.timestamp
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=TimingSectionHandler | COMPLEXITY=2 | LINES=9 */
 
 /// Manages emission of start/end section timings, enabled through `--json=timings`.
 pub struct TimingSectionHandler {
@@ -49,7 +45,6 @@ pub struct TimingSectionHandler {
     /// Sanity check to ensure that we open and close sections correctly.
     opened_sections: Lock<FxHashSet<TimingSection>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=51 */
 
 impl TimingSectionHandler {
     pub fn new(enabled: bool) -> Self {
@@ -101,7 +96,6 @@ impl TimingSectionHandler {
         self.origin.is_some()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=TimingSectionGuard | COMPLEXITY=4 | LINES=7 */
 
 /// RAII wrapper for starting and ending section timings.
 pub struct TimingSectionGuard<'a> {
@@ -109,7 +103,6 @@ pub struct TimingSectionGuard<'a> {
     section: TimingSection,
     origin: Option<Instant>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=create | COMPLEXITY=7 | LINES=9 */
 
 impl<'a> TimingSectionGuard<'a> {
     fn create(dcx: DiagCtxtHandle<'a>, section: TimingSection, origin: Option<Instant>) -> Self {
@@ -119,7 +112,6 @@ impl<'a> TimingSectionGuard<'a> {
         Self { dcx, section, origin }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=8 | LINES=8 */
 
 impl<'a> Drop for TimingSectionGuard<'a> {
     fn drop(&mut self) {

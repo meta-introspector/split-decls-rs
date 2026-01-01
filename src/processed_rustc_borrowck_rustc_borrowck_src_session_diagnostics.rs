@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/session_diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::codes::*;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{GenericArg, Ty};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_complete::Span;
 
 use crate::diagnostics::RegionName;
@@ -18,7 +15,6 @@ pub(crate) struct MoveUnsized<'tcx> {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_higher_ranked_lifetime_error)]
@@ -28,7 +24,6 @@ pub(crate) struct HigherRankedLifetimeError {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum HigherRankedErrorCause {
@@ -37,7 +32,6 @@ pub(crate) enum HigherRankedErrorCause {
     #[note(borrowck_could_not_normalize)]
     CouldNotNormalize { value: String },
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_higher_ranked_subtype_error)]
@@ -45,7 +39,6 @@ pub(crate) struct HigherRankedSubtypeError {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_generic_does_not_live_long_enough)]
@@ -54,7 +47,6 @@ pub(crate) struct GenericDoesNotLiveLongEnough {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(borrowck_var_does_not_need_mut)]
@@ -62,7 +54,6 @@ pub(crate) struct VarNeedNotMut {
     #[suggestion(style = "short", applicability = "machine-applicable", code = "")]
     pub span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 #[derive(Diagnostic)]
 #[diag(borrowck_var_cannot_escape_closure)]
 #[note]
@@ -73,7 +64,6 @@ pub(crate) struct FnMutError {
     #[subdiagnostic]
     pub ty_err: FnMutReturnTypeErr,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum VarHereDenote {
@@ -93,7 +83,6 @@ pub(crate) enum VarHereDenote {
         span: Span,
     },
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum FnMutReturnTypeErr {
@@ -113,7 +102,6 @@ pub(crate) enum FnMutReturnTypeErr {
         span: Span,
     },
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_lifetime_constraints_error)]
@@ -121,7 +109,6 @@ pub(crate) struct LifetimeOutliveErr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum LifetimeReturnCategoryErr<'a> {
@@ -142,7 +129,6 @@ pub(crate) enum LifetimeReturnCategoryErr<'a> {
         outlived_fr_name: RegionName,
     },
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum RequireStaticErr {
@@ -152,7 +138,6 @@ pub(crate) enum RequireStaticErr {
         multi_span: MultiSpan,
     },
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=44 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureVarPathUseCause {
@@ -197,7 +182,6 @@ pub(crate) enum CaptureVarPathUseCause {
         path_span: Span,
     },
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureVarKind {
@@ -217,7 +201,6 @@ pub(crate) enum CaptureVarKind {
         kind_span: Span,
     },
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=19 | LINES=80 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureVarCause {
@@ -298,7 +281,6 @@ pub(crate) enum CaptureVarCause {
         is_partial: bool,
     },
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_cannot_move_when_borrowed, code = E0505)]
@@ -312,7 +294,6 @@ pub(crate) struct MoveBorrow<'a> {
     #[label]
     pub borrow_span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_opaque_type_lifetime_mismatch)]
@@ -326,7 +307,6 @@ pub(crate) struct LifetimeMismatchOpaqueParam<'tcx> {
     #[label(borrowck_prev_lifetime_label)]
     pub prev_span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=57 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureReasonLabel<'a> {
@@ -384,7 +364,6 @@ pub(crate) enum CaptureReasonLabel<'a> {
         var_span: Span,
     },
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureReasonNote {
@@ -411,7 +390,6 @@ pub(crate) enum CaptureReasonNote {
         span: Span,
     },
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=25 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureReasonSuggest<'tcx> {
@@ -437,7 +415,6 @@ pub(crate) enum CaptureReasonSuggest<'tcx> {
         span: Span,
     },
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum CaptureArgLabel {
@@ -454,7 +431,6 @@ pub(crate) enum CaptureArgLabel {
         args_span: Span,
     },
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum OnClosureNote<'a> {
@@ -471,7 +447,6 @@ pub(crate) enum OnClosureNote<'a> {
         span: Span,
     },
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum TypeNoCopy<'a, 'tcx> {
@@ -486,7 +461,6 @@ pub(crate) enum TypeNoCopy<'a, 'tcx> {
     #[note(borrowck_ty_no_impl_copy)]
     Note { is_partial_move: bool, ty: Ty<'tcx>, place: &'a str },
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(borrowck_simd_intrinsic_arg_const)]
@@ -496,7 +470,6 @@ pub(crate) struct SimdIntrinsicArgConst {
     pub arg: usize,
     pub intrinsic: String,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(borrowck_tail_expr_drop_order)]

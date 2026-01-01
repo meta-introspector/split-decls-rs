@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/debug.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, EnumDef, MetaItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::FmtDebug;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=42 */
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
@@ -51,7 +46,6 @@ pub(crate) fn expand_deriving_debug(
     };
     trait_def.expand(cx, mitem, item, push)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=show_substructure | COMPLEXITY=80 | LINES=162 */
 
 fn show_substructure(cx: &ExtCtxt<'_>, span: Span, substr: &Substructure<'_>) -> BlockOrExpr {
     // We want to make sure we have the ctxt set so that we can use unstable methods
@@ -214,7 +208,6 @@ fn show_substructure(cx: &ExtCtxt<'_>, span: Span, substr: &Substructure<'_>) ->
         BlockOrExpr::new_mixed(stmts, Some(expr))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=13 */
 
 /// Special case for enums with no fields. Builds:
 /// ```text
@@ -228,7 +221,6 @@ fn show_substructure(cx: &ExtCtxt<'_>, span: Span, substr: &Substructure<'_>) ->
 ///             })
 ///     }
 /// }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=show_fieldless_enum | COMPLEXITY=12 | LINES=31 */
 /// ```
 fn show_fieldless_enum(
     cx: &ExtCtxt<'_>,

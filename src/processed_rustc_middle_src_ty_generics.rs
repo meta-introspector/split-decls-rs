@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/generics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_ast as ast;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, kw};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use super::{Clause, InstantiatedPredicates, ParamConst, ParamTy, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::ty;
 use crate::ty::{EarlyBinder, GenericArgsRef};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Clone, Debug, TyEncodable, TyDecodable, HashStable)]
 pub enum GenericParamDefKind {
@@ -21,7 +16,6 @@ pub enum GenericParamDefKind {
     Type { has_default: bool, synthetic: bool },
     Const { has_default: bool },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=31 | LINES=32 */
 
 impl GenericParamDefKind {
     pub fn descr(&self) -> &'static str {
@@ -54,7 +48,6 @@ impl GenericParamDefKind {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=GenericParamDef | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Clone, Debug, TyEncodable, TyDecodable, HashStable)]
 pub struct GenericParamDef {
@@ -69,7 +62,6 @@ pub struct GenericParamDef {
 
     pub kind: GenericParamDefKind,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=to_early_bound_region_data | COMPLEXITY=31 | LINES=40 */
 
 impl GenericParamDef {
     pub fn to_early_bound_region_data(&self) -> ty::EarlyParamRegion {
@@ -110,7 +102,6 @@ impl GenericParamDef {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=GenericParamCount | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Default)]
 pub struct GenericParamCount {
@@ -118,7 +109,6 @@ pub struct GenericParamCount {
     pub types: usize,
     pub consts: usize,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Generics | COMPLEXITY=3 | LINES=19 */
 
 /// Information about the formal type/lifetime parameters associated
 /// with an item or method. Analogous to `hir::Generics`.
@@ -138,14 +128,12 @@ pub struct Generics {
     pub has_self: bool,
     pub has_late_bound_regions: Option<Span>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=count | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> rustc_type_ir::inherent::GenericsOf<TyCtxt<'tcx>> for &'tcx Generics {
     fn count(&self) -> usize {
         self.parent_count + self.own_params.len()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=param_def_id_to_index | COMPLEXITY=140 | LINES=218 */
 
 impl<'tcx> Generics {
     /// Looks through the generics and all parents to find the index of the
@@ -364,7 +352,6 @@ impl<'tcx> Generics {
         self.own_params.is_empty()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=GenericPredicates | COMPLEXITY=2 | LINES=7 */
 
 /// Bounds on generics.
 #[derive(Copy, Clone, Default, Debug, TyEncodable, TyDecodable, HashStable)]
@@ -372,7 +359,6 @@ pub struct GenericPredicates<'tcx> {
     pub parent: Option<DefId>,
     pub predicates: &'tcx [(Clause<'tcx>, Span)],
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=instantiate | COMPLEXITY=18 | LINES=60 */
 
 impl<'tcx> GenericPredicates<'tcx> {
     pub fn instantiate(
@@ -433,7 +419,6 @@ impl<'tcx> GenericPredicates<'tcx> {
         instantiated.spans.extend(self.predicates.iter().map(|(_, s)| s));
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=ConstConditions | COMPLEXITY=7 | LINES=10 */
 
 /// `[const]` bounds for a given item. This is represented using a struct much like
 /// `GenericPredicates`, where you can either choose to only instantiate the "own"
@@ -444,7 +429,6 @@ pub struct ConstConditions<'tcx> {
     pub parent: Option<DefId>,
     pub predicates: &'tcx [(ty::PolyTraitRef<'tcx>, Span)],
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=instantiate | COMPLEXITY=17 | LINES=60 */
 
 impl<'tcx> ConstConditions<'tcx> {
     pub fn instantiate(

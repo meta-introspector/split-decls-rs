@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/callee.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Handles codegen of callees as well as other call-related
 // things. Callees are a superset of normal rust values and sometimes
 // have different representations. In particular, top-level fn items
@@ -8,9 +7,7 @@
 
 use crate::rustc_codegen_ssa::common;
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=61 | LINES=152 */
 use tracing::debug;
 
 use crate::context::CodegenCx;

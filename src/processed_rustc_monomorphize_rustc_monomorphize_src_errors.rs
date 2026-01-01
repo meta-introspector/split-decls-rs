@@ -1,11 +1,7 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Instance, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_recursion_limit)]
@@ -17,7 +13,6 @@ pub(crate) struct RecursionLimit<'tcx> {
     pub def_span: Span,
     pub def_path_str: String,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_no_optimized_mir)]
@@ -27,7 +22,6 @@ pub(crate) struct NoOptimizedMir {
     pub crate_name: Symbol,
     pub instance: String,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(monomorphize_large_assignments)]
@@ -38,7 +32,6 @@ pub(crate) struct LargeAssignmentsLint {
     pub size: u64,
     pub limit: u64,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_symbol_already_defined)]
@@ -47,14 +40,12 @@ pub(crate) struct SymbolAlreadyDefined {
     pub span: Option<Span>,
     pub symbol: String,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_couldnt_dump_mono_stats)]
 pub(crate) struct CouldntDumpMonoStats {
     pub error: String,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_encountered_error_while_instantiating)]
@@ -64,7 +55,6 @@ pub(crate) struct EncounteredErrorWhileInstantiating<'tcx> {
     pub kind: &'static str,
     pub instance: Instance<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_encountered_error_while_instantiating_global_asm)]
@@ -72,7 +62,6 @@ pub(crate) struct EncounteredErrorWhileInstantiatingGlobalAsm {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_start_not_found)]
@@ -91,7 +80,6 @@ pub(crate) struct AbiErrorDisabledVectorType<'a> {
     /// Whether this is a problem at a call site or at a declaration.
     pub is_call: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_abi_error_unsupported_vector_type)]
@@ -103,7 +91,6 @@ pub(crate) struct AbiErrorUnsupportedVectorType<'a> {
     /// Whether this is a problem at a call site or at a declaration.
     pub is_call: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_abi_required_target_feature)]

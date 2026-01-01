@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/partitioning.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=46 | LINES=97 */
 // Partitioning Codegen Units for Incremental Compilation
 // ======================================================
 //
@@ -97,54 +96,40 @@
 use std::cmp;
 use std::collections::hash_map::Entry;
 use std::fs::{self, File};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::io::Write;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::sync;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::attrs::{InlineAttr, Linkage};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, DefIdSet, LOCAL_CRATE};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::definitions::DefPathDataName;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::middle::exported_symbols::{SymbolExportInfo, SymbolExportLevel};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::mono::{
     CodegenUnit, CodegenUnitNameBuilder, InstantiationMode, MonoItem, MonoItemData,
     MonoItemPartitions, Visibility,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{characteristic_def_id_of_type, with_no_trimmed_paths};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, InstanceKind, TyCtxt};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::CodegenUnits;
 use crate::rustc_complete::config::{DumpMonoStatsFormat, SwitchWithOptPath};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 
 use crate::collector::{self, MonoItemCollectionStrategy, UsageMap};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{CouldntDumpMonoStats, SymbolAlreadyDefined};
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=PartitioningCx | COMPLEXITY=2 | LINES=5 */
 
 struct PartitioningCx<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     usage_map: &'a UsageMap<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PlacedMonoItems | COMPLEXITY=2 | LINES=7 */
 
 struct PlacedMonoItems<'tcx> {
     /// The codegen units, sorted by name to make things deterministic.
@@ -152,7 +137,6 @@ struct PlacedMonoItems<'tcx> {
 
     internalization_candidates: UnordSet<MonoItem<'tcx>>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=partition | COMPLEXITY=32 | LINES=59 */
 
 // The output CGUs are sorted by name.
 fn partition<'tcx, I>(
@@ -212,7 +196,6 @@ where
 
     codegen_units
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=place_mono_items | COMPLEXITY=55 | LINES=114 */
 
 fn place_mono_items<'tcx, I>(cx: &PartitioningCx<'_, 'tcx>, mono_items: I) -> PlacedMonoItems<'tcx>
 where
@@ -327,7 +310,6 @@ where
         });
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=merge_codegen_units | COMPLEXITY=68 | LINES=183 */
 
 // This function requires the CGUs to be sorted by name on input, and ensures
 // they are sorted by name on return, for deterministic behaviour.
@@ -511,7 +493,6 @@ fn merge_codegen_units<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=compute_inlined_overlap | COMPLEXITY=13 | LINES=17 */
 
 /// Compute the combined size of all inlined items that appear in both `cgu1`
 /// and `cgu2`.
@@ -529,7 +510,6 @@ fn compute_inlined_overlap<'tcx>(cgu1: &CodegenUnit<'tcx>, cgu2: &CodegenUnit<'t
     }
     overlap
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=internalize_symbols | COMPLEXITY=48 | LINES=78 */
 
 fn internalize_symbols<'tcx>(
     cx: &PartitioningCx<'_, 'tcx>,
@@ -608,7 +588,6 @@ fn internalize_symbols<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=mark_code_coverage_dead_code_cgu | COMPLEXITY=10 | LINES=22 */
 
 fn mark_code_coverage_dead_code_cgu<'tcx>(codegen_units: &mut [CodegenUnit<'tcx>]) {
     assert!(!codegen_units.is_empty());
@@ -631,7 +610,6 @@ fn mark_code_coverage_dead_code_cgu<'tcx>(codegen_units: &mut [CodegenUnit<'tcx>
 
     dead_code_cgu.make_code_coverage_dead_code_cgu();
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=characteristic_def_id_of_mono_item | COMPLEXITY=31 | LINES=65 */
 
 fn characteristic_def_id_of_mono_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -697,7 +675,6 @@ fn characteristic_def_id_of_mono_item<'tcx>(
         MonoItem::GlobalAsm(item_id) => Some(item_id.owner_id.to_def_id()),
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=compute_codegen_unit_name | COMPLEXITY=27 | LINES=48 */
 
 fn compute_codegen_unit_name(
     tcx: TyCtxt<'_>,
@@ -746,13 +723,11 @@ fn compute_codegen_unit_name(
         name_builder.build_cgu_name(def_path.krate, components, volatile_suffix)
     })
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fallback_cgu_name | COMPLEXITY=4 | LINES=5 */
 
 // Anything we can't find a proper codegen unit for goes into this.
 fn fallback_cgu_name(name_builder: &mut CodegenUnitNameBuilder<'_>) -> Symbol {
     name_builder.build_cgu_name(LOCAL_CRATE, &["fallback"], Some("cgu"))
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=mono_item_linkage_and_visibility | COMPLEXITY=6 | LINES=20 */
 
 fn mono_item_linkage_and_visibility<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -773,7 +748,6 @@ fn mono_item_linkage_and_visibility<'tcx>(
     );
     (Linkage::External, vis)
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=static_visibility | COMPLEXITY=6 | LINES=15 */
 
 type CguNameCache = UnordMap<(DefId, bool), Symbol>;
 
@@ -789,7 +763,6 @@ fn static_visibility<'tcx>(
         Visibility::Hidden
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=mono_item_visibility | COMPLEXITY=64 | LINES=148 */
 
 fn mono_item_visibility<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -938,7 +911,6 @@ fn mono_item_visibility<'tcx>(
         Visibility::Hidden
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=default_visibility | COMPLEXITY=19 | LINES=26 */
 
 fn default_visibility(tcx: TyCtxt<'_>, id: DefId, is_generic: bool) -> Visibility {
     // Fast-path to avoid expensive query call below
@@ -965,7 +937,6 @@ fn default_visibility(tcx: TyCtxt<'_>, id: DefId, is_generic: bool) -> Visibilit
         SymbolExportLevel::Rust => tcx.sess.default_visibility().into(),
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=debug_dump | COMPLEXITY=86 | LINES=141 */
 
 fn debug_dump<'a, 'tcx: 'a>(tcx: TyCtxt<'tcx>, label: &str, cgus: &[CodegenUnit<'tcx>]) {
     let dump = move || {
@@ -1107,7 +1078,6 @@ fn debug_dump<'a, 'tcx: 'a>(tcx: TyCtxt<'tcx>, label: &str, cgus: &[CodegenUnit<
 
     debug!("{}", dump());
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=assert_symbols_are_distinct | COMPLEXITY=22 | LINES=31 */
 
 #[inline(never)] // give this a place in the profiler
 fn assert_symbols_are_distinct<'a, 'tcx, I>(tcx: TyCtxt<'tcx>, mono_items: I)
@@ -1139,7 +1109,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=collect_and_partition_mono_items | COMPLEXITY=55 | LINES=105 */
 
 fn collect_and_partition_mono_items(tcx: TyCtxt<'_>, (): ()) -> MonoItemPartitions<'_> {
     let collection_strategy = if tcx.sess.link_dead_code() {
@@ -1245,7 +1214,6 @@ fn collect_and_partition_mono_items(tcx: TyCtxt<'_>, (): ()) -> MonoItemPartitio
 
     MonoItemPartitions { all_mono_items: tcx.arena.alloc(mono_items), codegen_units }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=dump_mono_items_stats | COMPLEXITY=36 | LINES=77 */
 
 /// Outputs stats about instantiation counts and estimated size, per `MonoItem`'s
 /// def, to a file in the given output directory.
@@ -1323,7 +1291,6 @@ fn dump_mono_items_stats<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=32 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.collect_and_partition_mono_items = collect_and_partition_mono_items;

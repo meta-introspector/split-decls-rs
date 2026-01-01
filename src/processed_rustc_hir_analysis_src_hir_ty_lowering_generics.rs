@@ -1,34 +1,25 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/generics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ast::ParamKindOrd;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, GenericArg};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, GenericArgsRef, GenericParamDef, GenericParamDefKind, IsSuggestable, Ty,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::builtin::LATE_BOUND_LIFETIME_ARGUMENTS;
 use crate::rustc_complete::kw;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{HirTyLowerer, IsMethodCall};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::wrong_number_of_generic_args::{GenericArgsInfo, WrongNumberOfGenericArgs};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::hir_ty_lowering::errors::prohibit_assoc_item_constraint;
 use crate::hir_ty_lowering::{
     ExplicitLateBound, GenericArgCountMismatch, GenericArgCountResult, GenericArgPosition,
     GenericArgsLowerer,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=generic_arg_mismatch_err | COMPLEXITY=83 | LINES=123 */
 
 /// Report an error that a generic argument did not match the generic parameter that was
 /// expected.
@@ -152,7 +143,6 @@ fn generic_arg_mismatch_err(
 
     err.emit()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=lower_generic_args | COMPLEXITY=123 | LINES=236 */
 
 /// Lower generic arguments from the HIR to the [`crate::rustc_middle::ty`] representation.
 ///
@@ -389,7 +379,6 @@ pub fn lower_generic_args<'tcx: 'a, 'a>(
 
     tcx.mk_args(&args)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_generic_arg_count_for_call | COMPLEXITY=9 | LINES=17 */
 
 /// Checks that the correct number of generic arguments have been provided.
 /// Used specifically for function calls.
@@ -407,7 +396,6 @@ pub fn check_generic_arg_count_for_call(
     let has_self = generics.parent.is_none() && generics.has_self;
     check_generic_arg_count(cx, def_id, seg, generics, gen_pos, has_self)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=76 | LINES=204 */
 
 /// Checks that the correct number of generic arguments have been provided.
 /// This is used both for datatypes and function calls.
@@ -612,7 +600,6 @@ pub(crate) fn check_generic_arg_count(
             .map_err(|reported| GenericArgCountMismatch { reported, invalid_args }),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=46 */
 
 /// Prohibits explicit lifetime arguments if late-bound lifetime parameters
 /// are present. This is used both for datatypes and function calls.

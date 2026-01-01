@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/large_enums.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{HasDataLayout, Size, TagEncoding, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::mir::interpret::AllocId;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::util::IntTypeExt;
 use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 use crate::rustc_complete::Session;
 
 use crate::patch::MirPatch;
@@ -21,7 +18,6 @@ use crate::patch::MirPatch;
 ///   Small,
 ///   Large([u32; 1024]),
 /// }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 /// ```
 /// Instead of emitting moves of the large variant, perform a memcpy instead.
 /// Based off of [this HackMD](https://hackmd.io/@ft4bxUsFT5CEUBmRKYHr7w/rJM8BBPzD).
@@ -32,7 +28,6 @@ use crate::patch::MirPatch;
 pub(super) struct EnumSizeOpt {
     pub(crate) discrepancy: u64,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=34 | LINES=140 */
 
 impl<'tcx> crate::MirPass<'tcx> for EnumSizeOpt {
     fn is_enabled(&self, sess: &Session) -> bool {
@@ -173,7 +168,6 @@ impl<'tcx> crate::MirPass<'tcx> for EnumSizeOpt {
         false
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=candidate | COMPLEXITY=59 | LINES=80 */
 
 impl EnumSizeOpt {
     fn candidate<'tcx>(

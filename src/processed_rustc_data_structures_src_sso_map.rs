@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sso/map.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=73 */
 use std::fmt;
 use std::hash::Hash;
 use std::ops::Index;
@@ -73,7 +72,6 @@ pub enum SsoHashMap<K, V> {
     Array(ArrayVec<(K, V), SSO_ARRAY_SIZE>),
     Map(FxHashMap<K, V>),
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=62 | LINES=101 */
 
 impl<K, V> SsoHashMap<K, V> {
     /// Creates an empty `SsoHashMap`.
@@ -175,7 +173,6 @@ impl<K, V> SsoHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=migrate_if_full | COMPLEXITY=130 | LINES=163 */
 
 impl<K: Eq + Hash, V> SsoHashMap<K, V> {
     /// Changes underlying storage from array to hashmap
@@ -339,7 +336,6 @@ impl<K: Eq + Hash, V> SsoHashMap<K, V> {
         Entry { ssomap: self, key }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<K, V> Default for SsoHashMap<K, V> {
     #[inline]
@@ -347,7 +343,6 @@ impl<K, V> Default for SsoHashMap<K, V> {
         Self::new()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=8 */
 
 impl<K: Eq + Hash, V> FromIterator<(K, V)> for SsoHashMap<K, V> {
     fn from_iter<I: IntoIterator<Item = (K, V)>>(iter: I) -> SsoHashMap<K, V> {
@@ -356,7 +351,6 @@ impl<K: Eq + Hash, V> FromIterator<(K, V)> for SsoHashMap<K, V> {
         map
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=19 | LINES=29 */
 
 impl<K: Eq + Hash, V> Extend<(K, V)> for SsoHashMap<K, V> {
     fn extend<I>(&mut self, iter: I)
@@ -386,7 +380,6 @@ impl<K: Eq + Hash, V> Extend<(K, V)> for SsoHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=7 | LINES=20 */
 
 impl<'a, K, V> Extend<(&'a K, &'a V)> for SsoHashMap<K, V>
 where
@@ -407,7 +400,6 @@ where
         Extend::<(K, V)>::extend_reserve(self, additional)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=9 | LINES=15 */
 
 impl<K, V> IntoIterator for SsoHashMap<K, V> {
     type IntoIter = Either<
@@ -423,7 +415,6 @@ impl<K, V> IntoIterator for SsoHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=adapt_array_ref_it | COMPLEXITY=2 | LINES=7 */
 
 /// adapts Item of array reference iterator to Item of hashmap reference iterator.
 #[inline(always)]
@@ -431,7 +422,6 @@ fn adapt_array_ref_it<K, V>(pair: &(K, V)) -> (&K, &V) {
     let (a, b) = pair;
     (a, b)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=adapt_array_mut_it | COMPLEXITY=2 | LINES=7 */
 
 /// adapts Item of array mut reference iterator to Item of hashmap mut reference iterator.
 #[inline(always)]
@@ -439,7 +429,6 @@ fn adapt_array_mut_it<K, V>(pair: &mut (K, V)) -> (&K, &mut V) {
     let (a, b) = pair;
     (a, b)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=10 | LINES=18 */
 
 impl<'a, K, V> IntoIterator for &'a SsoHashMap<K, V> {
     type IntoIter = Either<
@@ -458,7 +447,6 @@ impl<'a, K, V> IntoIterator for &'a SsoHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=10 | LINES=18 */
 
 impl<'a, K, V> IntoIterator for &'a mut SsoHashMap<K, V> {
     type IntoIter = Either<
@@ -477,7 +465,6 @@ impl<'a, K, V> IntoIterator for &'a mut SsoHashMap<K, V> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=10 */
 
 impl<K, V> fmt::Debug for SsoHashMap<K, V>
 where
@@ -488,7 +475,6 @@ where
         f.debug_map().entries(self.iter()).finish()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=index | COMPLEXITY=7 | LINES=12 */
 
 impl<'a, K, V> Index<&'a K> for SsoHashMap<K, V>
 where
@@ -501,14 +487,12 @@ where
         self.get(key).expect("no entry found for key")
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Entry | COMPLEXITY=2 | LINES=6 */
 
 /// A view into a single entry in a map.
 pub struct Entry<'a, K, V> {
     ssomap: &'a mut SsoHashMap<K, V>,
     key: K,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=and_modify | COMPLEXITY=25 | LINES=48 */
 
 impl<'a, K: Eq + Hash, V> Entry<'a, K, V> {
     /// Provides in-place mutable access to an occupied entry before any
@@ -557,7 +541,6 @@ impl<'a, K: Eq + Hash, V> Entry<'a, K, V> {
         &self.key
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=or_default | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, K: Eq + Hash, V: Default> Entry<'a, K, V> {
     /// Ensures a value is in the entry by inserting the default value if empty,

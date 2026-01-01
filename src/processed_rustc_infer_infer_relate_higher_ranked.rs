@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/relate/higher_ranked.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 // Helper routines for higher-ranked things. See the `doc` module at
 // the end of the file for details.
 
 use crate::rustc_complete::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=enter_forall_and_leak_universe | COMPLEXITY=29 | LINES=107 */
 
 use super::RelateResult;
 use crate::infer::InferCtxt;

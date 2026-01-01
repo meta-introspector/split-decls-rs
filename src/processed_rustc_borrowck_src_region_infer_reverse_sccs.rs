@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/reverse_sccs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Range;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
 use crate::rustc_complete::ty::RegionVid;
@@ -21,7 +19,6 @@ pub(crate) struct ReverseSccGraph {
     /// index into here.
     universal_regions: Vec<RegionVid>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=38 */
 
 impl ReverseSccGraph {
     pub(super) fn compute(

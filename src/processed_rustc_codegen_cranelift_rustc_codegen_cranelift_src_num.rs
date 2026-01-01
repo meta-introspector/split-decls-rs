@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/num.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=bin_op_to_intcc | COMPLEXITY=27 | LINES=42 */
 // Various operations on integer and floating-point numbers
 
 use crate::codegen_f16_f128;
@@ -42,7 +41,6 @@ fn bin_op_to_intcc(bin_op: BinOp, signed: bool) -> IntCC {
         _ => unreachable!(),
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=codegen_three_way_compare | COMPLEXITY=3 | LINES=16 */
 
 fn codegen_three_way_compare<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -59,7 +57,6 @@ fn codegen_three_way_compare<'tcx>(
     let val = fx.bcx.ins().isub(gt, lt);
     CValue::by_val(val, fx.layout_of(fx.tcx.ty_ordering_enum(fx.mir.span)))
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=codegen_compare_bin_op | COMPLEXITY=2 | LINES=12 */
 
 fn codegen_compare_bin_op<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -72,7 +69,6 @@ fn codegen_compare_bin_op<'tcx>(
     let val = fx.bcx.ins().icmp(intcc, lhs, rhs);
     CValue::by_val(val, fx.layout_of(fx.tcx.types.bool))
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=41 */
 
 pub(crate) fn codegen_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -114,7 +110,6 @@ pub(crate) fn codegen_binop<'tcx>(
         _ => unreachable!("{:?}({:?}, {:?})", bin_op, in_lhs.layout().ty, in_rhs.layout().ty),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=codegen_bool_binop | COMPLEXITY=10 | LINES=21 */
 
 fn codegen_bool_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -136,7 +131,6 @@ fn codegen_bool_binop<'tcx>(
 
     CValue::by_val(res, fx.layout_of(fx.tcx.types.bool))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=67 */
 
 pub(crate) fn codegen_int_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -204,7 +198,6 @@ pub(crate) fn codegen_int_binop<'tcx>(
 
     CValue::by_val(val, in_lhs.layout())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=106 */
 
 pub(crate) fn codegen_checked_int_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -311,7 +304,6 @@ pub(crate) fn codegen_checked_int_binop<'tcx>(
     let out_layout = fx.layout_of(Ty::new_tup(fx.tcx, &[in_lhs.layout().ty, fx.tcx.types.bool]));
     CValue::by_val_pair(res, has_overflow, out_layout)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=36 */
 
 pub(crate) fn codegen_saturating_int_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -348,7 +340,6 @@ pub(crate) fn codegen_saturating_int_binop<'tcx>(
 
     CValue::by_val(val, lhs.layout())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=95 */
 
 pub(crate) fn codegen_float_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -444,7 +435,6 @@ pub(crate) fn codegen_float_binop<'tcx>(
     };
     CValue::by_val(res, in_lhs.layout())
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=codegen_ptr_binop | COMPLEXITY=28 | LINES=63 */
 
 fn codegen_ptr_binop<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -508,7 +498,6 @@ fn codegen_ptr_binop<'tcx>(
         CValue::by_val(res, fx.layout_of(fx.tcx.types.bool))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 // In Rust floating point min and max don't propagate NaN. In Cranelift they do however.
 // For this reason it is necessary to use `a.is_nan() ? b : (a >= b ? b : a)` for `minnumf*`
@@ -522,7 +511,6 @@ pub(crate) fn codegen_float_min(fx: &mut FunctionCx<'_, '_, '_>, a: Value, b: Va
     let temp = fx.bcx.ins().select(a_ge_b, b, a);
     fx.bcx.ins().select(a_is_nan, b, temp)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn codegen_float_max(fx: &mut FunctionCx<'_, '_, '_>, a: Value, b: Value) -> Value {
     // FIXME(bytecodealliance/wasmtime#8312): Replace with Cranelift `fcmp` once

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_driver_impl/src/pretty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // The various pretty-printing routines.
 
 use std::cell::Cell;
@@ -8,20 +7,14 @@ use std::fmt::Write;
 use rustc_ast_pretty::pprust as pprust_ast;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{write_mir_graphviz, write_mir_pretty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_mir_build::thir::print::{thir_flat, thir_tree};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_public::rustc_internal::pretty::write_smir_pretty;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileName, Ident};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir_pretty as pprust_hir};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AstNoAnn; | COMPLEXITY=4 | LINES=7 */
 
 pub use self::PpMode::*;
 pub use self::PpSourceMode::*;
@@ -29,7 +22,6 @@ pub use self::PpSourceMode::*;
 struct AstNoAnn;
 
 impl pprust_ast::PpAnn for AstNoAnn {}
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=AstIdentifiedAnn; | COMPLEXITY=23 | LINES=40 */
 
 struct AstIdentifiedAnn;
 
@@ -70,12 +62,10 @@ impl pprust_ast::PpAnn for AstIdentifiedAnn {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=HirIdentifiedAnn | COMPLEXITY=2 | LINES=4 */
 
 struct HirIdentifiedAnn<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=31 | LINES=47 */
 
 impl<'tcx> pprust_hir::PpAnn for HirIdentifiedAnn<'tcx> {
     fn nested(&self, state: &mut pprust_hir::State<'_>, nested: pprust_hir::Nested) {
@@ -123,12 +113,10 @@ impl<'tcx> pprust_hir::PpAnn for HirIdentifiedAnn<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AstHygieneAnn | COMPLEXITY=2 | LINES=4 */
 
 struct AstHygieneAnn<'a> {
     sess: &'a Session,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=post | COMPLEXITY=17 | LINES=22 */
 
 impl<'a> pprust_ast::PpAnn for AstHygieneAnn<'a> {
     fn post(&self, s: &mut pprust_ast::State<'_>, node: pprust_ast::AnnNode<'_>) {
@@ -151,13 +139,11 @@ impl<'a> pprust_ast::PpAnn for AstHygieneAnn<'a> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=HirTypedAnn | COMPLEXITY=2 | LINES=5 */
 
 struct HirTypedAnn<'tcx> {
     tcx: TyCtxt<'tcx>,
     maybe_typeck_results: Cell<Option<&'tcx ty::TypeckResults<'tcx>>>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=22 | LINES=36 */
 
 impl<'tcx> pprust_hir::PpAnn for HirTypedAnn<'tcx> {
     fn nested(&self, state: &mut pprust_hir::State<'_>, nested: pprust_hir::Nested) {
@@ -194,7 +180,6 @@ impl<'tcx> pprust_hir::PpAnn for HirTypedAnn<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_source | COMPLEXITY=2 | LINES=13 */
 
 fn get_source(sess: &Session) -> (String, FileName) {
     let src_name = sess.io.input.source_name();
@@ -208,12 +193,10 @@ fn get_source(sess: &Session) -> (String, FileName) {
     );
     (src, src_name)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=write_or_print | COMPLEXITY=2 | LINES=4 */
 
 fn write_or_print(out: &str, sess: &Session) {
     sess.io.output_file.as_ref().unwrap_or(&OutFileName::Stdout).overwrite(out, sess);
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 // Extra data for pretty-printing, the form of which depends on what kind of
 // pretty-printing we are doing.
@@ -221,7 +204,6 @@ pub enum PrintExtra<'tcx> {
     AfterParsing { krate: &'tcx ast::Crate },
     NeedsAstMap { tcx: TyCtxt<'tcx> },
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=with_krate | COMPLEXITY=17 | LINES=19 */
 
 impl<'tcx> PrintExtra<'tcx> {
     fn with_krate<F, R>(&self, f: F) -> R
@@ -241,7 +223,6 @@ impl<'tcx> PrintExtra<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=print | COMPLEXITY=58 | LINES=117 */
 
 pub fn print<'tcx>(sess: &Session, ppm: PpMode, ex: PrintExtra<'tcx>) {
     if ppm.needs_analysis() {

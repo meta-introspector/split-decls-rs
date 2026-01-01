@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/common.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Code that is useful in various codegen modules.
 
 use std::borrow::Borrow;
 
 use libc::{c_char, c_uint};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::Primitive::Pointer;
 use crate::rustc_abi::{self as abi, HasDataLayout as _};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_codegen_ssa::common::TypeKind;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hashes::Hash128;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::cstore::DllImport;
 use tracing::debug;
@@ -26,9 +21,7 @@ use tracing::debug;
 use crate::consts::const_alloc_to_llvm;
 pub(crate) use crate::context::CodegenCx;
 use crate::context::{GenericCx, SCx};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self, BasicBlock, ConstantInt, FALSE, Metadata, TRUE, ToLlvmBool};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=47 */
 use crate::type_::Type;
 use crate::value::Value;
 
@@ -76,7 +69,6 @@ pub(crate) struct Funclet<'ll> {
     cleanuppad: &'ll Value,
     operand: llvm::OperandBundleBox<'ll>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 impl<'ll> Funclet<'ll> {
     pub(crate) fn new(cleanuppad: &'ll Value) -> Self {
@@ -91,7 +83,6 @@ impl<'ll> Funclet<'ll> {
         self.operand.as_ref()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> BackendTypes for GenericCx<'ll, CX> {
     type Value = &'ll Value;
@@ -107,7 +98,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> BackendTypes for GenericCx<'ll, CX> {
     type DILocation = &'ll llvm::debuginfo::DILocation;
     type DIVariable = &'ll llvm::debuginfo::DIVariable;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=26 */
 
 impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     pub(crate) fn const_array(&self, ty: &'ll Type, elts: &[&'ll Value]) -> &'ll Value {
@@ -134,7 +124,6 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
         unsafe { llvm::LLVMConstNull(t) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=const_null | COMPLEXITY=184 | LINES=245 */
 
 impl<'ll, 'tcx> ConstCodegenMethods for CodegenCx<'ll, 'tcx> {
     fn const_null(&self, t: &'ll Type) -> &'ll Value {
@@ -380,13 +369,11 @@ impl<'ll, 'tcx> ConstCodegenMethods for CodegenCx<'ll, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 
 /// Get the [LLVM type][Type] of a [`Value`].
 pub(crate) fn val_ty(v: &Value) -> &Type {
     unsafe { llvm::LLVMTypeOf(v) }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn bytes_in_context<'ll>(llcx: &'ll llvm::Context, bytes: &[u8]) -> &'ll Value {
     unsafe {
@@ -394,13 +381,11 @@ pub(crate) fn bytes_in_context<'ll>(llcx: &'ll llvm::Context, bytes: &[u8]) -> &
         llvm::LLVMConstStringInContext2(llcx, ptr, bytes.len(), TRUE)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 
 pub(crate) fn named_struct<'ll>(ty: &'ll Type, elts: &[&'ll Value]) -> &'ll Value {
     let len = c_uint::try_from(elts.len()).expect("LLVMConstStructInContext elements len overflow");
     unsafe { llvm::LLVMConstNamedStruct(ty, elts.as_ptr(), len) }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=struct_in_context | COMPLEXITY=7 | LINES=9 */
 
 fn struct_in_context<'ll>(
     llcx: &'ll llvm::Context,
@@ -410,18 +395,15 @@ fn struct_in_context<'ll>(
     let len = c_uint::try_from(elts.len()).expect("LLVMConstStructInContext elements len overflow");
     unsafe { llvm::LLVMConstStructInContext(llcx, elts.as_ptr(), len, packed.to_llvm_bool()) }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=hi_lo_to_u128 | COMPLEXITY=2 | LINES=5 */
 
 #[inline]
 fn hi_lo_to_u128(lo: u64, hi: u64) -> u128 {
     ((hi as u128) << 64) | (lo as u128)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=try_as_const_integral | COMPLEXITY=7 | LINES=4 */
 
 fn try_as_const_integral(v: &Value) -> Option<&ConstantInt> {
     unsafe { llvm::LLVMIsAConstantInt(v) }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn get_dllimport<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -431,21 +413,18 @@ pub(crate) fn get_dllimport<'tcx>(
     tcx.native_library(id)
         .and_then(|lib| lib.dll_imports.iter().find(|di| di.name.as_str() == name))
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=as_c_char_ptr | COMPLEXITY=4 | LINES=6 */
 
 /// Extension trait for explicit casts to `*const c_char`.
 pub(crate) trait AsCCharPtr {
     /// Equivalent to `self.as_ptr().cast()`, but only casts to `*const c_char`.
     fn as_c_char_ptr(&self) -> *const c_char;
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=as_c_char_ptr | COMPLEXITY=5 | LINES=6 */
 
 impl AsCCharPtr for str {
     fn as_c_char_ptr(&self) -> *const c_char {
         self.as_ptr().cast()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=as_c_char_ptr | COMPLEXITY=5 | LINES=6 */
 
 impl AsCCharPtr for [u8] {
     fn as_c_char_ptr(&self) -> *const c_char {

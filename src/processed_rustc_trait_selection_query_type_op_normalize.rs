@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::fmt;
 
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::query::NoSolution;
 pub use crate::rustc_complete::traits::query::type_op::{DeeplyNormalize, Normalize};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Lift, ParamEnvAnd, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=12 | LINES=27 */
 use crate::traits::ObligationCtxt;
 
 impl<'tcx, T> super::QueryTypeOp<'tcx> for Normalize<T>
@@ -39,7 +35,6 @@ where
         Ok(key.value.value)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=17 | LINES=42 */
 
 impl<'tcx, T> super::QueryTypeOp<'tcx> for DeeplyNormalize<T>
 where
@@ -82,7 +77,6 @@ where
         .map_err(|_| NoSolution)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=2 | LINES=9 */
 
 pub trait Normalizable<'tcx>:
     fmt::Debug + TypeFoldable<TyCtxt<'tcx>> + Lift<TyCtxt<'tcx>> + Copy
@@ -92,7 +86,6 @@ pub trait Normalizable<'tcx>:
         canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
     ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution>;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> Normalizable<'tcx> for Ty<'tcx> {
     fn type_op_method(
@@ -102,7 +95,6 @@ impl<'tcx> Normalizable<'tcx> for Ty<'tcx> {
         tcx.type_op_normalize_ty(canonicalized)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> Normalizable<'tcx> for ty::Clause<'tcx> {
     fn type_op_method(
@@ -112,7 +104,6 @@ impl<'tcx> Normalizable<'tcx> for ty::Clause<'tcx> {
         tcx.type_op_normalize_clause(canonicalized)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> Normalizable<'tcx> for ty::PolyFnSig<'tcx> {
     fn type_op_method(
@@ -122,7 +113,6 @@ impl<'tcx> Normalizable<'tcx> for ty::PolyFnSig<'tcx> {
         tcx.type_op_normalize_poly_fn_sig(canonicalized)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> Normalizable<'tcx> for ty::FnSig<'tcx> {
     fn type_op_method(
@@ -132,7 +122,6 @@ impl<'tcx> Normalizable<'tcx> for ty::FnSig<'tcx> {
         tcx.type_op_normalize_fn_sig(canonicalized)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=type_op_method | COMPLEXITY=6 | LINES=11 */
 
 /// This impl is not needed, since we never normalize type outlives predicates
 /// in the old solver, but is required by trait bounds to be happy.

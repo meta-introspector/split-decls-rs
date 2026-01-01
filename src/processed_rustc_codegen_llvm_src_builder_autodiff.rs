@@ -1,25 +1,18 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/builder/autodiff.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ptr;
 
 use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::common::TypeKind;
 use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{PseudoCanonicalInput, Ty, TyCtxt, TypingEnv};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::builder::{Builder, PlaceRef, UNNAMED};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::context::SimpleCx;
 use crate::declare::declare_simple_fn;
 use crate::llvm;
 use crate::llvm::{Metadata, TRUE, Type};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=51 | LINES=77 */
 use crate::value::Value;
 
 pub(crate) fn adjust_activity_to_abi<'tcx>(
@@ -97,7 +90,6 @@ pub(crate) fn adjust_activity_to_abi<'tcx>(
         da.insert(pos, activity);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=match_args_from_caller_to_enzyme | COMPLEXITY=88 | LINES=146 */
 
 // When we call the `__enzyme_autodiff` or `__enzyme_fwddiff` function, we need to pass all the
 // original inputs, as well as metadata and the additional shadow arguments.
@@ -244,7 +236,6 @@ fn match_args_from_caller_to_enzyme<'ll, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=99 */
 
 /// When differentiating `fn_to_diff`, take a `outer_fn` and generate another
 /// function with expected naming and calling conventions[^1] which will be

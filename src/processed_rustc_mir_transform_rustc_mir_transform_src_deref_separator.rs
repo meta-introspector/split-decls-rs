@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/deref_separator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::visit::NonUseContext::VarDebugInfo;
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=DerefChecker | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 
@@ -15,7 +13,6 @@ struct DerefChecker<'a, 'tcx> {
     patcher: MirPatch<'tcx>,
     local_decls: &'a LocalDecls<'tcx>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=30 | LINES=54 */
 
 impl<'a, 'tcx> MutVisitor<'tcx> for DerefChecker<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -70,7 +67,6 @@ impl<'a, 'tcx> MutVisitor<'tcx> for DerefChecker<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub(super) fn deref_finder<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     let patch = MirPatch::new(body);
@@ -82,7 +78,6 @@ pub(super) fn deref_finder<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
 
     checker.patcher.apply(body);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> crate::MirPass<'tcx> for Derefer {
     fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {

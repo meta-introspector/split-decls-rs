@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/traits.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::sym;
 
 use crate::lints::{DropGlue, DropTraitConstraintsDiag};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=37 */
 
 declare_lint! {
     /// The `drop_bounds` lint checks for generics with `std::ops::Drop` as
@@ -47,7 +42,6 @@ declare_lint! {
     Warn,
     "bounds of the form `T: Drop` are most likely incorrect"
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=37 */
 
 declare_lint! {
     /// The `dyn_drop` lint checks for trait objects with `std::ops::Drop`.
@@ -85,7 +79,6 @@ declare_lint! {
     Warn,
     "trait objects of the form `dyn Drop` are useless"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=32 | LINES=45 */
 
 declare_lint_pass!(
     /// Lint for bounds of the form `T: Drop`, which usually

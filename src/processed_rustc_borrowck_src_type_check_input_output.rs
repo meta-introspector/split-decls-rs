@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/input_output.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 // This module contains code to equate the input/output types appearing
 // in the MIR with the expected input/output types from the function
 // signature. This requires a bit of processing, as the expected types
@@ -14,16 +13,12 @@ use std::assert_matches::assert_matches;
 use itertools::Itertools;
 use rustc_hir as hir;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{Locations, TypeChecker};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=equate_normalized_input_or_output | COMPLEXITY=61 | LINES=191 */
 use crate::renumber::RegionCtxt;
 use crate::universal_regions::DefiningTy;
 

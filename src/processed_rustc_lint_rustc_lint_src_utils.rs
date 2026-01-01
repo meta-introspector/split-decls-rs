@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Expr, ExprKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::sym;
 
 use crate::LateContext;
 
 /// Given an expression, peel all of casts (`<expr> as ...`, `<expr>.cast{,_mut,_const}()`,
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=49 */
 /// `ptr::from_ref(<expr>)`, ...) and init expressions.
 ///
 /// Returns the innermost expression and a boolean representing if one of the casts was

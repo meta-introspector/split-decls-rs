@@ -1,31 +1,24 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/as_rvalue.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // See docs in `build/expr/mod.rs`.
 
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::cast::{CastTy, mir_cast_kind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::util::IntTypeExt;
 use crate::rustc_complete::ty::{self, Ty, UpvarArgs};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::debug;
 
 use crate::builder::expr::as_place::PlaceBase;
 use crate::builder::expr::category::{Category, RvalueFunc};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::builder::{BlockAnd, BlockAndExtension, Builder, NeedsTemporary};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=build_zero_repeat | COMPLEXITY=293 | LINES=777 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Returns an rvalue suitable for use until the end of the current

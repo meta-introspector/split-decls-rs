@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/scripts/cargo-clif.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=29 | LINES=84 */
 use std::env;
 #[cfg(unix)]
 use std::os::unix::process::CommandExt;

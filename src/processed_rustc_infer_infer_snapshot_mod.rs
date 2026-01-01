@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/snapshot/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::undo_log::UndoLogs;
 use crate::rustc_complete::ty;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use super::InferCtxt;
 use super::region_constraints::RegionSnapshot;
 
 
 use undo_log::{Snapshot, UndoLog};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=CombinedSnapshot | COMPLEXITY=2 | LINES=7 */
 
 #[must_use = "once you start a snapshot, you should always consume it"]
 pub struct CombinedSnapshot<'tcx> {
@@ -18,7 +15,6 @@ pub struct CombinedSnapshot<'tcx> {
     region_constraints_snapshot: RegionSnapshot,
     universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=VariableLengths | COMPLEXITY=2 | LINES=8 */
 
 struct VariableLengths {
     region_constraints_len: usize,
@@ -27,7 +23,6 @@ struct VariableLengths {
     float_var_len: usize,
     const_var_len: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=variable_lengths | COMPLEXITY=31 | LINES=97 */
 
 impl<'tcx> InferCtxt<'tcx> {
     fn variable_lengths(&self) -> VariableLengths {

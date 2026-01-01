@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/internal_cx/helpers.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=2 | LINES=15 */
 // A set of traits that define a stable interface to rustc's internals.
 //
 // These traits are primarily used to clarify the behavior of different
@@ -15,7 +14,6 @@ pub(crate) trait ExistentialProjectionHelpers<'tcx> {
         term: ty::Term<'tcx>,
     ) -> ty::ExistentialProjection<'tcx>;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) trait ExistentialTraitRefHelpers<'tcx> {
     fn new_from_args(
@@ -24,7 +22,6 @@ pub(crate) trait ExistentialTraitRefHelpers<'tcx> {
         args: ty::GenericArgsRef<'tcx>,
     ) -> ty::ExistentialTraitRef<'tcx>;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) trait TraitRefHelpers<'tcx> {
     fn new_from_args(

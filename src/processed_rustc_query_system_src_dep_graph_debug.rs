@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/dep_graph/debug.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // Code for debugging the dep-graph.
 
 use std::error::Error;
@@ -8,7 +7,6 @@ use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sync::Lock;
 
 use super::{DepNode, DepNodeIndex};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=DepNodeFilter | COMPLEXITY=2 | LINES=12 */
 
 /// A dep-node filter goes from a user-defined string to a query over
 /// nodes. Right now the format is like this:
@@ -21,7 +19,6 @@ use super::{DepNode, DepNodeIndex};
 pub struct DepNodeFilter {
     text: String,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=17 */
 
 impl DepNodeFilter {
     pub fn new(text: &str) -> Self {
@@ -39,7 +36,6 @@ impl DepNodeFilter {
         self.text.split('&').map(|s| s.trim()).all(|f| debug_str.contains(f))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=EdgeFilter | COMPLEXITY=2 | LINES=8 */
 
 /// A filter like `F -> G` where `F` and `G` are valid dep-node
 /// filters. This can be used to test the source/target independently.
@@ -48,7 +44,6 @@ pub struct EdgeFilter {
     pub target: DepNodeFilter,
     pub index_to_node: Lock<FxHashMap<DepNodeIndex, DepNode>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=19 */
 
 impl EdgeFilter {
     pub fn new(test: &str) -> Result<EdgeFilter, Box<dyn Error>> {

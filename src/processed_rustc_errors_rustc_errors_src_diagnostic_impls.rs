@@ -1,27 +1,22 @@
 // SRC: ../rust/compiler/rustc_errors/src/diagnostic_impls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 
 use crate::rustc_abi::TargetDataLayoutErrors;
 use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::Subdiagnostic;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::diagnostic::DiagLocation;
 use crate::{
     Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, Subdiagnostic,
     fluent_generated as fluent,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for DiagLocation {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::from(self.to_string()))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=DiagSymbolList | COMPLEXITY=5 | LINES=9 */
 
 #[derive(Clone)]
 pub struct DiagSymbolList<S = Symbol>(Vec<S>);
@@ -31,14 +26,12 @@ impl<S> From<Vec<S>> for DiagSymbolList<S> {
         DiagSymbolList(v)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=6 */
 
 impl<S> FromIterator<S> for DiagSymbolList<S> {
     fn from_iter<T: IntoIterator<Item = S>>(iter: T) -> Self {
         iter.into_iter().collect::<Vec<_>>().into()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=8 */
 
 impl<S: std::fmt::Display> IntoDiagArg for DiagSymbolList<S> {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
@@ -47,7 +40,6 @@ impl<S: std::fmt::Display> IntoDiagArg for DiagSymbolList<S> {
         )
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=29 | LINES=47 */
 
 impl<G: EmissionGuarantee> Diagnostic<'_, G> for TargetDataLayoutErrors<'_> {
     fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
@@ -95,20 +87,17 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for TargetDataLayoutErrors<'_> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=SingleLabelManySpans | COMPLEXITY=4 | LINES=6 */
 
 /// Utility struct used to apply a single label while highlighting multiple spans
 pub struct SingleLabelManySpans {
     pub spans: Vec<Span>,
     pub label: &'static str,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=5 */
 impl Subdiagnostic for SingleLabelManySpans {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
         diag.span_labels(self.spans, self.label);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ExpectedLifetimeParameter | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(errors_expected_lifetime_parameter)]
@@ -117,7 +106,6 @@ pub struct ExpectedLifetimeParameter {
     pub span: Span,
     pub count: usize,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=IndicateAnonymousLifetime | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(errors_indicate_anonymous_lifetime, code = "{suggestion}", style = "verbose")]
@@ -127,7 +115,6 @@ pub struct IndicateAnonymousLifetime {
     pub count: usize,
     pub suggestion: String,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ElidedLifetimeInPathSubdiag | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub struct ElidedLifetimeInPathSubdiag {

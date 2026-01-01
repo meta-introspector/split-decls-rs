@@ -1,28 +1,20 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/typeck_results.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::hash_map::Entry;
 use std::hash::Hash;
 use std::iter;
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordItems, UnordSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::hir_id::OwnerId;
 use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, HirId, ItemLocalId, ItemLocalMap, ItemLocalSet, Mutability,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::Span;
 
@@ -35,7 +27,6 @@ use crate::ty::{
     self, BoundVar, CanonicalPolyFnSig, ClosureSizeProfileData, GenericArgKind, GenericArgs,
     GenericArgsRef, Ty, UserArgs, tls,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=TypeckResults | COMPLEXITY=95 | LINES=202 */
 
 #[derive(TyEncodable, TyDecodable, Debug, HashStable)]
 pub struct TypeckResults<'tcx> {
@@ -238,7 +229,6 @@ pub struct TypeckResults<'tcx> {
     /// Container types and field indices of `offset_of!` expressions
     offset_of_data: ItemLocalMap<(Ty<'tcx>, Vec<(VariantIdx, FieldIdx)>)>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=159 | LINES=343 */
 
 impl<'tcx> TypeckResults<'tcx> {
     pub fn new(hir_owner: OwnerId) -> TypeckResults<'tcx> {
@@ -582,7 +572,6 @@ impl<'tcx> TypeckResults<'tcx> {
         LocalTableInContextMut { hir_owner: self.hir_owner, data: &mut self.offset_of_data }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=validate_hir_id_for_typeck_results | COMPLEXITY=6 | LINES=14 */
 
 /// Validate that the given HirId (respectively its `local_id` part) can be
 /// safely used as a key in the maps of a TypeckResults. For that to be
@@ -597,7 +586,6 @@ fn validate_hir_id_for_typeck_results(hir_owner: OwnerId, hir_id: HirId) {
         invalid_hir_id_for_typeck_results(hir_owner, hir_id);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=invalid_hir_id_for_typeck_results | COMPLEXITY=5 | LINES=12 */
 
 #[cold]
 #[inline(never)]
@@ -610,13 +598,11 @@ fn invalid_hir_id_for_typeck_results(hir_owner: OwnerId, hir_id: HirId) {
         )
     });
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LocalTableInContext | COMPLEXITY=2 | LINES=5 */
 
 pub struct LocalTableInContext<'a, V> {
     hir_owner: OwnerId,
     data: &'a ItemLocalMap<V>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=contains_key | COMPLEXITY=7 | LINES=23 */
 
 impl<'a, V> LocalTableInContext<'a, V> {
     pub fn contains_key(&self, id: HirId) -> bool {
@@ -640,7 +626,6 @@ impl<'a, V> LocalTableInContext<'a, V> {
         self.data.items().map(|(&k, v)| (k, v)).into_sorted_stable_ord_by_key(|(k, _)| k)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=index | COMPLEXITY=8 | LINES=10 */
 
 impl<'a, V> ::std::ops::Index<HirId> for LocalTableInContext<'a, V> {
     type Output = V;
@@ -651,13 +636,11 @@ impl<'a, V> ::std::ops::Index<HirId> for LocalTableInContext<'a, V> {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=LocalTableInContextMut | COMPLEXITY=2 | LINES=5 */
 
 pub struct LocalTableInContextMut<'a, V> {
     hir_owner: OwnerId,
     data: &'a mut ItemLocalMap<V>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=get_mut | COMPLEXITY=11 | LINES=34 */
 
 impl<'a, V> LocalTableInContextMut<'a, V> {
     pub fn get_mut(&mut self, id: HirId) -> Option<&mut V> {
@@ -692,14 +675,12 @@ impl<'a, V> LocalTableInContextMut<'a, V> {
         }))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=LocalSetInContext | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug)]
 pub struct LocalSetInContext<'a> {
     hir_owner: OwnerId,
     data: &'a ItemLocalSet,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=4 | LINES=11 */
 
 impl<'a> LocalSetInContext<'a> {
     pub fn is_empty(&self) -> bool {
@@ -711,14 +692,12 @@ impl<'a> LocalSetInContext<'a> {
         self.data.contains(&id.local_id)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=LocalSetInContextMut | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub struct LocalSetInContextMut<'a> {
     hir_owner: OwnerId,
     data: &'a mut ItemLocalSet,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=7 | LINES=20 */
 
 impl<'a> LocalSetInContextMut<'a> {
     pub fn is_empty(&self) -> bool {
@@ -739,7 +718,6 @@ impl<'a> LocalSetInContextMut<'a> {
         self.data.remove(&id.local_id)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UserTypeAnnotationIndex | COMPLEXITY=4 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     #[derive(HashStable)]
@@ -749,7 +727,6 @@ crate::rustc_index::newtype_index! {
         const START_INDEX = 0;
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=CanonicalUserTypeAnnotation | COMPLEXITY=2 | LINES=13 */
 
 /// Mapping of type annotation indices to canonical user type annotations.
 pub type CanonicalUserTypeAnnotations<'tcx> =
@@ -763,7 +740,6 @@ pub struct CanonicalUserTypeAnnotation<'tcx> {
     pub span: Span,
     pub inferred_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UserType | COMPLEXITY=2 | LINES=10 */
 
 /// Canonical user type annotation.
 pub type CanonicalUserType<'tcx> = Canonical<'tcx, UserType<'tcx>>;
@@ -774,7 +750,6 @@ pub struct UserType<'tcx> {
     pub kind: UserTypeKind<'tcx>,
     pub bounds: ty::Clauses<'tcx>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> UserType<'tcx> {
     pub fn new(kind: UserTypeKind<'tcx>) -> UserType<'tcx> {
@@ -787,7 +762,6 @@ impl<'tcx> UserType<'tcx> {
         UserType { kind, bounds }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// A user-given type annotation attached to a constant. These arise
 /// from constants that are named via paths, like `Foo::<A>::new` and
@@ -801,12 +775,10 @@ pub enum UserTypeKind<'tcx> {
     /// given generic parameters applied.
     TypeOf(DefId, UserArgs<'tcx>),
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=is_identity | COMPLEXITY=2 | LINES=4 */
 
 pub trait IsIdentity {
     fn is_identity(&self) -> bool;
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=is_identity | COMPLEXITY=42 | LINES=50 */
 
 impl<'tcx> IsIdentity for CanonicalUserType<'tcx> {
     /// Returns `true` if this represents the generic parameters of the form `[?0, ?1, ?2]`,
@@ -857,7 +829,6 @@ impl<'tcx> IsIdentity for CanonicalUserType<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> std::fmt::Display for UserType<'tcx> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -870,7 +841,6 @@ impl<'tcx> std::fmt::Display for UserType<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
 
 impl<'tcx> std::fmt::Display for UserTypeKind<'tcx> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -882,7 +852,6 @@ impl<'tcx> std::fmt::Display for UserTypeKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=Rust2024IncompatiblePatInfo | COMPLEXITY=7 | LINES=14 */
 
 /// Information on a pattern incompatible with Rust 2024, for use by the error/migration diagnostic
 /// emitted during THIR construction.

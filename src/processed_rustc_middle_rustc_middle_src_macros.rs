@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/macros.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=20 */
 /// A macro for triggering an ICE.
 /// Calling `bug` instead of panicking will result in a nicer error message and should
 /// therefore be preferred over `panic`/`unreachable` or others.
@@ -20,7 +19,6 @@ macro_rules! bug {
         $crate::util::bug::bug_fmt(::std::format_args!($($arg)+))
     );
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=16 */
 
 /// A macro for triggering an ICE with a span.
 /// Calling `span_bug!` instead of panicking will result in a nicer error message and point
@@ -37,7 +35,6 @@ macro_rules! span_bug {
         $crate::util::bug::span_bug_fmt($span, ::std::format_args!($($arg)+))
     );
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=15 | LINES=19 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Lift and TypeFoldable/TypeVisitable macros
@@ -57,7 +54,6 @@ macro_rules! TrivialLiftImpls {
         )+
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=21 | LINES=36 */
 
 /// Used for types that are `Copy` and which **do not care about arena
 /// allocated data** (i.e., don't need to be folded).
@@ -94,7 +90,6 @@ macro_rules! TrivialTypeTraversalImpls {
         )+
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=7 */
 
 macro_rules! TrivialTypeTraversalAndLiftImpls {
     ($($t:tt)*) => {

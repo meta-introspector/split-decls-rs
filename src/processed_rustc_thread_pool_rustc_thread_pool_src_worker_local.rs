@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/worker_local.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::fmt;
 use std::ops::Deref;
 use std::sync::Arc;
 
 use crate::registry::{Registry, WorkerThread};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=CacheAligned | COMPLEXITY=4 | LINES=12 */
 
 #[repr(align(64))]
 #[derive(Debug)]
@@ -18,13 +16,11 @@ pub struct WorkerLocal<T> {
     locals: Vec<CacheAligned<T>>,
     registry: Arc<Registry>,
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 /// We prevent concurrent access to the underlying value in the
 /// Deref impl, thus any values safe to send across threads can
 /// be used with WorkerLocal.
 unsafe impl<T: Send> Sync for WorkerLocal<T> {}
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=20 | LINES=31 */
 
 impl<T> WorkerLocal<T> {
     /// Creates a new worker local where the `initial` closure computes the
@@ -56,7 +52,6 @@ impl<T> WorkerLocal<T> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=join | COMPLEXITY=3 | LINES=7 */
 
 impl<T> WorkerLocal<Vec<T>> {
     /// Joins the elements of all the worker locals into one Vec
@@ -64,14 +59,12 @@ impl<T> WorkerLocal<Vec<T>> {
         self.into_inner().into_iter().flat_map(|v| v).collect()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<T: fmt::Debug> fmt::Debug for WorkerLocal<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("WorkerLocal").field("registry", &self.registry.id()).finish()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<T> Deref for WorkerLocal<T> {
     type Target = T;

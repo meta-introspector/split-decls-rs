@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/operand.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 
 use itertools::Either;
@@ -7,25 +6,17 @@ use rustc_abi as abi;
 use crate::rustc_abi::{
     Align, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, TagEncoding, VariantIdx, Variants,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{Pointer, Scalar, alloc_range};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, ConstValue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::place::{PlaceRef, PlaceValue};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use super::rvalue::transmute_scalar;
 use super::{FunctionCx, LocalRef};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=29 | LINES=53 */
 use crate::MemFlags;
 use crate::common::IntPredicate;
 use crate::traits::*;
@@ -79,7 +70,6 @@ pub enum OperandValue<V> {
     /// these values can still require alignment.
     ZeroSized,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=39 */
 
 impl<V: CodegenObject> OperandValue<V> {
     /// Treat this value as a pointer and return the data pointer and
@@ -119,7 +109,6 @@ impl<V: CodegenObject> OperandValue<V> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=OperandRef | COMPLEXITY=3 | LINES=17 */
 
 /// An `OperandRef` is an "SSA" reference to a Rust value, along with
 /// its type.
@@ -137,14 +126,12 @@ pub struct OperandRef<'tcx, V> {
     /// The layout of value, based on its Rust type.
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<V: CodegenObject> fmt::Debug for OperandRef<'_, V> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "OperandRef({:?} @ {:?})", self.val, self.layout)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=zero_sized | COMPLEXITY=260 | LINES=498 */
 
 impl<'a, 'tcx, V: CodegenObject> OperandRef<'tcx, V> {
     pub fn zero_sized(layout: TyAndLayout<'tcx>) -> OperandRef<'tcx, V> {
@@ -643,7 +630,6 @@ impl<'a, 'tcx, V: CodegenObject> OperandRef<'tcx, V> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Each of these variants starts out as `Either::Right` when it's uninitialized,
 /// then setting the field changes that to `Either::Left` with the backend value.
@@ -658,7 +644,6 @@ enum OperandValueBuilder<V> {
     /// mean that its one non-ZST field would also be [`OperandValue::Immediate`].
     Vector(Either<V, ()>),
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Allows building up an `OperandRef` by setting fields one at a time.
 #[derive(Debug, Copy, Clone)]
@@ -666,7 +651,6 @@ pub(super) struct OperandRefBuilder<'tcx, V> {
     val: OperandValueBuilder<V>,
     layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=158 | LINES=174 */
 
 impl<'a, 'tcx, V: CodegenObject> OperandRefBuilder<'tcx, V> {
     /// Creates an uninitialized builder for an instance of the `layout`.
@@ -841,7 +825,6 @@ impl<'a, 'tcx, V: CodegenObject> OperandRefBuilder<'tcx, V> {
         OperandRef { val, layout }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=poison | COMPLEXITY=42 | LINES=101 */
 
 impl<'a, 'tcx, V: CodegenObject> OperandValue<V> {
     /// Returns an `OperandValue` that's generally UB to use in any way.
@@ -943,7 +926,6 @@ impl<'a, 'tcx, V: CodegenObject> OperandValue<V> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=maybe_codegen_consume_direct | COMPLEXITY=63 | LINES=111 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     fn maybe_codegen_consume_direct(

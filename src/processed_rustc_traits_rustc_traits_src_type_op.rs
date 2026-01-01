@@ -1,25 +1,20 @@
 // SRC: ../rust/compiler/rustc_traits/src/type_op.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::{Clause, FnSig, ParamEnvAnd, PolyFnSig, Ty, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
 use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
 use crate::rustc_trait_selection::traits::query::type_op::ascribe_user_type::{
     AscribeUserType, type_op_ascribe_user_type_with_span,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::query::type_op::normalize::Normalize;
 use crate::rustc_trait_selection::traits::query::type_op::prove_predicate::ProvePredicate;
 use crate::rustc_trait_selection::traits::{Normalized, Obligation, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn provide(p: &mut Providers) {
     *p = Providers {
@@ -32,7 +27,6 @@ pub(crate) fn provide(p: &mut Providers) {
         ..*p
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=type_op_ascribe_user_type | COMPLEXITY=3 | LINES=9 */
 
 fn type_op_ascribe_user_type<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -42,7 +36,6 @@ fn type_op_ascribe_user_type<'tcx>(
         type_op_ascribe_user_type_with_span(ocx, key, DUMMY_SP)
     })
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_op_normalize | COMPLEXITY=5 | LINES=14 */
 
 fn type_op_normalize<'tcx, T>(
     ocx: &ObligationCtxt<'_, 'tcx>,
@@ -57,7 +50,6 @@ where
     ocx.register_obligations(obligations);
     Ok(value)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_op_normalize_ty | COMPLEXITY=2 | LINES=7 */
 
 fn type_op_normalize_ty<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -65,7 +57,6 @@ fn type_op_normalize_ty<'tcx>(
 ) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, Ty<'tcx>>>, NoSolution> {
     tcx.infer_ctxt().enter_canonical_trait_query(&canonicalized, type_op_normalize)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=type_op_normalize_clause | COMPLEXITY=2 | LINES=7 */
 
 fn type_op_normalize_clause<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -73,7 +64,6 @@ fn type_op_normalize_clause<'tcx>(
 ) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, Clause<'tcx>>>, NoSolution> {
     tcx.infer_ctxt().enter_canonical_trait_query(&canonicalized, type_op_normalize)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=type_op_normalize_fn_sig | COMPLEXITY=2 | LINES=7 */
 
 fn type_op_normalize_fn_sig<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -81,7 +71,6 @@ fn type_op_normalize_fn_sig<'tcx>(
 ) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, FnSig<'tcx>>>, NoSolution> {
     tcx.infer_ctxt().enter_canonical_trait_query(&canonicalized, type_op_normalize)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=type_op_normalize_poly_fn_sig | COMPLEXITY=2 | LINES=7 */
 
 fn type_op_normalize_poly_fn_sig<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -89,7 +78,6 @@ fn type_op_normalize_poly_fn_sig<'tcx>(
 ) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, PolyFnSig<'tcx>>>, NoSolution> {
     tcx.infer_ctxt().enter_canonical_trait_query(&canonicalized, type_op_normalize)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=type_op_prove_predicate | COMPLEXITY=3 | LINES=10 */
 
 fn type_op_prove_predicate<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -100,7 +88,6 @@ fn type_op_prove_predicate<'tcx>(
         Ok(())
     })
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=type_op_prove_predicate_with_cause | COMPLEXITY=7 | LINES=12 */
 
 /// The core of the `type_op_prove_predicate` query: for diagnostics purposes in NLL HRTB errors,
 /// this query can be re-run to better track the span of the obligation cause, and improve the error

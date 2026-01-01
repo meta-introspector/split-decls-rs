@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/session_diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::num::IntErrorKind;
 
 use crate::rustc_complete::{self as ast, AttrStyle, Path};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::AttributeTemplate;
 use crate::rustc_complete::{AttrPath, Target};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::fluent_generated as fluent;
 
@@ -24,7 +18,6 @@ pub(crate) enum UnsupportedLiteralReason {
     CfgString,
     CfgBoolean,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_expected_one_cfg_pattern, code = E0536)]
@@ -32,7 +25,6 @@ pub(crate) struct ExpectedOneCfgPattern {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_predicate, code = E0537)]
@@ -42,7 +34,6 @@ pub(crate) struct InvalidPredicate {
 
     pub predicate: String,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Error code: E0541
 pub(crate) struct UnknownMetaItem<'a> {
@@ -50,7 +41,6 @@ pub(crate) struct UnknownMetaItem<'a> {
     pub item: String,
     pub expected: &'a [&'a str],
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=7 | LINES=13 */
 
 // Manual implementation to be able to format `expected` items correctly.
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for UnknownMetaItem<'_> {
@@ -64,7 +54,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for UnknownMetaItem<'_> {
             .with_span_label(self.span, fluent::attr_parsing_label)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_missing_since, code = E0542)]
@@ -72,7 +61,6 @@ pub(crate) struct MissingSince {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_missing_note, code = E0543)]
@@ -80,7 +68,6 @@ pub(crate) struct MissingNote {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_multiple_stability_levels, code = E0544)]
@@ -88,7 +75,6 @@ pub(crate) struct MultipleStabilityLevels {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_issue_string, code = E0545)]
@@ -99,7 +85,6 @@ pub(crate) struct InvalidIssueString {
     #[subdiagnostic]
     pub cause: Option<InvalidIssueStringCause>,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=35 */
 
 // The error kinds of `IntErrorKind` are duplicated here in order to allow the messages to be
 // translatable.
@@ -135,7 +120,6 @@ pub(crate) enum InvalidIssueStringCause {
         span: Span,
     },
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=13 */
 
 impl InvalidIssueStringCause {
     pub(crate) fn from_int_error_kind(span: Span, kind: &IntErrorKind) -> Option<Self> {
@@ -149,7 +133,6 @@ impl InvalidIssueStringCause {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_missing_feature, code = E0546)]
@@ -157,7 +140,6 @@ pub(crate) struct MissingFeature {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_non_ident_feature, code = E0546)]
@@ -165,7 +147,6 @@ pub(crate) struct NonIdentFeature {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_missing_issue, code = E0547)]
@@ -173,7 +154,6 @@ pub(crate) struct MissingIssue {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // FIXME: Why is this the same error code as `InvalidReprHintNoParen` and `InvalidReprHintNoValue`?
 // It is more similar to `IncorrectReprFormatGeneric`.
@@ -183,14 +163,12 @@ pub(crate) struct IncorrectReprFormatPackedOneOrZeroArg {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[derive(Diagnostic)]
 #[diag(attr_parsing_incorrect_repr_format_packed_expect_integer, code = E0552)]
 pub(crate) struct IncorrectReprFormatPackedExpectInteger {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_repr_hint_no_paren, code = E0552)]
@@ -200,7 +178,6 @@ pub(crate) struct InvalidReprHintNoParen {
 
     pub name: Symbol,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_repr_hint_no_value, code = E0552)]
@@ -210,7 +187,6 @@ pub(crate) struct InvalidReprHintNoValue {
 
     pub name: Symbol,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Error code: E0565
 // FIXME(jdonszelmann): slowly phased out
@@ -220,7 +196,6 @@ pub(crate) struct UnsupportedLiteral {
     pub is_bytestr: bool,
     pub start_point_span: Span,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=17 | LINES=31 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for UnsupportedLiteral {
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
@@ -252,7 +227,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for UnsupportedLiteral {
         diag
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_repr_align_need_arg, code = E0589)]
@@ -261,7 +235,6 @@ pub(crate) struct InvalidReprAlignNeedArg {
     #[suggestion(code = "align(...)", applicability = "has-placeholders")]
     pub span: Span,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_repr_generic, code = E0589)]
@@ -272,7 +245,6 @@ pub(crate) struct InvalidReprGeneric<'a> {
     pub repr_arg: String,
     pub error_part: &'a str,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_incorrect_repr_format_align_one_arg, code = E0693)]
@@ -280,7 +252,6 @@ pub(crate) struct IncorrectReprFormatAlignOneArg {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_incorrect_repr_format_expect_literal_integer, code = E0693)]
@@ -288,7 +259,6 @@ pub(crate) struct IncorrectReprFormatExpectInteger {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_incorrect_repr_format_generic, code = E0693)]
@@ -301,7 +271,6 @@ pub(crate) struct IncorrectReprFormatGeneric {
     #[subdiagnostic]
     pub cause: Option<IncorrectReprFormatGenericCause>,
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=35 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum IncorrectReprFormatGenericCause {
@@ -337,7 +306,6 @@ pub(crate) enum IncorrectReprFormatGenericCause {
         value: Symbol,
     },
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 impl IncorrectReprFormatGenericCause {
     pub(crate) fn from_lit_kind(span: Span, kind: &ast::LitKind, name: Symbol) -> Option<Self> {
@@ -350,7 +318,6 @@ impl IncorrectReprFormatGenericCause {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_rustc_promotable_pairing, code = E0717)]
@@ -358,7 +325,6 @@ pub(crate) struct RustcPromotablePairing {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_rustc_allowed_unstable_pairing, code = E0789)]
@@ -366,7 +332,6 @@ pub(crate) struct RustcAllowedUnstablePairing {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_cfg_predicate_identifier)]
@@ -374,7 +339,6 @@ pub(crate) struct CfgPredicateIdentifier {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_deprecated_item_suggestion)]
@@ -388,7 +352,6 @@ pub(crate) struct DeprecatedItemSuggestion {
     #[note]
     pub details: (),
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_expected_single_version_literal)]
@@ -396,7 +359,6 @@ pub(crate) struct ExpectedSingleVersionLiteral {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_expected_version_literal)]
@@ -404,7 +366,6 @@ pub(crate) struct ExpectedVersionLiteral {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_expects_feature_list)]
@@ -414,7 +375,6 @@ pub(crate) struct ExpectsFeatureList {
 
     pub name: String,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_expects_features)]
@@ -424,7 +384,6 @@ pub(crate) struct ExpectsFeatures {
 
     pub name: String,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_since)]
@@ -432,7 +391,6 @@ pub(crate) struct InvalidSince {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_soft_no_args)]
@@ -440,7 +398,6 @@ pub(crate) struct SoftNoArgs {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_unknown_version_literal)]
@@ -448,7 +405,6 @@ pub(crate) struct UnknownVersionLiteral {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 // FIXME(jdonszelmann) duplicated from `rustc_passes`, remove once `check_attr` is integrated.
 #[derive(Diagnostic)]
@@ -461,7 +417,6 @@ pub(crate) struct UnusedMultiple {
     pub other: Span,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(attr_parsing_unused_duplicate)]
@@ -473,7 +428,6 @@ pub(crate) struct UnusedDuplicate {
     #[warning]
     pub warning: bool,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 // FIXME(jdonszelmann): duplicated in rustc_lints, should be moved here completely.
 #[derive(LintDiagnostic)]
@@ -482,7 +436,6 @@ pub(crate) struct IllFormedAttributeInput {
     pub num_suggestions: usize,
     pub suggestions: DiagArgValue,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_ill_formed_attribute_input)]
@@ -492,7 +445,6 @@ pub(crate) struct IllFormedAttributeInputLint {
     pub num_suggestions: usize,
     pub suggestions: DiagArgValue,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_null_on_export, code = E0648)]
@@ -500,7 +452,6 @@ pub(crate) struct NullOnExport {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_null_on_link_section, code = E0648)]
@@ -508,7 +459,6 @@ pub(crate) struct NullOnLinkSection {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_stability_outside_std, code = E0734)]
@@ -516,7 +466,6 @@ pub(crate) struct StabilityOutsideStd {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_empty_confusables)]
@@ -524,7 +473,6 @@ pub(crate) struct EmptyConfusables {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(attr_parsing_empty_attribute)]
@@ -532,7 +480,6 @@ pub(crate) struct EmptyAttributeList {
     #[suggestion(code = "", applicability = "machine-applicable")]
     pub attr_span: Span,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(attr_parsing_invalid_target_lint)]
@@ -546,7 +493,6 @@ pub(crate) struct InvalidTargetLint {
     #[suggestion(code = "", applicability = "machine-applicable", style = "tool-only")]
     pub attr_span: Span,
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[help]
@@ -560,7 +506,6 @@ pub(crate) struct InvalidTarget {
     pub applied: DiagArgValue,
     pub only: &'static str,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_alignment_value, code = E0589)]
@@ -569,7 +514,6 @@ pub(crate) struct InvalidAlignmentValue {
     pub span: Span,
     pub error_part: &'static str,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_repr_ident, code = E0565)]
@@ -577,7 +521,6 @@ pub(crate) struct ReprIdent {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_unrecognized_repr_hint, code = E0552)]
@@ -587,7 +530,6 @@ pub(crate) struct UnrecognizedReprHint {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_unstable_feature_bound_incompatible_stability)]
@@ -596,7 +538,6 @@ pub(crate) struct UnstableFeatureBoundIncompatibleStability {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_naked_functions_incompatible_attribute, code = E0736)]
@@ -608,7 +549,6 @@ pub(crate) struct NakedFunctionIncompatibleAttribute {
     pub naked_span: Span,
     pub attr: String,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_link_ordinal_out_of_range)]
@@ -618,7 +558,6 @@ pub(crate) struct LinkOrdinalOutOfRange {
     pub span: Span,
     pub ordinal: u128,
 }
-/* AST_META: AST_ID=61 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 pub(crate) enum AttributeParseErrorReason<'a> {
     ExpectedNoArgs,
@@ -640,7 +579,6 @@ pub(crate) enum AttributeParseErrorReason<'a> {
     },
     ExpectedIdentifier,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct AttributeParseError<'a> {
     pub(crate) span: Span,
@@ -650,7 +588,6 @@ pub(crate) struct AttributeParseError<'a> {
     pub(crate) attribute: AttrPath,
     pub(crate) reason: AttributeParseErrorReason<'a>,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=129 | LINES=150 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
@@ -801,7 +738,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
         diag
     }
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_attr_unsafe)]
@@ -812,7 +748,6 @@ pub(crate) struct InvalidAttrUnsafe {
     pub span: Span,
     pub name: Path,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_unsafe_attr_outside_unsafe)]
@@ -823,7 +758,6 @@ pub(crate) struct UnsafeAttrOutsideUnsafe {
     #[subdiagnostic]
     pub suggestion: UnsafeAttrOutsideUnsafeSuggestion,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -836,7 +770,6 @@ pub(crate) struct UnsafeAttrOutsideUnsafeSuggestion {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_meta_bad_delim)]
@@ -846,7 +779,6 @@ pub(crate) struct MetaBadDelim {
     #[subdiagnostic]
     pub sugg: MetaBadDelimSugg,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -859,7 +791,6 @@ pub(crate) struct MetaBadDelimSugg {
     #[suggestion_part(code = ")")]
     pub close: Span,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_meta_item)]
@@ -872,7 +803,6 @@ pub(crate) struct InvalidMetaItem {
     #[subdiagnostic]
     pub remove_neg_sugg: Option<InvalidMetaItemRemoveNegSugg>,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(attr_parsing_quote_ident_sugg, applicability = "machine-applicable")]
@@ -882,7 +812,6 @@ pub(crate) struct InvalidMetaItemQuoteIdentSugg {
     #[suggestion_part(code = "\"")]
     pub after: Span,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(attr_parsing_remove_neg_sugg, applicability = "machine-applicable")]
@@ -890,7 +819,6 @@ pub(crate) struct InvalidMetaItemRemoveNegSugg {
     #[suggestion_part(code = "")]
     pub negative_sign: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_suffixed_literal_in_attribute)]
@@ -899,7 +827,6 @@ pub(crate) struct SuffixedLiteralInAttribute {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(attr_parsing_invalid_style)]
@@ -910,7 +837,6 @@ pub(crate) struct InvalidAttrStyle {
     pub target_span: Option<Span>,
     pub target: Target,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_empty_link_name, code = E0454)]
@@ -919,7 +845,6 @@ pub(crate) struct EmptyLinkName {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_link_framework_apple, code = E0455)]
@@ -927,7 +852,6 @@ pub(crate) struct LinkFrameworkApple {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_incompatible_wasm_link)]
@@ -935,7 +859,6 @@ pub(crate) struct IncompatibleWasmLink {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_link_requires_name, code = E0459)]
@@ -944,7 +867,6 @@ pub(crate) struct LinkRequiresName {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_raw_dylib_no_nul)]
@@ -952,7 +874,6 @@ pub(crate) struct RawDylibNoNul {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_raw_dylib_only_windows, code = E0455)]
@@ -960,7 +881,6 @@ pub(crate) struct RawDylibOnlyWindows {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_invalid_link_modifier)]
@@ -968,7 +888,6 @@ pub(crate) struct InvalidLinkModifier {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_multiple_modifiers)]
@@ -977,7 +896,6 @@ pub(crate) struct MultipleModifiers {
     pub span: Span,
     pub modifier: Symbol,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_import_name_type_x86)]
@@ -985,7 +903,6 @@ pub(crate) struct ImportNameTypeX86 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_bundle_needs_static)]
@@ -993,7 +910,6 @@ pub(crate) struct BundleNeedsStatic {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_whole_archive_needs_static)]
@@ -1001,7 +917,6 @@ pub(crate) struct WholeArchiveNeedsStatic {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_as_needed_compatibility)]
@@ -1009,7 +924,6 @@ pub(crate) struct AsNeededCompatibility {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_import_name_type_raw)]
@@ -1017,7 +931,6 @@ pub(crate) struct ImportNameTypeRaw {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(attr_parsing_limit_invalid)]

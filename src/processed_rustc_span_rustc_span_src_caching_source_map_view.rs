@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_span/src/caching_source_map_view.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::Range;
 use std::sync::Arc;
 
 use crate::source_map::SourceMap;
 use crate::{BytePos, Pos, RelativeBytePos, SourceFile, SpanData, StableSourceFileId};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=CacheEntry | COMPLEXITY=14 | LINES=21 */
 
 #[derive(Clone)]
 struct CacheEntry {
@@ -27,7 +25,6 @@ struct CacheEntry {
     file: Arc<SourceFile>,
     file_index: usize,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=update | COMPLEXITY=8 | LINES=27 */
 
 impl CacheEntry {
     #[inline]
@@ -55,7 +52,6 @@ impl CacheEntry {
         self.time_stamp = time_stamp;
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=CachingSourceMapView | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone)]
 pub struct CachingSourceMapView<'sm> {
@@ -63,7 +59,6 @@ pub struct CachingSourceMapView<'sm> {
     line_cache: [CacheEntry; 3],
     time_stamp: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=116 | LINES=223 */
 
 impl<'sm> CachingSourceMapView<'sm> {
     pub fn new(source_map: &'sm SourceMap) -> CachingSourceMapView<'sm> {
@@ -287,7 +282,6 @@ impl<'sm> CachingSourceMapView<'sm> {
         None
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=file_contains | COMPLEXITY=9 | LINES=10 */
 
 #[inline]
 fn file_contains(file: &SourceFile, pos: BytePos) -> bool {

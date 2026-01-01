@@ -1,22 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/naked_asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{BackendRepr, Float, Integer, Primitive, RegKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{InstructionSetAttr, Linkage};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::mono::{MonoItemData, Visibility};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{InlineAsmOperand, START_BLOCK};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Instance, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::sym;
 use crate::rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=codegen_naked_asm | COMPLEXITY=7 | LINES=47 */
 use crate::rustc_target::spec::BinaryFormat;
 
 use crate::common;
@@ -64,7 +55,6 @@ pub fn codegen_naked_asm<
 
     cx.codegen_global_asm(&template_vec, &operands, options, line_spans);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=inline_to_global_operand | COMPLEXITY=31 | LINES=59 */
 
 fn inline_to_global_operand<'a, 'tcx, Cx: LayoutOf<'tcx, LayoutOfResult = TyAndLayout<'tcx>>>(
     cx: &'a Cx,
@@ -124,7 +114,6 @@ fn inline_to_global_operand<'a, 'tcx, Cx: LayoutOf<'tcx, LayoutOfResult = TyAndL
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=prefix_and_suffix | COMPLEXITY=147 | LINES=206 */
 
 fn prefix_and_suffix<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -331,7 +320,6 @@ fn prefix_and_suffix<'tcx>(
 
     (begin, end)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=wasm_functype | COMPLEXITY=27 | LINES=42 */
 
 /// The webassembly type signature for the given function.
 ///
@@ -374,7 +362,6 @@ fn wasm_functype<'tcx>(tcx: TyCtxt<'tcx>, fn_abi: &FnAbi<'tcx, Ty<'tcx>>) -> Str
 
     signature
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=wasm_type | COMPLEXITY=40 | LINES=46 */
 
 fn wasm_type<'tcx>(signature: &mut String, arg_abi: &ArgAbi<'_, Ty<'tcx>>, ptr_type: &'static str) {
     match arg_abi.mode {
@@ -421,7 +408,6 @@ fn wasm_type<'tcx>(signature: &mut String, arg_abi: &ArgAbi<'_, Ty<'tcx>>, ptr_t
         PassMode::Indirect { .. } => signature.push_str(ptr_type),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=wasm_primitive | COMPLEXITY=15 | LINES=16 */
 
 fn wasm_primitive(primitive: Primitive, ptr_type: &'static str) -> &'static str {
     match primitive {

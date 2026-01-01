@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/pointer.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 // Defines [`Pointer`] which is used to improve the quality of the generated clif ir for pointer
 // operations.
 
@@ -14,7 +13,6 @@ pub(crate) struct Pointer {
     base: PointerBase,
     offset: Offset32,
 }
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum PointerBase {
@@ -22,7 +20,6 @@ pub(crate) enum PointerBase {
     Stack(StackSlot),
     Dangling(Align),
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=71 | LINES=107 */
 
 impl Pointer {
     pub(crate) fn new(addr: Value) -> Self {

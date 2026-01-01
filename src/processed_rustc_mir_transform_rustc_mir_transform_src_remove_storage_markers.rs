@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_storage_markers.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=18 | LINES=29 */
 // This pass removes storage markers if they won't be emitted during codegen.
 
 use crate::rustc_complete::mir::*;

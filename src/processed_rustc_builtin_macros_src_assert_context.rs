@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/assert/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     BinOpKind, BorrowKind, DUMMY_NODE_ID, DelimArgs, Expr, ExprKind, ItemKind, MacCall, MethodCall,
     Mutability, Path, PathSegment, Stmt, StructRest, UnOp, UseTree, UseTreeKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_expand::base::ExtCtxt;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=26 */
 
 pub(super) struct Context<'cx, 'a> {
     // An optimization.
@@ -42,7 +36,6 @@ pub(super) struct Context<'cx, 'a> {
     paths: FxHashSet<Ident>,
     span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=build_initial_imports | COMPLEXITY=134 | LINES=383 */
 
 impl<'cx, 'a> Context<'cx, 'a> {
     pub(super) fn new(cx: &'cx ExtCtxt<'a>, span: Span) -> Self {
@@ -426,7 +419,6 @@ impl<'cx, 'a> Context<'cx, 'a> {
         self.is_consumed = prev_is_consumed;
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Capture | COMPLEXITY=4 | LINES=13 */
 
 /// Information about a captured element.
 #[derive(Debug)]
@@ -440,7 +432,6 @@ struct Capture {
     // `__capture{}`
     ident: Ident,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=escape_to_fmt | COMPLEXITY=11 | LINES=13 */
 
 /// Escapes to use as a formatting string.
 fn escape_to_fmt(s: &str) -> String {
@@ -454,12 +445,10 @@ fn escape_to_fmt(s: &str) -> String {
     }
     rslt
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=expr_addr_of_mut | COMPLEXITY=2 | LINES=4 */
 
 fn expr_addr_of_mut(cx: &ExtCtxt<'_>, sp: Span, e: Box<Expr>) -> Box<Expr> {
     cx.expr(sp, ExprKind::AddrOf(BorrowKind::Ref, Mutability::Mut, e))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=expr_method_call | COMPLEXITY=3 | LINES=10 */
 
 fn expr_method_call(
     cx: &ExtCtxt<'_>,
@@ -470,7 +459,6 @@ fn expr_method_call(
 ) -> Box<Expr> {
     cx.expr(span, ExprKind::MethodCall(Box::new(MethodCall { seg, receiver, args, span })))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=expr_paren | COMPLEXITY=2 | LINES=4 */
 
 fn expr_paren(cx: &ExtCtxt<'_>, sp: Span, e: Box<Expr>) -> Box<Expr> {
     cx.expr(sp, ExprKind::Paren(e))

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/constraints/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::ops::Index;
 
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::ty::{RegionVid, TyCtxt, VarianceDiagInfo};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
@@ -22,7 +19,6 @@ use crate::type_check::Locations;
 pub(crate) struct OutlivesConstraintSet<'tcx> {
     outlives: IndexVec<OutlivesConstraintIndex, OutlivesConstraint<'tcx>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=33 */
 
 impl<'tcx> OutlivesConstraintSet<'tcx> {
     pub(crate) fn push(&mut self, constraint: OutlivesConstraint<'tcx>) {
@@ -56,7 +52,6 @@ impl<'tcx> OutlivesConstraintSet<'tcx> {
         &self.outlives
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> Index<OutlivesConstraintIndex> for OutlivesConstraintSet<'tcx> {
     type Output = OutlivesConstraint<'tcx>;
@@ -65,7 +60,6 @@ impl<'tcx> Index<OutlivesConstraintIndex> for OutlivesConstraintSet<'tcx> {
         &self.outlives[i]
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OutlivesConstraint | COMPLEXITY=8 | LINES=31 */
 
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub struct OutlivesConstraint<'tcx> {
@@ -97,7 +91,6 @@ pub struct OutlivesConstraint<'tcx> {
     /// If this constraint is promoted from closure requirements.
     pub from_closure: bool,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=10 */
 
 impl<'tcx> fmt::Debug for OutlivesConstraint<'tcx> {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -108,13 +101,11 @@ impl<'tcx> fmt::Debug for OutlivesConstraint<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 crate::rustc_index::newtype_index! {
     #[debug_format = "OutlivesConstraintIndex({})"]
     pub(crate) struct OutlivesConstraintIndex {}
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ConstraintSccIndex | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]

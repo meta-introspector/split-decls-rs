@@ -1,47 +1,35 @@
 // SRC: ../rust/compiler/rustc_expand/src/proc_macro_server.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ops::{Bound, Range};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use ast::token::IdentIsRaw;
 use rustc_ast as ast;
 use crate::rustc_complete::token;
 use crate::rustc_complete::tokenstream::{self, DelimSpacing, Spacing, TokenStream};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::util::literal::escape_byte_str_symbol;
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{Diag, ErrorGuaranteed, MultiSpan, PResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_parse::lexer::{StripTokens, nfc_normalize};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_parse::parser::Parser;
 use crate::rustc_parse::{exp, new_parser_from_source_str, source_str_to_stream, unwrap_or_emit_fatal};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_proc_macro::bridge::{
     DelimSpan, Diagnostic, ExpnGlobals, Group, Ident, LitKind, Literal, Punct, TokenTree, server,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_proc_macro::{Delimiter, Level};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::def_id::CrateNum;
 use crate::rustc_complete::{BytePos, FileName, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from_internal | COMPLEXITY=2 | LINES=6 */
 
 use crate::base::ExtCtxt;
 
 trait FromInternal<T> {
     fn from_internal(x: T) -> Self;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_internal | COMPLEXITY=2 | LINES=4 */
 
 trait ToInternal<T> {
     fn to_internal(self) -> T;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from_internal | COMPLEXITY=9 | LINES=11 */
 
 impl FromInternal<token::Delimiter> for Delimiter {
     fn from_internal(delim: token::Delimiter) -> Delimiter {
@@ -53,7 +41,6 @@ impl FromInternal<token::Delimiter> for Delimiter {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_internal | COMPLEXITY=9 | LINES=11 */
 
 impl ToInternal<token::Delimiter> for Delimiter {
     fn to_internal(self) -> token::Delimiter {
@@ -65,7 +52,6 @@ impl ToInternal<token::Delimiter> for Delimiter {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from_internal | COMPLEXITY=11 | LINES=24 */
 
 impl FromInternal<token::LitKind> for LitKind {
     fn from_internal(kind: token::LitKind) -> Self {
@@ -90,7 +76,6 @@ impl FromInternal<token::LitKind> for LitKind {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=to_internal | COMPLEXITY=12 | LINES=27 */
 
 impl ToInternal<token::LitKind> for LitKind {
     fn to_internal(self) -> token::LitKind {
@@ -118,7 +103,6 @@ impl ToInternal<token::LitKind> for LitKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from_internal | COMPLEXITY=90 | LINES=219 */
 
 impl FromInternal<(TokenStream, &mut Rustc<'_, '_>)> for Vec<TokenTree<TokenStream, Span, Symbol>> {
     fn from_internal((stream, rustc): (TokenStream, &mut Rustc<'_, '_>)) -> Self {
@@ -338,7 +322,6 @@ impl FromInternal<(TokenStream, &mut Rustc<'_, '_>)> for Vec<TokenTree<TokenStre
         trees
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=to_internal | COMPLEXITY=43 | LINES=97 */
 
 // We use a `SmallVec` because the output size is always one or two `TokenTree`s.
 impl ToInternal<SmallVec<[tokenstream::TokenTree; 2]>>
@@ -436,7 +419,6 @@ impl ToInternal<SmallVec<[tokenstream::TokenTree; 2]>>
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=to_internal | COMPLEXITY=10 | LINES=12 */
 
 impl ToInternal<crate::rustc_errors::Level> for Level {
     fn to_internal(self) -> crate::rustc_errors::Level {
@@ -449,7 +431,6 @@ impl ToInternal<crate::rustc_errors::Level> for Level {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) struct FreeFunctions;
 
@@ -461,7 +442,6 @@ pub(crate) struct Rustc<'a, 'b> {
     krate: CrateNum,
     rebased_spans: FxHashMap<usize, Span>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=psess | COMPLEXITY=6 | LINES=18 */
 
 impl<'a, 'b> Rustc<'a, 'b> {
     pub(crate) fn new(ecx: &'a mut ExtCtxt<'b>) -> Self {
@@ -480,7 +460,6 @@ impl<'a, 'b> Rustc<'a, 'b> {
         self.ecx.psess()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 impl server::Types for Rustc<'_, '_> {
     type FreeFunctions = FreeFunctions;
@@ -488,7 +467,6 @@ impl server::Types for Rustc<'_, '_> {
     type Span = Span;
     type Symbol = Symbol;
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=injected_env_var | COMPLEXITY=37 | LINES=90 */
 
 impl server::FreeFunctions for Rustc<'_, '_> {
     fn injected_env_var(&mut self, var: &str) -> Option<String> {
@@ -579,7 +557,6 @@ impl server::FreeFunctions for Rustc<'_, '_> {
         diag.emit();
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=53 | LINES=120 */
 
 impl server::TokenStream for Rustc<'_, '_> {
     fn is_empty(&mut self, stream: &Self::TokenStream) -> bool {
@@ -700,7 +677,6 @@ impl server::TokenStream for Rustc<'_, '_> {
         FromInternal::from_internal((stream, self))
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=debug | COMPLEXITY=59 | LINES=161 */
 
 impl server::Span for Rustc<'_, '_> {
     fn debug(&mut self, span: Self::Span) -> String {
@@ -862,7 +838,6 @@ impl server::Span for Rustc<'_, '_> {
         })
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=normalize_and_validate_ident | COMPLEXITY=9 | LINES=7 */
 
 impl server::Symbol for Rustc<'_, '_> {
     fn normalize_and_validate_ident(&mut self, string: &str) -> Result<Self::Symbol, ()> {
@@ -870,7 +845,6 @@ impl server::Symbol for Rustc<'_, '_> {
         if rustc_lexer::is_ident(sym.as_str()) { Ok(sym) } else { Err(()) }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=globals | COMPLEXITY=8 | LINES=18 */
 
 impl server::Server for Rustc<'_, '_> {
     fn globals(&mut self) -> ExpnGlobals<Self::Span> {

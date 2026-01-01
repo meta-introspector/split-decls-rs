@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/var_name.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::mir::{Body, Local};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, RegionVid, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=124 */
 use tracing::debug;
 
 use crate::region_infer::RegionInferenceContext;

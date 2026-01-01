@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/mappings.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::coverage::{
     BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind, Mapping, MappingKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BasicBlock, StatementKind};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_complete::ty::TyCtxt;
 
 use crate::coverage::graph::CoverageGraph;
@@ -18,7 +15,6 @@ use crate::coverage::unexpand::unexpand_into_body_span;
 pub(crate) struct ExtractedMappings {
     pub(crate) mappings: Vec<Mapping>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 /// Extracts coverage-relevant spans from MIR, and uses them to create
 /// coverage mapping data for inclusion in MIR.
@@ -37,7 +33,6 @@ pub(crate) fn extract_mappings_from_mir<'tcx>(
 
     ExtractedMappings { mappings }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=resolve_block_markers | COMPLEXITY=13 | LINES=21 */
 
 fn resolve_block_markers(
     coverage_info_hi: &CoverageInfoHi,
@@ -59,7 +54,6 @@ fn resolve_block_markers(
 
     block_markers
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 pub(super) fn extract_branch_mappings(
     mir_body: &mir::Body<'_>,

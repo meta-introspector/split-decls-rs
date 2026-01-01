@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Utility Functions.
 
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use tracing::trace;
 
 use super::CodegenUnitDebugContext;
@@ -14,7 +11,6 @@ use super::namespace::item_namespace;
 use crate::common::CodegenCx;
 use crate::llvm;
 use crate::llvm::debuginfo::{DIArray, DIBuilder, DIDescriptor, DIScope};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 pub(crate) fn is_node_local_to_unit(cx: &CodegenCx<'_, '_>, def_id: DefId) -> bool {
     // The is_local_to_unit flag indicates whether a function is local to the
@@ -27,7 +23,6 @@ pub(crate) fn is_node_local_to_unit(cx: &CodegenCx<'_, '_>, def_id: DefId) -> bo
     // available in the codegen pass.
     !cx.tcx.is_reachable_non_generic(def_id)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
 #[allow(non_snake_case)]
 pub(crate) fn create_DIArray<'ll>(
@@ -36,7 +31,6 @@ pub(crate) fn create_DIArray<'ll>(
 ) -> &'ll DIArray {
     unsafe { llvm::LLVMRustDIBuilderGetOrCreateArray(builder, arr.as_ptr(), arr.len() as u32) }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[inline]
 pub(crate) fn debug_context<'a, 'll, 'tcx>(
@@ -44,26 +38,22 @@ pub(crate) fn debug_context<'a, 'll, 'tcx>(
 ) -> &'a CodegenUnitDebugContext<'ll, 'tcx> {
     cx.dbg_cx.as_ref().unwrap()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[inline]
 #[allow(non_snake_case)]
 pub(crate) fn DIB<'a, 'll>(cx: &'a CodegenCx<'ll, '_>) -> &'a DIBuilder<'ll> {
     cx.dbg_cx.as_ref().unwrap().builder.as_ref()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn get_namespace_for_item<'ll>(cx: &CodegenCx<'ll, '_>, def_id: DefId) -> &'ll DIScope {
     item_namespace(cx, cx.tcx.parent(def_id))
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, PartialEq, Eq)]
 pub(crate) enum WidePtrKind {
     Slice,
     Dyn,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=42 */
 
 /// Determines if `pointee_ty` is slice-like or trait-object-like, i.e.
 /// if the second field of the wide pointer is a length or a vtable-pointer.

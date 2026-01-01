@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_call_recursion.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::graph::iterate::{
     NodeStatus, TriColorDepthFirstSearch, TriColorVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=15 | LINES=26 */
 use crate::rustc_complete::lint::builtin::UNCONDITIONAL_RECURSION;
 use crate::rustc_complete::Span;
 
@@ -38,7 +34,6 @@ impl<'tcx> MirLint<'tcx> for CheckCallRecursion {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=20 | LINES=27 */
 
 /// Requires drop elaboration to have been performed.
 pub(super) struct CheckDropRecursion;
@@ -66,7 +61,6 @@ impl<'tcx> MirLint<'tcx> for CheckDropRecursion {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_recursion | COMPLEXITY=14 | LINES=31 */
 
 fn check_recursion<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -98,7 +92,6 @@ fn check_recursion<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=2 | LINES=9 */
 
 trait TerminatorClassifier<'tcx> {
     fn is_recursive_terminator(
@@ -108,7 +101,6 @@ trait TerminatorClassifier<'tcx> {
         terminator: &Terminator<'tcx>,
     ) -> bool;
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NonRecursive; | COMPLEXITY=2 | LINES=10 */
 
 struct NonRecursive;
 
@@ -119,18 +111,15 @@ struct Search<'mir, 'tcx, C: TerminatorClassifier<'tcx>> {
 
     reachable_recursive_calls: Vec<Span>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CallRecursion | COMPLEXITY=2 | LINES=4 */
 
 struct CallRecursion<'tcx> {
     trait_args: &'tcx [GenericArg<'tcx>],
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=RecursiveDrop | COMPLEXITY=2 | LINES=5 */
 
 struct RecursiveDrop<'tcx> {
     /// The type that `Drop` is implemented for.
     drop_for: Ty<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=25 | LINES=47 */
 
 impl<'tcx> TerminatorClassifier<'tcx> for CallRecursion<'tcx> {
     /// Returns `true` if `func` refers to the function we are searching in.
@@ -178,7 +167,6 @@ impl<'tcx> TerminatorClassifier<'tcx> for CallRecursion<'tcx> {
         false
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=7 | LINES=14 */
 
 impl<'tcx> TerminatorClassifier<'tcx> for RecursiveDrop<'tcx> {
     fn is_recursive_terminator(
@@ -193,7 +181,6 @@ impl<'tcx> TerminatorClassifier<'tcx> for RecursiveDrop<'tcx> {
         dropped_ty == self.drop_for
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=node_examined | COMPLEXITY=62 | LINES=86 */
 
 impl<'mir, 'tcx, C: TerminatorClassifier<'tcx>> TriColorVisitor<BasicBlocks<'tcx>>
     for Search<'mir, 'tcx, C>

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coroutine/drop.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=FixReturnPendingVisitor | COMPLEXITY=6 | LINES=8 */
 // Drops and async drops related logic for coroutine transformation pass
 
 use super::*;
@@ -8,7 +7,6 @@ use super::*;
 struct FixReturnPendingVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=13 | LINES=24 */
 
 impl<'tcx> MutVisitor<'tcx> for FixReturnPendingVisitor<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -33,7 +31,6 @@ impl<'tcx> MutVisitor<'tcx> for FixReturnPendingVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=build_poll_call | COMPLEXITY=6 | LINES=34 */
 
 // rv = call fut.poll()
 fn build_poll_call<'tcx>(
@@ -68,7 +65,6 @@ fn build_poll_call<'tcx>(
     };
     insert_term_block(body, call)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=build_pin_fut | COMPLEXITY=10 | LINES=56 */
 
 // pin_fut = Pin::new_unchecked(&mut fut)
 fn build_pin_fut<'tcx>(
@@ -125,14 +121,12 @@ fn build_pin_fut<'tcx>(
     ));
     (pin_fut_bb, fut_pin_place)
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 // Build Poll switch for async drop
 // match rv {
 //     Ready() => ready_block
 //     Pending => yield_block
 //}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=build_poll_switch | COMPLEXITY=8 | LINES=51 */
 fn build_poll_switch<'tcx>(
     tcx: TyCtxt<'tcx>,
     body: &mut Body<'tcx>,
@@ -184,7 +178,6 @@ fn build_poll_switch<'tcx>(
         false,
     ))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=gather_dropline_blocks | COMPLEXITY=19 | LINES=23 */
 
 // Gather blocks, reachable through 'drop' targets of Yield and Drop terminators (chained)
 fn gather_dropline_blocks<'tcx>(body: &mut Body<'tcx>) -> DenseBitSet<BasicBlock> {
@@ -208,7 +201,6 @@ fn gather_dropline_blocks<'tcx>(body: &mut Body<'tcx>) -> DenseBitSet<BasicBlock
     }
     dropline
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=20 */
 
 /// Cleanup all async drops (reset to sync)
 pub(super) fn cleanup_async_drops<'tcx>(body: &mut Body<'tcx>) {
@@ -229,7 +221,6 @@ pub(super) fn cleanup_async_drops<'tcx>(body: &mut Body<'tcx>) {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
 
 pub(super) fn has_expandable_async_drops<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -257,7 +248,6 @@ pub(super) fn has_expandable_async_drops<'tcx>(
     }
     return false;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=89 | LINES=213 */
 
 /// Expand Drop terminator for async drops into mainline poll-switch and dropline poll-switch
 pub(super) fn expand_async_drops<'tcx>(
@@ -471,7 +461,6 @@ pub(super) fn expand_async_drops<'tcx>(
         body[bb].terminator_mut().kind = TerminatorKind::Goto { target: pin_bb };
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=58 */
 
 pub(super) fn elaborate_coroutine_drops<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     use crate::elaborate_drop::{Unwind, elaborate_drop};
@@ -530,7 +519,6 @@ pub(super) fn elaborate_coroutine_drops<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body
     }
     elaborator.patch.apply(body);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=31 */
 
 pub(super) fn insert_clean_drop<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -562,7 +550,6 @@ pub(super) fn insert_clean_drop<'tcx>(
     body.basic_blocks_mut()
         .push(BasicBlockData::new(Some(Terminator { source_info, kind: term }), false))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=70 */
 
 pub(super) fn create_coroutine_drop_shim<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -633,7 +620,6 @@ pub(super) fn create_coroutine_drop_shim<'tcx>(
 
     body
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=85 */
 
 // Create async drop shim function to drop coroutine itself
 pub(super) fn create_coroutine_drop_shim_async<'tcx>(
@@ -719,11 +705,9 @@ pub(super) fn create_coroutine_drop_shim_async<'tcx>(
 
     body
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 // Create async drop shim proxy function for future_drop_poll
 // It is just { call coroutine_drop(); return Poll::Ready(); }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=44 */
 pub(super) fn create_coroutine_drop_shim_proxy_async<'tcx>(
     tcx: TyCtxt<'tcx>,
     body: &Body<'tcx>,

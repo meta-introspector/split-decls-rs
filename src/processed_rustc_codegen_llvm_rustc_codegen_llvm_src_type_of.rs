@@ -1,21 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/type_of.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt::Write;
 
 use crate::rustc_abi::Primitive::{Float, Int, Pointer};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, BackendRepr, FieldsShape, Scalar, Size, Variants};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=uncached_llvm_type | COMPLEXITY=55 | LINES=72 */
 use tracing::debug;
 
 use crate::common::*;
@@ -88,7 +81,6 @@ fn uncached_llvm_type<'a, 'tcx>(
         },
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=struct_llfields | COMPLEXITY=37 | LINES=59 */
 
 fn struct_llfields<'a, 'tcx>(
     cx: &CodegenCx<'a, 'tcx>,
@@ -148,7 +140,6 @@ fn struct_llfields<'a, 'tcx>(
     }
     (result, packed)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 
 impl<'a, 'tcx> CodegenCx<'a, 'tcx> {
     pub(crate) fn align_of(&self, ty: Ty<'tcx>) -> Align {
@@ -168,7 +159,6 @@ impl<'a, 'tcx> CodegenCx<'a, 'tcx> {
         (layout.size, layout.align.abi)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_llvm_immediate | COMPLEXITY=3 | LINES=14 */
 
 pub(crate) trait LayoutLlvmExt<'tcx> {
     fn is_llvm_immediate(&self) -> bool;
@@ -183,7 +173,6 @@ pub(crate) trait LayoutLlvmExt<'tcx> {
         immediate: bool,
     ) -> &'a Type;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_llvm_immediate | COMPLEXITY=101 | LINES=140 */
 
 impl<'tcx> LayoutLlvmExt<'tcx> for TyAndLayout<'tcx> {
     fn is_llvm_immediate(&self) -> bool {

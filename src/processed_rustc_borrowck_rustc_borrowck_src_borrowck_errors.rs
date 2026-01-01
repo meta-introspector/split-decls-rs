@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/borrowck_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=190 | LINES=477 */
 use crate::rustc_complete::Span;
 
 impl<'infcx, 'tcx> crate::MirBorrowckCtxt<'_, 'infcx, 'tcx> {
@@ -487,7 +484,6 @@ impl<'infcx, 'tcx> crate::MirBorrowckCtxt<'_, 'infcx, 'tcx> {
         struct_span_code_err!(self.dcx(), span, E0716, "temporary value dropped while borrowed",)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 pub(crate) fn borrowed_data_escapes_closure<'tcx>(
     tcx: TyCtxt<'tcx>,

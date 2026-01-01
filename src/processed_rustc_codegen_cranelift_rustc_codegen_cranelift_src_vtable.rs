@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/vtable.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 // Codegen vtables and vtable accesses.
 //
 // See `rustc_codegen_ssa/src/meth.rs` for reference.
@@ -12,7 +11,6 @@ pub(crate) fn vtable_memflags() -> MemFlags {
     flags.set_readonly(); // A vtable is always read-only.
     flags
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn drop_fn_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> Value {
     let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
@@ -23,7 +21,6 @@ pub(crate) fn drop_fn_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> 
         (ty::COMMON_VTABLE_ENTRIES_DROPINPLACE * usize_size) as i32,
     )
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn size_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> Value {
     let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
@@ -34,7 +31,6 @@ pub(crate) fn size_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> Val
         (ty::COMMON_VTABLE_ENTRIES_SIZE * usize_size) as i32,
     )
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn align_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> Value {
     let usize_size = fx.layout_of(fx.tcx.types.usize).size.bytes() as usize;
@@ -45,7 +41,6 @@ pub(crate) fn align_of_obj(fx: &mut FunctionCx<'_, '_, '_>, vtable: Value) -> Va
         (ty::COMMON_VTABLE_ENTRIES_ALIGN * usize_size) as i32,
     )
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=33 */
 
 pub(crate) fn get_ptr_and_method_ref<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,
@@ -79,7 +74,6 @@ pub(crate) fn get_ptr_and_method_ref<'tcx>(
     );
     (ptr, func_ref)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) fn get_vtable<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

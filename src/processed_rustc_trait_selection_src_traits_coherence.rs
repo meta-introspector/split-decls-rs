@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/coherence.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // See Rustc Dev Guide chapters on [trait-resolution] and [trait-specialization] for more info on
 // how this works.
 //
@@ -9,48 +8,36 @@
 use std::fmt::Debug;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, EmissionGuarantee};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::traits::solve::{CandidateSource, Certainty, Goal};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::traits::specialization_graph::OverlapMode;
 use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use rustc_next_trait_solver::coherence::*;
 use rustc_next_trait_solver::solve::SolverDelegateEvalExt;
 use crate::rustc_complete::{DUMMY_SP, Span, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, warn};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::ObligationCtxt;
 use crate::error_reporting::traits::suggest_new_overflow_limit;
 use crate::infer::InferOk;
 use crate::solve::inspect::{InspectGoal, ProofTreeInferCtxtExt, ProofTreeVisitor};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::solve::{SolverDelegate, deeply_normalize_for_diagnostics, inspect};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::traits::select::IntercrateAmbiguityCause;
 use crate::traits::{
     FulfillmentErrorCode, NormalizeExt, Obligation, ObligationCause, PredicateObligation,
     SelectionContext, SkipLeakCheck, util,
 };
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ImplHeader | COMPLEXITY=2 | LINES=12 */
 
 /// The "header" of an impl is everything outside the body: a Self type, a trait
 /// ref (in the case of a trait impl), and a set of predicates (from the
@@ -63,7 +50,6 @@ pub struct ImplHeader<'tcx> {
     pub trait_ref: Option<ty::TraitRef<'tcx>>,
     pub predicates: Vec<ty::Predicate<'tcx>>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=OverlapResult | COMPLEXITY=4 | LINES=12 */
 
 pub struct OverlapResult<'tcx> {
     pub impl_header: ImplHeader<'tcx>,
@@ -76,7 +62,6 @@ pub struct OverlapResult<'tcx> {
     /// Used in the new solver to suggest increasing the recursion limit.
     pub overflowing_predicates: Vec<ty::Predicate<'tcx>>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=add_placeholder_note | COMPLEXITY=4 | LINES=7 */
 
 pub fn add_placeholder_note<G: EmissionGuarantee>(err: &mut Diag<'_, G>) {
     err.note(
@@ -84,7 +69,6 @@ pub fn add_placeholder_note<G: EmissionGuarantee>(err: &mut Diag<'_, G>) {
          see rust-lang/rust#56105 for details",
     );
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 pub(crate) fn suggest_increasing_recursion_limit<'tcx, G: EmissionGuarantee>(
     tcx: TyCtxt<'tcx>,
@@ -97,14 +81,12 @@ pub(crate) fn suggest_increasing_recursion_limit<'tcx, G: EmissionGuarantee>(
 
     suggest_new_overflow_limit(tcx, err);
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone, Copy)]
 enum TrackAmbiguityCauses {
     Yes,
     No,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_yes | COMPLEXITY=7 | LINES=9 */
 
 impl TrackAmbiguityCauses {
     fn is_yes(self) -> bool {
@@ -114,7 +96,6 @@ impl TrackAmbiguityCauses {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=overlapping_impls | COMPLEXITY=24 | LINES=68 */
 
 /// If there are types that satisfy both impls, returns `Some`
 /// with a suitably-freshened `ImplHeader` with those types
@@ -183,7 +164,6 @@ pub fn overlapping_impls(
         Some(overlap)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=fresh_impl_header | COMPLEXITY=4 | LINES=18 */
 
 fn fresh_impl_header<'tcx>(infcx: &InferCtxt<'tcx>, impl_def_id: DefId) -> ImplHeader<'tcx> {
     let tcx = infcx.tcx;
@@ -202,7 +182,6 @@ fn fresh_impl_header<'tcx>(infcx: &InferCtxt<'tcx>, impl_def_id: DefId) -> ImplH
             .collect(),
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fresh_impl_header_normalized | COMPLEXITY=3 | LINES=14 */
 
 fn fresh_impl_header_normalized<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -217,7 +196,6 @@ fn fresh_impl_header_normalized<'tcx>(
     header.predicates.extend(obligations.into_iter().map(|o| o.predicate));
     header
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=overlap | COMPLEXITY=46 | LINES=100 */
 
 /// Can both impl `a` and impl `b` be satisfied by a common type (including
 /// where-clauses)? If so, returns an `ImplHeader` that unifies the two impls.
@@ -318,7 +296,6 @@ fn overlap<'tcx>(
         overflowing_predicates,
     })
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=equate_impl_headers | COMPLEXITY=7 | LINES=23 */
 
 #[instrument(level = "debug", skip(infcx), ret)]
 fn equate_impl_headers<'tcx>(
@@ -342,7 +319,6 @@ fn equate_impl_headers<'tcx>(
 
     result.map(|infer_ok| infer_ok.obligations).ok()
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// The result of [fn impl_intersection_has_impossible_obligation].
 #[derive(Debug)]
@@ -357,7 +333,6 @@ enum IntersectionHasImpossibleObligations<'tcx> {
         overflowing_predicates: Vec<ty::Predicate<'tcx>>,
     },
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=impl_intersection_has_impossible_obligation | COMPLEXITY=49 | LINES=93 */
 
 /// Check if both impls can be satisfied by a common type by considering whether
 /// any of either impl's obligations is not known to hold.
@@ -451,7 +426,6 @@ fn impl_intersection_has_impossible_obligation<'a, 'cx, 'tcx>(
         IntersectionHasImpossibleObligations::No { overflowing_predicates: Vec::new() }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=impl_intersection_has_negative_obligation | COMPLEXITY=22 | LINES=63 */
 
 /// Check if both impls can be satisfied by a common type by considering whether
 /// any of first impl's obligations is known not to hold *via a negative predicate*.
@@ -515,7 +489,6 @@ fn impl_intersection_has_negative_obligation(
         .elaborate_sized()
         .any(|(clause, _)| try_prove_negated_where_clause(infcx, clause, param_env))
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=plug_infer_with_placeholders | COMPLEXITY=49 | LINES=111 */
 
 fn plug_infer_with_placeholders<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -627,7 +600,6 @@ fn plug_infer_with_placeholders<'tcx>(
 
     value.visit_with(&mut PlugInferWithPlaceholder { infcx, universe, var: ty::BoundVar::ZERO });
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_prove_negated_where_clause | COMPLEXITY=15 | LINES=38 */
 
 fn try_prove_negated_where_clause<'tcx>(
     root_infcx: &InferCtxt<'tcx>,
@@ -666,7 +638,6 @@ fn try_prove_negated_where_clause<'tcx>(
 
     true
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=compute_intercrate_ambiguity_causes | COMPLEXITY=8 | LINES=20 */
 
 /// Compute the `intercrate_ambiguity_causes` for the new solver using
 /// "proof trees".
@@ -687,13 +658,11 @@ fn compute_intercrate_ambiguity_causes<'tcx>(
 
     causes
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=AmbiguityCausesVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct AmbiguityCausesVisitor<'a, 'tcx> {
     cache: FxHashSet<Goal<'tcx, ty::Predicate<'tcx>>>,
     causes: &'a mut FxIndexSet<IntercrateAmbiguityCause<'tcx>>,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=span | COMPLEXITY=88 | LINES=128 */
 
 impl<'a, 'tcx> ProofTreeVisitor<'tcx> for AmbiguityCausesVisitor<'a, 'tcx> {
     fn span(&self) -> Span {
@@ -822,7 +791,6 @@ impl<'a, 'tcx> ProofTreeVisitor<'tcx> for AmbiguityCausesVisitor<'a, 'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=search_ambiguity_causes | COMPLEXITY=4 | LINES=13 */
 
 fn search_ambiguity_causes<'tcx>(
     infcx: &InferCtxt<'tcx>,

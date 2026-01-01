@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/eval_ctxt/canonical.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 // Canonicalization is used to separate some goal from its context,
 // throwing away unnecessary information in the process.
 //
@@ -21,9 +20,7 @@ use rustc_type_ir::{
     self as ty, Canonical, CanonicalVarKind, CanonicalVarValues, InferCtxtLike, Interner,
     TypeFoldable,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 use crate::canonicalizer::Canonicalizer;
 use crate::delegate::SolverDelegate;
@@ -34,26 +31,22 @@ use crate::solve::{
     MaybeCause, NestedNormalizationGoals, NoSolution, PredefinedOpaquesData, QueryInput,
     QueryResult, Response, inspect, response_no_constraints_raw,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=var_values | COMPLEXITY=2 | LINES=4 */
 
 trait ResponseT<I: Interner> {
     fn var_values(&self) -> CanonicalVarValues<I>;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=var_values | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner> ResponseT<I> for Response<I> {
     fn var_values(&self) -> CanonicalVarValues<I> {
         self.var_values
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=var_values | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner, T> ResponseT<I> for inspect::State<I, T> {
     fn var_values(&self) -> CanonicalVarValues<I> {
         self.var_values
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_external_query_constraints | COMPLEXITY=176 | LINES=411 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -465,7 +458,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 /// Used by proof trees to be able to recompute intermediate actions while
 /// evaluating a goal. The `var_values` not only include the bound variables
@@ -487,7 +479,6 @@ where
     let state = eager_resolve_vars(delegate, state);
     Canonicalizer::canonicalize_response(delegate, max_input_universe, &mut vec![], state)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=instantiate_canonical_state | COMPLEXITY=7 | LINES=30 */
 
 // FIXME: needs to be pub to be accessed by downstream
 // `crate::rustc_trait_selection::solve::inspect::analyse`.

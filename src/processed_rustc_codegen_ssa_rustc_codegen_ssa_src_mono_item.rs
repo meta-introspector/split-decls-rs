@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mono_item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::Linkage;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData, Visibility};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=define | COMPLEXITY=3 | LINES=23 */
 use crate::rustc_complete::ty::layout::HasTyCtxt;
 use tracing::debug;
 
@@ -27,7 +25,6 @@ pub trait MonoItemExt<'a, 'tcx> {
     );
     fn to_raw_string(&self) -> String;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=define | COMPLEXITY=56 | LINES=72 */
 
 impl<'a, 'tcx: 'a> MonoItemExt<'a, 'tcx> for MonoItem<'tcx> {
     fn define<Bx: BuilderMethods<'a, 'tcx>>(

@@ -1,32 +1,24 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/impls/initialized.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::assert_matches::assert_matches;
 
 use crate::rustc_abi::VariantIdx;
 use crate::rustc_index::Idx;
 use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{
     self, Body, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::util::Discr;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::drop_flag_effects::{DropFlagState, InactiveVariants};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::move_paths::{HasMoveData, InitIndex, InitKind, LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::{
     Analysis, GenKill, MaybeReachable, drop_flag_effects, drop_flag_effects_for_function_entry,
     drop_flag_effects_for_location, on_all_children_bits, on_lookup_result_bits,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=MaybePlacesSwitchIntData | COMPLEXITY=2 | LINES=7 */
 
 // Used by both `MaybeInitializedPlaces` and `MaybeUninitializedPlaces`.
 pub struct MaybePlacesSwitchIntData<'tcx> {
@@ -34,7 +26,6 @@ pub struct MaybePlacesSwitchIntData<'tcx> {
     discriminants: Vec<(VariantIdx, Discr<'tcx>)>,
     index: usize,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=variants | COMPLEXITY=19 | LINES=22 */
 
 impl<'tcx> MaybePlacesSwitchIntData<'tcx> {
     /// Creates a `SmallVec` mapping each target in `targets` to its `VariantIdx`.
@@ -57,7 +48,6 @@ impl<'tcx> MaybePlacesSwitchIntData<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=29 | LINES=51 */
 
 impl<'tcx> MaybePlacesSwitchIntData<'tcx> {
     fn new(
@@ -109,7 +99,6 @@ impl<'tcx> MaybePlacesSwitchIntData<'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
 
 /// `MaybeInitializedPlaces` tracks all places that might be
 /// initialized upon reaching a particular point in the control flow
@@ -137,7 +126,6 @@ impl<'tcx> MaybePlacesSwitchIntData<'tcx> {
 ///
 ///     c = S;                                  // {a, b, c, d}
 /// }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=MaybeInitializedPlaces | COMPLEXITY=3 | LINES=17 */
 /// ```
 ///
 /// To determine whether a place is *definitely* initialized at a
@@ -155,7 +143,6 @@ pub struct MaybeInitializedPlaces<'a, 'tcx> {
     exclude_inactive_in_otherwise: bool,
     skip_unreachable_unwind: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=40 */
 
 impl<'a, 'tcx> MaybeInitializedPlaces<'a, 'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>, body: &'a Body<'tcx>, move_data: &'a MoveData<'tcx>) -> Self {
@@ -196,14 +183,12 @@ impl<'a, 'tcx> MaybeInitializedPlaces<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=move_data | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx> HasMoveData<'tcx> for MaybeInitializedPlaces<'a, 'tcx> {
     fn move_data(&self) -> &MoveData<'tcx> {
         self.move_data
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
 
 /// `MaybeUninitializedPlaces` tracks all places that might be
 /// uninitialized upon reaching a particular point in the control flow
@@ -231,7 +216,6 @@ impl<'a, 'tcx> HasMoveData<'tcx> for MaybeInitializedPlaces<'a, 'tcx> {
 ///
 ///     c = S;                                  // {a, b,    d}
 /// }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=MaybeUninitializedPlaces | COMPLEXITY=3 | LINES=19 */
 /// ```
 ///
 /// To determine whether a place is *definitely* uninitialized at a
@@ -251,7 +235,6 @@ pub struct MaybeUninitializedPlaces<'a, 'tcx> {
     include_inactive_in_otherwise: bool,
     skip_unreachable_unwind: DenseBitSet<mir::BasicBlock>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=38 */
 
 impl<'a, 'tcx> MaybeUninitializedPlaces<'a, 'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>, body: &'a Body<'tcx>, move_data: &'a MoveData<'tcx>) -> Self {
@@ -290,14 +273,12 @@ impl<'a, 'tcx> MaybeUninitializedPlaces<'a, 'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=move_data | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasMoveData<'tcx> for MaybeUninitializedPlaces<'_, 'tcx> {
     fn move_data(&self) -> &MoveData<'tcx> {
         self.move_data
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=30 */
 
 /// `EverInitializedPlaces` tracks all places that might have ever been
 /// initialized upon reaching a particular point in the control flow
@@ -328,27 +309,23 @@ impl<'tcx> HasMoveData<'tcx> for MaybeUninitializedPlaces<'_, 'tcx> {
 ///
 ///     c = S;                                  // {a, b, c, d }
 /// }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=EverInitializedPlaces | COMPLEXITY=2 | LINES=5 */
 /// ```
 pub struct EverInitializedPlaces<'a, 'tcx> {
     body: &'a Body<'tcx>,
     move_data: &'a MoveData<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> EverInitializedPlaces<'a, 'tcx> {
     pub fn new(body: &'a Body<'tcx>, move_data: &'a MoveData<'tcx>) -> Self {
         EverInitializedPlaces { body, move_data }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=move_data | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasMoveData<'tcx> for EverInitializedPlaces<'_, 'tcx> {
     fn move_data(&self) -> &MoveData<'tcx> {
         self.move_data
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=update_bits | COMPLEXITY=7 | LINES=13 */
 
 impl<'a, 'tcx> MaybeInitializedPlaces<'a, 'tcx> {
     fn update_bits(
@@ -362,7 +339,6 @@ impl<'a, 'tcx> MaybeInitializedPlaces<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=update_bits | COMPLEXITY=7 | LINES=13 */
 
 impl<'tcx> MaybeUninitializedPlaces<'_, 'tcx> {
     fn update_bits(
@@ -376,7 +352,6 @@ impl<'tcx> MaybeUninitializedPlaces<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=48 | LINES=133 */
 
 impl<'tcx> Analysis<'tcx> for MaybeInitializedPlaces<'_, 'tcx> {
     /// There can be many more `MovePathIndex` than there are locals in a MIR body.
@@ -510,7 +485,6 @@ impl<'tcx> Analysis<'tcx> for MaybeInitializedPlaces<'_, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=47 | LINES=120 */
 
 /// There can be many more `MovePathIndex` than there are locals in a MIR body.
 /// We use a mixed bitset to avoid paying too high a memory footprint.
@@ -631,7 +605,6 @@ impl<'tcx> Analysis<'tcx> for MaybeUninitializedPlaces<'_, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=30 | LINES=84 */
 
 /// There can be many more `InitIndex` than there are locals in a MIR body.
 /// We use a mixed bitset to avoid paying too high a memory footprint.

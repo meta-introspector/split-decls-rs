@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/overflow.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt;
 
 use crate::rustc_complete::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def::Namespace;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_infer::traits::{Obligation, PredicateObligation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{FmtPrinter, Print};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt, Upcast};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
@@ -22,7 +17,6 @@ pub enum OverflowCause<'tcx> {
     DeeplyNormalize(ty::AliasTerm<'tcx>),
     TraitSolver(ty::Predicate<'tcx>),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=suggest_new_overflow_limit | COMPLEXITY=8 | LINES=16 */
 
 pub fn suggest_new_overflow_limit<'tcx, G: EmissionGuarantee>(
     tcx: TyCtxt<'tcx>,
@@ -39,7 +33,6 @@ pub fn suggest_new_overflow_limit<'tcx, G: EmissionGuarantee>(
         tcx.crate_name(LOCAL_CRATE),
     ));
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=report_overflow_error | COMPLEXITY=51 | LINES=155 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     /// Reports that an overflow has occurred and halts compilation. We

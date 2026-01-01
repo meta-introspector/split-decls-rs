@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/ast.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=21 */
 // The Rust abstract syntax tree module.
 //
 // This module contains common structures forming the language AST.
@@ -21,38 +20,26 @@
 // - [`UnOp`], [`BinOp`], and [`BinOpKind`]: Unary and binary operators.
 
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{cmp, fmt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub use GenericArgs::*;
 pub use UnsafeSource::*;
 pub use rustc_ast_ir::{FloatTy, IntTy, Movability, Mutability, Pinnedness, UintTy};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::tagged_ptr::Tag;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use crate::rustc_complete::AttrId;
 use crate::rustc_complete::source_map::{Spanned, respan};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ByteSymbol, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub use crate::format::*;
 use crate::token::{self, CommentKind, Delimiter};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::tokenstream::{DelimSpan, LazyAttrTokenStream, TokenStream};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::util::parser::{ExprPrecedence, Fixity};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::visit::{AssocCtxt, BoundKind, LifetimeCtxt};
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// A "Label" is an identifier of some point in sources,
 /// e.g. in the following code:
@@ -61,7 +48,6 @@ use crate::visit::{AssocCtxt, BoundKind, LifetimeCtxt};
 /// 'outer: loop {
 ///     break 'outer;
 /// }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Label | COMPLEXITY=2 | LINES=7 */
 /// ```
 ///
 /// `'outer` is a label.
@@ -69,14 +55,12 @@ use crate::visit::{AssocCtxt, BoundKind, LifetimeCtxt};
 pub struct Label {
     pub ident: Ident,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for Label {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "label({:?})", self.ident)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Lifetime | COMPLEXITY=2 | LINES=8 */
 
 /// A "Lifetime" is an annotation of the scope in which variable
 /// can be used, e.g. `'a` in `&'a i32`.
@@ -85,21 +69,18 @@ pub struct Lifetime {
     pub id: NodeId,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for Lifetime {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "lifetime({}: {})", self.id, self)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Display for Lifetime {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.ident.name)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=Path | COMPLEXITY=2 | LINES=15 */
 
 /// A "Path" is essentially Rust's notion of a name.
 ///
@@ -115,7 +96,6 @@ pub struct Path {
     pub segments: ThinVec<PathSegment>,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=11 | LINES=14 */
 
 // Succeeds if the path has a single segment that is arg-free and matches the given symbol.
 impl PartialEq<Symbol> for Path {
@@ -130,7 +110,6 @@ impl PartialEq<Symbol> for Path {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=10 | LINES=9 */
 
 // Succeeds if the path has segments that are arg-free and match the given symbols.
 impl PartialEq<&[Symbol]> for Path {
@@ -140,7 +119,6 @@ impl PartialEq<&[Symbol]> for Path {
             && self.segments.iter().zip(names.iter()).all(|(s1, s2)| s1 == s2)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=8 | LINES=9 */
 
 impl<CTX: crate::rustc_span::HashStableContext> HashStable<CTX> for Path {
     fn hash_stable(&self, hcx: &mut CTX, hasher: &mut StableHasher) {
@@ -150,7 +128,6 @@ impl<CTX: crate::rustc_span::HashStableContext> HashStable<CTX> for Path {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=from_ident | COMPLEXITY=10 | LINES=27 */
 
 impl Path {
     /// Convert a span and an identifier to the corresponding
@@ -178,7 +155,6 @@ impl Path {
             || self.segments.len() == 1 && self.segments.iter().all(|seg| seg.args.is_none())
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=join_path_syms | COMPLEXITY=12 | LINES=33 */
 
 /// Joins multiple symbols with "::" into a path, e.g. "a::b::c". If the first
 /// segment is `kw::PathRoot` it will be printed as empty, e.g. "::b::c".
@@ -212,7 +188,6 @@ pub fn join_path_syms(path: impl IntoIterator<Item = impl Borrow<Symbol>>) -> St
     }
     s
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=join_path_idents | COMPLEXITY=11 | LINES=20 */
 
 /// Like `join_path_syms`, but for `Ident`s. This function is necessary because
 /// `Ident::to_string` does more than just print the symbol in the `name` field.
@@ -233,7 +208,6 @@ pub fn join_path_idents(path: impl IntoIterator<Item = impl Borrow<Ident>>) -> S
     }
     s
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=PathSegment | COMPLEXITY=5 | LINES=19 */
 
 /// A segment of a path: an identifier, an optional lifetime, and a set of types.
 ///
@@ -253,7 +227,6 @@ pub struct PathSegment {
     /// `P` is used as a size optimization for the common case with no parameters.
     pub args: Option<Box<GenericArgs>>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=7 | LINES=8 */
 
 // Succeeds if the path segment is arg-free and matches the given symbol.
 impl PartialEq<Symbol> for PathSegment {
@@ -262,7 +235,6 @@ impl PartialEq<Symbol> for PathSegment {
         self.args.is_none() && self.ident.name == *name
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from_ident | COMPLEXITY=10 | LINES=17 */
 
 impl PathSegment {
     pub fn from_ident(ident: Ident) -> Self {
@@ -280,7 +252,6 @@ impl PathSegment {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// The generic arguments and associated item constraints of a path segment.
 ///
@@ -294,7 +265,6 @@ pub enum GenericArgs {
     /// `(..)` in return type notation.
     ParenthesizedElided(Span),
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=is_angle_bracketed | COMPLEXITY=8 | LINES=14 */
 
 impl GenericArgs {
     pub fn is_angle_bracketed(&self) -> bool {
@@ -309,7 +279,6 @@ impl GenericArgs {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Concrete argument in the sequence of generic args.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -321,7 +290,6 @@ pub enum GenericArg {
     /// `1` in `Foo<1>`.
     Const(AnonConst),
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=span | COMPLEXITY=7 | LINES=10 */
 
 impl GenericArg {
     pub fn span(&self) -> Span {
@@ -332,7 +300,6 @@ impl GenericArg {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=AngleBracketedArgs | COMPLEXITY=2 | LINES=9 */
 
 /// A path like `Foo<'a, T>`.
 #[derive(Clone, Encodable, Decodable, Debug, Default, Walkable)]
@@ -342,7 +309,6 @@ pub struct AngleBracketedArgs {
     /// The comma separated parts in the `<...>`.
     pub args: ThinVec<AngleBracketedArg>,
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 /// Either an argument for a generic parameter or a constraint on an associated item.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -352,7 +318,6 @@ pub enum AngleBracketedArg {
     /// A constraint on an associated item.
     Constraint(AssocItemConstraint),
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=span | COMPLEXITY=7 | LINES=9 */
 
 impl AngleBracketedArg {
     pub fn span(&self) -> Span {
@@ -362,21 +327,18 @@ impl AngleBracketedArg {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<AngleBracketedArgs> for Box<GenericArgs> {
     fn from(val: AngleBracketedArgs) -> Self {
         Box::new(GenericArgs::AngleBracketed(val))
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ParenthesizedArgs> for Box<GenericArgs> {
     fn from(val: ParenthesizedArgs) -> Self {
         Box::new(GenericArgs::Parenthesized(val))
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=ParenthesizedArgs | COMPLEXITY=2 | LINES=22 */
 
 /// A path like `Foo(A, B) -> C`.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -399,7 +361,6 @@ pub struct ParenthesizedArgs {
     /// `C`
     pub output: FnRetTy,
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=as_angle_bracketed_args | COMPLEXITY=4 | LINES=12 */
 
 impl ParenthesizedArgs {
     pub fn as_angle_bracketed_args(&self) -> AngleBracketedArgs {
@@ -412,10 +373,8 @@ impl ParenthesizedArgs {
         AngleBracketedArgs { span: self.inputs_span, args }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 pub use crate::node_id::{CRATE_NODE_ID, DUMMY_NODE_ID, NodeId};
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=TraitBoundModifiers | COMPLEXITY=2 | LINES=8 */
 
 /// Modifiers on a trait bound like `[const]`, `?` and `!`.
 #[derive(Copy, Clone, PartialEq, Eq, Encodable, Decodable, Debug, Walkable)]
@@ -424,7 +383,6 @@ pub struct TraitBoundModifiers {
     pub asyncness: BoundAsyncness,
     pub polarity: BoundPolarity,
 }
-/* AST_META: AST_ID=42 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 impl TraitBoundModifiers {
     pub const NONE: Self = Self {
@@ -433,7 +391,6 @@ impl TraitBoundModifiers {
         polarity: BoundPolarity::Positive,
     };
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum GenericBound {
@@ -442,7 +399,6 @@ pub enum GenericBound {
     /// Precise capturing syntax: `impl Sized + use<'a>`
     Use(ThinVec<PreciseCapturingArg>, Span),
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=span | COMPLEXITY=7 | LINES=10 */
 
 impl GenericBound {
     pub fn span(&self) -> Span {
@@ -453,7 +409,6 @@ impl GenericBound {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub type GenericBounds = Vec<GenericBound>;
 
@@ -465,7 +420,6 @@ pub enum ParamKindOrd {
     Lifetime,
     TypeOrConst,
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl fmt::Display for ParamKindOrd {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -475,7 +429,6 @@ impl fmt::Display for ParamKindOrd {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum GenericParamKind {
@@ -492,7 +445,6 @@ pub enum GenericParamKind {
         default: Option<AnonConst>,
     },
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=GenericParam | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct GenericParam {
@@ -505,7 +457,6 @@ pub struct GenericParam {
     pub kind: GenericParamKind,
     pub colon_span: Option<Span>,
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=span | COMPLEXITY=11 | LINES=12 */
 
 impl GenericParam {
     pub fn span(&self) -> Span {
@@ -518,7 +469,6 @@ impl GenericParam {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=Generics | COMPLEXITY=2 | LINES=9 */
 
 /// Represents lifetime, type and const parameters attached to a declaration of
 /// a function, enum, trait, etc.
@@ -528,7 +478,6 @@ pub struct Generics {
     pub where_clause: WhereClause,
     pub span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=WhereClause | COMPLEXITY=7 | LINES=12 */
 
 /// A where-clause in a definition.
 #[derive(Clone, Encodable, Decodable, Debug, Default, Walkable)]
@@ -541,14 +490,12 @@ pub struct WhereClause {
     pub predicates: ThinVec<WherePredicate>,
     pub span: Span,
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=3 | LINES=6 */
 
 impl WhereClause {
     pub fn is_empty(&self) -> bool {
         !self.has_where_token && self.predicates.is_empty()
     }
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=WherePredicate | COMPLEXITY=2 | LINES=10 */
 
 /// A single predicate in a where-clause.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -559,7 +506,6 @@ pub struct WherePredicate {
     pub span: Span,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Predicate kind in where-clause.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -571,7 +517,6 @@ pub enum WherePredicateKind {
     /// An equality predicate (unsupported).
     EqPredicate(WhereEqPredicate),
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=WhereBoundPredicate | COMPLEXITY=2 | LINES=14 */
 
 /// A type bound.
 ///
@@ -586,7 +531,6 @@ pub struct WhereBoundPredicate {
     #[visitable(extra = BoundKind::Bound)]
     pub bounds: GenericBounds,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=WhereRegionPredicate | COMPLEXITY=2 | LINES=11 */
 
 /// A lifetime predicate.
 ///
@@ -598,7 +542,6 @@ pub struct WhereRegionPredicate {
     #[visitable(extra = BoundKind::Bound)]
     pub bounds: GenericBounds,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=WhereEqPredicate | COMPLEXITY=2 | LINES=9 */
 
 /// An equality predicate (unsupported).
 ///
@@ -608,7 +551,6 @@ pub struct WhereEqPredicate {
     pub lhs_ty: Box<Ty>,
     pub rhs_ty: Box<Ty>,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=Crate | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Crate {
@@ -620,7 +562,6 @@ pub struct Crate {
     pub spans: ModSpans,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=MetaItem | COMPLEXITY=5 | LINES=14 */
 
 /// A semantic representation of a meta item. A meta item is a slightly
 /// restricted form of an attribute -- it can only contain expressions in
@@ -635,7 +576,6 @@ pub struct MetaItem {
     pub kind: MetaItemKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=60 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 /// The meta item kind, containing the data after the initial path.
 #[derive(Clone, Encodable, Decodable, Debug, HashStable_Generic)]
@@ -655,7 +595,6 @@ pub enum MetaItemKind {
     /// E.g., `#[feature = "foo"]`, where the field represents the `"foo"`.
     NameValue(MetaItemLit),
 }
-/* AST_META: AST_ID=61 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 /// Values inside meta item lists.
 ///
@@ -670,13 +609,10 @@ pub enum MetaItemInner {
     /// E.g., `"foo"`, `64`, `true`.
     Lit(MetaItemLit),
 }
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// A block (`{ .. }`).
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 ///
 /// E.g., `{ .. }` as in `fn foo() { .. }`.
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=Block | COMPLEXITY=8 | LINES=10 */
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Block {
     /// The statements in the block.
@@ -687,7 +623,6 @@ pub struct Block {
     pub span: Span,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=Pat | COMPLEXITY=10 | LINES=11 */
 
 /// A match pattern.
 ///
@@ -699,7 +634,6 @@ pub struct Pat {
     pub span: Span,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=66 | LINES=129 */
 
 impl Pat {
     /// Attempt reparsing the pattern as a type.
@@ -829,19 +763,16 @@ impl Pat {
         }
     }
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Box<Pat>> for Pat {
     fn from(value: Box<Pat>) -> Self {
         *value
     }
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 /// A single field in a struct pattern.
 ///
 /// Patterns like the fields of `Foo { x, ref y, ref mut z }`
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=PatField | COMPLEXITY=4 | LINES=14 */
 /// are treated the same as `x: x, y: ref y, z: ref mut z`,
 /// except when `is_shorthand` is true.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -856,7 +787,6 @@ pub struct PatField {
     pub span: Span,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=70 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[derive(Encodable, Decodable, HashStable_Generic, Walkable)]
@@ -864,7 +794,6 @@ pub enum ByRef {
     Yes(Mutability),
     No,
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=cap_ref_mutability | COMPLEXITY=6 | LINES=10 */
 
 impl ByRef {
     #[must_use]
@@ -875,7 +804,6 @@ impl ByRef {
         self
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=BindingMode(pub | COMPLEXITY=16 | LINES=29 */
 
 /// The mode of a binding (`mut`, `ref mut`, etc).
 /// Used for both the explicit binding annotations given in the HIR for a binding
@@ -905,7 +833,6 @@ impl BindingMode {
         }
     }
 }
-/* AST_META: AST_ID=73 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum RangeEnd {
@@ -914,7 +841,6 @@ pub enum RangeEnd {
     /// `..`
     Excluded,
 }
-/* AST_META: AST_ID=74 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum RangeSyntax {
@@ -923,7 +849,6 @@ pub enum RangeSyntax {
     /// `..=`
     DotDotEq,
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=84 */
 
 /// All the different flavors of pattern that Rust recognizes.
 //
@@ -1008,7 +933,6 @@ pub enum PatKind {
     /// Placeholder for a pattern that wasn't syntactically well formed in some way.
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 /// Whether the `..` is present in a struct fields pattern.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, PartialEq, Walkable)]
@@ -1020,7 +944,6 @@ pub enum PatFieldsRest {
     /// `module::StructName { field }`
     None,
 }
-/* AST_META: AST_ID=77 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 /// The kind of borrow in an `AddrOf` expression,
 /// e.g., `&place` or `&raw const place`.
@@ -1040,7 +963,6 @@ pub enum BorrowKind {
     /// where `T = typeof($expr)` and `'a` is some lifetime.
     Pin,
 }
-/* AST_META: AST_ID=78 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=40 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Encodable, Decodable, HashStable_Generic, Walkable)]
 pub enum BinOpKind {
@@ -1081,7 +1003,6 @@ pub enum BinOpKind {
     /// The `>` operator (greater than)
     Gt,
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=30 | LINES=68 */
 
 impl BinOpKind {
     pub fn as_str(&self) -> &'static str {
@@ -1150,7 +1071,6 @@ impl BinOpKind {
         !self.is_comparison()
     }
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=from | COMPLEXITY=10 | LINES=22 */
 
 pub type BinOp = Spanned<BinOpKind>;
 
@@ -1173,7 +1093,6 @@ impl From<AssignOpKind> for BinOpKind {
         }
     }
 }
-/* AST_META: AST_ID=81 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Encodable, Decodable, HashStable_Generic, Walkable)]
 pub enum AssignOpKind {
@@ -1198,7 +1117,6 @@ pub enum AssignOpKind {
     /// The `>>=` operator (shift right)
     ShrAssign,
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=9 | LINES=23 */
 
 impl AssignOpKind {
     pub fn as_str(&self) -> &'static str {
@@ -1222,7 +1140,6 @@ impl AssignOpKind {
         true
     }
 }
-/* AST_META: AST_ID=83 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=15 */
 
 pub type AssignOp = Spanned<AssignOpKind>;
 
@@ -1238,7 +1155,6 @@ pub enum UnOp {
     /// The `-` operator for negation
     Neg,
 }
-/* AST_META: AST_ID=84 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=10 | LINES=15 */
 
 impl UnOp {
     pub fn as_str(&self) -> &'static str {
@@ -1254,7 +1170,6 @@ impl UnOp {
         matches!(self, Self::Neg | Self::Not)
     }
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=Stmt | COMPLEXITY=4 | LINES=10 */
 
 /// A statement. No `attrs` or `tokens` fields because each `StmtKind` variant
 /// contains an AST node with those fields. (Except for `StmtKind::Empty`,
@@ -1265,7 +1180,6 @@ pub struct Stmt {
     pub kind: StmtKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=has_trailing_semicolon | COMPLEXITY=19 | LINES=38 */
 
 impl Stmt {
     pub fn has_trailing_semicolon(&self) -> bool {
@@ -1304,7 +1218,6 @@ impl Stmt {
         matches!(self.kind, StmtKind::Expr(_))
     }
 }
-/* AST_META: AST_ID=87 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 // Adding a new variant? Please update `test_stmt` in `tests/ui/macros/stringify.rs`.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -1322,7 +1235,6 @@ pub enum StmtKind {
     /// Macro.
     MacCall(Box<MacCallStmt>),
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=MacCallStmt | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct MacCallStmt {
@@ -1331,7 +1243,6 @@ pub struct MacCallStmt {
     pub attrs: AttrVec,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=89 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, Walkable)]
 pub enum MacStmtStyle {
@@ -1345,7 +1256,6 @@ pub enum MacStmtStyle {
     /// expressions.
     NoBraces,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=Local | COMPLEXITY=2 | LINES=14 */
 
 /// Local represents a `let` statement, e.g., `let <pat>:<ty> = <expr>;`.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -1360,7 +1270,6 @@ pub struct Local {
     pub attrs: AttrVec,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=91 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum LocalKind {
@@ -1374,7 +1283,6 @@ pub enum LocalKind {
     /// Example: `let Some(x) = y else { return };`
     InitElse(Box<Expr>, Box<Block>),
 }
-/* AST_META: AST_ID=92 | TYPE=FUNCTION | NAME=init | COMPLEXITY=12 | LINES=17 */
 
 impl LocalKind {
     pub fn init(&self) -> Option<&Expr> {
@@ -1392,19 +1300,16 @@ impl LocalKind {
         }
     }
 }
-/* AST_META: AST_ID=93 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 /// An arm of a 'match'.
 ///
 /// E.g., `0..=10 => { println!("match!") }` as in
-/* AST_META: AST_ID=94 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 ///
 /// ```
 /// match 123 {
 ///     0..=10 => { println!("match!") },
 ///     _ => { println!("no match!") },
 /// }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=Arm | COMPLEXITY=18 | LINES=14 */
 /// ```
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Arm {
@@ -1419,10 +1324,8 @@ pub struct Arm {
     pub id: NodeId,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// A single field in a struct expression, e.g. `x: value` and `y` in `Foo { x: value, y }`.
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=ExprField | COMPLEXITY=2 | LINES=10 */
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct ExprField {
     pub attrs: AttrVec,
@@ -1433,21 +1336,18 @@ pub struct ExprField {
     pub is_shorthand: bool,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=98 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Encodable, Decodable, Debug, Copy, Walkable)]
 pub enum BlockCheckMode {
     Default,
     Unsafe(UnsafeSource),
 }
-/* AST_META: AST_ID=99 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Encodable, Decodable, Debug, Copy, Walkable)]
 pub enum UnsafeSource {
     CompilerGenerated,
     UserProvided,
 }
-/* AST_META: AST_ID=100 | TYPE=STRUCT | NAME=AnonConst | COMPLEXITY=6 | LINES=11 */
 
 /// A constant (expression) that's not an item or associated item,
 /// but needs its own `DefId` for type-checking, const-eval, etc.
@@ -1459,7 +1359,6 @@ pub struct AnonConst {
     pub id: NodeId,
     pub value: Box<Expr>,
 }
-/* AST_META: AST_ID=101 | TYPE=STRUCT | NAME=Expr | COMPLEXITY=2 | LINES=10 */
 
 /// An expression.
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -1470,7 +1369,6 @@ pub struct Expr {
     pub attrs: AttrVec,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=is_potential_trivial_const_arg | COMPLEXITY=120 | LINES=262 */
 
 impl Expr {
     /// Check if this expression is potentially a trivial const arg, i.e., one that can _potentially_
@@ -1733,14 +1631,12 @@ impl Expr {
         }
     }
 }
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Box<Expr>> for Expr {
     fn from(value: Box<Expr>) -> Self {
         *value
     }
 }
-/* AST_META: AST_ID=104 | TYPE=STRUCT | NAME=Closure | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Closure {
@@ -1756,7 +1652,6 @@ pub struct Closure {
     /// The span of the argument block `|...|`
     pub fn_arg_span: Span,
 }
-/* AST_META: AST_ID=105 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Limit types of a range (inclusive or exclusive).
 #[derive(Copy, Clone, PartialEq, Encodable, Decodable, Debug, Walkable)]
@@ -1766,7 +1661,6 @@ pub enum RangeLimits {
     /// Inclusive at the beginning and end.
     Closed,
 }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=9 */
 
 impl RangeLimits {
     pub fn as_str(&self) -> &'static str {
@@ -1776,7 +1670,6 @@ impl RangeLimits {
         }
     }
 }
-/* AST_META: AST_ID=107 | TYPE=STRUCT | NAME=MethodCall | COMPLEXITY=2 | LINES=14 */
 
 /// A method call (e.g. `x.foo::<Bar, Baz>(a, b, c)`).
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -1791,7 +1684,6 @@ pub struct MethodCall {
     /// Baz>(a, b, c)`.
     pub span: Span,
 }
-/* AST_META: AST_ID=108 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum StructRest {
@@ -1802,7 +1694,6 @@ pub enum StructRest {
     /// No trailing `..` or expression.
     None,
 }
-/* AST_META: AST_ID=109 | TYPE=STRUCT | NAME=StructExpr | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct StructExpr {
@@ -1811,7 +1702,6 @@ pub struct StructExpr {
     pub fields: ThinVec<ExprField>,
     pub rest: StructRest,
 }
-/* AST_META: AST_ID=110 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=51 | LINES=181 */
 
 // Adding a new variant? Please update `test_expr` in `tests/ui/macros/stringify.rs`.
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -1993,7 +1883,6 @@ pub enum ExprKind {
     /// Acts as a null expression. Lowering it will always emit a bug.
     Dummy,
 }
-/* AST_META: AST_ID=111 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Used to differentiate between `for` loops and `for await` loops.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, PartialEq, Eq, Walkable)]
@@ -2001,24 +1890,20 @@ pub enum ForLoopKind {
     For,
     ForAwait,
 }
-/* AST_META: AST_ID=112 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
 /// Used to differentiate between `async {}` blocks and `gen {}` blocks.
-/* AST_META: AST_ID=113 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[derive(Clone, Encodable, Decodable, Debug, PartialEq, Eq, Walkable)]
 pub enum GenBlockKind {
     Async,
     Gen,
     AsyncGen,
 }
-/* AST_META: AST_ID=114 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for GenBlockKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.modifier().fmt(f)
     }
 }
-/* AST_META: AST_ID=115 | TYPE=FUNCTION | NAME=modifier | COMPLEXITY=7 | LINES=10 */
 
 impl GenBlockKind {
     pub fn modifier(&self) -> &'static str {
@@ -2029,7 +1914,6 @@ impl GenBlockKind {
         }
     }
 }
-/* AST_META: AST_ID=116 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 /// Whether we're unwrapping or wrapping an unsafe binder
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
@@ -2040,7 +1924,6 @@ pub enum UnsafeBinderCastKind {
     // e.g. `unsafe<'a> &'a i32` -> `&i32`
     Unwrap,
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=QSelf | COMPLEXITY=3 | LINES=25 */
 
 /// The explicit `Self` type in a "qualified path". The actual
 /// path, including the trait and the associated item, is stored
@@ -2066,7 +1949,6 @@ pub struct QSelf {
     pub path_span: Span,
     pub position: usize,
 }
-/* AST_META: AST_ID=118 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 /// A capture clause used in closures and `async` blocks.
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, HashStable_Generic, Walkable)]
@@ -2088,7 +1970,6 @@ pub enum CaptureBy {
         use_kw: Span,
     },
 }
-/* AST_META: AST_ID=119 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 /// Closure lifetime binder, `for<'a, 'b>` in `for<'a, 'b> |_: &'a (), _: &'b ()|`.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -2114,7 +1995,6 @@ pub enum ClosureBinder {
         generic_params: ThinVec<GenericParam>,
     },
 }
-/* AST_META: AST_ID=120 | TYPE=STRUCT | NAME=MacCall | COMPLEXITY=2 | LINES=8 */
 
 /// Represents a macro invocation. The `path` indicates which macro
 /// is being invoked, and the `args` are arguments passed to it.
@@ -2123,14 +2003,12 @@ pub struct MacCall {
     pub path: Path,
     pub args: Box<DelimArgs>,
 }
-/* AST_META: AST_ID=121 | TYPE=FUNCTION | NAME=span | COMPLEXITY=3 | LINES=6 */
 
 impl MacCall {
     pub fn span(&self) -> Span {
         self.path.span.to(self.args.dspan.entire())
     }
 }
-/* AST_META: AST_ID=122 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 /// Arguments passed to an attribute macro.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -2146,7 +2024,6 @@ pub enum AttrArgs {
         expr: Box<Expr>,
     },
 }
-/* AST_META: AST_ID=123 | TYPE=FUNCTION | NAME=span | COMPLEXITY=17 | LINES=20 */
 
 impl AttrArgs {
     pub fn span(&self) -> Option<Span> {
@@ -2167,17 +2044,14 @@ impl AttrArgs {
         }
     }
 }
-/* AST_META: AST_ID=124 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
 /// Delimited arguments, as used in `#[attr()/[]/{}]` or `mac!()/[]/{}`.
-/* AST_META: AST_ID=125 | TYPE=STRUCT | NAME=DelimArgs | COMPLEXITY=2 | LINES=6 */
 #[derive(Clone, Encodable, Decodable, Debug, HashStable_Generic, Walkable)]
 pub struct DelimArgs {
     pub dspan: DelimSpan,
     pub delim: Delimiter, // Note: `Delimiter::Invisible` never occurs
     pub tokens: TokenStream,
 }
-/* AST_META: AST_ID=126 | TYPE=FUNCTION | NAME=need_semicolon | COMPLEXITY=4 | LINES=8 */
 
 impl DelimArgs {
     /// Whether a macro with these arguments needs a semicolon
@@ -2186,7 +2060,6 @@ impl DelimArgs {
         !matches!(self, DelimArgs { delim: Delimiter::Brace, .. })
     }
 }
-/* AST_META: AST_ID=127 | TYPE=STRUCT | NAME=MacroDef | COMPLEXITY=4 | LINES=8 */
 
 /// Represents a macro definition.
 #[derive(Clone, Encodable, Decodable, Debug, HashStable_Generic, Walkable)]
@@ -2195,7 +2068,6 @@ pub struct MacroDef {
     /// `true` if macro was defined with `macro_rules`.
     pub macro_rules: bool,
 }
-/* AST_META: AST_ID=128 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Copy, Hash, Eq, PartialEq)]
 #[derive(HashStable_Generic, Walkable)]
@@ -2207,7 +2079,6 @@ pub enum StrStyle {
     /// The value is the number of `#` symbols used.
     Raw(u8),
 }
-/* AST_META: AST_ID=129 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=9 */
 
 /// The kind of match expression
 #[derive(Clone, Copy, Encodable, Decodable, Debug, PartialEq, Walkable)]
@@ -2217,7 +2088,6 @@ pub enum MatchKind {
     /// expr.match { ... }
     Postfix,
 }
-/* AST_META: AST_ID=130 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// The kind of yield expression
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -2227,7 +2097,6 @@ pub enum YieldKind {
     /// expr.yield { ... }
     Postfix(Box<Expr>),
 }
-/* AST_META: AST_ID=131 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=29 */
 
 impl YieldKind {
     /// Returns the expression inside the yield expression, if any.
@@ -2257,7 +2126,6 @@ impl YieldKind {
         }
     }
 }
-/* AST_META: AST_ID=132 | TYPE=STRUCT | NAME=MetaItemLit | COMPLEXITY=3 | LINES=13 */
 
 /// A literal in a meta item.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, HashStable_Generic)]
@@ -2271,7 +2139,6 @@ pub struct MetaItemLit {
     pub kind: LitKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=133 | TYPE=STRUCT | NAME=StrLit | COMPLEXITY=2 | LINES=13 */
 
 /// Similar to `MetaItemLit`, but restricted to string literals.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, Walkable)]
@@ -2285,7 +2152,6 @@ pub struct StrLit {
     pub style: StrStyle,
     pub span: Span,
 }
-/* AST_META: AST_ID=134 | TYPE=FUNCTION | NAME=as_token_lit | COMPLEXITY=7 | LINES=10 */
 
 impl StrLit {
     pub fn as_token_lit(&self) -> token::Lit {
@@ -2296,7 +2162,6 @@ impl StrLit {
         token::Lit::new(token_kind, self.symbol, self.suffix)
     }
 }
-/* AST_META: AST_ID=135 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Type of the integer literal based on provided suffix.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, Hash, Eq, PartialEq)]
@@ -2309,7 +2174,6 @@ pub enum LitIntType {
     /// e.g. `42`.
     Unsuffixed,
 }
-/* AST_META: AST_ID=136 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Type of the float literal based on provided suffix.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, Hash, Eq, PartialEq)]
@@ -2320,7 +2184,6 @@ pub enum LitFloatType {
     /// A float literal without a suffix (`1.0 or 1.0E10`).
     Unsuffixed,
 }
-/* AST_META: AST_ID=137 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=34 */
 
 /// This type is used within both `ast::MetaItemLit` and `hir::Lit`.
 ///
@@ -2355,7 +2218,6 @@ pub enum LitKind {
     /// Placeholder for a literal that wasn't well-formed in some way.
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=138 | TYPE=FUNCTION | NAME=str | COMPLEXITY=31 | LINES=49 */
 
 impl LitKind {
     pub fn str(&self) -> Option<Symbol> {
@@ -2405,7 +2267,6 @@ impl LitKind {
         }
     }
 }
-/* AST_META: AST_ID=139 | TYPE=STRUCT | NAME=MutTy | COMPLEXITY=2 | LINES=8 */
 
 // N.B., If you change this, you'll probably want to change the corresponding
 // type structure in `middle/ty.rs` as well.
@@ -2414,7 +2275,6 @@ pub struct MutTy {
     pub ty: Box<Ty>,
     pub mutbl: Mutability,
 }
-/* AST_META: AST_ID=140 | TYPE=STRUCT | NAME=FnSig | COMPLEXITY=2 | LINES=9 */
 
 /// Represents a function's signature in a trait declaration,
 /// trait implementation, or free function.
@@ -2424,7 +2284,6 @@ pub struct FnSig {
     pub decl: Box<FnDecl>,
     pub span: Span,
 }
-/* AST_META: AST_ID=141 | TYPE=FUNCTION | NAME=header_span | COMPLEXITY=41 | LINES=48 */
 
 impl FnSig {
     /// Return a span encompassing the header, or where to insert it if empty.
@@ -2473,7 +2332,6 @@ impl FnSig {
         self.header.ext.span().unwrap_or(self.safety_span().shrink_to_hi())
     }
 }
-/* AST_META: AST_ID=142 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 /// A constraint on an associated item.
 ///
@@ -2484,7 +2342,6 @@ impl FnSig {
 /// * the `A: Bound` in `Trait<A: Bound>`
 /// * the `RetTy` in `Trait(ArgTy, ArgTy) -> RetTy`
 /// * the `C = { Ct }` in `Trait<C = { Ct }>` (feature `associated_const_equality`)
-/* AST_META: AST_ID=143 | TYPE=STRUCT | NAME=AssocItemConstraint | COMPLEXITY=2 | LINES=9 */
 /// * the `f(..): Bound` in `Trait<f(..): Bound>` (feature `return_type_notation`)
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct AssocItemConstraint {
@@ -2494,28 +2351,24 @@ pub struct AssocItemConstraint {
     pub kind: AssocItemConstraintKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=144 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum Term {
     Ty(Box<Ty>),
     Const(AnonConst),
 }
-/* AST_META: AST_ID=145 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Box<Ty>> for Term {
     fn from(v: Box<Ty>) -> Self {
         Term::Ty(v)
     }
 }
-/* AST_META: AST_ID=146 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<AnonConst> for Term {
     fn from(v: AnonConst) -> Self {
         Term::Const(v)
     }
 }
-/* AST_META: AST_ID=147 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 /// The kind of [associated item constraint][AssocItemConstraint].
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -2533,7 +2386,6 @@ pub enum AssocItemConstraintKind {
         bounds: GenericBounds,
     },
 }
-/* AST_META: AST_ID=148 | TYPE=STRUCT | NAME=Ty | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Encodable, Decodable, Debug, Walkable)]
 pub struct Ty {
@@ -2542,7 +2394,6 @@ pub struct Ty {
     pub span: Span,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=149 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=11 */
 
 impl Clone for Ty {
     fn clone(&self) -> Self {
@@ -2554,14 +2405,12 @@ impl Clone for Ty {
         })
     }
 }
-/* AST_META: AST_ID=150 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<Box<Ty>> for Ty {
     fn from(value: Box<Ty>) -> Self {
         *value
     }
 }
-/* AST_META: AST_ID=151 | TYPE=FUNCTION | NAME=peel_refs | COMPLEXITY=13 | LINES=19 */
 
 impl Ty {
     pub fn peel_refs(&self) -> &Self {
@@ -2581,7 +2430,6 @@ impl Ty {
         }
     }
 }
-/* AST_META: AST_ID=152 | TYPE=STRUCT | NAME=FnPtrTy | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct FnPtrTy {
@@ -2593,14 +2441,12 @@ pub struct FnPtrTy {
     /// after the generic params (if there are any, e.g. `for<'a>`).
     pub decl_span: Span,
 }
-/* AST_META: AST_ID=153 | TYPE=STRUCT | NAME=UnsafeBinderTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct UnsafeBinderTy {
     pub generic_params: ThinVec<GenericParam>,
     pub inner_ty: Box<Ty>,
 }
-/* AST_META: AST_ID=154 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=17 | LINES=62 */
 
 /// The various kinds of type recognized by the compiler.
 //
@@ -2663,7 +2509,6 @@ pub enum TyKind {
     /// Placeholder for a kind that has failed to be defined.
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=155 | TYPE=FUNCTION | NAME=is_implicit_self | COMPLEXITY=21 | LINES=54 */
 
 impl TyKind {
     pub fn is_implicit_self(&self) -> bool {
@@ -2718,7 +2563,6 @@ impl TyKind {
         )
     }
 }
-/* AST_META: AST_ID=156 | TYPE=STRUCT | NAME=TyPat | COMPLEXITY=2 | LINES=9 */
 
 /// A pattern type pattern.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -2728,7 +2572,6 @@ pub struct TyPat {
     pub span: Span,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=157 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// All the different flavors of pattern that Rust recognizes.
 //
@@ -2743,7 +2586,6 @@ pub enum TyPatKind {
     /// Placeholder for a pattern that wasn't syntactically well formed in some way.
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=158 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Syntax used to declare a trait object.
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, HashStable_Generic, Walkable)]
@@ -2753,7 +2595,6 @@ pub enum TraitObjectSyntax {
     Dyn = 0,
     None = 1,
 }
-/* AST_META: AST_ID=159 | TYPE=FUNCTION | NAME=into_usize | COMPLEXITY=19 | LINES=19 */
 
 /// SAFETY: `TraitObjectSyntax` only has 3 data-less variants which means
 /// it can be represented with a `u2`. We use `repr(u8)` to guarantee the
@@ -2773,7 +2614,6 @@ unsafe impl Tag for TraitObjectSyntax {
         }
     }
 }
-/* AST_META: AST_ID=160 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum PreciseCapturingArg {
@@ -2782,7 +2622,6 @@ pub enum PreciseCapturingArg {
     /// Type or const parameter.
     Arg(Path, NodeId),
 }
-/* AST_META: AST_ID=161 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Inline assembly operand explicit register or register class.
 ///
@@ -2792,7 +2631,6 @@ pub enum InlineAsmRegOrRegClass {
     Reg(Symbol),
     RegClass(Symbol),
 }
-/* AST_META: AST_ID=162 | TYPE=STRUCT | NAME=InlineAsmOptions(u16); | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Encodable, Decodable, HashStable_Generic)]
 pub struct InlineAsmOptions(u16);
@@ -2809,7 +2647,6 @@ bitflags::bitflags! {
         const MAY_UNWIND      = 1 << 8;
     }
 }
-/* AST_META: AST_ID=163 | TYPE=FUNCTION | NAME=human_readable_names | COMPLEXITY=32 | LINES=41 */
 
 impl InlineAsmOptions {
     pub const COUNT: usize = Self::all().bits().count_ones() as usize;
@@ -2851,21 +2688,18 @@ impl InlineAsmOptions {
         options
     }
 }
-/* AST_META: AST_ID=164 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl std::fmt::Debug for InlineAsmOptions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         bitflags::parser::to_writer(self, f)
     }
 }
-/* AST_META: AST_ID=165 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, PartialEq, Encodable, Decodable, Debug, Hash, HashStable_Generic, Walkable)]
 pub enum InlineAsmTemplatePiece {
     String(Cow<'static, str>),
     Placeholder { operand_idx: usize, modifier: Option<char>, span: Span },
 }
-/* AST_META: AST_ID=166 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=32 | LINES=23 */
 
 impl fmt::Display for InlineAsmTemplatePiece {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -2889,7 +2723,6 @@ impl fmt::Display for InlineAsmTemplatePiece {
         }
     }
 }
-/* AST_META: AST_ID=167 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=7 | LINES=12 */
 
 impl InlineAsmTemplatePiece {
     /// Rebuilds the asm template string from its pieces.
@@ -2902,7 +2735,6 @@ impl InlineAsmTemplatePiece {
         out
     }
 }
-/* AST_META: AST_ID=168 | TYPE=STRUCT | NAME=InlineAsmSym | COMPLEXITY=7 | LINES=14 */
 
 /// Inline assembly symbol operands get their own AST node that is somewhat
 /// similar to `AnonConst`.
@@ -2917,7 +2749,6 @@ pub struct InlineAsmSym {
     pub qself: Option<Box<QSelf>>,
     pub path: Path,
 }
-/* AST_META: AST_ID=169 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=36 */
 
 /// Inline assembly operand.
 ///
@@ -2954,7 +2785,6 @@ pub enum InlineAsmOperand {
         block: Box<Block>,
     },
 }
-/* AST_META: AST_ID=170 | TYPE=FUNCTION | NAME=reg | COMPLEXITY=14 | LINES=12 */
 
 impl InlineAsmOperand {
     pub fn reg(&self) -> Option<&InlineAsmRegOrRegClass> {
@@ -2967,7 +2797,6 @@ impl InlineAsmOperand {
         }
     }
 }
-/* AST_META: AST_ID=171 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Encodable, Decodable, Debug, HashStable_Generic, Walkable, PartialEq, Eq)]
 pub enum AsmMacro {
@@ -2978,7 +2807,6 @@ pub enum AsmMacro {
     /// The `naked_asm!` macro
     NakedAsm,
 }
-/* AST_META: AST_ID=172 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=26 */
 
 impl AsmMacro {
     pub const fn macro_name(self) -> &'static str {
@@ -3005,7 +2833,6 @@ impl AsmMacro {
         }
     }
 }
-/* AST_META: AST_ID=173 | TYPE=STRUCT | NAME=InlineAsm | COMPLEXITY=2 | LINES=15 */
 
 /// Inline assembly.
 ///
@@ -3021,7 +2848,6 @@ pub struct InlineAsm {
     pub options: InlineAsmOptions,
     pub line_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=174 | TYPE=FUNCTION | NAME=Param | COMPLEXITY=2 | LINES=13 */
 
 /// A parameter in a function header.
 ///
@@ -3035,7 +2861,6 @@ pub struct Param {
     pub span: Span,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=175 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// Alternative representation for `Arg`s describing `self` parameter of methods.
 ///
@@ -3051,7 +2876,6 @@ pub enum SelfKind {
     /// `self: TYPE`, `mut self: TYPE`
     Explicit(Box<Ty>, Mutability),
 }
-/* AST_META: AST_ID=176 | TYPE=FUNCTION | NAME=to_ref_suggestion | COMPLEXITY=16 | LINES=14 */
 
 impl SelfKind {
     pub fn to_ref_suggestion(&self) -> String {
@@ -3066,7 +2890,6 @@ impl SelfKind {
         }
     }
 }
-/* AST_META: AST_ID=177 | TYPE=FUNCTION | NAME=to_self | COMPLEXITY=45 | LINES=83 */
 
 pub type ExplicitSelf = Spanned<SelfKind>;
 
@@ -3150,7 +2973,6 @@ impl Param {
         }
     }
 }
-/* AST_META: AST_ID=178 | TYPE=FUNCTION | NAME=FnDecl | COMPLEXITY=2 | LINES=12 */
 
 /// A signature (not the body) of a function declaration.
 ///
@@ -3163,7 +2985,6 @@ pub struct FnDecl {
     pub inputs: ThinVec<Param>,
     pub output: FnRetTy,
 }
-/* AST_META: AST_ID=179 | TYPE=FUNCTION | NAME=has_self | COMPLEXITY=4 | LINES=9 */
 
 impl FnDecl {
     pub fn has_self(&self) -> bool {
@@ -3173,7 +2994,6 @@ impl FnDecl {
         self.inputs.last().is_some_and(|arg| matches!(arg.ty.kind, TyKind::CVarArgs))
     }
 }
-/* AST_META: AST_ID=180 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Is the trait definition an auto trait?
 #[derive(Copy, Clone, PartialEq, Encodable, Decodable, Debug, HashStable_Generic, Walkable)]
@@ -3181,7 +3001,6 @@ pub enum IsAuto {
     Yes,
     No,
 }
-/* AST_META: AST_ID=181 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// Safety of items.
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Encodable, Decodable, Debug)]
@@ -3195,7 +3014,6 @@ pub enum Safety {
     /// which is used.
     Default,
 }
-/* AST_META: AST_ID=182 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=15 */
 
 /// Describes what kind of coroutine markers, if any, a function has.
 ///
@@ -3211,7 +3029,6 @@ pub enum CoroutineKind {
     /// `async gen`, which returns an `impl AsyncIterator`.
     AsyncGen { span: Span, closure_id: NodeId, return_impl_trait_id: NodeId },
 }
-/* AST_META: AST_ID=183 | TYPE=FUNCTION | NAME=span | COMPLEXITY=39 | LINES=38 */
 
 impl CoroutineKind {
     pub fn span(self) -> Span {
@@ -3250,7 +3067,6 @@ impl CoroutineKind {
         }
     }
 }
-/* AST_META: AST_ID=184 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Encodable, Decodable, Debug)]
 #[derive(HashStable_Generic, Walkable)]
@@ -3258,7 +3074,6 @@ pub enum Const {
     Yes(Span),
     No,
 }
-/* AST_META: AST_ID=185 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Item defaultness.
 /// For details see the [RFC #2532](https://github.com/rust-lang/rfcs/pull/2532).
@@ -3267,7 +3082,6 @@ pub enum Defaultness {
     Default(Span),
     Final,
 }
-/* AST_META: AST_ID=186 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq, Encodable, Decodable, HashStable_Generic, Walkable)]
 pub enum ImplPolarity {
@@ -3276,7 +3090,6 @@ pub enum ImplPolarity {
     /// `impl !Trait for Type`
     Negative(Span),
 }
-/* AST_META: AST_ID=187 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl fmt::Debug for ImplPolarity {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -3286,7 +3099,6 @@ impl fmt::Debug for ImplPolarity {
         }
     }
 }
-/* AST_META: AST_ID=188 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The polarity of a trait bound.
 #[derive(Copy, Clone, PartialEq, Eq, Encodable, Decodable, Debug, Hash)]
@@ -3299,7 +3111,6 @@ pub enum BoundPolarity {
     /// `Type: ?Trait`
     Maybe(Span),
 }
-/* AST_META: AST_ID=189 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=10 */
 
 impl BoundPolarity {
     pub fn as_str(self) -> &'static str {
@@ -3310,7 +3121,6 @@ impl BoundPolarity {
         }
     }
 }
-/* AST_META: AST_ID=190 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The constness of a trait bound.
 #[derive(Copy, Clone, PartialEq, Eq, Encodable, Decodable, Debug, Hash)]
@@ -3323,7 +3133,6 @@ pub enum BoundConstness {
     /// `Type: [const] Trait`
     Maybe(Span),
 }
-/* AST_META: AST_ID=191 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=10 */
 
 impl BoundConstness {
     pub fn as_str(self) -> &'static str {
@@ -3334,7 +3143,6 @@ impl BoundConstness {
         }
     }
 }
-/* AST_META: AST_ID=192 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// The asyncness of a trait bound.
 #[derive(Copy, Clone, PartialEq, Eq, Encodable, Decodable, Debug)]
@@ -3345,7 +3153,6 @@ pub enum BoundAsyncness {
     /// `Type: async Trait`
     Async(Span),
 }
-/* AST_META: AST_ID=193 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=7 | LINES=9 */
 
 impl BoundAsyncness {
     pub fn as_str(self) -> &'static str {
@@ -3355,7 +3162,6 @@ impl BoundAsyncness {
         }
     }
 }
-/* AST_META: AST_ID=194 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum FnRetTy {
@@ -3367,7 +3173,6 @@ pub enum FnRetTy {
     /// Everything else.
     Ty(Box<Ty>),
 }
-/* AST_META: AST_ID=195 | TYPE=FUNCTION | NAME=span | COMPLEXITY=7 | LINES=9 */
 
 impl FnRetTy {
     pub fn span(&self) -> Span {
@@ -3377,14 +3182,12 @@ impl FnRetTy {
         }
     }
 }
-/* AST_META: AST_ID=196 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, Walkable)]
 pub enum Inline {
     Yes,
     No { had_parse_error: Result<(), ErrorGuaranteed> },
 }
-/* AST_META: AST_ID=197 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 /// Module item kind.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -3395,7 +3198,6 @@ pub enum ModKind {
     Loaded(ThinVec<Box<Item>>, Inline, ModSpans),
     Unloaded,
 }
-/* AST_META: AST_ID=198 | TYPE=STRUCT | NAME=ModSpans | COMPLEXITY=5 | LINES=8 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, Default, Walkable)]
 pub struct ModSpans {
@@ -3404,12 +3206,10 @@ pub struct ModSpans {
     pub inner_span: Span,
     pub inject_use_span: Span,
 }
-/* AST_META: AST_ID=199 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 /// Foreign module declaration.
 ///
 /// E.g., `extern { .. }` or `extern "C" { .. }`.
-/* AST_META: AST_ID=200 | TYPE=STRUCT | NAME=ForeignMod | COMPLEXITY=4 | LINES=10 */
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct ForeignMod {
     /// Span of the `extern` keyword.
@@ -3420,13 +3220,11 @@ pub struct ForeignMod {
     pub abi: Option<StrLit>,
     pub items: ThinVec<Box<ForeignItem>>,
 }
-/* AST_META: AST_ID=201 | TYPE=STRUCT | NAME=EnumDef | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct EnumDef {
     pub variants: ThinVec<Variant>,
 }
-/* AST_META: AST_ID=202 | TYPE=STRUCT | NAME=Variant | COMPLEXITY=3 | LINES=22 */
 
 /// Enum variant.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -3449,7 +3247,6 @@ pub struct Variant {
     /// Is a macro placeholder.
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=203 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 
 /// Part of `use` item to the right of its prefix.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -3468,7 +3265,6 @@ pub enum UseTreeKind {
     /// `use prefix::*`
     Glob,
 }
-/* AST_META: AST_ID=204 | TYPE=STRUCT | NAME=UseTree | COMPLEXITY=2 | LINES=9 */
 
 /// A tree of paths sharing common prefixes.
 /// Used in `use` items both at top-level and inside of braces in import groups.
@@ -3478,7 +3274,6 @@ pub struct UseTree {
     pub kind: UseTreeKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=205 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=8 | LINES=12 */
 
 impl UseTree {
     pub fn ident(&self) -> Ident {
@@ -3491,7 +3286,6 @@ impl UseTree {
         }
     }
 }
-/* AST_META: AST_ID=206 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Distinguishes between `Attribute`s that decorate items and Attributes that
 /// are contained as statements within items. These two cases need to be
@@ -3501,7 +3295,6 @@ pub enum AttrStyle {
     Outer,
     Inner,
 }
-/* AST_META: AST_ID=207 | TYPE=STRUCT | NAME=Attribute | COMPLEXITY=4 | LINES=14 */
 
 /// A list of attributes.
 pub type AttrVec = ThinVec<Attribute>;
@@ -3516,7 +3309,6 @@ pub struct Attribute {
     pub style: AttrStyle,
     pub span: Span,
 }
-/* AST_META: AST_ID=208 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum AttrKind {
@@ -3528,7 +3320,6 @@ pub enum AttrKind {
     /// variant (which is much less compact and thus more expensive).
     DocComment(CommentKind, Symbol),
 }
-/* AST_META: AST_ID=209 | TYPE=STRUCT | NAME=NormalAttr | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct NormalAttr {
@@ -3536,7 +3327,6 @@ pub struct NormalAttr {
     // Tokens for the full attribute, e.g. `#[foo]`, `#[bar]`.
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=210 | TYPE=FUNCTION | NAME=from_ident | COMPLEXITY=5 | LINES=14 */
 
 impl NormalAttr {
     pub fn from_ident(ident: Ident) -> Self {
@@ -3551,7 +3341,6 @@ impl NormalAttr {
         }
     }
 }
-/* AST_META: AST_ID=211 | TYPE=STRUCT | NAME=AttrItem | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct AttrItem {
@@ -3561,7 +3350,6 @@ pub struct AttrItem {
     // Tokens for the meta item, e.g. just the `foo` within `#[foo]` or `#[foo]`.
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=212 | TYPE=FUNCTION | NAME=is_valid_for_outer_style | COMPLEXITY=3 | LINES=11 */
 
 impl AttrItem {
     pub fn is_valid_for_outer_style(&self) -> bool {
@@ -3573,7 +3361,6 @@ impl AttrItem {
             || self.path == sym::deny
     }
 }
-/* AST_META: AST_ID=213 | TYPE=STRUCT | NAME=TraitRef | COMPLEXITY=2 | LINES=12 */
 
 /// `TraitRef`s appear in impls.
 ///
@@ -3586,7 +3373,6 @@ pub struct TraitRef {
     pub path: Path,
     pub ref_id: NodeId,
 }
-/* AST_META: AST_ID=214 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Whether enclosing parentheses are present or not.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -3594,7 +3380,6 @@ pub enum Parens {
     Yes,
     No,
 }
-/* AST_META: AST_ID=215 | TYPE=STRUCT | NAME=PolyTraitRef | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct PolyTraitRef {
@@ -3613,7 +3398,6 @@ pub struct PolyTraitRef {
     /// and a closing paren respectively.
     pub parens: Parens,
 }
-/* AST_META: AST_ID=216 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=18 */
 
 impl PolyTraitRef {
     pub fn new(
@@ -3632,7 +3416,6 @@ impl PolyTraitRef {
         }
     }
 }
-/* AST_META: AST_ID=217 | TYPE=STRUCT | NAME=Visibility | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Visibility {
@@ -3640,7 +3423,6 @@ pub struct Visibility {
     pub span: Span,
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=218 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum VisibilityKind {
@@ -3648,19 +3430,16 @@ pub enum VisibilityKind {
     Restricted { path: Box<Path>, id: NodeId, shorthand: bool },
     Inherited,
 }
-/* AST_META: AST_ID=219 | TYPE=FUNCTION | NAME=is_pub | COMPLEXITY=3 | LINES=6 */
 
 impl VisibilityKind {
     pub fn is_pub(&self) -> bool {
         matches!(self, VisibilityKind::Public)
     }
 }
-/* AST_META: AST_ID=220 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 /// Field definition in a struct, variant or union.
 ///
 /// E.g., `bar: usize` as in `struct Foo { bar: usize }`.
-/* AST_META: AST_ID=221 | TYPE=STRUCT | NAME=FieldDef | COMPLEXITY=2 | LINES=13 */
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct FieldDef {
     pub attrs: AttrVec,
@@ -3674,7 +3453,6 @@ pub struct FieldDef {
     pub default: Option<AnonConst>,
     pub is_placeholder: bool,
 }
-/* AST_META: AST_ID=222 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Was parsing recovery performed?
 #[derive(Copy, Clone, Debug, Encodable, Decodable, HashStable_Generic, Walkable)]
@@ -3682,7 +3460,6 @@ pub enum Recovered {
     No,
     Yes(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=223 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=17 */
 
 /// Fields and constructor ids of enum variants and structs.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
@@ -3700,7 +3477,6 @@ pub enum VariantData {
     /// E.g., `Bar = ..` as in `enum Foo { Bar = .. }`.
     Unit(NodeId),
 }
-/* AST_META: AST_ID=224 | TYPE=FUNCTION | NAME=fields | COMPLEXITY=17 | LINES=18 */
 
 impl VariantData {
     /// Return the fields of this variant.
@@ -3719,7 +3495,6 @@ impl VariantData {
         }
     }
 }
-/* AST_META: AST_ID=225 | TYPE=STRUCT | NAME=Item | COMPLEXITY=7 | LINES=20 */
 
 /// An item definition.
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -3740,7 +3515,6 @@ pub struct Item<K = ItemKind> {
     /// include inner attributes.
     pub tokens: Option<LazyAttrTokenStream>,
 }
-/* AST_META: AST_ID=226 | TYPE=FUNCTION | NAME=span_with_attributes | COMPLEXITY=10 | LINES=31 */
 
 impl Item {
     /// Return the span that encompasses the attributes.
@@ -3772,7 +3546,6 @@ impl Item {
         }
     }
 }
-/* AST_META: AST_ID=227 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 
 /// `extern` qualifier on a function item or function type.
 #[derive(Clone, Copy, Encodable, Decodable, Debug, Walkable)]
@@ -3792,7 +3565,6 @@ pub enum Extern {
     /// E.g. `extern "C" fn foo() {}`.
     Explicit(StrLit, Span),
 }
-/* AST_META: AST_ID=228 | TYPE=FUNCTION | NAME=from_abi | COMPLEXITY=12 | LINES=16 */
 
 impl Extern {
     pub fn from_abi(abi: Option<StrLit>, span: Span) -> Extern {
@@ -3809,7 +3581,6 @@ impl Extern {
         }
     }
 }
-/* AST_META: AST_ID=229 | TYPE=STRUCT | NAME=FnHeader | COMPLEXITY=11 | LINES=16 */
 
 /// A function header.
 ///
@@ -3826,7 +3597,6 @@ pub struct FnHeader {
     /// The `extern` keyword and corresponding ABI string, if any.
     pub ext: Extern,
 }
-/* AST_META: AST_ID=230 | TYPE=FUNCTION | NAME=has_qualifiers | COMPLEXITY=4 | LINES=11 */
 
 impl FnHeader {
     /// Does this function header have any qualifiers or is it empty?
@@ -3838,7 +3608,6 @@ impl FnHeader {
             || !matches!(ext, Extern::None)
     }
 }
-/* AST_META: AST_ID=231 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=11 */
 
 impl Default for FnHeader {
     fn default() -> FnHeader {
@@ -3850,7 +3619,6 @@ impl Default for FnHeader {
         }
     }
 }
-/* AST_META: AST_ID=232 | TYPE=STRUCT | NAME=Trait | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Trait {
@@ -3864,7 +3632,6 @@ pub struct Trait {
     #[visitable(extra = AssocCtxt::Trait)]
     pub items: ThinVec<Box<AssocItem>>,
 }
-/* AST_META: AST_ID=233 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// The location of a where clause on a `TyAlias` (`Span`) and whether there was
 /// a `where` keyword (`bool`). This is split out from `WhereClause`, since there
@@ -3876,13 +3643,11 @@ pub struct Trait {
 /// trait Foo {
 ///   type Assoc<'a, 'b> where Self: 'a, Self: 'b;
 /// }
-/* AST_META: AST_ID=234 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 /// impl Foo for () {
 ///   type Assoc<'a, 'b> where Self: 'a = () where Self: 'b;
 ///   //                 ^^^^^^^^^^^^^^ first where clause
 ///   //                                     ^^^^^^^^^^^^^^ second where clause
 /// }
-/* AST_META: AST_ID=235 | TYPE=STRUCT | NAME=TyAliasWhereClause | COMPLEXITY=2 | LINES=8 */
 /// ```
 ///
 /// If there is no where clause, then this is `false` with `DUMMY_SP`.
@@ -3891,7 +3656,6 @@ pub struct TyAliasWhereClause {
     pub has_where_token: bool,
     pub span: Span,
 }
-/* AST_META: AST_ID=236 | TYPE=STRUCT | NAME=TyAliasWhereClauses | COMPLEXITY=5 | LINES=13 */
 
 /// The span information for the two where clauses on a `TyAlias`.
 #[derive(Copy, Clone, Encodable, Decodable, Debug, Default, Walkable)]
@@ -3905,7 +3669,6 @@ pub struct TyAliasWhereClauses {
     /// from the where clause after the equals sign.
     pub split: usize,
 }
-/* AST_META: AST_ID=237 | TYPE=STRUCT | NAME=TyAlias | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct TyAlias {
@@ -3917,7 +3680,6 @@ pub struct TyAlias {
     pub bounds: GenericBounds,
     pub ty: Option<Box<Ty>>,
 }
-/* AST_META: AST_ID=238 | TYPE=STRUCT | NAME=Impl | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug)]
 pub struct Impl {
@@ -3926,7 +3688,6 @@ pub struct Impl {
     pub self_ty: Box<Ty>,
     pub items: ThinVec<Box<AssocItem>>,
 }
-/* AST_META: AST_ID=239 | TYPE=STRUCT | NAME=TraitImplHeader | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Encodable, Decodable, Debug)]
 pub struct TraitImplHeader {
@@ -3936,14 +3697,12 @@ pub struct TraitImplHeader {
     pub polarity: ImplPolarity,
     pub trait_ref: TraitRef,
 }
-/* AST_META: AST_ID=240 | TYPE=STRUCT | NAME=FnContract | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Default, Walkable)]
 pub struct FnContract {
     pub requires: Option<Box<Expr>>,
     pub ensures: Option<Box<Expr>>,
 }
-/* AST_META: AST_ID=241 | TYPE=STRUCT | NAME=Fn | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Encodable, Decodable, Debug)]
 pub struct Fn {
@@ -3955,7 +3714,6 @@ pub struct Fn {
     pub define_opaque: Option<ThinVec<(NodeId, Path)>>,
     pub body: Option<Box<Block>>,
 }
-/* AST_META: AST_ID=242 | TYPE=STRUCT | NAME=Delegation | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct Delegation {
@@ -3969,7 +3727,6 @@ pub struct Delegation {
     /// The item was expanded from a glob delegation item.
     pub from_glob: bool,
 }
-/* AST_META: AST_ID=243 | TYPE=STRUCT | NAME=DelegationMac | COMPLEXITY=6 | LINES=9 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct DelegationMac {
@@ -3979,7 +3736,6 @@ pub struct DelegationMac {
     pub suffixes: Option<ThinVec<(Ident, Option<Ident>)>>,
     pub body: Option<Box<Block>>,
 }
-/* AST_META: AST_ID=244 | TYPE=STRUCT | NAME=StaticItem | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct StaticItem {
@@ -3990,7 +3746,6 @@ pub struct StaticItem {
     pub expr: Option<Box<Expr>>,
     pub define_opaque: Option<ThinVec<(NodeId, Path)>>,
 }
-/* AST_META: AST_ID=245 | TYPE=STRUCT | NAME=ConstItem | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct ConstItem {
@@ -4001,7 +3756,6 @@ pub struct ConstItem {
     pub expr: Option<Box<Expr>>,
     pub define_opaque: Option<ThinVec<(NodeId, Path)>>,
 }
-/* AST_META: AST_ID=246 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=78 */
 
 // Adding a new variant? Please update `test_item` in `tests/ui/macros/stringify.rs`.
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -4079,7 +3833,6 @@ pub enum ItemKind {
     /// Treated similarly to a macro call and expanded early.
     DelegationMac(Box<DelegationMac>),
 }
-/* AST_META: AST_ID=247 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=41 | LINES=77 */
 
 impl ItemKind {
     pub fn ident(&self) -> Option<Ident> {
@@ -4157,7 +3910,6 @@ impl ItemKind {
         }
     }
 }
-/* AST_META: AST_ID=248 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=28 */
 
 /// Represents associated items.
 /// These include items in `impl` and `trait` definitions.
@@ -4186,7 +3938,6 @@ pub enum AssocItemKind {
     /// An associated list or glob delegation item.
     DelegationMac(Box<DelegationMac>),
 }
-/* AST_META: AST_ID=249 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=21 | LINES=24 */
 
 impl AssocItemKind {
     pub fn ident(&self) -> Option<Ident> {
@@ -4211,7 +3962,6 @@ impl AssocItemKind {
         }
     }
 }
-/* AST_META: AST_ID=250 | TYPE=FUNCTION | NAME=from | COMPLEXITY=10 | LINES=13 */
 
 impl From<AssocItemKind> for ItemKind {
     fn from(assoc_item_kind: AssocItemKind) -> ItemKind {
@@ -4225,7 +3975,6 @@ impl From<AssocItemKind> for ItemKind {
         }
     }
 }
-/* AST_META: AST_ID=251 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=10 | LINES=16 */
 
 impl TryFrom<ItemKind> for AssocItemKind {
     type Error = ItemKind;
@@ -4242,7 +3991,6 @@ impl TryFrom<ItemKind> for AssocItemKind {
         })
     }
 }
-/* AST_META: AST_ID=252 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// An item in `extern` block.
 #[derive(Clone, Encodable, Decodable, Debug)]
@@ -4256,7 +4004,6 @@ pub enum ForeignItemKind {
     /// A macro expanding to foreign items.
     MacCall(Box<MacCall>),
 }
-/* AST_META: AST_ID=253 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=10 | LINES=12 */
 
 impl ForeignItemKind {
     pub fn ident(&self) -> Option<Ident> {
@@ -4269,7 +4016,6 @@ impl ForeignItemKind {
         }
     }
 }
-/* AST_META: AST_ID=254 | TYPE=FUNCTION | NAME=from | COMPLEXITY=11 | LINES=13 */
 
 impl From<ForeignItemKind> for ItemKind {
     fn from(foreign_item_kind: ForeignItemKind) -> ItemKind {
@@ -4283,7 +4029,6 @@ impl From<ForeignItemKind> for ItemKind {
         }
     }
 }
-/* AST_META: AST_ID=255 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=10 | LINES=14 */
 
 impl TryFrom<ItemKind> for ForeignItemKind {
     type Error = ItemKind;
@@ -4298,7 +4043,6 @@ impl TryFrom<ItemKind> for ForeignItemKind {
         })
     }
 }
-/* AST_META: AST_ID=256 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=40 */
 
 pub type ForeignItem = Item<ForeignItemKind>;
 

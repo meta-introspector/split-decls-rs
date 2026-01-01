@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/mapgen.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::assert_matches::assert_matches;
 use std::sync::Arc;
 
 use itertools::Itertools;
 use crate::rustc_abi::Align;
 use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_index::IndexVec;
 use rustc_macros::TryFromU32;
@@ -14,7 +12,6 @@ use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::RemapFileNameExt;
 use crate::rustc_complete::config::RemapPathScopeComponents;
 use crate::rustc_complete::{SourceFile, StableSourceFileId};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
 use tracing::debug;
 
 use crate::common::CodegenCx;
@@ -33,14 +30,12 @@ enum CovmapVersion {
     /// Used by LLVM 18 onwards.
     Version7 = 6,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=to_u32 | COMPLEXITY=3 | LINES=6 */
 
 impl CovmapVersion {
     fn to_u32(self) -> u32 {
         self as u32
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=62 */
 
 /// Generates and exports the coverage map, which is embedded in special
 /// linker sections in the final binary.
@@ -103,7 +98,6 @@ pub(crate) fn finalize(cx: &mut CodegenCx<'_, '_>) {
     // (This is skipped if we returned early due to having no covfun records.)
     generate_covmap_record(cx, covmap_version, &global_file_table.filenames_buffer);
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=GlobalFileTable | COMPLEXITY=3 | LINES=19 */
 
 /// Maps "global" (per-CGU) file ID numbers to their underlying source file paths.
 #[derive(Debug)]
@@ -123,7 +117,6 @@ struct GlobalFileTable {
     /// contain multiple covmap records from different compilation units.
     filenames_hash: u64,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=build | COMPLEXITY=17 | LINES=51 */
 
 impl GlobalFileTable {
     /// Builds a "global file table" for this CGU, mapping numeric IDs to
@@ -175,21 +168,18 @@ impl GlobalFileTable {
         Some(GlobalFileId::from_usize(raw_id + 1))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=GlobalFileId | COMPLEXITY=3 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     /// An index into the CGU's overall list of file paths. The underlying paths
     /// will be embedded in the `__llvm_covmap` linker section.
     struct GlobalFileId {}
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LocalFileId | COMPLEXITY=3 | LINES=6 */
 crate::rustc_index::newtype_index! {
     /// An index into a function's list of global file IDs. That underlying list
     /// of local-to-global mappings will be embedded in the function's record in
     /// the `__llvm_covfun` linker section.
     struct LocalFileId {}
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=VirtualFileMapping | COMPLEXITY=2 | LINES=7 */
 
 /// Holds a mapping from "local" (per-function) file IDs to their corresponding
 /// source files.
@@ -197,7 +187,6 @@ crate::rustc_index::newtype_index! {
 struct VirtualFileMapping {
     local_file_table: IndexVec<LocalFileId, Arc<SourceFile>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=push_file | COMPLEXITY=8 | LINES=21 */
 
 impl VirtualFileMapping {
     fn push_file(&mut self, source_file: &Arc<SourceFile>) -> LocalFileId {
@@ -219,7 +208,6 @@ impl VirtualFileMapping {
             .collect::<Option<Vec<_>>>()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=generate_covmap_record | COMPLEXITY=9 | LINES=38 */
 
 /// Generates the contents of the covmap record for this CGU, which mostly
 /// consists of a header and a list of filenames. The record is then stored

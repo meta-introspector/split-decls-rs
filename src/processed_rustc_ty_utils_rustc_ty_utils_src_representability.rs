@@ -1,18 +1,15 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/representability.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Representability, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 use crate::rustc_complete::def_id::LocalDefId;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers =
         Providers { representability, representability_adt_ty, params_in_repr, ..*providers };
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=9 */
 
 macro_rules! rtry {
     ($e:expr) => {
@@ -22,7 +19,6 @@ macro_rules! rtry {
         }
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=representability | COMPLEXITY=15 | LINES=15 */
 
 fn representability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Representability {
     match tcx.def_kind(def_id) {
@@ -38,7 +34,6 @@ fn representability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Representability {
         def_kind => bug!("unexpected {def_kind:?}"),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=representability_ty | COMPLEXITY=11 | LINES=15 */
 
 fn representability_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Representability {
     match *ty.kind() {
@@ -54,7 +49,6 @@ fn representability_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Representabilit
         _ => Representability::Representable,
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=representability_adt_ty | COMPLEXITY=22 | LINES=34 */
 
 /*
 The reason for this being a separate query is very subtle:
@@ -89,7 +83,6 @@ fn representability_adt_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Representab
     }
     Representability::Representable
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=params_in_repr | COMPLEXITY=9 | LINES=16 */
 
 fn params_in_repr(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DenseBitSet<u32> {
     let adt_def = tcx.adt_def(def_id);
@@ -106,7 +99,6 @@ fn params_in_repr(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DenseBitSet<u32> {
     }
     params_in_repr
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=params_in_repr_ty | COMPLEXITY=19 | LINES=21 */
 
 fn params_in_repr_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>, params_in_repr: &mut DenseBitSet<u32>) {
     match *ty.kind() {

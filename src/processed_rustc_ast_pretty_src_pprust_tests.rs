@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pprust/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::{DUMMY_SP, Ident, create_default_session_globals_then};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fun_to_string | COMPLEXITY=3 | LINES=17 */
 use thin_vec::ThinVec;
 
 use super::*;
@@ -20,12 +18,10 @@ fn fun_to_string(
         s.end(cb);
     })
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=variant_to_string | COMPLEXITY=2 | LINES=4 */
 
 fn variant_to_string(var: &ast::Variant) -> String {
     to_string(|s| s.print_variant(var))
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_fun_to_string | COMPLEXITY=4 | LINES=14 */
 
 #[test]
 fn test_fun_to_string() {
@@ -40,7 +36,6 @@ fn test_fun_to_string() {
         );
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_variant_to_string | COMPLEXITY=6 | LINES=25 */
 
 #[test]
 fn test_variant_to_string() {

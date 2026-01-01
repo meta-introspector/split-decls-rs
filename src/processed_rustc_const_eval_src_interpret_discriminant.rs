@@ -1,23 +1,16 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/discriminant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Functions for reading and writing discriminants of multi-variant layouts (enums and coroutines).
 
 use crate::rustc_abi::{self as abi, FieldIdx, TagEncoding, VariantIdx, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{PrimitiveExt, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, CoroutineArgsExt, ScalarInt, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{mir, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     ImmTy, InterpCx, InterpResult, Machine, Projectable, Scalar, Writeable, err_ub, interp_ok,
     throw_ub,
 };
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_discriminant | COMPLEXITY=147 | LINES=299 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Writes the discriminant of the given variant.

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/dummy_machine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{AllocId, ConstAllocation, InterpResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{bug, span_bug, ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_target::callconv::FnAbi;
 
@@ -15,7 +12,6 @@ use crate::interpret::{
     self, HasStaticRootDefId, ImmTy, Immediate, InterpCx, PointerArithmetic, interp_ok,
     throw_machine_stop,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=Zst; | COMPLEXITY=19 | LINES=27 */
 
 /// Macro for machine-specific `InterpError` without allocation.
 /// (These will never be shown to the user, but they help diagnose ICEs.)
@@ -43,7 +39,6 @@ pub macro throw_machine_stop_str($($tt:tt)*) {{
     }
     throw_machine_stop!(Zst)
 }}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=DummyMachine; | COMPLEXITY=5 | LINES=8 */
 
 pub struct DummyMachine;
 
@@ -52,7 +47,6 @@ impl HasStaticRootDefId for DummyMachine {
         None
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=enforce_alignment | COMPLEXITY=53 | LINES=156 */
 
 impl<'tcx> interpret::Machine<'tcx> for DummyMachine {
     interpret::compile_time_machine!(<'tcx>);

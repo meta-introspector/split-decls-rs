@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/unexpand.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::Span;
 
 /// Walks through the expansion ancestors of `original_span` to find a span that

@@ -1,39 +1,29 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::token::{self, Token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::Subdiagnostic;
 use crate::rustc_parse::parser::{Parser, Recovery, token_descr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::macro_rules::{MacroRule, NoopTracker, parser_from_cx};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::expand::{AstFragmentKind, parse_ast_fragment};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mbe::macro_parser::ParseResult::*;
 use crate::mbe::macro_parser::{MatcherLoc, NamedParseResult, TtParser};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mbe::macro_rules::{
     Tracker, try_match_macro, try_match_macro_attr, try_match_macro_derive,
 };
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) enum FailedMacro<'a> {
     Func,
     Attr(&'a TokenStream),
     Derive,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=82 | LINES=104 */
 
 pub(super) fn failed_to_match_macro(
     psess: &ParseSess,
@@ -138,7 +128,6 @@ pub(super) fn failed_to_match_macro(
     let guar = err.emit();
     (sp, guar)
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CollectTrackerAndEmitter | COMPLEXITY=6 | LINES=10 */
 
 /// The tracker used for the slow error path that collects useful info for diagnostics.
 struct CollectTrackerAndEmitter<'dcx, 'matcher> {
@@ -149,7 +138,6 @@ struct CollectTrackerAndEmitter<'dcx, 'matcher> {
     root_span: Span,
     result: Option<(Span, ErrorGuaranteed)>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BestFailure | COMPLEXITY=2 | LINES=7 */
 
 struct BestFailure {
     token: Token,
@@ -157,14 +145,12 @@ struct BestFailure {
     msg: &'static str,
     remaining_matcher: MatcherLoc,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_better_position | COMPLEXITY=3 | LINES=6 */
 
 impl BestFailure {
     fn is_better_position(&self, position: (bool, u32)) -> bool {
         position > self.position_in_tokenstream
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=build_failure | COMPLEXITY=31 | LINES=63 */
 
 impl<'dcx, 'matcher> Tracker<'matcher> for CollectTrackerAndEmitter<'dcx, 'matcher> {
     type Failure = (Token, u32, &'static str);
@@ -228,14 +214,12 @@ impl<'dcx, 'matcher> Tracker<'matcher> for CollectTrackerAndEmitter<'dcx, 'match
         Recovery::Allowed
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'dcx> CollectTrackerAndEmitter<'dcx, '_> {
     fn new(dcx: DiagCtxtHandle<'dcx>, root_span: Span) -> Self {
         Self { dcx, remaining_matcher: None, best_failure: None, root_span, result: None }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=68 */
 
 pub(super) fn emit_frag_parse_err(
     mut e: Diag<'_>,
@@ -304,7 +288,6 @@ pub(super) fn emit_frag_parse_err(
     };
     e.emit()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 pub(crate) fn annotate_err_with_kind(err: &mut Diag<'_>, kind: AstFragmentKind, span: Span) {
     match kind {
@@ -317,7 +300,6 @@ pub(crate) fn annotate_err_with_kind(err: &mut Diag<'_>, kind: AstFragmentKind, 
         _ => {}
     };
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 enum ExplainDocComment {
@@ -332,7 +314,6 @@ enum ExplainDocComment {
         span: Span,
     },
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=annotate_doc_comment | COMPLEXITY=13 | LINES=10 */
 
 fn annotate_doc_comment(err: &mut Diag<'_>, sm: &SourceMap, span: Span) {
     if let Ok(src) = sm.span_to_snippet(span) {
@@ -343,7 +324,6 @@ fn annotate_doc_comment(err: &mut Diag<'_>, sm: &SourceMap, span: Span) {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_failure_msg | COMPLEXITY=14 | LINES=13 */
 
 /// Generates an appropriate parsing failure message. For EOF, this is "unexpected end...". For
 /// other tokens, this is "unexpected token...".

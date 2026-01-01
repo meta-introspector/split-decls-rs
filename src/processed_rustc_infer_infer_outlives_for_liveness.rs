@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/for_liveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=FreeRegionsVisitor | COMPLEXITY=5 | LINES=18 */
 
 use crate::infer::outlives::test_type_match;
 use crate::infer::region_constraints::VerifyIfEq;
@@ -22,7 +20,6 @@ pub struct FreeRegionsVisitor<'tcx, OP: FnMut(ty::Region<'tcx>)> {
     pub param_env: ty::ParamEnv<'tcx>,
     pub op: OP,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit_region | COMPLEXITY=54 | LINES=88 */
 
 impl<'tcx, OP> TypeVisitor<TyCtxt<'tcx>> for FreeRegionsVisitor<'tcx, OP>
 where

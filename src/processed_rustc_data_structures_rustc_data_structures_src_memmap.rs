@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/memmap.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fs::File;
 use std::io;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=Mmap(memmap2::Mmap); | COMPLEXITY=18 | LINES=27 */
 
 /// A trivial wrapper for [`memmap2::Mmap`] (or `Vec<u8>` on WASM).
 #[cfg(not(any(miri, target_arch = "wasm32")))]
@@ -31,7 +29,6 @@ impl Mmap {
         unsafe { memmap2::MmapOptions::new().map_copy_read_only(&file).map(Mmap) }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 #[cfg(any(miri, target_arch = "wasm32"))]
 impl Mmap {
@@ -44,7 +41,6 @@ impl Mmap {
         Ok(Mmap(data))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl Deref for Mmap {
     type Target = [u8];
@@ -54,14 +50,12 @@ impl Deref for Mmap {
         &self.0
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=5 | LINES=6 */
 
 impl AsRef<[u8]> for Mmap {
     fn as_ref(&self) -> &[u8] {
         &self.0
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=MmapMut(memmap2::MmapMut); | COMPLEXITY=6 | LINES=26 */
 
 #[cfg(not(any(miri, target_arch = "wasm32")))]
 pub struct MmapMut(memmap2::MmapMut);
@@ -88,7 +82,6 @@ impl MmapMut {
         Ok(Mmap(mmap))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=map_anon | COMPLEXITY=5 | LINES=19 */
 
 #[cfg(any(miri, target_arch = "wasm32"))]
 impl MmapMut {
@@ -108,7 +101,6 @@ impl MmapMut {
         Ok(Mmap(self.0))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl Deref for MmapMut {
     type Target = [u8];
@@ -118,7 +110,6 @@ impl Deref for MmapMut {
         &self.0
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=7 */
 
 impl DerefMut for MmapMut {
     #[inline]

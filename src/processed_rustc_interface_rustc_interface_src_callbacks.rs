@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_interface/src/callbacks.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 // Throughout the compiler tree, there are several places which want to have
 // access to state or queries while being inside crates that are dependencies
 // of `rustc_middle`. To facilitate this, we have the
@@ -14,14 +13,11 @@
 use std::fmt;
 
 use crate::rustc_complete::{DiagInner, TRACK_DIAGNOSTIC};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::dep_graph::{DepNodeExt, TaskDepsRef};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::tls;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::dep_graph::dep_node::default_dep_kind_debug;
 use rustc_query_system::dep_graph::{DepContext, DepKind, DepNode};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=track_span_parent | COMPLEXITY=16 | LINES=18 */
 
 fn track_span_parent(def_id: crate::rustc_span::def_id::LocalDefId) {
     tls::with_context_opt(|icx| {
@@ -40,7 +36,6 @@ fn track_span_parent(def_id: crate::rustc_span::def_id::LocalDefId) {
         }
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=track_diagnostic | COMPLEXITY=11 | LINES=18 */
 
 /// This is a callback from `rustc_errors` as it cannot access the implicit state
 /// in `rustc_middle` otherwise. It is used when diagnostic messages are
@@ -59,7 +54,6 @@ fn track_diagnostic<R>(diagnostic: DiagInner, f: &mut dyn FnMut(DiagInner) -> R)
         }
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=def_id_debug | COMPLEXITY=9 | LINES=13 */
 
 /// This is a callback from `rustc_hir` as it cannot access the implicit state
 /// in `rustc_middle` otherwise.
@@ -73,7 +67,6 @@ fn def_id_debug(def_id: crate::rustc_hir::def_id::DefId, f: &mut fmt::Formatter<
     })?;
     write!(f, ")")
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=dep_kind_debug | COMPLEXITY=8 | LINES=12 */
 
 /// This is a callback from `rustc_query_system` as it cannot access the implicit state
 /// in `rustc_middle` otherwise.
@@ -86,7 +79,6 @@ pub fn dep_kind_debug(kind: DepKind, f: &mut std::fmt::Formatter<'_>) -> std::fm
         }
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dep_node_debug | COMPLEXITY=20 | LINES=23 */
 
 /// This is a callback from `rustc_query_system` as it cannot access the implicit state
 /// in `rustc_middle` otherwise.
@@ -110,7 +102,6 @@ pub fn dep_node_debug(node: DepNode, f: &mut std::fmt::Formatter<'_>) -> std::fm
 
     write!(f, ")")
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=setup_callbacks | COMPLEXITY=3 | LINES=12 */
 
 /// Sets up the callbacks in prior crates which we want to refer to the
 /// TyCtxt in.

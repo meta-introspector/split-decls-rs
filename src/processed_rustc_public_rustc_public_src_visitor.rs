@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_public/src/visitor.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::ControlFlow;
 
 use super::ty::{
     Allocation, Binder, ConstDef, ExistentialPredicate, FnSig, GenericArgKind, GenericArgs,
     MirConst, Promoted, Region, RigidTy, TermKind, Ty, UnevaluatedConst,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=5 | LINES=15 */
 use crate::Opaque;
 use crate::ty::TyConst;
 
@@ -22,7 +20,6 @@ pub trait Visitor: Sized {
         reg.super_visit(self)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=3 | LINES=7 */
 
 pub trait Visitable {
     fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -30,7 +27,6 @@ pub trait Visitable {
     }
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break>;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=12 | LINES=14 */
 
 impl Visitable for Ty {
     fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -45,7 +41,6 @@ impl Visitable for Ty {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=13 | LINES=18 */
 
 impl Visitable for TyConst {
     fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -64,7 +59,6 @@ impl Visitable for TyConst {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=12 | LINES=15 */
 
 impl Visitable for MirConst {
     fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -80,21 +74,18 @@ impl Visitable for MirConst {
         self.ty().visit(visitor)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for Opaque {
     fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for Allocation {
     fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=6 | LINES=9 */
 
 impl Visitable for UnevaluatedConst {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -104,14 +95,12 @@ impl Visitable for UnevaluatedConst {
         promoted.visit(visitor)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for ConstDef {
     fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=9 */
 
 impl<T: Visitable> Visitable for Option<T> {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -121,21 +110,18 @@ impl<T: Visitable> Visitable for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for Promoted {
     fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for GenericArgs {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
         self.0.visit(visitor)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=6 | LINES=10 */
 
 impl Visitable for Region {
     fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -146,7 +132,6 @@ impl Visitable for Region {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=10 */
 
 impl Visitable for GenericArgKind {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -157,7 +142,6 @@ impl Visitable for GenericArgKind {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=14 | LINES=38 */
 
 impl Visitable for RigidTy {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -196,7 +180,6 @@ impl Visitable for RigidTy {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=8 | LINES=9 */
 
 impl<T: Visitable> Visitable for Vec<T> {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -206,14 +189,12 @@ impl<T: Visitable> Visitable for Vec<T> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl<T: Visitable> Visitable for Binder<T> {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
         self.value.visit(visitor)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=10 | LINES=13 */
 
 impl Visitable for ExistentialPredicate {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -227,7 +208,6 @@ impl Visitable for ExistentialPredicate {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=9 */
 
 impl Visitable for TermKind {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
@@ -237,7 +217,6 @@ impl Visitable for TermKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
 
 impl Visitable for FnSig {
     fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {

@@ -1,29 +1,22 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/cfg_eval.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
 use crate::rustc_complete::mut_visit::MutVisitor;
 use crate::rustc_complete::visit::{AssocCtxt, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Attribute, HasAttrs, HasTokens, NodeId, mut_visit, visit};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_expand::config::StripUnconfigured;
 use crate::rustc_expand::configure;
 use crate::rustc_feature::Features;
 use crate::rustc_parse::parser::{ForceCollect, Parser};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 use tracing::instrument;
 
 use crate::util::{check_builtin_macro_attribute, warn_on_duplicate_attribute};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(crate) fn expand(
     ecx: &mut ExtCtxt<'_>,
@@ -35,7 +28,6 @@ pub(crate) fn expand(
     warn_on_duplicate_attribute(ecx, &annotatable, sym::cfg_eval);
     vec![cfg_eval(ecx.sess, ecx.ecfg.features, annotatable, ecx.current_expansion.lint_node_id)]
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub(crate) fn cfg_eval(
     sess: &Session,
@@ -47,7 +39,6 @@ pub(crate) fn cfg_eval(
     CfgEval(StripUnconfigured { sess, features, config_tokens: true, lint_node_id })
         .configure_annotatable(annotatable)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=CfgEval | COMPLEXITY=16 | LINES=30 */
 
 struct CfgEval<'a>(StripUnconfigured<'a>);
 
@@ -78,7 +69,6 @@ fn has_cfg_or_cfg_attr(annotatable: &Annotatable) -> bool {
     };
     res.is_break()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=configure | COMPLEXITY=34 | LINES=83 */
 
 impl CfgEval<'_> {
     fn configure<T: HasAttrs + HasTokens>(&mut self, node: T) -> Option<T> {
@@ -162,7 +152,6 @@ impl CfgEval<'_> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=23 | LINES=85 */
 
 impl MutVisitor for CfgEval<'_> {
     #[instrument(level = "trace", skip(self))]

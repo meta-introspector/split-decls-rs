@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/places_conflict.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=22 | LINES=60 */
 // The borrowck rules for proving disjointness are applied from the "root" of the
 // borrow forwards, iterating over "similar" projections in lockstep until
 // we can prove overlap one way or another. Essentially, we treat `Overlap` as
@@ -60,14 +59,10 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{
     Body, BorrowKind, FakeBorrowKind, MutBorrowKind, Place, PlaceElem, PlaceRef, ProjectionElem,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{AccessDepth, ArtificialField, Deep, Overlap, Shallow};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 /// When checking if a place conflicts with another place, this enum is used to influence decisions
 /// where a place might be equal or disjoint with another place, such as if `a[i] == a[j]`.
@@ -80,7 +75,6 @@ pub enum PlaceConflictBias {
     Overlap,
     NoOverlap,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=places_conflict | COMPLEXITY=10 | LINES=21 */
 
 /// Helper function for checking if places conflict with a mutable borrow and deep access depth.
 /// This is used to check for places conflicting outside of the borrow checking code (such as in
@@ -102,7 +96,6 @@ pub fn places_conflict<'tcx>(
         bias,
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=31 */
 
 /// Checks whether the `borrow_place` conflicts with the `access_place` given a borrow kind and
 /// access depth. The `bias` parameter is used to determine how the unknowable (comparing runtime
@@ -134,7 +127,6 @@ pub(super) fn borrow_conflicts_with_place<'tcx>(
 
     place_components_conflict(tcx, body, borrow_place, borrow_kind, access_place, access, bias)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=place_components_conflict | COMPLEXITY=75 | LINES=158 */
 
 #[instrument(level = "debug", skip(tcx, body))]
 fn place_components_conflict<'tcx>(
@@ -293,7 +285,6 @@ fn place_components_conflict<'tcx>(
         true
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=place_projection_conflict | COMPLEXITY=128 | LINES=242 */
 
 // Given that the bases of `elem1` and `elem2` are always either equal
 // or disjoint (and have the same type!), return the overlap situation

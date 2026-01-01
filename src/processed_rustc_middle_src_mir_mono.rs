@@ -1,36 +1,27 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/mono.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::borrow::Cow;
 use std::fmt;
 use std::hash::Hash;
 
 use crate::rustc_data_structures::base_n::{BaseNString, CASE_INSENSITIVE, ToBaseN};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash128;
 use crate::rustc_complete::ItemId;
 use crate::rustc_complete::attrs::{InlineAttr, Linkage};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdSet, LOCAL_CRATE};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 
 use crate::dep_graph::{DepNode, WorkProduct, WorkProductId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::ty::{self, GenericArgs, Instance, InstanceKind, SymbolName, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=25 */
 
 /// Describes how a monomorphization will be instantiated in object files.
 #[derive(PartialEq)]
@@ -56,7 +47,6 @@ pub enum InstantiationMode {
     /// have its own private copy of the function (with internal linkage).
     LocalCopy,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(PartialEq, Eq, Clone, Copy, Debug, Hash, HashStable, TyEncodable, TyDecodable)]
 pub enum MonoItem<'tcx> {
@@ -64,7 +54,6 @@ pub enum MonoItem<'tcx> {
     Static(DefId),
     GlobalAsm(ItemId),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=opt_incr_drop_glue_mode | COMPLEXITY=23 | LINES=33 */
 
 fn opt_incr_drop_glue_mode<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> InstantiationMode {
     // Non-ADTs can't have a Drop impl. This case is mostly hit by closures whose captures require
@@ -98,7 +87,6 @@ fn opt_incr_drop_glue_mode<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Instantiati
         InstantiationMode::GloballyShared { may_conflict: true }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_user_defined | COMPLEXITY=150 | LINES=222 */
 
 impl<'tcx> MonoItem<'tcx> {
     /// Returns `true` if the mono item is user-defined (i.e. not compiler-generated, like shims).
@@ -321,7 +309,6 @@ impl<'tcx> MonoItem<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=12 */
 
 impl<'tcx> fmt::Display for MonoItem<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -334,7 +321,6 @@ impl<'tcx> fmt::Display for MonoItem<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=10 */
 
 impl ToStableHashKey<StableHashingContext<'_>> for MonoItem<'_> {
     type KeyType = Fingerprint;
@@ -345,14 +331,12 @@ impl ToStableHashKey<StableHashingContext<'_>> for MonoItem<'_> {
         hasher.finish()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=MonoItemPartitions | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, HashStable, Copy, Clone)]
 pub struct MonoItemPartitions<'tcx> {
     pub codegen_units: &'tcx [CodegenUnit<'tcx>],
     pub all_mono_items: &'tcx DefIdSet,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=CodegenUnit | COMPLEXITY=9 | LINES=15 */
 
 #[derive(Debug, HashStable)]
 pub struct CodegenUnit<'tcx> {
@@ -368,7 +352,6 @@ pub struct CodegenUnit<'tcx> {
     /// false otherwise.
     is_code_coverage_dead_code_cgu: bool,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=MonoItemData | COMPLEXITY=2 | LINES=14 */
 
 /// Auxiliary info about a `MonoItem`.
 #[derive(Copy, Clone, PartialEq, Debug, HashStable)]
@@ -383,7 +366,6 @@ pub struct MonoItemData {
     /// A cached copy of the result of `MonoItem::size_estimate`.
     pub size_estimate: usize,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 /// Specifies the symbol visibility with regards to dynamic linking.
 ///
@@ -403,7 +385,6 @@ pub enum Visibility {
     /// overriding exported symbols by another DSO.
     Protected,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<SymbolVisibility> for Visibility {
     fn from(value: SymbolVisibility) -> Self {
@@ -414,7 +395,6 @@ impl From<SymbolVisibility> for Visibility {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=79 | LINES=182 */
 
 impl<'tcx> CodegenUnit<'tcx> {
     #[inline]
@@ -597,7 +577,6 @@ impl<'tcx> CodegenUnit<'tcx> {
         crate::dep_graph::make_compile_codegen_unit(tcx, self.name())
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=8 | LINES=10 */
 
 impl ToStableHashKey<StableHashingContext<'_>> for CodegenUnit<'_> {
     type KeyType = String;
@@ -608,13 +587,11 @@ impl ToStableHashKey<StableHashingContext<'_>> for CodegenUnit<'_> {
         self.name.to_string()
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=CodegenUnitNameBuilder | COMPLEXITY=2 | LINES=5 */
 
 pub struct CodegenUnitNameBuilder<'tcx> {
     tcx: TyCtxt<'tcx>,
     cache: UnordMap<CrateNum, String>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=41 | LINES=94 */
 
 impl<'tcx> CodegenUnitNameBuilder<'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>) -> Self {
@@ -709,7 +686,6 @@ impl<'tcx> CodegenUnitNameBuilder<'tcx> {
         Symbol::intern(&cgu_name)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// See module-level docs of `rustc_monomorphize::collector` on some context for "mentioned" items.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, HashStable)]

@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/line_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Line info generation (`.debug_line`)
 
 use std::ffi::OsStr;
 use std::path::{Component, Path};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use cranelift_codegen::MachSrcLoc;
 use cranelift_codegen::binemit::CodeOffset;
 use gimli::write::{AttributeValue, FileId, FileInfo, LineProgram, LineString, LineStringTable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     FileName, Pos, SourceFile, SourceFileAndLine, SourceFileHash, SourceFileHashAlgorithm, hygiene,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=split_path_dir_and_file | COMPLEXITY=10 | LINES=21 */
 
 use crate::debuginfo::FunctionDebugContext;
 use crate::debuginfo::emit::address_for_func;
@@ -35,7 +31,6 @@ fn split_path_dir_and_file(path: &Path) -> (&Path, &OsStr) {
     let parent = iter.as_path();
     (parent, file_name)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=osstr_as_utf8_bytes | COMPLEXITY=4 | LINES=13 */
 
 // OPTIMIZATION: Avoid UTF-8 validation on UNIX.
 fn osstr_as_utf8_bytes(path: &OsStr) -> &[u8] {
@@ -49,7 +44,6 @@ fn osstr_as_utf8_bytes(path: &OsStr) -> &[u8] {
         path.to_str().unwrap().as_bytes()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=make_file_info | COMPLEXITY=7 | LINES=17 */
 
 const MD5_LEN: usize = 16;
 
@@ -67,7 +61,6 @@ fn make_file_info(hash: SourceFileHash) -> Option<FileInfo> {
         None
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=63 */
 
 impl DebugContext {
     pub(crate) fn get_span_loc(
@@ -131,7 +124,6 @@ impl DebugContext {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=52 */
 
 impl FunctionDebugContext {
     pub(crate) fn add_dbg_loc(&mut self, file_id: FileId, line: u64, column: u64) -> SourceLoc {

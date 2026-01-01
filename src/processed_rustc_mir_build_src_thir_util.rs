@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::assert_matches::assert_matches;
 
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, CanonicalUserType, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=41 */
 use tracing::debug;
 
 /// Looks up the type associated with this hir-id and applies the

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 // This module implements declarative macros: old `macro_rules` and the newer
 // `macro`. Declarative macros are also known as "macro by example", and that's
 // why we call this module `mbe`. For external documentation, prefer the
@@ -9,13 +8,9 @@
 
 use metavar_expr::MetaVarExpr;
 use crate::rustc_complete::token::{Delimiter, NonterminalKind, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Delimited | COMPLEXITY=2 | LINES=9 */
 
 /// Contains the sub-token-trees of a "delimited" token tree such as `(a b c)`.
 /// The delimiters are not represented explicitly in the `tts` vector.
@@ -25,7 +20,6 @@ struct Delimited {
     /// FIXME: #67062 has details about why this is sub-optimal.
     tts: Vec<TokenTree>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SequenceRepetition | COMPLEXITY=2 | LINES=12 */
 
 #[derive(PartialEq, Encodable, Decodable, Debug)]
 struct SequenceRepetition {
@@ -38,21 +32,18 @@ struct SequenceRepetition {
     /// The number of `Match`s that appear in the sequence (and subsequences)
     num_captures: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=KleeneToken | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Encodable, Decodable, Debug, Copy)]
 struct KleeneToken {
     span: Span,
     op: KleeneOp,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl KleeneToken {
     fn new(op: KleeneOp, span: Span) -> KleeneToken {
         KleeneToken { span, op }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 /// A Kleene-style [repetition operator](https://en.wikipedia.org/wiki/Kleene_star)
 /// for token sequences.
@@ -65,7 +56,6 @@ pub(crate) enum KleeneOp {
     /// Kleene optional (`?`) for zero or one repetitions
     ZeroOrOne,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=26 */
 
 /// Similar to `tokenstream::TokenTree`, except that `Sequence`, `MetaVar`, `MetaVarDecl`, and
 /// `MetaVarExpr` are "first-class" token trees. Useful for parsing macros.
@@ -92,7 +82,6 @@ enum TokenTree {
     /// A meta-variable expression inside `${...}`.
     MetaVarExpr(DelimSpan, MetaVarExpr),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_delimited | COMPLEXITY=22 | LINES=31 */
 
 impl TokenTree {
     /// Returns `true` if the given token tree is delimited.

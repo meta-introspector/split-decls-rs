@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/def_path_hash_map.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=Config; | COMPLEXITY=9 | LINES=36 */
 use rustc_hashes::Hash64;
 use crate::rustc_complete::def_id::DefIndex;
 
@@ -36,6 +35,5 @@ impl odht::Config for Config {
         DefIndex::from_u32(u32::from_le_bytes(*v))
     }
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 pub type DefPathHashMap = odht::HashTableOwned<Config>;

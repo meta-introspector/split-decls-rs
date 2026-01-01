@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/example/std_example.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=printf | COMPLEXITY=2 | LINES=12 */
 #[allow(internal_features)]
 #[feature(core_intrinsics, coroutines, coroutine_trait, stmt_expr_attributes)]
 
@@ -12,7 +11,6 @@ use std::ops::Coroutine;
 extern "C" {
     pub fn printf(format: *const i8, ...) -> i32;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=main | COMPLEXITY=29 | LINES=99 */
 
 fn main() {
     let mutex = std::sync::Mutex::new(());
@@ -112,7 +110,6 @@ fn main() {
 
     println!("End");
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=29 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -142,7 +139,6 @@ unsafe fn test_simd() {
     let mask1 = _mm_movemask_epi8(dbg!(_mm_setr_epi8(255u8 as i8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)));
     assert_eq!(mask1, 1);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=28 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -171,7 +167,6 @@ unsafe fn test_mm_slli_si128() {
     let r = _mm_slli_si128(a, 16);
     assert_eq_m128i(r, _mm_set1_epi8(0));
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 
 #[cfg(feature="master")]
@@ -188,7 +183,6 @@ unsafe fn test_mm_movemask_epi8() {
     let r = _mm_movemask_epi8(a);
     assert_eq!(r, 0b10100100_00100101);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -199,7 +193,6 @@ unsafe fn test_mm256_movemask_epi8() {
     let e = -1;
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -217,7 +210,6 @@ unsafe fn test_mm_add_epi8() {
     );
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -228,7 +220,6 @@ unsafe fn test_mm_add_pd() {
     let r = _mm_add_pd(a, b);
     assert_eq_m128d(r, _mm_setr_pd(6.0, 12.0));
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=assert_eq_m128i | COMPLEXITY=7 | LINES=8 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -237,7 +228,6 @@ fn assert_eq_m128i(x: std::arch::x86_64::__m128i, y: std::arch::x86_64::__m128i)
         assert_eq!(std::mem::transmute::<_, [u8; 16]>(x), std::mem::transmute::<_, [u8; 16]>(y));
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=9 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -247,7 +237,6 @@ pub unsafe fn assert_eq_m128d(a: __m128d, b: __m128d) {
         panic!("{:?} != {:?}", a, b);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -256,7 +245,6 @@ unsafe fn test_mm_cvtsi128_si64() {
     let r = _mm_cvtsi128_si64(std::mem::transmute::<[i64; 2], _>([5, 0]));
     assert_eq!(r, 5);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -271,7 +259,6 @@ unsafe fn test_mm_cvtepi8_epi16() {
     let e = _mm_set1_epi16(-10);
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]
@@ -287,7 +274,6 @@ unsafe fn test_mm_extract_epi8() {
     assert_eq!(r1, 0xFF);
     assert_eq!(r2, 3);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(all(feature="master", target_arch = "x86_64"))]
 #[target_feature(enable = "sse2")]
@@ -297,20 +283,17 @@ unsafe fn test_mm_insert_epi16() {
     let e = _mm_setr_epi16(9, 1, 2, 3, 4, 5, 6, 7);
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 enum LoopState {
     Continue(()),
     Break(())
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum Instruction {
     Increment,
     Loop,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=map | COMPLEXITY=6 | LINES=7 */
 
 fn map(a: Option<(u8, Box<Instruction>)>) -> Option<Box<Instruction>> {
     match a {

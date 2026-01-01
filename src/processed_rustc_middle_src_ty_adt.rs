@@ -1,43 +1,32 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/adt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cell::RefCell;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ops::Range;
 use std::str;
 
 use crate::rustc_abi::{FIRST_VARIANT, ReprOptions, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{CtorKind, DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, LangItem, find_attr};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_complete::DataTypeKind;
 use rustc_type_ir::solve::AdtDestructorKind;
 use tracing::{debug, info, trace};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::{
     AsyncDestructor, Destructor, FieldDef, GenericPredicates, Ty, TyCtxt, VariantDef, VariantDiscr,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mir::interpret::ErrorHandled;
 use crate::ty;
 use crate::ty::util::{Discr, IntTypeExt};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AdtFlags(u16); | COMPLEXITY=5 | LINES=31 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, HashStable, TyEncodable, TyDecodable)]
 pub struct AdtFlags(u16);
@@ -69,9 +58,7 @@ bitflags::bitflags! {
         const IS_UNSAFE_PINNED              = 1 << 10;
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 crate::rustc_data_structures::external_bitflags_debug! { AdtFlags }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 /// The definition of a user-defined type, e.g., a `struct`, `enum`, or `union`.
 ///
@@ -96,14 +83,12 @@ crate::rustc_data_structures::external_bitflags_debug! { AdtFlags }
 ///
 /// ```
 /// struct S { x: Box<S> }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 /// ```
 ///
 /// is essentially represented with [`Ty`] as the following pseudocode:
 ///
 /// ```ignore (illustrative)
 /// struct S { x }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=AdtDefData | COMPLEXITY=3 | LINES=15 */
 /// ```
 ///
 /// where `x` here represents the `DefId` of `S.x`. Then, the `DefId`
@@ -119,7 +104,6 @@ pub struct AdtDefData {
     /// Repr options provided by the user.
     repr: ReprOptions,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=18 | LINES=27 */
 
 impl PartialEq for AdtDefData {
     #[inline]
@@ -147,10 +131,8 @@ impl PartialEq for AdtDefData {
         res
     }
 }
-/* AST_META: AST_ID=17 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for AdtDefData {}
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=7 | LINES=9 */
 
 /// There should be only one AdtDef for each `did`, therefore
 /// it is fine to implement `Hash` only based on `did`.
@@ -160,7 +142,6 @@ impl Hash for AdtDefData {
         self.did.hash(s)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=11 | LINES=26 */
 
 impl<'a> HashStable<StableHashingContext<'a>> for AdtDefData {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
@@ -187,7 +168,6 @@ impl<'a> HashStable<StableHashingContext<'a>> for AdtDefData {
         hash.hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=AdtDef | COMPLEXITY=8 | LINES=31 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable)]
 #[rustc_pass_by_value]
@@ -219,7 +199,6 @@ impl<'tcx> AdtDef<'tcx> {
         self.0.0.repr
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=19 | LINES=50 */
 
 impl<'tcx> rustc_type_ir::inherent::AdtDef<TyCtxt<'tcx>> for AdtDef<'tcx> {
     fn def_id(self) -> DefId {
@@ -270,7 +249,6 @@ impl<'tcx> rustc_type_ir::inherent::AdtDef<TyCtxt<'tcx>> for AdtDef<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, HashStable, TyEncodable, TyDecodable)]
 pub enum AdtKind {
@@ -278,7 +256,6 @@ pub enum AdtKind {
     Union,
     Enum,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<AdtKind> for DataTypeKind {
     fn from(val: AdtKind) -> Self {
@@ -289,7 +266,6 @@ impl From<AdtKind> for DataTypeKind {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=52 */
 
 impl AdtDefData {
     /// Creates a new `AdtDefData`.
@@ -342,7 +318,6 @@ impl AdtDefData {
         AdtDefData { did, variants, flags, repr }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=is_struct | COMPLEXITY=173 | LINES=334 */
 
 impl<'tcx> AdtDef<'tcx> {
     /// Returns `true` if this is a struct.
@@ -677,7 +652,6 @@ impl<'tcx> AdtDef<'tcx> {
         if self.is_struct() { tcx.adt_sizedness_constraint((self.did(), sizedness)) } else { None }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug, HashStable)]
 pub enum Representability {

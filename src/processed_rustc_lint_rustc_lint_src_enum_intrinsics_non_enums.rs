@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/enum_intrinsics_non_enums.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::ty::{Ty, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::context::LintContext;
 use crate::lints::{EnumIntrinsicsMemDiscriminate, EnumIntrinsicsMemVariant};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=30 */
 
 declare_lint! {
     /// The `enum_intrinsics_non_enums` lint detects calls to
@@ -43,7 +37,6 @@ declare_lint! {
     Deny,
     "detects calls to `core::mem::discriminant` and `core::mem::variant_count` with non-enum types"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_non_enum | COMPLEXITY=10 | LINES=8 */
 
 declare_lint_pass!(EnumIntrinsicsNonEnums => [ENUM_INTRINSICS_NON_ENUMS]);
 
@@ -52,7 +45,6 @@ declare_lint_pass!(EnumIntrinsicsNonEnums => [ENUM_INTRINSICS_NON_ENUMS]);
 fn is_non_enum(t: Ty<'_>) -> bool {
     !t.is_enum() && !t.has_param()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=enforce_mem_discriminant | COMPLEXITY=6 | LINES=16 */
 
 fn enforce_mem_discriminant(
     cx: &LateContext<'_>,
@@ -69,7 +61,6 @@ fn enforce_mem_discriminant(
         );
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=enforce_mem_variant_count | COMPLEXITY=6 | LINES=7 */
 
 fn enforce_mem_variant_count(cx: &LateContext<'_>, func_expr: &hir::Expr<'_>, span: Span) {
     let ty_param = cx.typeck_results().node_args(func_expr.hir_id).type_at(0);
@@ -77,7 +68,6 @@ fn enforce_mem_variant_count(cx: &LateContext<'_>, func_expr: &hir::Expr<'_>, sp
         cx.emit_span_lint(ENUM_INTRINSICS_NON_ENUMS, span, EnumIntrinsicsMemVariant { ty_param });
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=15 | LINES=14 */
 
 impl<'tcx> LateLintPass<'tcx> for EnumIntrinsicsNonEnums {
     fn check_expr(&mut self, cx: &LateContext<'_>, expr: &hir::Expr<'_>) {

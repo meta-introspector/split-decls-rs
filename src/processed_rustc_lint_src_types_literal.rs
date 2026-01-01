@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/types/literal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use hir::{ExprKind, Node, is_range_literal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Integer, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{HirId, attrs};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::IntegerExt;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::LateContext;
 use crate::context::LintContext;
@@ -21,9 +15,7 @@ use crate::lints::{
     OverflowingBinHexSub, OverflowingInt, OverflowingIntHelp, OverflowingLiteral, OverflowingUInt,
     RangeEndpointOutOfRange, SurrogateCharCast, TooLargeCharCast, UseInclusiveRange,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::types::{OVERFLOWING_LITERALS, TypeLimits};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lint_overflowing_range_endpoint | COMPLEXITY=37 | LINES=80 */
 
 /// Attempts to special-case the overflowing literal lint when it occurs as a range endpoint (`expr..MAX+1`).
 /// Returns `true` iff the lint was emitted.
@@ -104,7 +96,6 @@ fn lint_overflowing_range_endpoint<'tcx>(
     // return `true` so the callers don't also emit a lint
     true
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 // For `isize` & `usize`, be conservative with the warnings, so that the
 // warnings are consistent between 32- and 64-bit platforms.
@@ -118,7 +109,6 @@ pub(crate) fn int_ty_range(int_ty: ty::IntTy) -> (i128, i128) {
         ty::IntTy::I128 => (i128::MIN, i128::MAX),
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 pub(crate) fn uint_ty_range(uint_ty: ty::UintTy) -> (u128, u128) {
     let max = match uint_ty {
@@ -131,7 +121,6 @@ pub(crate) fn uint_ty_range(uint_ty: ty::UintTy) -> (u128, u128) {
     };
     (0, max)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=get_bin_hex_repr | COMPLEXITY=9 | LINES=14 */
 
 fn get_bin_hex_repr(cx: &LateContext<'_>, lit: &hir::Lit) -> Option<String> {
     let src = cx.sess().source_map().span_to_snippet(lit.span).ok()?;
@@ -146,7 +135,6 @@ fn get_bin_hex_repr(cx: &LateContext<'_>, lit: &hir::Lit) -> Option<String> {
 
     None
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=report_bin_hex_error | COMPLEXITY=41 | LINES=79 */
 
 fn report_bin_hex_error(
     cx: &LateContext<'_>,
@@ -226,12 +214,10 @@ fn report_bin_hex_error(
         },
     )
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 // Find the "next" fitting integer and return a suggestion string
 //
 // No suggestion is offered for `{i,u}size`. Otherwise, we try to suggest an equal-sized type.
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=get_type_suggestion | COMPLEXITY=20 | LINES=24 */
 fn get_type_suggestion(t: Ty<'_>, val: u128, negative: bool) -> Option<&'static str> {
     match t.kind() {
         ty::Uint(ty::UintTy::Usize) | ty::Int(ty::IntTy::Isize) => None,
@@ -256,7 +242,6 @@ fn get_type_suggestion(t: Ty<'_>, val: u128, negative: bool) -> Option<&'static 
         _ => None,
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=literal_to_i128 | COMPLEXITY=6 | LINES=8 */
 
 fn literal_to_i128(val: u128, negative: bool) -> Option<i128> {
     if negative {
@@ -265,7 +250,6 @@ fn literal_to_i128(val: u128, negative: bool) -> Option<i128> {
         val.try_into().ok()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=lint_int_literal | COMPLEXITY=25 | LINES=53 */
 
 fn lint_int_literal<'tcx>(
     cx: &LateContext<'tcx>,
@@ -319,7 +303,6 @@ fn lint_int_literal<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=lint_uint_literal | COMPLEXITY=43 | LINES=80 */
 
 fn lint_uint_literal<'tcx>(
     cx: &LateContext<'tcx>,
@@ -400,7 +383,6 @@ fn lint_uint_literal<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=52 */
 
 pub(crate) fn lint_literal<'tcx>(
     cx: &LateContext<'tcx>,

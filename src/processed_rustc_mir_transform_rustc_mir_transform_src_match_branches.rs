@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/match_branches.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::iter;
 
 use crate::rustc_abi::Integer;
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ScalarInt, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=30 | LINES=48 */
 use tracing::instrument;
 
 use super::simplify::simplify_cfg;
@@ -57,7 +54,6 @@ impl<'tcx> crate::MirPass<'tcx> for MatchBranchSimplification {
         false
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=simplify | COMPLEXITY=20 | LINES=65 */
 
 trait SimplifyMatch<'tcx> {
     /// Simplifies a match statement, returning `Some` if the simplification succeeds, `None`
@@ -123,7 +119,6 @@ trait SimplifyMatch<'tcx> {
         discr_ty: Ty<'tcx>,
     );
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=SimplifyToIf; | COMPLEXITY=2 | LINES=14 */
 
 struct SimplifyToIf;
 
@@ -138,19 +133,16 @@ struct SimplifyToIf;
 /// bb0: {
 ///     switchInt(move _3) -> [42_isize: bb1, otherwise: bb2];
 /// }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 ///
 /// bb1: {
 ///     _2 = const true;
 ///     goto -> bb3;
 /// }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 ///
 /// bb2: {
 ///     _2 = const false;
 ///     goto -> bb3;
 /// }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 /// ```
 ///
 /// into:
@@ -160,7 +152,6 @@ struct SimplifyToIf;
 ///    _2 = Eq(move _3, const 42_isize);
 ///    goto -> bb3;
 /// }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=can_simplify | COMPLEXITY=80 | LINES=120 */
 /// ```
 impl<'tcx> SimplifyMatch<'tcx> for SimplifyToIf {
     #[instrument(level = "debug", skip(self, tcx), ret)]
@@ -281,7 +272,6 @@ impl<'tcx> SimplifyMatch<'tcx> for SimplifyToIf {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=can_cast | COMPLEXITY=14 | LINES=26 */
 
 /// Check if the cast constant using `IntToInt` is equal to the target constant.
 fn can_cast(
@@ -308,13 +298,11 @@ fn can_cast(
     let cast_scalar = ScalarInt::try_from_uint(v, size).unwrap();
     cast_scalar == target_scalar
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=SimplifyToExp | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 struct SimplifyToExp {
     transform_kinds: Vec<TransformKind>,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Clone, Copy, Debug)]
 enum ExpectedTransformKind<'a, 'tcx> {
@@ -325,13 +313,11 @@ enum ExpectedTransformKind<'a, 'tcx> {
     /// Enum variant comparison type.
     Cast { place: &'a Place<'tcx>, ty: Ty<'tcx> },
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum TransformKind {
     Same,
     Cast,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=11 | LINES=10 */
 
 impl From<ExpectedTransformKind<'_, '_>> for TransformKind {
     fn from(compare_type: ExpectedTransformKind<'_, '_>) -> Self {
@@ -342,7 +328,6 @@ impl From<ExpectedTransformKind<'_, '_>> for TransformKind {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 /// If we find that the value of match is the same as the assignment,
 /// merge a target block statements into the source block,
@@ -354,30 +339,25 @@ impl From<ExpectedTransformKind<'_, '_>> for TransformKind {
 /// bb0: {
 ///     switchInt(_1) -> [1: bb2, 2: bb3, 3: bb4, otherwise: bb1];
 /// }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 ///
 /// bb1: {
 ///     unreachable;
 /// }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 ///
 /// bb2: {
 ///     _0 = const 1_i16;
 ///     goto -> bb5;
 /// }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 ///
 /// bb3: {
 ///     _0 = const 2_i16;
 ///     goto -> bb5;
 /// }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 ///
 /// bb4: {
 ///     _0 = const 3_i16;
 ///     goto -> bb5;
 /// }
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 /// ```
 ///
 /// into:
@@ -387,7 +367,6 @@ impl From<ExpectedTransformKind<'_, '_>> for TransformKind {
 ///    _0 = _3 as i16 (IntToInt);
 ///    goto -> bb5;
 /// }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=can_simplify | COMPLEXITY=103 | LINES=163 */
 /// ```
 impl<'tcx> SimplifyMatch<'tcx> for SimplifyToExp {
     #[instrument(level = "debug", skip(self, tcx), ret)]

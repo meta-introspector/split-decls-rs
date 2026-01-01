@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/lift.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=22 | LINES=21 */
 /// A trait implemented for all `X<'a>` types that can be safely and
 /// efficiently converted to `X<'tcx>` as long as they are part of the
 /// provided `TyCtxt<'tcx>`.

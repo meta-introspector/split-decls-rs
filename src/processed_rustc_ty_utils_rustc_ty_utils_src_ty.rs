@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
@@ -11,10 +10,8 @@ use crate::rustc_complete::ty::{
     self, SizedTraitKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor, Upcast,
     fold_regions,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=sizedness_constraint_for_ty | COMPLEXITY=23 | LINES=66 */
 use crate::rustc_trait_selection::traits;
 use tracing::instrument;
 
@@ -81,7 +78,6 @@ fn sizedness_constraint_for_ty<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=defaultness | COMPLEXITY=15 | LINES=21 */
 
 fn defaultness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Defaultness {
     match tcx.hir_node_by_def_id(def_id) {
@@ -103,7 +99,6 @@ fn defaultness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Defaultness {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=adt_sizedness_constraint | COMPLEXITY=27 | LINES=49 */
 
 /// Returns the type of the last field of a struct ("the constraint") which must implement the
 /// `sizedness` trait for the whole ADT to be considered to implement that `sizedness` trait.
@@ -153,7 +148,6 @@ fn adt_sizedness_constraint<'tcx>(
 
     Some(ty::EarlyBinder::bind(constraint_ty))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=param_env | COMPLEXITY=22 | LINES=54 */
 
 /// See `ParamEnv` struct definition for details.
 fn param_env(tcx: TyCtxt<'_>, def_id: DefId) -> ty::ParamEnv<'_> {
@@ -208,7 +202,6 @@ fn param_env(tcx: TyCtxt<'_>, def_id: DefId) -> ty::ParamEnv<'_> {
     let cause = traits::ObligationCause::misc(tcx.def_span(def_id), body_id);
     traits::normalize_param_env_or_error(tcx, unnormalized_env, cause)
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ImplTraitInTraitFinder | COMPLEXITY=3 | LINES=13 */
 
 /// Walk through a function type, gathering all RPITITs and installing a
 /// `NormalizesTo(Projection(RPITIT) -> Opaque(RPITIT))` predicate into the
@@ -222,7 +215,6 @@ struct ImplTraitInTraitFinder<'a, 'tcx> {
     seen: FxHashSet<DefId>,
     depth: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=31 | LINES=70 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ImplTraitInTraitFinder<'_, 'tcx> {
     fn visit_binder<T: TypeVisitable<TyCtxt<'tcx>>>(&mut self, binder: &ty::Binder<'tcx, T>) {
@@ -293,12 +285,10 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ImplTraitInTraitFinder<'_, 'tcx> {
         ty.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=typing_env_normalized_for_post_analysis | COMPLEXITY=2 | LINES=4 */
 
 fn typing_env_normalized_for_post_analysis(tcx: TyCtxt<'_>, def_id: DefId) -> ty::TypingEnv<'_> {
     ty::TypingEnv::non_body_analysis(tcx, def_id).with_post_analysis_normalized(tcx)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=asyncness | COMPLEXITY=8 | LINES=9 */
 
 /// Check if a function is async.
 fn asyncness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Asyncness {
@@ -308,7 +298,6 @@ fn asyncness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Asyncness {
         hir::IsAsync::NotAsync => ty::Asyncness::No,
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=unsizing_params_for_adt | COMPLEXITY=32 | LINES=44 */
 
 fn unsizing_params_for_adt<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId) -> DenseBitSet<u32> {
     let def = tcx.adt_def(def_id);
@@ -353,7 +342,6 @@ fn unsizing_params_for_adt<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId) -> DenseBitSe
 
     unsizing_params
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=impl_self_is_guaranteed_unsized | COMPLEXITY=12 | LINES=54 */
 
 fn impl_self_is_guaranteed_unsized<'tcx>(tcx: TyCtxt<'tcx>, impl_def_id: DefId) -> bool {
     debug_assert_eq!(tcx.def_kind(impl_def_id), DefKind::Impl { of_trait: true });
@@ -408,7 +396,6 @@ fn impl_self_is_guaranteed_unsized<'tcx>(tcx: TyCtxt<'tcx>, impl_def_id: DefId) 
         | ty::Error(_) => false,
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

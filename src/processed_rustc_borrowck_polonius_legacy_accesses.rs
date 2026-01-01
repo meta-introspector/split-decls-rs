@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/legacy/accesses.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Local, Location, Place};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use super::{LocationIndex, PoloniusFacts, PoloniusLocationTable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::def_use::{self, DefUse};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=22 */
 use crate::universal_regions::UniversalRegions;
 
 /// Emit polonius facts for variable defs, uses, drops, and path accesses.
@@ -35,7 +29,6 @@ pub(crate) fn emit_access_facts<'tcx>(
         });
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AccessFactsExtractor | COMPLEXITY=2 | LINES=7 */
 
 /// MIR visitor extracting point-wise facts about accesses.
 struct AccessFactsExtractor<'a, 'tcx> {
@@ -43,14 +36,12 @@ struct AccessFactsExtractor<'a, 'tcx> {
     move_data: &'a MoveData<'tcx>,
     location_table: &'a PoloniusLocationTable,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=location_to_index | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> AccessFactsExtractor<'_, 'tcx> {
     fn location_to_index(&self, location: Location) -> LocationIndex {
         self.location_table.mid_index(location)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=29 | LINES=41 */
 
 impl<'a, 'tcx> Visitor<'tcx> for AccessFactsExtractor<'a, 'tcx> {
     fn visit_local(&mut self, local: Local, context: PlaceContext, location: Location) {

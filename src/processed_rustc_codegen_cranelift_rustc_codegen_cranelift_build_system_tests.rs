@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ffi::OsStr;
 use std::path::PathBuf;
 use std::process::Command;
 
 use crate::path::{Dirs, RelPath};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::prepare::{GitRepo, apply_patches};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_info::get_default_sysroot;
 use crate::shared_utils::rustflags_from_env;
 use crate::utils::{CargoProject, Compiler, LogGroup, ensure_empty_dir, spawn_and_wait};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CodegenBackend, SysrootKind, build_sysroot, config};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=TestCase | COMPLEXITY=2 | LINES=7 */
 
 static BUILD_EXAMPLE_OUT_DIR: RelPath = RelPath::build("example");
 
@@ -21,7 +16,6 @@ struct TestCase {
     config: &'static str,
     cmd: TestCaseCmd,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
 enum TestCaseCmd {
     Custom { func: &'static dyn Fn(&TestRunner<'_>) },
@@ -30,7 +24,6 @@ enum TestCaseCmd {
     BuildBinAndRun { source: &'static str, args: &'static [&'static str] },
     JitBin { source: &'static str, args: &'static str },
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=31 */
 
 impl TestCase {
     // FIXME reduce usage of custom test case commands
@@ -62,7 +55,6 @@ impl TestCase {
         Self { config, cmd: TestCaseCmd::JitBin { source, args } }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=44 */
 
 const NO_SYSROOT_SUITE: &[TestCase] = &[
     TestCase::build_lib("build.mini_core", "example/mini_core.rs", "lib,dylib"),
@@ -107,7 +99,6 @@ const BASE_SYSROOT_SUITE: &[TestCase] = &[
         ]);
         runner.run_out_command("gen_block_iterate", &[]);
     }),
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=29 */
     TestCase::build_bin_and_run("aot.raw-dylib", "example/raw-dylib.rs", &[]),
     TestCase::custom("test.sysroot", &|runner| {
         apply_patches(
@@ -137,7 +128,6 @@ const BASE_SYSROOT_SUITE: &[TestCase] = &[
             spawn_and_wait(build_cmd);
         }
     }),
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=47 */
 ];
 
 pub(crate) static RAND_REPO: GitRepo = GitRepo::github(
@@ -185,7 +175,6 @@ const EXTENDED_SYSROOT_SUITE: &[TestCase] = &[
             spawn_and_wait(build_cmd);
         }
     }),
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=33 */
     TestCase::custom("test.regex", &|runner| {
         REGEX_REPO.patch(&runner.dirs);
 
@@ -219,7 +208,6 @@ const EXTENDED_SYSROOT_SUITE: &[TestCase] = &[
             spawn_and_wait(build_cmd);
         }
     }),
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
     TestCase::custom("test.portable-simd", &|runner| {
         apply_patches(
             &runner.dirs,
@@ -240,7 +228,6 @@ const EXTENDED_SYSROOT_SUITE: &[TestCase] = &[
             spawn_and_wait(test_cmd);
         }
     }),
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=83 */
 ];
 
 pub(crate) fn run_tests(
@@ -324,7 +311,6 @@ pub(crate) fn run_tests(
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=TestRunner | COMPLEXITY=2 | LINES=9 */
 
 struct TestRunner<'a> {
     is_native: bool,
@@ -334,7 +320,6 @@ struct TestRunner<'a> {
     target_compiler: Compiler,
     stdlib_source: PathBuf,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=46 | LINES=109 */
 
 impl<'a> TestRunner<'a> {
     fn new(

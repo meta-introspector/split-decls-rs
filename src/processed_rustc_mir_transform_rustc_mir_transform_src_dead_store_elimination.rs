@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/dead_store_elimination.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=23 */
 // This module implements a dead store elimination (DSE) routine.
 //
 // This transformation was written specifically for the needs of dest prop. Although it is
@@ -23,7 +22,6 @@ use crate::rustc_mir_dataflow::debuginfo::debuginfo_locals;
 use crate::rustc_mir_dataflow::impls::{
     LivenessTransferFunction, MaybeTransitiveLiveLocals, borrowed_locals,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=eliminate | COMPLEXITY=70 | LINES=105 */
 
 use crate::util::is_within_packed;
 
@@ -129,13 +127,11 @@ fn eliminate<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
         *arg = Operand::Move(place);
     }
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) enum DeadStoreElimination {
     Initial,
     Final,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=name | COMPLEXITY=13 | LINES=21 */
 
 impl<'tcx> crate::MirPass<'tcx> for DeadStoreElimination {
     fn name(&self) -> &'static str {

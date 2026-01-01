@@ -1,41 +1,29 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/item.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::visit::AssocCtxt;
 use crate::rustc_complete::*;
 use crate::rustc_complete::{E0570, ErrorGuaranteed, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, PerNS, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     self as hir, HirId, ImplItemImplKind, LifetimeSource, PredicateOrigin, Target, find_attr,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use thin_vec::ThinVec;
 use tracing::instrument;
 
 use super::errors::{InvalidAbi, InvalidAbiSuggestion, TupleStructWithDefault, UnionWithDefault};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::stability::{enabled_names, gate_unstable_abi};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::{
     AstOwner, FnDeclKind, ImplTraitContext, ImplTraitPosition, LoweringContext, ParamMode,
     RelaxedBoundForbiddenReason, RelaxedBoundPolicy, ResolverAstLoweringExt,
 };
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) struct ItemLowerer<'a, 'hir> {
     pub(super) tcx: TyCtxt<'hir>,
@@ -43,7 +31,6 @@ pub(super) struct ItemLowerer<'a, 'hir> {
     pub(super) ast_index: &'a IndexSlice<LocalDefId, AstOwner<'a>>,
     pub(super) owners: &'a mut IndexVec<LocalDefId, hir::MaybeOwner<'hir>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=add_ty_alias_where_clause | COMPLEXITY=14 | LINES=21 */
 
 /// When we have a ty alias we *may* have two where clauses. To give the best diagnostics, we set the span
 /// to the where clause that is preferred, if it exists. Otherwise, it sets the span to the other where
@@ -65,7 +52,6 @@ fn add_ty_alias_where_clause(
     generics.where_clause.has_where_token = where_clause.has_where_token;
     generics.where_clause.span = where_clause.span;
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=with_lctx | COMPLEXITY=25 | LINES=48 */
 
 impl<'a, 'hir> ItemLowerer<'a, 'hir> {
     fn with_lctx(
@@ -114,7 +100,6 @@ impl<'a, 'hir> ItemLowerer<'a, 'hir> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=lower_item_id_use_tree | COMPLEXITY=672 | LINES=1832 */
 
 impl<'hir> LoweringContext<'_, 'hir> {
     pub(super) fn lower_mod(

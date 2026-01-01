@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_session/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::num::{NonZero, ParseIntError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::rustc_complete::token;
 use crate::rustc_complete::util::literal::LitError;
@@ -10,13 +8,9 @@ use crate::rustc_complete::{
     Diag, DiagCtxtHandle, DiagMessage, Diagnostic, EmissionGuarantee, ErrorGuaranteed, Level,
     MultiSpan,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{SplitDebuginfo, StackProtector, TargetTuple};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 use crate::config::CrateType;
 use crate::parse::ParseSess;
@@ -28,13 +22,11 @@ pub(crate) enum AppleDeploymentTarget {
     #[diag(session_apple_deployment_target_too_low)]
     TooLow { env_var: &'static str, version: String, os_min: String },
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct FeatureGateError {
     pub(crate) span: MultiSpan,
     pub(crate) explain: DiagMessage,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for FeatureGateError {
     #[track_caller]
@@ -42,21 +34,18 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for FeatureGateError {
         Diag::new(dcx, level, self.explain).with_span(self.span).with_code(E0658)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(session_feature_diagnostic_for_issue)]
 pub(crate) struct FeatureDiagnosticForIssue {
     pub(crate) n: NonZero<u32>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(session_feature_suggest_upgrade_compiler)]
 pub(crate) struct SuggestUpgradeCompiler {
     date: &'static str,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 impl SuggestUpgradeCompiler {
     pub(crate) fn ui_testing() -> Self {
@@ -69,14 +58,12 @@ impl SuggestUpgradeCompiler {
         Some(Self { date })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(session_feature_diagnostic_help)]
 pub(crate) struct FeatureDiagnosticHelp {
     pub(crate) feature: Symbol,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=FeatureDiagnosticSuggestion | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -89,14 +76,12 @@ pub struct FeatureDiagnosticSuggestion {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(session_cli_feature_diagnostic_help)]
 pub(crate) struct CliFeatureDiagnosticHelp {
     pub(crate) feature: Symbol,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(session_not_circumvent_feature)]
@@ -111,14 +96,12 @@ pub(crate) struct LinkerPluginToWindowsNotSupported;
 pub(crate) struct ProfileUseFileDoesNotExist<'a> {
     pub(crate) path: &'a std::path::Path,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_profile_sample_use_file_does_not_exist)]
 pub(crate) struct ProfileSampleUseFileDoesNotExist<'a> {
     pub(crate) path: &'a std::path::Path,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(session_target_requires_unwind_tables)]
@@ -129,21 +112,18 @@ pub(crate) struct TargetRequiresUnwindTables;
 pub(crate) struct InstrumentationNotSupported {
     pub(crate) us: String,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_sanitizer_not_supported)]
 pub(crate) struct SanitizerNotSupported {
     pub(crate) us: String,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_sanitizers_not_supported)]
 pub(crate) struct SanitizersNotSupported {
     pub(crate) us: String,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(session_cannot_mix_and_match_sanitizers)]
@@ -151,7 +131,6 @@ pub(crate) struct CannotMixAndMatchSanitizers {
     pub(crate) first: String,
     pub(crate) second: String,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=47 */
 
 #[derive(Diagnostic)]
 #[diag(session_cannot_enable_crt_static_linux)]
@@ -199,14 +178,12 @@ pub(crate) struct UnstableVirtualFunctionElimination;
 pub(crate) struct UnsupportedDwarfVersion {
     pub(crate) dwarf_version: u32,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_embed_source_insufficient_dwarf_version)]
 pub(crate) struct EmbedSourceInsufficientDwarfVersion {
     pub(crate) dwarf_version: u32,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(session_embed_source_requires_debug_info)]
@@ -218,14 +195,12 @@ pub(crate) struct StackProtectorNotSupportedForTarget<'a> {
     pub(crate) stack_protector: StackProtector,
     pub(crate) target_triple: &'a TargetTuple,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_target_small_data_threshold_not_supported)]
 pub(crate) struct SmallDataThresholdNotSupportedForTarget<'a> {
     pub(crate) target_triple: &'a TargetTuple,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(session_branch_protection_requires_aarch64)]
@@ -236,14 +211,12 @@ pub(crate) struct BranchProtectionRequiresAArch64;
 pub(crate) struct SplitDebugInfoUnstablePlatform {
     pub(crate) debuginfo: SplitDebuginfo,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Diagnostic)]
 #[diag(session_file_is_not_writeable)]
 pub(crate) struct FileIsNotWriteable<'a> {
     pub(crate) file: &'a std::path::Path,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(session_file_write_fail)]
@@ -251,7 +224,6 @@ pub(crate) struct FileWriteFail<'a> {
     pub(crate) path: &'a std::path::Path,
     pub(crate) err: String,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(session_crate_name_empty)]
@@ -259,7 +231,6 @@ pub(crate) struct CrateNameEmpty {
     #[primary_span]
     pub(crate) span: Option<Span>,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_character_in_crate_name)]
@@ -271,7 +242,6 @@ pub(crate) struct InvalidCharacterInCrateName {
     #[help]
     pub(crate) help: Option<()>,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=ExprParenthesesNeeded | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(session_expr_parentheses_needed, applicability = "machine-applicable")]
@@ -281,14 +251,12 @@ pub struct ExprParenthesesNeeded {
     #[suggestion_part(code = ")")]
     right: Span,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=surrounding | COMPLEXITY=4 | LINES=6 */
 
 impl ExprParenthesesNeeded {
     pub fn surrounding(s: Span) -> Self {
         ExprParenthesesNeeded { left: s.shrink_to_lo(), right: s.shrink_to_hi() }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(session_skipping_const_checks)]
@@ -296,7 +264,6 @@ pub(crate) struct SkippingConstChecks {
     #[subdiagnostic]
     pub(crate) unleashed_features: Vec<UnleashedFeatureHelp>,
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnleashedFeatureHelp {
@@ -312,7 +279,6 @@ pub(crate) enum UnleashedFeatureHelp {
         span: Span,
     },
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=InvalidLiteralSuffix | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_literal_suffix)]
@@ -324,7 +290,6 @@ struct InvalidLiteralSuffix<'a> {
     kind: &'a str,
     suffix: Symbol,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=InvalidIntLiteralWidth | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_int_literal_width)]
@@ -334,7 +299,6 @@ struct InvalidIntLiteralWidth {
     span: Span,
     width: String,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=InvalidNumLiteralBasePrefix | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_num_literal_base_prefix)]
@@ -345,7 +309,6 @@ struct InvalidNumLiteralBasePrefix {
     span: Span,
     fixed: String,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=InvalidNumLiteralSuffix | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_num_literal_suffix)]
@@ -356,7 +319,6 @@ struct InvalidNumLiteralSuffix {
     span: Span,
     suffix: String,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=InvalidFloatLiteralWidth | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_float_literal_width)]
@@ -366,7 +328,6 @@ struct InvalidFloatLiteralWidth {
     span: Span,
     width: String,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=InvalidFloatLiteralSuffix | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(session_invalid_float_literal_suffix)]
@@ -377,7 +338,6 @@ struct InvalidFloatLiteralSuffix {
     span: Span,
     suffix: String,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=IntLiteralTooLarge | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(session_int_literal_too_large)]
@@ -387,7 +347,6 @@ struct IntLiteralTooLarge {
     span: Span,
     limit: String,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=HexadecimalFloatLiteralNotSupported | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(session_hexadecimal_float_literal_not_supported)]
@@ -396,7 +355,6 @@ struct HexadecimalFloatLiteralNotSupported {
     #[label(session_not_supported)]
     span: Span,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=OctalFloatLiteralNotSupported | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(session_octal_float_literal_not_supported)]
@@ -405,7 +363,6 @@ struct OctalFloatLiteralNotSupported {
     #[label(session_not_supported)]
     span: Span,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=BinaryFloatLiteralNotSupported | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(session_binary_float_literal_not_supported)]
@@ -414,7 +371,6 @@ struct BinaryFloatLiteralNotSupported {
     #[label(session_not_supported)]
     span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(session_unsupported_crate_type_for_target)]
@@ -422,7 +378,6 @@ pub(crate) struct UnsupportedCrateTypeForTarget<'a> {
     pub(crate) crate_type: CrateType,
     pub(crate) target_triple: &'a TargetTuple,
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=report_lit_error | COMPLEXITY=2 | LINES=9 */
 
 pub fn report_lit_error(
     psess: &ParseSess,
@@ -432,7 +387,6 @@ pub fn report_lit_error(
 ) -> ErrorGuaranteed {
     create_lit_error(psess, err, lit, span).emit()
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=create_lit_error | COMPLEXITY=61 | LINES=72 */
 
 pub fn create_lit_error(psess: &ParseSess, err: LitError, lit: token::Lit, span: Span) -> Diag<'_> {
     // Checks if `s` looks like i32 or u1234 etc.
@@ -505,7 +459,6 @@ pub fn create_lit_error(psess: &ParseSess, err: LitError, lit: token::Lit, span:
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(session_incompatible_linker_flavor)]
@@ -514,7 +467,6 @@ pub(crate) struct IncompatibleLinkerFlavor {
     pub(crate) flavor: &'static str,
     pub(crate) compatible_list: String,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(session_function_return_requires_x86_or_x86_64)]
@@ -533,7 +485,6 @@ pub(crate) struct IndirectBranchCsPrefixRequiresX86OrX8664;
 pub(crate) struct UnsupportedRegparm {
     pub(crate) regparm: u32,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(session_unsupported_regparm_arch)]
@@ -548,7 +499,6 @@ pub(crate) struct UnsupportedRegStructReturnArch;
 pub(crate) struct FailedToCreateProfiler {
     pub(crate) err: String,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
 
 #[derive(Diagnostic)]
 #[diag(session_soft_float_ignored)]

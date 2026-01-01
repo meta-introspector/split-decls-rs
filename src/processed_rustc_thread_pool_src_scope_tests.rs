@@ -1,31 +1,24 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/scope/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::iter::once;
 use std::sync::atomic::{AtomicUsize, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Barrier, Mutex};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::vec;
 
 use rand::{Rng, SeedableRng};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rand_xorshift::XorShiftRng;
 
 use crate::{Scope, ScopeFifo, ThreadPoolBuilder, scope, scope_fifo, unwind};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=scope_empty | COMPLEXITY=3 | LINES=5 */
 
 #[test]
 fn scope_empty() {
     scope(|_| {});
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=scope_result | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn scope_result() {
     let x = scope(|_| 22);
     assert_eq!(x, 22);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=scope_two | COMPLEXITY=5 | LINES=16 */
 
 #[test]
 fn scope_two() {
@@ -42,7 +35,6 @@ fn scope_two() {
     let v = counter.load(Ordering::SeqCst);
     assert_eq!(v, 11);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=scope_divide_and_conquer | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 fn scope_divide_and_conquer() {
@@ -56,7 +48,6 @@ fn scope_divide_and_conquer() {
     let s = counter_s.load(Ordering::SeqCst);
     assert_eq!(p, s);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=divide_and_conquer | COMPLEXITY=6 | LINES=10 */
 
 fn divide_and_conquer<'scope>(scope: &Scope<'scope>, counter: &'scope AtomicUsize, size: usize) {
     if size > 1 {
@@ -67,7 +58,6 @@ fn divide_and_conquer<'scope>(scope: &Scope<'scope>, counter: &'scope AtomicUsiz
         counter.fetch_add(1, Ordering::SeqCst);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=divide_and_conquer_seq | COMPLEXITY=6 | LINES=10 */
 
 fn divide_and_conquer_seq(counter: &AtomicUsize, size: usize) {
     if size > 1 {
@@ -78,13 +68,11 @@ fn divide_and_conquer_seq(counter: &AtomicUsize, size: usize) {
         counter.fetch_add(1, Ordering::SeqCst);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=Tree | COMPLEXITY=2 | LINES=5 */
 
 struct Tree<T: Send> {
     value: T,
     children: Vec<Tree<T>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=11 | LINES=31 */
 
 impl<T: Send> Tree<T> {
     fn iter(&self) -> vec::IntoIter<&T> {
@@ -116,7 +104,6 @@ impl<T: Send> Tree<T> {
         op(value);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=random_tree | COMPLEXITY=2 | LINES=8 */
 
 fn random_tree(depth: usize) -> Tree<u32> {
     assert!(depth > 0);
@@ -125,7 +112,6 @@ fn random_tree(depth: usize) -> Tree<u32> {
     let mut rng = XorShiftRng::from_seed(seed);
     random_tree1(depth, &mut rng)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=random_tree1 | COMPLEXITY=7 | LINES=12 */
 
 fn random_tree1(depth: usize, rng: &mut XorShiftRng) -> Tree<u32> {
     let children = if depth == 0 {
@@ -138,7 +124,6 @@ fn random_tree1(depth: usize, rng: &mut XorShiftRng) -> Tree<u32> {
 
     Tree { value: rng.random_range(0..1_000_000), children }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=update_tree | COMPLEXITY=5 | LINES=12 */
 
 #[test]
 fn update_tree() {
@@ -151,7 +136,6 @@ fn update_tree() {
         assert_eq!(i + 1, j);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=linear_stack_growth | COMPLEXITY=12 | LINES=23 */
 
 /// Check that if you have a chain of scoped tasks where T0 spawns T1
 /// spawns T2 and so forth down to Tn, the stack space should not grow
@@ -175,7 +159,6 @@ fn linear_stack_growth() {
         assert!(ratio > 0.9 && ratio < 1.1, "stack usage ratio out of bounds: {}", ratio);
     });
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=the_final_countdown | COMPLEXITY=9 | LINES=19 */
 
 fn the_final_countdown<'scope>(
     s: &Scope<'scope>,
@@ -195,35 +178,30 @@ fn the_final_countdown<'scope>(
         s.spawn(move |s| the_final_countdown(s, bottom_of_stack, max, n - 1));
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=panic_propagate_scope | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_scope() {
     scope(|_| panic!("Hello, world!"));
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=panic_propagate_spawn | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_spawn() {
     scope(|s| s.spawn(|_| panic!("Hello, world!")));
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=panic_propagate_nested_spawn | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_nested_spawn() {
     scope(|s| s.spawn(|s| s.spawn(|s| s.spawn(|_| panic!("Hello, world!")))));
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=panic_propagate_nested_scope_spawn | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_nested_scope_spawn() {
     scope(|s| s.spawn(|_| scope(|s| s.spawn(|_| panic!("Hello, world!")))));
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=panic_propagate_still_execute_1 | COMPLEXITY=8 | LINES=16 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -240,7 +218,6 @@ fn panic_propagate_still_execute_1() {
         Err(_) => assert!(x, "job b failed to execute"),
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=panic_propagate_still_execute_2 | COMPLEXITY=8 | LINES=16 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -257,7 +234,6 @@ fn panic_propagate_still_execute_2() {
         Err(_) => assert!(x, "job b failed to execute"),
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=panic_propagate_still_execute_3 | COMPLEXITY=8 | LINES=16 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -274,7 +250,6 @@ fn panic_propagate_still_execute_3() {
         Err(_) => assert!(x, "panic after spawn, spawn failed to execute"),
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=panic_propagate_still_execute_4 | COMPLEXITY=8 | LINES=16 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -291,7 +266,6 @@ fn panic_propagate_still_execute_4() {
         Err(_) => assert!(x, "panic in spawn tainted scope"),
     }
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=20 | LINES=23 */
 
 macro_rules! test_order {
     ($scope:ident => $spawn:ident) => {{
@@ -315,7 +289,6 @@ macro_rules! test_order {
         })
     }};
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=lifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -327,7 +300,6 @@ fn lifo_order() {
     let expected: Vec<i32> = (0..100).rev().collect(); // LIFO -> reversed
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=fifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -339,7 +311,6 @@ fn fifo_order() {
     let expected: Vec<i32> = (0..100).collect(); // FIFO -> natural order
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=26 */
 
 macro_rules! test_nested_order {
     ($outer_scope:ident => $outer_spawn:ident,
@@ -366,7 +337,6 @@ macro_rules! test_nested_order {
         })
     }};
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=nested_lifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -378,7 +348,6 @@ fn nested_lifo_order() {
     let expected: Vec<i32> = (0..100).rev().collect(); // LIFO -> reversed
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=nested_fifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -390,7 +359,6 @@ fn nested_fifo_order() {
     let expected: Vec<i32> = (0..100).collect(); // FIFO -> natural order
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=nested_lifo_fifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -402,7 +370,6 @@ fn nested_lifo_fifo_order() {
     let expected: Vec<i32> = (0..10).rev().flat_map(|i| (0..10).map(move |j| i * 10 + j)).collect();
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=nested_fifo_lifo_order | COMPLEXITY=2 | LINES=11 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -414,14 +381,12 @@ fn nested_fifo_lifo_order() {
     let expected: Vec<i32> = (0..10).flat_map(|i| (0..10).rev().map(move |j| i * 10 + j)).collect();
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
 
 macro_rules! spawn_push {
     ($scope:ident . $spawn:ident, $vec:ident, $i:expr) => {{
         $scope.$spawn(move |_| $vec.lock().unwrap().push($i));
     }};
 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=26 */
 
 /// Test spawns pushing a series of numbers, interleaved
 /// such that negative values are using an inner scope.
@@ -448,7 +413,6 @@ macro_rules! test_mixed_order {
         })
     }};
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=mixed_lifo_order | COMPLEXITY=2 | LINES=12 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -461,7 +425,6 @@ fn mixed_lifo_order() {
     let expected = vec![-3, 2, -2, 1, -1, 3, 0];
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=mixed_fifo_order | COMPLEXITY=2 | LINES=10 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -472,7 +435,6 @@ fn mixed_fifo_order() {
     let expected = vec![-1, 0, -2, 1, -3, 2, 3];
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=mixed_lifo_fifo_order | COMPLEXITY=2 | LINES=12 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -485,7 +447,6 @@ fn mixed_lifo_fifo_order() {
     let expected = vec![-1, 2, -2, 1, -3, 3, 0];
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=mixed_fifo_lifo_order | COMPLEXITY=2 | LINES=10 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -496,7 +457,6 @@ fn mixed_fifo_lifo_order() {
     let expected = vec![-3, 0, -2, 1, -1, 2, 3];
     assert_eq!(vec, expected);
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=static_scope | COMPLEXITY=8 | LINES=22 */
 
 #[test]
 fn static_scope() {
@@ -519,7 +479,6 @@ fn static_scope() {
 
     assert_eq!(COUNTER.load(Ordering::Relaxed), sum);
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=static_scope_fifo | COMPLEXITY=8 | LINES=22 */
 
 #[test]
 fn static_scope_fifo() {
@@ -542,7 +501,6 @@ fn static_scope_fifo() {
 
     assert_eq!(COUNTER.load(Ordering::Relaxed), sum);
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=mixed_lifetime_scope | COMPLEXITY=9 | LINES=18 */
 
 #[test]
 fn mixed_lifetime_scope() {
@@ -561,7 +519,6 @@ fn mixed_lifetime_scope() {
     increment(&[&counter; 100]);
     assert_eq!(counter.into_inner(), 100);
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=mixed_lifetime_scope_fifo | COMPLEXITY=9 | LINES=18 */
 
 #[test]
 fn mixed_lifetime_scope_fifo() {
@@ -580,7 +537,6 @@ fn mixed_lifetime_scope_fifo() {
     increment(&[&counter; 100]);
     assert_eq!(counter.into_inner(), 100);
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=scope_spawn_broadcast | COMPLEXITY=4 | LINES=13 */
 
 #[test]
 fn scope_spawn_broadcast() {
@@ -594,7 +550,6 @@ fn scope_spawn_broadcast() {
     });
     assert_eq!(sum.into_inner(), n * (n - 1) / 2);
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=scope_fifo_spawn_broadcast | COMPLEXITY=4 | LINES=13 */
 
 #[test]
 fn scope_fifo_spawn_broadcast() {
@@ -608,7 +563,6 @@ fn scope_fifo_spawn_broadcast() {
     });
     assert_eq!(sum.into_inner(), n * (n - 1) / 2);
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=scope_spawn_broadcast_nested | COMPLEXITY=5 | LINES=16 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -625,7 +579,6 @@ fn scope_spawn_broadcast_nested() {
     });
     assert_eq!(sum.into_inner(), n * n * (n - 1) / 2);
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=scope_spawn_broadcast_barrier | COMPLEXITY=4 | LINES=13 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -639,7 +592,6 @@ fn scope_spawn_broadcast_barrier() {
         barrier.wait();
     });
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=scope_spawn_broadcast_panic_one | COMPLEXITY=9 | LINES=19 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -659,7 +611,6 @@ fn scope_spawn_broadcast_panic_one() {
     assert_eq!(count.into_inner(), 7);
     assert!(result.is_err(), "broadcast panic should propagate!");
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=scope_spawn_broadcast_panic_many | COMPLEXITY=9 | LINES=19 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]

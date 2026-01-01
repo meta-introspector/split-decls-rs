@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_query_system/src/ich/hcx.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::definitions::DefPathHash;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::cstore::Untracked;
@@ -12,7 +9,6 @@ use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{
     BytePos, CachingSourceMapView, DUMMY_SP, Span, SpanData, StableSourceFileId, Symbol,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=StableHashingContext | COMPLEXITY=5 | LINES=19 */
 
 use crate::ich;
 
@@ -32,7 +28,6 @@ pub struct StableHashingContext<'a> {
     caching_source_map: Option<CachingSourceMapView<'a>>,
     hashing_controls: HashingControls,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=23 | LINES=58 */
 
 impl<'a> StableHashingContext<'a> {
     #[inline]
@@ -91,7 +86,6 @@ impl<'a> StableHashingContext<'a> {
         self.hashing_controls.clone()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<'a> HashStable<StableHashingContext<'a>> for ast::NodeId {
     #[inline]
@@ -99,7 +93,6 @@ impl<'a> HashStable<StableHashingContext<'a>> for ast::NodeId {
         panic!("Node IDs should not appear in incremental state");
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=hash_spans | COMPLEXITY=11 | LINES=35 */
 
 impl<'a> crate::rustc_span::HashStableContext for StableHashingContext<'a> {
     #[inline]
@@ -135,6 +128,5 @@ impl<'a> crate::rustc_span::HashStableContext for StableHashingContext<'a> {
         self.hashing_controls.clone()
     }
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'a> crate::rustc_session::HashStableContext for StableHashingContext<'a> {}

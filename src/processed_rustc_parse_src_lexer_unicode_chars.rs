@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_parse/src/lexer/unicode_chars.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Characters and their corresponding confusables were collected from
 // <https://www.unicode.org/Public/security/10.0.0/confusables.txt>
 
 use crate::rustc_complete::{BytePos, Pos, Span, kw};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=52 | LINES=376 */
 
 use super::Lexer;
 use crate::errors::TokenSubstitution;
@@ -381,7 +379,6 @@ pub(super) fn check_for_substitution(
     };
     (*token, sugg)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=peek_delimited | COMPLEXITY=7 | LINES=11 */
 
 /// Extract string if found at current position with given delimiters
 fn peek_delimited(text: &str, from_ch: char, to_ch: char) -> Option<&str> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/collector.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=96 */
 // Mono Item Collection
 // ====================
 //
@@ -96,18 +95,15 @@
 // fn print_val<T: Display>(x: T) {
 //     println!("{}", x);
 // }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 //
 // fn call_fn(f: &dyn Fn(i32), x: i32) {
 //     f(x);
 // }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 //
 // fn main() {
 //     let print_i32 = print_val::<i32>;
 //     call_fn(&print_i32, 0);
 // }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=48 | LINES=108 */
 // ```
 // The MIR of none of these functions will contain an explicit call to
 // `print_val::<i32>`. Nonetheless, in order to mono this program, we need
@@ -215,58 +211,43 @@ use std::cell::OnceCell;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::{MTLock, par_for_each_in};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, DefIdMap, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, GlobalAlloc, Scalar};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::mono::{CollectionMode, InstantiationMode, MonoItem};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
 use crate::rustc_complete::mir::{self, Location, MentionedItem, traversal};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::adjustment::{CustomCoerceUnsized, PointerCoercion};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::layout::ValidityRequirement;
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Instance, InstanceKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, VtblEntry,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{DebugInfo, EntryFnType};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::source_map::{Spanned, dummy_spanned, respan};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::collector::autodiff::collect_autodiff_fn;
 use crate::errors::{
     self, EncounteredErrorWhileInstantiating, EncounteredErrorWhileInstantiatingGlobalAsm,
     NoOptimizedMir, RecursionLimit,
 };
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 pub(crate) enum MonoItemCollectionStrategy {
     Eager,
     Lazy,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=SharedState | COMPLEXITY=5 | LINES=11 */
 
 /// The state that is shared across the concurrent threads that are doing collection.
 struct SharedState<'tcx> {
@@ -278,7 +259,6 @@ struct SharedState<'tcx> {
     /// Which items are being used where, for better errors.
     usage_map: MTLock<UsageMap<'tcx>>,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) struct UsageMap<'tcx> {
     // Maps every mono item to the mono items used by it.
@@ -287,7 +267,6 @@ pub(crate) struct UsageMap<'tcx> {
     // Maps every mono item to the mono items that use it.
     user_map: UnordMap<MonoItem<'tcx>, Vec<MonoItem<'tcx>>>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=18 | LINES=39 */
 
 impl<'tcx> UsageMap<'tcx> {
     fn new() -> UsageMap<'tcx> {
@@ -327,14 +306,12 @@ impl<'tcx> UsageMap<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=MonoItems | COMPLEXITY=2 | LINES=6 */
 
 struct MonoItems<'tcx> {
     // We want a set of MonoItem + Span where trying to re-insert a MonoItem with a different Span
     // is ignored. Map does that, but it looks odd.
     items: FxIndexMap<MonoItem<'tcx>, Span>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=10 | LINES=20 */
 
 impl<'tcx> MonoItems<'tcx> {
     fn new() -> Self {
@@ -355,7 +332,6 @@ impl<'tcx> MonoItems<'tcx> {
         self.items.keys().cloned()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> IntoIterator for MonoItems<'tcx> {
     type Item = Spanned<MonoItem<'tcx>>;
@@ -365,7 +341,6 @@ impl<'tcx> IntoIterator for MonoItems<'tcx> {
         self.items.into_iter().map(|(item, span)| respan(span, item))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=8 | LINES=11 */
 
 impl<'tcx> Extend<Spanned<MonoItem<'tcx>>> for MonoItems<'tcx> {
     fn extend<I>(&mut self, iter: I)
@@ -377,7 +352,6 @@ impl<'tcx> Extend<Spanned<MonoItem<'tcx>>> for MonoItems<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=collect_items_root | COMPLEXITY=6 | LINES=21 */
 
 fn collect_items_root<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -399,7 +373,6 @@ fn collect_items_root<'tcx>(
         CollectionMode::UsedItems,
     );
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=collect_items_rec | COMPLEXITY=147 | LINES=229 */
 
 /// Collect all monomorphized items reachable from `starting_point`, and emit a note diagnostic if a
 /// post-monomorphization error is encountered during a collection step.
@@ -629,7 +602,6 @@ fn collect_items_rec<'tcx>(
         recursion_depths.insert(def_id, depth);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=check_recursion_limit | COMPLEXITY=13 | LINES=33 */
 
 fn check_recursion_limit<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -663,7 +635,6 @@ fn check_recursion_limit<'tcx>(
 
     (def_id, recursion_depth)
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=MirUsedCollector | COMPLEXITY=4 | LINES=10 */
 
 struct MirUsedCollector<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -674,7 +645,6 @@ struct MirUsedCollector<'a, 'tcx> {
     used_mentioned_items: &'a mut UnordSet<MentionedItem<'tcx>>,
     instance: Instance<'tcx>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=monomorphize | COMPLEXITY=17 | LINES=35 */
 
 impl<'a, 'tcx> MirUsedCollector<'a, 'tcx> {
     fn monomorphize<T>(&self, value: T) -> T
@@ -710,7 +680,6 @@ impl<'a, 'tcx> MirUsedCollector<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=visit_rvalue | COMPLEXITY=115 | LINES=205 */
 
 impl<'a, 'tcx> MirVisitor<'tcx> for MirUsedCollector<'a, 'tcx> {
     fn visit_rvalue(&mut self, rvalue: &mir::Rvalue<'tcx>, location: Location) {
@@ -916,7 +885,6 @@ impl<'a, 'tcx> MirVisitor<'tcx> for MirUsedCollector<'a, 'tcx> {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=visit_drop_use | COMPLEXITY=2 | LINES=11 */
 
 fn visit_drop_use<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -928,7 +896,6 @@ fn visit_drop_use<'tcx>(
     let instance = Instance::resolve_drop_in_place(tcx, ty);
     visit_instance_use(tcx, instance, is_direct_call, source, output);
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=visit_fn_use | COMPLEXITY=17 | LINES=33 */
 
 /// For every call of this function in the visitor, make sure there is a matching call in the
 /// `mentioned_items` pass!
@@ -962,7 +929,6 @@ fn visit_fn_use<'tcx>(
         visit_instance_use(tcx, instance, is_direct_call, source, output);
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=visit_instance_use | COMPLEXITY=56 | LINES=71 */
 
 fn visit_instance_use<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1034,7 +1000,6 @@ fn visit_instance_use<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=should_codegen_locally | COMPLEXITY=31 | LINES=46 */
 
 /// Returns `true` if we should codegen an instance in the local crate, or returns `false` if we
 /// can just link to the upstream crate and therefore don't need a mono item.
@@ -1081,7 +1046,6 @@ fn should_codegen_locally<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) -> 
 
     true
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=25 */
 
 /// For a given pair of source and target type that occur in an unsizing coercion,
 /// this function finds the pair of types that determines the vtable linking
@@ -1107,7 +1071,6 @@ fn should_codegen_locally<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) -> 
 ///    b: f64,
 ///    c: T
 /// }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=find_tails_for_unsizing | COMPLEXITY=29 | LINES=70 */
 /// ```
 ///
 /// In this case, if `T` is sized, `&ComplexStruct<T>` is a thin pointer. If `T`
@@ -1178,7 +1141,6 @@ fn find_tails_for_unsizing<'tcx>(
         ),
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=create_fn_mono_item | COMPLEXITY=5 | LINES=17 */
 
 #[instrument(skip(tcx), level = "debug", ret)]
 fn create_fn_mono_item<'tcx>(
@@ -1196,7 +1158,6 @@ fn create_fn_mono_item<'tcx>(
 
     respan(source, MonoItem::Fn(instance))
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=create_mono_items_for_vtable_methods | COMPLEXITY=25 | LINES=50 */
 
 /// Creates a `MonoItem` for each method that is referenced by the vtable for
 /// the given trait/impl pair.
@@ -1247,7 +1208,6 @@ fn create_mono_items_for_vtable_methods<'tcx>(
         visit_drop_use(tcx, impl_ty, false, source, output);
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=collect_alloc | COMPLEXITY=34 | LINES=42 */
 
 /// Scans the CTFE alloc in order to find function pointers and statics that must be monomorphized.
 fn collect_alloc<'tcx>(tcx: TyCtxt<'tcx>, alloc_id: AllocId, output: &mut MonoItems<'tcx>) {
@@ -1290,7 +1250,6 @@ fn collect_alloc<'tcx>(tcx: TyCtxt<'tcx>, alloc_id: AllocId, output: &mut MonoIt
         GlobalAlloc::TypeId { .. } => {}
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=collect_items_of_instance | COMPLEXITY=36 | LINES=65 */
 
 /// Scans the MIR in order to find function calls, closures, and drop-glue.
 ///
@@ -1356,7 +1315,6 @@ fn collect_items_of_instance<'tcx>(
 
     (used_items, mentioned_items)
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=items_of_instance | COMPLEXITY=2 | LINES=12 */
 
 fn items_of_instance<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1369,7 +1327,6 @@ fn items_of_instance<'tcx>(
 
     (used_items, mentioned_items)
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=visit_mentioned_item | COMPLEXITY=32 | LINES=52 */
 
 /// `item` must be already monomorphized.
 #[instrument(skip(tcx, span, output), level = "debug")]
@@ -1422,7 +1379,6 @@ fn visit_mentioned_item<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=collect_const_value | COMPLEXITY=10 | LINES=16 */
 
 #[instrument(skip(tcx, output), level = "debug")]
 fn collect_const_value<'tcx>(
@@ -1439,7 +1395,6 @@ fn collect_const_value<'tcx>(
         _ => {}
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=collect_roots | COMPLEXITY=19 | LINES=46 */
 
 //=-----------------------------------------------------------------------------
 // Root Collection
@@ -1486,7 +1441,6 @@ fn collect_roots(tcx: TyCtxt<'_>, mode: MonoItemCollectionStrategy) -> Vec<MonoI
         })
         .collect()
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=RootCollector | COMPLEXITY=2 | LINES=7 */
 
 struct RootCollector<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -1494,7 +1448,6 @@ struct RootCollector<'a, 'tcx> {
     output: &'a mut MonoItems<'tcx>,
     entry_fn: Option<(DefId, EntryFnType)>,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=process_item | COMPLEXITY=119 | LINES=206 */
 
 impl<'v> RootCollector<'_, 'v> {
     fn process_item(&mut self, id: hir::ItemId) {
@@ -1701,7 +1654,6 @@ impl<'v> RootCollector<'_, 'v> {
         self.output.push(create_fn_mono_item(self.tcx, start_instance, DUMMY_SP));
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=create_mono_items_for_default_impls | COMPLEXITY=41 | LINES=73 */
 
 #[instrument(level = "debug", skip(tcx, output))]
 fn create_mono_items_for_default_impls<'tcx>(
@@ -1775,7 +1727,6 @@ fn create_mono_items_for_default_impls<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=39 */
 
 //=-----------------------------------------------------------------------------
 // Top-level entry point, tying it all together
@@ -1815,7 +1766,6 @@ pub(crate) fn collect_crate_mono_items<'tcx>(
 
     (mono_items, state.usage_map.into_inner())
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.hooks.should_codegen_locally = should_codegen_locally;

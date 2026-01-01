@@ -1,51 +1,38 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cell::LazyCell;
 use std::ops::ControlFlow;
 
 use crate::rustc_abi::{ExternAbi, FieldIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{EmissionGuarantee, MultiSpan};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::attrs::ReprAttr::ReprPacked;
 use crate::rustc_complete::def::{CtorKind, DefKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LangItem, Node, attrs, find_attr, intravisit};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{RegionVariableOrigin, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{Obligation, ObligationCauseCode, WellFormedLoc};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_lint_defs::builtin::{
     REPR_TRANSPARENT_EXTERNAL_PRIVATE_FIELDS, UNSUPPORTED_CALLING_CONVENTIONS,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
 use crate::rustc_complete::middle::stability::EvalResult;
 use crate::rustc_complete::ty::error::TypeErrorToStringExt;
 use crate::rustc_complete::ty::layout::{LayoutError, MAX_SIMD_LANES};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::util::Discr;
 use crate::rustc_complete::ty::{
     AdtDef, BottomUpFolder, FnSig, GenericArgKind, RegionKind, TypeFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, fold_regions,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::builtin::UNINHABITED_STATIC;
 use crate::rustc_target::spec::{AbiMap, AbiMapping};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedDirective;
 use crate::rustc_trait_selection::traits;
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use ty::TypingMode;
 
 use super::compare_impl_item::check_type_bounds;
@@ -54,7 +41,6 @@ use crate::check::wfcheck::{
     check_associated_item, check_trait_item, check_variances_for_type_defn, check_where_clauses,
     enter_wf_checking_ctxt,
 };
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=add_abi_diag_help | COMPLEXITY=20 | LINES=14 */
 
 fn add_abi_diag_help<T: EmissionGuarantee>(abi: ExternAbi, diag: &mut Diag<'_, T>) {
     if let ExternAbi::Cdecl { unwind } = abi {
@@ -69,7 +55,6 @@ fn add_abi_diag_help<T: EmissionGuarantee>(abi: ExternAbi, diag: &mut Diag<'_, T
         ));
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=check_abi | COMPLEXITY=15 | LINES=22 */
 
 pub fn check_abi(tcx: TyCtxt<'_>, hir_id: hir::HirId, span: Span, abi: ExternAbi) {
     // FIXME: This should be checked earlier, e.g. in `rustc_ast_lowering`, as this
@@ -92,7 +77,6 @@ pub fn check_abi(tcx: TyCtxt<'_>, hir_id: hir::HirId, span: Span, abi: ExternAbi
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_custom_abi | COMPLEXITY=10 | LINES=12 */
 
 pub fn check_custom_abi(tcx: TyCtxt<'_>, def_id: LocalDefId, fn_sig: FnSig<'_>, fn_sig_span: Span) {
     if fn_sig.abi == ExternAbi::Custom {
@@ -105,7 +89,6 @@ pub fn check_custom_abi(tcx: TyCtxt<'_>, def_id: LocalDefId, fn_sig: FnSig<'_>, 
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_struct | COMPLEXITY=5 | LINES=13 */
 
 fn check_struct(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     let def = tcx.adt_def(def_id);
@@ -119,7 +102,6 @@ fn check_struct(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     check_transparent(tcx, def);
     check_packed(tcx, span, def);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_union | COMPLEXITY=2 | LINES=9 */
 
 fn check_union(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     let def = tcx.adt_def(def_id);
@@ -129,7 +111,6 @@ fn check_union(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     check_union_fields(tcx, span, def_id);
     check_packed(tcx, span, def);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=allowed_union_or_unsafe_field | COMPLEXITY=12 | LINES=32 */
 
 fn allowed_union_or_unsafe_field<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -162,7 +143,6 @@ fn allowed_union_or_unsafe_field<'tcx>(
         ty::TraitRef::new(tcx, def_id, [ty]),
     ))
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=check_union_fields | COMPLEXITY=16 | LINES=30 */
 
 /// Check that the fields of the `union` do not need dropping.
 fn check_union_fields(tcx: TyCtxt<'_>, span: Span, item_def_id: LocalDefId) -> bool {
@@ -193,7 +173,6 @@ fn check_union_fields(tcx: TyCtxt<'_>, span: Span, item_def_id: LocalDefId) -> b
 
     true
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=check_static_inhabited | COMPLEXITY=26 | LINES=39 */
 
 /// Check that a `static` is inhabited.
 fn check_static_inhabited(tcx: TyCtxt<'_>, def_id: LocalDefId) {
@@ -233,7 +212,6 @@ fn check_static_inhabited(tcx: TyCtxt<'_>, def_id: LocalDefId) {
         );
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=check_opaque | COMPLEXITY=13 | LINES=23 */
 
 /// Checks that an opaque type does not contain cycles and does not use `Self` or `T::Foo`
 /// projections that would result in "inheriting lifetimes".
@@ -257,7 +235,6 @@ fn check_opaque(tcx: TyCtxt<'_>, def_id: LocalDefId) {
 
     let _ = check_opaque_meets_bounds(tcx, def_id, origin);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 /// Checks that an opaque type does not contain cycles.
 pub(super) fn check_opaque_for_cycles<'tcx>(
@@ -275,7 +252,6 @@ pub(super) fn check_opaque_for_cycles<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// Check that the concrete type behind `impl Trait` actually implements `Trait`.
 ///
@@ -288,7 +264,6 @@ pub(super) fn check_opaque_for_cycles<'tcx>(
 /// fn f<T: Clone>(t: T) -> X<T> {
 ///     t
 /// }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=check_opaque_meets_bounds | COMPLEXITY=84 | LINES=143 */
 /// ```
 ///
 /// Without this check the above code is incorrectly accepted: we would ICE if
@@ -432,7 +407,6 @@ fn check_opaque_meets_bounds<'tcx>(
         Ok(())
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=best_definition_site_of_opaque | COMPLEXITY=56 | LINES=85 */
 
 fn best_definition_site_of_opaque<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -518,7 +492,6 @@ fn best_definition_site_of_opaque<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=sanity_check_found_hidden_type | COMPLEXITY=28 | LINES=44 */
 
 fn sanity_check_found_hidden_type<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -563,7 +536,6 @@ fn sanity_check_found_hidden_type<'tcx>(
         Err(ty.build_mismatch_error(&other, tcx)?.emit())
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=check_opaque_precise_captures | COMPLEXITY=111 | LINES=167 */
 
 /// Check that the opaque's precise captures list is valid (if present).
 /// We check this for regular `impl Trait`s and also RPITITs, even though the latter
@@ -731,7 +703,6 @@ fn check_opaque_precise_captures<'tcx>(tcx: TyCtxt<'tcx>, opaque_def_id: LocalDe
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=is_enum_of_nonnullable_ptr | COMPLEXITY=8 | LINES=18 */
 
 fn is_enum_of_nonnullable_ptr<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -750,7 +721,6 @@ fn is_enum_of_nonnullable_ptr<'tcx>(
     };
     matches!(field.ty(tcx, args).kind(), ty::FnPtr(..) | ty::Ref(..))
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=check_static_linkage | COMPLEXITY=13 | LINES=12 */
 
 fn check_static_linkage(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     if tcx.codegen_fn_attrs(def_id).import_linkage.is_some() {
@@ -763,7 +733,6 @@ fn check_static_linkage(tcx: TyCtxt<'_>, def_id: LocalDefId) {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=191 | LINES=347 */
 
 pub(crate) fn check_item_type(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(), ErrorGuaranteed> {
     let mut res = Ok(());
@@ -1111,13 +1080,11 @@ pub(crate) fn check_item_type(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(),
         _ => unreachable!("{node:?}"),
     })
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 pub(super) fn check_on_unimplemented(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     // an error would be reported if this fails.
     let _ = OnUnimplementedDirective::of_item(tcx, def_id.to_def_id());
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=53 */
 
 pub(super) fn check_specialization_validity<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1171,7 +1138,6 @@ pub(super) fn check_specialization_validity<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=check_impl_items_against_trait | COMPLEXITY=105 | LINES=183 */
 
 fn check_impl_items_against_trait<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1355,7 +1321,6 @@ fn check_impl_items_against_trait<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=check_simd | COMPLEXITY=37 | LINES=74 */
 
 fn check_simd(tcx: TyCtxt<'_>, sp: Span, def_id: LocalDefId) {
     let t = tcx.type_of(def_id).instantiate_identity();
@@ -1430,7 +1395,6 @@ fn check_simd(tcx: TyCtxt<'_>, sp: Span, def_id: LocalDefId) {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=66 */
 
 pub(super) fn check_packed(tcx: TyCtxt<'_>, sp: Span, def: ty::AdtDef<'_>) {
     let repr = def.repr();
@@ -1497,7 +1461,6 @@ pub(super) fn check_packed(tcx: TyCtxt<'_>, sp: Span, def: ty::AdtDef<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=28 */
 
 pub(super) fn check_packed_inner(
     tcx: TyCtxt<'_>,
@@ -1526,7 +1489,6 @@ pub(super) fn check_packed_inner(
 
     None
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=check_non_exhaustive | COMPLEXITY=68 | LINES=124 */
 
 pub(super) fn check_transparent<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>) {
     if !adt.repr().transparent() {
@@ -1651,7 +1613,6 @@ pub(super) fn check_transparent<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>) 
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=check_enum | COMPLEXITY=36 | LINES=70 */
 
 #[allow(trivial_numeric_casts)]
 fn check_enum(tcx: TyCtxt<'_>, def_id: LocalDefId) {
@@ -1722,7 +1683,6 @@ fn check_enum(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     detect_discriminant_duplicate(tcx, def);
     check_transparent(tcx, def);
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=detect_discriminant_duplicate | COMPLEXITY=68 | LINES=103 */
 
 /// Part of enum check. Given the discriminants of an enum, errors if two or more discriminants are equal
 fn detect_discriminant_duplicate<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>) {
@@ -1826,7 +1786,6 @@ fn detect_discriminant_duplicate<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>)
         i += 1;
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=check_type_alias_type_params_are_used | COMPLEXITY=53 | LINES=81 */
 
 fn check_type_alias_type_params_are_used<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) {
     if tcx.type_alias_is_lazy(def_id) {
@@ -1908,7 +1867,6 @@ fn check_type_alias_type_params_are_used<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalD
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=opaque_type_cycle_error | COMPLEXITY=87 | LINES=130 */
 
 /// Emit an error for recursive opaque types.
 ///
@@ -2039,7 +1997,6 @@ fn opaque_type_cycle_error(tcx: TyCtxt<'_>, opaque_def_id: LocalDefId) -> ErrorG
     }
     err.emit()
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=54 */
 
 pub(super) fn check_coroutine_obligations(
     tcx: TyCtxt<'_>,
@@ -2094,7 +2051,6 @@ pub(super) fn check_coroutine_obligations(
 
     Ok(())
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=26 */
 
 pub(super) fn check_potentially_region_dependent_goals<'tcx>(
     tcx: TyCtxt<'tcx>,

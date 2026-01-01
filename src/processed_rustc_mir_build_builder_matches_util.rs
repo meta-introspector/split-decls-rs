@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/matches/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::Ty;
@@ -9,7 +8,6 @@ use tracing::debug;
 use crate::builder::Builder;
 use crate::builder::expr::as_place::PlaceBase;
 use crate::builder::matches::{Binding, Candidate, FlatPat, MatchPairTree, TestCase};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Creates a false edge to `imaginary_target` and a real edge to
@@ -33,7 +31,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 /// Determine the set of places that have to be stable across match guards.
 ///
@@ -46,10 +43,8 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
 /// 1. Borrowing `*x` doesn't prevent assigning to `x`. If `x` is a shared reference, the borrow
 ///    isn't even tracked. As such we have to add fake borrows of any prefixes of a place.
 /// 2. We don't want `match x { (Some(_), _) => (), .. }` to conflict with mutable borrows of `x.1`, so we
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=2 */
 ///    only add fake borrows for places which are bound or tested by the match.
 /// 3. We don't want `match x { Some(_) => (), .. }` to conflict with mutable borrows of `(x as
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=9 */
 ///    Some).0`, so the borrows are a special shallow borrow that only affects the place and not its
 ///    projections.
 ///    ```rust
@@ -59,7 +54,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
 ///        _ if { if let Some(ref mut y) = x.0 { *y += 1 }; true } => {}
 ///        _ => {}
 ///    }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=10 */
 ///    ```
 /// 4. The fake borrows may be of places in inactive variants, e.g. here we need to fake borrow `x`
 ///    and `(x as Some).0`, but when we reach the guard `x` may not be `Some`.
@@ -70,7 +64,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
 ///        _ if { if let Some(Some(ref mut y)) = x.0 { *y += 1 }; true } => {}
 ///        _ => {}
 ///    }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=34 */
 ///    ```
 ///    So it would be UB to generate code for the fake borrows. They therefore have to be removed by
 ///    a MIR pass run after borrow checking.
@@ -105,7 +98,6 @@ pub(super) fn collect_fake_borrows<'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 pub(super) struct FakeBorrowCollector<'a, 'b, 'tcx> {
     cx: &'a mut Builder<'b, 'tcx>,
@@ -118,7 +110,6 @@ pub(super) struct FakeBorrowCollector<'a, 'b, 'tcx> {
     /// dereferences are also borrowed with the same of stronger borrow kind.
     fake_borrows: FxIndexMap<Place<'tcx>, FakeBorrowKind>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fake_borrow | COMPLEXITY=109 | LINES=117 */
 
 impl<'a, 'b, 'tcx> FakeBorrowCollector<'a, 'b, 'tcx> {
     // Fake borrow this place and its dereference prefixes.
@@ -236,7 +227,6 @@ impl<'a, 'b, 'tcx> FakeBorrowCollector<'a, 'b, 'tcx> {
         self.fake_borrow_deref_prefixes(*source, FakeBorrowKind::Shallow);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
 #[must_use]
 pub(crate) fn ref_pat_borrow_kind(ref_mutability: Mutability) -> BorrowKind {

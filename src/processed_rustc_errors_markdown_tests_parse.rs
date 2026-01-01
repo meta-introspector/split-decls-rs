@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/markdown/tests/parse.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_parse_simple | COMPLEXITY=2 | LINES=16 */
 use ParseOpt as PO;
 
 use super::*;
@@ -16,7 +15,6 @@ fn test_parse_simple() {
     let res = parse_simple_pat(buf.as_bytes(), b"**", b"**", PO::None, MdTree::Strong);
     assert!(res.is_none());
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_parse_comment | COMPLEXITY=49 | LINES=350 */
 
 #[test]
 fn test_parse_comment() {

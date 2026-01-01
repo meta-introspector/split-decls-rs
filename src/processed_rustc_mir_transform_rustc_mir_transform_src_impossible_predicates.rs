@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/impossible_predicates.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 // Check if it's even possible to satisfy the 'where' clauses
 // for this item.
 //
 // It's possible to `#!feature(trivial_bounds)]` to write
 // a function with impossible to satisfy clauses, e.g.:
 // `fn foo() where String: Copy {}`.
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=23 */
 //
 // We don't usually need to worry about this kind of case,
 // since we would get a compilation error if the user tried
@@ -30,9 +28,7 @@
 // it's usually never invoked in this way.
 
 use crate::rustc_complete::mir::{Body, START_BLOCK, TerminatorKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{TyCtxt, TypeFlags, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=13 | LINES=39 */
 use crate::rustc_trait_selection::traits;
 use tracing::trace;
 

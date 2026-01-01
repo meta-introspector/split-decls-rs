@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/autoderef.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Some helper functions for `AutoDeref`.
 
 use std::iter;
 
 use itertools::Itertools;
 use crate::rustc_hir_analysis::autoderef::{Autoderef, AutoderefKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::infer::InferOk;
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, OverloadedDeref};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 
 use super::method::MethodCallee;
 use super::{FnCtxt, PlaceOp};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=57 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn autoderef(&'a self, span: Span, base_ty: Ty<'tcx>) -> Autoderef<'a, 'tcx> {

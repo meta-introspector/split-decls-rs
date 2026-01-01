@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/llvm_cov.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 // Safe wrappers for coverage-specific FFI functions.
 
 use std::ffi::CString;
@@ -14,7 +13,6 @@ pub(crate) fn covmap_var_name() -> CString {
     }))
     .expect("covmap variable name should not contain NUL")
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn covmap_section_name(llmod: &llvm::Module) -> CString {
     CString::new(llvm::build_byte_buffer(|s| unsafe {
@@ -22,7 +20,6 @@ pub(crate) fn covmap_section_name(llmod: &llvm::Module) -> CString {
     }))
     .expect("covmap section name should not contain NUL")
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(crate) fn covfun_section_name(llmod: &llvm::Module) -> CString {
     CString::new(llvm::build_byte_buffer(|s| unsafe {
@@ -30,7 +27,6 @@ pub(crate) fn covfun_section_name(llmod: &llvm::Module) -> CString {
     }))
     .expect("covfun section name should not contain NUL")
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 pub(crate) fn create_pgo_func_name_var<'ll>(
     llfn: &'ll llvm::Value,
@@ -44,7 +40,6 @@ pub(crate) fn create_pgo_func_name_var<'ll>(
         )
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 pub(crate) fn write_filenames_to_buffer(filenames: &[impl AsRef<str>]) -> Vec<u8> {
     let (pointers, lengths) = filenames
@@ -63,7 +58,6 @@ pub(crate) fn write_filenames_to_buffer(filenames: &[impl AsRef<str>]) -> Vec<u8
         );
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
 
 pub(crate) fn write_function_mappings_to_buffer(
     virtual_file_mapping: &[u32],
@@ -92,14 +86,12 @@ pub(crate) fn write_function_mappings_to_buffer(
         )
     })
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
 
 /// Hashes some bytes into a 64-bit hash, via LLVM's `IndexedInstrProf::ComputeHash`,
 /// as required for parts of the LLVM coverage mapping format.
 pub(crate) fn hash_bytes(bytes: &[u8]) -> u64 {
     unsafe { llvm::LLVMRustCoverageHashBytes(bytes.as_c_char_ptr(), bytes.len()) }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 /// Returns LLVM's `coverage::CovMapVersion::CurrentVersion` (CoverageMapping.h)
 /// as a raw numeric value. For historical reasons, the numeric value is 1 less

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/cast.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=21 | LINES=34 */
 // Code for type-checking cast expressions.
 //
 // A cast `e as U` is valid if one of the following holds:
@@ -34,32 +33,23 @@ use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, ExprKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::DefineOpaqueTypes;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::Mutability;
 use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
 use crate::rustc_complete::ty::cast::{CastKind, CastTy};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeAndMut, TypeVisitableExt, VariantDef, elaborate};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::{DUMMY_SP, Span, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::FnCtxt;
 use crate::{errors, type_error_struct};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 /// Reifies a cast check to be checked once we have full type information for
 /// a function context.
@@ -75,7 +65,6 @@ pub(crate) struct CastCheck<'tcx> {
     cast_span: Span,
     span: Span,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// The kind of pointer and associated metadata (thin, length or vtable) - we
 /// only allow casts between wide pointers if their metadata have the same
@@ -93,7 +82,6 @@ enum PointerKind<'tcx> {
     /// The unsize info of this parameter
     OfParam(ty::ParamTy),
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=pointer_kind | COMPLEXITY=31 | LINES=71 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Returns the kind of unsize information of t, or None
@@ -165,7 +153,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=30 */
 
 #[derive(Debug)]
 enum CastError<'tcx> {
@@ -196,14 +183,12 @@ enum CastError<'tcx> {
     ForeignNonExhaustiveAdt,
     PtrPtrAddingAutoTrait(Vec<DefId>),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ErrorGuaranteed> for CastError<'_> {
     fn from(err: ErrorGuaranteed) -> Self {
         CastError::ErrorGuaranteed(err)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=make_invalid_casting_error | COMPLEXITY=4 | LINES=17 */
 
 fn make_invalid_casting_error<'a, 'tcx>(
     span: Span,
@@ -221,7 +206,6 @@ fn make_invalid_casting_error<'a, 'tcx>(
         fcx.ty_to_string(cast_ty)
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_cast | COMPLEXITY=7 | LINES=28 */
 
 /// If a cast from `from_ty` to `to_ty` is valid, returns a `Some` containing the kind
 /// of the cast.
@@ -250,7 +234,6 @@ pub fn check_cast<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=report_cast_error | COMPLEXITY=452 | LINES=932 */
 
 impl<'a, 'tcx> CastCheck<'tcx> {
     pub(crate) fn new(

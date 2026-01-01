@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/mono_checks/move_check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_abi::Size;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
 use crate::rustc_complete::mir::{self, Location, traversal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AssocTag, Instance, Ty, TyCtxt, TypeFoldable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::LARGE_ASSIGNMENTS;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=MoveCheckVisitor | COMPLEXITY=4 | LINES=10 */
 
 use crate::errors::LargeAssignmentsLint;
 
@@ -25,7 +20,6 @@ struct MoveCheckVisitor<'tcx> {
     /// Spans for move size lints already emitted. Helps avoid duplicate lints.
     move_size_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 pub(crate) fn check_moves<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -37,7 +31,6 @@ pub(crate) fn check_moves<'tcx>(
         visitor.visit_basic_block_data(bb, data)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_terminator | COMPLEXITY=17 | LINES=21 */
 
 impl<'tcx> MirVisitor<'tcx> for MoveCheckVisitor<'tcx> {
     fn visit_terminator(&mut self, terminator: &mir::Terminator<'tcx>, location: Location) {
@@ -59,7 +52,6 @@ impl<'tcx> MirVisitor<'tcx> for MoveCheckVisitor<'tcx> {
         self.check_operand_move_size(operand, location);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=monomorphize | COMPLEXITY=56 | LINES=137 */
 
 impl<'tcx> MoveCheckVisitor<'tcx> {
     fn monomorphize<T>(&self, value: T) -> T
@@ -197,7 +189,6 @@ impl<'tcx> MoveCheckVisitor<'tcx> {
         self.move_size_spans.push(reported_span);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=assoc_fn_of_type | COMPLEXITY=8 | LINES=14 */
 
 fn assoc_fn_of_type<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, fn_ident: Ident) -> Option<DefId> {
     for impl_def_id in tcx.inherent_impls(def_id) {
@@ -212,7 +203,6 @@ fn assoc_fn_of_type<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, fn_ident: Ident) -> 
     }
     None
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 pub(crate) fn skip_move_check_fns(tcx: TyCtxt<'_>, _: ()) -> FxIndexSet<DefId> {
     let fns = [

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/codes.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=ErrCode | COMPLEXITY=6 | LINES=15 */
 // This module defines the following.
 // - The `ErrCode` type.
 // - A constant for every error code, with a name like `E0123`.
@@ -15,14 +14,12 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "ErrCode({})"]
     pub struct ErrCode {}
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Display for ErrCode {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "E{:04}", self.as_u32())
     }
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
 
 crate::rustc_error_messages::into_diag_arg_using_display!(ErrCode);
 
@@ -41,6 +38,5 @@ macro_rules! define_error_code_constants_and_diagnostics_table {
         ];
     )
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 rustc_error_codes::error_codes!(define_error_code_constants_and_diagnostics_table);

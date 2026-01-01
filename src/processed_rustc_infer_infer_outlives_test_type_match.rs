@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/test_type_match.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ty::error::TypeError;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use crate::infer::region_constraints::VerifyIfEq;
 use crate::infer::relate::{self as relate, Relate, RelateResult, TypeRelation};
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Given a "verify-if-eq" type test like:
 ///
@@ -18,7 +15,6 @@ use crate::infer::relate::{self as relate, Relate, RelateResult, TypeRelation};
 /// exists<'a...> {
 ///     verify_if_eq(some_type, bound_region)
 /// }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=extract_verify_if_eq | COMPLEXITY=21 | LINES=53 */
 /// ```
 ///
 /// and the type `test_ty` that the type test is being tested against,
@@ -72,7 +68,6 @@ pub fn extract_verify_if_eq<'tcx>(
         Some(verify_if_eq.bound)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=18 */
 
 /// True if a (potentially higher-ranked) outlives
 #[instrument(level = "debug", skip(tcx))]
@@ -91,14 +86,12 @@ pub(super) fn can_match_erased_ty<'tcx>(
         MatchAgainstHigherRankedOutlives::new(tcx).relate(outlives_ty, erased_ty).is_ok()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MatchAgainstHigherRankedOutlives | COMPLEXITY=2 | LINES=6 */
 
 struct MatchAgainstHigherRankedOutlives<'tcx> {
     tcx: TyCtxt<'tcx>,
     pattern_depth: ty::DebruijnIndex,
     map: FxHashMap<ty::BoundRegion, ty::Region<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=10 */
 
 impl<'tcx> MatchAgainstHigherRankedOutlives<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> MatchAgainstHigherRankedOutlives<'tcx> {
@@ -109,7 +102,6 @@ impl<'tcx> MatchAgainstHigherRankedOutlives<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=no_match | COMPLEXITY=17 | LINES=30 */
 
 impl<'tcx> MatchAgainstHigherRankedOutlives<'tcx> {
     /// Creates the "Error" variant that signals "no match".
@@ -140,7 +132,6 @@ impl<'tcx> MatchAgainstHigherRankedOutlives<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=36 | LINES=77 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for MatchAgainstHigherRankedOutlives<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

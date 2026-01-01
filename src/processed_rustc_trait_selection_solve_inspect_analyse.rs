@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/inspect/analyse.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 // An infrastructure to mechanically analyse proof trees.
 //
 // It is unavoidable that this representation is somewhat
@@ -18,16 +17,11 @@ use crate::rustc_infer::traits::Obligation;
 use rustc_macros::extension;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::solve::{Certainty, Goal, GoalSource, NoSolution, QueryResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{TyCtxt, VisitorResult, try_visit};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_next_trait_solver::resolve::eager_resolve_vars;
 use rustc_next_trait_solver::solve::inspect::{self, instantiate_canonical_state};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_next_trait_solver::solve::{MaybeCause, SolverDelegateEvalExt as _};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=InspectConfig | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::Span;
 use tracing::instrument;
 
@@ -37,7 +31,6 @@ use crate::traits::ObligationCtxt;
 pub struct InspectConfig {
     pub max_depth: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=InspectGoal | COMPLEXITY=2 | LINES=11 */
 
 pub struct InspectGoal<'a, 'tcx> {
     infcx: &'a SolverDelegate<'tcx>,
@@ -49,7 +42,6 @@ pub struct InspectGoal<'a, 'tcx> {
     normalizes_to_term_hack: Option<NormalizesToTermHack<'tcx>>,
     source: GoalSource,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NormalizesToTermHack | COMPLEXITY=5 | LINES=15 */
 
 /// The expected term of a `NormalizesTo` goal gets replaced
 /// with an unconstrained inference variable when computing
@@ -65,7 +57,6 @@ struct NormalizesToTermHack<'tcx> {
     term: ty::Term<'tcx>,
     unconstrained_term: ty::Term<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=constrain_and | COMPLEXITY=13 | LINES=30 */
 
 impl<'tcx> NormalizesToTermHack<'tcx> {
     /// Relate the `term` with the new `unconstrained_term` created
@@ -96,7 +87,6 @@ impl<'tcx> NormalizesToTermHack<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=InspectCandidate | COMPLEXITY=2 | LINES=9 */
 
 pub struct InspectCandidate<'a, 'tcx> {
     goal: &'a InspectGoal<'a, 'tcx>,
@@ -106,7 +96,6 @@ pub struct InspectCandidate<'a, 'tcx> {
     result: QueryResult<'tcx>,
     shallow_certainty: Certainty,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=85 | LINES=200 */
 
 impl<'a, 'tcx> InspectCandidate<'a, 'tcx> {
     pub fn kind(&self) -> inspect::ProbeKind<TyCtxt<'tcx>> {
@@ -307,7 +296,6 @@ impl<'a, 'tcx> InspectCandidate<'a, 'tcx> {
         self.goal.infcx.probe(|_| self.visit_nested_no_probe(visitor))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=infcx | COMPLEXITY=82 | LINES=154 */
 
 impl<'a, 'tcx> InspectGoal<'a, 'tcx> {
     pub fn infcx(&self) -> &'a InferCtxt<'tcx> {
@@ -462,7 +450,6 @@ impl<'a, 'tcx> InspectGoal<'a, 'tcx> {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span | COMPLEXITY=4 | LINES=13 */
 
 /// The public API to interact with proof trees.
 pub trait ProofTreeVisitor<'tcx> {
@@ -476,7 +463,6 @@ pub trait ProofTreeVisitor<'tcx> {
 
     fn visit_goal(&mut self, goal: &InspectGoal<'_, 'tcx>) -> Self::Result;
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_proof_tree | COMPLEXITY=5 | LINES=22 */
 
 #[extension(pub trait ProofTreeInferCtxtExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/dyn_compatibility.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 // "Dyn-compatibility"[^1] refers to the ability for a trait to be converted
 // to a trait object. In general, traits may only be converted to a trait
 // object if certain criteria are met.
@@ -11,19 +10,15 @@ use std::ops::ControlFlow;
 use crate::rustc_complete::FatalError;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{
     self, EarlyBinder, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
     elaborate,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use super::elaborate;
 use crate::infer::TyCtxtInferExt;
@@ -32,7 +27,6 @@ use crate::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::traits::{
     MethodViolationCode, Obligation, ObligationCause, normalize_param_env_or_error, util,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hir_ty_lowering_dyn_compatibility_violations | COMPLEXITY=5 | LINES=18 */
 
 /// Returns the dyn-compatibility violations that affect HIR ty lowering.
 ///
@@ -51,7 +45,6 @@ pub fn hir_ty_lowering_dyn_compatibility_violations(
         .map(DynCompatibilityViolation::SupertraitSelf)
         .collect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=dyn_compatibility_violations | COMPLEXITY=3 | LINES=12 */
 
 fn dyn_compatibility_violations(
     tcx: TyCtxt<'_>,
@@ -64,12 +57,10 @@ fn dyn_compatibility_violations(
             .flat_map(|def_id| dyn_compatibility_violations_for_trait(tcx, def_id)),
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_dyn_compatible | COMPLEXITY=2 | LINES=4 */
 
 fn is_dyn_compatible(tcx: TyCtxt<'_>, trait_def_id: DefId) -> bool {
     tcx.dyn_compatibility_violations(trait_def_id).is_empty()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_vtable_safe_method | COMPLEXITY=10 | LINES=15 */
 
 /// We say a method is *vtable safe* if it can be invoked on a trait
 /// object. Note that dyn-compatible traits can have some
@@ -85,7 +76,6 @@ pub fn is_vtable_safe_method(tcx: TyCtxt<'_>, trait_def_id: DefId, method: ty::A
 
     virtual_call_violations_for_method(tcx, trait_def_id, method).is_empty()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=dyn_compatibility_violations_for_trait | COMPLEXITY=22 | LINES=38 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 fn dyn_compatibility_violations_for_trait(
@@ -124,7 +114,6 @@ fn dyn_compatibility_violations_for_trait(
 
     violations
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=sized_trait_bound_spans | COMPLEXITY=12 | LINES=18 */
 
 fn sized_trait_bound_spans<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -143,7 +132,6 @@ fn sized_trait_bound_spans<'tcx>(
         _ => None,
     })
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=get_sized_bounds | COMPLEXITY=21 | LINES=32 */
 
 fn get_sized_bounds(tcx: TyCtxt<'_>, trait_def_id: DefId) -> SmallVec<[Span; 1]> {
     tcx.hir_get_if_local(trait_def_id)
@@ -176,7 +164,6 @@ fn get_sized_bounds(tcx: TyCtxt<'_>, trait_def_id: DefId) -> SmallVec<[Span; 1]>
         })
         .unwrap_or_else(SmallVec::new)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=predicates_reference_self | COMPLEXITY=8 | LINES=24 */
 
 fn predicates_reference_self(
     tcx: TyCtxt<'_>,
@@ -201,7 +188,6 @@ fn predicates_reference_self(
         })
         .collect()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=bounds_reference_self | COMPLEXITY=4 | LINES=16 */
 
 fn bounds_reference_self(tcx: TyCtxt<'_>, trait_def_id: DefId) -> SmallVec<[Span; 1]> {
     tcx.associated_items(trait_def_id)
@@ -218,7 +204,6 @@ fn bounds_reference_self(tcx: TyCtxt<'_>, trait_def_id: DefId) -> SmallVec<[Span
         })
         .collect()
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=predicate_references_self | COMPLEXITY=21 | LINES=43 */
 
 fn predicate_references_self<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -262,7 +247,6 @@ fn predicate_references_self<'tcx>(
          => None,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=super_predicates_have_non_lifetime_binders | COMPLEXITY=2 | LINES=10 */
 
 fn super_predicates_have_non_lifetime_binders(
     tcx: TyCtxt<'_>,
@@ -273,7 +257,6 @@ fn super_predicates_have_non_lifetime_binders(
         .filter_map(|(pred, span)| pred.has_non_region_bound_vars().then_some(span))
         .collect()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=super_predicates_are_unconditionally_const | COMPLEXITY=12 | LINES=19 */
 
 /// Checks for `const Trait` supertraits. We're okay with `[const] Trait`,
 /// supertraits since for a non-const instantiation of that trait, the
@@ -293,12 +276,10 @@ fn super_predicates_are_unconditionally_const(
         })
         .collect()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=trait_has_sized_self | COMPLEXITY=2 | LINES=4 */
 
 fn trait_has_sized_self(tcx: TyCtxt<'_>, trait_def_id: DefId) -> bool {
     tcx.generics_require_sized_self(trait_def_id)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=generics_require_sized_self | COMPLEXITY=11 | LINES=23 */
 
 fn generics_require_sized_self(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
     let Some(sized_def_id) = tcx.lang_items().sized_trait() else {
@@ -322,7 +303,6 @@ fn generics_require_sized_self(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
         | ty::ClauseKind::HostEffect(..) => false,
     })
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=dyn_compatibility_violations_for_assoc_item | COMPLEXITY=37 | LINES=52 */
 
 /// Returns `Some(_)` if this item makes the containing trait dyn-incompatible.
 #[instrument(level = "debug", skip(tcx), ret)]
@@ -375,7 +355,6 @@ pub fn dyn_compatibility_violations_for_assoc_item(
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=virtual_call_violations_for_method | COMPLEXITY=90 | LINES=159 */
 
 /// Returns `Some(_)` if this method cannot be called on a trait
 /// object; this does not necessarily imply that the enclosing trait
@@ -535,7 +514,6 @@ fn virtual_call_violations_for_method<'tcx>(
 
     errors
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=receiver_for_self_ty | COMPLEXITY=17 | LINES=21 */
 
 /// Performs a type instantiation to produce the version of `receiver_ty` when `Self = self_ty`.
 /// For example, for `receiver_ty = Rc<Self>` and `self_ty = Foo`, returns `Rc<Foo>`.
@@ -557,7 +535,6 @@ fn receiver_for_self_ty<'tcx>(
     );
     result
 }
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=39 */
 
 /// Checks the method's receiver (the `self` argument) can be dispatched on when `Self` is a
 /// trait object. We require that `DispatchableFromDyn` be implemented for the receiver type
@@ -597,7 +574,6 @@ fn receiver_for_self_ty<'tcx>(
 ///         Receiver: DispatchFromDyn<Receiver[Self => U]>
 ///     }
 /// }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=receiver_is_dispatchable | COMPLEXITY=33 | LINES=86 */
 /// ```
 /// for `self: &'a mut Self`, this means `&'a mut Self: DispatchFromDyn<&'a mut U>`
 /// for `self: Rc<Self>`, this means `Rc<Self>: DispatchFromDyn<Rc<U>>`
@@ -684,14 +660,12 @@ fn receiver_is_dispatchable<'tcx>(
     // the receiver is dispatchable iff the obligation holds
     infcx.predicate_must_hold_modulo_regions(&obligation)
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 enum AllowSelfProjections {
     Yes,
     No,
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// This is somewhat subtle. In general, we want to forbid
 /// references to `Self` in the argument and return types,
@@ -705,7 +679,6 @@ enum AllowSelfProjections {
 /// trait SuperTrait {
 ///     type X;
 /// }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 ///
 /// trait Trait : SuperTrait {
 ///     type Y;
@@ -717,7 +690,6 @@ enum AllowSelfProjections {
 ///     fn foo(&self) -> Self::X // OK, desugars to next example
 ///     fn foo(&self) -> <Self as SuperTrait>::X // OK
 /// }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 /// ```
 ///
 /// However, it is not as simple as allowing `Self` in a projected
@@ -728,7 +700,6 @@ enum AllowSelfProjections {
 ///     ...
 ///     fn foo(&self) -> <Self as SomeOtherTrait>::X;
 /// }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=contains_illegal_self_type_reference | COMPLEXITY=4 | LINES=20 */
 /// ```
 ///
 /// Here we will not have the type of `X` recorded in the
@@ -749,7 +720,6 @@ fn contains_illegal_self_type_reference<'tcx, T: TypeVisitable<TyCtxt<'tcx>>>(
         })
         .is_break()
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=IllegalSelfTypeVisitor | COMPLEXITY=2 | LINES=7 */
 
 struct IllegalSelfTypeVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -757,7 +727,6 @@ struct IllegalSelfTypeVisitor<'tcx> {
     supertraits: Option<Vec<ty::TraitRef<'tcx>>>,
     allow_self_projections: AllowSelfProjections,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=46 | LINES=79 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IllegalSelfTypeVisitor<'tcx> {
     type Result = ControlFlow<()>;
@@ -837,13 +806,11 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IllegalSelfTypeVisitor<'tcx> {
         self.tcx.expand_abstract_consts(ct).super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=EraseEscapingBoundRegions | COMPLEXITY=2 | LINES=5 */
 
 struct EraseEscapingBoundRegions<'tcx> {
     tcx: TyCtxt<'tcx>,
     binder: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=12 | LINES=26 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for EraseEscapingBoundRegions<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -870,7 +837,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for EraseEscapingBoundRegions<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=contains_illegal_impl_trait_in_trait | COMPLEXITY=8 | LINES=15 */
 
 fn contains_illegal_impl_trait_in_trait<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -886,13 +852,11 @@ fn contains_illegal_impl_trait_in_trait<'tcx>(
         ty.visit_with(&mut IllegalRpititVisitor { tcx, allowed: None }).break_value()
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=IllegalRpititVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct IllegalRpititVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     allowed: Option<ty::AliasTy<'tcx>>,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=10 | LINES=17 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IllegalRpititVisitor<'tcx> {
     type Result = ControlFlow<MethodViolationCode>;
@@ -910,7 +874,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IllegalRpititVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

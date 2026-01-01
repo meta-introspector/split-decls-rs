@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/query/arena_cached.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=alloc_in_arena | COMPLEXITY=5 | LINES=20 */
 /// Helper trait that allows `arena_cache` queries to return `Option<&T>`
 /// instead of `&Option<T>`, and avoid allocating `None` in the arena.
 ///
@@ -20,7 +19,6 @@ pub trait ArenaCached<'tcx>: Sized {
         value: Self::Provided,
     ) -> Self;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=alloc_in_arena | COMPLEXITY=5 | LINES=13 */
 
 impl<'tcx, T> ArenaCached<'tcx> for &'tcx T {
     type Provided = T;
@@ -34,7 +32,6 @@ impl<'tcx, T> ArenaCached<'tcx> for &'tcx T {
         arena_alloc(value)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=alloc_in_arena | COMPLEXITY=5 | LINES=14 */
 
 impl<'tcx, T> ArenaCached<'tcx> for Option<&'tcx T> {
     type Provided = Option<T>;

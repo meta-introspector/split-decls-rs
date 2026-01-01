@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/assert.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_complete::token::Delimiter;
 use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, token};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_parse::exp;
 use crate::rustc_parse::parser::Parser;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=84 */
 use thin_vec::thin_vec;
 
 use crate::edition_panic::use_panic_2021;
@@ -98,16 +93,13 @@ pub(crate) fn expand_assert<'cx>(
 
     ExpandResult::Ready(MacEager::expr(expr))
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Assert | COMPLEXITY=2 | LINES=5 */
 
 struct Assert {
     cond_expr: Box<Expr>,
     custom_message: Option<TokenStream>,
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=2 */
 
 // if !{ ... } { ... } else { ... }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=expr_if_not | COMPLEXITY=2 | LINES=9 */
 fn expr_if_not(
     cx: &ExtCtxt<'_>,
     span: Span,
@@ -117,7 +109,6 @@ fn expr_if_not(
 ) -> Box<Expr> {
     cx.expr_if(span, cx.expr(span, ExprKind::Unary(UnOp::Not, cond)), then, els)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parse_assert | COMPLEXITY=25 | LINES=46 */
 
 fn parse_assert<'a>(cx: &ExtCtxt<'a>, sp: Span, stream: TokenStream) -> PResult<'a, Assert> {
     let mut parser = cx.new_parser_from_tts(stream);
@@ -164,7 +155,6 @@ fn parse_assert<'a>(cx: &ExtCtxt<'a>, sp: Span, stream: TokenStream) -> PResult<
 
     Ok(Assert { cond_expr, custom_message })
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parse_custom_message | COMPLEXITY=6 | LINES=5 */
 
 fn parse_custom_message(parser: &mut Parser<'_>) -> Option<TokenStream> {
     let ts = parser.parse_tokens();

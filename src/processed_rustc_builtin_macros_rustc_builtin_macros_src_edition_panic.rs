@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/edition_panic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token::Delimiter;
 use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::*;
 use crate::rustc_expand::base::*;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=18 */
 
 /// This expands to either
 /// - `$crate::panic::panic_2015!(...)` or
@@ -26,7 +23,6 @@ pub(crate) fn expand_panic<'cx>(
     let mac = if use_panic_2021(sp) { sym::panic_2021 } else { sym::panic_2015 };
     expand(mac, cx, sp, tts)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 /// This expands to either
 /// - `$crate::panic::unreachable_2015!(...)` or
@@ -40,7 +36,6 @@ pub(crate) fn expand_unreachable<'cx>(
     let mac = if use_panic_2021(sp) { sym::unreachable_2021 } else { sym::unreachable_2015 };
     expand(mac, cx, sp, tts)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=6 | LINES=31 */
 
 fn expand<'cx>(
     mac: crate::rustc_span::Symbol,
@@ -72,7 +67,6 @@ fn expand<'cx>(
         ),
     ))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=16 */
 
 pub(crate) fn use_panic_2021(mut span: Span) -> bool {
     // To determine the edition, we check the first span up the expansion

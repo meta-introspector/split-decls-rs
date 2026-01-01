@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_incremental/src/persist/fs/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_all_except_most_recent | COMPLEXITY=3 | LINES=18 */
 use super::*;
 
 #[test]
@@ -18,7 +17,6 @@ fn test_all_except_most_recent() {
 
     assert!(all_except_most_recent(UnordMap::default()).is_empty());
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_timestamp_serialization | COMPLEXITY=5 | LINES=9 */
 
 #[test]
 fn test_timestamp_serialization() {
@@ -28,7 +26,6 @@ fn test_timestamp_serialization() {
         assert_eq!(Ok(time), string_to_timestamp(&s));
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_find_source_directory_in_iter | COMPLEXITY=4 | LINES=50 */
 
 #[test]
 fn test_find_source_directory_in_iter() {

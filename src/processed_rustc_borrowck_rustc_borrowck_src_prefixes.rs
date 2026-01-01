@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/prefixes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 // From the NLL RFC:
 // "Shallow prefixes are found by stripping away fields, but stop at
 // any dereference. So: writing a path like `a` is illegal if `a.b`
@@ -7,14 +6,12 @@
 // whether or not `a` is a shared or mutable reference. [...] "
 
 use crate::rustc_complete::mir::{PlaceRef, ProjectionElem};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_prefix_of | COMPLEXITY=2 | LINES=6 */
 
 use super::MirBorrowckCtxt;
 
 pub(crate) trait IsPrefixOf<'tcx> {
     fn is_prefix_of(&self, other: PlaceRef<'tcx>) -> bool;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_prefix_of | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> IsPrefixOf<'tcx> for PlaceRef<'tcx> {
     fn is_prefix_of(&self, other: PlaceRef<'tcx>) -> bool {
@@ -23,13 +20,11 @@ impl<'tcx> IsPrefixOf<'tcx> for PlaceRef<'tcx> {
             && self.projection == &other.projection[..self.projection.len()]
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) struct Prefixes<'tcx> {
     kind: PrefixSet,
     next: Option<PlaceRef<'tcx>>,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub(super) enum PrefixSet {
@@ -39,7 +34,6 @@ pub(super) enum PrefixSet {
     /// Stops at any dereference.
     Shallow,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
     /// Returns an iterator over the prefixes of `place`
@@ -49,7 +43,6 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
         Prefixes { next: Some(place_ref), kind }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=next | COMPLEXITY=37 | LINES=61 */
 
 impl<'tcx> Iterator for Prefixes<'tcx> {
     type Item = PlaceRef<'tcx>;

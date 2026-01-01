@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/pat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
 // fields. This file defines types that represent patterns in this way.
 
 use std::fmt;
 
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use self::Constructor::*;
 use crate::constructor::{Constructor, Slice, SliceKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{PatCx, PrivateUninhabitedField};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=11 */
 
 /// A globally unique id to distinguish patterns.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -24,14 +20,12 @@ impl PatId {
         PatId(PAT_ID.fetch_add(1, Ordering::SeqCst))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=IndexedPat | COMPLEXITY=2 | LINES=6 */
 
 /// A pattern with an index denoting which field it corresponds to.
 pub struct IndexedPat<Cx: PatCx> {
     pub idx: usize,
     pub pat: DeconstructedPat<Cx>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=DeconstructedPat | COMPLEXITY=6 | LINES=17 */
 
 /// Values and patterns can be represented as a constructor applied to some fields. This represents
 /// a pattern in this form. A `DeconstructedPat` will almost always come from user input; the only
@@ -49,7 +43,6 @@ pub struct DeconstructedPat<Cx: PatCx> {
     /// Globally-unique id used to track usefulness at the level of subpatterns.
     pub(crate) uid: PatId,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=48 | LINES=92 */
 
 impl<Cx: PatCx> DeconstructedPat<Cx> {
     pub fn new(
@@ -142,7 +135,6 @@ impl<Cx: PatCx> DeconstructedPat<Cx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=11 */
 
 /// This is best effort and not good enough for a `Display` impl.
 impl<Cx: PatCx> fmt::Debug for DeconstructedPat<Cx> {
@@ -154,7 +146,6 @@ impl<Cx: PatCx> fmt::Debug for DeconstructedPat<Cx> {
         self.ctor().fmt_fields(f, self.ty(), fields.into_iter())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=7 */
 
 /// Delegate to `uid`.
 impl<Cx: PatCx> PartialEq for DeconstructedPat<Cx> {
@@ -162,17 +153,14 @@ impl<Cx: PatCx> PartialEq for DeconstructedPat<Cx> {
         self.uid == other.uid
     }
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 /// Delegate to `uid`.
 impl<Cx: PatCx> Eq for DeconstructedPat<Cx> {}
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=6 */
 /// Delegate to `uid`.
 impl<Cx: PatCx> std::hash::Hash for DeconstructedPat<Cx> {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         self.uid.hash(state);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Represents either a pattern obtained from user input or a wildcard constructed during the
 /// algorithm. Do not use `Wild` to represent a wildcard pattern comping from user input.
@@ -184,7 +172,6 @@ pub(crate) enum PatOrWild<'p, Cx: PatCx> {
     /// A user-provided pattern.
     Pat(&'p DeconstructedPat<Cx>),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=9 | LINES=9 */
 
 impl<'p, Cx: PatCx> Clone for PatOrWild<'p, Cx> {
     fn clone(&self) -> Self {
@@ -194,10 +181,8 @@ impl<'p, Cx: PatCx> Clone for PatOrWild<'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'p, Cx: PatCx> Copy for PatOrWild<'p, Cx> {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=57 */
 
 impl<'p, Cx: PatCx> PatOrWild<'p, Cx> {
     pub(crate) fn as_pat(&self) -> Option<&'p DeconstructedPat<Cx>> {
@@ -255,7 +240,6 @@ impl<'p, Cx: PatCx> PatOrWild<'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl<'p, Cx: PatCx> fmt::Debug for PatOrWild<'p, Cx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -265,7 +249,6 @@ impl<'p, Cx: PatCx> fmt::Debug for PatOrWild<'p, Cx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=WitnessPat | COMPLEXITY=4 | LINES=8 */
 
 /// Same idea as `DeconstructedPat`, except this is a fictitious pattern built up for diagnostics
 /// purposes. As such they don't use interning and can be cloned.
@@ -274,14 +257,12 @@ pub struct WitnessPat<Cx: PatCx> {
     pub(crate) fields: Vec<WitnessPat<Cx>>,
     ty: Cx::Ty,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
 
 impl<Cx: PatCx> Clone for WitnessPat<Cx> {
     fn clone(&self) -> Self {
         Self { ctor: self.ctor.clone(), fields: self.fields.clone(), ty: self.ty.clone() }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=ctor | COMPLEXITY=30 | LINES=46 */
 
 impl<Cx: PatCx> WitnessPat<Cx> {
     pub(crate) fn new(ctor: Constructor<Cx>, fields: Vec<Self>, ty: Cx::Ty) -> Self {
@@ -328,7 +309,6 @@ impl<Cx: PatCx> WitnessPat<Cx> {
         self.fields.iter()
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=7 */
 
 /// This is best effort and not good enough for a `Display` impl.
 impl<Cx: PatCx> fmt::Debug for WitnessPat<Cx> {

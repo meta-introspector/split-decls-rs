@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/solve/inspect.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=21 */
 // Data structure used to inspect trait solver behavior.
 //
 // During trait solving we optionally build "proof trees", the root of
@@ -21,12 +20,9 @@
 
 use derive_where::derive_where;
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::solve::{CandidateSource, Certainty, Goal, GoalSource, QueryResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Canonical, CanonicalVarValues, Interner};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=State | COMPLEXITY=3 | LINES=14 */
 
 /// Some `data` together with information about how they relate to the input
 /// of the canonical query.
@@ -41,10 +37,8 @@ pub struct State<I: Interner, T> {
     pub var_values: CanonicalVarValues<I>,
     pub data: T,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, T: Eq> Eq for State<I, T> {}
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=GoalEvaluation | COMPLEXITY=5 | LINES=14 */
 
 pub type CanonicalState<I, T> = Canonical<I, State<I, T>>;
 
@@ -59,7 +53,6 @@ pub struct GoalEvaluation<I: Interner> {
     pub final_revision: I::Probe,
     pub result: QueryResult<I>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Probe | COMPLEXITY=2 | LINES=11 */
 
 /// A self-contained computation during trait solving. This either
 /// corresponds to a `EvalCtxt::probe(_X)` call or the root evaluation
@@ -71,7 +64,6 @@ pub struct Probe<I: Interner> {
     pub kind: ProbeKind<I>,
     pub final_state: CanonicalState<I, ()>,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 #[derive_where(PartialEq, Eq, Hash, Debug; I: Interner)]
 pub enum ProbeStep<I: Interner> {
@@ -91,7 +83,6 @@ pub enum ProbeStep<I: Interner> {
     /// and we didn't force ambiguity for some reason.
     MakeCanonicalResponse { shallow_certainty: Certainty },
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=22 | LINES=29 */
 
 /// What kind of probe we're in. In case the probe represents a candidate, or
 /// the final result of the current goal - via [ProbeKind::Root] - we also

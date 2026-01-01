@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/infer/canonical.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=28 */
 // **Canonicalization** is the key to constructing a query in the
 // middle of type inference. Ordinarily, it is not possible to store
 // types from type inference in query keys, because they contain
@@ -28,13 +27,11 @@ use std::collections::hash_map::Entry;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sync::Lock;
 use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 pub use rustc_type_ir as ir;
 use smallvec::SmallVec;
 
 use crate::mir::ConstraintCategory;
 use crate::ty::{self, GenericArg, List, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=OriginalQueryValues | COMPLEXITY=6 | LINES=23 */
 
 pub type CanonicalQueryInput<'tcx, V> = ir::CanonicalQueryInput<TyCtxt<'tcx>, V>;
 pub type Canonical<'tcx, V> = ir::Canonical<TyCtxt<'tcx>, V>;
@@ -58,7 +55,6 @@ pub struct OriginalQueryValues<'tcx> {
     /// `SmallVec` yields a significant performance win.
     pub var_values: SmallVec<[GenericArg<'tcx>; 8]>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> Default for OriginalQueryValues<'tcx> {
     fn default() -> Self {
@@ -68,7 +64,6 @@ impl<'tcx> Default for OriginalQueryValues<'tcx> {
         Self { universe_map, var_values: SmallVec::default() }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=QueryResponse | COMPLEXITY=3 | LINES=12 */
 
 /// After we execute a query with a canonicalized key, we get back a
 /// `Canonical<QueryResponse<..>>`. You can use
@@ -81,7 +76,6 @@ pub struct QueryResponse<'tcx, R> {
     pub opaque_types: Vec<(ty::OpaqueTypeKey<'tcx>, Ty<'tcx>)>,
     pub value: R,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=QueryRegionConstraints | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Default, PartialEq, Eq, Hash)]
 #[derive(HashStable, TypeFoldable, TypeVisitable)]
@@ -89,7 +83,6 @@ pub struct QueryRegionConstraints<'tcx> {
     pub outlives: Vec<QueryOutlivesConstraint<'tcx>>,
     pub assumptions: Vec<ty::ArgOutlivesPredicate<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=10 | LINES=12 */
 
 impl QueryRegionConstraints<'_> {
     /// Represents an empty (trivially true) set of region constraints.
@@ -102,7 +95,6 @@ impl QueryRegionConstraints<'_> {
         self.outlives.is_empty() && self.assumptions.is_empty()
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=24 */
 
 pub type CanonicalQueryResponse<'tcx, T> = &'tcx Canonical<'tcx, QueryResponse<'tcx, T>>;
 
@@ -127,7 +119,6 @@ pub enum Certainty {
     /// query.
     Ambiguous,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_proven | COMPLEXITY=7 | LINES=9 */
 
 impl Certainty {
     pub fn is_proven(&self) -> bool {
@@ -137,14 +128,12 @@ impl Certainty {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_proven | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx, R> QueryResponse<'tcx, R> {
     pub fn is_proven(&self) -> bool {
         self.certainty.is_proven()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CanonicalParamEnvCache | COMPLEXITY=2 | LINES=12 */
 
 pub type QueryOutlivesConstraint<'tcx> = (ty::ArgOutlivesPredicate<'tcx>, ConstraintCategory<'tcx>);
 
@@ -157,7 +146,6 @@ pub struct CanonicalParamEnvCache<'tcx> {
         >,
     >,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=get_or_insert | COMPLEXITY=24 | LINES=57 */
 
 impl<'tcx> CanonicalParamEnvCache<'tcx> {
     /// Gets the cached canonical form of `key` or executes

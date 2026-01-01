@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_index/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 // tidy-alphabetical-start
 #[cfg_attr(all(feature = "nightly", test), feature(stmt_expr_attributes))]
 #[cfg_attr(feature = "nightly", allow(internal_features))]
@@ -12,7 +11,6 @@
 
 
 pub use idx::{Idx, IntoSliceIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=25 */
 pub use crate::rustc_index_macros::newtype_index;
 pub use slice::IndexSlice;
 #[doc(no_inline)]
@@ -38,7 +36,6 @@ macro_rules! static_assert_size {
         const _: [(); $size] = [(); ::std::mem::size_of::<$ty>()];
     };
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 
 #[macro_export]
 #[cfg(feature = "rustc_randomized_layouts")]

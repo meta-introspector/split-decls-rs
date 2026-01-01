@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/check_tail_calls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::Applicability;
@@ -8,15 +7,10 @@ use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::thir::visit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::thir::{BodyTy, Expr, ExprId, ExprKind, Thir};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 
 pub(crate) fn check_tail_calls(tcx: TyCtxt<'_>, def: LocalDefId) -> Result<(), ErrorGuaranteed> {
     let (thir, expr) = tcx.thir_body(def)?;
@@ -44,7 +38,6 @@ pub(crate) fn check_tail_calls(tcx: TyCtxt<'_>, def: LocalDefId) -> Result<(), E
 
     visitor.found_errors
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=TailCallCkVisitor | COMPLEXITY=6 | LINES=13 */
 
 struct TailCallCkVisitor<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -58,7 +51,6 @@ struct TailCallCkVisitor<'a, 'tcx> {
     /// Type of the caller function.
     caller_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_tail_call | COMPLEXITY=150 | LINES=360 */
 
 impl<'tcx> TailCallCkVisitor<'_, 'tcx> {
     fn check_tail_call(&mut self, call: &Expr<'_>, expr: &Expr<'_>) {
@@ -419,7 +411,6 @@ impl<'tcx> TailCallCkVisitor<'_, 'tcx> {
         self.found_errors = Err(err);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=11 | LINES=17 */
 
 impl<'a, 'tcx> Visitor<'a, 'tcx> for TailCallCkVisitor<'a, 'tcx> {
     fn thir(&self) -> &'a Thir<'tcx> {
@@ -437,7 +428,6 @@ impl<'a, 'tcx> Visitor<'a, 'tcx> for TailCallCkVisitor<'a, 'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=op_trait_as_method_name | COMPLEXITY=8 | LINES=32 */
 
 fn op_trait_as_method_name(tcx: TyCtxt<'_>, trait_did: DefId) -> Option<&'static str> {
     let m = match tcx.as_lang_item(trait_did)? {

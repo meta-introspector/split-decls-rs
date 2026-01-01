@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_parse/src/lexer/unescape_error_reporting.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Utilities for rendering escape sequence errors as diagnostics.
 
 use std::iter::once;
 use std::ops::Range;
 
 use crate::rustc_complete::{Applicability, DiagCtxtHandle, ErrorGuaranteed};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_literal_escaper::{EscapeError, Mode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::errors::{MoreThanOneCharNote, MoreThanOneCharSugg, NoBraceUnicodeSub, UnescapeError};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=164 | LINES=275 */
 
 pub(crate) fn emit_unescape_error(
     dcx: DiagCtxtHandle<'_>,
@@ -290,7 +285,6 @@ pub(crate) fn emit_unescape_error(
         }
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=11 */
 
 /// Pushes a character to a message string for error reporting
 pub(crate) fn escaped_char(c: char) -> String {

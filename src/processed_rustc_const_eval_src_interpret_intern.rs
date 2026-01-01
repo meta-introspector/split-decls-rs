@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/intern.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=18 */
 // This module specifies the type based interner for constants.
 //
 // After a const evaluation has computed a value, before we destroy the const evaluator's session
@@ -18,28 +17,22 @@
 use hir::def::DefKind;
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::mir::interpret::{
     AllocBytes, ConstAllocation, CtfeProvenance, InterpResult, Provenance,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{AllocId, Allocation, InterpCx, MPlaceTy, Machine, MemoryKind, PlaceTy, interp_ok};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::const_eval::DummyMachine;
 use crate::{const_eval, errors};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=static_def_id | COMPLEXITY=5 | LINES=16 */
 
 pub trait CompileTimeMachine<'tcx> = Machine<
         'tcx,
@@ -56,14 +49,12 @@ pub trait HasStaticRootDefId {
     /// Used for interning to be able to handle nested allocations.
     fn static_def_id(&self) -> Option<LocalDefId>;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=static_def_id | COMPLEXITY=5 | LINES=6 */
 
 impl HasStaticRootDefId for const_eval::CompileTimeMachine<'_> {
     fn static_def_id(&self) -> Option<LocalDefId> {
         Some(self.static_root_ids?.1)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=prepare_alloc | COMPLEXITY=24 | LINES=39 */
 
 fn prepare_alloc<'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>(
     tcx: TyCtxt<'tcx>,
@@ -103,7 +94,6 @@ fn prepare_alloc<'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=intern_shallow | COMPLEXITY=20 | LINES=43 */
 
 /// Intern an allocation. Returns `Err` if the allocation does not exist in the local memory.
 ///
@@ -147,7 +137,6 @@ fn intern_shallow<'tcx, M: CompileTimeMachine<'tcx>>(
     }
     Ok(alloc.inner().provenance().ptrs().iter().map(|&(_, prov)| prov))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=intern_as_new_static | COMPLEXITY=20 | LINES=38 */
 
 /// Creates a new `DefId` and feeds all the right queries to make this `DefId`
 /// appear as if it were a user-written `static` (though it has no HIR).
@@ -186,7 +175,6 @@ fn intern_as_new_static<'tcx>(
     feed.explicit_predicates_of(tcx.explicit_predicates_of(static_id));
     feed.feed_hir();
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// How a constant value should be interned.
 #[derive(Copy, Clone, Debug, PartialEq, Hash, Eq)]
@@ -197,7 +185,6 @@ pub enum InternKind {
     Constant,
     Promoted,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 pub enum InternError {
@@ -206,7 +193,6 @@ pub enum InternError {
     ConstAllocNotGlobal,
     PartialPointer,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=intern_const_alloc_recursive | COMPLEXITY=101 | LINES=158 */
 
 /// Intern `ret` and everything it references.
 ///
@@ -365,7 +351,6 @@ pub fn intern_const_alloc_recursive<'tcx, M: CompileTimeMachine<'tcx>>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=intern_const_alloc_for_constprop | COMPLEXITY=11 | LINES=20 */
 
 /// Intern `ret`. This function assumes that `ret` references no other allocation.
 #[instrument(level = "debug", skip(ecx))]
@@ -386,7 +371,6 @@ pub fn intern_const_alloc_for_constprop<'tcx, M: CompileTimeMachine<'tcx>>(
     }
     interp_ok(())
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=intern_with_temp_alloc | COMPLEXITY=15 | LINES=28 */
 
 impl<'tcx> InterpCx<'tcx, DummyMachine> {
     /// A helper function that allocates memory for the layout given and gives you access to mutate

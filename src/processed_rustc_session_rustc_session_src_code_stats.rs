@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_session/src/code_stats.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::cmp;
 
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=VariantInfo | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::sync::Lock;
 use crate::rustc_complete::Symbol;
@@ -16,14 +14,12 @@ pub struct VariantInfo {
     pub align: u64,
     pub fields: Vec<FieldInfo>,
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum SizeKind {
     Exact,
     Min,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum FieldKind {
@@ -31,7 +27,6 @@ pub enum FieldKind {
     Upvar,
     CoroutineLocal,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl std::fmt::Display for FieldKind {
     fn fmt(&self, w: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -42,7 +37,6 @@ impl std::fmt::Display for FieldKind {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=FieldInfo | COMPLEXITY=6 | LINES=13 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub struct FieldInfo {
@@ -56,7 +50,6 @@ pub struct FieldInfo {
     /// typically because the field name is uninformative.
     pub type_name: Option<Symbol>,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub enum DataTypeKind {
@@ -66,7 +59,6 @@ pub enum DataTypeKind {
     Closure,
     Coroutine,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TypeSizeInfo | COMPLEXITY=2 | LINES=11 */
 
 #[derive(PartialEq, Eq, Hash, Debug)]
 pub struct TypeSizeInfo {
@@ -78,7 +70,6 @@ pub struct TypeSizeInfo {
     pub opt_discr_size: Option<u64>,
     pub variants: Vec<VariantInfo>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CodeStats | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Default)]
 pub struct CodeStats {
@@ -86,7 +77,6 @@ pub struct CodeStats {
     /// The field is public for use in external tools. See #139876.
     pub type_sizes: Lock<FxHashSet<TypeSizeInfo>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=record_type_size | COMPLEXITY=106 | LINES=136 */
 
 impl CodeStats {
     pub fn record_type_size<S: ToString>(

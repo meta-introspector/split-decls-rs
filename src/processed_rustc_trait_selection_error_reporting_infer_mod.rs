@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=51 */
 // Error Reporting Code for the inference engine
 //
 // Because of the way inference, and in particular region inference,
@@ -51,54 +50,41 @@ use std::borrow::Cow;
 use std::ops::ControlFlow;
 use std::path::PathBuf;
 use std::{cmp, fmt, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::join_path_syms;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     Applicability, Diag, DiagStyledString, IntoDiagArg, MultiSpan, StringPart, pluralize,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{self as hir};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_macros::extension;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::dep_graph::DepContext;
 use crate::rustc_complete::traits::PatternOriginExpr;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError, TypeErrorToStringExt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::print::{
     PrintError, PrintTraitRefExt as _, WrapBinderMode, with_forced_trimmed_paths,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, List, ParamEnv, Region, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::error_reporting::TypeErrCtxt;
 use crate::errors::{ObligationCauseFailureCode, TypeErrorAdditionalDiags};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::infer;
 use crate::infer::relate::{self, RelateResult, TypeRelation};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{InferCtxt, InferCtxtExt as _, TypeTrace, ValuePairs};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::solve::deeply_normalize_for_diagnostics;
 use crate::traits::{MatchExpressionArmCause, ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=escape_literal | COMPLEXITY=11 | LINES=20 */
 
 
 
@@ -114,7 +100,6 @@ fn escape_literal(s: &str) -> String {
                 escaped.push(delim);
                 chrs.next();
             }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=type_error_struct_with_diag | COMPLEXITY=12 | LINES=32 */
             ('"' | '\'', _) => {
                 escaped.push('\\');
                 escaped.push(first)
@@ -147,7 +132,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     {
         let actual_ty = self.resolve_vars_if_possible(actual_ty);
         debug!("type_error_struct_with_diag({:?}, {:?})", sp, actual_ty);
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=report_mismatched_types | COMPLEXITY=93 | LINES=213 */
 
         let mut err = mk_diag(self.ty_to_string(actual_ty));
 
@@ -361,12 +345,10 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     span.push_span_label(
                         self.tcx.def_span(did1),
                         format!("this is the expected {ty} `{expected}`"),
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
                     );
                     span.push_span_label(
                         self.tcx.def_span(did2),
                         format!("this is the found {ty} `{found}`"),
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=10 */
                     );
                     for def_id in [did1, did2] {
                         let crate_name = self.tcx.crate_name(def_id.krate);
@@ -377,7 +359,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                                 "one version of".to_string()
                             } else {
                                 format!("one {ty} comes from")
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
                             };
                             let dependency = if both_direct_dependencies {
                                 if let crate::rustc_session::cstore::ExternCrateSource::Extern(def_id) =
@@ -385,7 +366,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                                     && let Some(name) = self.tcx.opt_item_name(def_id)
                                 {
                                     format!(", which is renamed locally to `{name}`")
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
                                 } else {
                                     String::new()
                                 }
@@ -394,25 +374,21 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             } else {
                                 let dep = self.tcx.crate_name(data.dependency_of);
                                 format!(", as a dependency of crate `{dep}`")
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
                             };
                             span.push_span_label(
                                 data.span,
                                 format!("{descr} crate `{crate_name}` used here{dependency}"),
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
                             );
                         }
                     }
                     let msg = if (did1.is_local() || did2.is_local()) && same_crate {
                         format!(
                             "the crate `{expected_crate_name}` is compiled multiple times, \
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
                              possibly with different configurations",
                         )
                     } else if same_crate {
                         format!(
                             "two different versions of crate `{expected_crate_name}` are being \
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=note_error_origin | COMPLEXITY=39 | LINES=63 */
                              used; two types coming from two different versions of the same crate \
                              are different types even if they look the same",
                         )
@@ -476,12 +452,10 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                         err.span_label(
                             span,
                             format!("this is an iterator with items of type `{}`", args.type_at(0)),
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
                         );
                     } else if !span.overlaps(cause.span) {
                         let expected_ty = self.tcx.short_string(expected_ty, err.long_ty_path());
                         err.span_label(span, format!("this expression has type `{expected_ty}`"));
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=18 | LINES=12 */
                     }
                 }
                 if let Some(ty::error::ExpectedFound { found, .. }) = exp_found
@@ -494,7 +468,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     // wasn't a reference to begin with.
                     if origin_expr.peeled_prefix_suggestion_parentheses {
                         peeled_snippet = format!("({peeled_snippet})");
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
                     }
 
                     // Try giving a box suggestion first, as it is a special case of the
@@ -504,7 +477,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             span,
                             "consider dereferencing the boxed value",
                             format!("*{peeled_snippet}"),
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
                             Applicability::MachineApplicable,
                         );
                     } else if let Some(param_env) = param_env
@@ -519,7 +491,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             span,
                             "consider dereferencing to access the inner value using the Deref trait",
                             format!("{prefix}{peeled_snippet}"),
-/* AST_META: AST_ID=29 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=63 | LINES=88 */
                             Applicability::MaybeIncorrect,
                         );
                     }
@@ -608,14 +579,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                         for sp in prior_non_diverging_arms {
                             any_multiline_arm |= source_map.is_multiline(*sp);
                             err.span_label(*sp, format!("this is found to be of type `{t}`"));
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
                         }
                     } else if let Some(sp) = prior_non_diverging_arms.last() {
                         any_multiline_arm |= source_map.is_multiline(*sp);
                         err.span_label(
                             *sp,
                             format!("this and all prior arms are found to be of type `{t}`"),
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=should_deref_suggestion_on_mismatch | COMPLEXITY=85 | LINES=140 */
                         );
                     }
                     let outer = if any_multiline_arm || !source_map.is_multiline(expr_span) {
@@ -756,7 +725,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         // want the suggestion to still give a reference.
         if deref_from.is_ref() && !after_deref_ty.is_ref() {
             Some(format!("&{deref_part}"))
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=highlight_outer | COMPLEXITY=70 | LINES=145 */
         } else {
             Some(deref_part)
         }
@@ -902,7 +870,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             let lts: Vec<String> =
                 reg.into_items().map(|(_, kind)| kind.to_string()).into_sorted_stable_ord();
             (if lts.is_empty() { String::new() } else { format!("for<{}> ", lts.join(", ")) }, sig)
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=28 | LINES=30 */
         };
 
         let (lt1, sig1) = get_lifetimes(sig1);
@@ -933,11 +900,9 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         //        ^^^^^^^^^^
         if sig1.abi != ExternAbi::Rust {
             values.0.push(format!("extern {} ", sig1.abi), sig1.abi != sig2.abi);
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=3 */
         }
         if sig2.abi != ExternAbi::Rust {
             values.1.push(format!("extern {} ", sig2.abi), sig1.abi != sig2.abi);
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=66 | LINES=73 */
         }
 
         // unsafe extern "C" for<'a> fn(&'a T) -> &'a T
@@ -1011,7 +976,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         }
 
         let fmt = |did, args| format!(" {{{}}}", self.tcx.def_path_str_with_args(did, args));
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=cmp_traits | COMPLEXITY=27 | LINES=42 */
 
         match (fn_def1, fn_def2) {
             (Some((fn_def1, Some(fn_args1))), Some((fn_def2, Some(fn_args2)))) => {
@@ -1054,13 +1018,11 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             let (pre, post) = if args1.len() > 0 { ("<", ">") } else { ("", "") };
             values.0.push_normal(format!(
                 "{pre}{}{post}",
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
                 args1.iter().map(|a| a.to_string()).collect::<Vec<_>>().join(", ")
             ));
             let (pre, post) = if args2.len() > 0 { ("<", ">") } else { ("", "") };
             values.1.push_normal(format!(
                 "{pre}{}{post}",
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=cmp | COMPLEXITY=30 | LINES=39 */
                 args2.iter().map(|a| a.to_string()).collect::<Vec<_>>().join(", ")
             ));
             return values;
@@ -1100,7 +1062,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     /// relevant differences, and return two representation of those types for highlighted printing.
     pub fn cmp(&self, t1: Ty<'tcx>, t2: Ty<'tcx>) -> (DiagStyledString, DiagStyledString) {
         debug!("cmp(t1={}, t1.kind={:?}, t2={}, t2.kind={:?})", t1, t1.kind(), t2, t2.kind());
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=fmt_region | COMPLEXITY=9 | LINES=16 */
 
         // helper functions
         let recurse = |t1, t2, values: &mut (DiagStyledString, DiagStyledString)| {
@@ -1117,7 +1078,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 r.push(' ');
             }
             format!("&{r}")
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=push_ref | COMPLEXITY=173 | LINES=405 */
         }
 
         fn push_ref<'tcx>(
@@ -1523,7 +1483,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             sp,
                             format!(
                                 "{}{} {:#}{}",
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=20 | LINES=41 */
                                 if count == 1 { "the " } else { "one of the " },
                                 target,
                                 kind,
@@ -1565,7 +1524,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         }
 
         debug!("note_type_err(diag={:?})", diag);
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=54 | LINES=75 */
         enum Mismatch<'a> {
             Variable(ty::error::ExpectedFound<Ty<'a>>),
             Fixed(&'static str),
@@ -1641,7 +1599,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 })) = values
                 {
                     Cow::from(format!("expected this to be `{expected}`"))
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=21 */
                 } else {
                     terr.to_string(self.tcx)
                 };
@@ -1663,7 +1620,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 label_or_note(span, terr.to_string(self.tcx));
             } else {
                 label_or_note(span, Cow::from(format!("expected {expected}, found {found}")));
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=64 | LINES=71 */
             }
         } else {
             label_or_note(span, terr.to_string(self.tcx));
@@ -1735,20 +1691,16 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             let name = shadow.sort_string(self.tcx);
                             diag.note(format!(
                                 "`{prim}` and {name} have similar names, but are actually distinct types"
-/* AST_META: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
                             ));
                             diag.note(format!(
                                 "one `{prim}` is a primitive defined by the language",
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
                             ));
                             let def_span = self.tcx.def_span(defid);
                             let msg = if defid.is_local() {
                                 format!("the other {name} is defined in the current crate")
-/* AST_META: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
                             } else {
                                 let crate_name = self.tcx.crate_name(defid.krate);
                                 format!("the other {name} is defined in crate `{crate_name}`")
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
                             };
                             diag.span_note(def_span, msg);
                         };
@@ -1764,7 +1716,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             let expected_defid = expected_adt.did();
 
                             diag.note(format!("{found_name} and {expected_name} have similar names, but are actually distinct types"));
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=14 */
                             for (defid, name) in
                                 [(found_defid, found_name), (expected_defid, expected_name)]
                             {
@@ -1779,15 +1730,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                                         self.tcx.def_path(module).to_string_no_crate_verbose();
                                     format!(
                                         "{name} is defined in module `crate{module_name}` of the current crate"
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=3 */
                                     )
                                 } else if defid.is_local() {
                                     format!("{name} is defined in the current crate")
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
                                 } else {
                                     let crate_name = self.tcx.crate_name(defid.krate);
                                     format!("{name} is defined in crate `{crate_name}`")
-/* AST_META: AST_ID=52 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=23 | LINES=28 */
                                 };
                                 diag.span_note(def_span, msg);
                             }
@@ -1816,7 +1764,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             let pos = sm.lookup_char_pos(self.tcx.def_span(*def_id).lo());
                             DiagStyledString::normal(format!(
                                 " (opaque type at <{}:{}:{}>)",
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=12 */
                                 sm.filename_for_diagnostics(&pos.file.name),
                                 pos.line,
                                 pos.col.to_usize() + 1,
@@ -1829,7 +1776,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             let pos = sm.lookup_char_pos(self.tcx.def_span(proj.def_id).lo());
                             DiagStyledString::normal(format!(
                                 " (trait associated opaque type at <{}:{}:{}>)",
-/* AST_META: AST_ID=54 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=29 | LINES=51 */
                                 sm.filename_for_diagnostics(&pos.file.name),
                                 pos.line,
                                 pos.col.to_usize() + 1,
@@ -1881,7 +1827,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 _ => {
                     debug!(
                         "note_type_err: exp_found={:?}, expected={:?} found={:?}",
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=27 | LINES=39 */
                         exp_found, expected, found
                     );
                     if !is_simple_error || terr.must_include_note() {
@@ -1921,7 +1866,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             _ => exp_found,
         };
         debug!("exp_found {:?} terr {:?} cause.code {:?}", exp_found, terr, cause.code());
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=type_error_additional_suggestions | COMPLEXITY=120 | LINES=214 */
         if let Some(exp_found) = exp_found {
             let should_suggest_fixes =
                 if let ObligationCauseCode::Pattern { root_ty, .. } = cause.code() {
@@ -2136,7 +2080,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         terr: TypeError<'tcx>,
     ) -> Diag<'a> {
         debug!("report_and_explain_type_error(trace={:?}, terr={:?})", trace, terr);
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=suggest_wrap_to_build_a_tuple | COMPLEXITY=63 | LINES=132 */
 
         let span = trace.cause.span;
         let mut path = None;
@@ -2269,7 +2212,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     }
 
     /// Returns a string of the form "expected `{}`, found `{}`".
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=expected_found_str | COMPLEXITY=176 | LINES=299 */
     fn expected_found_str<T: fmt::Display + TypeFoldable<TyCtxt<'tcx>>>(
         &self,
         exp_found: ty::error::ExpectedFound<T>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/terminator.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // Functionality for terminators and helper types that appear in terminators.
 
 use std::slice;
@@ -8,9 +7,7 @@ use crate::rustc_complete::InlineAsmOptions;
 use crate::rustc_data_structures::packed::Pu128;
 use crate::rustc_complete::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=49 | LINES=97 */
 
 use super::*;
 
@@ -108,12 +105,10 @@ impl SwitchTargets {
         self.targets.iter().collect::<FxHashSet<_>>().len() == self.targets.len()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=SwitchTargetsIter | COMPLEXITY=2 | LINES=4 */
 
 pub struct SwitchTargetsIter<'a> {
     inner: iter::Zip<slice::Iter<'a, Pu128>, slice::Iter<'a, BasicBlock>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=next | COMPLEXITY=6 | LINES=14 */
 
 impl<'a> Iterator for SwitchTargetsIter<'a> {
     type Item = (u128, BasicBlock);
@@ -128,10 +123,8 @@ impl<'a> Iterator for SwitchTargetsIter<'a> {
         self.inner.size_hint()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'a> ExactSizeIterator for SwitchTargetsIter<'a> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=cleanup_block | COMPLEXITY=7 | LINES=9 */
 
 impl UnwindAction {
     fn cleanup_block(self) -> Option<BasicBlock> {
@@ -141,7 +134,6 @@ impl UnwindAction {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=20 | LINES=25 */
 
 impl UnwindTerminateReason {
     pub fn as_str(self) -> &'static str {
@@ -167,7 +159,6 @@ impl UnwindTerminateReason {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_optional_overflow_check | COMPLEXITY=185 | LINES=273 */
 
 impl<O> AssertKind<O> {
     /// Returns true if this an overflow checking assertion controlled by -C overflow-checks.
@@ -441,14 +432,12 @@ impl<O> AssertKind<O> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Terminator | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
 pub struct Terminator<'tcx> {
     pub source_info: SourceInfo,
     pub kind: TerminatorKind<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=6 | LINES=22 */
 
 impl<'tcx> Terminator<'tcx> {
     #[inline]
@@ -471,7 +460,6 @@ impl<'tcx> Terminator<'tcx> {
         self.kind.unwind_mut()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=if_ | COMPLEXITY=21 | LINES=29 */
 
 impl<'tcx> TerminatorKind<'tcx> {
     /// Returns a simple string representation of a `TerminatorKind` variant, independent of any
@@ -501,7 +489,6 @@ impl<'tcx> TerminatorKind<'tcx> {
         TerminatorKind::SwitchInt { discr: cond, targets: SwitchTargets::static_if(0, f, t) }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=successors_for_value | COMPLEXITY=101 | LINES=141 */
 
 pub use helper::*;
 
@@ -643,7 +630,6 @@ mod helper {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=unwind | COMPLEXITY=48 | LINES=60 */
 
 impl<'tcx> TerminatorKind<'tcx> {
     #[inline]
@@ -704,7 +690,6 @@ impl<'tcx> TerminatorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=21 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum TerminatorEdges<'mir, 'tcx> {
@@ -726,7 +711,6 @@ pub enum TerminatorEdges<'mir, 'tcx> {
     /// Special edge for `SwitchInt`.
     SwitchInt { targets: &'mir SwitchTargets, discr: &'mir Operand<'tcx> },
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// List of places that are written to after a successful (non-unwind) return
 /// from a `Call`, `Yield` or `InlineAsm`.
@@ -736,7 +720,6 @@ pub enum CallReturnPlaces<'a, 'tcx> {
     Yield(Place<'tcx>),
     InlineAsm(&'a [InlineAsmOperand<'tcx>]),
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=for_each | COMPLEXITY=19 | LINES=17 */
 
 impl<'tcx> CallReturnPlaces<'_, 'tcx> {
     pub fn for_each(&self, mut f: impl FnMut(Place<'tcx>)) {
@@ -754,14 +737,12 @@ impl<'tcx> CallReturnPlaces<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=edges | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> Terminator<'tcx> {
     pub fn edges(&self) -> TerminatorEdges<'_, 'tcx> {
         self.kind.edges()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=edges | COMPLEXITY=35 | LINES=69 */
 
 impl<'tcx> TerminatorKind<'tcx> {
     pub fn edges(&self) -> TerminatorEdges<'_, 'tcx> {
@@ -831,14 +812,12 @@ impl<'tcx> TerminatorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from_hir_call | COMPLEXITY=3 | LINES=6 */
 
 impl CallSource {
     pub fn from_hir_call(self) -> bool {
         matches!(self, CallSource::Normal)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 impl InlineAsmMacro {
     pub const fn diverges(self, options: InlineAsmOptions) -> bool {

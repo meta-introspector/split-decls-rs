@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_pointers.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Details of a pointer check, the condition on which we decide whether to
 /// fail the assert and an [AssertKind] that defines the behavior on failure.
@@ -16,7 +12,6 @@ pub(crate) struct PointerCheck<'tcx> {
     pub(crate) cond: Operand<'tcx>,
     pub(crate) assert_kind: Box<AssertKind<Operand<'tcx>>>,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 /// When checking for borrows of field projections (`&(*ptr).a`), we might want
 /// to check for the field type (type of `.a` in the example). This enum defines
@@ -26,7 +21,6 @@ pub(crate) enum BorrowedFieldProjectionMode {
     FollowProjections,
     NoFollowProjections,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=101 */
 
 /// Utility for adding a check for read/write on every sized, raw pointer.
 ///
@@ -128,7 +122,6 @@ pub(crate) fn check_pointers<'tcx, F>(
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PointerFinder | COMPLEXITY=2 | LINES=9 */
 
 struct PointerFinder<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -138,7 +131,6 @@ struct PointerFinder<'a, 'tcx> {
     excluded_pointees: &'a [Ty<'tcx>],
     field_projection_mode: BorrowedFieldProjectionMode,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=45 */
 
 impl<'a, 'tcx> PointerFinder<'a, 'tcx> {
     fn new(
@@ -184,7 +176,6 @@ impl<'a, 'tcx> PointerFinder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_place | COMPLEXITY=37 | LINES=52 */
 
 impl<'a, 'tcx> Visitor<'tcx> for PointerFinder<'a, 'tcx> {
     fn visit_place(&mut self, place: &Place<'tcx>, context: PlaceContext, location: Location) {
@@ -237,7 +228,6 @@ impl<'a, 'tcx> Visitor<'tcx> for PointerFinder<'a, 'tcx> {
         self.super_place(place, context, location);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=split_block | COMPLEXITY=3 | LINES=16 */
 
 fn split_block(
     basic_blocks: &mut IndexVec<BasicBlock, BasicBlockData<'_>>,

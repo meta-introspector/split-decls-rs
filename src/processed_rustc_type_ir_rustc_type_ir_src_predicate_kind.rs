@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/predicate_kind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::fmt;
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=48 */
 
 /// A clause is something that can appear in where bounds or be inferred
 /// by implied bounds.
@@ -59,10 +55,8 @@ pub enum ClauseKind<I: Interner> {
         I::Symbol,
     ),
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ClauseKind<I> {}
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=54 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -117,10 +111,8 @@ pub enum PredicateKind<I: Interner> {
     /// Only used for new solver.
     AliasRelate(I::Term, I::Term, AliasRelationDirection),
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for PredicateKind<I> {}
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy)]
 #[cfg_attr(
@@ -131,7 +123,6 @@ pub enum AliasRelationDirection {
     Equate,
     Subtype,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl std::fmt::Display for AliasRelationDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -141,7 +132,6 @@ impl std::fmt::Display for AliasRelationDirection {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=17 | LINES=20 */
 
 impl<I: Interner> fmt::Debug for ClauseKind<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -162,7 +152,6 @@ impl<I: Interner> fmt::Debug for ClauseKind<I> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=19 */
 
 impl<I: Interner> fmt::Debug for PredicateKind<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

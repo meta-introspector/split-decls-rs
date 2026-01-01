@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/repr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::Align;
 use crate::rustc_complete::{IntTy, LitIntType, LitKind, UintTy};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{IntType, ReprAttr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::prelude::*;
 use crate::session_diagnostics::{self, IncorrectReprFormatGenericCause};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=21 | LINES=56 */
 
 /// Parse #[repr(...)] forms.
 ///
@@ -65,7 +61,6 @@ impl<S: Stage> CombineAttributeParser<S> for ReprParser {
     //This one is slightly more complicated because the allowed targets depend on the arguments
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(ALL_TARGETS);
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 macro_rules! int_pat {
     () => {
@@ -83,7 +78,6 @@ macro_rules! int_pat {
             | sym::usize
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=int_type_of_word | COMPLEXITY=7 | LINES=20 */
 
 fn int_type_of_word(s: Symbol) -> Option<IntType> {
     use IntType::*;
@@ -104,7 +98,6 @@ fn int_type_of_word(s: Symbol) -> Option<IntType> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse_repr | COMPLEXITY=31 | LINES=87 */
 
 fn parse_repr<S: Stage>(
     cx: &AcceptContext<'_, '_, S>,
@@ -192,13 +185,11 @@ fn parse_repr<S: Stage>(
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum AlignKind {
     Packed,
     Align,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parse_repr_align | COMPLEXITY=37 | LINES=61 */
 
 fn parse_repr_align<S: Stage>(
     cx: &AcceptContext<'_, '_, S>,
@@ -260,7 +251,6 @@ fn parse_repr_align<S: Stage>(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parse_alignment | COMPLEXITY=11 | LINES=19 */
 
 fn parse_alignment(node: &LitKind) -> Result<Align, &'static str> {
     if let LitKind::Int(literal, LitIntType::Unsuffixed) = node {
@@ -280,7 +270,6 @@ fn parse_alignment(node: &LitKind) -> Result<Align, &'static str> {
         Err("not an unsuffixed integer")
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=20 | LINES=45 */
 
 /// Parse #[align(N)].
 #[derive(Default)]
@@ -326,7 +315,6 @@ impl AlignParser {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=9 | LINES=17 */
 
 impl<S: Stage> AttributeParser<S> for AlignParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[(Self::PATH, Self::TEMPLATE, Self::parse)];
@@ -344,7 +332,6 @@ impl<S: Stage> AttributeParser<S> for AlignParser {
         Some(AttributeKind::Align { align, span })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Default)]
 pub(crate) struct AlignStaticParser(AlignParser);
@@ -361,7 +348,6 @@ impl AlignStaticParser {
         self.0.parse(cx, args)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=6 | LINES=11 */
 
 impl<S: Stage> AttributeParser<S> for AlignStaticParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[(Self::PATH, Self::TEMPLATE, Self::parse)];

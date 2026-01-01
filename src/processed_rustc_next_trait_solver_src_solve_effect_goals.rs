@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/effect_goals.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Dealing with host effect goals, i.e. enforcing the constness in
 // `T: const Trait` or `T: [const] Trait`.
 
@@ -9,17 +8,14 @@ use rustc_type_ir::lang_items::SolverTraitLangItem;
 use rustc_type_ir::solve::SizedTraitKind;
 use rustc_type_ir::solve::inspect::ProbeKind;
 use rustc_type_ir::{self as ty, Interner, TypingMode, elaborate};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use super::assembly::{Candidate, structural_traits};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::delegate::SolverDelegate;
 use crate::solve::{
     BuiltinImplSource, CandidateSource, Certainty, EvalCtxt, Goal, GoalSource, NoSolution,
     QueryResult, assembly,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=104 | LINES=371 */
 
 impl<D, I> assembly::GoalKind<D> for ty::HostEffectPredicate<I>
 where
@@ -391,7 +387,6 @@ where
         unreachable!("Unsize is not const")
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

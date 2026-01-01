@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/cfg_select.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::token::Token;
 use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::classify;
 use crate::rustc_complete::{MetaItemInner, token};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::PResult;
 use crate::rustc_complete::Span;
 
 use crate::exp;
 use crate::parser::{AttrWrapper, ForceCollect, Parser, Restrictions, Trailing, UsePreAttrPos};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum CfgSelectPredicate {
     Cfg(MetaItemInner),
     Wildcard(Token),
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CfgSelectBranches | COMPLEXITY=5 | LINES=11 */
 
 #[derive(Default)]
 pub struct CfgSelectBranches {
@@ -29,10 +24,8 @@ pub struct CfgSelectBranches {
     /// These branches are kept for formatting.
     pub unreachable: Vec<(CfgSelectPredicate, TokenStream, Span)>,
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 /// Parses a `TokenTree` consisting either of `{ /* ... */ }` (and strip the braces) or an
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse_token_tree | COMPLEXITY=16 | LINES=20 */
 /// expression followed by a comma (and strip the comma).
 fn parse_token_tree<'a>(p: &mut Parser<'a>) -> PResult<'a, TokenStream> {
     if p.token == token::OpenBrace {
@@ -53,7 +46,6 @@ fn parse_token_tree<'a>(p: &mut Parser<'a>) -> PResult<'a, TokenStream> {
     }
     Ok(TokenStream::from_ast(&expr))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=parse_cfg_select | COMPLEXITY=21 | LINES=36 */
 
 pub fn parse_cfg_select<'a>(p: &mut Parser<'a>) -> PResult<'a, CfgSelectBranches> {
     let mut branches = CfgSelectBranches::default();

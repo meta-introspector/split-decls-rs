@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/unreachable_enum_branching.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // A pass that eliminates branches on uninhabited or unreachable enum variants.
 
 use crate::rustc_abi::Variants;
@@ -9,10 +8,8 @@ use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, BasicBlocks, Body, Local, Operand, Rvalue, StatementKind,
     TerminatorKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=get_discriminant_local | COMPLEXITY=7 | LINES=13 */
 use tracing::trace;
 
 use crate::patch::MirPatch;
@@ -26,7 +23,6 @@ fn get_discriminant_local(terminator: &TerminatorKind<'_>) -> Option<Local> {
         None
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=get_switched_on_type | COMPLEXITY=9 | LINES=26 */
 
 /// If the basic block terminates by switching on a discriminant, this returns the `Ty` the
 /// discriminant is read from. Otherwise, returns None.
@@ -53,7 +49,6 @@ fn get_switched_on_type<'tcx>(
 
     None
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=variant_discriminants | COMPLEXITY=12 | LINES=28 */
 
 fn variant_discriminants<'tcx>(
     layout: &TyAndLayout<'tcx>,
@@ -82,7 +77,6 @@ fn variant_discriminants<'tcx>(
             .collect(),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=99 | LINES=138 */
 
 impl<'tcx> crate::MirPass<'tcx> for UnreachableEnumBranching {
     fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {

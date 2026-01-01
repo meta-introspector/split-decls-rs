@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/infer_ctxt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::fold::TypeFoldable;
 use crate::inherent::*;
 use crate::relate::RelateResult;
 use crate::relate::combine::PredicateEmittingRelation;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=82 */
 
 /// The current typing mode of an inference context. We unfortunately have some
 /// slightly different typing rules depending on the current context. See the
@@ -93,10 +90,8 @@ pub enum TypingMode<I: Interner> {
     /// some information about the underlying type to users, but not the type itself.
     PostAnalysis,
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TypingMode<I> {}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=non_body_analysis | COMPLEXITY=23 | LINES=43 */
 
 impl<I: Interner> TypingMode<I> {
     /// Analysis outside of a body does not define any opaque types.
@@ -140,7 +135,6 @@ impl<I: Interner> TypingMode<I> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=16 | LINES=153 */
 
 #[cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir_infer_ctxt_like")]
 pub trait InferCtxtLike: Sized {
@@ -294,7 +288,6 @@ pub trait InferCtxtLike: Sized {
 
     fn reset_opaque_types(&self);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=may_use_unstable_feature | COMPLEXITY=18 | LINES=37 */
 
 pub fn may_use_unstable_feature<'a, I: Interner, Infcx>(
     infcx: &'a Infcx,

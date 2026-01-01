@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/attrs/encode_cross_crate.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::attrs::AttributeKind;
 
 #[derive(PartialEq)]
@@ -7,7 +6,6 @@ pub enum EncodeCrossCrate {
     Yes,
     No,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=encode_cross_crate | COMPLEXITY=58 | LINES=97 */
 
 impl AttributeKind {
     /// Whether this attribute should be encoded in metadata files.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=noop | COMPLEXITY=3 | LINES=9 */
 // FIXME(#27438): Right now, the unit tests of `rustc_middle` don't refer to any actual functions
 //                generated in `rustc_data_structures` (all references are through generic functions),
 //                but statics are referenced from time to time. Due to this Windows `dllimport` bug

@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/item_bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_infer::traits::util;
 use crate::rustc_complete::ty::{
     self, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
     Upcast, shift_vars,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::ItemCtxt;
 use super::predicates_of::assert_only_contains_predicates_from;
 use crate::hir_ty_lowering::{HirTyLowerer, PredicateFilter};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=associated_type_bounds | COMPLEXITY=21 | LINES=85 */
 
 /// For associated types we include both bounds written on the type
 /// (`type X: Trait`) and predicates from the trait: `where Self::X: Trait`.
@@ -106,7 +99,6 @@ fn associated_type_bounds<'tcx>(
         bounds
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=remap_gat_vars_and_recurse_into_nested_projections | COMPLEXITY=73 | LINES=115 */
 
 /// The code below is quite involved, so let me explain.
 ///
@@ -222,7 +214,6 @@ fn remap_gat_vars_and_recurse_into_nested_projections<'tcx>(
         span,
     ))
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=MapAndCompressBoundVars | COMPLEXITY=8 | LINES=19 */
 
 /// Given some where clause like `for<'b, 'c> <Self as Trait<'a_identity>>::Gat<'b>: Bound<'c>`,
 /// the mapping will map `'b` back to the GAT's `'b_identity`. Then we need to compress the
@@ -242,7 +233,6 @@ struct MapAndCompressBoundVars<'tcx> {
     /// correctly during substitution.
     mapping: FxIndexMap<ty::BoundVar, ty::GenericArg<'tcx>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=53 | LINES=98 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for MapAndCompressBoundVars<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -341,7 +331,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for MapAndCompressBoundVars<'tcx> {
         if !p.has_bound_vars() { p } else { p.super_fold_with(self) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=opaque_type_bounds | COMPLEXITY=16 | LINES=42 */
 
 /// Opaque types don't inherit bounds from their parent: for return position
 /// impl trait it isn't possible to write a suitable predicate on the
@@ -384,7 +373,6 @@ fn opaque_type_bounds<'tcx>(
         tcx.arena.alloc_slice(&bounds)
     })
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) fn explicit_item_bounds(
     tcx: TyCtxt<'_>,
@@ -392,7 +380,6 @@ pub(super) fn explicit_item_bounds(
 ) -> ty::EarlyBinder<'_, &'_ [(ty::Clause<'_>, Span)]> {
     explicit_item_bounds_with_filter(tcx, def_id, PredicateFilter::All)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) fn explicit_item_self_bounds(
     tcx: TyCtxt<'_>,
@@ -400,7 +387,6 @@ pub(super) fn explicit_item_self_bounds(
 ) -> ty::EarlyBinder<'_, &'_ [(ty::Clause<'_>, Span)]> {
     explicit_item_bounds_with_filter(tcx, def_id, PredicateFilter::SelfOnly)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=71 */
 
 pub(super) fn explicit_item_bounds_with_filter(
     tcx: TyCtxt<'_>,
@@ -472,14 +458,12 @@ pub(super) fn explicit_item_bounds_with_filter(
 
     ty::EarlyBinder::bind(bounds)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 pub(super) fn item_bounds(tcx: TyCtxt<'_>, def_id: DefId) -> ty::EarlyBinder<'_, ty::Clauses<'_>> {
     tcx.explicit_item_bounds(def_id).map_bound(|bounds| {
         tcx.mk_clauses_from_iter(util::elaborate(tcx, bounds.iter().map(|&(bound, _span)| bound)))
     })
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub(super) fn item_self_bounds(
     tcx: TyCtxt<'_>,
@@ -491,7 +475,6 @@ pub(super) fn item_self_bounds(
         )
     })
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 /// This exists as an optimization to compute only the item bounds of the item
 /// that are not `Self` bounds.
@@ -507,7 +490,6 @@ pub(super) fn item_non_self_bounds(
         ty::EarlyBinder::bind(tcx.mk_clauses_from_iter(all_bounds.difference(&own_bounds).copied()))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 /// This exists as an optimization to compute only the supertraits of this impl's
 /// trait that are outlives bounds.
@@ -527,13 +509,11 @@ pub(super) fn impl_super_outlives(
         },
     )
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=AssocTyToOpaque | COMPLEXITY=2 | LINES=5 */
 
 struct AssocTyToOpaque<'tcx> {
     tcx: TyCtxt<'tcx>,
     fn_def_id: DefId,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=12 | LINES=18 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for AssocTyToOpaque<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

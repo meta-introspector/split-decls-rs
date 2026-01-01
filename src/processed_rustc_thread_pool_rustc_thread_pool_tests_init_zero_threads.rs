@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/tests/init_zero_threads.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=init_zero_threads | COMPLEXITY=2 | LINES=9 */
 #[allow(unused_crate_dependencies)]
 
 use crate::rustc_thread_pool::ThreadPoolBuilder;

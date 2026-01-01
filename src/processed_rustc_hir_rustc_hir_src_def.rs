@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/def.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::array::IntoIter;
 use std::borrow::Cow;
 use std::fmt::Debug;
@@ -9,12 +8,9 @@ use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::stable_hasher::ToStableHashKey;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Symbol;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 use crate::rustc_complete::hygiene::MacroKind;
 
 use crate::definitions::DefPathData;
@@ -28,7 +24,6 @@ pub enum CtorOf {
     /// This `DefKind::Ctor` is a synthesized constructor of a tuple or unit variant.
     Variant,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// What kind of constructor something is.
 #[derive(Clone, Copy, PartialEq, Eq, Encodable, Decodable, Hash, Debug, HashStable_Generic)]
@@ -38,7 +33,6 @@ pub enum CtorKind {
     /// Constructor constant automatically created by a unit struct/variant.
     Const,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MacroKinds(u8); | COMPLEXITY=5 | LINES=12 */
 
 /// A set of macro kinds, for macros that can have more than one kind
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Encodable, Decodable, Hash, Debug)]
@@ -51,7 +45,6 @@ bitflags::bitflags! {
         const DERIVE = 1 << 2;
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<MacroKind> for MacroKinds {
     fn from(kind: MacroKind) -> Self {
@@ -62,7 +55,6 @@ impl From<MacroKind> for MacroKinds {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=26 | LINES=25 */
 
 impl MacroKinds {
     /// Convert the MacroKinds to a static string.
@@ -88,7 +80,6 @@ impl MacroKinds {
         if self.contains(Self::ATTR) { "an" } else { "a" }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// An attribute that is not a macro; e.g., `#[inline]` or `#[rustfmt::skip]`.
 #[derive(Clone, Copy, PartialEq, Eq, Encodable, Decodable, Hash, Debug, HashStable_Generic)]
@@ -103,7 +94,6 @@ pub enum NonMacroAttrKind {
     /// but used before that derive macro was expanded (deprecated).
     DeriveHelperCompat,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=101 */
 
 /// What kind of definition something is; e.g., `mod` vs `struct`.
 /// `enum DefPathData` may need to be updated if a new variant is added here.
@@ -205,7 +195,6 @@ pub enum DefKind {
     /// coroutine-closure, such as an async closure.
     SyntheticCoroutineBody,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=90 | LINES=284 */
 
 impl DefKind {
     /// Get an English description for the item's kind.
@@ -490,7 +479,6 @@ impl DefKind {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// The resolution of a path or export.
 ///
@@ -505,7 +493,6 @@ impl DefKind {
 /// fn str_to_string(s: & /* Res */ str) -> /* Res */ String {
 ///     /* Res */ String::from(/* Res */ s)
 /// }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=132 */
 ///
 /// /* Res */ str_to_string("hello");
 /// ```
@@ -638,14 +625,12 @@ pub enum Res<Id = hir::HirId> {
     /// **Not bound to a specific namespace.**
     Err,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl<Id> IntoDiagArg for Res<Id> {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(self.descr()))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PartialRes | COMPLEXITY=3 | LINES=22 */
 
 /// The result of resolving a path before lowering to HIR,
 /// with "module" segments resolved and associated item
@@ -668,7 +653,6 @@ pub struct PartialRes {
     base_res: Res<NodeId>,
     unresolved_segments: usize,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=35 */
 
 impl PartialRes {
     #[inline]
@@ -704,7 +688,6 @@ impl PartialRes {
         self.full_res().expect("unexpected unresolved segments")
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=19 */
 
 /// Different kinds of symbols can coexist even if they share the same textual name.
 /// Therefore, they each have a separate universe (known as a "namespace").
@@ -724,7 +707,6 @@ pub enum Namespace {
     /// like `#[inline]` and `#[rustfmt::skip]`.
     MacroNS,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=7 | LINES=11 */
 
 impl Namespace {
     /// The English description of the namespace.
@@ -736,14 +718,12 @@ impl Namespace {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for Namespace {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(self.descr()))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=9 */
 
 impl<CTX: crate::HashStableContext> ToStableHashKey<CTX> for Namespace {
     type KeyType = Namespace;
@@ -753,7 +733,6 @@ impl<CTX: crate::HashStableContext> ToStableHashKey<CTX> for Namespace {
         *self
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=PerNS | COMPLEXITY=4 | LINES=8 */
 
 /// Just a helper ‒ separate structure for each namespace.
 #[derive(Copy, Clone, Default, Debug, HashStable_Generic)]
@@ -762,7 +741,6 @@ pub struct PerNS<T> {
     pub type_ns: T,
     pub macro_ns: T,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=map | COMPLEXITY=7 | LINES=20 */
 
 impl<T> PerNS<T> {
     pub fn map<U, F: FnMut(T) -> U>(self, mut f: F) -> PerNS<U> {
@@ -783,7 +761,6 @@ impl<T> PerNS<T> {
         [&self.value_ns, &self.type_ns, &self.macro_ns].into_iter()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=index | COMPLEXITY=9 | LINES=12 */
 
 impl<T> ::std::ops::Index<Namespace> for PerNS<T> {
     type Output = T;
@@ -796,7 +773,6 @@ impl<T> ::std::ops::Index<Namespace> for PerNS<T> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=9 | LINES=10 */
 
 impl<T> ::std::ops::IndexMut<Namespace> for PerNS<T> {
     fn index_mut(&mut self, ns: Namespace) -> &mut T {
@@ -807,7 +783,6 @@ impl<T> ::std::ops::IndexMut<Namespace> for PerNS<T> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=7 | LINES=16 */
 
 impl<T> PerNS<Option<T>> {
     /// Returns `true` if all the items in this collection are `None`.
@@ -824,7 +799,6 @@ impl<T> PerNS<Option<T>> {
         [self.type_ns, self.value_ns, self.macro_ns].into_iter().flatten()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=from_ast | COMPLEXITY=8 | LINES=10 */
 
 impl CtorKind {
     pub fn from_ast(vdata: &ast::VariantData) -> Option<(CtorKind, NodeId)> {
@@ -835,7 +809,6 @@ impl CtorKind {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=15 | LINES=28 */
 
 impl NonMacroAttrKind {
     pub fn descr(self) -> &'static str {
@@ -864,7 +837,6 @@ impl NonMacroAttrKind {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=96 | LINES=143 */
 
 impl<Id> Res<Id> {
     /// Return the `DefId` of this `Def` if it has an ID, else panic.
@@ -1008,7 +980,6 @@ impl<Id> Res<Id> {
         matches!(self, Res::Def(DefKind::Ctor(_, CtorKind::Const), _) | Res::SelfCtor(..))
     }
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=17 | LINES=38 */
 
 /// Resolution for a lifetime appearing in a type.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
@@ -1047,6 +1018,5 @@ pub enum LifetimeRes {
     /// HACK: This is used to recover the NodeId of an elided lifetime.
     ElidedAnchor { start: NodeId, end: NodeId },
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 pub type DocLinkResMap = UnordMap<(Symbol, Namespace), Option<Res<NodeId>>>;

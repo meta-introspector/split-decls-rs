@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/common.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use cranelift_codegen::isa::TargetFrontendConfig;
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Float, Integer, Primitive};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::ty::TypeFoldable;
 use crate::rustc_complete::ty::layout::{
     self, FnAbiError, FnAbiOfHelpers, FnAbiRequest, LayoutError, LayoutOfHelpers,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_target::callconv::FnAbi;
 use crate::rustc_target::spec::{HasTargetSpec, Target};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 use crate::constant::ConstantCx;
 use crate::debuginfo::FunctionDebugContext;
@@ -28,7 +23,6 @@ pub(crate) fn pointer_ty(tcx: TyCtxt<'_>) -> types::Type {
         bits => bug!("ptr_sized_integer: unknown pointer bit size {}", bits),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=20 */
 
 pub(crate) fn scalar_to_clif_type(tcx: TyCtxt<'_>, scalar: Scalar) -> Type {
     match scalar.primitive() {
@@ -49,7 +43,6 @@ pub(crate) fn scalar_to_clif_type(tcx: TyCtxt<'_>, scalar: Scalar) -> Type {
         Primitive::Pointer(_) => pointer_ty(tcx),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=clif_type_from_ty | COMPLEXITY=26 | LINES=39 */
 
 fn clif_type_from_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Option<types::Type> {
     Some(match ty.kind() {
@@ -89,7 +82,6 @@ fn clif_type_from_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Option<types::Typ
         _ => return None,
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=clif_pair_type_from_ty | COMPLEXITY=15 | LINES=19 */
 
 fn clif_pair_type_from_ty<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -109,7 +101,6 @@ fn clif_pair_type_from_ty<'tcx>(
         _ => return None,
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=44 */
 
 pub(crate) fn codegen_icmp_imm(
     fx: &mut FunctionCx<'_, '_, '_>,
@@ -154,7 +145,6 @@ pub(crate) fn codegen_icmp_imm(
         fx.bcx.ins().icmp_imm(intcc, lhs, rhs)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 pub(crate) fn codegen_bitcast(fx: &mut FunctionCx<'_, '_, '_>, dst_ty: Type, val: Value) -> Value {
     let mut flags = MemFlags::new();
@@ -164,7 +154,6 @@ pub(crate) fn codegen_bitcast(fx: &mut FunctionCx<'_, '_, '_>, dst_ty: Type, val
     });
     fx.bcx.ins().bitcast(dst_ty, flags, val)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 pub(crate) fn type_zero_value(bcx: &mut FunctionBuilder<'_>, ty: Type) -> Value {
     if ty == types::I128 {
@@ -174,7 +163,6 @@ pub(crate) fn type_zero_value(bcx: &mut FunctionBuilder<'_>, ty: Type) -> Value 
         bcx.ins().iconst(ty, 0)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=59 */
 
 pub(crate) fn type_min_max_value(
     bcx: &mut FunctionBuilder<'_>,
@@ -234,7 +222,6 @@ pub(crate) fn type_min_max_value(
 
     (min, max)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 pub(crate) fn type_sign(ty: Ty<'_>) -> bool {
     match ty.kind() {
@@ -244,7 +231,6 @@ pub(crate) fn type_sign(ty: Ty<'_>) -> bool {
         _ => panic!("{}", ty),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=36 */
 
 pub(crate) fn create_wrapper_function(
     module: &mut dyn Module,
@@ -281,7 +267,6 @@ pub(crate) fn create_wrapper_function(
     }
     module.define_function(wrapper_func_id, &mut ctx).unwrap();
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=27 */
 
 pub(crate) struct FunctionCx<'m, 'clif, 'tcx: 'm> {
     pub(crate) cx: &'clif mut crate::CodegenCx,
@@ -309,7 +294,6 @@ pub(crate) struct FunctionCx<'m, 'clif, 'tcx: 'm> {
     /// This should only be accessed by `CPlace::new_var`.
     pub(crate) next_ssa_var: u32,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for FunctionCx<'_, '_, 'tcx> {
     #[inline]
@@ -317,7 +301,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for FunctionCx<'_, '_, 'tcx> {
         FullyMonomorphizedLayoutCx(self.tcx).handle_layout_err(err, span, ty)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for FunctionCx<'_, '_, 'tcx> {
     #[inline]
@@ -330,35 +313,30 @@ impl<'tcx> FnAbiOfHelpers<'tcx> for FunctionCx<'_, '_, 'tcx> {
         FullyMonomorphizedLayoutCx(self.tcx).handle_fn_abi_err(err, span, fn_abi_request)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> layout::HasTyCtxt<'tcx> for FunctionCx<'_, '_, 'tcx> {
     fn tcx<'b>(&'b self) -> TyCtxt<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> crate::rustc_abi::HasDataLayout for FunctionCx<'_, '_, 'tcx> {
     fn data_layout(&self) -> &crate::rustc_abi::TargetDataLayout {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> layout::HasTypingEnv<'tcx> for FunctionCx<'_, '_, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for FunctionCx<'_, '_, 'tcx> {
     fn target_spec(&self) -> &Target {
         &self.tcx.sess.target
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=97 */
 
 impl<'tcx> FunctionCx<'_, '_, 'tcx> {
     pub(crate) fn monomorphize<T>(&self, value: T) -> T
@@ -456,7 +434,6 @@ impl<'tcx> FunctionCx<'_, '_, 'tcx> {
         self.bcx.ins().global_value(self.pointer_type, local_msg_id)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=14 | LINES=16 */
 
 pub(crate) struct FullyMonomorphizedLayoutCx<'tcx>(pub(crate) TyCtxt<'tcx>);
 
@@ -473,7 +450,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for FullyMonomorphizedLayoutCx<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=25 | LINES=26 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for FullyMonomorphizedLayoutCx<'tcx> {
     #[inline]
@@ -500,28 +476,24 @@ impl<'tcx> FnAbiOfHelpers<'tcx> for FullyMonomorphizedLayoutCx<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> layout::HasTyCtxt<'tcx> for FullyMonomorphizedLayoutCx<'tcx> {
     fn tcx<'b>(&'b self) -> TyCtxt<'tcx> {
         self.0
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> crate::rustc_abi::HasDataLayout for FullyMonomorphizedLayoutCx<'tcx> {
     fn data_layout(&self) -> &crate::rustc_abi::TargetDataLayout {
         &self.0.data_layout
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> layout::HasTypingEnv<'tcx> for FullyMonomorphizedLayoutCx<'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> HasTargetSpec for FullyMonomorphizedLayoutCx<'tcx> {
     fn target_spec(&self) -> &Target {

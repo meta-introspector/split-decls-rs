@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/config.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=BackendConfig | COMPLEXITY=4 | LINES=13 */
 /// Configuration of cg_clif as passed in through `-Cllvm-args` and various env vars.
 #[derive(Clone, Debug)]
 pub struct BackendConfig {
@@ -13,7 +12,6 @@ pub struct BackendConfig {
     /// Defaults to the value of `CG_CLIF_JIT_ARGS`.
     pub jit_args: Vec<String>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=from_opts | COMPLEXITY=23 | LINES=30 */
 
 impl BackendConfig {
     /// Parse the configuration passed in using `-Cllvm-args`.

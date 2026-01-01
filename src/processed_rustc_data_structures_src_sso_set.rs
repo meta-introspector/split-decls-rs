@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sso/set.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=SsoHashSet | COMPLEXITY=3 | LINES=27 */
 use std::fmt;
 use std::hash::Hash;
 
@@ -27,7 +26,6 @@ use super::map::SsoHashMap;
 pub struct SsoHashSet<T> {
     map: SsoHashMap<T, ()>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=entry_to_key | COMPLEXITY=4 | LINES=8 */
 
 /// Adapter function used to return
 /// result if SsoHashMap functions into
@@ -36,7 +34,6 @@ pub struct SsoHashSet<T> {
 fn entry_to_key<K, V>((k, _v): (K, V)) -> K {
     k
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=16 | LINES=51 */
 
 impl<T> SsoHashSet<T> {
     /// Creates an empty `SsoHashSet`.
@@ -88,7 +85,6 @@ impl<T> SsoHashSet<T> {
         self.map.drain().map(entry_to_key)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=reserve | COMPLEXITY=24 | LINES=63 */
 
 impl<T: Eq + Hash> SsoHashSet<T> {
     /// Reserves capacity for at least `additional` more elements to be inserted
@@ -152,7 +148,6 @@ impl<T: Eq + Hash> SsoHashSet<T> {
         self.map.contains_key(value)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=8 */
 
 impl<T: Eq + Hash> FromIterator<T> for SsoHashSet<T> {
     fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> SsoHashSet<T> {
@@ -161,7 +156,6 @@ impl<T: Eq + Hash> FromIterator<T> for SsoHashSet<T> {
         set
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<T> Default for SsoHashSet<T> {
     #[inline]
@@ -169,7 +163,6 @@ impl<T> Default for SsoHashSet<T> {
         Self::new()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=21 */
 
 impl<T: Eq + Hash> Extend<T> for SsoHashSet<T> {
     fn extend<I>(&mut self, iter: I)
@@ -191,7 +184,6 @@ impl<T: Eq + Hash> Extend<T> for SsoHashSet<T> {
         self.map.extend_reserve(additional)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=7 | LINES=20 */
 
 impl<'a, T> Extend<&'a T> for SsoHashSet<T>
 where
@@ -212,7 +204,6 @@ where
         Extend::<T>::extend_reserve(self, additional)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=10 */
 
 impl<T> IntoIterator for SsoHashSet<T> {
     type IntoIter = std::iter::Map<<SsoHashMap<T, ()> as IntoIterator>::IntoIter, fn((T, ())) -> T>;
@@ -223,7 +214,6 @@ impl<T> IntoIterator for SsoHashSet<T> {
         self.map.into_iter().map(entry_to_key)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=13 */
 
 impl<'a, T> IntoIterator for &'a SsoHashSet<T> {
     type IntoIter = std::iter::Map<
@@ -237,7 +227,6 @@ impl<'a, T> IntoIterator for &'a SsoHashSet<T> {
         self.map.iter().map(entry_to_key)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl<T> fmt::Debug for SsoHashSet<T>
 where

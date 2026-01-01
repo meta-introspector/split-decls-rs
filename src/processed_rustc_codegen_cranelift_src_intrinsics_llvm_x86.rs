@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/intrinsics/llvm_x86.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Emulate x86 LLVM intrinsics
 
 use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::asm::*;
 
 use crate::inline_asm::{CInlineAsmOperand, codegen_inline_asm_inner};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=select4 | COMPLEXITY=351 | LINES=1327 */
 use crate::intrinsics::*;
 use crate::prelude::*;
 
@@ -1335,7 +1332,6 @@ pub(super) fn codegen_x86_llvm_intrinsic_call<'tcx>(
     let ret_block = fx.get_block(dest);
     fx.bcx.ins().jump(ret_block, &[]);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=llvm_add_sub | COMPLEXITY=4 | LINES=31 */
 
 // llvm.x86.avx2.vperm2i128
 // llvm.x86.ssse3.pshuf.b.128
@@ -1367,7 +1363,6 @@ fn llvm_add_sub<'tcx>(
 
     (cb_out, c)
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 enum PackSize {
     U8,
@@ -1375,7 +1370,6 @@ enum PackSize {
     S8,
     S16,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=ret_clif_type | COMPLEXITY=34 | LINES=44 */
 
 impl PackSize {
     fn ret_clif_type(&self) -> Type {
@@ -1420,13 +1414,11 @@ impl PackSize {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum PackWidth {
     Sse = 1,
     Avx = 2,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=divisor | COMPLEXITY=7 | LINES=8 */
 impl PackWidth {
     fn divisor(&self) -> u64 {
         match self {
@@ -1435,10 +1427,8 @@ impl PackWidth {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 /// Implement an x86 pack instruction with the intrinsic `_mm{,256}pack{us,s}_epi{16,32}`.
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=pack_instruction | COMPLEXITY=18 | LINES=46 */
 /// Validated for correctness against LLVM, see commit `c8f5d35508e062bd2d95e6c03429bfec831db6d3`.
 fn pack_instruction<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

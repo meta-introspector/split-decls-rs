@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/cmp/ord.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MetaItem;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=38 */
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::*;
@@ -43,7 +40,6 @@ pub(crate) fn expand_deriving_ord(
 
     trait_def.expand(cx, mitem, item, push)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=39 */
 
 pub(crate) fn cs_cmp(cx: &ExtCtxt<'_>, span: Span, substr: &Substructure<'_>) -> BlockOrExpr {
     let test_id = Ident::new(sym::cmp, span);

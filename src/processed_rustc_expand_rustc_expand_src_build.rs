@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_expand/src/build.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::token::Delimiter;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::util::literal;
@@ -7,12 +6,9 @@ use crate::rustc_complete::{
     self as ast, AnonConst, AttrItem, AttrVec, BlockCheckMode, Expr, LocalKind, MatchKind, PatKind,
     UnOp, attr, token, tokenstream,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=path | COMPLEXITY=214 | LINES=775 */
 
 use crate::base::ExtCtxt;
 

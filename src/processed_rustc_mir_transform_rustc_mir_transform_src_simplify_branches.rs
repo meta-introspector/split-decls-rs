@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/simplify_branches.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::trace;
@@ -8,7 +7,6 @@ pub(super) enum SimplifyConstCondition {
     AfterConstProp,
     Final,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=name | COMPLEXITY=48 | LINES=59 */
 
 /// A pass that replaces a branch with a goto when its condition is known.
 impl<'tcx> crate::MirPass<'tcx> for SimplifyConstCondition {

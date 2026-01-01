@@ -1,27 +1,20 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/place_op.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Applicability;
 use crate::rustc_hir_analysis::autoderef::Autoderef;
 use crate::rustc_infer::infer::InferOk;
 use crate::rustc_infer::traits::{Obligation, ObligationCauseCode};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, OverloadedDeref,
     PointerCoercion,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::method::MethodCallee;
 use crate::{FnCtxt, PlaceOp};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=negative_index | COMPLEXITY=205 | LINES=395 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// Type-check `*oprnd_expr` with `oprnd_expr` type-checked already.

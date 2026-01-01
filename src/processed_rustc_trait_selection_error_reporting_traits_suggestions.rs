@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/suggestions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // ignore-tidy-filelength
 
 use std::assert_matches::debug_assert_matches;
@@ -8,7 +7,6 @@ use std::iter;
 use std::path::PathBuf;
 
 use itertools::{EitherOrBoth, Itertools};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
@@ -17,20 +15,15 @@ use crate::rustc_complete::{
     Applicability, Diag, EmissionGuarantee, MultiSpan, Style, SuggestionStyle, pluralize,
     struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{Visitor, VisitorExt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{
     self as hir, AmbigArg, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, HirId, Node,
     expr_needs_parens, is_range_literal,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferCtxt, InferOk};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::middle::privacy::Level;
 use crate::rustc_complete::traits::IsConstable;
 use crate::rustc_complete::ty::error::TypeError;
@@ -38,34 +31,27 @@ use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt as _, PrintPolyTraitRefExt, PrintTraitPredicateExt as _,
     with_forced_trimmed_paths, with_no_trimmed_paths, with_types_for_suggestion,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InferTy, IsSuggestable, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitableExt, TypeVisitor, TypeckResults, Upcast,
     suggest_arbitrary_trait_bound, suggest_constraining_type_param,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{
     BytePos, DUMMY_SP, DesugaringKind, ExpnKind, Ident, MacroKind, Span, Symbol, kw, sym,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     DefIdOrName, FindExprBySpan, ImplCandidate, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::error_reporting::TypeErrCtxt;
 use crate::errors;
 use crate::infer::InferCtxtExt as _;
 use crate::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::traits::{ImplDerivedCause, NormalizeExt, ObligationCtxt};
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 pub enum CoroutineInteriorOrUpvar {
@@ -74,7 +60,6 @@ pub enum CoroutineInteriorOrUpvar {
     // span of upvar
     Upvar(Span),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=CoroutineData | COMPLEXITY=11 | LINES=49 */
 
 // This type provides a uniform interface to retrieve data on coroutines, whether it originated from
 // the local crate being compiled or from a foreign crate.
@@ -124,7 +109,6 @@ impl<'a, 'tcx> CoroutineData<'a, 'tcx> {
             .map(|expr| expr.span)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=predicate_constraint | COMPLEXITY=4 | LINES=7 */
 
 fn predicate_constraint(generics: &hir::Generics<'_>, pred: ty::Predicate<'_>) -> (Span, String) {
     (
@@ -132,7 +116,6 @@ fn predicate_constraint(generics: &hir::Generics<'_>, pred: ty::Predicate<'_>) -
         with_types_for_suggestion!(format!("{} {}", generics.add_where_or_trailing_comma(), pred)),
     )
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=suggest_restriction | COMPLEXITY=5 | LINES=15 */
 
 /// Type parameter needs more bounds. The trivial case is `T` `where T: Bound`, but
 /// it can also be an `impl Trait` param that needs to be decomposed to a type
@@ -148,7 +131,6 @@ pub fn suggest_restriction<'tcx, G: EmissionGuarantee>(
     trait_pred: ty::PolyTraitPredicate<'tcx>,
     // When we are dealing with a trait, `super_traits` will be `Some`:
     // Given `trait T: A + B + C {}`
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=57 | LINES=111 */
     //              -  ^^^^^^^^^ GenericBounds
     //              |
     //              &Ident
@@ -260,7 +242,6 @@ pub fn suggest_restriction<'tcx, G: EmissionGuarantee>(
         );
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=suggest_restricting_param_bound | COMPLEXITY=988 | LINES=2037 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub fn suggest_restricting_param_bound(
@@ -2298,7 +2279,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     /// LL |     baz().await;
     ///    |     ^^^^^^^^^^^ await occurs here, with `x` maybe used later
     /// LL | }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
     ///    | - `x` is later dropped here
     /// ```
     ///
@@ -2310,7 +2290,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     ///   --> $DIR/issue-64130-2-send.rs:21:5
     ///    |
     /// LL | fn is_send<T: Send>(t: T) { }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=maybe_note_obligation_cause_for_async_await | COMPLEXITY=19 | LINES=51 */
     ///    |               ---- required by this bound in `is_send`
     /// ...
     /// LL |     is_send(bar());
@@ -2362,7 +2341,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             ty::PredicateKind::Clause(ty::ClauseKind::Trait(p)) => (Some(p), Some(p.self_ty())),
             _ => (None, None),
         };
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=42 | LINES=73 */
         let mut coroutine = None;
         let mut outer_coroutine = None;
         let mut next_code = Some(obligation.cause.code());
@@ -2436,7 +2414,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 _ => break,
             }
         }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
         // Only continue if a coroutine was found.
         debug!(?coroutine, ?trait_ref, ?target_ty);
@@ -2445,7 +2422,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         else {
             return false;
         };
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
         let span = self.tcx.def_span(coroutine_did);
 
@@ -2463,7 +2439,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         if let Some(body) = coroutine_body {
             visitor.visit_body(&body);
         }
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=24 */
         debug!(awaits = ?visitor.awaits);
 
         // Look for a type inside the coroutine interior that matches the target type to get
@@ -2488,7 +2463,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             debug!(?ty_erased, ?target_ty_erased, ?eq);
             eq
         };
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=12 */
 
         // Get the typeck results from the infcx if the coroutine is the function we are currently
         // type-checking; otherwise, get them by performing a query. This is needed to avoid
@@ -2501,13 +2475,11 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
             _ => return false,
         };
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 
         let coroutine_within_in_progress_typeck = match &self.typeck_results {
             Some(t) => t.hir_owner.to_def_id() == coroutine_did_root,
             _ => false,
         };
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=30 */
 
         let mut interior_or_upvar_span = None;
 
@@ -2538,18 +2510,15 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 }
             }
         }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
         if interior_or_upvar_span.is_none() {
             interior_or_upvar_span =
                 coroutine_data.try_get_upvar_span(self, coroutine_did, ty_matches);
         }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
         if interior_or_upvar_span.is_none() && !coroutine_did.is_local() {
             interior_or_upvar_span = Some(CoroutineInteriorOrUpvar::Interior(span, None));
         }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
         debug!(?interior_or_upvar_span);
         if let Some(interior_or_upvar_span) = interior_or_upvar_span {
@@ -2566,10 +2535,8 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             );
             true
         } else {
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             false
         }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=note_obligation_cause_for_async_await | COMPLEXITY=7 | LINES=20 */
     }
 
     /// Unconditionally adds the diagnostic note described in
@@ -2590,9 +2557,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
 
         let (await_or_yield, an_await_or_yield) =
             if is_async { ("await", "an await") } else { ("yield", "a yield") };
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
         let future_or_coroutine = if is_async { "future" } else { "coroutine" };
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=52 | LINES=102 */
 
         // Special case the primary error message when send or sync is the trait that was
         // not implemented.
@@ -2695,10 +2660,8 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
 
             format!("is not {trait_name}")
         } else {
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
             format!("does not implement `{}`", trait_pred.print_modifiers_and_trait_path())
         };
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=23 */
 
         let mut explain_yield = |interior_span: Span, yield_span: Span| {
             let mut span = MultiSpan::from_span(yield_span);
@@ -2722,7 +2685,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             //    |            has type `closure` which is not `Send`
             // note: value is later dropped here
             // LL | |          }).await;
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=29 | LINES=39 */
             //    | |                  ^
             //
             span.push_span_label(
@@ -2762,7 +2724,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     }
                 }
             }
-/* AST_META: AST_ID=39 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=42 | LINES=36 */
             CoroutineInteriorOrUpvar::Upvar(upvar_span) => {
                 // `Some((ref_ty, is_mut))` if `target_ty` is `&T` or `&mut T` and fails to impl `Send`
                 let non_send = match target_ty.kind() {
@@ -2799,7 +2760,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 span.push_span_label(upvar_span, span_label);
                 err.span_note(span, span_note);
             }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=43 */
         }
 
         // Add a note for the item obligation that remains - normally a note pointing to the
@@ -2843,16 +2803,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     Applicability::MaybeIncorrect,
                 );
             }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
         };
         match *cause_code {
             ObligationCauseCode::ExprAssignable
             | ObligationCauseCode::MatchExpressionArm { .. }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
             | ObligationCauseCode::Pattern { .. }
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
             | ObligationCauseCode::IfExpression { .. }
-/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
             | ObligationCauseCode::IfExpressionWithNoElse
             | ObligationCauseCode::MainFunctionType
             | ObligationCauseCode::LangFunctionType(_)
@@ -2868,18 +2824,14 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             | ObligationCauseCode::ForLoopIterator
             | ObligationCauseCode::QuestionMark
             | ObligationCauseCode::CheckAssociatedTypeBounds { .. }
-/* AST_META: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
             | ObligationCauseCode::LetElse
             | ObligationCauseCode::UnOp { .. }
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
             | ObligationCauseCode::BinOp { .. }
-/* AST_META: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
             | ObligationCauseCode::AscribeUserTypeProvePredicate(..)
             | ObligationCauseCode::AlwaysApplicableImpl
             | ObligationCauseCode::ConstParam(_)
             | ObligationCauseCode::ReferenceOutlivesReferent(..)
             | ObligationCauseCode::ObjectTypeBound(..) => {}
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
             ObligationCauseCode::RustCall => {
                 if let Some(pred) = predicate.as_trait_clause()
                     && tcx.is_lang_item(pred.def_id(), LangItem::Sized)
@@ -2887,19 +2839,15 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.note("argument required to be sized due to `extern \"rust-call\"` ABI");
                 }
             }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::SliceOrArrayElem => {
                 err.note("slice and array elements must have `Sized` type");
             }
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3 */
             ObligationCauseCode::ArrayLen(array_ty) => {
                 err.note(format!("the length of array `{array_ty}` must be type `usize`"));
             }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::TupleElem => {
                 err.note("only the last element of a tuple may have a dynamically sized type");
             }
-/* AST_META: AST_ID=52 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
             ObligationCauseCode::DynCompatible(span) => {
                 err.multipart_suggestion(
                     "you might have meant to use `Self` to refer to the implementing type",
@@ -2907,7 +2855,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     Applicability::MachineApplicable,
                 );
             }
-/* AST_META: AST_ID=53 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=139 | LINES=185 */
             ObligationCauseCode::WhereClause(item_def_id, span)
             | ObligationCauseCode::WhereClauseInExpr(item_def_id, span, ..)
             | ObligationCauseCode::HostEffectInExpr(item_def_id, span, ..)
@@ -3093,14 +3040,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.help(help);
                 }
             }
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
             ObligationCauseCode::WhereClause(..)
             | ObligationCauseCode::WhereClauseInExpr(..)
             | ObligationCauseCode::HostEffectInExpr(..) => {
                 // We hold the `DefId` of the item introducing the obligation, but displaying it
                 // doesn't add user usable information. It always point at an associated item.
             }
-/* AST_META: AST_ID=55 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
             ObligationCauseCode::OpaqueTypeBound(span, definition_def_id) => {
                 err.span_note(span, "required by a bound in an opaque type");
                 if let Some(definition_def_id) = definition_def_id
@@ -3117,9 +3062,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     );
                 }
             }
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
             ObligationCauseCode::Coercion { source, target } => {
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
                 let source =
                     tcx.short_string(self.resolve_vars_if_possible(source), err.long_ty_path());
                 let target =
@@ -3128,9 +3071,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     "required for the cast from `{source}` to `{target}`",
                 )));
             }
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
             ObligationCauseCode::RepeatElementCopy { is_constable, elt_span } => {
-/* AST_META: AST_ID=59 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=21 */
                 err.note(
                     "the `Copy` trait is required because this value will be copied for each element of the array",
                 );
@@ -3152,7 +3093,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.help("see https://doc.rust-lang.org/stable/std/array/fn.from_fn.html for more information");
                 }
             }
-/* AST_META: AST_ID=60 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=31 | LINES=56 */
             ObligationCauseCode::VariableType(hir_id) => {
                 if let Some(typeck_results) = &self.typeck_results
                     && let Some(ty) = typeck_results.node_type_opt(hir_id)
@@ -3209,7 +3149,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.note("all local variables must have a statically known size");
                 }
             }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=51 | LINES=93 */
             ObligationCauseCode::SizedArgumentType(hir_id) => {
                 let mut ty = None;
                 let borrowed_msg = "function arguments must have a statically known size, borrowed \
@@ -3303,29 +3242,22 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.help("unsized fn params are gated as an unstable feature");
                 }
             }
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::SizedReturnType | ObligationCauseCode::SizedCallReturnType => {
                 err.note("the return type of a function must have a statically known size");
             }
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::SizedYieldType => {
                 err.note("the yield type of a coroutine must have a statically known size");
             }
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::AssignmentLhsSized => {
                 err.note("the left-hand-side of an assignment must have a statically known size");
             }
-/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::TupleInitializerSized => {
                 err.note("tuples must have a statically known size to be initialized");
             }
-/* AST_META: AST_ID=66 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::StructInitializerSized => {
                 err.note("structs must have a statically known size to be initialized");
             }
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
             ObligationCauseCode::FieldSized { adt_kind: ref item, last, span } => {
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=37 */
                 match *item {
                     AdtKind::Struct => {
                         if last {
@@ -3363,15 +3295,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     Applicability::MachineApplicable,
                 );
             }
-/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::SizedConstOrStatic => {
                 err.note("statics and constants must have a statically known size");
             }
-/* AST_META: AST_ID=70 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::InlineAsmSized => {
                 err.note("all inline asm arguments must have a statically known size");
             }
-/* AST_META: AST_ID=71 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=15 */
             ObligationCauseCode::SizedClosureCapture(closure_def_id) => {
                 err.note(
                     "all values captured by value by a closure must have a statically known size",
@@ -3387,7 +3316,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     err.span_label(span, "this closure captures all values by move");
                 }
             }
-/* AST_META: AST_ID=72 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=18 */
             ObligationCauseCode::SizedCoroutineInterior(coroutine_def_id) => {
                 let what = match tcx.coroutine_kind(coroutine_def_id) {
                     None
@@ -3406,11 +3334,9 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     "all values live across `{what}` must have a statically known size"
                 ));
             }
-/* AST_META: AST_ID=73 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
             ObligationCauseCode::SharedStatic => {
                 err.note("shared static variables must have a type that implements `Sync`");
             }
-/* AST_META: AST_ID=74 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=69 | LINES=128 */
             ObligationCauseCode::BuiltinDerived(ref data) => {
                 let parent_trait_ref = self.resolve_vars_if_possible(data.parent_trait_pred);
                 let ty = parent_trait_ref.skip_binder().self_ty();
@@ -3539,7 +3465,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     });
                 }
             }
-/* AST_META: AST_ID=75 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=66 | LINES=134 */
             ObligationCauseCode::ImplDerived(ref data) => {
                 let mut parent_trait_pred =
                     self.resolve_vars_if_possible(data.derived.parent_trait_pred);
@@ -3674,7 +3599,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     )
                 });
             }
-/* AST_META: AST_ID=76 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=19 | LINES=43 */
             ObligationCauseCode::ImplDerivedHost(ref data) => {
                 let self_ty = tcx.short_string(
                     self.resolve_vars_if_possible(data.derived.parent_host_pred.self_ty()),
@@ -3718,7 +3642,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     )
                 });
             }
-/* AST_META: AST_ID=77 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
             ObligationCauseCode::BuiltinDerivedHost(ref data) => {
                 ensure_sufficient_stack(|| {
                     self.note_obligation_cause_code(
@@ -3732,7 +3655,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     )
                 });
             }
-/* AST_META: AST_ID=78 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
             ObligationCauseCode::WellFormedDerived(ref data) => {
                 let parent_trait_ref = self.resolve_vars_if_possible(data.parent_trait_pred);
                 let parent_predicate = parent_trait_ref;
@@ -3749,7 +3671,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     )
                 });
             }
-/* AST_META: AST_ID=79 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
             ObligationCauseCode::TypeAlias(ref nested, span, def_id) => {
                 // #74711: avoid a stack overflow
                 ensure_sufficient_stack(|| {
@@ -3770,11 +3691,9 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     format!("required by a bound on the type alias `{}`", tcx.item_name(def_id)),
                 );
             }
-/* AST_META: AST_ID=80 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3 */
             ObligationCauseCode::FunctionArg {
                 arg_hir_id, call_hir_id, ref parent_code, ..
             } => {
-/* AST_META: AST_ID=81 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
                 self.note_function_argument_obligation(
                     body_id,
                     err,
@@ -3796,15 +3715,11 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     )
                 });
             }
-/* AST_META: AST_ID=82 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
             // Suppress `compare_type_predicate_entailment` errors for RPITITs, since they
             // should be implied by the parent method.
             ObligationCauseCode::CompareImplItem { trait_item_def_id, .. }
-/* AST_META: AST_ID=83 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
                 if tcx.is_impl_trait_in_trait(trait_item_def_id) => {}
-/* AST_META: AST_ID=84 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
             ObligationCauseCode::CompareImplItem { trait_item_def_id, kind, .. } => {
-/* AST_META: AST_ID=85 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=22 */
                 let item_name = tcx.item_name(trait_item_def_id);
                 let msg = format!(
                     "the requirement `{predicate}` appears on the `impl`'s {kind} \
@@ -3827,12 +3742,10 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 }
                 err.span_note(assoc_span, msg);
             }
-/* AST_META: AST_ID=86 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
             ObligationCauseCode::TrivialBound => {
                 err.help("see issue #48214");
                 tcx.disabled_nightly_features(err, [(String::new(), sym::trivial_bounds)]);
             }
-/* AST_META: AST_ID=87 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=30 */
             ObligationCauseCode::OpaqueReturnType(expr_info) => {
                 let (expr_ty, expr) = if let Some((expr_ty, hir_id)) = expr_info {
                     let expr_ty = tcx.short_string(expr_ty, err.long_ty_path());
@@ -3863,14 +3776,12 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 );
                 suggest_remove_deref(err, &expr);
             }
-/* AST_META: AST_ID=88 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
             ObligationCauseCode::UnsizedNonPlaceExpr(span) => {
                 err.span_note(
                     span,
                     "unsized values must be place expressions and cannot be put in temporaries",
                 );
             }
-/* AST_META: AST_ID=89 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=72 */
         }
     }
 
@@ -3943,7 +3854,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     );
                 }
             }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
         }
     }
 
@@ -3955,7 +3865,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     ) {
         let rhs_span = match obligation.cause.code() {
             ObligationCauseCode::BinOp { rhs_span, rhs_is_lit, .. } if *rhs_is_lit => rhs_span,
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=can_suggest_derive | COMPLEXITY=22 | LINES=36 */
             _ => return,
         };
         if let ty::Float(_) = trait_pred.skip_binder().self_ty().kind()
@@ -3992,7 +3901,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 let rhs_ty = trait_pred.skip_binder().trait_ref.args.type_at(1);
                 trait_pred.skip_binder().self_ty() == rhs_ty
             }
-/* AST_META: AST_ID=92 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
             sym::Eq | sym::Ord | sym::Clone | sym::Copy | sym::Hash | sym::Debug => true,
             _ => false,
         };
@@ -4006,7 +3914,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     }
                     _ => None,
                 };
-/* AST_META: AST_ID=93 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
                 let trait_pred = trait_pred.map_bound_ref(|tr| ty::TraitPredicate {
                     trait_ref: ty::TraitRef::new(self.tcx,
                         trait_pred.def_id(),
@@ -4014,7 +3921,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     ),
                     ..*tr
                 });
-/* AST_META: AST_ID=94 | TYPE=FUNCTION | NAME=suggest_derive | COMPLEXITY=31 | LINES=76 */
                 let field_obl = Obligation::new(
                     self.tcx,
                     obligation.cause.clone(),
@@ -4091,7 +3997,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             && let Some(typeck_results) = &self.typeck_results
         {
             if let hir::Expr { kind: hir::ExprKind::MethodCall(_, rcvr, _, _), .. } = expr
-/* AST_META: AST_ID=95 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
                 && let Some(ty) = typeck_results.node_type_opt(rcvr.hir_id)
                 && let Some(failed_pred) = failed_pred.as_trait_clause()
                 && let pred = failed_pred.map_bound(|pred| pred.with_replaced_self_ty(tcx, ty))
@@ -4110,9 +4015,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                     Applicability::MaybeIncorrect,
                 );
             }
-/* AST_META: AST_ID=96 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=1 */
             if let hir::Expr { kind: hir::ExprKind::Block(block, _), .. } = expr {
-/* AST_META: AST_ID=97 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=104 | LINES=159 */
                 let inner_expr = expr.peel_blocks();
                 let ty = typeck_results
                     .expr_ty_adjusted_opt(inner_expr)
@@ -4272,7 +4175,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=98 | TYPE=FUNCTION | NAME=suggest_option_method_if_applicable | COMPLEXITY=31 | LINES=74 */
 
     fn suggest_option_method_if_applicable<G: EmissionGuarantee>(
         &self,
@@ -4347,7 +4249,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=look_for_iterator_item_mistakes | COMPLEXITY=42 | LINES=107 */
 
     fn look_for_iterator_item_mistakes<G: EmissionGuarantee>(
         &self,
@@ -4455,7 +4356,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=point_at_chain | COMPLEXITY=89 | LINES=168 */
 
     fn point_at_chain<G: EmissionGuarantee>(
         &self,
@@ -4624,7 +4524,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             );
         }
     }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=probe_assoc_types_at_expr | COMPLEXITY=28 | LINES=64 */
 
     fn probe_assoc_types_at_expr(
         &self,
@@ -4689,7 +4588,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         }
         assocs_in_this_method
     }
-/* AST_META: AST_ID=102 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=53 | LINES=75 */
 
     /// If the type that failed selection is an array or a reference to an array,
     /// but the trait is implemented for slices, suggest that the user converts
@@ -4765,7 +4663,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
         }
     }
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=36 */
 
     /// If the type failed selection but the trait is implemented for `(T,)`, suggest that the user
     /// creates a unary tuple
@@ -4802,7 +4699,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             );
         }
     }
-/* AST_META: AST_ID=104 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=66 */
 
     pub(super) fn explain_hrtb_projection(
         &self,
@@ -4869,7 +4765,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             });
         }
     }
-/* AST_META: AST_ID=105 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=84 */
 
     pub(super) fn suggest_desugaring_async_fn_in_trait(
         &self,
@@ -4954,7 +4849,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             Applicability::MachineApplicable,
         );
     }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=ty_kind_suggestion | COMPLEXITY=59 | LINES=66 */
 
     pub fn ty_kind_suggestion(
         &self,
@@ -5021,7 +4915,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             _ => "/* value */".to_string(),
         })
     }
-/* AST_META: AST_ID=107 | TYPE=FUNCTION | NAME=choose_suggest_items | COMPLEXITY=40 | LINES=77 */
 
     // For E0277 when use `?` operator, suggest adding
     // a suitable return type in `FnSig`, and a default
@@ -5099,7 +4992,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 Applicability::MaybeIncorrect,
             );
         }
-/* AST_META: AST_ID=108 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
     }
 
     #[instrument(level = "debug", skip_all)]
@@ -5113,18 +5005,15 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         else {
             return;
         };
-/* AST_META: AST_ID=109 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
         let (ObligationCauseCode::WhereClause(item_def_id, span)
         | ObligationCauseCode::WhereClauseInExpr(item_def_id, span, ..)) =
             *obligation.cause.code().peel_derives()
         else {
             return;
         };
-/* AST_META: AST_ID=110 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
         if span.is_dummy() {
             return;
         }
-/* AST_META: AST_ID=111 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
         debug!(?pred, ?item_def_id, ?span);
 
         let (Some(node), true) = (
@@ -5133,19 +5022,16 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         ) else {
             return;
         };
-/* AST_META: AST_ID=112 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
         let Some(generics) = node.generics() else {
             return;
         };
-/* AST_META: AST_ID=113 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
         let sized_trait = self.tcx.lang_items().sized_trait();
         debug!(?generics.params);
         debug!(?generics.predicates);
         let Some(param) = generics.params.iter().find(|param| param.span == span) else {
             return;
         };
-/* AST_META: AST_ID=114 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
         // Check that none of the explicit trait bounds is `Sized`. Assume that an explicit
         // `Sized` bound is there intentionally and we don't need to suggest relaxing it.
         let explicitly_sized = generics
@@ -5155,7 +5041,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         if explicitly_sized {
             return;
         }
-/* AST_META: AST_ID=115 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=16 */
         debug!(?param);
         match node {
             hir::Node::Item(
@@ -5172,17 +5057,14 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
             _ => {}
         };
-/* AST_META: AST_ID=116 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
 
         // Didn't add an indirection suggestion, so add a general suggestion to relax `Sized`.
         let (span, separator, open_paren_sp) =
             if let Some((s, open_paren_sp)) = generics.bounds_span_for_suggestions(param.def_id) {
                 (s, " +", open_paren_sp)
             } else {
-/* AST_META: AST_ID=117 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
                 (param.name.ident().span.shrink_to_hi(), ":", None)
             };
-/* AST_META: AST_ID=118 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
         let mut suggs = vec![];
         let suggestion = format!("{separator} ?Sized");
@@ -5191,10 +5073,8 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             suggs.push((open_paren_sp, "(".to_string()));
             suggs.push((span, format!("){suggestion}")));
         } else {
-/* AST_META: AST_ID=119 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             suggs.push((span, suggestion));
         }
-/* AST_META: AST_ID=120 | TYPE=FUNCTION | NAME=suggest_indirection_for_unsized | COMPLEXITY=8 | LINES=18 */
 
         err.multipart_suggestion_verbose(
             "consider relaxing the implicit `Sized` restriction",
@@ -5213,12 +5093,10 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         // borrow. `struct S<'a, T: ?Sized>(&'a T);` is valid, `struct S<T: ?Sized>(T);`
         // is not. Look for invalid "bare" parameter uses, and suggest using indirection.
         let mut visitor = FindTypeParam { param: param.name.ident().name, .. };
-/* AST_META: AST_ID=121 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
         visitor.visit_item(item);
         if visitor.invalid_spans.is_empty() {
             return false;
         }
-/* AST_META: AST_ID=122 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=11 */
         let mut multispan: MultiSpan = param.span.into();
         multispan.push_span_label(
             param.span,
@@ -5230,7 +5108,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 format!("...if indirection were used here: `Box<{}>`", param.name.ident()),
             );
         }
-/* AST_META: AST_ID=123 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=52 */
         err.span_help(
             multispan,
             format!(
@@ -5283,7 +5160,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
             }
             _ => {}
         }
-/* AST_META: AST_ID=124 | TYPE=FUNCTION | NAME=hint_missing_borrow | COMPLEXITY=12 | LINES=22 */
     }
 }
 
@@ -5306,14 +5182,12 @@ fn hint_missing_borrow<'tcx>(
         kind => {
             span_bug!(span, "found was converted to a FnPtr above but is now {:?}", kind)
         }
-/* AST_META: AST_ID=125 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
     };
     let expected_args = match expected.kind() {
         ty::FnPtr(sig_tys, _) => infcx.enter_forall(*sig_tys, |sig_tys| sig_tys.inputs().iter()),
         kind => {
             span_bug!(span, "expected was converted to a FnPtr above but is now {:?}", kind)
         }
-/* AST_META: AST_ID=126 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=27 | LINES=48 */
     };
 
     // This could be a variant constructor, for example.
@@ -5362,17 +5236,14 @@ fn hint_missing_borrow<'tcx>(
                 remove_borrow.push(sugg);
             }
         }
-/* AST_META: AST_ID=127 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
     }
 
     if !to_borrow.is_empty() {
         err.subdiagnostic(errors::AdjustSignatureBorrow::Borrow { to_borrow });
-/* AST_META: AST_ID=128 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=4 */
     }
 
     if !remove_borrow.is_empty() {
         err.subdiagnostic(errors::AdjustSignatureBorrow::RemoveBorrow { remove_borrow });
-/* AST_META: AST_ID=129 | TYPE=FUNCTION | NAME=SelfVisitor | COMPLEXITY=10 | LINES=19 */
     }
 }
 
@@ -5392,11 +5263,9 @@ impl<'v> Visitor<'v> for SelfVisitor<'v> {
             && let hir::TyKind::Path(inner_path) = inner_ty.kind
             && let hir::QPath::Resolved(None, inner_path) = inner_path
             && let Res::SelfTyAlias { .. } = inner_path.res
-/* AST_META: AST_ID=130 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         {
             self.paths.push(ty.as_unambig_ty());
         }
-/* AST_META: AST_ID=131 | TYPE=FUNCTION | NAME=ReturnsVisitor | COMPLEXITY=37 | LINES=47 */
         hir::intravisit::walk_ty(self, ty);
     }
 }
@@ -5444,7 +5313,6 @@ impl<'v> Visitor<'v> for ReturnsVisitor<'v> {
             _ if !self.in_block_tail => hir::intravisit::walk_expr(self, ex),
             _ => self.returns.push(ex),
         }
-/* AST_META: AST_ID=132 | TYPE=FUNCTION | NAME=visit_body | COMPLEXITY=12 | LINES=18 */
     }
 
     fn visit_body(&mut self, body: &hir::Body<'v>) {
@@ -5463,10 +5331,8 @@ struct AwaitsVisitor {
 impl<'v> Visitor<'v> for AwaitsVisitor {
     fn visit_expr(&mut self, ex: &'v hir::Expr<'v>) {
         if let hir::ExprKind::Yield(_, hir::YieldSource::Await { expr: Some(id) }) = ex.kind {
-/* AST_META: AST_ID=133 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
             self.awaits.push(id)
         }
-/* AST_META: AST_ID=134 | TYPE=FUNCTION | NAME=next_type_param_name | COMPLEXITY=16 | LINES=27 */
         hir::intravisit::walk_expr(self, ex)
     }
 }
@@ -5494,7 +5360,6 @@ impl NextTypeParamName for &[hir::GenericParam<'_>] {
                 hir::ParamName::Plain(ident) => Some(ident.name),
                 _ => None,
             })
-/* AST_META: AST_ID=135 | TYPE=FUNCTION | NAME=ReplaceImplTraitVisitor | COMPLEXITY=10 | LINES=22 */
             .collect();
 
         // Find a name from `possible_names` that is not in `used_names`.
@@ -5517,7 +5382,6 @@ impl<'a, 'hir> hir::intravisit::Visitor<'hir> for ReplaceImplTraitVisitor<'a> {
         if let hir::TyKind::Path(hir::QPath::Resolved(
             None,
             hir::Path { res: Res::Def(_, segment_did), .. },
-/* AST_META: AST_ID=136 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
         )) = t.kind
         {
             if self.param_did == *segment_did {
@@ -5529,7 +5393,6 @@ impl<'a, 'hir> hir::intravisit::Visitor<'hir> for ReplaceImplTraitVisitor<'a> {
                 return;
             }
         }
-/* AST_META: AST_ID=137 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=20 */
 
         hir::intravisit::walk_ty(self, t);
     }
@@ -5550,13 +5413,11 @@ pub(super) fn get_explanation_based_on_obligation<'tcx>(
             ty::Closure(_, _) => Some("closure"),
             _ => None,
         };
-/* AST_META: AST_ID=138 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 
         let desc = match ty_desc {
             Some(desc) => format!(" {desc}"),
             None => String::new(),
         };
-/* AST_META: AST_ID=139 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=7 */
         if let ty::PredicatePolarity::Positive = trait_predicate.polarity() {
             format!(
                 "{pre_message}the trait `{}` is not implemented for{desc} `{}`",
@@ -5564,13 +5425,11 @@ pub(super) fn get_explanation_based_on_obligation<'tcx>(
                 tcx.short_string(trait_predicate.self_ty().skip_binder(), long_ty_path),
             )
         } else {
-/* AST_META: AST_ID=140 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
             // "the trait bound `T: !Send` is not satisfied" reads better than "`!Send` is
             // not implemented for `T`".
             // FIXME: add note explaining explicit negative trait bounds.
             format!("{pre_message}the trait bound `{trait_predicate}` is not satisfied")
         }
-/* AST_META: AST_ID=141 | TYPE=FUNCTION | NAME=ReplaceImplTraitFolder | COMPLEXITY=10 | LINES=13 */
     }
 }
 
@@ -5584,12 +5443,10 @@ struct ReplaceImplTraitFolder<'tcx> {
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for ReplaceImplTraitFolder<'tcx> {
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
         if let ty::Param(ty::ParamTy { index, .. }) = t.kind() {
-/* AST_META: AST_ID=142 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
             if self.param.index == *index {
                 return self.replace_ty;
             }
         }
-/* AST_META: AST_ID=143 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=29 | LINES=61 */
         t.super_fold_with(self)
     }
 
@@ -5651,13 +5508,11 @@ pub fn suggest_desugaring_async_fn_to_impl_future_in_trait<'tcx>(
         if body_span_without_braces.is_empty() {
             sugg.push((body_span_without_braces, " async {} ".to_owned()));
         } else {
-/* AST_META: AST_ID=144 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
             sugg.extend([
                 (body_span_without_braces.shrink_to_lo(), "async {".to_owned()),
                 (body_span_without_braces.shrink_to_hi(), "} ".to_owned()),
             ]);
         }
-/* AST_META: AST_ID=145 | TYPE=FUNCTION | NAME=point_at_assoc_type_restriction | COMPLEXITY=14 | LINES=30 */
     }
 
     Some(sugg)
@@ -5688,7 +5543,6 @@ fn point_at_assoc_type_restriction<G: EmissionGuarantee>(
         let hir::WherePredicateKind::BoundPredicate(pred) = pred.kind else {
             continue;
         };
-/* AST_META: AST_ID=146 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=60 | LINES=101 */
         let mut bounds = pred.bounds.iter();
         while let Some(bound) = bounds.next() {
             let Some(trait_ref) = bound.trait_ref() else {
@@ -5790,7 +5644,6 @@ fn point_at_assoc_type_restriction<G: EmissionGuarantee>(
                 );
             }
         }
-/* AST_META: AST_ID=147 | TYPE=FUNCTION | NAME=get_deref_type_and_refs | COMPLEXITY=36 | LINES=56 */
         prev = Some((pred, curr_span));
     }
 }
@@ -5847,7 +5700,6 @@ impl<'v> Visitor<'v> for FindTypeParam {
                 hir::intravisit::walk_ty(self, ty);
             }
         }
-/* AST_META: AST_ID=148 | TYPE=FUNCTION | NAME=ParamFinder | COMPLEXITY=13 | LINES=15 */
     }
 }
 
@@ -5863,7 +5715,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ParamFinder {
             ty::Param(p) => self.params.push(p.name),
             _ => {}
         }
-/* AST_META: AST_ID=149 | TYPE=FUNCTION | NAME=can_suggest_bound | COMPLEXITY=6 | LINES=13 */
         t.super_visit_with(self)
     }
 }
@@ -5877,7 +5728,6 @@ impl ParamFinder {
             // would be reasonable.
             return true;
         }
-/* AST_META: AST_ID=150 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
         generics.params.iter().any(|p| match p.name {
             hir::ParamName::Plain(p_name) => {
                 // All of the parameters in the bound can be referenced in the current item.
@@ -5885,6 +5735,5 @@ impl ParamFinder {
             }
             _ => true,
         })
-/* AST_META: AST_ID=151 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
     }
 }

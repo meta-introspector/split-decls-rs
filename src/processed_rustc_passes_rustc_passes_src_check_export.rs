@@ -1,28 +1,21 @@
 // SRC: ../rust/compiler/rustc_passes/src/check_export.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::iter;
 use std::ops::ControlFlow;
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::privacy::{EffectiveVisibility, Level};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor, Visibility,
 };
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ExportableItemCollector | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_complete::Span;
 
@@ -34,7 +27,6 @@ struct ExportableItemCollector<'tcx> {
     in_exportable_mod: bool,
     seen_exportable_in_mod: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=29 | LINES=71 */
 
 impl<'tcx> ExportableItemCollector<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> ExportableItemCollector<'tcx> {
@@ -100,7 +92,6 @@ impl<'tcx> ExportableItemCollector<'tcx> {
 
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=56 | LINES=82 */
 
 impl<'tcx> Visitor<'tcx> for ExportableItemCollector<'tcx> {
     type NestedFilter = nested_filter::All;
@@ -183,14 +174,12 @@ impl<'tcx> Visitor<'tcx> for ExportableItemCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ExportableItemsChecker | COMPLEXITY=2 | LINES=6 */
 
 struct ExportableItemsChecker<'tcx, 'a> {
     tcx: TyCtxt<'tcx>,
     exportable_items: &'a FxIndexSet<DefId>,
     item_id: DefId,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check | COMPLEXITY=50 | LINES=78 */
 
 impl<'tcx, 'a> ExportableItemsChecker<'tcx, 'a> {
     fn check(&mut self) {
@@ -269,7 +258,6 @@ impl<'tcx, 'a> ExportableItemsChecker<'tcx, 'a> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=28 | LINES=55 */
 
 impl<'tcx, 'a> TypeVisitor<TyCtxt<'tcx>> for ExportableItemsChecker<'tcx, 'a> {
     type Result = ControlFlow<Ty<'tcx>>;
@@ -325,7 +313,6 @@ impl<'tcx, 'a> TypeVisitor<TyCtxt<'tcx>> for ExportableItemsChecker<'tcx, 'a> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=exportable_items_provider_local | COMPLEXITY=12 | LINES=23 */
 
 /// Exportable items:
 ///
@@ -349,20 +336,17 @@ fn exportable_items_provider_local<'tcx>(tcx: TyCtxt<'tcx>, _: LocalCrate) -> &'
 
     tcx.arena.alloc_from_iter(exportable_items.into_iter())
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=ImplsOrderVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct ImplsOrderVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     order: FxIndexMap<DefId, usize>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> ImplsOrderVisitor<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> ImplsOrderVisitor<'tcx> {
         ImplsOrderVisitor { tcx, order: Default::default() }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=10 | LINES=18 */
 
 impl<'tcx> Visitor<'tcx> for ImplsOrderVisitor<'tcx> {
     type NestedFilter = nested_filter::All;
@@ -381,7 +365,6 @@ impl<'tcx> Visitor<'tcx> for ImplsOrderVisitor<'tcx> {
         intravisit::walk_item(self, item);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=stable_order_of_exportable_impls | COMPLEXITY=6 | LINES=20 */
 
 /// During symbol mangling rustc uses a special index to distinguish between two impls of
 /// the same type in the same module(See `DisambiguatedDefPathData`). For exportable items
@@ -402,7 +385,6 @@ fn stable_order_of_exportable_impls<'tcx>(
     tcx.hir_walk_toplevel_module(&mut vis);
     tcx.arena.alloc(vis.order)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 // Basic types for managing and implementing lints.
 //
 // See <https://rustc-dev-guide.rust-lang.org/diagnostics.html> for an
@@ -14,39 +13,27 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::{Diag, LintBuffer, LintDiagnostic, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_feature::Features;
 use crate::rustc_complete::def::Res;
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Pat, PatKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::lint::LevelAndSource;
 use crate::rustc_complete::middle::privacy::EffectiveVisibilities;
 use crate::rustc_complete::ty::layout::{LayoutError, LayoutOfHelpers, TyAndLayout};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{PrintError, PrintTraitRefExt as _, Printer, with_no_trimmed_paths};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArg, RegisteredTools, Ty, TyCtxt, TypingEnv, TypingMode};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{FutureIncompatibleInfo, Lint, LintExpectationId, LintId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DynLintStore, Session};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edit_distance::find_best_match_for_names;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_abi as abi, rustc_hir as hir};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use self::TargetLint::*;
 use crate::levels::LintLevelsBuilder;
 use crate::passes::{EarlyLintPassObject, LateLintPassObject};
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LintStore | COMPLEXITY=6 | LINES=28 */
 
 type EarlyLintPassFactory = dyn Fn() -> EarlyLintPassObject + sync::DynSend + sync::DynSync;
 type LateLintPassFactory =
@@ -75,7 +62,6 @@ pub struct LintStore {
     /// Map of registered lint groups to what lints they expand to.
     lint_groups: FxIndexMap<&'static str, LintGroup>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=lint_groups_iter | COMPLEXITY=7 | LINES=8 */
 
 impl DynLintStore for LintStore {
     fn lint_groups_iter(&self) -> Box<dyn Iterator<Item = crate::rustc_session::LintGroup> + '_> {
@@ -84,7 +70,6 @@ impl DynLintStore for LintStore {
         }))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 /// The target of the `by_name` map, which accounts for renaming/deprecation.
 #[derive(Debug)]
@@ -105,21 +90,18 @@ enum TargetLint {
     /// them as tool lints.
     Ignored,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=LintAlias | COMPLEXITY=4 | LINES=6 */
 
 struct LintAlias {
     name: &'static str,
     /// Whether deprecation warnings should be suppressed for this alias.
     silent: bool,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=LintGroup | COMPLEXITY=2 | LINES=6 */
 
 struct LintGroup {
     lint_ids: Vec<LintId>,
     is_externally_loaded: bool,
     depr: Option<LintAlias>,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 #[derive(Debug)]
 pub enum CheckLintNameResult<'a> {
@@ -143,7 +125,6 @@ pub enum CheckLintNameResult<'a> {
     /// never added to the `LintStore`.
     MissingTool,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=204 | LINES=341 */
 
 impl LintStore {
     pub fn new() -> LintStore {
@@ -485,7 +466,6 @@ impl LintStore {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=LateContext | COMPLEXITY=14 | LINES=29 */
 
 /// Context for lint checking outside of type inference.
 pub struct LateContext<'tcx> {
@@ -515,14 +495,12 @@ pub struct LateContext<'tcx> {
     /// We are only looking at one module
     pub only_module: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=EarlyContext | COMPLEXITY=4 | LINES=6 */
 
 /// Context for lint checking of the AST, after expansion, before lowering to HIR.
 pub struct EarlyContext<'a> {
     pub builder: LintLevelsBuilder<'a, crate::levels::TopDown>,
     pub buffered: LintBuffer,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=sess | COMPLEXITY=27 | LINES=101 */
 
 pub trait LintContext {
     fn sess(&self) -> &Session;
@@ -624,7 +602,6 @@ pub trait LintContext {
             .emit();
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 impl<'a> EarlyContext<'a> {
     pub(crate) fn new(
@@ -647,7 +624,6 @@ impl<'a> EarlyContext<'a> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=sess | COMPLEXITY=12 | LINES=26 */
 
 impl<'tcx> LintContext for LateContext<'tcx> {
     /// Gets the overall compiler `Session` object.
@@ -674,7 +650,6 @@ impl<'tcx> LintContext for LateContext<'tcx> {
         self.tcx.lint_level_at_node(lint, self.last_node_with_lint_attrs)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=sess | COMPLEXITY=8 | LINES=21 */
 
 impl LintContext for EarlyContext<'_> {
     /// Gets the overall compiler `Session` object.
@@ -696,7 +671,6 @@ impl LintContext for EarlyContext<'_> {
         self.builder.lint_level(lint)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=typing_mode | COMPLEXITY=161 | LINES=321 */
 
 impl<'tcx> LateContext<'tcx> {
     /// The typing mode of the currently visited node. Use this when
@@ -1018,7 +992,6 @@ impl<'tcx> LateContext<'tcx> {
         expr
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> abi::HasDataLayout for LateContext<'tcx> {
     #[inline]
@@ -1026,7 +999,6 @@ impl<'tcx> abi::HasDataLayout for LateContext<'tcx> {
         &self.tcx.data_layout
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTyCtxt<'tcx> for LateContext<'tcx> {
     #[inline]
@@ -1034,7 +1006,6 @@ impl<'tcx> ty::layout::HasTyCtxt<'tcx> for LateContext<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTypingEnv<'tcx> for LateContext<'tcx> {
     #[inline]
@@ -1042,7 +1013,6 @@ impl<'tcx> ty::layout::HasTypingEnv<'tcx> for LateContext<'tcx> {
         self.typing_env()
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for LateContext<'tcx> {
     type LayoutOfResult = Result<TyAndLayout<'tcx>, LayoutError<'tcx>>;

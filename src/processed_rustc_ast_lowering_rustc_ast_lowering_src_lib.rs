@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=16 | LINES=44 */
 // Lowers the AST to the HIR.
 //
 // Since the AST and HIR are fairly similar, this is mostly a simple procedure,
@@ -44,56 +43,41 @@ use std::sync::Arc;
 
 use crate::rustc_complete::node_id::NodeMap;
 use crate::rustc_complete::{self as ast, *};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_attr_parsing::{AttributeParser, Late, OmitDoc};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::sync::spawn;
 use crate::rustc_data_structures::tagged_ptr::TaggedRef;
 use crate::rustc_complete::{DiagArgFromDisplay, DiagCtxtHandle};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, LifetimeRes, Namespace, PartialRes, PerNS, Res};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::lints::DelayedLint;
 use crate::rustc_complete::{
     self as hir, AngleBrackets, ConstArg, GenericArg, HirId, ItemLocalMap, LifetimeSource,
     LifetimeSyntax, ParamName, Target, TraitCandidate,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexSlice, IndexVec};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_macros::extension;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::add_feature_diagnostics;
 use crate::rustc_complete::symbol::{Ident, Symbol, kw, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Span};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::SmallVec;
 use thin_vec::ThinVec;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{AssocTyParentheses, AssocTyParenthesesSub, MisplacedImplTrait};
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 macro_rules! arena_vec {
     ($this:expr; $($x:expr),*) => (
         $this.arena.alloc_from_iter([$($x),*])
     );
 }
-/* AST_META: AST_ID=15 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=LoweringContext | COMPLEXITY=8 | LINES=58 */
 
 struct LoweringContext<'a, 'hir> {
     tcx: TyCtxt<'hir>,
@@ -152,7 +136,6 @@ struct LoweringContext<'a, 'hir> {
 
     attribute_parser: AttributeParser<'hir>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=new | COMPLEXITY=13 | LINES=60 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     fn new(tcx: TyCtxt<'hir>, resolver: &'a mut ResolverAstLowering) -> Self {
@@ -213,13 +196,11 @@ impl<'a, 'hir> LoweringContext<'a, 'hir> {
         self.tcx.dcx()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=SpanLowerer | COMPLEXITY=2 | LINES=5 */
 
 struct SpanLowerer {
     is_incremental: bool,
     def_id: LocalDefId,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=lower | COMPLEXITY=7 | LINES=11 */
 
 impl SpanLowerer {
     fn lower(&self, span: Span) -> Span {
@@ -231,7 +212,6 @@ impl SpanLowerer {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=legacy_const_generic_args | COMPLEXITY=35 | LINES=58 */
 
 #[extension(trait ResolverAstLoweringExt)]
 impl ResolverAstLowering {
@@ -290,7 +270,6 @@ impl ResolverAstLowering {
         self.extra_lifetime_params_map.get(&id).cloned().unwrap_or_default()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// How relaxed bounds `?Trait` should be treated.
 ///
@@ -302,7 +281,6 @@ enum RelaxedBoundPolicy<'a> {
     AllowedIfOnTyParam(NodeId, &'a [ast::GenericParam]),
     Forbidden(RelaxedBoundForbiddenReason),
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Debug)]
 enum RelaxedBoundForbiddenReason {
@@ -311,7 +289,6 @@ enum RelaxedBoundForbiddenReason {
     AssocTyBounds,
     LateBoundVarsInScope,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
 
 /// Context of `impl Trait` in code, which determines whether it is allowed in an HIR subtree,
 /// and if so, what meaning it has.
@@ -341,7 +318,6 @@ enum ImplTraitContext {
     /// `impl Trait` is not accepted in this position.
     Disallowed(ImplTraitPosition),
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=26 */
 
 /// Position in which `impl Trait` is disallowed.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
@@ -368,7 +344,6 @@ enum ImplTraitPosition {
     ImplSelf,
     OffsetOf,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=30 */
 
 impl std::fmt::Display for ImplTraitPosition {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -399,7 +374,6 @@ impl std::fmt::Display for ImplTraitPosition {
         write!(f, "{name}")
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 enum FnDeclKind {
@@ -411,7 +385,6 @@ enum FnDeclKind {
     Trait,
     Impl,
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone)]
 enum AstOwner<'a> {
@@ -421,7 +394,6 @@ enum AstOwner<'a> {
     AssocItem(&'a ast::AssocItem, visit::AssocCtxt),
     ForeignItem(&'a ast::ForeignItem),
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=index_crate | COMPLEXITY=14 | LINES=43 */
 
 fn index_crate<'a>(
     node_id_to_def_id: &NodeMap<LocalDefId>,
@@ -465,7 +437,6 @@ fn index_crate<'a>(
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=compute_hir_hash | COMPLEXITY=7 | LINES=23 */
 
 /// Compute the hash for the HIR of the full crate.
 /// This hash will then be part of the crate_hash which is stored in the metadata.
@@ -489,7 +460,6 @@ fn compute_hir_hash(
         stable_hasher.finish()
     })
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=lower_to_hir | COMPLEXITY=14 | LINES=40 */
 
 pub fn lower_to_hir(tcx: TyCtxt<'_>, (): ()) -> hir::Crate<'_> {
     let sess = tcx.sess;
@@ -530,7 +500,6 @@ pub fn lower_to_hir(tcx: TyCtxt<'_>, (): ()) -> hir::Crate<'_> {
         if tcx.needs_crate_hash() { Some(compute_hir_hash(tcx, &owners)) } else { None };
     hir::Crate { owners, opt_hir_hash }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 enum ParamMode {
@@ -539,7 +508,6 @@ enum ParamMode {
     /// The `module::Type` in `module::Type::method` in an expression.
     Optional,
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug)]
 enum AllowReturnTypeNotation {
@@ -548,7 +516,6 @@ enum AllowReturnTypeNotation {
     /// All other positions (path expr, method, use tree).
     No,
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 enum GenericArgsMode {
     /// Allow paren sugar, don't allow RTN.
@@ -560,7 +527,6 @@ enum GenericArgsMode {
     /// Silence errors when lowering generics. Only used with `Res::Err`.
     Silence,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=create_def | COMPLEXITY=819 | LINES=2076 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     fn create_def(
@@ -2637,7 +2603,6 @@ impl<'a, 'hir> LoweringContext<'a, 'hir> {
         self.arena.alloc(r)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=GenericArgsCtor | COMPLEXITY=4 | LINES=8 */
 
 /// Helper struct for the delayed construction of [`hir::GenericArgs`].
 struct GenericArgsCtor<'hir> {
@@ -2646,7 +2611,6 @@ struct GenericArgsCtor<'hir> {
     parenthesized: hir::GenericArgsParentheses,
     span: Span,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=6 | LINES=18 */
 
 impl<'hir> GenericArgsCtor<'hir> {
     fn is_empty(&self) -> bool {

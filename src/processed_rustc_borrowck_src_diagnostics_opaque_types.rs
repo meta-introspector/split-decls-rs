@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/opaque_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
@@ -9,15 +8,12 @@ use either::Either;
 use itertools::Itertools as _;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::{Diag, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::mir::{self, ConstraintCategory, Location};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=99 | LINES=195 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::error_reporting::infer::region::unexpected_hidden_region_diagnostic;
 use crate::rustc_trait_selection::errors::impl_trait_overcapture_suggestion;
@@ -213,7 +209,6 @@ impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=FindOpaqueRegion | COMPLEXITY=4 | LINES=7 */
 
 /// This visitor contains the bulk of the logic for this lint.
 struct FindOpaqueRegion<'a, 'tcx> {
@@ -221,7 +216,6 @@ struct FindOpaqueRegion<'a, 'tcx> {
     regioncx: &'a RegionInferenceContext<'tcx>,
     borrow_region: ty::RegionVid,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=36 | LINES=50 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for FindOpaqueRegion<'_, 'tcx> {
     type Result = ControlFlow<(DefId, usize, Location), ()>;
@@ -272,7 +266,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for FindOpaqueRegion<'_, 'tcx> {
         ty.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CheckExplicitRegionMentionAndCollectGenerics | COMPLEXITY=2 | LINES=8 */
 
 struct CheckExplicitRegionMentionAndCollectGenerics<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -281,7 +274,6 @@ struct CheckExplicitRegionMentionAndCollectGenerics<'tcx> {
     seen_opaques: FxIndexSet<DefId>,
     seen_lifetimes: FxIndexSet<DefId>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=28 | LINES=36 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for CheckExplicitRegionMentionAndCollectGenerics<'tcx> {
     type Result = ControlFlow<(), ()>;

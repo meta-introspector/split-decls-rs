@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=58 */
 // Polonius analysis and support code:
 // - dedicated constraints
 // - conversion from NLL constraints
@@ -52,9 +51,7 @@ use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_index::bit_set::SparseBitMatrix;
 use crate::rustc_index::interval::SparseIntervalMatrix;
 use crate::rustc_complete::mir::{Body, Local};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{RegionVid, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_mir_dataflow::points::PointIndex;
 
 pub(crate) use self::constraints::*;
@@ -64,7 +61,6 @@ use self::loan_liveness::compute_loan_liveness;
 use self::typeck_constraints::convert_typeck_constraints;
 use crate::dataflow::BorrowIndex;
 use crate::{BorrowSet, RegionInferenceContext};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 pub(crate) type LiveLoans = SparseBitMatrix<PointIndex, BorrowIndex>;
 
@@ -82,7 +78,6 @@ pub(crate) struct PoloniusLivenessContext {
     /// diagnostics, to focus on the locals we consider relevant and match NLL diagnostics.
     pub(crate) boring_nll_locals: FxHashSet<Local>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 /// This struct holds the data needed to create the Polonius localized constraints. Its data is
 /// transferred and converted from the [PoloniusLivenessContext] at the end of MIR typeck.
@@ -94,7 +89,6 @@ pub(crate) struct PoloniusContext {
     /// outlives constraints between regions that are live at connected points in the CFG.
     live_regions: SparseBitMatrix<PointIndex, RegionVid>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 /// This struct holds the data needed by the borrowck error computation and diagnostics. Its data is
 /// computed from the [PoloniusContext] when computing NLL regions.
@@ -105,7 +99,6 @@ pub(crate) struct PoloniusDiagnosticsContext {
     /// The liveness data computed during MIR typeck: [PoloniusLivenessContext::boring_nll_locals].
     pub(crate) boring_nll_locals: FxHashSet<Local>,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// The direction a constraint can flow into. Used to create liveness constraints according to
 /// variance.
@@ -120,7 +113,6 @@ enum ConstraintDirection {
     /// For invariant cases, we add both the forward and backward edges `O at P1 <-> O at P2`.
     Bidirectional,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=74 */
 
 impl PoloniusContext {
     /// Unlike NLLs, in polonius we traverse the cfg to look for regions live across an edge, so we

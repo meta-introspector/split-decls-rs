@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/block.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_complete::Target;
 use crate::rustc_complete::sym;
 use smallvec::SmallVec;
 
 use crate::{ImplTraitContext, ImplTraitPosition, LoweringContext};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=lower_stmts | COMPLEXITY=60 | LINES=118 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     pub(super) fn lower_block(

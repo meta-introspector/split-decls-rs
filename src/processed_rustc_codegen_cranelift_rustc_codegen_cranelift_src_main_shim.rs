@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/main_shim.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::ty::{AssocTag, GenericArg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::EntryFnType;
 use crate::rustc_complete::{DUMMY_SP, Ident};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=create_entry_fn | COMPLEXITY=58 | LINES=161 */
 
 use crate::prelude::*;
 

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/relate/generalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::mem;
 
 use crate::rustc_data_structures::sso::SsoHashMap;
@@ -11,40 +10,33 @@ use crate::rustc_complete::ty::{
     self, AliasRelationDirection, InferConst, Term, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument, warn};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::{
     PredicateEmittingRelation, Relate, RelateResult, StructurallyRelateAliases, TypeRelation,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::infer::type_variable::TypeVariableValue;
 use crate::infer::unify_key::ConstVariableValue;
 use crate::infer::{InferCtxt, RegionVariableOrigin, relate};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Eq, PartialEq, Debug)]
 enum TermVid {
     Ty(ty::TyVid),
     Const(ty::ConstVid),
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ty::TyVid> for TermVid {
     fn from(value: ty::TyVid) -> Self {
         TermVid::Ty(value)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ty::ConstVid> for TermVid {
     fn from(value: ty::ConstVid) -> Self {
         TermVid::Const(value)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=instantiate_ty_var | COMPLEXITY=100 | LINES=253 */
 
 impl<'tcx> InferCtxt<'tcx> {
     /// The idea is that we should ensure that the type variable `target_vid`
@@ -298,13 +290,11 @@ impl<'tcx> InferCtxt<'tcx> {
         Ok(Generalization { value_may_be_infer, has_unconstrained_ty_var })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=MaxUniverse | COMPLEXITY=2 | LINES=5 */
 
 /// Finds the max universe present
 struct MaxUniverse {
     max_universe: ty::UniverseIndex,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=10 */
 
 impl MaxUniverse {
     fn new() -> Self {
@@ -315,7 +305,6 @@ impl MaxUniverse {
         self.max_universe
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=17 | LINES=24 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for MaxUniverse {
     fn visit_ty(&mut self, t: Ty<'tcx>) {
@@ -340,7 +329,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for MaxUniverse {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Generalizer | COMPLEXITY=12 | LINES=52 */
 
 /// The "generalizer" is used when handling inference variables.
 ///
@@ -393,7 +381,6 @@ struct Generalizer<'me, 'tcx> {
     /// See the field `has_unconstrained_ty_var` in `Generalization`.
     has_unconstrained_ty_var: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=cyclic_term_error | COMPLEXITY=42 | LINES=75 */
 
 impl<'tcx> Generalizer<'_, 'tcx> {
     /// Create an error that corresponds to the term kind in `root_term`
@@ -469,7 +456,6 @@ impl<'tcx> Generalizer<'_, 'tcx> {
         result
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=155 | LINES=305 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for Generalizer<'_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -775,7 +761,6 @@ impl<'tcx> TypeRelation<TyCtxt<'tcx>> for Generalizer<'_, 'tcx> {
         Ok(a.rebind(result))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Generalization | COMPLEXITY=16 | LINES=40 */
 
 /// Result from a generalization operation. This includes
 /// not only the generalized type, but also a bool flag

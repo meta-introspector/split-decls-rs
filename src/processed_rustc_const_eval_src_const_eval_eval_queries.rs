@@ -1,41 +1,29 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/eval_queries.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::atomic::Ordering::Relaxed;
 
 use either::{Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{self as abi, BackendRepr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::E0080;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, InterpErrorInfo, ReportedErrorInfo};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, ConstAlloc, ConstValue};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::TyCtxtAt;
 use crate::rustc_complete::ty::layout::HasTypingEnv;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, throw_inval};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{CanAccessMutGlobal, CompileTimeInterpCx, CompileTimeMachine};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::const_eval::CheckAlignment;
 use crate::interpret::{
     CtfeValidationMode, GlobalId, Immediate, InternError, InternKind, InterpCx, InterpErrorKind,
     InterpResult, MPlaceTy, MemoryKind, OpTy, RefTracking, ReturnContinuation, create_static_alloc,
     intern_const_alloc_recursive, interp_ok, throw_exhaust,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CTRL_C_RECEIVED, errors};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=eval_body_using_ecx | COMPLEXITY=48 | LINES=105 */
 
 // Returns a pointer to where the result lives
 #[instrument(level = "trace", skip(ecx, body))]
@@ -141,7 +129,6 @@ fn eval_body_using_ecx<'tcx, R: InterpretationResult<'tcx>>(
 
     interp_ok(R::make_result(ret, ecx))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=25 */
 
 /// The `InterpCx` is only meant to be used to do field and index projections into constants for
 /// `simd_shuffle` and const patterns in match arms.
@@ -167,7 +154,6 @@ pub(crate) fn mk_eval_cx_to_read_const_val<'tcx>(
         CompileTimeMachine::new(can_access_mut_global, CheckAlignment::No),
     )
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mk_eval_cx_for_const_val | COMPLEXITY=3 | LINES=14 */
 
 /// Create an interpreter context to inspect the given `ConstValue`.
 /// Returns both the context and an `OpTy` that represents the constant.
@@ -182,7 +168,6 @@ pub fn mk_eval_cx_for_const_val<'tcx>(
     let op = ecx.const_val_to_op(val, ty, None).discard_err()?;
     Some((ecx, op))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=71 | LINES=89 */
 
 /// This function converts an interpreter value into a MIR constant.
 ///
@@ -272,7 +257,6 @@ pub(super) fn op_to_const<'tcx>(
         },
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=30 */
 
 #[instrument(skip(tcx), level = "debug", ret)]
 pub(crate) fn turn_into_const_value<'tcx>(
@@ -303,7 +287,6 @@ pub(crate) fn turn_into_const_value<'tcx>(
     // Turn this into a proper constant.
     op_to_const(&ecx, &mplace.into(), /* for diagnostics */ false)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=eval_to_const_value_raw_provider | COMPLEXITY=2 | LINES=8 */
 
 #[instrument(skip(tcx), level = "debug")]
 pub fn eval_to_const_value_raw_provider<'tcx>(
@@ -312,7 +295,6 @@ pub fn eval_to_const_value_raw_provider<'tcx>(
 ) -> ::crate::rustc_middle::mir::interpret::EvalToConstValueResult<'tcx> {
     tcx.eval_to_allocation_raw(key).map(|val| turn_into_const_value(tcx, val, key))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=eval_static_initializer_provider | COMPLEXITY=3 | LINES=12 */
 
 #[instrument(skip(tcx), level = "debug")]
 pub fn eval_static_initializer_provider<'tcx>(
@@ -325,7 +307,6 @@ pub fn eval_static_initializer_provider<'tcx>(
     let cid = crate::rustc_middle::mir::interpret::GlobalId { instance, promoted: None };
     eval_in_interpreter(tcx, cid, ty::TypingEnv::fully_monomorphized())
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=make_result | COMPLEXITY=4 | LINES=10 */
 
 pub trait InterpretationResult<'tcx> {
     /// This function takes the place where the result of the evaluation is stored
@@ -336,7 +317,6 @@ pub trait InterpretationResult<'tcx> {
         ecx: &mut InterpCx<'tcx, CompileTimeMachine<'tcx>>,
     ) -> Self;
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=make_result | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> InterpretationResult<'tcx> for ConstAlloc<'tcx> {
     fn make_result(
@@ -346,7 +326,6 @@ impl<'tcx> InterpretationResult<'tcx> for ConstAlloc<'tcx> {
         ConstAlloc { alloc_id: mplace.ptr().provenance.unwrap().alloc_id(), ty: mplace.layout.ty }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=eval_to_allocation_raw_provider | COMPLEXITY=15 | LINES=24 */
 
 #[instrument(skip(tcx), level = "debug")]
 pub fn eval_to_allocation_raw_provider<'tcx>(
@@ -371,7 +350,6 @@ pub fn eval_to_allocation_raw_provider<'tcx>(
 
     eval_in_interpreter(tcx, key.value, key.typing_env)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=eval_in_interpreter | COMPLEXITY=4 | LINES=24 */
 
 fn eval_in_interpreter<'tcx, R: InterpretationResult<'tcx>>(
     tcx: TyCtxt<'tcx>,
@@ -396,7 +374,6 @@ fn eval_in_interpreter<'tcx, R: InterpretationResult<'tcx>>(
         .report_err()
         .map_err(|error| report_eval_error(&ecx, cid, error))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=const_validate_mplace | COMPLEXITY=16 | LINES=31 */
 
 #[inline(always)]
 fn const_validate_mplace<'tcx>(
@@ -428,7 +405,6 @@ fn const_validate_mplace<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=report_eval_error | COMPLEXITY=8 | LINES=31 */
 
 #[inline(never)]
 fn report_eval_error<'tcx>(
@@ -460,7 +436,6 @@ fn report_eval_error<'tcx>(
         },
     )
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=report_validation_error | COMPLEXITY=12 | LINES=38 */
 
 #[inline(never)]
 fn report_validation_error<'tcx>(

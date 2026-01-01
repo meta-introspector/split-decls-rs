@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/search_graph/global_cache.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use derive_where::derive_where;
 
 use super::{AvailableDepth, Cx, NestedGoals};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Success | COMPLEXITY=2 | LINES=8 */
 use crate::data_structures::HashMap;
 use crate::search_graph::EvaluationResult;
 
@@ -12,13 +10,11 @@ struct Success<X: Cx> {
     nested_goals: NestedGoals<X>,
     result: X::Tracked<X::Result>,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=WithOverflow | COMPLEXITY=2 | LINES=5 */
 
 struct WithOverflow<X: Cx> {
     nested_goals: NestedGoals<X>,
     result: X::Tracked<X::Result>,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=CacheEntry | COMPLEXITY=4 | LINES=11 */
 
 /// The cache entry for a given input.
 ///
@@ -30,7 +26,6 @@ struct CacheEntry<X: Cx> {
     success: Option<Success<X>>,
     with_overflow: HashMap<usize, WithOverflow<X>>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive_where(Debug; X: Cx)]
 pub(super) struct CacheData<'a, X: Cx> {
@@ -39,12 +34,10 @@ pub(super) struct CacheData<'a, X: Cx> {
     pub(super) encountered_overflow: bool,
     pub(super) nested_goals: &'a NestedGoals<X>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=GlobalCache | COMPLEXITY=2 | LINES=4 */
 #[derive_where(Default; X: Cx)]
 pub struct GlobalCache<X: Cx> {
     map: HashMap<X::Input, CacheEntry<X>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=71 */
 
 impl<X: Cx> GlobalCache<X> {
     /// Insert a final result into the global cache.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/parser.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // This is in essence an (improved) duplicate of `rustc_ast/attr/mod.rs`.
 // That module is intended to be deleted in its entirety.
 //
@@ -7,26 +6,18 @@
 
 use std::borrow::Cow;
 use std::fmt::{Debug, Display};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_complete::token::{self, Delimiter, MetaVarKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, NormalAttr, Path};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::{Diag, PResult};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AttrPath};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_parse::exp;
 use crate::rustc_parse::parser::{Parser, PathStyle, token_descr};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::errors::{create_lit_error, report_lit_error};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use thin_vec::ThinVec;
 
 use crate::ShouldEmit;
@@ -34,7 +25,6 @@ use crate::session_diagnostics::{
     InvalidMetaItem, InvalidMetaItemQuoteIdentSugg, InvalidMetaItemRemoveNegSugg, MetaBadDelim,
     MetaBadDelimSugg, SuffixedLiteralInAttribute,
 };
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=PathParser | COMPLEXITY=20 | LINES=51 */
 
 #[derive(Clone, Debug)]
 pub struct PathParser<'a>(pub Cow<'a, Path>);
@@ -86,14 +76,12 @@ impl<'a> PathParser<'a> {
         segments.len() < self.len() && self.segments().zip(segments).all(|(a, b)| a.name == *b)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl Display for PathParser<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", pprust::path_to_string(&self.0))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug)]
 #[must_use]
@@ -102,7 +90,6 @@ pub enum ArgParser<'a> {
     List(MetaItemListParser<'a>),
     NameValue(NameValueParser),
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span | COMPLEXITY=240 | LINES=493 */
 
 impl<'a> ArgParser<'a> {
     pub fn span(&self) -> Option<Span> {

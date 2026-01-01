@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/deprecation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::prelude::*;
 use super::util::parse_version;
 use crate::session_diagnostics::{
     DeprecatedItemSuggestion, InvalidSince, MissingNote, MissingSince,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=get | COMPLEXITY=14 | LINES=26 */
 
 pub(crate) struct DeprecationParser;
 
@@ -35,7 +32,6 @@ fn get<S: Stage>(
         None
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=70 | LINES=131 */
 
 impl<S: Stage> SingleAttributeParser<S> for DeprecationParser {
     const PATH: &[Symbol] = &[sym::deprecated];

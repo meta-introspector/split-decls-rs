@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/source_map/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=init_source_map | COMPLEXITY=2 | LINES=9 */
 use super::*;
 
 fn init_source_map() -> SourceMap {
@@ -9,7 +8,6 @@ fn init_source_map() -> SourceMap {
     sm.new_source_file(PathBuf::from("blork2.rs").into(), "first line.\nsecond line".to_string());
     sm
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=merge_spans | COMPLEXITY=25 | LINES=45 */
 
 impl SourceMap {
     /// Returns `Some(span)`, a union of the LHS and RHS span. The LHS must precede the RHS. If
@@ -55,7 +53,6 @@ impl SourceMap {
         sf.bytepos_to_file_charpos(bpos)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=t3 | COMPLEXITY=3 | LINES=18 */
 
 /// Tests `lookup_byte_offset`.
 #[test]
@@ -74,7 +71,6 @@ fn t3() {
     assert_eq!(srcfbp2.sf.name, PathBuf::from("blork2.rs").into());
     assert_eq!(srcfbp2.pos, BytePos(0));
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=t4 | COMPLEXITY=2 | LINES=12 */
 
 /// Tests `bytepos_to_file_charpos`.
 #[test]
@@ -87,7 +83,6 @@ fn t4() {
     let cp2 = sm.bytepos_to_file_charpos(BytePos(25));
     assert_eq!(cp2, CharPos(0));
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=t5 | COMPLEXITY=2 | LINES=16 */
 
 /// Tests zero-length `SourceFile`s.
 #[test]
@@ -104,7 +99,6 @@ fn t5() {
     assert_eq!(loc2.line, 1);
     assert_eq!(loc2.col, CharPos(0));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=init_source_map_mbc | COMPLEXITY=2 | LINES=14 */
 
 fn init_source_map_mbc() -> SourceMap {
     let sm = SourceMap::new(FilePathMapping::empty());
@@ -119,7 +113,6 @@ fn init_source_map_mbc() -> SourceMap {
     );
     sm
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=t6 | COMPLEXITY=2 | LINES=18 */
 
 /// Tests `bytepos_to_file_charpos` in the presence of multi-byte chars.
 #[test]
@@ -138,7 +131,6 @@ fn t6() {
     let cp4 = sm.bytepos_to_file_charpos(BytePos(61));
     assert_eq!(cp4, CharPos(15));
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=t7 | COMPLEXITY=4 | LINES=12 */
 
 /// Test `span_to_lines` for a span ending at the end of a `SourceFile`.
 #[test]
@@ -151,7 +143,6 @@ fn t7() {
     assert_eq!(file_lines.lines.len(), 1);
     assert_eq!(file_lines.lines[0].line_index, 1);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=span_from_selection | COMPLEXITY=3 | LINES=11 */
 
 /// Given a string like " ~~~~~~~~~~~~ ", produces a span
 /// converting that range. The idea is that the string has the same
@@ -163,7 +154,6 @@ fn span_from_selection(input: &str, selection: &str) -> Span {
     let right_index = selection.rfind('~').map_or(left_index, |x| x as u32);
     Span::with_root_ctxt(BytePos(left_index), BytePos(right_index + 1))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=span_to_snippet_and_lines_spanning_multiple_lines | COMPLEXITY=9 | LINES=23 */
 
 /// Tests `span_to_snippet` and `span_to_lines` for a span converting 3
 /// lines in the middle of a file.
@@ -187,7 +177,6 @@ fn span_to_snippet_and_lines_spanning_multiple_lines() {
     ];
     assert_eq!(lines.lines, expected);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=t8 | COMPLEXITY=4 | LINES=10 */
 
 /// Test span_to_snippet for a span ending at the end of a `SourceFile`.
 #[test]
@@ -198,7 +187,6 @@ fn t8() {
 
     assert_eq!(snippet, Ok("second line".to_string()));
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=t9 | COMPLEXITY=4 | LINES=10 */
 
 /// Test `span_to_str` for a span ending at the end of a `SourceFile`.
 #[test]
@@ -209,7 +197,6 @@ fn t9() {
 
     assert_eq!(sstr, "blork.rs:2:1: 2:12");
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span_merging_fail | COMPLEXITY=3 | LINES=14 */
 
 /// Tests failing to merge two spans on different lines.
 #[test]
@@ -224,7 +211,6 @@ fn span_merging_fail() {
 
     assert!(sm.merge_spans(span1, span2).is_none());
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=t10 | COMPLEXITY=5 | LINES=52 */
 
 /// Tests loading an external source file that requires normalization.
 #[test]
@@ -277,13 +263,11 @@ fn t10() {
         "imported source file should be normalized"
     );
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=path | COMPLEXITY=2 | LINES=5 */
 
 // Takes a unix-style path and returns a platform specific path.
 fn path(p: &str) -> PathBuf {
     path_str(p).into()
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=path_str | COMPLEXITY=7 | LINES=18 */
 
 // Takes a unix-style path and returns a platform specific path.
 fn path_str(p: &str) -> String {
@@ -302,7 +286,6 @@ fn path_str(p: &str) -> String {
         path
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=map_path_prefix | COMPLEXITY=2 | LINES=8 */
 
 fn map_path_prefix(mapping: &FilePathMapping, p: &str) -> String {
     // It's important that we convert to a string here because that's what
@@ -311,12 +294,10 @@ fn map_path_prefix(mapping: &FilePathMapping, p: &str) -> String {
     // compare as equal.
     mapping.map_prefix(path(p)).0.to_string_lossy().to_string()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=reverse_map_prefix | COMPLEXITY=2 | LINES=4 */
 
 fn reverse_map_prefix(mapping: &FilePathMapping, p: &str) -> Option<String> {
     mapping.reverse_map_prefix_heuristically(&path(p)).map(|q| q.to_string_lossy().to_string())
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=path_prefix_remapping | COMPLEXITY=9 | LINES=51 */
 
 #[test]
 fn path_prefix_remapping() {
@@ -368,7 +349,6 @@ fn path_prefix_remapping() {
         assert_eq!(map_path_prefix(mapping, "/abc/def"), path_str("/foo"));
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=path_prefix_remapping_expand_to_absolute | COMPLEXITY=26 | LINES=104 */
 
 #[test]
 fn path_prefix_remapping_expand_to_absolute() {
@@ -473,7 +453,6 @@ fn path_prefix_remapping_expand_to_absolute() {
         RealFileName::Remapped { local_path: None, virtual_name: path("XYZ/src/main.rs") }
     );
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=path_prefix_remapping_expand_to_absolute_and_local | COMPLEXITY=13 | LINES=65 */
 
 #[test]
 fn path_prefix_remapping_expand_to_absolute_and_local() {
@@ -539,7 +518,6 @@ fn path_prefix_remapping_expand_to_absolute_and_local() {
         RealFileName::Remapped { local_path: None, virtual_name: path("XYZ/src/main.rs") }
     );
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=path_prefix_remapping_reverse | COMPLEXITY=9 | LINES=44 */
 
 #[test]
 fn path_prefix_remapping_reverse() {
@@ -584,7 +562,6 @@ fn path_prefix_remapping_reverse() {
         );
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=test_next_point | COMPLEXITY=5 | LINES=46 */
 
 #[test]
 fn test_next_point() {
@@ -631,7 +608,6 @@ fn test_next_point() {
     assert_eq!(span.hi().0, 6);
     assert!(sm.span_to_snippet(span).is_err());
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=read_binary_file_handles_lying_stat | COMPLEXITY=4 | LINES=27 */
 
 #[cfg(target_os = "linux")]
 #[test]

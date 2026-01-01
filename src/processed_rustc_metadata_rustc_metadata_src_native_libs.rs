@@ -1,30 +1,22 @@
 // SRC: ../rust/compiler/rustc_metadata/src/native_libs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ops::ControlFlow;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::CRATE_NODE_ID;
 use rustc_attr_parsing::{ShouldEmit, eval_config_entry};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::attrs::{AttributeKind, NativeLibKind, PeImportNameType};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::query::LocalCrate;
 use crate::rustc_complete::ty::{self, List, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_complete::cstore::{DllCallingConvention, DllImport, ForeignModule, NativeLib};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::search_paths::PathKind;
 use crate::rustc_complete::Symbol;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{BinaryFormat, LinkSelfContainedComponents};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NativeLibSearchFallback | COMPLEXITY=2 | LINES=10 */
 
 use crate::errors;
 
@@ -35,7 +27,6 @@ pub struct NativeLibSearchFallback<'a> {
     pub self_contained_components: LinkSelfContainedComponents,
     pub apple_sdk_root: Option<&'a Path>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=walk_native_lib_search_dirs | COMPLEXITY=29 | LINES=61 */
 
 pub fn walk_native_lib_search_dirs<R>(
     sess: &Session,
@@ -97,7 +88,6 @@ pub fn walk_native_lib_search_dirs<R>(
 
     ControlFlow::Continue(())
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=try_find_native_static_library | COMPLEXITY=24 | LINES=29 */
 
 pub fn try_find_native_static_library(
     sess: &Session,
@@ -127,7 +117,6 @@ pub fn try_find_native_static_library(
     })
     .break_value()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_find_native_dynamic_library | COMPLEXITY=24 | LINES=32 */
 
 pub fn try_find_native_dynamic_library(
     sess: &Session,
@@ -160,13 +149,11 @@ pub fn try_find_native_dynamic_library(
     })
     .break_value()
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=find_native_static_library | COMPLEXITY=2 | LINES=5 */
 
 pub fn find_native_static_library(name: &str, verbatim: bool, sess: &Session) -> PathBuf {
     try_find_native_static_library(sess, name, verbatim)
         .unwrap_or_else(|| sess.dcx().emit_fatal(errors::MissingNativeLibrary::new(name, verbatim)))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=find_bundled_library | COMPLEXITY=7 | LINES=21 */
 
 fn find_bundled_library(
     name: Symbol,
@@ -188,7 +175,6 @@ fn find_bundled_library(
     }
     None
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 pub(crate) fn collect(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> Vec<NativeLib> {
     let mut collector = Collector { tcx, libs: Vec::new() };
@@ -200,7 +186,6 @@ pub(crate) fn collect(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> Vec<NativeLib>
     collector.process_command_line();
     collector.libs
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 pub(crate) fn relevant_lib(sess: &Session, lib: &NativeLib) -> bool {
     match lib.cfg {
@@ -210,13 +195,11 @@ pub(crate) fn relevant_lib(sess: &Session, lib: &NativeLib) -> bool {
         None => true,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Collector | COMPLEXITY=2 | LINES=5 */
 
 struct Collector<'tcx> {
     tcx: TyCtxt<'tcx>,
     libs: Vec<NativeLib>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=process_module | COMPLEXITY=152 | LINES=261 */
 
 impl<'tcx> Collector<'tcx> {
     fn process_module(&mut self, module: &ForeignModule) {

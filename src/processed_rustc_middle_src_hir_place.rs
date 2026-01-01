@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_middle/src/hir/place.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::HirId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 use crate::ty;
 use crate::ty::Ty;
@@ -21,7 +18,6 @@ pub enum PlaceBase {
     /// An upvar referenced by closure env.
     Upvar(ty::UpvarId),
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=30 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -52,7 +48,6 @@ pub enum ProjectionKind {
     /// `unwrap_binder!(expr)`
     UnwrapUnsafeBinder,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Projection | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -63,7 +58,6 @@ pub struct Projection<'tcx> {
     /// Defines the kind of access made by the projection.
     pub kind: ProjectionKind,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Place | COMPLEXITY=3 | LINES=17 */
 
 /// A `Place` represents how a value is located in memory. This does not
 /// always correspond to a syntactic place expression. For example, when
@@ -81,7 +75,6 @@ pub struct Place<'tcx> {
     /// How this place is derived from the base place.
     pub projections: Vec<Projection<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PlaceWithHirId | COMPLEXITY=3 | LINES=15 */
 
 /// A `PlaceWithHirId` represents how a value is located in memory. This does not
 /// always correspond to a syntactic place expression. For example, when
@@ -97,7 +90,6 @@ pub struct PlaceWithHirId<'tcx> {
     /// Information about the `Place`.
     pub place: Place<'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> PlaceWithHirId<'tcx> {
     pub fn new(
@@ -109,7 +101,6 @@ impl<'tcx> PlaceWithHirId<'tcx> {
         PlaceWithHirId { hir_id, place: Place { base_ty, base, projections } }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=deref_tys | COMPLEXITY=16 | LINES=30 */
 
 impl<'tcx> Place<'tcx> {
     /// Returns an iterator of the types that have to be dereferenced to access

@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/link_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::Features;
 use crate::rustc_complete::attrs::AttributeKind::{LinkName, LinkOrdinal, LinkSection};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 use crate::rustc_complete::attrs::*;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::feature_err;
@@ -19,7 +17,6 @@ use crate::session_diagnostics::{
     LinkRequiresName, MultipleModifiers, NullOnLinkSection, RawDylibNoNul, RawDylibOnlyWindows,
     WholeArchiveNeedsStatic,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=10 | LINES=29 */
 
 pub(crate) struct LinkNameParser;
 
@@ -49,7 +46,6 @@ impl<S: Stage> SingleAttributeParser<S> for LinkNameParser {
         Some(LinkName { name, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=112 | LINES=195 */
 
 pub(crate) struct LinkParser;
 
@@ -245,7 +241,6 @@ impl<S: Stage> CombineAttributeParser<S> for LinkParser {
         })
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parse_link_name | COMPLEXITY=98 | LINES=219 */
 
 impl LinkParser {
     fn parse_link_name<S: Stage>(
@@ -465,7 +460,6 @@ impl LinkParser {
         true
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=17 | LINES=39 */
 
 pub(crate) struct LinkSectionParser;
 
@@ -505,7 +499,6 @@ impl<S: Stage> SingleAttributeParser<S> for LinkSectionParser {
         Some(LinkSection { name, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct ExportStableParser;
 impl<S: Stage> NoArgsAttributeParser<S> for ExportStableParser {
@@ -514,7 +507,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for ExportStableParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(ALL_TARGETS); //FIXME Still checked fully in `check_attr.rs`
     const CREATE: fn(Span) -> AttributeKind = |_| AttributeKind::ExportStable;
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct FfiConstParser;
 impl<S: Stage> NoArgsAttributeParser<S> for FfiConstParser {
@@ -523,7 +515,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for FfiConstParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::ForeignFn)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::FfiConst;
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 pub(crate) struct FfiPureParser;
 impl<S: Stage> NoArgsAttributeParser<S> for FfiPureParser {
@@ -532,7 +523,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for FfiPureParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::ForeignFn)]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::FfiPure;
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) struct StdInternalSymbolParser;
 impl<S: Stage> NoArgsAttributeParser<S> for StdInternalSymbolParser {
@@ -546,7 +536,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for StdInternalSymbolParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::StdInternalSymbol;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=18 | LINES=41 */
 
 pub(crate) struct LinkOrdinalParser;
 
@@ -588,7 +577,6 @@ impl<S: Stage> SingleAttributeParser<S> for LinkOrdinalParser {
         Some(LinkOrdinal { ordinal, span: cx.attr_span })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=20 | LINES=84 */
 
 pub(crate) struct LinkageParser;
 

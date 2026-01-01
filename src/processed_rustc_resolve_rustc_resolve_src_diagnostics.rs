@@ -1,34 +1,23 @@
 // SRC: ../rust/compiler/rustc_resolve/src/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use itertools::Itertools as _;
 use crate::rustc_complete::visit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     self as ast, CRATE_NODE_ID, Crate, ItemKind, ModKind, NodeId, Path, join_path_idents,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, MultiSpan, SuggestionStyle,
     report_ambiguity_error, struct_span_code_err,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_feature::BUILTIN_ATTRIBUTES;
 use crate::rustc_complete::attrs::{AttributeKind, CfgEntry, StrippedCfgItem};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::Namespace::{self, *};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, CtorKind, CtorOf, DefKind, MacroKinds, NonMacroAttrKind, PerNS};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{PrimTy, Stability, StabilityLevel, find_attr};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
@@ -36,31 +25,23 @@ use crate::rustc_complete::lint::builtin::{
     ABSOLUTE_PATHS_NOT_STARTING_WITH_CRATE, AMBIGUOUS_GLOB_IMPORTS,
     MACRO_EXPANDED_MACRO_EXPORTS_ACCESSED_BY_ABSOLUTE_PATHS,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{AmbiguityErrorDiag, BuiltinLintDiag};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::utils::was_invoked_from_cargo;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::MacroKind;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{BytePos, Ident, Macros20NormalizedIdent, Span, Symbol, SyntaxContext, kw, sym};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::errors::{
     self, AddedMacroUse, ChangeImportBinding, ChangeImportBindingSuggestion, ConsiderAddingADerive,
     ExplicitUnsafeTraits, MacroDefinedLater, MacroRulesNot, MacroSuggMovePosition,
     MaybeMissingMacroRulesName,
 };
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::imports::{Import, ImportKind};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::late::{PatternSource, Rib};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::{
     AmbiguityError, AmbiguityErrorMisc, AmbiguityKind, BindingError, BindingKey, Finalize,
     ForwardGenericParamBanReason, HasGenericParams, LexicalScopeBinding, MacroRulesScope, Module,
@@ -68,7 +49,6 @@ use crate::{
     PrivacyError, ResolutionError, Resolver, Scope, ScopeSet, Segment, UseError, Used,
     VisResolutionError, errors as errs, path_names_to_string,
 };
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 type Res = def::Res<ast::NodeId>;
 
@@ -86,7 +66,6 @@ pub(crate) enum SuggestionTarget {
     /// The target is the only valid item that can be used in the corresponding context
     SingleItem,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Debug)]
 pub(crate) struct TypoSuggestion {
@@ -97,7 +76,6 @@ pub(crate) struct TypoSuggestion {
     pub res: Res,
     pub target: SuggestionTarget,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=22 */
 
 impl TypoSuggestion {
     pub(crate) fn typo_from_ident(ident: Ident, res: Res) -> TypoSuggestion {
@@ -120,7 +98,6 @@ impl TypoSuggestion {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 /// A free importable items suggested in case of resolution failure.
 #[derive(Debug, Clone)]
@@ -136,7 +113,6 @@ pub(crate) struct ImportSuggestion {
     pub note: Option<String>,
     pub is_stable: bool,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=reduce_impl_span_to_impl_keyword | COMPLEXITY=8 | LINES=12 */
 
 /// Adjust the impl span so that just the `impl` keyword is taken by removing
 /// everything after `<` (`"impl<T> Iterator for A<T> {}" -> "impl"`) and
@@ -149,7 +125,6 @@ fn reduce_impl_span_to_impl_keyword(sm: &SourceMap, impl_span: Span) -> Span {
     let impl_span = sm.span_until_char(impl_span, '<');
     sm.span_until_whitespace(impl_span)
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=report_with_use_injections | COMPLEXITY=1690 | LINES=2974 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     pub(crate) fn dcx(&self) -> DiagCtxtHandle<'tcx> {
@@ -3122,7 +3097,6 @@ fn find_span_of_binding_until_next_binding(
 
     // Find everything after the binding but not including the binding.
     //   ie. `, e};` or `};`
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=extend_span_to_previous_binding | COMPLEXITY=38 | LINES=93 */
     let after_binding_until_end = binding_until_end.with_lo(binding_span.hi());
 
     // Keep characters in the span until we encounter something that isn't a comma or
@@ -3216,7 +3190,6 @@ fn find_span_immediately_after_crate_name(sess: &Session, use_span: Span) -> (bo
         if *c == ':' {
             num_colons += 1;
         }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
         !matches!(c, ':' if num_colons == 2)
     });
     // Find everything after the second colon.. `foo::{baz, makro};`
@@ -3228,11 +3201,9 @@ fn find_span_immediately_after_crate_name(sess: &Session, use_span: Span) -> (bo
         if found_a_non_whitespace_character {
             return false;
         }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
         if !c.is_whitespace() {
             found_a_non_whitespace_character = true;
         }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=show_candidates | COMPLEXITY=267 | LINES=393 */
         true
     });
 

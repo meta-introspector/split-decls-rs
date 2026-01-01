@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/graph/tests.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use std::cmp::max;
 
 use super::*;
@@ -11,7 +10,6 @@ pub(super) struct TestGraph {
     successors: FxHashMap<usize, Vec<usize>>,
     predecessors: FxHashMap<usize, Vec<usize>>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 impl TestGraph {
     pub(super) fn new(start_node: usize, edges: &[(usize, usize)]) -> Self {
@@ -34,7 +32,6 @@ impl TestGraph {
         graph
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=8 */
 
 impl DirectedGraph for TestGraph {
     type Node = usize;
@@ -43,21 +40,18 @@ impl DirectedGraph for TestGraph {
         self.num_nodes
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=start_node | COMPLEXITY=5 | LINES=6 */
 
 impl StartNode for TestGraph {
     fn start_node(&self) -> usize {
         self.start_node
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predecessors | COMPLEXITY=5 | LINES=6 */
 
 impl Predecessors for TestGraph {
     fn predecessors(&self, node: usize) -> impl Iterator<Item = Self::Node> {
         self.predecessors[&node].iter().cloned()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=5 | LINES=6 */
 
 impl Successors for TestGraph {
     fn successors(&self, node: usize) -> impl Iterator<Item = Self::Node> {

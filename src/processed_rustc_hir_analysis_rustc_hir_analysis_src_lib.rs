@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=93 */
 /*
 
 # typeck
@@ -80,27 +79,21 @@ This API is completely unstable and subject to change.
 
 pub use errors::NoVariantNamed;
 use crate::rustc_abi::{CVariadicStatus, ExternAbi};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::lints::DelayedLint;
 use crate::rustc_complete::{self as hir};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::middle;
 use crate::rustc_complete::mir::interpret::GlobalId;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::traits;
 
 pub use crate::collect::suggest_impl_trait;
 use crate::hir_ty_lowering::{FeedConstTy, HirTyLowerer};
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_c_variadic_abi | COMPLEXITY=20 | LINES=30 */
 
 fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi, span: Span) {
     if !decl.c_variadic {
@@ -131,7 +124,6 @@ fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi,
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=19 */
 
 /// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub fn provide(providers: &mut Providers) {
@@ -151,7 +143,6 @@ pub fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_delayed_lint | COMPLEXITY=7 | LINES=8 */
 
 fn emit_delayed_lint(lint: &DelayedLint, tcx: TyCtxt<'_>) {
     match lint {
@@ -160,7 +151,6 @@ fn emit_delayed_lint(lint: &DelayedLint, tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=68 | LINES=99 */
 
 pub fn check_crate(tcx: TyCtxt<'_>) {
     let _prof_timer = tcx.sess.timer("type_check_crate");
@@ -260,7 +250,6 @@ pub fn check_crate(tcx: TyCtxt<'_>) {
 
     tcx.ensure_ok().check_unused_traits(());
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=lower_ty | COMPLEXITY=7 | LINES=20 */
 
 /// Lower a [`hir::Ty`] to a [`Ty`].
 ///
@@ -281,7 +270,6 @@ pub fn lower_ty<'tcx>(tcx: TyCtxt<'tcx>, hir_ty: &hir::Ty<'tcx>) -> Ty<'tcx> {
         .lowerer()
         .lower_ty_maybe_return_type_notation(hir_ty)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lower_const_arg_for_rustdoc | COMPLEXITY=6 | LINES=11 */
 
 /// This is for rustdoc.
 // FIXME(const_generics): having special methods for rustdoc in `rustc_hir_analysis` is cursed

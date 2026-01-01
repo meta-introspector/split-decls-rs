@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/assert_module_sources.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 // This pass is only used for UNIT TESTS related to incremental
 // compilation. It tests whether a particular `.o` file will be re-used
 // from a previous compilation or whether it must be regenerated.
@@ -29,16 +28,13 @@ use std::borrow::Cow;
 use std::fmt;
 
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::mir::mono::CodegenUnitNameBuilder;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=assert_module_sources | COMPLEXITY=22 | LINES=47 */
 use thin_vec::ThinVec;
 use tracing::debug;
 
@@ -86,14 +82,12 @@ pub fn assert_module_sources(tcx: TyCtxt<'_>, set_reuse: &dyn Fn(&mut CguReuseTr
         ams.cgu_reuse_tracker.check_expected_reuse(tcx.sess);
     });
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=AssertModuleSource | COMPLEXITY=2 | LINES=6 */
 
 struct AssertModuleSource<'tcx> {
     tcx: TyCtxt<'tcx>,
     available_cgus: UnordSet<Symbol>,
     cgu_reuse_tracker: CguReuseTracker,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_attr | COMPLEXITY=74 | LINES=114 */
 
 impl<'tcx> AssertModuleSource<'tcx> {
     fn check_attr(&mut self, attr: &hir::Attribute) {
@@ -208,7 +202,6 @@ impl<'tcx> AssertModuleSource<'tcx> {
         false
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
 pub enum CguReuse {
@@ -216,7 +209,6 @@ pub enum CguReuse {
     PreLto,
     PostLto,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl fmt::Display for CguReuse {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -227,32 +219,27 @@ impl fmt::Display for CguReuse {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for CguReuse {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Owned(self.to_string()))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum ComparisonKind {
     Exact,
     AtLeast,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TrackerData | COMPLEXITY=2 | LINES=5 */
 
 struct TrackerData {
     actual_reuse: UnordMap<String, CguReuse>,
     expected_reuse: UnordMap<String, (String, Span, CguReuse, ComparisonKind)>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=CguReuseTracker | COMPLEXITY=2 | LINES=4 */
 
 pub struct CguReuseTracker {
     data: Option<TrackerData>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=49 | LINES=70 */
 
 impl CguReuseTracker {
     fn new() -> CguReuseTracker {

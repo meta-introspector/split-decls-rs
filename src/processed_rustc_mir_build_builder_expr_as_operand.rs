@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/as_operand.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // See docs in build/expr/mod.rs
 
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::builder::expr::category::Category;
 use crate::builder::{BlockAnd, BlockAndExtension, Builder, NeedsTemporary};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=79 | LINES=194 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Construct a temporary lifetime restricted to just the local scope

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/qualifs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 // Structural const qualification.
 //
 // See the `Qualif` trait for more info.
@@ -12,11 +11,8 @@ use crate::rustc_complete::LangItem;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, AdtDef, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::{Obligation, ObligationCause, ObligationCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=in_any_value_of_ty | COMPLEXITY=3 | LINES=16 */
 use tracing::instrument;
 
 use super::ConstCx;
@@ -33,7 +29,6 @@ pub fn in_any_value_of_ty<'tcx>(
         tainted_by_errors,
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=in_qualifs | COMPLEXITY=24 | LINES=41 */
 
 /// A "qualif"(-ication) is a way to look for something "bad" in the MIR that would disqualify some
 /// code for promotion or prevent it from evaluating at compile time.
@@ -75,7 +70,6 @@ pub trait Qualif {
     /// final qualif for this ADT.
     fn is_structural_in_adt_value<'tcx>(cx: &ConstCx<'_, 'tcx>, adt: AdtDef<'tcx>) -> bool;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=HasMutInterior; | COMPLEXITY=31 | LINES=60 */
 
 /// Constant containing interior mutability (`UnsafeCell<T>`).
 /// This must be ruled out to make sure that evaluating the constant at compile-time
@@ -136,7 +130,6 @@ impl Qualif for HasMutInterior {
         !adt.is_unsafe_cell()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=NeedsDrop; | COMPLEXITY=12 | LINES=25 */
 
 /// Constant containing an ADT that implements `Drop`.
 /// This must be ruled out because implicit promotion would remove side-effects
@@ -162,7 +155,6 @@ impl Qualif for NeedsDrop {
         !adt.has_dtor(cx.tcx)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=NeedsNonConstDrop; | COMPLEXITY=28 | LINES=60 */
 
 /// Constant containing an ADT that implements non-const `Drop`.
 /// This must be ruled out because we cannot run `Drop` during compile-time.
@@ -223,7 +215,6 @@ impl Qualif for NeedsNonConstDrop {
         !adt.has_dtor(cx.tcx)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=in_rvalue | COMPLEXITY=44 | LINES=68 */
 
 // FIXME: Use `mir::visit::Visitor` for the `in_*` functions if/when it supports early return.
 
@@ -292,7 +283,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=in_place | COMPLEXITY=33 | LINES=44 */
 
 /// Returns `true` if this `Place` contains qualif `Q`.
 pub fn in_place<'tcx, Q, F>(cx: &ConstCx<'_, 'tcx>, in_local: &mut F, place: PlaceRef<'tcx>) -> bool
@@ -337,7 +327,6 @@ where
     assert!(place.projection.is_empty());
     in_local(place.local)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=in_operand | COMPLEXITY=37 | LINES=59 */
 
 /// Returns `true` if this `Operand` contains qualif `Q`.
 pub fn in_operand<'tcx, Q, F>(

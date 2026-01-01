@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/visit.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=26 | LINES=49 */
 // A visiting traversal mechanism for complex data structures that contain type
 // information.
 //
@@ -49,15 +48,12 @@ use std::sync::Arc;
 
 pub use rustc_ast_ir::visit::VisitorResult;
 pub use rustc_ast_ir::{try_visit, walk_visitable_list};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use smallvec::SmallVec;
 use thin_vec::ThinVec;
 
 use crate::inherent::*;
 use crate::{self as ty, Interner, TypeFlags};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=19 */
 
 /// This trait is implemented for every type that can be visited,
 /// providing the skeleton of the traversal.
@@ -77,7 +73,6 @@ pub trait TypeVisitable<I: Interner>: fmt::Debug {
     /// `TypeVisitor`.
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=super_visit_with | COMPLEXITY=9 | LINES=11 */
 
 // This trait is implemented for types of interest.
 pub trait TypeSuperVisitable<I: Interner>: TypeVisitable<I> {
@@ -89,7 +84,6 @@ pub trait TypeSuperVisitable<I: Interner>: TypeVisitable<I> {
     /// with `xyz.visit_with(self)`.
     fn super_visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=19 | LINES=45 */
 
 /// This trait is implemented for every visiting traversal. There is a visit
 /// method defined for every type of interest. Each such method has a default
@@ -135,7 +129,6 @@ pub trait TypeVisitor<I: Interner>: Sized {
         Self::Result::output()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=10 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Traversal implementations.
@@ -146,7 +139,6 @@ impl<I: Interner, T: TypeVisitable<I>, U: TypeVisitable<I>> TypeVisitable<I> for
         self.1.visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=10 */
 
 impl<I: Interner, A: TypeVisitable<I>, B: TypeVisitable<I>, C: TypeVisitable<I>> TypeVisitable<I>
     for (A, B, C)
@@ -157,7 +149,6 @@ impl<I: Interner, A: TypeVisitable<I>, B: TypeVisitable<I>, C: TypeVisitable<I>>
         self.2.visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=9 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Option<T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -167,7 +158,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=9 */
 
 impl<I: Interner, T: TypeVisitable<I>, E: TypeVisitable<I>> TypeVisitable<I> for Result<T, E> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -177,21 +167,18 @@ impl<I: Interner, T: TypeVisitable<I>, E: TypeVisitable<I>> TypeVisitable<I> for
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Arc<T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
         (**self).visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Box<T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
         (**self).visit_with(visitor)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Vec<T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -199,7 +186,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Vec<T> {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for ThinVec<T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -207,7 +193,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for ThinVec<T> {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>, const N: usize> TypeVisitable<I> for SmallVec<[T; N]> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -215,7 +200,6 @@ impl<I: Interner, T: TypeVisitable<I>, const N: usize> TypeVisitable<I> for Smal
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=10 */
 
 // `TypeFoldable` isn't impl'd for `&[T]`. It doesn't make sense in the general
 // case, because we can't return a new slice. But note that there are a couple
@@ -226,7 +210,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for &[T] {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Box<[T]> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -234,7 +217,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitable<I> for Box<[T]> {
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>, Ix: Idx> TypeVisitable<I> for IndexVec<Ix, T> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -242,7 +224,6 @@ impl<I: Interner, T: TypeVisitable<I>, Ix: Idx> TypeVisitable<I> for IndexVec<Ix
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Interner, T: TypeVisitable<I>, S> TypeVisitable<I> for indexmap::IndexSet<T, S> {
     fn visit_with<V: TypeVisitor<I>>(&self, visitor: &mut V) -> V::Result {
@@ -250,13 +231,11 @@ impl<I: Interner, T: TypeVisitable<I>, S> TypeVisitable<I> for indexmap::IndexSe
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=2 | LINES=5 */
 
 pub trait Flags {
     fn flags(&self) -> TypeFlags;
     fn outer_exclusive_binder(&self) -> ty::DebruijnIndex;
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=has_type_flags | COMPLEXITY=52 | LINES=118 */
 
 pub trait TypeVisitableExt<I: Interner>: TypeVisitable<I> {
     fn has_type_flags(&self, flags: TypeFlags) -> bool;
@@ -375,7 +354,6 @@ pub trait TypeVisitableExt<I: Interner>: TypeVisitable<I> {
         self.has_type_flags(TypeFlags::STILL_FURTHER_SPECIALIZABLE)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=has_type_flags | COMPLEXITY=18 | LINES=24 */
 
 impl<I: Interner, T: TypeVisitable<I>> TypeVisitableExt<I> for T {
     fn has_type_flags(&self, flags: TypeFlags) -> bool {
@@ -400,7 +378,6 @@ impl<I: Interner, T: TypeVisitable<I>> TypeVisitableExt<I> for T {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=FoundFlags; | COMPLEXITY=6 | LINES=8 */
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 struct FoundFlags;
@@ -409,14 +386,12 @@ struct FoundFlags;
 struct HasTypeFlagsVisitor {
     flags: ty::TypeFlags,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl std::fmt::Debug for HasTypeFlagsVisitor {
     fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         self.flags.fmt(fmt)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=54 | LINES=86 */
 
 // Note: this visitor traverses values down to the level of
 // `Ty`/`Const`/`Predicate`, but not within those types. This is because the
@@ -503,7 +478,6 @@ impl<I: Interner> TypeVisitor<I> for HasTypeFlagsVisitor {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=FoundEscapingVars; | COMPLEXITY=13 | LINES=33 */
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 struct FoundEscapingVars;
@@ -537,7 +511,6 @@ struct HasEscapingVarsVisitor {
     /// Anything bound by `outer_index` or "above" is escaping.
     outer_index: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=34 | LINES=68 */
 
 impl<I: Interner> TypeVisitor<I> for HasEscapingVarsVisitor {
     type Result = ControlFlow<FoundEscapingVars>;
@@ -606,7 +579,6 @@ impl<I: Interner> TypeVisitor<I> for HasEscapingVarsVisitor {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=HasErrorVisitor; | COMPLEXITY=5 | LINES=10 */
 
 struct HasErrorVisitor;
 

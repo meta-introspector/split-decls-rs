@@ -1,30 +1,23 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Deeply normalize types using the old trait solver.
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_infer::infer::at::At;
 use crate::rustc_infer::infer::{InferCtxt, InferOk};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::{
     FromSolverError, Normalized, Obligation, PredicateObligations, TraitEngine,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_macros::extension;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, AliasTerm, Term, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitable,
     TypeVisitableExt, TypingMode,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{BoundVarReplacer, PlaceholderReplacer, SelectionContext, project};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=normalize | COMPLEXITY=31 | LINES=70 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::error_reporting::traits::OverflowCause;
 use crate::solve::NextSolverError;
@@ -95,7 +88,6 @@ impl<'tcx> At<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 /// As `normalize`, but with a custom depth.
 pub(crate) fn normalize_with_depth<'a, 'b, 'tcx, T>(
@@ -112,7 +104,6 @@ where
     let value = normalize_with_depth_to(selcx, param_env, cause, depth, value, &mut obligations);
     Normalized { value, obligations }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 #[instrument(level = "info", skip(selcx, param_env, cause, obligations))]
 pub(crate) fn normalize_with_depth_to<'a, 'b, 'tcx, T>(
@@ -133,7 +124,6 @@ where
     debug!(?normalizer.obligations,);
     result
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=20 */
 
 pub(super) fn needs_normalization<'tcx, T: TypeVisitable<TyCtxt<'tcx>>>(
     infcx: &InferCtxt<'tcx>,
@@ -154,7 +144,6 @@ pub(super) fn needs_normalization<'tcx, T: TypeVisitable<TyCtxt<'tcx>>>(
 
     value.has_type_flags(flags)
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AssocTypeNormalizer | COMPLEXITY=2 | LINES=9 */
 
 struct AssocTypeNormalizer<'a, 'b, 'tcx> {
     selcx: &'a mut SelectionContext<'b, 'tcx>,
@@ -164,7 +153,6 @@ struct AssocTypeNormalizer<'a, 'b, 'tcx> {
     depth: usize,
     universes: Vec<Option<ty::UniverseIndex>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=68 | LINES=191 */
 
 impl<'a, 'b, 'tcx> AssocTypeNormalizer<'a, 'b, 'tcx> {
     fn new(
@@ -356,7 +344,6 @@ impl<'a, 'b, 'tcx> AssocTypeNormalizer<'a, 'b, 'tcx> {
         res
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=84 | LINES=149 */
 
 impl<'a, 'b, 'tcx> TypeFolder<TyCtxt<'tcx>> for AssocTypeNormalizer<'a, 'b, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

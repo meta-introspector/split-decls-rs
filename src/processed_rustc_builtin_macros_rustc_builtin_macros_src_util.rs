@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_expand::expand::AstFragment;
 use crate::rustc_feature::AttributeTemplate;
 use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_lint_defs::builtin::DUPLICATE_MACRO_ATTRIBUTES;
 use crate::rustc_parse::{exp, parser};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::errors::report_lit_error;
 use crate::rustc_complete::{BytePos, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 use crate::errors;
 
@@ -32,7 +26,6 @@ pub(crate) fn check_builtin_macro_attribute(ecx: &ExtCtxt<'_>, meta_item: &MetaI
         true,
     );
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=29 */
 
 /// Emit a warning if the item is annotated with the given attribute. This is used to diagnose when
 /// an attribute may have been mistakenly duplicated.
@@ -62,7 +55,6 @@ pub(crate) fn warn_on_duplicate_attribute(ecx: &ExtCtxt<'_>, item: &Annotatable,
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// `Ok` represents successfully retrieving the string literal at the correct
 /// position, e.g., `println("abc")`.
@@ -77,7 +69,6 @@ pub(crate) struct ExprToSpannedString {
     /// Generally only useful for lints that care about the raw bytes the user wrote.
     pub uncooked_symbol: (ast::token::LitKind, Symbol),
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=61 */
 
 /// - `Ok` is returned when the conversion to a string literal is unsuccessful,
 /// but another type of expression is obtained instead.
@@ -139,7 +130,6 @@ pub(crate) fn expr_to_spanned_string<'a>(
         _ => Ok((cx.dcx().struct_span_err(expr.span, err_msg), false)),
     }))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=17 */
 
 /// Extracts a string literal from the macro expanded version of `expr`,
 /// emitting `err_msg` if `expr` is not a string literal. This does not stop
@@ -157,7 +147,6 @@ pub(crate) fn expr_to_string(
         .map(|ExprToSpannedString { symbol, style, .. }| (symbol, style))
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 /// Non-fatally assert that `tts` is empty. Note that this function
 /// returns even when `tts` is non-empty, macros that *need* to stop
@@ -168,7 +157,6 @@ pub(crate) fn check_zero_tts(cx: &ExtCtxt<'_>, span: Span, tts: TokenStream, nam
         cx.dcx().emit_err(errors::TakesNoArguments { span, name });
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 /// Parse an expression. On error, emit it, advancing to `Eof`, and return `Err`.
 pub(crate) fn parse_expr(p: &mut parser::Parser<'_>) -> Result<Box<ast::Expr>, ErrorGuaranteed> {
@@ -181,7 +169,6 @@ pub(crate) fn parse_expr(p: &mut parser::Parser<'_>) -> Result<Box<ast::Expr>, E
     }
     Err(guar)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Interpreting `tts` as a comma-separated sequence of expressions,
 /// expect exactly one string literal, or emit an error and return `Err`.
@@ -193,7 +180,6 @@ pub(crate) fn get_single_str_from_tts(
 ) -> ExpandResult<Result<Symbol, ErrorGuaranteed>, ()> {
     get_single_str_spanned_from_tts(cx, span, tts, name).map(|res| res.map(|(s, _)| s))
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=22 */
 
 pub(crate) fn get_single_str_spanned_from_tts(
     cx: &mut ExtCtxt<'_>,
@@ -216,7 +202,6 @@ pub(crate) fn get_single_str_spanned_from_tts(
         .map(|ExprToSpannedString { symbol, span, .. }| (symbol, span))
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=25 */
 
 /// Interpreting `tts` as a comma-separated sequence of expressions,
 /// expect exactly one expression, or emit an error and return `Err`.
@@ -242,7 +227,6 @@ pub(crate) fn get_single_expr_from_tts(
     }
     ExpandResult::Ready(Ok(ret))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=36 */
 
 /// Extracts comma-separated expressions from `tts`.
 /// On error, emit it, and return `Err`.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/example/alloc_system.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=System; | COMPLEXITY=19 | LINES=48 */
 // SPDX-License-Identifier: MIT OR Apache-2.0
 // SPDX-FileCopyrightText: The Rust Project Developers (see https://thanks.rust-lang.org)
 
@@ -48,7 +47,6 @@ mod realloc_fallback {
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=malloc | COMPLEXITY=75 | LINES=98 */
 #[cfg(any(unix, target_os = "redox"))]
 mod platform {
     mod libc {
@@ -147,7 +145,6 @@ mod platform {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=GetProcessHeap | COMPLEXITY=69 | LINES=76 */
 #[cfg(windows)]
 #[allow(nonstandard_style)]
 mod platform {

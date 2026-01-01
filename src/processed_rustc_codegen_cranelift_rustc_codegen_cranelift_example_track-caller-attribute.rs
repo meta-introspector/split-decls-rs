@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/track-caller-attribute.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=tracked | COMPLEXITY=2 | LINES=10 */
 // Based on https://github.com/anp/rust/blob/175631311716d7dfeceec40d2587cde7142ffa8c/src/test/ui/rfc-2091-track-caller/track-caller-attribute.rs
 
 // run-pass
@@ -10,17 +9,14 @@ use std::panic::Location;
 fn tracked() -> &'static Location<'static> {
     Location::caller()
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=nested_intrinsic | COMPLEXITY=2 | LINES=4 */
 
 fn nested_intrinsic() -> &'static Location<'static> {
     Location::caller()
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=nested_tracked | COMPLEXITY=2 | LINES=4 */
 
 fn nested_tracked() -> &'static Location<'static> {
     tracked()
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=main | COMPLEXITY=3 | LINES=22 */
 
 fn main() {
     let location = Location::caller();

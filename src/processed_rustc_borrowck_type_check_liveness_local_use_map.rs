@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/liveness/local_use_map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Local, Location};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::points::{DenseLocationMap, PointIndex};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::def_use::{self, DefUse};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=34 */
 
 /// A map that cross references each local with the locations where it
 /// is defined (assigned), used, or dropped. Used during liveness
@@ -44,7 +39,6 @@ pub(crate) struct LocalUseMap {
 
     appearances: Appearances,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Appearance | COMPLEXITY=2 | LINES=8 */
 
 // The `Appearance::next` field effectively embeds a linked list within `Appearances`.
 type Appearances = IndexVec<AppearanceIndex, Appearance>;
@@ -53,12 +47,10 @@ struct Appearance {
     point_index: PointIndex,
     next: Option<AppearanceIndex>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AppearanceIndex | COMPLEXITY=3 | LINES=4 */
 
 crate::rustc_index::newtype_index! {
     pub struct AppearanceIndex {}
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=appearances_iter | COMPLEXITY=3 | LINES=7 */
 
 fn appearances_iter(
     first: Option<AppearanceIndex>,
@@ -66,14 +58,12 @@ fn appearances_iter(
 ) -> impl Iterator<Item = AppearanceIndex> {
     AppearancesIter { appearances, current: first }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=AppearancesIter | COMPLEXITY=2 | LINES=6 */
 
 // Iterates over `Appearances` by following `next` fields.
 struct AppearancesIter<'a> {
     appearances: &'a Appearances,
     current: Option<AppearanceIndex>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=13 */
 
 impl<'a> Iterator for AppearancesIter<'a> {
     type Item = AppearanceIndex;
@@ -87,7 +77,6 @@ impl<'a> Iterator for AppearancesIter<'a> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=46 */
 
 //-----------------------------------------------------------------------------
 
@@ -134,7 +123,6 @@ impl LocalUseMap {
             .map(move |aa| self.appearances[aa].point_index)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=LocalUseMapBuild | COMPLEXITY=3 | LINES=14 */
 
 struct LocalUseMapBuild<'me> {
     local_use_map: &'me mut LocalUseMap,
@@ -149,7 +137,6 @@ struct LocalUseMapBuild<'me> {
     // the rationale on the time-memory trade-off we're favoring here).
     locals_with_use_data: IndexVec<Local, bool>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=14 | LINES=20 */
 
 impl Visitor<'_> for LocalUseMapBuild<'_> {
     fn visit_local(&mut self, local: Local, context: PlaceContext, location: Location) {

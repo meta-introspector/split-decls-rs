@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/tokenstream.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // # Token Streams
 //
 // `TokenStream`s represent syntactic objects before they are converted into ASTs.
@@ -10,26 +9,18 @@ use std::borrow::Cow;
 use std::ops::Range;
 use std::sync::Arc;
 use std::{cmp, fmt, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::sync;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, SpanDecoder, SpanEncoder, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use thin_vec::ThinVec;
 
 use crate::ast::AttrStyle;
 use crate::ast_traits::{HasAttrs, HasTokens};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::token::{self, Delimiter, Token, TokenKind};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AttrVec, Attribute};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Part of a `TokenStream`.
 #[derive(Debug, Clone, PartialEq, Encodable, Decodable, HashStable_Generic)]
@@ -40,7 +31,6 @@ pub enum TokenTree {
     /// A delimited sequence of token trees.
     Delimited(DelimSpan, DelimSpacing, Delimiter, TokenStream),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=_dummy | COMPLEXITY=2 | LINES=11 */
 
 // Ensure all fields of `TokenTree` are `DynSend` and `DynSync`.
 fn _dummy()
@@ -52,7 +42,6 @@ where
     TokenStream: sync::DynSend + sync::DynSync,
 {
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=eq_unspanned | COMPLEXITY=30 | LINES=48 */
 
 impl TokenTree {
     /// Checks if this `TokenTree` is equal to the other, regardless of span/spacing information.
@@ -101,7 +90,6 @@ impl TokenTree {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=LazyAttrTokenStream(Arc | COMPLEXITY=7 | LINES=31 */
 
 /// A lazy version of [`AttrTokenStream`], which defers creation of an actual
 /// `AttrTokenStream` until it is needed.
@@ -133,35 +121,30 @@ impl LazyAttrTokenStream {
         self.0.to_attr_token_stream()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for LazyAttrTokenStream {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "LazyAttrTokenStream({:?})", self.to_attr_token_stream())
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<S: SpanEncoder> Encodable<S> for LazyAttrTokenStream {
     fn encode(&self, _s: &mut S) {
         panic!("Attempted to encode LazyAttrTokenStream");
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: SpanDecoder> Decodable<D> for LazyAttrTokenStream {
     fn decode(_d: &mut D) -> Self {
         panic!("Attempted to decode LazyAttrTokenStream");
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=7 | LINES=6 */
 
 impl<CTX> HashStable<CTX> for LazyAttrTokenStream {
     fn hash_stable(&self, _hcx: &mut CTX, _hasher: &mut StableHasher) {
         panic!("Attempted to compute stable hash for LazyAttrTokenStream");
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=ParserRange(pub | COMPLEXITY=7 | LINES=51 */
 
 /// A token range within a `Parser`'s full token stream.
 #[derive(Clone, Debug)]
@@ -213,7 +196,6 @@ impl NodeRange {
         NodeRange((parser_range.start - start_pos)..(parser_range.end - start_pos))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=24 */
 
 enum LazyAttrTokenStreamInner {
     // The token stream has already been produced.
@@ -238,7 +220,6 @@ enum LazyAttrTokenStreamInner {
         node_replacements: ThinVec<NodeReplacement>,
     },
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=to_attr_token_stream | COMPLEXITY=39 | LINES=83 */
 
 impl LazyAttrTokenStreamInner {
     fn to_attr_token_stream(&self) -> AttrTokenStream {
@@ -322,7 +303,6 @@ impl LazyAttrTokenStreamInner {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
 
 /// A helper struct used when building an `AttrTokenStream` from
 /// a `LazyAttrTokenStream`. Both delimiter and non-delimited tokens
@@ -343,7 +323,6 @@ enum FlatToken {
     /// handling of replace ranges.
     Empty,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=AttrTokenStream(pub | COMPLEXITY=49 | LINES=72 */
 
 /// An `AttrTokenStream` is similar to a `TokenStream`, but with extra
 /// information about the tokens for attribute targets. This is used
@@ -416,7 +395,6 @@ fn make_attr_token_stream(
     }
     AttrTokenStream::new(stack_top.inner)
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=11 */
 
 /// Like `TokenTree`, but for `AttrTokenStream`.
 #[derive(Clone, Debug, Encodable, Decodable)]
@@ -428,7 +406,6 @@ pub enum AttrTokenTree {
     /// See `AttrsTarget` for more information
     AttrsTarget(AttrsTarget),
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=16 | LINES=33 */
 
 impl AttrTokenStream {
     pub fn new(tokens: Vec<AttrTokenTree>) -> AttrTokenStream {
@@ -462,7 +439,6 @@ impl AttrTokenStream {
         res
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=attrs_and_tokens_to_token_trees | COMPLEXITY=48 | LINES=75 */
 
 // Converts multiple attributes and the tokens for a target AST node into token trees, and appends
 // them to `res`.
@@ -538,7 +514,6 @@ fn attrs_and_tokens_to_token_trees(
         false
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 /// Stores the tokens for an attribute target, along
 /// with its attributes.
@@ -547,10 +522,8 @@ fn attrs_and_tokens_to_token_trees(
 /// tokens, for `cfg` and `cfg_attr` attributes.
 ///
 /// For example, `#[cfg(FALSE)] struct Foo {}` would
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 /// have an `attrs` field containing the `#[cfg(FALSE)]` attr,
 /// and a `tokens` field storing the (unparsed) tokens `struct Foo {}`
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=AttrsTarget | COMPLEXITY=4 | LINES=12 */
 ///
 /// The `cfg`/`cfg_attr` processing occurs in
 /// `StripUnconfigured::configure_tokens`.
@@ -563,7 +536,6 @@ pub struct AttrsTarget {
     /// are applied to
     pub tokens: LazyAttrTokenStream,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=23 | LINES=60 */
 
 /// Indicates whether a token can join with the following token to form a
 /// compound token. Used for conversions to `proc_macro::Spacing`. Also used to
@@ -624,7 +596,6 @@ pub enum Spacing {
     /// produced by declarative macros).
     JointHidden,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=TokenStream(pub(crate) | COMPLEXITY=86 | LINES=178 */
 
 /// A `TokenStream` is an abstract sequence of tokens, organized into [`TokenTree`]s.
 #[derive(Clone, Debug, Default, Encodable, Decodable)]
@@ -803,7 +774,6 @@ impl TokenStream {
                 vec![TokenTree::token_joint_hidden(token::Pound, span), body]
             }
         }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=add_comma | COMPLEXITY=22 | LINES=28 */
     }
 
     /// Given a `TokenStream` with a `Stream` of only two arguments, return a new `TokenStream`
@@ -832,7 +802,6 @@ impl TokenStream {
                 suggestion = Some((pos, comma, sp));
             }
         }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
         if let Some((pos, comma, sp)) = suggestion {
             let mut new_stream = Vec::with_capacity(self.0.len() + 1);
             let parts = self.0.split_at(pos + 1);
@@ -841,7 +810,6 @@ impl TokenStream {
             new_stream.extend_from_slice(parts.1);
             return Some((TokenStream::new(new_stream), sp));
         }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=20 | LINES=26 */
         None
     }
 }
@@ -868,7 +836,6 @@ where
         for sub_tt in self.iter() {
             sub_tt.hash_stable(hcx, hasher);
         }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=TokenStreamIter | COMPLEXITY=5 | LINES=12 */
     }
 }
 
@@ -881,7 +848,6 @@ pub struct TokenStreamIter<'t> {
 impl<'t> TokenStreamIter<'t> {
     fn new(stream: &'t TokenStream) -> Self {
         TokenStreamIter { stream, index: 0 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=peek | COMPLEXITY=8 | LINES=18 */
     }
 
     // Peeking could be done via `Peekable`, but most iterators need peeking,
@@ -900,7 +866,6 @@ impl<'t> Iterator for TokenStreamIter<'t> {
             self.index += 1;
             tree
         })
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=TokenTreeCursor | COMPLEXITY=5 | LINES=16 */
     }
 }
 
@@ -917,7 +882,6 @@ impl TokenTreeCursor {
     #[inline]
     pub fn new(stream: TokenStream) -> Self {
         TokenTreeCursor { stream, index: 0 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=curr | COMPLEXITY=47 | LINES=88 */
     }
 
     #[inline]
@@ -1006,7 +970,6 @@ impl TokenCursor {
                 return (Token::new(token::Eof, DUMMY_SP), Spacing::Alone);
             }
         }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=DelimSpan | COMPLEXITY=5 | LINES=12 */
     }
 }
 
@@ -1019,12 +982,10 @@ pub struct DelimSpan {
 impl DelimSpan {
     pub fn from_single(sp: Span) -> Self {
         DelimSpan { open: sp, close: sp }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=from_pair | COMPLEXITY=3 | LINES=4 */
     }
 
     pub fn from_pair(open: Span, close: Span) -> Self {
         DelimSpan { open, close }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=7 | LINES=20 */
     }
 
     pub fn dummy() -> Self {
@@ -1045,7 +1006,6 @@ pub struct DelimSpacing {
 impl DelimSpacing {
     pub fn new(open: Spacing, close: Spacing) -> DelimSpacing {
         DelimSpacing { open, close }
-/* AST_META: AST_ID=40 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
     }
 }
 

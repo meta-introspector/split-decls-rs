@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/token.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::borrow::Cow;
 use std::fmt;
 
@@ -8,15 +7,12 @@ pub use NtExprKind::*;
 pub use NtPatKind::*;
 pub use TokenKind::*;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::symbol::IdentPrintMode;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[allow(clippy::useless_attribute)] // FIXME: following use of `hidden_glob_reexports` incorrectly triggers `useless_attribute` lint.
 #[allow(hidden_glob_reexports)]
 use crate::rustc_complete::{Ident, Symbol};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use crate::ast;
 use crate::util::case::Case;
@@ -26,7 +22,6 @@ pub enum CommentKind {
     Line,
     Block,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Copy, Clone, PartialEq, Debug, Encodable, Decodable, HashStable_Generic)]
 pub enum InvisibleOrigin {
@@ -37,7 +32,6 @@ pub enum InvisibleOrigin {
     // `proc_macro::Delimiter::to_internal`, i.e. returned by a proc macro.
     ProcMacro,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=skip | COMPLEXITY=7 | LINES=12 */
 
 impl InvisibleOrigin {
     // Should the parser skip these invisible delimiters? Ideally this function
@@ -50,7 +44,6 @@ impl InvisibleOrigin {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 /// Annoyingly similar to `NonterminalKind`, but the slight differences are important.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Encodable, Decodable, Hash, HashStable_Generic)]
@@ -80,7 +73,6 @@ pub enum MetaVarKind {
     Vis,
     TT,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=20 | LINES=23 */
 
 impl fmt::Display for MetaVarKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -104,7 +96,6 @@ impl fmt::Display for MetaVarKind {
         write!(f, "{sym}")
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 
 /// Describes how a sequence of token trees is delimited.
 /// Cannot use `proc_macro::Delimiter` directly because this
@@ -124,7 +115,6 @@ pub enum Delimiter {
     /// Invisible delimiters might not survive roundtrip of a token stream through a string.
     Invisible(InvisibleOrigin),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=skip | COMPLEXITY=27 | LINES=43 */
 
 impl Delimiter {
     // Should the parser skip these delimiters? Only happens for certain kinds
@@ -168,7 +158,6 @@ impl Delimiter {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 // Note that the suffix is *not* considered when deciding the `LitKind` in this
 // type. This means that float literals like `1f32` are classified by this type
@@ -189,7 +178,6 @@ pub enum LitKind {
     CStrRaw(u8),
     Err(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Lit | COMPLEXITY=2 | LINES=8 */
 
 /// A literal token.
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
@@ -198,7 +186,6 @@ pub struct Lit {
     pub symbol: Symbol,
     pub suffix: Option<Symbol>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=26 | LINES=35 */
 
 impl Lit {
     pub fn new(kind: LitKind, symbol: Symbol, suffix: Option<Symbol>) -> Lit {
@@ -234,7 +221,6 @@ impl Lit {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=32 | LINES=35 */
 
 impl fmt::Display for Lit {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -270,7 +256,6 @@ impl fmt::Display for Lit {
         Ok(())
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=article | COMPLEXITY=16 | LINES=28 */
 
 impl LitKind {
     /// An English article for the literal token kind.
@@ -299,7 +284,6 @@ impl LitKind {
         matches!(self, Integer | Float | Err(_))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=ident_can_begin_expr | COMPLEXITY=3 | LINES=32 */
 
 pub fn ident_can_begin_expr(name: Symbol, span: Span, is_raw: IdentIsRaw) -> bool {
     let ident_token = Token::new(Ident(name, is_raw), span);
@@ -332,7 +316,6 @@ pub fn ident_can_begin_expr(name: Symbol, span: Span, is_raw: IdentIsRaw) -> boo
         ]
         .contains(&name)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=ident_can_begin_type | COMPLEXITY=2 | LINES=9 */
 
 fn ident_can_begin_type(name: Symbol, span: Span, is_raw: IdentIsRaw) -> bool {
     let ident_token = Token::new(Ident(name, is_raw), span);
@@ -342,14 +325,12 @@ fn ident_can_begin_type(name: Symbol, span: Span, is_raw: IdentIsRaw) -> bool {
         || [kw::Underscore, kw::For, kw::Impl, kw::Fn, kw::Unsafe, kw::Extern, kw::Typeof, kw::Dyn]
             .contains(&name)
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq, Encodable, Decodable, Debug, Copy, Clone, HashStable_Generic)]
 pub enum IdentIsRaw {
     No,
     Yes,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=to_print_mode_ident | COMPLEXITY=12 | LINES=15 */
 
 impl IdentIsRaw {
     pub fn to_print_mode_ident(self) -> IdentPrintMode {
@@ -365,14 +346,12 @@ impl IdentIsRaw {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=6 */
 
 impl From<bool> for IdentIsRaw {
     fn from(b: bool) -> Self {
         if b { Self::Yes } else { Self::No }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=19 | LINES=150 */
 
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub enum TokenKind {
@@ -523,14 +502,12 @@ pub enum TokenKind {
     /// End Of File
     Eof,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=Token | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
 pub struct Token {
     pub kind: TokenKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=lit | COMPLEXITY=36 | LINES=92 */
 
 impl TokenKind {
     pub fn lit(kind: LitKind, symbol: Symbol, suffix: Option<Symbol>) -> TokenKind {
@@ -623,7 +600,6 @@ impl TokenKind {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new | COMPLEXITY=228 | LINES=457 */
 
 impl Token {
     pub fn new(kind: TokenKind, span: Span) -> Self {
@@ -1081,7 +1057,6 @@ impl Token {
         Some(Token::new(kind, self.span.to(joint.span)))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=7 */
 
 impl PartialEq<TokenKind> for Token {
     #[inline]
@@ -1089,7 +1064,6 @@ impl PartialEq<TokenKind> for Token {
         self.kind == *rhs
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Encodable, Decodable, Hash, HashStable_Generic)]
 pub enum NtPatKind {
@@ -1100,7 +1074,6 @@ pub enum NtPatKind {
     // - `!inferred`: was written using `pat_param`.
     PatParam { inferred: bool },
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Encodable, Decodable, Hash, HashStable_Generic)]
 pub enum NtExprKind {
@@ -1112,7 +1085,6 @@ pub enum NtExprKind {
     // - `!inferred`: was written using `expr_2021`.
     Expr2021 { inferred: bool },
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 /// A macro nonterminal, known in documentation as a fragment specifier.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Encodable, Decodable, Hash, HashStable_Generic)]
@@ -1131,7 +1103,6 @@ pub enum NonterminalKind {
     Vis,
     TT,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from_symbol | COMPLEXITY=37 | LINES=60 */
 
 impl NonterminalKind {
     /// The `edition` closure is used to get the edition for the given symbol. Doing
@@ -1192,14 +1163,12 @@ impl NonterminalKind {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Display for NonterminalKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.symbol())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

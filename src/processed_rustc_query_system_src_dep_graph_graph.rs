@@ -1,48 +1,34 @@
 // SRC: ../rust/compiler/rustc_query_system/src/dep_graph/graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::assert_matches::assert_matches;
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::marker::PhantomData;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicU32, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::outline;
 use crate::rustc_data_structures::profiling::QueryInvocationId;
 use crate::rustc_data_structures::sharded::{self, ShardedHashMap};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{AtomicU64, Lock, is_dyn_thread_safe};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::DiagInner;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(debug_assertions)]
 use {super::debug::EdgeFilter, std::env};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::query::DepGraphQuery;
 use super::serialized::{GraphEncoder, SerializedDepGraph, SerializedDepNodeIndex};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{DepContext, DepKind, DepNode, Deps, HasDepContext, WorkProductId};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::dep_graph::edges::EdgesVec;
 use crate::ich::StableHashingContext;
 use crate::query::{QueryContext, QuerySideEffect};
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DepGraph | COMPLEXITY=6 | LINES=11 */
 
 #[derive(Clone)]
 pub struct DepGraph<D: Deps> {
@@ -54,12 +40,10 @@ pub struct DepGraph<D: Deps> {
     /// ID is used for self-profiling.
     virtual_dep_node_index: Arc<AtomicU32>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DepNodeIndex | COMPLEXITY=3 | LINES=4 */
 
 crate::rustc_index::newtype_index! {
     pub struct DepNodeIndex {}
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 // We store a large collection of these in `prev_index_to_index` during
 // non-full incremental builds, and want to ensure that the element size
@@ -70,7 +54,6 @@ impl DepNodeIndex {
     const SINGLETON_ZERO_DEPS_ANON_NODE: DepNodeIndex = DepNodeIndex::ZERO;
     pub const FOREVER_RED_NODE: DepNodeIndex = DepNodeIndex::from_u32(1);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<DepNodeIndex> for QueryInvocationId {
     #[inline(always)]
@@ -78,20 +61,17 @@ impl From<DepNodeIndex> for QueryInvocationId {
         QueryInvocationId(dep_node_index.as_u32())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=MarkFrame | COMPLEXITY=2 | LINES=5 */
 
 pub struct MarkFrame<'a> {
     index: SerializedDepNodeIndex,
     parent: Option<&'a MarkFrame<'a>>,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub(super) enum DepNodeColor {
     Red,
     Green(DepNodeIndex),
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_green | COMPLEXITY=7 | LINES=10 */
 
 impl DepNodeColor {
     #[inline]
@@ -102,7 +82,6 @@ impl DepNodeColor {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 
 pub(crate) struct DepGraphData<D: Deps> {
     /// The new encoding of the dependency graph, optimized for red/green
@@ -130,7 +109,6 @@ pub(crate) struct DepGraphData<D: Deps> {
     /// (not just marked green)
     debug_loaded_from_disk: Lock<FxHashSet<DepNode>>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=hash_result | COMPLEXITY=2 | LINES=9 */
 
 pub fn hash_result<R>(hcx: &mut StableHashingContext<'_>, result: &R) -> Fingerprint
 where
@@ -140,7 +118,6 @@ where
     result.hash_stable(hcx, &mut stable_hasher);
     stable_hasher.finish()
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=65 | LINES=177 */
 
 impl<D: Deps> DepGraph<D> {
     pub fn new(
@@ -318,7 +295,6 @@ impl<D: Deps> DepGraph<D> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=hash_result_and_alloc_node | COMPLEXITY=46 | LINES=162 */
 
 impl<D: Deps> DepGraphData<D> {
     /// Starts a new dep-graph task. Dep-graph tasks are specified
@@ -481,7 +457,6 @@ impl<D: Deps> DepGraphData<D> {
         dep_node_index
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=read_index | COMPLEXITY=95 | LINES=160 */
 
 impl<D: Deps> DepGraph<D> {
     #[inline]
@@ -642,7 +617,6 @@ impl<D: Deps> DepGraph<D> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=assert_dep_node_not_yet_allocated_in_current_session | COMPLEXITY=66 | LINES=168 */
 
 impl<D: Deps> DepGraphData<D> {
     fn assert_dep_node_not_yet_allocated_in_current_session<S: std::fmt::Display>(
@@ -811,7 +785,6 @@ impl<D: Deps> DepGraphData<D> {
         dep_node_index
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=previous_work_product | COMPLEXITY=20 | LINES=53 */
 
 impl<D: Deps> DepGraph<D> {
     /// Checks whether a previous work product exists for `v` and, if
@@ -865,7 +838,6 @@ impl<D: Deps> DepGraph<D> {
         self.data().and_then(|data| data.try_mark_green(qcx, dep_node))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_mark_parent_green | COMPLEXITY=72 | LINES=156 */
 
 impl<D: Deps> DepGraphData<D> {
     /// Try to mark a node index for the node dep_node.
@@ -1022,7 +994,6 @@ impl<D: Deps> DepGraphData<D> {
         Some(dep_node_index)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=is_red | COMPLEXITY=35 | LINES=61 */
 
 impl<D: Deps> DepGraph<D> {
     /// Returns true if the given node has been marked as red during the
@@ -1084,7 +1055,6 @@ impl<D: Deps> DepGraph<D> {
         DepNodeIndex::from_u32(index)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=WorkProduct | COMPLEXITY=18 | LINES=42 */
 
 /// A "work product" is an intermediate result that we save into the
 /// incremental directory for later re-use. The primary example are
@@ -1127,7 +1097,6 @@ pub struct WorkProduct {
     /// the object file's path, and "dwo" to the dwarf object file's path.
     pub saved_files: UnordMap<String, String>,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=EdgeIndex | COMPLEXITY=5 | LINES=7 */
 
 pub type WorkProductMap = UnordMap<WorkProductId, WorkProduct>;
 
@@ -1135,7 +1104,6 @@ pub type WorkProductMap = UnordMap<WorkProductId, WorkProduct>;
 crate::rustc_index::newtype_index! {
     struct EdgeIndex {}
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=18 | LINES=62 */
 
 /// `CurrentDepGraph` stores the dependency graph for the current session. It
 /// will be populated as we run queries or tasks. We never remove nodes from the
@@ -1198,7 +1166,6 @@ pub(super) struct CurrentDepGraph<D: Deps> {
     pub(super) total_read_count: AtomicU64,
     pub(super) total_duplicate_read_count: AtomicU64,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=new | COMPLEXITY=44 | LINES=108 */
 
 impl<D: Deps> CurrentDepGraph<D> {
     fn new(
@@ -1307,7 +1274,6 @@ impl<D: Deps> CurrentDepGraph<D> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 #[derive(Debug, Clone, Copy)]
 pub enum TaskDepsRef<'a> {
@@ -1329,7 +1295,6 @@ pub enum TaskDepsRef<'a> {
     /// require the execution of any queries.
     Forbid,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=TaskDeps | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 pub struct TaskDeps {
@@ -1339,7 +1304,6 @@ pub struct TaskDeps {
     read_set: FxHashSet<DepNodeIndex>,
     phantom_data: PhantomData<DepNode>,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=12 */
 
 impl Default for TaskDeps {
     fn default() -> Self {
@@ -1352,14 +1316,12 @@ impl Default for TaskDeps {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // A data structure that stores Option<DepNodeColor> values as a contiguous
 // array, using one u32 per entry.
 pub(super) struct DepNodeColorMap {
     values: IndexVec<SerializedDepNodeIndex, AtomicU32>,
     sync: bool,
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=new | COMPLEXITY=38 | LINES=70 */
 
 const COMPRESSED_NONE: u32 = u32::MAX;
 const COMPRESSED_RED: u32 = u32::MAX - 1;
@@ -1430,7 +1392,6 @@ impl DepNodeColorMap {
         )
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=20 */
 
 #[inline(never)]
 #[cold]
@@ -1451,7 +1412,6 @@ pub(crate) fn print_markframe_trace<D: Deps>(graph: &DepGraph<D>, frame: Option<
 
     eprintln!("end of try_mark_green dep node stack");
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=panic_on_forbidden_read | COMPLEXITY=20 | LINES=43 */
 
 #[cold]
 #[inline(never)]

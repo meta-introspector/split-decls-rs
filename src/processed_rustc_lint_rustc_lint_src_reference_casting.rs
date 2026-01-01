@@ -1,20 +1,14 @@
 // SRC: ../rust/compiler/rustc_lint/src/reference_casting.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_complete::{Expr, ExprKind, UnOp};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{LayoutOf as _, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::sym;
 
 use crate::lints::InvalidReferenceCastingDiag;
 use crate::utils::peel_casts;
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=28 */
 
 declare_lint! {
     /// The `invalid_reference_casting` lint checks for casts of `&T` to `&mut T`
@@ -43,7 +37,6 @@ declare_lint! {
     Deny,
     "casts of `&T` to `&mut T` without interior mutability"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=31 | LINES=55 */
 
 declare_lint_pass!(InvalidReferenceCasting => [INVALID_REFERENCE_CASTING]);
 
@@ -99,14 +92,12 @@ impl<'tcx> LateLintPass<'tcx> for InvalidReferenceCasting {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum PatternKind {
     Borrow { mutbl: Mutability },
     Assign,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=borrow_or_assign | COMPLEXITY=23 | LINES=48 */
 
 fn borrow_or_assign<'tcx>(
     cx: &LateContext<'tcx>,
@@ -155,7 +146,6 @@ fn borrow_or_assign<'tcx>(
 
     deref_assign_or_addr_of(e).or_else(|| ptr_write(cx, e))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_cast_from_ref_to_mut_ptr | COMPLEXITY=17 | LINES=31 */
 
 fn is_cast_from_ref_to_mut_ptr<'tcx>(
     cx: &LateContext<'tcx>,
@@ -187,7 +177,6 @@ fn is_cast_from_ref_to_mut_ptr<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_cast_to_bigger_memory_layout | COMPLEXITY=30 | LINES=60 */
 
 fn is_cast_to_bigger_memory_layout<'tcx>(
     cx: &LateContext<'tcx>,

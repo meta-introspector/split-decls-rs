@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_serialize/src/leb128/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use super::*;
 use crate::Decoder;
 use crate::opaque::{MAGIC_END_BYTES, MemDecoder};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=$test_name | COMPLEXITY=17 | LINES=37 */
 
 macro_rules! impl_test_unsigned_leb128 {
     ($test_name:ident, $write_fn_name:ident, $read_fn_name:ident, $int_ty:ident) => {
@@ -41,7 +39,6 @@ macro_rules! impl_test_unsigned_leb128 {
         }
     };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=$test_name | COMPLEXITY=23 | LINES=49 */
 
 impl_test_unsigned_leb128!(test_u16_leb128, write_u16_leb128, read_u16_leb128, u16);
 impl_test_unsigned_leb128!(test_u32_leb128, write_u32_leb128, read_u32_leb128, u32);
@@ -91,7 +88,6 @@ macro_rules! impl_test_signed_leb128 {
         }
     };
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=6 */
 
 impl_test_signed_leb128!(test_i16_leb128, write_i16_leb128, read_i16_leb128, i16);
 impl_test_signed_leb128!(test_i32_leb128, write_i32_leb128, read_i32_leb128, i32);

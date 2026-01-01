@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_sanitizers/src/cfi/typeid/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 // Type metadata identifiers for LLVM Control Flow Integrity (CFI) and cross-language LLVM CFI
 // support for the Rust compiler.
 //
@@ -8,7 +7,6 @@
 
 use bitflags::bitflags;
 use crate::rustc_complete::ty::{Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=TypeIdOptions: | COMPLEXITY=24 | LINES=27 */
 use crate::rustc_target::callconv::FnAbi;
 
 bitflags! {
@@ -36,7 +34,6 @@ bitflags! {
         const USE_CONCRETE_SELF = 8;
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=typeid_for_fnabi | COMPLEXITY=4 | LINES=11 */
 
 
 /// Returns a type metadata identifier for the specified FnAbi.
@@ -47,7 +44,6 @@ pub fn typeid_for_fnabi<'tcx>(
 ) -> String {
     itanium_cxx_abi::typeid_for_fnabi(tcx, fn_abi, options)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=typeid_for_instance | COMPLEXITY=4 | LINES=9 */
 
 /// Returns a type metadata identifier for the specified Instance.
 pub fn typeid_for_instance<'tcx>(

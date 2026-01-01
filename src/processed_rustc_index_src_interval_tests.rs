@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_index/src/interval/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=insert_collapses | COMPLEXITY=2 | LINES=9 */
 use super::*;
 
 #[test]
@@ -9,7 +8,6 @@ fn insert_collapses() {
     set.insert_range(43..=9830);
     assert_eq!(set.iter_intervals().collect::<Vec<_>>(), [43..9838]);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn contains() {
@@ -22,7 +20,6 @@ fn contains() {
     set.insert_range(10..11);
     assert!(set.contains(10));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=15 | LINES=53 */
 
 #[test]
 fn insert() {
@@ -76,7 +73,6 @@ fn insert() {
     set.insert_range(5..13);
     assert_eq!(set.iter().collect::<Vec<_>>(), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=insert_range | COMPLEXITY=31 | LINES=45 */
 
 #[test]
 fn insert_range() {
@@ -122,7 +118,6 @@ fn insert_range() {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=insert_range_dual | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 fn insert_range_dual() {
@@ -136,7 +131,6 @@ fn insert_range_dual() {
     set.insert_range(3..5);
     assert_eq!(set.iter().collect::<Vec<_>>(), [0, 1, 2, 3, 4, 5, 6]);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=last_set_before_adjacent | COMPLEXITY=2 | LINES=14 */
 
 #[test]
 fn last_set_before_adjacent() {
@@ -151,7 +145,6 @@ fn last_set_before_adjacent() {
     assert_eq!(set.last_set_in(0..5), Some(4));
     assert_eq!(set.last_set_in(3..5), Some(4));
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=last_set_in | COMPLEXITY=23 | LINES=53 */
 
 #[test]
 fn last_set_in() {

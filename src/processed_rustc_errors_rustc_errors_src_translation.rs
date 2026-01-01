@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_errors/src/translation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::borrow::Cow;
 use std::env;
 use std::error::Report;
 use std::sync::Arc;
 
 pub use crate::rustc_error_messages::{FluentArgs, LazyFallbackBundle};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::error::{TranslateError, TranslateErrorKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::snippet::Style;
 use crate::{DiagArg, DiagMessage, FluentBundle};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=to_fluent_args | COMPLEXITY=12 | LINES=19 */
 
 /// Convert diagnostic arguments (a rustc internal type that exists to implement
 /// `Encodable`/`Decodable`) into `FluentArgs` which is necessary to perform translation.
@@ -34,7 +29,6 @@ pub fn to_fluent_args<'iter>(iter: impl Iterator<Item = DiagArg<'iter>>) -> Flue
 
     args
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Translator | COMPLEXITY=9 | LINES=11 */
 
 #[derive(Clone)]
 pub struct Translator {
@@ -46,7 +40,6 @@ pub struct Translator {
     /// unavailable for the requested locale.
     pub fallback_fluent_bundle: LazyFallbackBundle,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=with_fallback_bundle | COMPLEXITY=45 | LINES=104 */
 
 impl Translator {
     pub fn with_fallback_bundle(

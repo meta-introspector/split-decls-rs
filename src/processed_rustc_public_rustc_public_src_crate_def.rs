@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_public/src/crate_def.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Module that define a common trait for things that represent a crate definition,
 // such as, a function, a trait, an enum, and any other definitions.
 
 use serde::Serialize;
 
 use crate::ty::{GenericArgs, Span, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AssocItems, Crate, Symbol, with};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=DefId(pub(crate) | COMPLEXITY=11 | LINES=25 */
 
 /// A unique identification number for each item accessible for the current compilation unit.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Serialize)]
@@ -34,7 +31,6 @@ impl DefId {
         with(|cx| cx.def_name(*self, true))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=19 | LINES=55 */
 
 /// A trait for retrieving information about a particular definition.
 ///
@@ -90,7 +86,6 @@ pub trait CrateDef {
         with(|cx| cx.all_tool_attrs(def_id))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=7 | LINES=17 */
 
 /// A trait that can be used to retrieve a definition's type.
 ///
@@ -108,7 +103,6 @@ pub trait CrateDefType: CrateDef {
         with(|cx| cx.def_ty_with_args(self.def_id(), args))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=associated_items | COMPLEXITY=5 | LINES=8 */
 
 /// A trait for retrieving all items from a definition within a crate.
 pub trait CrateDefItems: CrateDef {
@@ -117,14 +111,12 @@ pub trait CrateDefItems: CrateDef {
         with(|cx| cx.associated_items(self.def_id()))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Attribute | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Attribute {
     value: String,
     span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=16 */
 
 impl Attribute {
     pub fn new(value: String, span: Span) -> Attribute {
@@ -141,7 +133,6 @@ impl Attribute {
         &self.value
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=12 | LINES=16 */
 
 macro_rules! crate_def {
     ( $(#[$attr:meta])*
@@ -158,7 +149,6 @@ macro_rules! crate_def {
         }
     };
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=15 | LINES=18 */
 
 macro_rules! crate_def_with_ty {
     ( $(#[$attr:meta])*
@@ -177,7 +167,6 @@ macro_rules! crate_def_with_ty {
         impl CrateDefType for $name {}
     };
 }
-/* AST_META: AST_ID=11 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=11 | LINES=6 */
 
 macro_rules! impl_crate_def_items {
     ( $name:ident $(;)? ) => {

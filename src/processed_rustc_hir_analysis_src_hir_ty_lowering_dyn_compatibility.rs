@@ -1,32 +1,24 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/dyn_compatibility.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_lint_defs::builtin::UNUSED_ASSOCIATED_TYPE_BOUNDS;
 use crate::rustc_complete::ty::elaborate::ClauseWithSupertraitSpan;
 use crate::rustc_complete::ty::{
     self, BottomUpFolder, DynKind, ExistentialPredicateStableCmpExt as _, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, Upcast,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
 use crate::rustc_trait_selection::traits;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::HirTyLowerer;
 use crate::errors::SelfInTypeAlias;
 use crate::hir_ty_lowering::{GenericArgCountMismatch, PredicateFilter, RegionInferReason};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_elaborated_projection_mentions_input_lifetimes | COMPLEXITY=201 | LINES=466 */
 
 impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     /// Lower a trait object type from the HIR to our internal notion of a type.
@@ -493,7 +485,6 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         );
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=replace_dummy_self_with_error | COMPLEXITY=8 | LINES=15 */
 
 fn replace_dummy_self_with_error<'tcx, T: TypeFoldable<TyCtxt<'tcx>>>(
     tcx: TyCtxt<'tcx>,

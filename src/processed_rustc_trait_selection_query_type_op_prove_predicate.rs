@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/prove_predicate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_infer::traits::Obligation;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::traits::query::NoSolution;
 pub use crate::rustc_complete::traits::query::type_op::ProvePredicate;
 use crate::rustc_complete::ty::{self, ParamEnvAnd, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{ObligationCtxt, sizedness_fast_path};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=15 | LINES=43 */
 
 impl<'tcx> super::QueryTypeOp<'tcx> for ProvePredicate<'tcx> {
     type QueryResponse = ();

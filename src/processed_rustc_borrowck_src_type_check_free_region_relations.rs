@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/free_region_relations.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::transitive_relation::{TransitiveRelation, TransitiveRelationBuilder};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
 use crate::rustc_infer::infer::outlives;
@@ -12,18 +10,13 @@ use crate::rustc_infer::traits::query::type_op::DeeplyNormalize;
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::traits::query::OutlivesBound;
 use crate::rustc_complete::ty::{self, RegionVid, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_trait_selection::traits::query::type_op::{self, TypeOp};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use type_op::TypeOpOutput;
 
 use crate::BorrowckInferCtxt;
 use crate::type_check::{Locations, MirTypeckRegionConstraints, constraint_conversion};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 use crate::universal_regions::UniversalRegions;
 
 #[derive(Debug)]
@@ -42,7 +35,6 @@ pub(crate) struct UniversalRegionRelations<'tcx> {
     /// caller will understand.
     inverse_outlives: TransitiveRelation<RegionVid>,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 /// As part of computing the free region relations, we also have to
 /// normalize the input-output types, which we then need later. So we
@@ -56,7 +48,6 @@ pub(crate) struct CreateResult<'tcx> {
     pub(crate) known_type_outlives_obligations: Frozen<Vec<ty::PolyTypeOutlivesPredicate<'tcx>>>,
     pub(crate) normalized_inputs_and_output: NormalizedInputsAndOutput<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 pub(crate) fn create<'tcx>(
     infcx: &BorrowckInferCtxt<'tcx>,
@@ -73,7 +64,6 @@ pub(crate) fn create<'tcx>(
     }
     .create()
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=non_local_bounds | COMPLEXITY=54 | LINES=112 */
 
 impl UniversalRegionRelations<'_> {
     /// Given two universal regions, returns the postdominating
@@ -186,7 +176,6 @@ impl UniversalRegionRelations<'_> {
         self.outlives.base_edges()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UniversalRegionRelationsBuilder | COMPLEXITY=2 | LINES=11 */
 
 struct UniversalRegionRelationsBuilder<'a, 'tcx> {
     infcx: &'a BorrowckInferCtxt<'tcx>,
@@ -198,7 +187,6 @@ struct UniversalRegionRelationsBuilder<'a, 'tcx> {
     inverse_outlives: TransitiveRelationBuilder<RegionVid>,
     region_bound_pairs: RegionBoundPairs<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=relate_universal_regions | COMPLEXITY=107 | LINES=240 */
 
 impl<'tcx> UniversalRegionRelationsBuilder<'_, 'tcx> {
     /// Records in the `outlives_relation` (and

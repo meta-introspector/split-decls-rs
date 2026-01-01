@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/rustc_internal/pretty.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=write_smir_pretty | COMPLEXITY=7 | LINES=21 */
 use std::io;
 
 use crate::rustc_complete::ty::TyCtxt;

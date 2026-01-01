@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/context/tls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{mem, ptr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_data_structures::sync;
 
 use super::{GlobalCtxt, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ImplicitCtxt | COMPLEXITY=5 | LINES=24 */
 use crate::dep_graph::TaskDepsRef;
 use crate::query::plumbing::QueryJobId;
 
@@ -31,7 +28,6 @@ pub struct ImplicitCtxt<'a, 'tcx> {
     /// when executing them.
     pub task_deps: TaskDepsRef<'a>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> ImplicitCtxt<'a, 'tcx> {
     pub fn new(gcx: &'tcx GlobalCtxt<'tcx>) -> Self {
@@ -39,7 +35,6 @@ impl<'a, 'tcx> ImplicitCtxt<'a, 'tcx> {
         ImplicitCtxt { tcx, query: None, query_depth: 0, task_deps: TaskDepsRef::Ignore }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=erase | COMPLEXITY=4 | LINES=8 */
 
 // Import the thread-local variable from Rayon, which is preserved for Rayon jobs.
 use crate::rustc_thread_pool::tlv::TLV;
@@ -48,13 +43,11 @@ use crate::rustc_thread_pool::tlv::TLV;
 fn erase(context: &ImplicitCtxt<'_, '_>) -> *const () {
     context as *const _ as *const ()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5 */
 
 #[inline]
 unsafe fn downcast<'a, 'tcx>(context: *const ()) -> &'a ImplicitCtxt<'a, 'tcx> {
     unsafe { &*(context as *const ImplicitCtxt<'a, 'tcx>) }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=enter_context | COMPLEXITY=5 | LINES=13 */
 
 /// Sets `context` as the new current `ImplicitCtxt` for the duration of the function `f`.
 #[inline]
@@ -68,7 +61,6 @@ where
         f()
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=with_context_opt | COMPLEXITY=14 | LINES=19 */
 
 /// Allows access to the current `ImplicitCtxt` in a closure if one is available.
 #[inline]
@@ -88,7 +80,6 @@ where
         unsafe { f(Some(downcast(context))) }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=with_context | COMPLEXITY=4 | LINES=10 */
 
 /// Allows access to the current `ImplicitCtxt`.
 /// Panics if there is no `ImplicitCtxt` available.
@@ -99,7 +90,6 @@ where
 {
     with_context_opt(|opt_context| f(opt_context.expect("no ImplicitCtxt stored in tls")))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=with_related_context | COMPLEXITY=13 | LINES=23 */
 
 /// Allows access to the current `ImplicitCtxt` whose tcx field is the same as the tcx argument
 /// passed in. This means the closure is given an `ImplicitCtxt` with the same `'tcx` lifetime
@@ -123,7 +113,6 @@ where
         f(context)
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=with | COMPLEXITY=4 | LINES=10 */
 
 /// Allows access to the `TyCtxt` in the current `ImplicitCtxt`.
 /// Panics if there is no `ImplicitCtxt` available.
@@ -134,7 +123,6 @@ where
 {
     with_context(|context| f(context.tcx))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=with_opt | COMPLEXITY=4 | LINES=14 */
 
 /// Allows access to the `TyCtxt` in the current `ImplicitCtxt`.
 /// The closure is passed None if there is no `ImplicitCtxt` available.

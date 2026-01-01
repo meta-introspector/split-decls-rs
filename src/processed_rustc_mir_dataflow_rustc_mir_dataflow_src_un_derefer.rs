@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/un_derefer.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::mir::*;
 
@@ -8,7 +7,6 @@ use crate::rustc_complete::mir::*;
 pub(crate) struct UnDerefer<'tcx> {
     deref_chains: FxHashMap<Local, Vec<PlaceRef<'tcx>>>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
 
 impl<'tcx> UnDerefer<'tcx> {
     #[inline]
@@ -35,14 +33,12 @@ impl<'tcx> UnDerefer<'tcx> {
         ProjectionIter::new(self.deref_chain(place.local), place)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ProjectionIter | COMPLEXITY=2 | LINES=6 */
 
 /// The iterator returned by [`UnDerefer::iter_projections`].
 struct ProjectionIter<'a, 'tcx> {
     places: SlicePlusOne<'a, PlaceRef<'tcx>>,
     proj_idx: usize,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=15 */
 
 impl<'a, 'tcx> ProjectionIter<'a, 'tcx> {
     #[inline]
@@ -58,7 +54,6 @@ impl<'a, 'tcx> ProjectionIter<'a, 'tcx> {
         ProjectionIter { places: SlicePlusOne { slice: deref_chain, last }, proj_idx: 0 }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=next | COMPLEXITY=13 | LINES=23 */
 
 impl<'tcx> Iterator for ProjectionIter<'_, 'tcx> {
     type Item = (PlaceRef<'tcx>, PlaceElem<'tcx>);
@@ -82,13 +77,11 @@ impl<'tcx> Iterator for ProjectionIter<'_, 'tcx> {
         Some((partial_place, elem))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SlicePlusOne | COMPLEXITY=2 | LINES=5 */
 
 struct SlicePlusOne<'a, T> {
     slice: &'a [T],
     last: Option<T>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=read | COMPLEXITY=9 | LINES=17 */
 
 impl<T: Copy> SlicePlusOne<'_, T> {
     #[inline]

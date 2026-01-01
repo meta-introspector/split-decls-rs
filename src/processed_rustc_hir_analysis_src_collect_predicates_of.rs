@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/predicates_of.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::assert_matches::assert_matches;
 
 use hir::Node;
@@ -8,25 +7,19 @@ use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::ty::{
     self, GenericPredicates, ImplTraitInTraitData, Ty, TyCtxt, TypeVisitable, TypeVisitor, Upcast,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::item_bounds::explicit_item_bounds_with_filter;
 use crate::collect::ItemCtxt;
 use crate::constrained_generic_params as cgp;
 use crate::delegation::inherit_predicates_for_delegation_item;
 use crate::hir_ty_lowering::{HirTyLowerer, PredicateFilter, RegionInferReason};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=55 */
 
 /// Returns a list of all type predicates (explicit and implicit) for the definition with
 /// ID `def_id`. This includes all predicates returned by `explicit_predicates_of`, plus
@@ -82,7 +75,6 @@ pub(super) fn predicates_of(tcx: TyCtxt<'_>, def_id: DefId) -> ty::GenericPredic
     debug!("predicates_of({:?}) = {:?}", def_id, result);
     result
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=gather_explicit_predicates_of | COMPLEXITY=131 | LINES=296 */
 
 /// Returns a list of user-specified type predicates for the definition with ID `def_id`.
 /// N.B., this does not include any implied/inferred constraints.
@@ -379,7 +371,6 @@ fn gather_explicit_predicates_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Gen
         predicates: tcx.arena.alloc_from_iter(predicates),
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=compute_bidirectional_outlives_predicates | COMPLEXITY=11 | LINES=29 */
 
 /// Opaques have duplicated lifetimes and we need to compute bidirectional outlives predicates to
 /// enforce that these lifetimes stay in sync.
@@ -409,7 +400,6 @@ fn compute_bidirectional_outlives_predicates<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=const_evaluatable_predicates_of | COMPLEXITY=35 | LINES=79 */
 
 #[instrument(level = "debug", skip(tcx, predicates), ret)]
 fn const_evaluatable_predicates_of<'tcx>(
@@ -489,7 +479,6 @@ fn const_evaluatable_predicates_of<'tcx>(
 
     collector.preds
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(super) fn trait_explicit_predicates_and_bounds(
     tcx: TyCtxt<'_>,
@@ -498,7 +487,6 @@ pub(super) fn trait_explicit_predicates_and_bounds(
     assert_eq!(tcx.def_kind(def_id), DefKind::Trait);
     gather_explicit_predicates_of(tcx, def_id)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=107 */
 
 pub(super) fn explicit_predicates_of<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -606,7 +594,6 @@ pub(super) fn explicit_predicates_of<'tcx>(
         gather_explicit_predicates_of(tcx, def_id)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Ensures that the super-predicates of the trait with a `DefId`
 /// of `trait_def_id` are lowered and stored. This also ensures that
@@ -617,7 +604,6 @@ pub(super) fn explicit_super_predicates_of<'tcx>(
 ) -> ty::EarlyBinder<'tcx, &'tcx [(ty::Clause<'tcx>, Span)]> {
     implied_predicates_with_filter(tcx, trait_def_id.to_def_id(), PredicateFilter::SelfOnly)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub(super) fn explicit_supertraits_containing_assoc_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -629,7 +615,6 @@ pub(super) fn explicit_supertraits_containing_assoc_item<'tcx>(
         PredicateFilter::SelfTraitThatDefines(assoc_ident),
     )
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 pub(super) fn explicit_implied_predicates_of<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -645,7 +630,6 @@ pub(super) fn explicit_implied_predicates_of<'tcx>(
         },
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=88 */
 
 /// Ensures that the super-predicates of the trait with a `DefId`
 /// of `trait_def_id` are lowered and stored. This also ensures that
@@ -734,7 +718,6 @@ pub(super) fn implied_predicates_with_filter<'tcx>(
 
     ty::EarlyBinder::bind(implied_bounds)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=89 | LINES=135 */
 
 // Make sure when elaborating supertraits, probing for associated types, etc.,
 // we really truly are elaborating clauses that have `ty` as their self type.
@@ -870,7 +853,6 @@ pub(super) fn assert_only_contains_predicates_from<'tcx>(
         PredicateFilter::All | PredicateFilter::SelfAndAssociatedTypeBounds => {}
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=87 */
 
 /// Returns the predicates defined on `item_def_id` of the form
 /// `X: Foo` where `X` is the type parameter `def_id`.
@@ -958,7 +940,6 @@ pub(super) fn type_param_predicates<'tcx>(
 
     ty::EarlyBinder::bind(bounds)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=probe_ty_param_bounds_in_generics | COMPLEXITY=22 | LINES=51 */
 
 impl<'tcx> ItemCtxt<'tcx> {
     /// Finds bounds from `hir::Generics`.
@@ -1010,7 +991,6 @@ impl<'tcx> ItemCtxt<'tcx> {
         bounds
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=84 | LINES=112 */
 
 pub(super) fn const_conditions<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1123,7 +1103,6 @@ pub(super) fn const_conditions<'tcx>(
         })),
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=51 */
 
 pub(super) fn explicit_implied_const_bounds<'tcx>(
     tcx: TyCtxt<'tcx>,

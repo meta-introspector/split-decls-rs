@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=33 */
 // This module holds the logic to convert rustc internal ADTs into rustc_public ADTs.
 //
 // The conversion from stable to internal is not meant to be complete,
@@ -31,7 +30,6 @@ where
         (*self).stable(tables, cx)
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=15 */
 
 impl<'tcx, T> Stable<'tcx> for Option<T>
 where
@@ -47,7 +45,6 @@ where
         self.as_ref().map(|value| value.stable(tables, cx))
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=19 */
 
 impl<'tcx, T, E> Stable<'tcx> for Result<T, E>
 where
@@ -67,7 +64,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=14 */
 
 impl<'tcx, T> Stable<'tcx> for &[T]
 where
@@ -82,7 +78,6 @@ where
         self.iter().map(|e| e.stable(tables, cx)).collect()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=15 */
 
 impl<'tcx, T, U> Stable<'tcx> for (T, U)
 where
@@ -98,7 +93,6 @@ where
         (self.0.stable(tables, cx), self.1.stable(tables, cx))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=14 */
 
 impl<'tcx, T> Stable<'tcx> for RangeInclusive<T>
 where

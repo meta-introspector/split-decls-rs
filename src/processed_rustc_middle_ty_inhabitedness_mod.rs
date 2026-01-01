@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/inhabitedness/mod.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 // This module contains logic for determining whether a type is inhabited or
 // uninhabited. The [`InhabitedPredicate`] type captures the minimum
 // information needed to determine whether a type is inhabited given a
@@ -15,7 +14,6 @@
 //         }
 //     }
 // }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
 //
 // mod c {
 //     enum Void {}
@@ -25,13 +23,11 @@
 //     mod d {
 //     }
 // }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 //
 // struct Foo {
 //     x: a::b::SecretlyUninhabited,
 //     y: c::AlsoSecretlyUninhabited,
 // }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 // ```
 // In this code, the type `Foo` will only be visibly uninhabited inside the
 // modules `b`, `c` and `d`. Calling `inhabited_predicate` on `Foo` will
@@ -54,7 +50,6 @@ use tracing::instrument;
 use crate::query::Providers;
 use crate::ty::context::TyCtxt;
 use crate::ty::{self, DefId, Ty, TypeVisitableExt, VariantDef, Visibility};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 
 pub use inhabited_predicate::InhabitedPredicate;
@@ -62,7 +57,6 @@ pub use inhabited_predicate::InhabitedPredicate;
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { inhabited_predicate_adt, inhabited_predicate_type, ..*providers };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=inhabited_predicate_adt | COMPLEXITY=9 | LINES=15 */
 
 /// Returns an `InhabitedPredicate` that is generic over type parameters and
 /// requires calling [`InhabitedPredicate::instantiate`]
@@ -78,7 +72,6 @@ fn inhabited_predicate_adt(tcx: TyCtxt<'_>, def_id: DefId) -> InhabitedPredicate
         adt.variants().iter().map(|variant| variant.inhabited_predicate(tcx, adt)),
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=inhabited_predicate | COMPLEXITY=13 | LINES=26 */
 
 impl<'tcx> VariantDef {
     /// Calculates the forest of `DefId`s from which this variant is visibly uninhabited.
@@ -105,7 +98,6 @@ impl<'tcx> VariantDef {
         )
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=inhabited_predicate | COMPLEXITY=43 | LINES=93 */
 
 impl<'tcx> Ty<'tcx> {
     #[instrument(level = "debug", skip(tcx), ret)]
@@ -199,7 +191,6 @@ impl<'tcx> Ty<'tcx> {
         !self.inhabited_predicate(tcx).apply_ignore_module(tcx, typing_env)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=inhabited_predicate_type | COMPLEXITY=12 | LINES=21 */
 
 /// N.B. this query should only be called through `Ty::inhabited_predicate`
 fn inhabited_predicate_type<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> InhabitedPredicate<'tcx> {

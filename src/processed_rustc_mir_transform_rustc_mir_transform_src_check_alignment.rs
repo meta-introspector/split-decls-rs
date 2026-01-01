@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_alignment.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_abi::Align;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::mir::visit::PlaceContext;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 
 use crate::check_pointers::{BorrowedFieldProjectionMode, PointerCheck, check_pointers};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=8 | LINES=28 */
 
 pub(super) struct CheckAlignment;
 
@@ -39,7 +36,6 @@ impl<'tcx> crate::MirPass<'tcx> for CheckAlignment {
         true
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=insert_alignment_check | COMPLEXITY=22 | LINES=111 */
 
 /// Inserts the actual alignment check's logic. Returns a
 /// [AssertKind::MisalignedPointerDereference] on failure.

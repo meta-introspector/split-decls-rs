@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=LibFeatures | COMPLEXITY=10 | LINES=32 */
 pub mod lib_features {
     use crate::rustc_data_structures::unord::UnordMap;
     use rustc_macros::{HashStable, TyDecodable, TyEncodable};
@@ -27,4 +26,3 @@ pub mod lib_features {
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */

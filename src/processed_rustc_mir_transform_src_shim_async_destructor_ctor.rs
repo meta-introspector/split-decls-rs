@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/shim/async_destructor_ctor.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Safety};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, Body, Local, LocalDecl, MirSource, Operand, Place, Rvalue,
     SourceInfo, Statement, StatementKind, Terminator, TerminatorKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, EarlyBinder, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=build_adrop_for_coroutine_shim | COMPLEXITY=100 | LINES=416 */
 
 use super::*;
 use crate::patch::MirPatch;

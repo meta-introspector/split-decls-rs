@@ -1,28 +1,21 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/dataflow.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::{
     self, BasicBlock, Body, CallReturnPlaces, Location, Place, TerminatorEdges,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{RegionVid, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_mir_dataflow::fmt::DebugWithContext;
 use crate::rustc_mir_dataflow::impls::{
     EverInitializedPlaces, EverInitializedPlacesDomain, MaybeUninitializedPlaces,
     MaybeUninitializedPlacesDomain,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, GenKill, JoinSemiLattice};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::{BorrowSet, PlaceConflictBias, PlaceExt, RegionInferenceContext, places_conflict};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // This analysis is different to most others. Its results aren't computed with
 // `iterate_to_fixpoint`, but are instead composed from the results of three sub-analyses that are
@@ -32,7 +25,6 @@ pub(crate) struct Borrowck<'a, 'tcx> {
     pub(crate) uninits: MaybeUninitializedPlaces<'a, 'tcx>,
     pub(crate) ever_inits: EverInitializedPlaces<'a, 'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=17 | LINES=77 */
 
 impl<'a, 'tcx> Analysis<'tcx> for Borrowck<'a, 'tcx> {
     type Domain = BorrowckDomain;
@@ -110,7 +102,6 @@ impl<'a, 'tcx> Analysis<'tcx> for Borrowck<'a, 'tcx> {
         unreachable!();
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=join | COMPLEXITY=5 | LINES=7 */
 
 impl JoinSemiLattice for BorrowckDomain {
     fn join(&mut self, _other: &Self) -> bool {
@@ -118,7 +109,6 @@ impl JoinSemiLattice for BorrowckDomain {
         unreachable!();
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=20 | LINES=41 */
 
 impl<'tcx, C> DebugWithContext<C> for BorrowckDomain
 where
@@ -160,7 +150,6 @@ where
         Ok(())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// The transient state of the dataflow analyses used by the borrow checker.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -169,14 +158,12 @@ pub(crate) struct BorrowckDomain {
     pub(crate) uninits: MaybeUninitializedPlacesDomain,
     pub(crate) ever_inits: EverInitializedPlacesDomain,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BorrowIndex | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "bw{}"]
     pub struct BorrowIndex {}
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Borrows | COMPLEXITY=5 | LINES=14 */
 
 /// `Borrows` stores the data used in the analyses that track the flow
 /// of borrows.
@@ -191,7 +178,6 @@ pub struct Borrows<'a, 'tcx> {
     borrow_set: &'a BorrowSet<'tcx>,
     borrows_out_of_scope_at_location: FxIndexMap<Location, Vec<BorrowIndex>>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=OutOfScopePrecomputer | COMPLEXITY=2 | LINES=8 */
 
 struct OutOfScopePrecomputer<'a, 'tcx> {
     visited: DenseBitSet<mir::BasicBlock>,
@@ -200,7 +186,6 @@ struct OutOfScopePrecomputer<'a, 'tcx> {
     regioncx: &'a RegionInferenceContext<'tcx>,
     borrows_out_of_scope_at_location: FxIndexMap<Location, Vec<BorrowIndex>>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=compute | COMPLEXITY=46 | LINES=96 */
 
 impl<'tcx> OutOfScopePrecomputer<'_, 'tcx> {
     fn compute(
@@ -297,7 +282,6 @@ impl<'tcx> OutOfScopePrecomputer<'_, 'tcx> {
         self.visited.clear();
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=calculate_borrows_out_of_scope_at_location | COMPLEXITY=2 | LINES=9 */
 
 // This is `pub` because it's used by unstable external borrowck data users, see `consumers.rs`.
 pub fn calculate_borrows_out_of_scope_at_location<'tcx>(
@@ -307,7 +291,6 @@ pub fn calculate_borrows_out_of_scope_at_location<'tcx>(
 ) -> FxIndexMap<Location, Vec<BorrowIndex>> {
     OutOfScopePrecomputer::compute(body, regioncx, borrow_set)
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=PoloniusOutOfScopePrecomputer | COMPLEXITY=2 | LINES=9 */
 
 struct PoloniusOutOfScopePrecomputer<'a, 'tcx> {
     visited: DenseBitSet<mir::BasicBlock>,
@@ -317,7 +300,6 @@ struct PoloniusOutOfScopePrecomputer<'a, 'tcx> {
 
     loans_out_of_scope_at_location: FxIndexMap<Location, Vec<BorrowIndex>>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=compute | COMPLEXITY=68 | LINES=125 */
 
 impl<'tcx> PoloniusOutOfScopePrecomputer<'_, 'tcx> {
     fn compute(
@@ -443,7 +425,6 @@ impl<'tcx> PoloniusOutOfScopePrecomputer<'_, 'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=35 | LINES=83 */
 
 impl<'a, 'tcx> Borrows<'a, 'tcx> {
     pub fn new(
@@ -527,7 +508,6 @@ impl<'a, 'tcx> Borrows<'a, 'tcx> {
         state.kill_all(definitely_conflicting_borrows);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=54 | LINES=110 */
 
 type BorrowsDomain = MixedBitSet<BorrowIndex>;
 
@@ -638,6 +618,5 @@ impl<'tcx> crate::rustc_mir_dataflow::Analysis<'tcx> for Borrows<'_, 'tcx> {
         terminator.edges()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<C> DebugWithContext<C> for BorrowIndex {}

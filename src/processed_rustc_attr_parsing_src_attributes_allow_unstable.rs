@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/allow_unstable.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=6 | LINES=28 */
 use std::iter;
 
 use crate::prelude::*;
@@ -28,7 +27,6 @@ impl<S: Stage> CombineAttributeParser<S> for AllowInternalUnstableParser {
             .zip(iter::repeat(cx.attr_span))
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=12 | LINES=25 */
 
 pub(crate) struct UnstableFeatureBoundParser;
 impl<S: Stage> CombineAttributeParser<S> for UnstableFeatureBoundParser {
@@ -54,7 +52,6 @@ impl<S: Stage> CombineAttributeParser<S> for UnstableFeatureBoundParser {
             .zip(iter::repeat(cx.attr_span))
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=9 | LINES=23 */
 
 pub(crate) struct AllowConstFnUnstableParser;
 impl<S: Stage> CombineAttributeParser<S> for AllowConstFnUnstableParser {
@@ -78,7 +75,6 @@ impl<S: Stage> CombineAttributeParser<S> for AllowConstFnUnstableParser {
         parse_unstable(cx, args, <Self as CombineAttributeParser<S>>::PATH[0])
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=parse_unstable | COMPLEXITY=13 | LINES=30 */
 
 fn parse_unstable<S: Stage>(
     cx: &AcceptContext<'_, '_, S>,

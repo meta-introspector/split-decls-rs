@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/loan_liveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::RegionVid;
 use crate::rustc_mir_dataflow::points::PointIndex;
 
 use super::{LiveLoans, LocalizedOutlivesConstraintSet};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=96 */
 use crate::BorrowSet;
 use crate::constraints::OutlivesConstraint;
 use crate::region_infer::values::LivenessValues;
@@ -103,7 +100,6 @@ pub(super) fn compute_loan_liveness<'tcx>(
 
     live_loans
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=LocalizedConstraintGraph | COMPLEXITY=7 | LINES=12 */
 
 /// The localized constraint graph indexes the physical and logical edges to compute a given node's
 /// successors during traversal.
@@ -116,7 +112,6 @@ struct LocalizedConstraintGraph {
     /// can be big, and we don't need to create such a physical edge for every point in the CFG.
     logical_edges: FxHashMap<RegionVid, FxIndexSet<RegionVid>>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LocalizedNode | COMPLEXITY=2 | LINES=7 */
 
 /// A node in the graph to be traversed, one of the two vertices of a localized outlives constraint.
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
@@ -124,7 +119,6 @@ struct LocalizedNode {
     region: RegionVid,
     point: PointIndex,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=20 | LINES=40 */
 
 impl LocalizedConstraintGraph {
     /// Traverses the constraints and returns the indexed graph of edges per node.

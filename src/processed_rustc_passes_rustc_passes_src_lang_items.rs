@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 // Detecting lang items.
 //
 // Language items are items that represent concepts intrinsic to the language
@@ -13,14 +12,10 @@ use rustc_ast as ast;
 use crate::rustc_complete::visit;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lang_items::{GenericRequirement, extract};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LangItem, LanguageItems, MethodKind, Target};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::cstore::ExternCrate;
 use crate::rustc_complete::Span;
 
@@ -28,7 +23,6 @@ use crate::errors::{
     DuplicateLangItem, IncorrectCrateType, IncorrectTarget, LangItemOnIncorrectTarget,
     UnknownLangItem,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::weak_lang_items;
 
 pub(crate) enum Duplicate {
@@ -36,7 +30,6 @@ pub(crate) enum Duplicate {
     Crate,
     CrateDepends,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LanguageItemCollector | COMPLEXITY=4 | LINES=10 */
 
 struct LanguageItemCollector<'ast, 'tcx> {
     items: LanguageItems,
@@ -47,7 +40,6 @@ struct LanguageItemCollector<'ast, 'tcx> {
     item_spans: FxHashMap<DefId, Span>,
     parent_item: Option<&'ast ast::Item>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=106 | LINES=205 */
 
 impl<'ast, 'tcx> LanguageItemCollector<'ast, 'tcx> {
     fn new(
@@ -253,7 +245,6 @@ impl<'ast, 'tcx> LanguageItemCollector<'ast, 'tcx> {
         self.collect_item(lang_item, item_def_id.to_def_id(), Some(item_span));
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=get_lang_items | COMPLEXITY=9 | LINES=25 */
 
 /// Traverses and collects all the lang items in all crates.
 fn get_lang_items(tcx: TyCtxt<'_>, (): ()) -> LanguageItems {
@@ -279,7 +270,6 @@ fn get_lang_items(tcx: TyCtxt<'_>, (): ()) -> LanguageItems {
     // Return all the lang items that were found.
     collector.items
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=40 | LINES=89 */
 
 impl<'ast, 'tcx> visit::Visitor<'ast> for LanguageItemCollector<'ast, 'tcx> {
     fn visit_item(&mut self, i: &'ast ast::Item) {
@@ -369,7 +359,6 @@ impl<'ast, 'tcx> visit::Visitor<'ast> for LanguageItemCollector<'ast, 'tcx> {
         visit::walk_assoc_item(self, i, ctxt);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.get_lang_items = get_lang_items;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public_bridge/src/context/impls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Implementation of CompilerCtxt.
 
 #[allow(rustc::usage_of_qualified_ty)]
@@ -7,18 +6,12 @@
 use std::iter;
 
 use crate::rustc_abi::{Endian, Layout, ReprOptions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::{Attribute, LangItem};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::interpret::{AllocId, ConstAllocation, ErrorHandled, GlobalAlloc, Scalar};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{BinOp, Body, Const as MirConst, ConstValue, UnOp};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::print::{with_forced_trimmed_paths, with_no_trimmed_paths};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::ty::util::Discr;
 use crate::rustc_complete::ty::{
     AdtDef, AdtKind, AssocItem, Binder, ClosureKind, CoroutineArgsExt, EarlyBinder,
@@ -26,35 +19,27 @@ use crate::rustc_complete::ty::{
     PolyFnSig, ScalarInt, TraitDef, TraitRef, Ty, TyCtxt, TyKind, TypeVisitableExt, UintTy,
     ValTree, VariantDef,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{mir, ty};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::cstore::ForeignModule;
 use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileNameDisplayPreference, Span, Symbol};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::callconv::FnAbi;
 
 use super::{AllocRangeHelpers, CompilerCtxt, TyHelpers, TypingEnvHelpers};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::builder::BodyBuilder;
 use crate::{Bridge, Error, Tables, filter_def_ids};
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new_foreign | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, B: Bridge> TyHelpers<'tcx> for CompilerCtxt<'tcx, B> {
     fn new_foreign(&self, def_id: DefId) -> ty::Ty<'tcx> {
         ty::Ty::new_foreign(self.tcx, def_id)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fully_monomorphized | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, B: Bridge> TypingEnvHelpers<'tcx> for CompilerCtxt<'tcx, B> {
     fn fully_monomorphized(&self) -> ty::TypingEnv<'tcx> {
         ty::TypingEnv::fully_monomorphized()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=alloc_range | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, B: Bridge> AllocRangeHelpers<'tcx> for CompilerCtxt<'tcx, B> {
     fn alloc_range(
@@ -65,7 +50,6 @@ impl<'tcx, B: Bridge> AllocRangeHelpers<'tcx> for CompilerCtxt<'tcx, B> {
         crate::rustc_middle::mir::interpret::alloc_range(offset, size)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=lift | COMPLEXITY=259 | LINES=705 */
 
 impl<'tcx, B: Bridge> CompilerCtxt<'tcx, B> {
     pub fn lift<T: ty::Lift<TyCtxt<'tcx>>>(&self, value: T) -> Option<T::Lifted> {

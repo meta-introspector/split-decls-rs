@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_abi/src/layout/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::fmt;
 use std::ops::Deref;
 
@@ -10,7 +9,6 @@ use crate::{
     AbiAlign, Align, BackendRepr, FieldsShape, Float, HasDataLayout, LayoutData, Niche,
     PointeeInfo, Primitive, Size, Variants,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=FieldIdx | COMPLEXITY=14 | LINES=30 */
 
 // Explicitly import `Float` to avoid ambiguity with `Primitive::Float`.
 
@@ -41,7 +39,6 @@ crate::rustc_index::newtype_index! {
     #[orderable]
     pub struct FieldIdx {}
 }
-/* AST_META: AST_ID=3 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 impl FieldIdx {
     /// The second field, at index 1.
@@ -49,7 +46,6 @@ impl FieldIdx {
     /// For use alongside [`FieldIdx::ZERO`], particularly with scalar pairs.
     pub const ONE: FieldIdx = FieldIdx::from_u32(1);
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=VariantIdx | COMPLEXITY=4 | LINES=20 */
 
 crate::rustc_index::newtype_index! {
     /// The *source-order* index of a variant in a type.
@@ -70,7 +66,6 @@ crate::rustc_index::newtype_index! {
         const FIRST_VARIANT = 0;
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=Layout | COMPLEXITY=5 | LINES=10 */
 #[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable_Generic)]
 #[rustc_pass_by_value]
 pub struct Layout<'a>(pub Interned<'a, LayoutData<FieldIdx, VariantIdx>>);
@@ -81,7 +76,6 @@ impl<'a> fmt::Debug for Layout<'a> {
         self.0.0.fmt(f)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a> Deref for Layout<'a> {
     type Target = &'a LayoutData<FieldIdx, VariantIdx>;
@@ -89,7 +83,6 @@ impl<'a> Deref for Layout<'a> {
         &self.0.0
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fields | COMPLEXITY=11 | LINES=34 */
 
 impl<'a> Layout<'a> {
     pub fn fields(self) -> &'a FieldsShape<FieldIdx> {
@@ -124,7 +117,6 @@ impl<'a> Layout<'a> {
         self.0.0.unadjusted_abi_align
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TyAndLayout | COMPLEXITY=5 | LINES=13 */
 
 /// The layout of a type, alongside the type itself.
 /// Provides various type traversal APIs (e.g., recursing into fields).
@@ -138,7 +130,6 @@ pub struct TyAndLayout<'a, Ty> {
     pub ty: Ty,
     pub layout: Layout<'a>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
 
 impl<'a, Ty: fmt::Display> fmt::Debug for TyAndLayout<'a, Ty> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -149,7 +140,6 @@ impl<'a, Ty: fmt::Display> fmt::Debug for TyAndLayout<'a, Ty> {
             .finish()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, Ty> Deref for TyAndLayout<'a, Ty> {
     type Target = &'a LayoutData<FieldIdx, VariantIdx>;
@@ -157,14 +147,12 @@ impl<'a, Ty> Deref for TyAndLayout<'a, Ty> {
         &self.layout.0.0
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, Ty> AsRef<LayoutData<FieldIdx, VariantIdx>> for TyAndLayout<'a, Ty> {
     fn as_ref(&self) -> &LayoutData<FieldIdx, VariantIdx> {
         &*self.layout.0.0
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=ty_and_layout_for_variant | COMPLEXITY=3 | LINES=21 */
 
 /// Trait that needs to be implemented by the higher-level type representation
 /// (e.g. `crate::rustc_middle::ty::Ty`), to provide `crate::rustc_target::abi` functionality.
@@ -186,7 +174,6 @@ pub trait TyAbiInterface<'a, C>: Sized + std::fmt::Debug {
     fn is_unit(this: TyAndLayout<'a, Self>) -> bool;
     fn is_transparent(this: TyAndLayout<'a, Self>) -> bool;
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=for_variant | COMPLEXITY=52 | LINES=117 */
 
 impl<'a, Ty> TyAndLayout<'a, Ty> {
     pub fn for_variant<C>(self, cx: &C, variant_index: VariantIdx) -> Self

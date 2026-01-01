@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cmp::Ordering;
 use std::ops::{Index, IndexMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{mem, slice};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_data_structures::graph::{self, DirectedGraph, StartNode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 pub(crate) use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, START_BCB};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, BasicBlock, Terminator, TerminatorKind};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
 use tracing::debug;
 
 /// A coverage-specific simplification of the MIR control flow graph (CFG). The `CoverageGraph`s
@@ -38,7 +32,6 @@ pub(crate) struct CoverageGraph {
     /// This forms a linked list that can be traversed to find all enclosing loops.
     enclosing_loop_header: IndexVec<BasicCoverageBlock, Option<BasicCoverageBlock>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_basic_coverage_blocks | COMPLEXITY=81 | LINES=190 */
 
 impl CoverageGraph {
     pub(crate) fn from_mir(mir_body: &mir::Body<'_>) -> Self {
@@ -229,7 +222,6 @@ impl CoverageGraph {
         self.predecessors[to_bcb].iter().copied().filter(move |&pred| self.dominates(to_bcb, pred))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=9 */
 
 impl Index<BasicCoverageBlock> for CoverageGraph {
     type Output = BasicCoverageBlockData;
@@ -239,7 +231,6 @@ impl Index<BasicCoverageBlock> for CoverageGraph {
         &self.bcbs[index]
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=5 | LINES=7 */
 
 impl IndexMut<BasicCoverageBlock> for CoverageGraph {
     #[inline]
@@ -247,7 +238,6 @@ impl IndexMut<BasicCoverageBlock> for CoverageGraph {
         &mut self.bcbs[index]
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=9 */
 
 impl graph::DirectedGraph for CoverageGraph {
     type Node = BasicCoverageBlock;
@@ -257,7 +247,6 @@ impl graph::DirectedGraph for CoverageGraph {
         self.bcbs.len()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=start_node | COMPLEXITY=5 | LINES=8 */
 
 impl graph::StartNode for CoverageGraph {
     #[inline]
@@ -266,7 +255,6 @@ impl graph::StartNode for CoverageGraph {
             .expect("mir::START_BLOCK should be in a BasicCoverageBlock")
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=5 | LINES=7 */
 
 impl graph::Successors for CoverageGraph {
     #[inline]
@@ -274,7 +262,6 @@ impl graph::Successors for CoverageGraph {
         self.successors[node].iter().copied()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=predecessors | COMPLEXITY=5 | LINES=7 */
 
 impl graph::Predecessors for CoverageGraph {
     #[inline]
@@ -282,7 +269,6 @@ impl graph::Predecessors for CoverageGraph {
         self.predecessors[node].iter().copied()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=38 */
 
 /// `BasicCoverageBlockData` holds the data indexed by a `BasicCoverageBlock`.
 ///
@@ -321,7 +307,6 @@ pub(crate) struct BasicCoverageBlockData {
     /// because the yielding coroutine might not be resumed.
     pub(crate) is_out_summable: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 impl BasicCoverageBlockData {
     #[inline(always)]
@@ -334,7 +319,6 @@ impl BasicCoverageBlockData {
         *self.basic_blocks.last().unwrap()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=CoverageSuccessors | COMPLEXITY=3 | LINES=13 */
 
 /// Holds the coverage-relevant successors of a basic block's terminator, and
 /// indicates whether that block can potentially be combined into the same BCB
@@ -348,7 +332,6 @@ struct CoverageSuccessors<'a> {
     /// only followed if/when the generator is resumed after the yield.
     is_yield: bool,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_out_chainable | COMPLEXITY=7 | LINES=16 */
 
 impl CoverageSuccessors<'_> {
     /// If `false`, this terminator cannot be chained into another block when
@@ -365,7 +348,6 @@ impl CoverageSuccessors<'_> {
         !self.is_yield && !self.targets.is_empty()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=9 */
 
 impl IntoIterator for CoverageSuccessors<'_> {
     type Item = BasicBlock;
@@ -375,7 +357,6 @@ impl IntoIterator for CoverageSuccessors<'_> {
         self.targets.iter().copied()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=bcb_filtered_successors | COMPLEXITY=21 | LINES=46 */
 
 // Returns the subset of a block's successors that are relevant to the coverage
 // graph, i.e. those that do not represent unwinds or false edges.
@@ -422,7 +403,6 @@ fn bcb_filtered_successors<'a, 'tcx>(terminator: &'a Terminator<'tcx>) -> Covera
 
     CoverageSuccessors { targets, is_yield }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=CoverageRelevantSubgraph | COMPLEXITY=2 | LINES=8 */
 
 /// Wrapper around a [`mir::BasicBlocks`] graph that restricts each node's
 /// successors to only the ones considered "relevant" when building a coverage
@@ -431,7 +411,6 @@ fn bcb_filtered_successors<'a, 'tcx>(terminator: &'a Terminator<'tcx>) -> Covera
 struct CoverageRelevantSubgraph<'a, 'tcx> {
     basic_blocks: &'a mir::BasicBlocks<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=9 */
 impl<'a, 'tcx> CoverageRelevantSubgraph<'a, 'tcx> {
     fn new(basic_blocks: &'a mir::BasicBlocks<'tcx>) -> Self {
         Self { basic_blocks }
@@ -441,7 +420,6 @@ impl<'a, 'tcx> CoverageRelevantSubgraph<'a, 'tcx> {
         bcb_filtered_successors(self.basic_blocks[bb].terminator())
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=7 */
 impl<'a, 'tcx> graph::DirectedGraph for CoverageRelevantSubgraph<'a, 'tcx> {
     type Node = BasicBlock;
 
@@ -449,7 +427,6 @@ impl<'a, 'tcx> graph::DirectedGraph for CoverageRelevantSubgraph<'a, 'tcx> {
         self.basic_blocks.num_nodes()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=5 | LINES=5 */
 impl<'a, 'tcx> graph::Successors for CoverageRelevantSubgraph<'a, 'tcx> {
     fn successors(&self, bb: Self::Node) -> impl Iterator<Item = Self::Node> {
         self.coverage_successors(bb).into_iter()

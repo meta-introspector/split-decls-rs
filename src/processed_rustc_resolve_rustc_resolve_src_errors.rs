@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_resolve/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, ElidedLifetimeInPathSubdiag, EmissionGuarantee, IntoDiagArg, MultiSpan,
     Subdiagnostic,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::late::PatternSource;
 use crate::{Res, fluent_generated as fluent};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_generic_params_from_outer_item, code = E0401)]
@@ -31,7 +26,6 @@ pub(crate) struct GenericParamsFromOuterItem {
     pub(crate) static_or_const: Option<GenericParamsFromOuterItemStaticOrConst>,
     pub(crate) is_self: bool,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum GenericParamsFromOuterItemStaticOrConst {
@@ -40,7 +34,6 @@ pub(crate) enum GenericParamsFromOuterItemStaticOrConst {
     #[note(resolve_generic_params_from_outer_item_const)]
     Const,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum GenericParamsFromOuterItemLabel {
@@ -53,7 +46,6 @@ pub(crate) enum GenericParamsFromOuterItemLabel {
     #[label(resolve_generic_params_from_outer_item_const_param)]
     ConstParam(#[primary_span] Span),
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(resolve_suggestion, code = "{snippet}", applicability = "maybe-incorrect")]
@@ -62,7 +54,6 @@ pub(crate) struct GenericParamsFromOuterItemSugg {
     pub(crate) span: Span,
     pub(crate) snippet: String,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_name_is_already_used_as_generic_parameter, code = E0403)]
@@ -74,7 +65,6 @@ pub(crate) struct NameAlreadyUsedInParameterList {
     pub(crate) first_use_span: Span,
     pub(crate) name: Ident,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_method_not_member_of_trait, code = E0407)]
@@ -87,7 +77,6 @@ pub(crate) struct MethodNotMemberOfTrait {
     #[subdiagnostic]
     pub(crate) sub: Option<AssociatedFnWithSimilarNameExists>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -100,7 +89,6 @@ pub(crate) struct AssociatedFnWithSimilarNameExists {
     pub(crate) span: Span,
     pub(crate) candidate: Symbol,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_type_not_member_of_trait, code = E0437)]
@@ -113,7 +101,6 @@ pub(crate) struct TypeNotMemberOfTrait {
     #[subdiagnostic]
     pub(crate) sub: Option<AssociatedTypeWithSimilarNameExists>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -126,7 +113,6 @@ pub(crate) struct AssociatedTypeWithSimilarNameExists {
     pub(crate) span: Span,
     pub(crate) candidate: Symbol,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_const_not_member_of_trait, code = E0438)]
@@ -139,7 +125,6 @@ pub(crate) struct ConstNotMemberOfTrait {
     #[subdiagnostic]
     pub(crate) sub: Option<AssociatedConstWithSimilarNameExists>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -152,7 +137,6 @@ pub(crate) struct AssociatedConstWithSimilarNameExists {
     pub(crate) span: Span,
     pub(crate) candidate: Symbol,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_variable_bound_with_different_mode, code = E0409)]
@@ -164,7 +148,6 @@ pub(crate) struct VariableBoundWithDifferentMode {
     pub(crate) first_binding_span: Span,
     pub(crate) variable_name: Ident,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_ident_bound_more_than_once_in_parameter_list, code = E0415)]
@@ -174,7 +157,6 @@ pub(crate) struct IdentifierBoundMoreThanOnceInParameterList {
     pub(crate) span: Span,
     pub(crate) identifier: Ident,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_ident_bound_more_than_once_in_same_pattern, code = E0416)]
@@ -184,7 +166,6 @@ pub(crate) struct IdentifierBoundMoreThanOnceInSamePattern {
     pub(crate) span: Span,
     pub(crate) identifier: Ident,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_undeclared_label, code = E0426)]
@@ -200,7 +181,6 @@ pub(crate) struct UndeclaredLabel {
     #[subdiagnostic]
     pub(crate) sub_unreachable: Option<UnreachableLabelWithSimilarNameExists>,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_label_with_similar_name_reachable)]
@@ -217,7 +197,6 @@ pub(crate) struct TryUsingSimilarlyNamedLabel {
     pub(crate) span: Span,
     pub(crate) ident_name: Symbol,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_unreachable_label_with_similar_name_exists)]
@@ -225,7 +204,6 @@ pub(crate) struct UnreachableLabelWithSimilarNameExists {
     #[primary_span]
     pub(crate) ident_span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_self_import_can_only_appear_once_in_the_list, code = E0430)]
@@ -234,7 +212,6 @@ pub(crate) struct SelfImportCanOnlyAppearOnceInTheList {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_self_import_only_in_import_list_with_non_empty_prefix, code = E0431)]
@@ -243,7 +220,6 @@ pub(crate) struct SelfImportOnlyInImportListWithNonEmptyPrefix {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_capture_dynamic_environment_in_fn_item, code = E0434)]
@@ -252,7 +228,6 @@ pub(crate) struct CannotCaptureDynamicEnvironmentInFnItem {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_attempt_to_use_non_constant_value_in_constant, code = E0435)]
@@ -266,7 +241,6 @@ pub(crate) struct AttemptToUseNonConstantValueInConstant<'a> {
     #[subdiagnostic]
     pub(crate) without: Option<AttemptToUseNonConstantValueInConstantWithoutSuggestion<'a>>,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -283,7 +257,6 @@ pub(crate) struct AttemptToUseNonConstantValueInConstantWithSuggestion<'a> {
     pub(crate) type_span: Option<Span>,
     pub(crate) current: &'a str,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_attempt_to_use_non_constant_value_in_constant_label_with_suggestion)]
@@ -291,7 +264,6 @@ pub(crate) struct AttemptToUseNonConstantValueInConstantLabelWithSuggestion {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_attempt_to_use_non_constant_value_in_constant_without_suggestion)]
@@ -300,7 +272,6 @@ pub(crate) struct AttemptToUseNonConstantValueInConstantWithoutSuggestion<'a> {
     pub(crate) ident_span: Span,
     pub(crate) suggestion: &'a str,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_self_imports_only_allowed_within, code = E0429)]
@@ -312,7 +283,6 @@ pub(crate) struct SelfImportsOnlyAllowedWithin {
     #[subdiagnostic]
     pub(crate) mpart_suggestion: Option<SelfImportsOnlyAllowedWithinMultipartSuggestion>,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -324,7 +294,6 @@ pub(crate) struct SelfImportsOnlyAllowedWithinSuggestion {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -337,7 +306,6 @@ pub(crate) struct SelfImportsOnlyAllowedWithinMultipartSuggestion {
     #[suggestion_part(code = "}}")]
     pub(crate) multipart_end: Span,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_binding_shadows_something_unacceptable, code = E0530)]
@@ -355,7 +323,6 @@ pub(crate) struct BindingShadowsSomethingUnacceptable<'a> {
     pub(crate) participle: &'a str,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -368,7 +335,6 @@ pub(crate) struct BindingShadowsSomethingUnacceptableSuggestion {
     pub(crate) span: Span,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_forward_declared_generic_param, code = E0128)]
@@ -378,7 +344,6 @@ pub(crate) struct ForwardDeclaredGenericParam {
     pub(crate) span: Span,
     pub(crate) param: Symbol,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_forward_declared_generic_in_const_param_ty)]
@@ -388,7 +353,6 @@ pub(crate) struct ForwardDeclaredGenericInConstParamTy {
     pub(crate) span: Span,
     pub(crate) param: Symbol,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_param_in_ty_of_const_param, code = E0770)]
@@ -398,7 +362,6 @@ pub(crate) struct ParamInTyOfConstParam {
     pub(crate) span: Span,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_self_in_generic_param_default, code = E0735)]
@@ -406,7 +369,6 @@ pub(crate) struct SelfInGenericParamDefault {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_self_in_const_generic_ty)]
@@ -414,7 +376,6 @@ pub(crate) struct SelfInConstGenericTy {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_param_in_non_trivial_anon_const)]
@@ -428,7 +389,6 @@ pub(crate) struct ParamInNonTrivialAnonConst {
     #[subdiagnostic]
     pub(crate) help: Option<ParamInNonTrivialAnonConstHelp>,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 #[derive(Subdiagnostic)]
 #[help(resolve_param_in_non_trivial_anon_const_help)]
@@ -444,7 +404,6 @@ pub(crate) enum ParamKindInNonTrivialAnonConst {
     #[note(resolve_lifetime_param_in_non_trivial_anon_const)]
     Lifetime,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_unreachable_label, code = E0767)]
@@ -463,7 +422,6 @@ pub(crate) struct UnreachableLabel {
     #[subdiagnostic]
     pub(crate) sub_unreachable_label: Option<UnreachableLabelSubLabelUnreachable>,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -476,7 +434,6 @@ pub(crate) struct UnreachableLabelSubSuggestion {
     pub(crate) span: Span,
     pub(crate) ident_name: Symbol,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_unreachable_label_similar_name_reachable)]
@@ -484,7 +441,6 @@ pub(crate) struct UnreachableLabelSubLabel {
     #[primary_span]
     pub(crate) ident_span: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_unreachable_label_similar_name_unreachable)]
@@ -492,7 +448,6 @@ pub(crate) struct UnreachableLabelSubLabelUnreachable {
     #[primary_span]
     pub(crate) ident_span: Span,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_invalid_asm_sym)]
@@ -502,7 +457,6 @@ pub(crate) struct InvalidAsmSym {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_lowercase_self)]
@@ -511,7 +465,6 @@ pub(crate) struct LowercaseSelf {
     #[suggestion(code = "Self", applicability = "maybe-incorrect", style = "short")]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 #[derive(Diagnostic)]
@@ -521,7 +474,6 @@ pub(crate) struct BindingInNeverPattern {
     #[suggestion(code = "_", applicability = "machine-applicable", style = "short")]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_trait_impl_duplicate, code = E0201)]
@@ -535,7 +487,6 @@ pub(crate) struct TraitImplDuplicate {
     pub(crate) trait_item_span: Span,
     pub(crate) name: Ident,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_relative_2018)]
@@ -546,7 +497,6 @@ pub(crate) struct Relative2018 {
     pub(crate) path_span: Span,
     pub(crate) path_str: String,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_ancestor_only, code = E0742)]
@@ -561,7 +511,6 @@ pub(crate) struct ExpectedModuleFound {
     pub(crate) res: Res,
     pub(crate) path_str: String,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_indeterminate, code = E0578)]
@@ -575,7 +524,6 @@ pub(crate) struct ToolModuleImported {
     #[note]
     pub(crate) import: Span,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_module_only)]
@@ -596,7 +544,6 @@ pub(crate) struct MacroExpectedFound<'a> {
     #[subdiagnostic]
     pub(crate) add_as_non_derive: Option<AddAsNonDerive<'a>>,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[help(resolve_remove_surrounding_derive)]
@@ -604,14 +551,12 @@ pub(crate) struct RemoveSurroundingDerive {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[help(resolve_add_as_non_derive)]
 pub(crate) struct AddAsNonDerive<'a> {
     pub(crate) macro_path: &'a str,
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_proc_macro_same_crate)]
@@ -621,7 +566,6 @@ pub(crate) struct ProcMacroSameCrate {
     #[help]
     pub(crate) is_test: bool,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_imported_crate)]
@@ -629,7 +573,6 @@ pub(crate) struct CrateImported {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_macro_use_extern_crate_self)]
@@ -637,7 +580,6 @@ pub(crate) struct MacroUseExternCrateSelf {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_accessible_unsure)]
@@ -646,7 +588,6 @@ pub(crate) struct CfgAccessibleUnsure {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Debug)]
 #[derive(Diagnostic)]
@@ -659,7 +600,6 @@ pub(crate) struct ParamInEnumDiscriminant {
     #[subdiagnostic]
     pub(crate) param_kind: ParamKindInEnumDiscriminant,
 }
-/* AST_META: AST_ID=60 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Debug)]
 #[derive(Subdiagnostic)]
@@ -671,7 +611,6 @@ pub(crate) enum ParamKindInEnumDiscriminant {
     #[note(resolve_lifetime_param_in_enum_discriminant)]
     Lifetime,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_change_import_binding)]
@@ -679,7 +618,6 @@ pub(crate) struct ChangeImportBinding {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -692,7 +630,6 @@ pub(crate) struct ChangeImportBindingSuggestion {
     pub(crate) span: Span,
     pub(crate) suggestion: String,
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_imports_cannot_refer_to)]
@@ -701,7 +638,6 @@ pub(crate) struct ImportsCannotReferTo<'a> {
     pub(crate) span: Span,
     pub(crate) what: &'a str,
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_find_ident_in_this_scope)]
@@ -711,7 +647,6 @@ pub(crate) struct CannotFindIdentInThisScope<'a> {
     pub(crate) expected: &'a str,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_explicit_unsafe_traits)]
@@ -720,7 +655,6 @@ pub(crate) struct ExplicitUnsafeTraits {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_macro_defined_later)]
@@ -728,7 +662,6 @@ pub(crate) struct MacroDefinedLater {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_consider_move_macro_position)]
@@ -737,7 +670,6 @@ pub(crate) struct MacroSuggMovePosition {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=68 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MacroRulesNot {
@@ -760,7 +692,6 @@ pub(crate) enum MacroRulesNot {
         ident: Ident,
     },
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_missing_macro_rules_name)]
@@ -768,7 +699,6 @@ pub(crate) struct MaybeMissingMacroRulesName {
     #[primary_span]
     pub(crate) spans: MultiSpan,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 #[help(resolve_added_macro_use)]
@@ -785,7 +715,6 @@ pub(crate) struct ConsiderAddingADerive {
     pub(crate) span: Span,
     pub(crate) suggestion: String,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_determine_import_resolution)]
@@ -793,7 +722,6 @@ pub(crate) struct CannotDetermineImportResolution {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_determine_macro_resolution)]
@@ -804,7 +732,6 @@ pub(crate) struct CannotDetermineMacroResolution {
     pub(crate) kind: &'static str,
     pub(crate) path: String,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_be_reexported_private, code = E0364)]
@@ -813,7 +740,6 @@ pub(crate) struct CannotBeReexportedPrivate {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_be_reexported_crate_public, code = E0364)]
@@ -822,7 +748,6 @@ pub(crate) struct CannotBeReexportedCratePublic {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_be_reexported_private, code = E0365)]
@@ -833,7 +758,6 @@ pub(crate) struct CannotBeReexportedPrivateNS {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_be_reexported_crate_public, code = E0365)]
@@ -844,7 +768,6 @@ pub(crate) struct CannotBeReexportedCratePublicNS {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[help(resolve_consider_adding_macro_export)]
@@ -852,7 +775,6 @@ pub(crate) struct ConsiderAddingMacroExport {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -864,7 +786,6 @@ pub(crate) struct ConsiderMarkingAsPubCrate {
     #[primary_span]
     pub(crate) vis_span: Span,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_consider_marking_as_pub)]
@@ -873,7 +794,6 @@ pub(crate) struct ConsiderMarkingAsPub {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_glob_import_possible_crates)]
@@ -881,7 +801,6 @@ pub(crate) struct CannotGlobImportAllCrates {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -895,7 +814,6 @@ pub(crate) struct UnexpectedResChangeTyToConstParamSugg {
     #[applicability]
     pub applicability: Applicability,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -910,7 +828,6 @@ pub(crate) struct UnexpectedResUseAtOpInSlicePatWithRangeSugg {
     pub ident: Ident,
     pub snippet: String,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_extern_crate_loading_macro_not_at_crate_root, code = E0468)]
@@ -918,7 +835,6 @@ pub(crate) struct ExternCrateLoadingMacroNotAtCrateRoot {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_extern_crate_self_requires_renaming)]
@@ -927,7 +843,6 @@ pub(crate) struct ExternCrateSelfRequiresRenaming {
     #[suggestion(code = "extern crate self as name;", applicability = "has-placeholders")]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_macro_use_name_already_in_use)]
@@ -937,7 +852,6 @@ pub(crate) struct MacroUseNameAlreadyInUse {
     pub(crate) span: Span,
     pub(crate) name: Symbol,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_imported_macro_not_found, code = E0469)]
@@ -945,7 +859,6 @@ pub(crate) struct ImportedMacroNotFound {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_macro_extern_deprecated)]
@@ -955,7 +868,6 @@ pub(crate) struct MacroExternDeprecated {
     #[help]
     pub inner_attribute: bool,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_arguments_macro_use_not_allowed)]
@@ -963,7 +875,6 @@ pub(crate) struct ArgumentsMacroUseNotAllowed {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_unnamed_crate_root_import)]
@@ -971,7 +882,6 @@ pub(crate) struct UnnamedCrateRootImport {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_macro_expanded_extern_crate_cannot_shadow_extern_arguments)]
@@ -979,7 +889,6 @@ pub(crate) struct MacroExpandedExternCrateCannotShadowExternArguments {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_elided_anonymous_lifetime_report_error, code = E0637)]
@@ -990,7 +899,6 @@ pub(crate) struct ElidedAnonymousLifetimeReportError {
     #[subdiagnostic]
     pub(crate) suggestion: Option<ElidedAnonymousLifetimeReportErrorSuggestion>,
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_lending_iterator_report_error)]
@@ -1000,7 +908,6 @@ pub(crate) struct LendingIteratorReportError {
     #[note]
     pub(crate) ty: Span,
 }
-/* AST_META: AST_ID=93 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_anonymous_lifetime_non_gat_report_error)]
@@ -1009,7 +916,6 @@ pub(crate) struct AnonymousLifetimeNonGatReportError {
     #[label]
     pub(crate) lifetime: Span,
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1022,7 +928,6 @@ pub(crate) struct ElidedAnonymousLifetimeReportErrorSuggestion {
     #[suggestion_part(code = "'a ")]
     pub(crate) hi: Span,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_explicit_anonymous_lifetime_report_error, code = E0637)]
@@ -1031,7 +936,6 @@ pub(crate) struct ExplicitAnonymousLifetimeReportError {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_implicit_elided_lifetimes_not_allowed_here, code = E0726)]
@@ -1041,7 +945,6 @@ pub(crate) struct ImplicitElidedLifetimeNotAllowedHere {
     #[subdiagnostic]
     pub(crate) subdiag: ElidedLifetimeInPathSubdiag,
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_underscore_lifetime_is_reserved, code = E0637)]
@@ -1051,7 +954,6 @@ pub(crate) struct UnderscoreLifetimeIsReserved {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_static_lifetime_is_reserved, code = E0262)]
@@ -1061,7 +963,6 @@ pub(crate) struct StaticLifetimeIsReserved {
     pub(crate) span: Span,
     pub(crate) lifetime: Ident,
 }
-/* AST_META: AST_ID=99 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_variable_is_not_bound_in_all_patterns, code = E0408)]
@@ -1070,7 +971,6 @@ pub(crate) struct VariableIsNotBoundInAllPatterns {
     pub(crate) multispan: MultiSpan,
     pub(crate) name: Ident,
 }
-/* AST_META: AST_ID=100 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic, Debug, Clone)]
 #[label(resolve_pattern_doesnt_bind_name)]
@@ -1079,7 +979,6 @@ pub(crate) struct PatternDoesntBindName {
     pub(crate) span: Span,
     pub(crate) name: Ident,
 }
-/* AST_META: AST_ID=101 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic, Debug, Clone)]
 #[label(resolve_variable_not_in_all_patterns)]
@@ -1087,7 +986,6 @@ pub(crate) struct VariableNotInAllPatterns {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=102 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1100,7 +998,6 @@ pub(crate) struct PatternBindingTypo {
     pub(crate) spans: Vec<Span>,
     pub(crate) typo: Symbol,
 }
-/* AST_META: AST_ID=103 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_name_defined_multiple_time)]
@@ -1116,7 +1013,6 @@ pub(crate) struct NameDefinedMultipleTime {
     #[subdiagnostic]
     pub(crate) old_binding_label: Option<NameDefinedMultipleTimeOldBindingLabel>,
 }
-/* AST_META: AST_ID=104 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NameDefinedMultipleTimeLabel {
@@ -1131,7 +1027,6 @@ pub(crate) enum NameDefinedMultipleTimeLabel {
         span: Span,
     },
 }
-/* AST_META: AST_ID=105 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NameDefinedMultipleTimeOldBindingLabel {
@@ -1148,7 +1043,6 @@ pub(crate) enum NameDefinedMultipleTimeOldBindingLabel {
         old_kind: &'static str,
     },
 }
-/* AST_META: AST_ID=106 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_is_private, code = E0603)]
@@ -1159,7 +1053,6 @@ pub(crate) struct IsPrivate<'a> {
     pub(crate) ident_descr: &'a str,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=107 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_generic_arguments_in_macro_path)]
@@ -1167,7 +1060,6 @@ pub(crate) struct GenericArgumentsInMacroPath {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=108 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_attributes_starting_with_rustc_are_reserved)]
@@ -1175,7 +1067,6 @@ pub(crate) struct AttributesStartingWithRustcAreReserved {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=109 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_use_through_an_import)]
@@ -1187,7 +1078,6 @@ pub(crate) struct CannotUseThroughAnImport {
     #[note]
     pub(crate) binding_span: Option<Span>,
 }
-/* AST_META: AST_ID=110 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_name_reserved_in_attribute_namespace)]
@@ -1196,7 +1086,6 @@ pub(crate) struct NameReservedInAttributeNamespace {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=111 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_cannot_find_builtin_macro_with_name)]
@@ -1205,7 +1094,6 @@ pub(crate) struct CannotFindBuiltinMacroWithName {
     pub(crate) span: Span,
     pub(crate) ident: Ident,
 }
-/* AST_META: AST_ID=112 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_tool_was_already_registered)]
@@ -1216,7 +1104,6 @@ pub(crate) struct ToolWasAlreadyRegistered {
     #[label]
     pub(crate) old_ident_span: Span,
 }
-/* AST_META: AST_ID=113 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_tool_only_accepts_identifiers)]
@@ -1226,7 +1113,6 @@ pub(crate) struct ToolOnlyAcceptsIdentifiers {
     pub(crate) span: Span,
     pub(crate) tool: Symbol,
 }
-/* AST_META: AST_ID=114 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum DefinedHere {
@@ -1245,7 +1131,6 @@ pub(crate) enum DefinedHere {
         candidate: Symbol,
     },
 }
-/* AST_META: AST_ID=115 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_outer_ident_is_not_publicly_reexported)]
@@ -1255,7 +1140,6 @@ pub(crate) struct OuterIdentIsNotPubliclyReexported {
     pub(crate) outer_ident_descr: &'static str,
     pub(crate) outer_ident: Ident,
 }
-/* AST_META: AST_ID=116 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(resolve_constructor_private_if_any_field_private)]
@@ -1263,7 +1147,6 @@ pub(crate) struct ConstructorPrivateIfAnyFieldPrivate {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1276,7 +1159,6 @@ pub(crate) struct ConsiderMakingTheFieldPublic {
     pub(crate) spans: Vec<Span>,
     pub(crate) number_of_fields: usize,
 }
-/* AST_META: AST_ID=118 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=28 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ImportIdent {
@@ -1305,7 +1187,6 @@ pub(crate) enum ImportIdent {
         path: String,
     },
 }
-/* AST_META: AST_ID=119 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_note_and_refers_to_the_item_defined_here)]
@@ -1317,7 +1198,6 @@ pub(crate) struct NoteAndRefersToTheItemDefinedHere<'a> {
     pub(crate) first: bool,
     pub(crate) dots: bool,
 }
-/* AST_META: AST_ID=120 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(resolve_remove_unnecessary_import, code = "", applicability = "maybe-incorrect")]
@@ -1325,7 +1205,6 @@ pub(crate) struct RemoveUnnecessaryImport {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=121 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1338,7 +1217,6 @@ pub(crate) struct ToolOnlyRemoveUnnecessaryImport {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=122 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_ident_imported_here_but_it_is_desc)]
@@ -1348,7 +1226,6 @@ pub(crate) struct IdentImporterHereButItIsDesc<'a> {
     pub(crate) imported_ident: Ident,
     pub(crate) imported_ident_desc: &'a str,
 }
-/* AST_META: AST_ID=123 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[note(resolve_ident_in_scope_but_it_is_desc)]
@@ -1356,19 +1233,16 @@ pub(crate) struct IdentInScopeButItIsDesc<'a> {
     pub(crate) imported_ident: Ident,
     pub(crate) imported_ident_desc: &'a str,
 }
-/* AST_META: AST_ID=124 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct FoundItemConfigureOut {
     pub(crate) span: Span,
     pub(crate) item_was: ItemWas,
 }
-/* AST_META: AST_ID=125 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 pub(crate) enum ItemWas {
     BehindFeature { feature: Symbol, span: Span },
     CfgOut { span: Span },
 }
-/* AST_META: AST_ID=126 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=14 | LINES=21 */
 
 impl Subdiagnostic for FoundItemConfigureOut {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1390,7 +1264,6 @@ impl Subdiagnostic for FoundItemConfigureOut {
         diag.span_note(multispan, fluent::resolve_found_an_item_configured_out);
     }
 }
-/* AST_META: AST_ID=127 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(resolve_trait_impl_mismatch)]

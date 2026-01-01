@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coroutine/by_move_body.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 // This pass constructs a second coroutine body sufficient for return from
 // `FnOnce`/`AsyncFnOnce` implementations for coroutine-closures (e.g. async closures).
 //
@@ -10,7 +9,6 @@
 // let closure = async move || {
 //     println!("{x:#?}");
 // };
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // ```
 //
 // This desugars to something like:
@@ -22,7 +20,6 @@
 //         println!("{x:#?}");
 //     }
 // };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 // ```
 //
 // Important to note here is that while the outer closure *moves* `x: Vec<i32>`
@@ -43,7 +40,6 @@
 //         args: Args
 //     ) -> Self::CallOnceFuture;
 // }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=29 */
 // ```
 //
 // This signature *consumes* the async closure (`self`) and returns a `CallOnceFuture`.
@@ -73,22 +69,17 @@
 // to split one field capture into two.
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::definitions::DisambiguatorState;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::place::{Projection, ProjectionKind};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::visit::MutVisitor;
 use crate::rustc_complete::mir::{self, MirDumper};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=172 */
 
 pub(crate) fn coroutine_by_move_body_def_id<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -261,14 +252,12 @@ pub(crate) fn coroutine_by_move_body_def_id<'tcx>(
 
     body_def.def_id().to_def_id()
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=MakeByMoveBody | COMPLEXITY=2 | LINES=6 */
 
 struct MakeByMoveBody<'tcx> {
     tcx: TyCtxt<'tcx>,
     field_remapping: UnordMap<FieldIdx, (FieldIdx, Ty<'tcx>, bool, Vec<Projection<'tcx>>)>,
     by_move_coroutine_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=52 | LINES=112 */
 
 impl<'tcx> MutVisitor<'tcx> for MakeByMoveBody<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

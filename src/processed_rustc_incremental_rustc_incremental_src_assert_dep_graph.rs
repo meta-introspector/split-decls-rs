@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_incremental/src/assert_dep_graph.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 // This pass is only used for the UNIT TESTS and DEBUGGING NEEDS
 // around dependency graph construction. It serves two purposes; it
 // will dump graphs in graphviz form to disk, and it searches for
@@ -27,42 +26,31 @@
 // ```ignore (needs flags)
 // #[rustc_if_this_changed(Hir)]
 // fn foo() { }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 //
 // #[rustc_then_this_would_need(codegen)] //~ ERROR no path from `foo`
 // fn bar() { }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 //
 // #[rustc_then_this_would_need(codegen)] //~ ERROR OK
 // fn baz() { foo(); }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // ```
 
 use std::env;
 use std::fs::{self, File};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::io::Write;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, NodeIndex, OUTGOING};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::dep_graph::{
     DepGraphQuery, DepKind, DepNode, DepNodeExt, DepNodeFilter, EdgeFilter, dep_kinds,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_graphviz as dot, rustc_hir as hir};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=44 */
 
 use crate::errors;
 
@@ -107,7 +95,6 @@ pub(crate) fn assert_dep_graph(tcx: TyCtxt<'_>) {
         check_paths(tcx, &if_this_changed, &then_this_would_need);
     })
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=IfThisChanged | COMPLEXITY=2 | LINES=9 */
 
 type Sources = Vec<(Span, DefId, DepNode)>;
 type Targets = Vec<(Span, Symbol, hir::HirId, DepNode)>;
@@ -117,7 +104,6 @@ struct IfThisChanged<'tcx> {
     if_this_changed: Sources,
     then_this_would_need: Targets,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=argument | COMPLEXITY=51 | LINES=67 */
 
 impl<'tcx> IfThisChanged<'tcx> {
     fn argument(&self, attr: &hir::Attribute) -> Option<Symbol> {
@@ -185,7 +171,6 @@ impl<'tcx> IfThisChanged<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=10 | LINES=28 */
 
 impl<'tcx> Visitor<'tcx> for IfThisChanged<'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -214,7 +199,6 @@ impl<'tcx> Visitor<'tcx> for IfThisChanged<'tcx> {
         intravisit::walk_field_def(self, s);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_paths | COMPLEXITY=24 | LINES=26 */
 
 fn check_paths<'tcx>(tcx: TyCtxt<'tcx>, if_this_changed: &Sources, then_this_would_need: &Targets) {
     // Return early here so as not to construct the query, which is not cheap.
@@ -241,7 +225,6 @@ fn check_paths<'tcx>(tcx: TyCtxt<'tcx>, if_this_changed: &Sources, then_this_wou
         }
     });
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=dump_graph | COMPLEXITY=19 | LINES=34 */
 
 fn dump_graph(query: &DepGraphQuery) {
     let path: String = env::var("RUST_DEP_GRAPH").unwrap_or_else(|_| "dep_graph".to_string());
@@ -276,7 +259,6 @@ fn dump_graph(query: &DepGraphQuery) {
         fs::write(dot_path, v).unwrap();
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=GraphvizDepGraph(FxIndexSet | COMPLEXITY=9 | LINES=21 */
 
 #[allow(missing_docs)]
 struct GraphvizDepGraph(FxIndexSet<DepKind>, Vec<(DepKind, DepKind)>);
@@ -298,7 +280,6 @@ impl<'a> dot::GraphWalk<'a> for GraphvizDepGraph {
         edge.1
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=16 | LINES=19 */
 
 impl<'a> dot::Labeller<'a> for GraphvizDepGraph {
     type Node = DepKind;
@@ -318,7 +299,6 @@ impl<'a> dot::Labeller<'a> for GraphvizDepGraph {
         dot::LabelText::label(format!("{n:?}"))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=node_set | COMPLEXITY=6 | LINES=16 */
 
 // Given an optional filter like `"x,y,z"`, returns either `None` (no
 // filter) or the set of nodes whose labels contain all of those
@@ -335,7 +315,6 @@ fn node_set<'q>(
 
     Some(query.nodes().into_iter().filter(|n| filter.test(n)).collect())
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=filter_nodes | COMPLEXITY=14 | LINES=18 */
 
 fn filter_nodes<'q>(
     query: &'q DepGraphQuery,
@@ -354,7 +333,6 @@ fn filter_nodes<'q>(
         query.nodes().into_iter().map(|n| n.kind).collect()
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=walk_nodes | COMPLEXITY=20 | LINES=24 */
 
 fn walk_nodes<'q>(
     query: &'q DepGraphQuery,
@@ -379,7 +357,6 @@ fn walk_nodes<'q>(
     }
     set
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=walk_between | COMPLEXITY=34 | LINES=71 */
 
 fn walk_between<'q>(
     query: &'q DepGraphQuery,
@@ -451,7 +428,6 @@ fn walk_between<'q>(
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=filter_edges | COMPLEXITY=2 | LINES=10 */
 
 fn filter_edges(query: &DepGraphQuery, nodes: &FxIndexSet<DepKind>) -> Vec<(DepKind, DepKind)> {
     let uniq: FxIndexSet<_> = query

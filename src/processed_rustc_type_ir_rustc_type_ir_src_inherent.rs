@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/inherent.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 // Set of traits which are used to emulate the inherent impls that are present in `rustc_middle`.
 // It is customary to glob-import `rustc_type_ir::inherent::*` to bring all of these traits into
 // scope when programming in interner-agnostic settings, and to avoid importing any of these
@@ -12,14 +11,10 @@ use rustc_ast_ir::Mutability;
 
 use crate::elaborate::Elaboratable;
 use crate::fold::{TypeFoldable, TypeSuperFoldable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::relate::Relate;
 use crate::solve::{AdtDestructorKind, SizedTraitKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::visit::{Flags, TypeSuperVisitable, TypeVisitable, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, CollectAndApply, Interner, UpcastFrom};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new_unit | COMPLEXITY=30 | LINES=183 */
 
 pub trait Ty<I: Interner<Ty = Self>>:
     Copy
@@ -203,7 +198,6 @@ pub trait Ty<I: Interner<Ty = Self>>:
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=inputs | COMPLEXITY=2 | LINES=8 */
 
 pub trait Tys<I: Interner<Tys = Self>>:
     Copy + Debug + Hash + Eq + SliceLike<Item = I::Ty> + TypeFoldable<I> + Default
@@ -212,7 +206,6 @@ pub trait Tys<I: Interner<Tys = Self>>:
 
     fn output(self) -> I::Ty;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=rust | COMPLEXITY=2 | LINES=7 */
 
 pub trait Abi<I: Interner<Abi = Self>>: Copy + Debug + Hash + Eq {
     fn rust() -> Self;
@@ -220,7 +213,6 @@ pub trait Abi<I: Interner<Abi = Self>>: Copy + Debug + Hash + Eq {
     /// Whether this ABI is `extern "Rust"`.
     fn is_rust(self) -> bool;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=safe | COMPLEXITY=2 | LINES=8 */
 
 pub trait Safety<I: Interner<Safety = Self>>: Copy + Debug + Hash + Eq {
     fn safe() -> Self;
@@ -229,7 +221,6 @@ pub trait Safety<I: Interner<Safety = Self>>: Copy + Debug + Hash + Eq {
 
     fn prefix_str(self) -> &'static str;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new_bound | COMPLEXITY=4 | LINES=23 */
 
 pub trait Region<I: Interner<Region = Self>>:
     Copy
@@ -253,7 +244,6 @@ pub trait Region<I: Interner<Region = Self>>:
         matches!(self.kind(), ty::ReBound(..))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new_infer | COMPLEXITY=7 | LINES=42 */
 
 pub trait Const<I: Interner<Const = Self>>:
     Copy
@@ -296,23 +286,19 @@ pub trait Const<I: Interner<Const = Self>>:
         matches!(self.kind(), ty::ConstKind::Error(_))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=2 | LINES=5 */
 
 pub trait ValueConst<I: Interner<ValueConst = Self>>: Copy + Debug + Hash + Eq {
     fn ty(self) -> I::Ty;
     fn valtree(self) -> I::ValTree;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=args | COMPLEXITY=2 | LINES=4 */
 
 pub trait ExprConst<I: Interner<ExprConst = Self>>: Copy + Debug + Hash + Eq + Relate<I> {
     fn args(self) -> I::GenericArgs;
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=count | COMPLEXITY=2 | LINES=4 */
 
 pub trait GenericsOf<I: Interner<GenericsOf = Self>> {
     fn count(&self) -> usize;
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=as_term | COMPLEXITY=32 | LINES=54 */
 
 pub trait GenericArg<I: Interner<GenericArg = Self>>:
     Copy
@@ -367,7 +353,6 @@ pub trait GenericArg<I: Interner<GenericArg = Self>>:
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=as_type | COMPLEXITY=39 | LINES=47 */
 
 pub trait Term<I: Interner<Term = Self>>:
     Copy + Debug + Hash + Eq + IntoKind<Kind = ty::TermKind<I>> + TypeFoldable<I> + Relate<I>
@@ -415,7 +400,6 @@ pub trait Term<I: Interner<Term = Self>>:
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=rebase_onto | COMPLEXITY=10 | LINES=39 */
 
 pub trait GenericArgs<I: Interner<GenericArgs = Self>>:
     Copy + Debug + Hash + Eq + SliceLike<Item = I::GenericArg> + Default + Relate<I>
@@ -455,7 +439,6 @@ pub trait GenericArgs<I: Interner<GenericArgs = Self>>:
         ty::CoroutineArgs { args: self }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=as_clause | COMPLEXITY=9 | LINES=36 */
 
 pub trait Predicate<I: Interner<Predicate = Self>>:
     Copy
@@ -492,7 +475,6 @@ pub trait Predicate<I: Interner<Predicate = Self>>:
     // FIXME: Eventually uplift the impl out of rustc and make this defaulted.
     fn allow_normalization(self) -> bool;
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=as_predicate | COMPLEXITY=25 | LINES=49 */
 
 pub trait Clause<I: Interner<Clause = Self>>:
     Copy
@@ -542,7 +524,6 @@ pub trait Clause<I: Interner<Clause = Self>>:
     /// instantiation in terms of what happens with bound regions.
     fn instantiate_supertrait(self, cx: I, trait_ref: ty::Binder<I, ty::TraitRef<I>>) -> Self;
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 pub trait Clauses<I: Interner<Clauses = Self>>:
     Copy
@@ -555,7 +536,6 @@ pub trait Clauses<I: Interner<Clauses = Self>>:
     + SliceLike<Item = I::Clause>
 {
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=2 | LINES=11 */
 
 /// Common capabilities of placeholder kinds
 pub trait PlaceholderLike<I: Interner>: Copy + Debug + Hash + Eq {
@@ -567,12 +547,10 @@ pub trait PlaceholderLike<I: Interner>: Copy + Debug + Hash + Eq {
     fn new_anon(ui: ty::UniverseIndex, var: ty::BoundVar) -> Self;
     fn with_updated_universe(self, ui: ty::UniverseIndex) -> Self;
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=find_const_ty_from_env | COMPLEXITY=2 | LINES=4 */
 
 pub trait PlaceholderConst<I: Interner>: PlaceholderLike<I, Bound = I::BoundConst> {
     fn find_const_ty_from_env(self, env: I::ParamEnv) -> I::Ty;
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=find_const_ty_from_env | COMPLEXITY=28 | LINES=35 */
 impl<I: Interner> PlaceholderConst<I> for I::PlaceholderConst {
     fn find_const_ty_from_env(self, env: I::ParamEnv) -> I::Ty {
         let mut candidates = env.caller_bounds().iter().filter_map(|clause| {
@@ -608,26 +586,22 @@ impl<I: Interner> PlaceholderConst<I> for I::PlaceholderConst {
         ty
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=2 | LINES=6 */
 
 pub trait IntoKind {
     type Kind;
 
     fn kind(self) -> Self::Kind;
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=var | COMPLEXITY=2 | LINES=6 */
 
 pub trait BoundVarLike<I: Interner>: Copy + Debug + Hash + Eq {
     fn var(self) -> ty::BoundVar;
 
     fn assert_eq(self, var: I::BoundVarKind);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=index | COMPLEXITY=2 | LINES=4 */
 
 pub trait ParamLike: Copy + Debug + Hash + Eq {
     fn index(self) -> u32;
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=3 | LINES=28 */
 
 pub trait AdtDef<I: Interner>: Copy + Debug + Hash + Eq {
     fn def_id(self) -> I::AdtId;
@@ -656,12 +630,10 @@ pub trait AdtDef<I: Interner>: Copy + Debug + Hash + Eq {
 
     fn destructor(self, interner: I) -> Option<AdtDestructorKind>;
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=caller_bounds | COMPLEXITY=2 | LINES=4 */
 
 pub trait ParamEnv<I: Interner>: Copy + Debug + Hash + Eq + TypeFoldable<I> {
     fn caller_bounds(self) -> impl SliceLike<Item = I::Clause>;
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=generic_const_exprs | COMPLEXITY=2 | LINES=10 */
 
 pub trait Features<I: Interner>: Copy {
     fn generic_const_exprs(self) -> bool;
@@ -672,26 +644,22 @@ pub trait Features<I: Interner>: Copy {
 
     fn feature_bound_holds_in_crate(self, symbol: I::Symbol) -> bool;
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=is_local | COMPLEXITY=2 | LINES=6 */
 
 pub trait DefId<I: Interner>: Copy + Debug + Hash + Eq + TypeFoldable<I> {
     fn is_local(self) -> bool;
 
     fn as_local(self) -> Option<I::LocalDefId>;
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub trait SpecificDefId<I: Interner>:
     DefId<I> + Into<I::DefId> + TryFrom<I::DefId, Error: std::fmt::Debug>
 {
 }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl<I: Interner, T: DefId<I> + Into<I::DefId> + TryFrom<I::DefId, Error: std::fmt::Debug>>
     SpecificDefId<I> for T
 {
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=principal_def_id | COMPLEXITY=2 | LINES=14 */
 
 pub trait BoundExistentialPredicates<I: Interner>:
     Copy + Debug + Hash + Eq + Relate<I> + SliceLike<Item = ty::Binder<I, ty::ExistentialPredicate<I>>>
@@ -706,12 +674,10 @@ pub trait BoundExistentialPredicates<I: Interner>:
         self,
     ) -> impl IntoIterator<Item = ty::Binder<I, ty::ExistentialProjection<I>>>;
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=dummy | COMPLEXITY=2 | LINES=4 */
 
 pub trait Span<I: Interner>: Copy + Debug + Hash + Eq + TypeFoldable<I> {
     fn dummy() -> Self;
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=needs_reevaluation | COMPLEXITY=2 | LINES=7 */
 
 pub trait OpaqueTypeStorageEntries: Debug + Copy + Default {
     /// Whether the number of opaques has changed in a way that necessitates
@@ -719,7 +685,6 @@ pub trait OpaqueTypeStorageEntries: Debug + Copy + Default {
     /// entries changed.
     fn needs_reevaluation(self, canonicalized: usize) -> bool;
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=10 | LINES=40 */
 
 pub trait SliceLike: Sized + Copy {
     type Item: Copy;
@@ -760,7 +725,6 @@ pub trait SliceLike: Sized + Copy {
         self.as_slice().split_last()
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=13 */
 
 impl<'a, T: Copy> SliceLike for &'a [T] {
     type Item = T;
@@ -774,7 +738,6 @@ impl<'a, T: Copy> SliceLike for &'a [T] {
         *self
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=13 */
 
 impl<'a, T: Copy, const N: usize> SliceLike for &'a [T; N] {
     type Item = T;
@@ -788,7 +751,6 @@ impl<'a, T: Copy, const N: usize> SliceLike for &'a [T; N] {
         *self
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=13 */
 
 impl<'a, S: SliceLike> SliceLike for &'a S {
     type Item = S::Item;

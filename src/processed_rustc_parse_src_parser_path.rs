@@ -1,39 +1,29 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/path.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::mem;
 
 use ast::token::IdentIsRaw;
 use crate::rustc_complete::token::{self, MetaVarKind, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     self as ast, AngleBracketedArg, AngleBracketedArgs, AnonConst, AssocItemConstraint,
     AssocItemConstraintKind, BlockCheckMode, GenericArg, GenericArgs, Generics, ParenthesizedArgs,
     Path, PathSegment, QSelf,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Applicability, Diag, PResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Ident, Span, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use thin_vec::ThinVec;
 use tracing::debug;
 
 use super::ty::{AllowPlus, RecoverQPath, RecoverReturnSign};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{Parser, Restrictions, TokenType};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ast::{PatKind, TyKind};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::errors::{
     self, AttributeOnEmptyType, AttributeOnGenericArg, FnPathFoundNamedParams,
     PathFoundAttributeInParams, PathFoundCVariadicParams, PathSingleColon, PathTripleColon,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::exp;
 use crate::parser::{
     CommaRecoveryMode, ExprKind, FnContext, FnParseMode, RecoverColon, RecoverComma,
 };
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=35 */
 
 /// Specifies how to parse a path.
 #[derive(Copy, Clone, PartialEq)]
@@ -69,14 +59,12 @@ pub enum PathStyle {
     /// tokens when something goes wrong.
     Mod,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=has_generic_ambiguity | COMPLEXITY=3 | LINES=6 */
 
 impl PathStyle {
     fn has_generic_ambiguity(&self) -> bool {
         matches!(self, Self::Expr | Self::Pat)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=recover_colon_before_qpath_proj | COMPLEXITY=461 | LINES=949 */
 
 impl<'a> Parser<'a> {
     /// Parses a qualified path.

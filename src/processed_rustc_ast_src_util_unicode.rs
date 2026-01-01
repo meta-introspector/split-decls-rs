@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_ast/src/util/unicode.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=2 */
 pub const TEXT_FLOW_CONTROL_CHARS: &[char] = &[
     '\u{202A}', '\u{202B}', '\u{202D}', '\u{202E}', '\u{2066}', '\u{2067}', '\u{2068}', '\u{202C}',
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
     '\u{2069}',
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=contains_text_flow_control_chars | COMPLEXITY=17 | LINES=32 */
 ];
 
 #[inline]

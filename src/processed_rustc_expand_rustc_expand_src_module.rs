@@ -1,28 +1,21 @@
 // SRC: ../rust/compiler/rustc_expand/src/module.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::iter::once;
 use std::path::{self, Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_complete::{AttrVec, Attribute, Inline, Item, ModSpans};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_complete::{Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_parse::lexer::StripTokens;
 use crate::rustc_parse::{exp, new_parser_from_file, unwrap_or_emit_fatal};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use thin_vec::ThinVec;
 
 use crate::base::ModuleData;
 use crate::errors::{
     ModuleCircular, ModuleFileNotFound, ModuleInBlock, ModuleInBlockName, ModuleMultipleCandidates,
 };
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 #[derive(Copy, Clone)]
 pub enum DirOwnership {
@@ -32,14 +25,12 @@ pub enum DirOwnership {
     },
     UnownedViaBlock,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ModulePathSuccess | COMPLEXITY=4 | LINES=6 */
 
 // Public for rustfmt usage.
 pub struct ModulePathSuccess {
     pub file_path: PathBuf,
     pub dir_ownership: DirOwnership,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) struct ParsedExternalMod {
     pub items: ThinVec<Box<Item>>,
@@ -49,7 +40,6 @@ pub(crate) struct ParsedExternalMod {
     pub dir_ownership: DirOwnership,
     pub had_parse_error: Result<(), ErrorGuaranteed>,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub enum ModError<'a> {
     CircularInclusion(Vec<PathBuf>),
@@ -58,7 +48,6 @@ pub enum ModError<'a> {
     MultipleCandidates(Ident, PathBuf, PathBuf),
     ParserError(Diag<'a>),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=44 */
 
 pub(crate) fn parse_external_mod(
     sess: &Session,
@@ -103,7 +92,6 @@ pub(crate) fn parse_external_mod(
 
     ParsedExternalMod { items, spans, file_path, dir_path, dir_ownership, had_parse_error }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=52 */
 
 pub(crate) fn mod_dir_path(
     sess: &Session,
@@ -156,7 +144,6 @@ pub(crate) fn mod_dir_path(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=mod_file_path | COMPLEXITY=23 | LINES=33 */
 
 fn mod_file_path<'a>(
     sess: &'a Session,
@@ -188,7 +175,6 @@ fn mod_file_path<'a>(
         })),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=33 */
 
 /// Derive a submodule path from the first found `#[path = "path_string"]`.
 /// The provided `dir_path` is joined with the `path_string`.
@@ -222,7 +208,6 @@ pub(crate) fn mod_file_path_from_attr(
 
     Some(dir_path.join(path_str))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=default_submod_path | COMPLEXITY=28 | LINES=42 */
 
 /// Returns a path to a module.
 // Public for rustfmt usage.
@@ -265,7 +250,6 @@ pub fn default_submod_path<'a>(
         (true, true) => Err(ModError::MultipleCandidates(ident, default_path, secondary_path)),
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=report | COMPLEXITY=18 | LINES=41 */
 
 impl ModError<'_> {
     fn report(self, sess: &Session, span: Span) -> ErrorGuaranteed {

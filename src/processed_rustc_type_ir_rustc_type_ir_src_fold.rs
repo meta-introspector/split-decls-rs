@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/fold.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=27 | LINES=52 */
 // A folding traversal mechanism for complex data structures that contain type
 // information.
 //
@@ -52,16 +51,12 @@ use std::mem;
 use std::sync::Arc;
 
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use thin_vec::ThinVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::inherent::*;
 use crate::visit::{TypeVisitable, TypeVisitableExt as _};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, Interner, TypeFlags};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=17 | LINES=40 */
 
 /// This trait is implemented for every type that can be folded,
 /// providing the skeleton of the traversal.
@@ -102,7 +97,6 @@ pub trait TypeFoldable<I: Interner>: TypeVisitable<I> + Clone {
     /// the behavior in sync across functions.
     fn fold_with<F: TypeFolder<I>>(self, folder: &mut F) -> Self;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=try_super_fold_with | COMPLEXITY=11 | LINES=19 */
 
 // This trait is implemented for types of interest.
 pub trait TypeSuperFoldable<I: Interner>: TypeFoldable<I> {
@@ -122,7 +116,6 @@ pub trait TypeSuperFoldable<I: Interner>: TypeFoldable<I> {
     /// with `try_super_fold_with`.
     fn super_fold_with<F: TypeFolder<I>>(self, folder: &mut F) -> Self;
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=16 | LINES=42 */
 
 /// This trait is implemented for every infallible folding traversal. There is
 /// a fold method defined for every type of interest. Each such method has a
@@ -165,7 +158,6 @@ pub trait TypeFolder<I: Interner>: Sized {
         c.super_fold_with(self)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=16 | LINES=42 */
 
 /// This trait is implemented for every folding traversal. There is a fold
 /// method defined for every type of interest. Each such method has a default
@@ -208,7 +200,6 @@ pub trait FallibleTypeFolder<I: Interner>: Sized {
         c.try_super_fold_with(self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=7 | LINES=13 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Traversal implementations.
@@ -222,7 +213,6 @@ impl<I: Interner, T: TypeFoldable<I>, U: TypeFoldable<I>> TypeFoldable<I> for (T
         (self.0.fold_with(folder), self.1.fold_with(folder))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=7 | LINES=19 */
 
 impl<I: Interner, A: TypeFoldable<I>, B: TypeFoldable<I>, C: TypeFoldable<I>> TypeFoldable<I>
     for (A, B, C)
@@ -242,7 +232,6 @@ impl<I: Interner, A: TypeFoldable<I>, B: TypeFoldable<I>, C: TypeFoldable<I>> Ty
         (self.0.fold_with(folder), self.1.fold_with(folder), self.2.fold_with(folder))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=10 | LINES=13 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Option<T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -256,7 +245,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Option<T> {
         Some(self?.fold_with(folder))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=15 | LINES=16 */
 
 impl<I: Interner, T: TypeFoldable<I>, E: TypeFoldable<I>> TypeFoldable<I> for Result<T, E> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -273,7 +261,6 @@ impl<I: Interner, T: TypeFoldable<I>, E: TypeFoldable<I>> TypeFoldable<I> for Re
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fold_arc | COMPLEXITY=14 | LINES=38 */
 
 fn fold_arc<T: Clone, E>(
     mut arc: Arc<T>,
@@ -312,7 +299,6 @@ fn fold_arc<T: Clone, E>(
         Ok(Arc::from_raw(Arc::into_raw(unique).cast()))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=10 | LINES=12 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Arc<T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -325,7 +311,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Arc<T> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=12 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Box<T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(mut self, folder: &mut F) -> Result<Self, F::Error> {
@@ -338,7 +323,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Box<T> {
         self
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=10 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Vec<T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -349,7 +333,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Vec<T> {
         self.into_iter().map(|t| t.fold_with(folder)).collect()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=10 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for ThinVec<T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -360,7 +343,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for ThinVec<T> {
         self.into_iter().map(|t| t.fold_with(folder)).collect()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=10 */
 
 impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Box<[T]> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -371,7 +353,6 @@ impl<I: Interner, T: TypeFoldable<I>> TypeFoldable<I> for Box<[T]> {
         Vec::into_boxed_slice(Vec::from(self).fold_with(folder))
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=10 */
 
 impl<I: Interner, T: TypeFoldable<I>, Ix: Idx> TypeFoldable<I> for IndexVec<Ix, T> {
     fn try_fold_with<F: FallibleTypeFolder<I>>(self, folder: &mut F) -> Result<Self, F::Error> {
@@ -382,7 +363,6 @@ impl<I: Interner, T: TypeFoldable<I>, Ix: Idx> TypeFoldable<I> for IndexVec<Ix, 
         IndexVec::from_raw(self.raw.fold_with(folder))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Shifter | COMPLEXITY=5 | LINES=15 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Shifter
@@ -398,14 +378,12 @@ struct Shifter<I: Interner> {
     current_index: ty::DebruijnIndex,
     amount: u32,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<I: Interner> Shifter<I> {
     fn new(cx: I, amount: u32) -> Self {
         Shifter { cx, current_index: ty::INNERMOST, amount }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=40 | LINES=49 */
 
 impl<I: Interner> TypeFolder<I> for Shifter<I> {
     fn cx(&self) -> I {
@@ -455,7 +433,6 @@ impl<I: Interner> TypeFolder<I> for Shifter<I> {
         if p.has_vars_bound_at_or_above(self.current_index) { p.super_fold_with(self) } else { p }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=shift_region | COMPLEXITY=9 | LINES=9 */
 
 pub fn shift_region<I: Interner>(cx: I, region: I::Region, amount: u32) -> I::Region {
     match region.kind() {
@@ -465,7 +442,6 @@ pub fn shift_region<I: Interner>(cx: I, region: I::Region, amount: u32) -> I::Re
         _ => region,
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=shift_vars | COMPLEXITY=6 | LINES=12 */
 
 #[instrument(level = "trace", skip(cx), ret)]
 pub fn shift_vars<I: Interner, T>(cx: I, value: T, amount: u32) -> T
@@ -478,7 +454,6 @@ where
         value.fold_with(&mut Shifter::new(cx, amount))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fold_regions | COMPLEXITY=2 | LINES=14 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Region folder
@@ -493,7 +468,6 @@ where
 {
     value.fold_with(&mut RegionFolder::new(cx, f))
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=RegionFolder | COMPLEXITY=5 | LINES=21 */
 
 /// Folds over the substructure of a type, visiting its component
 /// types and all regions that occur *free* within it.
@@ -515,7 +489,6 @@ pub struct RegionFolder<I, F> {
     /// through.
     fold_region_fn: F,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 
 impl<I, F> RegionFolder<I, F> {
     #[inline]
@@ -523,7 +496,6 @@ impl<I, F> RegionFolder<I, F> {
         RegionFolder { cx, current_index: ty::INNERMOST, fold_region_fn }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=33 | LINES=61 */
 
 impl<I, F> TypeFolder<I> for RegionFolder<I, F>
 where

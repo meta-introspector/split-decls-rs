@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/config/sigpipe.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 // NOTE: Keep these constants in sync with `library/std/src/sys/pal/unix/mod.rs`!
 
 /// The default value if `-Zon-broken-pipe=...` is not specified. This resolves

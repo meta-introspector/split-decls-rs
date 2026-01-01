@@ -1,24 +1,17 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/cfg_old.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_feature::{Features, GatedCfg, find_gated_cfg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::RustcVersion;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::ExpectedValues;
 use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
 use crate::rustc_complete::lint::{BuiltinLintDiag, Lint};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::session_diagnostics::{self, UnsupportedLiteralReason};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{fluent_generated, parse_version};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=emit_span_lint | COMPLEXITY=2 | LINES=9 */
 
 /// Emitter of a builtin lint from `cfg_matches`.
 ///
@@ -28,14 +21,12 @@ use crate::{fluent_generated, parse_version};
 pub trait CfgMatchesLintEmitter {
     fn emit_span_lint(&self, sess: &Session, lint: &'static Lint, sp: Span, diag: BuiltinLintDiag);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=emit_span_lint | COMPLEXITY=5 | LINES=6 */
 
 impl CfgMatchesLintEmitter for NodeId {
     fn emit_span_lint(&self, sess: &Session, lint: &'static Lint, sp: Span, diag: BuiltinLintDiag) {
         sess.psess.buffer_lint(lint, sp, *self, diag);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Condition | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug)]
 pub struct Condition {
@@ -45,7 +36,6 @@ pub struct Condition {
     pub value_span: Option<Span>,
     pub span: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cfg_matches | COMPLEXITY=18 | LINES=38 */
 
 /// Tests if a cfg-pattern matches the cfg set
 pub fn cfg_matches(
@@ -84,7 +74,6 @@ pub fn cfg_matches(
         sess.psess.config.contains(&(cfg.name, cfg.value))
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_gate_cfg | COMPLEXITY=5 | LINES=7 */
 
 pub fn try_gate_cfg(name: Symbol, span: Span, sess: &Session, features: Option<&Features>) {
     let gate = find_gated_cfg(|sym| sym == name);
@@ -92,7 +81,6 @@ pub fn try_gate_cfg(name: Symbol, span: Span, sess: &Session, features: Option<&
         gate_cfg(gated_cfg, span, sess, feats);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=gate_cfg | COMPLEXITY=6 | LINES=9 */
 
 #[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
 fn gate_cfg(gated_cfg: &GatedCfg, cfg_span: Span, sess: &Session, features: &Features) {
@@ -102,7 +90,6 @@ fn gate_cfg(gated_cfg: &GatedCfg, cfg_span: Span, sess: &Session, features: &Fea
         feature_err(sess, *feature, cfg_span, explain).emit();
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=eval_condition | COMPLEXITY=89 | LINES=156 */
 
 /// Evaluate a cfg-like condition (with `any` and `all`), using `eval` to
 /// evaluate individual items.

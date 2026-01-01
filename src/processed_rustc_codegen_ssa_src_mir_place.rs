@@ -1,23 +1,16 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/place.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::{
     Align, BackendRepr, FieldIdx, FieldsShape, Size, TagEncoding, VariantIdx, Variants,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::PlaceTy;
 use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::operand::OperandValue;
 use super::{FunctionCx, LocalRef};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PlaceValue | COMPLEXITY=9 | LINES=21 */
 use crate::common::IntPredicate;
 use crate::size_of_val;
 use crate::traits::*;
@@ -39,7 +32,6 @@ pub struct PlaceValue<V> {
     /// The alignment we know for this place.
     pub align: Align,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new_sized | COMPLEXITY=25 | LINES=44 */
 
 impl<V: CodegenObject> PlaceValue<V> {
     /// Constructor for the ordinary case of `Sized` types.
@@ -84,7 +76,6 @@ impl<V: CodegenObject> PlaceValue<V> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=PlaceRef | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Copy, Clone, Debug)]
 pub struct PlaceRef<'tcx, V> {
@@ -98,7 +89,6 @@ pub struct PlaceRef<'tcx, V> {
     /// which might be different from the type's normal alignment.
     pub layout: TyAndLayout<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new_sized | COMPLEXITY=34 | LINES=59 */
 
 impl<'a, 'tcx, V: CodegenObject> PlaceRef<'tcx, V> {
     pub fn new_sized(llval: V, layout: TyAndLayout<'tcx>) -> PlaceRef<'tcx, V> {
@@ -158,7 +148,6 @@ impl<'a, 'tcx, V: CodegenObject> PlaceRef<'tcx, V> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=project_field | COMPLEXITY=66 | LINES=155 */
 
 impl<'a, 'tcx, V: CodegenObject> PlaceRef<'tcx, V> {
     /// Access a field, at a point when the value's case is known.
@@ -314,7 +303,6 @@ impl<'a, 'tcx, V: CodegenObject> PlaceRef<'tcx, V> {
         bx.lifetime_end(self.val.llval, self.layout.size);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=codegen_place | COMPLEXITY=50 | LINES=93 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     #[instrument(level = "trace", skip(self, bx))]
@@ -408,7 +396,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         self.monomorphize(place_ty.ty)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=round_up_const_value_to_alignment | COMPLEXITY=12 | LINES=42 */
 
 fn round_up_const_value_to_alignment<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -451,7 +438,6 @@ fn round_up_const_value_to_alignment<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     let offset = bx.and(neg_value, align_minus_1);
     bx.add(value, offset)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=67 */
 
 /// Calculates the value that needs to be stored to mark the discriminant.
 ///
@@ -519,7 +505,6 @@ pub(super) fn codegen_tag_value<'tcx, V>(
         }
     })
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 
 #[derive(Debug)]
 pub(super) struct UninhabitedVariantError;

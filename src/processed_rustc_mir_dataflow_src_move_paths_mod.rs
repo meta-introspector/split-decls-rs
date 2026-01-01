@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/move_paths/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 // The move-analysis portion of borrowck needs to work in an abstract domain of lifted `Place`s.
 // Most of the `Place` variants fall into a one-to-one mapping between the concrete and abstract
 // (e.g., a field projection on a local variable, `x.field`, has the same meaning in both
@@ -14,14 +13,11 @@
 
 use std::fmt;
 use std::ops::{Index, IndexMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=MovePathIndex | COMPLEXITY=4 | LINES=10 */
 use crate::rustc_complete::Span;
 use smallvec::SmallVec;
 
@@ -32,34 +28,29 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "mp{}"]
     pub struct MovePathIndex {}
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=6 */
 
 impl polonius_engine::Atom for MovePathIndex {
     fn index(self) -> usize {
         crate::rustc_index::Idx::index(self)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MoveOutIndex | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "mo{}"]
     pub struct MoveOutIndex {}
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=InitIndex | COMPLEXITY=4 | LINES=5 */
 
 crate::rustc_index::newtype_index! {
     #[debug_format = "in{}"]
     pub struct InitIndex {}
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=move_path_index | COMPLEXITY=3 | LINES=6 */
 
 impl MoveOutIndex {
     pub fn move_path_index(self, move_data: &MoveData<'_>) -> MovePathIndex {
         move_data.moves[self].path
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// `MovePath` is a canonicalized representation of a path that is
 /// moved or assigned to.
@@ -67,7 +58,6 @@ impl MoveOutIndex {
 /// It follows a tree structure.
 ///
 /// Given `struct X { m: M, n: N }` and `x: X`, moves like `drop x.m;`
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=MovePath | COMPLEXITY=3 | LINES=13 */
 /// move *out* of the place `x.m`.
 ///
 /// The MovePaths representing `x.m` and `x.n` are siblings (that is,
@@ -81,7 +71,6 @@ pub struct MovePath<'tcx> {
     pub parent: Option<MovePathIndex>,
     pub place: Place<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parents | COMPLEXITY=31 | LINES=65 */
 
 impl<'tcx> MovePath<'tcx> {
     /// Returns an iterator over the parents of `self`.
@@ -147,7 +136,6 @@ impl<'tcx> MovePath<'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=16 */
 
 impl<'tcx> fmt::Debug for MovePath<'tcx> {
     fn fmt(&self, w: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -164,20 +152,17 @@ impl<'tcx> fmt::Debug for MovePath<'tcx> {
         write!(w, " place: {:?} }}", self.place)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Display for MovePath<'tcx> {
     fn fmt(&self, w: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(w, "{:?}", self.place)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=MovePathLinearIter | COMPLEXITY=2 | LINES=5 */
 
 struct MovePathLinearIter<'a, 'tcx, F> {
     next: Option<(MovePathIndex, &'a MovePath<'tcx>)>,
     fetch_next: F,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=next | COMPLEXITY=5 | LINES=13 */
 
 impl<'a, 'tcx, F> Iterator for MovePathLinearIter<'a, 'tcx, F>
 where
@@ -191,7 +176,6 @@ where
         Some(ret)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=MoveData | COMPLEXITY=5 | LINES=18 */
 
 #[derive(Debug)]
 pub struct MoveData<'tcx> {
@@ -210,12 +194,10 @@ pub struct MoveData<'tcx> {
     pub init_loc_map: LocationMap<SmallVec<[InitIndex; 4]>>,
     pub init_path_map: IndexVec<MovePathIndex, SmallVec<[InitIndex; 4]>>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=move_data | COMPLEXITY=2 | LINES=4 */
 
 pub trait HasMoveData<'tcx> {
     fn move_data(&self) -> &MoveData<'tcx>;
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=LocationMap | COMPLEXITY=6 | LINES=7 */
 
 #[derive(Debug)]
 pub struct LocationMap<T> {
@@ -223,7 +205,6 @@ pub struct LocationMap<T> {
     /// for inner index) map.
     pub(crate) map: IndexVec<BasicBlock, Vec<T>>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=7 */
 
 impl<T> Index<Location> for LocationMap<T> {
     type Output = T;
@@ -231,14 +212,12 @@ impl<T> Index<Location> for LocationMap<T> {
         &self.map[index.block][index.statement_index]
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<T> IndexMut<Location> for LocationMap<T> {
     fn index_mut(&mut self, index: Location) -> &mut Self::Output {
         &mut self.map[index.block][index.statement_index]
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=15 */
 
 impl<T> LocationMap<T>
 where
@@ -254,7 +233,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=MoveOut | COMPLEXITY=2 | LINES=14 */
 
 /// `MoveOut` represents a point in a program that moves out of some
 /// L-value; i.e., "creates" uninitialized memory.
@@ -269,14 +247,12 @@ pub struct MoveOut {
     /// location of move
     pub source: Location,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl fmt::Debug for MoveOut {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(fmt, "{:?}@{:?}", self.path, self.source)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=Init | COMPLEXITY=2 | LINES=11 */
 
 /// `Init` represents a point in a program that initializes some L-value;
 #[derive(Copy, Clone)]
@@ -288,7 +264,6 @@ pub struct Init {
     /// Extra information about this initialization
     pub kind: InitKind,
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Initializations can be from an argument or from a statement. Arguments
 /// do not have locations, in those cases the `Local` is kept..
@@ -297,7 +272,6 @@ pub enum InitLocation {
     Argument(Local),
     Statement(Location),
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Additional information about the initialization.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -309,14 +283,12 @@ pub enum InitKind {
     /// This doesn't initialize the variable on panic (and a panic is possible).
     NonPanicPathOnly,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=6 */
 
 impl fmt::Debug for Init {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(fmt, "{:?}@{:?} ({:?})", self.path, self.location, self.kind)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=span | COMPLEXITY=7 | LINES=9 */
 
 impl Init {
     pub fn span<'tcx>(&self, body: &Body<'tcx>) -> Span {
@@ -326,7 +298,6 @@ impl Init {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=MovePathLookup | COMPLEXITY=3 | LINES=16 */
 
 /// Tables mapping from a place to its MovePathIndex.
 #[derive(Debug)]
@@ -343,7 +314,6 @@ pub struct MovePathLookup<'tcx> {
 
     un_derefer: UnDerefer<'tcx>,
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 
 #[derive(Copy, Clone, Debug)]
@@ -351,7 +321,6 @@ pub enum LookupResult {
     Exact(MovePathIndex),
     Parent(Option<MovePathIndex>),
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=find | COMPLEXITY=17 | LINES=35 */
 
 impl<'tcx> MovePathLookup<'tcx> {
     // Unlike the builder `fn move_path_for` below, this lookup
@@ -387,7 +356,6 @@ impl<'tcx> MovePathLookup<'tcx> {
         self.locals.iter_enumerated().filter_map(|(l, &idx)| Some((l, idx?)))
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=gather_moves | COMPLEXITY=17 | LINES=34 */
 
 impl<'tcx> MoveData<'tcx> {
     pub fn gather_moves(

@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/linkage.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::Linkage as RLinkage;
 use crate::rustc_complete::mir::mono::{MonoItem, Visibility};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=18 */
 
 use crate::prelude::*;
 
@@ -21,7 +19,6 @@ pub(crate) fn get_clif_linkage(
         _ => panic!("{:?} = {:?} {:?}", mono_item, linkage, visibility),
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=17 */
 
 pub(crate) fn get_static_linkage(tcx: TyCtxt<'_>, def_id: DefId) -> Linkage {
     let fn_attrs = tcx.codegen_fn_attrs(def_id);

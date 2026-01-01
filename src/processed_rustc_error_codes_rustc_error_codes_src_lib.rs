@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_error_codes/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=25 | LINES=553 */
 // This library is used to gather all error codes into one place, to make
 // their maintenance easier.
 
@@ -553,7 +552,6 @@ E0805: 0805,
         );
     )
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=25 */
 
 // Undocumented removed error codes. Note that many removed error codes are kept in the list above
 // and marked as no-longer emitted with a note in the markdown file (see E0001 for an example).
@@ -579,7 +577,6 @@ E0805: 0805,
 //  E0153, // unused error code
 //  E0157, // unused error code
 //  E0159, // use of trait `{}` as struct constructor
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=16 | LINES=57 */
 //  E0163, // merged into E0071
 //  E0167,
 //  E0168,
@@ -637,7 +634,6 @@ E0805: 0805,
 //  E0319, // trait impls for defaulted traits allowed just for structs/enums
 //  E0372, // coherence not dyn-compatible
 //  E0385, // {} in an aliasable location
-/* AST_META: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=15 | LINES=40 */
 //  E0402, // cannot use an outer type parameter in this context
 //  E0406, // merged into 420
 //  E0410, // merged into 408
@@ -678,9 +674,7 @@ E0805: 0805,
 //  E0563, // cannot determine a type for this `impl Trait` removed in 6383de15
 //  E0564, // only named lifetimes are allowed in `impl Trait`,
 //         // but `{}` was found in the type `{}`
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 //  E0598, // lifetime of {} is too short to guarantee its contents can be...
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 //  E0611, // merged into E0616
 //  E0612, // merged into E0609
 //  E0613, // Removed (merged with E0609)
@@ -696,7 +690,6 @@ E0805: 0805,
 //  E0722, // replaced with a generic attribute input check
 //  E0723, // unstable feature in `const` context
 //  E0738, // Removed; errored on `#[track_caller] fn`s in `extern "Rust" { ... }`.
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
 //  E0744, // merged into E0728
 //  E0776, // Removed; `#[cmse_nonsecure_entry]` is now `extern "cmse-nonsecure-entry"`
 //  E0796, // unused error code. We use `static_mut_refs` lint instead.

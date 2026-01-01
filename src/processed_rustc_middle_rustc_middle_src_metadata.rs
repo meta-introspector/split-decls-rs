@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_middle/src/metadata.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::Res;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 use crate::rustc_complete::Ident;
 use crate::rustc_complete::def_id::DefId;
 use smallvec::SmallVec;
@@ -19,7 +17,6 @@ pub enum Reexport {
     MacroUse,
     MacroExport,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=id | COMPLEXITY=7 | LINES=9 */
 
 impl Reexport {
     pub fn id(self) -> Option<DefId> {
@@ -29,7 +26,6 @@ impl Reexport {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=ModChild | COMPLEXITY=10 | LINES=19 */
 
 /// This structure is supposed to keep enough data to re-create `NameBinding`s for other crates
 /// during name resolution. Right now the bindings are not recreated entirely precisely so we may

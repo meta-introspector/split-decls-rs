@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[cfg_attr(bootstrap, feature(round_char_boundary))]
@@ -13,7 +12,6 @@
 
 
 pub use lint::{declare_lint, declare_lint_pass, declare_tool_lint, impl_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 pub use rustc_lint_defs as lint;
 
 #[macro_use]
@@ -24,7 +22,6 @@ pub use session::*;
 pub use getopts;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 /// Requirements for a `StableHashingContext` to be used in this crate.
 /// This is a hack to allow using the `HashStable_Generic` derive macro

@@ -1,25 +1,20 @@
 // SRC: ../rust/compiler/rustc_resolve/src/def_collector.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::mem;
 
 use crate::rustc_complete::visit::FnKind;
 use crate::rustc_complete::*;
 use rustc_attr_parsing::{AttributeParser, Early, OmitDoc, ShouldEmit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_expand::expand::AstFragment;
 use rustc_hir as hir;
 use crate::rustc_complete::Target;
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::hygiene::LocalExpnId;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::{ImplTraitContext, InvocationParent, Resolver};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 pub(crate) fn collect_definitions(
     resolver: &mut Resolver<'_, '_>,
@@ -30,7 +25,6 @@ pub(crate) fn collect_definitions(
     let mut visitor = DefCollector { resolver, expansion, invocation_parent };
     fragment.visit_with(&mut visitor);
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=DefCollector | COMPLEXITY=4 | LINES=7 */
 
 /// Creates `DefId`s for nodes in the AST.
 struct DefCollector<'a, 'ra, 'tcx> {
@@ -38,7 +32,6 @@ struct DefCollector<'a, 'ra, 'tcx> {
     invocation_parent: InvocationParent,
     expansion: LocalExpnId,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=create_def | COMPLEXITY=24 | LINES=68 */
 
 impl<'a, 'ra, 'tcx> DefCollector<'a, 'ra, 'tcx> {
     fn create_def(
@@ -107,7 +100,6 @@ impl<'a, 'ra, 'tcx> DefCollector<'a, 'ra, 'tcx> {
         assert!(old_parent.is_none(), "parent `LocalDefId` is reset for an invocation");
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=238 | LINES=413 */
 
 impl<'a, 'ra, 'tcx> visit::Visitor<'a> for DefCollector<'a, 'ra, 'tcx> {
     fn visit_item(&mut self, i: &'a Item) {

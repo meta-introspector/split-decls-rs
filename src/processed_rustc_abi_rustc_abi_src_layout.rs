@@ -1,32 +1,25 @@
 // SRC: ../rust/compiler/rustc_abi/src/layout.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::BTreeSet;
 use std::fmt::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ops::{Bound, Deref};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{cmp, iter};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use rustc_hashes::Hash64;
 use crate::rustc_index::Idx;
 use crate::rustc_index::bit_set::BitMatrix;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::{
     AbiAlign, Align, BackendRepr, FieldsShape, HasDataLayout, IndexSlice, IndexVec, Integer,
     LayoutData, Niche, NonZeroUsize, Primitive, ReprOptions, Scalar, Size, StructKind, TagEncoding,
     Variants, WrappingRange,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 
 #[cfg(feature = "nightly")]
 
 #[cfg(feature = "nightly")]
 pub use ty::{FIRST_VARIANT, FieldIdx, Layout, TyAbiInterface, TyAndLayout, VariantIdx};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=absent | COMPLEXITY=11 | LINES=18 */
 
 // A variant is absent if it's uninhabited and only has ZST fields.
 // Present uninhabited variants only require space for their fields,
@@ -45,14 +38,12 @@ where
     let is_1zst = fields.iter().all(|f| f.is_1zst());
     uninhabited && is_1zst
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Determines towards which end of a struct layout optimizations will try to place the best niches.
 enum NicheBias {
     Start,
     End,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum LayoutCalculatorError<F> {
@@ -82,7 +73,6 @@ pub enum LayoutCalculatorError<F> {
     /// An element type of an SIMD type isn't a primitive
     NonPrimitiveSimdType(F),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=without_payload | COMPLEXITY=22 | LINES=31 */
 
 impl<F> LayoutCalculatorError<F> {
     pub fn without_payload(&self) -> LayoutCalculatorError<()> {
@@ -114,7 +104,6 @@ impl<F> LayoutCalculatorError<F> {
         })
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LayoutCalculator | COMPLEXITY=2 | LINES=8 */
 
 type LayoutCalculatorResult<FieldIdx, VariantIdx, F> =
     Result<LayoutData<FieldIdx, VariantIdx>, LayoutCalculatorError<F>>;
@@ -123,7 +112,6 @@ type LayoutCalculatorResult<FieldIdx, VariantIdx, F> =
 pub struct LayoutCalculator<Cx> {
     pub cx: Cx,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=798 | LINES=1390 */
 
 impl<Cx: HasDataLayout> LayoutCalculator<Cx> {
     pub fn new(cx: Cx) -> Self {

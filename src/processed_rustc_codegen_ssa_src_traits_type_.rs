@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/type_.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{AddressSpace, Float, Integer, Primitive, Reg, Scalar};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{ArgAbi, CastTarget, FnAbi};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=type_i8 | COMPLEXITY=6 | LINES=36 */
 
 use super::BackendTypes;
 use super::misc::MiscCodegenMethods;
@@ -44,7 +40,6 @@ pub trait BaseTypeCodegenMethods: BackendTypes {
 
     fn val_ty(&self, v: Self::Value) -> Self::Type;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=type_int | COMPLEXITY=33 | LINES=64 */
 
 pub trait DerivedTypeCodegenMethods<'tcx>:
     BaseTypeCodegenMethods + MiscCodegenMethods<'tcx> + HasTyCtxt<'tcx> + HasTypingEnv<'tcx>
@@ -109,13 +104,11 @@ pub trait DerivedTypeCodegenMethods<'tcx>:
         self.type_from_primitive(s.primitive())
     }
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl<'tcx, T> DerivedTypeCodegenMethods<'tcx> for T where
     Self: BaseTypeCodegenMethods + MiscCodegenMethods<'tcx> + HasTyCtxt<'tcx> + HasTypingEnv<'tcx>
 {
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=backend_type | COMPLEXITY=11 | LINES=42 */
 
 pub trait LayoutTypeCodegenMethods<'tcx>: BackendTypes {
     /// The backend type used for a rust type when it's in memory,
@@ -158,7 +151,6 @@ pub trait LayoutTypeCodegenMethods<'tcx>: BackendTypes {
             || self.is_backend_scalar_pair(layout))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_type_metadata | COMPLEXITY=8 | LINES=12 */
 
 // For backends that support CFI using type membership (i.e., testing whether a given pointer is
 // associated with a type identifier).
@@ -171,7 +163,6 @@ pub trait TypeMembershipCodegenMethods<'tcx>: BackendTypes {
     fn add_kcfi_type_metadata(&self, _function: Self::Function, _typeid: u32) {}
     fn set_kcfi_type_metadata(&self, _function: Self::Function, _typeid: u32) {}
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=store_fn_arg | COMPLEXITY=2 | LINES=15 */
 
 pub trait ArgAbiBuilderMethods<'tcx>: BackendTypes {
     fn store_fn_arg(
@@ -187,7 +178,6 @@ pub trait ArgAbiBuilderMethods<'tcx>: BackendTypes {
         dst: PlaceRef<'tcx, Self::Value>,
     );
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
 
 pub trait TypeCodegenMethods<'tcx> = DerivedTypeCodegenMethods<'tcx>
     + LayoutTypeCodegenMethods<'tcx>

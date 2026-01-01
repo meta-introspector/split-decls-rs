@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/stability.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // A pass that annotates every item and method with its stability level,
 // propagating default levels lexically from parent to children ast nodes.
 
@@ -8,39 +7,26 @@ use std::num::NonZero;
 use rustc_ast_lowering::stability::extern_abi_stability;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordMap, UnordSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{EnabledLangFeature, EnabledLibFeature};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, DeprecatedSince};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     self as hir, AmbigArg, ConstStability, DefaultBodyStability, FieldDef, Item, ItemKind,
     Stability, StabilityLevel, StableSince, TraitRef, Ty, TyKind, UnstableReason,
     VERSION_PLACEHOLDER, Variant, find_attr,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::privacy::EffectiveVisibilities;
 use crate::rustc_complete::middle::stability::{AllowUnstable, Deprecated, DeprecationEntry, EvalResult};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{AssocContainer, TyCtxt};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::lint::builtin::{DEPRECATED, INEFFECTIVE_UNSTABLE_TRAIT_IMPL};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 use tracing::instrument;
 
 use crate::errors;
@@ -56,7 +42,6 @@ enum AnnotationKind {
     /// Annotation itself is useless, but it can be propagated to children.
     Container,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=inherit_deprecation | COMPLEXITY=6 | LINES=7 */
 
 fn inherit_deprecation(def_kind: DefKind) -> bool {
     match def_kind {
@@ -64,7 +49,6 @@ fn inherit_deprecation(def_kind: DefKind) -> bool {
         _ => true,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=inherit_const_stability | COMPLEXITY=12 | LINES=13 */
 
 fn inherit_const_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     let def_kind = tcx.def_kind(def_id);
@@ -78,7 +62,6 @@ fn inherit_const_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         _ => false,
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=annotation_kind | COMPLEXITY=27 | LINES=33 */
 
 fn annotation_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> AnnotationKind {
     let def_kind = tcx.def_kind(def_id);
@@ -112,7 +95,6 @@ fn annotation_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> AnnotationKind {
         _ => AnnotationKind::Required,
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=lookup_deprecation_entry | COMPLEXITY=8 | LINES=20 */
 
 fn lookup_deprecation_entry(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<DeprecationEntry> {
     let attrs = tcx.hir_attrs(tcx.local_def_id_to_hir_id(def_id));
@@ -133,7 +115,6 @@ fn lookup_deprecation_entry(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<Depre
     // `Deprecation` is just two pointers, no need to intern it
     Some(DeprecationEntry::local(depr, def_id))
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=inherit_stability | COMPLEXITY=6 | LINES=7 */
 
 fn inherit_stability(def_kind: DefKind) -> bool {
     match def_kind {
@@ -141,7 +122,6 @@ fn inherit_stability(def_kind: DefKind) -> bool {
         _ => false,
     }
 }
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 /// If the `-Z force-unstable-if-unmarked` flag is passed then we provide
 /// a parent stability annotation which indicates that this is private
@@ -159,7 +139,6 @@ const FORCE_UNSTABLE: Stability = Stability {
     },
     feature: sym::rustc_private,
 };
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=lookup_stability | COMPLEXITY=30 | LINES=47 */
 
 #[instrument(level = "debug", skip(tcx))]
 fn lookup_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<Stability> {
@@ -207,7 +186,6 @@ fn lookup_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<Stability> {
 
     None
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=lookup_default_body_stability | COMPLEXITY=6 | LINES=14 */
 
 #[instrument(level = "debug", skip(tcx))]
 fn lookup_default_body_stability(
@@ -222,7 +200,6 @@ fn lookup_default_body_stability(
     // FIXME: check that this item can have body stability
     find_attr!(attrs, AttributeKind::BodyStability { stability, .. } => *stability)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=lookup_const_stability | COMPLEXITY=36 | LINES=68 */
 
 #[instrument(level = "debug", skip(tcx))]
 fn lookup_const_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ConstStability> {
@@ -291,7 +268,6 @@ fn lookup_const_stability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ConstSt
 
     None
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=stability_implications | COMPLEXITY=41 | LINES=47 */
 
 fn stability_implications(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> UnordMap<Symbol, Symbol> {
     let mut implications = UnordMap::default();
@@ -339,13 +315,11 @@ fn stability_implications(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> UnordMap<S
 
     implications
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=MissingStabilityAnnotations | COMPLEXITY=2 | LINES=5 */
 
 struct MissingStabilityAnnotations<'tcx> {
     tcx: TyCtxt<'tcx>,
     effective_visibilities: &'tcx EffectiveVisibilities,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=check_compatible_stability | COMPLEXITY=84 | LINES=130 */
 
 impl<'tcx> MissingStabilityAnnotations<'tcx> {
     /// Verify that deprecation and stability attributes make sense with one another.
@@ -476,7 +450,6 @@ impl<'tcx> MissingStabilityAnnotations<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=33 | LINES=73 */
 
 impl<'tcx> Visitor<'tcx> for MissingStabilityAnnotations<'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -550,7 +523,6 @@ impl<'tcx> Visitor<'tcx> for MissingStabilityAnnotations<'tcx> {
         intravisit::walk_generic_param(self, p);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=check_mod_unstable_api_usage | COMPLEXITY=14 | LINES=21 */
 
 /// Cross-references the feature names of unstable APIs with enabled
 /// features and possibly prints errors.
@@ -572,7 +544,6 @@ fn check_mod_unstable_api_usage(tcx: TyCtxt<'_>, module_def_id: LocalModDefId) {
         check_unused_or_stable_features(tcx)
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {
@@ -585,12 +556,10 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=Checker | COMPLEXITY=2 | LINES=4 */
 
 struct Checker<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=189 | LINES=288 */
 
 impl<'tcx> Visitor<'tcx> for Checker<'tcx> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -879,7 +848,6 @@ impl<'tcx> Visitor<'tcx> for Checker<'tcx> {
         intravisit::walk_path(self, path)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=is_unstable_reexport | COMPLEXITY=13 | LINES=27 */
 
 /// Check whether a path is a `use` item that has been marked as unstable.
 ///
@@ -907,13 +875,11 @@ fn is_unstable_reexport(tcx: TyCtxt<'_>, id: hir::HirId) -> bool {
 
     true
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=CheckTraitImplStable | COMPLEXITY=2 | LINES=5 */
 
 struct CheckTraitImplStable<'tcx> {
     tcx: TyCtxt<'tcx>,
     fully_stable: bool,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=visit_path | COMPLEXITY=39 | LINES=44 */
 
 impl<'tcx> Visitor<'tcx> for CheckTraitImplStable<'tcx> {
     fn visit_path(&mut self, path: &hir::Path<'tcx>, _id: hir::HirId) {
@@ -958,7 +924,6 @@ impl<'tcx> Visitor<'tcx> for CheckTraitImplStable<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=check_unused_or_stable_features | COMPLEXITY=94 | LINES=152 */
 
 /// Given the list of enabled features that were not language features (i.e., that
 /// were expected to be library features), and the list of features used from
@@ -1111,7 +1076,6 @@ pub fn check_unused_or_stable_features(tcx: TyCtxt<'_>) {
     // FIXME(#44232): the `used_features` table no longer exists, so we
     // don't lint about unused features. We should re-enable this one day!
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=unnecessary_partially_stable_feature_lint | COMPLEXITY=3 | LINES=21 */
 
 fn unnecessary_partially_stable_feature_lint(
     tcx: TyCtxt<'_>,
@@ -1133,7 +1097,6 @@ fn unnecessary_partially_stable_feature_lint(
         },
     );
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=unnecessary_stable_feature_lint | COMPLEXITY=6 | LINES=17 */
 
 fn unnecessary_stable_feature_lint(
     tcx: TyCtxt<'_>,

@@ -1,27 +1,19 @@
 // SRC: ../rust/compiler/rustc_ast_lowering/src/pat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::sync::Arc;
 
 use crate::rustc_complete::*;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, LangItem, Target};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::source_map::{Spanned, respan};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DesugaringKind, Ident, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::errors::{
     ArbitraryExpressionInPattern, ExtraDoubleDot, MisplacedDoubleDot, SubTupleBinding,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{ImplTraitContext, LoweringContext, ParamMode, ResolverAstLoweringExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AllowReturnTypeNotation, ImplTraitPosition};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lower_pat_mut | COMPLEXITY=227 | LINES=539 */
 
 impl<'a, 'hir> LoweringContext<'a, 'hir> {
     pub(crate) fn lower_pat(&mut self, pattern: &Pat) -> &'hir hir::Pat<'hir> {

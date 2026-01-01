@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/back/lto.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=16 | LINES=20 */
 /// GCC requires to use the same toolchain for the whole compilation when doing LTO.
 /// So, we need the same version/commit of the linker (gcc) and lto front-end binaries (lto1,
 /// lto-wrapper, liblto_plugin.so).
@@ -20,23 +19,16 @@
 // /usr/bin/ld: warning: incremental linking of LTO and non-LTO objects; using -flinker-output=nolto-rel which will bypass whole program optimization
 // cSpell:enable
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fs::{self, File};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use gccjit::{Context, OutputKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use object::read::archive::ArchiveFile;
 use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule, ThinShared};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::back::write::{CodegenContext, FatLtoInput};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::bug;
@@ -44,12 +36,10 @@ use crate::rustc_complete::dep_graph::WorkProduct;
 use crate::rustc_complete::config::Lto;
 use crate::rustc_target::spec::RelocModel;
 use tempfile::{TempDir, tempdir};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::back::write::save_temp_bitcode;
 use crate::errors::LtoBitcodeFromRlib;
 use crate::{GccCodegenBackend, GccContext, SyncContext, to_gcc_opt_level};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=LtoData | COMPLEXITY=2 | LINES=7 */
 
 struct LtoData {
     // TODO(antoyo): use symbols_below_threshold.
@@ -57,7 +47,6 @@ struct LtoData {
     upstream_modules: Vec<(SerializedModule<ModuleBuffer>, CString)>,
     tmp_path: TempDir,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=prepare_lto | COMPLEXITY=42 | LINES=53 */
 
 fn prepare_lto(
     cgcx: &CodegenContext<GccCodegenBackend>,
@@ -111,14 +100,12 @@ fn prepare_lto(
 
     LtoData { upstream_modules, tmp_path }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=save_as_file | COMPLEXITY=4 | LINES=6 */
 
 fn save_as_file(obj: &[u8], path: &Path) -> Result<(), LtoBitcodeFromRlib> {
     fs::write(path, obj).map_err(|error| LtoBitcodeFromRlib {
         gcc_err: format!("write object file to temp dir: {}", error),
     })
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 /// Performs fat LTO by merging all modules into a single one and returning it
 /// for further optimization.
@@ -141,7 +128,6 @@ pub(crate) fn run_fat(
         //&lto_data.symbols_below_threshold,
     )
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fat_lto | COMPLEXITY=69 | LINES=134 */
 
 fn fat_lto(
     cgcx: &CodegenContext<GccCodegenBackend>,
@@ -276,7 +262,6 @@ fn fat_lto(
 
     module
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=ModuleBuffer(PathBuf); | COMPLEXITY=3 | LINES=8 */
 
 pub struct ModuleBuffer(PathBuf);
 
@@ -285,14 +270,12 @@ impl ModuleBuffer {
         ModuleBuffer(path)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=data | COMPLEXITY=5 | LINES=6 */
 
 impl ModuleBufferMethods for ModuleBuffer {
     fn data(&self) -> &[u8] {
         &[]
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=29 */
 
 /// Performs thin LTO by performing necessary global analysis and returning two
 /// lists, one of the modules that need optimization and another for modules that
@@ -322,7 +305,6 @@ pub(crate) fn run_thin(
         //&lto_data.symbols_below_threshold,
     )
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) fn prepare_thin(module: ModuleCodegen<GccContext>) -> (String, ThinBuffer) {
     let name = module.name;
@@ -330,7 +312,6 @@ pub(crate) fn prepare_thin(module: ModuleCodegen<GccContext>) -> (String, ThinBu
     let buffer = ThinBuffer::new(&module.module_llvm.context);
     (name, buffer)
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=thin_lto | COMPLEXITY=83 | LINES=204 */
 
 /// Prepare "thin" LTO to get run on these modules.
 ///
@@ -535,7 +516,6 @@ fn thin_lto(
 
     (opt_jobs, copy_jobs)
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=optimize_thin_module | COMPLEXITY=53 | LINES=117 */
 
 pub fn optimize_thin_module(
     thin_module: ThinModule<GccCodegenBackend>,
@@ -652,26 +632,22 @@ pub fn optimize_thin_module(
     #[allow(clippy::let_and_return)]
     module
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=ThinBuffer | COMPLEXITY=2 | LINES=4 */
 
 pub struct ThinBuffer {
     context: Arc<SyncContext>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl ThinBuffer {
     pub(crate) fn new(context: &Arc<SyncContext>) -> Self {
         Self { context: Arc::clone(context) }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=data | COMPLEXITY=5 | LINES=6 */
 
 impl ThinBufferMethods for ThinBuffer {
     fn data(&self) -> &[u8] {
         &[]
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=ThinData; | COMPLEXITY=5 | LINES=8 */
 
 pub struct ThinData; //(Arc<TempDir>);
 

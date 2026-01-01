@@ -1,40 +1,29 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/metadata/enums/cpp_like.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 
 use libc::c_uint;
 use crate::rustc_abi::{Align, Endian, FieldIdx, Size, TagEncoding, VariantIdx, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::debuginfo::type_names::compute_debuginfo_type_name;
 use crate::rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{ConstCodegenMethods, MiscCodegenMethods};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::smallvec;
 
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::debuginfo::dwarf_const::DW_TAG_const_type;
 use crate::debuginfo::metadata::enums::DiscrResult;
 use crate::debuginfo::metadata::type_map::{self, Stub, UniqueTypeId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::debuginfo::metadata::{
     DINodeCreationResult, NO_GENERICS, NO_SCOPE_METADATA, SmallVec, UNKNOWN_LINE_NUMBER,
     build_field_di_node, create_member_type, file_metadata, file_metadata_from_def_id,
     size_and_align_of, type_di_node, unknown_file_metadata, visibility_di_flags,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::debuginfo::utils::DIB;
 use crate::llvm::debuginfo::{DIFile, DIFlags, DIType};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=34 */
 
 // The names of the associated constants in each variant wrapper struct.
 // These have to match up with the names being used in `intrinsic.natvis`.
@@ -69,7 +58,6 @@ const SINGLE_VARIANT_VIRTUAL_DISR: u64 = 0;
 ///
 /// ```c
 /// union enum2$<{fully-qualified-name}> {
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=20 */
 ///   struct Variant0 {
 ///     struct {name-of-variant-0} {
 ///        <variant 0 fields>
@@ -90,7 +78,6 @@ const SINGLE_VARIANT_VIRTUAL_DISR: u64 = 0;
 ///      ...
 ///   }
 /// }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=90 */
 /// ```
 ///
 /// As you can see, the type name is wrapped in `enum2$<_>`. This way we can
@@ -181,7 +168,6 @@ const SINGLE_VARIANT_VIRTUAL_DISR: u64 = 0;
 ///     // We should have found an active variant at this point.
 ///     unreachable!();
 /// }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 ///
 /// // Check if a value is within the given range
 /// // (where the range might wrap around the value space)
@@ -192,7 +178,6 @@ const SINGLE_VARIANT_VIRTUAL_DISR: u64 = 0;
 ///         value >= start || value <= end
 ///     }
 /// }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=80 */
 ///
 /// ```
 pub(super) fn build_enum_type_di_node<'ll, 'tcx>(
@@ -273,7 +258,6 @@ pub(super) fn build_enum_type_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=54 */
 
 /// A coroutine debuginfo node looks the same as a that of an enum type.
 ///
@@ -328,7 +312,6 @@ pub(super) fn build_coroutine_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=build_single_variant_union_fields | COMPLEXITY=18 | LINES=83 */
 
 fn build_single_variant_union_fields<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -412,7 +395,6 @@ fn build_single_variant_union_fields<'ll, 'tcx>(
         }
     ]
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=build_union_fields_for_enum | COMPLEXITY=13 | LINES=66 */
 
 fn build_union_fields_for_enum<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -479,7 +461,6 @@ fn build_union_fields_for_enum<'ll, 'tcx>(
         visibility_flags,
     )
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=variant_names_enum_base_type | COMPLEXITY=2 | LINES=7 */
 
 // The base type of the VariantNames DW_AT_enumeration_type is always the same.
 // It has nothing to do with the tag of the enum and just has to be big enough
@@ -487,7 +468,6 @@ fn build_union_fields_for_enum<'ll, 'tcx>(
 fn variant_names_enum_base_type<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>) -> Ty<'tcx> {
     cx.tcx.types.u32
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=build_variant_names_type_di_node | COMPLEXITY=7 | LINES=22 */
 
 /// This function builds a DW_AT_enumeration_type that contains an entry for
 /// each variant. Note that this has nothing to do with the discriminant. The
@@ -510,7 +490,6 @@ fn build_variant_names_type_di_node<'ll, 'tcx>(
         containing_scope,
     )
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=build_variant_struct_wrapper_type_di_node | COMPLEXITY=60 | LINES=206 */
 
 fn build_variant_struct_wrapper_type_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -717,18 +696,15 @@ fn build_variant_struct_wrapper_type_di_node<'ll, 'tcx>(
     )
     .di_node
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=Split128 | COMPLEXITY=2 | LINES=5 */
 
 struct Split128 {
     hi: u64,
     lo: u64,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=split_128 | COMPLEXITY=3 | LINES=4 */
 
 fn split_128(value: u128) -> Split128 {
     Split128 { hi: (value >> 64) as u64, lo: value as u64 }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=build_union_fields_for_direct_tag_coroutine | COMPLEXITY=30 | LINES=91 */
 
 fn build_union_fields_for_direct_tag_coroutine<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -820,7 +796,6 @@ fn build_union_fields_for_direct_tag_coroutine<'ll, 'tcx>(
         DIFlags::FlagZero,
     )
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=build_union_fields_for_direct_tag_enum_or_coroutine | COMPLEXITY=29 | LINES=120 */
 
 /// This is a helper function shared between enums and coroutines that makes sure fields have the
 /// expect names.
@@ -941,7 +916,6 @@ fn build_union_fields_for_direct_tag_enum_or_coroutine<'ll, 'tcx>(
 
     unions_fields
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=VariantFieldInfo | COMPLEXITY=2 | LINES=8 */
 
 /// Information about a single field of the top-level DW_TAG_union_type.
 struct VariantFieldInfo<'ll> {
@@ -950,7 +924,6 @@ struct VariantFieldInfo<'ll> {
     source_info: Option<(&'ll DIFile, c_uint)>,
     discr: DiscrResult,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=variant_union_field_name | COMPLEXITY=4 | LINES=26 */
 
 fn variant_union_field_name(variant_index: VariantIdx) -> Cow<'static, str> {
     const PRE_ALLOCATED: [&str; 16] = [
@@ -977,7 +950,6 @@ fn variant_union_field_name(variant_index: VariantIdx) -> Cow<'static, str> {
         .map(|&s| Cow::from(s))
         .unwrap_or_else(|| format!("variant{}", variant_index.as_usize()).into())
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=variant_struct_wrapper_type_name | COMPLEXITY=4 | LINES=26 */
 
 fn variant_struct_wrapper_type_name(variant_index: VariantIdx) -> Cow<'static, str> {
     const PRE_ALLOCATED: [&str; 16] = [

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/tests/intersection.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=22 */
 // Test the computation of arm intersections.
 
 #[allow(unused_crate_dependencies)]
@@ -21,14 +20,12 @@ fn check(patterns: Vec<DeconstructedPat<Cx>>) -> Vec<Vec<usize>> {
             .unwrap();
     report.arm_intersections.into_iter().map(|bitset| bitset.iter().collect()).collect()
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=assert_intersects | COMPLEXITY=2 | LINES=6 */
 
 #[track_caller]
 fn assert_intersects(patterns: Vec<DeconstructedPat<Cx>>, intersects: &[&[usize]]) {
     let computed_intersects = check(patterns);
     assert_eq!(computed_intersects, intersects);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_int_ranges | COMPLEXITY=2 | LINES=26 */
 
 #[test]
 fn test_int_ranges() {
@@ -55,7 +52,6 @@ fn test_int_ranges() {
         &[&[], &[]],
     );
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_nested | COMPLEXITY=3 | LINES=41 */
 
 #[test]
 fn test_nested() {

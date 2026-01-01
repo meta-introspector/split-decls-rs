@@ -1,28 +1,20 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/region_name.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
 use std::fmt::{self, Display};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::iter;
 
 use crate::rustc_data_structures::fx::IndexEntry;
 use crate::rustc_complete::{Diag, EmissionGuarantee};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::RegionHighlightMode;
 use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, RegionVid, Ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 use crate::MirBorrowckCtxt;
 use crate::universal_regions::DefiningTy;
@@ -36,7 +28,6 @@ pub(crate) struct RegionName {
     /// Where the region comes from.
     pub(crate) source: RegionNameSource,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=27 */
 
 /// Denotes the source of a region that is named by a `RegionName`. For example, a free region that
 /// was named by the user would get `NamedLateParamRegion` and `'static` lifetime would get
@@ -64,7 +55,6 @@ pub(crate) enum RegionNameSource {
     /// An anonymous region from an impl self type or trait
     AnonRegionFromImplSignature(Span, &'static str),
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 /// Describes what to highlight to explain to the user that we're giving an anonymous region a
 /// synthesized name, and how to highlight it.
@@ -82,7 +72,6 @@ pub(crate) enum RegionNameHighlight {
     /// be included. This currently occurs for opaque types like `impl Future`.
     Occluded(Span, Symbol),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=60 | LINES=115 */
 
 impl RegionName {
     pub(crate) fn was_named(&self) -> bool {
@@ -198,21 +187,18 @@ impl RegionName {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl Display for RegionName {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.name)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl crate::rustc_errors::IntoDiagArg for RegionName {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         self.to_string().into_diag_arg(path)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=give_name_from_error_region | COMPLEXITY=347 | LINES=813 */
 
 impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
     pub(crate) fn mir_def_id(&self) -> hir::def_id::LocalDefId {

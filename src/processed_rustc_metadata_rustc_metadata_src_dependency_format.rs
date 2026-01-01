@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_metadata/src/dependency_format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=54 */
 // Resolution of mixing rlibs and dylibs
 //
 // When producing a final artifact, such as a dynamic library, the compiler has
@@ -54,18 +53,14 @@
 // than finding a number of solutions (there are normally quite a few).
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::dependency_format::{Dependencies, DependencyList, Linkage};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::CrateType;
 use crate::rustc_complete::cstore::CrateDepKind;
 use crate::rustc_complete::cstore::LinkagePreference::{self, RequireDynamic, RequireStatic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::sym;
 use tracing::info;
 
@@ -75,7 +70,6 @@ use crate::errors::{
     NonStaticCrateDep, RequiredPanicStrategy, RlibRequired, RustcDriverHelp, RustcLibRequired,
     TwoPanicRuntimes,
 };
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 pub(crate) fn calculate(tcx: TyCtxt<'_>) -> Dependencies {
     tcx.crate_types()
@@ -87,7 +81,6 @@ pub(crate) fn calculate(tcx: TyCtxt<'_>) -> Dependencies {
         })
         .collect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=calculate_type | COMPLEXITY=147 | LINES=210 */
 
 fn calculate_type(tcx: TyCtxt<'_>, ty: CrateType) -> DependencyList {
     let sess = &tcx.sess;
@@ -298,7 +291,6 @@ fn calculate_type(tcx: TyCtxt<'_>, ty: CrateType) -> DependencyList {
 
     ret
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_library | COMPLEXITY=17 | LINES=35 */
 
 fn add_library(
     tcx: TyCtxt<'_>,
@@ -334,7 +326,6 @@ fn add_library(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=attempt_static | COMPLEXITY=26 | LINES=44 */
 
 fn attempt_static(tcx: TyCtxt<'_>, unavailable: &mut Vec<CrateNum>) -> Option<DependencyList> {
     let all_crates_available_as_rlib = tcx
@@ -379,7 +370,6 @@ fn attempt_static(tcx: TyCtxt<'_>, unavailable: &mut Vec<CrateNum>) -> Option<De
 
     Some(ret)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=activate_injected_dep | COMPLEXITY=18 | LINES=28 */
 
 /// Given a list of how to link upstream dependencies so far, ensure that an
 /// injected dependency is activated. This will not do anything if one was
@@ -408,7 +398,6 @@ fn activate_injected_dep(
         list[injected] = Linkage::Static;
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=verify_ok | COMPLEXITY=63 | LINES=80 */
 
 /// After the linkage for a crate has been determined we need to verify that
 /// there's only going to be one panic runtime in the output.

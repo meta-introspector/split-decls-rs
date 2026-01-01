@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/elaborate_drop.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::Idx;
@@ -12,14 +9,10 @@ use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::util::IntTypeExt;
 use crate::rustc_complete::ty::{self, GenericArg, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug, traits};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_complete::source_map::{Spanned, dummy_spanned};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=23 */
 
 use crate::patch::MirPatch;
 
@@ -43,7 +36,6 @@ pub(crate) enum DropStyle {
     /// components of a value, for example for dropping array elements.
     Open,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Which drop flags to affect/check with an operation.
 #[derive(Debug)]
@@ -53,7 +45,6 @@ pub(crate) enum DropFlagMode {
     /// Affect all nested drop flags in addition to the top-level one.
     Deep,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 /// Describes if unwinding is necessary and where to unwind to if a panic occurs.
 #[derive(Copy, Clone, Debug)]
@@ -63,7 +54,6 @@ pub(crate) enum Unwind {
     /// Already in an unwind path, any panic will cause an abort.
     InCleanup,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_cleanup | COMPLEXITY=18 | LINES=26 */
 
 impl Unwind {
     fn is_cleanup(self) -> bool {
@@ -90,7 +80,6 @@ impl Unwind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=patch_ref | COMPLEXITY=21 | LINES=60 */
 
 pub(crate) trait DropElaborator<'a, 'tcx>: fmt::Debug {
     /// The type representing paths that can be moved out of.
@@ -151,7 +140,6 @@ pub(crate) trait DropElaborator<'a, 'tcx>: fmt::Debug {
     /// This is only relevant for array patterns, which can move out of individual array elements.
     fn array_subpath(&self, path: Self::Path, index: u64, size: u64) -> Option<Self::Path>;
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DropCtxt | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Debug)]
 struct DropCtxt<'a, 'b, 'tcx, D>
@@ -168,7 +156,6 @@ where
     unwind: Unwind,
     dropline: Option<BasicBlock>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=24 */
 
 /// "Elaborates" a drop of `place`/`path` and patches `bb`'s terminator to execute it.
 ///
@@ -193,7 +180,6 @@ pub(crate) fn elaborate_drop<'b, 'tcx, D>(
 {
     DropCtxt { elaborator, source_info, place, path, succ, unwind, dropline }.elaborate_drop(bb)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=place_ty | COMPLEXITY=455 | LINES=1291 */
 
 impl<'a, 'b, 'tcx, D> DropCtxt<'a, 'b, 'tcx, D>
 where

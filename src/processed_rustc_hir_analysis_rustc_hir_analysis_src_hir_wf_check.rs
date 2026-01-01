@@ -1,19 +1,13 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_wf_check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AmbigArg, ForeignItem, ForeignItemKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::traits::{ObligationCause, ObligationCauseCode, WellFormedLoc};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, TypingMode, fold_regions};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=HirWfCheck | COMPLEXITY=118 | LINES=211 */
 use tracing::debug;
 
 use crate::collect::ItemCtxt;

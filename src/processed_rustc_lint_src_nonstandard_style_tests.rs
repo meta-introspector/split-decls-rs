@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_lint/src/nonstandard_style/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{is_camel_case, to_camel_case};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=camel_case | COMPLEXITY=3 | LINES=20 */
 
 #[test]
 fn camel_case() {

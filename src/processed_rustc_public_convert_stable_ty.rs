@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/stable/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Conversion of internal Rust compiler `ty` items to stable ones.
 
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::{bug, mir, ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_public_bridge::Tables;
 use crate::rustc_public_bridge::context::CompilerCtxt;
 
@@ -13,7 +11,6 @@ use crate::compiler_interface::BridgeTys;
 use crate::ty::{
     AdtKind, FloatTy, GenericArgs, GenericParamDef, IntTy, Region, RigidTy, TyKind, UintTy,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=13 */
 use crate::unstable::Stable;
 
 impl<'tcx> Stable<'tcx> for ty::AliasTyKind {
@@ -27,7 +24,6 @@ impl<'tcx> Stable<'tcx> for ty::AliasTyKind {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::AliasTy<'tcx> {
     type T = crate::ty::AliasTy;
@@ -40,7 +36,6 @@ impl<'tcx> Stable<'tcx> for ty::AliasTy<'tcx> {
         crate::ty::AliasTy { def_id: tables.alias_def(*def_id), args: args.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::AliasTerm<'tcx> {
     type T = crate::ty::AliasTerm;
@@ -53,7 +48,6 @@ impl<'tcx> Stable<'tcx> for ty::AliasTerm<'tcx> {
         crate::ty::AliasTerm { def_id: tables.alias_def(*def_id), args: args.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=10 */
 
 impl<'tcx> Stable<'tcx> for ty::DynKind {
     type T = crate::ty::DynKind;
@@ -64,7 +58,6 @@ impl<'tcx> Stable<'tcx> for ty::DynKind {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=21 */
 
 impl<'tcx> Stable<'tcx> for ty::ExistentialPredicate<'tcx> {
     type T = crate::ty::ExistentialPredicate;
@@ -86,7 +79,6 @@ impl<'tcx> Stable<'tcx> for ty::ExistentialPredicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for ty::ExistentialTraitRef<'tcx> {
     type T = crate::ty::ExistentialTraitRef;
@@ -103,7 +95,6 @@ impl<'tcx> Stable<'tcx> for ty::ExistentialTraitRef<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=19 */
 
 impl<'tcx> Stable<'tcx> for ty::TermKind<'tcx> {
     type T = crate::ty::TermKind;
@@ -123,7 +114,6 @@ impl<'tcx> Stable<'tcx> for ty::TermKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=8 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for ty::ExistentialProjection<'tcx> {
     type T = crate::ty::ExistentialProjection;
@@ -141,7 +131,6 @@ impl<'tcx> Stable<'tcx> for ty::ExistentialProjection<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=21 */
 
 impl<'tcx> Stable<'tcx> for ty::adjustment::PointerCoercion {
     type T = crate::mir::PointerCoercion;
@@ -163,7 +152,6 @@ impl<'tcx> Stable<'tcx> for ty::adjustment::PointerCoercion {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Stable<'tcx> for ty::UserTypeAnnotationIndex {
     type T = usize;
@@ -171,7 +159,6 @@ impl<'tcx> Stable<'tcx> for ty::UserTypeAnnotationIndex {
         self.as_usize()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::AdtKind {
     type T = AdtKind;
@@ -184,7 +171,6 @@ impl<'tcx> Stable<'tcx> for ty::AdtKind {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for ty::FieldDef {
     type T = crate::ty::FieldDef;
@@ -200,7 +186,6 @@ impl<'tcx> Stable<'tcx> for ty::FieldDef {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for ty::GenericArgs<'tcx> {
     type T = crate::ty::GenericArgs;
@@ -212,7 +197,6 @@ impl<'tcx> Stable<'tcx> for ty::GenericArgs<'tcx> {
         GenericArgs(self.iter().map(|arg| arg.kind().stable(tables, cx)).collect())
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=19 */
 
 impl<'tcx> Stable<'tcx> for ty::GenericArgKind<'tcx> {
     type T = crate::ty::GenericArgKind;
@@ -232,7 +216,6 @@ impl<'tcx> Stable<'tcx> for ty::GenericArgKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=24 */
 
 impl<'tcx, S, V> Stable<'tcx> for ty::Binder<'tcx, S>
 where
@@ -257,7 +240,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=17 */
 
 impl<'tcx, S, V> Stable<'tcx> for ty::EarlyBinder<'tcx, S>
 where
@@ -275,7 +257,6 @@ where
         EarlyBinder { value: self.as_ref().skip_binder().stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=22 */
 
 impl<'tcx> Stable<'tcx> for ty::FnSig<'tcx> {
     type T = crate::ty::FnSig;
@@ -298,7 +279,6 @@ impl<'tcx> Stable<'tcx> for ty::FnSig<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=19 */
 
 impl<'tcx> Stable<'tcx> for ty::BoundTyKind {
     type T = crate::ty::BoundTyKind;
@@ -318,7 +298,6 @@ impl<'tcx> Stable<'tcx> for ty::BoundTyKind {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=22 */
 
 impl<'tcx> Stable<'tcx> for ty::BoundRegionKind {
     type T = crate::ty::BoundRegionKind;
@@ -341,7 +320,6 @@ impl<'tcx> Stable<'tcx> for ty::BoundRegionKind {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=22 */
 
 impl<'tcx> Stable<'tcx> for ty::BoundVariableKind {
     type T = crate::ty::BoundVariableKind;
@@ -364,7 +342,6 @@ impl<'tcx> Stable<'tcx> for ty::BoundVariableKind {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for ty::IntTy {
     type T = IntTy;
@@ -380,7 +357,6 @@ impl<'tcx> Stable<'tcx> for ty::IntTy {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for ty::UintTy {
     type T = UintTy;
@@ -396,7 +372,6 @@ impl<'tcx> Stable<'tcx> for ty::UintTy {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::FloatTy {
     type T = FloatTy;
@@ -410,7 +385,6 @@ impl<'tcx> Stable<'tcx> for ty::FloatTy {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for Ty<'tcx> {
     type T = crate::ty::Ty;
@@ -422,7 +396,6 @@ impl<'tcx> Stable<'tcx> for Ty<'tcx> {
         tables.intern_ty(cx.lift(*self).unwrap())
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=24 | LINES=84 */
 
 impl<'tcx> Stable<'tcx> for ty::TyKind<'tcx> {
     type T = crate::ty::TyKind;
@@ -507,7 +480,6 @@ impl<'tcx> Stable<'tcx> for ty::TyKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=12 | LINES=20 */
 
 impl<'tcx> Stable<'tcx> for ty::Pattern<'tcx> {
     type T = crate::ty::Pattern;
@@ -528,7 +500,6 @@ impl<'tcx> Stable<'tcx> for ty::Pattern<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=37 */
 
 impl<'tcx> Stable<'tcx> for ty::Const<'tcx> {
     type T = crate::ty::TyConst;
@@ -566,7 +537,6 @@ impl<'tcx> Stable<'tcx> for ty::Const<'tcx> {
         crate::ty::TyConst::new(kind, id)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for ty::ParamConst {
     type T = crate::ty::ParamConst;
@@ -575,7 +545,6 @@ impl<'tcx> Stable<'tcx> for ty::ParamConst {
         ParamConst { index: self.index, name: self.name.to_string() }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> Stable<'tcx> for ty::ParamTy {
     type T = crate::ty::ParamTy;
@@ -584,7 +553,6 @@ impl<'tcx> Stable<'tcx> for ty::ParamTy {
         ParamTy { index: self.index, name: self.name.to_string() }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::BoundTy {
     type T = crate::ty::BoundTy;
@@ -597,7 +565,6 @@ impl<'tcx> Stable<'tcx> for ty::BoundTy {
         BoundTy { var: self.var.as_usize(), kind: self.kind.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for ty::trait_def::TraitSpecializationKind {
     type T = crate::ty::TraitSpecializationKind;
@@ -613,7 +580,6 @@ impl<'tcx> Stable<'tcx> for ty::trait_def::TraitSpecializationKind {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=8 | LINES=30 */
 
 impl<'tcx> Stable<'tcx> for ty::TraitDef {
     type T = crate::ty::TraitDecl;
@@ -644,7 +610,6 @@ impl<'tcx> Stable<'tcx> for ty::TraitDef {
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::TraitRef<'tcx> {
     type T = crate::ty::TraitRef;
@@ -658,7 +623,6 @@ impl<'tcx> Stable<'tcx> for ty::TraitRef<'tcx> {
         TraitRef::try_new(tables.trait_def(self.def_id), self.args.stable(tables, cx)).unwrap()
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=28 */
 
 impl<'tcx> Stable<'tcx> for ty::Generics {
     type T = crate::ty::Generics;
@@ -687,7 +651,6 @@ impl<'tcx> Stable<'tcx> for ty::Generics {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=17 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_middle::ty::GenericParamDefKind {
     type T = crate::ty::GenericParamDefKind;
@@ -705,7 +668,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_middle::ty::GenericParamDefKind {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=18 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_middle::ty::GenericParamDef {
     type T = crate::ty::GenericParamDef;
@@ -724,7 +686,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_middle::ty::GenericParamDef {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=18 | LINES=38 */
 
 impl<'tcx> Stable<'tcx> for ty::PredicateKind<'tcx> {
     type T = crate::ty::PredicateKind;
@@ -763,7 +724,6 @@ impl<'tcx> Stable<'tcx> for ty::PredicateKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=20 | LINES=46 */
 
 impl<'tcx> Stable<'tcx> for ty::ClauseKind<'tcx> {
     type T = crate::ty::ClauseKind;
@@ -810,7 +770,6 @@ impl<'tcx> Stable<'tcx> for ty::ClauseKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::ClosureKind {
     type T = crate::ty::ClosureKind;
@@ -824,7 +783,6 @@ impl<'tcx> Stable<'tcx> for ty::ClosureKind {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::SubtypePredicate<'tcx> {
     type T = crate::ty::SubtypePredicate;
@@ -838,7 +796,6 @@ impl<'tcx> Stable<'tcx> for ty::SubtypePredicate<'tcx> {
         crate::ty::SubtypePredicate { a: a.stable(tables, cx), b: b.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::CoercePredicate<'tcx> {
     type T = crate::ty::CoercePredicate;
@@ -852,7 +809,6 @@ impl<'tcx> Stable<'tcx> for ty::CoercePredicate<'tcx> {
         crate::ty::CoercePredicate { a: a.stable(tables, cx), b: b.stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::AliasRelationDirection {
     type T = crate::ty::AliasRelationDirection;
@@ -865,7 +821,6 @@ impl<'tcx> Stable<'tcx> for ty::AliasRelationDirection {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for ty::TraitPredicate<'tcx> {
     type T = crate::ty::TraitPredicate;
@@ -882,7 +837,6 @@ impl<'tcx> Stable<'tcx> for ty::TraitPredicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=5 | LINES=16 */
 
 impl<'tcx, T> Stable<'tcx> for ty::OutlivesPredicate<'tcx, T>
 where
@@ -899,7 +853,6 @@ where
         crate::ty::OutlivesPredicate(a.stable(tables, cx), b.stable(tables, cx))
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for ty::ProjectionPredicate<'tcx> {
     type T = crate::ty::ProjectionPredicate;
@@ -916,7 +869,6 @@ impl<'tcx> Stable<'tcx> for ty::ProjectionPredicate<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=13 */
 
 impl<'tcx> Stable<'tcx> for ty::ImplPolarity {
     type T = crate::ty::ImplPolarity;
@@ -930,7 +882,6 @@ impl<'tcx> Stable<'tcx> for ty::ImplPolarity {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::PredicatePolarity {
     type T = crate::ty::PredicatePolarity;
@@ -943,7 +894,6 @@ impl<'tcx> Stable<'tcx> for ty::PredicatePolarity {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::Region<'tcx> {
     type T = crate::ty::Region;
@@ -956,7 +906,6 @@ impl<'tcx> Stable<'tcx> for ty::Region<'tcx> {
         Region { kind: self.kind().stable(tables, cx) }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=17 | LINES=35 */
 
 impl<'tcx> Stable<'tcx> for ty::RegionKind<'tcx> {
     type T = crate::ty::RegionKind;
@@ -992,7 +941,6 @@ impl<'tcx> Stable<'tcx> for ty::RegionKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=32 */
 
 impl<'tcx> Stable<'tcx> for ty::Instance<'tcx> {
     type T = crate::mir::mono::Instance;
@@ -1025,7 +973,6 @@ impl<'tcx> Stable<'tcx> for ty::Instance<'tcx> {
         crate::mir::mono::Instance { def, kind }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for ty::Variance {
     type T = crate::mir::Variance;
@@ -1038,7 +985,6 @@ impl<'tcx> Stable<'tcx> for ty::Variance {
         }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> Stable<'tcx> for ty::Movability {
     type T = crate::ty::Movability;
@@ -1050,7 +996,6 @@ impl<'tcx> Stable<'tcx> for ty::Movability {
         }
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=32 | LINES=39 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_abi::ExternAbi {
     type T = crate::ty::Abi;
@@ -1090,7 +1035,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_abi::ExternAbi {
         }
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_session::cstore::ForeignModule {
     type T = crate::ty::ForeignModule;
@@ -1106,7 +1050,6 @@ impl<'tcx> Stable<'tcx> for crate::rustc_session::cstore::ForeignModule {
         }
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=23 | LINES=26 */
 
 impl<'tcx> Stable<'tcx> for ty::AssocKind {
     type T = crate::ty::AssocKind;
@@ -1133,7 +1076,6 @@ impl<'tcx> Stable<'tcx> for ty::AssocKind {
         }
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=11 | LINES=19 */
 
 impl<'tcx> Stable<'tcx> for ty::AssocContainer {
     type T = crate::ty::AssocContainer;
@@ -1153,7 +1095,6 @@ impl<'tcx> Stable<'tcx> for ty::AssocContainer {
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=16 */
 
 impl<'tcx> Stable<'tcx> for ty::AssocItem {
     type T = crate::ty::AssocItem;
@@ -1170,7 +1111,6 @@ impl<'tcx> Stable<'tcx> for ty::AssocItem {
         }
     }
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=16 | LINES=23 */
 
 impl<'tcx> Stable<'tcx> for ty::ImplTraitInTraitData {
     type T = crate::ty::ImplTraitInTraitData;
@@ -1194,7 +1134,6 @@ impl<'tcx> Stable<'tcx> for ty::ImplTraitInTraitData {
         }
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=6 | LINES=12 */
 
 impl<'tcx> Stable<'tcx> for crate::rustc_middle::ty::util::Discr<'tcx> {
     type T = crate::ty::Discr;

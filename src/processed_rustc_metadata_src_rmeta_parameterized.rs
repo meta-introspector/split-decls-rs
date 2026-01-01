@@ -1,67 +1,53 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/parameterized.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::hash::Hash;
 
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::def_id::DefIndex;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Binder, EarlyBinder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Symbol;
 
 use crate::rmeta::{LazyArray, LazyValue};
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) trait ParameterizedOverTcx: 'static {
     type Value<'tcx>;
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for Option<T> {
     type Value<'tcx> = Option<T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<A: ParameterizedOverTcx, B: ParameterizedOverTcx> ParameterizedOverTcx for (A, B) {
     type Value<'tcx> = (A::Value<'tcx>, B::Value<'tcx>);
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for Vec<T> {
     type Value<'tcx> = Vec<T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<I: Idx + 'static, T: ParameterizedOverTcx> ParameterizedOverTcx for IndexVec<I, T> {
     type Value<'tcx> = IndexVec<I, T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<I: Hash + Eq + 'static, T: ParameterizedOverTcx> ParameterizedOverTcx for UnordMap<I, T> {
     type Value<'tcx> = UnordMap<I, T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for Binder<'static, T> {
     type Value<'tcx> = Binder<'tcx, T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for EarlyBinder<'static, T> {
     type Value<'tcx> = EarlyBinder<'tcx, T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for LazyValue<T> {
     type Value<'tcx> = LazyValue<T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T: ParameterizedOverTcx> ParameterizedOverTcx for LazyArray<T> {
     type Value<'tcx> = LazyArray<T::Value<'tcx>>;
 }
-/* AST_META: AST_ID=14 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=11 | LINES=11 */
 
 macro_rules! trivially_parameterized_over_tcx {
     ($($ty:ty),+ $(,)?) => {
@@ -73,7 +59,6 @@ macro_rules! trivially_parameterized_over_tcx {
         )*
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=71 */
 
 trivially_parameterized_over_tcx! {
     bool,
@@ -145,7 +130,6 @@ trivially_parameterized_over_tcx! {
     crate::rustc_span::hygiene::SyntaxContextKey,
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=11 | LINES=12 */
 
 // HACK(compiler-errors): This macro rule can only take a fake path,
 // not a real, due to parsing ambiguity reasons.
@@ -158,7 +142,6 @@ macro_rules! parameterized_over_tcx {
         )*
     }
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 parameterized_over_tcx! {
     // tidy-alphabetical-start

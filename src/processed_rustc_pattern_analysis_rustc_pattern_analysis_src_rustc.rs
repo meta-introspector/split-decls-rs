@@ -1,42 +1,32 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/rustc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::cell::Cell;
 use std::fmt;
 use std::iter::once;
 
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, Integer, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_arena::DroplessArena;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::stability::EvalResult;
 use crate::rustc_complete::thir::{self, Pat, PatKind, PatRange, PatRangeBoundary};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::layout::IntegerExt;
 use crate::rustc_complete::ty::{
     self, FieldDef, OpaqueTypeKey, ScalarInt, Ty, TyCtxt, TypeVisitableExt, VariantDef,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::constructor::Constructor::*;
 use crate::constructor::{
     IntRange, MaybeInfiniteInt, OpaqueId, RangeEnd, Slice, SliceKind, VariantVisibility,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::lints::lint_nonexhaustive_missing_variants;
 use crate::pat_column::PatternColumn;
 use crate::rustc::print::EnumInfo;
 use crate::usefulness::{PlaceValidity, compute_match_usefulness};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{PatCx, PrivateUninhabitedField, errors};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=RevealedTy | COMPLEXITY=11 | LINES=29 */
 
 
 // Re-export rustc-specific versions of all these types.
@@ -65,14 +55,12 @@ impl<'tcx> fmt::Display for RevealedTy<'tcx> {
         self.0.fmt(fmt)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> fmt::Debug for RevealedTy<'tcx> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.0.fmt(fmt)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> std::ops::Deref for RevealedTy<'tcx> {
     type Target = Ty<'tcx>;
@@ -80,14 +68,12 @@ impl<'tcx> std::ops::Deref for RevealedTy<'tcx> {
         &self.0
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=inner | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> RevealedTy<'tcx> {
     pub fn inner(self) -> Ty<'tcx> {
         self.0
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=RustcPatCtxt | COMPLEXITY=15 | LINES=27 */
 
 #[derive(Clone)]
 pub struct RustcPatCtxt<'p, 'tcx: 'p> {
@@ -115,7 +101,6 @@ pub struct RustcPatCtxt<'p, 'tcx: 'p> {
     pub known_valid_scrutinee: bool,
     pub internal_state: RustcPatCtxtState,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=RustcPatCtxtState | COMPLEXITY=4 | LINES=9 */
 
 /// Private fields of [`RustcPatCtxt`], separated out to permit record initialization syntax.
 #[derive(Clone, Default)]
@@ -125,14 +110,12 @@ pub struct RustcPatCtxtState {
     /// for everything containing patterns.
     has_lowered_deref_pat: Cell<bool>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'p, 'tcx: 'p> fmt::Debug for RustcPatCtxt<'p, 'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("RustcPatCtxt").finish()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=reveal_opaque_ty | COMPLEXITY=447 | LINES=754 */
 
 impl<'p, 'tcx: 'p> RustcPatCtxt<'p, 'tcx> {
     /// Type inference occasionally gives us opaque types in places where corresponding patterns
@@ -887,7 +870,6 @@ impl<'p, 'tcx: 'p> RustcPatCtxt<'p, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=would_print_as_wildcard | COMPLEXITY=12 | LINES=16 */
 
 /// Returns `true` if the given pattern would be printed as a wildcard (`_`).
 fn would_print_as_wildcard(tcx: TyCtxt<'_>, p: &WitnessPat<'_, '_>) -> bool {
@@ -904,7 +886,6 @@ fn would_print_as_wildcard(tcx: TyCtxt<'_>, p: &WitnessPat<'_, '_>) -> bool {
         _ => false,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=is_exhaustive_patterns_feature_on | COMPLEXITY=46 | LINES=154 */
 
 impl<'p, 'tcx: 'p> PatCx for RustcPatCtxt<'p, 'tcx> {
     type Ty = RevealedTy<'tcx>;
@@ -1059,7 +1040,6 @@ impl<'p, 'tcx: 'p> PatCx for RustcPatCtxt<'p, 'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=expand_or_pat | COMPLEXITY=14 | LINES=17 */
 
 /// Recursively expand this pattern into its subpatterns. Only useful for or-patterns.
 fn expand_or_pat<'p, 'tcx>(pat: &'p Pat<'tcx>) -> Vec<&'p Pat<'tcx>> {
@@ -1077,7 +1057,6 @@ fn expand_or_pat<'p, 'tcx>(pat: &'p Pat<'tcx>) -> Vec<&'p Pat<'tcx>> {
     expand(pat, &mut pats);
     pats
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=analyze_match | COMPLEXITY=19 | LINES=28 */
 
 /// The entrypoint for this crate. Computes whether a match is exhaustive and which of its arms are
 /// useful, and runs some lints.

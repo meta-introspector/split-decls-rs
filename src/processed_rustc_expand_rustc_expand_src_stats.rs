@@ -1,20 +1,14 @@
 // SRC: ../rust/compiler/rustc_expand/src/stats.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter;
 
 use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use smallvec::SmallVec;
 
 use crate::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::expand::{AstFragment, AstFragmentKind};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=MacroStat | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Default)]
 pub struct MacroStat {
@@ -27,7 +21,6 @@ pub struct MacroStat {
     /// Number of bytes of code (when pretty-printed).
     pub bytes: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=11 */
 
 pub(crate) fn elems_to_string<T>(elems: &SmallVec<[T; 1]>, f: impl Fn(&T) -> String) -> String {
     let mut s = String::new();
@@ -39,12 +32,10 @@ pub(crate) fn elems_to_string<T>(elems: &SmallVec<[T; 1]>, f: impl Fn(&T) -> Str
     }
     s
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn unreachable_to_string<T>(_: &T) -> String {
     unreachable!()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=38 */
 
 pub(crate) fn update_bang_macro_stats(
     ecx: &mut ExtCtxt<'_>,
@@ -83,7 +74,6 @@ pub(crate) fn update_bang_macro_stats(
 
     update_macro_stats(ecx, MacroKind::Bang, fragment_kind, span, &mac.path, &input, fragment);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=29 */
 
 pub(crate) fn update_attr_macro_stats(
     ecx: &mut ExtCtxt<'_>,
@@ -113,7 +103,6 @@ pub(crate) fn update_attr_macro_stats(
     );
     update_macro_stats(ecx, MacroKind::Attr, fragment_kind, span, path, &input, fragment);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 pub(crate) fn update_derive_macro_stats(
     ecx: &mut ExtCtxt<'_>,
@@ -128,7 +117,6 @@ pub(crate) fn update_derive_macro_stats(
     let input = format!("#[derive({})]", pprust::path_to_string(path));
     update_macro_stats(ecx, MacroKind::Derive, fragment_kind, span, path, &input, fragment);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=44 */
 
 pub(crate) fn update_macro_stats(
     ecx: &mut ExtCtxt<'_>,

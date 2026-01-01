@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_hir/src/weak_lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 // Validity checking for weak lang items
 
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_weak | COMPLEXITY=16 | LINES=21 */
 
 use crate::LangItem;
 
@@ -25,7 +23,6 @@ macro_rules! weak_lang_items {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 weak_lang_items! {
     PanicImpl,          rust_begin_unwind;

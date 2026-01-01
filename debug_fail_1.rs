@@ -31,5 +31,5 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_compiler_rustc_abi_src_layout_coroutine.rs"]
-mod dot_dot_rust_compiler_rustc_abi_src_layout_coroutine;
+#[path = "src/dot_dot_rust_compiler_rustc_hir_analysis_src_impl_wf_check_min_specialization.rs"]
+mod dot_dot_rust_compiler_rustc_hir_analysis_src_impl_wf_check_min_specialization;

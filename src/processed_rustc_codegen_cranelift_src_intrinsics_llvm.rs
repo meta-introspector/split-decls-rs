@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/intrinsics/llvm.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=90 */
 // Emulate LLVM intrinsics
 
 use crate::intrinsics::*;

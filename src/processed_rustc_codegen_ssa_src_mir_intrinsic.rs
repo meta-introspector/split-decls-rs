@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/intrinsic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::WrappingRange;
 use crate::rustc_complete::mir::SourceInfo;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::sym;
 
@@ -13,11 +10,9 @@ use super::FunctionCx;
 use super::operand::OperandRef;
 use super::place::PlaceRef;
 use crate::common::{AtomicRmwBinOp, SynchronizationScope};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::errors::InvalidMonomorphization;
 use crate::traits::*;
 use crate::{MemFlags, meth, size_of_val};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=copy_intrinsic | COMPLEXITY=11 | LINES=21 */
 
 fn copy_intrinsic<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -39,7 +34,6 @@ fn copy_intrinsic<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         bx.memcpy(dst, align, src, align, size, flags);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=memset_intrinsic | COMPLEXITY=6 | LINES=16 */
 
 fn memset_intrinsic<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,
@@ -56,7 +50,6 @@ fn memset_intrinsic<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     let flags = if volatile { MemFlags::VOLATILE } else { MemFlags::empty() };
     bx.memset(dst, val, size, align, flags);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=codegen_intrinsic_call | COMPLEXITY=216 | LINES=539 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     /// In the `Err` case, returns the instance that should be called instead.
@@ -596,7 +589,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=int_type_width_signed | COMPLEXITY=13 | LINES=16 */
 
 // Returns the width of an int Ty, and if it's signed or not
 // Returns None if the type is not an integer
@@ -613,7 +605,6 @@ fn int_type_width_signed(ty: Ty<'_>, tcx: TyCtxt<'_>) -> Option<(u64, bool)> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=float_type_width | COMPLEXITY=8 | LINES=9 */
 
 // Returns the width of a float Ty
 // Returns None if the type is not a float

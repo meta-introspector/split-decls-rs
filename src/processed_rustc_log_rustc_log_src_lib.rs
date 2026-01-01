@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_log/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 // This crate allows tools to enable rust logging without having to magically
 // match rustc's tracing crate version.
 //
@@ -10,9 +9,7 @@
 // ```toml
 // [dependencies]
 // rustc_ast = { path = "../rust/compiler/rustc_ast" }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 // rustc_log = { path = "../rust/compiler/rustc_log" }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // ```
 //
 // ```
@@ -20,7 +17,6 @@
 //     rustc_log::init_logger(rustc_log::LoggerConfig::from_env("LOG")).unwrap();
 //     /* ... */
 // }
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 // ```
 //
 // Now `LOG=debug cargo +nightly run` will run your minimal main.rs and show
@@ -39,23 +35,16 @@
 // to read the debug logs.
 
 use std::env::{self, VarError};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Display};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, IsTerminal};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use tracing::dispatcher::SetGlobalDefaultError;
 use tracing::{Event, Subscriber};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing_subscriber::filter::{Directive, EnvFilter, LevelFilter};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing_subscriber::fmt::FmtContext;
 use tracing_subscriber::fmt::format::{self, FormatEvent, FormatFields};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::{Layer, Registry};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LoggerConfig | COMPLEXITY=5 | LINES=12 */
 
 /// The values of all the environment variables that matter for configuring a logger.
 /// Errors are explicitly preserved so that we can share error handling.
@@ -68,7 +57,6 @@ pub struct LoggerConfig {
     pub wraptree: Result<String, VarError>,
     pub lines: Result<String, VarError>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from_env | COMPLEXITY=11 | LINES=14 */
 
 impl LoggerConfig {
     pub fn from_env(env: &str) -> Self {
@@ -83,13 +71,11 @@ impl LoggerConfig {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=init_logger | COMPLEXITY=4 | LINES=5 */
 
 /// Initialize the logger with the given values for the filter, coloring, and other options env variables.
 pub fn init_logger(cfg: LoggerConfig) -> Result<(), Error> {
     init_logger_with_additional_layer(cfg, || Registry::default())
 }
-/* AST_META: AST_ID=14 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 /// Trait alias for the complex return type of `build_subscriber` in
 /// [init_logger_with_additional_layer]. A [Registry] with any composition of [tracing::Subscriber]s
@@ -100,14 +86,12 @@ pub trait BuildSubscriberRet:
     tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<'span> + Send + Sync
 {
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<
     T: tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<'span> + Send + Sync,
 > BuildSubscriberRet for T
 {
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=init_logger_with_additional_layer | COMPLEXITY=52 | LINES=81 */
 
 /// Initialize the logger with the given values for the filter, coloring, and other options env variables.
 /// Additionally add a custom layer to collect logging and tracing events via `build_subscriber`,
@@ -189,12 +173,10 @@ where
 
     Ok(())
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=BacktraceFormatter | COMPLEXITY=2 | LINES=4 */
 
 struct BacktraceFormatter {
     backtrace_target: String,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=format_event | COMPLEXITY=10 | LINES=22 */
 
 impl<S, N> FormatEvent<S, N> for BacktraceFormatter
 where
@@ -217,17 +199,14 @@ where
         writeln!(writer, "stack backtrace: \n{backtrace:?}")
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stdout_isatty | COMPLEXITY=2 | LINES=4 */
 
 pub fn stdout_isatty() -> bool {
     io::stdout().is_terminal()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=stderr_isatty | COMPLEXITY=2 | LINES=4 */
 
 pub fn stderr_isatty() -> bool {
     io::stderr().is_terminal()
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 pub enum Error {
@@ -236,10 +215,8 @@ pub enum Error {
     InvalidWraptree(String),
     AlreadyInit(SetGlobalDefaultError),
 }
-/* AST_META: AST_ID=22 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl std::error::Error for Error {}
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=20 */
 
 impl Display for Error {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -260,7 +237,6 @@ impl Display for Error {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<SetGlobalDefaultError> for Error {
     fn from(tracing_error: SetGlobalDefaultError) -> Self {

@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, EmissionGuarantee, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::Span;
 
 use crate::rustc::{RustcPatCtxt, WitnessPat};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Uncovered | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[label(pattern_analysis_uncovered)]
@@ -21,7 +17,6 @@ pub struct Uncovered {
     witness_3: String, // a printed pattern
     remainder: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=22 */
 
 impl Uncovered {
     pub fn new<'p, 'tcx>(
@@ -44,7 +39,6 @@ impl Uncovered {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OverlappingRangeEndpoints | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(pattern_analysis_overlapping_range_endpoints)]
@@ -55,13 +49,11 @@ pub struct OverlappingRangeEndpoints {
     #[subdiagnostic]
     pub overlap: Vec<Overlap>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Overlap | COMPLEXITY=2 | LINES=5 */
 
 pub struct Overlap {
     pub span: Span,
     pub range: String, // a printed pattern
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=7 | LINES=11 */
 
 impl Subdiagnostic for Overlap {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -73,7 +65,6 @@ impl Subdiagnostic for Overlap {
         diag.span_label(span, message);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ExclusiveRangeMissingMax | COMPLEXITY=6 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(pattern_analysis_excluside_range_missing_max)]
@@ -86,7 +77,6 @@ pub struct ExclusiveRangeMissingMax {
     pub suggestion: String,
     pub max: String, // a printed pattern
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ExclusiveRangeMissingGap | COMPLEXITY=7 | LINES=15 */
 
 #[derive(LintDiagnostic)]
 #[diag(pattern_analysis_excluside_range_missing_gap)]
@@ -102,14 +92,12 @@ pub struct ExclusiveRangeMissingGap {
     /// All these ranges skipped over `gap` which we think is probably a mistake.
     pub gap_with: Vec<GappedRange>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=GappedRange | COMPLEXITY=2 | LINES=6 */
 
 pub struct GappedRange {
     pub span: Span,
     pub gap: String,         // a printed pattern
     pub first_range: String, // a printed pattern
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=9 | LINES=14 */
 
 impl Subdiagnostic for GappedRange {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -124,7 +112,6 @@ impl Subdiagnostic for GappedRange {
         diag.span_label(span, message);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(pattern_analysis_non_exhaustive_omitted_pattern)]
@@ -135,7 +122,6 @@ pub(crate) struct NonExhaustiveOmittedPattern<'tcx> {
     #[subdiagnostic]
     pub uncovered: Uncovered,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(pattern_analysis_non_exhaustive_omitted_pattern_lint_on_arm)]
@@ -148,7 +134,6 @@ pub(crate) struct NonExhaustiveOmittedPatternLintOnArm {
     pub lint_level: &'static str,
     pub lint_name: &'static str,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(pattern_analysis_mixed_deref_pattern_constructors)]

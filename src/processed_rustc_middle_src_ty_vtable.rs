@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/vtable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::fmt;
 
 use crate::rustc_complete::Mutability;
@@ -9,9 +8,7 @@ use rustc_type_ir::elaborate;
 use crate::mir::interpret::{
     AllocId, AllocInit, Allocation, CTFE_ALLOC_SALT, Pointer, Scalar, alloc_range,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, Instance, TraitRef, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Clone, Copy, PartialEq, HashStable)]
 pub enum VtblEntry<'tcx> {
@@ -28,7 +25,6 @@ pub enum VtblEntry<'tcx> {
     /// pointer to a separate supertrait vtable, can be used by trait upcasting coercion
     TraitVPtr(TraitRef<'tcx>),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=15 */
 
 impl<'tcx> fmt::Debug for VtblEntry<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -44,14 +40,12 @@ impl<'tcx> fmt::Debug for VtblEntry<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // Needs to be associated with the `'tcx` lifetime
 impl<'tcx> TyCtxt<'tcx> {
     pub const COMMON_VTABLE_ENTRIES: &'tcx [VtblEntry<'tcx>] =
         &[VtblEntry::MetadataDropInPlace, VtblEntry::MetadataSize, VtblEntry::MetadataAlign];
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
 
 pub const COMMON_VTABLE_ENTRIES_DROPINPLACE: usize = 0;
 pub const COMMON_VTABLE_ENTRIES_SIZE: usize = 1;
@@ -80,7 +74,6 @@ pub(crate) fn vtable_min_entries<'tcx>(
 
     count
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=80 */
 
 /// Retrieves an allocation that represents the contents of a vtable.
 /// Since this is a query, allocations are cached and not duplicated.

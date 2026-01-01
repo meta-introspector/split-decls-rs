@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/generic_args.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Generic arguments.
 
 use core::intrinsics;
@@ -9,24 +8,19 @@ use std::ptr::NonNull;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_type_ir::WithCachedTypeInfo;
 use rustc_type_ir::walk::TypeWalker;
 use smallvec::SmallVec;
 
 use crate::ty::codec::{TyDecoder, TyEncoder};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::ty::{
     self, ClosureArgs, CoroutineArgs, CoroutineClosureArgs, FallibleTypeFolder, InlineConstArgs,
     Lift, List, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeVisitable, TypeVisitor, VisitorResult,
     walk_visitable_list,
 };
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=GenericArg | COMPLEXITY=5 | LINES=17 */
 
 pub type GenericArgKind<'tcx> = rustc_type_ir::GenericArgKind<TyCtxt<'tcx>>;
 pub type TermKind<'tcx> = rustc_type_ir::TermKind<TyCtxt<'tcx>>;
@@ -44,10 +38,8 @@ pub struct GenericArg<'tcx> {
     ptr: NonNull<()>,
     marker: PhantomData<(Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>)>,
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx> rustc_type_ir::inherent::GenericArg<TyCtxt<'tcx>> for GenericArg<'tcx> {}
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=rebase_onto | COMPLEXITY=35 | LINES=84 */
 
 impl<'tcx> rustc_type_ir::inherent::GenericArgs<TyCtxt<'tcx>> for ty::GenericArgsRef<'tcx> {
     fn rebase_onto(
@@ -132,7 +124,6 @@ impl<'tcx> rustc_type_ir::inherent::GenericArgs<TyCtxt<'tcx>> for ty::GenericArg
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> rustc_type_ir::inherent::IntoKind for GenericArg<'tcx> {
     type Kind = GenericArgKind<'tcx>;
@@ -141,35 +132,29 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for GenericArg<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSend for GenericArg<'tcx> where
     &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): crate::rustc_data_structures::sync::DynSend
 {
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSync for GenericArg<'tcx> where
     &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): crate::rustc_data_structures::sync::DynSync
 {
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 unsafe impl<'tcx> Send for GenericArg<'tcx> where
     &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): Send
 {
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 unsafe impl<'tcx> Sync for GenericArg<'tcx> where
     &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): Sync
 {
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> IntoDiagArg for GenericArg<'tcx> {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         self.to_string().into_diag_arg(&mut None)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=pack | COMPLEXITY=13 | LINES=31 */
 
 const TAG_MASK: usize = 0b11;
 const TYPE_TAG: usize = 0b00;
@@ -201,7 +186,6 @@ impl<'tcx> GenericArgKind<'tcx> {
         GenericArg { ptr: ptr.map_addr(|addr| addr | tag), marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> From<ty::Region<'tcx>> for GenericArg<'tcx> {
     #[inline]
@@ -209,7 +193,6 @@ impl<'tcx> From<ty::Region<'tcx>> for GenericArg<'tcx> {
         GenericArgKind::Lifetime(r).pack()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> From<Ty<'tcx>> for GenericArg<'tcx> {
     #[inline]
@@ -217,7 +200,6 @@ impl<'tcx> From<Ty<'tcx>> for GenericArg<'tcx> {
         GenericArgKind::Type(ty).pack()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> From<ty::Const<'tcx>> for GenericArg<'tcx> {
     #[inline]
@@ -225,7 +207,6 @@ impl<'tcx> From<ty::Const<'tcx>> for GenericArg<'tcx> {
         GenericArgKind::Const(c).pack()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> From<ty::Term<'tcx>> for GenericArg<'tcx> {
     fn from(value: ty::Term<'tcx>) -> Self {
@@ -235,7 +216,6 @@ impl<'tcx> From<ty::Term<'tcx>> for GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=56 | LINES=98 */
 
 impl<'tcx> GenericArg<'tcx> {
     #[inline]
@@ -334,7 +314,6 @@ impl<'tcx> GenericArg<'tcx> {
         TypeWalker::new(self)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=9 | LINES=12 */
 
 impl<'a, 'tcx> Lift<TyCtxt<'tcx>> for GenericArg<'a> {
     type Lifted = GenericArg<'tcx>;
@@ -347,7 +326,6 @@ impl<'a, 'tcx> Lift<TyCtxt<'tcx>> for GenericArg<'a> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=15 | LINES=21 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for GenericArg<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -369,7 +347,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=10 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for GenericArg<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
@@ -380,21 +357,18 @@ impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for GenericArg<'tcx> {
     fn encode(&self, e: &mut E) {
         self.kind().encode(e)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for GenericArg<'tcx> {
     fn decode(d: &mut D) -> GenericArg<'tcx> {
         GenericArgKind::decode(d).pack()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=into_type_list | COMPLEXITY=109 | LINES=229 */
 
 /// List of generic arguments that are gonna be used to replace generic parameters.
 pub type GenericArgs<'tcx> = List<GenericArg<'tcx>>;
@@ -624,7 +598,6 @@ impl<'tcx> GenericArgs<'tcx> {
         format!("[{}]", v.join(", "))
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=45 | LINES=52 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for GenericArgsRef<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -677,7 +650,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for GenericArgsRef<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=27 | LINES=51 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for &'tcx ty::List<Ty<'tcx>> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -729,7 +701,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for &'tcx ty::List<Ty<'tcx>> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, T: TypeVisitable<TyCtxt<'tcx>>> TypeVisitable<TyCtxt<'tcx>> for &'tcx ty::List<T> {
     #[inline]
@@ -738,7 +709,6 @@ impl<'tcx, T: TypeVisitable<TyCtxt<'tcx>>> TypeVisitable<TyCtxt<'tcx>> for &'tcx
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UserArgs | COMPLEXITY=5 | LINES=13 */
 
 /// Stores the user-given args to reach some fully qualified path
 /// (e.g., `<T>::Item` or `<T as Trait>::Item`).
@@ -752,7 +722,6 @@ pub struct UserArgs<'tcx> {
     /// to an inherent impl). See `UserSelfTy` below.
     pub user_self_ty: Option<UserSelfTy<'tcx>>,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Specifies the user-given self type. In the case of a path that
 /// refers to a member in an inherent impl, this self type is
@@ -761,9 +730,7 @@ pub struct UserArgs<'tcx> {
 ///
 /// ```ignore (illustrative)
 /// struct Foo<T> { }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// impl<A> Foo<A> { fn method() { } }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UserSelfTy | COMPLEXITY=3 | LINES=14 */
 /// ```
 ///
 /// when you then have a path like `<Foo<&'static u32>>::method`,

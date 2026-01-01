@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/cmp/eq.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, MetaItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=44 */
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
@@ -53,7 +48,6 @@ pub(crate) fn expand_deriving_eq(
     };
     trait_def.expand_ext(cx, mitem, item, push, true)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cs_total_eq_assert | COMPLEXITY=23 | LINES=43 */
 
 fn cs_total_eq_assert(
     cx: &ExtCtxt<'_>,

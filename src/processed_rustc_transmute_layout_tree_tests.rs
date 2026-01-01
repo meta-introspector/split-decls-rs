@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_transmute/src/layout/tree/tests.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use super::Tree;
 
 #[derive(Debug, Hash, Eq, PartialEq, Clone, Copy)]
@@ -7,14 +6,12 @@ enum Def {
     NoSafetyInvariants,
     HasSafetyInvariants,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=has_safety_invariants | COMPLEXITY=5 | LINES=6 */
 
 impl super::Def for Def {
     fn has_safety_invariants(&self) -> bool {
         self == &Self::HasSafetyInvariants
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=seq_1 | COMPLEXITY=18 | LINES=84 */
 
 mod prune {
     use super::*;

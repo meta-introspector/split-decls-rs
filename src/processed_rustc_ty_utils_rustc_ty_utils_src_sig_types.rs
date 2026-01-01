@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/sig_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 // This module contains helpers for walking all types of
 // a signature, while preserving spans as much as possible
 
@@ -7,16 +6,13 @@ use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable, VisitorResult, try_visit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=2 | LINES=5 */
 
 pub trait SpannedTypeVisitor<'tcx> {
     type Result: VisitorResult = ();
     fn visit(&mut self, span: Span, value: impl TypeVisitable<TyCtxt<'tcx>>) -> Self::Result;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=walk_types | COMPLEXITY=78 | LINES=115 */
 
 #[instrument(level = "trace", skip(tcx, visitor))]
 pub fn walk_types<'tcx, V: SpannedTypeVisitor<'tcx>>(

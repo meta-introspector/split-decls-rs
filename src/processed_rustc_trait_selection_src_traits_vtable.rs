@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/vtable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
@@ -10,21 +9,17 @@ use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt, Upcast, VtblEntry,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::traits::{impossible_predicates, is_vtable_safe_method};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, Debug)]
 pub enum VtblSegment<'tcx> {
     MetadataDSA,
     TraitOwnEntries { trait_ref: ty::TraitRef<'tcx>, emit_vptr: bool },
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=prepare_vtable_segments | COMPLEXITY=4 | LINES=11 */
 
 /// Prepare the segments for a vtable
 // FIXME: This should take a `PolyExistentialTraitRef`, since we don't care
@@ -36,7 +31,6 @@ pub fn prepare_vtable_segments<'tcx, T>(
 ) -> Option<T> {
     prepare_vtable_segments_inner(tcx, trait_ref, segment_visitor).break_value()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=prepare_vtable_segments_inner | COMPLEXITY=55 | LINES=153 */
 
 /// Helper for [`prepare_vtable_segments`] that returns `ControlFlow`,
 /// such that we can use `?` in the body.
@@ -190,24 +184,20 @@ fn prepare_vtable_segments_inner<'tcx, T>(
         return ControlFlow::Continue(());
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=maybe_iter | COMPLEXITY=2 | LINES=6 */
 
 /// Turns option of iterator into an iterator (this is just flatten)
 fn maybe_iter<I: Iterator>(i: Option<I>) -> impl Iterator<Item = I::Item> {
     // Flatten is bad perf-vise, we could probably implement a special case here that is better
     i.into_iter().flatten()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=has_own_existential_vtable_entries | COMPLEXITY=2 | LINES=4 */
 
 fn has_own_existential_vtable_entries(tcx: TyCtxt<'_>, trait_def_id: DefId) -> bool {
     own_existential_vtable_entries_iter(tcx, trait_def_id).next().is_some()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=own_existential_vtable_entries | COMPLEXITY=2 | LINES=4 */
 
 fn own_existential_vtable_entries(tcx: TyCtxt<'_>, trait_def_id: DefId) -> &[DefId] {
     tcx.arena.alloc_from_iter(own_existential_vtable_entries_iter(tcx, trait_def_id))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=own_existential_vtable_entries_iter | COMPLEXITY=10 | LINES=24 */
 
 fn own_existential_vtable_entries_iter(
     tcx: TyCtxt<'_>,
@@ -232,7 +222,6 @@ fn own_existential_vtable_entries_iter(
 
     own_entries
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=vtable_entries | COMPLEXITY=39 | LINES=85 */
 
 /// Given a trait `trait_ref`, iterates the vtable entries
 /// that come from `trait_ref`, including its supertraits.
@@ -318,7 +307,6 @@ fn vtable_entries<'tcx>(
 
     tcx.arena.alloc_from_iter(entries)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=56 */
 
 // Given a `dyn Subtrait: Supertrait` trait ref, find corresponding first slot
 // for `Supertrait`'s methods in the vtable of `Subtrait`.
@@ -375,7 +363,6 @@ pub(crate) fn first_method_vtable_slot<'tcx>(tcx: TyCtxt<'tcx>, key: ty::TraitRe
 
     prepare_vtable_segments(tcx, source_principal, vtable_segment_callback).unwrap()
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=74 */
 
 /// Given a `dyn Subtrait` and `dyn Supertrait` trait object, find the slot of
 /// the trait vptr in the subtrait's vtable.
@@ -450,7 +437,6 @@ pub(crate) fn supertrait_vtable_slot<'tcx>(
 
     prepare_vtable_segments(tcx, source_principal, vtable_segment_callback).unwrap()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 pub(super) fn provide(providers: &mut Providers) {
     *providers = Providers {

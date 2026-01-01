@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/select/confirmation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 // Confirmation.
 //
 // Confirmation unifies the output type parameters of the trait
@@ -14,32 +13,22 @@ use std::ops::ControlFlow;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::ObligationCauseCode;
 use crate::rustc_complete::traits::{BuiltinImplSource, SignatureMismatchData};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, Region, SizedTraitKind, Ty, TyCtxt, Upcast};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use thin_vec::thin_vec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::SelectionCandidate::{self, *};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{PredicateObligations, SelectionContext};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::normalize::{normalize_with_depth, normalize_with_depth_to};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::util::{self, closure_trait_ref_and_return_type};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::traits::{
     ImplSource, ImplSourceUserDefinedData, Normalized, Obligation, ObligationCause,
     PolyTraitObligation, PredicateObligation, Selection, SelectionError, TraitObligation,
 };
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=confirm_projection_candidate | COMPLEXITY=379 | LINES=1306 */
 
 impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
     #[instrument(level = "debug", skip(self))]

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/mir/visit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=39 */
 // # The rustc_public's IR Visitor
 //
 // ## Overview
@@ -39,9 +38,7 @@
 
 use crate::mir::*;
 use crate::ty::{GenericArgs, MirConst, Region, Ty, TyConst};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Error, Opaque, Span};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit_body | COMPLEXITY=186 | LINES=346 */
 
 macro_rules! make_mir_visitor {
     ($visitor_trait_name:ident, $($mutability:ident)?) => {
@@ -388,7 +385,6 @@ macro_rules! make_mir_visitor {
         }
     };
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=36 | LINES=50 */
 
 macro_rules! super_body {
     ($self:ident, $body:ident, mut) => {
@@ -439,7 +435,6 @@ macro_rules! super_body {
         $self.visit_span(span)
     };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=super_place | COMPLEXITY=48 | LINES=83 */
 
 macro_rules! visit_place_fns {
     (mut) => {
@@ -523,7 +518,6 @@ macro_rules! visit_place_fns {
         }
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_opaque | COMPLEXITY=4 | LINES=12 */
 
 make_mir_visitor!(MirVisitor,);
 make_mir_visitor!(MutMirVisitor, mut);
@@ -536,7 +530,6 @@ make_mir_visitor!(MutMirVisitor, mut);
 /// If you are here because your compilation is broken, replace the failing call to `visit_opaque()`
 /// by a `visit_<CONSTRUCT>` for your construct.
 fn visit_opaque(_: &Opaque) {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=Location(Span); | COMPLEXITY=3 | LINES=10 */
 
 /// The location of a statement / terminator in the code and the CFG.
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -547,7 +540,6 @@ impl Location {
         self.0
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=statement_location | COMPLEXITY=6 | LINES=8 */
 
 /// Location of the statement at the given index for a given basic block. Assumes that `stmt_idx`
 /// and `bb_idx` are valid for a given body.
@@ -556,7 +548,6 @@ pub fn statement_location(body: &Body, bb_idx: &BasicBlockIdx, stmt_idx: usize) 
     let stmt = &bb.statements[stmt_idx];
     Location(stmt.span)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=terminator_location | COMPLEXITY=6 | LINES=8 */
 
 /// Location of the terminator for a given basic block. Assumes that `bb_idx` is valid for a given
 /// body.
@@ -565,14 +556,12 @@ pub fn terminator_location(body: &Body, bb_idx: &BasicBlockIdx) -> Location {
     let terminator = &bb.terminator;
     Location(terminator.span)
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=PlaceRef | COMPLEXITY=2 | LINES=6 */
 
 /// Reference to a place used to represent a partial projection.
 pub struct PlaceRef<'a> {
     pub local: Local,
     pub projection: &'a [ProjectionElem],
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=3 | LINES=7 */
 
 impl PlaceRef<'_> {
     /// Get the type of this place.
@@ -580,7 +569,6 @@ impl PlaceRef<'_> {
         self.projection.iter().try_fold(locals[self.local].ty, |place_ty, elem| elem.ty(place_ty))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=PlaceContext | COMPLEXITY=2 | LINES=8 */
 
 /// Information about a place's usage.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
@@ -589,7 +577,6 @@ pub struct PlaceContext {
     /// backward compatible manner.
     is_mut: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_mutating | COMPLEXITY=6 | LINES=10 */
 
 impl PlaceContext {
     const MUTATING: Self = PlaceContext { is_mut: true };

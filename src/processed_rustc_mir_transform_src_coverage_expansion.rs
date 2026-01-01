@@ -1,23 +1,18 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/expansion.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::coverage::BasicCoverageBlock;
 use crate::rustc_complete::{ExpnId, ExpnKind, Span};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct SpanWithBcb {
     pub(crate) span: Span,
     pub(crate) bcb: BasicCoverageBlock,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub(crate) struct ExpnTree {
     nodes: FxIndexMap<ExpnId, ExpnNode>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=38 */
 
 impl ExpnTree {
     pub(crate) fn get(&self, expn_id: ExpnId) -> Option<&ExpnNode> {
@@ -56,7 +51,6 @@ impl ExpnTree {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 #[derive(Debug)]
 pub(crate) struct ExpnNode {
@@ -78,7 +72,6 @@ pub(crate) struct ExpnNode {
     /// Expansions whose call-site is in this expansion.
     pub(crate) child_expn_ids: FxIndexSet<ExpnId>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=20 */
 
 impl ExpnNode {
     fn new(expn_id: ExpnId) -> Self {
@@ -99,7 +92,6 @@ impl ExpnNode {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=34 */
 
 /// Given a collection of span/BCB pairs from potentially-different syntax contexts,
 /// arranges them into an "expansion tree" based on their expansion call-sites.

@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/place_ext.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use rustc_macros::extension;
 use crate::rustc_complete::mir::{Body, Mutability, Place, ProjectionElem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=ignore_borrow | COMPLEXITY=48 | LINES=68 */
 use tracing::debug;
 
 use crate::borrow_set::LocalsStateAtExit;

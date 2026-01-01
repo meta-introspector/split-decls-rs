@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/multiple_return_terminators.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=22 | LINES=41 */
 // This pass removes jumps to basic blocks containing only a return, and replaces them with a
 // return instead.
 

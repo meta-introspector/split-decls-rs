@@ -1,31 +1,22 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/interpret/error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::any::Any;
 use std::backtrace::Backtrace;
 use std::borrow::Cow;
 use std::{convert, fmt, mem, ops};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use either::Either;
 use crate::rustc_abi::{Align, Size, VariantIdx, WrappingRange};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::sync::Lock;
 use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::CtfeBacktrace;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{AllocId, AllocRange, ConstAllocation, Pointer, Scalar};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::error;
 use crate::mir::{ConstAlloc, ConstValue};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, Mutability, Ty, TyCtxt, ValTree, layout, tls};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 pub enum ErrorHandled {
@@ -36,7 +27,6 @@ pub enum ErrorHandled {
     /// and the args didn't fully monomorphize it.
     TooGeneric(Span),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ReportedErrorInfo> for ErrorHandled {
     #[inline]
@@ -44,7 +34,6 @@ impl From<ReportedErrorInfo> for ErrorHandled {
         ErrorHandled::Reported(error, DUMMY_SP)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=emit_note | COMPLEXITY=19 | LINES=20 */
 
 impl ErrorHandled {
     pub(crate) fn with_span(self, span: Span) -> Self {
@@ -65,7 +54,6 @@ impl ErrorHandled {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ReportedErrorInfo | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 pub struct ReportedErrorInfo {
@@ -74,7 +62,6 @@ pub struct ReportedErrorInfo {
     /// This is for things like overflows during size computation or resource exhaustion.
     allowed_in_infallible: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=const_eval_error | COMPLEXITY=10 | LINES=25 */
 
 impl ReportedErrorInfo {
     #[inline]
@@ -100,7 +87,6 @@ impl ReportedErrorInfo {
         self.allowed_in_infallible
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ReportedErrorInfo> for ErrorGuaranteed {
     #[inline]
@@ -108,7 +94,6 @@ impl From<ReportedErrorInfo> for ErrorGuaranteed {
         val.error
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// An error type for the `const_to_valtree` query. Some error should be reported with a "use-site span",
 /// which means the query cannot emit the error, so those errors are represented as dedicated variants here.
@@ -123,14 +108,12 @@ pub enum ValTreeCreationError<'tcx> {
     /// The error has already been handled by const evaluation.
     ErrorHandled(ErrorHandled),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> From<ErrorHandled> for ValTreeCreationError<'tcx> {
     fn from(err: ErrorHandled) -> Self {
         ValTreeCreationError::ErrorHandled(err)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=11 */
 
 impl<'tcx> From<InterpErrorInfo<'tcx>> for ValTreeCreationError<'tcx> {
     fn from(err: InterpErrorInfo<'tcx>) -> Self {
@@ -142,7 +125,6 @@ impl<'tcx> From<InterpErrorInfo<'tcx>> for ValTreeCreationError<'tcx> {
         ValTreeCreationError::InvalidConst
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 impl<'tcx> ValTreeCreationError<'tcx> {
     pub(crate) fn with_span(self, span: Span) -> Self {
@@ -153,7 +135,6 @@ impl<'tcx> ValTreeCreationError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=InterpErrorInfo | COMPLEXITY=8 | LINES=26 */
 
 pub type EvalToAllocationRawResult<'tcx> = Result<ConstAlloc<'tcx>, ErrorHandled>;
 pub type EvalStaticInitializerRawResult<'tcx> = Result<ConstAllocation<'tcx>, ErrorHandled>;
@@ -180,13 +161,11 @@ struct InterpErrorInfoInner<'tcx> {
     kind: InterpErrorKind<'tcx>,
     backtrace: InterpErrorBacktrace,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=InterpErrorBacktrace | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub struct InterpErrorBacktrace {
     backtrace: Option<Box<Backtrace>>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=19 | LINES=31 */
 
 impl InterpErrorBacktrace {
     pub fn new() -> InterpErrorBacktrace {
@@ -218,7 +197,6 @@ impl InterpErrorBacktrace {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=into_parts | COMPLEXITY=9 | LINES=20 */
 
 impl<'tcx> InterpErrorInfo<'tcx> {
     pub fn into_parts(self) -> (InterpErrorKind<'tcx>, InterpErrorBacktrace) {
@@ -239,12 +217,10 @@ impl<'tcx> InterpErrorInfo<'tcx> {
         &self.0.kind
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=print_backtrace | COMPLEXITY=3 | LINES=4 */
 
 fn print_backtrace(backtrace: &Backtrace) {
     eprintln!("\n\nAn error occurred in the MIR interpreter:\n{backtrace}");
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 
 impl From<ErrorHandled> for InterpErrorInfo<'_> {
     fn from(err: ErrorHandled) -> Self {
@@ -255,7 +231,6 @@ impl From<ErrorHandled> for InterpErrorInfo<'_> {
         .into()
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> From<InterpErrorKind<'tcx>> for InterpErrorInfo<'tcx> {
     fn from(kind: InterpErrorKind<'tcx>) -> Self {
@@ -265,7 +240,6 @@ impl<'tcx> From<InterpErrorKind<'tcx>> for InterpErrorInfo<'tcx> {
         }))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 
 /// Error information for when the program we executed turned out not to actually be a valid
 /// program. This cannot happen in stand-alone Miri (except for layout errors that are only detect
@@ -280,7 +254,6 @@ pub enum InvalidProgramInfo<'tcx> {
     /// An error occurred during layout computation.
     Layout(layout::LayoutError<'tcx>),
 }
-/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Details of why a pointer had to be in-bounds.
 #[derive(Debug, Copy, Clone)]
@@ -292,7 +265,6 @@ pub enum CheckInAllocMsg {
     /// None of the above -- generic/unspecific inbounds test.
     Dereferenceable,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Details of which pointer is not aligned.
 #[derive(Debug, Copy, Clone)]
@@ -302,7 +274,6 @@ pub enum CheckAlignMsg {
     /// The access occurred with a place that was based on a misaligned pointer.
     BasedOn,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug, Copy, Clone)]
 pub enum InvalidMetaKind {
@@ -311,7 +282,6 @@ pub enum InvalidMetaKind {
     /// Size of a DST is too big
     TooBig,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=9 */
 
 impl IntoDiagArg for InvalidMetaKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
@@ -321,7 +291,6 @@ impl IntoDiagArg for InvalidMetaKind {
         }))
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=BadBytesAccess | COMPLEXITY=2 | LINES=9 */
 
 /// Details of an access to uninitialized bytes / bad pointer bytes where it is not allowed.
 #[derive(Debug, Clone, Copy)]
@@ -331,7 +300,6 @@ pub struct BadBytesAccess {
     /// Range of the bad memory that was encountered. (Might not be maximal.)
     pub bad: AllocRange,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=ScalarSizeMismatch | COMPLEXITY=5 | LINES=7 */
 
 /// Information about a size mismatch.
 #[derive(Debug)]
@@ -339,7 +307,6 @@ pub struct ScalarSizeMismatch {
     pub target_size: u64,
     pub data_size: u64,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=Misalignment | COMPLEXITY=2 | LINES=7 */
 
 /// Information about a misaligned pointer.
 #[derive(Copy, Clone, Hash, PartialEq, Eq, Debug)]
@@ -347,7 +314,6 @@ pub struct Misalignment {
     pub has: Align,
     pub required: Align,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=13 | LINES=10 */
 
 macro_rules! impl_into_diag_arg_through_debug {
     ($($ty:ty),*$(,)?) => {$(
@@ -358,7 +324,6 @@ macro_rules! impl_into_diag_arg_through_debug {
         }
     )*}
 }
-/* AST_META: AST_ID=35 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 // These types have nice `Debug` output so we can just use them in diagnostics.
 impl_into_diag_arg_through_debug! {
@@ -366,7 +331,6 @@ impl_into_diag_arg_through_debug! {
     Pointer<AllocId>,
     AllocRange,
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=30 | LINES=105 */
 
 /// Error information for when the program caused Undefined Behavior.
 #[derive(Debug)]
@@ -472,14 +436,12 @@ pub enum UndefinedBehaviorInfo<'tcx> {
     /// ABI-incompatible return types.
     AbiMismatchReturn { caller_ty: Ty<'tcx>, callee_ty: Ty<'tcx> },
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone, Copy)]
 pub enum PointerKind {
     Ref(Mutability),
     Box,
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12 */
 
 impl IntoDiagArg for PointerKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
@@ -492,14 +454,12 @@ impl IntoDiagArg for PointerKind {
         )
     }
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=ValidationErrorInfo | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub struct ValidationErrorInfo<'tcx> {
     pub path: Option<String>,
     pub kind: ValidationErrorKind<'tcx>,
 }
-/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Debug)]
 pub enum ExpectedKind {
@@ -515,7 +475,6 @@ pub enum ExpectedKind {
     EnumTag,
     Str,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
 
 impl From<PointerKind> for ExpectedKind {
     fn from(x: PointerKind) -> ExpectedKind {
@@ -525,7 +484,6 @@ impl From<PointerKind> for ExpectedKind {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=25 | LINES=82 */
 
 #[derive(Debug)]
 pub enum ValidationErrorKind<'tcx> {
@@ -608,7 +566,6 @@ pub enum ValidationErrorKind<'tcx> {
         value: String,
     },
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
 
 /// Error information for when the program did something that might (or might not) be correct
 /// to do according to the Rust spec, but due to limitations in the interpreter, the
@@ -636,7 +593,6 @@ pub enum UnsupportedOpInfo {
     /// Accessing an unsupported extern static.
     ExternStatic(DefId),
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 /// Error information for when the program exhausted the resources granted to it
 /// by the interpreter.
@@ -651,7 +607,6 @@ pub enum ResourceExhaustionInfo {
     /// The compiler got an interrupt signal (a user ran out of patience).
     Interrupted,
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=8 | LINES=9 */
 
 /// A trait for machine-specific errors (or other "machine stop" conditions).
 pub trait MachineStopType: Any + fmt::Debug + Send {
@@ -661,7 +616,6 @@ pub trait MachineStopType: Any + fmt::Debug + Send {
     /// fluent for formatting the translated diagnostic message.
     fn add_args(self: Box<Self>, adder: &mut dyn FnMut(DiagArgName, DiagArgValue));
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=downcast_ref | COMPLEXITY=3 | LINES=8 */
 
 impl dyn MachineStopType {
     #[inline(always)]
@@ -670,7 +624,6 @@ impl dyn MachineStopType {
         x.downcast_ref()
     }
 }
-/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 #[derive(Debug)]
 pub enum InterpErrorKind<'tcx> {
@@ -688,7 +641,6 @@ pub enum InterpErrorKind<'tcx> {
     /// the core engine itself.
     MachineStop(Box<dyn MachineStopType>),
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=formatted_string | COMPLEXITY=7 | LINES=14 */
 
 impl InterpErrorKind<'_> {
     /// Some errors do string formatting even if the error is never printed.
@@ -703,7 +655,6 @@ impl InterpErrorKind<'_> {
         )
     }
 }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=10 */
 
 // Macros for constructing / throwing `InterpErrorKind`
 #[macro_export]
@@ -714,13 +665,11 @@ macro_rules! err_unsup {
         )
     };
 }
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! err_unsup_format {
     ($($tt:tt)*) => { $crate::err_unsup!(Unsupported(format!($($tt)*))) };
 }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! err_inval {
@@ -730,7 +679,6 @@ macro_rules! err_inval {
         )
     };
 }
-/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! err_ub {
@@ -740,13 +688,11 @@ macro_rules! err_ub {
         )
     };
 }
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! err_ub_format {
     ($($tt:tt)*) => { $crate::err_ub!(Ub(format!($($tt)*))) };
 }
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 #[macro_export]
 macro_rules! err_ub_custom {
@@ -766,7 +712,6 @@ macro_rules! err_ub_custom {
         ))
     }};
 }
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! err_exhaust {
@@ -776,7 +721,6 @@ macro_rules! err_exhaust {
         )
     };
 }
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 #[macro_export]
 macro_rules! err_machine_stop {
@@ -784,57 +728,47 @@ macro_rules! err_machine_stop {
         $crate::mir::interpret::InterpErrorKind::MachineStop(Box::new($($tt)*))
     };
 }
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 // In the `throw_*` macros, avoid `return` to make them work with `try {}`.
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 #[macro_export]
 macro_rules! throw_unsup {
     ($($tt:tt)*) => { do yeet $crate::err_unsup!($($tt)*) };
 }
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_unsup_format {
     ($($tt:tt)*) => { do yeet $crate::err_unsup_format!($($tt)*) };
 }
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_inval {
     ($($tt:tt)*) => { do yeet $crate::err_inval!($($tt)*) };
 }
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_ub {
     ($($tt:tt)*) => { do yeet $crate::err_ub!($($tt)*) };
 }
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_ub_format {
     ($($tt:tt)*) => { do yeet $crate::err_ub_format!($($tt)*) };
 }
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_ub_custom {
     ($($tt:tt)*) => { do yeet $crate::err_ub_custom!($($tt)*) };
 }
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_exhaust {
     ($($tt:tt)*) => { do yeet $crate::err_exhaust!($($tt)*) };
 }
-/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 #[macro_export]
 macro_rules! throw_machine_stop {
     ($($tt:tt)*) => { do yeet $crate::err_machine_stop!($($tt)*) };
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=Guard; | COMPLEXITY=12 | LINES=15 */
 
 /// Guard type that panics on drop.
 #[derive(Debug)]
@@ -850,7 +784,6 @@ impl Drop for Guard {
         }
     }
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=InterpResult | COMPLEXITY=4 | LINES=11 */
 
 /// The result type used by the interpreter. This is a newtype around `Result`
 /// to block access to operations like `ok()` that discard UB errors.
@@ -862,7 +795,6 @@ pub struct InterpResult<'tcx, T = ()> {
     res: Result<T, InterpErrorInfo<'tcx>>,
     guard: Guard,
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=from_output | COMPLEXITY=11 | LINES=18 */
 
 impl<'tcx, T> ops::Try for InterpResult<'tcx, T> {
     type Output = T;
@@ -881,12 +813,10 @@ impl<'tcx, T> ops::Try for InterpResult<'tcx, T> {
         }
     }
 }
-/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<'tcx, T> ops::Residual<T> for InterpResult<'tcx, convert::Infallible> {
     type TryType = InterpResult<'tcx, T>;
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=9 | LINES=10 */
 
 impl<'tcx, T> ops::FromResidual for InterpResult<'tcx, T> {
     #[inline]
@@ -897,7 +827,6 @@ impl<'tcx, T> ops::FromResidual for InterpResult<'tcx, T> {
         }
     }
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=5 | LINES=8 */
 
 // Allow `yeet`ing `InterpError` in functions returning `InterpResult_`.
 impl<'tcx, T> ops::FromResidual<ops::Yeet<InterpErrorKind<'tcx>>> for InterpResult<'tcx, T> {
@@ -906,7 +835,6 @@ impl<'tcx, T> ops::FromResidual<ops::Yeet<InterpErrorKind<'tcx>>> for InterpResu
         Self::new(Err(e.into()))
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=11 | LINES=13 */
 
 // Allow `?` on `Result<_, InterpError>` in functions returning `InterpResult_`.
 // This is useful e.g. for `option.ok_or_else(|| err_ub!(...))`.
@@ -920,7 +848,6 @@ impl<'tcx, T, E: Into<InterpErrorInfo<'tcx>>> ops::FromResidual<Result<convert::
         }
     }
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, T, E: Into<InterpErrorInfo<'tcx>>> From<Result<T, E>> for InterpResult<'tcx, T> {
     #[inline]
@@ -928,14 +855,12 @@ impl<'tcx, T, E: Into<InterpErrorInfo<'tcx>>> From<Result<T, E>> for InterpResul
         Self::new(value.map_err(|e| e.into()))
     }
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, T, V: FromIterator<T>> FromIterator<InterpResult<'tcx, T>> for InterpResult<'tcx, V> {
     fn from_iter<I: IntoIterator<Item = InterpResult<'tcx, T>>>(iter: I) -> Self {
         Self::new(iter.into_iter().map(|x| x.disarm()).collect())
     }
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=95 */
 
 impl<'tcx, T> InterpResult<'tcx, T> {
     #[inline(always)]
@@ -1031,7 +956,6 @@ impl<'tcx, T> InterpResult<'tcx, T> {
         }
     }
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=interp_ok | COMPLEXITY=2 | LINES=5 */
 
 #[inline(always)]
 pub fn interp_ok<'tcx, T>(x: T) -> InterpResult<'tcx, T> {

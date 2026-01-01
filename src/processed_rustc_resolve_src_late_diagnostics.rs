@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/late/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // ignore-tidy-filelength
 
 use std::borrow::Cow;
@@ -7,56 +6,42 @@ use std::iter;
 use std::ops::Deref;
 
 use crate::rustc_complete::visit::{FnCtxt, FnKind, LifetimeCtxt, Visitor, walk_ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AssocItemKind, DUMMY_NODE_ID, Expr, ExprKind, GenericParam, GenericParamKind,
     Item, ItemKind, MethodCall, NodeId, Path, PathSegment, Ty, TyKind,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast_pretty::pprust::where_bound_predicate_to_string;
 use rustc_attr_parsing::is_doc_alias_attrs_contain_symbol;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, SuggestionStyle, pluralize,
     struct_span_code_err,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::Namespace::{self, *};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, CtorKind, CtorOf, DefKind, MacroKinds};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{MissingLifetimeKind, PrimTy};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{Session, lint};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::edit_distance::{edit_distance, find_best_match_for_name};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::ThinVec;
 use tracing::debug;
 
 use super::NoConstantGenericsReason;
 use crate::diagnostics::{ImportSuggestion, LabelSuggestion, TypoSuggestion};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::late::{
     AliasPossibility, LateResolutionVisitor, LifetimeBinderKind, LifetimeRes, LifetimeRibKind,
     LifetimeUseSet, QSelf, RibKind,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::ty::fast_reject::SimplifiedType;
 use crate::{
     Module, ModuleKind, ModuleOrUniformRoot, ParentScope, PathResult, PathSource, Resolver,
     ScopeSet, Segment, errors, path_names_to_string,
 };
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 type Res = def::Res<ast::NodeId>;
 
@@ -68,7 +53,6 @@ enum AssocSuggestion {
     AssocType,
     AssocConst,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=action | COMPLEXITY=14 | LINES=18 */
 
 impl AssocSuggestion {
     fn action(&self) -> &'static str {
@@ -87,17 +71,14 @@ impl AssocSuggestion {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_self_type | COMPLEXITY=2 | LINES=4 */
 
 fn is_self_type(path: &[Segment], namespace: Namespace) -> bool {
     namespace == TypeNS && path.len() == 1 && path[0].ident.name == kw::SelfUpper
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_self_value | COMPLEXITY=2 | LINES=4 */
 
 fn is_self_value(path: &[Segment], namespace: Namespace) -> bool {
     namespace == ValueNS && path.len() == 1 && path[0].ident.name == kw::SelfLower
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=import_candidate_to_enum_paths | COMPLEXITY=8 | LINES=16 */
 
 /// Gets the stringified path for an enum from an `ImportSuggestion` for an enum variant.
 fn import_candidate_to_enum_paths(suggestion: &ImportSuggestion) -> (String, String) {
@@ -114,7 +95,6 @@ fn import_candidate_to_enum_paths(suggestion: &ImportSuggestion) -> (String, Str
 
     (variant_path_string, enum_path_string)
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 /// Description of an elided lifetime.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Debug)]
@@ -135,7 +115,6 @@ pub(super) struct MissingLifetime {
     /// Number of elided lifetimes, used for elision in path.
     pub count: usize,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Description of the lifetimes appearing in a function parameter.
 /// This is used to provide a literal explanation to the elision failure.
@@ -150,7 +129,6 @@ pub(super) struct ElisionFnParameter {
     /// The span of the parameter.
     pub span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 /// Description of lifetimes that appear as candidates for elision.
 /// This is used to suggest introducing an explicit lifetime.
@@ -162,7 +140,6 @@ pub(super) enum LifetimeElisionCandidate {
     Named,
     Missing(MissingLifetime),
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=BaseError | COMPLEXITY=4 | LINES=12 */
 
 /// Only used for diagnostics.
 #[derive(Debug)]
@@ -175,7 +152,6 @@ struct BaseError {
     suggestion: Option<(Span, &'static str, String)>,
     module: Option<DefId>,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 enum TypoCandidate {
@@ -183,7 +159,6 @@ enum TypoCandidate {
     Shadowed(Res, Option<Span>),
     None,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=to_opt_suggestion | COMPLEXITY=7 | LINES=9 */
 
 impl TypoCandidate {
     fn to_opt_suggestion(self) -> Option<TypoSuggestion> {
@@ -193,7 +168,6 @@ impl TypoCandidate {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=make_base_error | COMPLEXITY=2046 | LINES=3694 */
 
 impl<'ast, 'ra, 'tcx> LateResolutionVisitor<'_, 'ast, 'ra, 'tcx> {
     fn make_base_error(

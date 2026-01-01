@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/prettify.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // These two passes provide no value to the compiler, so are off at every level.
 //
 // However, they can be enabled on the command line
@@ -8,9 +7,7 @@
 
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=13 | LINES=33 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
@@ -44,7 +41,6 @@ impl<'tcx> crate::MirPass<'tcx> for ReorderBasicBlocks {
         false
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=27 | LINES=54 */
 
 /// Rearranges the locals into *use* order.
 ///
@@ -99,7 +95,6 @@ impl<'tcx> crate::MirPass<'tcx> for ReorderLocals {
         false
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=permute | COMPLEXITY=5 | LINES=9 */
 
 fn permute<I: crate::rustc_index::Idx + Ord, T>(data: &mut IndexVec<I, T>, map: &IndexSlice<I, I>) {
     // FIXME: It would be nice to have a less-awkward way to apply permutations,
@@ -109,13 +104,11 @@ fn permute<I: crate::rustc_index::Idx + Ord, T>(data: &mut IndexVec<I, T>, map: 
     enumerated.sort_by_key(|p| map[p.0]);
     *data = enumerated.into_iter().map(|p| p.1).collect();
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=BasicBlockUpdater | COMPLEXITY=2 | LINES=5 */
 
 struct BasicBlockUpdater<'tcx> {
     map: IndexVec<BasicBlock, BasicBlock>,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> MutVisitor<'tcx> for BasicBlockUpdater<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -126,13 +119,11 @@ impl<'tcx> MutVisitor<'tcx> for BasicBlockUpdater<'tcx> {
         terminator.successors_mut(|succ| *succ = self.map[*succ]);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=LocalFinder | COMPLEXITY=2 | LINES=5 */
 
 struct LocalFinder {
     map: IndexVec<Local, Local>,
     seen: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=track | COMPLEXITY=6 | LINES=8 */
 
 impl LocalFinder {
     fn track(&mut self, l: Local) {
@@ -141,7 +132,6 @@ impl LocalFinder {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=8 | LINES=10 */
 
 impl<'tcx> Visitor<'tcx> for LocalFinder {
     fn visit_local(&mut self, l: Local, context: PlaceContext, _location: Location) {
@@ -152,13 +142,11 @@ impl<'tcx> Visitor<'tcx> for LocalFinder {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LocalUpdater | COMPLEXITY=2 | LINES=5 */
 
 struct LocalUpdater<'tcx> {
     map: IndexVec<Local, Local>,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> MutVisitor<'tcx> for LocalUpdater<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/dwarf_const.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=17 */
 // Definitions of various DWARF-related constants.
 
 use libc::c_uint;
@@ -17,7 +16,6 @@ macro_rules! declare_constant {
         const _: () = assert!($name as i128 == ::gimli::constants::$name.0 as i128);
     };
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=20 */
 
 declare_constant!(DW_TAG_const_type: c_uint);
 

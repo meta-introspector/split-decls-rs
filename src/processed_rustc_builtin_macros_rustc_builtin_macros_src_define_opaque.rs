@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/define_opaque.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_NODE_ID, ast};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=60 */
 use crate::rustc_complete::Span;
 
 pub(crate) fn expand(

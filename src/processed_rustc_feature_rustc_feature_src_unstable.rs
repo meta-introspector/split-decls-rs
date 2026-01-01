@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_feature/src/unstable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // List of the unstable feature gates.
 
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{Feature, to_nonzero};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(PartialEq)]
 enum FeatureStatus {
@@ -19,7 +15,6 @@ enum FeatureStatus {
     Incomplete,
     Internal,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! status_to_enum {
     (unstable) => {
@@ -32,15 +27,12 @@ macro_rules! status_to_enum {
         FeatureStatus::Internal
     };
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 
 /// A set of features to be used by later passes.
 ///
 /// There are two ways to check if a language feature `foo` is enabled:
 /// - Directly with the `foo` method, e.g. `if tcx.features().foo() { ... }`.
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// - With the `enabled` method, e.g. `if tcx.features.enabled(sym::foo) { ... }`.
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Features | COMPLEXITY=9 | LINES=12 */
 ///
 /// The former is preferred. `enabled` should only be used when the feature symbol is not a
 /// constant, e.g. a parameter, or when the feature is a library feature.
@@ -53,7 +45,6 @@ pub struct Features {
     /// `enabled_lang_features` + `enabled_lib_features`.
     enabled_features: FxHashSet<Symbol>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=EnabledLangFeature | COMPLEXITY=2 | LINES=11 */
 
 /// Information about an enabled language feature.
 #[derive(Debug, Copy, Clone)]
@@ -65,7 +56,6 @@ pub struct EnabledLangFeature {
     /// If the lang feature is stable, the version number when it was stabilized.
     pub stable_since: Option<Symbol>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=EnabledLibFeature | COMPLEXITY=2 | LINES=7 */
 
 /// Information about an enabled library feature.
 #[derive(Debug, Copy, Clone)]
@@ -73,7 +63,6 @@ pub struct EnabledLibFeature {
     pub gate_name: Symbol,
     pub attr_sp: Span,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=set_enabled_lang_feature | COMPLEXITY=14 | LINES=36 */
 
 impl Features {
     /// `since` should be set for stable features that are nevertheless enabled with a `#[feature]`
@@ -110,7 +99,6 @@ impl Features {
         self.enabled_features.contains(&feature)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=$feature | COMPLEXITY=41 | LINES=64 */
 
 macro_rules! declare_features {
     ($(
@@ -175,7 +163,6 @@ macro_rules! declare_features {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=74 | LINES=269 */
 
 // See https://rustc-dev-guide.rust-lang.org/feature-gates.html#feature-gates for more
 // documentation about handling feature gates.
@@ -445,10 +432,8 @@ declare_features! (
     /// Allows `extern "cmse-nonsecure-entry" fn()`.
     (unstable, cmse_nonsecure_entry, "1.48.0", Some(75835)),
     /// Allows `async {}` expressions in const contexts.
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
     (unstable, const_async_blocks, "1.53.0", Some(85368)),
     /// Allows `const || {}` closures in const contexts.
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=50 */
     (incomplete, const_closures, "1.68.0", Some(106003)),
     /// Allows using `[const] Destruct` bounds and calling drop impls in const contexts.
     (unstable, const_destruct, "1.85.0", Some(133214)),
@@ -499,7 +484,6 @@ declare_features! (
     /// Allows features to allow target_feature to better interact with traits.
     (incomplete, effective_target_features, "1.91.0", Some(143352)),
     /// Allows the .use postfix syntax `x.use` and use closures `use |x| { ... }`
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=50 | LINES=125 */
     (incomplete, ergonomic_clones, "1.87.0", Some(132290)),
     /// Allows exhaustive pattern matching on types that contain uninhabited types.
     (unstable, exhaustive_patterns, "1.13.0", Some(51085)),
@@ -625,7 +609,6 @@ declare_features! (
     /// Experimental features that make `Pin` more ergonomic.
     (incomplete, pin_ergonomics, "1.83.0", Some(130494)),
     /// Allows postfix match `expr.match { ... }`
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=49 */
     (unstable, postfix_match, "1.79.0", Some(121618)),
     /// Allows macro attributes on expressions, statements and non-inline modules.
     (unstable, proc_macro_hygiene, "1.30.0", Some(54727)),
@@ -675,7 +658,6 @@ declare_features! (
     /// Allows inconsistent bounds in where clauses.
     (unstable, trivial_bounds, "1.28.0", Some(48214)),
     /// Allows using `try {...}` expressions.
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=dump_feature_usage_metrics | COMPLEXITY=30 | LINES=103 */
     (unstable, try_blocks, "1.29.0", Some(31436)),
     /// Allows `impl Trait` to be used inside type aliases (RFC 2515).
     (unstable, type_alias_impl_trait, "1.38.0", Some(63063)),

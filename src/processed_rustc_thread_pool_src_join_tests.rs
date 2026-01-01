@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/join/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Tests for the join code.
 
 use rand::distr::StandardUniform;
 use rand::{Rng, SeedableRng};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=quick_sort | COMPLEXITY=5 | LINES=14 */
 use rand_xorshift::XorShiftRng;
 
 use super::*;
@@ -19,7 +17,6 @@ fn quick_sort<T: PartialOrd + Send>(v: &mut [T]) {
     let (lo, hi) = v.split_at_mut(mid);
     join(|| quick_sort(lo), || quick_sort(hi));
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=partition | COMPLEXITY=8 | LINES=13 */
 
 fn partition<T: PartialOrd + Send>(v: &mut [T]) -> usize {
     let pivot = v.len() - 1;
@@ -33,14 +30,12 @@ fn partition<T: PartialOrd + Send>(v: &mut [T]) -> usize {
     v.swap(i, pivot);
     i
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=seeded_rng | COMPLEXITY=2 | LINES=6 */
 
 fn seeded_rng() -> XorShiftRng {
     let mut seed = <XorShiftRng as SeedableRng>::Seed::default();
     (0..).zip(seed.as_mut()).for_each(|(i, x)| *x = i);
     XorShiftRng::from_seed(seed)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=sort | COMPLEXITY=2 | LINES=10 */
 
 #[test]
 fn sort() {
@@ -51,7 +46,6 @@ fn sort() {
     quick_sort(&mut data);
     assert_eq!(data, sorted_data);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=sort_in_pool | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -65,28 +59,24 @@ fn sort_in_pool() {
     pool.install(|| quick_sort(&mut data));
     assert_eq!(data, sorted_data);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=panic_propagate_a | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_a() {
     join(|| panic!("Hello, world!"), || ());
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=panic_propagate_b | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_b() {
     join(|| (), || panic!("Hello, world!"));
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=panic_propagate_both | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[should_panic(expected = "Hello, world!")]
 fn panic_propagate_both() {
     join(|| panic!("Hello, world!"), || panic!("Goodbye, world!"));
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=panic_b_still_executes | COMPLEXITY=6 | LINES=10 */
 
 #[test]
 #[cfg_attr(not(panic = "unwind"), ignore)]
@@ -97,7 +87,6 @@ fn panic_b_still_executes() {
         Err(_) => assert!(x, "closure b failed to execute"),
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=join_context_both | COMPLEXITY=2 | LINES=9 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -107,7 +96,6 @@ fn join_context_both() {
     assert!(a_migrated);
     assert!(b_migrated);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=join_context_neither | COMPLEXITY=2 | LINES=13 */
 
 // FIXME: We should fix or remove this ignored test.
 #[test]
@@ -121,7 +109,6 @@ fn join_context_neither() {
     assert!(!a_migrated);
     assert!(!b_migrated);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=join_context_second | COMPLEXITY=6 | LINES=24 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -146,7 +133,6 @@ fn join_context_second() {
     assert!(!a_migrated);
     assert!(b_migrated);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=join_counter_overflow | COMPLEXITY=6 | LINES=19 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]

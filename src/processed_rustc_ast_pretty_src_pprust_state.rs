@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pprust/state.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 // AST pretty printing.
 //
 // Note that HIR pretty printing is layered on top of this crate.
@@ -10,36 +9,27 @@ use std::sync::Arc;
 
 use crate::rustc_complete::attr::AttrIdGenerator;
 use crate::rustc_complete::token::{self, CommentKind, Delimiter, Token, TokenKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{Spacing, TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::classify;
 use crate::rustc_complete::util::comments::{Comment, CommentStyle};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::{
     self as ast, AttrArgs, BindingMode, BlockCheckMode, ByRef, DelimArgs, GenericArg, GenericBound,
     InlineAsmOperand, InlineAsmOptions, InlineAsmRegOrRegClass, InlineAsmTemplatePiece, PatKind,
     RangeEnd, RangeSyntax, Safety, SelfKind, Term, attr,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::{SourceMap, Spanned};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::symbol::IdentPrinter;
 use crate::rustc_complete::{BytePos, CharPos, DUMMY_SP, FileName, Ident, Pos, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::pp::Breaks::{Consistent, Inconsistent};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::pp::{self, BoxMarker, Breaks};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::pprust::state::fixup::FixupContext;
 
 pub enum MacHeader<'a> {
     Path(&'a ast::Path),
     Keyword(&'static str),
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 pub enum AnnNode<'a> {
     Ident(&'a Ident),
@@ -51,25 +41,21 @@ pub enum AnnNode<'a> {
     Pat(&'a ast::Pat),
     Crate(&'a ast::Crate),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pre | COMPLEXITY=4 | LINES=5 */
 
 pub trait PpAnn {
     fn pre(&self, _state: &mut State<'_>, _node: AnnNode<'_>) {}
     fn post(&self, _state: &mut State<'_>, _node: AnnNode<'_>) {}
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=NoAnn; | COMPLEXITY=4 | LINES=4 */
 
 struct NoAnn;
 
 impl PpAnn for NoAnn {}
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Comments | COMPLEXITY=2 | LINES=6 */
 
 pub struct Comments<'a> {
     sm: &'a SourceMap,
     // Stored in reverse order so we can consume them by popping.
     reversed_comments: Vec<Comment>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=all_whitespace | COMPLEXITY=10 | LINES=14 */
 
 /// Returns `None` if the first `col` chars of `s` contain a non-whitespace char.
 /// Otherwise returns `Some(k)` where `k` is first char offset after that leading
@@ -84,7 +70,6 @@ fn all_whitespace(s: &str, col: CharPos) -> Option<usize> {
     }
     Some(idx)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=trim_whitespace_prefix | COMPLEXITY=11 | LINES=14 */
 
 fn trim_whitespace_prefix(s: &str, col: CharPos) -> &str {
     let len = s.len();
@@ -99,7 +84,6 @@ fn trim_whitespace_prefix(s: &str, col: CharPos) -> &str {
         None => s,
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=split_block_comment_into_lines | COMPLEXITY=7 | LINES=12 */
 
 fn split_block_comment_into_lines(text: &str, col: CharPos) -> Vec<String> {
     let mut res: Vec<String> = vec![];
@@ -112,7 +96,6 @@ fn split_block_comment_into_lines(text: &str, col: CharPos) -> Vec<String> {
     }
     res
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=gather_comments | COMPLEXITY=52 | LINES=89 */
 
 fn gather_comments(sm: &SourceMap, path: FileName, src: String) -> Vec<Comment> {
     let sm = SourceMap::new(sm.path_mapping().clone());
@@ -202,7 +185,6 @@ fn gather_comments(sm: &SourceMap, path: FileName, src: String) -> Vec<Comment> 
 
     comments
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=18 | LINES=36 */
 
 impl<'a> Comments<'a> {
     pub fn new(sm: &'a SourceMap, filename: FileName, input: String) -> Comments<'a> {
@@ -239,7 +221,6 @@ impl<'a> Comments<'a> {
         None
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=State | COMPLEXITY=2 | LINES=7 */
 
 pub struct State<'a> {
     pub s: pp::Printer,
@@ -247,7 +228,6 @@ pub struct State<'a> {
     ann: &'a (dyn PpAnn + 'a),
     is_sdylib_interface: bool,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=print_crate | COMPLEXITY=6 | LINES=25 */
 
 const INDENT_UNIT: isize = 4;
 
@@ -273,7 +253,6 @@ pub fn print_crate<'a>(
     print_crate_inner(&mut s, krate, is_expanded, edition, g);
     s.s.eof()
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=print_crate_as_interface | COMPLEXITY=3 | LINES=12 */
 
 pub fn print_crate_as_interface(
     krate: &ast::Crate,
@@ -286,7 +265,6 @@ pub fn print_crate_as_interface(
     print_crate_inner(&mut s, krate, false, edition, g);
     s.s.eof()
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=print_crate_inner | COMPLEXITY=14 | LINES=52 */
 
 fn print_crate_inner<'a>(
     s: &mut State<'a>,
@@ -339,7 +317,6 @@ fn print_crate_inner<'a>(
     s.print_remaining_comments();
     s.ann.post(s, AnnNode::Crate(krate));
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=space_between | COMPLEXITY=41 | LINES=60 */
 
 /// Should two consecutive tokens be printed with a space between them?
 ///
@@ -400,7 +377,6 @@ fn space_between(tt1: &TokenTree, tt2: &TokenTree) -> bool {
         _ => true,
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=doc_comment_to_string | COMPLEXITY=10 | LINES=13 */
 
 pub fn doc_comment_to_string(
     comment_kind: CommentKind,
@@ -414,7 +390,6 @@ pub fn doc_comment_to_string(
         (CommentKind::Block, ast::AttrStyle::Inner) => format!("/*{data}*/"),
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=literal_to_string | COMPLEXITY=28 | LINES=27 */
 
 fn literal_to_string(lit: token::Lit) -> String {
     let token::Lit { kind, symbol, suffix } = lit;
@@ -442,7 +417,6 @@ fn literal_to_string(lit: token::Lit) -> String {
 
     out
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl std::ops::Deref for State<'_> {
     type Target = pp::Printer;
@@ -450,14 +424,12 @@ impl std::ops::Deref for State<'_> {
         &self.s
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl std::ops::DerefMut for State<'_> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.s
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=comments | COMPLEXITY=345 | LINES=674 */
 
 /// This trait is used for both AST and HIR pretty-printing.
 pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::DerefMut {
@@ -1132,7 +1104,6 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
         printer.s.eof()
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=comments | COMPLEXITY=24 | LINES=43 */
 
 impl<'a> PrintState<'a> for State<'a> {
     fn comments(&self) -> Option<&Comments<'a>> {
@@ -1176,7 +1147,6 @@ impl<'a> PrintState<'a> for State<'a> {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=new | COMPLEXITY=590 | LINES=1039 */
 
 impl<'a> State<'a> {
     pub fn new() -> State<'a> {

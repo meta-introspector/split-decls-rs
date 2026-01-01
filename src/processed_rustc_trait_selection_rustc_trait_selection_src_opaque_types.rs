@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/opaque_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::OpaqueTyOrigin;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
 use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, DefiningScopeKind, GenericArgKind, GenericArgs, OpaqueTypeKey, Ty, TyCtxt,
     TypeVisitableExt, TypingMode, fold_regions,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 use crate::errors::NonGenericOpaqueTypeParam;
 use crate::regions::OutlivesEnvironmentBuildExt;
@@ -24,13 +20,11 @@ pub enum NonDefiningUseReason<'tcx> {
     NotAParam { opaque_type_key: OpaqueTypeKey<'tcx>, param_index: usize, span: Span },
     DuplicateParam { opaque_type_key: OpaqueTypeKey<'tcx>, param_indices: Vec<usize>, span: Span },
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=5 */
 impl From<ErrorGuaranteed> for NonDefiningUseReason<'_> {
     fn from(guar: ErrorGuaranteed) -> Self {
         NonDefiningUseReason::Tainted(guar)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=report | COMPLEXITY=16 | LINES=32 */
 impl<'tcx> NonDefiningUseReason<'tcx> {
     pub fn report(self, infcx: &InferCtxt<'tcx>) -> ErrorGuaranteed {
         let tcx = infcx.tcx;
@@ -63,7 +57,6 @@ impl<'tcx> NonDefiningUseReason<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=opaque_type_has_defining_use_args | COMPLEXITY=41 | LINES=67 */
 
 /// Opaque type parameter validity check as documented in the [rustc-dev-guide chapter].
 /// With the new solver, uses which fail this check are simply treated as non-defining
@@ -131,7 +124,6 @@ pub fn opaque_type_has_defining_use_args<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=LazyOpaqueTyEnv | COMPLEXITY=5 | LINES=15 */
 
 /// Computes if an opaque type requires a lifetime parameter to be equal to
 /// another one or to the `'static` lifetime.
@@ -147,7 +139,6 @@ struct LazyOpaqueTyEnv<'tcx> {
     ///     Canonical args: `['static, 'b, 'b]`
     canonical_args: std::cell::OnceCell<ty::GenericArgsRef<'tcx>>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=35 | LINES=70 */
 
 impl<'tcx> LazyOpaqueTyEnv<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> Self {
@@ -218,7 +209,6 @@ impl<'tcx> LazyOpaqueTyEnv<'tcx> {
         canonical_args
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=report_item_does_not_constrain_error | COMPLEXITY=9 | LINES=24 */
 
 pub fn report_item_does_not_constrain_error<'tcx>(
     tcx: TyCtxt<'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=34 */
 // Trait Resolution. See the [rustc dev guide] for more information on how this works.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
@@ -16,58 +15,45 @@ pub use crate::rustc_infer::traits::*;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypingMode, Upcast,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub use self::coherence::{
     InCrate, IsFirstInputType, OrphanCheckErr, OrphanCheckMode, OverlapResult, UncoveredTyParams,
     add_placeholder_note, orphan_check_trait_ref, overlapping_impls,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::dyn_compatibility::{
     DynCompatibilityViolation, dyn_compatibility_violations_for_assoc_item,
     hir_ty_lowering_dyn_compatibility_violations, is_vtable_safe_method,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::engine::{ObligationCtxt, TraitEngineExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::fulfill::{FulfillmentContext, OldSolverError, PendingPredicateObligation};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use self::normalize::NormalizeExt;
 pub use self::project::{normalize_inherent_projection, normalize_projection_term};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::select::{
     EvaluationCache, EvaluationResult, IntercrateAmbiguityCause, OverflowError, SelectionCache,
     SelectionContext,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use self::specialize::specialization_graph::{
     FutureCompatOverlapError, FutureCompatOverlapErrorKind,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use self::specialize::{
     OverlapError, specialization_graph, translate_args, translate_args_with_cause,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 pub use self::structural_normalize::StructurallyNormalizeExt;
 pub use self::util::{
     BoundVarReplacer, PlaceholderReplacer, elaborate, expand_trait_aliases, impl_item_is_final,
     sizedness_fast_path, supertrait_def_ids, supertraits, transitive_bounds_that_define_assoc_item,
     upcast_choices, with_replaced_escaping_bound_vars,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::infer::outlives::env::OutlivesEnvironment;
 use crate::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=FulfillmentError | COMPLEXITY=3 | LINES=12 */
 use crate::regions::InferCtxtRegionExt;
 use crate::traits::query::evaluate_obligation::InferCtxtExt as _;
 
@@ -80,7 +66,6 @@ pub struct FulfillmentError<'tcx> {
     /// that was initially passed to `register_predicate_obligation`
     pub root_obligation: PredicateObligation<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=22 */
 
 impl<'tcx> FulfillmentError<'tcx> {
     pub fn new(
@@ -103,7 +88,6 @@ impl<'tcx> FulfillmentError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 #[derive(Clone)]
 pub enum FulfillmentErrorCode<'tcx> {
@@ -121,7 +105,6 @@ pub enum FulfillmentErrorCode<'tcx> {
         overflow: Option<bool>,
     },
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=23 | LINES=20 */
 
 impl<'tcx> Debug for FulfillmentErrorCode<'tcx> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -142,7 +125,6 @@ impl<'tcx> Debug for FulfillmentErrorCode<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Whether to skip the leak check, as part of a future compatibility warning step.
 ///
@@ -155,14 +137,12 @@ pub enum SkipLeakCheck {
     #[default]
     No,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=is_yes | COMPLEXITY=3 | LINES=6 */
 
 impl SkipLeakCheck {
     fn is_yes(self) -> bool {
         self == SkipLeakCheck::Yes
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// The mode that trait queries run in.
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -176,7 +156,6 @@ pub enum TraitQueryMode {
     /// pre-canonicalization callsites.
     Canonical,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=predicates_for_generics | COMPLEXITY=4 | LINES=15 */
 
 /// Creates predicate obligations from the generic bounds.
 #[instrument(level = "debug", skip(cause, param_env))]
@@ -192,7 +171,6 @@ pub fn predicates_for_generics<'tcx>(
         predicate: clause.as_predicate(),
     })
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=type_known_to_meet_bound_modulo_regions | COMPLEXITY=7 | LINES=15 */
 
 /// Determines whether the type `ty` is known to meet `bound` and
 /// returns true if so. Returns false if `ty` either does not meet
@@ -208,7 +186,6 @@ pub fn type_known_to_meet_bound_modulo_regions<'tcx>(
     let trait_ref = ty::TraitRef::new(infcx.tcx, def_id, [ty]);
     pred_known_to_hold_modulo_regions(infcx, param_env, trait_ref)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=pred_known_to_hold_modulo_regions | COMPLEXITY=22 | LINES=43 */
 
 /// FIXME(@lcnr): this function doesn't seem right and shouldn't exist?
 ///
@@ -252,7 +229,6 @@ fn pred_known_to_hold_modulo_regions<'tcx>(
         false
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=do_normalize_predicates | COMPLEXITY=32 | LINES=68 */
 
 #[instrument(level = "debug", skip(tcx, elaborated_env))]
 fn do_normalize_predicates<'tcx>(
@@ -321,7 +297,6 @@ fn do_normalize_predicates<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=normalize_param_env_or_error | COMPLEXITY=61 | LINES=160 */
 
 // FIXME: this is gonna need to be removed ...
 /// Normalizes the parameter environment, reporting errors if they occur.
@@ -482,7 +457,6 @@ pub fn normalize_param_env_or_error<'tcx>(
     debug!("normalize_param_env_or_error: final predicates={:?}", predicates);
     ty::ParamEnv::new(tcx.mk_clauses(&predicates))
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 #[derive(Debug)]
 pub enum EvaluateConstErr {
@@ -498,7 +472,6 @@ pub enum EvaluateConstErr {
     /// This is also used when the constant was already tainted by error.
     EvaluationFailure(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=evaluate_const | COMPLEXITY=11 | LINES=23 */
 
 // FIXME(BoxyUwU): Private this once we `generic_const_exprs` isn't doing its own normalization routine
 // FIXME(generic_const_exprs): Consider accepting a `ty::UnevaluatedConst` when we are not rolling our own
@@ -522,7 +495,6 @@ pub fn evaluate_const<'tcx>(
         Err(EvaluateConstErr::HasGenericsOrInfers) => ct,
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_evaluate_const | COMPLEXITY=65 | LINES=154 */
 
 // FIXME(BoxyUwU): Private this once we `generic_const_exprs` isn't doing its own normalization routine
 // FIXME(generic_const_exprs): Consider accepting a `ty::UnevaluatedConst` when we are not rolling our own
@@ -677,7 +649,6 @@ pub fn try_evaluate_const<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=replace_param_and_infer_args_with_placeholder | COMPLEXITY=25 | LINES=53 */
 
 /// Replaces args that reference param or infer variables with suitable
 /// placeholders. This function is meant to remove these param and infer
@@ -731,7 +702,6 @@ fn replace_param_and_infer_args_with_placeholder<'tcx>(
 
     args.fold_with(&mut ReplaceParamAndInferWithPlaceholder { tcx, idx: ty::BoundVar::ZERO })
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=impossible_predicates | COMPLEXITY=15 | LINES=32 */
 
 /// Normalizes the predicates and checks whether they hold in an empty environment. If this
 /// returns true, then either normalize encountered an error or one of the predicates did not
@@ -764,7 +734,6 @@ pub fn impossible_predicates<'tcx>(tcx: TyCtxt<'tcx>, predicates: Vec<ty::Clause
 
     false
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=instantiate_and_check_impossible_predicates | COMPLEXITY=9 | LINES=22 */
 
 fn instantiate_and_check_impossible_predicates<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -787,7 +756,6 @@ fn instantiate_and_check_impossible_predicates<'tcx>(
     debug!("instantiate_and_check_impossible_predicates(key={:?}) = {:?}", key, result);
     result
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=is_impossible_associated_item | COMPLEXITY=27 | LINES=82 */
 
 /// Checks whether a trait's associated item is impossible to reference on a given impl.
 ///
@@ -870,7 +838,6 @@ fn is_impossible_associated_item(
     ocx.register_obligations(predicates_for_trait);
     !ocx.select_where_possible().is_empty()
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=13 */
 
 pub fn provide(providers: &mut Providers) {
     dyn_compatibility::provide(providers);

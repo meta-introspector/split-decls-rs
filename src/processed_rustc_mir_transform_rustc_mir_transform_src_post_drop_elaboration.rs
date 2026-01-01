@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/post_drop_elaboration.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=5 | LINES=13 */
 use rustc_const_eval::check_consts;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;

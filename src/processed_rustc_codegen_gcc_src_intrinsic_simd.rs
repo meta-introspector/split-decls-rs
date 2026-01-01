@@ -1,32 +1,24 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/intrinsic/simd.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter::FromIterator;
 
 use gccjit::{BinaryOp, RValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use gccjit::{ComparisonOp, UnaryOp};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::base::compare_simd_types;
 use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[cfg(feature = "master")]
 use crate::rustc_codegen_ssa::errors::ExpectedPointerMutability;
 use crate::rustc_codegen_ssa::errors::InvalidMonomorphization;
 use crate::rustc_codegen_ssa::mir::operand::OperandRef;
 use crate::rustc_codegen_ssa::mir::place::PlaceRef;
 use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 #[cfg(feature = "master")]
 use rustc_hir as hir;
 use crate::rustc_complete::mir::BinOp;
 use crate::rustc_complete::ty::layout::HasTyCtxt;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=generic_simd_intrinsic | COMPLEXITY=652 | LINES=1438 */
 
 use crate::builder::Builder;
 #[cfg(not(feature = "master"))]
@@ -1465,7 +1457,6 @@ pub fn generic_simd_intrinsic<'a, 'gcc, 'tcx>(
 
     unimplemented!("simd {}", name);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=simd_funnel_shift | COMPLEXITY=27 | LINES=58 */
 
 #[cfg(feature = "master")]
 fn simd_funnel_shift<'a, 'gcc, 'tcx>(

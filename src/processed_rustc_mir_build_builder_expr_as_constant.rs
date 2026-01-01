@@ -1,26 +1,20 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/as_constant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // See docs in build/expr/mod.rs
 
 use crate::rustc_abi::Size;
 use rustc_ast as ast;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, LitToConstInput, Scalar};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{
     self, CanonicalUserType, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypeVisitableExt as _,
     UserTypeAnnotationIndex,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builder::{Builder, parse_float_into_constval};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=26 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Compile `expr`, yielding a compile-time constant. Assumes that
@@ -47,7 +41,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=56 */
 
 pub(crate) fn as_constant_inner<'tcx>(
     expr: &Expr<'tcx>,
@@ -104,7 +97,6 @@ pub(crate) fn as_constant_inner<'tcx>(
         _ => span_bug!(span, "expression is not a valid constant {:?}", kind),
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lit_to_mir_constant | COMPLEXITY=54 | LINES=68 */
 
 #[instrument(skip(tcx, lit_input))]
 fn lit_to_mir_constant<'tcx>(tcx: TyCtxt<'tcx>, lit_input: LitToConstInput<'tcx>) -> Const<'tcx> {

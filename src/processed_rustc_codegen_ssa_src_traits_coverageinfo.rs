@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/coverageinfo.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=add_coverage | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_complete::mir::coverage::CoverageKind;
 use crate::rustc_complete::ty::Instance;
 

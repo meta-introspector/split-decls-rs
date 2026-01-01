@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/opaque_types.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::error::ConstNotUsedTraitAlias;
 use crate::ty::{
     self, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
 };
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 pub type OpaqueTypeKey<'tcx> = rustc_type_ir::OpaqueTypeKey<TyCtxt<'tcx>>;
 
@@ -27,7 +24,6 @@ pub(super) struct ReverseMapper<'tcx> {
     /// Span of function being checked.
     span: Span,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fold_kind_no_missing_regions_error | COMPLEXITY=25 | LINES=64 */
 
 impl<'tcx> ReverseMapper<'tcx> {
     pub(super) fn new(
@@ -92,7 +88,6 @@ impl<'tcx> ReverseMapper<'tcx> {
         }))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=64 | LINES=131 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for ReverseMapper<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {

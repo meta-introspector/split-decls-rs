@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/stack.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=ensure_sufficient_stack | COMPLEXITY=8 | LINES=22 */
 // This is the amount of bytes that need to be left on the stack before increasing the size.
 // It must be at least as large as the stack required by any code that does not call
 // `ensure_sufficient_stack`.

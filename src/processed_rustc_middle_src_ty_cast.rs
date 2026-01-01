@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/cast.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Helpers for handling cast expressions, used in both
 // typeck and codegen.
 
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::mir;
 use crate::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Types that are represented as ints.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -19,14 +16,12 @@ pub enum IntTy {
     Bool,
     Char,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_signed | COMPLEXITY=3 | LINES=6 */
 
 impl IntTy {
     pub fn is_signed(self) -> bool {
         matches!(self, Self::I)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 // Valid types for the result of a non-coercion cast
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -41,7 +36,6 @@ pub enum CastTy<'tcx> {
     /// Raw pointers.
     Ptr(ty::TypeAndMut<'tcx>),
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 /// Cast Kind. See [RFC 401](https://rust-lang.github.io/rfcs/0401-coercions.html)
 /// (or rustc_hir_analysis/check/cast.rs).
@@ -58,7 +52,6 @@ pub enum CastKind {
     FnPtrPtrCast,
     FnPtrAddrCast,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from_ty | COMPLEXITY=13 | LINES=20 */
 
 impl<'tcx> CastTy<'tcx> {
     /// Returns `Some` for integral/pointer casts.
@@ -79,7 +72,6 @@ impl<'tcx> CastTy<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=mir_cast_kind | COMPLEXITY=12 | LINES=24 */
 
 /// Returns `mir::CastKind` from the given parameters.
 pub fn mir_cast_kind<'tcx>(from_ty: Ty<'tcx>, cast_ty: Ty<'tcx>) -> mir::CastKind {

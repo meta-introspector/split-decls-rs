@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/pattern_type.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{AnonConst, DUMMY_NODE_ID, Ty, TyPat, TyPatKind, ast, token};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::PResult;
 use crate::rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_parse::exp;
 use crate::rustc_parse::parser::{CommaRecoveryMode, RecoverColon, RecoverComma};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
@@ -25,7 +21,6 @@ pub(crate) fn expand<'cx>(
 
     ExpandResult::Ready(base::MacEager::ty(cx.ty(sp, ast::TyKind::Pat(ty, pat))))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parse_pat_ty | COMPLEXITY=6 | LINES=26 */
 
 fn parse_pat_ty<'a>(
     cx: &mut ExtCtxt<'a>,
@@ -52,12 +47,10 @@ fn parse_pat_ty<'a>(
 
     Ok((ty, pat))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=ty_pat | COMPLEXITY=3 | LINES=4 */
 
 fn ty_pat(kind: TyPatKind, span: Span) -> Box<TyPat> {
     Box::new(TyPat { id: DUMMY_NODE_ID, kind, span, tokens: None })
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=pat_to_ty_pat | COMPLEXITY=10 | LINES=16 */
 
 fn pat_to_ty_pat(cx: &mut ExtCtxt<'_>, pat: ast::Pat) -> Box<TyPat> {
     let kind = match pat.kind {

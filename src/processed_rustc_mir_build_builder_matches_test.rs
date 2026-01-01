@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/matches/test.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 // Testing candidates
 //
 // After candidates have been simplified, the only match pairs that
@@ -12,23 +11,17 @@ use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::{LangItem, RangeEnd};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::util::IntTypeExt;
 use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::builder::Builder;
 use crate::builder::matches::{Candidate, MatchPairTree, Test, TestBranch, TestCase, TestKind};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compare | COMPLEXITY=343 | LINES=722 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Identifies what test is needed to decide if `match_pair` is applicable.
@@ -751,12 +744,10 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         ret
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_switch_ty | COMPLEXITY=2 | LINES=4 */
 
 fn is_switch_ty(ty: Ty<'_>) -> bool {
     ty.is_integral() || ty.is_char()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=trait_method | COMPLEXITY=3 | LINES=19 */
 
 fn trait_method<'tcx>(
     tcx: TyCtxt<'tcx>,

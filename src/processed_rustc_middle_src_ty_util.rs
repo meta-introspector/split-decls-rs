@@ -1,47 +1,35 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Miscellaneous type-system utilities that are too small to deserve their own modules.
 
 use std::{fmt, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{Float, Integer, IntegerType, Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_apfloat::Float as _;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hashes::Hash128;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_index::bit_set::GrowableBitSet;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::sym;
 use rustc_type_ir::solve::SizedTraitKind;
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::TypingEnv;
 use crate::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::mir;
 use crate::query::Providers;
 use crate::ty::layout::{FloatExt, IntegerExt};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::ty::{
     self, Asyncness, FallibleTypeFolder, GenericArgKind, GenericArgsRef, Ty, TyCtxt, TypeFoldable,
     TypeFolder, TypeSuperFoldable, TypeVisitableExt, Upcast,
 };
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Discr | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug)]
 pub struct Discr<'tcx> {
@@ -49,7 +37,6 @@ pub struct Discr<'tcx> {
     pub val: u128,
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// Used as an input to [`TyCtxt::uses_unique_generic_params`].
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -64,14 +51,12 @@ pub enum CheckRegions {
     /// and late-bound region parameters.
     FromFunction,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum NotUniqueParam<'tcx> {
     DuplicateParam(ty::GenericArg<'tcx>),
     NotParam(ty::GenericArg<'tcx>),
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=15 */
 
 impl<'tcx> fmt::Display for Discr<'tcx> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -87,7 +72,6 @@ impl<'tcx> fmt::Display for Discr<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=wrap_incr | COMPLEXITY=23 | LINES=30 */
 
 impl<'tcx> Discr<'tcx> {
     /// Adds `1` to the value and wraps around if the maximum for the type is reached.
@@ -118,7 +102,6 @@ impl<'tcx> Discr<'tcx> {
         (Self { val, ty: self.ty }, oflo)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=19 | LINES=25 */
 
 #[extension(pub trait IntTypeExt)]
 impl IntegerType {
@@ -144,7 +127,6 @@ impl IntegerType {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=type_id_hash | COMPLEXITY=438 | LINES=812 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Creates a hash of the type `Ty` which will be the same no matter what crate
@@ -957,7 +939,6 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=OpaqueTypeExpander | COMPLEXITY=9 | LINES=19 */
 
 struct OpaqueTypeExpander<'tcx> {
     // Contains the DefIds of the opaque types that are currently being
@@ -977,7 +958,6 @@ struct OpaqueTypeExpander<'tcx> {
     check_recursion: bool,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=expand_opaque_ty | COMPLEXITY=20 | LINES=31 */
 
 impl<'tcx> OpaqueTypeExpander<'tcx> {
     fn expand_opaque_ty(&mut self, def_id: DefId, args: GenericArgsRef<'tcx>) -> Option<Ty<'tcx>> {
@@ -1009,7 +989,6 @@ impl<'tcx> OpaqueTypeExpander<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=24 | LINES=36 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for OpaqueTypeExpander<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -1046,13 +1025,11 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for OpaqueTypeExpander<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=FreeAliasTypeExpander | COMPLEXITY=2 | LINES=5 */
 
 struct FreeAliasTypeExpander<'tcx> {
     tcx: TyCtxt<'tcx>,
     depth: usize,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=20 | LINES=33 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for FreeAliasTypeExpander<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -1086,7 +1063,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for FreeAliasTypeExpander<'tcx> {
         ct.super_fold_with(self)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=primitive_size | COMPLEXITY=212 | LINES=405 */
 
 impl<'tcx> Ty<'tcx> {
     /// Returns the `Size` for primitive types (bool, uint, int, char, float).
@@ -1492,7 +1468,6 @@ impl<'tcx> Ty<'tcx> {
         self.0.outer_exclusive_binder
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=needs_drop_components | COMPLEXITY=5 | LINES=14 */
 
 /// Returns a list of types such that the given type needs drop if and only if
 /// *any* of the returned types need drop. Returns `Err(AlwaysRequiresDrop)` if
@@ -1507,7 +1482,6 @@ pub fn needs_drop_components<'tcx>(
 ) -> Result<SmallVec<[Ty<'tcx>; 2]>, AlwaysRequiresDrop> {
     needs_drop_components_with_async(tcx, ty, Asyncness::No)
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=needs_drop_components_with_async | COMPLEXITY=36 | LINES=72 */
 
 /// Returns a list of types such that the given type needs drop if and only if
 /// *any* of the returned types need drop. Returns `Err(AlwaysRequiresDrop)` if
@@ -1580,7 +1554,6 @@ pub fn needs_drop_components_with_async<'tcx>(
         | ty::UnsafeBinder(_) => Ok(smallvec![ty]),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=fold_list | COMPLEXITY=19 | LINES=36 */
 
 /// Does the equivalent of
 /// ```ignore (illustrative)
@@ -1617,7 +1590,6 @@ where
         None => list,
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=try_fold_list | COMPLEXITY=21 | LINES=39 */
 
 /// Does the equivalent of
 /// ```ignore (illustrative)
@@ -1657,7 +1629,6 @@ where
         None => Ok(list),
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=AlwaysRequiresDrop; | COMPLEXITY=4 | LINES=22 */
 
 #[derive(Copy, Clone, Debug, HashStable, TyEncodable, TyDecodable)]
 pub struct AlwaysRequiresDrop;
@@ -1680,7 +1651,6 @@ pub fn reveal_opaque_types_in_bounds<'tcx>(
     };
     val.fold_with(&mut visitor)
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=is_doc_hidden | COMPLEXITY=2 | LINES=7 */
 
 /// Determines whether an item is directly annotated with `doc(hidden)`.
 fn is_doc_hidden(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
@@ -1688,7 +1658,6 @@ fn is_doc_hidden(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         .filter_map(|attr| attr.meta_item_list())
         .any(|items| items.iter().any(|item| item.has_name(sym::hidden)))
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=is_doc_notable_trait | COMPLEXITY=2 | LINES=7 */
 
 /// Determines whether an item is annotated with `doc(notable_trait)`.
 pub fn is_doc_notable_trait(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
@@ -1696,7 +1665,6 @@ pub fn is_doc_notable_trait(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
         .filter_map(|attr| attr.meta_item_list())
         .any(|items| items.iter().any(|item| item.has_name(sym::notable_trait)))
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=intrinsic_raw | COMPLEXITY=18 | LINES=23 */
 
 /// Determines whether an item is an intrinsic (which may be via Abi or via the `rustc_intrinsic` attribute).
 ///
@@ -1720,7 +1688,6 @@ pub fn intrinsic_raw(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::Intrinsi
         None
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=10 */
 
 pub fn provide(providers: &mut Providers) {
     *providers = Providers {

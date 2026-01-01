@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MetaItem;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=28 */
 use crate::rustc_complete::Span;
 
 use crate::deriving::generic::*;
@@ -31,7 +29,6 @@ pub(crate) fn expand_deriving_copy(
 
     trait_def.expand(cx, mitem, item, push);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=39 */
 
 pub(crate) fn expand_deriving_const_param_ty(
     cx: &ExtCtxt<'_>,
@@ -71,7 +68,6 @@ pub(crate) fn expand_deriving_const_param_ty(
 
     trait_def.expand(cx, mitem, item, push);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=24 */
 
 pub(crate) fn expand_deriving_unsized_const_param_ty(
     cx: &ExtCtxt<'_>,

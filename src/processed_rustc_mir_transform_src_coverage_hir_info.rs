@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/hir_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::intravisit::{Visitor, walk_expr};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=19 */
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Span;
@@ -22,7 +20,6 @@ pub(crate) struct ExtractedHirInfo {
     /// (e.g. closures and nested items).
     pub(crate) hole_spans: Vec<Span>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=46 */
 
 pub(crate) fn extract_hir_info<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> ExtractedHirInfo {
     // FIXME(#79625): Consider improving MIR to provide the information needed, to avoid going back
@@ -69,7 +66,6 @@ pub(crate) fn extract_hir_info<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> E
 
     ExtractedHirInfo { function_source_hash, is_async_fn, fn_sig_span, body_span, hole_spans }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=hash_mir_source | COMPLEXITY=2 | LINES=9 */
 
 fn hash_mir_source<'tcx>(tcx: TyCtxt<'tcx>, hir_body: &'tcx hir::Body<'tcx>) -> u64 {
     let owner = hir_body.id().hir_id.owner;
@@ -79,7 +75,6 @@ fn hash_mir_source<'tcx>(tcx: TyCtxt<'tcx>, hir_body: &'tcx hir::Body<'tcx>) -> 
         .to_smaller_hash()
         .as_u64()
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=extract_hole_spans_from_hir | COMPLEXITY=22 | LINES=52 */
 
 fn extract_hole_spans_from_hir<'tcx>(tcx: TyCtxt<'tcx>, hir_body: &hir::Body<'tcx>) -> Vec<Span> {
     struct HolesVisitor<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/mut_visit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 // A `MutVisitor` represents an AST modification; it accepts an AST piece and
 // mutates it in place. So, for instance, macro expansion is a `MutVisitor`
 // that walks over an AST and modifies it.
@@ -15,15 +14,12 @@ use std::panic;
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use thin_vec::ThinVec;
 
 use crate::ast::*;
 use crate::tokenstream::*;
 use crate::visit::{AssocCtxt, BoundKind, FnCtxt, LifetimeCtxt, VisitorResult, try_visit};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 mod sealed {
     use rustc_ast_ir::visit::VisitorResult;
@@ -37,7 +33,6 @@ mod sealed {
         type Result = ();
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=2 | LINES=7 */
 
 use sealed::MutVisitorResult;
 
@@ -45,7 +40,6 @@ pub(crate) trait MutVisitable<V: MutVisitor> {
     type Extra: Copy;
     fn visit_mut(&mut self, visitor: &mut V, extra: Self::Extra);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=5 | LINES=10 */
 
 impl<V: MutVisitor, T: ?Sized> MutVisitable<V> for Box<T>
 where
@@ -56,7 +50,6 @@ where
         (**self).visit_mut(visitor, extra)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=8 | LINES=12 */
 
 impl<V: MutVisitor, T> MutVisitable<V> for Option<T>
 where
@@ -69,7 +62,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=6 | LINES=12 */
 
 impl<V: MutVisitor, T> MutVisitable<V> for Spanned<T>
 where
@@ -82,7 +74,6 @@ where
         node.visit_mut(visitor, extra);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=8 | LINES=12 */
 
 impl<V: MutVisitor, T> MutVisitable<V> for [T]
 where
@@ -95,7 +86,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=8 | LINES=12 */
 
 impl<V: MutVisitor, T> MutVisitable<V> for Vec<T>
 where
@@ -108,7 +98,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=5 | LINES=10 */
 
 impl<V: MutVisitor, T> MutVisitable<V> for (T,)
 where
@@ -119,7 +108,6 @@ where
         self.0.visit_mut(visitor, extra);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=5 | LINES=12 */
 
 impl<V: MutVisitor, T1, T2> MutVisitable<V> for (T1, T2)
 where
@@ -132,7 +120,6 @@ where
         self.1.visit_mut(visitor, extra);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=5 | LINES=14 */
 
 impl<V: MutVisitor, T1, T2, T3> MutVisitable<V> for (T1, T2, T3)
 where
@@ -147,7 +134,6 @@ where
         self.2.visit_mut(visitor, extra);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=5 | LINES=16 */
 
 impl<V: MutVisitor, T1, T2, T3, T4> MutVisitable<V> for (T1, T2, T3, T4)
 where
@@ -164,33 +150,28 @@ where
         self.3.visit_mut(visitor, extra);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=walk_mut | COMPLEXITY=2 | LINES=4 */
 
 pub trait MutWalkable<V: MutVisitor> {
     fn walk_mut(&mut self, visitor: &mut V);
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
 
 macro_rules! visit_visitable {
     (mut $visitor:expr, $($expr:expr),* $(,)?) => {{
         $(MutVisitable::visit_mut($expr, $visitor, ());)*
     }};
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! visit_visitable_with {
     (mut $visitor:expr, $expr:expr, $extra:expr $(,)?) => {
         MutVisitable::visit_mut($expr, $visitor, $extra)
     };
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 macro_rules! walk_walkable {
     ($visitor:expr, $expr:expr, mut) => {
         MutWalkable::walk_mut($expr, $visitor)
     };
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=12 | LINES=14 */
 
 macro_rules! impl_visitable {
     (|&mut $self:ident: $self_ty:ty,
@@ -205,7 +186,6 @@ macro_rules! impl_visitable {
         }
     };
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=walk_mut | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! impl_walkable {
     ($(<$K:ident: $Kb:ident>)? |&mut $self:ident: $self_ty:ty,
@@ -218,7 +198,6 @@ macro_rules! impl_walkable {
         }
     };
 }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! impl_visitable_noop {
     (<mut> $($ty:ty,)*) => {
@@ -227,7 +206,6 @@ macro_rules! impl_visitable_noop {
         )*
     };
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=16 | LINES=19 */
 
 macro_rules! impl_visitable_list {
     (<mut> $($ty:ty,)*) => {
@@ -247,7 +225,6 @@ macro_rules! impl_visitable_list {
         })*
     }
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 macro_rules! impl_visitable_direct {
     (<mut> $($ty:ty,)*) => {
@@ -258,7 +235,6 @@ macro_rules! impl_visitable_direct {
         );)*
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=14 */
 
 macro_rules! impl_visitable_calling_walkable {
     (<mut>
@@ -273,7 +249,6 @@ macro_rules! impl_visitable_calling_walkable {
         })*
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
 macro_rules! define_named_walk {
     ((mut) $Visitor:ident
@@ -284,7 +259,6 @@ macro_rules! define_named_walk {
         })*
     };
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=visit_mut | COMPLEXITY=14 | LINES=32 */
 
 super::common_visitor_and_walkers!((mut) MutVisitor);
 
@@ -317,7 +291,6 @@ macro_rules! generate_flat_map_visitor_fns {
         )+
     }
 }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 generate_flat_map_visitor_fns! {
     visit_items, Box<Item>, flat_map_item;
@@ -334,7 +307,6 @@ generate_flat_map_visitor_fns! {
     visit_field_defs, FieldDef, flat_map_field_def;
     visit_arms, Arm, flat_map_arm;
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=walk_flat_map_pat_field | COMPLEXITY=2 | LINES=8 */
 
 pub fn walk_flat_map_pat_field<T: MutVisitor>(
     vis: &mut T,
@@ -343,7 +315,6 @@ pub fn walk_flat_map_pat_field<T: MutVisitor>(
     vis.visit_pat_field(&mut fp);
     smallvec![fp]
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=$fn_name | COMPLEXITY=9 | LINES=9 */
 
 macro_rules! generate_walk_flat_map_fns {
     ($($fn_name:ident($Ty:ty$(,$extra_name:ident: $ExtraTy:ty)*) => $visit_fn_name:ident;)+) => {$(
@@ -353,7 +324,6 @@ macro_rules! generate_walk_flat_map_fns {
         }
     )+};
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 generate_walk_flat_map_fns! {
     walk_flat_map_arm(Arm) => visit_arm;
@@ -367,18 +337,15 @@ generate_walk_flat_map_fns! {
     walk_flat_map_foreign_item(Box<ForeignItem>) => visit_foreign_item;
     walk_flat_map_assoc_item(Box<AssocItem>, ctxt: AssocCtxt) => visit_assoc_item;
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=walk_filter_map_expr | COMPLEXITY=2 | LINES=5 */
 
 pub fn walk_filter_map_expr<T: MutVisitor>(vis: &mut T, mut e: Box<Expr>) -> Option<Box<Expr>> {
     vis.visit_expr(&mut e);
     Some(e)
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=walk_flat_map_stmt | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_flat_map_stmt<T: MutVisitor>(
     vis: &mut T,
     Stmt { kind, span, mut id }: Stmt,
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 ) -> SmallVec<[Stmt; 1]> {
     vis.visit_id(&mut id);
     let mut stmts: SmallVec<[Stmt; 1]> = walk_flat_map_stmt_kind(vis, kind)
@@ -395,7 +362,6 @@ pub fn walk_flat_map_stmt<T: MutVisitor>(
     }
     stmts
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=walk_flat_map_stmt_kind | COMPLEXITY=13 | LINES=21 */
 
 fn walk_flat_map_stmt_kind<T: MutVisitor>(vis: &mut T, kind: StmtKind) -> SmallVec<[StmtKind; 1]> {
     match kind {

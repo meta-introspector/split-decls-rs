@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/search_graph/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 // The search graph is responsible for caching and cycle detection in the trait
 // solver. Making sure that caching doesn't result in soundness bugs or unstable
 // query results is very challenging and makes this one of the most-involved
@@ -16,7 +15,6 @@
 use std::cmp::Ordering;
 use std::collections::hash_map::Entry;
 use std::collections::{BTreeMap, btree_map};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::iter;
@@ -25,13 +23,10 @@ use std::marker::PhantomData;
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_type_ir::data_structures::HashMap;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use stack::{Stack, StackDepth, StackEntry};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=mk_tracked | COMPLEXITY=4 | LINES=28 */
 use global_cache::CacheData;
 pub use global_cache::GlobalCache;
 
@@ -59,7 +54,6 @@ pub trait Cx: Copy {
 
     fn evaluation_is_concurrent(&self) -> bool;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=enter_validation_scope | COMPLEXITY=11 | LINES=57 */
 
 pub trait Delegate: Sized {
     type Cx: Cx;
@@ -117,7 +111,6 @@ pub trait Delegate: Sized {
         inspect: &mut Self::ProofTreeBuilder,
     ) -> <Self::Cx as Cx>::Result;
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=28 */
 
 /// In the initial iteration of a cycle, we do not yet have a provisional
 /// result. In the case we return an initial provisional result depending
@@ -146,7 +139,6 @@ pub enum PathKind {
     /// For more details, see #143054.
     ForcedAmbiguity,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=9 | LINES=20 */
 
 impl PathKind {
     /// Returns the path kind when merging `self` with `rest`.
@@ -167,7 +159,6 @@ impl PathKind {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=HeadUsages | COMPLEXITY=7 | LINES=20 */
 
 /// The kinds of cycles a cycle head was involved in.
 ///
@@ -188,7 +179,6 @@ struct HeadUsages {
     coinductive: u32,
     forced_ambiguity: u32,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=add_usage | COMPLEXITY=34 | LINES=36 */
 
 impl HeadUsages {
     fn add_usage(&mut self, path: PathKind) {
@@ -225,13 +215,11 @@ impl HeadUsages {
         inductive == 0 && unknown == 0 && coinductive == 0 && forced_ambiguity == 0
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CandidateHeadUsages | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug, Default)]
 pub struct CandidateHeadUsages {
     usages: Option<Box<HashMap<StackDepth, HeadUsages>>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=merge_usages | COMPLEXITY=15 | LINES=19 */
 impl CandidateHeadUsages {
     pub fn merge_usages(&mut self, other: CandidateHeadUsages) {
         if let Some(other_usages) = other.usages {
@@ -251,7 +239,6 @@ impl CandidateHeadUsages {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=AvailableDepth(usize); | COMPLEXITY=21 | LINES=35 */
 
 #[derive(Debug, Clone, Copy)]
 struct AvailableDepth(usize);
@@ -287,7 +274,6 @@ impl AvailableDepth {
         self.0 >= additional_depth
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=CycleHead | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Clone, Copy, Debug)]
 struct CycleHead {
@@ -299,7 +285,6 @@ struct CycleHead {
     /// failures or hide query cycles.
     usages: HeadUsages,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=CycleHeads | COMPLEXITY=2 | LINES=9 */
 
 /// All cycle heads a given goal depends on, ordered by their stack depth.
 ///
@@ -309,7 +294,6 @@ struct CycleHead {
 struct CycleHeads {
     heads: BTreeMap<StackDepth, CycleHead>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=21 | LINES=53 */
 
 impl CycleHeads {
     fn is_empty(&self) -> bool {
@@ -363,7 +347,6 @@ impl CycleHeads {
         self.heads.iter().map(|(k, v)| (*k, *v))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=PathsToNested: | COMPLEXITY=6 | LINES=15 */
 
 bitflags::bitflags! {
     /// Tracks how nested goals have been accessed. This is necessary to disable
@@ -379,7 +362,6 @@ bitflags::bitflags! {
         const FORCED_AMBIGUITY           = 1 << 4;
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
 impl From<PathKind> for PathsToNested {
     fn from(path: PathKind) -> PathsToNested {
         match path {
@@ -390,7 +372,6 @@ impl From<PathKind> for PathsToNested {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=extend_with | COMPLEXITY=35 | LINES=69 */
 impl PathsToNested {
     /// The implementation of this function is kind of ugly. We check whether
     /// there currently exist 'weaker' paths in the set, if so we upgrade these
@@ -460,7 +441,6 @@ impl PathsToNested {
             .filter(move |&p| self.contains(p.into()))
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=NestedGoals | COMPLEXITY=3 | LINES=18 */
 
 /// The nested goals of each stack entry and the path from the
 /// stack entry to that nested goal.
@@ -479,7 +459,6 @@ impl PathsToNested {
 struct NestedGoals<X: Cx> {
     nested_goals: HashMap<X::Input, PathsToNested>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=18 | LINES=36 */
 impl<X: Cx> NestedGoals<X> {
     fn is_empty(&self) -> bool {
         self.nested_goals.is_empty()
@@ -516,7 +495,6 @@ impl<X: Cx> NestedGoals<X> {
         self.nested_goals.contains_key(&input)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=ProvisionalCacheEntry | COMPLEXITY=5 | LINES=16 */
 
 /// A provisional result of an already computed goals which depends on other
 /// goals still on the stack.
@@ -533,7 +511,6 @@ struct ProvisionalCacheEntry<X: Cx> {
     path_from_head: PathKind,
     result: X::Result,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=EvaluationResult | COMPLEXITY=5 | LINES=18 */
 
 /// The final result of evaluating a goal.
 ///
@@ -552,7 +529,6 @@ struct EvaluationResult<X: Cx> {
     nested_goals: NestedGoals<X>,
     result: X::Result,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=5 | LINES=19 */
 
 impl<X: Cx> EvaluationResult<X> {
     fn finalize(
@@ -572,7 +548,6 @@ impl<X: Cx> EvaluationResult<X> {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=SearchGraph | COMPLEXITY=5 | LINES=12 */
 
 pub struct SearchGraph<D: Delegate<Cx = X>, X: Cx = <D as Delegate>::Cx> {
     root_depth: AvailableDepth,
@@ -585,7 +560,6 @@ pub struct SearchGraph<D: Delegate<Cx = X>, X: Cx = <D as Delegate>::Cx> {
 
     _marker: PhantomData<D>,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// While [`SearchGraph::update_parent_goal`] can be mostly shared between
 /// ordinary nested goals/global cache hits and provisional cache hits,
@@ -601,7 +575,6 @@ enum UpdateParentGoalCtxt<'a, X: Cx> {
     CycleOnStack(X::Input),
     ProvisionalCacheHit,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=new | COMPLEXITY=365 | LINES=786 */
 
 impl<D: Delegate<Cx = X>, X: Cx> SearchGraph<D> {
     pub fn new(root_depth: usize) -> SearchGraph<D> {

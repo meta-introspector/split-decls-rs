@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/errors/note_and_explain.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, EmissionGuarantee, IntoDiagArg, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, kw};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=DescriptionCtx | COMPLEXITY=2 | LINES=9 */
 
 use crate::error_reporting::infer::nice_region_error::find_anon_type;
 use crate::fluent_generated as fluent;
@@ -17,7 +13,6 @@ struct DescriptionCtx<'a> {
     kind: &'a str,
     arg: String,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=45 | LINES=70 */
 
 impl<'a> DescriptionCtx<'a> {
     fn new<'tcx>(
@@ -88,7 +83,6 @@ impl<'a> DescriptionCtx<'a> {
         Some(DescriptionCtx { span, kind, arg })
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 pub enum PrefixKind {
     Empty,
@@ -105,14 +99,12 @@ pub enum PrefixKind {
     PointerValidFor,
     DataValidFor,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub enum SuffixKind {
     Empty,
     Continues,
     ReqByBinding,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=10 | LINES=22 */
 
 impl IntoDiagArg for PrefixKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -135,7 +127,6 @@ impl IntoDiagArg for PrefixKind {
         crate::rustc_errors::DiagArgValue::Str(kind)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12 */
 
 impl IntoDiagArg for SuffixKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
@@ -148,14 +139,12 @@ impl IntoDiagArg for SuffixKind {
         crate::rustc_errors::DiagArgValue::Str(kind)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=RegionExplanation | COMPLEXITY=2 | LINES=6 */
 
 pub struct RegionExplanation<'a> {
     desc: DescriptionCtx<'a>,
     prefix: PrefixKind,
     suffix: SuffixKind,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=17 */
 
 impl RegionExplanation<'_> {
     pub fn new<'tcx>(
@@ -173,7 +162,6 @@ impl RegionExplanation<'_> {
         })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=10 | LINES=18 */
 
 impl Subdiagnostic for RegionExplanation<'_> {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {

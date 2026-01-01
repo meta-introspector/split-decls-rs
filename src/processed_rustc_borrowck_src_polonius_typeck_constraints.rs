@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/typeck_constraints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::mir::{Body, Location, Statement, StatementKind, Terminator, TerminatorKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{TyCtxt, TypeVisitable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_mir_dataflow::points::PointIndex;
 
 use super::{LocalizedOutlivesConstraint, LocalizedOutlivesConstraintSet};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=65 */
 use crate::constraints::OutlivesConstraint;
 use crate::region_infer::values::LivenessValues;
 use crate::type_check::Locations;
@@ -74,7 +70,6 @@ pub(super) fn convert_typeck_constraints<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=localize_statement_constraint | COMPLEXITY=20 | LINES=68 */
 
 /// For a given outlives constraint arising from a MIR statement, localize the constraint with the
 /// needed CFG `from`-`to` intra-block nodes.
@@ -143,7 +138,6 @@ fn localize_statement_constraint<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=localize_terminator_constraint | COMPLEXITY=19 | LINES=46 */
 
 /// For a given outlives constraint arising from a MIR terminator, localize the constraint with the
 /// needed CFG `from`-`to` inter-block nodes.
@@ -190,7 +184,6 @@ fn localize_terminator_constraint<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_constraint_direction | COMPLEXITY=14 | LINES=33 */
 
 /// For a given outlives constraint and CFG edge, returns the localized constraint with the
 /// appropriate `from`-`to` direction. This is computed according to whether the constraint flows to

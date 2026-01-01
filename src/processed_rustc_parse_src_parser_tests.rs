@@ -1,49 +1,35 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[allow(rustc::symbol_intern_string_literal)]
 
 use std::assert_matches::assert_matches;
 use std::io::prelude::*;
 use std::iter::Peekable;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, Mutex};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{io, str};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use ast::token::IdentIsRaw;
 use crate::rustc_complete::token::{self, Delimiter, Token};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, PatKind, visit};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast_pretty::pprust::item_to_string;
 use crate::rustc_complete::emitter::{HumanEmitter, OutputTheme};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::translation::Translator;
 use crate::rustc_complete::{DiagCtxt, MultiSpan, PResult};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     BytePos, FileName, Pos, Span, Symbol, create_default_session_globals_then, kw, sym,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use termcolor::WriteColor;
 
 use crate::lexer::StripTokens;
 use crate::parser::{ForceCollect, Parser};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{new_parser_from_source_str, source_str_to_stream, unwrap_or_emit_fatal};
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=psess | COMPLEXITY=2 | LINES=4 */
 
 fn psess() -> ParseSess {
     ParseSess::new(vec![crate::DEFAULT_LOCALE_RESOURCE])
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=string_to_parser | COMPLEXITY=2 | LINES=10 */
 
 /// Map string to parser (via tts).
 fn string_to_parser(psess: &ParseSess, source_str: String) -> Parser<'_> {
@@ -54,7 +40,6 @@ fn string_to_parser(psess: &ParseSess, source_str: String) -> Parser<'_> {
         StripTokens::Nothing,
     ))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=create_test_handler | COMPLEXITY=4 | LINES=12 */
 
 fn create_test_handler(theme: OutputTheme) -> (DiagCtxt, Arc<SourceMap>, Arc<Mutex<Vec<u8>>>) {
     let output = Arc::new(Mutex::new(Vec::new()));
@@ -67,7 +52,6 @@ fn create_test_handler(theme: OutputTheme) -> (DiagCtxt, Arc<SourceMap>, Arc<Mut
     let dcx = DiagCtxt::new(Box::new(emitter));
     (dcx, source_map, output)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=with_error_checking_parse | COMPLEXITY=2 | LINES=13 */
 
 /// Returns the result of parsing the given string via the given callback.
 ///
@@ -81,7 +65,6 @@ where
     p.dcx().abort_if_errors();
     x
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=with_expected_parse_error | COMPLEXITY=5 | LINES=20 */
 
 /// Verifies that parsing the given string using the given callback will
 /// generate an error that contains the given text.
@@ -102,7 +85,6 @@ where
 
     assert!(actual_output.contains(expected_output))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Maps a string to tts, using a made-up filename.
 pub(crate) fn string_to_stream(source_str: String) -> TokenStream {
@@ -114,7 +96,6 @@ pub(crate) fn string_to_stream(source_str: String) -> TokenStream {
         None,
     ))
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=43 | LINES=41 */
 
 /// Does the given string match the pattern? whitespace in the first string
 /// may be deleted or replaced with other whitespace to match the pattern.
@@ -156,7 +137,6 @@ pub(crate) fn matches_codepattern(a: &str, b: &str) -> bool {
     // Check if a has *only* trailing whitespace.
     a_iter.all(rustc_lexer::is_whitespace)
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=scan_for_non_ws_or_end | COMPLEXITY=5 | LINES=7 */
 
 /// Advances the given peekable `Iterator` until it reaches a non-whitespace character.
 fn scan_for_non_ws_or_end<I: Iterator<Item = char>>(iter: &mut Peekable<I>) {
@@ -164,26 +144,22 @@ fn scan_for_non_ws_or_end<I: Iterator<Item = char>>(iter: &mut Peekable<I>) {
         iter.next();
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=Position | COMPLEXITY=2 | LINES=6 */
 
 /// Identifies a position in the text by the n'th occurrence of a string.
 struct Position {
     string: &'static str,
     count: usize,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=SpanLabel | COMPLEXITY=2 | LINES=6 */
 
 struct SpanLabel {
     start: Position,
     end: Position,
     label: &'static str,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=Shared | COMPLEXITY=2 | LINES=4 */
 
 struct Shared<T: Write> {
     data: Arc<Mutex<T>>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=supports_color | COMPLEXITY=7 | LINES=14 */
 
 impl<T: Write> WriteColor for Shared<T> {
     fn supports_color(&self) -> bool {
@@ -198,7 +174,6 @@ impl<T: Write> WriteColor for Shared<T> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=write | COMPLEXITY=6 | LINES=10 */
 
 impl<T: Write> Write for Shared<T> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
@@ -209,7 +184,6 @@ impl<T: Write> Write for Shared<T> {
         self.data.lock().unwrap().flush()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=test_harness | COMPLEXITY=27 | LINES=53 */
 
 #[allow(rustc::untranslatable_diagnostic)] // no translation needed for tests
 fn test_harness(
@@ -263,7 +237,6 @@ fn test_harness(
         }
     })
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=make_span | COMPLEXITY=2 | LINES=7 */
 
 fn make_span(file_text: &str, start: &Position, end: &Position) -> Span {
     let start = make_pos(file_text, start);
@@ -271,7 +244,6 @@ fn make_span(file_text: &str, start: &Position, end: &Position) -> Span {
     assert!(start <= end);
     Span::with_root_ctxt(BytePos(start as u32), BytePos(end as u32))
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=make_pos | COMPLEXITY=12 | LINES=14 */
 
 fn make_pos(file_text: &str, pos: &Position) -> usize {
     let mut remainder = file_text;
@@ -286,7 +258,6 @@ fn make_pos(file_text: &str, pos: &Position) -> usize {
     }
     offset
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=ends_on_col0 | COMPLEXITY=10 | LINES=36 */
 
 #[test]
 fn ends_on_col0() {
@@ -323,7 +294,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=ends_on_col2 | COMPLEXITY=10 | LINES=40 */
 
 #[test]
 fn ends_on_col2() {
@@ -364,7 +334,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=non_nested | COMPLEXITY=11 | LINES=53 */
 #[test]
 fn non_nested() {
     test_harness(
@@ -418,7 +387,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=11 | LINES=51 */
 
 #[test]
 fn nested() {
@@ -470,7 +438,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=multiline_and_normal_overlap | COMPLEXITY=11 | LINES=53 */
 
 #[test]
 fn multiline_and_normal_overlap() {
@@ -524,7 +491,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=different_overlap | COMPLEXITY=11 | LINES=55 */
 
 #[test]
 fn different_overlap() {
@@ -580,7 +546,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=different_note_1 | COMPLEXITY=7 | LINES=40 */
 
 #[test]
 fn different_note_1() {
@@ -621,7 +586,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=different_note_2 | COMPLEXITY=7 | LINES=42 */
 
 #[test]
 fn different_note_2() {
@@ -664,7 +628,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=different_note_3 | COMPLEXITY=7 | LINES=44 */
 
 #[test]
 fn different_note_3() {
@@ -709,7 +672,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=different_note_spanned_1 | COMPLEXITY=9 | LINES=51 */
 
 #[test]
 fn different_note_spanned_1() {
@@ -761,7 +723,6 @@ note: bar
 "#,
     );
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=different_note_spanned_2 | COMPLEXITY=12 | LINES=67 */
 
 #[test]
 fn different_note_spanned_2() {
@@ -829,7 +790,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=different_note_spanned_3 | COMPLEXITY=14 | LINES=81 */
 
 #[test]
 fn different_note_spanned_3() {
@@ -911,7 +871,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=different_note_spanned_4 | COMPLEXITY=9 | LINES=56 */
 
 #[test]
 fn different_note_spanned_4() {
@@ -968,7 +927,6 @@ note: bar
 "#,
     );
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=different_note_spanned_5 | COMPLEXITY=9 | LINES=56 */
 
 #[test]
 fn different_note_spanned_5() {
@@ -1025,7 +983,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=different_note_spanned_6 | COMPLEXITY=12 | LINES=70 */
 
 #[test]
 fn different_note_spanned_6() {
@@ -1096,7 +1053,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=different_note_spanned_7 | COMPLEXITY=12 | LINES=74 */
 
 #[test]
 fn different_note_spanned_7() {
@@ -1171,7 +1127,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=different_note_spanned_8 | COMPLEXITY=12 | LINES=70 */
 
 #[test]
 fn different_note_spanned_8() {
@@ -1242,7 +1197,6 @@ note: baz
 "#,
     );
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=different_note_spanned_9 | COMPLEXITY=10 | LINES=59 */
 
 #[test]
 fn different_note_spanned_9() {
@@ -1302,7 +1256,6 @@ note: qux
 "#,
     );
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=different_note_spanned_10 | COMPLEXITY=10 | LINES=59 */
 
 #[test]
 fn different_note_spanned_10() {
@@ -1362,7 +1315,6 @@ note: bar
 "#,
     );
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=triple_overlap | COMPLEXITY=14 | LINES=63 */
 
 #[test]
 fn triple_overlap() {
@@ -1426,7 +1378,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=triple_exact_overlap | COMPLEXITY=14 | LINES=59 */
 
 #[test]
 fn triple_exact_overlap() {
@@ -1486,7 +1437,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=minimum_depth | COMPLEXITY=14 | LINES=68 */
 
 #[test]
 fn minimum_depth() {
@@ -1555,7 +1505,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=non_overlapping | COMPLEXITY=11 | LINES=53 */
 
 #[test]
 fn non_overlapping() {
@@ -1609,7 +1558,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=overlapping_start_and_end | COMPLEXITY=11 | LINES=57 */
 
 #[test]
 fn overlapping_start_and_end() {
@@ -1667,7 +1615,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=multiple_labels_primary_without_message | COMPLEXITY=19 | LINES=45 */
 
 #[test]
 fn multiple_labels_primary_without_message() {
@@ -1713,7 +1660,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=multiline_notes | COMPLEXITY=13 | LINES=43 */
 
 #[test]
 fn multiline_notes() {
@@ -1757,7 +1703,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=multiple_labels_secondary_without_message | COMPLEXITY=16 | LINES=40 */
 
 #[test]
 fn multiple_labels_secondary_without_message() {
@@ -1798,7 +1743,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=multiple_labels_primary_without_message_2 | COMPLEXITY=20 | LINES=49 */
 
 #[test]
 fn multiple_labels_primary_without_message_2() {
@@ -1848,7 +1792,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=multiple_labels_secondary_without_message_2 | COMPLEXITY=16 | LINES=44 */
 
 #[test]
 fn multiple_labels_secondary_without_message_2() {
@@ -1893,7 +1836,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=multiple_labels_secondary_without_message_3 | COMPLEXITY=10 | LINES=44 */
 
 #[test]
 fn multiple_labels_secondary_without_message_3() {
@@ -1938,7 +1880,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=multiple_labels_without_message | COMPLEXITY=16 | LINES=40 */
 
 #[test]
 fn multiple_labels_without_message() {
@@ -1979,7 +1920,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=multiple_labels_without_message_2 | COMPLEXITY=19 | LINES=45 */
 
 #[test]
 fn multiple_labels_without_message_2() {
@@ -2025,7 +1965,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=multiple_labels_with_message | COMPLEXITY=16 | LINES=46 */
 
 #[test]
 fn multiple_labels_with_message() {
@@ -2072,7 +2011,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=single_label_with_message | COMPLEXITY=13 | LINES=33 */
 
 #[test]
 fn single_label_with_message() {
@@ -2106,7 +2044,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=single_label_without_message | COMPLEXITY=13 | LINES=33 */
 
 #[test]
 fn single_label_without_message() {
@@ -2140,7 +2077,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=long_snippet | COMPLEXITY=11 | LINES=75 */
 
 #[test]
 fn long_snippet() {
@@ -2216,7 +2152,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=long_snippet_multiple_spans | COMPLEXITY=11 | LINES=81 */
 
 #[test]
 fn long_snippet_multiple_spans() {
@@ -2298,7 +2233,6 @@ error: foo
 "#,
     );
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=parse_item_from_source_str | COMPLEXITY=2 | LINES=13 */
 
 /// Parses an item.
 ///
@@ -2312,25 +2246,21 @@ fn parse_item_from_source_str(
     unwrap_or_emit_fatal(new_parser_from_source_str(psess, name, source, StripTokens::Nothing))
         .parse_item(ForceCollect::No)
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=sp | COMPLEXITY=2 | LINES=5 */
 
 // Produces a `crate::rustc_span::span`.
 fn sp(a: u32, b: u32) -> Span {
     Span::with_root_ctxt(BytePos(a), BytePos(b))
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=string_to_expr | COMPLEXITY=2 | LINES=5 */
 
 /// Parses a string, return an expression.
 fn string_to_expr(source_str: String) -> Box<ast::Expr> {
     with_error_checking_parse(source_str, &psess(), |p| p.parse_expr())
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=string_to_item | COMPLEXITY=2 | LINES=5 */
 
 /// Parses a string, returns an item.
 fn string_to_item(source_str: String) -> Option<Box<ast::Item>> {
     with_error_checking_parse(source_str, &psess(), |p| p.parse_item(ForceCollect::No))
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=bad_path_expr_1 | COMPLEXITY=3 | LINES=12 */
 
 #[test]
 fn bad_path_expr_1() {
@@ -2343,7 +2273,6 @@ fn bad_path_expr_1() {
         );
     })
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=string_to_tts_macro | COMPLEXITY=56 | LINES=57 */
 
 // Checks the token-tree-ization of macros.
 #[test]
@@ -2401,7 +2330,6 @@ fn string_to_tts_macro() {
         }
     })
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=string_to_tts_1 | COMPLEXITY=9 | LINES=52 */
 
 #[test]
 fn string_to_tts_1() {
@@ -2454,7 +2382,6 @@ fn string_to_tts_1() {
         assert_eq!(tts, expected);
     })
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=parse_use | COMPLEXITY=3 | LINES=15 */
 
 #[test]
 fn parse_use() {
@@ -2470,7 +2397,6 @@ fn parse_use() {
         assert_eq!(&vitem_s[..], use_s);
     })
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=parse_extern_crate | COMPLEXITY=3 | LINES=15 */
 
 #[test]
 fn parse_extern_crate() {
@@ -2486,7 +2412,6 @@ fn parse_extern_crate() {
         assert_eq!(&vitem_s[..], ex_s);
     })
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=get_spans_of_pat_idents | COMPLEXITY=15 | LINES=23 */
 
 fn get_spans_of_pat_idents(src: &str) -> Vec<Span> {
     let item = string_to_item(src.to_string()).unwrap();
@@ -2510,7 +2435,6 @@ fn get_spans_of_pat_idents(src: &str) -> Vec<Span> {
     visit::walk_item(&mut v, &item);
     return v.spans;
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=span_of_self_arg_pat_idents_are_correct | COMPLEXITY=19 | LINES=24 */
 
 #[test]
 fn span_of_self_arg_pat_idents_are_correct() {
@@ -2535,7 +2459,6 @@ fn span_of_self_arg_pat_idents_are_correct() {
         }
     })
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=parse_exprs | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn parse_exprs() {
@@ -2545,7 +2468,6 @@ fn parse_exprs() {
         string_to_expr("a::z.froob(b,&(987+3))".to_string());
     })
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=attrs_fix_bug | COMPLEXITY=6 | LINES=21 */
 
 #[test]
 fn attrs_fix_bug() {
@@ -2567,7 +2489,6 @@ let mut fflags: c_int = wb();
         );
     })
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=crlf_doc_comments | COMPLEXITY=8 | LINES=26 */
 
 #[test]
 fn crlf_doc_comments() {
@@ -2594,7 +2515,6 @@ fn crlf_doc_comments() {
         assert_eq!(doc.as_str(), " doc comment\n *  with CRLF ");
     });
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=ttdelim_span | COMPLEXITY=12 | LINES=30 */
 
 #[test]
 fn ttdelim_span() {
@@ -2625,7 +2545,6 @@ fn ttdelim_span() {
         }
     });
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=look | COMPLEXITY=4 | LINES=9 */
 
 #[track_caller]
 fn look(p: &Parser<'_>, dist: usize, kind: crate::rustc_ast::token::TokenKind) {
@@ -2635,7 +2554,6 @@ fn look(p: &Parser<'_>, dist: usize, kind: crate::rustc_ast::token::TokenKind) {
     let tok = p.look_ahead(dist, |tok| *tok);
     assert_eq!(kind, tok.kind);
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=look_ahead | COMPLEXITY=15 | LINES=73 */
 
 #[test]
 fn look_ahead() {
@@ -2709,7 +2627,6 @@ fn look_ahead() {
         look(&p, 100, token::Eof);
     });
 }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=look_ahead_non_outermost_stream | COMPLEXITY=12 | LINES=40 */
 
 /// There used to be some buggy behaviour when using `look_ahead` not within
 /// the outermost token stream, which this test covers.
@@ -2749,7 +2666,6 @@ fn look_ahead_non_outermost_stream() {
         look(&p, 100, token::Eof);
     });
 }
-/* AST_META: AST_ID=84 | TYPE=FUNCTION | NAME=debug_lookahead | COMPLEXITY=42 | LINES=219 */
 
 // FIXME(nnethercote) All the output is currently wrong.
 #[test]
@@ -2969,7 +2885,6 @@ fn debug_lookahead() {
         );
     });
 }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=out_of_line_mod | COMPLEXITY=10 | LINES=19 */
 
 // This tests that when parsing a string (rather than a file) we don't try
 // and read in a file for a module declaration and just parse a stub.
@@ -2988,7 +2903,6 @@ fn out_of_line_mod() {
         assert_matches!(mod_kind, ast::ModKind::Loaded(items, ..) if items.len() == 2);
     });
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=eqmodws | COMPLEXITY=3 | LINES=15 */
 
 #[test]
 fn eqmodws() {
@@ -3004,7 +2918,6 @@ fn eqmodws() {
     assert_eq!(matches_codepattern("a   b", "ab"), true);
     assert_eq!(matches_codepattern(" a   b", "ab"), true);
 }
-/* AST_META: AST_ID=87 | TYPE=FUNCTION | NAME=pattern_whitespace | COMPLEXITY=4 | LINES=7 */
 
 #[test]
 fn pattern_whitespace() {
@@ -3012,7 +2925,6 @@ fn pattern_whitespace() {
     assert_eq!(matches_codepattern("a b ", "a   \u{0085}\n\t\r  b"), true);
     assert_eq!(matches_codepattern("a b", "a   \u{0085}\n\t\r  b "), false);
 }
-/* AST_META: AST_ID=88 | TYPE=FUNCTION | NAME=non_pattern_whitespace | COMPLEXITY=6 | LINES=9 */
 
 #[test]
 fn non_pattern_whitespace() {

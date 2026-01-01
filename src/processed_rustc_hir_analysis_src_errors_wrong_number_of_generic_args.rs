@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/errors/wrong_number_of_generic_args.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::iter;
 
 use GenericArgsInfo::*;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, Diagnostic, EmissionGuarantee, MultiSpan, pluralize};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::ty::{self as ty, AssocItems, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=28 */
 use crate::rustc_complete::def_id::DefId;
 use tracing::debug;
 
@@ -37,7 +34,6 @@ pub(crate) struct WrongNumberOfGenericArgs<'a, 'tcx> {
     /// DefId of the generic type
     pub(crate) def_id: DefId,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 // Provides information about the kind of arguments that were provided for
 // the PathSegment, for which missing generic arguments were detected
@@ -52,7 +48,6 @@ pub(crate) enum AngleBrackets {
     // Angle brackets are available, but missing some generic arguments
     Available,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=39 */
 
 // Information about the kind of arguments that are either missing or are unexpected
 #[derive(Debug)]
@@ -92,7 +87,6 @@ pub(crate) enum GenericArgsInfo {
         synth_provided: bool,
     },
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=missing_lifetimes | COMPLEXITY=625 | LINES=1049 */
 
 impl<'a, 'tcx> WrongNumberOfGenericArgs<'a, 'tcx> {
     pub(crate) fn new(
@@ -1142,7 +1136,6 @@ impl<'a, 'tcx> WrongNumberOfGenericArgs<'a, 'tcx> {
         err.note("`impl Trait` cannot be explicitly specified as a generic argument");
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=6 | LINES=20 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for WrongNumberOfGenericArgs<'_, '_> {
     fn into_diag(

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/check_unsafety.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::borrow::Cow;
 use std::mem;
 use std::ops::Bound;
@@ -10,23 +9,17 @@ use crate::rustc_complete::DiagArgValue;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, Mutability, find_attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::mir::BorrowKind;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::thir::visit::Visitor;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::Level;
 use crate::rustc_complete::lint::builtin::{DEPRECATED_SAFE_2024, UNSAFE_OP_IN_UNSAFE_FN, UNUSED_UNSAFE};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UnsafetyVisitor | COMPLEXITY=12 | LINES=28 */
 
 use crate::builder::ExprCategory;
 use crate::errors::*;
@@ -55,7 +48,6 @@ struct UnsafetyVisitor<'a, 'tcx> {
     /// an unsafe block once.
     suggest_unsafe_block: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=in_safety_context | COMPLEXITY=115 | LINES=191 */
 
 impl<'tcx> UnsafetyVisitor<'_, 'tcx> {
     fn in_safety_context(&mut self, safety_context: SafetyContext, f: impl FnOnce(&mut Self)) {
@@ -247,7 +239,6 @@ impl<'tcx> UnsafetyVisitor<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LayoutConstrainedPlaceVisitor | COMPLEXITY=4 | LINES=7 */
 
 // Searches for accesses to layout constrained fields.
 struct LayoutConstrainedPlaceVisitor<'a, 'tcx> {
@@ -255,14 +246,12 @@ struct LayoutConstrainedPlaceVisitor<'a, 'tcx> {
     thir: &'a Thir<'tcx>,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a, 'tcx> LayoutConstrainedPlaceVisitor<'a, 'tcx> {
     fn new(thir: &'a Thir<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
         Self { found: false, thir, tcx }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=26 | LINES=31 */
 
 impl<'a, 'tcx> Visitor<'a, 'tcx> for LayoutConstrainedPlaceVisitor<'a, 'tcx> {
     fn thir(&self) -> &'a Thir<'tcx> {
@@ -294,7 +283,6 @@ impl<'a, 'tcx> Visitor<'a, 'tcx> for LayoutConstrainedPlaceVisitor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=362 | LINES=430 */
 
 impl<'a, 'tcx> Visitor<'a, 'tcx> for UnsafetyVisitor<'a, 'tcx> {
     fn thir(&self) -> &'a Thir<'tcx> {
@@ -725,7 +713,6 @@ impl<'a, 'tcx> Visitor<'a, 'tcx> for UnsafetyVisitor<'a, 'tcx> {
         visit::walk_expr(self, expr);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 #[derive(Clone)]
 enum SafetyContext {
@@ -734,21 +721,18 @@ enum SafetyContext {
     UnsafeFn,
     UnsafeBlock { span: Span, hir_id: HirId, used: bool, nested_used_blocks: Vec<NestedUsedBlock> },
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=NestedUsedBlock | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 struct NestedUsedBlock {
     hir_id: HirId,
     span: Span,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UnusedUnsafeWarning | COMPLEXITY=2 | LINES=6 */
 
 struct UnusedUnsafeWarning {
     hir_id: HirId,
     block_span: Span,
     enclosing_unsafe: Option<UnusedUnsafeEnclosing>,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=25 */
 
 #[derive(Clone, PartialEq)]
 enum UnsafeOpKind {
@@ -774,7 +758,6 @@ enum UnsafeOpKind {
     },
     UnsafeBinderCast,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=emit_unsafe_op_in_unsafe_fn_lint | COMPLEXITY=170 | LINES=396 */
 
 use UnsafeOpKind::*;
 
@@ -1171,7 +1154,6 @@ impl UnsafeOpKind {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=52 | LINES=68 */
 
 pub(crate) fn check_unsafety(tcx: TyCtxt<'_>, def: LocalDefId) {
     // Closures and inline consts are handled by their owner, if it has a body

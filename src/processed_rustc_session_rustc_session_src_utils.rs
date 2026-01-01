@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::path::PathBuf;
 use std::sync::OnceLock;
 
@@ -7,7 +6,6 @@ use crate::rustc_data_structures::profiling::VerboseTimingGuard;
 use rustc_fs_util::try_canonicalize;
 use crate::rustc_complete::attrs::NativeLibKind;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=timer | COMPLEXITY=4 | LINES=12 */
 
 use crate::session::Session;
 
@@ -20,7 +18,6 @@ impl Session {
         self.prof.verbose_generic_activity(what).run(f)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=NativeLib | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Encodable, Decodable)]
 #[derive(HashStable_Generic)]
@@ -30,14 +27,12 @@ pub struct NativeLib {
     pub kind: NativeLibKind,
     pub verbatim: Option<bool>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=has_modifiers | COMPLEXITY=3 | LINES=6 */
 
 impl NativeLib {
     pub fn has_modifiers(&self) -> bool {
         self.verbatim.is_some() || self.kind.has_modifiers()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CanonicalizedPath | COMPLEXITY=2 | LINES=8 */
 
 /// A path that has been canonicalized along with its original, non-canonicalized form
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -46,7 +41,6 @@ pub struct CanonicalizedPath {
     canonicalized: Option<PathBuf>,
     original: PathBuf,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=14 */
 
 impl CanonicalizedPath {
     pub fn new(path: PathBuf) -> Self {
@@ -61,7 +55,6 @@ impl CanonicalizedPath {
         &self.original
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extra_compiler_flags | COMPLEXITY=36 | LINES=48 */
 
 /// Gets a list of extra command-line flags provided by the user, as strings.
 ///
@@ -110,7 +103,6 @@ pub fn extra_compiler_flags() -> Option<(Vec<String>, bool)> {
 
     if !result.is_empty() { Some((result, excluded_cargo_defaults)) } else { None }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=was_invoked_from_cargo | COMPLEXITY=3 | LINES=15 */
 
 /// Returns whenever rustc was launched by Cargo as opposed to another build system.
 ///

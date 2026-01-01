@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/select.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::ControlFlow;
 
 use crate::rustc_infer::infer::InferCtxt;
 use crate::rustc_infer::traits::solve::inspect::ProbeKind;
 use crate::rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::{
     BuiltinImplSource, ImplSource, ImplSourceUserDefinedData, Obligation, ObligationCause,
     Selection, SelectionError, SelectionResult, TraitObligation,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::extension;
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use thin_vec::thin_vec;
 
 use crate::solve::inspect::{self, ProofTreeInferCtxtExt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=select_in_new_trait_solver | COMPLEXITY=5 | LINES=18 */
 
 #[extension(pub trait InferCtxtSelectExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {
@@ -37,12 +32,10 @@ impl<'tcx> InferCtxt<'tcx> {
         .unwrap()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Select | COMPLEXITY=2 | LINES=4 */
 
 struct Select {
     span: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=span | COMPLEXITY=28 | LINES=50 */
 
 impl<'tcx> inspect::ProofTreeVisitor<'tcx> for Select {
     type Result = ControlFlow<SelectionResult<'tcx, Selection<'tcx>>>;
@@ -93,7 +86,6 @@ impl<'tcx> inspect::ProofTreeVisitor<'tcx> for Select {
         ControlFlow::Break(Ok(to_selection(self.span, candidates.into_iter().next().unwrap())))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=candidate_should_be_dropped_in_favor_of | COMPLEXITY=22 | LINES=53 */
 
 /// This is a lot more limited than the old solver's equivalent method. This may lead to more `Ok(None)`
 /// results when selecting traits in polymorphic contexts, but we should never rely on the lack of ambiguity,
@@ -147,7 +139,6 @@ fn candidate_should_be_dropped_in_favor_of<'tcx>(
         _ => false,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_selection | COMPLEXITY=34 | LINES=53 */
 
 fn to_selection<'tcx>(
     span: Span,

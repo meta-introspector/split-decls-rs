@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_index/src/slice.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops::{Index, IndexMut, RangeBounds};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::slice::GetDisjointMutError::*;
 use std::slice::{self, SliceIndex};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{Idx, IndexVec, IntoSliceIdx};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=IndexSlice | COMPLEXITY=5 | LINES=14 */
 
 /// A view into contiguous `T`s, indexed by `I` rather than by `usize`.
 ///
@@ -24,7 +20,6 @@ pub struct IndexSlice<I: Idx, T> {
     _marker: PhantomData<fn(&I)>,
     pub raw: [T],
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_raw_mut | COMPLEXITY=73 | LINES=157 */
 
 impl<I: Idx, T> IndexSlice<I, T> {
     #[inline]
@@ -182,7 +177,6 @@ impl<I: Idx, T> IndexSlice<I, T> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=invert_bijective_mapping | COMPLEXITY=18 | LINES=30 */
 
 impl<I: Idx, J: Idx> IndexSlice<I, J> {
     /// Invert a bijective mapping, i.e. `invert(map)[y] = x` if `map[x] = y`,
@@ -213,14 +207,12 @@ impl<I: Idx, J: Idx> IndexSlice<I, J> {
         inverse
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<I: Idx, T: fmt::Debug> fmt::Debug for IndexSlice<I, T> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::Debug::fmt(&self.raw, fmt)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=9 */
 
 impl<I: Idx, T, R: IntoSliceIdx<I, [T]>> Index<R> for IndexSlice<I, T> {
     type Output = <R::Output as SliceIndex<[T]>>::Output;
@@ -230,7 +222,6 @@ impl<I: Idx, T, R: IntoSliceIdx<I, [T]>> Index<R> for IndexSlice<I, T> {
         &self.raw[index.into_slice_idx()]
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Idx, T, R: IntoSliceIdx<I, [T]>> IndexMut<R> for IndexSlice<I, T> {
     #[inline]
@@ -238,7 +229,6 @@ impl<I: Idx, T, R: IntoSliceIdx<I, [T]>> IndexMut<R> for IndexSlice<I, T> {
         &mut self.raw[index.into_slice_idx()]
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, I: Idx, T> IntoIterator for &'a IndexSlice<I, T> {
     type Item = &'a T;
@@ -249,7 +239,6 @@ impl<'a, I: Idx, T> IntoIterator for &'a IndexSlice<I, T> {
         self.raw.iter()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, I: Idx, T> IntoIterator for &'a mut IndexSlice<I, T> {
     type Item = &'a mut T;
@@ -260,7 +249,6 @@ impl<'a, I: Idx, T> IntoIterator for &'a mut IndexSlice<I, T> {
         self.raw.iter_mut()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_owned | COMPLEXITY=6 | LINES=12 */
 
 impl<I: Idx, T: Clone> ToOwned for IndexSlice<I, T> {
     type Owned = IndexVec<I, T>;
@@ -273,7 +261,6 @@ impl<I: Idx, T: Clone> ToOwned for IndexSlice<I, T> {
         self.raw.clone_into(&mut target.raw)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Idx, T> Default for &IndexSlice<I, T> {
     #[inline]
@@ -281,7 +268,6 @@ impl<I: Idx, T> Default for &IndexSlice<I, T> {
         IndexSlice::from_raw(Default::default())
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=7 */
 
 impl<I: Idx, T> Default for &mut IndexSlice<I, T> {
     #[inline]
@@ -289,7 +275,6 @@ impl<I: Idx, T> Default for &mut IndexSlice<I, T> {
         IndexSlice::from_raw_mut(Default::default())
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 
 // Whether `IndexSlice` is `Send` depends only on the data,
 // not the phantom data.

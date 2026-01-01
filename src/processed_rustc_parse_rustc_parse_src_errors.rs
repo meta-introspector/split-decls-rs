@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // ignore-tidy-filelength
 
 use std::borrow::Cow;
@@ -7,24 +6,18 @@ use std::borrow::Cow;
 use crate::rustc_complete::token::Token;
 use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_complete::{Path, Visibility};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, Subdiagnostic,
     SuggestionStyle,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::fluent_generated as fluent;
 use crate::parser::{ForbiddenLetReason, TokenDescription};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_maybe_report_ambiguous_plus)]
@@ -34,7 +27,6 @@ pub(crate) struct AmbiguousPlus {
     #[subdiagnostic]
     pub suggestion: AddParen,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_maybe_recover_from_bad_type_plus, code = E0178)]
@@ -44,7 +36,6 @@ pub(crate) struct BadTypePlus {
     #[subdiagnostic]
     pub sub: BadTypePlusSub,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_add_paren, applicability = "machine-applicable")]
@@ -54,7 +45,6 @@ pub(crate) struct AddParen {
     #[suggestion_part(code = ")")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum BadTypePlusSub {
@@ -73,7 +63,6 @@ pub(crate) enum BadTypePlusSub {
         span: Span,
     },
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_maybe_recover_from_bad_qpath_stage_2)]
@@ -83,7 +72,6 @@ pub(crate) struct BadQPathStage2 {
     #[subdiagnostic]
     pub wrap: WrapType,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_trait_impl_modifier_in_inherent_impl)]
@@ -98,7 +86,6 @@ pub(crate) struct TraitImplModifierInInherentImpl {
     #[label(parse_type)]
     pub self_ty: Span,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -108,7 +95,6 @@ pub(crate) struct WrapType {
     #[suggestion_part(code = ">")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_semicolon)]
@@ -120,7 +106,6 @@ pub(crate) struct IncorrectSemicolon<'a> {
     pub show_help: bool,
     pub name: &'a str,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_use_of_await)]
@@ -134,7 +119,6 @@ pub(crate) struct IncorrectUseOfAwait {
     )]
     pub span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_use_of_use)]
@@ -148,7 +132,6 @@ pub(crate) struct IncorrectUseOfUse {
     )]
     pub span: Span,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -162,7 +145,6 @@ pub(crate) struct AwaitSuggestion {
     pub dot_await: Span,
     pub question_mark: &'static str,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_use_of_await)]
@@ -172,7 +154,6 @@ pub(crate) struct IncorrectAwait {
     #[subdiagnostic]
     pub suggestion: AwaitSuggestion,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_in_in_typo)]
@@ -182,7 +163,6 @@ pub(crate) struct InInTypo {
     #[suggestion(code = "", style = "verbose", applicability = "machine-applicable")]
     pub sugg_span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_variable_declaration)]
@@ -192,7 +172,6 @@ pub(crate) struct InvalidVariableDeclaration {
     #[subdiagnostic]
     pub sub: InvalidVariableDeclarationSub,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=32 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidVariableDeclarationSub {
@@ -225,7 +204,6 @@ pub(crate) enum InvalidVariableDeclarationSub {
     )]
     UseLetNotVar(#[primary_span] Span),
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_switch_ref_box_order)]
@@ -234,7 +212,6 @@ pub(crate) struct SwitchRefBoxOrder {
     #[suggestion(applicability = "machine-applicable", style = "verbose", code = "box ref")]
     pub span: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_comparison_operator)]
@@ -245,7 +222,6 @@ pub(crate) struct InvalidComparisonOperator {
     #[subdiagnostic]
     pub sub: InvalidComparisonOperatorSub,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidComparisonOperatorSub {
@@ -264,7 +240,6 @@ pub(crate) enum InvalidComparisonOperatorSub {
     #[label(parse_spaceship_operator_invalid)]
     Spaceship(#[primary_span] Span),
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_logical_operator)]
@@ -276,7 +251,6 @@ pub(crate) struct InvalidLogicalOperator {
     #[subdiagnostic]
     pub sub: InvalidLogicalOperatorSub,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum InvalidLogicalOperatorSub {
@@ -295,7 +269,6 @@ pub(crate) enum InvalidLogicalOperatorSub {
     )]
     Disjunction(#[primary_span] Span),
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(parse_tilde_is_not_unary_operator)]
@@ -314,7 +287,6 @@ pub(crate) struct NotAsNegationOperator {
     #[subdiagnostic]
     pub sub: NotAsNegationOperatorSub,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NotAsNegationOperatorSub {
@@ -342,7 +314,6 @@ pub(crate) enum NotAsNegationOperatorSub {
     )]
     SuggestNotLogical(#[primary_span] Span),
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_malformed_loop_label)]
@@ -352,7 +323,6 @@ pub(crate) struct MalformedLoopLabel {
     #[suggestion(applicability = "machine-applicable", code = "'", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_lifetime_in_borrow_expression)]
@@ -363,7 +333,6 @@ pub(crate) struct LifetimeInBorrowExpression {
     #[label]
     pub lifetime_span: Span,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 #[derive(Diagnostic)]
 #[diag(parse_field_expression_with_generic)]
@@ -384,7 +353,6 @@ pub(crate) struct UnexpectedTokenAfterLabel {
     #[subdiagnostic]
     pub enclose_in_block: Option<UnexpectedTokenAfterLabelSugg>,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion_enclose_in_block, applicability = "machine-applicable")]
@@ -394,7 +362,6 @@ pub(crate) struct UnexpectedTokenAfterLabelSugg {
     #[suggestion_part(code = " }}")]
     pub right: Span,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_require_colon_after_labeled_expression)]
@@ -407,7 +374,6 @@ pub(crate) struct RequireColonAfterLabeledExpression {
     #[suggestion(style = "verbose", applicability = "machine-applicable", code = ": ")]
     pub label_end: Span,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_do_catch_syntax_removed)]
@@ -417,7 +383,6 @@ pub(crate) struct DoCatchSyntaxRemoved {
     #[suggestion(applicability = "machine-applicable", code = "try", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_float_literal_requires_integer_part)]
@@ -427,7 +392,6 @@ pub(crate) struct FloatLiteralRequiresIntegerPart {
     #[suggestion(applicability = "machine-applicable", code = "0", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_semicolon_before_array)]
@@ -437,7 +401,6 @@ pub(crate) struct MissingSemicolonBeforeArray {
     #[suggestion(style = "verbose", applicability = "maybe-incorrect", code = ";")]
     pub semicolon: Span,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expect_dotdot_not_dotdotdot)]
@@ -447,7 +410,6 @@ pub(crate) struct MissingDotDot {
     #[suggestion(applicability = "maybe-incorrect", code = "..", style = "verbose")]
     pub sugg_span: Span,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_block_macro_segment)]
@@ -459,7 +421,6 @@ pub(crate) struct InvalidBlockMacroSegment {
     #[subdiagnostic]
     pub wrap: WrapInExplicitBlock,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -469,7 +430,6 @@ pub(crate) struct WrapInExplicitBlock {
     #[suggestion_part(code = " }}")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_if_expression_missing_then_block)]
@@ -481,7 +441,6 @@ pub(crate) struct IfExpressionMissingThenBlock {
     #[subdiagnostic]
     pub let_else_sub: Option<IfExpressionLetSomeSub>,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum IfExpressionMissingThenBlockSub {
@@ -490,7 +449,6 @@ pub(crate) enum IfExpressionMissingThenBlockSub {
     #[help(parse_add_then_block)]
     AddThenBlock(#[primary_span] Span),
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_ternary_operator)]
@@ -504,7 +462,6 @@ pub(crate) struct TernaryOperator {
     #[help(parse_use_if_else)]
     pub no_sugg: bool,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 #[derive(Subdiagnostic, Copy, Clone)]
 #[multipart_suggestion(parse_use_if_else, applicability = "maybe-incorrect", style = "verbose")]
@@ -518,7 +475,6 @@ pub(crate) struct TernaryOperatorSuggestion {
     #[suggestion_part(code = " }}")]
     pub end: Span,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -531,7 +487,6 @@ pub(crate) struct IfExpressionLetSomeSub {
     #[primary_span]
     pub if_span: Span,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_if_expression_missing_condition)]
@@ -542,7 +497,6 @@ pub(crate) struct IfExpressionMissingCondition {
     #[label(parse_block_label)]
     pub block_span: Span,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_expression_found_let)]
@@ -557,7 +511,6 @@ pub(crate) struct ExpectedExpressionFoundLet {
     #[subdiagnostic]
     pub comparison: Option<MaybeComparison>,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_or_in_let_chain)]
@@ -565,7 +518,6 @@ pub(crate) struct OrInLetChain {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic, Clone, Copy)]
 #[multipart_suggestion(
@@ -577,7 +529,6 @@ pub(crate) struct MaybeMissingLet {
     #[suggestion_part(code = "let ")]
     pub span: Span,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Subdiagnostic, Clone, Copy)]
 #[multipart_suggestion(
@@ -589,7 +540,6 @@ pub(crate) struct MaybeComparison {
     #[suggestion_part(code = "=")]
     pub span: Span,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expect_eq_instead_of_eqeq)]
@@ -599,7 +549,6 @@ pub(crate) struct ExpectedEqForLetExpr {
     #[suggestion(applicability = "maybe-incorrect", code = "=", style = "verbose")]
     pub sugg_span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_else_block)]
@@ -612,7 +561,6 @@ pub(crate) struct ExpectedElseBlock {
     #[suggestion(applicability = "maybe-incorrect", code = "if ", style = "verbose")]
     pub condition_start: Span,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_struct_field)]
@@ -624,7 +572,6 @@ pub(crate) struct ExpectedStructField {
     #[label(parse_ident_label)]
     pub ident_span: Span,
 }
-/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(parse_outer_attribute_not_allowed_on_if_else)]
@@ -642,7 +589,6 @@ pub(crate) struct OuterAttributeNotAllowedOnIfElse {
     #[suggestion(applicability = "machine-applicable", code = "", style = "verbose")]
     pub attributes: Span,
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_in_in_for_loop)]
@@ -652,7 +598,6 @@ pub(crate) struct MissingInInForLoop {
     #[subdiagnostic]
     pub sub: MissingInInForLoopSub,
 }
-/* AST_META: AST_ID=55 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MissingInInForLoopSub {
@@ -666,7 +611,6 @@ pub(crate) enum MissingInInForLoopSub {
     #[suggestion(parse_add_in, style = "verbose", applicability = "maybe-incorrect", code = " in ")]
     AddIn(#[primary_span] Span),
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_expression_in_for_loop)]
@@ -679,7 +623,6 @@ pub(crate) struct MissingExpressionInForLoop {
     )]
     pub span: Span,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_loop_else)]
@@ -691,7 +634,6 @@ pub(crate) struct LoopElseNotSupported {
     #[label(parse_loop_keyword)]
     pub loop_kw: Span,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_comma_after_match_arm)]
@@ -700,7 +642,6 @@ pub(crate) struct MissingCommaAfterMatchArm {
     #[suggestion(applicability = "machine-applicable", code = ",", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_catch_after_try)]
@@ -709,7 +650,6 @@ pub(crate) struct CatchAfterTry {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_comma_after_base_struct)]
@@ -720,7 +660,6 @@ pub(crate) struct CommaAfterBaseStruct {
     #[suggestion(style = "verbose", applicability = "machine-applicable", code = "")]
     pub comma: Span,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_eq_field_init)]
@@ -730,7 +669,6 @@ pub(crate) struct EqFieldInit {
     #[suggestion(applicability = "machine-applicable", code = ":", style = "verbose")]
     pub eq: Span,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dotdotdot)]
@@ -750,7 +688,6 @@ pub(crate) struct DotDotDot {
     )]
     pub span: Span,
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_left_arrow_operator)]
@@ -759,7 +696,6 @@ pub(crate) struct LeftArrowOperator {
     #[suggestion(applicability = "maybe-incorrect", code = "< -", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_remove_let)]
@@ -769,7 +705,6 @@ pub(crate) struct RemoveLet {
     #[suggestion(applicability = "machine-applicable", code = "", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_use_eq_instead)]
@@ -778,7 +713,6 @@ pub(crate) struct UseEqInstead {
     #[suggestion(style = "verbose", applicability = "machine-applicable", code = "=")]
     pub span: Span,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_use_empty_block_not_semi)]
@@ -787,7 +721,6 @@ pub(crate) struct UseEmptyBlockNotSemi {
     #[suggestion(style = "hidden", applicability = "machine-applicable", code = "{{}}")]
     pub span: Span,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_comparison_interpreted_as_generic)]
@@ -801,7 +734,6 @@ pub(crate) struct ComparisonInterpretedAsGeneric {
     #[subdiagnostic]
     pub suggestion: ComparisonOrShiftInterpretedAsGenericSugg,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_shift_interpreted_as_generic)]
@@ -815,7 +747,6 @@ pub(crate) struct ShiftInterpretedAsGeneric {
     #[subdiagnostic]
     pub suggestion: ComparisonOrShiftInterpretedAsGenericSugg,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -825,7 +756,6 @@ pub(crate) struct ComparisonOrShiftInterpretedAsGenericSugg {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_found_expr_would_be_stmt)]
@@ -837,7 +767,6 @@ pub(crate) struct FoundExprWouldBeStmt {
     #[subdiagnostic]
     pub suggestion: ExprParenthesesNeeded,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_extra_characters_after_close)]
@@ -845,7 +774,6 @@ pub(crate) struct FrontmatterExtraCharactersAfterClose {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_invalid_infostring)]
@@ -854,7 +782,6 @@ pub(crate) struct FrontmatterInvalidInfostring {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_invalid_opening_preceding_whitespace)]
@@ -864,7 +791,6 @@ pub(crate) struct FrontmatterInvalidOpeningPrecedingWhitespace {
     #[note]
     pub note_span: Span,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_unclosed)]
@@ -874,7 +800,6 @@ pub(crate) struct FrontmatterUnclosed {
     #[note]
     pub note_span: Span,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_invalid_close_preceding_whitespace)]
@@ -884,7 +809,6 @@ pub(crate) struct FrontmatterInvalidClosingPrecedingWhitespace {
     #[note]
     pub note_span: Span,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_frontmatter_length_mismatch)]
@@ -898,7 +822,6 @@ pub(crate) struct FrontmatterLengthMismatch {
     pub len_opening: usize,
     pub len_close: usize,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 #[derive(Diagnostic)]
 #[diag(parse_leading_plus_not_supported)]
@@ -916,7 +839,6 @@ pub(crate) struct LeadingPlusNotSupported {
     #[subdiagnostic]
     pub add_parentheses: Option<ExprParenthesesNeeded>,
 }
-/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_parentheses_with_struct_fields)]
@@ -929,7 +851,6 @@ pub(crate) struct ParenthesesWithStructFields {
     #[subdiagnostic]
     pub no_fields_for_fn: NoFieldsForFnCall,
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion_braces_for_struct, applicability = "maybe-incorrect")]
@@ -939,7 +860,6 @@ pub(crate) struct BracesForStructLiteral {
     #[suggestion_part(code = " }}")]
     pub second: Span,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion_no_fields_for_fn, applicability = "maybe-incorrect")]
@@ -947,7 +867,6 @@ pub(crate) struct NoFieldsForFnCall {
     #[suggestion_part(code = "")]
     pub fields: Vec<Span>,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_labeled_loop_in_break)]
@@ -957,7 +876,6 @@ pub(crate) struct LabeledLoopInBreak {
     #[subdiagnostic]
     pub sub: WrapInParentheses,
 }
-/* AST_META: AST_ID=82 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=24 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum WrapInParentheses {
@@ -982,7 +900,6 @@ pub(crate) enum WrapInParentheses {
         right: Span,
     },
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_array_brackets_instead_of_braces)]
@@ -992,7 +909,6 @@ pub(crate) struct ArrayBracketsInsteadOfBraces {
     #[subdiagnostic]
     pub sub: ArrayBracketsInsteadOfBracesSugg,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "maybe-incorrect")]
@@ -1002,7 +918,6 @@ pub(crate) struct ArrayBracketsInsteadOfBracesSugg {
     #[suggestion_part(code = "]")]
     pub right: Span,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_match_arm_body_without_braces)]
@@ -1016,7 +931,6 @@ pub(crate) struct MatchArmBodyWithoutBraces {
     #[subdiagnostic]
     pub sub: MatchArmBodyWithoutBracesSugg,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_inclusive_range_extra_equals)]
@@ -1031,7 +945,6 @@ pub(crate) struct InclusiveRangeExtraEquals {
     )]
     pub span: Span,
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_inclusive_range_match_arrow)]
@@ -1043,7 +956,6 @@ pub(crate) struct InclusiveRangeMatchArrow {
     #[suggestion(style = "verbose", code = " ", applicability = "machine-applicable")]
     pub after_pat: Span,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(parse_inclusive_range_no_end, code = E0586)]
@@ -1059,7 +971,6 @@ pub(crate) struct InclusiveRangeNoEnd {
     )]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=89 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MatchArmBodyWithoutBracesSugg {
@@ -1081,7 +992,6 @@ pub(crate) enum MatchArmBodyWithoutBracesSugg {
         semicolon: Span,
     },
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_struct_literal_not_allowed_here)]
@@ -1091,7 +1001,6 @@ pub(crate) struct StructLiteralNotAllowedHere {
     #[subdiagnostic]
     pub sub: StructLiteralNotAllowedHereSugg,
 }
-/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1101,7 +1010,6 @@ pub(crate) struct StructLiteralNotAllowedHereSugg {
     #[suggestion_part(code = ")")]
     pub right: Span,
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_literal_suffix_on_tuple_index)]
@@ -1111,7 +1019,6 @@ pub(crate) struct InvalidLiteralSuffixOnTupleIndex {
     pub span: Span,
     pub suffix: Symbol,
 }
-/* AST_META: AST_ID=93 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_non_string_abi_literal)]
@@ -1120,7 +1027,6 @@ pub(crate) struct NonStringAbiLiteral {
     #[suggestion(code = "\"C\"", applicability = "maybe-incorrect", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_mismatched_closing_delimiter)]
@@ -1135,7 +1041,6 @@ pub(crate) struct MismatchedClosingDelimiter {
     #[label(parse_label_unclosed)]
     pub unclosed: Option<Span>,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_visibility_restriction, code = E0704)]
@@ -1146,7 +1051,6 @@ pub(crate) struct IncorrectVisibilityRestriction {
     pub span: Span,
     pub inner_str: String,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_assignment_else_not_allowed)]
@@ -1154,7 +1058,6 @@ pub(crate) struct AssignmentElseNotAllowed {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_statement_after_outer_attr)]
@@ -1162,7 +1065,6 @@ pub(crate) struct ExpectedStatementAfterOuterAttr {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_doc_comment_does_not_document_anything, code = E0585)]
@@ -1173,7 +1075,6 @@ pub(crate) struct DocCommentDoesNotDocumentAnything {
     #[suggestion(code = ",", applicability = "machine-applicable", style = "verbose")]
     pub missing_comma: Option<Span>,
 }
-/* AST_META: AST_ID=99 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_const_let_mutually_exclusive)]
@@ -1182,7 +1083,6 @@ pub(crate) struct ConstLetMutuallyExclusive {
     #[suggestion(code = "const", applicability = "maybe-incorrect", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=100 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_expression_in_let_else)]
@@ -1193,7 +1093,6 @@ pub(crate) struct InvalidExpressionInLetElse {
     #[subdiagnostic]
     pub sugg: WrapInParentheses,
 }
-/* AST_META: AST_ID=101 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_curly_in_let_else)]
@@ -1203,7 +1102,6 @@ pub(crate) struct InvalidCurlyInLetElse {
     #[subdiagnostic]
     pub sugg: WrapInParentheses,
 }
-/* AST_META: AST_ID=102 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_compound_assignment_expression_in_let)]
@@ -1214,7 +1112,6 @@ pub(crate) struct CompoundAssignmentExpressionInLet {
     #[suggestion(style = "verbose", code = "", applicability = "maybe-incorrect")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=103 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_suffixed_literal_in_attribute)]
@@ -1223,7 +1120,6 @@ pub(crate) struct SuffixedLiteralInAttribute {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=104 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_meta_item)]
@@ -1234,7 +1130,6 @@ pub(crate) struct InvalidMetaItem {
     #[subdiagnostic]
     pub quote_ident_sugg: Option<InvalidMetaItemQuoteIdentSugg>,
 }
-/* AST_META: AST_ID=105 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_quote_ident_sugg, applicability = "machine-applicable")]
@@ -1244,7 +1139,6 @@ pub(crate) struct InvalidMetaItemQuoteIdentSugg {
     #[suggestion_part(code = "\"")]
     pub after: Span,
 }
-/* AST_META: AST_ID=106 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1258,7 +1152,6 @@ pub(crate) struct SuggEscapeIdentifier {
     pub span: Span,
     pub ident_name: String,
 }
-/* AST_META: AST_ID=107 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1271,7 +1164,6 @@ pub(crate) struct SuggRemoveComma {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=108 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1284,7 +1176,6 @@ pub(crate) struct SuggAddMissingLetStmt {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=109 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ExpectedIdentifierFound {
@@ -1301,7 +1192,6 @@ pub(crate) enum ExpectedIdentifierFound {
     #[label(parse_expected_identifier)]
     Other(#[primary_span] Span),
 }
-/* AST_META: AST_ID=110 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 impl ExpectedIdentifierFound {
     pub(crate) fn new(token_descr: Option<TokenDescription>, span: Span) -> Self {
@@ -1317,7 +1207,6 @@ impl ExpectedIdentifierFound {
         })(span)
     }
 }
-/* AST_META: AST_ID=111 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) struct ExpectedIdentifier {
     pub span: Span,
@@ -1326,7 +1215,6 @@ pub(crate) struct ExpectedIdentifier {
     pub suggest_remove_comma: Option<SuggRemoveComma>,
     pub help_cannot_start_number: Option<HelpIdentifierStartsWithNumber>,
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=29 | LINES=52 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for ExpectedIdentifier {
     #[track_caller]
@@ -1379,7 +1267,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for ExpectedIdentifier {
         diag
     }
 }
-/* AST_META: AST_ID=113 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[help(parse_invalid_identifier_with_leading_number)]
@@ -1387,7 +1274,6 @@ pub(crate) struct HelpIdentifierStartsWithNumber {
     #[primary_span]
     pub num_span: Span,
 }
-/* AST_META: AST_ID=114 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) struct ExpectedSemi {
     pub span: Span,
@@ -1396,7 +1282,6 @@ pub(crate) struct ExpectedSemi {
     pub unexpected_token_label: Option<Span>,
     pub sugg: ExpectedSemiSugg,
 }
-/* AST_META: AST_ID=115 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=22 | LINES=42 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for ExpectedSemi {
     #[track_caller]
@@ -1439,7 +1324,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for ExpectedSemi {
         diag
     }
 }
-/* AST_META: AST_ID=116 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ExpectedSemiSugg {
@@ -1458,7 +1342,6 @@ pub(crate) enum ExpectedSemiSugg {
     )]
     AddSemi(#[primary_span] Span),
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_struct_literal_body_without_path)]
@@ -1468,7 +1351,6 @@ pub(crate) struct StructLiteralBodyWithoutPath {
     #[subdiagnostic]
     pub sugg: StructLiteralBodyWithoutPathSugg,
 }
-/* AST_META: AST_ID=118 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "has-placeholders")]
@@ -1478,7 +1360,6 @@ pub(crate) struct StructLiteralBodyWithoutPathSugg {
     #[suggestion_part(code = " }}")]
     pub after: Span,
 }
-/* AST_META: AST_ID=119 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unmatched_angle_brackets)]
@@ -1488,7 +1369,6 @@ pub(crate) struct UnmatchedAngleBrackets {
     pub span: Span,
     pub num_extra_brackets: usize,
 }
-/* AST_META: AST_ID=120 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_generic_parameters_without_angle_brackets)]
@@ -1498,7 +1378,6 @@ pub(crate) struct GenericParamsWithoutAngleBrackets {
     #[subdiagnostic]
     pub sugg: GenericParamsWithoutAngleBracketsSugg,
 }
-/* AST_META: AST_ID=121 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1508,7 +1387,6 @@ pub(crate) struct GenericParamsWithoutAngleBracketsSugg {
     #[suggestion_part(code = ">")]
     pub right: Span,
 }
-/* AST_META: AST_ID=122 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=19 */
 
 #[derive(Diagnostic)]
 #[diag(parse_comparison_operators_cannot_be_chained)]
@@ -1528,7 +1406,6 @@ pub(crate) struct ComparisonOperatorsCannotBeChained {
     #[subdiagnostic]
     pub chaining_sugg: Option<ComparisonOperatorsCannotBeChainedSugg>,
 }
-/* AST_META: AST_ID=123 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ComparisonOperatorsCannotBeChainedSugg {
@@ -1551,7 +1428,6 @@ pub(crate) enum ComparisonOperatorsCannotBeChainedSugg {
         right: Span,
     },
 }
-/* AST_META: AST_ID=124 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_question_mark_in_type)]
@@ -1562,7 +1438,6 @@ pub(crate) struct QuestionMarkInType {
     #[subdiagnostic]
     pub sugg: QuestionMarkInTypeSugg,
 }
-/* AST_META: AST_ID=125 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1572,7 +1447,6 @@ pub(crate) struct QuestionMarkInTypeSugg {
     #[suggestion_part(code = ">")]
     pub right: Span,
 }
-/* AST_META: AST_ID=126 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_parentheses_in_for_head)]
@@ -1582,7 +1456,6 @@ pub(crate) struct ParenthesesInForHead {
     #[subdiagnostic]
     pub sugg: ParenthesesInForHeadSugg,
 }
-/* AST_META: AST_ID=127 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1592,7 +1465,6 @@ pub(crate) struct ParenthesesInForHeadSugg {
     #[suggestion_part(code = " ")]
     pub right: Span,
 }
-/* AST_META: AST_ID=128 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_parentheses_in_match_arm_pattern)]
@@ -1602,7 +1474,6 @@ pub(crate) struct ParenthesesInMatchPat {
     #[subdiagnostic]
     pub sugg: ParenthesesInMatchPatSugg,
 }
-/* AST_META: AST_ID=129 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1612,7 +1483,6 @@ pub(crate) struct ParenthesesInMatchPatSugg {
     #[suggestion_part(code = "")]
     pub right: Span,
 }
-/* AST_META: AST_ID=130 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_doc_comment_on_param_type)]
@@ -1621,7 +1491,6 @@ pub(crate) struct DocCommentOnParamType {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=131 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attribute_on_param_type)]
@@ -1630,7 +1499,6 @@ pub(crate) struct AttributeOnParamType {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=132 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attribute_on_type)]
@@ -1641,7 +1509,6 @@ pub(crate) struct AttributeOnType {
     #[suggestion(code = "", applicability = "machine-applicable", style = "tool-only")]
     pub fix_span: Span,
 }
-/* AST_META: AST_ID=133 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attribute_on_generic_arg)]
@@ -1652,7 +1519,6 @@ pub(crate) struct AttributeOnGenericArg {
     #[suggestion(code = "", applicability = "machine-applicable", style = "tool-only")]
     pub fix_span: Span,
 }
-/* AST_META: AST_ID=134 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attribute_on_empty_type)]
@@ -1661,7 +1527,6 @@ pub(crate) struct AttributeOnEmptyType {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=135 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_pattern_method_param_without_body, code = E0642)]
@@ -1670,7 +1535,6 @@ pub(crate) struct PatternMethodParamWithoutBody {
     #[suggestion(code = "_", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=136 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_self_param_not_first)]
@@ -1679,7 +1543,6 @@ pub(crate) struct SelfParamNotFirst {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=137 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_const_generic_without_braces)]
@@ -1689,7 +1552,6 @@ pub(crate) struct ConstGenericWithoutBraces {
     #[subdiagnostic]
     pub sugg: ConstGenericWithoutBracesSugg,
 }
-/* AST_META: AST_ID=138 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1699,7 +1561,6 @@ pub(crate) struct ConstGenericWithoutBracesSugg {
     #[suggestion_part(code = " }}")]
     pub right: Span,
 }
-/* AST_META: AST_ID=139 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_const_param_declaration)]
@@ -1710,7 +1571,6 @@ pub(crate) struct UnexpectedConstParamDeclaration {
     #[subdiagnostic]
     pub sugg: Option<UnexpectedConstParamDeclarationSugg>,
 }
-/* AST_META: AST_ID=140 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnexpectedConstParamDeclarationSugg {
@@ -1733,7 +1593,6 @@ pub(crate) enum UnexpectedConstParamDeclarationSugg {
         ident: String,
     },
 }
-/* AST_META: AST_ID=141 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_const_in_generic_param)]
@@ -1743,7 +1602,6 @@ pub(crate) struct UnexpectedConstInGenericParam {
     #[suggestion(style = "verbose", code = "", applicability = "maybe-incorrect")]
     pub to_remove: Option<Span>,
 }
-/* AST_META: AST_ID=142 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_move_order_incorrect)]
@@ -1752,7 +1610,6 @@ pub(crate) struct AsyncMoveOrderIncorrect {
     #[suggestion(style = "verbose", code = "async move", applicability = "maybe-incorrect")]
     pub span: Span,
 }
-/* AST_META: AST_ID=143 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_use_order_incorrect)]
@@ -1761,7 +1618,6 @@ pub(crate) struct AsyncUseOrderIncorrect {
     #[suggestion(style = "verbose", code = "async use", applicability = "maybe-incorrect")]
     pub span: Span,
 }
-/* AST_META: AST_ID=144 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_double_colon_in_bound)]
@@ -1771,7 +1627,6 @@ pub(crate) struct DoubleColonInBound {
     #[suggestion(code = ": ", applicability = "machine-applicable", style = "verbose")]
     pub between: Span,
 }
-/* AST_META: AST_ID=145 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_fn_ptr_with_generics)]
@@ -1781,7 +1636,6 @@ pub(crate) struct FnPtrWithGenerics {
     #[subdiagnostic]
     pub sugg: Option<FnPtrWithGenericsSugg>,
 }
-/* AST_META: AST_ID=146 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -1796,7 +1650,6 @@ pub(crate) struct MisplacedReturnType {
     #[suggestion_part(code = "")]
     pub ret_ty_span: Span,
 }
-/* AST_META: AST_ID=147 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "maybe-incorrect")]
@@ -1809,12 +1662,10 @@ pub(crate) struct FnPtrWithGenericsSugg {
     pub arity: usize,
     pub for_param_list_exists: bool,
 }
-/* AST_META: AST_ID=148 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct FnTraitMissingParen {
     pub span: Span,
 }
-/* AST_META: AST_ID=149 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=12 */
 
 impl Subdiagnostic for FnTraitMissingParen {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1827,7 +1678,6 @@ impl Subdiagnostic for FnTraitMissingParen {
         );
     }
 }
-/* AST_META: AST_ID=150 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_if_with_if)]
@@ -1844,7 +1694,6 @@ pub(crate) struct FnTypoWithImpl {
     #[suggestion(applicability = "maybe-incorrect", code = "impl", style = "verbose")]
     pub fn_span: Span,
 }
-/* AST_META: AST_ID=151 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_fn_path_found_fn_keyword)]
@@ -1853,7 +1702,6 @@ pub(crate) struct ExpectedFnPathFoundFnKeyword {
     #[suggestion(applicability = "machine-applicable", code = "Fn", style = "verbose")]
     pub fn_token_span: Span,
 }
-/* AST_META: AST_ID=152 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_path_found_named_params)]
@@ -1862,7 +1710,6 @@ pub(crate) struct FnPathFoundNamedParams {
     #[suggestion(applicability = "machine-applicable", code = "")]
     pub named_param_span: Span,
 }
-/* AST_META: AST_ID=153 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_path_found_c_variadic_params)]
@@ -1871,7 +1718,6 @@ pub(crate) struct PathFoundCVariadicParams {
     #[suggestion(applicability = "machine-applicable", code = "")]
     pub span: Span,
 }
-/* AST_META: AST_ID=154 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_path_found_attribute_in_params)]
@@ -1880,7 +1726,6 @@ pub(crate) struct PathFoundAttributeInParams {
     #[suggestion(applicability = "machine-applicable", code = "")]
     pub span: Span,
 }
-/* AST_META: AST_ID=155 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_path_double_colon)]
@@ -1891,7 +1736,6 @@ pub(crate) struct PathSingleColon {
     #[suggestion(applicability = "machine-applicable", code = ":", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=156 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_path_double_colon)]
@@ -1900,7 +1744,6 @@ pub(crate) struct PathTripleColon {
     #[suggestion(applicability = "maybe-incorrect", code = "", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=157 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_colon_as_semi)]
@@ -1909,7 +1752,6 @@ pub(crate) struct ColonAsSemi {
     #[suggestion(applicability = "machine-applicable", code = ";", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=158 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_where_clause_before_tuple_struct_body)]
@@ -1924,7 +1766,6 @@ pub(crate) struct WhereClauseBeforeTupleStructBody {
     #[subdiagnostic]
     pub sugg: Option<WhereClauseBeforeTupleStructBodySugg>,
 }
-/* AST_META: AST_ID=159 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -1935,7 +1776,6 @@ pub(crate) struct WhereClauseBeforeTupleStructBodySugg {
     #[suggestion_part(code = "")]
     pub right: Span,
 }
-/* AST_META: AST_ID=160 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_fn_in_2015, code = E0670)]
@@ -1946,7 +1786,6 @@ pub(crate) struct AsyncFnIn2015 {
     #[subdiagnostic]
     pub help: HelpUseLatestEdition,
 }
-/* AST_META: AST_ID=161 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(parse_async_block_in_2015)]
@@ -1954,7 +1793,6 @@ pub(crate) struct AsyncBlockIn2015 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=162 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_move_block_in_2015)]
@@ -1962,7 +1800,6 @@ pub(crate) struct AsyncMoveBlockIn2015 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=163 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_use_block_in_2015)]
@@ -1970,7 +1807,6 @@ pub(crate) struct AsyncUseBlockIn2015 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=164 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_async_bound_modifier_in_2015)]
@@ -1980,7 +1816,6 @@ pub(crate) struct AsyncBoundModifierIn2015 {
     #[subdiagnostic]
     pub help: HelpUseLatestEdition,
 }
-/* AST_META: AST_ID=165 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_let_chain_pre_2024)]
@@ -1988,7 +1823,6 @@ pub(crate) struct LetChainPre2024 {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=166 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_self_argument_pointer)]
@@ -1997,7 +1831,6 @@ pub(crate) struct SelfArgumentPointer {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=167 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_token_after_dot)]
@@ -2006,7 +1839,6 @@ pub(crate) struct UnexpectedTokenAfterDot {
     pub span: Span,
     pub actual: String,
 }
-/* AST_META: AST_ID=168 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_visibility_not_followed_by_item)]
@@ -2017,7 +1849,6 @@ pub(crate) struct VisibilityNotFollowedByItem {
     pub span: Span,
     pub vis: Visibility,
 }
-/* AST_META: AST_ID=169 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_default_not_followed_by_item)]
@@ -2027,7 +1858,6 @@ pub(crate) struct DefaultNotFollowedByItem {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=170 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=48 */
 
 #[derive(Diagnostic)]
 pub(crate) enum MissingKeywordForItemDefinition {
@@ -2076,7 +1906,6 @@ pub(crate) enum MissingKeywordForItemDefinition {
         subdiag: Option<AmbiguousMissingKwForItemSub>,
     },
 }
-/* AST_META: AST_ID=171 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum AmbiguousMissingKwForItemSub {
@@ -2094,7 +1923,6 @@ pub(crate) enum AmbiguousMissingKwForItemSub {
     #[help(parse_help)]
     HelpMacro,
 }
-/* AST_META: AST_ID=172 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_fn_params)]
@@ -2103,7 +1931,6 @@ pub(crate) struct MissingFnParams {
     #[suggestion(code = "()", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=173 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_path_sep_in_fn_definition)]
@@ -2112,7 +1939,6 @@ pub(crate) struct InvalidPathSepInFnDefinition {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=174 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=20 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_trait_in_trait_impl)]
@@ -2133,7 +1959,6 @@ pub(crate) struct MissingTraitInTraitImpl {
     )]
     pub for_span: Span,
 }
-/* AST_META: AST_ID=175 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_for_in_trait_impl)]
@@ -2142,7 +1967,6 @@ pub(crate) struct MissingForInTraitImpl {
     #[suggestion(style = "verbose", code = " for ", applicability = "machine-applicable")]
     pub span: Span,
 }
-/* AST_META: AST_ID=176 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_trait_in_trait_impl_found_type)]
@@ -2150,7 +1974,6 @@ pub(crate) struct ExpectedTraitInTraitImplFoundType {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=177 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_extra_impl_keyword_in_trait_impl)]
@@ -2161,7 +1984,6 @@ pub(crate) struct ExtraImplKeywordInTraitImpl {
     #[note]
     pub impl_trait_span: Span,
 }
-/* AST_META: AST_ID=178 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_bounds_not_allowed_on_trait_aliases)]
@@ -2169,7 +1991,6 @@ pub(crate) struct BoundsNotAllowedOnTraitAliases {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=179 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_trait_alias_cannot_be_auto)]
@@ -2178,7 +1999,6 @@ pub(crate) struct TraitAliasCannotBeAuto {
     #[label(parse_trait_alias_cannot_be_auto)]
     pub span: Span,
 }
-/* AST_META: AST_ID=180 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_trait_alias_cannot_be_const)]
@@ -2187,7 +2007,6 @@ pub(crate) struct TraitAliasCannotBeConst {
     #[label(parse_trait_alias_cannot_be_const)]
     pub span: Span,
 }
-/* AST_META: AST_ID=181 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_trait_alias_cannot_be_unsafe)]
@@ -2196,7 +2015,6 @@ pub(crate) struct TraitAliasCannotBeUnsafe {
     #[label(parse_trait_alias_cannot_be_unsafe)]
     pub span: Span,
 }
-/* AST_META: AST_ID=182 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_associated_static_item_not_allowed)]
@@ -2204,7 +2022,6 @@ pub(crate) struct AssociatedStaticItemNotAllowed {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=183 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_extern_crate_name_with_dashes)]
@@ -2215,7 +2032,6 @@ pub(crate) struct ExternCrateNameWithDashes {
     #[subdiagnostic]
     pub sugg: ExternCrateNameWithDashesSugg,
 }
-/* AST_META: AST_ID=184 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -2223,7 +2039,6 @@ pub(crate) struct ExternCrateNameWithDashesSugg {
     #[suggestion_part(code = "_")]
     pub dashes: Vec<Span>,
 }
-/* AST_META: AST_ID=185 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_extern_item_cannot_be_const)]
@@ -2234,7 +2049,6 @@ pub(crate) struct ExternItemCannotBeConst {
     #[suggestion(code = "static ", applicability = "machine-applicable", style = "verbose")]
     pub const_span: Option<Span>,
 }
-/* AST_META: AST_ID=186 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_const_global_cannot_be_mutable)]
@@ -2245,7 +2059,6 @@ pub(crate) struct ConstGlobalCannotBeMutable {
     #[suggestion(code = "static", style = "verbose", applicability = "maybe-incorrect")]
     pub const_span: Span,
 }
-/* AST_META: AST_ID=187 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_const_type)]
@@ -2257,7 +2070,6 @@ pub(crate) struct MissingConstType {
     pub kind: &'static str,
     pub colon: &'static str,
 }
-/* AST_META: AST_ID=188 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_enum_struct_mutually_exclusive)]
@@ -2266,7 +2078,6 @@ pub(crate) struct EnumStructMutuallyExclusive {
     #[suggestion(code = "enum", style = "verbose", applicability = "machine-applicable")]
     pub span: Span,
 }
-/* AST_META: AST_ID=189 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=45 */
 
 #[derive(Diagnostic)]
 pub(crate) enum UnexpectedTokenAfterStructName {
@@ -2312,7 +2123,6 @@ pub(crate) enum UnexpectedTokenAfterStructName {
         token: Token,
     },
 }
-/* AST_META: AST_ID=190 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=13 */
 
 impl UnexpectedTokenAfterStructName {
     pub(crate) fn new(span: Span, token: Token) -> Self {
@@ -2326,7 +2136,6 @@ impl UnexpectedTokenAfterStructName {
         }
     }
 }
-/* AST_META: AST_ID=191 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_self_in_generic_parameters)]
@@ -2335,7 +2144,6 @@ pub(crate) struct UnexpectedSelfInGenericParameters {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=192 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_default_value_for_lifetime_in_generic_parameters)]
@@ -2344,7 +2152,6 @@ pub(crate) struct UnexpectedDefaultValueForLifetimeInGenericParameters {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=193 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_multiple_where_clauses)]
@@ -2356,7 +2163,6 @@ pub(crate) struct MultipleWhereClauses {
     #[suggestion(style = "verbose", code = ",", applicability = "maybe-incorrect")]
     pub between: Span,
 }
-/* AST_META: AST_ID=194 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Diagnostic)]
 pub(crate) enum UnexpectedNonterminal {
@@ -2377,7 +2183,6 @@ pub(crate) enum UnexpectedNonterminal {
         token: Token,
     },
 }
-/* AST_META: AST_ID=195 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 #[derive(Diagnostic)]
 pub(crate) enum TopLevelOrPatternNotAllowed {
@@ -2396,7 +2201,6 @@ pub(crate) enum TopLevelOrPatternNotAllowed {
         sub: Option<TopLevelOrPatternNotAllowedSugg>,
     },
 }
-/* AST_META: AST_ID=196 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_cannot_be_raw_ident)]
@@ -2405,7 +2209,6 @@ pub(crate) struct CannotBeRawIdent {
     pub span: Span,
     pub ident: Symbol,
 }
-/* AST_META: AST_ID=197 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_cannot_be_raw_lifetime)]
@@ -2414,7 +2217,6 @@ pub(crate) struct CannotBeRawLifetime {
     pub span: Span,
     pub ident: Symbol,
 }
-/* AST_META: AST_ID=198 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_keyword_lifetime)]
@@ -2422,7 +2224,6 @@ pub(crate) struct KeywordLifetime {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=199 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_keyword_label)]
@@ -2430,7 +2231,6 @@ pub(crate) struct KeywordLabel {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=200 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_cr_doc_comment)]
@@ -2439,7 +2239,6 @@ pub(crate) struct CrDocComment {
     pub span: Span,
     pub block: bool,
 }
-/* AST_META: AST_ID=201 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_no_digits_literal, code = E0768)]
@@ -2447,7 +2246,6 @@ pub(crate) struct NoDigitsLiteral {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=202 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_digit_literal)]
@@ -2456,7 +2254,6 @@ pub(crate) struct InvalidDigitLiteral {
     pub span: Span,
     pub base: u32,
 }
-/* AST_META: AST_ID=203 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_empty_exponent_float)]
@@ -2464,7 +2261,6 @@ pub(crate) struct EmptyExponentFloat {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=204 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_float_literal_unsupported_base)]
@@ -2473,7 +2269,6 @@ pub(crate) struct FloatLiteralUnsupportedBase {
     pub span: Span,
     pub base: &'static str,
 }
-/* AST_META: AST_ID=205 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unknown_prefix)]
@@ -2486,14 +2281,12 @@ pub(crate) struct UnknownPrefix<'a> {
     #[subdiagnostic]
     pub sugg: Option<UnknownPrefixSugg>,
 }
-/* AST_META: AST_ID=206 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(parse_macro_expands_to_adt_field)]
 pub(crate) struct MacroExpandsToAdtField<'a> {
     pub adt_ty: &'a str,
 }
-/* AST_META: AST_ID=207 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=36 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnknownPrefixSugg {
@@ -2530,7 +2323,6 @@ pub(crate) enum UnknownPrefixSugg {
         end: Span,
     },
 }
-/* AST_META: AST_ID=208 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_reserved_multihash)]
@@ -2541,7 +2333,6 @@ pub(crate) struct ReservedMultihash {
     #[subdiagnostic]
     pub sugg: Option<GuardedStringSugg>,
 }
-/* AST_META: AST_ID=209 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 #[derive(Diagnostic)]
 #[diag(parse_reserved_string)]
 #[note]
@@ -2551,7 +2342,6 @@ pub(crate) struct ReservedString {
     #[subdiagnostic]
     pub sugg: Option<GuardedStringSugg>,
 }
-/* AST_META: AST_ID=210 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 #[derive(Subdiagnostic)]
 #[suggestion(
     parse_suggestion_whitespace,
@@ -2568,7 +2358,6 @@ pub(crate) struct TooManyHashes {
     pub span: Span,
     pub num: u32,
 }
-/* AST_META: AST_ID=211 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unknown_start_of_token)]
@@ -2583,7 +2372,6 @@ pub(crate) struct UnknownTokenStart {
     #[subdiagnostic]
     pub repeat: Option<UnknownTokenRepeat>,
 }
-/* AST_META: AST_ID=212 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=32 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum TokenSubstitution {
@@ -2616,14 +2404,12 @@ pub(crate) enum TokenSubstitution {
         ascii_name: &'static str,
     },
 }
-/* AST_META: AST_ID=213 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Subdiagnostic)]
 #[note(parse_note_repeats)]
 pub(crate) struct UnknownTokenRepeat {
     pub repeats: usize,
 }
-/* AST_META: AST_ID=214 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=19 | LINES=149 */
 
 #[derive(Subdiagnostic)]
 #[help(parse_help_null)]
@@ -2773,7 +2559,6 @@ pub(crate) enum UnescapeError {
         span: Span,
     },
 }
-/* AST_META: AST_ID=215 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=48 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MoreThanOneCharSugg {
@@ -2822,7 +2607,6 @@ pub(crate) enum MoreThanOneCharSugg {
         prefix: &'static str,
     },
 }
-/* AST_META: AST_ID=216 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MoreThanOneCharNote {
@@ -2841,7 +2625,6 @@ pub(crate) enum MoreThanOneCharNote {
         escaped: String,
     },
 }
-/* AST_META: AST_ID=217 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=17 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum NoBraceUnicodeSub {
@@ -2859,7 +2642,6 @@ pub(crate) enum NoBraceUnicodeSub {
     #[help(parse_format_of_unicode)]
     Help,
 }
-/* AST_META: AST_ID=218 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_sugg_wrap_pattern_in_parens, applicability = "machine-applicable")]
@@ -2869,7 +2651,6 @@ pub(crate) struct WrapInParens {
     #[suggestion_part(code = ")")]
     pub(crate) hi: Span,
 }
-/* AST_META: AST_ID=219 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum TopLevelOrPatternNotAllowedSugg {
@@ -2890,7 +2671,6 @@ pub(crate) enum TopLevelOrPatternNotAllowedSugg {
         suggestion: WrapInParens,
     },
 }
-/* AST_META: AST_ID=220 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_vert_vert_before_function_parameter)]
@@ -2900,7 +2680,6 @@ pub(crate) struct UnexpectedVertVertBeforeFunctionParam {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=221 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_vert_vert_in_pattern)]
@@ -2911,7 +2690,6 @@ pub(crate) struct UnexpectedVertVertInPattern {
     #[label(parse_label_while_parsing_or_pattern_here)]
     pub start: Option<Span>,
 }
-/* AST_META: AST_ID=222 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -2924,7 +2702,6 @@ pub(crate) struct TrailingVertSuggestion {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=223 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_trailing_vert_not_allowed)]
@@ -2939,7 +2716,6 @@ pub(crate) struct TrailingVertNotAllowed {
     #[note(parse_note_pattern_alternatives_use_single_vert)]
     pub note_double_vert: bool,
 }
-/* AST_META: AST_ID=224 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dotdotdot_rest_pattern)]
@@ -2950,7 +2726,6 @@ pub(crate) struct DotDotDotRestPattern {
     #[suggestion(style = "verbose", code = "", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=225 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(parse_pattern_on_wrong_side_of_at)]
@@ -2964,7 +2739,6 @@ pub(crate) struct PatternOnWrongSideOfAt {
     #[label(parse_label_binding)]
     pub binding: Span,
 }
-/* AST_META: AST_ID=226 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_binding_left_of_at)]
@@ -2977,7 +2751,6 @@ pub(crate) struct ExpectedBindingLeftOfAt {
     #[label(parse_label_rhs)]
     pub rhs: Span,
 }
-/* AST_META: AST_ID=227 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -2990,7 +2763,6 @@ pub(crate) struct ParenRangeSuggestion {
     #[suggestion_part(code = ")")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=228 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_ambiguous_range_pattern)]
@@ -3000,7 +2772,6 @@ pub(crate) struct AmbiguousRangePattern {
     #[subdiagnostic]
     pub suggestion: ParenRangeSuggestion,
 }
-/* AST_META: AST_ID=229 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_lifetime_in_pattern)]
@@ -3011,7 +2782,6 @@ pub(crate) struct UnexpectedLifetimeInPattern {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=230 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 
 #[derive(Diagnostic)]
 pub(crate) enum InvalidMutInPattern {
@@ -3031,7 +2801,6 @@ pub(crate) enum InvalidMutInPattern {
         span: Span,
     },
 }
-/* AST_META: AST_ID=231 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_repeated_mut_in_pattern)]
@@ -3041,7 +2810,6 @@ pub(crate) struct RepeatedMutInPattern {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=232 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dot_dot_dot_range_to_pattern_not_allowed)]
@@ -3050,7 +2818,6 @@ pub(crate) struct DotDotDotRangeToPatternNotAllowed {
     #[suggestion(style = "verbose", code = "..=", applicability = "machine-applicable")]
     pub span: Span,
 }
-/* AST_META: AST_ID=233 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_enum_pattern_instead_of_identifier)]
@@ -3058,7 +2825,6 @@ pub(crate) struct EnumPatternInsteadOfIdentifier {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=234 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_at_dot_dot_in_struct_pattern)]
@@ -3069,7 +2835,6 @@ pub(crate) struct AtDotDotInStructPattern {
     pub remove: Span,
     pub ident: Ident,
 }
-/* AST_META: AST_ID=235 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_at_in_struct_pattern)]
@@ -3079,7 +2844,6 @@ pub(crate) struct AtInStructPattern {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=236 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dot_dot_dot_for_remaining_fields)]
@@ -3089,7 +2853,6 @@ pub(crate) struct DotDotDotForRemainingFields {
     pub span: Span,
     pub token_str: Cow<'static, str>,
 }
-/* AST_META: AST_ID=237 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_comma_after_pattern_field)]
@@ -3097,7 +2860,6 @@ pub(crate) struct ExpectedCommaAfterPatternField {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=238 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_expr_in_pat)]
@@ -3112,7 +2874,6 @@ pub(crate) struct UnexpectedExpressionInPattern {
     /// The unexpected expr's precedence (used in match arm guard suggestions).
     pub expr_precedence: ExprPrecedence,
 }
-/* AST_META: AST_ID=239 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=33 | LINES=61 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnexpectedExpressionInPatternSugg {
@@ -3174,7 +2935,6 @@ pub(crate) enum UnexpectedExpressionInPatternSugg {
         indentation: String,
     },
 }
-/* AST_META: AST_ID=240 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unexpected_paren_in_range_pat)]
@@ -3184,7 +2944,6 @@ pub(crate) struct UnexpectedParenInRangePat {
     #[subdiagnostic]
     pub sugg: UnexpectedParenInRangePatSugg,
 }
-/* AST_META: AST_ID=241 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -3197,7 +2956,6 @@ pub(crate) struct UnexpectedParenInRangePatSugg {
     #[suggestion_part(code = "")]
     pub end_span: Span,
 }
-/* AST_META: AST_ID=242 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_return_types_use_thin_arrow)]
@@ -3207,7 +2965,6 @@ pub(crate) struct ReturnTypesUseThinArrow {
     #[suggestion(style = "verbose", code = " -> ", applicability = "machine-applicable")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=243 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_need_plus_after_trait_object_lifetime)]
@@ -3217,7 +2974,6 @@ pub(crate) struct NeedPlusAfterTraitObjectLifetime {
     #[suggestion(code = " + /* Trait */", applicability = "has-placeholders")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=244 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_mut_or_const_in_raw_pointer_type)]
@@ -3227,7 +2983,6 @@ pub(crate) struct ExpectedMutOrConstInRawPointerType {
     #[suggestion(code("mut ", "const "), applicability = "has-placeholders", style = "verbose")]
     pub after_asterisk: Span,
 }
-/* AST_META: AST_ID=245 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_lifetime_after_mut)]
@@ -3238,7 +2993,6 @@ pub(crate) struct LifetimeAfterMut {
     pub suggest_lifetime: Option<Span>,
     pub snippet: String,
 }
-/* AST_META: AST_ID=246 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dyn_after_mut)]
@@ -3247,7 +3001,6 @@ pub(crate) struct DynAfterMut {
     #[suggestion(code = "&mut dyn", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=247 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_fn_pointer_cannot_be_const)]
@@ -3259,7 +3012,6 @@ pub(crate) struct FnPointerCannotBeConst {
     #[suggestion(code = "", applicability = "maybe-incorrect", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=248 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_fn_pointer_cannot_be_async)]
@@ -3271,7 +3023,6 @@ pub(crate) struct FnPointerCannotBeAsync {
     #[suggestion(code = "", applicability = "maybe-incorrect", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=249 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_nested_c_variadic_type, code = E0743)]
@@ -3279,7 +3030,6 @@ pub(crate) struct NestedCVariadicType {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=250 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_invalid_dyn_keyword)]
@@ -3290,7 +3040,6 @@ pub(crate) struct InvalidDynKeyword {
     #[suggestion(code = "", applicability = "machine-applicable", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=251 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum HelpUseLatestEdition {
@@ -3301,7 +3050,6 @@ pub(crate) enum HelpUseLatestEdition {
     #[note(parse_note_edition_guide)]
     Standalone { edition: Edition },
 }
-/* AST_META: AST_ID=252 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 impl HelpUseLatestEdition {
     pub(crate) fn new() -> Self {
@@ -3313,7 +3061,6 @@ impl HelpUseLatestEdition {
         }
     }
 }
-/* AST_META: AST_ID=253 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_box_syntax_removed)]
@@ -3323,7 +3070,6 @@ pub(crate) struct BoxSyntaxRemoved {
     #[subdiagnostic]
     pub sugg: AddBoxNew,
 }
-/* AST_META: AST_ID=254 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -3337,7 +3083,6 @@ pub(crate) struct AddBoxNew {
     #[suggestion_part(code = ")")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=255 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_bad_return_type_notation_output)]
@@ -3347,7 +3092,6 @@ pub(crate) struct BadReturnTypeNotationOutput {
     #[suggestion(code = "", applicability = "maybe-incorrect", style = "verbose")]
     pub suggestion: Span,
 }
-/* AST_META: AST_ID=256 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_bad_assoc_type_bounds)]
@@ -3356,7 +3100,6 @@ pub(crate) struct BadAssocTypeBounds {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=257 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attr_after_generic)]
@@ -3365,7 +3108,6 @@ pub(crate) struct AttrAfterGeneric {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=258 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_attr_without_generics)]
@@ -3374,7 +3116,6 @@ pub(crate) struct AttrWithoutGenerics {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=259 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_where_generics)]
@@ -3383,7 +3124,6 @@ pub(crate) struct WhereOnGenerics {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=260 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_generics_in_path)]
@@ -3391,7 +3131,6 @@ pub(crate) struct GenericsInPath {
     #[primary_span]
     pub span: Vec<Span>,
 }
-/* AST_META: AST_ID=261 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 #[derive(Diagnostic)]
 #[diag(parse_lifetime_in_eq_constraint)]
@@ -3411,7 +3150,6 @@ pub(crate) struct LifetimeInEqConstraint {
     )]
     pub colon_sugg: Span,
 }
-/* AST_META: AST_ID=262 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_modifier_lifetime)]
@@ -3421,7 +3159,6 @@ pub(crate) struct ModifierLifetime {
     pub span: Span,
     pub modifier: &'static str,
 }
-/* AST_META: AST_ID=263 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_underscore_literal_suffix)]
@@ -3429,7 +3166,6 @@ pub(crate) struct UnderscoreLiteralSuffix {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=264 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expect_label_found_ident)]
@@ -3439,7 +3175,6 @@ pub(crate) struct ExpectedLabelFoundIdent {
     #[suggestion(code = "'", applicability = "machine-applicable", style = "verbose")]
     pub start: Span,
 }
-/* AST_META: AST_ID=265 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_inappropriate_default)]
@@ -3451,7 +3186,6 @@ pub(crate) struct InappropriateDefault {
     pub article: &'static str,
     pub descr: &'static str,
 }
-/* AST_META: AST_ID=266 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_recover_import_as_use)]
@@ -3461,7 +3195,6 @@ pub(crate) struct RecoverImportAsUse {
     pub span: Span,
     pub token_name: String,
 }
-/* AST_META: AST_ID=267 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_single_colon_import_path)]
@@ -3471,7 +3204,6 @@ pub(crate) struct SingleColonImportPath {
     #[suggestion(code = "::", applicability = "machine-applicable", style = "verbose")]
     pub span: Span,
 }
-/* AST_META: AST_ID=268 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_bad_item_kind)]
@@ -3483,7 +3215,6 @@ pub(crate) struct BadItemKind {
     #[help]
     pub help: bool,
 }
-/* AST_META: AST_ID=269 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_macro_rules_missing_bang)]
@@ -3493,7 +3224,6 @@ pub(crate) struct MacroRulesMissingBang {
     #[suggestion(code = "!", applicability = "machine-applicable", style = "verbose")]
     pub hi: Span,
 }
-/* AST_META: AST_ID=270 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_macro_name_remove_bang)]
@@ -3502,7 +3232,6 @@ pub(crate) struct MacroNameRemoveBang {
     #[suggestion(code = "", applicability = "machine-applicable", style = "short")]
     pub span: Span,
 }
-/* AST_META: AST_ID=271 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_macro_rules_visibility)]
@@ -3512,7 +3241,6 @@ pub(crate) struct MacroRulesVisibility<'a> {
     pub span: Span,
     pub vis: &'a str,
 }
-/* AST_META: AST_ID=272 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_macro_invocation_visibility)]
@@ -3523,7 +3251,6 @@ pub(crate) struct MacroInvocationVisibility<'a> {
     pub span: Span,
     pub vis: &'a str,
 }
-/* AST_META: AST_ID=273 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_nested_adt)]
@@ -3535,7 +3262,6 @@ pub(crate) struct NestedAdt<'a> {
     pub keyword: &'a str,
     pub kw_str: Cow<'a, str>,
 }
-/* AST_META: AST_ID=274 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_function_body_equals_expr)]
@@ -3545,7 +3271,6 @@ pub(crate) struct FunctionBodyEqualsExpr {
     #[subdiagnostic]
     pub sugg: FunctionBodyEqualsExprSugg,
 }
-/* AST_META: AST_ID=275 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -3555,7 +3280,6 @@ pub(crate) struct FunctionBodyEqualsExprSugg {
     #[suggestion_part(code = " }}")]
     pub semi: Span,
 }
-/* AST_META: AST_ID=276 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(parse_box_not_pat)]
@@ -3568,7 +3292,6 @@ pub(crate) struct BoxNotPat {
     pub lo: Span,
     pub descr: String,
 }
-/* AST_META: AST_ID=277 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unmatched_angle)]
@@ -3578,7 +3301,6 @@ pub(crate) struct UnmatchedAngle {
     pub span: Span,
     pub plural: bool,
 }
-/* AST_META: AST_ID=278 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_missing_plus_in_bounds)]
@@ -3589,7 +3311,6 @@ pub(crate) struct MissingPlusBounds {
     pub hi: Span,
     pub sym: Symbol,
 }
-/* AST_META: AST_ID=279 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_parens_trait_bounds)]
@@ -3599,7 +3320,6 @@ pub(crate) struct IncorrectParensTraitBounds {
     #[subdiagnostic]
     pub sugg: IncorrectParensTraitBoundsSugg,
 }
-/* AST_META: AST_ID=280 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(
@@ -3612,7 +3332,6 @@ pub(crate) struct IncorrectParensTraitBoundsSugg {
     #[suggestion_part(code = "(")]
     pub new_span: Span,
 }
-/* AST_META: AST_ID=281 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_kw_bad_case)]
@@ -3622,7 +3341,6 @@ pub(crate) struct KwBadCase<'a> {
     pub span: Span,
     pub kw: &'a str,
 }
-/* AST_META: AST_ID=282 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_cfg_attr_bad_delim)]
@@ -3632,7 +3350,6 @@ pub(crate) struct CfgAttrBadDelim {
     #[subdiagnostic]
     pub sugg: MetaBadDelimSugg,
 }
-/* AST_META: AST_ID=283 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_meta_bad_delim_suggestion, applicability = "machine-applicable")]
@@ -3642,7 +3359,6 @@ pub(crate) struct MetaBadDelimSugg {
     #[suggestion_part(code = ")")]
     pub close: Span,
 }
-/* AST_META: AST_ID=284 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_malformed_cfg_attr)]
@@ -3653,7 +3369,6 @@ pub(crate) struct MalformedCfgAttr {
     pub span: Span,
     pub sugg: &'static str,
 }
-/* AST_META: AST_ID=285 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_unknown_builtin_construct)]
@@ -3662,7 +3377,6 @@ pub(crate) struct UnknownBuiltinConstruct {
     pub span: Span,
     pub name: Ident,
 }
-/* AST_META: AST_ID=286 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expected_builtin_ident)]
@@ -3670,7 +3384,6 @@ pub(crate) struct ExpectedBuiltinIdent {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=287 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_static_with_generics)]
@@ -3678,7 +3391,6 @@ pub(crate) struct StaticWithGenerics {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=288 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_where_clause_before_const_body)]
@@ -3693,7 +3405,6 @@ pub(crate) struct WhereClauseBeforeConstBody {
     #[subdiagnostic]
     pub sugg: Option<WhereClauseBeforeConstBodySugg>,
 }
-/* AST_META: AST_ID=289 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -3704,7 +3415,6 @@ pub(crate) struct WhereClauseBeforeConstBodySugg {
     #[suggestion_part(code = "")]
     pub right: Span,
 }
-/* AST_META: AST_ID=290 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(parse_generic_args_in_pat_require_turbofish_syntax)]
@@ -3719,7 +3429,6 @@ pub(crate) struct GenericArgsInPatRequireTurbofishSyntax {
     )]
     pub suggest_turbofish: Span,
 }
-/* AST_META: AST_ID=291 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_transpose_dyn_or_impl)]
@@ -3730,7 +3439,6 @@ pub(crate) struct TransposeDynOrImpl<'a> {
     #[subdiagnostic]
     pub sugg: TransposeDynOrImplSugg<'a>,
 }
-/* AST_META: AST_ID=292 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -3741,7 +3449,6 @@ pub(crate) struct TransposeDynOrImplSugg<'a> {
     pub insertion_span: Span,
     pub kw: &'a str,
 }
-/* AST_META: AST_ID=293 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(parse_array_index_offset_of)]
@@ -3757,7 +3464,6 @@ pub(crate) struct AsyncImpl {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=294 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_expr_rarrow_call)]
@@ -3767,7 +3473,6 @@ pub(crate) struct ExprRArrowCall {
     #[suggestion(style = "verbose", applicability = "machine-applicable", code = ".")]
     pub span: Span,
 }
-/* AST_META: AST_ID=295 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_dot_dot_range_attribute)]
@@ -3775,7 +3480,6 @@ pub(crate) struct DotDotRangeAttribute {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=296 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_binder_before_modifiers)]
@@ -3785,7 +3489,6 @@ pub(crate) struct BinderBeforeModifiers {
     #[label]
     pub modifiers_span: Span,
 }
-/* AST_META: AST_ID=297 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_binder_and_polarity)]
@@ -3796,7 +3499,6 @@ pub(crate) struct BinderAndPolarity {
     pub binder_span: Span,
     pub polarity: &'static str,
 }
-/* AST_META: AST_ID=298 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(parse_modifiers_and_polarity)]
@@ -3808,7 +3510,6 @@ pub(crate) struct PolarityAndModifiers {
     pub polarity: &'static str,
     pub modifiers_concatenated: String,
 }
-/* AST_META: AST_ID=299 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_incorrect_type_on_self)]
@@ -3818,7 +3519,6 @@ pub(crate) struct IncorrectTypeOnSelf {
     #[subdiagnostic]
     pub move_self_modifier: MoveSelfModifier,
 }
-/* AST_META: AST_ID=300 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(parse_suggestion, applicability = "machine-applicable")]
@@ -3829,7 +3529,6 @@ pub(crate) struct MoveSelfModifier {
     pub insertion_span: Span,
     pub modifier: String,
 }
-/* AST_META: AST_ID=301 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_unsupported_operand)]
@@ -3840,7 +3539,6 @@ pub(crate) struct AsmUnsupportedOperand<'a> {
     pub(crate) symbol: &'a str,
     pub(crate) macro_name: &'static str,
 }
-/* AST_META: AST_ID=302 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_underscore_input)]
@@ -3848,7 +3546,6 @@ pub(crate) struct AsmUnderscoreInput {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=303 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_sym_no_path)]
@@ -3856,7 +3553,6 @@ pub(crate) struct AsmSymNoPath {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=304 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_requires_template)]
@@ -3864,7 +3560,6 @@ pub(crate) struct AsmRequiresTemplate {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=305 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_expected_comma)]
@@ -3873,7 +3568,6 @@ pub(crate) struct AsmExpectedComma {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=306 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_expected_other)]
@@ -3883,7 +3577,6 @@ pub(crate) struct AsmExpectedOther {
     pub(crate) span: Span,
     pub(crate) is_inline_asm: bool,
 }
-/* AST_META: AST_ID=307 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_non_abi)]
@@ -3891,7 +3584,6 @@ pub(crate) struct NonABI {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=308 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_expected_string_literal)]
@@ -3900,7 +3592,6 @@ pub(crate) struct AsmExpectedStringLiteral {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=309 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(parse_asm_expected_register_class_or_explicit_register)]
@@ -3908,7 +3599,6 @@ pub(crate) struct ExpectedRegisterClassOrExplicitRegister {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=310 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(LintDiagnostic)]
 #[diag(parse_hidden_unicode_codepoints)]
@@ -3923,12 +3613,10 @@ pub(crate) struct HiddenUnicodeCodepointsDiag {
     #[subdiagnostic]
     pub sub: HiddenUnicodeCodepointsDiagSub,
 }
-/* AST_META: AST_ID=311 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct HiddenUnicodeCodepointsDiagLabels {
     pub spans: Vec<(char, Span)>,
 }
-/* AST_META: AST_ID=312 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=9 | LINES=8 */
 
 impl Subdiagnostic for HiddenUnicodeCodepointsDiagLabels {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -3937,13 +3625,11 @@ impl Subdiagnostic for HiddenUnicodeCodepointsDiagLabels {
         }
     }
 }
-/* AST_META: AST_ID=313 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 pub(crate) enum HiddenUnicodeCodepointsDiagSub {
     Escape { spans: Vec<(char, Span)> },
     NoEscape { spans: Vec<(char, Span)> },
 }
-/* AST_META: AST_ID=314 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=19 | LINES=42 */
 
 // Used because of multiple multipart_suggestion and note
 impl Subdiagnostic for HiddenUnicodeCodepointsDiagSub {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/tests/scoped_threadpool.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=Local(i32); | COMPLEXITY=5 | LINES=22 */
 #[allow(unused_crate_dependencies)]
 
 use crossbeam_utils::thread;
@@ -22,7 +21,6 @@ fn missing_scoped_tls() {
         });
     });
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=spawn_scoped_tls_threadpool | COMPLEXITY=17 | LINES=43 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
@@ -66,7 +64,6 @@ fn spawn_scoped_tls_threadpool() {
         });
     });
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=build_scoped_tls_threadpool | COMPLEXITY=14 | LINES=34 */
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]

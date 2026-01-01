@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/llvm/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[allow(non_snake_case)]
 
 use std::ffi::{CStr, CString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::num::NonZero;
 use std::ptr;
 use std::string::FromUtf8Error;
 
 use libc::c_uint;
 use crate::rustc_abi::{Align, Size, WrappingRange};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
 use rustc_llvm::RustString;
 
 pub(crate) use self::CallConv::*;
@@ -30,7 +27,6 @@ impl LLVMRustResult {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 pub(crate) fn AddFunctionAttributes<'ll>(
     llfn: &'ll Value,
@@ -41,7 +37,6 @@ pub(crate) fn AddFunctionAttributes<'ll>(
         LLVMRustAddFunctionAttributes(llfn, idx.as_uint(), attrs.as_ptr(), attrs.len());
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 pub(crate) fn AddCallSiteAttributes<'ll>(
     callsite: &'ll Value,
@@ -52,7 +47,6 @@ pub(crate) fn AddCallSiteAttributes<'ll>(
         LLVMRustAddCallSiteAttributes(callsite, idx.as_uint(), attrs.as_ptr(), attrs.len());
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 
 pub(crate) fn CreateAttrStringValue<'ll>(
     llcx: &'ll Context,
@@ -69,7 +63,6 @@ pub(crate) fn CreateAttrStringValue<'ll>(
         )
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 
 pub(crate) fn CreateAttrString<'ll>(llcx: &'ll Context, attr: &str) -> &'ll Attribute {
     unsafe {
@@ -82,47 +75,38 @@ pub(crate) fn CreateAttrString<'ll>(llcx: &'ll Context, attr: &str) -> &'ll Attr
         )
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateAlignmentAttr(llcx: &Context, bytes: u64) -> &Attribute {
     unsafe { LLVMRustCreateAlignmentAttr(llcx, bytes) }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateDereferenceableAttr(llcx: &Context, bytes: u64) -> &Attribute {
     unsafe { LLVMRustCreateDereferenceableAttr(llcx, bytes) }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateDereferenceableOrNullAttr(llcx: &Context, bytes: u64) -> &Attribute {
     unsafe { LLVMRustCreateDereferenceableOrNullAttr(llcx, bytes) }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateByValAttr<'ll>(llcx: &'ll Context, ty: &'ll Type) -> &'ll Attribute {
     unsafe { LLVMRustCreateByValAttr(llcx, ty) }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateStructRetAttr<'ll>(llcx: &'ll Context, ty: &'ll Type) -> &'ll Attribute {
     unsafe { LLVMRustCreateStructRetAttr(llcx, ty) }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateUWTableAttr(llcx: &Context, async_: bool) -> &Attribute {
     unsafe { LLVMRustCreateUWTableAttr(llcx, async_) }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateAllocSizeAttr(llcx: &Context, size_arg: u32) -> &Attribute {
     unsafe { LLVMRustCreateAllocSizeAttr(llcx, size_arg) }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn CreateAllocKindAttr(llcx: &Context, kind_arg: AllocKindFlags) -> &Attribute {
     unsafe { LLVMRustCreateAllocKindAttr(llcx, kind_arg.bits()) }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=25 */
 
 pub(crate) fn CreateRangeAttr(llcx: &Context, size: Size, range: WrappingRange) -> &Attribute {
     let lower = range.start;
@@ -148,7 +132,6 @@ pub(crate) fn CreateRangeAttr(llcx: &Context, size: Size, range: WrappingRange) 
         LLVMRustCreateRangeAttribute(llcx, size_bits, lower_words.as_ptr(), upper_words.as_ptr())
     }
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone)]
 pub(crate) enum AttributePlace {
@@ -156,7 +139,6 @@ pub(crate) enum AttributePlace {
     Argument(u32),
     Function,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
 
 impl AttributePlace {
     pub(crate) fn as_uint(self) -> c_uint {
@@ -167,7 +149,6 @@ impl AttributePlace {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq)]
 #[repr(C)]
@@ -176,20 +157,17 @@ pub(crate) enum CodeGenOptSize {
     CodeGenOptSizeDefault = 1,
     CodeGenOptSizeAggressive = 2,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn SetInstructionCallConv(instr: &Value, cc: CallConv) {
     unsafe {
         LLVMSetInstructionCallConv(instr, cc as c_uint);
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 pub(crate) fn SetFunctionCallConv(fn_: &Value, cc: CallConv) {
     unsafe {
         LLVMSetFunctionCallConv(fn_, cc as c_uint);
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 // Externally visible symbols that might appear in multiple codegen units need to appear in
 // their own comdat section so that the duplicates can be discarded at link time. This can for
@@ -203,19 +181,16 @@ pub(crate) fn SetUniqueComdat(llmod: &Module, val: &Value) {
         CString::from_vec_with_nul(name_buf).or_else(|buf| CString::new(buf.into_bytes())).unwrap();
     set_comdat(llmod, val, &name);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn set_unnamed_address(global: &Value, unnamed: UnnamedAddr) {
     LLVMSetUnnamedAddress(global, unnamed);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_thread_local_mode(global: &Value, mode: ThreadLocalMode) {
     unsafe {
         LLVMSetThreadLocalMode(global, mode);
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 impl AttributeKind {
     /// Create an LLVM Attribute with no associated value.
@@ -223,7 +198,6 @@ impl AttributeKind {
         unsafe { LLVMRustCreateAttrNoValue(llcx, self) }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 impl MemoryEffects {
     /// Create an LLVM Attribute with these memory effects.
@@ -231,67 +205,56 @@ impl MemoryEffects {
         unsafe { LLVMRustCreateMemoryEffectsAttr(llcx, self) }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_section(llglobal: &Value, section_name: &CStr) {
     unsafe {
         LLVMSetSection(llglobal, section_name.as_ptr());
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn add_global<'a>(llmod: &'a Module, ty: &'a Type, name_cstr: &CStr) -> &'a Value {
     unsafe { LLVMAddGlobal(llmod, ty, name_cstr.as_ptr()) }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_initializer(llglobal: &Value, constant_val: &Value) {
     unsafe {
         LLVMSetInitializer(llglobal, constant_val);
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn set_global_constant(llglobal: &Value, is_constant: bool) {
     LLVMSetGlobalConstant(llglobal, is_constant.to_llvm_bool());
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn get_linkage(llglobal: &Value) -> Linkage {
     unsafe { LLVMGetLinkage(llglobal) }.to_rust()
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_linkage(llglobal: &Value, linkage: Linkage) {
     unsafe {
         LLVMSetLinkage(llglobal, linkage);
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn is_declaration(llglobal: &Value) -> bool {
     unsafe { LLVMIsDeclaration(llglobal) }.is_true()
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
 pub(crate) fn get_visibility(llglobal: &Value) -> Visibility {
     unsafe { LLVMGetVisibility(llglobal) }.to_rust()
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_visibility(llglobal: &Value, visibility: Visibility) {
     unsafe {
         LLVMSetVisibility(llglobal, visibility);
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_alignment(llglobal: &Value, align: Align) {
     unsafe {
         ffi::LLVMSetAlignment(llglobal, align.bytes() as c_uint);
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=11 */
 
 /// Get the `name`d comdat from `llmod` and assign it to `llglobal`.
 ///
@@ -303,7 +266,6 @@ pub(crate) fn set_comdat(llmod: &Module, llglobal: &Value, name: &CStr) {
         LLVMSetComdat(llglobal, comdat);
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 
 /// Safe wrapper around `LLVMGetParam`, because segfaults are no fun.
 pub(crate) fn get_param(llfn: &Value, index: c_uint) -> &Value {
@@ -317,7 +279,6 @@ pub(crate) fn get_param(llfn: &Value, index: c_uint) -> &Value {
         LLVMGetParam(llfn, index)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 /// Safe wrapper for `LLVMGetValueName2`
 /// Needs to allocate the value, because `set_value_name` will invalidate
@@ -329,13 +290,11 @@ pub(crate) fn get_value_name(value: &Value) -> Vec<u8> {
         std::slice::from_raw_parts(data.cast(), len).to_vec()
     }
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug, Copy, Clone)]
 pub(crate) struct Intrinsic {
     id: NonZero<c_uint>,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=17 */
 
 impl Intrinsic {
     pub(crate) fn lookup(name: &[u8]) -> Option<Self> {
@@ -353,7 +312,6 @@ impl Intrinsic {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 /// Safe wrapper for `LLVMSetValueName2` from a byte slice
 pub(crate) fn set_value_name(value: &Value, name: &[u8]) {
@@ -362,24 +320,20 @@ pub(crate) fn set_value_name(value: &Value, name: &[u8]) {
         LLVMSetValueName2(value, data, name.len());
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn build_string(f: impl FnOnce(&RustString)) -> Result<String, FromUtf8Error> {
     String::from_utf8(RustString::build_byte_buffer(f))
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn build_byte_buffer(f: impl FnOnce(&RustString)) -> Vec<u8> {
     RustString::build_byte_buffer(f)
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn twine_to_string(tr: &Twine) -> String {
     unsafe {
         build_string(|s| LLVMRustWriteTwineToString(tr, s)).expect("got a non-UTF8 Twine from LLVM")
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=14 */
 
 pub(crate) fn last_error() -> Option<String> {
     unsafe {
@@ -394,14 +348,12 @@ pub(crate) fn last_error() -> Option<String> {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Owning pointer to an [`OperandBundle`] that will dispose of the bundle
 /// when dropped.
 pub(crate) struct OperandBundleBox<'a> {
     raw: ptr::NonNull<OperandBundle<'a>>,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=24 */
 
 impl<'a> OperandBundleBox<'a> {
     pub(crate) fn new(name: &str, vals: &[&'a Value]) -> Self {
@@ -426,7 +378,6 @@ impl<'a> OperandBundleBox<'a> {
         unsafe { self.raw.as_ref() }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=8 */
 
 impl Drop for OperandBundleBox<'_> {
     fn drop(&mut self) {
@@ -435,7 +386,6 @@ impl Drop for OperandBundleBox<'_> {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
 
 pub(crate) fn add_module_flag_u32(
     module: &Module,
@@ -447,7 +397,6 @@ pub(crate) fn add_module_flag_u32(
         LLVMRustAddModuleFlagU32(module, merge_behavior, key.as_c_char_ptr(), key.len(), value);
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 pub(crate) fn add_module_flag_str(
     module: &Module,
@@ -466,21 +415,18 @@ pub(crate) fn add_module_flag_str(
         );
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_dllimport_storage_class<'ll>(v: &'ll Value) {
     unsafe {
         LLVMSetDLLStorageClass(v, DLLStorageClass::DllImport);
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
 
 pub(crate) fn set_dso_local<'ll>(v: &'ll Value) {
     unsafe {
         LLVMRustSetDSOLocal(v, true);
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 /// Safe wrapper for `LLVMAppendModuleInlineAsm`, which delegates to
 /// `Module::appendModuleInlineAsm`.

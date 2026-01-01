@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/scope.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=52 */
 /*
 Managing the scope stack. The scopes are tied to lexical scopes, so as
 we descend the THIR, we push a scope on the stack, build its
@@ -52,7 +51,6 @@ loop {
     if cond { break; }
     let y = ..;
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=36 */
 ```
 
 When processing the `let x`, we will add one drop to the scope for
@@ -89,33 +87,23 @@ use std::mem;
 use interpret::ErrorHandled;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{self as hir, HirId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::mir::{self, *};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::thir::{AdtExpr, AdtExprBase, ArmId, ExprId, ExprKind, LintLevel};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, ValTree};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_pattern_analysis::rustc::RustcPatCtxt;
 use crate::rustc_complete::lint::Level;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::matches::BuiltMatchTree;
 use crate::builder::{BlockAnd, BlockAndExtension, BlockFrame, Builder, CFG};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::errors::{
     ConstContinueBadConst, ConstContinueNotMonomorphicConst, ConstContinueUnknownJumpTarget,
 };
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 #[derive(Debug)]
 pub(crate) struct Scopes<'tcx> {
@@ -136,7 +124,6 @@ pub(crate) struct Scopes<'tcx> {
     /// Drops that need to be done on paths to the `CoroutineDrop` terminator.
     coroutine_drops: DropTree,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Scope | COMPLEXITY=3 | LINES=25 */
 
 #[derive(Debug)]
 struct Scope {
@@ -162,7 +149,6 @@ struct Scope {
     /// coroutine drop path.
     cached_coroutine_drop_block: Option<DropIdx>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DropData | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Clone, Copy, Debug)]
 struct DropData {
@@ -176,7 +162,6 @@ struct DropData {
     /// Whether this is a value Drop or a StorageDead.
     kind: DropKind,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub(crate) enum DropKind {
@@ -184,7 +169,6 @@ pub(crate) enum DropKind {
     Storage,
     ForLint(BackwardIncompatibleDropReason),
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=BreakableScope | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Debug)]
 struct BreakableScope<'tcx> {
@@ -198,7 +182,6 @@ struct BreakableScope<'tcx> {
     /// Drops that happen on the `continue` path.
     continue_drops: Option<DropTree>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=ConstContinuableScope | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Debug)]
 struct ConstContinuableScope<'tcx> {
@@ -213,7 +196,6 @@ struct ConstContinuableScope<'tcx> {
     /// Drops that happen on a `#[const_continue]`
     const_continue_drops: DropTree,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=IfThenScope | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 struct IfThenScope {
@@ -222,7 +204,6 @@ struct IfThenScope {
     /// Drops that happen on the `else` path.
     else_drops: DropTree,
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// The target of an expression that breaks out of a scope
 #[derive(Clone, Copy, Debug)]
@@ -231,13 +212,11 @@ pub(crate) enum BreakableTarget {
     Break(region::Scope),
     Return,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=DropIdx | COMPLEXITY=3 | LINES=5 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     struct DropIdx {}
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=DropTree | COMPLEXITY=9 | LINES=21 */
 
 const ROOT_NODE: DropIdx = DropIdx::ZERO;
 
@@ -259,7 +238,6 @@ struct DropTree {
     /// Edges into the `DropTree` that need to be added once it's lowered.
     entry_points: Vec<(DropIdx, BasicBlock)>,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=DropNode | COMPLEXITY=2 | LINES=9 */
 
 /// A single node in the drop tree.
 #[derive(Debug)]
@@ -269,7 +247,6 @@ struct DropNode {
     /// Index of the "next" drop to perform (in drop order, not declaration order).
     next: DropIdx,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=DropNodeKey | COMPLEXITY=4 | LINES=7 */
 
 /// Subset of [`DropNode`] used for reverse lookup in a hash table.
 #[derive(Debug, PartialEq, Eq, Hash)]
@@ -277,7 +254,6 @@ struct DropNodeKey {
     next: DropIdx,
     local: Local,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=needs_cleanup | COMPLEXITY=22 | LINES=25 */
 
 impl Scope {
     /// Whether there's anything to do for the cleanup path, that is,
@@ -303,7 +279,6 @@ impl Scope {
         self.cached_coroutine_drop_block = None;
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=make_block | COMPLEXITY=4 | LINES=12 */
 
 /// A trait that determined how [DropTree] creates its blocks and
 /// links to any entry nodes.
@@ -316,7 +291,6 @@ trait DropTreeBuilder<'tcx> {
     /// the drop tree.
     fn link_entry_point(cfg: &mut CFG<'tcx>, from: BasicBlock, to: BasicBlock);
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=new | COMPLEXITY=94 | LINES=187 */
 
 impl DropTree {
     fn new() -> Self {
@@ -504,7 +478,6 @@ impl DropTree {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=push_scope | COMPLEXITY=14 | LINES=44 */
 
 impl<'tcx> Scopes<'tcx> {
     pub(crate) fn new() -> Self {
@@ -549,7 +522,6 @@ impl<'tcx> Scopes<'tcx> {
         self.scopes.last().expect("topmost_scope: no scopes present").region_scope
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=eval_unevaluated_mir_constant_to_valtree | COMPLEXITY=566 | LINES=1275 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     // Adding and removing scopes
@@ -1825,7 +1797,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         guard_scope.invalidate_cache();
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=build_scope_drops | COMPLEXITY=75 | LINES=179 */
 
 /// Builds drops for `pop_scope` and `leave_top_scope`.
 ///
@@ -2005,7 +1976,6 @@ where
     }
     block.unit()
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=build_exit_tree | COMPLEXITY=83 | LINES=142 */
 
 impl<'a, 'tcx: 'a> Builder<'a, 'tcx> {
     /// Build a drop tree for a breakable scope.
@@ -2148,7 +2118,6 @@ impl<'a, 'tcx: 'a> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=ExitScopes; | COMPLEXITY=13 | LINES=21 */
 
 // DropTreeBuilder implementations.
 
@@ -2170,7 +2139,6 @@ impl<'tcx> DropTreeBuilder<'tcx> for ExitScopes {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=CoroutineDrop; | COMPLEXITY=17 | LINES=22 */
 
 struct CoroutineDrop;
 
@@ -2193,7 +2161,6 @@ impl<'tcx> DropTreeBuilder<'tcx> for CoroutineDrop {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=Unwind; | COMPLEXITY=32 | LINES=39 */
 
 struct Unwind;
 

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_privacy/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
@@ -19,43 +18,31 @@ use errors::{
     ItemIsPrivate, PrivateInterfacesOrBoundsLint, ReportEffectiveVisibility, UnnameableTypesLint,
     UnnamedItemIsPrivate,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::MacroDef;
 use crate::rustc_complete::visit::{VisitorResult, try_visit};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::{MultiSpan, listify};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AmbigArg, ForeignItemId, ItemId, OwnerId, PatKind, find_attr};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
 use crate::rustc_complete::ty::{
     self, Const, GenericParamDefKind, TraitRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitor,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::hygiene::Transparency;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LazyDefPathStr | COMPLEXITY=2 | LINES=9 */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Generic infrastructure used to implement specific visitors below.
@@ -65,14 +52,12 @@ struct LazyDefPathStr<'tcx> {
     def_id: DefId,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> fmt::Display for LazyDefPathStr<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.tcx.def_path_str(self.def_id))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=skip_assoc_tys | COMPLEXITY=12 | LINES=41 */
 
 /// Implemented to visit all `DefId`s in a type.
 /// Visiting `DefId`s is useful because visibilities and reachabilities are attached to them.
@@ -114,14 +99,12 @@ pub trait DefIdVisitor<'tcx> {
         self.skeleton().visit_clauses(clauses)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=DefIdVisitorSkeleton | COMPLEXITY=2 | LINES=6 */
 
 pub struct DefIdVisitorSkeleton<'v, 'tcx, V: ?Sized> {
     def_id_visitor: &'v mut V,
     visited_opaque_tys: FxHashSet<DefId>,
     dummy: PhantomData<TyCtxt<'tcx>>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_trait | COMPLEXITY=32 | LINES=63 */
 
 impl<'tcx, V> DefIdVisitorSkeleton<'_, 'tcx, V>
 where
@@ -185,7 +168,6 @@ where
         V::Result::output()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=visit_predicate | COMPLEXITY=83 | LINES=136 */
 
 impl<'tcx, V> TypeVisitor<TyCtxt<'tcx>> for DefIdVisitorSkeleton<'_, 'tcx, V>
 where
@@ -322,12 +304,10 @@ where
         tcx.expand_abstract_consts(c).super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=min | COMPLEXITY=6 | LINES=4 */
 
 fn min(vis1: ty::Visibility, vis2: ty::Visibility, tcx: TyCtxt<'_>) -> ty::Visibility {
     if vis1.is_at_least(vis2, tcx) { vis2 } else { vis1 }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=FindMin | COMPLEXITY=2 | LINES=10 */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Visitor used to determine impl visibility and reachability.
@@ -338,7 +318,6 @@ struct FindMin<'a, 'tcx, VL: VisibilityLike, const SHALLOW: bool> {
     effective_visibilities: &'a EffectiveVisibilities,
     min: VL,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=skip_assoc_tys | COMPLEXITY=10 | LINES=17 */
 
 impl<'a, 'tcx, VL: VisibilityLike, const SHALLOW: bool> DefIdVisitor<'tcx>
     for FindMin<'a, 'tcx, VL, SHALLOW>
@@ -356,7 +335,6 @@ impl<'a, 'tcx, VL: VisibilityLike, const SHALLOW: bool> DefIdVisitor<'tcx>
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new_min | COMPLEXITY=10 | LINES=23 */
 
 trait VisibilityLike: Sized {
     const MAX: Self;
@@ -380,7 +358,6 @@ trait VisibilityLike: Sized {
         find.min
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new_min | COMPLEXITY=5 | LINES=10 */
 
 impl VisibilityLike for ty::Visibility {
     const MAX: Self = ty::Visibility::Public;
@@ -391,7 +368,6 @@ impl VisibilityLike for ty::Visibility {
         min(find.tcx.local_visibility(def_id), find.min, find.tcx)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=new_min | COMPLEXITY=7 | LINES=18 */
 
 impl VisibilityLike for EffectiveVisibility {
     const MAX: Self = EffectiveVisibility::from_vis(ty::Visibility::Public);
@@ -410,7 +386,6 @@ impl VisibilityLike for EffectiveVisibility {
         effective_vis.min(find.min, find.tcx)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=EmbargoVisitor | COMPLEXITY=10 | LINES=26 */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// The embargo visitor, used to determine the exports of the AST.
@@ -437,7 +412,6 @@ struct EmbargoVisitor<'tcx> {
     /// Has something changed in the level map?
     changed: bool,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=ReachEverythingInTheInterfaceVisitor | COMPLEXITY=2 | LINES=7 */
 
 struct ReachEverythingInTheInterfaceVisitor<'a, 'tcx> {
     effective_vis: EffectiveVisibility,
@@ -445,7 +419,6 @@ struct ReachEverythingInTheInterfaceVisitor<'a, 'tcx> {
     ev: &'a mut EmbargoVisitor<'tcx>,
     level: Level,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=get | COMPLEXITY=96 | LINES=217 */
 
 impl<'tcx> EmbargoVisitor<'tcx> {
     fn get(&self, def_id: LocalDefId) -> Option<EffectiveVisibility> {
@@ -663,7 +636,6 @@ impl<'tcx> EmbargoVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=check_def_id | COMPLEXITY=124 | LINES=165 */
 
 impl<'tcx> EmbargoVisitor<'tcx> {
     fn check_def_id(&mut self, owner_id: OwnerId) {
@@ -829,7 +801,6 @@ impl<'tcx> EmbargoVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=generics | COMPLEXITY=21 | LINES=31 */
 
 impl ReachEverythingInTheInterfaceVisitor<'_, '_> {
     fn generics(&mut self) -> &mut Self {
@@ -861,7 +832,6 @@ impl ReachEverythingInTheInterfaceVisitor<'_, '_> {
         self
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=10 | LINES=16 */
 
 impl<'tcx> DefIdVisitor<'tcx> for ReachEverythingInTheInterfaceVisitor<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -878,7 +848,6 @@ impl<'tcx> DefIdVisitor<'tcx> for ReachEverythingInTheInterfaceVisitor<'_, 'tcx>
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=TestReachabilityVisitor | COMPLEXITY=4 | LINES=8 */
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Visitor, used for EffectiveVisibilities table checking
@@ -887,7 +856,6 @@ pub struct TestReachabilityVisitor<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     effective_visibilities: &'a EffectiveVisibilities,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=effective_visibility_diagnostic | COMPLEXITY=20 | LINES=21 */
 
 impl<'a, 'tcx> TestReachabilityVisitor<'a, 'tcx> {
     fn effective_visibility_diagnostic(&self, def_id: LocalDefId) {
@@ -909,7 +877,6 @@ impl<'a, 'tcx> TestReachabilityVisitor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=check_def_id | COMPLEXITY=27 | LINES=31 */
 
 impl<'a, 'tcx> TestReachabilityVisitor<'a, 'tcx> {
     fn check_def_id(&self, owner_id: OwnerId) {
@@ -941,7 +908,6 @@ impl<'a, 'tcx> TestReachabilityVisitor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=NamePrivacyVisitor | COMPLEXITY=5 | LINES=12 */
 
 //////////////////////////////////////////////////////////////////////////////////////
 /// Name privacy visitor, checks privacy and reports violations.
@@ -954,7 +920,6 @@ struct NamePrivacyVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     maybe_typeck_results: Option<&'tcx ty::TypeckResults<'tcx>>,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=520 | LINES=964 */
 
 impl<'tcx> NamePrivacyVisitor<'tcx> {
     /// Gets the type-checking results for the current body.

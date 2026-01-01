@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_driver_impl/src/signal_handler.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 // Signal handler for rustc
 // Primarily used to extract a backtrace from stack overflow
 
 use std::alloc::{Layout, alloc};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fmt, mem, ptr, slice};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use rustc_interface::util::{DEFAULT_STACK_SIZE, STACK_SIZE};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=backtrace_symbols_fd | COMPLEXITY=6 | LINES=13 */
 
 /// Signals that represent that we have a bug, and our prompt termination has
 /// been ordered.
@@ -23,13 +19,11 @@ const KILL_SIGNALS: [(libc::c_int, &str); 3] = [
 unsafe extern "C" {
     fn backtrace_symbols_fd(buffer: *const *mut libc::c_void, size: libc::c_int, fd: libc::c_int);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=backtrace_stderr | COMPLEXITY=7 | LINES=5 */
 
 fn backtrace_stderr(buffer: &[*mut libc::c_void]) {
     let size = buffer.len().try_into().unwrap_or_default();
     unsafe { backtrace_symbols_fd(buffer.as_ptr(), size, libc::STDERR_FILENO) };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=RawStderr(()); | COMPLEXITY=14 | LINES=12 */
 
 /// Unbuffered, unsynchronized writer to stderr.
 ///
@@ -42,7 +36,6 @@ impl fmt::Write for RawStderr {
         if ret == -1 { Err(fmt::Error) } else { Ok(()) }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// We don't really care how many bytes we actually get out. SIGSEGV comes for our head.
 /// Splash stderr with letters of our own blood to warn our friends about the monster.
@@ -50,7 +43,6 @@ macro raw_errln($tokens:tt) {
     let _ = ::core::fmt::Write::write_fmt(&mut RawStderr(()), format_args!($tokens));
     let _ = ::core::fmt::Write::write_char(&mut RawStderr(()), '\n');
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=65 | LINES=99 */
 
 /// Signal handler installed for SIGSEGV
 ///
@@ -150,7 +142,6 @@ unsafe extern "C" fn print_stack_trace(signum: libc::c_int) {
         raw_errln!("note: backtrace dumped due to {signame}! resuming signal");
     };
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 /// When one of the KILL signals is delivered to the process, print a stack trace and then exit.
 pub(super) fn install() {
@@ -170,7 +161,6 @@ pub(super) fn install() {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=min_sigstack_size | COMPLEXITY=8 | LINES=11 */
 
 /// Modern kernels on modern hardware can have dynamic signal stack sizes.
 #[cfg(any(target_os = "linux", target_os = "android"))]
@@ -182,7 +172,6 @@ fn min_sigstack_size() -> usize {
     // This transparently supports older kernels which don't provide AT_MINSIGSTKSZ
     libc::MINSIGSTKSZ.max(dynamic_sigstksz as _)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=min_sigstack_size | COMPLEXITY=2 | LINES=6 */
 
 /// Not all OS support hardware where this is needed.
 #[cfg(not(any(target_os = "linux", target_os = "android")))]

@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/impls/storage_liveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Cow;
 
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::*;
 
 use super::MaybeBorrowedLocals;
 use crate::{Analysis, GenKill, ResultsCursor};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=always_storage_live_locals | COMPLEXITY=14 | LINES=17 */
 
 /// The set of locals in a MIR body that do not have `StorageLive`/`StorageDead` annotations.
 ///
@@ -27,19 +24,16 @@ pub fn always_storage_live_locals(body: &Body<'_>) -> DenseBitSet<Local> {
 
     always_live_locals
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=MaybeStorageLive | COMPLEXITY=2 | LINES=4 */
 
 pub struct MaybeStorageLive<'a> {
     always_live_locals: Cow<'a, DenseBitSet<Local>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a> MaybeStorageLive<'a> {
     pub fn new(always_live_locals: Cow<'a, DenseBitSet<Local>>) -> Self {
         MaybeStorageLive { always_live_locals }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=15 | LINES=32 */
 
 impl<'a, 'tcx> Analysis<'tcx> for MaybeStorageLive<'a> {
     type Domain = DenseBitSet<Local>;
@@ -72,19 +66,16 @@ impl<'a, 'tcx> Analysis<'tcx> for MaybeStorageLive<'a> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=MaybeStorageDead | COMPLEXITY=2 | LINES=4 */
 
 pub struct MaybeStorageDead<'a> {
     always_live_locals: Cow<'a, DenseBitSet<Local>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a> MaybeStorageDead<'a> {
     pub fn new(always_live_locals: Cow<'a, DenseBitSet<Local>>) -> Self {
         MaybeStorageDead { always_live_locals }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=19 | LINES=34 */
 
 impl<'a, 'tcx> Analysis<'tcx> for MaybeStorageDead<'a> {
     type Domain = DenseBitSet<Local>;
@@ -119,7 +110,6 @@ impl<'a, 'tcx> Analysis<'tcx> for MaybeStorageDead<'a> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=MaybeRequiresStorage | COMPLEXITY=2 | LINES=8 */
 
 type BorrowedLocalsResults<'mir, 'tcx> = ResultsCursor<'mir, 'tcx, MaybeBorrowedLocals>;
 
@@ -128,14 +118,12 @@ type BorrowedLocalsResults<'mir, 'tcx> = ResultsCursor<'mir, 'tcx, MaybeBorrowed
 pub struct MaybeRequiresStorage<'mir, 'tcx> {
     borrowed_locals: BorrowedLocalsResults<'mir, 'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'mir, 'tcx> MaybeRequiresStorage<'mir, 'tcx> {
     pub fn new(borrowed_locals: BorrowedLocalsResults<'mir, 'tcx>) -> Self {
         MaybeRequiresStorage { borrowed_locals }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=103 | LINES=169 */
 
 impl<'tcx> Analysis<'tcx> for MaybeRequiresStorage<'_, 'tcx> {
     type Domain = DenseBitSet<Local>;
@@ -305,7 +293,6 @@ impl<'tcx> Analysis<'tcx> for MaybeRequiresStorage<'_, 'tcx> {
         return_places.for_each(|place| state.gen_(place.local));
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_for_move | COMPLEXITY=4 | LINES=9 */
 
 impl<'tcx> MaybeRequiresStorage<'_, 'tcx> {
     /// Kill locals that are fully moved and have not been borrowed.
@@ -315,13 +302,11 @@ impl<'tcx> MaybeRequiresStorage<'_, 'tcx> {
         visitor.visit_location(body, loc);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=MoveVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct MoveVisitor<'a, 'mir, 'tcx> {
     borrowed_locals: &'a mut BorrowedLocalsResults<'mir, 'tcx>,
     state: &'a mut DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=11 | LINES=11 */
 
 impl<'tcx> Visitor<'tcx> for MoveVisitor<'_, '_, 'tcx> {
     fn visit_local(&mut self, local: Local, context: PlaceContext, loc: Location) {

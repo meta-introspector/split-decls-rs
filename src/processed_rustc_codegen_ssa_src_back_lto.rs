@@ -1,31 +1,24 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/lto.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ffi::CString;
 use std::sync::Arc;
 
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo, SymbolExportLevel};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::{CrateType, Lto};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::info;
 
 use crate::back::symbol_export::{self, allocator_shim_symbols, symbol_name_for_instance_in_crate};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::back::write::CodegenContext;
 use crate::base::allocator_kind_for_codegen;
 use crate::errors::{DynamicLinkingWithLTO, LtoDisallowed, LtoDylib, LtoProcMacro};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ThinModule | COMPLEXITY=2 | LINES=6 */
 use crate::traits::*;
 
 pub struct ThinModule<B: WriteBackendMethods> {
     pub shared: Arc<ThinShared<B>>,
     pub idx: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=name | COMPLEXITY=9 | LINES=20 */
 
 impl<B: WriteBackendMethods> ThinModule<B> {
     pub fn name(&self) -> &str {
@@ -46,7 +39,6 @@ impl<B: WriteBackendMethods> ThinModule<B> {
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ThinShared | COMPLEXITY=2 | LINES=7 */
 
 pub struct ThinShared<B: WriteBackendMethods> {
     pub data: B::ThinData,
@@ -54,14 +46,12 @@ pub struct ThinShared<B: WriteBackendMethods> {
     pub serialized_modules: Vec<SerializedModule<B::ModuleBuffer>>,
     pub module_names: Vec<CString>,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub enum SerializedModule<M: ModuleBufferMethods> {
     Local(M),
     FromRlib(Vec<u8>),
     FromUncompressedFile(Mmap),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=data | COMPLEXITY=7 | LINES=10 */
 
 impl<M: ModuleBufferMethods> SerializedModule<M> {
     pub fn data(&self) -> &[u8] {
@@ -72,7 +62,6 @@ impl<M: ModuleBufferMethods> SerializedModule<M> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=crate_type_allows_lto | COMPLEXITY=6 | LINES=12 */
 
 fn crate_type_allows_lto(crate_type: CrateType) -> bool {
     match crate_type {
@@ -85,7 +74,6 @@ fn crate_type_allows_lto(crate_type: CrateType) -> bool {
         CrateType::Rlib => false,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=50 */
 
 pub(super) fn exported_symbols_for_lto(
     tcx: TyCtxt<'_>,
@@ -136,7 +124,6 @@ pub(super) fn exported_symbols_for_lto(
 
     symbols_below_threshold
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=26 */
 
 pub(super) fn check_lto_allowed<B: WriteBackendMethods>(cgcx: &CodegenContext<B>) {
     if cgcx.lto == Lto::ThinLocal {

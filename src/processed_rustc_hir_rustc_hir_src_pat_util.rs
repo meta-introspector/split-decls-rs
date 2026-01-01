@@ -1,23 +1,17 @@
 // SRC: ../rust/compiler/rustc_hir/src/pat_util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::iter::Enumerate;
 
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::def::{CtorOf, DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::def_id::{DefId, DefIdSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::hir::{self, BindingMode, ByRef, HirId, PatKind};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=EnumerateAndAdjust | COMPLEXITY=2 | LINES=6 */
 
 pub struct EnumerateAndAdjust<I> {
     enumerate: Enumerate<I>,
     gap_pos: usize,
     gap_len: usize,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=next | COMPLEXITY=10 | LINES=17 */
 
 impl<I> Iterator for EnumerateAndAdjust<I>
 where
@@ -35,7 +29,6 @@ where
         self.enumerate.size_hint()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=enumerate_and_adjust | COMPLEXITY=2 | LINES=10 */
 
 pub trait EnumerateAndAdjustIterator {
     fn enumerate_and_adjust(
@@ -46,7 +39,6 @@ pub trait EnumerateAndAdjustIterator {
     where
         Self: Sized;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=enumerate_and_adjust | COMPLEXITY=6 | LINES=18 */
 
 impl<T: ExactSizeIterator> EnumerateAndAdjustIterator for T {
     fn enumerate_and_adjust(
@@ -65,7 +57,6 @@ impl<T: ExactSizeIterator> EnumerateAndAdjustIterator for T {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=each_binding | COMPLEXITY=64 | LINES=86 */
 
 impl hir::Pat<'_> {
     /// Call `f` on every "binding" in a pattern, e.g., on `a` in

@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_monomorphize/src/collector/autodiff.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, GenericArg, IntrinsicDef, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::collector::{MonoItems, create_fn_mono_item};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 // Here, we force both primal and diff function to be collected in
 // mono so this does not interfere in `autodiff` intrinsics
@@ -23,7 +20,6 @@ pub(crate) fn collect_autodiff_fn<'tcx>(
 
     collect_autodiff_fn_from_arg(instance.args[0], tcx, output);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=collect_autodiff_fn_from_arg | COMPLEXITY=12 | LINES=27 */
 
 fn collect_autodiff_fn_from_arg<'tcx>(
     arg: GenericArg<'tcx>,

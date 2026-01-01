@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/test_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=18 | LINES=44 */
 use crate::prelude::*;
 
 pub(crate) struct IgnoreParser;
@@ -44,7 +43,6 @@ impl<S: Stage> SingleAttributeParser<S> for IgnoreParser {
         })
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=25 | LINES=56 */
 
 pub(crate) struct ShouldPanicParser;
 

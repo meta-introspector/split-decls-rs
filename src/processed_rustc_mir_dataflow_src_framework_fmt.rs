@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/fmt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Custom formatting traits used when outputting Graphviz diagrams with the results of a dataflow
 // analysis.
 
@@ -7,7 +6,6 @@ use std::fmt;
 
 use crate::rustc_index::Idx;
 use crate::rustc_index::bit_set::{ChunkedBitSet, DenseBitSet, MixedBitSet};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=19 | LINES=34 */
 
 use super::lattice::MaybeReachable;
 
@@ -42,14 +40,12 @@ pub trait DebugWithContext<C>: Eq + fmt::Debug {
         old.fmt_with(ctxt, f)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=DebugWithAdapter | COMPLEXITY=2 | LINES=6 */
 
 /// Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_with`.
 pub struct DebugWithAdapter<'a, T, C> {
     pub this: T,
     pub ctxt: &'a C,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl<T, C> fmt::Debug for DebugWithAdapter<'_, T, C>
 where
@@ -59,7 +55,6 @@ where
         self.this.fmt_with(self.ctxt, f)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=DebugDiffWithAdapter | COMPLEXITY=2 | LINES=7 */
 
 /// Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_diff_with`.
 pub struct DebugDiffWithAdapter<'a, T, C> {
@@ -67,7 +62,6 @@ pub struct DebugDiffWithAdapter<'a, T, C> {
     pub old: T,
     pub ctxt: &'a C,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
 
 impl<T, C> fmt::Debug for DebugDiffWithAdapter<'_, T, C>
 where
@@ -77,7 +71,6 @@ where
         self.new.fmt_diff_with(&self.old, self.ctxt, f)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=29 */
 
 // Impls
 
@@ -107,7 +100,6 @@ where
         fmt_diff(&set_in_self, &cleared_in_self, ctxt, f)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=27 */
 
 impl<T, C> DebugWithContext<C> for ChunkedBitSet<T>
 where
@@ -135,7 +127,6 @@ where
         fmt_diff(&set_in_self, &cleared_in_self, ctxt, f)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=20 */
 
 impl<T, C> DebugWithContext<C> for MixedBitSet<T>
 where
@@ -156,7 +147,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=22 | LINES=31 */
 
 impl<S, C> DebugWithContext<C> for MaybeReachable<S>
 where
@@ -188,7 +178,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt_diff | COMPLEXITY=35 | LINES=48 */
 
 fn fmt_diff<T, C>(
     inserted: &MixedBitSet<T>,
@@ -237,7 +226,6 @@ where
 
     Ok(())
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=6 | LINES=13 */
 
 impl<T, C> DebugWithContext<C> for &'_ T
 where
@@ -251,12 +239,9 @@ where
         (*self).fmt_diff_with(*old, ctxt, f)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<C> DebugWithContext<C> for crate::rustc_middle::mir::Local {}
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<C> DebugWithContext<C> for crate::move_paths::InitIndex {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx, C> DebugWithContext<C> for crate::move_paths::MovePathIndex
 where

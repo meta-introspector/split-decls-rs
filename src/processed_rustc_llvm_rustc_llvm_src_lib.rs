@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_llvm/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
@@ -10,7 +9,6 @@
 
 use std::cell::RefCell;
 use std::{ptr, slice};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 use libc::size_t;
 
@@ -20,7 +18,6 @@ unsafe extern "C" {
     /// (Rust) and `RustStringRef` (C++) in FFI signatures.
     pub type RustString;
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=build_byte_buffer | COMPLEXITY=3 | LINES=8 */
 
 impl RustString {
     pub fn build_byte_buffer(closure: impl FnOnce(&Self)) -> Vec<u8> {
@@ -29,7 +26,6 @@ impl RustString {
         buf.into_inner()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=RustStringInner | COMPLEXITY=4 | LINES=11 */
 
 /// Underlying implementation of [`RustString`].
 ///
@@ -41,7 +37,6 @@ impl RustString {
 struct RustStringInner {
     bytes: RefCell<Vec<u8>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=as_opaque | COMPLEXITY=16 | LINES=20 */
 
 impl RustStringInner {
     fn as_opaque(&self) -> &RustString {
@@ -62,7 +57,6 @@ impl RustStringInner {
         self.bytes.into_inner()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=15 */
 
 /// Appends the contents of a byte slice to a [`RustString`].
 ///
@@ -78,7 +72,6 @@ pub unsafe extern "C" fn LLVMRustStringWriteImpl(
     let slice = unsafe { slice::from_raw_parts(slice_ptr, slice_len) };
     RustStringInner::from_opaque(buf).bytes.borrow_mut().extend_from_slice(slice);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=initialize_available_targets | COMPLEXITY=32 | LINES=178 */
 
 /// Initialize targets enabled by the build script via `cfg(llvm_component = "...")`.
 /// N.B., this function can't be moved to `rustc_codegen_llvm` because of the `cfg`s.

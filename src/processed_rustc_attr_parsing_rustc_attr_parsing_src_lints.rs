@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/lints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::borrow::Cow;
 
 use crate::rustc_complete::{DiagArgValue, LintEmitter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Target;
 use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=emit_attribute_lint | COMPLEXITY=30 | LINES=79 */
 use crate::rustc_complete::sym;
 
 use crate::session_diagnostics;

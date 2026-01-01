@@ -1,39 +1,32 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/source_util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // The implementation of built-in macros which relate to the file system.
 
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::rc::Rc;
 use std::sync::Arc;
 
 use rustc_ast as ast;
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{join_path_idents, token};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_expand::base::{
     DummyResult, ExpandResult, ExtCtxt, MacEager, MacResult, MacroExpanderResult, resolve_path,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_expand::module::DirOwnership;
 use crate::rustc_lint_defs::BuiltinLintDiag;
 use crate::rustc_parse::lexer::StripTokens;
 use crate::rustc_parse::parser::ForceCollect;
 use crate::rustc_parse::{new_parser_from_file, unwrap_or_emit_fatal, utf8_error};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::builtin::INCOMPLETE_INCLUDE;
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{ByteSymbol, Pos, Span, Symbol};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use smallvec::SmallVec;
 
 use crate::errors;
 use crate::util::{
     check_zero_tts, get_single_str_from_tts, get_single_str_spanned_from_tts, parse_expr,
 };
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// Expand `line!()` to the current line number.
 pub(crate) fn expand_line(
@@ -49,7 +42,6 @@ pub(crate) fn expand_line(
 
     ExpandResult::Ready(MacEager::expr(cx.expr_u32(topmost, loc.line as u32)))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// Expand `column!()` to the current column number.
 pub(crate) fn expand_column(
@@ -65,7 +57,6 @@ pub(crate) fn expand_column(
 
     ExpandResult::Ready(MacEager::expr(cx.expr_u32(topmost, loc.col.to_usize() as u32 + 1)))
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 
 /// Expand `file!()` to the current filename.
 pub(crate) fn expand_file(
@@ -88,7 +79,6 @@ pub(crate) fn expand_file(
         ),
     )))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Expand `stringify!($input)`.
 pub(crate) fn expand_stringify(
@@ -100,7 +90,6 @@ pub(crate) fn expand_stringify(
     let s = pprust::tts_to_string(&tts);
     ExpandResult::Ready(MacEager::expr(cx.expr_str(sp, Symbol::intern(&s))))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// Expand `module_path!()` to (a textual representation of) the current module path.
 pub(crate) fn expand_mod(
@@ -115,7 +104,6 @@ pub(crate) fn expand_mod(
 
     ExpandResult::Ready(MacEager::expr(cx.expr_str(sp, Symbol::intern(&string))))
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=ExpandInclude | COMPLEXITY=47 | LINES=100 */
 
 /// Expand `include!($input)`.
 ///
@@ -215,7 +203,6 @@ pub(crate) fn expand_include<'cx>(
         span: sp,
     }))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=34 */
 
 /// Expand `include_str!($input)` to the content of the UTF-8-encoded file given by path `$input` as a string literal.
 ///
@@ -250,7 +237,6 @@ pub(crate) fn expand_include_str(
         Err(dummy) => dummy,
     })
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=29 */
 
 /// Expand `include_bytes!($input)` to the content of the file given by path `$input`.
 ///
@@ -280,7 +266,6 @@ pub(crate) fn expand_include_bytes(
         Err(dummy) => dummy,
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=load_binary_file | COMPLEXITY=24 | LINES=44 */
 
 fn load_binary_file(
     cx: &ExtCtxt<'_>,
@@ -325,7 +310,6 @@ fn load_binary_file(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=find_path_suggestion | COMPLEXITY=23 | LINES=62 */
 
 fn find_path_suggestion(
     source_map: &SourceMap,

@@ -1,51 +1,38 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/lint_tail_expr_drop_order.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::cell::RefCell;
 use std::collections::hash_map;
 use std::rc::Rc;
 
 use itertools::Itertools as _;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Subdiagnostic;
 use crate::rustc_complete::CRATE_HIR_ID;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::bit_set::MixedBitSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{
     self, BackwardIncompatibleDropReason, BasicBlock, Body, ClearCrossCrate, Local, Location,
     MirDumper, Place, StatementKind, TerminatorKind,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::significant_drop_order::{
     extract_component_with_significant_dtor, ty_dtor_span,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::impls::MaybeInitializedPlaces;
 use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::{Analysis, MaybeReachable, ResultsCursor};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::builtin::TAIL_EXPR_DROP_ORDER;
 use crate::rustc_complete::lint::{self};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=place_has_common_prefix | COMPLEXITY=2 | LINES=6 */
 use tracing::debug;
 
 fn place_has_common_prefix<'tcx>(left: &Place<'tcx>, right: &Place<'tcx>) -> bool {
     left.local == right.local
         && left.projection.iter().zip(right.projection).all(|(left, right)| left == right)
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Cache entry of `drop` at a `BasicBlock`
 #[derive(Debug, Clone, Copy)]
@@ -57,7 +44,6 @@ enum MovePathIndexAtBlock {
     /// We know that the `drop` here will invoke a destructor
     Some(MovePathIndex),
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DropsReachable | COMPLEXITY=2 | LINES=11 */
 
 struct DropsReachable<'a, 'mir, 'tcx> {
     body: &'a Body<'tcx>,
@@ -69,7 +55,6 @@ struct DropsReachable<'a, 'mir, 'tcx> {
     collected_drops: &'a mut MixedBitSet<MovePathIndex>,
     visited: FxHashMap<BasicBlock, Rc<RefCell<MixedBitSet<MovePathIndex>>>>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=56 | LINES=104 */
 
 impl<'a, 'mir, 'tcx> DropsReachable<'a, 'mir, 'tcx> {
     fn visit(&mut self, block: BasicBlock) {
@@ -174,7 +159,6 @@ impl<'a, 'mir, 'tcx> DropsReachable<'a, 'mir, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=place_descendent_of_bids | COMPLEXITY=15 | LINES=21 */
 
 /// Check if a moved place at `idx` is a part of a BID.
 /// The use of this check is that we will consider drops on these
@@ -196,7 +180,6 @@ fn place_descendent_of_bids<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=147 | LINES=284 */
 
 /// The core of the lint `tail-expr-drop-order`
 pub(crate) fn run_lint<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &Body<'tcx>) {
@@ -481,7 +464,6 @@ pub(crate) fn run_lint<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &Body<
         );
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=collect_user_names | COMPLEXITY=12 | LINES=13 */
 
 /// Extract binding names if available for diagnosis
 fn collect_user_names(body: &Body<'_>) -> FxIndexMap<Local, Symbol> {
@@ -495,7 +477,6 @@ fn collect_user_names(body: &Body<'_>) -> FxIndexMap<Local, Symbol> {
     }
     names
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=assign_observables_names | COMPLEXITY=20 | LINES=25 */
 
 /// Assign names for anonymous or temporary values for diagnosis
 fn assign_observables_names(
@@ -521,7 +502,6 @@ fn assign_observables_names(
     }
     names
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=TailExprDropOrderLint | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_transform_tail_expr_drop_order)]
@@ -533,7 +513,6 @@ struct TailExprDropOrderLint<'a> {
     #[note(mir_transform_note_epilogue)]
     _epilogue: (),
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=LocalLabel | COMPLEXITY=2 | LINES=8 */
 
 struct LocalLabel<'a> {
     span: Span,
@@ -542,7 +521,6 @@ struct LocalLabel<'a> {
     is_dropped_first_edition_2024: bool,
     destructors: Vec<DestructorLabel<'a>>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=10 | LINES=21 */
 
 /// A custom `Subdiagnostic` implementation so that the notes are delivered in a specific order
 impl Subdiagnostic for LocalLabel<'_> {
@@ -564,7 +542,6 @@ impl Subdiagnostic for LocalLabel<'_> {
         diag.span_label(self.span, msg);
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=DestructorLabel | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[note(mir_transform_tail_expr_dtor)]

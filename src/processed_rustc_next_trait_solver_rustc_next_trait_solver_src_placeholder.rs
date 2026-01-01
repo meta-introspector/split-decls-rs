@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/placeholder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use core::panic;
 
 use rustc_type_ir::data_structures::IndexMap;
@@ -8,7 +7,6 @@ use rustc_type_ir::{
     self as ty, InferCtxtLike, Interner, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=BoundVarReplacer | COMPLEXITY=6 | LINES=20 */
 
 pub struct BoundVarReplacer<'a, Infcx, I = <Infcx as InferCtxtLike>::Interner>
 where
@@ -29,7 +27,6 @@ where
     // we don't actually create a universe until we see a bound var we have to replace.
     universe_indices: &'a mut Vec<Option<ty::UniverseIndex>>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=replace_bound_vars | COMPLEXITY=14 | LINES=45 */
 
 impl<'a, Infcx, I> BoundVarReplacer<'a, Infcx, I>
 where
@@ -75,7 +72,6 @@ where
         universe
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=58 | LINES=85 */
 
 impl<Infcx, I> TypeFolder<I> for BoundVarReplacer<'_, Infcx, I>
 where

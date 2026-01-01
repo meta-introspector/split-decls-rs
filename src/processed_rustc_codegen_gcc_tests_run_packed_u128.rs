@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/packed_u128.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=ScalarInt | COMPLEXITY=2 | LINES=17 */
 // Compiler:
 //
 // Run-time:
@@ -17,13 +16,11 @@ pub struct ScalarInt {
     data: u128,
     size: u8,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=read_data | COMPLEXITY=2 | LINES=5 */
 #[inline(never)]
 #[unsafe(no_mangle)]
 fn read_data(a: &ScalarInt) {
     black_box(a.data);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {

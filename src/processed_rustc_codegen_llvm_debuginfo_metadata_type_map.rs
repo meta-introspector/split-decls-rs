@@ -1,28 +1,19 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/metadata/type_map.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::cell::RefCell;
 
 use crate::rustc_abi::{Align, Size, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_macros::HashStable;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, ExistentialTraitRef, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{DefinitionLocation, SmallVec, UNKNOWN_LINE_NUMBER, unknown_file_metadata};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::debuginfo::utils::{DIB, create_DIArray, debug_context};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::debuginfo::{DIFlags, DIScope, DIType};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::llvm::{self};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 mod private {
     use rustc_macros::HashStable;
@@ -34,7 +25,6 @@ mod private {
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, HashStable)]
     pub(crate) struct HiddenZst;
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=22 */
 
 /// A unique identifier for anything that we create a debuginfo node for.
 /// The types it contains are expected to already be normalized (which
@@ -57,7 +47,6 @@ pub(super) enum UniqueTypeId<'tcx> {
     /// The ID of the artificial type we create for VTables.
     VTableTy(Ty<'tcx>, Option<ExistentialTraitRef<'tcx>>, private::HiddenZst),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=generate_unique_id_string | COMPLEXITY=20 | LINES=74 */
 
 impl<'tcx> UniqueTypeId<'tcx> {
     pub(crate) fn for_ty(tcx: TyCtxt<'tcx>, t: Ty<'tcx>) -> Self {
@@ -132,7 +121,6 @@ impl<'tcx> UniqueTypeId<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// The `TypeMap` is where the debug context holds the type metadata nodes
 /// created so far. The debuginfo nodes are identified by `UniqueTypeId`.
@@ -140,7 +128,6 @@ impl<'tcx> UniqueTypeId<'tcx> {
 pub(crate) struct TypeMap<'ll, 'tcx> {
     pub(super) unique_id_to_di_node: RefCell<FxHashMap<UniqueTypeId<'tcx>, &'ll DIType>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=17 */
 
 impl<'ll, 'tcx> TypeMap<'ll, 'tcx> {
     /// Adds a `UniqueTypeId` to metadata mapping to the `TypeMap`. The method will
@@ -158,20 +145,17 @@ impl<'ll, 'tcx> TypeMap<'ll, 'tcx> {
         self.unique_id_to_di_node.borrow().get(&unique_type_id).cloned()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct DINodeCreationResult<'ll> {
     pub di_node: &'ll DIType,
     pub already_stored_in_typemap: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<'ll> DINodeCreationResult<'ll> {
     pub(crate) fn new(di_node: &'ll DIType, already_stored_in_typemap: bool) -> Self {
         DINodeCreationResult { di_node, already_stored_in_typemap }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub(crate) enum Stub<'ll> {
@@ -179,13 +163,11 @@ pub(crate) enum Stub<'ll> {
     Union,
     VTableTy { vtable_holder: &'ll DIType },
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct StubInfo<'ll, 'tcx> {
     metadata: &'ll DIType,
     unique_type_id: UniqueTypeId<'tcx>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 impl<'ll, 'tcx> StubInfo<'ll, 'tcx> {
     pub(super) fn new(
@@ -198,7 +180,6 @@ impl<'ll, 'tcx> StubInfo<'ll, 'tcx> {
         StubInfo { metadata: di_node, unique_type_id }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=67 */
 
 /// Create a stub debuginfo node onto which fields and nested types can be attached.
 pub(super) fn stub<'ll, 'tcx>(
@@ -266,19 +247,16 @@ pub(super) fn stub<'ll, 'tcx>(
     };
     StubInfo { metadata, unique_type_id }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=AdtStackPopGuard | COMPLEXITY=2 | LINES=4 */
 
 struct AdtStackPopGuard<'ll, 'tcx, 'a> {
     cx: &'a CodegenCx<'ll, 'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=6 */
 
 impl<'ll, 'tcx, 'a> Drop for AdtStackPopGuard<'ll, 'tcx, 'a> {
     fn drop(&mut self) {
         debug_context(self.cx).adt_stack.borrow_mut().pop();
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=96 */
 
 /// This function enables creating debuginfo nodes that can recursively refer to themselves.
 /// It will first insert the given stub into the type map and only then execute the `members`

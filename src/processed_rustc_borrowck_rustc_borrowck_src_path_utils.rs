@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/path_utils.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::ControlFlow;
 
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_complete::mir::{BasicBlock, Body, Location, Place, PlaceRef, ProjectionElem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use crate::borrow_set::{BorrowData, BorrowSet, TwoPhaseActivation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{AccessDepth, BorrowIndex, places_conflict};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=48 */
 
 /// Encapsulates the idea of iterating over every borrow that involves a particular path
 pub(super) fn each_borrow_involving_path<'tcx, F, I, S>(
@@ -61,7 +57,6 @@ pub(super) fn each_borrow_involving_path<'tcx, F, I, S>(
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=62 */
 
 pub(super) fn is_active<'tcx>(
     dominators: &Dominators<BasicBlock>,
@@ -124,7 +119,6 @@ pub(super) fn is_active<'tcx>(
         true
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 /// Determines if a given borrow is borrowing local data
 /// This is called for all Yield expressions on movable coroutines
@@ -133,7 +127,6 @@ pub(super) fn borrow_of_local_data(place: Place<'_>) -> bool {
     // Any errors will be caught on the initial borrow
     !place.is_indirect()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=33 */
 
 /// If `place` is a field projection, and the field is being projected from a closure type,
 /// then returns the index of the field being projected. Note that this closure will always

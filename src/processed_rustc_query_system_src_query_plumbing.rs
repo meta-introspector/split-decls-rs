@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/query/plumbing.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // The implementation of the query system itself. This defines the macros that
 // generate the actual methods on tcx which find and execute the provider,
 // manage the caches, and so forth.
@@ -12,38 +11,28 @@ use std::mem;
 use hashbrown::hash_table::Entry;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sharded::{self, Sharded};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::{outline, sync};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, FatalError, StashKey};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use super::{QueryConfig, QueryStackFrameExtra};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::HandleCycleError;
 use crate::dep_graph::{DepContext, DepGraphData, DepNode, DepNodeIndex, DepNodeParams};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::ich::StableHashingContext;
 use crate::query::caches::QueryCache;
 use crate::query::job::{QueryInfo, QueryJob, QueryJobId, QueryJobInfo, QueryLatch, report_cycle};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::query::{QueryContext, QueryMap, QueryStackFrame, SerializedDepNodeIndex};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=equivalent_key | COMPLEXITY=2 | LINES=5 */
 
 #[inline]
 fn equivalent_key<K: Eq, V>(k: &K) -> impl Fn(&(K, V)) -> bool + '_ {
     move |x| x.0 == *k
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=QueryState | COMPLEXITY=2 | LINES=4 */
 
 pub struct QueryState<K, I> {
     active: Sharded<hashbrown::HashTable<(K, QueryResult<I>)>>,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 /// Indicates the state of a query for a given key in a query map.
 enum QueryResult<I> {
@@ -54,7 +43,6 @@ enum QueryResult<I> {
     /// silently panic.
     Poisoned,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=expect_job | COMPLEXITY=10 | LINES=12 */
 
 impl<I> QueryResult<I> {
     /// Unwraps the query job expecting that it has started.
@@ -67,7 +55,6 @@ impl<I> QueryResult<I> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=all_inactive | COMPLEXITY=21 | LINES=37 */
 
 impl<K, I> QueryState<K, I>
 where
@@ -105,14 +92,12 @@ where
         Some(())
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<K, I> Default for QueryState<K, I> {
     fn default() -> QueryState<K, I> {
         QueryState { active: Default::default() }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=JobOwner | COMPLEXITY=4 | LINES=10 */
 
 /// A type representing the responsibility to execute the job in the `job` field.
 /// This will poison the relevant query if dropped.
@@ -123,7 +108,6 @@ where
     state: &'tcx QueryState<K, I>,
     key: K,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mk_cycle | COMPLEXITY=2 | LINES=11 */
 
 #[cold]
 #[inline(never)]
@@ -135,7 +119,6 @@ where
     let error = report_cycle(qcx.dep_context().sess(), &cycle_error);
     handle_cycle_error(query, qcx, &cycle_error, error)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=handle_cycle_error | COMPLEXITY=16 | LINES=38 */
 
 fn handle_cycle_error<Q, Qcx>(
     query: Q,
@@ -174,7 +157,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=complete | COMPLEXITY=10 | LINES=37 */
 
 impl<'tcx, K, I> JobOwner<'tcx, K, I>
 where
@@ -212,7 +194,6 @@ where
         job.signal_complete();
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=12 | LINES=27 */
 
 impl<'tcx, K, I> Drop for JobOwner<'tcx, K, I>
 where
@@ -240,7 +221,6 @@ where
         job.signal_complete();
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=CycleError | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug)]
 pub struct CycleError<I = QueryStackFrameExtra> {
@@ -248,7 +228,6 @@ pub struct CycleError<I = QueryStackFrameExtra> {
     pub usage: Option<(Span, QueryStackFrame<I>)>,
     pub cycle: Vec<QueryInfo<I>>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=lift | COMPLEXITY=4 | LINES=9 */
 
 impl<I> CycleError<I> {
     fn lift<Qcx: QueryContext<QueryInfo = I>>(&self, qcx: Qcx) -> CycleError<QueryStackFrameExtra> {
@@ -258,7 +237,6 @@ impl<I> CycleError<I> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=try_get_cached | COMPLEXITY=14 | LINES=20 */
 
 /// Checks whether there is already a value for this key in the in-memory
 /// query cache, returning that value if present.
@@ -279,7 +257,6 @@ where
         None => None,
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=cycle_error | COMPLEXITY=3 | LINES=20 */
 
 #[cold]
 #[inline(never)]
@@ -300,7 +277,6 @@ where
     let error = try_execute.find_cycle_in_stack(query_map, &qcx.current_query_job(), span);
     (mk_cycle(query, qcx, error.lift(qcx)), None)
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=wait_for_query | COMPLEXITY=19 | LINES=50 */
 
 #[inline(always)]
 fn wait_for_query<Q, Qcx>(
@@ -351,7 +327,6 @@ where
         Err(cycle) => (mk_cycle(query, qcx, cycle.lift(qcx)), None),
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=try_execute_query | COMPLEXITY=31 | LINES=70 */
 
 #[inline(never)]
 fn try_execute_query<Q, Qcx, const INCR: bool>(
@@ -422,7 +397,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=execute_job | COMPLEXITY=36 | LINES=72 */
 
 #[inline(always)]
 fn execute_job<Q, Qcx, const INCR: bool>(
@@ -495,7 +469,6 @@ where
 
     (result, Some(dep_node_index))
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=execute_job_non_incr | COMPLEXITY=13 | LINES=38 */
 
 // Fast path for when incr. comp. is off.
 #[inline(always)]
@@ -534,7 +507,6 @@ where
 
     (result, dep_node_index)
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=execute_job_incr | COMPLEXITY=22 | LINES=56 */
 
 #[inline(always)]
 fn execute_job_incr<Q, Qcx>(
@@ -591,7 +563,6 @@ where
 
     (result, dep_node_index)
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=try_load_from_disk_and_cache_in_memory | COMPLEXITY=34 | LINES=96 */
 
 #[inline(always)]
 fn try_load_from_disk_and_cache_in_memory<Q, Qcx>(
@@ -688,7 +659,6 @@ where
 
     Some((result, dep_node_index))
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=27 */
 
 #[inline]
 #[instrument(skip(tcx, dep_graph_data, result, hash_result, format_value), level = "debug")]
@@ -716,7 +686,6 @@ pub(crate) fn incremental_verify_ich<Tcx, V>(
         incremental_verify_ich_failed(tcx, prev_index, &|| format_value(result));
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=incremental_verify_ich_not_green | COMPLEXITY=5 | LINES=12 */
 
 #[cold]
 #[inline(never)]
@@ -729,7 +698,6 @@ where
         tcx.dep_graph().data().unwrap().prev_node_of(prev_index)
     )
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=incremental_verify_ich_failed | COMPLEXITY=33 | LINES=44 */
 
 // Note that this is marked #[cold] and intentionally takes `dyn Debug` for `result`,
 // as we want to avoid generating a bunch of different implementations for LLVM to
@@ -774,7 +742,6 @@ fn incremental_verify_ich_failed<Tcx>(
 
     INSIDE_VERIFY_PANIC.set(old_in_panic);
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=ensure_must_run | COMPLEXITY=24 | LINES=55 */
 
 /// Ensure that either this query has all green inputs or been executed.
 /// Executing `query::ensure(D)` is considered a read of the dep-node `D`.
@@ -830,14 +797,12 @@ where
     let loadable = query.loadable_from_disk(qcx, key, serialized_dep_node_index);
     (!loadable, Some(dep_node))
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Debug)]
 pub enum QueryMode {
     Get,
     Ensure { check_cache: bool },
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=get_query_non_incr | COMPLEXITY=2 | LINES=11 */
 
 #[inline(always)]
 pub fn get_query_non_incr<Q, Qcx>(query: Q, qcx: Qcx, span: Span, key: Q::Key) -> Q::Value
@@ -849,7 +814,6 @@ where
 
     ensure_sufficient_stack(|| try_execute_query::<Q, Qcx, false>(query, qcx, span, key, None).0)
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=get_query_incr | COMPLEXITY=15 | LINES=33 */
 
 #[inline(always)]
 pub fn get_query_incr<Q, Qcx>(
@@ -883,7 +847,6 @@ where
     }
     Some(result)
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=force_query | COMPLEXITY=7 | LINES=19 */
 
 pub fn force_query<Q, Qcx>(query: Q, qcx: Qcx, key: Q::Key, dep_node: DepNode)
 where

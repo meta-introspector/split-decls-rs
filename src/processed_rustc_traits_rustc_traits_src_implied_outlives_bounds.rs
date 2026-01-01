@@ -1,27 +1,22 @@
 // SRC: ../rust/compiler/rustc_traits/src/implied_outlives_bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Provider for the `implied_outlives_bounds` query.
 // Do not call this query directory. See
 // [`crate::rustc_trait_selection::traits::query::type_op::implied_outlives_bounds`].
 
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::infer::canonical::{self, Canonical};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::query::OutlivesBound;
 use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::DUMMY_SP;
 use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
 use crate::rustc_trait_selection::traits::query::type_op::implied_outlives_bounds::compute_implied_outlives_bounds_inner;
 use crate::rustc_trait_selection::traits::query::{CanonicalImpliedOutlivesBoundsGoal, NoSolution};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(p: &mut Providers) {
     *p = Providers { implied_outlives_bounds, ..*p };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=implied_outlives_bounds | COMPLEXITY=6 | LINES=19 */
 
 fn implied_outlives_bounds<'tcx>(
     tcx: TyCtxt<'tcx>,

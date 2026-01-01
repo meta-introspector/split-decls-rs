@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_lookup_line | COMPLEXITY=3 | LINES=25 */
 use super::*;
 
 #[test]
@@ -25,7 +24,6 @@ fn test_lookup_line() {
     assert_eq!(sf.lookup_line(RelativeBytePos(25)), Some(2));
     assert_eq!(sf.lookup_line(RelativeBytePos(26)), Some(2));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_normalize_newlines | COMPLEXITY=4 | LINES=23 */
 
 #[test]
 fn test_normalize_newlines() {
@@ -49,7 +47,6 @@ fn test_normalize_newlines() {
     check("\r\r\n", "\r\n", &[2]);
     check("hello\rworld", "hello\rworld", &[]);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_trim | COMPLEXITY=13 | LINES=57 */
 
 #[test]
 fn test_trim() {

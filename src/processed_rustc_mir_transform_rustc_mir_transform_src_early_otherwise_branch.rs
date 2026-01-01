@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/early_otherwise_branch.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Debug;
 
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=14 */
 use tracing::trace;
 
 use super::simplify::simplify_cfg;
@@ -19,7 +17,6 @@ use crate::patch::MirPatch;
 ///     (None, None) => {2},
 ///     _ => {1}
 /// }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 /// ```
 /// into something like
 /// ```ignore (syntax-highlighting-only)
@@ -33,10 +30,8 @@ use crate::patch::MirPatch;
 ///         None => 2,
 ///     }
 /// } else {
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 ///     1
 /// }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=51 | LINES=174 */
 /// ```
 ///
 /// Specifically, it looks for instances of control flow like this:
@@ -211,7 +206,6 @@ impl<'tcx> crate::MirPass<'tcx> for EarlyOtherwiseBranch {
         false
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=OptimizationData | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 struct OptimizationData<'tcx> {
@@ -221,7 +215,6 @@ struct OptimizationData<'tcx> {
     child_source: SourceInfo,
     need_hoist_discriminant: bool,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=evaluate_candidate | COMPLEXITY=72 | LINES=140 */
 
 fn evaluate_candidate<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -362,7 +355,6 @@ fn evaluate_candidate<'tcx>(
         need_hoist_discriminant,
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=verify_candidate_branch | COMPLEXITY=35 | LINES=51 */
 
 fn verify_candidate_branch<'tcx>(
     branch: &BasicBlockData<'tcx>,

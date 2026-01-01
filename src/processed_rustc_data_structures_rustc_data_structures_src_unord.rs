@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/unord.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 // This module contains collection types that don't expose their internal
 // ordering. This is a useful property for deterministic computations, such
 // as required by the query system.
 
 use std::borrow::{Borrow, BorrowMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::collections::hash_map::{Entry, OccupiedError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::hash::Hash;
 use std::iter::{Product, Sum};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::Index;
 
 use crate::rustc_hash::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::fingerprint::Fingerprint;
 use crate::stable_hasher::{HashStable, StableCompare, StableHasher, ToStableHashKey};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UnordItems | COMPLEXITY=23 | LINES=107 */
 
 /// `UnordItems` is the order-less version of `Iterator`. It only contains methods
 /// that don't (easily) expose an ordering of the underlying items.
@@ -128,14 +121,12 @@ impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
         item
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=3 | LINES=6 */
 
 impl<T> UnordItems<T, std::iter::Empty<T>> {
     pub fn empty() -> Self {
         UnordItems(std::iter::empty())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cloned | COMPLEXITY=3 | LINES=7 */
 
 impl<'a, T: Clone + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
     #[inline]
@@ -143,7 +134,6 @@ impl<'a, T: Clone + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
         UnordItems(self.0.cloned())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=copied | COMPLEXITY=3 | LINES=7 */
 
 impl<'a, T: Copy + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
     #[inline]
@@ -151,7 +141,6 @@ impl<'a, T: Copy + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
         UnordItems(self.0.copied())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=into_sorted | COMPLEXITY=27 | LINES=76 */
 
 impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
     #[inline]
@@ -228,7 +217,6 @@ impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
         items
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// A marker trait specifying that `Self` can consume `UnordItems<_>` without
 /// exposing any internal ordering.
@@ -237,7 +225,6 @@ impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
 /// some useful, common methods though, like `len`, `clear`, or the various
 /// kinds of `to_sorted`.
 trait UnordCollection {}
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UnordSet | COMPLEXITY=7 | LINES=14 */
 
 /// This is a set collection type that tries very hard to not expose
 /// any internal iteration. This is a useful property when trying to
@@ -252,10 +239,8 @@ trait UnordCollection {}
 pub struct UnordSet<V: Eq + Hash> {
     inner: FxHashSet<V>,
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<V: Eq + Hash> UnordCollection for UnordSet<V> {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=7 */
 
 impl<V: Eq + Hash> Default for UnordSet<V> {
     #[inline]
@@ -263,7 +248,6 @@ impl<V: Eq + Hash> Default for UnordSet<V> {
         Self { inner: FxHashSet::default() }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=42 | LINES=122 */
 
 impl<V: Eq + Hash> UnordSet<V> {
     #[inline]
@@ -386,7 +370,6 @@ impl<V: Eq + Hash> UnordSet<V> {
         self.inner.clear();
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=extend_unord | COMPLEXITY=2 | LINES=9 */
 
 pub trait ExtendUnord<T> {
     /// Extend this unord collection with the given `UnordItems`.
@@ -396,7 +379,6 @@ pub trait ExtendUnord<T> {
     /// via UFCS.
     fn extend_unord<I: Iterator<Item = T>>(&mut self, items: UnordItems<T, I>);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=extend_unord | COMPLEXITY=5 | LINES=10 */
 
 // Note: it is important that `C` implements `UnordCollection` in addition to
 // `Extend`, otherwise this impl would leak the internal iteration order of
@@ -407,7 +389,6 @@ impl<C: Extend<T> + UnordCollection, T> ExtendUnord<T> for C {
         self.extend(items.0)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=7 */
 
 impl<V: Hash + Eq> Extend<V> for UnordSet<V> {
     #[inline]
@@ -415,7 +396,6 @@ impl<V: Hash + Eq> Extend<V> for UnordSet<V> {
         self.inner.extend(iter)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=6 | LINES=7 */
 
 impl<V: Hash + Eq> FromIterator<V> for UnordSet<V> {
     #[inline]
@@ -423,21 +403,18 @@ impl<V: Hash + Eq> FromIterator<V> for UnordSet<V> {
         UnordSet { inner: FxHashSet::from_iter(iter) }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<V: Hash + Eq> From<FxHashSet<V>> for UnordSet<V> {
     fn from(value: FxHashSet<V>) -> Self {
         UnordSet { inner: value }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<V: Hash + Eq, I: Iterator<Item = V>> From<UnordItems<V, I>> for UnordSet<V> {
     fn from(value: UnordItems<V, I>) -> Self {
         UnordSet { inner: FxHashSet::from_iter(value.0) }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordSet<V> {
     #[inline]
@@ -445,7 +422,6 @@ impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordSet<V> {
         hash_iter_order_independent(self.inner.iter(), hcx, hasher);
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UnordMap | COMPLEXITY=7 | LINES=14 */
 
 /// This is a map collection type that tries very hard to not expose
 /// any internal iteration. This is a useful property when trying to
@@ -460,10 +436,8 @@ impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordSet<V> {
 pub struct UnordMap<K: Eq + Hash, V> {
     inner: FxHashMap<K, V>,
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<K: Eq + Hash, V> UnordCollection for UnordMap<K, V> {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=7 */
 
 impl<K: Eq + Hash, V> Default for UnordMap<K, V> {
     #[inline]
@@ -471,7 +445,6 @@ impl<K: Eq + Hash, V> Default for UnordMap<K, V> {
         Self { inner: FxHashMap::default() }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=7 */
 
 impl<K: Hash + Eq, V> Extend<(K, V)> for UnordMap<K, V> {
     #[inline]
@@ -479,7 +452,6 @@ impl<K: Hash + Eq, V> Extend<(K, V)> for UnordMap<K, V> {
         self.inner.extend(iter)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=6 | LINES=7 */
 
 impl<K: Hash + Eq, V> FromIterator<(K, V)> for UnordMap<K, V> {
     #[inline]
@@ -487,7 +459,6 @@ impl<K: Hash + Eq, V> FromIterator<(K, V)> for UnordMap<K, V> {
         UnordMap { inner: FxHashMap::from_iter(iter) }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
 
 impl<K: Hash + Eq, V, I: Iterator<Item = (K, V)>> From<UnordItems<(K, V), I>> for UnordMap<K, V> {
     #[inline]
@@ -495,7 +466,6 @@ impl<K: Hash + Eq, V, I: Iterator<Item = (K, V)>> From<UnordItems<(K, V), I>> fo
         UnordMap { inner: FxHashMap::from_iter(items.0) }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=with_capacity | COMPLEXITY=49 | LINES=159 */
 
 impl<K: Eq + Hash, V> UnordMap<K, V> {
     #[inline]
@@ -655,7 +625,6 @@ impl<K: Eq + Hash, V> UnordMap<K, V> {
         self.inner.clear()
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=13 */
 
 impl<K, Q: ?Sized, V> Index<&Q> for UnordMap<K, V>
 where
@@ -669,7 +638,6 @@ where
         &self.inner[key]
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<HCX, K: Hash + Eq + HashStable<HCX>, V: HashStable<HCX>> HashStable<HCX> for UnordMap<K, V> {
     #[inline]
@@ -677,7 +645,6 @@ impl<HCX, K: Hash + Eq + HashStable<HCX>, V: HashStable<HCX>> HashStable<HCX> fo
         hash_iter_order_independent(self.inner.iter(), hcx, hasher);
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UnordBag | COMPLEXITY=7 | LINES=15 */
 
 /// This is a collection type that tries very hard to not expose
 /// any internal iteration. This is a useful property when trying to
@@ -693,7 +660,6 @@ impl<HCX, K: Hash + Eq + HashStable<HCX>, V: HashStable<HCX>> HashStable<HCX> fo
 pub struct UnordBag<V> {
     inner: Vec<V>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=27 */
 
 impl<V> UnordBag<V> {
     #[inline]
@@ -721,24 +687,20 @@ impl<V> UnordBag<V> {
         UnordItems(self.inner.into_iter())
     }
 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T> UnordCollection for UnordBag<T> {}
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=6 */
 
 impl<T> Extend<T> for UnordBag<T> {
     fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
         self.inner.extend(iter)
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<T, I: Iterator<Item = T>> From<UnordItems<T, I>> for UnordBag<T> {
     fn from(value: UnordItems<T, I>) -> Self {
         UnordBag { inner: Vec::from_iter(value.0) }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
 
 impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordBag<V> {
     #[inline]
@@ -746,7 +708,6 @@ impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordBag<V> {
         hash_iter_order_independent(self.inner.iter(), hcx, hasher);
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=to_sorted_vec | COMPLEXITY=6 | LINES=21 */
 
 #[inline]
 fn to_sorted_vec<HCX, T, K, I>(
@@ -768,7 +729,6 @@ where
 
     items
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=hash_iter_order_independent | COMPLEXITY=13 | LINES=33 */
 
 fn hash_iter_order_independent<
     HCX,
@@ -802,14 +762,10 @@ fn hash_iter_order_independent<
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 // Do not implement IntoIterator for the collections in this module.
 // They only exist to hide iteration order in the first place.
 impl<T> !IntoIterator for UnordBag<T> {}
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<V> !IntoIterator for UnordSet<V> {}
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<K, V> !IntoIterator for UnordMap<K, V> {}
-/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl<T, I> !IntoIterator for UnordItems<T, I> {}

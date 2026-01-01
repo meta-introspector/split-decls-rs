@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/instsimplify.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Performs various peephole optimizations.
 
 use crate::rustc_abi::ExternAbi;
@@ -9,9 +8,7 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::layout::ValidityRequirement;
 use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, layout};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 use crate::simplify::simplify_duplicate_switch_targets;
 
@@ -19,7 +16,6 @@ pub(super) enum InstSimplify {
     BeforeInline,
     AfterSimplifyCfg,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=name | COMPLEXITY=26 | LINES=51 */
 
 impl<'tcx> crate::MirPass<'tcx> for InstSimplify {
     fn name(&self) -> &'static str {
@@ -71,14 +67,12 @@ impl<'tcx> crate::MirPass<'tcx> for InstSimplify {
         false
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=InstSimplifyContext | COMPLEXITY=2 | LINES=6 */
 
 struct InstSimplifyContext<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     local_decls: &'a LocalDecls<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=simplify_repeated_aggregate | COMPLEXITY=122 | LINES=262 */
 
 impl<'tcx> InstSimplifyContext<'_, 'tcx> {
     /// Transform aggregates like [0, 0, 0, 0, 0] into [0; 5].
@@ -341,7 +335,6 @@ impl<'tcx> InstSimplifyContext<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=intrinsic_assert_panics | COMPLEXITY=2 | LINES=11 */
 
 fn intrinsic_assert_panics<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -353,7 +346,6 @@ fn intrinsic_assert_panics<'tcx>(
     let ty = arg.expect_ty();
     Some(!tcx.check_validity_requirement((requirement, typing_env.as_query_input(ty))).ok()?)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=resolve_rust_intrinsic | COMPLEXITY=3 | LINES=9 */
 
 fn resolve_rust_intrinsic<'tcx>(
     tcx: TyCtxt<'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 // Handling of everything related to debuginfo.
 
 
@@ -10,30 +9,24 @@ use gimli::write::{
     Address, AttributeValue, DwarfUnit, Expression, FileId, LineProgram, LineString, Range,
     RangeList, UnitEntryId,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gimli::{AArch64, Encoding, Format, LineEncoding, Register, RiscV, RunTimeEndian, X86_64};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use indexmap::IndexSet;
 use crate::rustc_codegen_ssa::debuginfo::type_names;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefIdMap;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{FileNameDisplayPreference, SourceFileHash, StableSourceFileId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_target::callconv::FnAbi;
 
 pub(crate) use self::emit::{DebugReloc, DebugRelocName};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub(crate) use self::types::TypeDebugContext;
 pub(crate) use self::unwind::UnwindContext;
 use crate::debuginfo::emit::{address_for_data, address_for_func};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 use crate::prelude::*;
 
 pub(crate) fn producer(sess: &Session) -> String {
     format!("rustc version {} with cranelift {}", sess.cfg_version, cranelift_codegen::VERSION)
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 pub(crate) struct DebugContext {
     endian: RunTimeEndian,
@@ -47,14 +40,12 @@ pub(crate) struct DebugContext {
 
     filename_display_preference: FileNameDisplayPreference,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct FunctionDebugContext {
     entry_id: UnitEntryId,
     function_source_loc: (FileId, u64, u64),
     source_loc_set: IndexSet<(FileId, u64, u64)>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=item_namespace | COMPLEXITY=86 | LINES=265 */
 
 impl DebugContext {
     pub(crate) fn new(tcx: TyCtxt<'_>, isa: &dyn TargetIsa, cgu_name: &str) -> Self {
@@ -320,7 +311,6 @@ impl DebugContext {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=22 */
 
 impl FunctionDebugContext {
     pub(crate) fn finalize(

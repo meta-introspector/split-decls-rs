@@ -1,26 +1,19 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/query.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Values computed by queries that use MIR.
 
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::BitMatrix;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ConstValue, SourceInfo};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self, CoroutineArgsExt, OpaqueHiddenType, Ty};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CoroutineSavedLocal | COMPLEXITY=4 | LINES=7 */
 
 crate::rustc_index::newtype_index! {
     #[derive(HashStable)]
@@ -28,7 +21,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "_{}"]
     pub struct CoroutineSavedLocal {}
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=CoroutineSavedTy | COMPLEXITY=4 | LINES=10 */
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
@@ -39,7 +31,6 @@ pub struct CoroutineSavedTy<'tcx> {
     /// Whether the local should be ignored for trait bound computations.
     pub ignore_for_traits: bool,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CoroutineLayout | COMPLEXITY=6 | LINES=26 */
 
 /// The layout of coroutine state.
 #[derive(Clone, PartialEq, Eq)]
@@ -66,7 +57,6 @@ pub struct CoroutineLayout<'tcx> {
     #[type_visitable(ignore)]
     pub storage_conflicts: BitMatrix<CoroutineSavedLocal, CoroutineSavedLocal>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=27 */
 
 impl Debug for CoroutineLayout<'_> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -94,7 +84,6 @@ impl Debug for CoroutineLayout<'_> {
             .finish()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ConcreteOpaqueTypes | COMPLEXITY=5 | LINES=19 */
 
 /// All the opaque types that are restricted to concrete types
 /// by this function. Unlike the value in `TypeckResults`, this has
@@ -114,7 +103,6 @@ pub struct ConstQualifs {
     pub needs_non_const_drop: bool,
     pub tainted_by_errors: Option<ErrorGuaranteed>,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=57 */
 /// Outlives-constraints can be categorized to determine whether and why they
 /// are interesting (for error reporting). Order of variants indicates sort
 /// order of the category, thereby influencing diagnostic output.
@@ -172,7 +160,6 @@ pub enum ConstraintCategory<'tcx> {
         ty::RegionVid,
     ),
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeVisitable, TypeFoldable)]
@@ -180,7 +167,6 @@ pub enum ReturnConstraint {
     Normal,
     ClosureUpvar(FieldIdx),
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeVisitable, TypeFoldable)]
@@ -190,7 +176,6 @@ pub enum AnnotationSource {
     OpaqueCast,
     GenericArg,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=DestructuredConstant | COMPLEXITY=2 | LINES=7 */
 
 /// The constituent parts of a mir constant of kind ADT or array.
 #[derive(Copy, Clone, Debug, HashStable)]

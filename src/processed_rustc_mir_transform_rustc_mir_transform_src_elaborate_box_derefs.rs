@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/elaborate_box_derefs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 // This pass transforms derefs of Box into a deref of the pointer inside Box.
 //
 // Box is not actually a pointer so it is incorrect to dereference it directly.
@@ -10,7 +9,6 @@ use crate::rustc_complete::mir::visit::MutVisitor;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=build_ptr_tys | COMPLEXITY=3 | LINES=17 */
 
 use crate::patch::MirPatch;
 
@@ -28,7 +26,6 @@ fn build_ptr_tys<'tcx>(
 
     (unique_ty, nonnull_ty, ptr_ty)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// Constructs the projection needed to access a Box's pointer
 pub(super) fn build_projection<'tcx>(
@@ -37,7 +34,6 @@ pub(super) fn build_projection<'tcx>(
 ) -> [PlaceElem<'tcx>; 2] {
     [PlaceElem::Field(FieldIdx::ZERO, unique_ty), PlaceElem::Field(FieldIdx::ZERO, nonnull_ty)]
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=ElaborateBoxDerefVisitor | COMPLEXITY=2 | LINES=8 */
 
 struct ElaborateBoxDerefVisitor<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -46,7 +42,6 @@ struct ElaborateBoxDerefVisitor<'a, 'tcx> {
     local_decls: &'a mut LocalDecls<'tcx>,
     patch: MirPatch<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=11 | LINES=46 */
 
 impl<'a, 'tcx> MutVisitor<'tcx> for ElaborateBoxDerefVisitor<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -93,7 +88,6 @@ impl<'a, 'tcx> MutVisitor<'tcx> for ElaborateBoxDerefVisitor<'a, 'tcx> {
         self.super_place(place, context, location);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=37 | LINES=69 */
 
 pub(super) struct ElaborateBoxDerefs;
 

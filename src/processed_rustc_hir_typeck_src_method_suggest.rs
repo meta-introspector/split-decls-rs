@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/method/suggest.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Give useful errors and suggestions to users when an item can't be
 // found or is otherwise invalid.
 
@@ -12,39 +11,29 @@ use std::path::PathBuf;
 use hir::Expr;
 use crate::rustc_complete::ast::Mutability;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, MultiSpan, StashKey, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::{CtorKind, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{self as hir, ExprKind, HirId, Node, PathSegment, QPath, find_attr};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::print::{
     PrintTraitRefExt as _, with_crate_prefix, with_forced_trimmed_paths,
     with_no_visible_paths_if_doc_hidden,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgKind, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::def_id::DefIdSet;
 use crate::rustc_complete::{
     DUMMY_SP, ErrorGuaranteed, ExpnKind, FileName, Ident, MacroKind, Span, Symbol, edit_distance,
     kw, sym,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
 use crate::rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedNote;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
@@ -52,18 +41,12 @@ use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtE
 use crate::rustc_trait_selection::traits::{
     FulfillmentError, Obligation, ObligationCause, ObligationCauseCode, supertraits,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::probe::{AutorefOrPtrAdjustment, IsSuggestion, Mode, ProbeScope};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{CandidateSource, MethodError, NoMatchData};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{self, CandidateTraitNote, NoAssociatedItem};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Expectation, FnCtxt};
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_slice_ty | COMPLEXITY=1584 | LINES=2777 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     fn is_slice_ty(&self, ty: Ty<'tcx>, span: Span) -> bool {
@@ -2841,7 +2824,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     // FIXME(compiler-errors): Support suggestions for other matching enum variants
                     _ => {}
                 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
             }
             // Target wrapper types - types that wrap or pretend to wrap another type,
             // perhaps this inner type is meant to be called?
@@ -2849,11 +2831,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 let [first] = ***args else {
                     return;
                 };
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
                 let ty::GenericArgKind::Type(ty) = first.kind() else {
                     return;
                 };
-/* AST_META: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
                 let Ok(pick) = self.lookup_probe_for_diagnostic(
                     item_name,
                     ty,
@@ -2863,31 +2843,25 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 ) else {
                     return;
                 };
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
                 let name = self.ty_to_value_string(actual);
                 let inner_id = kind.did();
                 let mutable = if let Some(AutorefOrPtrAdjustment::Autoref { mutbl, .. }) =
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
                     pick.autoref_or_ptr_adjustment
                 {
                     Some(mutbl)
                 } else {
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
                     None
                 };
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
 
                 if tcx.is_diagnostic_item(sym::LocalKey, inner_id) {
                     err.help("use `with` or `try_with` to access thread local storage");
                 } else if tcx.is_lang_item(kind.did(), LangItem::MaybeUninit) {
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
                     err.help(format!(
                         "if this `{name}` has been initialized, \
                         use one of the `assume_init` methods to access the inner value"
                     ));
                 } else if tcx.is_diagnostic_item(sym::RefCell, inner_id) {
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=16 | LINES=17 */
                     let (suggestion, borrow_kind, panic_if) = match mutable {
                         Some(Mutability::Not) => (".borrow()", "borrow", "a mutable borrow exists"),
                         Some(Mutability::Mut) => {
@@ -2905,7 +2879,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         Applicability::MaybeIncorrect,
                     );
                 } else if tcx.is_diagnostic_item(sym::Mutex, inner_id) {
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
                     err.span_suggestion_verbose(
                         expr.span.shrink_to_hi(),
                         format!(
@@ -2916,7 +2889,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         Applicability::MaybeIncorrect,
                     );
                 } else if tcx.is_diagnostic_item(sym::RwLock, inner_id) {
-/* AST_META: AST_ID=28 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=15 */
                     let (suggestion, borrow_kind) = match mutable {
                         Some(Mutability::Not) => (".read().unwrap()", "borrow"),
                         Some(Mutability::Mut) => (".write().unwrap()", "mutably borrow"),
@@ -2932,10 +2904,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         Applicability::MaybeIncorrect,
                     );
                 } else {
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
                     return;
                 };
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=23 */
 
                 err.span_note(
                     tcx.def_span(pick.item.def_id),
@@ -2959,7 +2929,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         ty::Adt(_, _) => Some(pred),
                         _ => None,
                     }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=28 | LINES=39 */
                 }
                 _ => None,
             })
@@ -2999,9 +2968,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         format!("must implement `{}`", pred.trait_ref.print_trait_sugared()),
                     );
                 }
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
                 _ => {}
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=22 | LINES=15 */
             }
         }
         if local_spans.primary_span().is_some() {
@@ -3017,7 +2984,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                      operation to be valid",
                     pluralize!(local_def_ids.len()),
                     if local_def_ids.len() == 1 { "its" } else { "their" },
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=30 */
                     pluralize!(local_preds.len()),
                 )
             };
@@ -3048,9 +3014,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         format!("not implement `{}`", pred.trait_ref.print_trait_sugared()),
                     );
                 }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
                 _ => {}
-/* AST_META: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=20 | LINES=15 */
             }
         }
         if foreign_spans.primary_span().is_some() {
@@ -3066,7 +3030,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                      operation to be valid",
                     pluralize!(foreign_def_ids.len()),
                     if foreign_def_ids.len() > 1 { "don't" } else { "doesn't" },
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=note_predicate_source_and_get_derives | COMPLEXITY=26 | LINES=52 */
                     pluralize!(foreign_preds.len()),
                 )
             };
@@ -3119,7 +3082,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     | sym::Debug => true,
                     _ => false,
                 };
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=14 */
                 if can_derive {
                     let self_name = trait_pred.self_ty().to_string();
                     let self_span = self.tcx.def_span(adt.did());
@@ -3134,10 +3096,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     derives.push((self_name, self_span, diagnostic_name));
                 } else {
-/* AST_META: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
                     traits.push(trait_pred.def_id());
                 }
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=16 */
             } else {
                 traits.push(trait_pred.def_id());
             }
@@ -3154,11 +3114,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 if len > 2 {
                     names.push_str(", ");
                 }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
                 if i == len - 1 {
                     names.push_str(" and ");
                 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=33 */
                 names.push('`');
                 names.push_str(&self.tcx.def_path_str(did));
                 names.push('`');
@@ -3192,7 +3150,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     last_trait_names.push_str(format!(", {trait_name}").as_str());
                     continue;
                 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=note_derefed_ty_has_method | COMPLEXITY=39 | LINES=77 */
             }
             derives_grouped.push((self_name, self_span, trait_name.to_string()));
         }
@@ -3270,13 +3227,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         Applicability::MaybeIncorrect,
                     );
                 } else {
-/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
                     err.span_note(
                         ty.span,
                         format!("the function `{item_name}` is implemented on `{deref_ty}`"),
                     );
                 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=ty_to_value_string | COMPLEXITY=32 | LINES=70 */
                 return;
             }
         }
@@ -3347,7 +3302,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                             return false;
                         }
                     }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=suggest_valid_traits | COMPLEXITY=48 | LINES=81 */
 
                     true
                 });
@@ -3429,7 +3383,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     );
                     err.span_suggestions(span, msg, suggs, Applicability::MaybeIncorrect);
                 };
-/* AST_META: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=15 */
                 let suggest_for_privacy = |err: &mut Diag<'_>, suggs: Vec<String>| {
                     let msg = format!(
                         "{this_trait_is} implemented but not reachable",
@@ -3445,19 +3398,15 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         err.span_suggestions(span, msg, suggs, Applicability::MaybeIncorrect);
                     }
                 };
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
                 if accessible_sugg.is_empty() {
                     // `inaccessible_sugg` must not be empty
                     suggest_for_privacy(err, inaccessible_sugg);
                 } else if inaccessible_sugg.is_empty() {
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
                     suggest_for_access(err, msg, accessible_sugg);
                 } else {
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
                     suggest_for_access(err, msg, accessible_sugg);
                     suggest_for_privacy(err, inaccessible_sugg);
                 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=suggest_traits_to_import | COMPLEXITY=50 | LINES=99 */
             });
 
             if let Some(did) = edition_fix {
@@ -3557,12 +3506,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     Err(_) => (),
                 }
-/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
                 let Some(unpin_trait) = self.tcx.lang_items().unpin_trait() else {
                     return;
                 };
-/* AST_META: AST_ID=53 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=28 | LINES=65 */
                 let pred = ty::TraitRef::new(self.tcx, unpin_trait, [*rcvr_ty]);
                 let unpin = self.predicate_must_hold_considering_regions(&Obligation::new(
                     self.tcx,
@@ -3628,7 +3575,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         }
                     }
                 }
-/* AST_META: AST_ID=54 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=27 */
                 // We special case the situation where `Pin::new` wouldn't work, and instead
                 // suggest using the `pin!()` macro instead.
                 if let Some(new_rcvr_t) = Ty::new_lang_item(self.tcx, *rcvr_ty, LangItem::Pin)
@@ -3656,7 +3602,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                             _ => true,
                         }
                     })
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=30 | LINES=75 */
                     // We don't want to go through derefs.
                     && pick.autoderefs == 0
                     // Check that the method of the same name that was found on the new `Pin<T>`
@@ -3732,7 +3677,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     // We don't care about the other suggestions.
                     alt_rcvr_sugg = true;
                 }
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=25 | LINES=54 */
             }
         }
 
@@ -3787,7 +3731,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     CandidateSource::Impl(def_id) => {
                         self.tcx.trait_id_of_impl(def_id) != Some(info.def_id)
                     }
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=31 | LINES=52 */
                 })
             })
             .filter(|info| {
@@ -3840,7 +3783,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                     }
                                 }
                             }
-/* AST_META: AST_ID=58 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=20 | LINES=28 */
                             // We only want to suggest public or local traits (#45781).
                             item.visibility(self.tcx).is_public() || info.def_id.is_local()
                         })
@@ -3869,17 +3811,14 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     ty::Param(param) => Some(param),
                     _ => None,
                 },
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=6 */
                 _ => None,
             };
             if !trait_missing_method {
                 err.help(if param_type.is_some() {
                     "items from traits can only be used if the type parameter is bounded by the trait"
                 } else {
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
                     "items from traits can only be used if the trait is implemented and in scope"
                 });
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=9 */
             }
 
             let candidates_len = candidates.len();
@@ -3889,10 +3828,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                      {one_of_them}:",
                     traits_define =
                         if candidates_len == 1 { "trait defines" } else { "traits define" },
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=2 */
                     action = action,
                     one_of_them = if candidates_len == 1 { "it" } else { "one of them" },
-/* AST_META: AST_ID=63 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=88 | LINES=143 */
                     name = item_name,
                 )
             };
@@ -4036,7 +3973,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         _ => {}
                     }
                 }
-/* AST_META: AST_ID=64 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=23 | LINES=34 */
             }
 
             let (potential_candidates, explicitly_negative) = if param_type.is_some() {
@@ -4071,7 +4007,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         potential_candidates.push(candidate);
                     }
                 }
-/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
                 (potential_candidates, explicitly_negative)
             } else {
                 // We don't know enough about `recv_ty` to make proper suggestions.
@@ -4086,7 +4021,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         self.infcx.var_for_def(span, param)
                     }
                 });
-/* AST_META: AST_ID=66 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
                 self.infcx
                     .type_implements_trait(def_id, args, self.param_env)
                     .must_apply_modulo_regions()
@@ -4094,7 +4028,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             };
             match &potential_candidates[..] {
                 [] => {}
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=19 */
                 [trait_info] if trait_info.def_id.is_local() => {
                     if impls_trait(trait_info.def_id) {
                         self.suggest_valid_traits(err, item_name, vec![trait_info.def_id], false);
@@ -4114,7 +4047,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         });
                     }
                 }
-/* AST_META: AST_ID=68 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=22 */
                 trait_infos => {
                     let mut msg = message(param_type.map_or_else(
                         || "implement".to_string(), // FIXME: it might only need to be imported into scope, not implemented.
@@ -4137,11 +4069,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     err.note(msg);
                 }
-/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
             }
             match &explicitly_negative[..] {
                 [] => {}
-/* AST_META: AST_ID=70 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
                 [trait_info] => {
                     let msg = format!(
                         "the trait `{}` defines an item `{}`, but is explicitly unimplemented",
@@ -4150,7 +4080,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     );
                     err.note(msg);
                 }
-/* AST_META: AST_ID=71 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
                 trait_infos => {
                     let mut msg = format!(
                         "the following traits define an item `{item_name}`, but are explicitly unimplemented:"
@@ -4160,7 +4089,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     err.note(msg);
                 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=detect_and_explain_multiple_crate_versions_of_trait_item | COMPLEXITY=113 | LINES=241 */
             }
         }
     }

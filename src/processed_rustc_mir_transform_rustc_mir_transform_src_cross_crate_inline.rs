@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/cross_crate_inline.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
@@ -8,16 +7,13 @@ use crate::rustc_complete::mir::*;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::config::{InliningThreshold, OptLevel};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::sym;
 
 use crate::{inline, pass_manager as pm};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(super) fn provide(providers: &mut Providers) {
     providers.cross_crate_inlinable = cross_crate_inlinable;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cross_crate_inlinable | COMPLEXITY=64 | LINES=88 */
 
 fn cross_crate_inlinable(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     let codegen_fn_attrs = tcx.codegen_fn_attrs(def_id);
@@ -106,7 +102,6 @@ fn cross_crate_inlinable(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
         && checker.landing_pads == 0
         && checker.statements <= threshold
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CostChecker | COMPLEXITY=2 | LINES=9 */
 
 struct CostChecker<'b, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -116,7 +111,6 @@ struct CostChecker<'b, 'tcx> {
     landing_pads: usize,
     resumes: usize,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=46 | LINES=58 */
 
 impl<'tcx> Visitor<'tcx> for CostChecker<'_, 'tcx> {
     fn visit_statement(&mut self, statement: &Statement<'tcx>, _: Location) {

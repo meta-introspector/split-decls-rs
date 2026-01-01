@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/build_reduced_graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 // After we obtain a fresh AST fragment from a macro, code in this module helps to integrate
 // that fragment into the module structures that are already partially built.
 //
@@ -11,50 +10,37 @@ use std::cell::Cell;
 use std::sync::Arc;
 
 use crate::rustc_complete::visit::{self, AssocCtxt, Visitor, WalkItemKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::{
     self as ast, AssocItem, AssocItemKind, Block, ConstItem, Delegation, Fn, ForeignItem,
     ForeignItemKind, Inline, Item, ItemKind, NodeId, StaticItem, StmtKind, TyAlias,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_attr_parsing as attr;
 use rustc_attr_parsing::AttributeParser;
 use crate::rustc_expand::base::ResolverExpand;
 use crate::rustc_expand::expand::AstFragment;
 use crate::rustc_complete::Attribute;
 use crate::rustc_complete::attrs::{AttributeKind, MacroUseArgs};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, *};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_metadata::creader::LoadedMacro;
 use crate::rustc_complete::metadata::ModChild;
 use crate::rustc_complete::ty::{Feed, Visibility};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::hygiene::{ExpnId, LocalExpnId, MacroKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use thin_vec::ThinVec;
 use tracing::debug;
 
 use crate::Namespace::{MacroNS, TypeNS, ValueNS};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::def_collector::collect_definitions;
 use crate::imports::{ImportData, ImportKind};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::macros::{MacroRulesBinding, MacroRulesScope, MacroRulesScopeRef};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::{
     BindingKey, ExternPreludeEntry, Finalize, MacroData, Module, ModuleKind, ModuleOrUniformRoot,
     NameBinding, ParentScope, PathResult, ResolutionError, Resolver, Segment, Used,
     VisResolutionError, errors,
 };
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=define_local | COMPLEXITY=129 | LINES=269 */
 
 type Res = def::Res<NodeId>;
 
@@ -324,20 +310,17 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=BuildReducedGraphVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
     r: &'a mut Resolver<'ra, 'tcx>,
     parent_scope: ParentScope<'ra>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=as_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'ra, 'tcx> AsMut<Resolver<'ra, 'tcx>> for BuildReducedGraphVisitor<'_, 'ra, 'tcx> {
     fn as_mut(&mut self) -> &mut Resolver<'ra, 'tcx> {
         self.r
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=res | COMPLEXITY=496 | LINES=1000 */
 
 impl<'a, 'ra, 'tcx> BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
     fn res(&self, def_id: impl Into<DefId>) -> Res {
@@ -1338,7 +1321,6 @@ impl<'a, 'ra, 'tcx> BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=$visit | COMPLEXITY=13 | LINES=12 */
 
 macro_rules! method {
     ($visit:ident: $ty:ty, $invoc:path, $walk:ident) => {
@@ -1351,7 +1333,6 @@ macro_rules! method {
         }
     };
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=152 | LINES=253 */
 
 impl<'a, 'ra, 'tcx> Visitor<'a> for BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
     method!(visit_expr: ast::Expr, ast::ExprKind::MacCall, walk_expr);

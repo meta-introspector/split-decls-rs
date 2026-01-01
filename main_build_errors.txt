@@ -1,0 +1,299 @@
+     33 unresolved import `crate::lints`
+     24 unresolved imports `crate::rustc_complete::declare_lint`, `crate::rustc_complete::declare_lint_pass`
+     20 unresolved import `crate::rustc_complete::lint`
+     15 unresolved imports `crate::LateContext`, `crate::LateLintPass`, `crate::LintContext`
+      9 unresolved import `crate::rustc_complete::edition`
+      9 unresolved import `crate::rustc_complete::def::Res`
+      9 unresolved import `crate::rustc_complete::cstore`
+      8 unresolved imports `crate::LateContext`, `crate::LateLintPass`
+      8 unresolved import `crate::rmeta`
+      7 unresolved import `crate::rustc_complete::definitions`
+      6 unresolved imports `crate::rustc_complete::declare_lint`, `crate::rustc_complete::impl_lint_pass`
+      6 unresolved import `crate::rustc_complete::def_id::LOCAL_CRATE`
+      6 unresolved import `crate::rustc_complete::attrs::AttributeKind`
+      5 unresolved import `crate::rustc_feature`
+      5 unresolved import `crate::rustc_complete::Ident`
+      5 unresolved import `crate::rustc_complete::hygiene`
+      5 unresolved import `crate::rustc_complete::find_attr`
+      5 unresolved import `crate::creader`
+      4 unresolved import `crate::rustc_complete::ty::adjustment`
+      4 unresolved import `crate::rustc_complete::query::Providers`
+      4 unresolved import `crate::rustc_complete::intravisit`
+      4 failed to resolve: use of unresolved module or unlinked crate `rustc_query_system`
+      4 failed to resolve: could not find `lint` in `rustc_complete`
+      3 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`
+      3 unresolved imports `crate::LateContext`, `crate::LateLintPass`, `crate::LintContext`, `crate::fluent_generated`
+      3 unresolved import `rustc_hashes`
+      3 unresolved import `crate::rustc_complete::ty::print`
+      3 unresolved import `crate::rustc_complete::ty::codec`
+      3 unresolved import `crate::rustc_complete::search_paths`
+      3 unresolved import `crate::rustc_complete::LitKind`
+      3 unresolved import `crate::rustc_complete::kw`
+      3 unresolved import `crate::passes`
+      3 unresolved import `crate::fluent_generated`
+      3 unresolved import `crate::context::LintContext`
+      2 unresolved import `super::super::tests::TestGraph`
+      2 unresolved imports `crate::rustc_complete::intravisit`, `crate::rustc_complete::intravisit`
+      2 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::HirId`
+      2 unresolved imports `crate::rustc_complete::dep_graph`, `crate::rustc_complete::dep_graph`
+      2 unresolved imports `crate::rustc_complete::declare_lint_pass`, `crate::rustc_complete::declare_tool_lint`
+      2 unresolved imports `crate::rustc_complete::declare_lint`, `crate::rustc_complete::declare_lint_pass`, `crate::rustc_complete::impl_lint_pass`
+      2 unresolved imports `crate::EarlyContext`, `crate::EarlyLintPass`, `crate::LintContext`
+      2 unresolved import `rustc_fs_util`
+      2 unresolved import `rmeta`
+      2 unresolved import `jobserver_crate`
+      2 unresolved import `crate::utils`
+      2 unresolved import `crate::rustc_complete::visit`
+      2 unresolved import `crate::rustc_complete::util::Providers`
+      2 unresolved import `crate::rustc_complete::ty::TypeVisitableExt`
+      2 unresolved import `crate::rustc_complete::ty::RegisteredTools`
+      2 unresolved import `crate::rustc_complete::ty::fast_reject`
+      2 unresolved import `crate::rustc_complete::query::on_disk_cache`
+      2 unresolved import `crate::rustc_complete::query::LocalCrate`
+      2 unresolved import `crate::rustc_complete::output`
+      2 unresolved import `crate::rustc_complete::MultiSpan`
+      2 unresolved import `crate::rustc_complete::mir::interpret`
+      2 unresolved import `crate::rustc_complete::middle::stability`
+      2 unresolved import `crate::rustc_complete::middle::resolve_bound_vars`
+      2 unresolved import `crate::rustc_complete::middle::lib_features`
+      2 unresolved import `crate::rustc_complete::middle::exported_symbols`
+      2 unresolved import `crate::rustc_complete::middle::dependency_format`
+      2 unresolved import `crate::rustc_complete::metadata`
+      2 unresolved import `crate::rustc_complete::HirId`
+      2 unresolved import `crate::rustc_complete::hir`
+      2 unresolved import `crate::rustc_complete::edit_distance`
+      2 unresolved import `crate::rustc_complete::DiagSymbolList`
+      2 unresolved import `crate::rustc_complete::dep_graph`
+      2 unresolved import `crate::rustc_complete::def::CtorKind`
+      2 unresolved import `crate::rustc_complete::config::CrateType`
+      2 unresolved import `crate::rustc_complete::BytePos`
+      2 unresolved import `crate::rustc_complete::arena`
+      2 unresolved import `crate::rustc_complete::Applicability`
+      2 unresolved import `crate::rustc_complete::AmbigArg`
+      2 unresolved import `crate::plumbing`
+      2 unresolved import `crate::locator`
+      2 unresolved import `crate::levels`
+      2 unresolved import `crate::LateContext`
+      2 unresolved import `crate::builtin`
+      2 failed to resolve: could not find `rustc_proc_macro` in the crate root
+      2 failed to resolve: could not find `rmeta` in the crate root
+      1 unresolved import `vec`
+      1 unresolved import `test`
+      1 unresolved import `super::UnionFind`
+      1 unresolved import `super::SnapshotMap`
+      1 unresolved import `super::repr_nullable_ptr`
+      1 unresolved import `super::map`
+      1 unresolved import `super::JsonTimePassesEntry`
+      1 unresolved imports `super::SortedIndexMultiMap`, `super::SortedMap`
+      1 unresolved imports `super::LabelText`, `super::LabelText`
+      1 unresolved imports `super::is_camel_case`, `super::to_camel_case`
+      1 unresolved imports `super::Edges`, `super::GraphWalk`, `super::Id`, `super::Labeller`, `super::Nodes`, `super::Style`, `super::render`
+      1 unresolved imports `super::Decodable`, `super::DecodeContext`, `super::DecodeIterator`
+      1 unresolved imports `super::Debug`, `super::LinkedGraph`, `super::NodeIndex`
+      1 unresolved import `slice`
+      1 unresolved import `set`
+      1 unresolved imports `crate::types::OVERFLOWING_LITERALS`, `crate::types::TypeLimits`
+      1 unresolved imports `crate::sync::FromDyn`, `crate::sync::IntoDynSyncSend`
+      1 unresolved imports `crate::rustc_hash::FxHashMap`, `crate::rustc_hash::FxHashSet`, `crate::rustc_hash::FxHasher`
+      1 unresolved imports `crate::rustc_hash::FxHashMap`, `crate::rustc_hash::FxHashSet`
+      1 unresolved imports `crate::rustc_complete::WhereBoundPredicate`, `crate::rustc_complete::WherePredicateKind`
+      1 unresolved imports `crate::rustc_complete::visit`, `crate::rustc_complete::visit`
+      1 unresolved imports `crate::rustc_complete::util::classify`, `crate::rustc_complete::util::parser`
+      1 unresolved imports `crate::rustc_complete::ty::TypeSuperVisitable`, `crate::rustc_complete::ty::TypeVisitableExt`, `crate::rustc_complete::ty::TypeVisitor`
+      1 unresolved imports `crate::rustc_complete::ty::tls`, `crate::rustc_complete::ty::tls`
+      1 unresolved imports `crate::rustc_complete::ty::RegisteredTools`, `crate::rustc_complete::ty::TypingEnv`, `crate::rustc_complete::ty::TypingMode`
+      1 unresolved imports `crate::rustc_complete::ty::layout::LayoutOf`, `crate::rustc_complete::ty::layout::SizeSkeleton`
+      1 unresolved imports `crate::rustc_complete::ty::GenericArgsRef`, `crate::rustc_complete::ty::PredicatePolarity`
+      1 unresolved imports `crate::rustc_complete::ty::fast_reject`, `crate::rustc_complete::ty::fast_reject`
+      1 unresolved imports `crate::rustc_complete::ty::DeducedParamAttrs`, `crate::rustc_complete::ty::UnusedGenericParams`
+      1 unresolved imports `crate::rustc_complete::ty::Clause`, `crate::rustc_complete::ty::PolyExistentialTraitRef`
+      1 unresolved imports `crate::rustc_complete::ty::AdtDef`, `crate::rustc_complete::ty::Instance`
+      1 unresolved imports `crate::rustc_complete::ty::Adt`, `crate::rustc_complete::ty::AdtDef`, `crate::rustc_complete::ty::AdtKind`, `crate::rustc_complete::ty::GenericArgsRef`, `crate::rustc_complete::ty::TypeSuperVisitable`, `crate::rustc_complete::ty::TypeVisitableExt`
+      1 unresolved imports `crate::rustc_complete::query::ExternProviders`, `crate::rustc_complete::query::LocalCrate`
+      1 unresolved imports `crate::rustc_complete::query::AsLocalKey`, `crate::rustc_complete::query::DynamicQueries`, `crate::rustc_complete::query::ExternProviders`, `crate::rustc_complete::query::Providers`, `crate::rustc_complete::query::QueryCaches`, `crate::rustc_complete::query::QueryEngine`, `crate::rustc_complete::query::QueryStates`, `crate::rustc_complete::query::queries`
+      1 unresolved imports `crate::rustc_complete::Pat`, `crate::rustc_complete::PatKind`
+      1 unresolved imports `crate::rustc_complete::MultiSpan`, `crate::rustc_complete::pluralize`
+      1 unresolved imports `crate::rustc_complete::LitIntType`, `crate::rustc_complete::LitKind`
+      1 unresolved imports `crate::rustc_complete::LintDiagnostic`, `crate::rustc_complete::Subdiagnostic`
+      1 unresolved imports `crate::rustc_complete::lint`, `crate::rustc_complete::lint`
+      1 unresolved imports `crate::rustc_complete::InnerSpan`, `crate::rustc_complete::hygiene`
+      1 unresolved imports `crate::rustc_complete::Ident`, `crate::rustc_complete::MacroRulesNormalizedIdent`
+      1 unresolved imports `crate::rustc_complete::ExprKind`, `crate::rustc_complete::FnRetTy`, `crate::rustc_complete::HasAttrs`, `crate::rustc_complete::StmtKind`
+      1 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::Stmt`
+      1 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::UnOp`
+      1 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::Stmt`, `crate::rustc_complete::StmtKind`
+      1 unresolved imports `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::Mutability`
+      1 unresolved imports `crate::rustc_complete::ExpnKind`, `crate::rustc_complete::kw`
+      1 unresolved imports `crate::rustc_complete::ExpnKind`, `crate::rustc_complete::Ident`
+      1 unresolved imports `crate::rustc_complete::ExpnData`, `crate::rustc_complete::ExpnHash`, `crate::rustc_complete::ExpnId`, `crate::rustc_complete::Ident`
+      1 unresolved imports `crate::rustc_complete::Diag`, `crate::rustc_complete::LintDiagnostic`, `crate::rustc_complete::MultiSpan`
+      1 unresolved imports `crate::rustc_complete::Diag`, `crate::rustc_complete::LintBuffer`, `crate::rustc_complete::LintDiagnostic`, `crate::rustc_complete::MultiSpan`
+      1 unresolved imports `crate::rustc_complete::Diag`, `crate::rustc_complete::EmissionGuarantee`, `crate::rustc_complete::Subdiagnostic`
+      1 unresolved imports `crate::rustc_complete::Diag`, `crate::rustc_complete::DiagCtxtHandle`, `crate::rustc_complete::Diagnostic`, `crate::rustc_complete::EmissionGuarantee`, `crate::rustc_complete::Level`
+      1 unresolved imports `crate::rustc_complete::DiagArgValue`, `crate::rustc_complete::IntoDiagArg`
+      1 unresolved imports `crate::rustc_complete::def_id::LOCAL_CRATE`, `crate::rustc_complete::def_id::StableCrateId`
+      1 unresolved imports `crate::rustc_complete::def_id::DefIdMap`, `crate::rustc_complete::def_id::StableCrateId`
+      1 unresolved imports `crate::rustc_complete::def_id::DefIdMap`, `crate::rustc_complete::def_id::LOCAL_CRATE`
+      1 unresolved imports `crate::rustc_complete::def_id::CRATE_DEF_INDEX`, `crate::rustc_complete::def_id::LOCAL_CRATE`
+      1 unresolved imports `crate::rustc_complete::def_id::CRATE_DEF_ID`, `crate::rustc_complete::def_id::CRATE_DEF_INDEX`, `crate::rustc_complete::def_id::LOCAL_CRATE`, `crate::rustc_complete::def_id::LocalDefIdSet`
+      1 unresolved imports `crate::rustc_complete::def::CtorKind`, `crate::rustc_complete::def::DocLinkResMap`, `crate::rustc_complete::def::MacroKinds`
+      1 unresolved imports `crate::rustc_complete::config::SymbolManglingVersion`, `crate::rustc_complete::config::TargetModifier`
+      1 unresolved imports `crate::rustc_complete::config::CrateType`, `crate::rustc_complete::config::OutFileName`, `crate::rustc_complete::config::OutputType`
+      1 unresolved imports `crate::rustc_complete::config::CrateType`, `crate::rustc_complete::config::OptLevel`, `crate::rustc_complete::config::TargetModifier`
+      1 unresolved imports `crate::rustc_complete::config::CrateType`, `crate::rustc_complete::config::ExtendedTargetModifierInfo`, `crate::rustc_complete::config::ExternLocation`, `crate::rustc_complete::config::Externs`, `crate::rustc_complete::config::OptionsTargetModifiers`, `crate::rustc_complete::config::TargetModifier`
+      1 unresolved imports `crate::rustc_complete::ByteSymbol`, `crate::rustc_complete::ExternalSource`, `crate::rustc_complete::FileName`, `crate::rustc_complete::SourceFile`, `crate::rustc_complete::SpanData`, `crate::rustc_complete::SpanEncoder`, `crate::rustc_complete::StableSourceFileId`, `crate::rustc_complete::SyntaxContext`
+      1 unresolved imports `crate::rustc_complete::BytePos`, `crate::rustc_complete::kw`
+      1 unresolved imports `crate::rustc_complete::BytePos`, `crate::rustc_complete::ByteSymbol`, `crate::rustc_complete::Pos`, `crate::rustc_complete::SpanData`, `crate::rustc_complete::SpanDecoder`, `crate::rustc_complete::SyntaxContext`, `crate::rustc_complete::kw`
+      1 unresolved imports `crate::rustc_complete::BufferedEarlyLint`, `crate::rustc_complete::DecorateDiagCompat`, `crate::rustc_complete::LintBuffer`
+      1 unresolved imports `crate::rustc_complete::BorrowKind`, `crate::rustc_complete::UnOp`
+      1 unresolved imports `crate::rustc_complete::Body`, `crate::rustc_complete::HirId`, `crate::rustc_complete::Item`, `crate::rustc_complete::ItemKind`, `crate::rustc_complete::Node`, `crate::rustc_complete::Path`, `crate::rustc_complete::TyKind`
+      1 unresolved imports `crate::rustc_complete::Block`, `crate::rustc_complete::StmtKind`
+      1 unresolved imports `crate::rustc_complete::Block`, `crate::rustc_complete::Body`, `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::FnDecl`, `crate::rustc_complete::FnRetTy`, `crate::rustc_complete::TyKind`, `crate::rustc_complete::find_attr`
+      1 unresolved imports `crate::rustc_complete::BinOpKind`, `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::TyKind`
+      1 unresolved imports `crate::rustc_complete::attrs::AttributeKind`, `crate::rustc_complete::attrs::NativeLibKind`, `crate::rustc_complete::attrs::PeImportNameType`
+      1 unresolved imports `crate::rustc_complete::attrs::AttributeKind`, `crate::rustc_complete::attrs::EncodeCrossCrate`
+      1 unresolved imports `crate::rustc_complete::Arm`, `crate::rustc_complete::Expr`, `crate::rustc_complete::ExprKind`, `crate::rustc_complete::Node`, `crate::rustc_complete::StmtKind`
+      1 unresolved imports `crate::rustc_complete::Applicability`, `crate::rustc_complete::LintDiagnostic`
+      1 unresolved imports `crate::rustc_complete::Applicability`, `crate::rustc_complete::Diag`, `crate::rustc_complete::EmissionGuarantee`, `crate::rustc_complete::Subdiagnostic`, `crate::rustc_complete::SuggestionStyle`
+      1 unresolved imports `crate::rustc_complete::Applicability`, `crate::rustc_complete::Diag`, `crate::rustc_complete::DiagArgValue`, `crate::rustc_complete::LintDiagnostic`, `crate::rustc_complete::elided_lifetime_in_path_suggestion`
+      1 unresolved imports `crate::rustc_complete::Applicability`, `crate::rustc_complete::Diag`, `crate::rustc_complete::DiagArgValue`, `crate::rustc_complete::DiagMessage`, `crate::rustc_complete::DiagStyledString`, `crate::rustc_complete::ElidedLifetimeInPathSubdiag`, `crate::rustc_complete::EmissionGuarantee`, `crate::rustc_complete::LintDiagnostic`, `crate::rustc_complete::MultiSpan`, `crate::rustc_complete::Subdiagnostic`, `crate::rustc_complete::SuggestionStyle`
+      1 unresolved imports `crate::rustc_complete::Applicability`, `crate::rustc_complete::Diag`
+      1 unresolved imports `crate::rustc_complete::AmbigArg`, `crate::rustc_complete::HirId`, `crate::rustc_complete::intravisit`
+      1 unresolved imports `crate::rustc_complete::AmbigArg`, `crate::rustc_complete::GenericArg`, `crate::rustc_complete::PathSegment`, `crate::rustc_complete::QPath`, `crate::rustc_complete::TyKind`, `crate::rustc_complete::find_attr`
+      1 unresolved imports `crate::LateLintPass`, `crate::LintContext`
+      1 unresolved imports `crate::LateContext`, `crate::LateLintPass`, `crate::LintId`, `crate::LintStore`
+      1 unresolved imports `crate::LateContext`, `crate::LateLintPass`, `crate::LintContext`, `crate::lints`
+      1 unresolved imports `crate::LateContext`, `crate::LateLintPass`, `crate::fluent_generated`
+      1 unresolved imports `crate::LateContext`, `crate::fluent_generated`
+      1 unresolved imports `crate::Idx`, `crate::IndexVec`, `crate::IntoSliceIdx`
+      1 unresolved imports `crate::HashStableContext`, `crate::SpanDecoder`, `crate::SpanEncoder`, `crate::with_session_globals`
+      1 unresolved imports `crate::HashStableContext`, `crate::SpanDecoder`, `crate::SpanEncoder`
+      1 unresolved imports `crate::foreign_modules`, `crate::native_libs`
+      1 unresolved imports `crate::errors::OverruledAttributeSub`, `crate::errors::RequestedLevel`
+      1 unresolved imports `crate::errors::FailCreateFileEncoder`, `crate::errors::FailWriteFile`
+      1 unresolved imports `crate::errors::CheckNameUnknownTool`, `crate::errors::MalformedAttribute`, `crate::errors::MalformedAttributeSub`, `crate::errors::OverruledAttribute`, `crate::errors::OverruledAttributeSub`, `crate::errors::RequestedLevel`, `crate::errors::UnknownToolInScopedLint`, `crate::errors::UnsupportedGroup`
+      1 unresolved imports `crate::errors::BinaryOutputToTty`, `crate::errors::FailedCopyToStdout`, `crate::errors::FailedCreateEncodedMetadata`, `crate::errors::FailedCreateFile`, `crate::errors::FailedCreateTempdir`, `crate::errors::FailedWriteError`
+      1 unresolved imports `crate::errors::BadPanicStrategy`, `crate::errors::CrateDepMultiple`, `crate::errors::IncompatiblePanicInDropStrategy`, `crate::errors::LibRequired`, `crate::errors::NonStaticCrateDep`, `crate::errors::RequiredPanicStrategy`, `crate::errors::RlibRequired`, `crate::errors::RustcDriverHelp`, `crate::errors::RustcLibRequired`, `crate::errors::TwoPanicRuntimes`
+      1 unresolved imports `crate::EncodedMetadata`, `crate::encode_metadata`
+      1 unresolved imports `crate::EarlyContext`, `crate::EarlyLintPass`, `crate::LateContext`, `crate::LateLintPass`, `crate::Lint`, `crate::LintContext`
+      1 unresolved imports `crate::EarlyContext`, `crate::EarlyLintPass`, `crate::LateContext`, `crate::LateLintPass`, `crate::LintContext`
+      1 unresolved imports `crate::def_id::CRATE_DEF_ID`, `crate::def_id::LOCAL_CRATE`, `crate::def_id::StableCrateId`
+      1 unresolved imports `crate::context::EarlyContext`, `crate::context::LintContext`, `crate::context::LintStore`
+      1 unresolved imports `crate::context::EarlyContext`, `crate::context::LateContext`
+      1 unresolved imports `crate::context::CheckLintNameResult`, `crate::context::LintStore`
+      1 unresolved imports `crate::BytePos`, `crate::SPAN_TRACK`, `crate::SpanData`
+      1 unresolved imports `crate::BytePos`, `crate::Pos`, `crate::RelativeBytePos`, `crate::SourceFile`, `crate::SpanData`, `crate::StableSourceFileId`
+      1 unresolved imports `crate::BackendRepr`, `crate::FieldsShape`, `crate::HasDataLayout`, `crate::LayoutData`, `crate::Niche`, `crate::Primitive`, `crate::Scalar`, `crate::Size`, `crate::Variants`
+      1 unresolved imports `crate::BackendRepr`, `crate::FieldsShape`, `crate::HasDataLayout`, `crate::Integer`, `crate::LayoutData`, `crate::Primitive`, `crate::ReprOptions`, `crate::Scalar`, `crate::StructKind`, `crate::TagEncoding`, `crate::Variants`, `crate::WrappingRange`
+      1 unresolved imports `crate::Align`, `crate::HasDataLayout`, `crate::Size`
+      1 unresolved imports `crate::AbiAlign`, `crate::Align`, `crate::BackendRepr`, `crate::FieldsShape`, `crate::HasDataLayout`, `crate::IndexSlice`, `crate::IndexVec`, `crate::Integer`, `crate::LayoutData`, `crate::Niche`, `crate::NonZeroUsize`, `crate::Primitive`, `crate::ReprOptions`, `crate::Scalar`, `crate::Size`, `crate::StructKind`, `crate::TagEncoding`, `crate::Variants`, `crate::WrappingRange`
+      1 unresolved imports `crate::AbiAlign`, `crate::Align`, `crate::BackendRepr`, `crate::FieldsShape`, `crate::Float`, `crate::HasDataLayout`, `crate::LayoutData`, `crate::Niche`, `crate::PointeeInfo`, `crate::Primitive`, `crate::Size`, `crate::Variants`
+      1 unresolved imports `ast::BindingMode`, `ast::PatKind`
+      1 unresolved import `rustc_query_system`
+      1 unresolved import `rustc_graphviz`
+      1 unresolved import `rustc_attr_parsing`
+      1 unresolved import `reg`
+      1 unresolved import `proc_macro`
+      1 unresolved import `native_libs`
+      1 unresolved import `map`
+      1 unresolved import `linux`
+      1 unresolved import `hir::intravisit`
+      1 unresolved import `fs`
+      1 unresolved import `creader`
+      1 unresolved import `crate::sync::is_dyn_thread_safe`
+      1 unresolved import `crate::symbol`
+      1 unresolved import `crate::rustc_index_macros`
+      1 unresolved import `crate::rustc_complete::util::unicode`
+      1 unresolved import `crate::rustc_complete::utils`
+      1 unresolved import `crate::rustc_complete::util::parser`
+      1 unresolved import `crate::rustc_complete::ty::Visibility`
+      1 unresolved import `crate::rustc_complete::ty::TyCtxtFeed`
+      1 unresolved import `crate::rustc_complete::ty::significant_drop_order`
+      1 unresolved import `crate::rustc_complete::ty::relate`
+      1 unresolved import `crate::rustc_complete::ty::RawPtr`
+      1 unresolved import `crate::rustc_complete::ty::Mutability`
+      1 unresolved import `crate::rustc_complete::ty::List`
+      1 unresolved import `crate::rustc_complete::ty::layout::LayoutOfHelpers`
+      1 unresolved import `crate::rustc_complete::ty::layout::LayoutOf`
+      1 unresolved import `crate::rustc_complete::ty::layout::IntegerExt`
+      1 unresolved import `crate::rustc_complete::ty::inhabitedness`
+      1 unresolved import `crate::rustc_complete::ty::data_structures`
+      1 unresolved import `crate::rustc_complete::ty::BottomUpFolder`
+      1 unresolved import `crate::rustc_complete::ty::AssocContainer`
+      1 unresolved import `crate::rustc_complete::traits::specialization_graph`
+      1 unresolved import `crate::rustc_complete::symbol`
+      1 unresolved import `crate::rustc_complete::StableCrateId`
+      1 unresolved import `crate::rustc_complete::source_map::Spanned`
+      1 unresolved import `crate::rustc_complete::Safety`
+      1 unresolved import `crate::rustc_complete::Recovered`
+      1 unresolved import `crate::rustc_complete::query::plumbing`
+      1 unresolved import `crate::rustc_complete::query::Key`
+      1 unresolved import `crate::rustc_complete::query::erase`
+      1 unresolved import `crate::rustc_complete::PreciseCapturingArgKind`
+      1 unresolved import `crate::rustc_complete::Mutability`
+      1 unresolved import `crate::rustc_complete::middle::privacy`
+      1 unresolved import `crate::rustc_complete::middle::debugger_visualizer`
+      1 unresolved import `crate::rustc_complete::middle::codegen_fn_attrs`
+      1 unresolved import `crate::rustc_complete::limit`
+      1 unresolved import `crate::rustc_complete::lang_items`
+      1 unresolved import `crate::rustc_complete::implement_ty_decoder`
+      1 unresolved import `crate::rustc_complete::HirIdSet`
+      1 unresolved import `crate::rustc_complete::HasAttrs`
+      1 unresolved import `crate::rustc_complete::filesearch`
+      1 unresolved import `crate::rustc_complete::ExprKind`
+      1 unresolved import `crate::rustc_complete::DynLintStore`
+      1 unresolved import `crate::rustc_complete::diagnostic_items`
+      1 unresolved import `crate::rustc_complete::DiagMessage`
+      1 unresolved import `crate::rustc_complete::def_path_hash_map`
+      1 unresolved import `crate::rustc_complete::def_id::LocalModDefId`
+      1 unresolved import `crate::rustc_complete::def_id::CRATE_DEF_ID`
+      1 unresolved import `crate::rustc_complete::def::CtorOf`
+      1 unresolved import `crate::rustc_complete::declare_lint`
+      1 unresolved import `crate::rustc_complete::create_default_session_globals_then`
+      1 unresolved import `crate::rustc_complete::CRATE_NODE_ID`
+      1 unresolved import `crate::rustc_complete::config::TargetModifier`
+      1 unresolved import `crate::rustc_complete::config::ExpectedValues`
+      1 unresolved import `crate::rustc_complete::BindingMode`
+      1 unresolved import `crate::rustc_complete::attrs::StrippedCfgItem`
+      1 unresolved import `crate::rustc_complete::attrs::Deprecation`
+      1 unresolved import `crate::rustc_complete::attr`
+      1 unresolved import `crate::QueryConfigRestored`
+      1 unresolved import `crate::profiling_support`
+      1 unresolved import `crate::owned_slice`
+      1 unresolved import `crate::obligation_forest`
+      1 unresolved import `crate::LintVec`
+      1 unresolved import `crate::lifetime_syntax`
+      1 unresolved import `crate::late`
+      1 unresolved import `crate::hygiene`
+      1 unresolved import `crate::graph::tests`
+      1 unresolved import `crate::graph::Predecessors`
+      1 unresolved import `crate::fx::FxHasher`
+      1 unresolved import `crate::FatalErrorMarker`
+      1 unresolved import `crate::ExternAbi`
+      1 unresolved import `crate::edition`
+      1 unresolved import `crate::EarlyLintPass`
+      1 unresolved import `crate::defer`
+      1 unresolved import `crate::create_default_session_globals_then`
+      1 unresolved import `atomic_ref`
+      1 unresolved import `ast::PatKind`
+      1 unresolved import `ast::Mutability`
+      1 unresolved import `ast::ItemKind`
+      1 the name `ty` is defined multiple times
+      1 the name `stable_hasher` is defined multiple times
+      1 the name `source_map` is defined multiple times
+      1 the name `rustc_trait_selection` is defined multiple times
+      1 the name `rustc_serialize` is defined multiple times
+      1 the name `rustc_infer` is defined multiple times
+      1 the name `rustc_index` is defined multiple times
+      1 the name `rustc_abi` is defined multiple times
+      1 the name `mir` is defined multiple times
+      1 failed to resolve: could not find `windows` in `os`
+      1 failed to resolve: could not find `expand` in `rustc_complete`
+      1 failed to resolve: could not find `edition` in `rustc_complete`
+      1 failed to resolve: could not find `cstore` in `rustc_complete`
+      1 `#[derive(Default)]` on enum with no `#[default]`
+      1 can't find crate for `test_helpers`
+      1 can't find crate for `synstructure`
+      1 can't find crate for `cranelift_frontend`
+      1 can't find crate for `cranelift_codegen`
+      1 can't find crate for `core_simd`

@@ -1,55 +1,41 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/shim.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::assert_matches::assert_matches;
 use std::{fmt, iter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{ExternAbi, FIRST_VARIANT, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{
     self, CoroutineArgs, CoroutineArgsExt, EarlyBinder, GenericArgs, Ty, TyCtxt,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::source_map::{Spanned, dummy_spanned};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::elaborate_drop::{DropElaborator, DropFlagMode, DropStyle, Unwind, elaborate_drop};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::patch::MirPatch;
 use crate::{
     abort_unwinding_calls, add_call_guards, add_moves_for_packed_drops, deref_separator, inline,
     instsimplify, mentioned_items, pass_manager as pm, remove_noop_landing_pads,
     run_optimization_passes, simplify,
 };
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 
 pub(super) fn provide(providers: &mut Providers) {
     providers.mir_shims = make_shim;
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=FixProxyFutureDropVisitor | COMPLEXITY=2 | LINES=6 */
 
 // Replace Pin<&mut ImplCoroutine> accesses (_1.0) into Pin<&mut ProxyCoroutine> accesses
 struct FixProxyFutureDropVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     replace_to: Local,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=16 | LINES=28 */
 
 impl<'tcx> MutVisitor<'tcx> for FixProxyFutureDropVisitor<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -78,7 +64,6 @@ impl<'tcx> MutVisitor<'tcx> for FixProxyFutureDropVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=make_shim | COMPLEXITY=74 | LINES=184 */
 
 fn make_shim<'tcx>(tcx: TyCtxt<'tcx>, instance: ty::InstanceKind<'tcx>) -> Body<'tcx> {
     debug!("make_shim({:?})", instance);
@@ -263,7 +248,6 @@ fn make_shim<'tcx>(tcx: TyCtxt<'tcx>, instance: ty::InstanceKind<'tcx>) -> Body<
 
     result
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 enum DerefSource {
@@ -274,7 +258,6 @@ enum DerefSource {
     /// `fn shim(*mut self) { inner(*self )}`.
     MutPtr,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=18 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 enum Adjustment {
@@ -293,7 +276,6 @@ enum Adjustment {
     /// won't do it for us.
     RefMut,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 enum CallKind<'tcx> {
@@ -303,7 +285,6 @@ enum CallKind<'tcx> {
     /// Call a known `FnDef`.
     Direct(DefId),
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=local_decls_for_sig | COMPLEXITY=2 | LINES=9 */
 
 fn local_decls_for_sig<'tcx>(
     sig: &ty::FnSig<'tcx>,
@@ -313,7 +294,6 @@ fn local_decls_for_sig<'tcx>(
         .chain(sig.inputs().iter().map(|ity| LocalDecl::new(*ity, span).immutable()))
         .collect()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=dropee_emit_retag | COMPLEXITY=13 | LINES=34 */
 
 fn dropee_emit_retag<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -348,7 +328,6 @@ fn dropee_emit_retag<'tcx>(
     }
     dropee_ptr
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=build_drop_shim | COMPLEXITY=24 | LINES=62 */
 
 fn build_drop_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, ty: Option<Ty<'tcx>>) -> Body<'tcx> {
     debug!("build_drop_shim(def_id={:?}, ty={:?})", def_id, ty);
@@ -411,7 +390,6 @@ fn build_drop_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, ty: Option<Ty<'tcx>>)
 
     body
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new_body | COMPLEXITY=4 | LINES=34 */
 
 fn new_body<'tcx>(
     source: MirSource<'tcx>,
@@ -446,7 +424,6 @@ fn new_body<'tcx>(
     body.set_required_consts(Vec::new());
     body
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 pub(super) struct DropShimElaborator<'a, 'tcx> {
     pub body: &'a Body<'tcx>,
@@ -455,14 +432,12 @@ pub(super) struct DropShimElaborator<'a, 'tcx> {
     pub typing_env: ty::TypingEnv<'tcx>,
     pub produce_async_drops: bool,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for DropShimElaborator<'_, '_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), fmt::Error> {
         f.debug_struct("DropShimElaborator").finish_non_exhaustive()
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=patch_ref | COMPLEXITY=29 | LINES=61 */
 
 impl<'a, 'tcx> DropElaborator<'a, 'tcx> for DropShimElaborator<'a, 'tcx> {
     type Path = ();
@@ -524,7 +499,6 @@ impl<'a, 'tcx> DropElaborator<'a, 'tcx> for DropShimElaborator<'a, 'tcx> {
         None
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=build_thread_local_shim | COMPLEXITY=4 | LINES=30 */
 
 fn build_thread_local_shim<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -555,7 +529,6 @@ fn build_thread_local_shim<'tcx>(
         span,
     )
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=build_clone_shim | COMPLEXITY=16 | LINES=26 */
 
 /// Builds a `Clone::clone` shim for `self_ty`. Here, `def_id` is `Clone::clone`.
 fn build_clone_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, self_ty: Ty<'tcx>) -> Body<'tcx> {
@@ -582,7 +555,6 @@ fn build_clone_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, self_ty: Ty<'tcx>) -
 
     builder.into_mir()
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=CloneShimBuilder | COMPLEXITY=2 | LINES=9 */
 
 struct CloneShimBuilder<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -592,7 +564,6 @@ struct CloneShimBuilder<'tcx> {
     span: Span,
     sig: ty::FnSig<'tcx>,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=new | COMPLEXITY=64 | LINES=227 */
 
 impl<'tcx> CloneShimBuilder<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def_id: DefId, self_ty: Ty<'tcx>) -> Self {
@@ -820,7 +791,6 @@ impl<'tcx> CloneShimBuilder<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=build_call_shim | COMPLEXITY=106 | LINES=235 */
 
 /// Builds a "call" shim for `instance`. The shim calls the function specified by `call_kind`,
 /// first adjusting its first argument according to `rcvr_adjustment`.
@@ -1056,7 +1026,6 @@ fn build_call_shim<'tcx>(
 
     body
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=74 */
 
 pub(super) fn build_adt_ctor(tcx: TyCtxt<'_>, ctor_id: DefId) -> Body<'_> {
     debug_assert!(tcx.is_constructor(ctor_id));
@@ -1131,7 +1100,6 @@ pub(super) fn build_adt_ctor(tcx: TyCtxt<'_>, ctor_id: DefId) -> Body<'_> {
 
     body
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 /// ```ignore (pseudo-impl)
 /// impl FnPtr for fn(u32) {
@@ -1139,7 +1107,6 @@ pub(super) fn build_adt_ctor(tcx: TyCtxt<'_>, ctor_id: DefId) -> Body<'_> {
 ///         self as usize
 ///     }
 /// }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=build_fn_ptr_addr_shim | COMPLEXITY=10 | LINES=30 */
 /// ```
 fn build_fn_ptr_addr_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, self_ty: Ty<'tcx>) -> Body<'tcx> {
     assert_matches!(self_ty.kind(), ty::FnPtr(..), "expected fn ptr, found {self_ty}");
@@ -1170,7 +1137,6 @@ fn build_fn_ptr_addr_shim<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, self_ty: Ty<'t
     let source = MirSource::from_instance(ty::InstanceKind::FnPtrAddrShim(def_id, self_ty));
     new_body(source, IndexVec::from_elem_n(start_block, 1), locals, sig.inputs().len(), span)
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=build_construct_coroutine_by_move_shim | COMPLEXITY=46 | LINES=114 */
 
 fn build_construct_coroutine_by_move_shim<'tcx>(
     tcx: TyCtxt<'tcx>,

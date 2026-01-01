@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/dump.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::intravisit;
 use crate::rustc_complete::hir::nested_filter;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=22 */
 use crate::rustc_complete::sym;
 
 pub(crate) fn opaque_hidden_types(tcx: TyCtxt<'_>) {
@@ -29,7 +26,6 @@ pub(crate) fn opaque_hidden_types(tcx: TyCtxt<'_>) {
         tcx.dcx().emit_err(crate::errors::TypeOf { span, ty });
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=25 */
 
 pub(crate) fn predicates_and_item_bounds(tcx: TyCtxt<'_>) {
     for id in tcx.hir_crate_items(()).owners() {
@@ -55,7 +51,6 @@ pub(crate) fn predicates_and_item_bounds(tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=AnonConstFinder | COMPLEXITY=29 | LINES=47 */
 
 pub(crate) fn def_parents(tcx: TyCtxt<'_>) {
     for iid in tcx.hir_free_items() {
@@ -103,7 +98,6 @@ pub(crate) fn def_parents(tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=80 */
 
 pub(crate) fn vtables<'tcx>(tcx: TyCtxt<'tcx>) {
     for id in tcx.hir_free_items() {

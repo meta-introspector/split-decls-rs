@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/fuzz/reduce.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::io::Write;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=save_reduction | COMPLEXITY=8 | LINES=12 */
 
 use super::ResultCache;
 
@@ -15,7 +13,6 @@ fn save_reduction(lines: &[String], path: &Path, stage: &str) {
         file.write_all(line.as_bytes()).expect("Could not save the reduced example");
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_reduction | COMPLEXITY=9 | LINES=15 */
 
 /// Checks if a given reduction is valid.
 fn test_reduction(lines: &[String], path: &Path, cache: &mut ResultCache) -> bool {
@@ -31,7 +28,6 @@ fn test_reduction(lines: &[String], path: &Path, cache: &mut ResultCache) -> boo
     };
     true
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=remove_dup_assign | COMPLEXITY=32 | LINES=62 */
 
 /// Removes duplicate assignments in bulk.
 /// If a line A = B is followed directly by A = C,
@@ -94,7 +90,6 @@ fn remove_dup_assign(
     }
     save_reduction(file, path, "remove_dup_assign");
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=remove_dump_var | COMPLEXITY=15 | LINES=31 */
 
 /// Removes all the unneeded calls to `dump_var`. This is not something tools like `cvise` can do,
 /// but it greately speeds up MIR interpretation + native execution.
@@ -126,7 +121,6 @@ fn remove_dump_var(file: &mut Vec<String>, path: &PathBuf) {
     }
     save_reduction(file, path, "remove_dump_var");
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=match_to_goto | COMPLEXITY=36 | LINES=48 */
 
 /// Replaces matches with gotos where possible.
 /// This exploits some properties of rustlantis(match arm order),
@@ -175,7 +169,6 @@ fn match_to_goto(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCache
             curr = match_ends;
         }
     }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=block_abort | COMPLEXITY=21 | LINES=48 */
     save_reduction(file, path, "match_to_goto");
 }
 
@@ -224,7 +217,6 @@ fn block_abort(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCache) 
             curr = block_ends;
         }
     }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=remove_block | COMPLEXITY=21 | LINES=41 */
     save_reduction(file, path, "block_abort");
 }
 
@@ -266,7 +258,6 @@ fn remove_block(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCache)
             curr = block_starts + 1;
         }
     }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=linearize_cf | COMPLEXITY=23 | LINES=47 */
     save_reduction(file, path, "remove_block");
 }
 
@@ -314,7 +305,6 @@ fn linearize_cf(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCache)
             curr = block_starts + 1;
         }
     }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=remove_fn_calls | COMPLEXITY=22 | LINES=50 */
     save_reduction(file, path, "linearize_cf");
 }
 
@@ -365,7 +355,6 @@ fn remove_fn_calls(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCac
             curr = fn_call + 1;
         }
     }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=remove_fns | COMPLEXITY=19 | LINES=36 */
     save_reduction(file, path, "remove_fn_calls");
 }
 
@@ -402,7 +391,6 @@ fn remove_fns(file: &mut Vec<String>, path: &PathBuf, cache: &mut ResultCache) {
             curr = fn_start + 1;
         }
     }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=40 */
     save_reduction(file, path, "remove_fns");
 }
 

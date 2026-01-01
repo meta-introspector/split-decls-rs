@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/info.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=run | COMPLEXITY=13 | LINES=21 */
 use crate::config::ConfigInfo;
 
 pub fn run() -> Result<(), String> {

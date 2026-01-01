@@ -1,27 +1,20 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/symbol_export.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::collections::hash_map::Entry::*;
 
 use crate::rustc_abi::{CanonAbi, X86Call};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::expand::allocator::{ALLOCATOR_METHODS, NO_ALLOC_SHIM_IS_UNSTABLE, global_fn_name};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::middle::exported_symbols::{
     ExportedSymbol, SymbolExportInfo, SymbolExportKind, SymbolExportLevel,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::LocalCrate;
 use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, Instance, SymbolName, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::config::{CrateType, OomStrategy};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=threshold | COMPLEXITY=2 | LINES=9 */
 use rustc_symbol_mangling::mangle_internal_symbol;
 use crate::rustc_target::spec::TlsModel;
 use tracing::debug;
@@ -31,7 +24,6 @@ use crate::back::symbol_export;
 fn threshold(tcx: TyCtxt<'_>) -> SymbolExportLevel {
     crates_export_threshold(tcx.crate_types())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=crate_export_threshold | COMPLEXITY=7 | LINES=9 */
 
 fn crate_export_threshold(crate_type: CrateType) -> SymbolExportLevel {
     match crate_type {
@@ -41,7 +33,6 @@ fn crate_export_threshold(crate_type: CrateType) -> SymbolExportLevel {
         CrateType::Rlib | CrateType::Dylib | CrateType::Sdylib => SymbolExportLevel::Rust,
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=crates_export_threshold | COMPLEXITY=6 | LINES=11 */
 
 pub fn crates_export_threshold(crate_types: &[CrateType]) -> SymbolExportLevel {
     if crate_types
@@ -53,7 +44,6 @@ pub fn crates_export_threshold(crate_types: &[CrateType]) -> SymbolExportLevel {
         SymbolExportLevel::C
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=reachable_non_generics_provider | COMPLEXITY=67 | LINES=110 */
 
 fn reachable_non_generics_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> DefIdMap<SymbolExportInfo> {
     if !tcx.sess.opts.output_types.should_codegen() && !tcx.is_sdylib_interface_build() {
@@ -164,7 +154,6 @@ fn reachable_non_generics_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> DefIdMap<S
 
     reachable_non_generics
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_reachable_non_generic_provider_local | COMPLEXITY=6 | LINES=10 */
 
 fn is_reachable_non_generic_provider_local(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     let export_threshold = threshold(tcx);
@@ -175,12 +164,10 @@ fn is_reachable_non_generic_provider_local(tcx: TyCtxt<'_>, def_id: LocalDefId) 
         false
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_reachable_non_generic_provider_extern | COMPLEXITY=2 | LINES=4 */
 
 fn is_reachable_non_generic_provider_extern(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
     tcx.reachable_non_generics(def_id.krate).contains_key(&def_id)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=exported_non_generic_symbols_provider_local | COMPLEXITY=19 | LINES=55 */
 
 fn exported_non_generic_symbols_provider_local<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -236,7 +223,6 @@ fn exported_non_generic_symbols_provider_local<'tcx>(
 
     tcx.arena.alloc_from_iter(symbols)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=exported_generic_symbols_provider_local | COMPLEXITY=85 | LINES=167 */
 
 fn exported_generic_symbols_provider_local<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -404,7 +390,6 @@ fn exported_generic_symbols_provider_local<'tcx>(
 
     tcx.arena.alloc_from_iter(symbols)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=upstream_monomorphizations_provider | COMPLEXITY=36 | LINES=58 */
 
 fn upstream_monomorphizations_provider(
     tcx: TyCtxt<'_>,
@@ -463,7 +448,6 @@ fn upstream_monomorphizations_provider(
 
     instances
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=upstream_monomorphizations_for_provider | COMPLEXITY=2 | LINES=8 */
 
 fn upstream_monomorphizations_for_provider(
     tcx: TyCtxt<'_>,
@@ -472,7 +456,6 @@ fn upstream_monomorphizations_for_provider(
     assert!(!def_id.is_local());
     tcx.upstream_monomorphizations(()).get(&def_id)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=upstream_drop_glue_for_provider | COMPLEXITY=2 | LINES=8 */
 
 fn upstream_drop_glue_for_provider<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -481,7 +464,6 @@ fn upstream_drop_glue_for_provider<'tcx>(
     let def_id = tcx.lang_items().drop_in_place_fn()?;
     tcx.upstream_monomorphizations_for(def_id)?.get(&args).cloned()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=upstream_async_drop_glue_for_provider | COMPLEXITY=2 | LINES=8 */
 
 fn upstream_async_drop_glue_for_provider<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -490,12 +472,10 @@ fn upstream_async_drop_glue_for_provider<'tcx>(
     let def_id = tcx.lang_items().async_drop_in_place_fn()?;
     tcx.upstream_monomorphizations_for(def_id)?.get(&args).cloned()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=is_unreachable_local_definition_provider | COMPLEXITY=2 | LINES=4 */
 
 fn is_unreachable_local_definition_provider(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
     !tcx.reachable_set(()).contains(&def_id)
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.reachable_non_generics = reachable_non_generics_provider;
@@ -511,7 +491,6 @@ pub(crate) fn provide(providers: &mut Providers) {
     providers.extern_queries.upstream_monomorphizations_for =
         upstream_monomorphizations_for_provider;
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=25 */
 
 pub(crate) fn allocator_shim_symbols(
     tcx: TyCtxt<'_>,
@@ -537,7 +516,6 @@ pub(crate) fn allocator_shim_symbols(
             )
         })
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=symbol_export_level | COMPLEXITY=19 | LINES=26 */
 
 fn symbol_export_level(tcx: TyCtxt<'_>, sym_def_id: DefId) -> SymbolExportLevel {
     // We export anything that's not mangled at the "C" layer as it probably has
@@ -564,7 +542,6 @@ fn symbol_export_level(tcx: TyCtxt<'_>, sym_def_id: DefId) -> SymbolExportLevel 
         SymbolExportLevel::Rust
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=62 */
 
 /// This is the symbol name of the given instance instantiated in a specific crate.
 pub(crate) fn symbol_name_for_instance_in_crate<'tcx>(
@@ -627,7 +604,6 @@ pub(crate) fn symbol_name_for_instance_in_crate<'tcx>(
         ExportedSymbol::NoDefId(symbol_name) => symbol_name.to_string(),
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=calling_convention_for_symbol | COMPLEXITY=14 | LINES=37 */
 
 fn calling_convention_for_symbol<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -665,7 +641,6 @@ fn calling_convention_for_symbol<'tcx>(
         // FIXME(workingjubilee): why don't we know the convention here?
         .unwrap_or((CanonAbi::Rust, &[]))
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=56 */
 
 /// This is the symbol name of the given instance as seen by the linker.
 ///
@@ -722,7 +697,6 @@ pub(crate) fn linking_symbol_name_for_instance_in_crate<'tcx>(
         .sum();
     format!("{prefix}{undecorated}{suffix}{args_in_bytes}")
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 pub(crate) fn exporting_symbol_name_for_instance_in_crate<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -732,7 +706,6 @@ pub(crate) fn exporting_symbol_name_for_instance_in_crate<'tcx>(
     let undecorated = symbol_name_for_instance_in_crate(tcx, symbol, cnum);
     maybe_emutls_symbol_name(tcx, symbol, &undecorated).unwrap_or(undecorated)
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=23 */
 
 /// On amdhsa, `gpu-kernel` functions have an associated metadata object with a `.kd` suffix.
 /// Add it to the symbols list for all kernel functions, so that it is exported in the linked
@@ -756,7 +729,6 @@ pub(crate) fn extend_exported_symbols<'tcx>(
     // export as data.
     symbols.push((format!("{undecorated}.kd"), SymbolExportKind::Data));
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=maybe_emutls_symbol_name | COMPLEXITY=11 | LINES=17 */
 
 fn maybe_emutls_symbol_name<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -774,7 +746,6 @@ fn maybe_emutls_symbol_name<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=wasm_import_module_map | COMPLEXITY=10 | LINES=24 */
 
 fn wasm_import_module_map(tcx: TyCtxt<'_>, cnum: CrateNum) -> DefIdMap<String> {
     // Build up a map from DefId to a `NativeLib` structure, where

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/unsize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Codegen of the [`PointerCoercion::Unsize`] operation.
 //
 // [`PointerCoercion::Unsize`]: `crate::rustc_middle::ty::adjustment::PointerCoercion::Unsize`
@@ -7,7 +6,6 @@
 use crate::rustc_codegen_ssa::base::validate_trivial_unsize;
 use crate::rustc_complete::ty::layout::HasTypingEnv;
 use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=65 */
 
 use crate::base::codegen_panic_nounwind;
 use crate::prelude::*;
@@ -73,7 +71,6 @@ pub(crate) fn unsized_info<'tcx>(
         _ => bug!("unsized_info: invalid unsizing {:?} -> {:?}", source, target),
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=unsize_ptr | COMPLEXITY=21 | LINES=41 */
 
 /// Coerce `src` to `dst_ty`.
 fn unsize_ptr<'tcx>(
@@ -115,7 +112,6 @@ fn unsize_ptr<'tcx>(
         _ => bug!("unsize_ptr: called on bad types"),
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=47 */
 
 /// Coerce `src`, which is a reference to a value of type `src_ty`,
 /// to a value of type `dst_ty` and store the result in `dst`
@@ -163,7 +159,6 @@ pub(crate) fn coerce_unsized_into<'tcx>(
         _ => bug!("coerce_unsized_into: invalid coercion {:?} -> {:?}", src_ty, dst_ty),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=41 | LINES=131 */
 
 // Adapted from https://github.com/rust-lang/rust/blob/2a663555ddf36f6b041445894a8c175cd1bc718c/src/librustc_codegen_ssa/glue.rs
 

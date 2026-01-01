@@ -1,47 +1,37 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/validate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Validates the MIR to ensure that invariants are upheld.
 
 use crate::rustc_abi::{ExternAbi, FIRST_VARIANT, Size};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::attrs::InlineAttr;
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_infer::traits::{Obligation, ObligationCause};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::coverage::CoverageKind;
 use crate::rustc_complete::mir::visit::{NonUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{
     self, CoroutineArgsExt, InstanceKind, ScalarInt, Ty, TyCtxt, TypeVisitableExt, Upcast, Variance,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::util::{self, is_within_packed};
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 enum EdgeKind {
     Unwind,
     Normal,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) struct Validator {
     /// Describes at which point in the pipeline this validation is happening.
     pub when: String,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=36 | LINES=64 */
 
 impl<'tcx> crate::MirPass<'tcx> for Validator {
     fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
@@ -106,7 +96,6 @@ impl<'tcx> crate::MirPass<'tcx> for Validator {
         true
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CfgChecker | COMPLEXITY=3 | LINES=18 */
 
 /// This checker covers basic properties of the control-flow graph, (dis)allowed statements and terminators.
 /// Everything checked here must be stable under substitution of generic parameters. In other words,
@@ -125,7 +114,6 @@ struct CfgChecker<'a, 'tcx> {
     // `TerminatorKind::Resume`.
     can_unwind: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=119 | LINES=166 */
 
 impl<'a, 'tcx> CfgChecker<'a, 'tcx> {
     #[track_caller]
@@ -292,7 +280,6 @@ impl<'a, 'tcx> CfgChecker<'a, 'tcx> {
             && self.body.basic_blocks.predecessors()[target].len() > 1
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=181 | LINES=255 */
 
 impl<'a, 'tcx> Visitor<'tcx> for CfgChecker<'a, 'tcx> {
     fn visit_local(&mut self, local: Local, _context: PlaceContext, location: Location) {
@@ -548,7 +535,6 @@ impl<'a, 'tcx> Visitor<'tcx> for CfgChecker<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
 
 /// A faster version of the validation pass that only checks those things which may break when
 /// instantiating any generic parameters.
@@ -571,7 +557,6 @@ pub(super) fn validate_types<'tcx>(
     });
     type_checker.failures
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=TypeChecker | COMPLEXITY=2 | LINES=8 */
 
 struct TypeChecker<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -580,7 +565,6 @@ struct TypeChecker<'a, 'tcx> {
     typing_env: ty::TypingEnv<'tcx>,
     failures: Vec<(Location, String)>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=28 | LINES=62 */
 
 impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     fn fail(&mut self, location: Location, msg: impl Into<String>) {
@@ -643,7 +627,6 @@ impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
         ocx.select_all_or_error().is_empty()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_operand | COMPLEXITY=692 | LINES=985 */
 
 impl<'a, 'tcx> Visitor<'tcx> for TypeChecker<'a, 'tcx> {
     fn visit_operand(&mut self, operand: &Operand<'tcx>, location: Location) {

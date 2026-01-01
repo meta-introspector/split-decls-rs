@@ -1,53 +1,40 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/fulfill.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::marker::PhantomData;
 
 use crate::rustc_data_structures::obligation_forest::{
     Error, ForestObligation, ObligationForest, ObligationProcessor, Outcome, ProcessResult,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_infer::infer::DefineOpaqueTypes;
 use crate::rustc_infer::traits::{
     FromSolverError, PolyTraitObligation, PredicateObligations, ProjectionCacheKey, SelectionError,
     TraitEngine,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, Binder, Const, GenericArgsRef, TypeVisitable, TypeVisitableExt, TypingMode,
     may_use_unstable_feature,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, debug_span, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::effects::{self, HostEffectObligation};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::project::{self, ProjectAndUnifyResult};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use super::select::SelectionContext;
 use super::{
     EvaluationResult, FulfillmentError, FulfillmentErrorCode, PredicateObligation,
     ScrubbedTraitError, const_evaluatable, wf,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::infer::{InferCtxt, TyOrConstInferVar};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::solve::StalledOnCoroutines;
 use crate::traits::normalize::normalize_with_depth_to;
 use crate::traits::project::{PolyProjectionObligation, ProjectionCacheKeyExt as _};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::traits::query::evaluate_obligation::InferCtxtExt;
 use crate::traits::{EvaluateConstErr, sizedness_fast_path};
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=as_cache_key | COMPLEXITY=6 | LINES=13 */
 
 pub(crate) type PendingPredicateObligations<'tcx> = ThinVec<PendingPredicateObligation<'tcx>>;
 
@@ -61,7 +48,6 @@ impl<'tcx> ForestObligation for PendingPredicateObligation<'tcx> {
         self.obligation.param_env.and(self.obligation.predicate)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=FulfillmentContext | COMPLEXITY=6 | LINES=24 */
 
 /// The fulfillment context is used to drive trait resolution. It
 /// consists of a list of obligations that must be (eventually)
@@ -86,7 +72,6 @@ pub struct FulfillmentContext<'tcx, E: 'tcx> {
 
     _errors: PhantomData<E>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PendingPredicateObligation | COMPLEXITY=6 | LINES=10 */
 
 #[derive(Clone, Debug)]
 pub struct PendingPredicateObligation<'tcx> {
@@ -97,7 +82,6 @@ pub struct PendingPredicateObligation<'tcx> {
     // For whatever reason using a boxed slice is slower than using a `Vec` here.
     pub stalled_on: Vec<TyOrConstInferVar>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=select | COMPLEXITY=17 | LINES=51 */
 
 // `PendingPredicateObligation` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
@@ -149,7 +133,6 @@ where
         errors
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=register_predicate_obligation | COMPLEXITY=40 | LINES=116 */
 
 impl<'tcx, E> TraitEngine<'tcx, E> for FulfillmentContext<'tcx, E>
 where
@@ -266,12 +249,10 @@ where
         self.predicates.map_pending_obligations(|o| o.obligation.clone())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=FulfillProcessor | COMPLEXITY=2 | LINES=4 */
 
 struct FulfillProcessor<'a, 'tcx> {
     selcx: SelectionContext<'a, 'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=mk_pending | COMPLEXITY=4 | LINES=12 */
 
 fn mk_pending<'tcx>(
     parent: &PredicateObligation<'tcx>,
@@ -284,7 +265,6 @@ fn mk_pending<'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=skippable_obligations | COMPLEXITY=254 | LINES=563 */
 
 impl<'a, 'tcx> ObligationProcessor for FulfillProcessor<'a, 'tcx> {
     type Obligation = PendingPredicateObligation<'tcx>;
@@ -848,7 +828,6 @@ impl<'a, 'tcx> ObligationProcessor for FulfillProcessor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=process_trait_obligation | COMPLEXITY=66 | LINES=134 */
 
 impl<'a, 'tcx> FulfillProcessor<'a, 'tcx> {
     #[instrument(level = "debug", skip(self, obligation, stalled_on))]
@@ -983,7 +962,6 @@ impl<'a, 'tcx> FulfillProcessor<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=args_infer_vars | COMPLEXITY=10 | LINES=24 */
 
 /// Returns the set of inference variables contained in `args`.
 fn args_infer_vars<'tcx>(
@@ -1008,7 +986,6 @@ fn args_infer_vars<'tcx>(
         })
         .filter_map(TyOrConstInferVar::maybe_from_generic_arg)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=OldSolverError | COMPLEXITY=8 | LINES=16 */
 
 #[derive(Debug)]
 pub struct OldSolverError<'tcx>(
@@ -1025,7 +1002,6 @@ impl<'tcx> FromSolverError<'tcx, OldSolverError<'tcx>> for FulfillmentError<'tcx
         FulfillmentError::new(obligation, error.0.error, root_obligation)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from_solver_error | COMPLEXITY=11 | LINES=13 */
 
 impl<'tcx> FromSolverError<'tcx, OldSolverError<'tcx>> for ScrubbedTraitError<'tcx> {
     fn from_solver_error(_infcx: &InferCtxt<'tcx>, error: OldSolverError<'tcx>) -> Self {

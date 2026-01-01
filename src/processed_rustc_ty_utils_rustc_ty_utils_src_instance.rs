@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/instance.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::DefId;
@@ -7,11 +6,9 @@ use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::traits::{BuiltinImplSource, CodegenObligationError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgsRef, Instance, PseudoCanonicalInput, TyCtxt, TypeVisitableExt,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=resolve_instance_raw | COMPLEXITY=52 | LINES=91 */
 use crate::rustc_complete::sym;
 use crate::rustc_trait_selection::traits;
 use tracing::debug;
@@ -103,7 +100,6 @@ fn resolve_instance_raw<'tcx>(
     debug!("resolve_instance: result={:?}", result);
     result
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=resolve_associated_item | COMPLEXITY=189 | LINES=291 */
 
 fn resolve_associated_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -395,7 +391,6 @@ fn resolve_associated_item<'tcx>(
         | traits::ImplSource::Builtin(BuiltinImplSource::TraitUpcasting { .. }, _) => None,
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { resolve_instance_raw, ..*providers };

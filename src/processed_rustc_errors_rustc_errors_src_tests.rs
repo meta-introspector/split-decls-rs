@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_errors/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, LazyLock};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_data_structures::sync::IntoDynSyncSend;
 use crate::rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_error_messages::{DiagMessage, langid};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::FluentBundle;
 use crate::error::{TranslateError, TranslateErrorKind};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=make_translator | COMPLEXITY=4 | LINES=20 */
 use crate::fluent_bundle::*;
 use crate::translation::Translator;
 
@@ -32,7 +27,6 @@ fn make_translator(ftl: &'static str) -> Translator {
         fallback_fluent_bundle: Arc::new(LazyLock::new(Box::new(|| bundle))),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=wellformed_fluent | COMPLEXITY=19 | LINES=60 */
 
 #[test]
 fn wellformed_fluent() {
@@ -93,7 +87,6 @@ fn wellformed_fluent() {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=misformed_fluent | COMPLEXITY=52 | LINES=94 */
 
 #[test]
 fn misformed_fluent() {

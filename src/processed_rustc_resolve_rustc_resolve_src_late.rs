@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_resolve/src/late.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 // ignore-tidy-filelength
 // "Late resolution" is the pass that resolves most of names in a crate beside imports and macros.
 // It runs when the crate is fully expanded and its module structure is fully built.
@@ -12,69 +11,49 @@ use std::assert_matches::debug_assert_matches;
 use std::borrow::Cow;
 use std::collections::hash_map::Entry;
 use std::mem::{replace, swap, take};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_complete::visit::{
     AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, try_visit, visit_opt, walk_list,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::*;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, DiagArgValue, ErrorGuaranteed, IntoDiagArg, StashKey, Suggestions,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::Namespace::{self, *};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{self, CtorKind, DefKind, LifetimeRes, NonMacroAttrKind, PartialRes, PerNS};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{MissingLifetimeKind, PrimTy, TraitCandidate};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::middle::resolve_bound_vars::Set1;
 use crate::rustc_complete::ty::{DelegationFnSig, Visibility};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{CrateType, ResolveDocLinks};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{self, BuiltinLintDiag};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::source_map::{Spanned, respan};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Ident, Span, Symbol, SyntaxContext, kw, sym};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use thin_vec::ThinVec;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::{
     BindingError, BindingKey, Finalize, LexicalScopeBinding, Module, ModuleOrUniformRoot,
     NameBinding, ParentScope, PathResult, ResolutionError, Resolver, Segment, TyCtxt, UseError,
     Used, errors, path_names_to_string, rustdoc,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 
 type Res = def::Res<NodeId>;
 
 use diagnostics::{ElisionFnParameter, LifetimeElisionCandidate, MissingLifetime};
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=BindingInfo | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 struct BindingInfo {
     span: Span,
     annotation: BindingMode,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub(crate) enum PatternSource {
@@ -83,14 +62,12 @@ pub(crate) enum PatternSource {
     For,
     FnParam,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 enum IsRepeatExpr {
     No,
     Yes,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=IsNeverPattern; | COMPLEXITY=2 | LINES=12 */
 
 struct IsNeverPattern;
 
@@ -103,7 +80,6 @@ enum AnonConstKind {
     InlineConst,
     ConstArg(IsRepeatExpr),
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=12 | LINES=11 */
 
 impl PatternSource {
     fn descr(self) -> &'static str {
@@ -115,14 +91,12 @@ impl PatternSource {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
 
 impl IntoDiagArg for PatternSource {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(self.descr()))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// Denotes whether the context for the set of already bound bindings is a `Product`
 /// or `Or` context. This is used in e.g., `fresh_binding` and `resolve_pattern_inner`.
@@ -134,7 +108,6 @@ enum PatBoundCtx {
     /// An or-pattern context, e.g., `p_0 | ... | p_n`.
     Or,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
 
 /// Tracks bindings resolved within a pattern. This serves two purposes:
 ///
@@ -155,7 +128,6 @@ pub(crate) enum HasGenericParams {
     Yes(Span),
     No,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// May this constant have generics?
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
@@ -163,14 +135,12 @@ pub(crate) enum ConstantHasGenerics {
     Yes,
     No(NoConstantGenericsReason),
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=force_yes_if | COMPLEXITY=7 | LINES=6 */
 
 impl ConstantHasGenerics {
     fn force_yes_if(self, b: bool) -> Self {
         if b { Self::Yes } else { self }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=21 */
 
 /// Reason for why an anon const is not allowed to reference generic parameters
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
@@ -192,14 +162,12 @@ pub(crate) enum NoConstantGenericsReason {
     /// ```
     IsEnumDiscriminant,
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub(crate) enum ConstantItemKind {
     Const,
     Static,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 impl ConstantItemKind {
     pub(crate) fn as_str(&self) -> &'static str {
@@ -209,14 +177,12 @@ impl ConstantItemKind {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 enum RecordPartialRes {
     Yes,
     No,
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=52 */
 
 /// The rib kind restricts certain accesses,
 /// e.g. to a `Res::Local` of an outer item.
@@ -269,14 +235,12 @@ pub(crate) enum RibKind<'ra> {
     /// globals.
     InlineAsmSym,
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub(crate) enum ForwardGenericParamBanReason {
     Default,
     ConstParamTy,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=is_label_barrier | COMPLEXITY=14 | LINES=29 */
 
 impl RibKind<'_> {
     /// Whether this rib kind contains generic parameters, as opposed to local
@@ -306,7 +270,6 @@ impl RibKind<'_> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 
 /// A single local scope.
 ///
@@ -326,7 +289,6 @@ pub(crate) struct Rib<'ra, R = Res> {
     pub patterns_with_skipped_bindings: UnordMap<DefId, Vec<(Span, Result<(), ErrorGuaranteed>)>>,
     pub kind: RibKind<'ra>,
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=10 */
 
 impl<'ra, R> Rib<'ra, R> {
     fn new(kind: RibKind<'ra>) -> Rib<'ra, R> {
@@ -337,14 +299,12 @@ impl<'ra, R> Rib<'ra, R> {
         }
     }
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Clone, Copy, Debug)]
 enum LifetimeUseSet {
     One { use_span: Span, use_ctxt: visit::LifetimeCtxt },
     Many,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=61 */
 
 #[derive(Copy, Clone, Debug)]
 enum LifetimeRibKind {
@@ -406,7 +366,6 @@ enum LifetimeRibKind {
     /// This rib acts as a barrier to forbid reference to lifetimes of a parent item.
     Item,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Copy, Clone, Debug)]
 enum LifetimeBinderKind {
@@ -419,7 +378,6 @@ enum LifetimeBinderKind {
     Closure,
     ImplBlock,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=7 | LINES=15 */
 
 impl LifetimeBinderKind {
     fn descr(self) -> &'static str {
@@ -435,7 +393,6 @@ impl LifetimeBinderKind {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=LifetimeRib | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Debug)]
 struct LifetimeRib {
@@ -443,21 +400,18 @@ struct LifetimeRib {
     // We need to preserve insertion order for async fns.
     bindings: FxIndexMap<Ident, (NodeId, LifetimeRes)>,
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl LifetimeRib {
     fn new(kind: LifetimeRibKind) -> LifetimeRib {
         LifetimeRib { bindings: Default::default(), kind }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub(crate) enum AliasPossibility {
     No,
     Maybe,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum PathSource<'a, 'ast, 'ra> {
@@ -487,7 +441,6 @@ pub(crate) enum PathSource<'a, 'ast, 'ra> {
     /// Paths from `#[define_opaque]` attributes
     DefineOpaques,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=namespace | COMPLEXITY=87 | LINES=188 */
 
 impl PathSource<'_, '_, '_> {
     fn namespace(self) -> Namespace {
@@ -676,7 +629,6 @@ impl PathSource<'_, '_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// At this point for most items we can answer whether that item is exported or not,
 /// but some items like impls require type information to determine exported-ness, so we make a
@@ -688,7 +640,6 @@ enum MaybeExported<'a> {
     ImplItem(Result<DefId, &'a ast::Visibility>),
     NestedUse(&'a ast::Visibility),
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=eval | COMPLEXITY=10 | LINES=16 */
 
 impl MaybeExported<'_> {
     fn eval(self, r: &Resolver<'_, '_>) -> bool {
@@ -705,7 +656,6 @@ impl MaybeExported<'_> {
         def_id.is_none_or(|def_id| r.effective_visibilities.is_exported(def_id))
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Used for recording UnnecessaryQualification.
 #[derive(Debug)]
@@ -715,7 +665,6 @@ pub(crate) struct UnnecessaryQualification<'ra> {
     pub path_span: Span,
     pub removal_span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=DiagMetadata | COMPLEXITY=25 | LINES=63 */
 
 #[derive(Default, Debug)]
 struct DiagMetadata<'ast> {
@@ -779,7 +728,6 @@ struct DiagMetadata<'ast> {
     /// and report them all at once for each function.
     current_elision_failures: Vec<MissingLifetime>,
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=LateResolutionVisitor | COMPLEXITY=23 | LINES=42 */
 
 struct LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
     r: &'a mut Resolver<'ra, 'tcx>,
@@ -822,7 +770,6 @@ struct LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
     /// Count the number of places a lifetime is used.
     lifetime_uses: FxHashMap<LocalDefId, LifetimeUseSet>,
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=334 | LINES=647 */
 
 /// Walks the whole crate in DFS order, visiting each item, resolving names as it goes.
 impl<'ast, 'ra, 'tcx> Visitor<'ast> for LateResolutionVisitor<'_, 'ast, 'ra, 'tcx> {
@@ -1470,7 +1417,6 @@ impl<'ast, 'ra, 'tcx> Visitor<'ast> for LateResolutionVisitor<'_, 'ast, 'ra, 'tc
         }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=new | COMPLEXITY=1886 | LINES=3710 */
 
 impl<'a, 'ast, 'ra, 'tcx> LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
     fn new(resolver: &'a mut Resolver<'ra, 'tcx>) -> LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
@@ -5181,14 +5127,12 @@ impl<'a, 'ast, 'ra, 'tcx> LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=ItemInfoCollector | COMPLEXITY=2 | LINES=6 */
 
 /// Walks the whole crate in DFS order, visiting each item, counting the declared number of
 /// lifetime generic parameters and function parameters.
 struct ItemInfoCollector<'a, 'ra, 'tcx> {
     r: &'a mut Resolver<'ra, 'tcx>,
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=collect_fn_info | COMPLEXITY=5 | LINES=19 */
 
 impl ItemInfoCollector<'_, '_, '_> {
     fn collect_fn_info(
@@ -5208,7 +5152,6 @@ impl ItemInfoCollector<'_, '_, '_> {
         self.r.delegation_fn_sigs.insert(self.r.local_def_id(id), sig);
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=visit_item | COMPLEXITY=44 | LINES=61 */
 
 impl<'ast> Visitor<'ast> for ItemInfoCollector<'_, '_, '_> {
     fn visit_item(&mut self, item: &'ast Item) {
@@ -5270,7 +5213,6 @@ impl<'ast> Visitor<'ast> for ItemInfoCollector<'_, '_, '_> {
         visit::walk_assoc_item(self, item, ctxt);
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=17 */
 
 impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     pub(crate) fn late_resolve_crate(&mut self, krate: &Crate) {
@@ -5288,7 +5230,6 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=def_id_matches_path | COMPLEXITY=10 | LINES=12 */
 
 /// Check if definition matches a path
 fn def_id_matches_path(tcx: TyCtxt<'_>, mut def_id: DefId, expected_path: &[&str]) -> bool {

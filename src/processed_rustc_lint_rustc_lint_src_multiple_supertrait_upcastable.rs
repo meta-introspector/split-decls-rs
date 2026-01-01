@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_lint/src/multiple_supertrait_upcastable.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
 
 declare_lint! {
     /// The `multiple_supertrait_upcastable` lint detects when a dyn-compatible trait has multiple
@@ -35,7 +32,6 @@ declare_lint! {
     "detect when a dyn-compatible trait has multiple supertraits",
     @feature_gate = multiple_supertrait_upcastable;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=14 | LINES=28 */
 
 declare_lint_pass!(MultipleSupertraitUpcastable => [MULTIPLE_SUPERTRAIT_UPCASTABLE]);
 

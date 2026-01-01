@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/traversal.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=Preorder | COMPLEXITY=3 | LINES=26 */
 use super::*;
 
 /// Preorder traversal of a graph.
@@ -26,7 +25,6 @@ pub struct Preorder<'a, 'tcx> {
     visited: DenseBitSet<BasicBlock>,
     worklist: Vec<BasicBlock>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=8 */
 
 impl<'a, 'tcx> Preorder<'a, 'tcx> {
     pub fn new(body: &'a Body<'tcx>, root: BasicBlock) -> Preorder<'a, 'tcx> {
@@ -35,7 +33,6 @@ impl<'a, 'tcx> Preorder<'a, 'tcx> {
         Preorder { body, visited: DenseBitSet::new_empty(body.basic_blocks.len()), worklist }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=preorder | COMPLEXITY=2 | LINES=10 */
 
 /// Preorder traversal of a graph.
 ///
@@ -46,7 +43,6 @@ impl<'a, 'tcx> Preorder<'a, 'tcx> {
 pub fn preorder<'a, 'tcx>(body: &'a Body<'tcx>) -> Preorder<'a, 'tcx> {
     Preorder::new(body, START_BLOCK)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=next | COMPLEXITY=18 | LINES=32 */
 
 impl<'a, 'tcx> Iterator for Preorder<'a, 'tcx> {
     type Item = (BasicBlock, &'a BasicBlockData<'tcx>);
@@ -79,7 +75,6 @@ impl<'a, 'tcx> Iterator for Preorder<'a, 'tcx> {
         (lower, Some(upper))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Postorder | COMPLEXITY=5 | LINES=27 */
 
 /// Postorder traversal of a graph.
 ///
@@ -107,7 +102,6 @@ pub struct Postorder<'a, 'tcx> {
     /// A non-empty `extra` allows for a precise calculation of the successors.
     extra: Option<(TyCtxt<'tcx>, Instance<'tcx>)>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=30 | LINES=86 */
 
 impl<'a, 'tcx> Postorder<'a, 'tcx> {
     pub fn new(
@@ -194,7 +188,6 @@ impl<'a, 'tcx> Postorder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> Iterator for Postorder<'_, 'tcx> {
     type Item = BasicBlock;
@@ -217,7 +210,6 @@ impl<'tcx> Iterator for Postorder<'_, 'tcx> {
         (lower, Some(upper))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=postorder | COMPLEXITY=3 | LINES=15 */
 
 /// Postorder traversal of a graph.
 ///
@@ -233,7 +225,6 @@ pub fn postorder<'a, 'tcx>(
 {
     reverse_postorder(body).rev()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=mono_reachable_reverse_postorder | COMPLEXITY=5 | LINES=14 */
 
 pub fn mono_reachable_reverse_postorder<'a, 'tcx>(
     body: &'a Body<'tcx>,
@@ -248,7 +239,6 @@ pub fn mono_reachable_reverse_postorder<'a, 'tcx>(
     items.reverse();
     items
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=reachable | COMPLEXITY=2 | LINES=10 */
 
 /// Returns an iterator over all basic blocks reachable from the `START_BLOCK` in no particular
 /// order.
@@ -259,7 +249,6 @@ pub fn reachable<'a, 'tcx>(
 ) -> impl 'a + Iterator<Item = (BasicBlock, &'a BasicBlockData<'tcx>)> {
     preorder(body)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=reachable_as_bitset | COMPLEXITY=5 | LINES=7 */
 
 /// Returns a `DenseBitSet` containing all basic blocks reachable from the `START_BLOCK`.
 pub fn reachable_as_bitset(body: &Body<'_>) -> DenseBitSet<BasicBlock> {
@@ -267,7 +256,6 @@ pub fn reachable_as_bitset(body: &Body<'_>) -> DenseBitSet<BasicBlock> {
     while let Some(_) = iter.next() {}
     iter.visited
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=reverse_postorder | COMPLEXITY=6 | LINES=31 */
 
 /// Reverse postorder traversal of a graph.
 ///
@@ -299,7 +287,6 @@ pub fn reverse_postorder<'a, 'tcx>(
 {
     body.basic_blocks.reverse_postorder().iter().map(|&bb| (bb, &body.basic_blocks[bb]))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=mono_reachable | COMPLEXITY=7 | LINES=17 */
 
 /// Traversal of a [`Body`] that tries to avoid unreachable blocks in a monomorphized [`Instance`].
 ///
@@ -317,7 +304,6 @@ pub fn mono_reachable<'a, 'tcx>(
 ) -> MonoReachable<'a, 'tcx> {
     MonoReachable::new(body, tcx, instance)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mono_reachable_as_bitset | COMPLEXITY=5 | LINES=12 */
 
 /// [`MonoReachable`] internally accumulates a [`DenseBitSet`] of visited blocks. This is just a
 /// convenience function to run that traversal then extract its set of reached blocks.
@@ -330,7 +316,6 @@ pub fn mono_reachable_as_bitset<'a, 'tcx>(
     while let Some(_) = iter.next() {}
     iter.visited
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=MonoReachable | COMPLEXITY=2 | LINES=11 */
 
 pub struct MonoReachable<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -342,7 +327,6 @@ pub struct MonoReachable<'a, 'tcx> {
     // optimization.
     worklist: DenseBitSet<BasicBlock>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=26 */
 
 impl<'a, 'tcx> MonoReachable<'a, 'tcx> {
     pub fn new(
@@ -369,7 +353,6 @@ impl<'a, 'tcx> MonoReachable<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=next | COMPLEXITY=12 | LINES=22 */
 
 impl<'a, 'tcx> Iterator for MonoReachable<'a, 'tcx> {
     type Item = (BasicBlock, &'a BasicBlockData<'tcx>);

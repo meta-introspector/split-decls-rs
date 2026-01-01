@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/back/write.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fs};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use gccjit::{Context, OutputKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::back::link::ensure_removed;
 use crate::rustc_codegen_ssa::back::write::{BitcodeSection, CodegenContext, EmitObj, ModuleConfig};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::{CompiledModule, ModuleCodegen};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use rustc_fs_util::link_or_copy;
 use crate::rustc_complete::config::OutputType;
 use crate::rustc_target::spec::SplitDebuginfo;
@@ -17,7 +12,6 @@ use crate::rustc_target::spec::SplitDebuginfo;
 use crate::base::add_pic_option;
 use crate::errors::CopyBitcode;
 use crate::{GccCodegenBackend, GccContext};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=106 | LINES=244 */
 
 pub(crate) fn codegen(
     cgcx: &CodegenContext<GccCodegenBackend>,
@@ -262,7 +256,6 @@ pub(crate) fn codegen(
         cgcx.invocation_temp.as_deref(),
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 pub(crate) fn save_temp_bitcode(
     cgcx: &CodegenContext<GccCodegenBackend>,

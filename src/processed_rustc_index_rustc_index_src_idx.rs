@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_index/src/idx.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=24 */
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::ops;
@@ -24,7 +23,6 @@ pub trait Idx: Copy + 'static + Eq + PartialEq + Debug + Hash {
         Self::new(self.index() + amount)
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=11 */
 
 impl Idx for usize {
     #[inline]
@@ -36,7 +34,6 @@ impl Idx for usize {
         self
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=12 */
 
 impl Idx for u32 {
     #[inline]
@@ -49,14 +46,12 @@ impl Idx for u32 {
         self as usize
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=4 | LINES=6 */
 
 /// Helper trait for indexing operations with a custom index type.
 pub trait IntoSliceIdx<I, T: ?Sized> {
     type Output: SliceIndex<T>;
     fn into_slice_idx(self) -> Self::Output;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for I {
     type Output = usize;
@@ -65,7 +60,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for I {
         self.index()
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=5 | LINES=8 */
 
 impl<I, T> IntoSliceIdx<I, [T]> for ops::RangeFull {
     type Output = ops::RangeFull;
@@ -74,7 +68,6 @@ impl<I, T> IntoSliceIdx<I, [T]> for ops::RangeFull {
         self
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=6 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::Range<I> {
     type Output = ops::Range<usize>;
@@ -83,7 +76,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::Range<I> {
         ops::Range { start: self.start.index(), end: self.end.index() }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=6 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeFrom<I> {
     type Output = ops::RangeFrom<usize>;
@@ -92,7 +84,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeFrom<I> {
         ops::RangeFrom { start: self.start.index() }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeTo<I> {
     type Output = ops::RangeTo<usize>;
@@ -101,7 +92,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeTo<I> {
         ..self.end.index()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeInclusive<I> {
     type Output = ops::RangeInclusive<usize>;
@@ -110,7 +100,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeInclusive<I> {
         ops::RangeInclusive::new(self.start().index(), self.end().index())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeToInclusive<I> {
     type Output = ops::RangeToInclusive<usize>;
@@ -119,7 +108,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for ops::RangeToInclusive<I> {
         ..=self.end.index()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(feature = "nightly")]
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::Range<I> {
@@ -129,7 +117,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::Range<I> {
         core::range::Range { start: self.start.index(), end: self.end.index() }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(feature = "nightly")]
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::RangeFrom<I> {
@@ -139,7 +126,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::RangeFrom<I> {
         core::range::RangeFrom { start: self.start.index() }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=9 | LINES=15 */
 
 #[cfg(feature = "nightly")]
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::RangeInclusive<I> {
@@ -155,7 +141,6 @@ impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::RangeInclusive<I> {
         core::range::RangeInclusive { start: self.start.index(), last: self.last.index() }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=into_slice_idx | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(all(feature = "nightly", not(bootstrap)))]
 impl<I: Idx, T> IntoSliceIdx<I, [T]> for core::range::RangeToInclusive<I> {

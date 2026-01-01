@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/va_arg.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, BackendRepr, Endian, HasDataLayout, Primitive, Size, TyAndLayout};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::MemFlags;
 use crate::rustc_codegen_ssa::common::IntPredicate;
 use crate::rustc_codegen_ssa::mir::operand::OperandRef;
 use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods, LayoutTypeCodegenMethods,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::Ty;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=round_up_to_alignment | COMPLEXITY=2 | LINES=14 */
 
 use crate::builder::Builder;
 use crate::type_::Type;
@@ -26,7 +22,6 @@ fn round_up_to_alignment<'ll>(
     value = bx.add(value, bx.cx().const_i32(align.bytes() as i32 - 1));
     return bx.and(value, bx.cx().const_i32(-(align.bytes() as i32)));
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=round_pointer_up_to_alignment | COMPLEXITY=2 | LINES=14 */
 
 fn round_pointer_up_to_alignment<'ll>(
     bx: &mut Builder<'_, 'll, '_>,
@@ -41,7 +36,6 @@ fn round_pointer_up_to_alignment<'ll>(
         &[ptr, bx.const_int(bx.isize_ty, -(align.bytes() as isize) as i64)],
     )
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=emit_direct_ptr_va_arg | COMPLEXITY=12 | LINES=38 */
 
 fn emit_direct_ptr_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -80,31 +74,26 @@ fn emit_direct_ptr_va_arg<'ll, 'tcx>(
         (addr, addr_align)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum PassMode {
     Direct,
     Indirect,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum SlotSize {
     Bytes8 = 8,
     Bytes4 = 4,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum AllowHigherAlign {
     No,
     Yes,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum ForceRightAdjust {
     No,
     Yes,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=emit_ptr_va_arg | COMPLEXITY=12 | LINES=41 */
 
 fn emit_ptr_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -146,7 +135,6 @@ fn emit_ptr_va_arg<'ll, 'tcx>(
         bx.load(llty, addr, addr_align)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=emit_aapcs_va_arg | COMPLEXITY=29 | LINES=106 */
 
 fn emit_aapcs_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -253,7 +241,6 @@ fn emit_aapcs_va_arg<'ll, 'tcx>(
 
     val
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=emit_powerpc_va_arg | COMPLEXITY=56 | LINES=142 */
 
 fn emit_powerpc_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -396,7 +383,6 @@ fn emit_powerpc_va_arg<'ll, 'tcx>(
         if is_indirect { bx.load(bx.cx.type_ptr(), val_addr, ptr_align_abi) } else { val_addr };
     bx.load(val_type, val_addr, layout.align.abi)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=emit_s390x_va_arg | COMPLEXITY=28 | LINES=88 */
 
 fn emit_s390x_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -485,7 +471,6 @@ fn emit_s390x_va_arg<'ll, 'tcx>(
         if indirect { bx.load(bx.cx.type_ptr(), val_addr, ptr_align_abi) } else { val_addr };
     bx.load(val_type, val_addr, layout.align.abi)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=emit_x86_64_sysv64_va_arg | COMPLEXITY=102 | LINES=251 */
 
 fn emit_x86_64_sysv64_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -737,7 +722,6 @@ fn emit_x86_64_sysv64_va_arg<'ll, 'tcx>(
 
     bx.load(val_type, val_addr, layout.align.abi)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=copy_to_temporary_if_more_aligned | COMPLEXITY=9 | LINES=23 */
 
 /// Copy into a temporary if the type is more aligned than the register save area.
 fn copy_to_temporary_if_more_aligned<'ll, 'tcx>(
@@ -761,7 +745,6 @@ fn copy_to_temporary_if_more_aligned<'ll, 'tcx>(
         reg_addr
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=x86_64_sysv64_va_arg_from_memory | COMPLEXITY=9 | LINES=34 */
 
 fn x86_64_sysv64_va_arg_from_memory<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -796,7 +779,6 @@ fn x86_64_sysv64_va_arg_from_memory<'ll, 'tcx>(
 
     mem_addr
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=emit_xtensa_va_arg | COMPLEXITY=41 | LINES=98 */
 
 fn emit_xtensa_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,
@@ -895,7 +877,6 @@ fn emit_xtensa_va_arg<'ll, 'tcx>(
         bx.phi(bx.type_ptr(), &[regsave_value_ptr, stack_value_ptr], &[from_regsave, from_stack]);
     return bx.load(layout.llvm_type(bx), value_ptr, layout.align.abi);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=87 */
 
 pub(super) fn emit_va_arg<'ll, 'tcx>(
     bx: &mut Builder<'_, 'll, 'tcx>,

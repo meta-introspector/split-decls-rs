@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/markdown/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // A simple markdown parser that can write formatted text to the terminal
 //
 // Entrypoint is `MdStream::parse_str(...)`
@@ -7,7 +6,6 @@
 use std::io;
 
 use termcolor::{Buffer, BufferWriter, ColorChoice};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=MdStream | COMPLEXITY=5 | LINES=19 */
 
 /// An AST representation of a Markdown document
 #[derive(Clone, Debug, Default, PartialEq)]
@@ -25,13 +23,11 @@ impl<'a> MdStream<'a> {
         term::entrypoint(self, buf)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=create_stdout_bufwtr | COMPLEXITY=2 | LINES=5 */
 
 /// Create a termcolor buffer with the `Always` color choice
 pub fn create_stdout_bufwtr() -> BufferWriter {
     BufferWriter::stdout(ColorChoice::Always)
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=40 */
 
 /// A single tokentree within a Markdown document
 #[derive(Clone, Debug, PartialEq)]
@@ -72,7 +68,6 @@ pub enum MdTree<'a> {
     OrderedListItem(u16, MdStream<'a>),
     UnorderedListItem(MdStream<'a>),
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'a> From<Vec<MdTree<'a>>> for MdStream<'a> {
     fn from(value: Vec<MdTree<'a>>) -> Self {

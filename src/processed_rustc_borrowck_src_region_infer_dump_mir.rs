@@ -1,18 +1,15 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/dump_mir.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // As part of generating the regions, if you enable `-Zdump-mir=nll`,
 // we will generate an annotated copy of the MIR that includes the
 // state of region inference. This code handles emitting the region
 // context internal state.
 
 use std::io::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::rustc_infer::infer::NllRegionVariableOrigin;
 use crate::rustc_complete::ty::TyCtxt;
 
 use super::{OutlivesConstraint, RegionInferenceContext};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=for_each_constraint | COMPLEXITY=55 | LINES=81 */
 use crate::type_check::Locations;
 
 // Room for "'_#NNNNr" before things get misaligned.

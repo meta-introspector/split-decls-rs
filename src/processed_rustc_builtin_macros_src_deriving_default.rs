@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/default.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
 use crate::rustc_complete::visit::visit_opt;
 use crate::rustc_complete::{EnumDef, VariantData, attr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::SmallVec;
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=48 */
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
@@ -61,14 +56,12 @@ pub(crate) fn expand_deriving_default(
     };
     trait_def.expand(cx, mitem, item, push)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default_call | COMPLEXITY=2 | LINES=6 */
 
 fn default_call(cx: &ExtCtxt<'_>, span: Span) -> Box<ast::Expr> {
     // Note that `kw::Default` is "default" and `sym::Default` is "Default"!
     let default_ident = cx.std_path(&[kw::Default, sym::Default, kw::Default]);
     cx.expr_call_global(span, default_ident, ThinVec::new())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default_struct_substructure | COMPLEXITY=16 | LINES=33 */
 
 fn default_struct_substructure(
     cx: &ExtCtxt<'_>,
@@ -102,7 +95,6 @@ fn default_struct_substructure(
     };
     BlockOrExpr::new_expr(expr)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=default_enum_substructure | COMPLEXITY=27 | LINES=59 */
 
 fn default_enum_substructure(
     cx: &ExtCtxt<'_>,
@@ -162,7 +154,6 @@ fn default_enum_substructure(
     };
     BlockOrExpr::new_expr(expr)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=extract_default_variant | COMPLEXITY=37 | LINES=84 */
 
 fn extract_default_variant<'a>(
     cx: &ExtCtxt<'_>,
@@ -247,7 +238,6 @@ fn extract_default_variant<'a>(
 
     Ok(variant)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=validate_default_attribute | COMPLEXITY=15 | LINES=36 */
 
 fn validate_default_attribute(
     cx: &ExtCtxt<'_>,
@@ -284,12 +274,10 @@ fn validate_default_attribute(
     }
     Ok(())
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=DetectNonVariantDefaultAttr | COMPLEXITY=2 | LINES=4 */
 
 struct DetectNonVariantDefaultAttr<'a, 'b> {
     cx: &'a ExtCtxt<'b>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=18 | LINES=24 */
 
 impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAttr<'a, 'b> {
     fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) {
@@ -314,7 +302,6 @@ impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAtt
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=has_a_default_variant | COMPLEXITY=13 | LINES=18 */
 
 fn has_a_default_variant(item: &Annotatable) -> bool {
     struct HasDefaultAttrOnVariant;

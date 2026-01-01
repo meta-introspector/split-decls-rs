@@ -1,45 +1,32 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/on_unimplemented.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::iter;
 use std::path::PathBuf;
 
 use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{ErrorGuaranteed, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AttrArgs, Attribute};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_macros::LintDiagnostic;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::print::PrintTraitRefExt;
 use crate::rustc_complete::ty::{self, GenericArgsRef, GenericParamDef, GenericParamDefKind, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::{
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, info};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ObligationCauseCode, PredicateObligation};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::error_reporting::TypeErrCtxt;
 use crate::error_reporting::traits::on_unimplemented_condition::{
     ConditionOptions, OnUnimplementedCondition,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::error_reporting::traits::on_unimplemented_format::{
     Ctx, FormatArgs, FormatString, FormatWarning,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{InvalidOnClause, NoValueInOnUnimplemented};
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=impl_similar_to | COMPLEXITY=194 | LINES=276 */
 use crate::infer::InferCtxtExt;
 
 impl<'tcx> TypeErrCtxt<'_, 'tcx> {
@@ -316,7 +303,6 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=OnUnimplementedFormatString | COMPLEXITY=2 | LINES=11 */
 
 /// Represents a format string in a on_unimplemented attribute,
 /// like the "content" in `#[diagnostic::on_unimplemented(message = "content")]`
@@ -328,7 +314,6 @@ pub struct OnUnimplementedFormatString {
     span: Span,
     is_diagnostic_namespace_variant: bool,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=OnUnimplementedDirective | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Debug)]
 pub struct OnUnimplementedDirective {
@@ -340,7 +325,6 @@ pub struct OnUnimplementedDirective {
     parent_label: Option<OnUnimplementedFormatString>,
     append_const_msg: Option<AppendConstMessage>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=OnUnimplementedNote | COMPLEXITY=2 | LINES=11 */
 
 /// For the `#[rustc_on_unimplemented]` attribute
 #[derive(Default)]
@@ -352,7 +336,6 @@ pub struct OnUnimplementedNote {
     // If none, should fall back to a generic message
     pub append_const_msg: Option<AppendConstMessage>,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Append a message for `[const] Trait` errors.
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Default)]
@@ -361,7 +344,6 @@ pub enum AppendConstMessage {
     Default,
     Custom(Symbol, Span),
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=MalformedOnUnimplementedAttrLint | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(trait_selection_malformed_on_unimplemented_attr)]
@@ -370,14 +352,12 @@ pub struct MalformedOnUnimplementedAttrLint {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl MalformedOnUnimplementedAttrLint {
     pub fn new(span: Span) -> Self {
         Self { span }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=MissingOptionsForOnUnimplementedAttr; | COMPLEXITY=2 | LINES=15 */
 
 #[derive(LintDiagnostic)]
 #[diag(trait_selection_missing_options_for_on_unimplemented_attr)]
@@ -393,7 +373,6 @@ pub struct IgnoredDiagnosticOption {
     #[label(trait_selection_other_label)]
     pub prev_span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=maybe_emit_warning | COMPLEXITY=8 | LINES=21 */
 
 impl IgnoredDiagnosticOption {
     pub fn maybe_emit_warning<'tcx>(
@@ -415,7 +394,6 @@ impl IgnoredDiagnosticOption {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=WrappedParserError | COMPLEXITY=2 | LINES=7 */
 
 #[derive(LintDiagnostic)]
 #[diag(trait_selection_wrapped_parser_error)]
@@ -423,7 +401,6 @@ pub struct WrappedParserError {
     pub description: String,
     pub label: String,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=208 | LINES=384 */
 
 impl<'tcx> OnUnimplementedDirective {
     fn parse(
@@ -808,7 +785,6 @@ impl<'tcx> OnUnimplementedDirective {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=try_parse | COMPLEXITY=81 | LINES=125 */
 
 impl<'tcx> OnUnimplementedFormatString {
     fn try_parse(

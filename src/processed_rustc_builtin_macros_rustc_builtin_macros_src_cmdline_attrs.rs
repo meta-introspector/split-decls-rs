@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/cmdline_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Attributes injected into the crate root from command line using `-Z crate-attr`.
 
 use crate::rustc_complete::{self as ast};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Diag;
 use crate::rustc_parse::parser::attr::InnerAttrPolicy;
 use crate::rustc_parse::{parse_in, source_str_to_stream};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=inject | COMPLEXITY=17 | LINES=31 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::FileName;
 

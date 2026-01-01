@@ -1,20 +1,16 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // cSpell:ignoreRegExp [afkspqvwy]reg
 
 use std::borrow::Cow;
 
 use gccjit::{LValue, RValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::mir::operand::OperandValue;
 use crate::rustc_codegen_ssa::mir::place::PlaceRef;
 use crate::rustc_codegen_ssa::traits::{
     AsmBuilderMethods, AsmCodegenMethods, BaseTypeCodegenMethods, BuilderMethods,
     GlobalAsmOperandRef, InlineAsmOperandRef,
 };
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=AsmOutOperand | COMPLEXITY=18 | LINES=72 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::Instance;
 use crate::rustc_complete::Span;
@@ -87,14 +83,12 @@ struct AsmOutOperand<'a, 'tcx, 'gcc> {
     tmp_var: LValue<'gcc>,
     out_place: Option<PlaceRef<'tcx, RValue<'gcc>>>,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=AsmInOperand | COMPLEXITY=2 | LINES=6 */
 
 struct AsmInOperand<'a, 'tcx> {
     rust_idx: usize,
     constraint: Cow<'a, str>,
     val: RValue<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=to_constraint | COMPLEXITY=10 | LINES=15 */
 
 impl AsmOutOperand<'_, '_, '_> {
     fn to_constraint(&self) -> String {
@@ -110,13 +104,11 @@ impl AsmOutOperand<'_, '_, '_> {
         res
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum ConstraintOrRegister {
     Constraint(&'static str),
     Register(&'static str),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=codegen_inline_asm | COMPLEXITY=265 | LINES=474 */
 
 impl<'a, 'gcc, 'tcx> AsmBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tcx> {
     fn codegen_inline_asm(
@@ -591,7 +583,6 @@ impl<'a, 'gcc, 'tcx> AsmBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=estimate_template_length | COMPLEXITY=15 | LINES=29 */
 
 fn estimate_template_length(
     template: &[InlineAsmTemplatePiece],
@@ -621,7 +612,6 @@ fn estimate_template_length(
     }
     res
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=reg_to_gcc | COMPLEXITY=8 | LINES=12 */
 
 /// Converts a register class to a GCC constraint code.
 fn reg_to_gcc(reg_or_reg_class: InlineAsmRegOrRegClass) -> ConstraintOrRegister {
@@ -634,7 +624,6 @@ fn reg_to_gcc(reg_or_reg_class: InlineAsmRegOrRegClass) -> ConstraintOrRegister 
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=explicit_reg_to_gcc | COMPLEXITY=19 | LINES=25 */
 
 fn explicit_reg_to_gcc(reg: InlineAsmReg) -> &'static str {
     // For explicit registers, we have to create a register variable: https://stackoverflow.com/a/31774784/389119
@@ -660,7 +649,6 @@ fn explicit_reg_to_gcc(reg: InlineAsmReg) -> &'static str {
         _ => unimplemented!(),
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=reg_class_to_gcc | COMPLEXITY=22 | LINES=88 */
 
 /// They can be retrieved from https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html
 fn reg_class_to_gcc(reg_class: InlineAsmRegClass) -> &'static str {
@@ -749,7 +737,6 @@ fn reg_class_to_gcc(reg_class: InlineAsmRegClass) -> &'static str {
         InlineAsmRegClass::Err => unreachable!(),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=dummy_output_type | COMPLEXITY=31 | LINES=93 */
 
 /// Type to use for outputs that are discarded. It doesn't really matter what
 /// the type is, as long as it is valid for the constraint code.
@@ -843,7 +830,6 @@ fn dummy_output_type<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, reg: InlineAsmRegCl
         InlineAsmRegClass::Err => unreachable!(),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=codegen_global_asm | COMPLEXITY=42 | LINES=84 */
 
 impl<'gcc, 'tcx> AsmCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn codegen_global_asm(
@@ -928,7 +914,6 @@ impl<'gcc, 'tcx> AsmCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
         self.tcx.symbol_name(instance).name.to_string()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=modifier_to_gcc | COMPLEXITY=45 | LINES=100 */
 
 fn modifier_to_gcc(
     arch: InlineAsmArch,

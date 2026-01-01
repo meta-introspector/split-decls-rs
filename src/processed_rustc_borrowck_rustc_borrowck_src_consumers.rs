@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/consumers.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // This file provides API for compiler consumers.
 
 use crate::rustc_data_structures::fx::FxHashMap;
@@ -7,22 +6,17 @@ use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{Body, Promoted};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::TyCtxt;
 
 pub use super::borrow_set::{BorrowData, BorrowSet, TwoPhaseActivation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use super::constraints::OutlivesConstraint;
 pub use super::dataflow::{BorrowIndex, Borrows, calculate_borrows_out_of_scope_at_location};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use super::place_ext::PlaceExt;
 pub use super::places_conflict::{PlaceConflictBias, places_conflict};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use super::polonius::legacy::{
     PoloniusFacts as PoloniusInput, PoloniusLocationTable, PoloniusOutput, PoloniusRegionVid,
     RichLocation, RustcFacts,
 };
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 pub use super::region_infer::RegionInferenceContext;
 use crate::BorrowCheckRootCtxt;
 
@@ -32,7 +26,6 @@ pub(crate) struct BorrowckConsumer<'tcx> {
     options: ConsumerOptions,
     bodies: FxHashMap<LocalDefId, BodyWithBorrowckFacts<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=25 */
 
 impl<'tcx> BorrowckConsumer<'tcx> {
     pub(crate) fn new(options: ConsumerOptions) -> Self {
@@ -58,7 +51,6 @@ impl<'tcx> BorrowckConsumer<'tcx> {
         matches!(self.options, ConsumerOptions::PoloniusOutputFacts)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=26 */
 
 /// Options determining the output behavior of [`get_bodies_with_borrowck_facts`].
 ///
@@ -85,7 +77,6 @@ pub enum ConsumerOptions {
     /// and additionally runs Polonius to calculate the [`PoloniusOutput`].
     PoloniusOutputFacts,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=BodyWithBorrowckFacts | COMPLEXITY=7 | LINES=28 */
 
 /// A `Body` with information computed by the borrow checker. This struct is
 /// intended to be consumed by compiler consumers.
@@ -114,7 +105,6 @@ pub struct BodyWithBorrowckFacts<'tcx> {
     /// [`ConsumerOptions::PoloniusOutputFacts`].
     pub output_facts: Option<Box<PoloniusOutput>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get_bodies_with_borrowck_facts | COMPLEXITY=10 | LINES=26 */
 
 /// This function computes borrowck facts for the given def id and all its nested bodies.
 /// It must be called with a typeck root which will then borrowck all nested bodies as well.

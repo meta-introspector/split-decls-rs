@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_lint/src/async_closures.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::{LateContext, LateLintPass};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=46 */
 
 declare_lint! {
     /// The `closure_returning_async_block` lint detects cases where users
@@ -55,7 +51,6 @@ declare_lint! {
     Allow,
     "closure that returns `async {}` could be rewritten as an async closure",
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=20 | LINES=56 */
 
 declare_lint_pass!(
     /// Lint for potential usages of async closures and async fn trait bounds.
@@ -112,7 +107,6 @@ impl<'tcx> LateLintPass<'tcx> for AsyncClosureUsage {
         );
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ClosureReturningAsyncBlock | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(lint_closure_returning_async_block)]
@@ -122,7 +116,6 @@ struct ClosureReturningAsyncBlock {
     #[subdiagnostic]
     sugg: AsyncClosureSugg,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AsyncClosureSugg | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(lint_suggestion, applicability = "maybe-incorrect")]

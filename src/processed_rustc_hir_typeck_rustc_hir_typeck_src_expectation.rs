@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/expectation.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 use crate::rustc_complete::Span;
 
 use super::Expectation::*;
@@ -24,7 +22,6 @@ pub(crate) enum Expectation<'tcx> {
     /// to `&Ty` or `Box<Ty>`, respectively. `Ty` is `[A]` or `Trait`.
     ExpectRvalueLikeUnsized(Ty<'tcx>),
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=resolve | COMPLEXITY=67 | LINES=96 */
 
 impl<'a, 'tcx> Expectation<'tcx> {
     // Disregard "castable to" expectations because they

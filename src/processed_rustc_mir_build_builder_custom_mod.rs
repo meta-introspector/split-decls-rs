@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/custom/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=22 */
 // Provides the implementation of the `custom_mir` attribute.
 //
 // Up until MIR building, this attribute has absolutely no effect. The `mir!` macro is a normal
@@ -22,14 +21,11 @@
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{HirId, attrs};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=73 */
 use crate::rustc_complete::Span;
 
 
@@ -102,7 +98,6 @@ pub(super) fn build_custom_mir<'tcx>(
 
     body
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parse_attribute | COMPLEXITY=25 | LINES=34 */
 
 /// Turns the arguments passed to `#[custom_mir(..)]` into a proper
 /// [`MirPhase`]. Panics if this isn't possible for any reason.
@@ -137,7 +132,6 @@ fn parse_attribute(dialect: Option<attrs::MirDialect>, phase: Option<attrs::MirP
         },
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ParseCtxt | COMPLEXITY=2 | LINES=10 */
 
 struct ParseCtxt<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -148,14 +142,12 @@ struct ParseCtxt<'a, 'tcx> {
     local_map: FxHashMap<LocalVarId, Local>,
     block_map: FxHashMap<LocalVarId, BasicBlock>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ParseError | COMPLEXITY=2 | LINES=6 */
 
 struct ParseError {
     span: Span,
     item_description: String,
     expected: String,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=expr_error | COMPLEXITY=15 | LINES=24 */
 
 impl<'a, 'tcx> ParseCtxt<'a, 'tcx> {
     fn expr_error(&self, expr: ExprId, expected: &'static str) -> ParseError {
@@ -180,6 +172,5 @@ impl<'a, 'tcx> ParseCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 type PResult<T> = Result<T, ParseError>;

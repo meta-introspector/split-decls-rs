@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Not in interpret to make sure we do not use private implementation details
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::instrument;
 
@@ -20,7 +16,6 @@ pub use self::eval_queries::*;
 pub use self::fn_queries::*;
 pub use self::machine::*;
 pub(crate) use self::valtrees::{eval_to_valtree, valtree_to_const_value};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=40 */
 
 // We forbid type-level constants that contain more than `VALTREE_MAX_NODES` nodes.
 const VALTREE_MAX_NODES: usize = 100000;
@@ -61,7 +56,6 @@ pub(crate) fn try_destructure_mir_constant_for_user_output<'tcx>(
 
     Some(mir::DestructuredConstant { variant, fields })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tag_for_variant_provider | COMPLEXITY=7 | LINES=15 */
 
 /// Computes the tag (if any) for a given type and variant.
 #[instrument(skip(tcx), level = "debug")]

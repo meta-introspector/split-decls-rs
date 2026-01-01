@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/pattern/migration.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Automatic migration of Rust 2021 patterns to a form valid in both Editions 2021 and 2024.
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::MultiSpan;
 use crate::rustc_complete::{BindingMode, ByRef, HirId, Mutability};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_lint as lint;
 use crate::rustc_complete::ty::{self, Rust2024IncompatiblePatInfo, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{Rust2024IncompatiblePat, Rust2024IncompatiblePatSugg};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=20 */
 use crate::fluent_generated as fluent;
 
 /// For patterns flagged for migration during HIR typeck, this handles constructing and emitting
@@ -34,7 +29,6 @@ pub(super) struct PatMigration<'a> {
     /// Information collected from typeck, including spans for subpatterns invalid in Rust 2024.
     info: &'a Rust2024IncompatiblePatInfo,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=80 | LINES=150 */
 
 impl<'a> PatMigration<'a> {
     pub(super) fn new(info: &'a Rust2024IncompatiblePatInfo) -> Self {

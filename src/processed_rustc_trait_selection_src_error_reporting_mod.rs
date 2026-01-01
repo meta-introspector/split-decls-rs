@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::ops::Deref;
 
 use crate::rustc_complete::DiagCtxtHandle;
@@ -8,7 +7,6 @@ use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=TypeErrCtxt | COMPLEXITY=7 | LINES=21 */
 
 
 /// A helper for building type related errors. The `typeck_results`
@@ -28,7 +26,6 @@ pub struct TypeErrCtxt<'a, 'tcx> {
 
     pub autoderef_steps: Box<dyn Fn(Ty<'tcx>) -> Vec<(Ty<'tcx>, PredicateObligations<'tcx>)> + 'a>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=err_ctxt | COMPLEXITY=8 | LINES=18 */
 
 #[extension(pub trait InferCtxtErrorExt<'tcx>)]
 impl<'tcx> InferCtxt<'tcx> {
@@ -47,7 +44,6 @@ impl<'tcx> InferCtxt<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=dcx | COMPLEXITY=4 | LINES=14 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     pub fn dcx(&self) -> DiagCtxtHandle<'a> {
@@ -62,7 +58,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         bug!("called `err_ctxt` on `TypeErrCtxt`. Try removing the call");
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> Deref for TypeErrCtxt<'_, 'tcx> {
     type Target = InferCtxt<'tcx>;

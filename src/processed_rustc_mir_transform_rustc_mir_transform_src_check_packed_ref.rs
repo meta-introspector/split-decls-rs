@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_packed_ref.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::{errors, util};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=6 | LINES=11 */
 
 pub(super) struct CheckPackedRef;
 
@@ -20,7 +16,6 @@ impl<'tcx> crate::MirLint<'tcx> for CheckPackedRef {
         checker.visit_body(body);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=PackedRefChecker | COMPLEXITY=2 | LINES=7 */
 
 struct PackedRefChecker<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -28,7 +23,6 @@ struct PackedRefChecker<'a, 'tcx> {
     typing_env: ty::TypingEnv<'tcx>,
     source_info: SourceInfo,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_terminator | COMPLEXITY=17 | LINES=31 */
 
 impl<'tcx> Visitor<'tcx> for PackedRefChecker<'_, 'tcx> {
     fn visit_terminator(&mut self, terminator: &Terminator<'tcx>, location: Location) {

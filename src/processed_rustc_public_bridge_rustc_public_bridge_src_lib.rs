@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public_bridge/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=33 */
 // Crate that implements what will become the rustc side of rustc_public.
 //
 // This crate serves as a proxy for making calls to rustc queries.
@@ -33,26 +32,21 @@ use std::ops::Index;
 use bridge::*;
 use context::CompilerCtxt;
 use crate::rustc_data_structures::fx::{self, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir;
 use crate::rustc_complete::mir::interpret::AllocId;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 
 #[deprecated(note = "please use `rustc_public::rustc_internal` instead")]
 pub mod rustc_internal {}
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Container | COMPLEXITY=4 | LINES=6 */
 
 /// A container which is used for TLS.
 pub struct Container<'tcx, B: Bridge> {
     pub tables: RefCell<Tables<'tcx, B>>,
     pub cx: RefCell<CompilerCtxt<'tcx, B>>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Tables | COMPLEXITY=2 | LINES=11 */
 
 pub struct Tables<'tcx, B: Bridge> {
     pub def_ids: IndexMap<DefId, B::DefId>,
@@ -64,7 +58,6 @@ pub struct Tables<'tcx, B: Bridge> {
     pub mir_consts: IndexMap<mir::Const<'tcx>, B::MirConstId>,
     pub layouts: IndexMap<crate::rustc_abi::Layout<'tcx>, B::Layout>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx, B: Bridge> Default for Tables<'tcx, B> {
     fn default() -> Self {
@@ -80,7 +73,6 @@ impl<'tcx, B: Bridge> Default for Tables<'tcx, B> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, B: Bridge> Index<B::DefId> for Tables<'tcx, B> {
     type Output = DefId;
@@ -90,7 +82,6 @@ impl<'tcx, B: Bridge> Index<B::DefId> for Tables<'tcx, B> {
         &self.def_ids[index]
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=intern_ty | COMPLEXITY=39 | LINES=124 */
 
 impl<'tcx, B: Bridge> Tables<'tcx, B> {
     pub fn intern_ty(&mut self, ty: Ty<'tcx>) -> B::Ty {
@@ -215,7 +206,6 @@ impl<'tcx, B: Bridge> Tables<'tcx, B> {
         B::StaticDef::new(self.create_def_id(did))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=38 */
 
 /// A trait defining types that are used to emulate rustc_public components, which is really
 /// useful when programming in rustc_public-agnostic settings.
@@ -254,28 +244,24 @@ pub trait Bridge: Sized {
 
     type Allocation: Allocation<Self>;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=to_val | COMPLEXITY=2 | LINES=6 */
 
 pub trait IndexedVal {
     fn to_val(index: usize) -> Self;
 
     fn to_index(&self) -> usize;
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=IndexMap | COMPLEXITY=2 | LINES=6 */
 
 /// Similar to rustc's `FxIndexMap`, `IndexMap` with extra
 /// safety features added.
 pub struct IndexMap<K, V> {
     index_map: fx::FxIndexMap<K, V>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<K, V> Default for IndexMap<K, V> {
     fn default() -> Self {
         Self { index_map: FxIndexMap::default() }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=create_or_fetch | COMPLEXITY=3 | LINES=8 */
 
 impl<K: PartialEq + Hash + Eq, V: Copy + Debug + PartialEq + IndexedVal> IndexMap<K, V> {
     pub fn create_or_fetch(&mut self, key: K) -> V {
@@ -284,7 +270,6 @@ impl<K: PartialEq + Hash + Eq, V: Copy + Debug + PartialEq + IndexedVal> IndexMa
         *v
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=index | COMPLEXITY=8 | LINES=12 */
 
 impl<K: PartialEq + Hash + Eq, V: Copy + Debug + PartialEq + IndexedVal> Index<V>
     for IndexMap<K, V>
@@ -297,7 +282,6 @@ impl<K: PartialEq + Hash + Eq, V: Copy + Debug + PartialEq + IndexedVal> Index<V
         k
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=18 */
 
 /// Iterate over the definitions of the given crate.
 pub(crate) fn filter_def_ids<F, T>(tcx: TyCtxt<'_>, krate: CrateNum, mut func: F) -> Vec<T>

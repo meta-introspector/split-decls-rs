@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/graph/vec_graph/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=create_graph | COMPLEXITY=2 | LINES=18 */
 use super::*;
 use crate::graph;
 
@@ -18,13 +17,11 @@ fn create_graph() -> VecGraph<usize> {
 
     VecGraph::new(7, vec![(0, 1), (1, 2), (1, 3), (3, 4), (5, 1)])
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=create_graph_with_back_refs | COMPLEXITY=2 | LINES=5 */
 
 fn create_graph_with_back_refs() -> VecGraph<usize, true> {
     // Same as above
     VecGraph::new(7, vec![(0, 1), (1, 2), (1, 3), (3, 4), (5, 1)])
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=2 | LINES=9 */
 
 #[test]
 fn num_nodes() {
@@ -34,7 +31,6 @@ fn num_nodes() {
     let graph = create_graph_with_back_refs();
     assert_eq!(graph.num_nodes(), 7);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=3 | LINES=21 */
 
 #[test]
 fn successors() {
@@ -56,7 +52,6 @@ fn successors() {
     assert_eq!(graph.successors(5), &[1]);
     assert_eq!(graph.successors(6), &[] as &[usize]);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predecessors | COMPLEXITY=2 | LINES=12 */
 
 #[test]
 fn predecessors() {
@@ -69,7 +64,6 @@ fn predecessors() {
     assert_eq!(graph.predecessors(5), &[]);
     assert_eq!(graph.predecessors(6), &[]);
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dfs | COMPLEXITY=2 | LINES=11 */
 
 #[test]
 fn dfs() {

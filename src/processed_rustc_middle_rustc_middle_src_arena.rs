@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/arena.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=28 | LINES=122 */
 /// This higher-order macro declares a list of types which can be allocated by `Arena`.
 ///
 /// Specifying the `decode` modifier will add decode impls for `&T` and `&[T]` where `T` is the type
@@ -122,6 +121,5 @@ macro_rules! arena_types {
         ]);
     )
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 arena_types!(rustc_arena::declare_arena);

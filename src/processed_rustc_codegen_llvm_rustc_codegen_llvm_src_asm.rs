@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::assert_matches;
 
 use crate::rustc_abi::{BackendRepr, Float, Integer, Primitive, Scalar};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_codegen_ssa::mir::operand::OperandValue;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ty::Instance;
 use crate::rustc_complete::ty::layout::TyAndLayout;
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use crate::rustc_target::asm::*;
 use smallvec::SmallVec;
 use tracing::debug;
@@ -27,7 +22,6 @@ use crate::type_::Type;
 use crate::type_of::LayoutLlvmExt;
 use crate::value::Value;
 use crate::{attributes, llvm};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=codegen_inline_asm | COMPLEXITY=285 | LINES=353 */
 
 impl<'ll, 'tcx> AsmBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
     fn codegen_inline_asm(
@@ -381,7 +375,6 @@ impl<'ll, 'tcx> AsmBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=codegen_global_asm | COMPLEXITY=59 | LINES=81 */
 
 impl<'tcx> AsmCodegenMethods<'tcx> for CodegenCx<'_, 'tcx> {
     fn codegen_global_asm(
@@ -463,7 +456,6 @@ impl<'tcx> AsmCodegenMethods<'tcx> for CodegenCx<'_, 'tcx> {
         .expect("symbol is not valid UTF-8")
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=49 | LINES=88 */
 
 pub(crate) fn inline_asm_call<'ll>(
     bx: &mut Builder<'_, 'll, '_>,
@@ -552,7 +544,6 @@ pub(crate) fn inline_asm_call<'ll>(
 
     Some(call)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=xmm_reg_index | COMPLEXITY=16 | LINES=17 */
 
 /// If the register is an xmm/ymm/zmm register then return its index.
 fn xmm_reg_index(reg: InlineAsmReg) -> Option<u32> {
@@ -570,7 +561,6 @@ fn xmm_reg_index(reg: InlineAsmReg) -> Option<u32> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=a64_reg_index | COMPLEXITY=6 | LINES=8 */
 
 /// If the register is an AArch64 integer register then return its index.
 fn a64_reg_index(reg: InlineAsmReg) -> Option<u32> {
@@ -579,7 +569,6 @@ fn a64_reg_index(reg: InlineAsmReg) -> Option<u32> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=a64_vreg_index | COMPLEXITY=6 | LINES=8 */
 
 /// If the register is an AArch64 vector register then return its index.
 fn a64_vreg_index(reg: InlineAsmReg) -> Option<u32> {
@@ -588,7 +577,6 @@ fn a64_vreg_index(reg: InlineAsmReg) -> Option<u32> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=reg_to_llvm | COMPLEXITY=92 | LINES=132 */
 
 /// Converts a register class to an LLVM constraint code.
 fn reg_to_llvm(reg: InlineAsmRegOrRegClass, layout: Option<&TyAndLayout<'_>>) -> String {
@@ -721,7 +709,6 @@ fn reg_to_llvm(reg: InlineAsmRegOrRegClass, layout: Option<&TyAndLayout<'_>>) ->
         .to_string(),
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=modifier_to_llvm | COMPLEXITY=36 | LINES=89 */
 
 /// Converts a modifier into LLVM's equivalent modifier.
 fn modifier_to_llvm(
@@ -811,7 +798,6 @@ fn modifier_to_llvm(
         Err => unreachable!(),
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=dummy_output_type | COMPLEXITY=21 | LINES=76 */
 
 /// Type to use for outputs that are discarded. It doesn't really matter what
 /// the type is, as long as it is valid for the constraint code.
@@ -888,7 +874,6 @@ fn dummy_output_type<'ll>(cx: &CodegenCx<'ll, '_>, reg: InlineAsmRegClass) -> &'
         Err => unreachable!(),
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=llvm_asm_scalar_type | COMPLEXITY=9 | LINES=19 */
 
 /// Helper function to get the LLVM type for a Scalar. Pointers are returned as
 /// the equivalent integer type.
@@ -908,7 +893,6 @@ fn llvm_asm_scalar_type<'ll>(cx: &CodegenCx<'ll, '_>, scalar: Scalar) -> &'ll Ty
         _ => unreachable!(),
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=any_target_feature_enabled | COMPLEXITY=2 | LINES=9 */
 
 fn any_target_feature_enabled(
     cx: &CodegenCx<'_, '_>,
@@ -918,7 +902,6 @@ fn any_target_feature_enabled(
     let enabled = cx.tcx.asm_target_features(instance.def_id());
     features.iter().any(|feat| enabled.contains(feat))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=llvm_fixup_input | COMPLEXITY=82 | LINES=176 */
 
 /// Fix up an input value to work around LLVM bugs.
 fn llvm_fixup_input<'ll, 'tcx>(
@@ -1095,7 +1078,6 @@ fn llvm_fixup_input<'ll, 'tcx>(
         _ => value,
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=llvm_fixup_output | COMPLEXITY=80 | LINES=155 */
 
 /// Fix up an output value to work around LLVM bugs.
 fn llvm_fixup_output<'ll, 'tcx>(
@@ -1251,7 +1233,6 @@ fn llvm_fixup_output<'ll, 'tcx>(
         _ => value,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=llvm_fixup_output_type | COMPLEXITY=76 | LINES=140 */
 
 /// Output type to use for llvm_fixup_output.
 fn llvm_fixup_output_type<'ll, 'tcx>(

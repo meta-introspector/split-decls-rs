@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/back/owned_target_machine.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=OwnedTargetMachine | COMPLEXITY=7 | LINES=17 */
 use std::assert_matches::assert_matches;
 use std::ffi::CStr;
 use std::marker::PhantomData;
@@ -17,7 +16,6 @@ pub struct OwnedTargetMachine {
     tm_unique: NonNull<llvm::TargetMachine>,
     phantom: PhantomData<llvm::TargetMachine>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=raw | COMPLEXITY=21 | LINES=76 */
 
 impl OwnedTargetMachine {
     pub(crate) fn new(
@@ -94,7 +92,6 @@ impl OwnedTargetMachine {
         unsafe { self.tm_unique.as_ref() }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=11 */
 
 impl Drop for OwnedTargetMachine {
     fn drop(&mut self) {

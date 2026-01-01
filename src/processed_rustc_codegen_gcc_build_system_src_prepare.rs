@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/prepare.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fs;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::rustc_info::get_rustc_path;
 use crate::utils::{
     cargo_install, create_dir, get_sysroot_dir, git_clone_root_dir, remove_file, run_command,
     run_command_with_output, walk_dir,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=prepare_libcore | COMPLEXITY=57 | LINES=110 */
 
 fn prepare_libcore(
     sysroot_path: &Path,
@@ -120,7 +117,6 @@ fn prepare_libcore(
 
     Ok(())
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=prepare_rand | COMPLEXITY=7 | LINES=17 */
 
 // TODO: remove when we can ignore warnings in rustdoc tests.
 fn prepare_rand() -> Result<(), String> {
@@ -138,7 +134,6 @@ fn prepare_rand() -> Result<(), String> {
 
     Ok(())
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=build_raytracer | COMPLEXITY=7 | LINES=11 */
 
 // build with cg_llvm for perf comparison
 fn build_raytracer(repo_dir: &Path) -> Result<(), String> {
@@ -150,7 +145,6 @@ fn build_raytracer(repo_dir: &Path) -> Result<(), String> {
     run_command(&[&"mv", &"target/debug/main", &"raytracer_cg_llvm"], Some(repo_dir))?;
     Ok(())
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=clone_and_setup | COMPLEXITY=10 | LINES=17 */
 
 fn clone_and_setup<F>(repo_url: &str, checkout_commit: &str, extra: Option<F>) -> Result<(), String>
 where
@@ -168,7 +162,6 @@ where
     }
     Ok(())
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PrepareArg | COMPLEXITY=2 | LINES=7 */
 
 struct PrepareArg {
     cross_compile: bool,
@@ -176,7 +169,6 @@ struct PrepareArg {
     libgccjit12_patches: bool,
     sysroot_source: Option<String>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=26 | LINES=46 */
 
 impl PrepareArg {
     fn new() -> Result<Option<Self>, String> {
@@ -223,7 +215,6 @@ impl PrepareArg {
         )
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=run | COMPLEXITY=14 | LINES=45 */
 
 pub fn run() -> Result<(), String> {
     let args = match PrepareArg::new()? {

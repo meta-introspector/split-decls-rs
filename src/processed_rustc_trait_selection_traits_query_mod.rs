@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 // Experimental types for the trait query interface. The methods
 // defined in this module are all based on **canonicalization**,
 // which makes a canonical query by replacing unbound inference

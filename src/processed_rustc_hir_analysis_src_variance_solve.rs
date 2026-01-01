@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/variance/solve.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=glb | COMPLEXITY=12 | LINES=34 */
 // Constraint solving
 //
 // The final phase iterates over the constraints, refining the variance
@@ -34,7 +33,6 @@ fn glb(v1: ty::Variance, v2: ty::Variance) -> ty::Variance {
         (x, ty::Bivariant) | (ty::Bivariant, x) => x,
     }
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=SolveContext | COMPLEXITY=4 | LINES=7 */
 struct SolveContext<'a, 'tcx> {
     terms_cx: TermsContext<'a, 'tcx>,
     constraints: Vec<Constraint<'a>>,
@@ -42,7 +40,6 @@ struct SolveContext<'a, 'tcx> {
     // Maps from an InferredIndex to the inferred value for that variable.
     solutions: Vec<ty::Variance>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=20 */
 
 pub(crate) fn solve_constraints<'tcx>(
     constraints_cx: ConstraintContext<'_, 'tcx>,
@@ -63,7 +60,6 @@ pub(crate) fn solve_constraints<'tcx>(
 
     ty::CrateVariancesMap { variances }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=solve | COMPLEXITY=51 | LINES=90 */
 
 impl<'a, 'tcx> SolveContext<'a, 'tcx> {
     fn solve(&mut self) {

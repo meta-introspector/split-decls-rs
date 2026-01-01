@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_thread_pool/tests/stack_overflow_crash.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[allow(unused_crate_dependencies)]
 
 use std::env;
 #[cfg(target_os = "linux")]
 use std::os::unix::process::ExitStatusExt;
 use std::process::{Command, ExitStatus, Stdio};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=force_stack_overflow | COMPLEXITY=5 | LINES=11 */
 
 use crate::rustc_thread_pool::ThreadPoolBuilder;
 
@@ -18,7 +16,6 @@ fn force_stack_overflow(depth: u32) {
         force_stack_overflow(depth - 1);
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=disable_core | COMPLEXITY=8 | LINES=7 */
 
 #[cfg(unix)]
 fn disable_core() {
@@ -26,13 +23,11 @@ fn disable_core() {
         libc::setrlimit(libc::RLIMIT_CORE, &libc::rlimit { rlim_cur: 0, rlim_max: 0 });
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=overflow_code | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(unix)]
 fn overflow_code() -> Option<i32> {
     None
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=overflow_code | COMPLEXITY=2 | LINES=7 */
 
 #[cfg(windows)]
 fn overflow_code() -> Option<i32> {
@@ -40,7 +35,6 @@ fn overflow_code() -> Option<i32> {
 
     ExitStatus::from_raw(0xc00000fd /*STATUS_STACK_OVERFLOW*/).code()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stack_overflow_crash | COMPLEXITY=3 | LINES=20 */
 
 // FIXME: We should fix or remove this test on Windows.
 #[test]
@@ -61,7 +55,6 @@ fn stack_overflow_crash() {
     #[cfg(target_os = "linux")]
     assert_eq!(status.signal(), None);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=run_ignored | COMPLEXITY=2 | LINES=11 */
 
 fn run_ignored(test: &str) -> ExitStatus {
     Command::new(env::current_exe().unwrap())
@@ -73,21 +66,18 @@ fn run_ignored(test: &str) -> ExitStatus {
         .status()
         .unwrap()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=run_with_small_stack | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[ignore]
 fn run_with_small_stack() {
     run_with_stack(8);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=run_with_large_stack | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 #[ignore]
 fn run_with_large_stack() {
     run_with_stack(48);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=run_with_stack | COMPLEXITY=3 | LINES=9 */
 
 fn run_with_stack(stack_size_in_mb: usize) {
     let pool = ThreadPoolBuilder::new().stack_size(stack_size_in_mb * 1024 * 1024).build().unwrap();

@@ -7,6 +7,50 @@ use serde_json::Value;
 use syn::{parse_file, Item, ItemMod, Attribute, Meta, parse_str, visit::Visit};
 use quote::{quote, ToTokens};
 
+fn load_error_exclusions() -> HashSet<String> {
+    let mut exclusions = HashSet::new();
+    
+    if let Ok(content) = fs::read_to_string("error_list.txt") {
+        println!("📋 Loading exclusions from error_list.txt:");
+        for line in content.lines() {
+            let line = line.trim();
+            if !line.is_empty() && !line.starts_with('#') {
+                println!("  - {}", line);
+                exclusions.insert(line.to_string());
+            }
+        }
+        println!("📊 Loaded {} exclusion patterns", exclusions.len());
+    } else {
+        println!("⚠️  No error_list.txt found");
+    }
+    
+    exclusions
+}
+
+fn should_exclude_file(file_path: &str, exclusions: &HashSet<String>) -> bool {
+    let processed_name = format!("processed_{}", 
+        file_path.replace("/", "_").replace(".rs", ".rs"));
+    
+    println!("🔍 Checking exclusion for: {} -> {}", file_path, processed_name);
+    
+    // Check exact match
+    if exclusions.contains(&processed_name) {
+        println!("✅ EXCLUDED (exact match): {}", processed_name);
+        return true;
+    }
+    
+    // Check pattern matches
+    for pattern in exclusions {
+        if processed_name.contains(pattern) {
+            println!("✅ EXCLUDED (pattern match '{}'): {}", pattern, processed_name);
+            return true;
+        }
+    }
+    
+    println!("❌ NOT EXCLUDED: {}", processed_name);
+    false
+}
+
 fn semantic_patch_content(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
     // Generate AST metadata for debugging but write to proof files instead of injecting into code
     let mut ast_id_counter = 1u32;
@@ -673,19 +717,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     
     let symbol_map = load_symbol_map(symbol_map_path)?;
-    let mut processed_count = 0;
+    let exclusions = load_error_exclusions();
     
+    // Extract unique source files from symbol map
     let mut unique_files = HashSet::new();
-    for (symbol_name, symbol_data) in symbol_map.iter() {
+    for (_, symbol_data) in symbol_map.iter() {
         if let Some(source_file) = symbol_data.get("source_file").and_then(|v| v.as_str()) {
-            unique_files.insert(source_file.to_string());
+            if source_file.contains("/rust/compiler/") && source_file.ends_with(".rs") {
+                unique_files.insert(source_file.to_string());
+            }
         }
     }
+    
+    let mut processed_count = 0;
     
     for file_path in unique_files.iter() {
         if processed_count >= max_files {
             println!("🛑 Reached max files limit ({})", max_files);
             break;
+        }
+        
+        // Check if file should be excluded
+        if should_exclude_file(file_path, &exclusions) {
+            println!("⏭️  Skipping {} (in error exclusion list)", file_path);
+            continue;
         }
         
         print!("[{:3}] Processing {} ... ", processed_count + 1, file_path);
@@ -748,6 +803,9 @@ fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>
 fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔧 Building rustc from symbol_map.json...");
     
+    // Load error exclusions
+    let exclusions = load_error_exclusions();
+    
     // Set required rustc environment variables
     println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
     println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
@@ -776,9 +834,15 @@ fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     
-    // Group files by crate
+    // Group files by crate (excluding error-prone files)
     let mut crate_files: HashMap<String, Vec<String>> = HashMap::new();
     for file in &source_files {
+        // Check if file should be excluded
+        if should_exclude_file(file, &exclusions) {
+            println!("⏭️  Skipping {} (in error exclusion list)", file);
+            continue;
+        }
+        
         if let Some(crate_name) = extract_crate_name(file) {
             crate_files.entry(crate_name).or_insert_with(Vec::new).push(file.clone());
         }

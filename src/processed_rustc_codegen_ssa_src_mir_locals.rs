@@ -1,26 +1,21 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/locals.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Locals are in a private module as updating `LocalRef::Operand` has to
 // be careful wrt to subtyping. To deal with this we only allow updates by using
 // `FunctionCx::overwrite_local` which handles it automatically.
 
 use std::ops::{Index, IndexMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use tracing::{debug, warn};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::mir::{FunctionCx, LocalRef};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::traits::BuilderMethods;
 
 pub(super) struct Locals<'tcx, V> {
     values: IndexVec<mir::Local, LocalRef<'tcx, V>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, V> Index<mir::Local> for Locals<'tcx, V> {
     type Output = LocalRef<'tcx, V>;
@@ -29,11 +24,9 @@ impl<'tcx, V> Index<mir::Local> for Locals<'tcx, V> {
         &self.values[index]
     }
 }
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 /// To mutate locals, use `FunctionCx::overwrite_local` instead.
 impl<'tcx, V, Idx: ?Sized> !IndexMut<Idx> for Locals<'tcx, V> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, V> Locals<'tcx, V> {
     pub(super) fn empty() -> Locals<'tcx, V> {
@@ -44,7 +37,6 @@ impl<'tcx, V> Locals<'tcx, V> {
         self.values.indices()
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=46 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     pub(super) fn initialize_locals(&mut self, values: Vec<LocalRef<'tcx, Bx::Value>>) {

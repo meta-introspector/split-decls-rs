@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/add_subtyping_projections.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=SubTypeChecker | COMPLEXITY=2 | LINES=13 */
 use crate::rustc_complete::mir::visit::MutVisitor;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
@@ -13,7 +12,6 @@ struct SubTypeChecker<'a, 'tcx> {
     patcher: MirPatch<'tcx>,
     local_decls: &'a LocalDecls<'tcx>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=18 | LINES=34 */
 
 impl<'a, 'tcx> MutVisitor<'tcx> for SubTypeChecker<'a, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -48,7 +46,6 @@ impl<'a, 'tcx> MutVisitor<'tcx> for SubTypeChecker<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=11 | LINES=22 */
 
 // Aim here is to do this kind of transformation:
 //

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/mod.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=75 */
 /*
 
 # typeck: check phase
@@ -68,34 +67,25 @@ a type parameter).
 use std::num::NonZero;
 
 pub use check::{check_abi, check_custom_abi};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::VariantIdx;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, ErrorGuaranteed, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::intravisit::Visitor;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_infer::infer::{self, TyCtxtInferExt as _};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_infer::traits::ObligationCause;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::print::with_types_for_signature;
 use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypingMode,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::error_reporting::infer::ObligationCauseExt as _;
 use crate::rustc_trait_selection::error_reporting::traits::suggestions::ReturnsVisitor;
@@ -105,7 +95,6 @@ use tracing::debug;
 use self::compare_impl_item::collect_return_position_impl_trait_in_trait_tys;
 use self::region::region_scope_tree;
 use crate::{check_c_variadic_abi, errors};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 /// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub(super) fn provide(providers: &mut Providers) {
@@ -122,7 +111,6 @@ pub(super) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=adt_destructor | COMPLEXITY=10 | LINES=12 */
 
 fn adt_destructor(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::Destructor> {
     let dtor = tcx.calculate_dtor(def_id, always_applicable::check_drop_impl);
@@ -135,12 +123,10 @@ fn adt_destructor(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::Destructor>
     }
     dtor
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=adt_async_destructor | COMPLEXITY=2 | LINES=4 */
 
 fn adt_async_destructor(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<ty::AsyncDestructor> {
     tcx.calculate_async_dtor(def_id, always_applicable::check_drop_impl)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=get_owner_return_paths | COMPLEXITY=6 | LINES=16 */
 
 /// Given a `DefId` for an opaque type in return position, find its parent item's return
 /// expressions.
@@ -157,7 +143,6 @@ fn get_owner_return_paths(
         (parent_id, visitor)
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=45 */
 
 pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDefId) {
     // Only restricted on wasm target for now
@@ -203,7 +188,6 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
         tcx.dcx().span_err(tcx.def_span(id), msg);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=report_forbidden_specialization | COMPLEXITY=8 | LINES=12 */
 
 fn report_forbidden_specialization(tcx: TyCtxt<'_>, impl_item: DefId, parent_impl: DefId) {
     let span = tcx.def_span(impl_item);
@@ -216,7 +200,6 @@ fn report_forbidden_specialization(tcx: TyCtxt<'_>, impl_item: DefId, parent_imp
 
     tcx.dcx().emit_err(err);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=missing_items_err | COMPLEXITY=24 | LINES=65 */
 
 fn missing_items_err(
     tcx: TyCtxt<'_>,
@@ -282,7 +265,6 @@ fn missing_items_err(
         missing_trait_item_none,
     });
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=missing_items_must_implement_one_of_err | COMPLEXITY=3 | LINES=16 */
 
 fn missing_items_must_implement_one_of_err(
     tcx: TyCtxt<'_>,
@@ -299,7 +281,6 @@ fn missing_items_must_implement_one_of_err(
         missing_items_msg,
     });
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=default_body_is_unstable | COMPLEXITY=10 | LINES=40 */
 
 fn default_body_is_unstable(
     tcx: TyCtxt<'_>,
@@ -340,7 +321,6 @@ fn default_body_is_unstable(
 
     err.emit();
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=bounds_from_generic_predicates | COMPLEXITY=75 | LINES=92 */
 
 /// Re-sugar `ty::GenericPredicates` in a way suitable to be used in structured suggestions.
 fn bounds_from_generic_predicates<'tcx>(
@@ -433,7 +413,6 @@ fn bounds_from_generic_predicates<'tcx>(
 
     (generics, where_clauses)
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=fn_sig_suggestion | COMPLEXITY=77 | LINES=81 */
 
 /// Return placeholder code for the given function.
 fn fn_sig_suggestion<'tcx>(
@@ -515,7 +494,6 @@ fn fn_sig_suggestion<'tcx>(
     // suggestions can help the user fix the code.
     format!("{safety}{asyncness}fn {ident}{generics}({args}){output}{where_clauses} {{ todo!() }}")
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=suggestion_signature | COMPLEXITY=24 | LINES=46 */
 
 /// Return placeholder code for the given associated item.
 /// Similar to `ty::AssocItem::suggestion`, but appropriate for use as the code snippet of a
@@ -562,7 +540,6 @@ fn suggestion_signature<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=bad_variant_count | COMPLEXITY=7 | LINES=21 */
 
 /// Emit an error when encountering two or more variants in a transparent enum.
 fn bad_variant_count<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>, sp: Span, did: DefId) {
@@ -584,7 +561,6 @@ fn bad_variant_count<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>, sp: Span, d
         path: tcx.def_path_str(did),
     });
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=bad_non_zero_sized_fields | COMPLEXITY=9 | LINES=26 */
 
 /// Emit an error when encountering two or more non-zero-sized fields in a transparent
 /// enum.
@@ -611,13 +587,11 @@ fn bad_non_zero_sized_fields<'tcx>(
         });
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=potentially_plural_count | COMPLEXITY=5 | LINES=5 */
 
 // FIXME: Consider moving this method to a more fitting place.
 pub fn potentially_plural_count(count: usize, word: &str) -> String {
     format!("{} {}{}", count, word, pluralize!(count))
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=check_function_signature | COMPLEXITY=31 | LINES=74 */
 
 pub fn check_function_signature<'tcx>(
     tcx: TyCtxt<'tcx>,

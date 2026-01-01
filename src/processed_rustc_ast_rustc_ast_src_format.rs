@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_ast/src/format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_macros::{Decodable, Encodable, Walkable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=FormatArgs | COMPLEXITY=18 | LINES=57 */
 
 use crate::Expr;
 use crate::token::LitKind;
@@ -62,7 +59,6 @@ pub struct FormatArgs {
     /// and suggestions about rewriting it.
     pub is_source_literal: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 /// A piece of a format template string.
 ///
@@ -72,7 +68,6 @@ pub enum FormatArgsPiece {
     Literal(Symbol),
     Placeholder(FormatPlaceholder),
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=FormatArguments | COMPLEXITY=3 | LINES=12 */
 
 /// The arguments to format_args!().
 ///
@@ -85,7 +80,6 @@ pub struct FormatArguments {
     num_explicit_args: usize,
     names: FxHashMap<Symbol, usize>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=24 | LINES=63 */
 
 impl FormatArguments {
     pub fn new() -> Self {
@@ -149,14 +143,12 @@ impl FormatArguments {
         &mut self.arguments
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=FormatArgument | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct FormatArgument {
     pub kind: FormatArgumentKind,
     pub expr: Box<Expr>,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub enum FormatArgumentKind {
@@ -167,7 +159,6 @@ pub enum FormatArgumentKind {
     /// `format_args("… {arg} …")`
     Captured(Ident),
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=ident | COMPLEXITY=7 | LINES=10 */
 
 impl FormatArgumentKind {
     pub fn ident(&self) -> Option<Ident> {
@@ -178,7 +169,6 @@ impl FormatArgumentKind {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FormatPlaceholder | COMPLEXITY=11 | LINES=14 */
 
 #[derive(Clone, Encodable, Decodable, Debug, PartialEq, Eq, Walkable)]
 pub struct FormatPlaceholder {
@@ -193,7 +183,6 @@ pub struct FormatPlaceholder {
     #[visitable(ignore)]
     pub format_options: FormatOptions,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=FormatArgPosition | COMPLEXITY=4 | LINES=13 */
 
 #[derive(Clone, Encodable, Decodable, Debug, PartialEq, Eq, Walkable)]
 pub struct FormatArgPosition {
@@ -207,7 +196,6 @@ pub struct FormatArgPosition {
     /// The span of the name or number.
     pub span: Option<Span>,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=10 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, PartialEq, Eq)]
 pub enum FormatArgPositionKind {
@@ -218,7 +206,6 @@ pub enum FormatArgPositionKind {
     /// `{a}` or `{:a$}` or `{:.a$}`
     Named,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, PartialEq, Eq, Hash)]
 pub enum FormatTrait {
@@ -241,7 +228,6 @@ pub enum FormatTrait {
     /// `{:X}`
     UpperHex,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=FormatOptions | COMPLEXITY=15 | LINES=20 */
 
 #[derive(Clone, Encodable, Decodable, Default, Debug, PartialEq, Eq)]
 pub struct FormatOptions {
@@ -262,7 +248,6 @@ pub struct FormatOptions {
     /// The `x` or `X` flag (for `Debug` only). E.g. the `x` in `{:x?}`.
     pub debug_hex: Option<FormatDebugHex>,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, PartialEq, Eq)]
 pub enum FormatSign {
@@ -271,7 +256,6 @@ pub enum FormatSign {
     /// The `-` flag.
     Minus,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, PartialEq, Eq)]
 pub enum FormatDebugHex {
@@ -280,7 +264,6 @@ pub enum FormatDebugHex {
     /// The `X` flag in `{:X?}`.
     Upper,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 
 #[derive(Copy, Clone, Encodable, Decodable, Debug, PartialEq, Eq)]
 pub enum FormatAlignment {
@@ -291,7 +274,6 @@ pub enum FormatAlignment {
     /// `{:^}`
     Center,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
 #[derive(Clone, Encodable, Decodable, Debug, PartialEq, Eq)]
 pub enum FormatCount {

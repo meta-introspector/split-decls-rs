@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/main.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 #[warn(rust_2018_idioms)]
 #[warn(unused_lifetimes)]
 #[warn(unreachable_pub)]
 
 use std::path::PathBuf;
 use std::{env, process};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=usage | COMPLEXITY=3 | LINES=18 */
 
 use self::utils::Compiler;
 
@@ -14,7 +12,6 @@ use self::utils::Compiler;
 fn usage() {
     eprintln!("{}", include_str!("usage.txt"));
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! arg_error {
     ($($err:tt)*) => {{
@@ -23,7 +20,6 @@ macro_rules! arg_error {
         std::process::exit(1);
     }};
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(PartialEq, Debug)]
 enum Command {
@@ -33,7 +29,6 @@ enum Command {
     AbiCafe,
     Bench,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug)]
 enum SysrootKind {
@@ -41,14 +36,12 @@ enum SysrootKind {
     Clif,
     Llvm,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug)]
 enum CodegenBackend {
     Local(PathBuf),
     Builtin(String),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=main | COMPLEXITY=89 | LINES=203 */
 
 fn main() {
     if env::var_os("RUST_BACKTRACE").is_none() {

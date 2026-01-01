@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/gen_block_iterate.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=foo | COMPLEXITY=6 | LINES=15 */
 // Copied from https://github.com/rust-lang/rust/blob/46455dc65069387f2dc46612f13fd45452ab301a/tests/ui/coroutine/gen_block_iterate.rs
 // revisions: next old
 //compile-flags: --edition 2024 -Zunstable-options
@@ -15,7 +14,6 @@ fn foo() -> impl Iterator<Item = u32> {
         }
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=moved | COMPLEXITY=9 | LINES=14 */
 
 fn moved() -> impl Iterator<Item = u32> {
     let mut x = "foo".to_string();
@@ -30,7 +28,6 @@ fn moved() -> impl Iterator<Item = u32> {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=main | COMPLEXITY=2 | LINES=15 */
 
 fn main() {
     let mut iter = foo();

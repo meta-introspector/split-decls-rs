@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public_bridge/src/alloc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 // Internal memory allocator implementation for rustc_public.
 //
 // This module handles all direct interactions with rustc queries and performs
@@ -7,19 +6,14 @@
 // delegates all query-related operations to this implementation.
 
 use crate::rustc_abi::{Size, TyAndLayout};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::interpret::{
     AllocId, AllocInit, AllocRange, Allocation, ConstAllocation, Pointer, Scalar, alloc_range,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Ty, layout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{CompilerCtxt, Tables};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::bridge::Allocation as _;
 use crate::{Bridge, Error};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=create_ty_and_layout | COMPLEXITY=2 | LINES=8 */
 
 pub fn create_ty_and_layout<'tcx, B: Bridge>(
     cx: &CompilerCtxt<'tcx, B>,
@@ -28,7 +22,6 @@ pub fn create_ty_and_layout<'tcx, B: Bridge>(
     use crate::context::TypingEnvHelpers;
     cx.tcx.layout_of(cx.fully_monomorphized().as_query_input(ty))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=try_new_scalar | COMPLEXITY=2 | LINES=14 */
 
 pub fn try_new_scalar<'tcx, B: Bridge>(
     layout: TyAndLayout<'tcx, Ty<'tcx>>,
@@ -43,7 +36,6 @@ pub fn try_new_scalar<'tcx, B: Bridge>(
 
     Ok(allocation)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=try_new_slice | COMPLEXITY=3 | LINES=21 */
 
 pub fn try_new_slice<'tcx, B: Bridge>(
     layout: TyAndLayout<'tcx, Ty<'tcx>>,
@@ -65,7 +57,6 @@ pub fn try_new_slice<'tcx, B: Bridge>(
 
     Ok(allocation)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=try_new_indirect | COMPLEXITY=2 | LINES=9 */
 
 pub fn try_new_indirect<'tcx, B: Bridge>(
     alloc_id: AllocId,
@@ -75,7 +66,6 @@ pub fn try_new_indirect<'tcx, B: Bridge>(
 
     alloc
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=allocation_filter | COMPLEXITY=13 | LINES=33 */
 
 /// Creates an `Allocation` only from information within the `AllocRange`.
 pub fn allocation_filter<'tcx, B: Bridge>(

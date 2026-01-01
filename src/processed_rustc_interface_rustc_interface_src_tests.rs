@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_interface/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 #[allow(rustc::bad_opt_access)]
 use std::collections::BTreeMap;
 use std::num::NonZero;
@@ -10,7 +9,6 @@ use crate::rustc_abi::Align;
 use crate::rustc_data_structures::profiling::TimePassesFormat;
 use crate::rustc_complete::emitter::HumanReadableErrorType;
 use crate::rustc_complete::{ColorConfig, registry};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 use crate::rustc_complete::attrs::NativeLibKind;
 use crate::rustc_complete::config::{
     AutoDiff, BranchProtection, CFGuard, Cfg, CollapseMacroDebuginfo, CoverageLevel,
@@ -22,27 +20,19 @@ use crate::rustc_complete::config::{
     SwitchWithOptPath, SymbolManglingVersion, WasiExecModel, build_configuration,
     build_session_options, rustc_optgroups,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::Level;
 use crate::rustc_complete::search_paths::SearchPath;
 use crate::rustc_complete::utils::{CanonicalizedPath, NativeLib};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, build_session, getopts};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::edition::{DEFAULT_EDITION, Edition};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::source_map::{RealFileLoader, SourceMapInputs};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{FileName, SourceFileHashAlgorithm, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, TlsModel,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::interface::{initialize_checked_jobserver, parse_cfg};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=sess_and_cfg | COMPLEXITY=9 | LINES=53 */
 
 fn sess_and_cfg<F>(args: &[&'static str], f: F)
 where
@@ -96,7 +86,6 @@ where
         f(sess, cfg)
     });
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new_public_extern_entry | COMPLEXITY=3 | LINES=17 */
 
 fn new_public_extern_entry<S, I>(locations: I) -> ExternEntry
 where
@@ -114,7 +103,6 @@ where
         force: false,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=optgroups | COMPLEXITY=5 | LINES=8 */
 
 fn optgroups() -> getopts::Options {
     let mut opts = getopts::Options::new();
@@ -123,18 +111,15 @@ fn optgroups() -> getopts::Options {
     }
     return opts;
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=mk_map | COMPLEXITY=2 | LINES=4 */
 
 fn mk_map<K: Ord, V>(entries: Vec<(K, V)>) -> BTreeMap<K, V> {
     BTreeMap::from_iter(entries.into_iter())
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=assert_same_clone | COMPLEXITY=2 | LINES=5 */
 
 fn assert_same_clone(x: &Options) {
     assert_eq!(x.dep_tracking_hash(true), x.clone().dep_tracking_hash(true));
     assert_eq!(x.dep_tracking_hash(false), x.clone().dep_tracking_hash(false));
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=assert_same_hash | COMPLEXITY=2 | LINES=8 */
 
 fn assert_same_hash(x: &Options, y: &Options) {
     assert_eq!(x.dep_tracking_hash(true), y.dep_tracking_hash(true));
@@ -143,7 +128,6 @@ fn assert_same_hash(x: &Options, y: &Options) {
     assert_same_clone(x);
     assert_same_clone(y);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=assert_different_hash | COMPLEXITY=2 | LINES=9 */
 
 #[track_caller]
 fn assert_different_hash(x: &Options, y: &Options) {
@@ -153,7 +137,6 @@ fn assert_different_hash(x: &Options, y: &Options) {
     assert_same_clone(x);
     assert_same_clone(y);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=assert_non_crate_hash_different | COMPLEXITY=2 | LINES=8 */
 
 fn assert_non_crate_hash_different(x: &Options, y: &Options) {
     assert_eq!(x.dep_tracking_hash(true), y.dep_tracking_hash(true));
@@ -162,7 +145,6 @@ fn assert_non_crate_hash_different(x: &Options, y: &Options) {
     assert_same_clone(x);
     assert_same_clone(y);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=test_switch_implies_cfg_test | COMPLEXITY=3 | LINES=8 */
 
 // When the user supplies --test we should implicitly supply --cfg test
 #[test]
@@ -171,7 +153,6 @@ fn test_switch_implies_cfg_test() {
         assert!(cfg.contains(&(sym::test, None)));
     })
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=test_switch_implies_cfg_test_unless_cfg_test | COMPLEXITY=3 | LINES=10 */
 
 // When the user supplies --test and --cfg test, don't implicitly add another --cfg test
 #[test]
@@ -182,7 +163,6 @@ fn test_switch_implies_cfg_test_unless_cfg_test() {
         assert!(test_items.next().is_none());
     });
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=test_can_print_warnings | COMPLEXITY=5 | LINES=15 */
 
 #[test]
 fn test_can_print_warnings() {
@@ -198,7 +178,6 @@ fn test_can_print_warnings() {
         assert!(sess.dcx().can_emit_warnings());
     });
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=test_output_types_tracking_hash_different_paths | COMPLEXITY=3 | LINES=21 */
 
 #[test]
 fn test_output_types_tracking_hash_different_paths() {
@@ -220,7 +199,6 @@ fn test_output_types_tracking_hash_different_paths() {
     assert_non_crate_hash_different(&v1, &v3);
     assert_non_crate_hash_different(&v2, &v3);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=test_output_types_tracking_hash_different_construction_order | COMPLEXITY=3 | LINES=18 */
 
 #[test]
 fn test_output_types_tracking_hash_different_construction_order() {
@@ -239,7 +217,6 @@ fn test_output_types_tracking_hash_different_construction_order() {
 
     assert_same_hash(&v1, &v2);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=test_externs_tracking_hash_different_construction_order | COMPLEXITY=3 | LINES=26 */
 
 #[test]
 fn test_externs_tracking_hash_different_construction_order() {
@@ -266,7 +243,6 @@ fn test_externs_tracking_hash_different_construction_order() {
     assert_same_hash(&v1, &v3);
     assert_same_hash(&v2, &v3);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=test_lints_tracking_hash_different_values | COMPLEXITY=3 | LINES=32 */
 
 #[test]
 fn test_lints_tracking_hash_different_values() {
@@ -299,7 +275,6 @@ fn test_lints_tracking_hash_different_values() {
     assert_non_crate_hash_different(&v1, &v3);
     assert_non_crate_hash_different(&v2, &v3);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=test_lints_tracking_hash_different_construction_order | COMPLEXITY=3 | LINES=23 */
 
 #[test]
 fn test_lints_tracking_hash_different_construction_order() {
@@ -323,7 +298,6 @@ fn test_lints_tracking_hash_different_construction_order() {
     // The hash should be order-dependent
     assert_non_crate_hash_different(&v1, &v2);
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=test_lint_cap_hash_different | COMPLEXITY=2 | LINES=14 */
 
 #[test]
 fn test_lint_cap_hash_different() {
@@ -338,7 +312,6 @@ fn test_lint_cap_hash_different() {
     assert_non_crate_hash_different(&v1, &v3);
     assert_non_crate_hash_different(&v2, &v3);
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=test_search_paths_tracking_hash_different_order | COMPLEXITY=7 | LINES=54 */
 
 #[test]
 fn test_search_paths_tracking_hash_different_order() {
@@ -393,7 +366,6 @@ fn test_search_paths_tracking_hash_different_order() {
     assert_same_hash(&v1, &v3);
     assert_same_hash(&v1, &v4);
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=test_native_libs_tracking_hash_different_values | COMPLEXITY=33 | LINES=124 */
 
 #[test]
 fn test_native_libs_tracking_hash_different_values() {
@@ -518,7 +490,6 @@ fn test_native_libs_tracking_hash_different_values() {
     assert_different_hash(&v1, &v4);
     assert_different_hash(&v1, &v5);
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=test_native_libs_tracking_hash_different_order | COMPLEXITY=21 | LINES=76 */
 
 #[test]
 fn test_native_libs_tracking_hash_different_order() {
@@ -595,7 +566,6 @@ fn test_native_libs_tracking_hash_different_order() {
     assert_different_hash(&v1, &v3);
     assert_different_hash(&v2, &v3);
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=test_codegen_options_tracking_hash | COMPLEXITY=23 | LINES=81 */
 
 #[test]
 fn test_codegen_options_tracking_hash() {
@@ -677,7 +647,6 @@ fn test_codegen_options_tracking_hash() {
     tracked!(target_feature, String::from("all the features, all of them"));
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=test_top_level_options_tracked_no_crate | COMPLEXITY=11 | LINES=27 */
 
 #[test]
 fn test_top_level_options_tracked_no_crate() {
@@ -705,7 +674,6 @@ fn test_top_level_options_tracked_no_crate() {
     tracked!(remap_path_prefix, vec![("/home/bors/rust".into(), "src".into())]);
     // tidy-alphabetical-end
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=test_unstable_options_tracking_hash | COMPLEXITY=47 | LINES=228 */
 
 #[test]
 fn test_unstable_options_tracking_hash() {
@@ -934,7 +902,6 @@ fn test_unstable_options_tracking_hash() {
     tracked_no_crate_hash!(no_codegen, true);
     tracked_no_crate_hash!(verbose_internals, true);
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=test_edition_parsing | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 fn test_edition_parsing() {

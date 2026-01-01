@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/visit.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=49 */
 // # The MIR Visitor
 //
 // ## Overview
@@ -49,11 +48,9 @@
 //
 //     ...
 // }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // ```
 //
 // Here we used `let BasicBlockData { <fields> } = *data` deliberately,
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit_body | COMPLEXITY=356 | LINES=960 */
 // rather than writing `data.statements` in the body. This is because if one
 // adds a new field to `BasicBlockData`, one will be forced to revise this code,
 // and hence one will (hopefully) invoke the correct visit methods (if any).
@@ -1014,7 +1011,6 @@ macro_rules! make_mir_visitor {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
 
 macro_rules! basic_blocks {
     ($body:ident, mut, true) => {
@@ -1027,7 +1023,6 @@ macro_rules! basic_blocks {
         $body.basic_blocks
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=9 */
 
 macro_rules! basic_blocks_iter {
     ($body:ident, mut, $invalidate:tt) => {
@@ -1037,7 +1032,6 @@ macro_rules! basic_blocks_iter {
         basic_blocks!($body,).iter_enumerated()
     };
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_body_preserves_cfg | COMPLEXITY=11 | LINES=13 */
 
 macro_rules! extra_body_methods {
     (mut) => {
@@ -1051,7 +1045,6 @@ macro_rules! extra_body_methods {
     };
     () => {};
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=48 | LINES=62 */
 
 macro_rules! super_body {
     ($self:ident, $body:ident, $($mutability:ident, $invalidate:tt)?) => {
@@ -1114,7 +1107,6 @@ macro_rules! super_body {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=103 | LINES=171 */
 
 macro_rules! visit_place_fns {
     (mut) => {
@@ -1286,7 +1278,6 @@ macro_rules! visit_place_fns {
         }
     };
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=29 */
 
 make_mir_visitor!(Visitor,);
 make_mir_visitor!(MutVisitor, mut);
@@ -1316,7 +1307,6 @@ pub enum TyContext {
     /// A type found at some location.
     Location(Location),
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=30 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum NonMutatingUseContext {
@@ -1347,7 +1337,6 @@ pub enum NonMutatingUseContext {
     /// ```
     Projection,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=31 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum MutatingUseContext {
@@ -1379,7 +1368,6 @@ pub enum MutatingUseContext {
     /// Retagging, a "Stacked Borrows" shadow state operation
     Retag,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=14 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum NonUseContext {
@@ -1394,7 +1382,6 @@ pub enum NonUseContext {
     /// A `BackwardIncompatibleDropHint` statement, meant for edition 2024 lints.
     BackwardIncompatibleDropHint,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum PlaceContext {
@@ -1402,7 +1389,6 @@ pub enum PlaceContext {
     MutatingUse(MutatingUseContext),
     NonUse(NonUseContext),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=is_drop | COMPLEXITY=37 | LINES=95 */
 
 impl PlaceContext {
     /// Returns `true` if this place context represents a drop.

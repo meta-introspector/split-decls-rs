@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/debuginfo/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Integer, Primitive, Size, TagEncoding, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{IntegerExt, PrimitiveExt, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=wants_c_like_enum_debuginfo | COMPLEXITY=30 | LINES=44 */
 
 // FIXME(eddyb) find a place for this (or a way to replace it).
 
@@ -50,7 +46,6 @@ pub fn wants_c_like_enum_debuginfo<'tcx>(
         _ => false,
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tag_base_type | COMPLEXITY=6 | LINES=7 */
 
 /// Extract the type with which we want to describe the tag of the given enum or coroutine.
 pub fn tag_base_type<'tcx>(tcx: TyCtxt<'tcx>, enum_type_and_layout: TyAndLayout<'tcx>) -> Ty<'tcx> {
@@ -58,7 +53,6 @@ pub fn tag_base_type<'tcx>(tcx: TyCtxt<'tcx>, enum_type_and_layout: TyAndLayout<
         bug!("tag_base_type() called for enum without tag: {:?}", enum_type_and_layout)
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tag_base_type_opt | COMPLEXITY=24 | LINES=41 */
 
 fn tag_base_type_opt<'tcx>(
     tcx: TyCtxt<'tcx>,

@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_passes/src/input_stats.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // The visitors in this module collect sizes and counts of the most important
 // pieces of AST and HIR. The resulting numbers are good approximations but not
 // completely accurate (some things might be counted twice, others missed).
 
 use crate::rustc_complete::visit::BoundKind;
 use crate::rustc_complete::{self as ast, NodeId, visit as ast_visit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::thousands::usize_with_underscores;
 use crate::rustc_complete::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=NodeStats | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::LocalDefId;
@@ -20,7 +16,6 @@ struct NodeStats {
     count: usize,
     size: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=10 */
 
 impl NodeStats {
     fn new() -> NodeStats {
@@ -31,20 +26,17 @@ impl NodeStats {
         self.count * self.size
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Node | COMPLEXITY=2 | LINES=5 */
 
 struct Node {
     stats: NodeStats,
     subnodes: FxHashMap<&'static str, NodeStats>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl Node {
     fn new() -> Node {
         Node { stats: NodeStats::new(), subnodes: FxHashMap::default() }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=StatCollector | COMPLEXITY=6 | LINES=23 */
 
 /// This type measures the size of AST and HIR nodes, by implementing the AST
 /// and HIR `Visitor` traits. But we don't measure every visited type because
@@ -68,7 +60,6 @@ struct StatCollector<'k> {
     nodes: FxHashMap<&'static str, Node>,
     seen: FxHashSet<HirId>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=print_hir_stats | COMPLEXITY=3 | LINES=8 */
 
 pub fn print_hir_stats(tcx: TyCtxt<'_>) {
     let mut collector =
@@ -77,7 +68,6 @@ pub fn print_hir_stats(tcx: TyCtxt<'_>) {
     tcx.hir_walk_attributes(&mut collector);
     collector.print(tcx, "HIR STATS", "hir-stats");
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=print_ast_stats | COMPLEXITY=3 | LINES=9 */
 
 pub fn print_ast_stats(tcx: TyCtxt<'_>, krate: &ast::Crate) {
     use crate::rustc_complete::visit::Visitor;
@@ -87,7 +77,6 @@ pub fn print_ast_stats(tcx: TyCtxt<'_>, krate: &ast::Crate) {
     collector.visit_crate(krate);
     collector.print(tcx, "POST EXPANSION AST STATS", "ast-stats");
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=record | COMPLEXITY=66 | LINES=122 */
 
 impl<'k> StatCollector<'k> {
     // Record a top-level node.
@@ -210,7 +199,6 @@ impl<'k> StatCollector<'k> {
         eprint!("{s}");
     }
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=16 | LINES=16 */
 
 // Used to avoid boilerplate for types with many variants.
 macro_rules! record_variants {
@@ -227,7 +215,6 @@ macro_rules! record_variants {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_param | COMPLEXITY=72 | LINES=341 */
 
 impl<'v> hir_visit::Visitor<'v> for StatCollector<'v> {
     fn visit_param(&mut self, param: &'v hir::Param<'v>) {
@@ -569,7 +556,6 @@ impl<'v> hir_visit::Visitor<'v> for StatCollector<'v> {
         hir_visit::walk_inline_asm(self, asm, id);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit_foreign_item | COMPLEXITY=41 | LINES=234 */
 
 impl<'v> ast_visit::Visitor<'v> for StatCollector<'v> {
     fn visit_foreign_item(&mut self, i: &'v ast::ForeignItem) {

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/constant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::Size;
 use crate::rustc_complete::{self as ast};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::interpret::LitToConstInput;
 use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt, TypeVisitableExt as _};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=82 */
 use tracing::trace;
 
 use crate::builder::parse_float_into_scalar;

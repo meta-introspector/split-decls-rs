@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/sleep/counters.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::atomic::{AtomicUsize, Ordering};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 pub(super) struct AtomicCounters {
     /// Packs together a number of counters. The counters are ordered as
@@ -17,13 +15,11 @@ pub(super) struct AtomicCounters {
     /// JEC) will depend on whether we are using a 32- or 64-bit architecture.
     value: AtomicUsize,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Copy, Clone)]
 pub(super) struct Counters {
     word: usize,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=32 */
 
 /// A value read from the **Jobs Event Counter**.
 /// See the [`README.md`](README.md) for more
@@ -56,7 +52,6 @@ impl JobsEventCounter {
         !self.is_sleepy()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=try_exchange | COMPLEXITY=58 | LINES=156 */
 
 /// Number of bits used for the thread counters.
 #[cfg(target_pointer_width = "64")]
@@ -213,19 +208,16 @@ impl AtomicCounters {
         self.try_exchange(old_value, new_value, Ordering::SeqCst)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=select_thread | COMPLEXITY=2 | LINES=5 */
 
 #[inline]
 fn select_thread(word: usize, shift: usize) -> usize {
     (word >> shift) & THREADS_MAX
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=select_jec | COMPLEXITY=2 | LINES=5 */
 
 #[inline]
 fn select_jec(word: usize) -> usize {
     word >> JEC_SHIFT
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=42 */
 
 impl Counters {
     #[inline]
@@ -268,7 +260,6 @@ impl Counters {
         select_thread(self.word, SLEEPING_SHIFT)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=12 */
 
 impl std::fmt::Debug for Counters {
     fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

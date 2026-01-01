@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/misc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Miscellaneous builder routines that are not specific to building any particular
 // kind of thing.
 
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=65 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/query/job.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::fmt::Debug;
 use std::hash::Hash;
 use std::io::Write;
@@ -8,22 +7,17 @@ use std::num::NonZero;
 use std::sync::Arc;
 
 use parking_lot::{Condvar, Mutex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, DiagCtxtHandle};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::QueryStackFrameExtra;
 use crate::dep_graph::DepContext;
 use crate::error::CycleStack;
 use crate::query::plumbing::CycleError;
 use crate::query::{QueryContext, QueryStackFrame};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=QueryInfo | COMPLEXITY=4 | LINES=8 */
 
 /// Represents a span and a query key.
 #[derive(Clone, Debug)]
@@ -32,7 +26,6 @@ pub struct QueryInfo<I> {
     pub span: Span,
     pub query: QueryStackFrame<I>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 impl<I> QueryInfo<I> {
     pub(crate) fn lift<Qcx: QueryContext<QueryInfo = I>>(
@@ -42,7 +35,6 @@ impl<I> QueryInfo<I> {
         QueryInfo { span: self.span, query: self.query.lift(qcx) }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=QueryJobId(pub | COMPLEXITY=7 | LINES=24 */
 
 pub type QueryMap<I> = FxHashMap<QueryJobId, QueryJobInfo<I>>;
 
@@ -67,14 +59,12 @@ impl QueryJobId {
         map.get(&self).unwrap().job.latch.as_ref()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=QueryJobInfo | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug)]
 pub struct QueryJobInfo<I> {
     pub query: QueryStackFrame<I>,
     pub job: QueryJob<I>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=QueryJob | COMPLEXITY=4 | LINES=15 */
 
 /// Represents an active query job.
 #[derive(Debug)]
@@ -90,14 +80,12 @@ pub struct QueryJob<I> {
     /// The latch that is used to wait on this job.
     latch: Option<QueryLatch<I>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
 
 impl<I> Clone for QueryJob<I> {
     fn clone(&self) -> Self {
         Self { id: self.id, span: self.span, parent: self.parent, latch: self.latch.clone() }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=15 | LINES=26 */
 
 impl<I> QueryJob<I> {
     /// Creates a new query job.
@@ -124,7 +112,6 @@ impl<I> QueryJob<I> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=find_dep_kind_root | COMPLEXITY=23 | LINES=59 */
 
 impl QueryJobId {
     pub(super) fn find_cycle_in_stack<I: Clone>(
@@ -184,7 +171,6 @@ impl QueryJobId {
         last_layout
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=QueryWaiter | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Debug)]
 struct QueryWaiter<I> {
@@ -193,27 +179,23 @@ struct QueryWaiter<I> {
     span: Span,
     cycle: Mutex<Option<CycleError<I>>>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=QueryLatchInfo | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 struct QueryLatchInfo<I> {
     complete: bool,
     waiters: Vec<Arc<QueryWaiter<I>>>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub(super) struct QueryLatch<I> {
     info: Arc<Mutex<QueryLatchInfo<I>>>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
 
 impl<I> Clone for QueryLatch<I> {
     fn clone(&self) -> Self {
         Self { info: Arc::clone(&self.info) }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=27 | LINES=72 */
 
 impl<I> QueryLatch<I> {
     fn new() -> Self {
@@ -286,7 +268,6 @@ impl<I> QueryLatch<I> {
         info.waiters.remove(waiter)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_waiters | COMPLEXITY=22 | LINES=42 */
 
 /// A resumable waiter of a query. The usize is the index into waiters in the query's latch
 type Waiter = (QueryJobId, usize);
@@ -329,7 +310,6 @@ where
 
     None
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=cycle_check | COMPLEXITY=23 | LINES=41 */
 
 /// Look for query cycles by doing a depth first search starting at `query`.
 /// `span` is the reason for the `query` to execute. This is initially DUMMY_SP.
@@ -371,7 +351,6 @@ fn cycle_check<I>(
 
     r
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=connected_to_root | COMPLEXITY=12 | LINES=24 */
 
 /// Finds out if there's a path to the compiler root (aka. code which isn't in a query)
 /// from `query` without going through any of the queries in `visited`.
@@ -396,7 +375,6 @@ fn connected_to_root<I>(
     })
     .is_some()
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=pick_query | COMPLEXITY=10 | LINES=21 */
 
 // Deterministically pick an query from a list
 fn pick_query<'a, I: Clone, T, F>(query_map: &QueryMap<I>, queries: &'a [T], f: F) -> &'a T
@@ -418,7 +396,6 @@ where
         })
         .unwrap()
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=remove_cycle | COMPLEXITY=44 | LINES=104 */
 
 /// Looks for query cycles starting from the last query in `jobs`.
 /// If a cycle is found, all queries in the cycle is removed from `jobs` and
@@ -523,7 +500,6 @@ fn remove_cycle<I: Clone>(
         false
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=break_query_cycles | COMPLEXITY=30 | LINES=51 */
 
 /// Detects query cycles by using depth first search over all active query jobs.
 /// If a query cycle is found it will break the cycle by finding an edge which
@@ -575,14 +551,12 @@ pub fn break_query_cycles<I: Clone + Debug>(
         waiter.condvar.notify_one();
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=report_cycle | COMPLEXITY=2 | LINES=6 */
 
 #[inline(never)]
 #[cold]
 pub fn report_cycle<'a>(
     sess: &'a Session,
     CycleError { usage, cycle: stack }: &CycleError,
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=24 | LINES=45 */
 ) -> Diag<'a> {
     assert!(!stack.is_empty());
 
@@ -628,7 +602,6 @@ pub fn report_cycle<'a>(
 
     sess.dcx().create_err(cycle_diag)
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=print_query_stack | COMPLEXITY=38 | LINES=61 */
 
 pub fn print_query_stack<Qcx: QueryContext>(
     qcx: Qcx,

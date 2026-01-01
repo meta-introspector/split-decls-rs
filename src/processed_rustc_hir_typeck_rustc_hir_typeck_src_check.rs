@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::cell::RefCell;
 
 use crate::rustc_abi::ExternAbi;
@@ -10,18 +9,14 @@ use crate::rustc_hir_analysis::check::check_function_signature;
 use crate::rustc_infer::infer::RegionVariableOrigin;
 use crate::rustc_infer::traits::WellFormedLoc;
 use crate::rustc_complete::ty::{self, Binder, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::sym;
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::coercion::CoerceMany;
 use crate::gather_locals::GatherLocalsVisitor;
 use crate::{CoroutineTypes, Diverges, FnCtxt};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=61 | LINES=145 */
 
 /// Helper used for fns and closures. Does the grungy work of checking a function
 /// body and returns the function context used for that purpose, since in the case of a fn item
@@ -167,7 +162,6 @@ pub(super) fn check_fn<'a, 'tcx>(
 
     fcx.coroutine_types
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_panic_info_fn | COMPLEXITY=14 | LINES=54 */
 
 fn check_panic_info_fn(tcx: TyCtxt<'_>, fn_id: LocalDefId, fn_sig: ty::FnSig<'_>) {
     let span = tcx.def_span(fn_id);
@@ -222,7 +216,6 @@ fn check_panic_info_fn(tcx: TyCtxt<'_>, fn_id: LocalDefId, fn_sig: ty::FnSig<'_>
         expected_sig,
     );
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_lang_start_fn | COMPLEXITY=12 | LINES=39 */
 
 fn check_lang_start_fn<'tcx>(tcx: TyCtxt<'tcx>, fn_sig: ty::FnSig<'tcx>, def_id: LocalDefId) {
     // build type `fn(main: fn() -> T, argc: isize, argv: *const *const u8, sigpipe: u8)`

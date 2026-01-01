@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_lint/src/non_ascii_idents.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_ast as ast;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::Symbol;
 use unicode_security::general_security_profile::IdentifierType;
 
@@ -12,9 +10,7 @@ use crate::lints::{
     ConfusableIdentifierPair, IdentifierNonAsciiChar, IdentifierUncommonCodepoints,
     MixedScriptConfusables,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{EarlyContext, EarlyLintPass, LintContext};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=29 */
 
 declare_lint! {
     /// The `non_ascii_idents` lint detects non-ASCII identifiers.
@@ -44,7 +40,6 @@ declare_lint! {
     "detects non-ASCII identifiers",
     crate_level_only
 }
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=34 */
 
 declare_lint! {
     /// The `uncommon_codepoints` lint detects uncommon Unicode codepoints in
@@ -79,7 +74,6 @@ declare_lint! {
     "detects uncommon Unicode codepoints in identifiers",
     crate_level_only
 }
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=39 */
 
 declare_lint! {
     /// The `confusable_idents` lint detects visually confusable pairs between
@@ -119,7 +113,6 @@ declare_lint! {
     "detects visually confusable pairs between identifiers",
     crate_level_only
 }
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=36 */
 
 declare_lint! {
     /// The `mixed_script_confusables` lint detects visually confusable
@@ -156,7 +149,6 @@ declare_lint! {
     "detects Unicode scripts whose mixed script confusables codepoints are solely used",
     crate_level_only
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=131 | LINES=245 */
 
 declare_lint_pass!(NonAsciiIdents => [NON_ASCII_IDENTS, UNCOMMON_CODEPOINTS, CONFUSABLE_IDENTS, MIXED_SCRIPT_CONFUSABLES]);
 

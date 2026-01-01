@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/unwind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Unwind info generation (`.eh_frame`)
 
 use cranelift_codegen::ir::Endianness;
@@ -7,7 +6,6 @@ use cranelift_codegen::isa::unwind::UnwindInfo;
 use cranelift_object::ObjectProduct;
 use gimli::RunTimeEndian;
 use gimli::write::{CieId, EhFrame, FrameTable, Section};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 use super::emit::address_for_func;
 use super::object::WriteDebugInfo;
@@ -18,7 +16,6 @@ pub(crate) struct UnwindContext {
     frame_table: FrameTable,
     cie_id: Option<CieId>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=74 | LINES=127 */
 
 impl UnwindContext {
     pub(crate) fn new(module: &mut dyn Module, pic_eh_frame: bool) -> Self {
@@ -146,7 +143,6 @@ impl UnwindContext {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=__register_frame | COMPLEXITY=2 | LINES=5 */
 
 extern "C" {
     // libunwind import

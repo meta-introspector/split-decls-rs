@@ -1,28 +1,20 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/encoder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::borrow::Borrow;
 use std::collections::hash_map::Entry;
 use std::fs::File;
 use std::io::{Read, Seek, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::memmap::{Mmap, MmapMut};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{join, par_for_each_in};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::temp_dir::MaybeTempDir;
 use crate::rustc_data_structures::thousands::usize_with_underscores;
 use crate::rustc_feature::Features;
 use rustc_hir as hir;
 use crate::rustc_complete::attrs::{AttributeKind, EncodeCrossCrate};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, CRATE_DEF_INDEX, LOCAL_CRATE, LocalDefId, LocalDefIdSet};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 use crate::rustc_complete::definitions::DefPathData;
 use crate::rustc_complete::find_attr;
 use rustc_hir_pretty::id_to_string;
@@ -34,24 +26,17 @@ use crate::rustc_complete::traits::specialization_graph;
 use crate::rustc_complete::ty::AssocContainer;
 use crate::rustc_complete::ty::codec::TyEncoder;
 use crate::rustc_complete::ty::fast_reject::{self, TreatParams};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder, opaque};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{CrateType, OptLevel, TargetModifier};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::hygiene::HygieneEncodeContext;
 use crate::rustc_complete::{
     ByteSymbol, ExternalSource, FileName, SourceFile, SpanData, SpanEncoder, StableSourceFileId,
     Symbol, SyntaxContext, sym,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{FailCreateFileEncoder, FailWriteFile};
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=31 */
 use crate::rmeta::*;
 
 pub(super) struct EncodeContext<'a, 'tcx> {
@@ -83,7 +68,6 @@ pub(super) struct EncodeContext<'a, 'tcx> {
     // Used for both `Symbol`s and `ByteSymbol`s.
     symbol_index_table: FxHashMap<u32, usize>,
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=11 */
 
 /// If the current crate is a proc-macro, returns early with `LazyArray::default()`.
 /// This is useful for skipping the encoding of things that aren't needed
@@ -95,7 +79,6 @@ macro_rules! empty_proc_macro {
         }
     };
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8 */
 
 macro_rules! encoder_methods {
     ($($name:ident($ty:ty);)*) => {
@@ -104,7 +87,6 @@ macro_rules! encoder_methods {
         })*
     }
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=19 */
 
 impl<'a, 'tcx> Encoder for EncodeContext<'a, 'tcx> {
     encoder_methods! {
@@ -124,14 +106,12 @@ impl<'a, 'tcx> Encoder for EncodeContext<'a, 'tcx> {
         emit_raw_bytes(&[u8]);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx, T> Encodable<EncodeContext<'a, 'tcx>> for LazyValue<T> {
     fn encode(&self, e: &mut EncodeContext<'a, 'tcx>) {
         e.emit_lazy_distance(self.position);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=8 | LINES=9 */
 
 impl<'a, 'tcx, T> Encodable<EncodeContext<'a, 'tcx>> for LazyArray<T> {
     fn encode(&self, e: &mut EncodeContext<'a, 'tcx>) {
@@ -141,7 +121,6 @@ impl<'a, 'tcx, T> Encodable<EncodeContext<'a, 'tcx>> for LazyArray<T> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'tcx, I, T> Encodable<EncodeContext<'a, 'tcx>> for LazyTable<I, T> {
     fn encode(&self, e: &mut EncodeContext<'a, 'tcx>) {
@@ -150,14 +129,12 @@ impl<'a, 'tcx, I, T> Encodable<EncodeContext<'a, 'tcx>> for LazyTable<I, T> {
         e.emit_lazy_distance(self.position);
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for ExpnIndex {
     fn encode(&self, s: &mut EncodeContext<'a, 'tcx>) {
         s.emit_u32(self.as_u32());
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=encode_crate_num | COMPLEXITY=42 | LINES=78 */
 
 impl<'a, 'tcx> SpanEncoder for EncodeContext<'a, 'tcx> {
     fn encode_crate_num(&mut self, crate_num: CrateNum) {
@@ -236,12 +213,10 @@ impl<'a, 'tcx> SpanEncoder for EncodeContext<'a, 'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=bytes_needed | COMPLEXITY=2 | LINES=4 */
 
 fn bytes_needed(n: usize) -> usize {
     (usize::BITS - n.leading_zeros()).div_ceil(u8::BITS) as usize
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=72 | LINES=143 */
 
 impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for SpanData {
     fn encode(&self, s: &mut EncodeContext<'a, 'tcx>) {
@@ -385,7 +360,6 @@ impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for SpanData {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for [u8] {
     fn encode(&self, e: &mut EncodeContext<'a, 'tcx>) {
@@ -393,7 +367,6 @@ impl<'a, 'tcx> Encodable<EncodeContext<'a, 'tcx>> for [u8] {
         e.emit_raw_bytes(self);
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=position | COMPLEXITY=9 | LINES=22 */
 
 impl<'a, 'tcx> TyEncoder<'tcx> for EncodeContext<'a, 'tcx> {
     const CLEAR_CROSS_CRATE: bool = true;
@@ -416,7 +389,6 @@ impl<'a, 'tcx> TyEncoder<'tcx> for EncodeContext<'a, 'tcx> {
         index.encode(self);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 // Shorthand for `$self.$tables.$table.set_some($def_id.index, $self.lazy($value))`, which would
 // normally need extra variables to avoid errors about multiple mutable borrows.
@@ -429,7 +401,6 @@ macro_rules! record {
         }
     }};
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12 */
 
 // Shorthand for `$self.$tables.$table.set_some($def_id.index, $self.lazy_array($value))`, which would
 // normally need extra variables to avoid errors about multiple mutable borrows.
@@ -442,7 +413,6 @@ macro_rules! record_array {
         }
     }};
 }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=10 */
 
 macro_rules! record_defaulted_array {
     ($self:ident.$tables:ident.$table:ident[$def_id:expr] <- $value:expr) => {{
@@ -453,7 +423,6 @@ macro_rules! record_defaulted_array {
         }
     }};
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=emit_lazy_distance | COMPLEXITY=156 | LINES=421 */
 
 impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
     fn emit_lazy_distance(&mut self, position: NonZero<usize>) {
@@ -875,14 +844,12 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         root
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=AnalyzeAttrState | COMPLEXITY=2 | LINES=6 */
 
 struct AnalyzeAttrState<'a> {
     is_exported: bool,
     is_doc_hidden: bool,
     features: &'a Features,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=analyze_attr | COMPLEXITY=49 | LINES=49 */
 
 /// Returns whether an attribute needs to be recorded in metadata, that is, if it's usable and
 /// useful in downstream crates. Local-only attributes are an obvious example, but some
@@ -932,7 +899,6 @@ fn analyze_attr(attr: &hir::Attribute, state: &mut AnalyzeAttrState<'_>) -> bool
     }
     should_encode
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=should_encode_span | COMPLEXITY=9 | LINES=35 */
 
 fn should_encode_span(def_kind: DefKind) -> bool {
     match def_kind {
@@ -968,7 +934,6 @@ fn should_encode_span(def_kind: DefKind) -> bool {
         DefKind::ForeignMod | DefKind::GlobalAsm => false,
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=should_encode_attrs | COMPLEXITY=13 | LINES=41 */
 
 fn should_encode_attrs(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1010,7 +975,6 @@ fn should_encode_attrs(def_kind: DefKind) -> bool {
         | DefKind::GlobalAsm => false,
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=should_encode_expn_that_defined | COMPLEXITY=9 | LINES=36 */
 
 fn should_encode_expn_that_defined(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1047,7 +1011,6 @@ fn should_encode_expn_that_defined(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=should_encode_visibility | COMPLEXITY=11 | LINES=37 */
 
 fn should_encode_visibility(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1085,7 +1048,6 @@ fn should_encode_visibility(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=should_encode_stability | COMPLEXITY=9 | LINES=36 */
 
 fn should_encode_stability(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1122,7 +1084,6 @@ fn should_encode_stability(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=19 */
 
 /// Whether we should encode MIR. Return a pair, resp. for CTFE and for LLVM.
 ///
@@ -1142,9 +1103,7 @@ fn should_encode_stability(def_kind: DefKind) -> bool {
 ///
 /// ```
 /// const fn f() -> usize { 0 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// pub struct S { pub a: [usize; f()] }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=should_encode_mir | COMPLEXITY=14 | LINES=37 */
 /// ```
 fn should_encode_mir(
     tcx: TyCtxt<'_>,
@@ -1182,7 +1141,6 @@ fn should_encode_mir(
         _ => (false, false),
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=should_encode_variances | COMPLEXITY=16 | LINES=39 */
 
 fn should_encode_variances<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, def_kind: DefKind) -> bool {
     match def_kind {
@@ -1222,7 +1180,6 @@ fn should_encode_variances<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId, def_kind: Def
         DefKind::TyAlias => tcx.type_alias_is_lazy(def_id),
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=should_encode_generics | COMPLEXITY=9 | LINES=36 */
 
 fn should_encode_generics(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1259,7 +1216,6 @@ fn should_encode_generics(def_kind: DefKind) -> bool {
         | DefKind::ExternCrate => false,
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=should_encode_type | COMPLEXITY=29 | LINES=61 */
 
 fn should_encode_type(tcx: TyCtxt<'_>, def_id: LocalDefId, def_kind: DefKind) -> bool {
     match def_kind {
@@ -1321,7 +1277,6 @@ fn should_encode_type(tcx: TyCtxt<'_>, def_id: LocalDefId, def_kind: DefKind) ->
         | DefKind::ExternCrate => false,
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=should_encode_fn_sig | COMPLEXITY=9 | LINES=36 */
 
 fn should_encode_fn_sig(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1358,7 +1313,6 @@ fn should_encode_fn_sig(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=should_encode_constness | COMPLEXITY=10 | LINES=35 */
 
 fn should_encode_constness(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1394,7 +1348,6 @@ fn should_encode_constness(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=should_encode_const | COMPLEXITY=9 | LINES=34 */
 
 fn should_encode_const(def_kind: DefKind) -> bool {
     match def_kind {
@@ -1429,7 +1382,6 @@ fn should_encode_const(def_kind: DefKind) -> bool {
         | DefKind::SyntheticCoroutineBody => false,
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=encode_attrs | COMPLEXITY=472 | LINES=841 */
 
 impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
     fn encode_attrs(&mut self, def_id: LocalDefId) {
@@ -2271,7 +2223,6 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         LazyArray::default()
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=prefetch_mir | COMPLEXITY=16 | LINES=24 */
 
 /// Used to prefetch queries which will be needed later by metadata encoding.
 /// Only a subset of the queries are actually prefetched to keep this code smaller.
@@ -2296,7 +2247,6 @@ fn prefetch_mir(tcx: TyCtxt<'_>) {
         }
     })
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=EncodedMetadata | COMPLEXITY=13 | LINES=37 */
 
 // NOTE(eddyb) The following comment was preserved for posterity, even
 // though it's no longer relevant as EBML (which uses nested & tagged
@@ -2334,7 +2284,6 @@ pub struct EncodedMetadata {
     // directory while accessing the Mmap.
     _temp_dir: Option<MaybeTempDir>,
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=from_path | COMPLEXITY=22 | LINES=46 */
 
 impl EncodedMetadata {
     #[inline]
@@ -2381,7 +2330,6 @@ impl EncodedMetadata {
         self.path.as_deref()
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=9 */
 
 impl<S: Encoder> Encodable<S> for EncodedMetadata {
     fn encode(&self, s: &mut S) {
@@ -2391,7 +2339,6 @@ impl<S: Encoder> Encodable<S> for EncodedMetadata {
         slice.encode(s)
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=11 | LINES=17 */
 
 impl<D: Decoder> Decodable<D> for EncodedMetadata {
     fn decode(d: &mut D) -> Self {
@@ -2409,7 +2356,6 @@ impl<D: Decoder> Decodable<D> for EncodedMetadata {
         Self { full_metadata, stub_metadata: stub, path: None, _temp_dir: None }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=encode_metadata | COMPLEXITY=42 | LINES=84 */
 
 #[instrument(level = "trace", skip(tcx))]
 pub fn encode_metadata(tcx: TyCtxt<'_>, path: &Path, ref_path: Option<&Path>) {
@@ -2494,7 +2440,6 @@ pub fn encode_metadata(tcx: TyCtxt<'_>, path: &Path, ref_path: Option<&Path>) {
         None,
     );
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=with_encode_metadata_header | COMPLEXITY=15 | LINES=54 */
 
 fn with_encode_metadata_header(
     tcx: TyCtxt<'_>,
@@ -2549,7 +2494,6 @@ fn with_encode_metadata_header(
         tcx.dcx().emit_fatal(FailWriteFile { path: ecx.opaque.path(), err });
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=encode_root_position | COMPLEXITY=3 | LINES=14 */
 
 fn encode_root_position(mut file: &File, pos: usize) -> Result<(), std::io::Error> {
     // We will return to this position after writing the root position.
@@ -2564,7 +2508,6 @@ fn encode_root_position(mut file: &File, pos: usize) -> Result<(), std::io::Erro
     file.seek(std::io::SeekFrom::Start(pos_before_seek))?;
     Ok(())
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=18 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {
@@ -2583,13 +2526,11 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     }
 }
-/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 /// Build a textual representation of an unevaluated constant expression.
 ///
 /// If the const expression is too complex, an underscore `_` is returned.
 /// For const arguments, it's `{ _ }` to be precise.
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 /// This means that the output is not necessarily valid Rust code.
 ///
 /// Currently, only
@@ -2597,7 +2538,6 @@ pub(crate) fn provide(providers: &mut Providers) {
 /// * literals (optionally with a leading `-`)
 /// * unit `()`
 /// * blocks (`{ … }`) around simple expressions and
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=rendered_const | COMPLEXITY=59 | LINES=87 */
 /// * paths without arguments
 ///
 /// are considered simple enough. Simple blocks are included since they are

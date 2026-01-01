@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/thir.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 // THIR datatypes and definitions. See the [rustc dev guide] for more info.
 //
 // If you compare the THIR [`ExprKind`] to [`hir::ExprKind`], you will see it is
@@ -16,20 +15,14 @@ use std::ops::Index;
 use std::sync::Arc;
 
 use crate::rustc_abi::{FieldIdx, Integer, Size, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexVec, newtype_index};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_target::asm::InlineAsmRegOrRegClass;
 use tracing::instrument;
 
@@ -38,7 +31,6 @@ use crate::mir::interpret::AllocId;
 use crate::mir::{
     self, AssignOp, BackwardIncompatibleDropReason, BinOp, BorrowKind, FakeReadCause, UnOp,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::thir::visit::for_each_immediate_subpat;
 use crate::ty::adjustment::PointerCoercion;
 use crate::ty::layout::IntegerExt;
@@ -46,7 +38,6 @@ use crate::ty::{
     self, AdtDef, CanonicalUserType, CanonicalUserTypeAnnotation, FnSig, GenericArgsRef, List, Ty,
     TyCtxt, UpvarArgs,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=$id | COMPLEXITY=24 | LINES=50 */
 
 
 macro_rules! thir_with_elements {
@@ -96,7 +87,6 @@ macro_rules! thir_with_elements {
         )*
     }
 }
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
 
 thir_with_elements! {
     arms: ArmId => Arm<'tcx> => "a{}",
@@ -105,7 +95,6 @@ thir_with_elements! {
     stmts: StmtId => Stmt<'tcx> => "s{}",
     params: ParamId => Param<'tcx> => "p{}",
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug, HashStable, Clone)]
 pub enum BodyTy<'tcx> {
@@ -113,7 +102,6 @@ pub enum BodyTy<'tcx> {
     Fn(FnSig<'tcx>),
     GlobalAsm(Ty<'tcx>),
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Param | COMPLEXITY=11 | LINES=15 */
 
 /// Description of a type-checked function parameter.
 #[derive(Clone, Debug, HashStable)]
@@ -129,14 +117,12 @@ pub struct Param<'tcx> {
     /// HirId for lints.
     pub hir_id: Option<HirId>,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, HashStable)]
 pub enum LintLevel {
     Inherited,
     Explicit(HirId),
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Block | COMPLEXITY=11 | LINES=18 */
 
 #[derive(Clone, Debug, HashStable)]
 pub struct Block {
@@ -155,7 +141,6 @@ pub struct Block {
     pub expr: Option<ExprId>,
     pub safety_mode: BlockSafety,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=AdtExpr | COMPLEXITY=7 | LINES=19 */
 
 type UserTy<'tcx> = Option<Box<CanonicalUserType<'tcx>>>;
 
@@ -175,7 +160,6 @@ pub struct AdtExpr<'tcx> {
     /// The base, e.g. `Foo {x: 1, ..base}`.
     pub base: AdtExprBase<'tcx>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 #[derive(Clone, Debug, HashStable)]
 pub enum AdtExprBase<'tcx> {
@@ -189,7 +173,6 @@ pub enum AdtExprBase<'tcx> {
     /// `Foo { .. }`.
     DefaultFields(Box<[Ty<'tcx>]>),
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=ClosureExpr | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, HashStable)]
 pub struct ClosureExpr<'tcx> {
@@ -199,7 +182,6 @@ pub struct ClosureExpr<'tcx> {
     pub movability: Option<hir::Movability>,
     pub fake_reads: Vec<(ExprId, FakeReadCause, HirId)>,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=InlineAsmExpr | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, HashStable)]
 pub struct InlineAsmExpr<'tcx> {
@@ -209,7 +191,6 @@ pub struct InlineAsmExpr<'tcx> {
     pub options: InlineAsmOptions,
     pub line_spans: &'tcx [Span],
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, HashStable)]
 pub enum BlockSafety {
@@ -219,13 +200,11 @@ pub enum BlockSafety {
     /// An `unsafe` block. The `HirId` is the ID of the block.
     ExplicitUnsafe(HirId),
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Stmt | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Debug, HashStable)]
 pub struct Stmt<'tcx> {
     pub kind: StmtKind<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=40 */
 
 #[derive(Clone, Debug, HashStable)]
 pub enum StmtKind<'tcx> {
@@ -266,7 +245,6 @@ pub enum StmtKind<'tcx> {
         span: Span,
     },
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=LocalVarId(pub | COMPLEXITY=5 | LINES=20 */
 
 #[derive(Clone, Debug, Copy, PartialEq, Eq, Hash, HashStable, TyEncodable, TyDecodable)]
 pub struct LocalVarId(pub HirId);
@@ -287,7 +265,6 @@ pub struct Expr<'tcx> {
     /// span of the expression in the source
     pub span: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=TempLifetime | COMPLEXITY=7 | LINES=11 */
 
 /// Temporary lifetime information for THIR expressions
 #[derive(Clone, Copy, Debug, HashStable)]
@@ -299,7 +276,6 @@ pub struct TempLifetime {
     /// If `None`, then no changes are expected, or lints are disabled.
     pub backwards_incompatible: Option<(region::Scope, BackwardIncompatibleDropReason)>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=105 | LINES=298 */
 
 #[derive(Clone, Debug, HashStable)]
 pub enum ExprKind<'tcx> {
@@ -598,7 +574,6 @@ pub enum ExprKind<'tcx> {
         value: ExprId,
     },
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=FieldExpr | COMPLEXITY=2 | LINES=9 */
 
 /// Represents the association of a field identifier and an expression.
 ///
@@ -608,14 +583,12 @@ pub struct FieldExpr {
     pub name: FieldIdx,
     pub expr: ExprId,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=FruInfo | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, HashStable)]
 pub struct FruInfo<'tcx> {
     pub base: ExprId,
     pub field_types: Box<[Ty<'tcx>]>,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=Arm | COMPLEXITY=2 | LINES=11 */
 
 /// A `match` arm.
 #[derive(Clone, Debug, HashStable)]
@@ -627,7 +600,6 @@ pub struct Arm<'tcx> {
     pub scope: region::Scope,
     pub span: Span,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=LoopMatchMatchData | COMPLEXITY=2 | LINES=8 */
 
 /// The `match` part of a `#[loop_match]`
 #[derive(Clone, Debug, HashStable)]
@@ -636,7 +608,6 @@ pub struct LoopMatchMatchData {
     pub arms: Box<[ArmId]>,
     pub span: Span,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, HashStable)]
 pub enum LogicalOp {
@@ -645,7 +616,6 @@ pub enum LogicalOp {
     /// The `||` operator.
     Or,
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=37 */
 
 #[derive(Clone, Debug, HashStable)]
 pub enum InlineAsmOperand<'tcx> {
@@ -683,14 +653,12 @@ pub enum InlineAsmOperand<'tcx> {
         block: BlockId,
     },
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=FieldPat | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, HashStable, TypeVisitable)]
 pub struct FieldPat<'tcx> {
     pub field: FieldIdx,
     pub pattern: Pat<'tcx>,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=Pat | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, HashStable, TypeVisitable)]
 pub struct Pat<'tcx> {
@@ -698,7 +666,6 @@ pub struct Pat<'tcx> {
     pub span: Span,
     pub kind: PatKind<'tcx>,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=simple_ident | COMPLEXITY=46 | LINES=80 */
 
 impl<'tcx> Pat<'tcx> {
     pub fn simple_ident(&self) -> Option<Symbol> {
@@ -779,7 +746,6 @@ impl<'tcx> Pat<'tcx> {
         is_never_pattern
     }
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=Ascription | COMPLEXITY=18 | LINES=24 */
 
 #[derive(Clone, Debug, HashStable, TypeVisitable)]
 pub struct Ascription<'tcx> {
@@ -804,7 +770,6 @@ pub struct Ascription<'tcx> {
     /// of the old type-check for now. See #57280 for details.
     pub variance: ty::Variance,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=44 | LINES=123 */
 
 #[derive(Clone, Debug, HashStable, TypeVisitable)]
 pub enum PatKind<'tcx> {
@@ -928,7 +893,6 @@ pub enum PatKind<'tcx> {
     /// related to this pattern.
     Error(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=PatRange | COMPLEXITY=2 | LINES=13 */
 
 /// A range pattern.
 /// The boundaries must be of the same type and that type must be numeric.
@@ -942,7 +906,6 @@ pub struct PatRange<'tcx> {
     pub end: RangeEnd,
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=is_full_range | COMPLEXITY=63 | LINES=89 */
 
 impl<'tcx> PatRange<'tcx> {
     /// Whether this range covers the full extent of possible values (best-effort, we ignore floats).
@@ -1032,7 +995,6 @@ impl<'tcx> PatRange<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=18 */
 
 impl<'tcx> fmt::Display for PatRange<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -1051,7 +1013,6 @@ impl<'tcx> fmt::Display for PatRange<'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// A (possibly open) boundary of a range pattern.
 /// If present, the const must be of a numeric type.
@@ -1062,7 +1023,6 @@ pub enum PatRangeBoundary<'tcx> {
     NegInfinity,
     PosInfinity,
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=is_finite | COMPLEXITY=56 | LINES=95 */
 
 impl<'tcx> PatRangeBoundary<'tcx> {
     #[inline]
@@ -1158,7 +1118,6 @@ impl<'tcx> PatRangeBoundary<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]

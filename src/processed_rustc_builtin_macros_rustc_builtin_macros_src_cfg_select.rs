@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/cfg_select.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use rustc_attr_parsing as attr;
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_parse::parser::cfg_select::{CfgSelectBranches, CfgSelectPredicate, parse_cfg_select};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{CfgSelectNoMatches, CfgSelectUnreachable};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=select_arm | COMPLEXITY=8 | LINES=16 */
 
 /// Selects the first arm whose predicate evaluates to true.
 fn select_arm(ecx: &ExtCtxt<'_>, branches: CfgSelectBranches) -> Option<(TokenStream, Span)> {
@@ -27,7 +22,6 @@ fn select_arm(ecx: &ExtCtxt<'_>, branches: CfgSelectBranches) -> Option<(TokenSt
 
     branches.wildcard.map(|(_, tt, span)| (tt, span))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=40 */
 
 pub(super) fn expand_cfg_select<'cx>(
     ecx: &'cx mut ExtCtxt<'_>,

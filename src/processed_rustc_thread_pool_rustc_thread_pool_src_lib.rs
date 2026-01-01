@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=23 | LINES=71 */
 // Rayon-core houses the core stable APIs of Rayon.
 //
 // These APIs have been mirrored in the Rayon crate and it is recommended to use these from there.
@@ -71,7 +70,6 @@ use std::error::Error;
 use std::marker::PhantomData;
 use std::str::FromStr;
 use std::{env, fmt, io, thread};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=24 */
 
 #[macro_use]
 
@@ -81,22 +79,15 @@ use std::{env, fmt, io, thread};
 pub use worker_local::WorkerLocal;
 
 pub use self::broadcast::{BroadcastContext, broadcast, spawn_broadcast};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::join::{join, join_context};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use self::registry::{CustomSpawn, DefaultSpawn, ThreadSpawn};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::registry::{Registry, ThreadBuilder, mark_blocked, mark_unblocked};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::scope::{Scope, ScopeFifo, in_place_scope, in_place_scope_fifo, scope, scope_fifo};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::spawn::{spawn, spawn_fifo};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::thread_pool::{
     ThreadPool, Yield, current_thread_has_pending_tasks, current_thread_index, yield_local,
     yield_now,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=max_num_threads | COMPLEXITY=3 | LINES=11 */
 
 /// Returns the maximum number of threads that Rayon supports in a single thread-pool.
 ///
@@ -108,7 +99,6 @@ pub fn max_num_threads() -> usize {
     // We are limited by the bits available in the sleep counter's `AtomicUsize`.
     crate::sleep::THREADS_MAX
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=current_num_threads | COMPLEXITY=11 | LINES=22 */
 
 /// Returns the number of threads in the current registry. If this
 /// code is executing within a Rayon thread-pool, then this will be
@@ -131,21 +121,18 @@ pub fn max_num_threads() -> usize {
 pub fn current_num_threads() -> usize {
     crate::registry::Registry::current_num_threads()
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ThreadPoolBuildError | COMPLEXITY=2 | LINES=6 */
 
 /// Error when initializing a thread pool.
 #[derive(Debug)]
 pub struct ThreadPoolBuildError {
     kind: ErrorKind,
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 enum ErrorKind {
     GlobalPoolAlreadyInitialized,
     IOError(io::Error),
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ThreadPoolBuilder | COMPLEXITY=10 | LINES=58 */
 
 /// Used to create a new [`ThreadPool`] or to configure the global rayon thread pool.
 /// ## Creating a ThreadPool
@@ -204,7 +191,6 @@ pub struct ThreadPoolBuilder<S = DefaultSpawn> {
     /// fashion. Depth-first is the default.
     breadth_first: bool,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Configuration | COMPLEXITY=2 | LINES=9 */
 
 /// Contains the rayon thread pool configuration. Use [`ThreadPoolBuilder`] instead.
 ///
@@ -214,7 +200,6 @@ pub struct ThreadPoolBuilder<S = DefaultSpawn> {
 pub struct Configuration {
     builder: ThreadPoolBuilder,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=default | COMPLEXITY=16 | LINES=36 */
 
 /// The type for a panic handling closure. Note that this same closure
 /// may be invoked multiple times in parallel.
@@ -251,7 +236,6 @@ impl Default for ThreadPoolBuilder {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=15 */
 
 /// The type for a closure that gets invoked before starting computations in a thread.
 /// Note that this same closure may be invoked multiple times in parallel.
@@ -267,7 +251,6 @@ impl ThreadPoolBuilder {
         Self::default()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=build | COMPLEXITY=11 | LINES=35 */
 
 /// Note: the `S: ThreadSpawn` constraint is an internal implementation detail for the
 /// default spawn and those set by [`spawn_handler`](#method.spawn_handler).
@@ -303,7 +286,6 @@ where
         Ok(())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=build_scoped | COMPLEXITY=25 | LINES=67 */
 
 impl ThreadPoolBuilder {
     /// Creates a scoped `ThreadPool` initialized using this configuration.
@@ -371,7 +353,6 @@ impl ThreadPoolBuilder {
         })
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=spawn_handler | COMPLEXITY=116 | LINES=337 */
 
 impl<S> ThreadPoolBuilder<S> {
     /// Sets a custom function for spawning threads.
@@ -709,7 +690,6 @@ impl<S> ThreadPoolBuilder<S> {
         self
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=new | COMPLEXITY=17 | LINES=72 */
 
 #[allow(deprecated)]
 impl Configuration {
@@ -782,7 +762,6 @@ impl Configuration {
         self.builder
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=10 */
 
 impl ThreadPoolBuildError {
     fn new(kind: ErrorKind) -> ThreadPoolBuildError {
@@ -793,7 +772,6 @@ impl ThreadPoolBuildError {
         matches!(&self.kind, ErrorKind::IOError(e) if e.kind() == io::ErrorKind::Unsupported)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=source | COMPLEXITY=9 | LINES=9 */
 
 impl Error for ThreadPoolBuildError {
     fn source(&self) -> Option<&(dyn Error + 'static)> {
@@ -803,7 +781,6 @@ impl Error for ThreadPoolBuildError {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=11 */
 
 impl fmt::Display for ThreadPoolBuildError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -815,7 +792,6 @@ impl fmt::Display for ThreadPoolBuildError {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=initialize | COMPLEXITY=2 | LINES=7 */
 
 /// Deprecated in favor of `ThreadPoolBuilder::build_global`.
 #[deprecated(note = "use `ThreadPoolBuilder::build_global`")]
@@ -823,7 +799,6 @@ impl fmt::Display for ThreadPoolBuildError {
 pub fn initialize(config: Configuration) -> Result<(), Box<dyn Error>> {
     config.into_builder().build_global().map_err(Box::from)
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=14 | LINES=47 */
 
 impl<S> fmt::Debug for ThreadPoolBuilder<S> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -871,7 +846,6 @@ impl<S> fmt::Debug for ThreadPoolBuilder<S> {
             .finish()
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=7 */
 
 #[allow(deprecated)]
 impl fmt::Debug for Configuration {
@@ -879,7 +853,6 @@ impl fmt::Debug for Configuration {
         self.builder.fmt(f)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=FnContext | COMPLEXITY=4 | LINES=9 */
 
 /// Provides the calling context to a closure called by `join_context`.
 #[derive(Debug)]
@@ -889,7 +862,6 @@ pub struct FnContext {
     /// disable `Send` and `Sync`, just for a little future-proofing.
     _marker: PhantomData<*mut ()>,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 
 impl FnContext {
     #[inline]
@@ -897,7 +869,6 @@ impl FnContext {
         FnContext { migrated, _marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=migrated | COMPLEXITY=5 | LINES=9 */
 
 impl FnContext {
     /// Returns `true` if the closure was called from a different thread

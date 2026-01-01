@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_impl/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 // Support for serializing the dep-graph and reloading it.
 
 // tidy-alphabetical-start
@@ -15,18 +14,13 @@ use crate::rustc_data_structures::stable_hasher::HashStable;
 use crate::rustc_data_structures::sync::AtomicU64;
 use crate::rustc_complete::arena::Arena;
 use crate::rustc_complete::dep_graph::{self, DepKind, DepKindStruct, DepNodeIndex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::erase::{Erase, erase, restore};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::on_disk_cache::{CacheEncoder, EncodedDepNodeIndex, OnDiskCache};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::query::plumbing::{DynamicQuery, QuerySystem, QuerySystemFns};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::query::{
     AsLocalKey, DynamicQueries, ExternProviders, Providers, QueryCaches, QueryEngine, QueryStates,
     queries,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::ty::TyCtxt;
 use rustc_query_system::dep_graph::SerializedDepNodeIndex;
 use rustc_query_system::ich::StableHashingContext;
@@ -34,19 +28,14 @@ use rustc_query_system::query::{
     CycleError, HashResult, QueryCache, QueryConfig, QueryMap, QueryMode, QueryStackDeferred,
     QueryState, get_query_incr, get_query_non_incr,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_query_system::{HandleCycleError, Value};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::plumbing::{__rust_begin_short_backtrace, encode_all_query_results, try_mark_green};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::profiling_support::QueryKeyStringCache;
 
 #[macro_use]
 pub use crate::plumbing::{QueryCtxt, query_key_hash_verify_all};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=DynamicConfig | COMPLEXITY=2 | LINES=13 */
 
 pub use self::profiling_support::alloc_self_profile_query_strings;
 
@@ -59,13 +48,11 @@ struct DynamicConfig<
 > {
     dynamic: &'tcx DynamicQuery<'tcx, C>,
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 impl<'tcx, C: QueryCache, const ANON: bool, const DEPTH_LIMIT: bool, const FEEDABLE: bool> Copy
     for DynamicConfig<'tcx, C, ANON, DEPTH_LIMIT, FEEDABLE>
 {
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=5 | LINES=7 */
 impl<'tcx, C: QueryCache, const ANON: bool, const DEPTH_LIMIT: bool, const FEEDABLE: bool> Clone
     for DynamicConfig<'tcx, C, ANON, DEPTH_LIMIT, FEEDABLE>
 {
@@ -73,7 +60,6 @@ impl<'tcx, C: QueryCache, const ANON: bool, const DEPTH_LIMIT: bool, const FEEDA
         *self
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=name | COMPLEXITY=41 | LINES=135 */
 
 impl<'tcx, C: QueryCache, const ANON: bool, const DEPTH_LIMIT: bool, const FEEDABLE: bool>
     QueryConfig<QueryCtxt<'tcx>> for DynamicConfig<'tcx, C, ANON, DEPTH_LIMIT, FEEDABLE>
@@ -209,7 +195,6 @@ where
         self.dynamic.hash_result
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=config | COMPLEXITY=2 | LINES=13 */
 
 /// This is implemented per query. It allows restoring query values from their erased state
 /// and constructing a QueryConfig.
@@ -223,7 +208,6 @@ trait QueryConfigRestored<'tcx> {
     fn restore(value: <Self::Config as QueryConfig<QueryCtxt<'tcx>>>::Value)
     -> Self::RestoredValue;
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=query_system | COMPLEXITY=5 | LINES=23 */
 
 pub fn query_system<'a>(
     local_providers: Providers,
@@ -247,10 +231,8 @@ pub fn query_system<'a>(
         jobs: AtomicU64::new(1),
     }
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 crate::rustc_middle::rustc_with_all_queries! { define_queries! }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=2 | LINES=5 */
 
 pub fn provide(providers: &mut crate::rustc_middle::util::Providers) {
     providers.hooks.alloc_self_profile_query_strings = alloc_self_profile_query_strings;

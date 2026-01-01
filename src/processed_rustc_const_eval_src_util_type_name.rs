@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/util/type_name.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Write;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::definitions::DisambiguatedDefPathData;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::print::{PrettyPrinter, PrintError, Printer};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=TypeNamePrinter | COMPLEXITY=2 | LINES=5 */
 
 struct TypeNamePrinter<'tcx> {
     tcx: TyCtxt<'tcx>,
     path: String,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=53 | LINES=151 */
 
 impl<'tcx> Printer<'tcx> for TypeNamePrinter<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -168,7 +163,6 @@ impl<'tcx> Printer<'tcx> for TypeNamePrinter<'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=should_print_optional_region | COMPLEXITY=14 | LINES=32 */
 
 impl<'tcx> PrettyPrinter<'tcx> for TypeNamePrinter<'tcx> {
     fn should_print_optional_region(&self, region: ty::Region<'_>) -> bool {
@@ -201,7 +195,6 @@ impl<'tcx> PrettyPrinter<'tcx> for TypeNamePrinter<'tcx> {
         false
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_str | COMPLEXITY=5 | LINES=7 */
 
 impl Write for TypeNamePrinter<'_> {
     fn write_str(&mut self, s: &str) -> std::fmt::Result {
@@ -209,7 +202,6 @@ impl Write for TypeNamePrinter<'_> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_name | COMPLEXITY=3 | LINES=6 */
 
 pub fn type_name<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> String {
     let mut p = TypeNamePrinter { tcx, path: String::new() };

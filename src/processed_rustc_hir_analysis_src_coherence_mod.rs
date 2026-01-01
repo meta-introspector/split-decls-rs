@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // Coherence phase
 //
 // The job of the coherence phase of typechecking is to ensure that
@@ -11,13 +10,10 @@ use crate::rustc_complete::codes::*;
 use crate::rustc_complete::struct_span_code_err;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, elaborate};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{ErrorGuaranteed, sym};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_impl | COMPLEXITY=11 | LINES=39 */
 use tracing::debug;
 
 use crate::check::always_applicable;
@@ -52,7 +48,6 @@ fn check_impl<'tcx>(
             polarity,
         ))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=enforce_trait_manually_implementable | COMPLEXITY=29 | LINES=52 */
 
 fn enforce_trait_manually_implementable(
     tcx: TyCtxt<'_>,
@@ -105,7 +100,6 @@ fn enforce_trait_manually_implementable(
     }
     Ok(())
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=enforce_empty_impls_for_marker_traits | COMPLEXITY=11 | LINES=25 */
 
 /// We allow impls of marker traits to overlap, so they can't override impls
 /// as that could make it ambiguous which associated item to use.
@@ -131,7 +125,6 @@ fn enforce_empty_impls_for_marker_traits(
     )
     .emit())
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=23 */
 
 /// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`].
 pub(crate) fn provide(providers: &mut Providers) {
@@ -155,7 +148,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=coherent_trait | COMPLEXITY=14 | LINES=27 */
 
 fn coherent_trait(tcx: TyCtxt<'_>, def_id: DefId) -> Result<(), ErrorGuaranteed> {
     let impls = tcx.local_trait_impls(def_id);
@@ -183,7 +175,6 @@ fn coherent_trait(tcx: TyCtxt<'_>, def_id: DefId) -> Result<(), ErrorGuaranteed>
 
     res
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_object_overlap | COMPLEXITY=42 | LINES=61 */
 
 /// Checks whether an impl overlaps with the automatic `impl Trait for dyn Trait`.
 fn check_object_overlap<'tcx>(

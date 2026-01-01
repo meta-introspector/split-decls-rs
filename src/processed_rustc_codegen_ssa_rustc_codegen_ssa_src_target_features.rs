@@ -1,29 +1,21 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/target_features.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attrs::InstructionSetAttr;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::builtin::AARCH64_SOFTFLOAT_NEON;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::target_features::{RUSTC_SPECIFIC_FEATURES, Stability};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 
 use crate::errors::FeatureNotValid;
 use crate::{errors, target_features};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=86 */
 
 /// Compute the enabled target features from the `#[target_feature]` function attribute.
 /// Enabled target features are added to `target_features`.
@@ -110,7 +102,6 @@ pub(crate) fn from_target_feature_attr(
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=asm_target_features | COMPLEXITY=15 | LINES=22 */
 
 /// Computes the set of target features used in a function for the purposes of
 /// inline assembly.
@@ -133,7 +124,6 @@ fn asm_target_features(tcx: TyCtxt<'_>, did: DefId) -> &FxIndexSet<Symbol> {
 
     tcx.arena.alloc(target_features)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=14 */
 
 /// Checks the function annotated with `#[target_feature]` is not a safe
 /// trait method implementation, reporting an error if it is.
@@ -148,7 +138,6 @@ pub(crate) fn check_target_feature_trait_unsafe(tcx: TyCtxt<'_>, id: LocalDefId,
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse_rust_feature_flag | COMPLEXITY=45 | LINES=63 */
 
 /// Parse the value of `-Ctarget-feature`, also expanding implied features,
 /// and call the closure for each (expanded) Rust feature. If the list contains
@@ -212,7 +201,6 @@ fn parse_rust_feature_flag<'a>(
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=cfg_target_feature | COMPLEXITY=26 | LINES=79 */
 
 /// Utility function for a codegen backend to compute `cfg(target_feature)`, or more specifically,
 /// to populate `sess.unstable_target_features` and `sess.target_features` (these are the first and
@@ -292,7 +280,6 @@ pub fn cfg_target_feature(
 
     (f(true), f(false))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=check_tied_features | COMPLEXITY=12 | LINES=19 */
 
 /// Given a map from target_features to whether they are enabled or disabled, ensure only valid
 /// combinations are allowed.
@@ -312,7 +299,6 @@ pub fn check_tied_features(
     }
     None
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=flag_to_backend_features | COMPLEXITY=62 | LINES=101 */
 
 /// Translates the `-Ctarget-feature` flag into a backend target feature list.
 ///
@@ -414,7 +400,6 @@ pub fn flag_to_backend_features<'a, const N: usize>(
         extend_backend_features(feature, enable);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=retpoline_features_by_flags | COMPLEXITY=12 | LINES=20 */
 
 /// Computes the backend target features to be added to account for retpoline flags.
 /// Used by both LLVM and GCC since their target features are, conveniently, the same.
@@ -435,7 +420,6 @@ pub fn retpoline_features_by_flags(sess: &Session, features: &mut Vec<String>) {
         features.push("+retpoline-indirect-calls".into());
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=60 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

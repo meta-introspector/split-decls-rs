@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pp/ring.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::VecDeque;
 use std::ops::{Index, IndexMut};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 /// A view onto a finite range of an infinitely long sequence of T.
 ///
@@ -19,7 +17,6 @@ pub(super) struct RingBuffer<T> {
     // Abstract index of data[0] in the infinitely sized queue.
     offset: usize,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=46 */
 
 impl<T> RingBuffer<T> {
     pub(super) fn new() -> Self {
@@ -66,7 +63,6 @@ impl<T> RingBuffer<T> {
         self.data.back_mut()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=7 */
 
 impl<T> Index<usize> for RingBuffer<T> {
     type Output = T;
@@ -74,7 +70,6 @@ impl<T> Index<usize> for RingBuffer<T> {
         &self.data[index.checked_sub(self.offset).unwrap()]
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<T> IndexMut<usize> for RingBuffer<T> {
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {

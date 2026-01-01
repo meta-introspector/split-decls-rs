@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/graph/scc/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=MaxReached(usize); | COMPLEXITY=7 | LINES=22 */
 
 use super::*;
 use crate::graph::tests::TestGraph;
@@ -22,7 +21,6 @@ impl Annotations<usize> for Maxes {
     type Ann = MaxReached;
     type SccIdx = usize;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=annotation | COMPLEXITY=4 | LINES=9 */
 
 impl Maxes {
     fn annotation(&self, scc: usize) -> MaxReached {
@@ -32,7 +30,6 @@ impl Maxes {
         Self(IndexVec::new(), mapping)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=merge_scc | COMPLEXITY=6 | LINES=10 */
 
 impl Annotation for MaxReached {
     fn merge_scc(self, other: Self) -> Self {
@@ -43,21 +40,18 @@ impl Annotation for MaxReached {
         Self(std::cmp::max(other.0, self.0))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=6 */
 
 impl PartialEq<usize> for MaxReached {
     fn eq(&self, other: &usize) -> bool {
         &self.0 == other
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=MinMaxIn | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 struct MinMaxIn {
     min: usize,
     max: usize,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=MinMaxes(IndexVec | COMPLEXITY=3 | LINES=7 */
 struct MinMaxes(IndexVec<usize, MinMaxIn>, fn(usize) -> MinMaxIn);
 
 impl MinMaxes {
@@ -65,7 +59,6 @@ impl MinMaxes {
         self.0[scc]
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=14 */
 
 impl Annotations<usize> for MinMaxes {
     fn new(&self, element: usize) -> MinMaxIn {
@@ -80,7 +73,6 @@ impl Annotations<usize> for MinMaxes {
     type Ann = MinMaxIn;
     type SccIdx = usize;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=merge_scc | COMPLEXITY=7 | LINES=10 */
 
 impl Annotation for MinMaxIn {
     fn merge_scc(self, other: Self) -> Self {
@@ -91,7 +83,6 @@ impl Annotation for MinMaxIn {
         self
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=diamond | COMPLEXITY=2 | LINES=8 */
 
 #[test]
 fn diamond() {
@@ -100,7 +91,6 @@ fn diamond() {
     assert_eq!(sccs.num_sccs(), 4);
     assert_eq!(sccs.num_sccs(), 4);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_big_scc | COMPLEXITY=3 | LINES=27 */
 
 #[test]
 fn test_big_scc() {
@@ -128,7 +118,6 @@ fn test_big_scc() {
     let sccs: UsizeSccs = Sccs::new(&graph);
     assert_eq!(sccs.num_sccs(), 1);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=test_three_sccs | COMPLEXITY=3 | LINES=23 */
 
 #[test]
 fn test_three_sccs() {
@@ -152,7 +141,6 @@ fn test_three_sccs() {
     assert_eq!(sccs.successors(1), &[0]);
     assert_eq!(sccs.successors(2), &[0]);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=test_find_state_2 | COMPLEXITY=16 | LINES=55 */
 
 #[test]
 fn test_find_state_2() {
@@ -208,7 +196,6 @@ fn test_find_state_2() {
     assert_eq!(sccs.scc(4), 0);
     assert_eq!(sccs.successors(0), &[] as &[usize]);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=test_find_state_3 | COMPLEXITY=3 | LINES=26 */
 
 #[test]
 fn test_find_state_3() {
@@ -235,7 +222,6 @@ fn test_find_state_3() {
     assert_eq!(sccs.successors(0), &[] as &[usize]);
     assert_eq!(sccs.successors(1), &[0]);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=test_deep_linear | COMPLEXITY=6 | LINES=29 */
 
 #[test]
 fn test_deep_linear() {
@@ -265,7 +251,6 @@ fn test_deep_linear() {
     assert_eq!(sccs.scc(0), NR_NODES - 1);
     assert_eq!(sccs.scc(NR_NODES - 1), 0);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=bench_sccc | COMPLEXITY=7 | LINES=44 */
 
 #[bench]
 fn bench_sccc(b: &mut test::Bencher) {
@@ -310,7 +295,6 @@ fn bench_sccc(b: &mut test::Bencher) {
         assert_eq!(sccs.num_sccs(), 3);
     });
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=test_max_self_loop | COMPLEXITY=6 | LINES=8 */
 
 #[test]
 fn test_max_self_loop() {
@@ -319,7 +303,6 @@ fn test_max_self_loop() {
     Sccs::new_with_annotation(&graph, &mut annotations);
     assert_eq!(annotations.0[0], 17);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=test_max_branch | COMPLEXITY=2 | LINES=10 */
 
 #[test]
 fn test_max_branch() {
@@ -330,7 +313,6 @@ fn test_max_branch() {
     assert_eq!(annotations.0[sccs.scc(1)], 3);
     assert_eq!(annotations.0[sccs.scc(2)], 4);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=test_single_cycle_max | COMPLEXITY=2 | LINES=9 */
 
 #[test]
 fn test_single_cycle_max() {
@@ -340,7 +322,6 @@ fn test_single_cycle_max() {
     assert_eq!(annotations.0[sccs.scc(2)], 4);
     assert_eq!(annotations.0[sccs.scc(0)], 4);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=test_double_cycle_max | COMPLEXITY=6 | LINES=11 */
 
 #[test]
 fn test_double_cycle_max() {
@@ -352,7 +333,6 @@ fn test_double_cycle_max() {
 
     assert_eq!(annotations.0[sccs.scc(0)].0, 2);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=test_bug_minimised | COMPLEXITY=6 | LINES=14 */
 
 #[test]
 fn test_bug_minimised() {
@@ -367,7 +347,6 @@ fn test_bug_minimised() {
     assert_eq!(annotations.annotation(sccs.scc(1)), 0);
     assert_eq!(annotations.annotation(sccs.scc(4)), 0);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=test_bug_max_leak_minimised | COMPLEXITY=6 | LINES=15 */
 
 #[test]
 fn test_bug_max_leak_minimised() {
@@ -383,7 +362,6 @@ fn test_bug_max_leak_minimised() {
     assert_eq!(annotations.annotation(sccs.scc(3)), 1);
     assert_eq!(annotations.annotation(sccs.scc(0)), 1);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=test_bug_max_leak | COMPLEXITY=8 | LINES=61 */
 
 #[test]
 fn test_bug_max_leak() {
@@ -445,7 +423,6 @@ fn test_bug_max_leak() {
     assert_eq!(annotations.annotation(sccs.scc(3)), 2);
     assert_eq!(annotations.annotation(sccs.scc(0)), 2);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=test_bug_max_zero_stick_shape | COMPLEXITY=7 | LINES=16 */
 
 #[test]
 fn test_bug_max_zero_stick_shape() {
@@ -462,7 +439,6 @@ fn test_bug_max_zero_stick_shape() {
     assert_eq!(annotations.annotation(sccs.scc(3)), 1);
     assert_eq!(annotations.annotation(sccs.scc(4)), 1);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=test_min_max_in | COMPLEXITY=4 | LINES=15 */
 
 #[test]
 fn test_min_max_in() {

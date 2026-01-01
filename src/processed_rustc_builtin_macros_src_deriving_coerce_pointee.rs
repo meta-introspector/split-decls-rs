@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/coerce_pointee.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use ast::HasAttrs;
 use crate::rustc_complete::mut_visit::MutVisitor;
 use crate::rustc_complete::visit::BoundKind;
@@ -7,23 +6,18 @@ use crate::rustc_complete::{
     self as ast, GenericArg, GenericBound, GenericParamKind, Generics, ItemKind, MetaItem,
     TraitBoundModifiers, VariantData, WherePredicate,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_complete::E0802;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_macros::Diagnostic;
 use crate::rustc_complete::{Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 use crate::errors;
 
 macro_rules! path {
     ($span:expr, $($part:ident)::*) => { vec![$(Ident::new(sym::$part, $span),)*] }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=128 | LINES=307 */
 
 pub(crate) fn expand_deriving_coerce_pointee(
     cx: &ExtCtxt<'_>,
@@ -331,7 +325,6 @@ pub(crate) fn expand_deriving_coerce_pointee(
     add_impl_block(impl_generics.clone(), sym::DispatchFromDyn, gen_args.clone());
     add_impl_block(impl_generics.clone(), sym::CoerceUnsized, gen_args);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=contains_maybe_sized_bound_on_pointee | COMPLEXITY=14 | LINES=15 */
 
 fn contains_maybe_sized_bound_on_pointee(predicates: &[WherePredicate], pointee: Symbol) -> bool {
     for bound in predicates {
@@ -347,7 +340,6 @@ fn contains_maybe_sized_bound_on_pointee(predicates: &[WherePredicate], pointee:
     }
     false
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_maybe_sized_bound | COMPLEXITY=7 | LINES=12 */
 
 fn is_maybe_sized_bound(bound: &GenericBound) -> bool {
     if let GenericBound::Trait(trait_ref) = bound
@@ -360,17 +352,14 @@ fn is_maybe_sized_bound(bound: &GenericBound) -> bool {
         false
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=contains_maybe_sized_bound | COMPLEXITY=2 | LINES=4 */
 
 fn contains_maybe_sized_bound(bounds: &[GenericBound]) -> bool {
     bounds.iter().any(is_maybe_sized_bound)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=path_segment_is_exact_match | COMPLEXITY=2 | LINES=4 */
 
 fn path_segment_is_exact_match(path_segments: &[ast::PathSegment], syms: &[Symbol]) -> bool {
     path_segments.iter().zip(syms).all(|(segment, &symbol)| segment.ident.name == symbol)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_sized_marker | COMPLEXITY=10 | LINES=14 */
 
 fn is_sized_marker(path: &ast::Path) -> bool {
     const CORE_UNSIZE: [Symbol; 3] = [sym::core, sym::marker, sym::Sized];
@@ -385,14 +374,12 @@ fn is_sized_marker(path: &ast::Path) -> bool {
         *path == sym::Sized
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=TypeSubstitution | COMPLEXITY=2 | LINES=6 */
 
 struct TypeSubstitution<'a> {
     from_name: Symbol,
     to_ty: &'a ast::Ty,
     rewritten: bool,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=21 | LINES=29 */
 
 impl<'a> ast::mut_visit::MutVisitor for TypeSubstitution<'a> {
     fn visit_ty(&mut self, ty: &mut ast::Ty) {
@@ -422,12 +409,10 @@ impl<'a> ast::mut_visit::MutVisitor for TypeSubstitution<'a> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=DetectNonGenericPointeeAttr | COMPLEXITY=2 | LINES=4 */
 
 struct DetectNonGenericPointeeAttr<'a, 'b> {
     cx: &'a ExtCtxt<'b>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=27 | LINES=44 */
 
 impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonGenericPointeeAttr<'a, 'b> {
     fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) -> Self::Result {
@@ -472,12 +457,10 @@ impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonGenericPointeeAtt
         error_on_pointee.visit_ty(t)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=AlwaysErrorOnGenericParam | COMPLEXITY=2 | LINES=4 */
 
 struct AlwaysErrorOnGenericParam<'a, 'b> {
     cx: &'a ExtCtxt<'b>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=9 | LINES=8 */
 
 impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for AlwaysErrorOnGenericParam<'a, 'b> {
     fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) -> Self::Result {
@@ -486,7 +469,6 @@ impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for AlwaysErrorOnGenericParam<
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=RequireTransparent | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_requires_transparent, code = E0802)]
@@ -494,7 +476,6 @@ struct RequireTransparent {
     #[primary_span]
     span: Span,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=RequireOneField | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_requires_one_field, code = E0802)]
@@ -502,7 +483,6 @@ struct RequireOneField {
     #[primary_span]
     span: Span,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=RequireOneGeneric | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_requires_one_generic, code = E0802)]
@@ -510,7 +490,6 @@ struct RequireOneGeneric {
     #[primary_span]
     span: Span,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=RequireOnePointee | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_requires_one_pointee, code = E0802)]
@@ -518,7 +497,6 @@ struct RequireOnePointee {
     #[primary_span]
     span: Span,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=TooManyPointees | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_too_many_pointees, code = E0802)]
@@ -528,7 +506,6 @@ struct TooManyPointees {
     #[label]
     another: Span,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=RequiresMaybeSized | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_coerce_pointee_requires_maybe_sized, code = E0802)]

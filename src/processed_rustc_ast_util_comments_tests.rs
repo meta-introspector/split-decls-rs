@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/util/comments/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_block_doc_comment_1 | COMPLEXITY=3 | LINES=14 */
 #[allow(rustc::symbol_intern_string_literal)]
 
 use crate::rustc_complete::create_default_session_globals_then;
@@ -14,7 +13,6 @@ fn test_block_doc_comment_1() {
         assert_eq!(stripped.as_str(), " Test \n*  Test\n   Test");
     })
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_block_doc_comment_2 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_block_doc_comment_2() {
@@ -24,7 +22,6 @@ fn test_block_doc_comment_2() {
         assert_eq!(stripped.as_str(), " Test\n  Test");
     })
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_block_doc_comment_3 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_block_doc_comment_3() {
@@ -34,7 +31,6 @@ fn test_block_doc_comment_3() {
         assert_eq!(stripped.as_str(), "let a: *i32;\n*a = 5;");
     })
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_line_doc_comment | COMPLEXITY=4 | LINES=14 */
 
 #[test]
 fn test_line_doc_comment() {
@@ -49,7 +45,6 @@ fn test_line_doc_comment() {
         assert_eq!(stripped.as_str(), "!test");
     })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_doc_blocks | COMPLEXITY=4 | LINES=18 */
 
 #[test]
 fn test_doc_blocks() {

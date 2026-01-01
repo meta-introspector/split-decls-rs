@@ -1,22 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/builder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::borrow::{Borrow, Cow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ops::Deref;
 use std::{iter, ptr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 
 use libc::{c_char, c_uint, size_t};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_abi as abi;
 use crate::rustc_abi::{Align, Size, WrappingRange};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::MemFlags;
 use crate::rustc_codegen_ssa::common::{IntPredicate, RealPredicate, SynchronizationScope, TypeKind};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_codegen_ssa::mir::place::PlaceRef;
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
@@ -27,30 +20,22 @@ use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
     TyAndLayout,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_sanitizers::{cfi, kcfi};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::config::OptLevel;
 use crate::rustc_complete::Span;
 use crate::rustc_target::callconv::{FnAbi, PassMode};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{HasTargetSpec, SanitizerSet, Target};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::abi::FnAbiLlvmExt;
 use crate::attributes;
 use crate::common::Funclet;
 use crate::context::{CodegenCx, FullCx, GenericCx, SCx};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::llvm::{
     self, AtomicOrdering, AtomicRmwBinOp, BasicBlock, GEPNoWrapFlags, Metadata, TRUE, ToLlvmBool,
 };
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::type_::Type;
 use crate::type_of::LayoutLlvmExt;
 use crate::value::Value;
@@ -60,7 +45,6 @@ pub(crate) struct GenericBuilder<'a, 'll, CX: Borrow<SCx<'ll>>> {
     pub llbuilder: &'ll mut llvm::Builder<'ll>,
     pub cx: &'a GenericCx<'ll, CX>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=11 */
 
 pub(crate) type SBuilder<'a, 'll> = GenericBuilder<'a, 'll, SCx<'ll>>;
 pub(crate) type Builder<'a, 'll, 'tcx> = GenericBuilder<'a, 'll, FullCx<'ll, 'tcx>>;
@@ -72,7 +56,6 @@ impl<'a, 'll, CX: Borrow<SCx<'ll>>> Drop for GenericBuilder<'a, 'll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=33 */
 
 impl<'a, 'll> SBuilder<'a, 'll> {
     pub(crate) fn call(
@@ -106,7 +89,6 @@ impl<'a, 'll> SBuilder<'a, 'll> {
         call
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=with_cx | COMPLEXITY=71 | LINES=98 */
 
 impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
     fn with_cx(scx: &'a GenericCx<'ll, CX>) -> Self {
@@ -205,7 +187,6 @@ impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 /// Empty string, to be used where LLVM expects an instruction name, indicating
 /// that the instruction is to be left unnamed (i.e. numbered, in textual IR).
@@ -224,14 +205,12 @@ impl<'ll, CX: Borrow<SCx<'ll>>> BackendTypes for GenericBuilder<'_, 'll, CX> {
     type DILocation = <GenericCx<'ll, CX> as BackendTypes>::DILocation;
     type DIVariable = <GenericCx<'ll, CX> as BackendTypes>::DIVariable;
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=data_layout | COMPLEXITY=5 | LINES=6 */
 
 impl abi::HasDataLayout for Builder<'_, '_, '_> {
     fn data_layout(&self) -> &abi::TargetDataLayout {
         self.cx.data_layout()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> ty::layout::HasTyCtxt<'tcx> for Builder<'_, '_, 'tcx> {
     #[inline]
@@ -239,14 +218,12 @@ impl<'tcx> ty::layout::HasTyCtxt<'tcx> for Builder<'_, '_, 'tcx> {
         self.cx.tcx
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=typing_env | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> ty::layout::HasTypingEnv<'tcx> for Builder<'_, '_, 'tcx> {
     fn typing_env(&self) -> ty::TypingEnv<'tcx> {
         self.cx.typing_env()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=target_spec | COMPLEXITY=5 | LINES=7 */
 
 impl HasTargetSpec for Builder<'_, '_, '_> {
     #[inline]
@@ -254,7 +231,6 @@ impl HasTargetSpec for Builder<'_, '_, '_> {
         self.cx.target_spec()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=handle_layout_err | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> LayoutOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
     #[inline]
@@ -262,7 +238,6 @@ impl<'tcx> LayoutOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
         self.cx.handle_layout_err(err, span, ty)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=handle_fn_abi_err | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> FnAbiOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
     #[inline]
@@ -275,7 +250,6 @@ impl<'tcx> FnAbiOfHelpers<'tcx> for Builder<'_, '_, 'tcx> {
         self.cx.handle_fn_abi_err(err, span, fn_abi_request)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<'ll, 'tcx> Deref for Builder<'_, 'll, 'tcx> {
     type Target = CodegenCx<'ll, 'tcx>;
@@ -285,7 +259,6 @@ impl<'ll, 'tcx> Deref for Builder<'_, 'll, 'tcx> {
         self.cx
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=10 */
 
 macro_rules! math_builder_methods {
     ($($name:ident($($arg:ident),*) => $llvm_capi:ident),+ $(,)?) => {
@@ -296,7 +269,6 @@ macro_rules! math_builder_methods {
         })+
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=12 */
 
 macro_rules! set_math_builder_methods {
     ($($name:ident($($arg:ident),*) => ($llvm_capi:ident, $llvm_set_math:ident)),+ $(,)?) => {
@@ -309,7 +281,6 @@ macro_rules! set_math_builder_methods {
         })+
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=build | COMPLEXITY=766 | LINES=1208 */
 
 impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
     type CodegenCx = CodegenCx<'ll, 'tcx>;
@@ -1518,7 +1489,6 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
         attributes::apply_to_callsite(llret, llvm::AttributePlace::Function, &[cold_inline]);
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=get_static | COMPLEXITY=14 | LINES=16 */
 
 impl<'ll> StaticBuilderMethods for Builder<'_, 'll, '_> {
     fn get_static(&mut self, def_id: DefId) -> &'ll Value {
@@ -1535,14 +1505,12 @@ impl<'ll> StaticBuilderMethods for Builder<'_, 'll, '_> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
     pub(crate) fn llfn(&self) -> &'ll Value {
         unsafe { llvm::LLVMGetBasicBlockParent(self.llbb()) }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=position_at_start | COMPLEXITY=8 | LINES=8 */
 
 impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
     fn position_at_start(&mut self, llbb: &'ll BasicBlock) {
@@ -1551,7 +1519,6 @@ impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=align_metadata | COMPLEXITY=21 | LINES=23 */
 impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
     fn align_metadata(&mut self, load: &'ll Value, align: Align) {
         unsafe {
@@ -1575,7 +1542,6 @@ impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=check_call | COMPLEXITY=160 | LINES=147 */
 impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
     pub(crate) fn minnum(&mut self, lhs: &'ll Value, rhs: &'ll Value) -> &'ll Value {
         unsafe { llvm::LLVMRustBuildMinNum(self.llbuilder, lhs, rhs) }
@@ -1723,7 +1689,6 @@ impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
         unsafe { llvm::LLVMBuildVAArg(self.llbuilder, list, ty, UNNAMED) }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=call_lifetime_intrinsic | COMPLEXITY=15 | LINES=29 */
 
 impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
     pub(crate) fn call_intrinsic(
@@ -1753,7 +1718,6 @@ impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=add_incoming_to_phi | COMPLEXITY=20 | LINES=21 */
 impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
     pub(crate) fn phi(
         &mut self,
@@ -1775,7 +1739,6 @@ impl<'a, 'll, CX: Borrow<SCx<'ll>>> GenericBuilder<'a, 'll, CX> {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=cfi_type_test | COMPLEXITY=90 | LINES=177 */
 impl<'a, 'll, 'tcx> Builder<'a, 'll, 'tcx> {
     pub(crate) fn landing_pad(
         &mut self,

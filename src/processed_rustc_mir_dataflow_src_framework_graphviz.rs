@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/graphviz.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // A helpful diagram for debugging dataflow problems.
 
 use std::borrow::Cow;
@@ -8,33 +7,26 @@ use std::ffi::OsString;
 use std::path::PathBuf;
 use std::sync::OnceLock;
 use std::{io, ops, str};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use regex::Regex;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::{
     self, BasicBlock, Body, Location, MirDumper, graphviz_safe_def_name, traversal,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::debug;
 use {rustc_ast as ast, rustc_graphviz as dot};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::fmt::{DebugDiffWithAdapter, DebugWithAdapter, DebugWithContext};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use super::{
     Analysis, CallReturnPlaces, Direction, Results, ResultsCursor, ResultsVisitor, visit_results,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::errors::{
     DuplicateValuesFor, PathMustEndInFilename, RequiresAnArgument, UnknownFormatter,
 };
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=70 */
 
 /// Writes a DOT file containing the results of a dataflow analysis if the user requested it via
 /// `rustc_mir` attributes and `-Z dump-mir-dataflow`. The `Result` in and the `Results` out are
@@ -105,14 +97,12 @@ where
 
     lhs
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=RustcMirAttrs | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 struct RustcMirAttrs {
     basename_and_suffix: Option<PathBuf>,
     formatter: Option<Symbol>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=41 | LINES=83 */
 
 impl RustcMirAttrs {
     fn parse(tcx: TyCtxt<'_>, def_id: DefId) -> Result<Self, ()> {
@@ -196,14 +186,12 @@ impl RustcMirAttrs {
         Some(ret)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum OutputStyle {
     AfterOnly,
     BeforeAndAfter,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=num_state_columns | COMPLEXITY=7 | LINES=9 */
 
 impl OutputStyle {
     fn num_state_columns(&self) -> usize {
@@ -213,7 +201,6 @@ impl OutputStyle {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Formatter | COMPLEXITY=5 | LINES=15 */
 
 struct Formatter<'mir, 'tcx, A>
 where
@@ -229,7 +216,6 @@ where
     style: OutputStyle,
     reachable: DenseBitSet<BasicBlock>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=15 */
 
 impl<'mir, 'tcx, A> Formatter<'mir, 'tcx, A>
 where
@@ -245,7 +231,6 @@ where
         Formatter { body, analysis: analysis.into(), results, style, reachable }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=CfgEdge | COMPLEXITY=2 | LINES=7 */
 
 /// A pair of a basic block and an index into that basic blocks `successors`.
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -253,7 +238,6 @@ struct CfgEdge {
     source: BasicBlock,
     index: usize,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=dataflow_successors | COMPLEXITY=3 | LINES=9 */
 
 fn dataflow_successors(body: &Body<'_>, bb: BasicBlock) -> Vec<CfgEdge> {
     body[bb]
@@ -263,7 +247,6 @@ fn dataflow_successors(body: &Body<'_>, bb: BasicBlock) -> Vec<CfgEdge> {
         .map(|(index, _)| CfgEdge { source: bb, index })
         .collect()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=14 | LINES=42 */
 
 impl<'tcx, A> dot::Labeller<'_> for Formatter<'_, 'tcx, A>
 where
@@ -306,7 +289,6 @@ where
         dot::LabelText::label(label.clone())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=9 | LINES=34 */
 
 impl<'tcx, A> dot::GraphWalk<'_> for Formatter<'_, 'tcx, A>
 where
@@ -341,7 +323,6 @@ where
         self.body[edge.source].terminator().successors().nth(edge.index).unwrap()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=BlockFormatter | COMPLEXITY=2 | LINES=9 */
 
 struct BlockFormatter<'mir, 'tcx, A>
 where
@@ -351,7 +332,6 @@ where
     bg: Background,
     style: OutputStyle,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=toggle_background | COMPLEXITY=142 | LINES=356 */
 
 impl<'tcx, A> BlockFormatter<'_, 'tcx, A>
 where
@@ -708,14 +688,12 @@ where
         })
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=StateDiffCollector | COMPLEXITY=2 | LINES=6 */
 
 struct StateDiffCollector<D> {
     prev_state: D,
     before: Option<Vec<String>>,
     after: Vec<String>,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=run | COMPLEXITY=5 | LINES=23 */
 
 impl<D> StateDiffCollector<D> {
     fn run<'tcx, A>(
@@ -739,7 +717,6 @@ impl<D> StateDiffCollector<D> {
         collector
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=visit_block_start | COMPLEXITY=25 | LINES=66 */
 
 impl<'tcx, A> ResultsVisitor<'tcx, A> for StateDiffCollector<A::Domain>
 where
@@ -806,7 +783,6 @@ where
         self.prev_state.clone_from(state)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=7 */
 
 macro_rules! regex {
     ($re:literal $(,)?) => {{
@@ -814,7 +790,6 @@ macro_rules! regex {
         RE.get_or_init(|| Regex::new($re).unwrap())
     }};
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=diff_pretty | COMPLEXITY=22 | LINES=45 */
 
 fn diff_pretty<T, C>(new: T, old: T, ctxt: &C) -> String
 where
@@ -860,7 +835,6 @@ where
 
     html_diff
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// The background color used for zebra-striping the table.
 #[derive(Clone, Copy)]
@@ -868,7 +842,6 @@ enum Background {
     Light,
     Dark,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=attr | COMPLEXITY=7 | LINES=9 */
 
 impl Background {
     fn attr(self) -> &'static str {
@@ -878,7 +851,6 @@ impl Background {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=not | COMPLEXITY=9 | LINES=11 */
 
 impl ops::Not for Background {
     type Output = Self;

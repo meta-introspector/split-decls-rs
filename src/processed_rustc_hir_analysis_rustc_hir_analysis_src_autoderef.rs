@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/autoderef.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_infer::infer::InferCtxt;
 use crate::rustc_infer::traits::PredicateObligations;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 use crate::errors::AutoDerefReachedRecursionLimit;
 use crate::traits;
@@ -24,7 +19,6 @@ pub enum AutoderefKind {
     /// A type which must dispatch to a `Deref` implementation.
     Overloaded,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=AutoderefSnapshot | COMPLEXITY=2 | LINES=7 */
 struct AutoderefSnapshot<'tcx> {
     at_start: bool,
     reached_recursion_limit: bool,
@@ -32,7 +26,6 @@ struct AutoderefSnapshot<'tcx> {
     cur_ty: Ty<'tcx>,
     obligations: PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Autoderef | COMPLEXITY=3 | LINES=20 */
 
 /// Recursively dereference a type, considering both built-in
 /// dereferences (`*`) and the `Deref` trait.
@@ -53,7 +46,6 @@ pub struct Autoderef<'a, 'tcx> {
     use_receiver_trait: bool,
     silence_errors: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=next | COMPLEXITY=43 | LINES=66 */
 
 impl<'a, 'tcx> Iterator for Autoderef<'a, 'tcx> {
     type Item = (Ty<'tcx>, usize);
@@ -120,7 +112,6 @@ impl<'a, 'tcx> Iterator for Autoderef<'a, 'tcx> {
         Some((self.state.cur_ty, self.step_count()))
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=56 | LINES=143 */
 
 impl<'a, 'tcx> Autoderef<'a, 'tcx> {
     pub fn new(
@@ -264,7 +255,6 @@ impl<'a, 'tcx> Autoderef<'a, 'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=report_autoderef_recursion_limit_error | COMPLEXITY=7 | LINES=18 */
 
 pub fn report_autoderef_recursion_limit_error<'tcx>(
     tcx: TyCtxt<'tcx>,

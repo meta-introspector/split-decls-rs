@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/resolver.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 // Propagate `Qualif`s between locals and query the results.
 //
 // This contains the dataflow analysis used to track `Qualif`s on complex control-flow graphs.
@@ -12,13 +11,10 @@ use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Local, Location, Statement, StatementKind, TerminatorEdges,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::fmt::DebugWithContext;
 use crate::rustc_mir_dataflow::{Analysis, JoinSemiLattice};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ConstCx, Qualif, qualifs};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=TransferFunction | COMPLEXITY=5 | LINES=13 */
 
 /// A `Visitor` that propagates qualifs between locals. This defines the transfer function of
 /// `FlowSensitiveAnalysis`.
@@ -32,7 +28,6 @@ struct TransferFunction<'mir, 'tcx, Q> {
     state: &'mir mut State,
     _qualif: PhantomData<Q>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=61 | LINES=96 */
 
 impl<'mir, 'tcx, Q> TransferFunction<'mir, 'tcx, Q>
 where
@@ -129,7 +124,6 @@ where
         !place.ty(self.ccx.body, self.ccx.tcx).ty.is_freeze(self.ccx.tcx, self.ccx.typing_env)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_operand | COMPLEXITY=65 | LINES=103 */
 
 impl<'tcx, Q> Visitor<'tcx> for TransferFunction<'_, 'tcx, Q>
 where
@@ -233,14 +227,12 @@ where
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// The dataflow analysis used to propagate qualifs on arbitrary CFGs.
 pub(super) struct FlowSensitiveAnalysis<'mir, 'tcx, Q> {
     ccx: &'mir ConstCx<'mir, 'tcx>,
     _qualif: PhantomData<Q>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=transfer_function | COMPLEXITY=5 | LINES=13 */
 
 impl<'mir, 'tcx, Q> FlowSensitiveAnalysis<'mir, 'tcx, Q>
 where
@@ -254,7 +246,6 @@ where
         TransferFunction::<Q>::new(self.ccx, state)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 #[derive(Debug, PartialEq, Eq)]
 /// The state for the `FlowSensitiveAnalysis` dataflow analysis. This domain is likely homogeneous,
@@ -266,7 +257,6 @@ pub(super) struct State {
     /// indirect mutation.
     pub borrow: MixedBitSet<Local>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=9 | LINES=13 */
 
 impl Clone for State {
     fn clone(&self) -> Self {
@@ -280,7 +270,6 @@ impl Clone for State {
         self.borrow.clone_from(&other.borrow);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 impl State {
     #[inline]
@@ -288,7 +277,6 @@ impl State {
         self.qualif.contains(local)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=20 | LINES=30 */
 
 impl<C> DebugWithContext<C> for State {
     fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -319,14 +307,12 @@ impl<C> DebugWithContext<C> for State {
         Ok(())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=join | COMPLEXITY=5 | LINES=6 */
 
 impl JoinSemiLattice for State {
     fn join(&mut self, other: &Self) -> bool {
         self.qualif.join(&other.qualif) || self.borrow.join(&other.borrow)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=12 | LINES=48 */
 
 impl<'tcx, Q> Analysis<'tcx> for FlowSensitiveAnalysis<'_, 'tcx, Q>
 where

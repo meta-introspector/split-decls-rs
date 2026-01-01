@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/layout.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use hir::def_id::DefId;
 use crate::rustc_abi::Integer::{I8, I32};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::Primitive::{self, Float, Int, Pointer};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_abi::{
     AddressSpace, BackendRepr, FIRST_VARIANT, FieldIdx, FieldsShape, HasDataLayout, Layout,
     LayoutCalculatorError, LayoutData, Niche, ReprOptions, Scalar, Size, StructKind, TagEncoding,
     VariantIdx, Variants, WrappingRange,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use rustc_hashes::Hash64;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
@@ -18,29 +14,21 @@ use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::layout::{
     FloatExt, HasTyCtxt, IntegerExt, LayoutCx, LayoutError, LayoutOf, TyAndLayout,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{
     self, AdtDef, CoroutineArgsExt, EarlyBinder, PseudoCanonicalInput, Ty, TyCtxt, TypeVisitableExt,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_abi as abi, rustc_hir as hir};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{NonPrimitiveSimdType, OversizedSimdType, ZeroLengthSimdType};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { layout_of, ..*providers };
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=layout_of | COMPLEXITY=22 | LINES=48 */
 
 #[instrument(skip(tcx, query), level = "debug")]
 fn layout_of<'tcx>(
@@ -89,12 +77,10 @@ fn layout_of<'tcx>(
 
     Ok(layout)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=error | COMPLEXITY=2 | LINES=4 */
 
 fn error<'tcx>(cx: &LayoutCx<'tcx>, err: LayoutError<'tcx>) -> &'tcx LayoutError<'tcx> {
     cx.tcx().arena.alloc(err)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=map_error | COMPLEXITY=39 | LINES=53 */
 
 fn map_error<'tcx>(
     cx: &LayoutCx<'tcx>,
@@ -148,7 +134,6 @@ fn map_error<'tcx>(
     };
     error(cx, err)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=extract_const_value | COMPLEXITY=22 | LINES=37 */
 
 fn extract_const_value<'tcx>(
     cx: &LayoutCx<'tcx>,
@@ -186,7 +171,6 @@ fn extract_const_value<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=layout_of_uncached | COMPLEXITY=254 | LINES=534 */
 
 fn layout_of_uncached<'tcx>(
     cx: &LayoutCx<'tcx>,
@@ -721,7 +705,6 @@ fn layout_of_uncached<'tcx>(
         }
     })
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=record_layout_for_printing | COMPLEXITY=22 | LINES=50 */
 
 fn record_layout_for_printing<'tcx>(cx: &LayoutCx<'tcx>, layout: TyAndLayout<'tcx>) {
     // Ignore layouts that are done with non-empty environments or
@@ -772,7 +755,6 @@ fn record_layout_for_printing<'tcx>(cx: &LayoutCx<'tcx>, layout: TyAndLayout<'tc
         }
     };
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=variant_info_for_adt | COMPLEXITY=36 | LINES=70 */
 
 fn variant_info_for_adt<'tcx>(
     cx: &LayoutCx<'tcx>,
@@ -843,7 +825,6 @@ fn variant_info_for_adt<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=variant_info_for_coroutine | COMPLEXITY=48 | LINES=123 */
 
 fn variant_info_for_coroutine<'tcx>(
     cx: &LayoutCx<'tcx>,

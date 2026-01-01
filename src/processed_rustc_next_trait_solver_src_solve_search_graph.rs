@@ -1,28 +1,22 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/search_graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::convert::Infallible;
 use std::marker::PhantomData;
 
 use rustc_type_ir::data_structures::ensure_sufficient_stack;
 use rustc_type_ir::search_graph::{self, PathKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::solve::{CanonicalInput, Certainty, NoSolution, QueryResult};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::{Interner, TypingMode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{
     EvalCtxt, FIXPOINT_STEP_LIMIT, has_no_inference_or_external_constraints, inspect,
 };
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 /// This type is never constructed. We only use it to implement `search_graph::Delegate`
 /// for all types which impl `SolverDelegate` and doing it directly fails in coherence.
 pub(super) struct SearchGraphDelegate<D: SolverDelegate> {
     _marker: PhantomData<D>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=enter_validation_scope | COMPLEXITY=40 | LINES=105 */
 pub(super) type SearchGraph<D> = search_graph::SearchGraph<SearchGraphDelegate<D>>;
 impl<D, I> search_graph::Delegate for SearchGraphDelegate<D>
 where
@@ -128,7 +122,6 @@ where
         })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=response_no_constraints | COMPLEXITY=2 | LINES=13 */
 
 fn response_no_constraints<I: Interner>(
     cx: I,

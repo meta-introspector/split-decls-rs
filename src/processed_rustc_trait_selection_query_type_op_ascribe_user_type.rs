@@ -1,21 +1,14 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/ascribe_user_type.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::Obligation;
 use crate::rustc_complete::traits::query::NoSolution;
 pub use crate::rustc_complete::traits::query::type_op::AscribeUserType;
 use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, UserArgs, UserSelfTy, UserTypeKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=8 | LINES=27 */
 use crate::traits::ObligationCtxt;
 
 impl<'tcx> super::QueryTypeOp<'tcx> for AscribeUserType<'tcx> {
@@ -43,7 +36,6 @@ impl<'tcx> super::QueryTypeOp<'tcx> for AscribeUserType<'tcx> {
         type_op_ascribe_user_type_with_span(ocx, key, span)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_op_ascribe_user_type_with_span | COMPLEXITY=16 | LINES=25 */
 
 /// The core of the `type_op_ascribe_user_type` query: for diagnostics purposes in NLL HRTB errors,
 /// this query can be re-run to better track the span of the obligation cause, and improve the error
@@ -69,7 +61,6 @@ pub fn type_op_ascribe_user_type_with_span<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=relate_mir_and_user_ty | COMPLEXITY=3 | LINES=22 */
 
 #[instrument(level = "debug", skip(ocx, param_env, span))]
 fn relate_mir_and_user_ty<'tcx>(
@@ -92,7 +83,6 @@ fn relate_mir_and_user_ty<'tcx>(
 
     Ok(())
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=relate_mir_and_user_args | COMPLEXITY=29 | LINES=75 */
 
 #[instrument(level = "debug", skip(ocx, param_env, span))]
 fn relate_mir_and_user_args<'tcx>(

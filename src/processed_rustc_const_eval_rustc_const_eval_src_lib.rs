@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=34 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[allow(rustc::diagnostic_outside_of_impl)]
@@ -29,7 +28,6 @@ use crate::rustc_complete::util::Providers;
 pub use self::errors::ReportErrorExt;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=7 | LINES=21 */
 
 pub fn provide(providers: &mut Providers) {
     const_eval::provide(providers);
@@ -51,7 +49,6 @@ pub fn provide(providers: &mut Providers) {
     providers.hooks.validate_scalar_in_layout =
         |tcx, scalar, layout| util::validate_scalar_in_layout(tcx, scalar, layout);
 }
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=5 */
 
 /// `rustc_driver::main` installs a handler that will set this to `true` if
 /// the compiler has been sent a request to shut down, such as by a Ctrl-C.

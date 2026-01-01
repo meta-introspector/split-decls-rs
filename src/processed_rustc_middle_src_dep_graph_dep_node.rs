@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_middle/src/dep_graph/dep_node.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::definitions::DefPathHash;
 use crate::rustc_complete::{HirId, ItemLocalId, OwnerId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use rustc_query_system::dep_graph::DepNode;
 use rustc_query_system::dep_graph::FingerprintStyle;
 pub use rustc_query_system::dep_graph::dep_node::DepKind;
 pub(crate) use rustc_query_system::dep_graph::{DepContext, DepNodeParams};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=47 | LINES=79 */
 use crate::rustc_complete::Symbol;
 
 use crate::mir::mono::MonoItem;
@@ -90,7 +86,6 @@ macro_rules! define_dep_nodes {
         }
     };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
 
 // Create various data structures for each query, and also for a few things
 // that aren't queries.
@@ -112,7 +107,6 @@ rustc_with_all_queries!(define_dep_nodes![
 pub(crate) fn make_compile_codegen_unit(tcx: TyCtxt<'_>, name: Symbol) -> DepNode {
     DepNode::construct(tcx, dep_kinds::CompileCodegenUnit, &name)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 // WARNING: `construct` is generic and does not know that `CompileMonoItem` takes `MonoItem`s as keys.
 // Be very careful changing this type signature!
@@ -122,14 +116,12 @@ pub(crate) fn make_compile_mono_item<'tcx>(
 ) -> DepNode {
     DepNode::construct(tcx, dep_kinds::CompileMonoItem, mono_item)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // WARNING: `construct` is generic and does not know that `Metadata` takes `()`s as keys.
 // Be very careful changing this type signature!
 pub(crate) fn make_metadata(tcx: TyCtxt<'_>) -> DepNode {
     DepNode::construct(tcx, dep_kinds::Metadata, &())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=extract_def_id | COMPLEXITY=2 | LINES=12 */
 
 pub trait DepNodeExt: Sized {
     fn extract_def_id(&self, tcx: TyCtxt<'_>) -> Option<DefId>;
@@ -142,7 +134,6 @@ pub trait DepNodeExt: Sized {
 
     fn has_label_string(label: &str) -> bool;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=extract_def_id | COMPLEXITY=22 | LINES=42 */
 
 impl DepNodeExt for DepNode {
     /// Extracts the DefId corresponding to this DepNode. This will work
@@ -185,7 +176,6 @@ impl DepNodeExt for DepNode {
         dep_kind_from_label_string(label).is_ok()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=7 | LINES=17 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for () {
     #[inline(always)]
@@ -203,7 +193,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for () {
         Some(())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for DefId {
     #[inline(always)]
@@ -226,7 +215,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for DefId {
         dep_node.extract_def_id(tcx)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for LocalDefId {
     #[inline(always)]
@@ -249,7 +237,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for LocalDefId {
         dep_node.extract_def_id(tcx).map(|id| id.expect_local())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=10 | LINES=22 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for OwnerId {
     #[inline(always)]
@@ -272,7 +259,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for OwnerId {
         dep_node.extract_def_id(tcx).map(|id| OwnerId { def_id: id.expect_local() })
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=9 | LINES=23 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for CrateNum {
     #[inline(always)]
@@ -296,7 +282,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for CrateNum {
         dep_node.extract_def_id(tcx).map(|id| id.krate)
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=10 | LINES=27 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for (DefId, DefId) {
     #[inline(always)]
@@ -324,7 +309,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for (DefId, DefId) {
         format!("({}, {})", tcx.def_path_debug_str(def_id_0), tcx.def_path_debug_str(def_id_1))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=22 | LINES=43 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for HirId {
     #[inline(always)]
@@ -368,7 +352,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for HirId {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for ModDefId {
     #[inline(always)]
@@ -391,7 +374,6 @@ impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for ModDefId {
         DefId::recover(tcx, dep_node).map(ModDefId::new_unchecked)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=fingerprint_style | COMPLEXITY=9 | LINES=22 */
 
 impl<'tcx> DepNodeParams<TyCtxt<'tcx>> for LocalModDefId {
     #[inline(always)]

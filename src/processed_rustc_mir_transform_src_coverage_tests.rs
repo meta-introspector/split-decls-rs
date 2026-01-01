@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/tests.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=25 */
 // This crate hosts a selection of "unit tests" for components of the `InstrumentCoverage` MIR
 // pass.
 //
@@ -25,26 +24,19 @@
 // basic, coverage-specific features would be impossible to test, but thankfully initializing these
 // globals is comparatively simpler. The easiest way is to wrap the test in a closure argument
 // to: `crate::rustc_span::create_default_session_globals_then(|| { test_here(); })`.
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use itertools::Itertools;
 use crate::rustc_data_structures::graph::{DirectedGraph, Successors};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, DUMMY_SP, Pos, Span};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::graph::{self, BasicCoverageBlock};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=bcb | COMPLEXITY=2 | LINES=4 */
 
 fn bcb(index: u32) -> BasicCoverageBlock {
     BasicCoverageBlock::from_u32(index)
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=MockBlocks | COMPLEXITY=2 | LINES=9 */
 
 // All `TEMP_BLOCK` targets should be replaced before calling `to_body() -> mir::Body`.
 const TEMP_BLOCK: BasicBlock = BasicBlock::MAX;
@@ -54,7 +46,6 @@ struct MockBlocks<'tcx> {
     dummy_place: Place<'tcx>,
     next_local: usize,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=64 | LINES=117 */
 
 impl<'tcx> MockBlocks<'tcx> {
     fn new() -> Self {
@@ -172,7 +163,6 @@ impl<'tcx> MockBlocks<'tcx> {
         Body::new_cfg_only(self.blocks)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=debug_basic_blocks | COMPLEXITY=40 | LINES=34 */
 
 fn debug_basic_blocks(mir_body: &Body<'_>) -> String {
     format!(
@@ -207,7 +197,6 @@ fn debug_basic_blocks(mir_body: &Body<'_>) -> String {
             .collect::<Vec<_>>()
     )
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=print_mir_graphviz | COMPLEXITY=18 | LINES=28 */
 
 static PRINT_GRAPHS: bool = false;
 
@@ -236,7 +225,6 @@ fn print_mir_graphviz(name: &str, mir_body: &Body<'_>) {
         );
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=print_coverage_graphviz | COMPLEXITY=18 | LINES=24 */
 
 fn print_coverage_graphviz(name: &str, mir_body: &Body<'_>, graph: &graph::CoverageGraph) {
     if PRINT_GRAPHS {
@@ -261,7 +249,6 @@ fn print_coverage_graphviz(name: &str, mir_body: &Body<'_>, graph: &graph::Cover
         );
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=goto_switchint | COMPLEXITY=6 | LINES=47 */
 
 /// Create a mock `Body` with a simple flow.
 fn goto_switchint<'a>() -> Body<'a> {
@@ -309,7 +296,6 @@ fn goto_switchint<'a>() -> Body<'a> {
     */
     mir_body
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=assert_successors | COMPLEXITY=2 | LINES=11 */
 
 #[track_caller]
 fn assert_successors(
@@ -321,7 +307,6 @@ fn assert_successors(
     successors.sort_unstable();
     assert_eq!(successors, expected_successors);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=test_covgraph_goto_switchint | COMPLEXITY=9 | LINES=26 */
 
 #[test]
 fn test_covgraph_goto_switchint() {
@@ -348,7 +333,6 @@ fn test_covgraph_goto_switchint() {
     assert_successors(&graph, bcb(1), &[]);
     assert_successors(&graph, bcb(2), &[]);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=switchint_then_loop_else_return | COMPLEXITY=5 | LINES=40 */
 
 /// Create a mock `Body` with a loop.
 fn switchint_then_loop_else_return<'a>() -> Body<'a> {
@@ -389,7 +373,6 @@ fn switchint_then_loop_else_return<'a>() -> Body<'a> {
     */
     mir_body
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=test_covgraph_switchint_then_loop_else_return | COMPLEXITY=6 | LINES=32 */
 
 #[test]
 fn test_covgraph_switchint_then_loop_else_return() {
@@ -422,7 +405,6 @@ fn test_covgraph_switchint_then_loop_else_return() {
     assert_successors(&graph, bcb(2), &[]);
     assert_successors(&graph, bcb(3), &[bcb(1)]);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=switchint_loop_then_inner_loop_else_break | COMPLEXITY=10 | LINES=70 */
 
 /// Create a mock `Body` with nested loops.
 fn switchint_loop_then_inner_loop_else_break<'a>() -> Body<'a> {
@@ -493,7 +475,6 @@ fn switchint_loop_then_inner_loop_else_break<'a>() -> Body<'a> {
     */
     mir_body
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=test_covgraph_switchint_loop_then_inner_loop_else_break | COMPLEXITY=8 | LINES=51 */
 
 #[test]
 fn test_covgraph_switchint_loop_then_inner_loop_else_break() {

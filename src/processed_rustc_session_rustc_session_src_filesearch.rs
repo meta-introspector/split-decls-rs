@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_session/src/filesearch.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 // A module for searching for libraries
 
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fs};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use rustc_fs_util::try_canonicalize;
 use crate::rustc_target::spec::Target;
 
 use crate::search_paths::{PathKind, SearchPath};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FileSearch | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 pub struct FileSearch {
     cli_search_paths: Vec<SearchPath>,
     tlib_path: SearchPath,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cli_search_paths | COMPLEXITY=9 | LINES=30 */
 
 impl FileSearch {
     pub fn cli_search_paths<'b>(&'b self, kind: PathKind) -> impl Iterator<Item = &'b SearchPath> {
@@ -49,13 +44,11 @@ impl FileSearch {
         self
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=make_target_lib_path | COMPLEXITY=2 | LINES=5 */
 
 pub fn make_target_lib_path(sysroot: &Path, target_triple: &str) -> PathBuf {
     let rustlib_path = crate::rustc_target::relative_target_rustlib_path(sysroot, target_triple);
     sysroot.join(rustlib_path).join("lib")
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=make_target_bin_path | COMPLEXITY=2 | LINES=8 */
 
 /// Returns a path to the target's `bin` folder within its `rustlib` path in the sysroot. This is
 /// where binaries are usually installed, e.g. the self-contained linkers, lld-wrappers, LLVM tools,
@@ -64,7 +57,6 @@ pub fn make_target_bin_path(sysroot: &Path, target_triple: &str) -> PathBuf {
     let rustlib_path = crate::rustc_target::relative_target_rustlib_path(sysroot, target_triple);
     sysroot.join(rustlib_path).join("bin")
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=current_dll_path | COMPLEXITY=50 | LINES=78 */
 
 #[cfg(unix)]
 fn current_dll_path() -> Result<PathBuf, String> {
@@ -143,7 +135,6 @@ fn current_dll_path() -> Result<PathBuf, String> {
         })
         .clone()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=current_dll_path | COMPLEXITY=23 | LINES=41 */
 
 #[cfg(windows)]
 fn current_dll_path() -> Result<PathBuf, String> {
@@ -185,13 +176,11 @@ fn current_dll_path() -> Result<PathBuf, String> {
     // so we try to avoid those kinds of paths.
     Ok(rustc_fs_util::fix_windows_verbatim_for_gcc(&path))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=current_dll_path | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(target_os = "wasi")]
 fn current_dll_path() -> Result<PathBuf, String> {
     Err("current_dll_path is not supported on WASI".to_string())
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=default_from_rustc_driver_dll | COMPLEXITY=37 | LINES=71 */
 
 /// This function checks if sysroot is found using env::args().next(), and if it
 /// is not found, finds sysroot from current rustc_driver dll.

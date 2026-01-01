@@ -1,24 +1,20 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/job.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::any::Any;
 use std::cell::UnsafeCell;
 use std::mem;
 use std::sync::Arc;
 
 use crossbeam_deque::{Injector, Steal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::latch::Latch;
 use crate::tlv::Tlv;
 use crate::{tlv, unwind};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) enum JobResult<T> {
     None,
     Ok(T),
     Panic(Box<dyn Any + Send>),
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=12 */
 
 /// A `Job` is used to advertise work for other threads that they may
 /// want to steal. In accordance with time honored tradition, jobs are
@@ -31,13 +27,11 @@ pub(super) trait Job {
     /// appropriate traits are met, whether `Send`, `Sync`, or both.
     unsafe fn execute(this: *const ());
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub(super) struct JobRefId {
     pointer: usize,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// Effectively a Job trait object. Each JobRef **must** be executed
 /// exactly once, or else data may leak.
@@ -49,12 +43,9 @@ pub(super) struct JobRef {
     pointer: *const (),
     execute_fn: unsafe fn(*const ()),
 }
-/* AST_META: AST_ID=7 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl Send for JobRef {}
-/* AST_META: AST_ID=8 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for JobRef {}
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=22 */
 
 impl JobRef {
     /// Unsafe: caller asserts that `data` will remain valid until the
@@ -77,7 +68,6 @@ impl JobRef {
         unsafe { (self.execute_fn)(self.pointer) }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 /// A job that will be owned by a stack slot. This means that when it
 /// executes it need not free any heap data, the cleanup occurs when
@@ -94,7 +84,6 @@ where
     result: UnsafeCell<JobResult<R>>,
     tlv: Tlv,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=35 */
 
 impl<L, F, R> StackJob<L, F, R>
 where
@@ -130,7 +119,6 @@ where
         self.result.into_inner().into_return_value()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=21 */
 
 impl<L, F, R> Job for StackJob<L, F, R>
 where
@@ -152,7 +140,6 @@ where
         mem::forget(abort);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// Represents a job stored in the heap. Used to implement
 /// `scope`. Unlike `StackJob`, when executed, `HeapJob` simply
@@ -167,7 +154,6 @@ where
     job: BODY,
     tlv: Tlv,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=24 */
 
 impl<BODY> HeapJob<BODY>
 where
@@ -192,7 +178,6 @@ where
         unsafe { self.into_job_ref() }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=12 */
 
 impl<BODY> Job for HeapJob<BODY>
 where
@@ -205,7 +190,6 @@ where
         (this.job)(JobRefId { pointer });
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Represents a job stored in an `Arc` -- like `HeapJob`, but may
 /// be turned into multiple `JobRef`s and called multiple times.
@@ -215,7 +199,6 @@ where
 {
     job: BODY,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=24 */
 
 impl<BODY> ArcJob<BODY>
 where
@@ -240,7 +223,6 @@ where
         unsafe { Self::as_job_ref(this) }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=11 */
 
 impl<BODY> Job for ArcJob<BODY>
 where
@@ -252,7 +234,6 @@ where
         (this.job)(JobRefId { pointer });
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=call | COMPLEXITY=17 | LINES=21 */
 
 impl<T> JobResult<T> {
     fn call(func: impl FnOnce(bool) -> T) -> Self {
@@ -274,13 +255,11 @@ impl<T> JobResult<T> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 /// Indirect queue to provide FIFO job priority.
 pub(super) struct JobFifo {
     inner: Injector<JobRef>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=14 */
 
 impl JobFifo {
     pub(super) fn new() -> Self {
@@ -295,7 +274,6 @@ impl JobFifo {
         unsafe { JobRef::new(self) }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=14 */
 
 impl Job for JobFifo {
     unsafe fn execute(this: *const ()) {

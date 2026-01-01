@@ -1,27 +1,18 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/wfcheck.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cell::LazyCell;
 use std::ops::{ControlFlow, Deref};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use hir::intravisit::{self, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{AmbigArg, ItemKind};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
 use crate::rustc_infer::infer::{self, InferCtxt, SubregionOrigin, TyCtxtInferExt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 use crate::rustc_lint_defs::builtin::SUPERTRAIT_ITEM_SHADOWING_DEFINITION;
 use rustc_macros::LintDiagnostic;
 use crate::rustc_complete::mir::interpret::ErrorHandled;
@@ -32,50 +23,38 @@ use crate::rustc_complete::ty::{
     TypeFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
     Upcast,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{DUMMY_SP, Span, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::regions::{InferCtxtRegionExt, OutlivesEnvironmentBuildExt};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::misc::{
     ConstParamTyImplementationError, type_allowed_to_implement_const_param_ty,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
     WellFormedLoc,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::autoderef::Autoderef;
 use crate::constrained_generic_params::{Parameter, identify_constrained_generic_params};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::errors::InvalidReceiverTyHint;
 use crate::{errors, fluent_generated as fluent};
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(super) struct WfCheckingCtxt<'a, 'tcx> {
     pub(super) ocx: ObligationCtxt<'a, 'tcx, FulfillmentError<'tcx>>,
     body_def_id: LocalDefId,
     param_env: ty::ParamEnv<'tcx>,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=6 */
 impl<'a, 'tcx> Deref for WfCheckingCtxt<'a, 'tcx> {
     type Target = ObligationCtxt<'a, 'tcx, FulfillmentError<'tcx>>;
     fn deref(&self) -> &Self::Target {
         &self.ocx
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=23 | LINES=68 */
 
 impl<'tcx> WfCheckingCtxt<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -144,7 +123,6 @@ impl<'tcx> WfCheckingCtxt<'_, 'tcx> {
         ));
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=65 */
 
 pub(super) fn enter_wf_checking_ctxt<'tcx, F>(
     tcx: TyCtxt<'tcx>,
@@ -210,7 +188,6 @@ where
         Err(infcx_compat.err_ctxt().report_region_errors(body_def_id, &errors_compat))
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(super) fn check_well_formed(
     tcx: TyCtxt<'_>,
@@ -224,7 +201,6 @@ pub(super) fn check_well_formed(
 
     res
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Checks that the field types (in a struct def'n) or argument types (in an enum def'n) are
 /// well-formed, meaning that they do not require any constraints not declared in the struct
@@ -232,7 +208,6 @@ pub(super) fn check_well_formed(
 ///
 /// ```rust
 /// struct StaticRef<T> { x: &'static T }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=91 */
 /// ```
 ///
 /// because the type did not declare that `T: 'static`.
@@ -324,7 +299,6 @@ pub(super) fn check_item<'tcx>(
         _ => Ok(()),
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 pub(super) fn check_foreign_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -342,7 +316,6 @@ pub(super) fn check_foreign_item<'tcx>(
         hir::ForeignItemKind::Static(..) | hir::ForeignItemKind::Type => Ok(()),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 
 pub(crate) fn check_trait_item<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -362,7 +335,6 @@ pub(crate) fn check_trait_item<'tcx>(
     }
     res
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 /// Require that the user writes where clauses on GATs for the implicit
 /// outlives bounds involving trait parameters in trait functions and
@@ -375,7 +347,6 @@ pub(crate) fn check_trait_item<'tcx>(
 ///     type Item<'a>;
 ///     fn into_iter<'a>(&'a self) -> Self::Iter<'a>;
 /// }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=check_gat_where_clauses | COMPLEXITY=103 | LINES=180 */
 /// ```
 fn check_gat_where_clauses(tcx: TyCtxt<'_>, trait_def_id: LocalDefId) {
     // Associates every GAT's def_id to a list of possibly missing bounds detected by this lint.
@@ -556,7 +527,6 @@ fn check_gat_where_clauses(tcx: TyCtxt<'_>, trait_def_id: LocalDefId) {
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=augment_param_env | COMPLEXITY=7 | LINES=22 */
 
 /// Add a new set of predicates to the caller_bounds of an existing param_env.
 fn augment_param_env<'tcx>(
@@ -579,7 +549,6 @@ fn augment_param_env<'tcx>(
     // i.e. traits::normalize_param_env_or_error
     ty::ParamEnv::new(bounds)
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 /// We use the following trait as an example throughout this function.
 /// Specifically, let's assume that `to_check` here is the return type
@@ -590,7 +559,6 @@ fn augment_param_env<'tcx>(
 ///     type Item<'a>;
 ///     fn into_iter<'a>(&'a self) -> Self::Iter<'a>;
 /// }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=gather_gat_bounds | COMPLEXITY=52 | LINES=101 */
 /// ```
 fn gather_gat_bounds<'tcx, T: TypeFoldable<TyCtxt<'tcx>>>(
     tcx: TyCtxt<'tcx>,
@@ -692,7 +660,6 @@ fn gather_gat_bounds<'tcx, T: TypeFoldable<TyCtxt<'tcx>>>(
 
     Some(bounds)
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=ty_known_to_outlive | COMPLEXITY=5 | LINES=19 */
 
 /// Given a known `param_env` and a set of well formed types, can we prove that
 /// `ty` outlives `region`.
@@ -712,7 +679,6 @@ fn ty_known_to_outlive<'tcx>(
         });
     })
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=region_known_to_outlive | COMPLEXITY=4 | LINES=19 */
 
 /// Given a known `param_env` and a set of well formed types, can we prove that
 /// `region_a` outlives `region_b`
@@ -732,7 +698,6 @@ fn region_known_to_outlive<'tcx>(
         );
     })
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=test_region_obligations | COMPLEXITY=3 | LINES=25 */
 
 /// Given a known `param_env` and a set of well formed types, set up an
 /// `InferCtxt`, call the passed function (to e.g. set up region constraints
@@ -758,7 +723,6 @@ fn test_region_obligations<'tcx>(
     // an error, it must be because of the implied or explicit bounds...
     errors.is_empty()
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=GATArgsCollector | COMPLEXITY=5 | LINES=12 */
 
 /// TypeVisitor that looks for uses of GATs like
 /// `<P0 as Trait<P1..Pn>>::GAT<Pn..Pm>` and adds the arguments `P0..Pm` into
@@ -771,7 +735,6 @@ struct GATArgsCollector<'tcx> {
     // Which params appears and which parameter index its instantiated with
     types: FxIndexSet<(Ty<'tcx>, usize)>,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=4 | LINES=12 */
 
 impl<'tcx> GATArgsCollector<'tcx> {
     fn visit<T: TypeFoldable<TyCtxt<'tcx>>>(
@@ -784,7 +747,6 @@ impl<'tcx> GATArgsCollector<'tcx> {
         (visitor.regions, visitor.types)
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=26 | LINES=22 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for GATArgsCollector<'tcx> {
     fn visit_ty(&mut self, t: Ty<'tcx>) {
@@ -807,7 +769,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for GATArgsCollector<'tcx> {
         t.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=lint_item_shadowing_supertrait_item | COMPLEXITY=17 | LINES=39 */
 
 fn lint_item_shadowing_supertrait_item<'tcx>(tcx: TyCtxt<'tcx>, trait_item_def_id: LocalDefId) {
     let item_name = tcx.item_name(trait_item_def_id.to_def_id());
@@ -847,7 +808,6 @@ fn lint_item_shadowing_supertrait_item<'tcx>(tcx: TyCtxt<'tcx>, trait_item_def_i
         );
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=check_param_wf | COMPLEXITY=61 | LINES=125 */
 
 fn check_param_wf(tcx: TyCtxt<'_>, param: &ty::GenericParamDef) -> Result<(), ErrorGuaranteed> {
     match param.kind {
@@ -973,7 +933,6 @@ fn check_param_wf(tcx: TyCtxt<'_>, param: &ty::GenericParamDef) -> Result<(), Er
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=58 */
 
 #[instrument(level = "debug", skip(tcx))]
 pub(crate) fn check_associated_item(
@@ -1032,7 +991,6 @@ pub(crate) fn check_associated_item(
         }
     })
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=check_type_defn | COMPLEXITY=61 | LINES=116 */
 
 /// In a type definition, we check that to ensure that the types of the fields are well-formed.
 fn check_type_defn<'tcx>(
@@ -1149,7 +1107,6 @@ fn check_type_defn<'tcx>(
         Ok(())
     })
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=check_trait | COMPLEXITY=17 | LINES=37 */
 
 #[instrument(skip(tcx, item))]
 fn check_trait(tcx: TyCtxt<'_>, item: &hir::Item<'_>) -> Result<(), ErrorGuaranteed> {
@@ -1187,7 +1144,6 @@ fn check_trait(tcx: TyCtxt<'_>, item: &hir::Item<'_>) -> Result<(), ErrorGuarant
     }
     res
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=check_associated_type_bounds | COMPLEXITY=5 | LINES=22 */
 
 /// Checks all associated type defaults of trait `trait_def_id`.
 ///
@@ -1210,7 +1166,6 @@ fn check_associated_type_bounds(wfcx: &WfCheckingCtxt<'_, '_>, item: ty::AssocIt
 
     wfcx.register_obligations(wf_obligations);
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=check_item_fn | COMPLEXITY=3 | LINES=12 */
 
 fn check_item_fn(
     tcx: TyCtxt<'_>,
@@ -1223,7 +1178,6 @@ fn check_item_fn(
         Ok(())
     })
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=55 */
 
 #[instrument(level = "debug", skip(tcx))]
 pub(crate) fn check_static_item<'tcx>(
@@ -1279,7 +1233,6 @@ pub(crate) fn check_static_item<'tcx>(
         Ok(())
     })
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=24 */
 
 pub(crate) fn check_const_item(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(), ErrorGuaranteed> {
     enter_wf_checking_ctxt(tcx, def_id, |wfcx| {
@@ -1304,7 +1257,6 @@ pub(crate) fn check_const_item(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<()
         Ok(())
     })
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=check_impl | COMPLEXITY=40 | LINES=95 */
 
 #[instrument(level = "debug", skip(tcx, impl_))]
 fn check_impl<'tcx>(
@@ -1400,7 +1352,6 @@ fn check_impl<'tcx>(
         Ok(())
     })
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=CountParams | COMPLEXITY=75 | LINES=166 */
 
 /// Checks where-clauses and inline bounds that are declared on `def_id`.
 #[instrument(level = "debug", skip(wfcx))]
@@ -1567,7 +1518,6 @@ pub(super) fn check_where_clauses<'tcx>(wfcx: &WfCheckingCtxt<'_, 'tcx>, def_id:
     let obligations: Vec<_> = wf_obligations.chain(default_obligations).collect();
     wfcx.register_obligations(obligations);
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=check_fn_or_method | COMPLEXITY=36 | LINES=88 */
 
 #[instrument(level = "debug", skip(wfcx, hir_decl))]
 fn check_fn_or_method<'tcx>(
@@ -1656,7 +1606,6 @@ fn check_fn_or_method<'tcx>(
         ObligationCauseCode::SizedReturnType,
     );
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=check_sized_if_body | COMPLEXITY=6 | LINES=20 */
 
 fn check_sized_if_body<'tcx>(
     wfcx: &WfCheckingCtxt<'_, 'tcx>,
@@ -1677,7 +1626,6 @@ fn check_sized_if_body<'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=52 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// The `arbitrary_self_types_pointers` feature implies `arbitrary_self_types`.
 #[derive(Clone, Copy, PartialEq)]
@@ -1685,7 +1633,6 @@ enum ArbitrarySelfTypesLevel {
     Basic,        // just arbitrary_self_types
     WithPointers, // both arbitrary_self_types and arbitrary_self_types_pointers
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=check_method_receiver | COMPLEXITY=59 | LINES=130 */
 
 #[instrument(level = "debug", skip(wfcx))]
 fn check_method_receiver<'tcx>(
@@ -1816,7 +1763,6 @@ fn check_method_receiver<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Error cases which may be returned from `receiver_is_valid`. These error
 /// cases are generated in this function as they may be unearthed as we explore
@@ -1828,7 +1774,6 @@ enum ReceiverValidityError {
     /// A type was found which is a method type parameter, and that's not allowed.
     MethodGenericParamUsed,
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=confirm_type_is_not_a_method_generic_param | COMPLEXITY=8 | LINES=14 */
 
 /// Confirms that a type is not a type parameter referring to one of the
 /// method's type params.
@@ -1843,7 +1788,6 @@ fn confirm_type_is_not_a_method_generic_param(
     }
     Ok(())
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=receiver_is_valid | COMPLEXITY=56 | LINES=96 */
 
 /// Returns whether `receiver_ty` would be considered a valid receiver type for `self_ty`. If
 /// `arbitrary_self_types` is enabled, `receiver_ty` must transitively deref to `self_ty`, possibly
@@ -1940,7 +1884,6 @@ fn receiver_is_valid<'tcx>(
     debug!("receiver_is_valid: type `{:?}` does not deref to `{:?}`", receiver_ty, self_ty);
     Err(ReceiverValidityError::DoesNotDeref)
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=legacy_receiver_is_implemented | COMPLEXITY=8 | LINES=22 */
 
 fn legacy_receiver_is_implemented<'tcx>(
     wfcx: &WfCheckingCtxt<'_, 'tcx>,
@@ -1963,7 +1906,6 @@ fn legacy_receiver_is_implemented<'tcx>(
         false
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=50 | LINES=98 */
 
 pub(super) fn check_variances_for_type_defn<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) {
     match tcx.def_kind(def_id) {
@@ -2062,14 +2004,12 @@ pub(super) fn check_variances_for_type_defn<'tcx>(tcx: TyCtxt<'tcx>, def_id: Loc
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=HasErrorDeep | COMPLEXITY=4 | LINES=6 */
 
 /// Look for `ErrorGuaranteed` deeply within structs' (unsubstituted) fields.
 struct HasErrorDeep<'tcx> {
     tcx: TyCtxt<'tcx>,
     seen: FxHashSet<DefId>,
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=29 | LINES=34 */
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for HasErrorDeep<'tcx> {
     type Result = ControlFlow<ErrorGuaranteed>;
 
@@ -2104,7 +2044,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for HasErrorDeep<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=report_bivariance | COMPLEXITY=37 | LINES=73 */
 
 fn report_bivariance<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -2178,7 +2117,6 @@ fn report_bivariance<'tcx>(
     diag.code(E0392);
     diag.emit()
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=IsProbablyCyclical | COMPLEXITY=4 | LINES=11 */
 
 /// Detects cases where an ADT/LTA is trivially cyclical -- we want to detect this so
 /// we only mention that its parameters are used cyclically if the ADT/LTA is truly
@@ -2190,7 +2128,6 @@ struct IsProbablyCyclical<'tcx> {
     item_def_id: DefId,
     seen: FxHashSet<DefId>,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=visit_def | COMPLEXITY=13 | LINES=16 */
 
 impl<'tcx> IsProbablyCyclical<'tcx> {
     fn visit_def(&mut self, def_id: DefId) -> ControlFlow<(), ()> {
@@ -2207,7 +2144,6 @@ impl<'tcx> IsProbablyCyclical<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=19 | LINES=21 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IsProbablyCyclical<'tcx> {
     type Result = ControlFlow<(), ()>;
@@ -2229,7 +2165,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for IsProbablyCyclical<'tcx> {
         ty.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=CollectUsageSpans | COMPLEXITY=4 | LINES=9 */
 
 /// Collect usages of the `param_def_id` and `Res::SelfTyAlias` in the HIR.
 ///
@@ -2239,7 +2174,6 @@ struct CollectUsageSpans<'a> {
     spans: &'a mut Vec<Span>,
     param_def_id: DefId,
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=visit_generics | COMPLEXITY=17 | LINES=23 */
 
 impl<'tcx> Visitor<'tcx> for CollectUsageSpans<'_> {
     type Result = ();
@@ -2263,7 +2197,6 @@ impl<'tcx> Visitor<'tcx> for CollectUsageSpans<'_> {
         intravisit::walk_ty(self, t);
     }
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=check_false_global_bounds | COMPLEXITY=24 | LINES=55 */
 
 impl<'tcx> WfCheckingCtxt<'_, 'tcx> {
     /// Feature gates RFC 2056 -- trivial bounds, checking for global bounds that
@@ -2319,7 +2252,6 @@ impl<'tcx> WfCheckingCtxt<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 pub(super) fn check_type_wf(tcx: TyCtxt<'_>, (): ()) -> Result<(), ErrorGuaranteed> {
     let items = tcx.hir_crate_items(());
@@ -2336,7 +2268,6 @@ pub(super) fn check_type_wf(tcx: TyCtxt<'_>, (): ()) -> Result<(), ErrorGuarante
 
     res
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=lint_redundant_lifetimes | COMPLEXITY=61 | LINES=122 */
 
 fn lint_redundant_lifetimes<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -2459,7 +2390,6 @@ fn lint_redundant_lifetimes<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=RedundantLifetimeArgsLint | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(hir_analysis_redundant_lifetime_args)]

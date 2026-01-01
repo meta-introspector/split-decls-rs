@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/cx/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // This module contains the functionality to convert from the wacky tcx data
 // structures into the THIR. The `builder` is generally ignorant of the tcx,
 // etc., and instead goes through the `Cx` for most of its work.
@@ -9,15 +8,12 @@ use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{self as hir, HirId, find_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::region;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, RvalueScopes, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=38 */
 use tracing::instrument;
 
 use crate::thir::pattern::pat_from_hir;
@@ -56,7 +52,6 @@ pub(crate) fn thir_body(
     let expr = cx.mirror_expr(body.value);
     Ok((tcx.alloc_steal_thir(cx.thir), expr))
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ThirBuildCx | COMPLEXITY=9 | LINES=19 */
 
 /// Context for lowering HIR to THIR for a single function body (or other kind of body).
 struct ThirBuildCx<'tcx> {
@@ -76,7 +71,6 @@ struct ThirBuildCx<'tcx> {
     /// The `DefId` of the owner of this body.
     body_owner: DefId,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=56 | LINES=138 */
 
 impl<'tcx> ThirBuildCx<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, def: LocalDefId) -> Self {
@@ -215,4 +209,3 @@ impl<'tcx> ThirBuildCx<'tcx> {
         crate::thir::util::user_args_applied_to_ty_of_hir_id(self.tcx, self.typeck_results, hir_id)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */

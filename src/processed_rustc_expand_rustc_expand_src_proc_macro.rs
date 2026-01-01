@@ -1,25 +1,19 @@
 // SRC: ../rust/compiler/rustc_expand/src/proc_macro.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_parse::parser::{ForceCollect, Parser};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config::ProcMacroExecutionStrategy;
 use crate::rustc_complete::Span;
 use crate::rustc_complete::profiling::SpannedEventArgRecorder;
 use {rustc_ast as ast, rustc_proc_macro as pm};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::base::{self, *};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{errors, proc_macro_server};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=MessagePipe | COMPLEXITY=2 | LINES=5 */
 
 struct MessagePipe<T> {
     tx: std::sync::mpsc::SyncSender<T>,
     rx: std::sync::mpsc::Receiver<T>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=16 */
 
 impl<T> pm::bridge::server::MessagePipe<T> for MessagePipe<T> {
     fn new() -> (Self, Self) {
@@ -36,7 +30,6 @@ impl<T> pm::bridge::server::MessagePipe<T> for MessagePipe<T> {
         self.rx.recv().ok()
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=exec_strategy | COMPLEXITY=2 | LINES=7 */
 
 fn exec_strategy(ecx: &ExtCtxt<'_>) -> impl pm::bridge::server::ExecutionStrategy + 'static {
     pm::bridge::server::MaybeCrossThread::<MessagePipe<_>>::new(
@@ -44,12 +37,10 @@ fn exec_strategy(ecx: &ExtCtxt<'_>) -> impl pm::bridge::server::ExecutionStrateg
             == ProcMacroExecutionStrategy::CrossThread,
     )
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=BangProcMacro | COMPLEXITY=2 | LINES=4 */
 
 pub struct BangProcMacro {
     pub client: pm::bridge::client::Client<pm::TokenStream, pm::TokenStream>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=10 | LINES=26 */
 
 impl base::BangProcMacro for BangProcMacro {
     fn expand(
@@ -76,12 +67,10 @@ impl base::BangProcMacro for BangProcMacro {
         })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=AttrProcMacro | COMPLEXITY=2 | LINES=4 */
 
 pub struct AttrProcMacro {
     pub client: pm::bridge::client::Client<(pm::TokenStream, pm::TokenStream), pm::TokenStream>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=11 | LINES=29 */
 
 impl base::AttrProcMacro for AttrProcMacro {
     fn expand(
@@ -111,12 +100,10 @@ impl base::AttrProcMacro for AttrProcMacro {
         )
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DeriveProcMacro | COMPLEXITY=2 | LINES=4 */
 
 pub struct DeriveProcMacro {
     pub client: pm::bridge::client::Client<pm::TokenStream, pm::TokenStream>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=47 | LINES=77 */
 
 impl MultiItemModifier for DeriveProcMacro {
     fn expand(

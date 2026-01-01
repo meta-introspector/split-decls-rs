@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check_unused.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=41 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::TyCtxt;

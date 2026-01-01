@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_zsts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Removes operations on ZST places, and convert ZST operands to constants.
 
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=20 | LINES=29 */
 
 pub(super) struct RemoveZsts;
 
@@ -35,14 +33,12 @@ impl<'tcx> crate::MirPass<'tcx> for RemoveZsts {
         true
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Replacer | COMPLEXITY=2 | LINES=6 */
 
 struct Replacer<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
     local_decls: &'a LocalDecls<'tcx>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=trivially_zst | COMPLEXITY=18 | LINES=30 */
 
 /// A cheap, approximate check to avoid unnecessary `layout_of` calls.
 ///
@@ -73,7 +69,6 @@ fn trivially_zst<'tcx>(ty: Ty<'tcx>, tcx: TyCtxt<'tcx>) -> Option<bool> {
         _ => None,
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=known_to_be_zst | COMPLEXITY=10 | LINES=21 */
 
 impl<'tcx> Replacer<'_, 'tcx> {
     fn known_to_be_zst(&self, ty: Ty<'tcx>) -> bool {
@@ -95,7 +90,6 @@ impl<'tcx> Replacer<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=39 | LINES=58 */
 
 impl<'tcx> MutVisitor<'tcx> for Replacer<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/spans/from_mir.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::iter;
 
 use crate::rustc_complete::bug;
@@ -7,11 +6,9 @@ use crate::rustc_complete::mir::coverage::CoverageKind;
 use crate::rustc_complete::mir::{
     self, FakeReadCause, Statement, StatementKind, Terminator, TerminatorKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::coverage::graph::{BasicCoverageBlock, CoverageGraph};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 pub(crate) struct RawSpanFromMir {
@@ -21,7 +18,6 @@ pub(crate) struct RawSpanFromMir {
     pub(crate) raw_span: Span,
     pub(crate) bcb: BasicCoverageBlock,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=34 */
 
 /// Generates an initial set of coverage spans from the statements and
 /// terminators in the function's MIR body, each associated with its
@@ -56,7 +52,6 @@ pub(crate) fn extract_raw_spans_from_mir<'tcx>(
 
     raw_spans
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=filtered_statement_span | COMPLEXITY=40 | LINES=54 */
 
 /// If the MIR `Statement` has a span contributive to computing coverage spans,
 /// return it; otherwise return `None`.
@@ -111,7 +106,6 @@ fn filtered_statement_span(statement: &Statement<'_>) -> Option<Span> {
         ),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=filtered_terminator_span | COMPLEXITY=30 | LINES=38 */
 
 /// If the MIR `Terminator` has a span contributive to computing coverage spans,
 /// return it; otherwise return `None`.
@@ -150,13 +144,11 @@ fn filtered_terminator_span(terminator: &Terminator<'_>) -> Option<Span> {
         | TerminatorKind::InlineAsm { .. } => Some(terminator.source_info.span),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub(crate) struct Hole {
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 impl Hole {
     pub(crate) fn merge_if_overlapping_or_adjacent(&mut self, other: &mut Self) -> bool {

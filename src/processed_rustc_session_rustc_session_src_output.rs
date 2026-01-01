@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_session/src/output.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Related to out filenames of compilation (e.g. binaries).
 
 use std::path::Path;
 
 use rustc_ast as ast;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::Session;
 use crate::config::{self, CrateType, OutFileName, OutputFilenames, OutputType};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::errors::{self, CrateNameEmpty, FileIsNotWriteable, InvalidCharacterInCrateName};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=out_filename | COMPLEXITY=6 | LINES=21 */
 
 pub fn out_filename(
     sess: &Session,
@@ -34,7 +30,6 @@ pub fn out_filename(
 
     out_filename
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_file_is_writeable | COMPLEXITY=6 | LINES=9 */
 
 /// Make sure files are writeable. Mac, FreeBSD, and Windows system linkers
 /// check this already -- however, the Linux linker will happily overwrite a
@@ -44,7 +39,6 @@ pub fn check_file_is_writeable(file: &Path, sess: &Session) {
         sess.dcx().emit_fatal(FileIsNotWriteable { file });
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_writeable | COMPLEXITY=6 | LINES=7 */
 
 fn is_writeable(p: &Path) -> bool {
     match p.metadata() {
@@ -52,7 +46,6 @@ fn is_writeable(p: &Path) -> bool {
         Ok(m) => !m.permissions().readonly(),
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=validate_crate_name | COMPLEXITY=18 | LINES=32 */
 
 /// Validate the given crate name.
 ///
@@ -85,7 +78,6 @@ pub fn validate_crate_name(sess: &Session, crate_name: Symbol, span: Option<Span
         guar.raise_fatal();
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=filename_for_metadata | COMPLEXITY=5 | LINES=8 */
 
 pub fn filename_for_metadata(sess: &Session, outputs: &OutputFilenames) -> OutFileName {
     let out_filename = outputs.path(OutputType::Metadata);
@@ -94,7 +86,6 @@ pub fn filename_for_metadata(sess: &Session, outputs: &OutputFilenames) -> OutFi
     }
     out_filename
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=filename_for_input | COMPLEXITY=29 | LINES=36 */
 
 pub fn filename_for_input(
     sess: &Session,
@@ -131,7 +122,6 @@ pub fn filename_for_input(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=default_output_for_target | COMPLEXITY=13 | LINES=13 */
 
 /// Returns default crate type for target
 ///
@@ -145,7 +135,6 @@ pub fn filename_for_input(
 pub fn default_output_for_target(sess: &Session) -> CrateType {
     if !sess.target.executables { CrateType::Staticlib } else { CrateType::Executable }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=invalid_output_for_target | COMPLEXITY=20 | LINES=24 */
 
 /// Checks if target supports crate_type as output
 pub fn invalid_output_for_target(sess: &Session, crate_type: CrateType) -> bool {
@@ -170,7 +159,6 @@ pub fn invalid_output_for_target(sess: &Session, crate_type: CrateType) -> bool 
 
     false
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=categorize_crate_type | COMPLEXITY=3 | LINES=15 */
 
 pub const CRATE_TYPES: &[(Symbol, CrateType)] = &[
     (sym::rlib, CrateType::Rlib),
@@ -186,7 +174,6 @@ pub const CRATE_TYPES: &[(Symbol, CrateType)] = &[
 pub fn categorize_crate_type(s: Symbol) -> Option<CrateType> {
     Some(CRATE_TYPES.iter().find(|(key, _)| *key == s)?.1)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=collect_crate_types | COMPLEXITY=35 | LINES=59 */
 
 pub fn collect_crate_types(session: &Session, attrs: &[ast::Attribute]) -> Vec<CrateType> {
     // If we're generating a test executable, then ignore all other output

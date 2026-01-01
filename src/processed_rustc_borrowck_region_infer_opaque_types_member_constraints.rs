@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/opaque_types/member_constraints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::bug;
@@ -7,9 +6,7 @@ use crate::rustc_complete::ty::{
     self, GenericArgsRef, Region, RegionVid, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=48 */
 
 use super::DefiningUse;
 use super::region_ctxt::RegionCtxt;
@@ -58,7 +55,6 @@ pub(super) fn apply_member_constraints<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=apply_member_constraint | COMPLEXITY=37 | LINES=83 */
 
 #[instrument(level = "debug", skip(rcx))]
 fn apply_member_constraint<'tcx>(
@@ -142,14 +138,12 @@ fn apply_member_constraint<'tcx>(
     let min_choice_scc = rcx.constraint_sccs.scc(min_choice);
     rcx.scc_values.add_region(member, min_choice_scc);
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CollectMemberConstraintsVisitor | COMPLEXITY=2 | LINES=6 */
 
 struct CollectMemberConstraintsVisitor<'a, 'b, 'tcx> {
     rcx: &'a RegionCtxt<'a, 'tcx>,
     defining_use: &'b DefiningUse<'tcx>,
     member_constraints: &'a mut FxHashMap<ConstraintSccIndex, Vec<&'b DefiningUse<'tcx>>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=7 | LINES=11 */
 impl<'tcx> CollectMemberConstraintsVisitor<'_, '_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
         self.rcx.infcx.tcx
@@ -161,7 +155,6 @@ impl<'tcx> CollectMemberConstraintsVisitor<'_, '_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_region | COMPLEXITY=32 | LINES=39 */
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for CollectMemberConstraintsVisitor<'_, '_, 'tcx> {
     fn visit_region(&mut self, r: Region<'tcx>) {
         match r.kind() {

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/hashed.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::fmt::Write;
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hashes::Hash64;
 use crate::rustc_complete::def_id::CrateNum;
 use crate::rustc_complete::ty::{Instance, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=31 */
 
 use crate::v0;
 
@@ -39,7 +36,6 @@ pub(super) fn mangle<'tcx>(
 
     symbol
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=push_hash64 | COMPLEXITY=4 | LINES=8 */
 
 // The hash is encoded based on `base-62` and the final terminator `_` is removed because it does
 // not help prevent hash collisions

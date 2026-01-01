@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_feature/src/accepted.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // List of the accepted feature gates.
 
 use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 macro_rules! declare_features {
     ($(
@@ -21,7 +19,6 @@ macro_rules! declare_features {
         ];
     }
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=39 */
 
 #[rustfmt::skip]
 declare_features! (
@@ -61,7 +58,6 @@ declare_features! (
     /// Allows using the `thiscall` ABI.
     (accepted, abi_thiscall, "1.73.0", None),
     /// Allows using ADX intrinsics from `core::arch::{x86, x86_64}`.
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=40 | LINES=159 */
     (accepted, adx_target_feature, "1.61.0", Some(44839)),
     /// Allows explicit discriminants on non-unit enum variants.
     (accepted, arbitrary_enum_discriminant, "1.66.0", Some(60553)),
@@ -221,7 +217,6 @@ declare_features! (
     /// Allows access to crate names passed via `--extern` through prelude.
     (accepted, extern_prelude, "1.30.0", Some(44660)),
     /// Allows using F16C intrinsics from `core::arch::{x86, x86_64}`.
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=26 | LINES=51 */
     (accepted, f16c_target_feature, "1.68.0", Some(44839)),
     /// Allows field shorthands (`x` meaning `x: x`) in struct literal expressions.
     (accepted, field_init_shorthand, "1.17.0", Some(37340)),
@@ -273,7 +268,6 @@ declare_features! (
     // Allows using the `kl` and `widekl` target features and the associated intrinsics
     (accepted, keylocker_x86, "1.89.0", Some(134813)),
     /// Allows `'a: { break 'a; }`.
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
     (accepted, label_break_value, "1.65.0", Some(48594)),
     /// Allows `if/while p && let q = r && ...` chains.
     (accepted, let_chains, "1.88.0", Some(53667)),
@@ -282,7 +276,6 @@ declare_features! (
     /// Allows using `reason` in lint attributes and the `#[expect(lint)]` lint check.
     (accepted, lint_reasons, "1.81.0", Some(54503)),
     /// Allows `break {expr}` with a value inside `loop`s.
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=14 */
     (accepted, loop_break_value, "1.19.0", Some(37339)),
     /// Allows use of `?` as the Kleene "at most one" operator in macros.
     (accepted, macro_at_most_once_rep, "1.32.0", Some(48075)),
@@ -297,7 +290,6 @@ declare_features! (
     /// Allows use of the `:vis` macro fragment specifier
     (accepted, macro_vis_matcher, "1.30.0", Some(41022)),
     /// Allows macro invocations in `extern {}` blocks.
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=38 | LINES=119 */
     (accepted, macros_in_extern, "1.40.0", Some(49476)),
     /// Allows '|' at beginning of match arms (RFC 1925).
     (accepted, match_beginning_vert, "1.25.0", Some(44101)),
@@ -417,7 +409,6 @@ declare_features! (
     /// Allows attributes on struct literal fields.
     (accepted, struct_field_attributes, "1.20.0", Some(38814)),
     /// Allows struct variants `Foo { baz: u8, .. }` in enums (RFC 418).
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=68 */
     (accepted, struct_variant, "1.0.0", None),
     /// Allows `#[target_feature(...)]`.
     (accepted, target_feature, "1.27.0", None),

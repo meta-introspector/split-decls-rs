@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/canonical.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 use std::ops::Index;
 
@@ -7,14 +6,11 @@ use arrayvec::ArrayVec;
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::data_structures::HashMap;
 use crate::inherent::*;
 use crate::{self as ty, Interner, TypingMode, UniverseIndex};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=CanonicalQueryInput | COMPLEXITY=2 | LINES=11 */
 
 #[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, V)]
 #[derive_where(Copy; I: Interner, V: Copy)]
@@ -26,10 +22,8 @@ pub struct CanonicalQueryInput<I: Interner, V> {
     pub canonical: Canonical<I, V>,
     pub typing_mode: TypingMode<I>,
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, V: Eq> Eq for CanonicalQueryInput<I, V> {}
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Canonical | COMPLEXITY=3 | LINES=15 */
 
 /// A "canonicalized" type `V` is one where all free inference
 /// variables have been rewritten to "canonical vars". These are
@@ -45,10 +39,8 @@ pub struct Canonical<I: Interner, V> {
     pub max_universe: UniverseIndex,
     pub variables: I::CanonicalVarKinds,
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner, V: Eq> Eq for Canonical<I, V> {}
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=unchecked_map | COMPLEXITY=9 | LINES=30 */
 
 impl<I: Interner, V> Canonical<I, V> {
     /// Allows you to map the `value` of a canonical while keeping the
@@ -79,7 +71,6 @@ impl<I: Interner, V> Canonical<I, V> {
         Canonical { max_universe, variables, value: map_op(value) }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=10 */
 
 impl<I: Interner, V: fmt::Display> fmt::Display for Canonical<I, V> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -90,7 +81,6 @@ impl<I: Interner, V: fmt::Display> fmt::Display for Canonical<I, V> {
         )
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=41 */
 
 /// Information about a canonical variable that is included with the
 /// canonical value. This is sufficient information for code to create
@@ -132,10 +122,8 @@ pub enum CanonicalVarKind<I: Interner> {
     /// A "placeholder" that represents "any const".
     PlaceholderConst(I::PlaceholderConst),
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CanonicalVarKind<I> {}
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=45 | LINES=81 */
 
 impl<I: Interner> CanonicalVarKind<I> {
     pub fn universe(self) -> UniverseIndex {
@@ -217,7 +205,6 @@ impl<I: Interner> CanonicalVarKind<I> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=CanonicalVarValues | COMPLEXITY=3 | LINES=19 */
 
 /// A set of values corresponding to the canonical variables from some
 /// `Canonical`. You can give these values to
@@ -237,10 +224,8 @@ impl<I: Interner> CanonicalVarKind<I> {
 pub struct CanonicalVarValues<I: Interner> {
     pub var_values: I::GenericArgs,
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CanonicalVarValues<I> {}
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=is_identity | COMPLEXITY=84 | LINES=118 */
 
 impl<I: Interner> CanonicalVarValues<I> {
     pub fn is_identity(&self) -> bool {
@@ -359,7 +344,6 @@ impl<I: Interner> CanonicalVarValues<I> {
         self.var_values.len()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, I: Interner> IntoIterator for &'a CanonicalVarValues<I> {
     type Item = I::GenericArg;
@@ -369,7 +353,6 @@ impl<'a, I: Interner> IntoIterator for &'a CanonicalVarValues<I> {
         self.var_values.iter()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<I: Interner> Index<ty::BoundVar> for CanonicalVarValues<I> {
     type Output = I::GenericArg;
@@ -378,7 +361,6 @@ impl<I: Interner> Index<ty::BoundVar> for CanonicalVarValues<I> {
         &self.var_values.as_slice()[value.as_usize()]
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=CanonicalParamEnvCacheEntry | COMPLEXITY=2 | LINES=8 */
 
 #[derive_where(Clone, Debug; I: Interner)]
 pub struct CanonicalParamEnvCacheEntry<I: Interner> {

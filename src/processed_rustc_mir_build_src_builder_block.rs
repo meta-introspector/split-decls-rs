@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/block.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::middle::region::Scope;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::{span_bug, ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::builder::ForGuard::OutsideGuard;
 use crate::builder::matches::{DeclareLetBindings, ScheduleDrops};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::builder::{BlockAnd, BlockAndExtension, BlockFrame, Builder};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=ast_block_stmts | COMPLEXITY=113 | LINES=338 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     pub(crate) fn ast_block(

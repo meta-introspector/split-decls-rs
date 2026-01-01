@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/lock.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=Handle(HANDLE); | COMPLEXITY=53 | LINES=80 */
 // Bindings to acquire a global named lock.
 //
 // This is intended to be used to synchronize multiple compiler processes to
@@ -80,7 +79,6 @@ pub(crate) fn acquire_global_lock(name: &str) -> Box<dyn Any> {
     // Return a guard which will call `ReleaseMutex` when dropped.
     Box::new(Guard(mutex))
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[cfg(not(windows))]
 pub(crate) fn acquire_global_lock(_name: &str) -> Box<dyn Any> {

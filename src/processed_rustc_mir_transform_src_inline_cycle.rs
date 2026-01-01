@@ -1,18 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/inline/cycle.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::limit::Limit;
 use crate::rustc_complete::mir::TerminatorKind;
 use crate::rustc_complete::ty::{self, GenericArgsRef, InstanceKind, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::sym;
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=should_recurse | COMPLEXITY=25 | LINES=46 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 fn should_recurse<'tcx>(tcx: TyCtxt<'tcx>, callee: ty::Instance<'tcx>) -> bool {
@@ -59,7 +54,6 @@ fn should_recurse<'tcx>(tcx: TyCtxt<'tcx>, callee: ty::Instance<'tcx>) -> bool {
     crate::pm::should_run_pass(tcx, &crate::inline::Inline, crate::pm::Optimizations::Allowed)
         || crate::inline::ForceInline::should_run_pass_for_callee(tcx, callee.def.def_id())
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=process | COMPLEXITY=39 | LINES=93 */
 
 #[instrument(
     level = "debug",
@@ -153,7 +147,6 @@ fn process<'tcx>(
 
     reaches_root
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=39 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 pub(crate) fn mir_callgraph_cyclic<'tcx>(
@@ -193,7 +186,6 @@ pub(crate) fn mir_callgraph_cyclic<'tcx>(
     );
     involved.into()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=39 */
 
 pub(crate) fn mir_inliner_callees<'tcx>(
     tcx: TyCtxt<'tcx>,

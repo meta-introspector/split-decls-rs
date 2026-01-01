@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/region_constraints/leak_check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::graph::scc::Sccs;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
@@ -7,7 +6,6 @@ use crate::rustc_index::Idx;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::error::TypeError;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=leak_check | COMPLEXITY=36 | LINES=86 */
 
 use super::*;
 use crate::infer::relate::RelateResult;
@@ -94,7 +92,6 @@ impl<'tcx> RegionConstraintCollector<'_, 'tcx> {
         Ok(())
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=LeakCheck | COMPLEXITY=16 | LINES=27 */
 
 struct LeakCheck<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -122,7 +119,6 @@ struct LeakCheck<'a, 'tcx> {
     // `scc_placeholders[S]` (if any) cannot be stored into `scc_universes[S]`.
     scc_universes: IndexVec<LeakCheckScc, SccUniverse<'tcx>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=97 | LINES=155 */
 
 impl<'a, 'tcx> LeakCheck<'a, 'tcx> {
     fn new(
@@ -278,7 +274,6 @@ impl<'a, 'tcx> LeakCheck<'a, 'tcx> {
         TypeError::RegionsInsufficientlyPolymorphic(placeholder.bound, other_region)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=SccUniverse | COMPLEXITY=19 | LINES=48 */
 
 // States we need to distinguish:
 //
@@ -327,7 +322,6 @@ struct SccUniverse<'tcx> {
     /// Some region that caused `universe` to be what it is.
     region: Option<ty::Region<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=take_min | COMPLEXITY=6 | LINES=11 */
 
 impl<'tcx> SccUniverse<'tcx> {
     /// If `universe` is less than our current universe, then update
@@ -339,21 +333,18 @@ impl<'tcx> SccUniverse<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LeakCheckNode | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "LeakCheckNode({})"]
     struct LeakCheckNode {}
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=LeakCheckScc | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "LeakCheckScc({})"]
     struct LeakCheckScc {}
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=MiniGraph | COMPLEXITY=4 | LINES=12 */
 
 /// Represents the graph of constraints. For each `R1: R2` constraint we create
 /// an edge `R1 -> R2` in the graph.
@@ -366,7 +357,6 @@ struct MiniGraph<'tcx> {
     /// then `S1: S2`.
     sccs: Sccs<LeakCheckNode, LeakCheckScc>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=30 | LINES=59 */
 
 impl<'tcx> MiniGraph<'tcx> {
     fn new(

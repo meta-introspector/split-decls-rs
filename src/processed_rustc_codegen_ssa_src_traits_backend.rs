@@ -1,21 +1,17 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/backend.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::any::Any;
 use std::hash::Hash;
 
 use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_metadata::EncodedMetadata;
 use crate::rustc_metadata::creader::MetadataLoaderDyn;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{self, OutputFilenames, PrintRequest};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::Symbol;
 
 use super::CodegenObject;
@@ -24,7 +20,6 @@ use crate::back::archive::ArArchiveBuilderBuilder;
 use crate::back::link::link_binary;
 use crate::back::write::TargetMachineFactoryFn;
 use crate::{CodegenResults, ModuleCodegen, TargetConfig};
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 pub trait BackendTypes {
     type Value: CodegenObject + PartialEq;
@@ -41,7 +36,6 @@ pub trait BackendTypes {
     type DILocation: Copy;
     type DIVariable: Copy;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=locale_resource | COMPLEXITY=19 | LINES=64 */
 
 pub trait CodegenBackend {
     /// Locale resources for diagnostic messages - a string the content of the Fluent resource.
@@ -106,7 +100,6 @@ pub trait CodegenBackend {
         link_binary(sess, &ArArchiveBuilderBuilder, codegen_results, metadata, outputs);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=codegen_allocator | COMPLEXITY=8 | LINES=47 */
 
 pub trait ExtraBackendMethods:
     CodegenBackend + WriteBackendMethods + Sized + Send + Sync + DynSend + DynSync

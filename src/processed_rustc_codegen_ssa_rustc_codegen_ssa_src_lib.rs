@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=25 */
 // tidy-alphabetical-start
 #[allow(internal_features)]
 #[allow(rustc::diagnostic_outside_of_impl)]
@@ -25,18 +24,14 @@
 use std::collections::BTreeSet;
 use std::io;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::unord::UnordMap;
 use crate::rustc_complete::CRATE_HIR_ID;
 use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::CrateNum;
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 use crate::rustc_metadata::EncodedMetadata;
 use crate::rustc_complete::dep_graph::WorkProduct;
 use crate::rustc_complete::lint::LevelAndSource;
@@ -46,20 +41,15 @@ use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::util::Providers;
 use crate::rustc_serialize::opaque::{FileEncoder, MemDecoder};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{CrateType, OutputFilenames, OutputType, RUST_CGU_EXT};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::cstore::{self, CrateSource};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=18 */
 use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
 use crate::rustc_complete::Symbol;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ModuleCodegen | COMPLEXITY=5 | LINES=14 */
 
 pub struct ModuleCodegen<M> {
     /// The name of the module. When the crate may be saved between
@@ -74,7 +64,6 @@ pub struct ModuleCodegen<M> {
     /// Saving the ThinLTO buffer for embedding in the object file.
     pub thin_lto_buffer: Option<Vec<u8>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new_regular | COMPLEXITY=12 | LINES=54 */
 
 impl<M> ModuleCodegen<M> {
     pub fn new_regular(name: impl Into<String>, module: M) -> Self {
@@ -129,7 +118,6 @@ impl<M> ModuleCodegen<M> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=CompiledModule | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Debug, Encodable, Decodable)]
 pub struct CompiledModule {
@@ -142,7 +130,6 @@ pub struct CompiledModule {
     pub llvm_ir: Option<PathBuf>,  // --emit=llvm-ir, llvm-bc is in bytecode
     pub links_from_incr_cache: Vec<PathBuf>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=for_each_output | COMPLEXITY=16 | LINES=18 */
 
 impl CompiledModule {
     /// Call `emit` function with every artifact type currently compiled
@@ -161,20 +148,17 @@ impl CompiledModule {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct CachedModuleCodegen {
     pub name: String,
     pub source: WorkProduct,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Encodable, Decodable)]
 pub enum ModuleKind {
     Regular,
     Allocator,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=MemFlags: | COMPLEXITY=3 | LINES=9 */
 
 bitflags::bitflags! {
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -184,7 +168,6 @@ bitflags::bitflags! {
         const UNALIGNED = 1 << 2;
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=NativeLib | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Debug, Encodable, Decodable, HashStable)]
 pub struct NativeLib {
@@ -195,7 +178,6 @@ pub struct NativeLib {
     pub verbatim: bool,
     pub dll_imports: Vec<cstore::DllImport>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=13 */
 
 impl From<&cstore::NativeLib> for NativeLib {
     fn from(lib: &cstore::NativeLib) -> Self {
@@ -209,7 +191,6 @@ impl From<&cstore::NativeLib> for NativeLib {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=CrateInfo | COMPLEXITY=5 | LINES=31 */
 
 /// Misc info we load from metadata to persist beyond the tcx.
 ///
@@ -241,7 +222,6 @@ pub struct CrateInfo {
     pub lint_levels: CodegenLintLevels,
     pub metadata_symbol: String,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=TargetConfig | COMPLEXITY=19 | LINES=18 */
 
 /// Target-specific options that get set in `cfg(...)`.
 ///
@@ -260,7 +240,6 @@ pub struct TargetConfig {
     /// Option for `cfg(target_has_reliable_f128_math)`, true if `f128` math calls work.
     pub has_reliable_f128_math: bool,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=CodegenResults | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Encodable, Decodable)]
 pub struct CodegenResults {
@@ -268,7 +247,6 @@ pub struct CodegenResults {
     pub allocator_module: Option<CompiledModule>,
     pub crate_info: CrateInfo,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=8 */
 
 pub enum CodegenErrors {
     WrongFileType,
@@ -277,7 +255,6 @@ pub enum CodegenErrors {
     RustcVersionMismatch { rustc_version: String },
     CorruptFile,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=2 | LINES=8 */
 
 pub fn provide(providers: &mut Providers) {
     crate::back::symbol_export::provide(providers);
@@ -286,7 +263,6 @@ pub fn provide(providers: &mut Providers) {
     crate::codegen_attrs::provide(providers);
     providers.queries.global_backend_features = |_tcx: TyCtxt<'_>, ()| vec![];
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=looks_like_rust_object_file | COMPLEXITY=12 | LINES=17 */
 
 /// Checks if the given filename ends with the `.rcgu.o` extension that `rustc`
 /// uses for the object files it generates.
@@ -304,7 +280,6 @@ pub fn looks_like_rust_object_file(filename: &str) -> bool {
     // Check if the "inner" extension
     ext2 == Some(RUST_CGU_EXT)
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=serialize_rlink | COMPLEXITY=31 | LINES=63 */
 
 const RLINK_VERSION: u32 = 1;
 const RLINK_MAGIC: &[u8] = b"rustlink";
@@ -368,7 +343,6 @@ impl CodegenResults {
         Ok((codegen_results, metadata, outputs))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=CodegenLintLevels | COMPLEXITY=2 | LINES=10 */
 
 /// A list of lint levels used in codegen.
 ///
@@ -379,7 +353,6 @@ impl CodegenResults {
 pub struct CodegenLintLevels {
     linker_messages: LevelAndSource,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=from_tcx | COMPLEXITY=4 | LINES=6 */
 
 impl CodegenLintLevels {
     pub fn from_tcx(tcx: TyCtxt<'_>) -> Self {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=27 */
 // HIR ty lowering: Lowers type-system entities[^1] from the [HIR][hir] to
 // the [`crate::rustc_middle::ty`] representation.
 //
@@ -21,23 +20,16 @@ use std::slice;
 
 use crate::rustc_complete::TraitObjectSyntax;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, FatalError, struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, AnonConst, GenericArg, GenericArgs, HirId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::DynCompatibilityViolation;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::middle::stability::AllowUnstable;
 use crate::rustc_complete::mir::interpret::LitToConstInput;
 use crate::rustc_complete::ty::print::PrintPolyTraitRefExt as _;
@@ -45,28 +37,20 @@ use crate::rustc_complete::ty::{
     self, Const, GenericArgKind, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt,
     TypingMode, Upcast, fold_regions,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, kw, sym};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::wf::object_region_bounds;
 use crate::rustc_trait_selection::traits::{self, FulfillmentError};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::check::check_abi;
 use crate::check_c_variadic_abi;
 use crate::errors::{AmbiguousLifetimeBound, BadReturnTypeNotation};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::hir_ty_lowering::errors::{GenericsArgsErrExtend, prohibit_assoc_item_constraint};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::hir_ty_lowering::generics::{check_generic_arg_count, lower_generic_args};
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=GenericPathSegment(pub | COMPLEXITY=4 | LINES=30 */
 use crate::middle::resolve_bound_vars as rbv;
 
 /// A path segment that is semantically allowed to have generic arguments.
@@ -97,7 +81,6 @@ pub enum PredicateFilter {
     /// Filter only the `[const]` bounds which are *also* in the supertrait position.
     SelfConstIfConst,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Debug)]
 pub enum RegionInferReason<'a> {
@@ -111,7 +94,6 @@ pub enum RegionInferReason<'a> {
     Reference,
     OutlivesBound,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=InherentAssocCandidate | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, TypeFoldable, TypeVisitable, Debug)]
 pub struct InherentAssocCandidate {
@@ -119,7 +101,6 @@ pub struct InherentAssocCandidate {
     pub assoc_item: DefId,
     pub scope: DefId,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=20 | LINES=114 */
 
 /// A context which can lower type-system entities from the [HIR][hir] to
 /// the [`crate::rustc_middle::ty`] representation.
@@ -234,7 +215,6 @@ pub trait HirTyLowerer<'tcx> {
     /// Outside of bodies we could end up in cycles, so we delay most checks to later phases.
     fn dyn_compatibility_violations(&self, trait_def_id: DefId) -> Vec<DynCompatibilityViolation>;
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// The "qualified self" of an associated item path.
 ///
@@ -244,7 +224,6 @@ enum AssocItemQSelf {
     TyParam(LocalDefId, Span),
     SelfTyAlias,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=7 | LINES=10 */
 
 impl AssocItemQSelf {
     fn to_string(&self, tcx: TyCtxt<'_>) -> String {
@@ -255,7 +234,6 @@ impl AssocItemQSelf {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 
 /// In some cases, [`hir::ConstArg`]s that are being used in the type system
 /// through const generics need to have their type "fed" to them
@@ -276,14 +254,12 @@ pub enum FeedConstTy<'a, 'tcx> {
     /// Don't feed the type.
     No,
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone, Copy)]
 enum LowerTypeRelativePathMode {
     Type(PermitVariants),
     Const,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=assoc_tag | COMPLEXITY=18 | LINES=25 */
 
 impl LowerTypeRelativePathMode {
     fn assoc_tag(self) -> ty::AssocTag {
@@ -309,7 +285,6 @@ impl LowerTypeRelativePathMode {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Whether to permit a path to resolve to an enum variant.
 #[derive(Debug, Clone, Copy)]
@@ -317,14 +292,12 @@ pub enum PermitVariants {
     Yes,
     No,
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Debug, Clone, Copy)]
 enum TypeRelativePath<'tcx> {
     AssocItem(DefId, GenericArgsRef<'tcx>),
     Variant { adt: Ty<'tcx>, variant_did: DefId },
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=15 */
 
 /// New-typed boolean indicating whether explicit late-bound lifetimes
 /// are present in a set of generic arguments.
@@ -340,14 +313,12 @@ pub enum ExplicitLateBound {
     Yes,
     No,
 }
-/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq)]
 pub enum IsMethodCall {
     Yes,
     No,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// Denotes the "position" of a generic argument, indicating if it is a generic type,
 /// generic function or generic method call.
@@ -357,7 +328,6 @@ pub(crate) enum GenericArgPosition {
     Value, // e.g., functions
     MethodCall,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=GenericArgCountMismatch | COMPLEXITY=8 | LINES=9 */
 
 /// A marker denoting that the generic arguments that were
 /// provided did not match the respective generic parameters.
@@ -367,7 +337,6 @@ pub struct GenericArgCountMismatch {
     /// A list of indices of arguments provided that were not valid.
     pub invalid_args: Vec<usize>,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=GenericArgCountResult | COMPLEXITY=2 | LINES=8 */
 
 /// Decorates the result of a generic argument count mismatch
 /// check with whether explicit late bounds were provided.
@@ -376,7 +345,6 @@ pub struct GenericArgCountResult {
     pub explicit_late_bound: ExplicitLateBound,
     pub correct: Result<(), GenericArgCountMismatch>,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=args_for_def_id | COMPLEXITY=3 | LINES=22 */
 
 /// A context which can lower HIR's [`GenericArg`] to `rustc_middle`'s [`ty::GenericArg`].
 ///
@@ -399,7 +367,6 @@ pub trait GenericArgsLowerer<'a, 'tcx> {
         infer_args: bool,
     ) -> ty::GenericArg<'tcx>;
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=lower_lifetime | COMPLEXITY=1004 | LINES=2457 */
 
 impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     /// Lower a lifetime from the HIR to our internal notion of a lifetime called a *region*.

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 // The `Visitor` responsible for actually checking a `mir::Body` for invalid operations.
 
 use std::assert_matches::assert_matches;
@@ -9,11 +8,9 @@ use std::num::NonZero;
 use std::ops::Deref;
 
 use crate::rustc_complete::{Diag, ErrorGuaranteed};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::mir::visit::Visitor;
@@ -21,26 +18,18 @@ use crate::rustc_complete::mir::*;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::Analysis;
 use crate::rustc_mir_dataflow::impls::{MaybeStorageLive, always_storage_live_locals};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::{
     Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::ops::{self, NonConstOp, Status};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::qualifs::{self, HasMutInterior, NeedsDrop, NeedsNonConstDrop};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use super::resolver::FlowSensitiveAnalysis;
 use super::{ConstCx, Qualif};
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::check_consts::is_fn_or_trait_safe_to_expose_on_stable;
 use crate::errors;
 
@@ -52,7 +41,6 @@ enum ConstConditionsHold {
     Yes,
     No,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Default)]
 pub(crate) struct Qualifs<'mir, 'tcx> {
@@ -60,7 +48,6 @@ pub(crate) struct Qualifs<'mir, 'tcx> {
     needs_drop: Option<QualifResults<'mir, 'tcx, NeedsDrop>>,
     needs_non_const_drop: Option<QualifResults<'mir, 'tcx, NeedsNonConstDrop>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=has_mut_interior | COMPLEXITY=54 | LINES=121 */
 
 impl<'mir, 'tcx> Qualifs<'mir, 'tcx> {
     /// Returns `true` if `local` is `NeedsDrop` at the given `Location`.
@@ -182,7 +169,6 @@ impl<'mir, 'tcx> Qualifs<'mir, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Checker | COMPLEXITY=4 | LINES=15 */
 
 pub struct Checker<'mir, 'tcx> {
     ccx: &'mir ConstCx<'mir, 'tcx>,
@@ -198,7 +184,6 @@ pub struct Checker<'mir, 'tcx> {
     error_emitted: Option<ErrorGuaranteed>,
     secondary_errors: Vec<Diag<'tcx>>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'mir, 'tcx> Deref for Checker<'mir, 'tcx> {
     type Target = ConstCx<'mir, 'tcx>;
@@ -207,7 +192,6 @@ impl<'mir, 'tcx> Deref for Checker<'mir, 'tcx> {
         self.ccx
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=181 | LINES=352 */
 
 impl<'mir, 'tcx> Checker<'mir, 'tcx> {
     pub fn new(ccx: &'mir ConstCx<'mir, 'tcx>) -> Self {
@@ -560,7 +544,6 @@ impl<'mir, 'tcx> Checker<'mir, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_basic_block_data | COMPLEXITY=240 | LINES=433 */
 
 impl<'tcx> Visitor<'tcx> for Checker<'_, 'tcx> {
     fn visit_basic_block_data(&mut self, bb: BasicBlock, block: &BasicBlockData<'tcx>) {
@@ -994,12 +977,10 @@ impl<'tcx> Visitor<'tcx> for Checker<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_int_bool_float_or_char | COMPLEXITY=2 | LINES=4 */
 
 fn is_int_bool_float_or_char(ty: Ty<'_>) -> bool {
     ty.is_bool() || ty.is_integral() || ty.is_char() || ty.is_floating_point()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=emit_unstable_in_stable_exposed_error | COMPLEXITY=3 | LINES=17 */
 
 fn emit_unstable_in_stable_exposed_error(
     ccx: &ConstCx<'_, '_>,

@@ -31,5 +31,5 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_library_std_src_sync_nonpoison_condvar.rs"]
-mod dot_dot_rust_library_std_src_sync_nonpoison_condvar;
+#[path = "src/dot_dot_rust_compiler_rustc_query_system_src_query_caches.rs"]
+mod dot_dot_rust_compiler_rustc_query_system_src_query_caches;

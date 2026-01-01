@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_lint/src/unit_bindings.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::lints::UnitBindingsDiag;
 use crate::{LateLintPass, LintContext};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=40 */
 
 declare_lint! {
     /// The `unit_bindings` lint detects cases where bindings are useless because they have
@@ -47,7 +44,6 @@ declare_lint! {
     Allow,
     "binding is useless because it has the unit `()` type"
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_local | COMPLEXITY=13 | LINES=28 */
 
 declare_lint_pass!(UnitBindings => [UNIT_BINDINGS]);
 

@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/generic/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // A mini version of ast::Ty, which is easier to use, and features an explicit `Self` type to use
 // when specifying impls to be derived.
 
 pub(crate) use Ty::*;
 use crate::rustc_complete::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_expand::base::ExtCtxt;
 use crate::rustc_complete::source_map::respan;
 use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 use thin_vec::ThinVec;
 
 /// A path, e.g., `::std::option::Option::<i32>` (global). Has support
@@ -20,14 +17,12 @@ pub(crate) struct Path {
     params: Vec<Box<Ty>>,
     kind: PathKind,
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone)]
 pub(crate) enum PathKind {
     Local,
     Std,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=42 */
 
 impl Path {
     pub(crate) fn new(path: Vec<Symbol>) -> Path {
@@ -70,7 +65,6 @@ impl Path {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// A type. Supports pointers, Self, literals, unit or an arbitrary AST path.
 #[derive(Clone)]
@@ -86,12 +80,10 @@ pub(crate) enum Ty {
     /// An arbitrary type.
     AstTy(Box<ast::Ty>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn self_ref() -> Ty {
     Ref(Box::new(Self_), ast::Mutability::Not)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=61 */
 
 impl Ty {
     pub(crate) fn to_ty(
@@ -153,7 +145,6 @@ impl Ty {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=mk_ty_param | COMPLEXITY=3 | LINES=18 */
 
 fn mk_ty_param(
     cx: &ExtCtxt<'_>,
@@ -172,14 +163,12 @@ fn mk_ty_param(
         .collect();
     cx.typaram(span, Ident::new(name, span), bounds, None)
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Bounds on type parameters.
 #[derive(Clone)]
 pub(crate) struct Bounds {
     pub bounds: Vec<(Symbol, Vec<Path>)>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=29 */
 
 impl Bounds {
     pub(crate) fn empty() -> Bounds {
@@ -209,7 +198,6 @@ impl Bounds {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) fn get_explicit_self(cx: &ExtCtxt<'_>, span: Span) -> (Box<Expr>, ast::ExplicitSelf) {
     // This constructs a fresh `self` path.

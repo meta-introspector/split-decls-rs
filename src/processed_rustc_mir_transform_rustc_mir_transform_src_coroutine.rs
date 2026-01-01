@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coroutine.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=21 | LINES=26 */
 // This is the implementation of the pass which transforms coroutines into state machines.
 //
 // MIR generation for coroutines creates a function which has a self argument which
@@ -26,7 +25,6 @@
 //         state: u32,
 //         mir_locals...,
 //     }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=29 */
 //     ```
 // This pass computes the meaning of the state field and the MIR locals which are live
 // across a suspension point. There are however three hardcoded coroutine states:
@@ -54,7 +52,6 @@
 // Otherwise it drops all the values in scope at the last suspension point.
 
 use std::{iter, ops};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) use by_move_body::coroutine_by_move_body_def_id;
 use drop::{
@@ -62,55 +59,40 @@ use drop::{
     create_coroutine_drop_shim_proxy_async, elaborate_coroutine_drops, expand_async_drops,
     has_expandable_async_drops, insert_clean_drop,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::pluralize;
 use rustc_hir as hir;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::bit_set::{BitMatrix, DenseBitSet, GrowableBitSet};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::util::Discr;
 use crate::rustc_complete::ty::{
     self, CoroutineArgs, CoroutineArgsExt, GenericArgsRef, InstanceKind, Ty, TyCtxt, TypingMode,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_mir_dataflow::impls::{
     MaybeBorrowedLocals, MaybeLiveLocals, MaybeRequiresStorage, MaybeStorageLive,
     always_storage_live_locals,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_mir_dataflow::{
     Analysis, Results, ResultsCursor, ResultsVisitor, visit_reachable_results,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::source_map::dummy_spanned;
 use crate::rustc_complete::symbol::sym;
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::spec::PanicStrategy;
 use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use crate::rustc_trait_selection::infer::TyCtxtInferExt as _;
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode, ObligationCtxt};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::deref_separator::deref_finder;
 use crate::{abort_unwinding_calls, errors, pass_manager as pm, simplify};
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=RenameLocalVisitor | COMPLEXITY=2 | LINES=8 */
 
 pub(super) struct StateTransform;
 
@@ -119,7 +101,6 @@ struct RenameLocalVisitor<'tcx> {
     to: Local,
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=16 | LINES=22 */
 
 impl<'tcx> MutVisitor<'tcx> for RenameLocalVisitor<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -142,20 +123,17 @@ impl<'tcx> MutVisitor<'tcx> for RenameLocalVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=SelfArgVisitor | COMPLEXITY=2 | LINES=5 */
 
 struct SelfArgVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
     new_base: Place<'tcx>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> SelfArgVisitor<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, elem: ProjectionElem<Local, Ty<'tcx>>) -> Self {
         Self { tcx, new_base: Place { local: SELF_ARG, projection: tcx.mk_place_elems(&[elem]) } }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=18 | LINES=24 */
 
 impl<'tcx> MutVisitor<'tcx> for SelfArgVisitor<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -180,7 +158,6 @@ impl<'tcx> MutVisitor<'tcx> for SelfArgVisitor<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=replace_base | COMPLEXITY=2 | LINES=9 */
 
 fn replace_base<'tcx>(place: &mut Place<'tcx>, new_base: Place<'tcx>, tcx: TyCtxt<'tcx>) {
     place.local = new_base.local;
@@ -190,7 +167,6 @@ fn replace_base<'tcx>(place: &mut Place<'tcx>, new_base: Place<'tcx>, tcx: TyCtx
 
     place.projection = tcx.mk_place_elems(&new_projection);
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=SuspensionPoint | COMPLEXITY=7 | LINES=17 */
 
 const SELF_ARG: Local = Local::from_u32(1);
 const CTX_ARG: Local = Local::from_u32(2);
@@ -208,7 +184,6 @@ struct SuspensionPoint<'tcx> {
     /// Set of locals that have live storage while at this suspension point.
     storage_liveness: GrowableBitSet<Local>,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=TransformVisitor | COMPLEXITY=3 | LINES=27 */
 
 struct TransformVisitor<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -236,7 +211,6 @@ struct TransformVisitor<'tcx> {
 
     old_ret_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=insert_none_ret_block | COMPLEXITY=62 | LINES=172 */
 
 impl<'tcx> TransformVisitor<'tcx> {
     fn insert_none_ret_block(&self, body: &mut Body<'tcx>) -> BasicBlock {
@@ -409,7 +383,6 @@ impl<'tcx> TransformVisitor<'tcx> {
         (assign, temp)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=54 | LINES=90 */
 
 impl<'tcx> MutVisitor<'tcx> for TransformVisitor<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -500,7 +473,6 @@ impl<'tcx> MutVisitor<'tcx> for TransformVisitor<'tcx> {
         self.super_basic_block_data(block, data);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=make_aggregate_adt | COMPLEXITY=2 | LINES=9 */
 
 fn make_aggregate_adt<'tcx>(
     def_id: DefId,
@@ -510,7 +482,6 @@ fn make_aggregate_adt<'tcx>(
 ) -> Rvalue<'tcx> {
     Rvalue::Aggregate(Box::new(AggregateKind::Adt(def_id, variant_idx, args, None, None)), operands)
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=make_coroutine_state_argument_indirect | COMPLEXITY=2 | LINES=12 */
 
 fn make_coroutine_state_argument_indirect<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     let coroutine_ty = body.local_decls.raw[1].ty;
@@ -523,7 +494,6 @@ fn make_coroutine_state_argument_indirect<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Bo
     // Add a deref to accesses of the coroutine state
     SelfArgVisitor::new(tcx, ProjectionElem::Deref).visit_body(body);
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=make_coroutine_state_argument_pinned | COMPLEXITY=3 | LINES=16 */
 
 fn make_coroutine_state_argument_pinned<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
     let ref_coroutine_ty = body.local_decls.raw[1].ty;
@@ -540,7 +510,6 @@ fn make_coroutine_state_argument_pinned<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body
     SelfArgVisitor::new(tcx, ProjectionElem::Field(FieldIdx::ZERO, ref_coroutine_ty))
         .visit_body(body);
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=replace_local | COMPLEXITY=4 | LINES=21 */
 
 /// Allocates a new local and replaces all references of `local` with it. Returns the new local.
 ///
@@ -562,7 +531,6 @@ fn replace_local<'tcx>(
 
     new_local
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=transform_async_context | COMPLEXITY=30 | LINES=54 */
 
 /// Transforms the `body` of the coroutine applying the following transforms:
 ///
@@ -617,7 +585,6 @@ fn transform_async_context<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> Ty
     }
     context_mut_ref
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=eliminate_get_context_call | COMPLEXITY=7 | LINES=19 */
 
 fn eliminate_get_context_call<'tcx>(bb_data: &mut BasicBlockData<'tcx>) -> Local {
     let terminator = bb_data.terminator.take().unwrap();
@@ -637,7 +604,6 @@ fn eliminate_get_context_call<'tcx>(bb_data: &mut BasicBlockData<'tcx>) -> Local
     });
     local
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=replace_resume_ty_local | COMPLEXITY=11 | LINES=21 */
 
 #[cfg_attr(not(debug_assertions), allow(unused))]
 fn replace_resume_ty_local<'tcx>(
@@ -659,7 +625,6 @@ fn replace_resume_ty_local<'tcx>(
         };
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=transform_gen_context | COMPLEXITY=5 | LINES=16 */
 
 /// Transforms the `body` of the coroutine applying the following transform:
 ///
@@ -676,7 +641,6 @@ fn transform_gen_context<'tcx>(body: &mut Body<'tcx>) {
     // adjusting all local references in the body after removing it.
     body.arg_count = 1;
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=LivenessInfo | COMPLEXITY=5 | LINES=20 */
 
 struct LivenessInfo {
     /// Which locals are live across any suspension point.
@@ -697,7 +661,6 @@ struct LivenessInfo {
     /// that suspension point.
     storage_liveness: IndexVec<BasicBlock, Option<DenseBitSet<Local>>>,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=locals_live_across_suspend_points | COMPLEXITY=44 | LINES=127 */
 
 /// Computes which locals have to be stored in the state-machine for the
 /// given coroutine.
@@ -825,7 +788,6 @@ fn locals_live_across_suspend_points<'tcx>(
         storage_liveness: storage_liveness_map,
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=CoroutineSavedLocals(DenseBitSet | COMPLEXITY=18 | LINES=37 */
 
 /// The set of `Local`s that must be saved across yield points.
 ///
@@ -863,7 +825,6 @@ impl CoroutineSavedLocals {
         Some(CoroutineSavedLocal::new(idx))
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl ops::Deref for CoroutineSavedLocals {
     type Target = DenseBitSet<Local>;
@@ -872,7 +833,6 @@ impl ops::Deref for CoroutineSavedLocals {
         &self.0
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=compute_storage_conflicts | COMPLEXITY=39 | LINES=57 */
 
 /// For every saved local, looks for which locals are StorageLive at the same
 /// time. Generates a bitset for every local of all the other locals that may be
@@ -930,7 +890,6 @@ fn compute_storage_conflicts<'mir, 'tcx>(
     }
     storage_conflicts
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=StorageConflictVisitor | COMPLEXITY=4 | LINES=10 */
 
 struct StorageConflictVisitor<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -941,7 +900,6 @@ struct StorageConflictVisitor<'a, 'tcx> {
     // We keep this bitset as a buffer to avoid reallocating memory.
     eligible_storage_live: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=visit_after_early_statement_effect | COMPLEXITY=7 | LINES=24 */
 
 impl<'a, 'tcx> ResultsVisitor<'tcx, MaybeRequiresStorage<'a, 'tcx>>
     for StorageConflictVisitor<'a, 'tcx>
@@ -966,7 +924,6 @@ impl<'a, 'tcx> ResultsVisitor<'tcx, MaybeRequiresStorage<'a, 'tcx>>
         self.apply_state(state, loc);
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=apply_state | COMPLEXITY=15 | LINES=20 */
 
 impl StorageConflictVisitor<'_, '_> {
     fn apply_state(&mut self, state: &DenseBitSet<Local>, loc: Location) {
@@ -987,7 +944,6 @@ impl StorageConflictVisitor<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=compute_layout | COMPLEXITY=43 | LINES=109 */
 
 fn compute_layout<'tcx>(
     liveness: LivenessInfo,
@@ -1097,7 +1053,6 @@ fn compute_layout<'tcx>(
 
     (remap, layout, storage_liveness)
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=insert_switch | COMPLEXITY=9 | LINES=30 */
 
 /// Replaces the entry point of `body` with a block that switches on the coroutine discriminant and
 /// dispatches to blocks according to `cases`.
@@ -1128,13 +1083,11 @@ fn insert_switch<'tcx>(
         b.terminator_mut().successors_mut(|target| *target += 1);
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=insert_term_block | COMPLEXITY=3 | LINES=5 */
 
 fn insert_term_block<'tcx>(body: &mut Body<'tcx>, kind: TerminatorKind<'tcx>) -> BasicBlock {
     let source_info = SourceInfo::outermost(body.span);
     body.basic_blocks_mut().push(BasicBlockData::new(Some(Terminator { source_info, kind }), false))
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=return_poll_ready_assign | COMPLEXITY=4 | LINES=16 */
 
 fn return_poll_ready_assign<'tcx>(tcx: TyCtxt<'tcx>, source_info: SourceInfo) -> Statement<'tcx> {
     // Poll::Ready(())
@@ -1151,7 +1104,6 @@ fn return_poll_ready_assign<'tcx>(tcx: TyCtxt<'tcx>, source_info: SourceInfo) ->
     );
     Statement::new(source_info, StatementKind::Assign(Box::new((Place::return_place(), ready_val))))
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=insert_poll_ready_block | COMPLEXITY=3 | LINES=9 */
 
 fn insert_poll_ready_block<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> BasicBlock {
     let source_info = SourceInfo::outermost(body.span);
@@ -1161,7 +1113,6 @@ fn insert_poll_ready_block<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) -> Ba
         false,
     ))
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=insert_panic_block | COMPLEXITY=5 | LINES=21 */
 
 fn insert_panic_block<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1183,7 +1134,6 @@ fn insert_panic_block<'tcx>(
 
     insert_term_block(body, kind)
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=can_return | COMPLEXITY=5 | LINES=11 */
 
 fn can_return<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>, typing_env: ty::TypingEnv<'tcx>) -> bool {
     // Returning from a function with an uninhabited return type is undefined behavior.
@@ -1195,7 +1145,6 @@ fn can_return<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>, typing_env: ty::Typing
     body.basic_blocks.iter().any(|block| matches!(block.terminator().kind, TerminatorKind::Return))
     // Otherwise the function can't return.
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=can_unwind | COMPLEXITY=31 | LINES=43 */
 
 fn can_unwind<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) -> bool {
     // Nothing can unwind when landing pads are off.
@@ -1239,7 +1188,6 @@ fn can_unwind<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) -> bool {
     // If we didn't find an unwinding terminator, the function cannot unwind.
     false
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=generate_poison_block_and_redirect_unwinds_there | COMPLEXITY=19 | LINES=32 */
 
 // Poison the coroutine when it unwinds
 fn generate_poison_block_and_redirect_unwinds_there<'tcx>(
@@ -1272,7 +1220,6 @@ fn generate_poison_block_and_redirect_unwinds_there<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=create_coroutine_resume_function | COMPLEXITY=39 | LINES=77 */
 
 fn create_coroutine_resume_function<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1350,7 +1297,6 @@ fn create_coroutine_resume_function<'tcx>(
         dumper.dump_mir(body);
     }
 }
-/* AST_META: AST_ID=54 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// An operation that can be performed on a coroutine.
 #[derive(PartialEq, Copy, Clone)]
@@ -1358,7 +1304,6 @@ enum Operation {
     Resume,
     Drop,
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=target_block | COMPLEXITY=7 | LINES=9 */
 
 impl Operation {
     fn target_block(self, point: &SuspensionPoint<'_>) -> Option<BasicBlock> {
@@ -1368,7 +1313,6 @@ impl Operation {
         }
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=create_cases | COMPLEXITY=24 | LINES=50 */
 
 fn create_cases<'tcx>(
     body: &mut Body<'tcx>,
@@ -1419,7 +1363,6 @@ fn create_cases<'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=34 */
 
 #[instrument(level = "debug", skip(tcx), ret)]
 pub(crate) fn mir_coroutine_witnesses<'tcx>(
@@ -1454,7 +1397,6 @@ pub(crate) fn mir_coroutine_witnesses<'tcx>(
 
     Some(coroutine_layout)
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=check_field_tys_sized | COMPLEXITY=15 | LINES=39 */
 
 fn check_field_tys_sized<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1494,7 +1436,6 @@ fn check_field_tys_sized<'tcx>(
         infcx.err_ctxt().report_fulfillment_errors(errors);
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=80 | LINES=223 */
 
 impl<'tcx> crate::MirPass<'tcx> for StateTransform {
     fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
@@ -1718,7 +1659,6 @@ impl<'tcx> crate::MirPass<'tcx> for StateTransform {
         true
     }
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=EnsureCoroutineFieldAssignmentsNeverAlias | COMPLEXITY=8 | LINES=18 */
 
 /// Looks for any assignments between locals (e.g., `_4 = _5`) that will both be converted to fields
 /// in the coroutine state machine but whose storage is not marked as conflicting
@@ -1737,7 +1677,6 @@ struct EnsureCoroutineFieldAssignmentsNeverAlias<'a> {
     storage_conflicts: &'a BitMatrix<CoroutineSavedLocal, CoroutineSavedLocal>,
     assigned_local: Option<CoroutineSavedLocal>,
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=saved_local_for_direct_place | COMPLEXITY=11 | LINES=20 */
 
 impl EnsureCoroutineFieldAssignmentsNeverAlias<'_> {
     fn saved_local_for_direct_place(&self, place: Place<'_>) -> Option<CoroutineSavedLocal> {
@@ -1758,7 +1697,6 @@ impl EnsureCoroutineFieldAssignmentsNeverAlias<'_> {
         }
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=visit_place | COMPLEXITY=59 | LINES=91 */
 
 impl<'tcx> Visitor<'tcx> for EnsureCoroutineFieldAssignmentsNeverAlias<'_> {
     fn visit_place(&mut self, place: &Place<'tcx>, context: PlaceContext, location: Location) {
@@ -1850,7 +1788,6 @@ impl<'tcx> Visitor<'tcx> for EnsureCoroutineFieldAssignmentsNeverAlias<'_> {
         }
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=check_suspend_tys | COMPLEXITY=15 | LINES=32 */
 
 fn check_suspend_tys<'tcx>(tcx: TyCtxt<'tcx>, layout: &CoroutineLayout<'tcx>, body: &Body<'tcx>) {
     let mut linted_tys = FxHashSet::default();
@@ -1883,7 +1820,6 @@ fn check_suspend_tys<'tcx>(tcx: TyCtxt<'tcx>, layout: &CoroutineLayout<'tcx>, bo
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=SuspendCheckData | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Default)]
 struct SuspendCheckData<'a> {
@@ -1893,7 +1829,6 @@ struct SuspendCheckData<'a> {
     descr_post: &'a str,
     plural_len: usize,
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=check_must_not_suspend_ty | COMPLEXITY=74 | LINES=118 */
 
 // Returns whether it emitted a diagnostic or not
 // Note that this fn and the proceeding one are based on the code
@@ -2012,7 +1947,6 @@ fn check_must_not_suspend_ty<'tcx>(
         _ => false,
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=check_must_not_suspend_def | COMPLEXITY=9 | LINES=32 */
 
 fn check_must_not_suspend_def(
     tcx: TyCtxt<'_>,

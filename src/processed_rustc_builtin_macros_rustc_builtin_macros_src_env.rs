@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/env.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // The compiler code necessary to support the env! extension. Eventually this
 // should all get sucked into either the compiler syntax extension plugin
 // interface.
@@ -9,19 +8,14 @@ use std::env;
 use std::env::VarError;
 
 use crate::rustc_complete::token::{self, LitKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::{ExprKind, GenericArg, Mutability};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use thin_vec::thin_vec;
 
 use crate::errors;
 use crate::util::{expr_to_string, get_exprs_from_tts, get_single_expr_from_tts};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=lookup_env | COMPLEXITY=5 | LINES=10 */
 
 fn lookup_env<'cx>(cx: &'cx ExtCtxt<'_>, var: Symbol) -> Result<Symbol, VarError> {
     let var = var.as_str();
@@ -32,7 +26,6 @@ fn lookup_env<'cx>(cx: &'cx ExtCtxt<'_>, var: Symbol) -> Result<Symbol, VarError
     // from rustc's environment.
     Ok(Symbol::intern(&env::var(var)?))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=60 */
 
 pub(crate) fn expand_option_env<'cx>(
     cx: &'cx mut ExtCtxt<'_>,
@@ -93,7 +86,6 @@ pub(crate) fn expand_option_env<'cx>(
     };
     ExpandResult::Ready(MacEager::expr(e))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=84 */
 
 pub(crate) fn expand_env<'cx>(
     cx: &'cx mut ExtCtxt<'_>,
@@ -178,7 +170,6 @@ pub(crate) fn expand_env<'cx>(
     };
     ExpandResult::Ready(MacEager::expr(e))
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_cargo_env_var | COMPLEXITY=4 | LINES=7 */
 
 /// Returns `true` if an environment variable from `env!` is one used by Cargo.
 fn is_cargo_env_var(var: &str) -> bool {

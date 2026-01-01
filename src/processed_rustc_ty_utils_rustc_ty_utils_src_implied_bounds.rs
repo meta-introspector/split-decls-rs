@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/implied_bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::iter;
 
 use crate::rustc_data_structures::fx::FxHashMap;
@@ -8,9 +7,7 @@ use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, fold_regions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 use crate::rustc_complete::Span;
 
 pub(crate) fn provide(providers: &mut Providers) {
@@ -23,7 +20,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=assumed_wf_types | COMPLEXITY=66 | LINES=137 */
 
 fn assumed_wf_types<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> &'tcx [(Ty<'tcx>, Span)] {
     let kind = tcx.def_kind(def_id);
@@ -161,7 +157,6 @@ fn assumed_wf_types<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> &'tcx [(Ty<'
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=fn_sig_spans | COMPLEXITY=10 | LINES=9 */
 
 fn fn_sig_spans(tcx: TyCtxt<'_>, def_id: LocalDefId) -> impl Iterator<Item = Span> {
     let node = tcx.hir_node_by_def_id(def_id);
@@ -171,7 +166,6 @@ fn fn_sig_spans(tcx: TyCtxt<'_>, def_id: LocalDefId) -> impl Iterator<Item = Spa
         bug!("unexpected item for fn {def_id:?}: {node:?}")
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=impl_spans | COMPLEXITY=11 | LINES=18 */
 
 fn impl_spans(tcx: TyCtxt<'_>, def_id: LocalDefId) -> impl Iterator<Item = Span> {
     let item = tcx.hir_expect_item(def_id);

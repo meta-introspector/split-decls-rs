@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/liveness/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use itertools::{Either, Itertools};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::mir::visit::{TyContext, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Local, Location, SourceInfo};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::relate::Relate;
 use crate::rustc_complete::ty::{GenericArgsRef, Region, RegionVid, Ty, TyCtxt, TypeVisitable};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=62 */
 use crate::rustc_mir_dataflow::move_paths::MoveData;
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use tracing::debug;
@@ -71,7 +66,6 @@ pub(super) fn generate<'tcx>(
         typeck.body,
     );
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=compute_relevant_live_locals | COMPLEXITY=18 | LINES=26 */
 
 // The purpose of `compute_relevant_live_locals` is to define the subset of `Local`
 // variables for which we need to do a liveness computation. We only need
@@ -98,7 +92,6 @@ fn compute_relevant_live_locals<'tcx>(
 
     (relevant_live_locals, boring_locals)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=regions_that_outlive_free_regions | COMPLEXITY=18 | LINES=40 */
 
 /// Computes all regions that are (currently) known to outlive free
 /// regions. For these regions, we do not need to compute
@@ -139,7 +132,6 @@ fn regions_that_outlive_free_regions<'tcx>(
     // Return the final set of things we visited.
     outlives_free_region
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=record_regular_live_regions | COMPLEXITY=7 | LINES=16 */
 
 /// Some variables are "regular live" at `location` -- i.e., they may be used later. This means that
 /// all regions appearing in their type must be live at `location`.
@@ -156,7 +148,6 @@ fn record_regular_live_regions<'tcx>(
         visitor.visit_basic_block_data(bb, data);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LiveVariablesVisitor | COMPLEXITY=4 | LINES=8 */
 
 /// Visitor looking for regions that should be live within rvalues or calls.
 struct LiveVariablesVisitor<'a, 'tcx> {
@@ -165,7 +156,6 @@ struct LiveVariablesVisitor<'a, 'tcx> {
     universal_regions: &'a UniversalRegions<'tcx>,
     polonius_liveness: &'a mut Option<PoloniusLivenessContext>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=visit_args | COMPLEXITY=21 | LINES=35 */
 
 impl<'a, 'tcx> Visitor<'tcx> for LiveVariablesVisitor<'a, 'tcx> {
     /// We sometimes have `args` within an rvalue, or within a
@@ -201,7 +191,6 @@ impl<'a, 'tcx> Visitor<'tcx> for LiveVariablesVisitor<'a, 'tcx> {
         self.super_ty(ty);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=record_regions_live_at | COMPLEXITY=10 | LINES=20 */
 
 impl<'a, 'tcx> LiveVariablesVisitor<'a, 'tcx> {
     /// Some variable is "regular live" at `location` -- i.e., it may be used later. This means that

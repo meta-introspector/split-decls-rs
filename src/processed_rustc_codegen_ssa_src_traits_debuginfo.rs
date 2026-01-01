@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/debuginfo.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::Range;
 
 use crate::rustc_abi::Size;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{SourceFile, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_target::callconv::FnAbi;
 
 use super::BackendTypes;
 use crate::mir::debuginfo::{FunctionDebugContext, VariableKind};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=create_vtable_debuginfo | COMPLEXITY=15 | LINES=55 */
 
 pub trait DebugInfoCodegenMethods<'tcx>: BackendTypes {
     fn create_vtable_debuginfo(
@@ -68,7 +64,6 @@ pub trait DebugInfoCodegenMethods<'tcx>: BackendTypes {
         span: Span,
     ) -> Self::DIVariable;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=dbg_var_addr | COMPLEXITY=7 | LINES=21 */
 
 pub trait DebugInfoBuilderMethods: BackendTypes {
     // FIXME(eddyb) find a common convention for all of the debuginfo-related

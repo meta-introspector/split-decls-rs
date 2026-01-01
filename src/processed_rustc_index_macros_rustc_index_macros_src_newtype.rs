@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_index_macros/src/newtype.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use proc_macro2::{Span, TokenStream};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=Newtype(TokenStream); | COMPLEXITY=166 | LINES=312 */
 use quote::quote;
 use syn::parse::*;
 use syn::*;
@@ -314,7 +312,6 @@ impl Parse for Newtype {
         }))
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn newtype(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as Newtype);

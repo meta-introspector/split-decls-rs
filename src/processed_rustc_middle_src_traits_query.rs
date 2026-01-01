@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/query.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 // Experimental types for the trait query interface. The methods
 // defined in this module are all based on **canonicalization**,
 // which makes a canonical query by replacing unbound inference
@@ -8,15 +7,12 @@
 // `rustc_traits`.
 
 use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 
 use crate::error::DropCheckOverflow;
 use crate::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use crate::traits::solve::NoSolution;
 use crate::ty::{self, GenericArg, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=AscribeUserType | COMPLEXITY=15 | LINES=51 */
 
 pub mod type_op {
     use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
@@ -68,7 +64,6 @@ pub mod type_op {
         pub dropped_ty: Ty<'tcx>,
     }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=DropckOutlivesResult | COMPLEXITY=4 | LINES=32 */
 
 pub type CanonicalAliasGoal<'tcx> =
     CanonicalQueryInput<'tcx, ty::ParamEnvAnd<'tcx, ty::AliasTy<'tcx>>>;
@@ -101,7 +96,6 @@ pub struct DropckOutlivesResult<'tcx> {
     pub kinds: Vec<GenericArg<'tcx>>,
     pub overflows: Vec<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=report_overflows | COMPLEXITY=7 | LINES=8 */
 
 impl<'tcx> DropckOutlivesResult<'tcx> {
     pub fn report_overflows(&self, tcx: TyCtxt<'tcx>, span: Span, ty: Ty<'tcx>) {
@@ -110,7 +104,6 @@ impl<'tcx> DropckOutlivesResult<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=DropckConstraint | COMPLEXITY=9 | LINES=17 */
 
 /// A set of constraints that need to be satisfied in order for
 /// a type to be valid for destruction.
@@ -128,14 +121,12 @@ pub struct DropckConstraint<'tcx> {
     /// report an error.
     pub overflows: Vec<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> DropckConstraint<'tcx> {
     pub fn empty() -> DropckConstraint<'tcx> {
         DropckConstraint { outlives: vec![], dtorck_types: vec![], overflows: vec![] }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=9 | LINES=14 */
 
 impl<'tcx> FromIterator<DropckConstraint<'tcx>> for DropckConstraint<'tcx> {
     fn from_iter<I: IntoIterator<Item = DropckConstraint<'tcx>>>(iter: I) -> Self {
@@ -150,7 +141,6 @@ impl<'tcx> FromIterator<DropckConstraint<'tcx>> for DropckConstraint<'tcx> {
         result
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=CandidateStep | COMPLEXITY=10 | LINES=22 */
 
 #[derive(Debug, HashStable)]
 pub struct CandidateStep<'tcx> {
@@ -173,7 +163,6 @@ pub struct CandidateStep<'tcx> {
     /// be converted into by autodereffing.
     pub reachable_via_deref: bool,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=MethodAutoderefStepsResult | COMPLEXITY=3 | LINES=12 */
 
 #[derive(Copy, Clone, Debug, HashStable)]
 pub struct MethodAutoderefStepsResult<'tcx> {
@@ -186,23 +175,19 @@ pub struct MethodAutoderefStepsResult<'tcx> {
     /// recursion limit.
     pub reached_recursion_limit: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=MethodAutoderefBadTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, HashStable)]
 pub struct MethodAutoderefBadTy<'tcx> {
     pub reached_raw_pointer: bool,
     pub ty: Canonical<'tcx, QueryResponse<'tcx, Ty<'tcx>>>,
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
 
 /// Result of the `normalize_canonicalized_{{,inherent_}projection,free}_ty` queries.
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=NormalizationResult | COMPLEXITY=2 | LINES=5 */
 #[derive(Clone, Debug, HashStable, TypeFoldable, TypeVisitable)]
 pub struct NormalizationResult<'tcx> {
     /// Result of the normalization.
     pub normalized_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// Outlives bounds are relationships between generic parameters,
 /// whether they both be regions (`'a: 'b`) or whether types are

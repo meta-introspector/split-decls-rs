@@ -31,9 +31,5 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_library_std_src_sys_pal_windows_stack_overflow_uwp.rs"]
-mod dot_dot_rust_library_std_src_sys_pal_windows_stack_overflow_uwp;
-#[path = "src/dot_dot_rust_compiler_rustc_codegen_ssa_src_back_linker.rs"]
-mod dot_dot_rust_compiler_rustc_codegen_ssa_src_back_linker;
-#[path = "src/dot_dot_rust_compiler_rustc_codegen_llvm_src_mono_item.rs"]
-mod dot_dot_rust_compiler_rustc_codegen_llvm_src_mono_item;
+#[path = "src/dot_dot_rust_library_std_src_hash_random.rs"]
+mod dot_dot_rust_library_std_src_hash_random;

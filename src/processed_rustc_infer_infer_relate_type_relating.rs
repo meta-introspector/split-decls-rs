@@ -1,25 +1,17 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/relate/type_relating.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::traits::solve::Goal;
 use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::relate::{
     Relate, RelateResult, TypeRelation, relate_args_invariantly, relate_args_with_variances,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, DelayedSet, Ty, TyCtxt, TyVar};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::infer::BoundRegionConversionTime::HigherRankedType;
 use crate::infer::relate::{PredicateEmittingRelation, StructurallyRelateAliases};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{DefineOpaqueTypes, InferCtxt, SubregionOrigin, TypeTrace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{Obligation, PredicateObligations};
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=37 */
 
 /// Enforce that `a` is equal to or a subtype of `b`.
 pub(crate) struct TypeRelating<'infcx, 'tcx> {
@@ -57,7 +49,6 @@ pub(crate) struct TypeRelating<'infcx, 'tcx> {
     /// later proving the `Subtype(?0, ?1)` goal from the first relation.
     cache: DelayedSet<(ty::Variance, Ty<'tcx>, Ty<'tcx>)>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 impl<'infcx, 'tcx> TypeRelating<'infcx, 'tcx> {
     pub(crate) fn new(
@@ -83,7 +74,6 @@ impl<'infcx, 'tcx> TypeRelating<'infcx, 'tcx> {
         self.obligations
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=110 | LINES=264 */
 
 impl<'tcx> TypeRelation<TyCtxt<'tcx>> for TypeRelating<'_, 'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -348,7 +338,6 @@ impl<'tcx> TypeRelation<TyCtxt<'tcx>> for TypeRelating<'_, 'tcx> {
         Ok(a)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=span | COMPLEXITY=20 | LINES=58 */
 
 impl<'tcx> PredicateEmittingRelation<InferCtxt<'tcx>> for TypeRelating<'_, 'tcx> {
     fn span(&self) -> Span {

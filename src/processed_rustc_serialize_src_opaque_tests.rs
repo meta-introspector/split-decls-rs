@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_serialize/src/opaque/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Debug;
 use std::fs;
 
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::opaque::{FileEncoder, MemDecoder};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Struct | COMPLEXITY=2 | LINES=21 */
 
 #[derive(PartialEq, Clone, Debug, Encodable_NoContext, Decodable_NoContext)]
 struct Struct {
@@ -31,7 +27,6 @@ struct Struct {
     p: bool,
     q: Option<u32>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_round_trip | COMPLEXITY=9 | LINES=22 */
 
 fn check_round_trip<
     T: Encodable<FileEncoder> + for<'a> Decodable<MemDecoder<'a>> + PartialEq + Debug,
@@ -54,13 +49,11 @@ fn check_round_trip<
         assert_eq!(value, decoded);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=test_unit | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_unit() {
     check_round_trip(vec![(), (), (), ()]);
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_u8 | COMPLEXITY=5 | LINES=9 */
 
 #[test]
 fn test_u8() {
@@ -70,7 +63,6 @@ fn test_u8() {
     }
     check_round_trip(vec);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=test_u16 | COMPLEXITY=5 | LINES=7 */
 
 #[test]
 fn test_u16() {
@@ -78,25 +70,21 @@ fn test_u16() {
         check_round_trip(vec![1, 2, 3, i, i, i]);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=test_u32 | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_u32() {
     check_round_trip(vec![1, 2, 3, u32::MIN, 0, 1, u32::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_u64 | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_u64() {
     check_round_trip(vec![1, 2, 3, u64::MIN, 0, 1, u64::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=test_usize | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_usize() {
     check_round_trip(vec![1, 2, 3, usize::MIN, 0, 1, usize::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=test_i8 | COMPLEXITY=5 | LINES=9 */
 
 #[test]
 fn test_i8() {
@@ -106,7 +94,6 @@ fn test_i8() {
     }
     check_round_trip(vec);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=test_i16 | COMPLEXITY=5 | LINES=7 */
 
 #[test]
 fn test_i16() {
@@ -114,38 +101,32 @@ fn test_i16() {
         check_round_trip(vec![-1, 2, -3, i, i, i, 2]);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=test_i32 | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_i32() {
     check_round_trip(vec![-1, 2, -3, i32::MIN, 0, 1, i32::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=test_i64 | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_i64() {
     check_round_trip(vec![-1, 2, -3, i64::MIN, 0, 1, i64::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=test_isize | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_isize() {
     check_round_trip(vec![-1, 2, -3, isize::MIN, 0, 1, isize::MAX, 2, 1]);
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=test_bool | COMPLEXITY=2 | LINES=5 */
 
 #[test]
 fn test_bool() {
     check_round_trip(vec![false, true, true, false, false]);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=test_char | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn test_char() {
     let vec = vec!['a', 'b', 'c', 'd', 'A', 'X', ' ', '#', 'Ö', 'Ä', 'µ', '€'];
     check_round_trip(vec);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=test_string | COMPLEXITY=3 | LINES=15 */
 
 #[test]
 fn test_string() {
@@ -161,7 +142,6 @@ fn test_string() {
 
     check_round_trip(vec);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=test_option | COMPLEXITY=3 | LINES=24 */
 
 #[test]
 fn test_option() {
@@ -186,7 +166,6 @@ fn test_option() {
     let none_isize: Option<isize> = None;
     check_round_trip(vec![none_isize]);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=test_struct | COMPLEXITY=5 | LINES=43 */
 
 #[test]
 fn test_struct() {
@@ -230,7 +209,6 @@ fn test_struct() {
         q: Some(1234567),
     }]);
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 #[derive(PartialEq, Clone, Debug, Encodable_NoContext, Decodable_NoContext)]
 enum Enum {
@@ -238,7 +216,6 @@ enum Enum {
     Variant2(usize, u32),
     Variant3 { a: i32, b: char, c: bool },
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=test_enum | COMPLEXITY=4 | LINES=10 */
 
 #[test]
 fn test_enum() {
@@ -249,7 +226,6 @@ fn test_enum() {
         Enum::Variant3 { a: -4, b: 'f', c: true },
     ]);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=test_sequence | COMPLEXITY=5 | LINES=10 */
 
 #[test]
 fn test_sequence() {
@@ -260,7 +236,6 @@ fn test_sequence() {
 
     check_round_trip(vec![vec]);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=test_hash_map | COMPLEXITY=5 | LINES=11 */
 
 #[test]
 fn test_hash_map() {
@@ -272,7 +247,6 @@ fn test_hash_map() {
 
     check_round_trip(vec![map]);
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=test_tuples | COMPLEXITY=2 | LINES=9 */
 
 #[test]
 fn test_tuples() {
@@ -282,7 +256,6 @@ fn test_tuples() {
     check_round_trip(vec![(1234567isize, 100000000000000u64, 99999999999999i64)]);
     check_round_trip(vec![(String::new(), "some string".to_string())]);
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=test_unit_like_struct | COMPLEXITY=2 | LINES=8 */
 
 #[test]
 fn test_unit_like_struct() {
@@ -291,7 +264,6 @@ fn test_unit_like_struct() {
 
     check_round_trip(vec![UnitLikeStruct]);
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=test_box | COMPLEXITY=4 | LINES=11 */
 
 #[test]
 fn test_box() {
@@ -303,7 +275,6 @@ fn test_box() {
     let obj = A { foo: Box::new([true, false]) };
     check_round_trip(vec![obj]);
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=test_cell | COMPLEXITY=7 | LINES=19 */
 
 #[test]
 fn test_cell() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/check_consts/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // Check the bodies of `const`s, `static`s and `const fn`s for illegal operations.
 //
 // This module will eventually replace the parts of `qualify_consts.rs` that check whether a local
@@ -9,13 +8,9 @@
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, find_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, PolyFnSig, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ConstCx | COMPLEXITY=2 | LINES=18 */
 use crate::rustc_complete::Symbol;
 
 pub use self::qualifs::Qualif;
@@ -29,7 +24,6 @@ pub struct ConstCx<'mir, 'tcx> {
     pub typing_env: ty::TypingEnv<'tcx>,
     pub const_kind: Option<hir::ConstContext>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=22 | LINES=47 */
 
 impl<'mir, 'tcx> ConstCx<'mir, 'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>, body: &'mir mir::Body<'tcx>) -> Self {
@@ -77,7 +71,6 @@ impl<'mir, 'tcx> ConstCx<'mir, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=rustc_allow_const_fn_unstable | COMPLEXITY=4 | LINES=10 */
 
 pub fn rustc_allow_const_fn_unstable(
     tcx: TyCtxt<'_>,
@@ -88,7 +81,6 @@ pub fn rustc_allow_const_fn_unstable(
 
     find_attr!(attrs, AttributeKind::AllowConstFnUnstable(syms, _) if syms.contains(&feature_gate))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_fn_or_trait_safe_to_expose_on_stable | COMPLEXITY=22 | LINES=28 */
 
 /// Returns `true` if the given `def_id` (trait or function) is "safe to expose on stable".
 ///

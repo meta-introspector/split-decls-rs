@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/jobserver.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, LazyLock, OnceLock};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 pub use jobserver_crate::{Acquired, Client, HelperThread};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use jobserver_crate::{FromEnv, FromEnvErrorKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use parking_lot::{Condvar, Mutex};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=26 | LINES=36 */
 
 // We can only call `from_env_ext` once per process
 
@@ -45,7 +40,6 @@ static GLOBAL_CLIENT: LazyLock<Result<Client, String>> = LazyLock::new(|| {
         value
     ))
 });
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default_client | COMPLEXITY=6 | LINES=13 */
 
 // Create a new jobserver if there's no inherited one.
 fn default_client() -> Client {
@@ -59,7 +53,6 @@ fn default_client() -> Client {
 
     client
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=initialize_checked | COMPLEXITY=7 | LINES=13 */
 
 static GLOBAL_CLIENT_CHECKED: OnceLock<Client> = OnceLock::new();
 
@@ -73,14 +66,12 @@ pub fn initialize_checked(report_warning: impl FnOnce(&'static str)) {
     };
     GLOBAL_CLIENT_CHECKED.set(client_checked).ok();
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=client | COMPLEXITY=2 | LINES=6 */
 
 const ACCESS_ERROR: &str = "jobserver check should have been called earlier";
 
 pub fn client() -> Client {
     GLOBAL_CLIENT_CHECKED.get().expect(ACCESS_ERROR).clone()
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ProxyData | COMPLEXITY=2 | LINES=9 */
 
 struct ProxyData {
     /// The number of tokens assigned to threads.
@@ -90,7 +81,6 @@ struct ProxyData {
     /// The number of threads requesting a token
     pending: u16,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Proxy | COMPLEXITY=2 | LINES=11 */
 
 /// This is a jobserver proxy used to ensure that we hold on to at least one token.
 pub struct Proxy {
@@ -102,7 +92,6 @@ pub struct Proxy {
 
     helper: OnceLock<HelperThread>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=32 | LINES=71 */
 
 impl Proxy {
     pub fn new() -> Arc<Self> {

@@ -1,28 +1,20 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/collect/type_of.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use core::ops::ControlFlow;
 
 use crate::rustc_complete::{Applicability, StashKey, Suggestions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::VisitorExt;
 use crate::rustc_complete::{self as hir, AmbigArg, HirId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::query::plumbing::CyclePlaceholder;
 use crate::rustc_complete::ty::print::with_forced_trimmed_paths;
 use crate::rustc_complete::ty::util::IntTypeExt;
 use crate::rustc_complete::ty::{
     self, DefiningScopeKind, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, fold_regions,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Ident, Span};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{HirPlaceholderCollector, ItemCtxt, bad_placeholder};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=anon_const_type_of | COMPLEXITY=44 | LINES=63 */
 use crate::check::wfcheck::check_static_item;
 use crate::errors::TypeofReservedKeywordUsed;
 use crate::hir_ty_lowering::HirTyLowerer;
@@ -85,7 +77,6 @@ fn anon_const_type_of<'tcx>(icx: &ItemCtxt<'tcx>, def_id: LocalDefId) -> Ty<'tcx
         ),
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=const_arg_anon_type_of | COMPLEXITY=19 | LINES=36 */
 
 fn const_arg_anon_type_of<'tcx>(icx: &ItemCtxt<'tcx>, arg_hir_id: HirId, span: Span) -> Ty<'tcx> {
     use hir::*;
@@ -122,7 +113,6 @@ fn const_arg_anon_type_of<'tcx>(icx: &ItemCtxt<'tcx>, arg_hir_id: HirId, span: S
         ),
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=137 | LINES=226 */
 
 pub(super) fn type_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, Ty<'_>> {
     use crate::rustc_complete::*;
@@ -349,7 +339,6 @@ pub(super) fn type_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_
         ty::EarlyBinder::bind(output)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=46 */
 
 pub(super) fn type_of_opaque(
     tcx: TyCtxt<'_>,
@@ -396,7 +385,6 @@ pub(super) fn type_of_opaque(
         Ok(tcx.type_of(def_id))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=36 */
 
 pub(super) fn type_of_opaque_hir_typeck(
     tcx: TyCtxt<'_>,
@@ -433,7 +421,6 @@ pub(super) fn type_of_opaque_hir_typeck(
         }
     })
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=infer_placeholder_type | COMPLEXITY=54 | LINES=84 */
 
 fn infer_placeholder_type<'tcx>(
     cx: &dyn HirTyLowerer<'tcx>,
@@ -518,7 +505,6 @@ fn infer_placeholder_type<'tcx>(
         });
     Ty::new_error(tcx, guar)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=check_feature_inherent_assoc_ty | COMPLEXITY=5 | LINES=14 */
 
 fn check_feature_inherent_assoc_ty(tcx: TyCtxt<'_>, span: Span) {
     if !tcx.features().inherent_associated_types() {
@@ -533,7 +519,6 @@ fn check_feature_inherent_assoc_ty(tcx: TyCtxt<'_>, span: Span) {
         .emit();
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=HasTait; | COMPLEXITY=14 | LINES=19 */
 
 pub(crate) fn type_alias_is_lazy<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> bool {
     use hir::intravisit::Visitor;

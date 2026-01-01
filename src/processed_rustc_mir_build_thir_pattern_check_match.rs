@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/thir/pattern/check_match.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_arena::{DroplessArena, TypedArena};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, struct_span_code_err};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def::*;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, MatchSource};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_lint::Level;
 use crate::rustc_complete::bug;
@@ -19,21 +15,17 @@ use crate::rustc_complete::thir::visit::Visitor;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_pattern_analysis::errors::Uncovered;
 use crate::rustc_pattern_analysis::rustc::{
     Constructor, DeconstructedPat, MatchArm, RedundancyExplanation, RevealedTy,
     RustcPatCtxt as PatCtxt, Usefulness, UsefulnessReport, WitnessPat,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint::builtin::{
     BINDINGS_WITH_VARIANT_NAME, IRREFUTABLE_LET_PATTERNS, UNREACHABLE_PATTERNS,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::hygiene::DesugaringKind;
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=42 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::instrument;
 
@@ -76,14 +68,12 @@ pub(crate) fn check_match(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(), Err
     }
     visitor.error
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 enum RefutableFlag {
     Irrefutable,
     Refutable,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 use RefutableFlag::*;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -97,7 +87,6 @@ enum LetSource {
     Else,
     ElseIfLet,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=MatchVisitor | COMPLEXITY=7 | LINES=15 */
 
 struct MatchVisitor<'p, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -113,7 +102,6 @@ struct MatchVisitor<'p, 'tcx> {
     /// on error, but callers don't need to store it here again.
     error: Result<(), ErrorGuaranteed>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=thir | COMPLEXITY=76 | LINES=98 */
 
 // Visitor for a thir body. This calls `check_match`, `check_let` and `check_let_chain` as
 // appropriate.
@@ -212,7 +200,6 @@ impl<'p, 'tcx> Visitor<'p, 'tcx> for MatchVisitor<'p, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=with_let_source | COMPLEXITY=914 | LINES=1336 */
 
 impl<'p, 'tcx> MatchVisitor<'p, 'tcx> {
     #[instrument(level = "trace", skip(self, f))]

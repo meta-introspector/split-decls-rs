@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/arg_matrix.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 use core::cmp::Ordering;
 use std::cmp;
 
@@ -11,28 +10,24 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "ExpectedIdx({})"]
     pub(crate) struct ExpectedIdx {}
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "ProvidedIdx({})"]
     pub(crate) struct ProvidedIdx {}
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 impl ExpectedIdx {
     pub(crate) fn to_provided_idx(self) -> ProvidedIdx {
         ProvidedIdx::from_usize(self.as_usize())
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 impl ProvidedIdx {
     pub(crate) fn to_expected_idx(self) -> ExpectedIdx {
         ExpectedIdx::from_u32(self.as_u32())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 // An issue that might be found in the compatibility matrix
 #[derive(Debug)]
@@ -48,14 +43,12 @@ enum Issue {
     /// Several arguments should be reordered
     Permutation(Vec<Option<usize>>),
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub(crate) enum Compatibility<'tcx> {
     Compatible,
     Incompatible(Option<TypeError<'tcx>>),
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// Similar to `Issue`, but contains some extra information
 #[derive(Debug, PartialEq, Eq)]
@@ -71,7 +64,6 @@ pub(crate) enum Error<'tcx> {
     /// Several arguments should be reordered
     Permutation(Vec<(ExpectedIdx, ProvidedIdx)>),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cmp | COMPLEXITY=15 | LINES=22 */
 
 impl Ord for Error<'_> {
     fn cmp(&self, other: &Self) -> Ordering {
@@ -94,14 +86,12 @@ impl Ord for Error<'_> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=partial_cmp | COMPLEXITY=5 | LINES=6 */
 
 impl PartialOrd for Error<'_> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(self.cmp(other))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 pub(crate) struct ArgMatrix<'tcx> {
     /// Maps the indices in the `compatibility_matrix` rows to the indices of
@@ -115,7 +105,6 @@ pub(crate) struct ArgMatrix<'tcx> {
     /// to match
     compatibility_matrix: Vec<Vec<Compatibility<'tcx>>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=eliminate_provided | COMPLEXITY=175 | LINES=315 */
 
 impl<'tcx> ArgMatrix<'tcx> {
     pub(crate) fn new<F: FnMut(ProvidedIdx, ExpectedIdx) -> Compatibility<'tcx>>(

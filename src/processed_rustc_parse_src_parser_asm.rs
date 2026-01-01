@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/asm.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, AsmMacro};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, kw};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{ExpKeywordPair, ForceCollect, IdentIsRaw, Trailing, UsePreAttrPos};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{PResult, Parser, errors, exp, token};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=AsmArg | COMPLEXITY=2 | LINES=8 */
 
 /// An argument to one of the `asm!` macros. The argument is syntactically valid, but is otherwise
 /// not validated at all.
@@ -17,7 +12,6 @@ pub struct AsmArg {
     pub attributes: AsmAttrVec,
     pub span: Span,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub enum AsmArgKind {
     Template(Box<ast::Expr>),
@@ -25,7 +19,6 @@ pub enum AsmArgKind {
     Options(Vec<AsmOption>),
     ClobberAbi(Vec<(Symbol, Span)>),
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AsmOption | COMPLEXITY=4 | LINES=9 */
 
 pub struct AsmOption {
     pub symbol: Symbol,
@@ -35,7 +28,6 @@ pub struct AsmOption {
     // Used when suggesting to remove an option.
     pub span_with_comma: Span,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=AsmAttrVec(pub | COMPLEXITY=4 | LINES=14 */
 
 /// A parsed list of attributes that is not attached to any item.
 /// Used to check whether `asm!` arguments are configured out.
@@ -50,7 +42,6 @@ impl AsmAttrVec {
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=attrs | COMPLEXITY=6 | LINES=12 */
 impl ast::HasAttrs for AsmAttrVec {
     // Follows `ast::Expr`.
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
@@ -63,7 +54,6 @@ impl ast::HasAttrs for AsmAttrVec {
         f(&mut self.0)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tokens | COMPLEXITY=6 | LINES=10 */
 
 impl ast::HasTokens for AsmAttrVec {
     fn tokens(&self) -> Option<&crate::rustc_ast::tokenstream::LazyAttrTokenStream> {
@@ -74,7 +64,6 @@ impl ast::HasTokens for AsmAttrVec {
         None
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=eat_operand_keyword | COMPLEXITY=30 | LINES=31 */
 
 /// Used for better error messages when operand types are used that are not
 /// supported by the current macro (e.g. `in` or `out` for `global_asm!`)
@@ -106,7 +95,6 @@ fn eat_operand_keyword<'a>(
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=parse_asm_operand | COMPLEXITY=82 | LINES=70 */
 
 fn parse_asm_operand<'a>(
     p: &mut Parser<'a>,
@@ -177,7 +165,6 @@ fn parse_asm_operand<'a>(
         return Ok(None);
     }))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=parse_asm_args | COMPLEXITY=61 | LINES=121 */
 
 // Public for rustfmt.
 pub fn parse_asm_args<'a>(
@@ -299,7 +286,6 @@ pub fn parse_asm_args<'a>(
 
     Ok(args)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=parse_options | COMPLEXITY=27 | LINES=50 */
 
 fn parse_options<'a>(p: &mut Parser<'a>, asm_macro: AsmMacro) -> PResult<'a, Vec<AsmOption>> {
     p.expect(exp!(OpenParen))?;
@@ -350,7 +336,6 @@ fn parse_options<'a>(p: &mut Parser<'a>, asm_macro: AsmMacro) -> PResult<'a, Vec
 
     Ok(asm_options)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=parse_clobber_abi | COMPLEXITY=20 | LINES=29 */
 
 fn parse_clobber_abi<'a>(p: &mut Parser<'a>) -> PResult<'a, Vec<(Symbol, Span)>> {
     p.expect(exp!(OpenParen))?;
@@ -380,7 +365,6 @@ fn parse_clobber_abi<'a>(p: &mut Parser<'a>) -> PResult<'a, Vec<(Symbol, Span)>>
 
     Ok(new_abis)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=parse_reg | COMPLEXITY=11 | LINES=18 */
 
 fn parse_reg<'a>(p: &mut Parser<'a>) -> PResult<'a, ast::InlineAsmRegOrRegClass> {
     p.expect(exp!(OpenParen))?;

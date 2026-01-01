@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/mentioned_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::{self, Location, MentionedItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=MentionedItemsVisitor | COMPLEXITY=2 | LINES=10 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::source_map::Spanned;
 
@@ -16,7 +13,6 @@ struct MentionedItemsVisitor<'a, 'tcx> {
     body: &'a mir::Body<'tcx>,
     mentioned_items: Vec<Spanned<MentionedItem<'tcx>>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=11 | LINES=20 */
 
 impl<'tcx> crate::MirPass<'tcx> for MentionedItems {
     fn is_enabled(&self, _sess: &Session) -> bool {
@@ -37,7 +33,6 @@ impl<'tcx> crate::MirPass<'tcx> for MentionedItems {
         true
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_terminator | COMPLEXITY=58 | LINES=88 */
 
 // This visitor is carefully in sync with the one in `rustc_monomorphize::collector`. We are
 // visiting the exact same places but then instead of monomorphizing and creating `MonoItems`, we

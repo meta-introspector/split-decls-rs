@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/pat.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cmp;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use crate::rustc_abi::FieldIdx;
 use rustc_ast as ast;
@@ -11,44 +9,34 @@ use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, DefKind, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::pat_util::EnumerateAndAdjustIterator;
 use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, ExprKind, HirId, LangItem, Mutability, Pat, PatExpr,
     PatExprKind, PatKind, expr_needs_parens,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_hir_analysis::autoderef::report_autoderef_recursion_limit_error;
 use crate::rustc_infer::infer::RegionVariableOrigin;
 use crate::rustc_complete::traits::PatternOriginExpr;
 use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, kw, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use ty::VariantDef;
 use ty::adjustment::{PatAdjust, PatAdjustment};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::report_unexpected_variant_res;
 use crate::expectation::Expectation;
 use crate::gather_locals::DeclOrigin;
 use crate::{FnCtxt, errors};
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_number | COMPLEXITY=3 | LINES=13 */
 
 const CANNOT_IMPLICITLY_DEREF_POINTER_TRAIT_OBJ: &str = "\
 This error indicates that a pointer to a trait type cannot be implicitly dereferenced by a \
@@ -62,7 +50,6 @@ https://doc.rust-lang.org/reference/types.html#trait-objects";
 fn is_number(text: &str) -> bool {
     text.chars().all(|c: char| c.is_digit(10))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=TopInfo | COMPLEXITY=1762 | LINES=3113 */
 
 /// Information about the expected type at the top level of type checking a pattern.
 ///

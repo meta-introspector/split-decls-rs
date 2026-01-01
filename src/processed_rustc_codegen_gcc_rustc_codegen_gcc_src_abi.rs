@@ -1,16 +1,11 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/abi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[cfg(feature = "master")]
 use gccjit::FnAttribute;
 use gccjit::{ToLValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "master")]
 use crate::rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Reg, RegKind};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{AbiBuilderMethods, BaseTypeCodegenMethods};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::Ty;
@@ -18,7 +13,6 @@ use crate::rustc_complete::ty::layout::LayoutOf;
 #[cfg(feature = "master")]
 use crate::rustc_complete::config;
 use crate::rustc_target::callconv::{ArgAttributes, CastTarget, FnAbi, PassMode};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=get_param | COMPLEXITY=14 | LINES=19 */
 
 use crate::builder::Builder;
 use crate::context::CodegenCx;
@@ -38,7 +32,6 @@ impl AbiBuilderMethods for Builder<'_, '_, '_> {
         if on_stack { param.to_lvalue().get_address(None) } else { param.to_rvalue() }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=gcc_type | COMPLEXITY=23 | LINES=43 */
 
 impl GccType for CastTarget {
     fn gcc_type<'gcc>(&self, cx: &CodegenCx<'gcc, '_>) -> Type<'gcc> {
@@ -82,12 +75,10 @@ impl GccType for CastTarget {
         cx.type_struct(&args, false)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=gcc_type | COMPLEXITY=2 | LINES=4 */
 
 pub trait GccType {
     fn gcc_type<'gcc>(&self, cx: &CodegenCx<'gcc, '_>) -> Type<'gcc>;
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=gcc_type | COMPLEXITY=15 | LINES=14 */
 
 impl GccType for Reg {
     fn gcc_type<'gcc>(&self, cx: &CodegenCx<'gcc, '_>) -> Type<'gcc> {
@@ -102,7 +93,6 @@ impl GccType for Reg {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FnAbiGcc | COMPLEXITY=2 | LINES=9 */
 
 pub struct FnAbiGcc<'gcc> {
     pub return_type: Type<'gcc>,
@@ -112,7 +102,6 @@ pub struct FnAbiGcc<'gcc> {
     #[cfg(feature = "master")]
     pub fn_attributes: Vec<FnAttribute<'gcc>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=gcc_type | COMPLEXITY=2 | LINES=8 */
 
 pub trait FnAbiGccExt<'gcc, 'tcx> {
     // TODO(antoyo): return a function pointer type instead?
@@ -121,7 +110,6 @@ pub trait FnAbiGccExt<'gcc, 'tcx> {
     #[cfg(feature = "master")]
     fn gcc_cconv(&self, cx: &CodegenCx<'gcc, 'tcx>) -> Option<FnAttribute<'gcc>>;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=gcc_type | COMPLEXITY=66 | LINES=127 */
 
 impl<'gcc, 'tcx> FnAbiGccExt<'gcc, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
     fn gcc_type(&self, cx: &CodegenCx<'gcc, 'tcx>) -> FnAbiGcc<'gcc> {
@@ -249,7 +237,6 @@ impl<'gcc, 'tcx> FnAbiGccExt<'gcc, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
         conv_to_fn_attribute(self.conv, &cx.tcx.sess.target.arch)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=conv_to_fn_attribute | COMPLEXITY=35 | LINES=46 */
 
 #[cfg(feature = "master")]
 pub fn conv_to_fn_attribute<'gcc>(conv: CanonAbi, arch: &str) -> Option<FnAttribute<'gcc>> {

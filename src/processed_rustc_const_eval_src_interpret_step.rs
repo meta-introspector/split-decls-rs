@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/step.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // This module contains the `InterpCx` methods for executing a single step of the interpreter.
 //
 // The main entry point is the `step` method.
@@ -8,27 +7,21 @@ use std::iter;
 
 use either::Either;
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_index::IndexSlice;
 use crate::rustc_complete::ty::{self, Instance, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_target::callconv::FnAbi;
 use tracing::field::Empty;
 use tracing::{info, instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::{
     FnArg, FnVal, ImmTy, Immediate, InterpCx, InterpResult, Machine, MemPlaceMeta, PlaceTy,
     Projectable, Scalar, interp_ok, throw_ub, throw_unsup_format,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::interpret::EnteredTraceSpan;
 use crate::{enter_trace_span, util};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=EvaluatedCalleeAndArgs | COMPLEXITY=4 | LINES=9 */
 
 struct EvaluatedCalleeAndArgs<'tcx, M: Machine<'tcx>> {
     callee: FnVal<'tcx, M::ExtraFnVal>,
@@ -38,7 +31,6 @@ struct EvaluatedCalleeAndArgs<'tcx, M: Machine<'tcx>> {
     /// True if the function is marked as `#[track_caller]` ([`ty::InstanceKind::requires_caller_location`])
     with_caller_location: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=step | COMPLEXITY=292 | LINES=625 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Returns `true` as long as there are more things to do.

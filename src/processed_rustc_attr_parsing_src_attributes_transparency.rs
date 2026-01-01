@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/transparency.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=15 | LINES=40 */
 use crate::rustc_complete::hygiene::Transparency;
 
 use crate::prelude::*;

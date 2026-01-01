@@ -1,18 +1,12 @@
 // SRC: ../rust/compiler/rustc_ast_passes/src/feature_gate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_ast as ast;
 use crate::rustc_complete::visit::{self, AssocCtxt, FnCtxt, FnKind, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{NodeId, PatKind, attr, token};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{AttributeGate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute, Features};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::parse::{feature_err, feature_warn};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=18 | LINES=21 */
 use thin_vec::ThinVec;
 
 use crate::errors;
@@ -34,7 +28,6 @@ macro_rules! gate {
         }
     }};
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=21 | LINES=20 */
 
 /// The unusual case, where the `has_feature` condition is non-standard.
 macro_rules! gate_alt {
@@ -55,7 +48,6 @@ macro_rules! gate_alt {
         }
     }};
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=15 | LINES=13 */
 
 /// The case involving a multispan.
 macro_rules! gate_multi {
@@ -69,7 +61,6 @@ macro_rules! gate_multi {
         }
     }};
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=9 */
 
 /// The legacy case.
 macro_rules! gate_legacy {
@@ -79,12 +70,10 @@ macro_rules! gate_legacy {
         }
     }};
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_attribute | COMPLEXITY=3 | LINES=4 */
 
 pub fn check_attribute(attr: &ast::Attribute, sess: &Session, features: &Features) {
     PostExpansionVisitor { sess, features }.visit_attribute(attr)
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=PostExpansionVisitor | COMPLEXITY=2 | LINES=7 */
 
 struct PostExpansionVisitor<'a> {
     sess: &'a Session,
@@ -92,7 +81,6 @@ struct PostExpansionVisitor<'a> {
     // `sess` contains a `Features`, but this might not be that one.
     features: &'a Features,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=check_impl_trait | COMPLEXITY=50 | LINES=78 */
 
 impl<'a> PostExpansionVisitor<'a> {
     /// Feature gate `impl Trait` inside `type Alias = $type_expr;`.
@@ -171,7 +159,6 @@ impl<'a> PostExpansionVisitor<'a> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=191 | LINES=282 */
 
 impl<'a> Visitor<'a> for PostExpansionVisitor<'a> {
     fn visit_attribute(&mut self, attr: &ast::Attribute) {
@@ -454,7 +441,6 @@ impl<'a> Visitor<'a> for PostExpansionVisitor<'a> {
         visit::walk_assoc_item(self, i, ctxt)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=106 | LINES=137 */
 
 pub fn check_crate(krate: &ast::Crate, sess: &Session, features: &Features) {
     maybe_stage_features(sess, features, krate);
@@ -592,7 +578,6 @@ pub fn check_crate(krate: &ast::Crate, sess: &Session, features: &Features) {
 
     visit::walk_crate(&mut visitor, krate);
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=maybe_stage_features | COMPLEXITY=30 | LINES=43 */
 
 fn maybe_stage_features(sess: &Session, features: &Features, krate: &ast::Crate) {
     // checks if `#[feature]` has been used to enable any feature.
@@ -636,7 +621,6 @@ fn maybe_stage_features(sess: &Session, features: &Features, krate: &ast::Crate)
     // Just make sure we actually error if anything is listed in `enabled_features`.
     assert!(errored);
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=check_incompatible_features | COMPLEXITY=10 | LINES=20 */
 
 fn check_incompatible_features(sess: &Session, features: &Features) {
     let enabled_lang_features =
@@ -657,7 +641,6 @@ fn check_incompatible_features(sess: &Session, features: &Features) {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_new_solver_banned_features | COMPLEXITY=10 | LINES=21 */
 
 fn check_new_solver_banned_features(sess: &Session, features: &Features) {
     if !sess.opts.unstable_opts.next_solver.globally {

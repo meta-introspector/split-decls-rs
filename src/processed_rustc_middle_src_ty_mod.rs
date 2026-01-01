@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 // Defines how the compiler represents types internally.
 //
 // Two important entities in this module are:
@@ -16,59 +15,42 @@
 use std::assert_matches::assert_matches;
 use std::fmt::Debug;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::marker::PhantomData;
 use std::num::NonZero;
 use std::ptr::NonNull;
 use std::{fmt, iter, str};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub use adt::*;
 pub use assoc::*;
 pub use generic_args::{GenericArgKind, TermKind, *};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use generics::*;
 pub use intrinsic::IntrinsicDef;
 use crate::rustc_abi::{Align, FieldIdx, Integer, IntegerType, ReprFlags, ReprOptions, VariantIdx};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::node_id::NodeMap;
 pub use rustc_ast_ir::{Movability, Mutability, try_visit};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, ErrorGuaranteed, LintBuffer};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, StrippedCfgItem};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, DocLinkResMap, LifetimeRes, Res};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, LocalDefId, LocalDefIdMap};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::definitions::DisambiguatorState;
 use crate::rustc_complete::{LangItem, attrs as attr, find_attr};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::BitMatrix;
 use rustc_macros::{
     Decodable, Encodable, HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable,
     extension,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_query_system::ich::StableHashingContext;
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use crate::rustc_complete::lint::RegisteredTools;
 use crate::rustc_complete::hygiene::MacroKind;
 use crate::rustc_complete::{DUMMY_SP, ExpnId, ExpnKind, Ident, Span, Symbol, sym};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use rustc_type_ir::data_structures::{DelayedMap, DelayedSet};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 pub use rustc_type_ir::fast_reject::DeepRejectCtxt;
 #[allow(
     hidden_glob_reexports,
@@ -81,12 +63,9 @@ pub use rustc_type_ir::solve::SizedTraitKind;
 pub use rustc_type_ir::*;
 #[allow(hidden_glob_reexports, unused_imports)]
 use rustc_type_ir::{InferCtxtLike, Interner};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use vtable::*;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub use self::closure::{
     BorrowKind, CAPTURE_STRUCT_LOCAL, CaptureInfo, CapturedPlace, ClosureTypeInfo,
@@ -94,25 +73,19 @@ pub use self::closure::{
     UpvarPath, analyze_coroutine_closure_captures, is_ancestor_or_same_capture,
     place_to_string_for_capture,
 };
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::consts::{
     AnonConstKind, AtomicOrdering, Const, ConstInt, ConstKind, ConstToValTreeResult, Expr,
     ExprKind, ScalarInt, UnevaluatedConst, ValTree, ValTreeKind, Value,
 };
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::context::{
     CtxtInterners, CurrentGcx, DeducedParamAttrs, Feed, FreeRegionInfo, GlobalCtxt, Lift, TyCtxt,
     TyCtxtFeed, tls,
 };
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use self::fold::*;
 pub use self::instance::{Instance, InstanceKind, ReifyReason, UnusedGenericParams};
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::list::{List, ListWithCachedTypeInfo};
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use self::opaque_types::OpaqueTypeKey;
 pub use self::pattern::{Pattern, PatternKind};
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 pub use self::predicate::{
     AliasTerm, ArgOutlivesPredicate, Clause, ClauseKind, CoercePredicate, ExistentialPredicate,
     ExistentialPredicateStableCmpExt, ExistentialProjection, ExistentialTraitRef,
@@ -122,36 +95,28 @@ pub use self::predicate::{
     PolyTraitRef, PolyTypeOutlivesPredicate, Predicate, PredicateKind, ProjectionPredicate,
     RegionOutlivesPredicate, SubtypePredicate, TraitPredicate, TraitRef, TypeOutlivesPredicate,
 };
-/* AST_META: AST_ID=28 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use self::region::{
     BoundRegion, BoundRegionKind, EarlyParamRegion, LateParamRegion, LateParamRegionKind, Region,
     RegionKind, RegionVid,
 };
-/* AST_META: AST_ID=29 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 pub use self::rvalue_scopes::RvalueScopes;
 pub use self::sty::{
     AliasTy, Article, Binder, BoundTy, BoundTyKind, BoundVariableKind, CanonicalPolyFnSig,
     CoroutineArgsExt, EarlyBinder, FnSig, InlineConstArgs, InlineConstArgsParts, ParamConst,
     ParamTy, PolyFnSig, TyKind, TypeAndMut, TypingMode, UpvarArgs,
 };
-/* AST_META: AST_ID=30 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 pub use self::trait_def::TraitDef;
 pub use self::typeck_results::{
     CanonicalUserType, CanonicalUserTypeAnnotation, CanonicalUserTypeAnnotations, IsIdentity,
     Rust2024IncompatiblePatInfo, TypeckResults, UserType, UserTypeAnnotationIndex, UserTypeKind,
 };
-/* AST_META: AST_ID=31 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::error::{OpaqueHiddenTypeMismatch, TypeMismatchReason};
-/* AST_META: AST_ID=32 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::metadata::ModChild;
 use crate::middle::privacy::EffectiveVisibilities;
 use crate::mir::{Body, CoroutineLayout, CoroutineSavedLocal, SourceInfo};
-/* AST_META: AST_ID=33 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::query::{IntoQueryParam, Providers};
-/* AST_META: AST_ID=34 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::ty;
 use crate::ty::codec::{TyDecoder, TyEncoder};
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=ResolverGlobalCtxt | COMPLEXITY=8 | LINES=73 */
 pub use crate::ty::diagnostics::*;
 use crate::ty::fast_reject::SimplifiedType;
 use crate::ty::layout::LayoutError;
@@ -186,7 +151,6 @@ pub struct ResolverGlobalCtxt {
     pub all_macro_rules: UnordSet<Symbol>,
     pub stripped_cfg_items: Vec<StrippedCfgItem>,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=ResolverAstLowering | COMPLEXITY=18 | LINES=34 */
 
 /// Resolutions that should only be used for lowering.
 /// This struct is meant to be consumed by lowering.
@@ -221,7 +185,6 @@ pub struct ResolverAstLowering {
     /// Information about functions signatures for delegation items expansion
     pub delegation_fn_sigs: LocalDefIdMap<DelegationFnSig>,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=DelegationFnSig | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug)]
 pub struct DelegationFnSig {
@@ -231,7 +194,6 @@ pub struct DelegationFnSig {
     pub c_variadic: bool,
     pub target_feature: bool,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=MainDefinition | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, HashStable)]
 pub struct MainDefinition {
@@ -239,14 +201,12 @@ pub struct MainDefinition {
     pub is_import: bool,
     pub span: Span,
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=opt_fn_def_id | COMPLEXITY=7 | LINES=6 */
 
 impl MainDefinition {
     pub fn opt_fn_def_id(self) -> Option<DefId> {
         if let Res::Def(DefKind::Fn, def_id) = self.res { Some(def_id) } else { None }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=ImplTraitHeader | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Copy, Clone, Debug, TyEncodable, TyDecodable, HashStable)]
 pub struct ImplTraitHeader<'tcx> {
@@ -255,14 +215,12 @@ pub struct ImplTraitHeader<'tcx> {
     pub safety: hir::Safety,
     pub constness: hir::Constness,
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug, TypeFoldable, TypeVisitable)]
 pub enum ImplSubject<'tcx> {
     Trait(TraitRef<'tcx>),
     Inherent(Ty<'tcx>),
 }
-/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable, Debug)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -270,14 +228,12 @@ pub enum Asyncness {
     Yes,
     No,
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=is_async | COMPLEXITY=3 | LINES=6 */
 
 impl Asyncness {
     pub fn is_async(self) -> bool {
         matches!(self, Asyncness::Yes)
     }
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Copy, Hash, Encodable, Decodable, HashStable)]
 pub enum Visibility<Id = LocalDefId> {
@@ -286,7 +242,6 @@ pub enum Visibility<Id = LocalDefId> {
     /// Visible only in the given crate-local module.
     Restricted(Id),
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=to_string | COMPLEXITY=17 | LINES=20 */
 
 impl Visibility {
     pub fn to_string(self, def_id: LocalDefId, tcx: TyCtxt<'_>) -> String {
@@ -307,7 +262,6 @@ impl Visibility {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=ClosureSizeProfileData | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Copy, Hash, TyEncodable, TyDecodable, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -317,7 +271,6 @@ pub struct ClosureSizeProfileData<'tcx> {
     /// Tuple containing the types of closure captures after the feature `capture_disjoint_fields`
     pub after_feature_tys: Ty<'tcx>,
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=opt_parent | COMPLEXITY=25 | LINES=43 */
 
 impl TyCtxt<'_> {
     #[inline]
@@ -361,7 +314,6 @@ impl TyCtxt<'_> {
         true
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=is_public | COMPLEXITY=8 | LINES=13 */
 
 impl<Id> Visibility<Id> {
     pub fn is_public(self) -> bool {
@@ -375,7 +327,6 @@ impl<Id> Visibility<Id> {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=to_def_id | COMPLEXITY=18 | LINES=23 */
 
 impl<Id: Into<DefId>> Visibility<Id> {
     pub fn to_def_id(self) -> Visibility<DefId> {
@@ -399,7 +350,6 @@ impl<Id: Into<DefId>> Visibility<Id> {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=expect_local | COMPLEXITY=10 | LINES=14 */
 
 impl Visibility<DefId> {
     pub fn expect_local(self) -> Visibility {
@@ -414,7 +364,6 @@ impl Visibility<DefId> {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=CrateVariancesMap | COMPLEXITY=5 | LINES=14 */
 
 /// The crate variances map is computed during typeck and contains the
 /// variance of every item in the local crate. You should not use it
@@ -429,7 +378,6 @@ pub struct CrateVariancesMap<'tcx> {
     /// entry.
     pub variances: DefIdMap<&'tcx [ty::Variance]>,
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=CReaderCacheKey | COMPLEXITY=2 | LINES=8 */
 
 // Contains information needed to resolve types and (in the future) look up
 // the types of AST nodes.
@@ -438,7 +386,6 @@ pub struct CReaderCacheKey {
     pub cnum: Option<CrateNum>,
     pub pos: usize,
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=Ty | COMPLEXITY=5 | LINES=14 */
 
 /// Use this rather than `TyKind`, whenever possible.
 #[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable)]
@@ -453,7 +400,6 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Ty<'tcx> {
         *self.kind()
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::Flags for Ty<'tcx> {
     fn flags(&self) -> TypeFlags {
@@ -464,7 +410,6 @@ impl<'tcx> rustc_type_ir::Flags for Ty<'tcx> {
         self.0.outer_exclusive_binder
     }
 }
-/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=CratePredicatesMap | COMPLEXITY=5 | LINES=14 */
 
 /// The crate outlives map is computed during typeck and contains the
 /// outlives of every item in the local crate. You should not use it
@@ -479,17 +424,14 @@ pub struct CratePredicatesMap<'tcx> {
     /// bounds, it will have no entry.
     pub predicates: DefIdMap<&'tcx [(Clause<'tcx>, Span)]>,
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=Term | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Term<'tcx> {
     ptr: NonNull<()>,
     marker: PhantomData<(Ty<'tcx>, Const<'tcx>)>,
 }
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<'tcx> rustc_type_ir::inherent::Term<TyCtxt<'tcx>> for Term<'tcx> {}
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> rustc_type_ir::inherent::IntoKind for Term<'tcx> {
     type Kind = TermKind<'tcx>;
@@ -498,22 +440,17 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Term<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
 
 unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSend for Term<'tcx> where
     &'tcx (Ty<'tcx>, Const<'tcx>): crate::rustc_data_structures::sync::DynSend
 {
 }
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
 unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSync for Term<'tcx> where
     &'tcx (Ty<'tcx>, Const<'tcx>): crate::rustc_data_structures::sync::DynSync
 {
 }
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<'tcx> Send for Term<'tcx> where &'tcx (Ty<'tcx>, Const<'tcx>): Send {}
-/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl<'tcx> Sync for Term<'tcx> where &'tcx (Ty<'tcx>, Const<'tcx>): Sync {}
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=9 */
 
 impl Debug for Term<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -523,28 +460,24 @@ impl Debug for Term<'_> {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> From<Ty<'tcx>> for Term<'tcx> {
     fn from(ty: Ty<'tcx>) -> Self {
         TermKind::Ty(ty).pack()
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> From<Const<'tcx>> for Term<'tcx> {
     fn from(c: Const<'tcx>) -> Self {
         TermKind::Const(c).pack()
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx> HashStable<StableHashingContext<'a>> for Term<'tcx> {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
         self.kind().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=15 | LINES=19 */
 
 impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Term<'tcx> {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
@@ -564,7 +497,6 @@ impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for Term<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for Term<'tcx> {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
@@ -574,14 +506,12 @@ impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for Term<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=69 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for Term<'tcx> {
     fn encode(&self, e: &mut E) {
         self.kind().encode(e)
     }
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for Term<'tcx> {
     fn decode(d: &mut D) -> Self {
@@ -589,7 +519,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for Term<'tcx> {
         res.pack()
     }
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=66 | LINES=86 */
 
 impl<'tcx> Term<'tcx> {
     #[inline]
@@ -676,7 +605,6 @@ impl<'tcx> Term<'tcx> {
         TypeWalker::new(self.into())
     }
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=pack | COMPLEXITY=11 | LINES=25 */
 
 const TAG_MASK: usize = 0b11;
 const TYPE_TAG: usize = 0b00;
@@ -702,7 +630,6 @@ impl<'tcx> TermKind<'tcx> {
         Term { ptr: ptr.map_addr(|addr| addr | tag), marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// Represents the bounds declared on a particular set of type
 /// parameters. Should eventually be generalized into a flag list of
@@ -718,7 +645,6 @@ impl<'tcx> TermKind<'tcx> {
 /// Example:
 /// ```ignore (illustrative)
 /// struct Foo<T, U: Bar<T>> { ... }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=InstantiatedPredicates | COMPLEXITY=6 | LINES=10 */
 /// ```
 /// Here, the `GenericPredicates` for `Foo` would contain a list of bounds like
 /// `[[], [U:Bar<T>]]`. Now if there were some particular reference
@@ -729,7 +655,6 @@ pub struct InstantiatedPredicates<'tcx> {
     pub predicates: Vec<Clause<'tcx>>,
     pub spans: Vec<Span>,
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=6 | LINES=14 */
 
 impl<'tcx> InstantiatedPredicates<'tcx> {
     pub fn empty() -> InstantiatedPredicates<'tcx> {
@@ -744,7 +669,6 @@ impl<'tcx> InstantiatedPredicates<'tcx> {
         self.into_iter()
     }
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> IntoIterator for InstantiatedPredicates<'tcx> {
     type Item = (Clause<'tcx>, Span);
@@ -756,7 +680,6 @@ impl<'tcx> IntoIterator for InstantiatedPredicates<'tcx> {
         std::iter::zip(self.predicates, self.spans)
     }
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=14 */
 
 impl<'a, 'tcx> IntoIterator for &'a InstantiatedPredicates<'tcx> {
     type Item = (Clause<'tcx>, Span);
@@ -771,7 +694,6 @@ impl<'a, 'tcx> IntoIterator for &'a InstantiatedPredicates<'tcx> {
         std::iter::zip(self.predicates.iter().copied(), self.spans.iter().copied())
     }
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=OpaqueHiddenType | COMPLEXITY=7 | LINES=32 */
 
 #[derive(Copy, Clone, Debug, TypeFoldable, TypeVisitable, HashStable, TyEncodable, TyDecodable)]
 pub struct OpaqueHiddenType<'tcx> {
@@ -804,7 +726,6 @@ pub struct OpaqueHiddenType<'tcx> {
     /// lifetime parameter on `foo`.)
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=79 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Whether we're currently in HIR typeck or MIR borrowck.
 #[derive(Debug, Clone, Copy)]
@@ -816,7 +737,6 @@ pub enum DefiningScopeKind {
     HirTypeck,
     MirBorrowck,
 }
-/* AST_META: AST_ID=80 | TYPE=FUNCTION | NAME=new_error | COMPLEXITY=32 | LINES=66 */
 
 impl<'tcx> OpaqueHiddenType<'tcx> {
     pub fn new_error(tcx: TyCtxt<'tcx>, guar: ErrorGuaranteed) -> OpaqueHiddenType<'tcx> {
@@ -883,7 +803,6 @@ impl<'tcx> OpaqueHiddenType<'tcx> {
         result
     }
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=Placeholder | COMPLEXITY=2 | LINES=11 */
 
 /// The "placeholder index" fully defines a placeholder region, type, or const. Placeholders are
 /// identified by both a universe, as well as a name residing within that universe. Distinct bound
@@ -895,7 +814,6 @@ pub struct Placeholder<T> {
     pub universe: UniverseIndex,
     pub bound: T,
 }
-/* AST_META: AST_ID=82 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=14 | LINES=26 */
 
 pub type PlaceholderRegion = Placeholder<BoundRegion>;
 
@@ -922,7 +840,6 @@ impl<'tcx> rustc_type_ir::inherent::PlaceholderLike<TyCtxt<'tcx>> for Placeholde
         Placeholder { universe: ui, bound: BoundRegion { var, kind: BoundRegionKind::Anon } }
     }
 }
-/* AST_META: AST_ID=83 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=14 | LINES=26 */
 
 pub type PlaceholderType = Placeholder<BoundTy>;
 
@@ -949,14 +866,12 @@ impl<'tcx> rustc_type_ir::inherent::PlaceholderLike<TyCtxt<'tcx>> for Placeholde
         Placeholder { universe: ui, bound: BoundTy { var, kind: BoundTyKind::Anon } }
     }
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=BoundConst | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, HashStable)]
 #[derive(TyEncodable, TyDecodable)]
 pub struct BoundConst {
     pub var: BoundVar,
 }
-/* AST_META: AST_ID=85 | TYPE=FUNCTION | NAME=var | COMPLEXITY=6 | LINES=10 */
 
 impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundConst {
     fn var(self) -> BoundVar {
@@ -967,7 +882,6 @@ impl<'tcx> rustc_type_ir::inherent::BoundVarLike<TyCtxt<'tcx>> for BoundConst {
         var.expect_const()
     }
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=14 | LINES=26 */
 
 pub type PlaceholderConst = Placeholder<BoundConst>;
 
@@ -994,7 +908,6 @@ impl<'tcx> rustc_type_ir::inherent::PlaceholderLike<TyCtxt<'tcx>> for Placeholde
         Placeholder { universe: ui, bound: BoundConst { var } }
     }
 }
-/* AST_META: AST_ID=87 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=6 | LINES=12 */
 
 pub type Clauses<'tcx> = &'tcx ListWithCachedTypeInfo<Clause<'tcx>>;
 
@@ -1007,7 +920,6 @@ impl<'tcx> rustc_type_ir::Flags for Clauses<'tcx> {
         (**self).outer_exclusive_binder()
     }
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=ParamEnv | COMPLEXITY=5 | LINES=16 */
 
 /// When interacting with the type system we must provide information about the
 /// environment. `ParamEnv` is the type that represents this information. See the
@@ -1024,14 +936,12 @@ pub struct ParamEnv<'tcx> {
     /// Use the `caller_bounds()` method to access.
     caller_bounds: Clauses<'tcx>,
 }
-/* AST_META: AST_ID=89 | TYPE=FUNCTION | NAME=caller_bounds | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> rustc_type_ir::inherent::ParamEnv<TyCtxt<'tcx>> for ParamEnv<'tcx> {
     fn caller_bounds(self) -> impl inherent::SliceLike<Item = ty::Clause<'tcx>> {
         self.caller_bounds()
     }
 }
-/* AST_META: AST_ID=90 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=16 | LINES=29 */
 
 impl<'tcx> ParamEnv<'tcx> {
     /// Construct a trait environment suitable for contexts where there are
@@ -1061,7 +971,6 @@ impl<'tcx> ParamEnv<'tcx> {
         ParamEnvAnd { param_env: self, value }
     }
 }
-/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=ParamEnvAnd | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, TypeFoldable, TypeVisitable)]
 #[derive(HashStable)]
@@ -1069,7 +978,6 @@ pub struct ParamEnvAnd<'tcx, T> {
     pub param_env: ParamEnv<'tcx>,
     pub value: T,
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=TypingEnv | COMPLEXITY=3 | LINES=19 */
 
 /// The environment in which to do trait solving.
 ///
@@ -1089,7 +997,6 @@ pub struct TypingEnv<'tcx> {
     pub typing_mode: TypingMode<'tcx>,
     pub param_env: ParamEnv<'tcx>,
 }
-/* AST_META: AST_ID=93 | TYPE=FUNCTION | NAME=fully_monomorphized | COMPLEXITY=34 | LINES=70 */
 
 impl<'tcx> TypingEnv<'tcx> {
     /// Create a typing environment with no where-clauses in scope
@@ -1160,7 +1067,6 @@ impl<'tcx> TypingEnv<'tcx> {
         PseudoCanonicalInput { typing_env: self, value }
     }
 }
-/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=PseudoCanonicalInput | COMPLEXITY=3 | LINES=16 */
 
 /// Similar to `CanonicalInput`, this carries the `typing_mode` and the environment
 /// necessary to do any kind of trait solving inside of nested queries.
@@ -1177,14 +1083,12 @@ pub struct PseudoCanonicalInput<'tcx, T> {
     pub typing_env: TypingEnv<'tcx>,
     pub value: T,
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=Destructor | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug, HashStable, Encodable, Decodable)]
 pub struct Destructor {
     /// The `DefId` of the destructor method
     pub did: DefId,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=AsyncDestructor | COMPLEXITY=2 | LINES=7 */
 
 // FIXME: consider combining this definition with regular `Destructor`
 #[derive(Copy, Clone, Debug, HashStable, Encodable, Decodable)]
@@ -1192,7 +1096,6 @@ pub struct AsyncDestructor {
     /// The `DefId` of the `impl AsyncDrop`
     pub impl_did: DefId,
 }
-/* AST_META: AST_ID=97 | TYPE=STRUCT | NAME=VariantFlags(u8); | COMPLEXITY=3 | LINES=10 */
 
 #[derive(Clone, Copy, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 pub struct VariantFlags(u8);
@@ -1203,9 +1106,7 @@ bitflags::bitflags! {
         const IS_FIELD_LIST_NON_EXHAUSTIVE = 1 << 0;
     }
 }
-/* AST_META: AST_ID=98 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 crate::rustc_data_structures::external_bitflags_debug! { VariantFlags }
-/* AST_META: AST_ID=99 | TYPE=STRUCT | NAME=VariantDef | COMPLEXITY=5 | LINES=21 */
 
 /// Definition of a variant -- a struct's fields or an enum variant.
 #[derive(Debug, HashStable, TyEncodable, TyDecodable)]
@@ -1227,7 +1128,6 @@ pub struct VariantDef {
     /// Flags of the variant (e.g. is field list non-exhaustive)?
     flags: VariantFlags,
 }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=new | COMPLEXITY=51 | LINES=114 */
 
 impl VariantDef {
     /// Creates a new `VariantDef`.
@@ -1342,7 +1242,6 @@ impl VariantDef {
         self.fields.iter().any(|x| x.safety.is_unsafe())
     }
 }
-/* AST_META: AST_ID=101 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=18 | LINES=45 */
 
 impl PartialEq for VariantDef {
     #[inline]
@@ -1388,10 +1287,8 @@ impl PartialEq for VariantDef {
         res
     }
 }
-/* AST_META: AST_ID=102 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for VariantDef {}
-/* AST_META: AST_ID=103 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=11 | LINES=15 */
 
 impl Hash for VariantDef {
     #[inline]
@@ -1407,7 +1304,6 @@ impl Hash for VariantDef {
         def_id.hash(s)
     }
 }
-/* AST_META: AST_ID=104 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, TyEncodable, TyDecodable, HashStable)]
 pub enum VariantDiscr {
@@ -1421,7 +1317,6 @@ pub enum VariantDiscr {
     /// or `0` for the first variant, if it has none.
     Relative(u32),
 }
-/* AST_META: AST_ID=105 | TYPE=STRUCT | NAME=FieldDef | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Debug, HashStable, TyEncodable, TyDecodable)]
 pub struct FieldDef {
@@ -1431,7 +1326,6 @@ pub struct FieldDef {
     pub safety: hir::Safety,
     pub value: Option<DefId>,
 }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=17 | LINES=27 */
 
 impl PartialEq for FieldDef {
     #[inline]
@@ -1459,10 +1353,8 @@ impl PartialEq for FieldDef {
         res
     }
 }
-/* AST_META: AST_ID=107 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for FieldDef {}
-/* AST_META: AST_ID=108 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=11 | LINES=16 */
 
 impl Hash for FieldDef {
     #[inline]
@@ -1479,7 +1371,6 @@ impl Hash for FieldDef {
         did.hash(s)
     }
 }
-/* AST_META: AST_ID=109 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=5 | LINES=13 */
 
 impl<'tcx> FieldDef {
     /// Returns the type of this field. The resulting type is not normalized. The `arg` is
@@ -1493,7 +1384,6 @@ impl<'tcx> FieldDef {
         Ident::new(self.name, tcx.def_ident_span(self.did).unwrap())
     }
 }
-/* AST_META: AST_ID=110 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum ImplOverlapKind {
@@ -1503,7 +1393,6 @@ pub enum ImplOverlapKind {
         marker: bool,
     },
 }
-/* AST_META: AST_ID=111 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 /// Useful source information about where a desugared associated type for an
 /// RPITIT originated from.
@@ -1512,7 +1401,6 @@ pub enum ImplTraitInTraitData {
     Trait { fn_def_id: DefId, opaque_def_id: DefId },
     Impl { fn_def_id: DefId },
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=typeck_body | COMPLEXITY=397 | LINES=723 */
 
 impl<'tcx> TyCtxt<'tcx> {
     pub fn typeck_body(self, body: hir::BodyId) -> &'tcx TypeckResults<'tcx> {
@@ -2236,7 +2124,6 @@ impl<'tcx> TyCtxt<'tcx> {
         !self.associated_types_for_impl_traits_in_associated_fn(trait_item_def_id).is_empty()
     }
 }
-/* AST_META: AST_ID=113 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=18 */
 
 pub fn provide(providers: &mut Providers) {
     closure::provide(providers);
@@ -2255,7 +2142,6 @@ pub fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=114 | TYPE=STRUCT | NAME=CrateInherentImpls | COMPLEXITY=7 | LINES=11 */
 
 /// A map for the local crate mapping each type to a vector of its
 /// inherent impls. This is not meant to be used outside of coherence;
@@ -2267,35 +2153,30 @@ pub struct CrateInherentImpls {
     pub inherent_impls: FxIndexMap<LocalDefId, Vec<DefId>>,
     pub incoherent_impls: FxIndexMap<SimplifiedType, Vec<LocalDefId>>,
 }
-/* AST_META: AST_ID=115 | TYPE=STRUCT | NAME=SymbolName | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, TyEncodable, HashStable)]
 pub struct SymbolName<'tcx> {
     /// `&str` gives a consistent ordering, which ensures reproducible builds.
     pub name: &'tcx str,
 }
-/* AST_META: AST_ID=116 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> SymbolName<'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>, name: &str) -> SymbolName<'tcx> {
         SymbolName { name: tcx.arena.alloc_str(name) }
     }
 }
-/* AST_META: AST_ID=117 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> fmt::Display for SymbolName<'tcx> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::Display::fmt(&self.name, fmt)
     }
 }
-/* AST_META: AST_ID=118 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> fmt::Debug for SymbolName<'tcx> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::Display::fmt(&self.name, fmt)
     }
 }
-/* AST_META: AST_ID=119 | TYPE=STRUCT | NAME=DestructuredConst | COMPLEXITY=2 | LINES=7 */
 
 /// The constituent parts of a type level constant of kind ADT or array.
 #[derive(Copy, Clone, Debug, HashStable)]

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/union_find/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=5 | LINES=10 */
 use super::UnionFind;
 
 #[test]
@@ -10,7 +9,6 @@ fn empty() {
         assert_eq!(sets.find(i), i);
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=transitive | COMPLEXITY=5 | LINES=22 */
 
 #[test]
 fn transitive() {

@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/write.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::path::PathBuf;
 
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::dep_graph::WorkProduct;
 
 use crate::back::lto::{SerializedModule, ThinModule};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::back::write::{CodegenContext, FatLtoInput, ModuleConfig};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CompiledModule, ModuleCodegen};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_and_optimize_fat_lto | COMPLEXITY=9 | LINES=47 */
 
 pub trait WriteBackendMethods: Clone + 'static {
     type Module: Send + Sync;
@@ -58,12 +54,10 @@ pub trait WriteBackendMethods: Clone + 'static {
     fn prepare_thin(module: ModuleCodegen<Self::Module>) -> (String, Self::ThinBuffer);
     fn serialize_module(module: ModuleCodegen<Self::Module>) -> (String, Self::ModuleBuffer);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=data | COMPLEXITY=2 | LINES=4 */
 
 pub trait ThinBufferMethods: Send + Sync {
     fn data(&self) -> &[u8];
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=data | COMPLEXITY=2 | LINES=4 */
 
 pub trait ModuleBufferMethods: Send + Sync {
     fn data(&self) -> &[u8];

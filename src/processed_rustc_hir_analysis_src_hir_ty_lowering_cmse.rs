@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/cmse.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::{DiagCtxtHandle, E0781, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, HirId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::LayoutError;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=79 | LINES=113 */
 
 use crate::errors;
 
@@ -122,7 +118,6 @@ pub(crate) fn validate_cmse_abi<'tcx>(
         _ => (),
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_valid_cmse_inputs | COMPLEXITY=15 | LINES=32 */
 
 /// Returns whether the inputs will fit into the available registers
 fn is_valid_cmse_inputs<'tcx>(
@@ -155,7 +150,6 @@ fn is_valid_cmse_inputs<'tcx>(
         Some(span) => Ok(Err(span)),
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_valid_cmse_output | COMPLEXITY=28 | LINES=47 */
 
 /// Returns whether the output will fit into the available registers
 fn is_valid_cmse_output<'tcx>(
@@ -203,7 +197,6 @@ fn is_valid_cmse_output<'tcx>(
 
     Ok(ret_ty == tcx.types.i64 || ret_ty == tcx.types.u64 || ret_ty == tcx.types.f64)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=should_emit_generic_error | COMPLEXITY=15 | LINES=24 */
 
 fn should_emit_generic_error<'tcx>(abi: ExternAbi, layout_err: &'tcx LayoutError<'tcx>) -> bool {
     use LayoutError::*;

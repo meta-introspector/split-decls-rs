@@ -1,37 +1,27 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/interpret/call.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Manages calling a concrete function (with known MIR body) with argument passing,
 // and returning the return value to the caller.
 use std::assert_matches::assert_matches;
 use std::borrow::Cow;
 
 use either::{Left, Right};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{self as abi, ExternAbi, FieldIdx, Integer, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, AdtDef, Instance, Ty, VariantDef};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::sym;
 use crate::rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use tracing::field::Empty;
 use tracing::{info, instrument, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     CtfeProvenance, FnVal, ImmTy, InterpCx, InterpResult, MPlaceTy, Machine, OpTy, PlaceTy,
     Projectable, Provenance, ReturnAction, ReturnContinuation, Scalar, StackPopInfo, interp_ok,
     throw_ub, throw_ub_custom, throw_unsup_format,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::interpret::EnteredTraceSpan;
 use crate::{enter_trace_span, fluent_generated as fluent};
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
 
 /// An argument passed to a function.
 #[derive(Clone, Debug)]
@@ -43,7 +33,6 @@ pub enum FnArg<'tcx, Prov: Provenance = CtfeProvenance> {
     /// an in-memory place so that we can do the proper alias checks.
     InPlace(MPlaceTy<'tcx, Prov>),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=layout | COMPLEXITY=7 | LINES=9 */
 
 impl<'tcx, Prov: Provenance> FnArg<'tcx, Prov> {
     pub fn layout(&self) -> &TyAndLayout<'tcx> {
@@ -53,7 +42,6 @@ impl<'tcx, Prov: Provenance> FnArg<'tcx, Prov> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=copy_fn_arg | COMPLEXITY=468 | LINES=902 */
 
 impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     /// Make a copy of the given fn_arg. Any `InPlace` are degenerated to copies, no protection of the

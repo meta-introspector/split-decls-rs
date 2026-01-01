@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/values.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::dep_graph::DepContext;
@@ -8,7 +7,6 @@ use crate::query::CycleError;
 pub trait Value<Tcx: DepContext>: Sized {
     fn from_cycle_error(tcx: Tcx, cycle_error: &CycleError, guar: ErrorGuaranteed) -> Self;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=13 */
 
 impl<Tcx: DepContext, T> Value<Tcx> for T {
     default fn from_cycle_error(tcx: Tcx, cycle_error: &CycleError, _guar: ErrorGuaranteed) -> T {

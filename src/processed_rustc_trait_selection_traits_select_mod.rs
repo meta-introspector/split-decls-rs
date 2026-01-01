@@ -1,57 +1,43 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/select/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Candidate selection. See the [rustc dev guide] for more information on how this works.
 //
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
 
 use std::assert_matches::assert_matches;
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::cmp;
 use std::fmt::{self, Display};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ops::ControlFlow;
 
 use hir::def::DefKind;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::{Diag, EmissionGuarantee};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_hir as hir;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_infer::infer::BoundRegionConversionTime::{self, HigherRankedType};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::DefineOpaqueTypes;
 use crate::rustc_infer::infer::at::ToTrace;
 use crate::rustc_infer::infer::relate::TypeRelation;
 use crate::rustc_infer::traits::{PredicateObligations, TraitObligation};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::dep_graph::{DepNodeIndex, dep_kinds};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use crate::rustc_complete::traits::select::*;
 use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
 use crate::rustc_complete::ty::error::TypeErrorToStringExt;
 use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::{
     self, DeepRejectCtxt, GenericArgsRef, PolyProjectionPredicate, SizedTraitKind, Ty, TyCtxt,
     TypeFoldable, TypeVisitableExt, TypingMode, Upcast, elaborate, may_use_unstable_feature,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use self::EvaluationResult::*;
 use self::SelectionCandidate::*;
 use super::coherence::{self, Conflict};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use super::project::ProjectionTermObligation;
 use super::util::closure_trait_ref_and_return_type;
 use super::{
@@ -59,17 +45,12 @@ use super::{
     PolyTraitObligation, PredicateObligation, Selection, SelectionError, SelectionResult,
     TraitQueryMode, const_evaluatable, project, util, wf,
 };
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::error_reporting::InferCtxtErrorExt;
 use crate::infer::{InferCtxt, InferOk, TypeFreshener};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::solve::InferCtxtSelectExt as _;
 use crate::traits::normalize::{normalize_with_depth, normalize_with_depth_to};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::project::{ProjectAndUnifyResult, ProjectionCacheKeyExt};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{EvaluateConstErr, ProjectionCacheKey, effects, sizedness_fast_path};
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash)]
@@ -78,7 +59,6 @@ pub enum IntercrateAmbiguityCause<'tcx> {
     UpstreamCrateUpdate { trait_ref: ty::TraitRef<'tcx>, self_ty: Option<Ty<'tcx>> },
     ReservationImpl { message: Symbol },
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=add_intercrate_ambiguity_hint | COMPLEXITY=36 | LINES=37 */
 
 impl<'tcx> IntercrateAmbiguityCause<'tcx> {
     /// Emits notes when the overlap is caused by complex intercrate ambiguities.
@@ -116,7 +96,6 @@ impl<'tcx> IntercrateAmbiguityCause<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=SelectionContext | COMPLEXITY=10 | LINES=24 */
 
 pub struct SelectionContext<'cx, 'tcx> {
     pub infcx: &'cx InferCtxt<'tcx>,
@@ -141,7 +120,6 @@ pub struct SelectionContext<'cx, 'tcx> {
     /// rather than immediately reported because we do not have accurate spans.
     query_mode: TraitQueryMode,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=TraitObligationStack | COMPLEXITY=14 | LINES=48 */
 
 // A stack that walks back up the stack frame.
 struct TraitObligationStack<'prev, 'tcx> {
@@ -190,7 +168,6 @@ struct TraitObligationStack<'prev, 'tcx> {
     /// pre-order index. Basically, a freshly incremented counter.
     dfn: usize,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=SelectionCandidateSet | COMPLEXITY=2 | LINES=12 */
 
 struct SelectionCandidateSet<'tcx> {
     /// A list of candidates that definitely apply to the current
@@ -203,14 +180,12 @@ struct SelectionCandidateSet<'tcx> {
     /// various "builtin" rules that might or might not trigger.
     ambiguous: bool,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=EvaluatedCandidate | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 struct EvaluatedCandidate<'tcx> {
     candidate: SelectionCandidate<'tcx>,
     evaluation: EvaluationResult,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=new | COMPLEXITY=799 | LINES=1617 */
 
 impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
     pub fn new(infcx: &'cx InferCtxt<'tcx>) -> SelectionContext<'cx, 'tcx> {
@@ -1828,7 +1803,6 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=winnow_candidates | COMPLEXITY=215 | LINES=290 */
 
 /// ## Winnowing
 ///
@@ -2119,7 +2093,6 @@ impl<'tcx> SelectionContext<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=sizedness_conditions | COMPLEXITY=284 | LINES=754 */
 
 impl<'tcx> SelectionContext<'_, 'tcx> {
     fn sizedness_conditions(
@@ -2874,7 +2847,6 @@ impl<'tcx> SelectionContext<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=list | COMPLEXITY=13 | LINES=33 */
 
 impl<'o, 'tcx> TraitObligationStack<'o, 'tcx> {
     fn list(&'o self) -> TraitObligationStackList<'o, 'tcx> {
@@ -2908,7 +2880,6 @@ impl<'o, 'tcx> TraitObligationStack<'o, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=ProvisionalEvaluationCache | COMPLEXITY=28 | LINES=84 */
 
 /// The "provisional evaluation cache" is used to store intermediate cache results
 /// when solving auto traits. Auto traits are unusual in that they can support
@@ -2993,7 +2964,6 @@ struct ProvisionalEvaluationCache<'tcx> {
     /// and the depth of the trait predicate *above* that well-formed predicate.
     wf_args: RefCell<Vec<(ty::Term<'tcx>, usize)>>,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=ProvisionalEvaluation | COMPLEXITY=4 | LINES=9 */
 
 /// A cache value for the provisional cache: contains the depth-first
 /// number (DFN) and result.
@@ -3003,14 +2973,12 @@ struct ProvisionalEvaluation {
     reached_depth: usize,
     result: EvaluationResult,
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> Default for ProvisionalEvaluationCache<'tcx> {
     fn default() -> Self {
         Self { dfn: Cell::new(0), map: Default::default(), wf_args: Default::default() }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=next_dfn | COMPLEXITY=45 | LINES=131 */
 
 impl<'tcx> ProvisionalEvaluationCache<'tcx> {
     /// Get the next DFN in sequence (basically a counter).
@@ -3142,14 +3110,12 @@ impl<'tcx> ProvisionalEvaluationCache<'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=TraitObligationStackList | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone)]
 struct TraitObligationStackList<'o, 'tcx> {
     cache: &'o ProvisionalEvaluationCache<'tcx>,
     head: Option<&'o TraitObligationStack<'o, 'tcx>>,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=13 | LINES=18 */
 
 impl<'o, 'tcx> TraitObligationStackList<'o, 'tcx> {
     fn empty(cache: &'o ProvisionalEvaluationCache<'tcx>) -> TraitObligationStackList<'o, 'tcx> {
@@ -3168,7 +3134,6 @@ impl<'o, 'tcx> TraitObligationStackList<'o, 'tcx> {
         if let Some(head) = self.head { head.depth } else { 0 }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=next | COMPLEXITY=5 | LINES=10 */
 
 impl<'o, 'tcx> Iterator for TraitObligationStackList<'o, 'tcx> {
     type Item = &'o TraitObligationStack<'o, 'tcx>;
@@ -3179,21 +3144,18 @@ impl<'o, 'tcx> Iterator for TraitObligationStackList<'o, 'tcx> {
         Some(o)
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'o, 'tcx> fmt::Debug for TraitObligationStack<'o, 'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "TraitObligationStack({:?})", self.obligation)
     }
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) enum ProjectionMatchesProjection {
     Yes,
     Ambiguous,
     No,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, TypeFoldable, TypeVisitable)]
 pub(crate) struct AutoImplConstituents<'tcx> {

@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_serialize/src/opaque/mem_encoder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use super::IntEncodedWithFixedSize;
 use crate::{Encodable, Encoder, leb128};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=MemEncoder | COMPLEXITY=2 | LINES=4 */
 
 pub struct MemEncoder {
     pub data: Vec<u8>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=39 | LINES=62 */
 
 impl MemEncoder {
     pub fn new() -> MemEncoder {
@@ -70,7 +67,6 @@ impl MemEncoder {
         })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=$this_fn | COMPLEXITY=9 | LINES=9 */
 
 macro_rules! write_leb128 {
     ($this_fn:ident, $int_ty:ty, $write_leb_fn:ident) => {
@@ -80,7 +76,6 @@ macro_rules! write_leb128 {
         }
     };
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=emit_u16 | COMPLEXITY=9 | LINES=32 */
 
 impl Encoder for MemEncoder {
     write_leb128!(emit_usize, usize, write_usize_leb128);
@@ -113,7 +108,6 @@ impl Encoder for MemEncoder {
         self.data.extend_from_slice(s);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=9 */
 
 // Specialize encoding byte slices. This specialization also applies to encoding `Vec<u8>`s, etc.,
 // since the default implementations call `encode` on their slices internally.
@@ -123,7 +117,6 @@ impl Encodable<MemEncoder> for [u8] {
         e.emit_raw_bytes(self);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=10 */
 
 impl Encodable<MemEncoder> for IntEncodedWithFixedSize {
     #[inline]

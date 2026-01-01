@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/fx.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::hash::BuildHasherDefault;
 
 pub use crate::rustc_hash::{FxHashMap, FxHashSet, FxHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=18 */
 
 pub type StdEntry<'a, K, V> = std::collections::hash_map::Entry<'a, K, V>;
 
@@ -22,7 +20,6 @@ macro_rules! define_id_collections {
         pub type $entry_name<'a, T> = $crate::fx::StdEntry<'a, $key, T>;
     };
 }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 #[macro_export]
 macro_rules! define_stable_id_collections {

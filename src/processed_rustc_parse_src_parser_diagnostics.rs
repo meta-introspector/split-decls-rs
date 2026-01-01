@@ -1,44 +1,35 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/diagnostics.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::mem::take;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use ast::token::IdentIsRaw;
 use rustc_ast as ast;
 use crate::rustc_complete::token::{self, Lit, LitKind, Token, TokenKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::util::parser::AssocOp;
 use crate::rustc_complete::{
     AngleBracketedArg, AngleBracketedArgs, AnonConst, AttrVec, BinOpKind, BindingMode, Block,
     BlockCheckMode, Expr, ExprKind, GenericArg, Generics, Item, ItemKind, Param, Pat, PatKind,
     Path, PathSegment, QSelf, Recovered, Ty, TyKind,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, PResult, Subdiagnostic, Suggestions,
     pluralize,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::errors::ExprParenthesesNeeded;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::symbol::used_keywords;
 use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, SpanSnippetError, Symbol, kw, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::pat::Expected;
 use super::{
     BlockMode, CommaRecoveryMode, ExpTokenPair, Parser, PathStyle, Restrictions, SemiColonMode,
     SeqSep, TokenType,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 use crate::errors::{
     AddParen, AmbiguousPlus, AsyncMoveBlockIn2015, AsyncUseBlockIn2015, AttributeOnParamType,
     AwaitSuggestion, BadQPathStage2, BadTypePlus, BadTypePlusSub, ColonAsSemi,
@@ -54,11 +45,9 @@ use crate::errors::{
     UnexpectedConstParamDeclaration, UnexpectedConstParamDeclarationSugg, UnmatchedAngleBrackets,
     UseEqInstead, WrapType,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::parser::FnContext;
 use crate::parser::attr::InnerAttrPolicy;
 use crate::{exp, fluent_generated as fluent};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 
 /// Creates a placeholder argument.
 pub(super) fn dummy_arg(ident: Ident, guar: ErrorGuaranteed) -> Param {
@@ -78,14 +67,12 @@ pub(super) fn dummy_arg(ident: Ident, guar: ErrorGuaranteed) -> Param {
         is_placeholder: false,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=2 | LINES=6 */
 
 pub(super) trait RecoverQPath: Sized + 'static {
     const PATH_STYLE: PathStyle = PathStyle::Expr;
     fn to_ty(&self) -> Option<Box<Ty>>;
     fn recovered(qself: Option<Box<QSelf>>, path: ast::Path) -> Self;
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=7 | LINES=15 */
 
 impl RecoverQPath for Ty {
     const PATH_STYLE: PathStyle = PathStyle::Type;
@@ -101,7 +88,6 @@ impl RecoverQPath for Ty {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=7 | LINES=15 */
 
 impl RecoverQPath for Pat {
     const PATH_STYLE: PathStyle = PathStyle::Pat;
@@ -117,7 +103,6 @@ impl RecoverQPath for Pat {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=to_ty | COMPLEXITY=7 | LINES=15 */
 
 impl RecoverQPath for Expr {
     fn to_ty(&self) -> Option<Box<Ty>> {
@@ -133,21 +118,18 @@ impl RecoverQPath for Expr {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 /// Control whether the closing delimiter should be consumed when calling `Parser::consume_block`.
 pub(crate) enum ConsumeClosingDelim {
     Yes,
     No,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 pub enum AttemptLocalParseRecovery {
     Yes,
     No,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=16 */
 
 impl AttemptLocalParseRecovery {
     pub(super) fn yes(&self) -> bool {
@@ -164,7 +146,6 @@ impl AttemptLocalParseRecovery {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=IncDecRecovery | COMPLEXITY=4 | LINES=12 */
 
 /// Information for emitting suggestions and recovering from
 /// C-style `i++`, `--i`, etc.
@@ -177,7 +158,6 @@ struct IncDecRecovery {
     /// Is this pre- or postfix?
     fixity: UnaryFixity,
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Is an increment or decrement expression its own statement?
 #[derive(Debug, Copy, Clone)]
@@ -187,21 +167,18 @@ enum IsStandalone {
     /// It's a subexpression, i.e., *not* standalone.
     Subexpr,
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 enum IncOrDec {
     Inc,
     Dec,
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 enum UnaryFixity {
     Pre,
     Post,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=chr | COMPLEXITY=12 | LINES=16 */
 
 impl IncOrDec {
     fn chr(&self) -> char {
@@ -218,7 +195,6 @@ impl IncOrDec {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl std::fmt::Display for UnaryFixity {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -228,7 +204,6 @@ impl std::fmt::Display for UnaryFixity {
         }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=MisspelledKw | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Debug, rustc_macros::Subdiagnostic)]
 #[suggestion(
@@ -243,7 +218,6 @@ struct MisspelledKw {
     span: Span,
     is_incorrect_case: bool,
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=find_similar_kw | COMPLEXITY=14 | LINES=17 */
 
 /// Checks if the given `lookup` identifier is similar to any keyword symbol in `candidates`.
 fn find_similar_kw(lookup: Ident, candidates: &[Symbol]) -> Option<MisspelledKw> {
@@ -261,14 +235,12 @@ fn find_similar_kw(lookup: Ident, candidates: &[Symbol]) -> Option<MisspelledKw>
         None
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=MultiSugg | COMPLEXITY=2 | LINES=6 */
 
 struct MultiSugg {
     msg: String,
     patches: Vec<(Span, String)>,
     applicability: Applicability,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=emit | COMPLEXITY=4 | LINES=10 */
 
 impl MultiSugg {
     fn emit(self, err: &mut Diag<'_>) {
@@ -279,7 +251,6 @@ impl MultiSugg {
         err.multipart_suggestion_verbose(self.msg, self.patches, self.applicability);
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=SnapshotParser | COMPLEXITY=2 | LINES=7 */
 
 /// SnapshotParser is used to create a snapshot of the parser
 /// without causing duplicate errors being emitted when the `Parser`
@@ -287,7 +258,6 @@ impl MultiSugg {
 pub struct SnapshotParser<'a> {
     parser: Parser<'a>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'a> Deref for SnapshotParser<'a> {
     type Target = Parser<'a>;
@@ -296,14 +266,12 @@ impl<'a> Deref for SnapshotParser<'a> {
         &self.parser
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'a> DerefMut for SnapshotParser<'a> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.parser
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=dcx | COMPLEXITY=997 | LINES=1864 */
 
 impl<'a> Parser<'a> {
     pub fn dcx(&self) -> DiagCtxtHandle<'a> {
@@ -2168,15 +2136,12 @@ impl<'a> Parser<'a> {
     /// statement. This is something of a best-effort heuristic.
     ///
     /// We terminate when we find an unmatched `}` (without consuming it).
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
     pub(super) fn recover_stmt(&mut self) {
         self.recover_stmt_(SemiColonMode::Ignore, BlockMode::Ignore)
     }
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
     /// If `break_on_semi` is `Break`, then we will stop consuming tokens after
     /// finding (and consuming) a `;` outside of `{}` or `[]` (note that this is
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=47 | LINES=73 */
     /// approximate -- it can mean we break too early due to macros, but that
     /// should only lead to sub-optimal recovery, not inaccurate parsing).
     ///
@@ -2250,7 +2215,6 @@ impl<'a> Parser<'a> {
             }
         }
     }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 
     pub(super) fn check_for_for_in_in_typo(&mut self, in_span: Span) {
         if self.eat_keyword(exp!(In)) {
@@ -2261,7 +2225,6 @@ impl<'a> Parser<'a> {
             });
         }
     }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=16 */
 
     pub(super) fn eat_incorrect_doc_comment_for_param_type(&mut self) {
         if let token::DocComment(..) = self.token.kind {
@@ -2278,7 +2241,6 @@ impl<'a> Parser<'a> {
             self.dcx().emit_err(AttributeOnParamType { span: sp });
         }
     }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=54 | LINES=119 */
 
     pub(super) fn parameter_without_type(
         &mut self,
@@ -2398,7 +2360,6 @@ impl<'a> Parser<'a> {
         }
         None
     }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
     pub(super) fn recover_arg_parse(&mut self) -> PResult<'a, (Box<ast::Pat>, Box<ast::Ty>)> {
         let pat = self.parse_pat_no_top_alt(Some(Expected::ArgumentName), None)?;
@@ -2416,7 +2377,6 @@ impl<'a> Parser<'a> {
         });
         Ok((pat, ty))
     }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
     pub(super) fn recover_bad_self_param(&mut self, mut param: Param) -> PResult<'a, Param> {
         let span = param.pat.span;
@@ -2424,7 +2384,6 @@ impl<'a> Parser<'a> {
         param.ty.kind = TyKind::Err(guar);
         Ok(param)
     }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=32 */
 
     pub(super) fn consume_block(
         &mut self,
@@ -2457,7 +2416,6 @@ impl<'a> Parser<'a> {
             }
         }
     }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=20 */
 
     pub(super) fn expected_expression_found(&self) -> Diag<'a> {
         let (span, msg) = match (&self.token.kind, self.subparser_name) {
@@ -2478,7 +2436,6 @@ impl<'a> Parser<'a> {
         err.span_label(span, "expected expression");
         err
     }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=consume_tts | COMPLEXITY=12 | LINES=17 */
 
     fn consume_tts(
         &mut self,
@@ -2496,7 +2453,6 @@ impl<'a> Parser<'a> {
             self.bump();
         }
     }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=27 */
 
     /// Replace duplicated recovered parameters with `_` pattern to avoid unnecessary errors.
     ///
@@ -2524,7 +2480,6 @@ impl<'a> Parser<'a> {
             }
         }
     }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=37 */
 
     /// Handle encountering a symbol in a generic argument list that is not a `,` or `>`. In this
     /// case, we emit an error and try to suggest enclosing a const argument in braces if it looks
@@ -2562,7 +2517,6 @@ impl<'a> Parser<'a> {
         }
         Ok(false) // Don't continue.
     }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=30 */
 
     /// Attempt to parse a generic const argument that has not been enclosed in braces.
     /// There are a limited number of expressions that are permitted without being encoded
@@ -2593,7 +2547,6 @@ impl<'a> Parser<'a> {
         }
         Ok(expr)
     }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=recover_const_param_decl | COMPLEXITY=24 | LINES=38 */
 
     fn recover_const_param_decl(&mut self, ty_generics: Option<&Generics>) -> Option<GenericArg> {
         let snapshot = self.create_snapshot_for_diagnostic();
@@ -2632,7 +2585,6 @@ impl<'a> Parser<'a> {
         let value = self.mk_expr_err(param.span(), guar);
         Some(GenericArg::Const(AnonConst { id: ast::DUMMY_NODE_ID, value }))
     }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=25 */
 
     pub(super) fn recover_const_param_declaration(
         &mut self,
@@ -2658,14 +2610,11 @@ impl<'a> Parser<'a> {
             self.recover_const_arg(after_kw_const, self.dcx().create_err(err)).map(Some)
         }
     }
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
     /// Try to recover from possible generic const argument without `{` and `}`.
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3 */
     ///
     /// When encountering code like `foo::< bar + 3 >` or `foo::< bar - baz >` we suggest
     /// `foo::<{ bar + 3 }>` and `foo::<{ bar - baz }>`, respectively. We only provide a suggestion
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=85 */
     /// if we think that the resulting expression would be well formed.
     pub(super) fn recover_const_arg(
         &mut self,
@@ -2751,7 +2700,6 @@ impl<'a> Parser<'a> {
         self.restore_snapshot(snapshot);
         Err(err)
     }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=25 */
 
     /// Try to recover from an unbraced const argument whose first token [could begin a type][ty].
     ///
@@ -2777,7 +2725,6 @@ impl<'a> Parser<'a> {
             }
         }
     }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
     /// Creates a dummy const argument, and reports that the expression must be enclosed in braces
     pub(super) fn dummy_const_arg_needs_braces(&self, mut err: Diag<'a>, span: Span) -> GenericArg {
@@ -2791,7 +2738,6 @@ impl<'a> Parser<'a> {
         let value = self.mk_expr_err(span, guar);
         GenericArg::Const(AnonConst { id: ast::DUMMY_NODE_ID, value })
     }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=89 | LINES=144 */
 
     /// Some special error handling for the "top-level" patterns in a match arm,
     /// `for` loop, `let`, &c. (in contrast to subpatterns within such).
@@ -2936,7 +2882,6 @@ impl<'a> Parser<'a> {
         };
         first_pat
     }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=conflict_marker | COMPLEXITY=137 | LINES=243 */
 
     /// If `loop_header` is `Some` and an unexpected block label is encountered,
     /// it is suggested to be moved just before `loop_header`, else it is suggested to be removed.

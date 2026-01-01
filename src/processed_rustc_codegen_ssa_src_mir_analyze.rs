@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/analyze.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // An analysis to determine which locals require allocas and
 // which do not.
 
@@ -7,14 +6,10 @@ use rustc_abi as abi;
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, DefLocation, Location, TerminatorKind, traversal};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::layout::LayoutOf;
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=45 */
 use tracing::debug;
 
 use super::FunctionCx;
@@ -60,7 +55,6 @@ pub(crate) fn non_ssa_locals<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
 
     non_ssa_locals
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Copy, Clone, PartialEq, Eq)]
 enum LocalKind {
@@ -72,14 +66,12 @@ enum LocalKind {
     /// A scalar or a scalar pair local with a single definition that dominates all uses.
     SSA(DefLocation),
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LocalAnalyzer | COMPLEXITY=2 | LINES=6 */
 
 struct LocalAnalyzer<'a, 'b, 'tcx, Bx: BuilderMethods<'b, 'tcx>> {
     fx: &'a FunctionCx<'b, 'tcx, Bx>,
     dominators: &'a Dominators<mir::BasicBlock>,
     locals: IndexVec<mir::Local, LocalKind>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=define | COMPLEXITY=63 | LINES=100 */
 
 impl<'a, 'b, 'tcx, Bx: BuilderMethods<'b, 'tcx>> LocalAnalyzer<'a, 'b, 'tcx, Bx> {
     fn define(&mut self, local: mir::Local, location: DefLocation) {
@@ -180,7 +172,6 @@ impl<'a, 'b, 'tcx, Bx: BuilderMethods<'b, 'tcx>> LocalAnalyzer<'a, 'b, 'tcx, Bx>
         self.visit_local(place_ref.local, context, location);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_assign | COMPLEXITY=58 | LINES=94 */
 
 impl<'a, 'b, 'tcx, Bx: BuilderMethods<'b, 'tcx>> Visitor<'tcx> for LocalAnalyzer<'a, 'b, 'tcx, Bx> {
     fn visit_assign(
@@ -275,7 +266,6 @@ impl<'a, 'b, 'tcx, Bx: BuilderMethods<'b, 'tcx>> Visitor<'tcx> for LocalAnalyzer
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub(crate) enum CleanupKind {
@@ -283,7 +273,6 @@ pub(crate) enum CleanupKind {
     Funclet,
     Internal { funclet: mir::BasicBlock },
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 
 impl CleanupKind {
     pub(crate) fn funclet_bb(self, for_bb: mir::BasicBlock) -> Option<mir::BasicBlock> {
@@ -294,7 +283,6 @@ impl CleanupKind {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=discover_masters | COMPLEXITY=88 | LINES=112 */
 
 /// MSVC requires unwinding code to be split to a tree of *funclets*, where each funclet can only
 /// branch to itself or to its parent. Luckily, the code we generates matches this pattern.

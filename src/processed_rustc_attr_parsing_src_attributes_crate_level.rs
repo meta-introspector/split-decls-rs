@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/crate_level.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=parse_limit_int | COMPLEXITY=18 | LINES=37 */
 use std::num::IntErrorKind;
 
 use crate::rustc_complete::limit::Limit;
@@ -37,7 +36,6 @@ impl<S: Stage> AcceptContext<'_, '_, S> {
         None
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=10 | LINES=33 */
 
 pub(crate) struct CrateNameParser;
 
@@ -71,7 +69,6 @@ impl<S: Stage> SingleAttributeParser<S> for CrateNameParser {
         })
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=27 */
 
 pub(crate) struct RecursionLimitParser;
 
@@ -99,7 +96,6 @@ impl<S: Stage> SingleAttributeParser<S> for RecursionLimitParser {
         })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=27 */
 
 pub(crate) struct MoveSizeLimitParser;
 
@@ -127,7 +123,6 @@ impl<S: Stage> SingleAttributeParser<S> for MoveSizeLimitParser {
         })
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=27 */
 
 pub(crate) struct TypeLengthLimitParser;
 
@@ -155,7 +150,6 @@ impl<S: Stage> SingleAttributeParser<S> for TypeLengthLimitParser {
         })
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=27 */
 
 pub(crate) struct PatternComplexityLimitParser;
 
@@ -183,7 +177,6 @@ impl<S: Stage> SingleAttributeParser<S> for PatternComplexityLimitParser {
         })
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 pub(crate) struct NoCoreParser;
 
@@ -196,7 +189,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for NoCoreParser {
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::NoCore;
     const TYPE: AttributeType = AttributeType::CrateLevel;
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 pub(crate) struct NoStdParser;
 

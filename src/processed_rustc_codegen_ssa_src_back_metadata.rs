@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/metadata.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 // Reading of the rustc metadata for rlibs and dylibs
 
 use std::borrow::Cow;
@@ -9,16 +8,13 @@ use std::path::Path;
 
 use itertools::Itertools;
 use object::write::{self, StandardSegment, Symbol, SymbolSection};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use object::{
     Architecture, BinaryFormat, Endianness, FileFlags, Object, ObjectSection, ObjectSymbol,
     SectionFlags, SectionKind, SymbolFlags, SymbolKind, SymbolScope, elf, pe, xcoff,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::Endian;
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::owned_slice::{OwnedSlice, try_slice_owned};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_metadata::EncodedMetadata;
 use crate::rustc_metadata::creader::MetadataLoader;
 use crate::rustc_metadata::fs::METADATA_FILENAME;
@@ -26,7 +22,6 @@ use crate::rustc_complete::bug;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::sym;
 use crate::rustc_target::spec::{RelocModel, Target, ef_avr_arch};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=load_metadata_with | COMPLEXITY=12 | LINES=30 */
 use tracing::debug;
 
 use super::apple;
@@ -57,7 +52,6 @@ fn load_metadata_with(
         .map_err(|e| format!("failed to mmap file '{}': {}", path.display(), e))
         .and_then(|mmap| try_slice_owned(mmap, |mmap| f(mmap)))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=get_rlib_metadata | COMPLEXITY=55 | LINES=53 */
 
 impl MetadataLoader for DefaultMetadataLoader {
     fn get_rlib_metadata(&self, target: &Target, path: &Path) -> Result<OwnedSlice, String> {
@@ -111,7 +105,6 @@ impl MetadataLoader for DefaultMetadataLoader {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=20 */
 
 pub(super) fn search_for_section<'a>(
     path: &Path,
@@ -132,7 +125,6 @@ pub(super) fn search_for_section<'a>(
         .data()
         .map_err(|e| format!("failed to read {} section in '{}': {}", section, path.display(), e))
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=add_gnu_property_note | COMPLEXITY=22 | LINES=48 */
 
 fn add_gnu_property_note(
     file: &mut write::Object<'static>,
@@ -181,7 +173,6 @@ fn add_gnu_property_note(
     });
     file.append_section_data(section, &data, 8);
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=19 | LINES=27 */
 
 pub(super) fn get_metadata_xcoff<'a>(path: &Path, data: &'a [u8]) -> Result<&'a [u8], String> {
     let Ok(file) = object::File::parse(data) else {
@@ -209,7 +200,6 @@ pub(super) fn get_metadata_xcoff<'a>(path: &Path, data: &'a [u8]) -> Result<&'a 
         Err(format!("Unable to find symbol {AIX_METADATA_SYMBOL_NAME}"))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=59 */
 
 pub(crate) fn create_object_file(sess: &Session) -> Option<write::Object<'static>> {
     let endianness = match sess.target.options.endian {
@@ -269,7 +259,6 @@ pub(crate) fn create_object_file(sess: &Session) -> Option<write::Object<'static
     file.flags = FileFlags::Elf { os_abi, abi_version, e_flags };
     Some(file)
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 pub(super) fn elf_os_abi(sess: &Session) -> u8 {
     match sess.target.options.os.as_ref() {
@@ -279,7 +268,6 @@ pub(super) fn elf_os_abi(sess: &Session) -> u8 {
         _ => elf::ELFOSABI_NONE,
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=134 | LINES=139 */
 
 pub(super) fn elf_e_flags(architecture: Architecture, sess: &Session) -> u32 {
     match architecture {
@@ -419,7 +407,6 @@ pub(super) fn elf_e_flags(architecture: Architecture, sess: &Session) -> u32 {
         _ => 0,
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=macho_object_build_version_for_target | COMPLEXITY=14 | LINES=42 */
 
 /// Mach-O files contain information about:
 /// - The platform/OS they were built for (macOS/watchOS/Mac Catalyst/iOS simulator etc).
@@ -462,19 +449,16 @@ fn macho_object_build_version_for_target(sess: &Session) -> object::write::MachO
 
     build_version
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=macho_is_arm64e | COMPLEXITY=2 | LINES=5 */
 
 /// Is Apple's CPU subtype `arm64e`s
 fn macho_is_arm64e(target: &Target) -> bool {
     target.llvm_target.starts_with("arm64e")
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum MetadataPosition {
     First,
     Last,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=101 */
 
 /// For rlibs we "pack" rustc metadata into a dummy object file.
 ///
@@ -576,7 +560,6 @@ pub(crate) fn create_wrapper_file(
     file.append_section_data(section, data, 1);
     (file.write().unwrap(), MetadataPosition::First)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=create_compressed_metadata_file | COMPLEXITY=23 | LINES=62 */
 
 // Historical note:
 //
@@ -639,7 +622,6 @@ pub fn create_compressed_metadata_file(
 
     file.write().unwrap()
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=create_compressed_metadata_file_for_xcoff | COMPLEXITY=15 | LINES=58 */
 
 /// * Xcoff - On AIX, custom sections are merged into predefined sections,
 ///   so custom .rustc section is not preserved during linking.
@@ -698,7 +680,6 @@ pub fn create_compressed_metadata_file_for_xcoff(
     file.append_section_data(section, data, 1);
     file.write().unwrap()
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=create_metadata_file_for_wasm | COMPLEXITY=20 | LINES=50 */
 
 /// Creates a simple WebAssembly object file, which is itself a wasm module,
 /// that contains a custom section of the name `section_name` with contents

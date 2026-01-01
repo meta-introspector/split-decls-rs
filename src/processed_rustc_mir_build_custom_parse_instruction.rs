@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/custom/parse/instruction.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::mir::interpret::Scalar;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
@@ -11,7 +9,6 @@ use crate::rustc_complete::Span;
 use crate::rustc_complete::source_map::Spanned;
 
 use super::{PResult, ParseCtxt, parse_by_kind};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=parse_unwind_terminate_reason | COMPLEXITY=161 | LINES=391 */
 use crate::builder::custom::ParseError;
 use crate::builder::expr::as_constant::as_constant_inner;
 

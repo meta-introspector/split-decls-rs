@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/project.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 // Code for projecting associated types out of trait references.
 
 use std::ops::ControlFlow;
@@ -11,32 +10,24 @@ use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_infer::infer::DefineOpaqueTypes;
 use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
 use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::traits::select::OverflowError;
 use crate::rustc_complete::traits::{BuiltinImplSource, ImplSource, ImplSourceUserDefinedData};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
 use crate::rustc_complete::ty::{
     self, Term, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, TypingMode, Upcast,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::{
     MismatchedProjectionTypes, Normalized, NormalizedTerm, Obligation, ObligationCause,
     PredicateObligation, ProjectionCacheEntry, ProjectionCacheKey, Selection, SelectionContext,
     SelectionError, specialization_graph, translate_args, util,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::errors::InherentProjectionNormalizationOverflow;
 use crate::infer::{BoundRegionConversionTime, InferOk};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::normalize::{normalize_with_depth, normalize_with_depth_to};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 use crate::traits::query::evaluate_obligation::InferCtxtExt as _;
 use crate::traits::select::ProjectionMatchesProjection;
 
@@ -57,7 +48,6 @@ pub enum ProjectionError<'tcx> {
     /// ...an error occurred matching `T : TraitRef`
     TraitSelectionError(SelectionError<'tcx>),
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 #[derive(PartialEq, Eq, Debug)]
 enum ProjectionCandidate<'tcx> {
@@ -74,7 +64,6 @@ enum ProjectionCandidate<'tcx> {
     /// From an "impl" (or a "pseudo-impl" returned by select)
     Select(Selection<'tcx>),
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 enum ProjectionCandidateSet<'tcx> {
     None,
@@ -82,7 +71,6 @@ enum ProjectionCandidateSet<'tcx> {
     Ambiguous,
     Error(SelectionError<'tcx>),
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=mark_ambiguous | COMPLEXITY=35 | LINES=68 */
 
 impl<'tcx> ProjectionCandidateSet<'tcx> {
     fn mark_ambiguous(&mut self) {
@@ -151,7 +139,6 @@ impl<'tcx> ProjectionCandidateSet<'tcx> {
         false
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
 
 /// States returned from `poly_project_and_unify_type`. Takes the place
 /// of the old return type, which was:
@@ -177,7 +164,6 @@ pub(super) enum ProjectAndUnifyResult<'tcx> {
     // Returns the type error that arose from the mismatch.
     MismatchedProjectionTypes(MismatchedProjectionTypes<'tcx>),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=29 */
 
 /// Evaluates constraints of the form:
 /// ```ignore (not-rust)
@@ -207,7 +193,6 @@ pub(super) fn poly_project_and_unify_term<'cx, 'tcx>(
         Err(err) => ProjectAndUnifyResult::MismatchedProjectionTypes(err),
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=project_and_unify_term | COMPLEXITY=26 | LINES=59 */
 
 /// Evaluates constraints of the form:
 /// ```ignore (not-rust)
@@ -267,7 +252,6 @@ fn project_and_unify_term<'cx, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=normalize_projection_term | COMPLEXITY=11 | LINES=30 */
 
 /// The guts of `normalize`: normalize a specific projection like `<T
 /// as Trait>::Item`. The result is always a type (and possibly
@@ -298,7 +282,6 @@ pub fn normalize_projection_term<'a, 'b, 'tcx>(
                 .into()
         })
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=54 | LINES=152 */
 
 /// The guts of `normalize`: normalize a specific projection like `<T
 /// as Trait>::Item`. The result is always a type (and possibly
@@ -451,7 +434,6 @@ pub(super) fn opt_normalize_projection_term<'a, 'b, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=normalize_to_error | COMPLEXITY=16 | LINES=48 */
 
 /// If we are projecting `<T as Trait>::Item`, but `T: Trait` does not
 /// hold. In various error cases, we cannot generate a valid
@@ -500,7 +482,6 @@ fn normalize_to_error<'a, 'tcx>(
     });
     Normalized { value: new_value, obligations }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=normalize_inherent_projection | COMPLEXITY=25 | LINES=76 */
 
 /// Confirm and normalize the given inherent projection.
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
@@ -577,7 +558,6 @@ pub fn normalize_inherent_projection<'a, 'b, 'tcx>(
 
     term
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=compute_inherent_assoc_term_args | COMPLEXITY=20 | LINES=53 */
 
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
 pub fn compute_inherent_assoc_term_args<'a, 'b, 'tcx>(
@@ -631,19 +611,16 @@ pub fn compute_inherent_assoc_term_args<'a, 'b, 'tcx>(
 
     alias_term.rebase_inherent_args_onto_impl(impl_args, tcx)
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum Projected<'tcx> {
     Progress(Progress<'tcx>),
     NoProgress(ty::Term<'tcx>),
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=Progress | COMPLEXITY=2 | LINES=5 */
 
 struct Progress<'tcx> {
     term: ty::Term<'tcx>,
     obligations: PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=error_for_term | COMPLEXITY=10 | LINES=20 */
 
 impl<'tcx> Progress<'tcx> {
     fn error_for_term(
@@ -664,7 +641,6 @@ impl<'tcx> Progress<'tcx> {
         self
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=project | COMPLEXITY=29 | LINES=63 */
 
 /// Computes the result of a projection type (if we can).
 ///
@@ -728,7 +704,6 @@ fn project<'cx, 'tcx>(
         ProjectionCandidateSet::Ambiguous => Err(ProjectionError::TooManyCandidates),
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=assemble_candidates_from_param_env | COMPLEXITY=3 | LINES=18 */
 
 /// The first thing we have to do is scan through the parameter
 /// environment to see whether there are any projection predicates
@@ -747,7 +722,6 @@ fn assemble_candidates_from_param_env<'cx, 'tcx>(
         false,
     );
 }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// In the case of a nested projection like `<<A as Foo>::FooT as Bar>::BarT`, we may find
 /// that the definition of `Foo` has some clues:
@@ -756,7 +730,6 @@ fn assemble_candidates_from_param_env<'cx, 'tcx>(
 /// trait Foo {
 ///     type FooT : Bar<BarT=i32>
 /// }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=assemble_candidates_from_trait_def | COMPLEXITY=33 | LINES=51 */
 /// ```
 ///
 /// Here, for example, we could conclude that the result is `i32`.
@@ -808,7 +781,6 @@ fn assemble_candidates_from_trait_def<'cx, 'tcx>(
         candidate_set.mark_ambiguous();
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=assemble_candidates_from_object_ty | COMPLEXITY=15 | LINES=49 */
 
 /// In the case of a trait object like
 /// `<dyn Iterator<Item = ()> as Iterator>::Item` we can use the existential
@@ -858,7 +830,6 @@ fn assemble_candidates_from_object_ty<'cx, 'tcx>(
         false,
     );
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=assemble_candidates_from_predicates | COMPLEXITY=37 | LINES=58 */
 
 #[instrument(
     level = "debug",
@@ -917,7 +888,6 @@ fn assemble_candidates_from_predicates<'cx, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=assemble_candidates_from_impls | COMPLEXITY=140 | LINES=321 */
 
 #[instrument(level = "debug", skip(selcx, obligation, candidate_set))]
 fn assemble_candidates_from_impls<'cx, 'tcx>(
@@ -1239,7 +1209,6 @@ fn assemble_candidates_from_impls<'cx, 'tcx>(
         }
     });
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=confirm_candidate | COMPLEXITY=21 | LINES=34 */
 
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
 fn confirm_candidate<'cx, 'tcx>(
@@ -1274,7 +1243,6 @@ fn confirm_candidate<'cx, 'tcx>(
 
     result
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=confirm_select_candidate | COMPLEXITY=44 | LINES=49 */
 
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
 fn confirm_select_candidate<'cx, 'tcx>(
@@ -1324,7 +1292,6 @@ fn confirm_select_candidate<'cx, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=confirm_coroutine_candidate | COMPLEXITY=19 | LINES=59 */
 
 fn confirm_coroutine_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1384,7 +1351,6 @@ fn confirm_coroutine_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=confirm_future_candidate | COMPLEXITY=11 | LINES=48 */
 
 fn confirm_future_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1433,7 +1399,6 @@ fn confirm_future_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=confirm_iterator_candidate | COMPLEXITY=11 | LINES=46 */
 
 fn confirm_iterator_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1480,7 +1445,6 @@ fn confirm_iterator_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=confirm_async_iterator_candidate | COMPLEXITY=10 | LINES=54 */
 
 fn confirm_async_iterator_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1535,7 +1499,6 @@ fn confirm_async_iterator_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=confirm_builtin_candidate | COMPLEXITY=24 | LINES=65 */
 
 fn confirm_builtin_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1601,7 +1564,6 @@ fn confirm_builtin_candidate<'cx, 'tcx>(
         .with_addl_obligations(obligations)
         .with_addl_obligations(data)
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=confirm_fn_pointer_candidate | COMPLEXITY=4 | LINES=21 */
 
 fn confirm_fn_pointer_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1623,7 +1585,6 @@ fn confirm_fn_pointer_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=confirm_closure_candidate | COMPLEXITY=28 | LINES=86 */
 
 fn confirm_closure_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1710,7 +1671,6 @@ fn confirm_closure_candidate<'cx, 'tcx>(
         .with_addl_obligations(nested)
         .with_addl_obligations(obligations)
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=confirm_callable_candidate | COMPLEXITY=4 | LINES=29 */
 
 fn confirm_callable_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1740,7 +1700,6 @@ fn confirm_callable_candidate<'cx, 'tcx>(
 
     confirm_param_env_candidate(selcx, obligation, predicate, true)
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=confirm_async_closure_candidate | COMPLEXITY=80 | LINES=160 */
 
 fn confirm_async_closure_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1901,7 +1860,6 @@ fn confirm_async_closure_candidate<'cx, 'tcx>(
     confirm_param_env_candidate(selcx, obligation, poly_cache_entry, true)
         .with_addl_obligations(nested)
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=confirm_async_fn_kind_helper_candidate | COMPLEXITY=6 | LINES=39 */
 
 fn confirm_async_fn_kind_helper_candidate<'cx, 'tcx>(
     selcx: &mut SelectionContext<'cx, 'tcx>,
@@ -1941,7 +1899,6 @@ fn confirm_async_fn_kind_helper_candidate<'cx, 'tcx>(
     confirm_param_env_candidate(selcx, obligation, ty::Binder::dummy(predicate), false)
         .with_addl_obligations(nested)
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=confirm_param_env_candidate | COMPLEXITY=27 | LINES=68 */
 
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
 fn confirm_param_env_candidate<'cx, 'tcx>(
@@ -2010,7 +1967,6 @@ fn confirm_param_env_candidate<'cx, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=confirm_impl_candidate | COMPLEXITY=54 | LINES=92 */
 
 // FIXME(mgca): While this supports constants, it is only used for types by default right now
 fn confirm_impl_candidate<'cx, 'tcx>(
@@ -2103,7 +2059,6 @@ fn confirm_impl_candidate<'cx, 'tcx>(
     };
     Ok(Projected::Progress(progress))
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=assoc_term_own_obligations | COMPLEXITY=16 | LINES=46 */
 
 // Get obligations corresponding to the predicates from the where-clause of the
 // associated type itself.
@@ -2150,7 +2105,6 @@ fn assoc_term_own_obligations<'cx, 'tcx>(
         ));
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=from_poly_projection_obligation | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) trait ProjectionCacheKeyExt<'cx, 'tcx>: Sized {
     fn from_poly_projection_obligation(
@@ -2158,7 +2112,6 @@ pub(crate) trait ProjectionCacheKeyExt<'cx, 'tcx>: Sized {
         obligation: &PolyProjectionObligation<'tcx>,
     ) -> Option<Self>;
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=from_poly_projection_obligation | COMPLEXITY=10 | LINES=21 */
 
 impl<'cx, 'tcx> ProjectionCacheKeyExt<'cx, 'tcx> for ProjectionCacheKey<'tcx> {
     fn from_poly_projection_obligation(
@@ -2180,7 +2133,6 @@ impl<'cx, 'tcx> ProjectionCacheKeyExt<'cx, 'tcx> for ProjectionCacheKey<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=get_associated_const_value | COMPLEXITY=7 | LINES=12 */
 
 fn get_associated_const_value<'tcx>(
     selcx: &mut SelectionContext<'_, 'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_index/src/bit_set/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_new_filled | COMPLEXITY=5 | LINES=15 */
 use super::*;
 
 use std::hint::black_box;
@@ -15,7 +14,6 @@ fn test_new_filled() {
         assert_eq!(elems, expected);
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=bitset_iter_works | COMPLEXITY=2 | LINES=15 */
 
 #[test]
 fn bitset_iter_works() {
@@ -31,7 +29,6 @@ fn bitset_iter_works() {
     bitset.insert(99);
     assert_eq!(bitset.iter().collect::<Vec<_>>(), [1, 10, 19, 62, 63, 64, 65, 66, 99]);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=bitset_iter_works_2 | COMPLEXITY=2 | LINES=11 */
 
 #[test]
 fn bitset_iter_works_2() {
@@ -43,7 +40,6 @@ fn bitset_iter_works_2() {
     bitset.insert(319);
     assert_eq!(bitset.iter().collect::<Vec<_>>(), [0, 127, 191, 255, 319]);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=bitset_clone_from | COMPLEXITY=2 | LINES=17 */
 
 #[test]
 fn bitset_clone_from() {
@@ -61,7 +57,6 @@ fn bitset_clone_from() {
     assert_eq!(b.domain_size(), 40);
     assert_eq!(b.iter().collect::<Vec<_>>(), []);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=union_two_sets | COMPLEXITY=3 | LINES=17 */
 
 #[test]
 fn union_two_sets() {
@@ -79,7 +74,6 @@ fn union_two_sets() {
     assert!(!set1.contains(63));
     assert!(set1.contains(64));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=union_not | COMPLEXITY=3 | LINES=26 */
 
 #[test]
 fn union_not() {
@@ -106,7 +100,6 @@ fn union_not() {
         (0usize..100).filter(|&x| !matches!(x, 7 | 63 | 90)).collect::<Vec<_>>(),
     );
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=chunked_bitset | COMPLEXITY=41 | LINES=197 */
 
 #[test]
 fn chunked_bitset() {
@@ -304,7 +297,6 @@ fn chunked_bitset() {
     b10000.assert_valid();
     b10000b.assert_valid();
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=with_elements_chunked | COMPLEXITY=5 | LINES=8 */
 
 fn with_elements_chunked(elements: &[usize], domain_size: usize) -> ChunkedBitSet<usize> {
     let mut s = ChunkedBitSet::new_empty(domain_size);
@@ -313,7 +305,6 @@ fn with_elements_chunked(elements: &[usize], domain_size: usize) -> ChunkedBitSe
     }
     s
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=with_elements_standard | COMPLEXITY=5 | LINES=8 */
 
 fn with_elements_standard(elements: &[usize], domain_size: usize) -> DenseBitSet<usize> {
     let mut s = DenseBitSet::new_empty(domain_size);
@@ -322,7 +313,6 @@ fn with_elements_standard(elements: &[usize], domain_size: usize) -> DenseBitSet
     }
     s
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=chunked_bitset_into_bitset_operations | COMPLEXITY=3 | LINES=20 */
 
 #[test]
 fn chunked_bitset_into_bitset_operations() {
@@ -343,7 +333,6 @@ fn chunked_bitset_into_bitset_operations() {
     assert!(!intersection.intersect(&b));
     assert!(intersection.iter().eq(aib.iter().copied()));
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=chunked_bitset_iter | COMPLEXITY=9 | LINES=42 */
 
 #[test]
 fn chunked_bitset_iter() {
@@ -386,7 +375,6 @@ fn chunked_bitset_iter() {
     let bit = with_elements_chunked(&vec, n);
     check_iter(&bit, &vec);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=grow | COMPLEXITY=19 | LINES=26 */
 
 #[test]
 fn grow() {
@@ -413,7 +401,6 @@ fn grow() {
         assert!(!set.insert(index));
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=matrix_intersection | COMPLEXITY=3 | LINES=31 */
 
 #[test]
 fn matrix_intersection() {
@@ -445,7 +432,6 @@ fn matrix_intersection() {
     let intersection = matrix.intersect_rows(2, 65);
     assert_eq!(intersection, &[10, 64, 160]);
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=matrix_iter | COMPLEXITY=24 | LINES=58 */
 
 #[test]
 fn matrix_iter() {
@@ -504,7 +490,6 @@ fn matrix_iter() {
         panic!("expected no elements in row, but contains element {:?}", i);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=sparse_matrix_iter | COMPLEXITY=16 | LINES=42 */
 
 #[test]
 fn sparse_matrix_iter() {
@@ -547,7 +532,6 @@ fn sparse_matrix_iter() {
     }
     assert!(iter.next().is_none());
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=sparse_matrix_operations | COMPLEXITY=10 | LINES=66 */
 
 #[test]
 fn sparse_matrix_operations() {
@@ -614,7 +598,6 @@ fn sparse_matrix_operations() {
         assert!(matrix.row(0).is_some());
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=dense_insert_range | COMPLEXITY=20 | LINES=46 */
 
 #[test]
 fn dense_insert_range() {
@@ -661,7 +644,6 @@ fn dense_insert_range() {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=dense_last_set_before | COMPLEXITY=23 | LINES=49 */
 
 #[test]
 fn dense_last_set_before() {
@@ -711,7 +693,6 @@ fn dense_last_set_before() {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=dense_contains_any | COMPLEXITY=2 | LINES=19 */
 
 #[test]
 fn dense_contains_any() {
@@ -731,7 +712,6 @@ fn dense_contains_any() {
     set.insert(22);
     assert!(set.contains_any(20..59));
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=bench_insert | COMPLEXITY=3 | LINES=8 */
 
 #[bench]
 fn bench_insert(b: &mut Bencher) {
@@ -740,7 +720,6 @@ fn bench_insert(b: &mut Bencher) {
         black_box(bs.insert(black_box(100u32)));
     });
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=bench_remove | COMPLEXITY=3 | LINES=8 */
 
 #[bench]
 fn bench_remove(b: &mut Bencher) {
@@ -749,7 +728,6 @@ fn bench_remove(b: &mut Bencher) {
         black_box(bs.remove(black_box(100u32)));
     });
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=bench_iter | COMPLEXITY=3 | LINES=8 */
 
 #[bench]
 fn bench_iter(b: &mut Bencher) {
@@ -758,7 +736,6 @@ fn bench_iter(b: &mut Bencher) {
         bs.iter().map(|b: usize| black_box(b)).for_each(drop);
     });
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=bench_intersect | COMPLEXITY=3 | LINES=9 */
 
 #[bench]
 fn bench_intersect(b: &mut Bencher) {

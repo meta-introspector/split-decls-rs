@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/autodiff.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=has_ret | COMPLEXITY=450 | LINES=877 */
 // This module contains the implementation of the `#[autodiff]` attribute.
 // Currently our linter isn't smart enough to see that each import is used in one of the two
 // configs (autodiff enabled or disabled), so we have to add cfg's to each import.
@@ -877,6 +876,5 @@ mod llvm_enzyme {
         d_sig
     }
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 pub(crate) use llvm_enzyme::{expand_forward, expand_reverse};

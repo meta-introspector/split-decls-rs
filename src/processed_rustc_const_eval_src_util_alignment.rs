@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/util/alignment.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_abi::Align;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_disaligned | COMPLEXITY=24 | LINES=48 */
 use tracing::debug;
 
 /// Returns `true` if this place is allowed to be less aligned
@@ -52,7 +50,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_within_packed | COMPLEXITY=4 | LINES=22 */
 
 pub fn is_within_packed<'tcx, L>(
     tcx: TyCtxt<'tcx>,

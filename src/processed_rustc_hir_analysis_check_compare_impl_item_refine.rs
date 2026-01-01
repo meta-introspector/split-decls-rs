@@ -1,24 +1,19 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/check/compare_impl_item/refine.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use itertools::Itertools as _;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_lint_defs::builtin::{REFINING_IMPL_TRAIT_INTERNAL, REFINING_IMPL_TRAIT_REACHABLE};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
 use crate::rustc_trait_selection::traits::{ObligationCtxt, elaborate, normalize_param_env_or_error};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=83 | LINES=232 */
 
 /// Check that an implementation does not refine an RPITIT from a trait method signature.
 pub(crate) fn check_refining_return_position_impl_trait_in_trait<'tcx>(
@@ -251,13 +246,11 @@ pub(crate) fn check_refining_return_position_impl_trait_in_trait<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ImplTraitInTraitCollector | COMPLEXITY=2 | LINES=5 */
 
 struct ImplTraitInTraitCollector<'tcx> {
     tcx: TyCtxt<'tcx>,
     types: FxIndexSet<ty::AliasTy<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=16 | LINES=20 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ImplTraitInTraitCollector<'tcx> {
     fn visit_ty(&mut self, ty: Ty<'tcx>) {
@@ -278,7 +271,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ImplTraitInTraitCollector<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=report_mismatched_rpitit_signature | COMPLEXITY=35 | LINES=77 */
 
 fn report_mismatched_rpitit_signature<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -356,7 +348,6 @@ fn report_mismatched_rpitit_signature<'tcx>(
         },
     );
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=type_visibility | COMPLEXITY=11 | LINES=14 */
 
 fn type_visibility<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Option<ty::Visibility<DefId>> {
     match *ty.kind() {
@@ -371,12 +362,10 @@ fn type_visibility<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Option<ty::Visibili
         _ => None,
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Anonymize | COMPLEXITY=2 | LINES=4 */
 
 struct Anonymize<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=6 | LINES=13 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for Anonymize<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -390,12 +379,10 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for Anonymize<'tcx> {
         self.tcx.anonymize_bound_vars(t)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=CollectParams | COMPLEXITY=2 | LINES=4 */
 
 struct CollectParams<'a, 'tcx> {
     params: &'a mut FxIndexSet<ty::GenericArg<'tcx>>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=22 | LINES=24 */
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for CollectParams<'_, 'tcx> {
     fn visit_ty(&mut self, ty: Ty<'tcx>) {
         if let ty::Param(_) = ty.kind() {
@@ -420,7 +407,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for CollectParams<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=report_mismatched_rpitit_captures | COMPLEXITY=15 | LINES=34 */
 
 fn report_mismatched_rpitit_captures<'tcx>(
     tcx: TyCtxt<'tcx>,

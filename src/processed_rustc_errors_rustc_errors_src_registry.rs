@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/registry.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=InvalidErrorCode; | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_data_structures::fx::FxHashMap;
 
 use crate::ErrCode;
@@ -11,7 +10,6 @@ pub struct InvalidErrorCode;
 pub struct Registry {
     long_descriptions: FxHashMap<ErrCode, &'static str>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=12 */
 
 impl Registry {
     pub fn new(long_descriptions: &[(ErrCode, &'static str)]) -> Registry {

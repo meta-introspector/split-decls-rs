@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_thread_pool/src/broadcast/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 use std::marker::PhantomData;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::job::{ArcJob, StackJob};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::latch::{CountLatch, LatchRef};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::registry::{Registry, WorkerThread};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=broadcast | COMPLEXITY=8 | LINES=20 */
 
 
 /// Executes `op` within every thread in the current threadpool. If this is
@@ -31,7 +26,6 @@ where
     // We assert that current registry has not terminated.
     unsafe { broadcast_in(op, &Registry::current()) }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=spawn_broadcast | COMPLEXITY=8 | LINES=16 */
 
 /// Spawns an asynchronous task on every thread in this thread-pool. This task
 /// will run in the implicit, global scope, which means that it may outlast the
@@ -48,7 +42,6 @@ where
     // We assert that current registry has not terminated.
     unsafe { spawn_broadcast_in(op, &Registry::current()) }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=BroadcastContext | COMPLEXITY=2 | LINES=8 */
 
 /// Provides context to a closure called by `broadcast`.
 pub struct BroadcastContext<'a> {
@@ -57,7 +50,6 @@ pub struct BroadcastContext<'a> {
     /// Make sure to prevent auto-traits like `Send` and `Sync`.
     _marker: PhantomData<&'a mut dyn Fn()>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=index | COMPLEXITY=12 | LINES=26 */
 
 impl<'a> BroadcastContext<'a> {
     pub(super) fn with<R>(f: impl FnOnce(BroadcastContext<'_>) -> R) -> R {
@@ -84,7 +76,6 @@ impl<'a> BroadcastContext<'a> {
         self.worker.registry().num_threads()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=10 */
 
 impl<'a> fmt::Debug for BroadcastContext<'a> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -95,7 +86,6 @@ impl<'a> fmt::Debug for BroadcastContext<'a> {
             .finish()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=48 */
 
 /// Execute `op` on every thread in the pool. It will be executed on each
 /// thread when they have nothing else to do locally, before they try to
@@ -144,7 +134,6 @@ where
     );
     jobs.into_iter().map(|job| unsafe { job.into_result() }).collect()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=30 */
 
 /// Execute `op` on every thread in the pool. It will be executed on each
 /// thread when they have nothing else to do locally, before they try to

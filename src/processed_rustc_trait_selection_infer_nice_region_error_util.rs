@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Helper functions corresponding to lifetime errors due to
 // anonymous regions.
 
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Binder, Region, Ty, TyCtxt, TypeFoldable, fold_regions};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=AnonymousParamInfo | COMPLEXITY=3 | LINES=19 */
 use crate::rustc_complete::Span;
 use tracing::instrument;
 
@@ -27,7 +24,6 @@ pub struct AnonymousParamInfo<'tcx> {
     /// Signals that the argument is the first parameter in the declaration.
     pub is_first: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=find_param_with_region | COMPLEXITY=35 | LINES=75 */
 
 // This method walks the Type of the function body parameters using
 // `fold_regions()` function and returns the
@@ -103,7 +99,6 @@ pub fn find_param_with_region<'tcx>(
             })
         })
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=includes_region | COMPLEXITY=37 | LINES=63 */
 
 impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
     pub(super) fn find_param_with_region(

@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/ty_kind/closure.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ops::ControlFlow;
 
 use derive_where::derive_where;
 use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::data_structures::DelayedMap;
 use crate::fold::{TypeFoldable, TypeFolder, TypeSuperFoldable, shift_region};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::inherent::*;
 use crate::visit::{TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=25 */
 
 /// A closure can be modeled as a struct that looks like:
 /// ```ignore (illustrative)
@@ -39,7 +34,6 @@ use crate::{self as ty, Interner};
 /// fn foo<'a, T>(data: &'a mut T) {
 ///      do(|| data.count += 1)
 /// }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=14 */
 /// ```
 /// the type of the closure would be something like:
 /// ```ignore (illustrative)
@@ -54,7 +48,6 @@ use crate::{self as ty, Interner};
 /// impl<'b, 'a, T> FnMut() for Closure<'a, T, (&'b mut &'a mut T,)> {
 ///     ...
 /// }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=ClosureArgs | COMPLEXITY=16 | LINES=64 */
 /// ```
 /// You can see that the *impl* fully specified the type of the upvar
 /// and thus knows full well that `data` has type `&'b mut &'a mut T`.
@@ -119,10 +112,8 @@ pub struct ClosureArgs<I: Interner> {
     /// when monomorphizing.
     pub args: I::GenericArgs,
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ClosureArgs<I> {}
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ClosureArgsParts | COMPLEXITY=3 | LINES=14 */
 
 /// Struct returned by `split()`.
 pub struct ClosureArgsParts<I: Interner> {
@@ -137,7 +128,6 @@ pub struct ClosureArgsParts<I: Interner> {
     /// until the upvar analysis, which happens late in HIR typeck.
     pub tupled_upvars_ty: I::Ty,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=41 | LINES=77 */
 
 impl<I: Interner> ClosureArgs<I> {
     /// Construct `ClosureArgs` from `ClosureArgsParts`, containing `Args`
@@ -215,17 +205,14 @@ impl<I: Interner> ClosureArgs<I> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CoroutineClosureArgs | COMPLEXITY=2 | LINES=6 */
 
 #[derive_where(Clone, Copy, PartialEq, Hash, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
 pub struct CoroutineClosureArgs<I: Interner> {
     pub args: I::GenericArgs,
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CoroutineClosureArgs<I> {}
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=CoroutineClosureArgsParts | COMPLEXITY=17 | LINES=31 */
 
 /// See docs for explanation of how each argument is used.
 ///
@@ -257,7 +244,6 @@ pub struct CoroutineClosureArgsParts<I: Interner> {
     /// captures, will be `(String,)`.
     pub coroutine_captures_by_ref_ty: I::Ty,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=34 | LINES=84 */
 
 impl<I: Interner> CoroutineClosureArgs<I> {
     pub fn new(cx: I, parts: CoroutineClosureArgsParts<I>) -> CoroutineClosureArgs<I> {
@@ -342,14 +328,12 @@ impl<I: Interner> CoroutineClosureArgs<I> {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=HasRegionsBoundAt | COMPLEXITY=2 | LINES=6 */
 
 /// Unlike `has_escaping_bound_vars` or `outermost_exclusive_binder`, this will
 /// detect only regions bound *at* the debruijn index.
 struct HasRegionsBoundAt {
     binder: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=13 | LINES=18 */
 // FIXME: Could be optimized to not walk into components with no escaping bound vars.
 impl<I: Interner> TypeVisitor<I> for HasRegionsBoundAt {
     type Result = ControlFlow<()>;
@@ -368,7 +352,6 @@ impl<I: Interner> TypeVisitor<I> for HasRegionsBoundAt {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=CoroutineClosureSignature | COMPLEXITY=5 | LINES=23 */
 
 #[derive_where(Clone, Copy, PartialEq, Hash, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -392,10 +375,8 @@ pub struct CoroutineClosureSignature<I: Interner> {
     #[type_foldable(identity)]
     pub abi: I::Abi,
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CoroutineClosureSignature<I> {}
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=to_coroutine | COMPLEXITY=25 | LINES=113 */
 
 impl<I: Interner> CoroutineClosureSignature<I> {
     /// Construct a coroutine from the closure signature. Since a coroutine signature
@@ -509,7 +490,6 @@ impl<I: Interner> CoroutineClosureSignature<I> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=FoldEscapingRegions | COMPLEXITY=2 | LINES=13 */
 
 /// Instantiates a `for<'env> ...` binder with a specific region.
 // FIXME(async_closures): Get rid of this in favor of `BoundVarReplacerDelegate`
@@ -523,7 +503,6 @@ struct FoldEscapingRegions<I: Interner> {
     // debruijn depths depending on the binders we've entered.
     cache: DelayedMap<(ty::DebruijnIndex, I::Ty), I::Ty>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=25 | LINES=44 */
 
 impl<I: Interner> TypeFolder<I> for FoldEscapingRegions<I> {
     fn cx(&self) -> I {
@@ -568,7 +547,6 @@ impl<I: Interner> TypeFolder<I> for FoldEscapingRegions<I> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=GenSig | COMPLEXITY=2 | LINES=8 */
 
 #[derive_where(Clone, Copy, PartialEq, Hash, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
@@ -577,20 +555,16 @@ pub struct GenSig<I: Interner> {
     pub yield_ty: I::Ty,
     pub return_ty: I::Ty,
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for GenSig<I> {}
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=CoroutineArgs | COMPLEXITY=4 | LINES=6 */
 /// Similar to `ClosureArgs`; see the above documentation for more.
 #[derive_where(Clone, Copy, PartialEq, Hash, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
 pub struct CoroutineArgs<I: Interner> {
     pub args: I::GenericArgs,
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CoroutineArgs<I> {}
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=CoroutineArgsParts | COMPLEXITY=5 | LINES=24 */
 
 pub struct CoroutineArgsParts<I: Interner> {
     /// This is the args of the typeck root.
@@ -615,7 +589,6 @@ pub struct CoroutineArgsParts<I: Interner> {
     /// until the upvar analysis, which happens late in HIR typeck.
     pub tupled_upvars_ty: I::Ty,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=new | COMPLEXITY=31 | LINES=73 */
 
 impl<I: Interner> CoroutineArgs<I> {
     /// Construct `CoroutineArgs` from `CoroutineArgsParts`, containing `Args`

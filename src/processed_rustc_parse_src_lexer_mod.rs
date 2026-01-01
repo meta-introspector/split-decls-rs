@@ -1,31 +1,22 @@
 // SRC: ../rust/compiler/rustc_parse/src/lexer/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use diagnostics::make_errors_for_mismatched_closing_delims;
 use crate::rustc_complete::ast::{self, AttrStyle};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, CommentKind, Delimiter, IdentIsRaw, Token, TokenKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::tokenstream::TokenStream;
 use crate::rustc_complete::util::unicode::{TEXT_FLOW_CONTROL_CHARS, contains_text_flow_control_chars};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, StashKey};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_lexer::{
     Base, Cursor, DocStyle, FrontmatterAllowed, LiteralKind, RawStrError, is_horizontal_whitespace,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_literal_escaper::{EscapeError, Mode, check_for_errors};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::{
     RUST_2021_PREFIXES_INCOMPATIBLE_SYNTAX, RUST_2024_GUARDED_STRING_INCOMPATIBLE_SYNTAX,
     TEXT_DIRECTION_CODEPOINT_IN_COMMENT, TEXT_DIRECTION_CODEPOINT_IN_LITERAL,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::ParseSess;
 use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 use tracing::debug;
 
 use crate::errors;
@@ -34,7 +25,6 @@ use crate::lexer::unicode_chars::UNICODE_ARRAY;
 
 
 use unescape_error_reporting::{emit_unescape_error, escaped_char};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 // This type is used a lot. Make sure it doesn't unintentionally get bigger.
 //
@@ -50,7 +40,6 @@ pub(crate) struct UnmatchedDelim {
     pub unclosed_span: Option<Span>,
     pub candidate_span: Option<Span>,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 /// Which tokens should be stripped before lexing the tokens.
 pub enum StripTokens {
@@ -67,7 +56,6 @@ pub enum StripTokens {
     /// are simply interpreted as regular Rust lexemes.
     Nothing,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=58 */
 
 pub(crate) fn lex_token_trees<'psess, 'src>(
     psess: &'psess ParseSess,
@@ -126,7 +114,6 @@ pub(crate) fn lex_token_trees<'psess, 'src>(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=Lexer | COMPLEXITY=281 | LINES=603 */
 
 struct Lexer<'psess, 'src> {
     psess: &'psess ParseSess,
@@ -730,7 +717,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                             Applicability::MaybeIncorrect,
                         );
                     }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=52 | LINES=88 */
                     err.emit()
                 }
                 self.cook_quoted(token::Char, Mode::Char, start, end, 1, 1) // ' '
@@ -819,7 +805,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                 if empty_int {
                     let span = self.mk_sp(start, end);
                     let guar = self.dcx().emit_err(errors::NoDigitsLiteral { span });
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=15 */
                     kind = token::Err(guar);
                 } else if matches!(base, Base::Binary | Base::Octal) {
                     let base = base as u32;
@@ -835,7 +820,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                             kind = token::Err(guar);
                         }
                     }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
                 }
                 (kind, self.symbol_from_to(start, end))
             }
@@ -844,7 +828,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                 if empty_exponent {
                     let span = self.mk_sp(start, self.pos);
                     let guar = self.dcx().emit_err(errors::EmptyExponentFloat { span });
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=12 */
                     kind = token::Err(guar);
                 }
                 let base = match base {
@@ -857,7 +840,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                     let span = self.mk_sp(start, end);
                     let guar =
                         self.dcx().emit_err(errors::FloatLiteralUnsupportedBase { span, base });
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=src_index | COMPLEXITY=84 | LINES=166 */
                     kind = token::Err(guar)
                 }
                 (kind, self.symbol_from_to(start, end))
@@ -1024,7 +1006,6 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
                     // but it's hard to silence this error while not also silencing important cases
                     // too. We should use the error stashing machinery instead.
                     Some(errors::UnknownPrefixSugg::MeantStr { start, end })
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=maybe_report_guarded_str | COMPLEXITY=80 | LINES=160 */
                 } else {
                     Some(errors::UnknownPrefixSugg::Whitespace(prefix_span.shrink_to_hi()))
                 }

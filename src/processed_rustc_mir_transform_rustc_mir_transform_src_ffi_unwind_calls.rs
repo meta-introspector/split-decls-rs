@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/ffi_unwind_calls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::ExternAbi;
 use crate::rustc_complete::def_id::{LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::query::{LocalCrate, Providers};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt, layout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=has_ffi_unwind_calls | COMPLEXITY=53 | LINES=95 */
 use crate::rustc_complete::lint::builtin::FFI_UNWIND_CALLS;
 use crate::rustc_target::spec::PanicStrategy;
 use tracing::debug;
@@ -105,7 +100,6 @@ fn has_ffi_unwind_calls(tcx: TyCtxt<'_>, local_def_id: LocalDefId) -> bool {
 
     tainted
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=required_panic_strategy | COMPLEXITY=29 | LINES=40 */
 
 fn required_panic_strategy(tcx: TyCtxt<'_>, _: LocalCrate) -> Option<PanicStrategy> {
     if tcx.is_panic_runtime(LOCAL_CRATE) {
@@ -146,7 +140,6 @@ fn required_panic_strategy(tcx: TyCtxt<'_>, _: LocalCrate) -> Option<PanicStrate
     // This crate can be linked with either runtime.
     None
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { has_ffi_unwind_calls, required_panic_strategy, ..*providers };

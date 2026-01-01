@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/gather_locals.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{HirId, PatKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::traits::ObligationCauseCode;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=16 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::LocalDefId;
 use tracing::debug;
@@ -24,7 +20,6 @@ pub(super) enum DeclOrigin<'a> {
     // from `let x = ..`
     LocalDecl { els: Option<&'a hir::Block<'a>> },
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 impl<'a> DeclOrigin<'a> {
     pub(super) fn try_get_else(&self) -> Option<&'a hir::Block<'a>> {
@@ -34,7 +29,6 @@ impl<'a> DeclOrigin<'a> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// A declaration is an abstraction of [hir::LetStmt] and [hir::LetExpr].
 ///
@@ -47,7 +41,6 @@ pub(super) struct Declaration<'a> {
     pub init: Option<&'a hir::Expr<'a>>,
     pub origin: DeclOrigin<'a>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=8 | LINES=7 */
 
 impl<'a> From<&'a hir::LetStmt<'a>> for Declaration<'a> {
     fn from(local: &'a hir::LetStmt<'a>) -> Self {
@@ -55,7 +48,6 @@ impl<'a> From<&'a hir::LetStmt<'a>> for Declaration<'a> {
         Declaration { hir_id, pat, ty, span, init, origin: DeclOrigin::LocalDecl { els } }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from | COMPLEXITY=7 | LINES=7 */
 
 impl<'a> From<(&'a hir::LetExpr<'a>, HirId)> for Declaration<'a> {
     fn from((let_expr, hir_id): (&'a hir::LetExpr<'a>, HirId)) -> Self {
@@ -63,7 +55,6 @@ impl<'a> From<(&'a hir::LetExpr<'a>, HirId)> for Declaration<'a> {
         Declaration { hir_id, pat, ty, span, init: Some(init), origin: DeclOrigin::LetExpr }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=16 */
 
 /// The `GatherLocalsVisitor` is responsible for initializing local variable types
 /// in the [`ty::TypeckResults`] for all subpatterns in statements and expressions
@@ -80,7 +71,6 @@ pub(super) struct GatherLocalsVisitor<'a, 'tcx> {
     // parameter.
     outermost_fn_param_pat: Option<(Span, HirId)>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=assign | COMPLEXITY=48 | LINES=94 */
 
 // N.B. additional `gather_*` functions should be careful to only walk the pattern
 // for new expressions, since visiting sub-expressions or nested bodies may initialize
@@ -175,7 +165,6 @@ impl<'a, 'tcx> GatherLocalsVisitor<'a, 'tcx> {
         );
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=39 | LINES=74 */
 
 impl<'a, 'tcx> Visitor<'tcx> for GatherLocalsVisitor<'a, 'tcx> {
     // Add explicitly-declared locals.

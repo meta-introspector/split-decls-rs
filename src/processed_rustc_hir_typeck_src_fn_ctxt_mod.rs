@@ -1,40 +1,29 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::Deref;
 
 use hir::def_id::CRATE_DEF_ID;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, HirId, ItemLocalMap};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_hir_analysis::hir_ty_lowering::{
     HirTyLowerer, InherentAssocCandidate, RegionInferReason,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::infer::{self, RegionVariableOrigin};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_infer::traits::{DynCompatibilityViolation, Obligation};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{self, DUMMY_SP, ErrorGuaranteed, Ident, Span, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_trait_selection::error_reporting::TypeErrCtxt;
 use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::coercion::DynamicCoerceMany;
 use crate::fallback::DivergingFallbackBehavior;
 use crate::fn_ctxt::checks::DivergingBlockBehavior;
 use crate::{CoroutineTypes, Diverges, EnclosingBreakables, TypeckRootCtxt};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=29 | LINES=101 */
 
 /// The `FnCtxt` stores type-checking context needed to type-check bodies of
 /// functions, closures, and `const`s, including performing type inference
@@ -136,7 +125,6 @@ pub(crate) struct FnCtxt<'a, 'tcx> {
     /// This allows to skip processing attributes in many places.
     pub(super) has_rustc_attrs: bool,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=89 */
 
 impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(crate) fn new(
@@ -226,7 +214,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
 
 impl<'a, 'tcx> Deref for FnCtxt<'a, 'tcx> {
     type Target = TypeckRootCtxt<'tcx>;
@@ -234,7 +221,6 @@ impl<'a, 'tcx> Deref for FnCtxt<'a, 'tcx> {
         self.root_ctxt
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=99 | LINES=234 */
 
 impl<'tcx> HirTyLowerer<'tcx> for FnCtxt<'_, 'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -469,7 +455,6 @@ impl<'tcx> HirTyLowerer<'tcx> for FnCtxt<'_, 'tcx> {
         self.tcx.dyn_compatibility_violations(trait_def_id).to_vec()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 /// The `ty` representation of a user-provided type. Depending on the use-site
 /// we want to either use the unnormalized or the normalized form of this type.
@@ -484,7 +469,6 @@ pub(crate) struct LoweredTy<'tcx> {
     /// The normalized form of `raw`, stored here for efficiency.
     pub normalized: Ty<'tcx>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from_raw | COMPLEXITY=9 | LINES=15 */
 
 impl<'tcx> LoweredTy<'tcx> {
     fn from_raw(fcx: &FnCtxt<'_, 'tcx>, span: Span, raw: Ty<'tcx>) -> LoweredTy<'tcx> {
@@ -500,7 +484,6 @@ impl<'tcx> LoweredTy<'tcx> {
         LoweredTy { raw, normalized }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=never_type_behavior | COMPLEXITY=2 | LINES=8 */
 
 fn never_type_behavior(tcx: TyCtxt<'_>) -> (DivergingFallbackBehavior, DivergingBlockBehavior) {
     let (fallback, block) = parse_never_type_options_attr(tcx);
@@ -509,7 +492,6 @@ fn never_type_behavior(tcx: TyCtxt<'_>) -> (DivergingFallbackBehavior, Diverging
 
     (fallback, block)
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=default_fallback | COMPLEXITY=9 | LINES=16 */
 
 /// Returns the default fallback which is used when there is no explicit override via `#[never_type_options(...)]`.
 fn default_fallback(tcx: TyCtxt<'_>) -> DivergingFallbackBehavior {
@@ -526,7 +508,6 @@ fn default_fallback(tcx: TyCtxt<'_>) -> DivergingFallbackBehavior {
     // Otherwise: fallback to `()`
     DivergingFallbackBehavior::ToUnit
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=parse_never_type_options_attr | COMPLEXITY=34 | LINES=56 */
 
 fn parse_never_type_options_attr(
     tcx: TyCtxt<'_>,

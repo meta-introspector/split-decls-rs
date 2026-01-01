@@ -1,19 +1,12 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/assoc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, DefIdMap, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, ImplItemImplKind, ItemKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{self, ImplTraitInTraitData, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 use crate::rustc_complete::Ident;
 use crate::rustc_complete::symbol::kw;
 
@@ -27,7 +20,6 @@ pub(crate) fn provide(providers: &mut Providers) {
         ..*providers
     };
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=associated_item_def_ids | COMPLEXITY=17 | LINES=31 */
 
 fn associated_item_def_ids(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &[DefId] {
     let item = tcx.hir_expect_item(def_id);
@@ -59,7 +51,6 @@ fn associated_item_def_ids(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &[DefId] {
         _ => span_bug!(item.span, "associated_item_def_ids: not impl or trait"),
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=associated_items | COMPLEXITY=6 | LINES=9 */
 
 fn associated_items(tcx: TyCtxt<'_>, def_id: DefId) -> ty::AssocItems {
     if tcx.is_trait_alias(def_id) {
@@ -69,7 +60,6 @@ fn associated_items(tcx: TyCtxt<'_>, def_id: DefId) -> ty::AssocItems {
         ty::AssocItems::new(items)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=impl_item_implementor_ids | COMPLEXITY=2 | LINES=7 */
 
 fn impl_item_implementor_ids(tcx: TyCtxt<'_>, impl_id: DefId) -> DefIdMap<DefId> {
     tcx.associated_items(impl_id)
@@ -77,7 +67,6 @@ fn impl_item_implementor_ids(tcx: TyCtxt<'_>, impl_id: DefId) -> DefIdMap<DefId>
         .filter_map(|item| item.trait_item_def_id().map(|trait_item| (trait_item, item.def_id)))
         .collect()
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=associated_item | COMPLEXITY=7 | LINES=10 */
 
 fn associated_item(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AssocItem {
     let assoc_item = match tcx.hir_node_by_def_id(def_id) {
@@ -88,12 +77,10 @@ fn associated_item(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AssocItem {
     debug_assert_eq!(assoc_item.def_id.expect_local(), def_id);
     assoc_item
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fn_has_self_parameter | COMPLEXITY=3 | LINES=4 */
 
 fn fn_has_self_parameter(tcx: TyCtxt<'_>, owner_id: hir::OwnerId) -> bool {
     matches!(tcx.fn_arg_idents(owner_id.def_id), [Some(Ident { name: kw::SelfLower, .. }), ..])
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=associated_item_from_trait_item | COMPLEXITY=16 | LINES=19 */
 
 fn associated_item_from_trait_item(
     tcx: TyCtxt<'_>,
@@ -113,7 +100,6 @@ fn associated_item_from_trait_item(
 
     ty::AssocItem { kind, def_id: owner_id.to_def_id(), container: ty::AssocContainer::Trait }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=associated_item_from_impl_item | COMPLEXITY=23 | LINES=22 */
 
 fn associated_item_from_impl_item(tcx: TyCtxt<'_>, impl_item: &hir::ImplItem<'_>) -> ty::AssocItem {
     let owner_id = impl_item.owner_id;
@@ -136,14 +122,12 @@ fn associated_item_from_impl_item(tcx: TyCtxt<'_>, impl_item: &hir::ImplItem<'_>
     };
     ty::AssocItem { kind, def_id: owner_id.to_def_id(), container }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=RPITVisitor | COMPLEXITY=2 | LINES=6 */
 struct RPITVisitor<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     synthetics: Vec<LocalDefId>,
     data: DefPathData,
     disambiguator: &'a mut DisambiguatorState,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_opaque_ty | COMPLEXITY=5 | LINES=12 */
 
 impl<'tcx> Visitor<'tcx> for RPITVisitor<'_, 'tcx> {
     fn visit_opaque_ty(&mut self, opaque: &'tcx hir::OpaqueTy<'tcx>) -> Self::Result {
@@ -156,7 +140,6 @@ impl<'tcx> Visitor<'tcx> for RPITVisitor<'_, 'tcx> {
         intravisit::walk_opaque_ty(self, opaque)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=associated_types_for_impl_traits_in_trait_or_impl | COMPLEXITY=30 | LINES=70 */
 
 fn associated_types_for_impl_traits_in_trait_or_impl<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -227,7 +210,6 @@ fn associated_types_for_impl_traits_in_trait_or_impl<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=associated_type_for_impl_trait_in_trait | COMPLEXITY=19 | LINES=60 */
 
 /// Given an `opaque_ty_def_id` corresponding to an `impl Trait` in an associated
 /// function from a trait, synthesize an associated type for that `impl Trait`
@@ -288,7 +270,6 @@ fn associated_type_for_impl_trait_in_trait(
 
     local_def_id
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=associated_type_for_impl_trait_in_impl | COMPLEXITY=27 | LINES=94 */
 
 /// Given an `trait_assoc_def_id` corresponding to an associated item synthesized
 /// from an `impl Trait` in an associated function from a trait, and an

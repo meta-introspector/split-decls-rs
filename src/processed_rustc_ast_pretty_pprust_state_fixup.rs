@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pprust/state/fixup.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::util::classify;
 use crate::rustc_complete::util::parser::{self, ExprPrecedence};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Expr, ExprKind, YieldKind};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=72 | LINES=112 */
 
 // The default amount of fixing is minimal fixing, so all fixups are set to `false` by `Default`.
 // Fixups should be turned on in a targeted fashion where needed.
@@ -117,7 +114,6 @@ pub(crate) struct FixupContext {
     /// ```
     next_operator_can_continue_expr: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=59 | LINES=152 */
 
 impl FixupContext {
     /// Create the initial fixup for printing an expression in statement

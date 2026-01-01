@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/internal_cx/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // Implementation of InternalCx.
 
 pub(crate) use helpers::*;
 use crate::rustc_complete::ty::{List, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{mir, ty};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=5 | LINES=15 */
 
 use super::InternalCx;
 
@@ -21,7 +18,6 @@ impl<'tcx, T: InternalCx<'tcx>> ExistentialProjectionHelpers<'tcx> for T {
         ty::ExistentialProjection::new_from_args(self.tcx(), def_id, args, term)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, T: InternalCx<'tcx>> ExistentialTraitRefHelpers<'tcx> for T {
     fn new_from_args(
@@ -32,7 +28,6 @@ impl<'tcx, T: InternalCx<'tcx>> ExistentialTraitRefHelpers<'tcx> for T {
         ty::ExistentialTraitRef::new_from_args(self.tcx(), trait_def_id, args)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, T: InternalCx<'tcx>> TraitRefHelpers<'tcx> for T {
     fn new_from_args(
@@ -43,7 +38,6 @@ impl<'tcx, T: InternalCx<'tcx>> TraitRefHelpers<'tcx> for T {
         ty::TraitRef::new_from_args(self.tcx(), trait_def_id, args)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=17 | LINES=53 */
 
 impl<'tcx> InternalCx<'tcx> for TyCtxt<'tcx> {
     fn tcx(self) -> TyCtxt<'tcx> {

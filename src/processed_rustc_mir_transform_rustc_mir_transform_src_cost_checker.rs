@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/cost_checker.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 const INSTR_COST: usize = 5;
 const CALL_PENALTY: usize = 25;
@@ -23,7 +21,6 @@ pub(super) struct CostChecker<'b, 'tcx> {
     callee_body: &'b Body<'tcx>,
     instance: Option<ty::Instance<'tcx>>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=instantiate_ty | COMPLEXITY=18 | LINES=38 */
 
 impl<'b, 'tcx> CostChecker<'b, 'tcx> {
     pub(super) fn new(
@@ -62,7 +59,6 @@ impl<'b, 'tcx> CostChecker<'b, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=92 | LINES=117 */
 
 impl<'tcx> Visitor<'tcx> for CostChecker<'_, 'tcx> {
     fn visit_statement(&mut self, statement: &Statement<'tcx>, location: Location) {
@@ -180,7 +176,6 @@ impl<'tcx> Visitor<'tcx> for CostChecker<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=23 */
 
 /// A terminator that's more call-like (might do a bunch of work, might panic, etc)
 /// than it is goto-/return-like (no side effects, etc).

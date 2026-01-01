@@ -1,14 +1,9 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/clone.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as ast, Generics, ItemKind, MetaItem, VariantData};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=89 */
 
 use crate::deriving::generic::ty::*;
 use crate::deriving::generic::*;
@@ -98,7 +93,6 @@ pub(crate) fn expand_deriving_clone(
 
     trait_def.expand_ext(cx, mitem, item, push, is_simple)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cs_clone_simple | COMPLEXITY=32 | LINES=63 */
 
 fn cs_clone_simple(
     name: &str,
@@ -162,7 +156,6 @@ fn cs_clone_simple(
     }
     BlockOrExpr::new_mixed(stmts, Some(cx.expr_deref(trait_span, cx.expr_self(trait_span))))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=cs_clone | COMPLEXITY=27 | LINES=62 */
 
 fn cs_clone(
     name: &str,

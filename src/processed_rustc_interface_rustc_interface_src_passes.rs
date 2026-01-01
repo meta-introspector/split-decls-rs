@@ -1,76 +1,54 @@
 // SRC: ../rust/compiler/rustc_interface/src/passes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::any::Any;
 use std::ffi::{OsStr, OsString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, BufWriter, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::sync::{Arc, LazyLock, OnceLock};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fs, iter};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use rustc_ast as ast;
 use rustc_attr_parsing::{AttributeParser, ShouldEmit};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{AppendOnlyIndexVec, FreezeLock, WorkerLocal};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::{parallel, thousands};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::timings::TimingSection;
 use crate::rustc_expand::base::{ExtCtxt, LintStoreExpand};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_feature::Features;
 use rustc_fs_util::try_canonicalize;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def_id::{LOCAL_CRATE, StableCrateId, StableCrateIdMap};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::definitions::Definitions;
 use crate::rustc_complete::limit::Limit;
 use rustc_incremental::setup_dep_graph;
 use crate::rustc_lint::{BufferedEarlyLint, EarlyCheckNode, LintStore, unerased_lint_store};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_metadata::EncodedMetadata;
 use crate::rustc_metadata::creader::CStore;
 use crate::rustc_complete::arena::Arena;
 use crate::rustc_complete::dep_graph::DepsType;
 use crate::rustc_complete::ty::{self, CurrentGcx, GlobalCtxt, RegisteredTools, TyCtxt};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_parse::lexer::StripTokens;
 use crate::rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_passes::{abi_test, input_stats, layout_test};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_resolve::{Resolver, ResolverOutputs};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{CrateType, Input, OutFileName, OutputFilenames, OutputType};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::cstore::Untracked;
 use crate::rustc_complete::output::{collect_crate_types, filename_for_input};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::search_paths::PathKind;
 use crate::rustc_complete::{
     DUMMY_SP, ErrorGuaranteed, ExpnKind, FileName, SourceFileHash, SourceFileHashAlgorithm, Span,
     Symbol, sym,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_target::spec::PanicStrategy;
 use crate::rustc_trait_selection::{solve, traits};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{info, instrument};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::interface::Compiler;
 use crate::{errors, limits, proc_macro_decls, util};
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=11 | LINES=33 */
 
 pub fn parse<'a>(sess: &'a Session) -> ast::Crate {
     let mut krate = sess
@@ -104,7 +82,6 @@ pub fn parse<'a>(sess: &'a Session) -> ast::Crate {
 
     krate
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=pre_expansion_lint | COMPLEXITY=4 | LINES=25 */
 
 fn pre_expansion_lint<'a>(
     sess: &Session,
@@ -130,7 +107,6 @@ fn pre_expansion_lint<'a>(
         },
     );
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=LintStoreExpandImpl | COMPLEXITY=8 | LINES=18 */
 
 // Cannot implement directly for `LintStore` due to trait coherence.
 struct LintStoreExpandImpl<'a>(&'a LintStore);
@@ -149,7 +125,6 @@ impl LintStoreExpand for LintStoreExpandImpl<'_> {
         pre_expansion_lint(sess, features, self.0, registered_tools, (node_id, attrs, items), name);
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=configure_and_expand | COMPLEXITY=81 | LINES=184 */
 
 /// Runs the "early phases" of the compiler: initial `cfg` processing,
 /// syntax expansion, secondary `cfg` expansion, synthesis of a test
@@ -334,7 +309,6 @@ fn configure_and_expand(
     CStore::from_tcx(tcx).report_incompatible_async_drop_feature(tcx, &krate);
     krate
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=print_macro_stats | COMPLEXITY=57 | LINES=90 */
 
 fn print_macro_stats(ecx: &ExtCtxt<'_>) {
     use std::fmt::Write;
@@ -425,7 +399,6 @@ fn print_macro_stats(ecx: &ExtCtxt<'_>) {
     _ = writeln!(s, "{prefix} {}", "=".repeat(banner_w));
     eprint!("{s}");
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=early_lint_checks | COMPLEXITY=43 | LINES=82 */
 
 fn early_lint_checks(tcx: TyCtxt<'_>, (): ()) {
     let sess = tcx.sess;
@@ -508,7 +481,6 @@ fn early_lint_checks(tcx: TyCtxt<'_>, (): ()) {
         (&**krate, &*krate.attrs),
     )
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=env_var_os | COMPLEXITY=16 | LINES=25 */
 
 fn env_var_os<'tcx>(tcx: TyCtxt<'tcx>, key: &'tcx OsStr) -> Option<&'tcx OsStr> {
     let value = env::var_os(key);
@@ -534,7 +506,6 @@ fn env_var_os<'tcx>(tcx: TyCtxt<'tcx>, key: &'tcx OsStr) -> Option<&'tcx OsStr> 
 
     value_tcx
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=generated_output_paths | COMPLEXITY=24 | LINES=35 */
 
 // Returns all the paths that correspond to generated files.
 fn generated_output_paths(
@@ -570,7 +541,6 @@ fn generated_output_paths(
     }
     out_filenames
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=output_contains_path | COMPLEXITY=5 | LINES=8 */
 
 fn output_contains_path(output_paths: &[PathBuf], input_path: &Path) -> bool {
     let input_path = try_canonicalize(input_path).ok();
@@ -579,19 +549,16 @@ fn output_contains_path(output_paths: &[PathBuf], input_path: &Path) -> bool {
     }
     output_paths.iter().any(|output_path| try_canonicalize(output_path).ok() == input_path)
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=output_conflicts_with_dir | COMPLEXITY=2 | LINES=4 */
 
 fn output_conflicts_with_dir(output_paths: &[PathBuf]) -> Option<&PathBuf> {
     output_paths.iter().find(|output_path| output_path.is_dir())
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=escape_dep_filename | COMPLEXITY=2 | LINES=6 */
 
 fn escape_dep_filename(filename: &str) -> String {
     // Apparently clang and gcc *only* escape spaces:
     // https://llvm.org/klaus/clang/commit/9d50634cfc268ecc9a7250226dd5ca0e945240d4
     filename.replace(' ', "\\ ")
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=escape_dep_env | COMPLEXITY=10 | LINES=16 */
 
 // Makefile comments only need escaping newlines and `\`.
 // The result can be unescaped by anything that can unescape `escape_default` and friends.
@@ -608,7 +575,6 @@ fn escape_dep_env(symbol: Symbol) -> String {
     }
     escaped
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=write_out_deps | COMPLEXITY=118 | LINES=209 */
 
 fn write_out_deps(tcx: TyCtxt<'_>, outputs: &OutputFilenames, out_filenames: &[PathBuf]) {
     // Write out dependency rules to the dep-info file if requested
@@ -818,7 +784,6 @@ fn write_out_deps(tcx: TyCtxt<'_>, outputs: &OutputFilenames, out_filenames: &[P
         }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=resolver_for_lowering_raw | COMPLEXITY=5 | LINES=28 */
 
 fn resolver_for_lowering_raw<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -847,7 +812,6 @@ fn resolver_for_lowering_raw<'tcx>(
     let resolutions = tcx.arena.alloc(untracked_resolutions);
     (tcx.arena.alloc(Steal::new((untracked_resolver_for_lowering, Arc::new(krate)))), resolutions)
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=write_dep_info | COMPLEXITY=34 | LINES=49 */
 
 pub fn write_dep_info(tcx: TyCtxt<'_>) {
     // Make sure name resolution and macro expansion is run for
@@ -897,7 +861,6 @@ pub fn write_dep_info(tcx: TyCtxt<'_>) {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=write_interface | COMPLEXITY=11 | LINES=19 */
 
 pub fn write_interface<'tcx>(tcx: TyCtxt<'tcx>) {
     if !tcx.crate_types().contains(&crate::rustc_session::config::CrateType::Sdylib) {
@@ -917,7 +880,6 @@ pub fn write_interface<'tcx>(tcx: TyCtxt<'tcx>) {
         tcx.dcx().fatal(format!("error writing interface file: {}", err));
     }
 }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=36 */
 
 pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
     let providers = &mut Providers::default();
@@ -954,7 +916,6 @@ pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
     crate::rustc_codegen_ssa::provide(providers);
     *providers
 });
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=create_and_enter_global_ctxt | COMPLEXITY=19 | LINES=117 */
 
 pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
     compiler: &Compiler,
@@ -1072,7 +1033,6 @@ pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
         f,
     )
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=run_required_analyses | COMPLEXITY=47 | LINES=104 */
 
 /// Runs all analyses that we guarantee to run, even if errors were reported in earlier analyses.
 /// This function never fails.
@@ -1177,7 +1137,6 @@ fn run_required_analyses(tcx: TyCtxt<'_>) {
         });
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=analysis | COMPLEXITY=26 | LINES=65 */
 
 /// Runs the type-checking, region checking and other miscellaneous analysis
 /// passes on the crate.
@@ -1243,7 +1202,6 @@ fn analysis(tcx: TyCtxt<'_>, (): ()) {
         let _ = tcx.all_diagnostic_items(());
     });
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=45 */
 
 /// Runs the codegen backend, after which the AST and analysis can
 /// be discarded.
@@ -1289,7 +1247,6 @@ pub(crate) fn start_codegen<'tcx>(
 
     (codegen, metadata)
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=get_crate_name | COMPLEXITY=27 | LINES=48 */
 
 /// Compute and validate the crate name.
 pub fn get_crate_name(sess: &Session, krate_attrs: &[ast::Attribute]) -> Symbol {
@@ -1338,7 +1295,6 @@ pub fn get_crate_name(sess: &Session, krate_attrs: &[ast::Attribute]) -> Symbol 
 
     sym::rust_out
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 pub(crate) fn parse_crate_name(
     sess: &Session,
@@ -1361,7 +1317,6 @@ pub(crate) fn parse_crate_name(
 
     Some((name, name_span))
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=get_recursion_limit | COMPLEXITY=4 | LINES=17 */
 
 fn get_recursion_limit(krate_attrs: &[ast::Attribute], sess: &Session) -> Limit {
     let attr = AttributeParser::parse_limited_should_emit(

@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flock/unix.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fs::{File, OpenOptions};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::os::unix::prelude::*;
 use std::path::Path;
 use std::{io, mem};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Debug)]
 pub struct Lock {
     file: File,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=31 | LINES=35 */
 
 impl Lock {
     pub fn new(p: &Path, wait: bool, create: bool, exclusive: bool) -> io::Result<Lock> {
@@ -47,7 +43,6 @@ impl Lock {
         matches!(err.raw_os_error(), Some(libc::ENOTSUP) | Some(libc::ENOSYS))
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=18 | LINES=22 */
 
 impl Drop for Lock {
     fn drop(&mut self) {

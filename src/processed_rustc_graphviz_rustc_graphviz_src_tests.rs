@@ -1,14 +1,11 @@
 // SRC: ../rust/compiler/rustc_graphviz/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::io;
 use std::io::prelude::*;
 
 use NodeLabels::*;
 
 use super::LabelText::{self, EscStr, HtmlStr, LabelStr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{Edges, GraphWalk, Id, Labeller, Nodes, Style, render};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Edge | COMPLEXITY=2 | LINES=9 */
 
 /// each node is an index in a vector in the graph.
 type Node = usize;
@@ -18,12 +15,10 @@ struct Edge {
     label: &'static str,
     style: Style,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=edge | COMPLEXITY=3 | LINES=4 */
 
 fn edge(from: usize, to: usize, label: &'static str, style: Style) -> Edge {
     Edge { from, to, label, style }
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=LabelledGraph | COMPLEXITY=9 | LINES=20 */
 
 struct LabelledGraph {
     /// The name for this graph. Used for labeling generated `digraph`.
@@ -44,21 +39,18 @@ struct LabelledGraph {
     /// label; `edges` collects them.
     edges: Vec<Edge>,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=LabelledGraphWithEscStrs | COMPLEXITY=2 | LINES=6 */
 
 // A simple wrapper around LabelledGraph that forces the labels to
 // be emitted as EscStr.
 struct LabelledGraphWithEscStrs {
     graph: LabelledGraph,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum NodeLabels<L> {
     AllNodesLabelled(Vec<L>),
     UnlabelledNodes(usize),
     SomeNodesLabelled(Vec<Option<L>>),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=to_opt_strs | COMPLEXITY=13 | LINES=20 */
 
 type Trivial = NodeLabels<&'static str>;
 
@@ -79,7 +71,6 @@ impl NodeLabels<&'static str> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=20 */
 
 impl LabelledGraph {
     fn new(
@@ -100,19 +91,16 @@ impl LabelledGraph {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl LabelledGraphWithEscStrs {
     fn new(name: &'static str, node_labels: Trivial, edges: Vec<Edge>) -> LabelledGraphWithEscStrs {
         LabelledGraphWithEscStrs { graph: LabelledGraph::new(name, node_labels, edges, None) }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=id_name | COMPLEXITY=3 | LINES=4 */
 
 fn id_name<'a>(n: &Node) -> Id<'a> {
     Id::new(format!("N{}", *n)).unwrap()
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=15 | LINES=26 */
 
 impl<'a> Labeller<'a> for LabelledGraph {
     type Node = Node;
@@ -139,7 +127,6 @@ impl<'a> Labeller<'a> for LabelledGraph {
         e.style
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=17 | LINES=21 */
 
 impl<'a> Labeller<'a> for LabelledGraphWithEscStrs {
     type Node = Node;
@@ -161,7 +148,6 @@ impl<'a> Labeller<'a> for LabelledGraphWithEscStrs {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=8 | LINES=17 */
 
 impl<'a> GraphWalk<'a> for LabelledGraph {
     type Node = Node;
@@ -179,7 +165,6 @@ impl<'a> GraphWalk<'a> for LabelledGraph {
         edge.to
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=8 | LINES=17 */
 
 impl<'a> GraphWalk<'a> for LabelledGraphWithEscStrs {
     type Node = Node;
@@ -197,7 +182,6 @@ impl<'a> GraphWalk<'a> for LabelledGraphWithEscStrs {
         edge.to
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=test_input | COMPLEXITY=2 | LINES=8 */
 
 fn test_input(g: LabelledGraph) -> io::Result<String> {
     let mut writer = Vec::new();
@@ -206,7 +190,6 @@ fn test_input(g: LabelledGraph) -> io::Result<String> {
     Read::read_to_string(&mut &*writer, &mut s)?;
     Ok(s)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=empty_graph | COMPLEXITY=5 | LINES=16 */
 
 // All of the tests use raw-strings as the format for the expected outputs,
 // so that you can cut-and-paste the content into a .dot file yourself to
@@ -223,7 +206,6 @@ fn empty_graph() {
 "#
     );
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=single_node | COMPLEXITY=3 | LINES=13 */
 
 #[test]
 fn single_node() {
@@ -237,7 +219,6 @@ fn single_node() {
 "#
     );
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=single_node_with_style | COMPLEXITY=3 | LINES=14 */
 
 #[test]
 fn single_node_with_style() {
@@ -252,7 +233,6 @@ fn single_node_with_style() {
 "#
     );
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=single_edge | COMPLEXITY=3 | LINES=20 */
 
 #[test]
 fn single_edge() {
@@ -273,7 +253,6 @@ fn single_edge() {
 "#
     );
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=single_edge_with_style | COMPLEXITY=3 | LINES=20 */
 
 #[test]
 fn single_edge_with_style() {
@@ -294,7 +273,6 @@ fn single_edge_with_style() {
 "#
     );
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=test_some_labelled | COMPLEXITY=4 | LINES=21 */
 
 #[test]
 fn test_some_labelled() {
@@ -316,7 +294,6 @@ fn test_some_labelled() {
 "#
     );
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=single_cyclic_node | COMPLEXITY=3 | LINES=19 */
 
 #[test]
 fn single_cyclic_node() {
@@ -336,7 +313,6 @@ fn single_cyclic_node() {
 "#
     );
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=hasse_diagram | COMPLEXITY=12 | LINES=30 */
 
 #[test]
 fn hasse_diagram() {
@@ -367,7 +343,6 @@ fn hasse_diagram() {
 "#
     );
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=left_aligned_text | COMPLEXITY=13 | LINES=48 */
 
 #[test]
 fn left_aligned_text() {
@@ -416,7 +391,6 @@ fn left_aligned_text() {
 "#
     );
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=simple_id_construction | COMPLEXITY=9 | LINES=9 */
 
 #[test]
 fn simple_id_construction() {
@@ -426,7 +400,6 @@ fn simple_id_construction() {
         Err(..) => panic!("'hello' is not a valid value for id anymore"),
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=badly_formatted_id | COMPLEXITY=8 | LINES=9 */
 
 #[test]
 fn badly_formatted_id() {

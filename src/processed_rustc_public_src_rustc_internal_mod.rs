@@ -1,23 +1,19 @@
 // SRC: ../rust/compiler/rustc_public/src/rustc_internal/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Module that implements the bridge between rustc_public's IR and internal compiler MIR.
 //
 // For that, we define APIs that will temporarily be public to 3P that exposes rustc internal APIs
 // until rustc_public's IR is complete.
 
 use std::cell::{Cell, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_public_bridge::context::CompilerCtxt;
 use crate::rustc_public_bridge::{Bridge, Container, Tables};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::def_id::CrateNum;
 use scoped_tls::scoped_thread_local;
 
 use crate::Error;
 use crate::unstable::{RustcInternal, Stable};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=17 */
 
 
 /// Convert an internal Rust compiler item into its stable counterpart, if one exists.
@@ -34,7 +30,6 @@ use crate::unstable::{RustcInternal, Stable};
 pub fn stable<'tcx, S: Stable<'tcx>>(item: S) -> S::T {
     with_container(|tables, cx| item.stable(tables, cx))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=21 */
 
 /// Convert a stable item into its internal Rust compiler counterpart, if one exists.
 ///
@@ -56,12 +51,10 @@ where
     // for more details.
     with_container(|tables, _| item.internal(tables, tcx))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=crate_num | COMPLEXITY=2 | LINES=4 */
 
 pub fn crate_num(item: &crate::Crate) -> CrateNum {
     item.id.into()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 // A thread local variable that stores a pointer to the tables mapping between TyCtxt
 // datastructures and rustc_public's IR datastructures
@@ -75,7 +68,6 @@ where
     let ptr = container as *const _ as *const ();
     TLV.set(&Cell::new(ptr), || f())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=16 */
 
 /// Loads the current context and calls a function with it.
 /// Do not nest these, as that will ICE.
@@ -92,7 +84,6 @@ pub(crate) fn with_container<R, B: Bridge>(
         f(&mut *tables, &*cx)
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=run | COMPLEXITY=3 | LINES=10 */
 
 pub fn run<F, T>(tcx: TyCtxt<'_>, f: F) -> Result<T, Error>
 where
@@ -103,7 +94,6 @@ where
 
     crate::compiler_interface::run(&container, || init(&container, f))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=24 */
 
 /// Instantiate and run the compiler with the provided arguments and callback.
 ///
@@ -128,7 +118,6 @@ where
 ///     let result = run!(args, analyze_code);
 /// #   assert_eq!(result, Err(CompilerError::Skipped))
 /// # }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=22 */
 /// ```
 /// 2. A closure expression:
 /// ```ignore(needs-extern-crate)
@@ -151,7 +140,6 @@ where
 ///     let result = run!(args, || analyze_code(extra_args));
 /// #   assert_eq!(result, Err(CompilerError::Skipped))
 /// # }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
 /// ```
 #[macro_export]
 macro_rules! run {
@@ -162,7 +150,6 @@ macro_rules! run {
         $crate::run_driver!($args, $callback)
     };
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
 
 /// Instantiate and run the compiler with the provided arguments and callback.
 ///
@@ -177,7 +164,6 @@ macro_rules! run_with_tcx {
         $crate::run_driver!($args, $callback, with_tcx)
     };
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 /// Optionally include an ident. This is needed due to macro hygiene.
 #[macro_export]
@@ -187,7 +173,6 @@ macro_rules! optional {
         $ident
     };
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=RustcPublic | COMPLEXITY=42 | LINES=95 */
 
 /// Prefer using [run!] and [run_with_tcx] instead.
 ///

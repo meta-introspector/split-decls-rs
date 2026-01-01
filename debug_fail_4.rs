@@ -31,7 +31,5 @@ extern crate rustc_session;
 extern crate smallvec;
 extern crate thin_vec;
 
-#[path = "src/dot_dot_rust_library_stdarch_crates_core_arch_src_aarch64_tme.rs"]
-mod dot_dot_rust_library_stdarch_crates_core_arch_src_aarch64_tme;
-#[path = "src/dot_dot_rust_compiler_rustc_middle_src_thir.rs"]
-mod dot_dot_rust_compiler_rustc_middle_src_thir;
+#[path = "src/dot_dot_rust_compiler_rustc_trait_selection_src_error_reporting_traits_fulfillment_errors.rs"]
+mod dot_dot_rust_compiler_rustc_trait_selection_src_error_reporting_traits_fulfillment_errors;

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/target.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 // This module implements some validity checks for attributes.
 // In particular it verifies that `#[inline]` and `#[repr]` attributes are
 // attached to items that actually support them and if there are
@@ -7,16 +6,13 @@
 // item.
 
 use std::fmt::{self, Display};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_complete::visit::AssocCtxt;
 use crate::rustc_complete::{AssocItemKind, ForeignItemKind, ast};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_macros::HashStable_Generic;
 
 use crate::def::DefKind;
 use crate::{Item, ItemKind, TraitItem, TraitItemKind, hir};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, PartialEq, Debug, Eq, HashStable_Generic)]
 pub enum GenericParamKind {
@@ -24,7 +20,6 @@ pub enum GenericParamKind {
     Lifetime,
     Const,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 #[derive(Copy, Clone, PartialEq, Debug, Eq, HashStable_Generic)]
 pub enum MethodKind {
@@ -38,7 +33,6 @@ pub enum MethodKind {
     /// Method in a `impl Type` block
     Inherent,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=40 */
 
 #[derive(Copy, Clone, PartialEq, Debug, Eq, HashStable_Generic)]
 pub enum Target {
@@ -79,14 +73,12 @@ pub enum Target {
     Crate,
     Delegation { mac: bool },
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl Display for Target {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", Self::name(*self))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_associated_item | COMPLEXITY=161 | LINES=286 */
 
 crate::rustc_error_messages::into_diag_arg_using_display!(Target);
 

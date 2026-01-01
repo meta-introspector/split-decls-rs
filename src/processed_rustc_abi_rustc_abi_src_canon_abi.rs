@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_abi/src/canon_abi.rs
-/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=18 | LINES=52 */
 use std::fmt;
 
 #[cfg(feature = "nightly")]
@@ -52,7 +51,6 @@ pub enum CanonAbi {
     /// ABIs relevant to Windows or x86 targets
     X86(X86Call),
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=33 | LINES=37 */
 
 impl fmt::Display for CanonAbi {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -90,7 +88,6 @@ impl fmt::Display for CanonAbi {
         erased_abi.as_str().fmt(f)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// Callee codegen for interrupts
 ///
@@ -108,10 +105,8 @@ pub enum InterruptKind {
     RiscvSupervisor,
     X86,
 }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 /// ABIs defined for x86-{32,64}
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 ///
 /// One of SysV64 or Win64 may alias the C ABI, and arguably Win64 is cross-platform now?
 #[derive(Clone, Copy, Debug)]
@@ -127,7 +122,6 @@ pub enum X86Call {
     Vectorcall,
     Win64,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
 /// ABIs defined for 32-bit Arm
 #[derive(Copy, Clone, Debug)]

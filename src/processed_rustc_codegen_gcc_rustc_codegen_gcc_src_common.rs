@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/common.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gccjit::{LValue, RValue, ToRValue, Type};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::Primitive::Pointer;
 use crate::rustc_abi::{self as abi, HasDataLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, ConstCodegenMethods, MiscCodegenMethods, StaticCodegenMethods,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::Mutability;
 use crate::rustc_complete::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=const_ptrcast | COMPLEXITY=13 | LINES=36 */
 use crate::rustc_complete::ty::layout::LayoutOf;
 
 use crate::context::CodegenCx;
@@ -48,7 +43,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         self.bitcast_if_needed(value, typ)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=bytes_in_context | COMPLEXITY=27 | LINES=62 */
 
 pub fn bytes_in_context<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, bytes: &[u8]) -> RValue<'gcc> {
     // Instead of always using an array of bytes, use an array of larger integers of target endianness
@@ -111,12 +105,10 @@ pub fn bytes_in_context<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, bytes: &[u8]) ->
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_is_pointer | COMPLEXITY=2 | LINES=4 */
 
 pub fn type_is_pointer(typ: Type<'_>) -> bool {
     typ.get_pointee().is_some()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=const_null | COMPLEXITY=109 | LINES=221 */
 
 impl<'gcc, 'tcx> ConstCodegenMethods for CodegenCx<'gcc, 'tcx> {
     fn const_null(&self, typ: Type<'gcc>) -> RValue<'gcc> {
@@ -338,7 +330,6 @@ impl<'gcc, 'tcx> ConstCodegenMethods for CodegenCx<'gcc, 'tcx> {
             .get_address(None)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_signed | COMPLEXITY=2 | LINES=7 */
 
 pub trait SignType<'gcc, 'tcx> {
     fn is_signed(&self, cx: &CodegenCx<'gcc, 'tcx>) -> bool;
@@ -346,7 +337,6 @@ pub trait SignType<'gcc, 'tcx> {
     fn to_signed(&self, cx: &CodegenCx<'gcc, 'tcx>) -> Type<'gcc>;
     fn to_unsigned(&self, cx: &CodegenCx<'gcc, 'tcx>) -> Type<'gcc>;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_signed | COMPLEXITY=73 | LINES=62 */
 
 impl<'gcc, 'tcx> SignType<'gcc, 'tcx> for Type<'gcc> {
     fn is_signed(&self, cx: &CodegenCx<'gcc, 'tcx>) -> bool {
@@ -409,7 +399,6 @@ impl<'gcc, 'tcx> SignType<'gcc, 'tcx> for Type<'gcc> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_uchar | COMPLEXITY=4 | LINES=26 */
 
 pub trait TypeReflection<'gcc, 'tcx> {
     fn is_uchar(&self, cx: &CodegenCx<'gcc, 'tcx>) -> bool;
@@ -436,7 +425,6 @@ pub trait TypeReflection<'gcc, 'tcx> {
 
     fn is_vector(&self) -> bool;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_uchar | COMPLEXITY=39 | LINES=99 */
 
 impl<'gcc, 'tcx> TypeReflection<'gcc, 'tcx> for Type<'gcc> {
     fn is_uchar(&self, cx: &CodegenCx<'gcc, 'tcx>) -> bool {

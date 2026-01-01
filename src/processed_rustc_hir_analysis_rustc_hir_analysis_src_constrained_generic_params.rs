@@ -1,9 +1,7 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/constrained_generic_params.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=11 */
 use crate::rustc_complete::Span;
 use tracing::debug;
 
@@ -15,21 +13,18 @@ impl From<ty::ParamTy> for Parameter {
         Parameter(param.index)
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ty::EarlyParamRegion> for Parameter {
     fn from(param: ty::EarlyParamRegion) -> Self {
         Parameter(param.index)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<ty::ParamConst> for Parameter {
     fn from(param: ty::ParamConst) -> Self {
         Parameter(param.index)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 /// Returns the set of parameters constrained by the impl header.
 pub(crate) fn parameters_for_impl<'tcx>(
@@ -43,7 +38,6 @@ pub(crate) fn parameters_for_impl<'tcx>(
     };
     vec.into_iter().collect()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
 
 /// If `include_nonconstraining` is false, returns the list of parameters that are
 /// constrained by `value` - i.e., the value of each parameter in the list is
@@ -60,13 +54,11 @@ pub(crate) fn parameters_for<'tcx>(
     value.visit_with(&mut collector);
     collector.parameters
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ParameterCollector | COMPLEXITY=2 | LINES=5 */
 
 struct ParameterCollector {
     parameters: Vec<Parameter>,
     include_nonconstraining: bool,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=32 | LINES=42 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ParameterCollector {
     fn visit_ty(&mut self, t: Ty<'tcx>) {
@@ -109,7 +101,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ParameterCollector {
         c.super_visit_with(self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn identify_constrained_generic_params<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -120,7 +111,6 @@ pub(crate) fn identify_constrained_generic_params<'tcx>(
     let mut predicates = predicates.predicates.to_vec();
     setup_constraining_predicates(tcx, &mut predicates, impl_trait_ref, input_parameters);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=118 */
 
 /// Order the predicates in `predicates` such that each parameter is
 /// constrained before it is used, if that is possible, and add the

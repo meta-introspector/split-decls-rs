@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/codec.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // This module contains some shared code for encoding and decoding various
 // things from the `ty` module, and in particular implements support for
 // "shorthands" which allow to have pointers back into the already encoded
@@ -11,29 +10,21 @@
 use std::hash::Hash;
 use std::intrinsics;
 use std::marker::{DiscriminantKind, PointeeSized};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_abi::{FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_serialize::{Decodable, Encodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{Span, SpanDecoder, SpanEncoder};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::arena::ArenaAllocatable;
 use crate::infer::canonical::{CanonicalVarKind, CanonicalVarKinds};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::interpret::{AllocId, ConstAllocation, CtfeProvenance};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::mir::mono::MonoItem;
 use crate::mir::{self};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::traits;
 use crate::ty::{self, AdtDef, GenericArgsRef, Ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=position | COMPLEXITY=3 | LINES=17 */
 
 /// The shorthand encoding uses an enum's variant index `usize`
 /// and is offset by this value so it never matches a real variant.
@@ -51,7 +42,6 @@ pub trait TyEncoder<'tcx>: SpanEncoder {
 
     fn encode_alloc_id(&mut self, alloc_id: &AllocId);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=interner | COMPLEXITY=4 | LINES=20 */
 
 pub trait TyDecoder<'tcx>: SpanDecoder {
     const CLEAR_CROSS_CRATE: bool;
@@ -72,13 +62,11 @@ pub trait TyDecoder<'tcx>: SpanDecoder {
 
     fn decode_alloc_id(&mut self) -> AllocId;
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=variant | COMPLEXITY=2 | LINES=5 */
 
 pub trait EncodableWithShorthand<'tcx, E: TyEncoder<'tcx>>: Copy + Eq + Hash {
     type Variant: Encodable<E>;
     fn variant(&self) -> &Self::Variant;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=variant | COMPLEXITY=5 | LINES=10 */
 
 #[allow(rustc::usage_of_ty_tykind)]
 impl<'tcx, E: TyEncoder<'tcx>> EncodableWithShorthand<'tcx, E> for Ty<'tcx> {
@@ -89,7 +77,6 @@ impl<'tcx, E: TyEncoder<'tcx>> EncodableWithShorthand<'tcx, E> for Ty<'tcx> {
         self.kind()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=variant | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, E: TyEncoder<'tcx>> EncodableWithShorthand<'tcx, E> for ty::PredicateKind<'tcx> {
     type Variant = ty::PredicateKind<'tcx>;
@@ -99,7 +86,6 @@ impl<'tcx, E: TyEncoder<'tcx>> EncodableWithShorthand<'tcx, E> for ty::Predicate
         self
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=7 | LINES=14 */
 
 /// Trait for decoding to a reference.
 ///
@@ -114,7 +100,6 @@ impl<'tcx, E: TyEncoder<'tcx>> EncodableWithShorthand<'tcx, E> for ty::Predicate
 pub trait RefDecodable<'tcx, D: TyDecoder<'tcx>>: PointeeSized {
     fn decode(d: &mut D) -> &'tcx Self;
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=encode_with_shorthand | COMPLEXITY=10 | LINES=39 */
 
 /// Encode the given value or a previously cached shorthand.
 pub fn encode_with_shorthand<'tcx, E, T, M>(encoder: &mut E, value: &T, cache: M)
@@ -154,14 +139,12 @@ where
         cache(encoder).insert(*value, shorthand);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for Ty<'tcx> {
     fn encode(&self, e: &mut E) {
         encode_with_shorthand(e, self, TyEncoder::type_shorthands);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Predicate<'tcx> {
     fn encode(&self, e: &mut E) {
@@ -170,77 +153,66 @@ impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Predicate<'tcx> {
         encode_with_shorthand(e, &kind.skip_binder(), TyEncoder::predicate_shorthands);
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Clause<'tcx> {
     fn encode(&self, e: &mut E) {
         self.as_predicate().encode(e);
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Region<'tcx> {
     fn encode(&self, e: &mut E) {
         self.kind().encode(e);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Const<'tcx> {
     fn encode(&self, e: &mut E) {
         self.0.0.encode(e);
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::Pattern<'tcx> {
     fn encode(&self, e: &mut E) {
         self.0.0.encode(e);
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::ValTree<'tcx> {
     fn encode(&self, e: &mut E) {
         self.0.0.encode(e);
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ConstAllocation<'tcx> {
     fn encode(&self, e: &mut E) {
         self.inner().encode(e)
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for AdtDef<'tcx> {
     fn encode(&self, e: &mut E) {
         self.0.0.encode(e)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for AllocId {
     fn encode(&self, e: &mut E) {
         e.encode_alloc_id(self)
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for CtfeProvenance {
     fn encode(&self, e: &mut E) {
         self.into_parts().encode(e);
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, E: TyEncoder<'tcx>> Encodable<E> for ty::ParamEnv<'tcx> {
     fn encode(&self, e: &mut E) {
         self.caller_bounds().encode(e);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=decode_arena_allocable | COMPLEXITY=2 | LINES=7 */
 
 #[inline]
 fn decode_arena_allocable<'tcx, D: TyDecoder<'tcx>, T: ArenaAllocatable<'tcx> + Decodable<D>>(
@@ -248,7 +220,6 @@ fn decode_arena_allocable<'tcx, D: TyDecoder<'tcx>, T: ArenaAllocatable<'tcx> + 
 ) -> &'tcx T {
     decoder.interner().arena.alloc(Decodable::decode(decoder))
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=decode_arena_allocable_slice | COMPLEXITY=2 | LINES=11 */
 
 #[inline]
 fn decode_arena_allocable_slice<
@@ -260,7 +231,6 @@ fn decode_arena_allocable_slice<
 ) -> &'tcx [T] {
     decoder.interner().arena.alloc_from_iter(<Vec<T> as Decodable<D>>::decode(decoder))
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=13 | LINES=19 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for Ty<'tcx> {
     #[allow(rustc::usage_of_ty_tykind)]
@@ -280,7 +250,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for Ty<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=12 | LINES=20 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Predicate<'tcx> {
     fn decode(decoder: &mut D) -> ty::Predicate<'tcx> {
@@ -301,7 +270,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Predicate<'tcx> {
         decoder.interner().mk_predicate(predicate_kind)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Clause<'tcx> {
     fn decode(decoder: &mut D) -> ty::Clause<'tcx> {
@@ -309,7 +277,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Clause<'tcx> {
         pred.expect_clause()
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for GenericArgsRef<'tcx> {
     fn decode(decoder: &mut D) -> Self {
@@ -320,7 +287,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for GenericArgsRef<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=6 | LINES=11 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for mir::Place<'tcx> {
     fn decode(decoder: &mut D) -> Self {
@@ -332,14 +298,12 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for mir::Place<'tcx> {
         mir::Place { local, projection }
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Region<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         ty::Region::new_from_kind(decoder.interner(), Decodable::decode(decoder))
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for CanonicalVarKinds<'tcx> {
     fn decode(decoder: &mut D) -> Self {
@@ -349,14 +313,12 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for CanonicalVarKinds<'tcx> {
         )
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for AllocId {
     fn decode(decoder: &mut D) -> Self {
         decoder.decode_alloc_id()
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for CtfeProvenance {
     fn decode(decoder: &mut D) -> Self {
@@ -364,14 +326,12 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for CtfeProvenance {
         CtfeProvenance::from_parts(parts)
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::SymbolName<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         ty::SymbolName::new(decoder.interner(), decoder.read_str())
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::ParamEnv<'tcx> {
     fn decode(d: &mut D) -> Self {
@@ -379,7 +339,6 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::ParamEnv<'tcx> {
         ty::ParamEnv::new(caller_bounds)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=12 | LINES=10 */
 
 macro_rules! impl_decodable_via_ref {
     ($($t:ty,)+) => {
@@ -390,7 +349,6 @@ macro_rules! impl_decodable_via_ref {
         })*
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<Ty<'tcx>> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -400,7 +358,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<Ty<'tcx>> {
             .mk_type_list_from_iter((0..len).map::<Ty<'tcx>, _>(|_| Decodable::decode(decoder)))
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D>
     for ty::List<ty::PolyExistentialPredicate<'tcx>>
@@ -412,7 +369,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D>
         )
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Const<'tcx> {
     fn decode(decoder: &mut D) -> Self {
@@ -420,35 +376,30 @@ impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Const<'tcx> {
         decoder.interner().mk_ct_from_kind(kind)
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::Pattern<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         decoder.interner().mk_pat(Decodable::decode(decoder))
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ty::ValTree<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         decoder.interner().intern_valtree(Decodable::decode(decoder))
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for ConstAllocation<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         decoder.interner().mk_const_alloc(Decodable::decode(decoder))
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for AdtDef<'tcx> {
     fn decode(decoder: &mut D) -> Self {
         decoder.interner().mk_adt_def_from_data(Decodable::decode(decoder))
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [(ty::Clause<'tcx>, Span)] {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -458,7 +409,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [(ty::Clause<'tcx>, Spa
             .alloc_from_iter((0..decoder.read_usize()).map(|_| Decodable::decode(decoder)))
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [(ty::PolyTraitRef<'tcx>, Span)] {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -468,7 +418,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [(ty::PolyTraitRef<'tcx
             .alloc_from_iter((0..decoder.read_usize()).map(|_| Decodable::decode(decoder)))
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [Spanned<MonoItem<'tcx>>] {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -478,7 +427,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for [Spanned<MonoItem<'tcx>
             .alloc_from_iter((0..decoder.read_usize()).map(|_| Decodable::decode(decoder)))
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::BoundVariableKind> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -488,7 +436,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::BoundVaria
         )
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::Pattern<'tcx>> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -498,7 +445,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::Pattern<'t
         )
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::Const<'tcx>> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -508,7 +454,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<ty::Const<'tcx
         )
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D>
     for ty::ListWithCachedTypeInfo<ty::Clause<'tcx>>
@@ -520,7 +465,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D>
         )
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<FieldIdx> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -530,7 +474,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<FieldIdx> {
             .mk_fields_from_iter((0..len).map::<FieldIdx, _>(|_| Decodable::decode(decoder)))
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<LocalDefId> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -540,14 +483,12 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<LocalDefId> {
         )
     }
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx, D: TyDecoder<'tcx>> Decodable<D> for &'tcx ty::List<LocalDefId> {
     fn decode(d: &mut D) -> Self {
         RefDecodable::decode(d)
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<(VariantIdx, FieldIdx)> {
     fn decode(decoder: &mut D) -> &'tcx Self {
@@ -557,7 +498,6 @@ impl<'tcx, D: TyDecoder<'tcx>> RefDecodable<'tcx, D> for ty::List<(VariantIdx, F
         )
     }
 }
-/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 impl_decodable_via_ref! {
     &'tcx ty::TypeckResults<'tcx>,
@@ -569,7 +509,6 @@ impl_decodable_via_ref! {
     &'tcx ty::List<ty::Pattern<'tcx>>,
     &'tcx ty::ListWithCachedTypeInfo<ty::Clause<'tcx>>,
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=9 | LINES=12 */
 
 #[macro_export]
 macro_rules! __impl_decoder_methods {
@@ -582,7 +521,6 @@ macro_rules! __impl_decoder_methods {
         )*
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=18 | LINES=20 */
 
 macro_rules! impl_arena_allocatable_decoder {
     ([]$args:tt) => {};
@@ -603,7 +541,6 @@ macro_rules! impl_arena_allocatable_decoder {
         }
     };
 }
-/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8 */
 
 macro_rules! impl_arena_allocatable_decoders {
     ([$($a:tt $name:ident: $ty:ty,)*]) => {
@@ -612,7 +549,6 @@ macro_rules! impl_arena_allocatable_decoders {
         )*
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=17 | LINES=21 */
 
 crate::rustc_hir::arena_types!(impl_arena_allocatable_decoders);
 arena_types!(impl_arena_allocatable_decoders);
@@ -634,7 +570,6 @@ macro_rules! impl_arena_copy_decoder {
         })*
     };
 }
-/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 impl_arena_copy_decoder! {<'tcx>
     Span,
@@ -645,7 +580,6 @@ impl_arena_copy_decoder! {<'tcx>
     (crate::rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, crate::rustc_middle::middle::exported_symbols::SymbolExportInfo),
     ty::DeducedParamAttrs,
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=read_raw_bytes | COMPLEXITY=18 | LINES=43 */
 
 #[macro_export]
 macro_rules! implement_ty_decoder {

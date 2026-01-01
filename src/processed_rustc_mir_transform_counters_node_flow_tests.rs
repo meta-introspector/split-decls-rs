@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/counters/node_flow/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use itertools::Itertools;
 use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
@@ -9,17 +8,14 @@ use crate::rustc_complete::mir::coverage::Op;
 use crate::coverage::counters::node_flow::{
     CounterTerm, NodeCounters, NodeFlowData, make_node_counters, node_flow_data_for_balanced_graph,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=node_flow_data | COMPLEXITY=2 | LINES=4 */
 
 fn node_flow_data<G: graph::Successors>(graph: G) -> NodeFlowData<G::Node> {
     node_flow_data_for_balanced_graph(graph)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=make_graph | COMPLEXITY=2 | LINES=4 */
 
 fn make_graph<Node: Idx + Ord>(num_nodes: usize, edge_pairs: Vec<(Node, Node)>) -> VecGraph<Node> {
     VecGraph::new(num_nodes, edge_pairs)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=example_driver | COMPLEXITY=7 | LINES=25 */
 
 /// Example used in "Optimal Measurement Points for Program Frequency Counts"
 /// (Knuth & Stevenson, 1973), but with 0-based node IDs.
@@ -45,7 +41,6 @@ fn example_driver() {
         ]
     );
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=format_counter_expressions | COMPLEXITY=14 | LINES=20 */
 
 fn format_counter_expressions<Node: Idx>(counters: &NodeCounters<Node>) -> Vec<String> {
     let format_item = |&CounterTerm { node, op }| {

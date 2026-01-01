@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/check_enums.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Scalar, Size, TagEncoding, Variants, WrappingRange};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_complete::LangItem;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
@@ -9,7 +7,6 @@ use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::layout::PrimitiveExt;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingEnv};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=51 | LINES=106 */
 use crate::rustc_complete::Session;
 use tracing::debug;
 
@@ -116,7 +113,6 @@ impl<'tcx> crate::MirPass<'tcx> for CheckEnums {
         true
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 /// Represent the different kind of enum checks we can insert.
 enum EnumCheckType<'tcx> {
@@ -139,14 +135,12 @@ enum EnumCheckType<'tcx> {
         valid_range: WrappingRange,
     },
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=TyAndSize | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone)]
 struct TyAndSize<'tcx> {
     pub ty: Ty<'tcx>,
     pub size: Size,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=EnumFinder | COMPLEXITY=2 | LINES=9 */
 
 /// A [Visitor] that finds the construction of enums and evaluates which checks
 /// we should apply.
@@ -156,7 +150,6 @@ struct EnumFinder<'a, 'tcx> {
     typing_env: TypingEnv<'tcx>,
     enums: Vec<EnumCheckType<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=15 */
 
 impl<'a, 'tcx> EnumFinder<'a, 'tcx> {
     fn new(
@@ -172,7 +165,6 @@ impl<'a, 'tcx> EnumFinder<'a, 'tcx> {
         self.enums
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_rvalue | COMPLEXITY=40 | LINES=74 */
 
 impl<'a, 'tcx> Visitor<'tcx> for EnumFinder<'a, 'tcx> {
     fn visit_rvalue(&mut self, rvalue: &Rvalue<'tcx>, location: Location) {
@@ -247,7 +239,6 @@ impl<'a, 'tcx> Visitor<'tcx> for EnumFinder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=split_block | COMPLEXITY=3 | LINES=16 */
 
 fn split_block(
     basic_blocks: &mut IndexVec<BasicBlock, BasicBlockData<'_>>,
@@ -264,7 +255,6 @@ fn split_block(
 
     basic_blocks.push(new_block)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=insert_discr_cast_to_u128 | COMPLEXITY=21 | LINES=82 */
 
 /// Inserts the cast of an operand (any type) to a u128 value that holds the discriminant value.
 fn insert_discr_cast_to_u128<'tcx>(
@@ -347,7 +337,6 @@ fn insert_discr_cast_to_u128<'tcx>(
 
     discr
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=insert_direct_enum_check | COMPLEXITY=17 | LINES=80 */
 
 fn insert_direct_enum_check<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -428,7 +417,6 @@ fn insert_direct_enum_check<'tcx>(
         },
     });
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=insert_uninhabited_enum_check | COMPLEXITY=13 | LINES=42 */
 
 fn insert_uninhabited_enum_check<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -471,7 +459,6 @@ fn insert_uninhabited_enum_check<'tcx>(
         },
     });
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=insert_niche_check | COMPLEXITY=15 | LINES=77 */
 
 fn insert_niche_check<'tcx>(
     tcx: TyCtxt<'tcx>,

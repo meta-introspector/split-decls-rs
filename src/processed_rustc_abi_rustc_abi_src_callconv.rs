@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_abi/src/callconv.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "nightly")]
 use crate::{BackendRepr, FieldsShape, Primitive, Size, TyAbiInterface, TyAndLayout, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 
 pub use reg::{Reg, RegKind};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// Return value from the `homogeneous_aggregate` test function.
 #[derive(Copy, Clone, Debug)]
@@ -18,7 +15,6 @@ pub enum HomogeneousAggregate {
     /// There are no leaf fields at all.
     NoData,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=Heterogeneous; | COMPLEXITY=20 | LINES=33 */
 
 /// Error from the `homogeneous_aggregate` test function, indicating
 /// there are distinct leaf fields passed in different ways,
@@ -52,7 +48,6 @@ impl HomogeneousAggregate {
         }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=homogeneous_aggregate | COMPLEXITY=97 | LINES=136 */
 
 #[cfg(feature = "nightly")]
 impl<'a, Ty> TyAndLayout<'a, Ty> {

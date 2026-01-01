@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/legacy/location.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::mir::{BasicBlock, Body, Location};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=PoloniusLocationTable | COMPLEXITY=5 | LINES=17 */
 use tracing::debug;
 
 /// Maps between a MIR Location, which identifies a particular
@@ -20,21 +18,18 @@ pub struct PoloniusLocationTable {
     num_points: usize,
     statements_before_block: IndexVec<BasicBlock, usize>,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=LocationIndex | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "LocationIndex({})"]
     pub struct LocationIndex {}
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum RichLocation {
     Start(Location),
     Mid(Location),
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=all_points | COMPLEXITY=31 | LINES=76 */
 
 impl PoloniusLocationTable {
     pub(crate) fn new(body: &Body<'_>) -> Self {
@@ -111,7 +106,6 @@ impl PoloniusLocationTable {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_start | COMPLEXITY=3 | LINES=7 */
 
 impl LocationIndex {
     fn is_start(self) -> bool {

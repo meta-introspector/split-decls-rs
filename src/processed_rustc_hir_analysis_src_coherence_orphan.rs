@@ -1,27 +1,20 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/orphan.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Orphan checker: every impl either implements a trait defined in this
 // crate or pertains to a type defined in this crate.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_lint_defs::builtin::UNCOVERED_PARAM_IN_PROJECTION;
 use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits::{
     self, IsFirstInputType, OrphanCheckErr, OrphanCheckMode, UncoveredTyParams,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=185 | LINES=261 */
 
 use crate::errors;
 
@@ -283,7 +276,6 @@ pub(crate) fn orphan_check_impl(
 
     Ok(())
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=orphan_check | COMPLEXITY=36 | LINES=98 */
 
 /// Checks the coherence orphan rules.
 ///
@@ -382,7 +374,6 @@ fn orphan_check<'tcx>(
         }
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_orphan_check_error | COMPLEXITY=85 | LINES=115 */
 
 fn emit_orphan_check_error<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -498,12 +489,10 @@ fn emit_orphan_check_error<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=lint_uncovered_ty_params | COMPLEXITY=2 | LINES=4 */
 
 fn lint_uncovered_ty_params<'tcx>(
     tcx: TyCtxt<'tcx>,
     UncoveredTyParams { uncovered, local_ty }: UncoveredTyParams<TyCtxt<'tcx>, FxIndexSet<DefId>>,
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=24 */
     impl_def_id: LocalDefId,
 ) {
     let hir_id = tcx.local_def_id_to_hir_id(impl_def_id);
@@ -528,13 +517,11 @@ fn lint_uncovered_ty_params<'tcx>(
         };
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UncoveredTyParamCollector | COMPLEXITY=2 | LINES=5 */
 
 struct UncoveredTyParamCollector<'cx, 'tcx> {
     infcx: &'cx InferCtxt<'tcx>,
     uncovered_params: FxIndexSet<DefId>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=17 | LINES=21 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for UncoveredTyParamCollector<'_, 'tcx> {
     fn visit_ty(&mut self, ty: Ty<'tcx>) -> Self::Result {

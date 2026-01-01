@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=73 */
 // Centralized logic for parsing and attributes.
 //
 // ## Architecture
@@ -73,7 +72,6 @@
 // #[repr(C)]
 // #[repr(packed)]
 // struct Meow {}
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=35 */
 // ```
 //
 // This is equivalent to `#[repr(C, packed)]` and results in a single `AttributeKind::Repr`
@@ -101,12 +99,9 @@
 
 
 pub use attributes::cfg::{CFG_TEMPLATE, EvalConfigResult, eval_config_entry, parse_cfg_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub use attributes::cfg_old::*;
 pub use attributes::util::{is_builtin_attr, is_doc_alias_attrs_contain_symbol, parse_version};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use context::{Early, Late, OmitDoc, ShouldEmit};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 pub use interface::AttributeParser;
 pub use lints::emit_attribute_lint;
 

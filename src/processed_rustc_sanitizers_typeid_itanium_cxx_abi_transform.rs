@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_sanitizers/src/cfi/typeid/itanium_cxx_abi/transform.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 // Transforms instances and types for LLVM CFI and cross-language LLVM CFI support using Itanium
 // C++ ABI mangling.
 //
@@ -15,13 +14,10 @@ use crate::rustc_complete::ty::{
     self, ExistentialPredicateStableCmpExt as _, Instance, InstanceKind, IntTy, List, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, UintTy,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::{DUMMY_SP, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 use crate::cfi::typeid::TypeIdOptions;
 use crate::cfi::typeid::itanium_cxx_abi::encode::EncodeTyOptions;
@@ -34,14 +30,12 @@ pub(crate) struct TransformTy<'tcx> {
     options: TransformTyOptions,
     parents: Vec<Ty<'tcx>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx> TransformTy<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, options: TransformTyOptions) -> Self {
         TransformTy { tcx, options, parents: Vec::new() }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fold_ty | COMPLEXITY=117 | LINES=194 */
 
 /// Transforms a ty:Ty for being encoded and used in the substitution dictionary.
 ///
@@ -236,7 +230,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for TransformTy<'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=trait_object_ty | COMPLEXITY=13 | LINES=41 */
 
 #[instrument(skip(tcx), ret)]
 fn trait_object_ty<'tcx>(tcx: TyCtxt<'tcx>, poly_trait_ref: ty::PolyTraitRef<'tcx>) -> Ty<'tcx> {
@@ -278,7 +271,6 @@ fn trait_object_ty<'tcx>(tcx: TyCtxt<'tcx>, poly_trait_ref: ty::PolyTraitRef<'tc
     );
     Ty::new_dynamic(tcx, preds, tcx.lifetimes.re_erased, ty::Dyn)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=107 | LINES=187 */
 
 /// Transforms an instance for LLVM CFI and cross-language LLVM CFI support using Itanium C++ ABI
 /// mangling.
@@ -466,7 +458,6 @@ pub(crate) fn transform_instance<'tcx>(
 
     instance
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=implemented_method | COMPLEXITY=11 | LINES=32 */
 
 fn implemented_method<'tcx>(
     tcx: TyCtxt<'tcx>,

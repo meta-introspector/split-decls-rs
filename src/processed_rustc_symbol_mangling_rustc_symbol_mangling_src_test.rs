@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_symbol_mangling/src/test.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 // Walks the crate looking for items/impl-items/trait-items that have
 // either a `rustc_symbol_name` or `rustc_def_path` attribute and
 // generates an error giving, respectively, the symbol name or
@@ -9,12 +8,9 @@
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{GenericArgs, Instance, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::errors::{Kind, TestOutput};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=report_symbol_names | COMPLEXITY=22 | LINES=33 */
 
 const SYMBOL_NAME: Symbol = sym::rustc_symbol_name;
 const DEF_PATH: Symbol = sym::rustc_def_path;
@@ -48,12 +44,10 @@ pub fn report_symbol_names(tcx: TyCtxt<'_>) {
         }
     })
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=SymbolNamesTest | COMPLEXITY=2 | LINES=4 */
 
 struct SymbolNamesTest<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=process_attrs | COMPLEXITY=25 | LINES=42 */
 
 impl SymbolNamesTest<'_> {
     fn process_attrs(&mut self, def_id: LocalDefId) {

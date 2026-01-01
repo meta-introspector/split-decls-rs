@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/table.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::def::CtorOf;
 use crate::rustc_index::Idx;
 
@@ -8,49 +7,42 @@ use crate::rmeta::*;
 pub(super) trait IsDefault: Default {
     fn is_default(&self) -> bool;
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl<T> IsDefault for Option<T> {
     fn is_default(&self) -> bool {
         self.is_none()
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl IsDefault for AttrFlags {
     fn is_default(&self) -> bool {
         self.is_empty()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl IsDefault for bool {
     fn is_default(&self) -> bool {
         !self
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl IsDefault for u32 {
     fn is_default(&self) -> bool {
         *self == 0
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl IsDefault for u64 {
     fn is_default(&self) -> bool {
         *self == 0
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=6 */
 
 impl<T> IsDefault for LazyArray<T> {
     fn is_default(&self) -> bool {
         self.num_elems == 0
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_default | COMPLEXITY=5 | LINES=10 */
 
 impl IsDefault for UnusedGenericParams {
     fn is_default(&self) -> bool {
@@ -61,7 +53,6 @@ impl IsDefault for UnusedGenericParams {
         is_default
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=7 | LINES=13 */
 
 /// Helper trait, for encoding to, and decoding from, a fixed number of bytes.
 /// Used mainly for Lazy positions and lengths.
@@ -75,7 +66,6 @@ pub(super) trait FixedSizeEncoding: IsDefault {
     fn from_bytes(b: &Self::ByteArray) -> Self;
     fn write_to_bytes(self, b: &mut Self::ByteArray);
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=6 | LINES=14 */
 
 impl FixedSizeEncoding for u64 {
     type ByteArray = [u8; 8];
@@ -90,7 +80,6 @@ impl FixedSizeEncoding for u64 {
         *b = self.to_le_bytes();
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=31 | LINES=30 */
 
 macro_rules! fixed_size_enum {
     ($ty:ty { $(($($pat:tt)*))* } $( unreachable { $(($($upat:tt)*))+ } )?) => {
@@ -121,13 +110,11 @@ macro_rules! fixed_size_enum {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 
 // Workaround; need const traits to construct bitflags in a const
 macro_rules! const_macro_kinds {
     ($($name:ident),+$(,)?) => (MacroKinds::from_bits_truncate($(MacroKinds::$name.bits())|+))
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=23 | LINES=61 */
 const MACRO_KINDS_ATTR_BANG: MacroKinds = const_macro_kinds!(ATTR, BANG);
 const MACRO_KINDS_DERIVE_BANG: MacroKinds = const_macro_kinds!(DERIVE, BANG);
 const MACRO_KINDS_DERIVE_ATTR: MacroKinds = const_macro_kinds!(DERIVE, ATTR);
@@ -189,7 +176,6 @@ fixed_size_enum! {
         ( Macro(_)                                 )
     }
 }
-/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 fixed_size_enum! {
     hir::Constness {
@@ -197,7 +183,6 @@ fixed_size_enum! {
         ( Const    )
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
 
 fixed_size_enum! {
     hir::Defaultness {
@@ -206,7 +191,6 @@ fixed_size_enum! {
         ( Default { has_value: true }  )
     }
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 fixed_size_enum! {
     hir::Safety {
@@ -214,7 +198,6 @@ fixed_size_enum! {
         ( Safe   )
     }
 }
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=7 */
 
 fixed_size_enum! {
     ty::Asyncness {
@@ -222,7 +205,6 @@ fixed_size_enum! {
         ( No  )
     }
 }
-/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 fixed_size_enum! {
     hir::CoroutineKind {
@@ -239,7 +221,6 @@ fixed_size_enum! {
         ( Desugared(hir::CoroutineDesugaring::AsyncGen, hir::CoroutineSource::Closure) )
     }
 }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
 
 fixed_size_enum! {
     MacroKind {
@@ -248,7 +229,6 @@ fixed_size_enum! {
         ( Derive )
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=18 | LINES=34 */
 
 // We directly encode RawDefId because using a `LazyValue` would incur a 50% overhead in the worst case.
 impl FixedSizeEncoding for Option<RawDefId> {
@@ -283,7 +263,6 @@ impl FixedSizeEncoding for Option<RawDefId> {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=6 | LINES=15 */
 
 impl FixedSizeEncoding for AttrFlags {
     type ByteArray = [u8; 1];
@@ -299,7 +278,6 @@ impl FixedSizeEncoding for AttrFlags {
         b[0] = self.bits();
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=6 | LINES=15 */
 
 impl FixedSizeEncoding for bool {
     type ByteArray = [u8; 1];
@@ -315,7 +293,6 @@ impl FixedSizeEncoding for bool {
         b[0] = self as u8
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=14 | LINES=25 */
 
 // NOTE(eddyb) there could be an impl for `usize`, which would enable a more
 // generic `LazyValue<T>` impl, but in the general case we might not need / want
@@ -341,7 +318,6 @@ impl<T> FixedSizeEncoding for Option<LazyValue<T>> {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=write_to_bytes_impl | COMPLEXITY=5 | LINES=16 */
 
 impl<T> LazyArray<T> {
     #[inline]
@@ -358,7 +334,6 @@ impl<T> LazyArray<T> {
         Some(LazyArray::from_position_and_num_elems(position, len))
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=decode_interleaved | COMPLEXITY=7 | LINES=14 */
 
 // Interleaving the bytes of the two integers exposes trailing bytes in the first integer
 // to the varint scheme that we use for tables.
@@ -373,7 +348,6 @@ fn decode_interleaved<const N: usize, const M: usize>(encoded: &[u8; N]) -> ([u8
     }
     (first, second)
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=encode_interleaved | COMPLEXITY=6 | LINES=16 */
 
 // Element width is selected at runtime on a per-table basis by omitting trailing
 // zero bytes in table elements. This works very naturally when table elements are
@@ -390,7 +364,6 @@ fn encode_interleaved<const N: usize, const M: usize>(a: [u8; M], b: [u8; M], de
         dest[2 * i + 1] = b[i];
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=9 | LINES=20 */
 
 impl<T> FixedSizeEncoding for LazyArray<T> {
     type ByteArray = [u8; 16];
@@ -411,7 +384,6 @@ impl<T> FixedSizeEncoding for LazyArray<T> {
         self.write_to_bytes_impl(b)
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from_bytes | COMPLEXITY=10 | LINES=19 */
 
 impl<T> FixedSizeEncoding for Option<LazyArray<T>> {
     type ByteArray = [u8; 16];
@@ -431,7 +403,6 @@ impl<T> FixedSizeEncoding for Option<LazyArray<T>> {
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Helper for constructing a table's serialization (also see `Table`).
 pub(super) struct TableBuilder<I: Idx, T: FixedSizeEncoding> {
@@ -439,14 +410,12 @@ pub(super) struct TableBuilder<I: Idx, T: FixedSizeEncoding> {
     blocks: IndexVec<I, T::ByteArray>,
     _marker: PhantomData<T>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=6 */
 
 impl<I: Idx, T: FixedSizeEncoding> Default for TableBuilder<I, T> {
     fn default() -> Self {
         TableBuilder { width: 0, blocks: Default::default(), _marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 impl<I: Idx, const N: usize, T> TableBuilder<I, Option<T>>
 where
@@ -456,7 +425,6 @@ where
         self.set(i, Some(value))
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=41 */
 
 impl<I: Idx, const N: usize, T: FixedSizeEncoding<ByteArray = [u8; N]>> TableBuilder<I, T> {
     /// Sets the table value if it is not default.
@@ -498,12 +466,10 @@ impl<I: Idx, const N: usize, T: FixedSizeEncoding<ByteArray = [u8; N]>> TableBui
         )
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=trailing_zeros | COMPLEXITY=2 | LINES=4 */
 
 fn trailing_zeros(x: &[u8]) -> usize {
     x.iter().rev().take_while(|b| **b == 0).count()
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=32 */
 
 impl<I: Idx, const N: usize, T: FixedSizeEncoding<ByteArray = [u8; N]> + ParameterizedOverTcx>
     LazyTable<I, T>

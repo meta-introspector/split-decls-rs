@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/specialize/specialization_graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::DefId;
 use rustc_macros::extension;
 use crate::rustc_complete::bug;
 pub use crate::rustc_complete::traits::specialization_graph::*;
 use crate::rustc_complete::ty::fast_reject::{self, SimplifiedType, TreatParams};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 use super::OverlapError;
 use crate::traits;
@@ -19,14 +15,12 @@ use crate::traits;
 pub enum FutureCompatOverlapErrorKind {
     LeakCheck,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=FutureCompatOverlapError | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug)]
 pub struct FutureCompatOverlapError<'tcx> {
     pub error: OverlapError<'tcx>,
     pub kind: FutureCompatOverlapErrorKind,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// The result of attempting to insert an impl into a group of children.
 #[derive(Debug)]
@@ -40,7 +34,6 @@ enum Inserted<'tcx> {
     /// The impl is a specialization of an existing child.
     ShouldRecurseOn(DefId),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=insert_blindly | COMPLEXITY=78 | LINES=159 */
 
 #[extension(trait ChildrenExt<'tcx>)]
 impl<'tcx> Children {
@@ -200,19 +193,16 @@ impl<'tcx> Children {
         Ok(Inserted::BecameNewSibling(last_lint))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=iter_children | COMPLEXITY=2 | LINES=5 */
 
 fn iter_children(children: &Children) -> impl Iterator<Item = DefId> {
     let nonblanket = children.non_blanket_impls.iter().flat_map(|(_, v)| v.iter());
     children.blanket_impls.iter().chain(nonblanket).cloned()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=filtered_children | COMPLEXITY=2 | LINES=5 */
 
 fn filtered_children(children: &mut Children, st: SimplifiedType) -> impl Iterator<Item = DefId> {
     let nonblanket = children.non_blanket_impls.entry(st).or_default().iter();
     children.blanket_impls.iter().chain(nonblanket).cloned()
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 // A custom iterator used by Children::insert
 enum PotentialSiblings<I, J>
@@ -223,7 +213,6 @@ where
     Unfiltered(I),
     Filtered(J),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=15 */
 
 impl<I, J> Iterator for PotentialSiblings<I, J>
 where
@@ -239,7 +228,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=46 | LINES=119 */
 
 #[extension(pub trait GraphExt<'tcx>)]
 impl<'tcx> Graph {
@@ -359,7 +347,6 @@ impl<'tcx> Graph {
         self.children.entry(parent).or_default().insert_blindly(tcx, child);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=39 | LINES=62 */
 
 /// Locate the definition of an associated type in the specialization hierarchy,
 /// starting from the given impl.

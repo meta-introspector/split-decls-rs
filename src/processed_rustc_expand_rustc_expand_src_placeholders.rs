@@ -1,19 +1,14 @@
 // SRC: ../rust/compiler/rustc_expand/src/placeholders.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mut_visit::*;
 use crate::rustc_complete::token::Delimiter;
 use crate::rustc_complete::visit::AssocCtxt;
 use crate::rustc_complete::{self as ast, Safety};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::{DUMMY_SP, Ident};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 use crate::expand::{AstFragment, AstFragmentKind};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=mac_placeholder | COMPLEXITY=57 | LINES=209 */
 
 pub(crate) fn placeholder(
     kind: AstFragmentKind,
@@ -223,13 +218,11 @@ pub(crate) fn placeholder(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub(crate) struct PlaceholderExpander {
     expanded_fragments: FxHashMap<ast::NodeId, AstFragment>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=remove | COMPLEXITY=4 | LINES=11 */
 
 impl PlaceholderExpander {
     pub(crate) fn add(&mut self, id: ast::NodeId, mut fragment: AstFragment) {
@@ -241,7 +234,6 @@ impl PlaceholderExpander {
         self.expanded_fragments.remove(&id).unwrap()
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=flat_map_arm | COMPLEXITY=128 | LINES=196 */
 
 impl MutVisitor for PlaceholderExpander {
     fn flat_map_arm(&mut self, arm: ast::Arm) -> SmallVec<[ast::Arm; 1]> {

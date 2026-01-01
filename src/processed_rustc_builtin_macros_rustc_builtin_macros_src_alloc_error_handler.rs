@@ -1,15 +1,10 @@
 // SRC: ../rust/compiler/rustc_builtin_macros/src/alloc_error_handler.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     self as ast, Fn, FnHeader, FnSig, Generics, ItemKind, Safety, Stmt, StmtKind, TyKind,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_expand::base::{Annotatable, ExtCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=23 | LINES=49 */
 
 use crate::errors;
 use crate::util::check_builtin_macro_attribute;
@@ -59,13 +54,11 @@ pub(crate) fn expand(
     // Return the original item and the new methods.
     vec![orig_item, const_item]
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
 
 // #[rustc_std_internal_symbol]
 // unsafe fn __rg_oom(size: usize, align: usize) -> ! {
 //     handler(core::alloc::Layout::from_size_align_unchecked(size, align))
 // }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=generate_handler | COMPLEXITY=7 | LINES=38 */
 fn generate_handler(cx: &ExtCtxt<'_>, handler: Ident, span: Span, sig_span: Span) -> Stmt {
     let usize = cx.path_ident(span, Ident::new(sym::usize, span));
     let ty_usize = cx.ty_path(usize);

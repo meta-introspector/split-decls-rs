@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/rustc_internal.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=6 | LINES=17 */
 use crate::prelude::*;
 use super::util::parse_single_integer;
 
@@ -17,7 +16,6 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeStart {
             .map(|n| AttributeKind::RustcLayoutScalarValidRangeStart(Box::new(n), cx.attr_span))
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=6 | LINES=15 */
 
 pub(crate) struct RustcLayoutScalarValidRangeEnd;
 
@@ -33,7 +31,6 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeEnd {
             .map(|n| AttributeKind::RustcLayoutScalarValidRangeEnd(Box::new(n), cx.attr_span))
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=19 */
 
 pub(crate) struct RustcObjectLifetimeDefaultParser;
 

@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/outlives/env.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::transitive_relation::TransitiveRelationBuilder;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=OutlivesEnvironment | COMPLEXITY=12 | LINES=42 */
 use tracing::debug;
 
 use super::explicit_outlives_bounds;
@@ -47,7 +44,6 @@ pub struct OutlivesEnvironment<'tcx> {
     /// auto trait bounds for during the type checking of this body.
     higher_ranked_assumptions: FxHashSet<ty::ArgOutlivesPredicate<'tcx>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=from_normalized_bounds | COMPLEXITY=33 | LINES=69 */
 
 /// "Region-bound pairs" tracks outlives relations that are known to
 /// be true, either because of explicit where-clauses like `T: 'a` or

@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/rustc_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=get_rustc_path | COMPLEXITY=5 | LINES=11 */
 
 use crate::utils::run_command;
 

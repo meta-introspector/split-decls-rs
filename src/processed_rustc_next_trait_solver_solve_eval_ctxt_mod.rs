@@ -1,25 +1,20 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/eval_ctxt/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::mem;
 use std::ops::ControlFlow;
 
 #[cfg(feature = "nightly")]
 use rustc_macros::HashStable_NoContext;
 use rustc_type_ir::data_structures::{HashMap, HashSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::relate::Relate;
 use rustc_type_ir::relate::solver_relating::RelateExt;
 use rustc_type_ir::search_graph::{CandidateHeadUsages, PathKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use rustc_type_ir::{
     self as ty, CanonicalVarValues, InferCtxtLike, Interner, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     TypingMode,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 use super::has_only_region_constraints;
 use crate::coherence;
@@ -33,7 +28,6 @@ use crate::solve::{
     GoalStalledOn, HasChanged, NestedNormalizationGoals, NoSolution, QueryInput, QueryResult,
     inspect,
 };
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=25 */
 
 
 /// The kind of goal we're currently proving.
@@ -57,7 +51,6 @@ enum CurrentGoalKind {
     /// goal so this never leaks out of the solver.
     NormalizesTo,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from_query_input | COMPLEXITY=13 | LINES=16 */
 
 impl CurrentGoalKind {
     fn from_query_input<I: Interner>(cx: I, input: QueryInput<I, I::Predicate>) -> CurrentGoalKind {
@@ -74,7 +67,6 @@ impl CurrentGoalKind {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=EvalCtxt | COMPLEXITY=21 | LINES=63 */
 
 pub struct EvalCtxt<'a, D, I = <D as SolverDelegate>::Interner>
 where
@@ -138,7 +130,6 @@ where
 
     pub(super) inspect: inspect::EvaluationStepBuilder<D>,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(PartialEq, Eq, Debug, Hash, Clone, Copy)]
 #[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
@@ -146,7 +137,6 @@ pub enum GenerateProofTree {
     Yes,
     No,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=evaluate_root_goal | COMPLEXITY=9 | LINES=37 */
 
 pub trait SolverDelegateEvalExt: SolverDelegate {
     /// Evaluates a goal from **outside** of the trait solver.
@@ -184,7 +174,6 @@ pub trait SolverDelegateEvalExt: SolverDelegate {
         inspect::GoalEvaluation<Self::Interner>,
     );
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=evaluate_root_goal | COMPLEXITY=12 | LINES=40 */
 
 impl<D, I> SolverDelegateEvalExt for D
 where
@@ -225,7 +214,6 @@ where
         evaluate_root_goal_for_proof_tree(self, goal, span)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=evaluate_goal | COMPLEXITY=429 | LINES=993 */
 
 impl<'a, D, I> EvalCtxt<'a, D>
 where
@@ -1219,7 +1207,6 @@ where
             })
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ReplaceAliasWithInfer | COMPLEXITY=8 | LINES=25 */
 
 /// Eagerly replace aliases with inference variables, emitting `AliasRelate`
 /// goals, used when adding goals to the `EvalCtxt`. We compute the
@@ -1245,7 +1232,6 @@ where
     normalization_goal_source: GoalSource,
     cache: HashMap<I::Ty, I::Ty>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=20 */
 
 impl<'me, 'a, D, I> ReplaceAliasWithInfer<'me, 'a, D, I>
 where
@@ -1266,7 +1252,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=38 | LINES=62 */
 
 impl<D, I> TypeFolder<I> for ReplaceAliasWithInfer<'_, '_, D, I>
 where
@@ -1329,7 +1314,6 @@ where
         if predicate.allow_normalization() { predicate.super_fold_with(self) } else { predicate }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=evaluate_root_goal_for_proof_tree_raw_provider | COMPLEXITY=3 | LINES=19 */
 
 /// Do not call this directly, use the `tcx` query instead.
 pub fn evaluate_root_goal_for_proof_tree_raw_provider<
@@ -1349,7 +1333,6 @@ pub fn evaluate_root_goal_for_proof_tree_raw_provider<
     let final_revision = inspect.unwrap();
     (canonical_result, cx.mk_probe(final_revision))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=40 */
 
 /// Evaluate a goal to build a proof tree.
 ///

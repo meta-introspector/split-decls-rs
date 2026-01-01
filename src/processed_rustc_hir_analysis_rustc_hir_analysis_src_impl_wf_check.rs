@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/impl_wf_check.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=18 */
 // This pass enforces various "well-formedness constraints" on impls.
 // Logically, it is part of wfcheck -- but we do it early so that we
 // can stop compilation afterwards, since part of the trait matching
@@ -18,7 +17,6 @@ use crate::rustc_complete::codes::*;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=23 */
 use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::constrained_generic_params as cgp;
@@ -41,23 +39,18 @@ use crate::errors::UnconstrainedGenericParameter;
 ///
 /// ```rust,ignore (pseudo-Rust)
 /// impl<T> Trait<Foo> for Bar { ... }
-/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 /// //   ^ T does not appear in `Foo` or `Bar`, error!
 ///
 /// impl<T> Trait<Foo<T>> for Bar { ... }
-/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 /// //   ^ T appears in `Foo<T>`, ok.
 ///
 /// impl<T> Trait<Foo> for Bar where Bar: Iterator<Item = T> { ... }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 /// //   ^ T is bound to `<Bar as Iterator>::Item`, ok.
 ///
 /// impl<'a> Trait<Foo> for Bar { }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=3 */
 /// //   ^ 'a is unused, but for back-compat we allow it
 ///
 /// impl<'a> Trait<Foo> for Bar { type X = &'a i32; }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=19 */
 /// //   ^ 'a is unused and appears in assoc type, error
 /// ```
 pub(crate) fn check_impl_wf(
@@ -77,7 +70,6 @@ pub(crate) fn check_impl_wf(
     }
     res
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=98 */
 
 pub(crate) fn enforce_impl_lifetime_params_are_constrained(
     tcx: TyCtxt<'_>,
@@ -176,7 +168,6 @@ pub(crate) fn enforce_impl_lifetime_params_are_constrained(
     }
     res
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=66 */
 
 pub(crate) fn enforce_impl_non_lifetime_params_are_constrained(
     tcx: TyCtxt<'_>,

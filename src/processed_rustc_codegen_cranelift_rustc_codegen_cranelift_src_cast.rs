@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/cast.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=29 */
 // Various number casting functions
 
 use crate::codegen_f16_f128;
@@ -29,7 +28,6 @@ pub(crate) fn clif_intcast(
         (_, _) => fx.bcx.ins().ireduce(to, val),
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=91 | LINES=143 */
 
 pub(crate) fn clif_int_or_float_cast(
     fx: &mut FunctionCx<'_, '_, '_>,

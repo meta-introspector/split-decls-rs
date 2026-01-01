@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/confusables.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::prelude::*;
 use crate::session_diagnostics::EmptyConfusables;
 
@@ -8,7 +7,6 @@ pub(crate) struct ConfusablesParser {
     confusables: ThinVec<Symbol>,
     first_span: Option<Span>,
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=21 | LINES=43 */
 
 impl<S: Stage> AttributeParser<S> for ConfusablesParser {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[(

@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/coverage/spans.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir;
 use crate::rustc_complete::mir::coverage::{Mapping, MappingKind, START_BCB};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::source_map::SourceMap;
 use crate::rustc_complete::{BytePos, DesugaringKind, ExpnId, ExpnKind, MacroKind, Span};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::instrument;
 
 use crate::coverage::expansion::{self, ExpnTree, SpanWithBcb};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::coverage::graph::{BasicCoverageBlock, CoverageGraph};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::coverage::hir_info::ExtractedHirInfo;
 use crate::coverage::spans::from_mir::{Hole, RawSpanFromMir};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=66 | LINES=131 */
 
 
 pub(super) fn extract_refined_covspans<'tcx>(
@@ -146,7 +140,6 @@ pub(super) fn extract_refined_covspans<'tcx>(
         Mapping { span, kind: MappingKind::Code { bcb } }
     }));
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=single_covspan_for_child_expn | COMPLEXITY=15 | LINES=33 */
 
 /// For a single child expansion, try to distill it into a single span+BCB mapping.
 fn single_covspan_for_child_expn(
@@ -180,7 +173,6 @@ fn single_covspan_for_child_expn(
 
     Some(Covspan { span, bcb })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=discard_spans_overlapping_holes | COMPLEXITY=11 | LINES=29 */
 
 /// Discard all covspans that overlap a hole.
 ///
@@ -210,7 +202,6 @@ fn discard_spans_overlapping_holes(covspans: &mut Vec<Covspan>, holes: &[Hole]) 
 
     covspans.retain(|covspan| !overlaps_hole(covspan));
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=remove_unwanted_overlapping_spans | COMPLEXITY=14 | LINES=33 */
 
 /// Takes a list of sorted spans extracted from MIR, and "refines"
 /// those spans by removing spans that overlap in unwanted ways.
@@ -244,14 +235,12 @@ fn remove_unwanted_overlapping_spans(sorted_spans: Vec<Covspan>) -> Vec<Covspan>
     refined.extend(pending);
     refined
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Covspan | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug)]
 struct Covspan {
     span: Span,
     bcb: BasicCoverageBlock,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=merge_if_eligible | COMPLEXITY=10 | LINES=19 */
 
 impl Covspan {
     /// If `self` and `other` can be merged, mutates `self.span` to also
@@ -271,7 +260,6 @@ impl Covspan {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=compare_spans | COMPLEXITY=5 | LINES=12 */
 
 /// Compares two spans in (lo ascending, hi descending) order.
 fn compare_spans(a: Span, b: Span) -> std::cmp::Ordering {
@@ -284,7 +272,6 @@ fn compare_spans(a: Span, b: Span) -> std::cmp::Ordering {
         // - Both have the same start and span A extends further right
         .then_with(|| Ord::cmp(&a.hi(), &b.hi()).reverse())
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=ensure_non_empty_span | COMPLEXITY=16 | LINES=23 */
 
 fn ensure_non_empty_span(source_map: &SourceMap, span: Span) -> Option<Span> {
     if !span.is_empty() {

@@ -1,17 +1,13 @@
 // SRC: ../rust/compiler/rustc_middle/src/traits/specialization_graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::def_id::{DefId, DefIdMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::sym;
 
 use crate::error::StrictCoherenceNeedsNegativeCoherence;
 use crate::ty::fast_reject::SimplifiedType;
 use crate::ty::{self, TyCtxt, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Graph | COMPLEXITY=8 | LINES=25 */
 
 /// A per-trait graph of impls in specialization order. At the moment, this
 /// graph forms a tree rooted with the trait itself, with all other nodes
@@ -37,7 +33,6 @@ pub struct Graph {
     /// The "root" impls are found by looking up the trait's def_id.
     pub children: DefIdMap<Children>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=13 */
 
 impl Graph {
     pub fn new() -> Graph {
@@ -51,7 +46,6 @@ impl Graph {
         *self.parent.get(&child).unwrap_or_else(|| panic!("Failed to get parent for {child:?}"))
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=12 */
 
 /// What kind of overlap check are we doing -- this exists just for testing and feature-gating
 /// purposes.
@@ -64,7 +58,6 @@ pub enum OverlapMode {
     /// Just check for negative impls, not for "where clause not implemented": used for testing.
     Strict,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=get | COMPLEXITY=20 | LINES=35 */
 
 impl OverlapMode {
     pub fn get(tcx: TyCtxt<'_>, trait_id: DefId) -> OverlapMode {
@@ -100,7 +93,6 @@ impl OverlapMode {
         *self == OverlapMode::Stable || *self == OverlapMode::WithNegative
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Children | COMPLEXITY=7 | LINES=20 */
 
 /// Children of a given impl, grouped into blanket/non-blanket varieties as is
 /// done in `TraitDef`.
@@ -121,7 +113,6 @@ pub struct Children {
     /// Blanket impls associated with the trait.
     pub blanket_impls: Vec<DefId>,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// A node in the specialization graph is either an impl or a trait
 /// definition; either can serve as a source of item definitions.
@@ -131,7 +122,6 @@ pub enum Node {
     Impl(DefId),
     Trait(DefId),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_from_trait | COMPLEXITY=15 | LINES=28 */
 
 impl Node {
     pub fn is_from_trait(&self) -> bool {
@@ -160,7 +150,6 @@ impl Node {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=Ancestors | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone)]
 pub struct Ancestors<'tcx> {
@@ -168,7 +157,6 @@ pub struct Ancestors<'tcx> {
     specialization_graph: &'tcx Graph,
     current_source: Option<Node>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=next | COMPLEXITY=12 | LINES=17 */
 
 impl Iterator for Ancestors<'_> {
     type Item = Node;
@@ -186,7 +174,6 @@ impl Iterator for Ancestors<'_> {
         cur
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=LeafDef | COMPLEXITY=16 | LINES=36 */
 
 /// Information about the most specialized definition of an associated item.
 #[derive(Debug)]
@@ -223,7 +210,6 @@ pub struct LeafDef {
     /// (doesn't finalize it).
     pub finalizing_node: Option<Node>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=is_final | COMPLEXITY=3 | LINES=7 */
 
 impl LeafDef {
     /// Returns whether this definition is known to not be further specializable.
@@ -231,7 +217,6 @@ impl LeafDef {
         self.finalizing_node.is_some()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=leaf_def | COMPLEXITY=16 | LINES=27 */
 
 impl<'tcx> Ancestors<'tcx> {
     /// Finds the bottom-most (ie. most specialized) definition of an associated
@@ -259,7 +244,6 @@ impl<'tcx> Ancestors<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=ancestors | COMPLEXITY=12 | LINES=23 */
 
 /// Walk up the specialization ancestors of a given impl, starting with that
 /// impl itself.

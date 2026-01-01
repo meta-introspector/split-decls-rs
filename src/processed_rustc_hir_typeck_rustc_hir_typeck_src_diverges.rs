@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/diverges.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{cmp, ops};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_complete::{DUMMY_SP, Span};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=33 */
 
 /// Tracks whether executing a node may exit normally (versus
 /// return/break/panic, which "diverge", leaving dead code in their
@@ -38,7 +35,6 @@ pub(crate) enum Diverges {
     /// warning already emitted.
     WarnedAlways,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=bitand | COMPLEXITY=7 | LINES=9 */
 
 // Convenience impls for combining `Diverges`.
 
@@ -48,7 +44,6 @@ impl ops::BitAnd for Diverges {
         cmp::min(self, other)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=bitor | COMPLEXITY=5 | LINES=7 */
 
 impl ops::BitOr for Diverges {
     type Output = Self;
@@ -56,21 +51,18 @@ impl ops::BitOr for Diverges {
         cmp::max(self, other)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=bitand_assign | COMPLEXITY=5 | LINES=6 */
 
 impl ops::BitAndAssign for Diverges {
     fn bitand_assign(&mut self, other: Self) {
         *self = *self & other;
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=bitor_assign | COMPLEXITY=5 | LINES=6 */
 
 impl ops::BitOrAssign for Diverges {
     fn bitor_assign(&mut self, other: Self) {
         *self = *self | other;
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 impl Diverges {
     /// Creates a `Diverges::Always` with the provided `span` and the default note message.

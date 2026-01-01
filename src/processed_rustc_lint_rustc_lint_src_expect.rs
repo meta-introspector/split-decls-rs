@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_lint/src/expect.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::lint::LintExpectation;
 use crate::rustc_complete::query::Providers;
@@ -9,12 +8,10 @@ use crate::rustc_complete::lint::builtin::UNFULFILLED_LINT_EXPECTATIONS;
 use crate::rustc_complete::Symbol;
 
 use crate::lints::{Expectation, ExpectationNote};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { lint_expectations, check_expectations, ..*providers };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=lint_expectations | COMPLEXITY=5 | LINES=13 */
 
 fn lint_expectations(tcx: TyCtxt<'_>, (): ()) -> Vec<(LintExpectationId, LintExpectation)> {
     let krate = tcx.hir_crate_items(());
@@ -28,7 +25,6 @@ fn lint_expectations(tcx: TyCtxt<'_>, (): ()) -> Vec<(LintExpectationId, LintExp
 
     expectations
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_expectations | COMPLEXITY=24 | LINES=46 */
 
 fn check_expectations(tcx: TyCtxt<'_>, tool_filter: Option<Symbol>) {
     let lint_expectations = tcx.lint_expectations(());

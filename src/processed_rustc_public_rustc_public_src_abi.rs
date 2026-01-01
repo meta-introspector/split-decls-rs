@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_public/src/abi.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::num::NonZero;
 use std::ops::RangeInclusive;
 
@@ -10,11 +8,8 @@ use serde::Serialize;
 use crate::compiler_interface::with;
 use crate::mir::FieldIdx;
 use crate::target::{MachineInfo, MachineSize as Size};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{Align, Ty, VariantIdx};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Error, Opaque, error};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=FnAbi | COMPLEXITY=3 | LINES=21 */
 
 /// A function ABI definition.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -36,7 +31,6 @@ pub struct FnAbi {
     /// Whether this is a variadic C function,
     pub c_variadic: bool,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ArgAbi | COMPLEXITY=2 | LINES=8 */
 
 /// Information about the ABI of a function's argument, or return value.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -45,7 +39,6 @@ pub struct ArgAbi {
     pub layout: Layout,
     pub mode: PassMode,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 /// How a function argument should be passed in to the target function.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -67,7 +60,6 @@ pub enum PassMode {
     /// Pass the argument indirectly via a hidden pointer.
     Indirect { attrs: Opaque, meta_attrs: Opaque, on_stack: bool },
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TyAndLayout | COMPLEXITY=2 | LINES=7 */
 
 /// The layout of a type, alongside the type itself.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -75,7 +67,6 @@ pub struct TyAndLayout {
     pub ty: Ty,
     pub layout: Layout,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=LayoutShape | COMPLEXITY=3 | LINES=24 */
 
 /// The layout of a type in memory.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -100,7 +91,6 @@ pub struct LayoutShape {
     /// The size of this layout in bytes.
     pub size: Size,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_unsized | COMPLEXITY=9 | LINES=18 */
 
 impl LayoutShape {
     /// Returns `true` if the layout corresponds to an unsized type.
@@ -119,7 +109,6 @@ impl LayoutShape {
         self.is_sized() && self.size.bits() == 0 && self.abi_align == 1
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=Layout(usize); | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub struct Layout(usize);
@@ -129,7 +118,6 @@ impl Layout {
         with(|cx| cx.layout_shape(self))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=to_val | COMPLEXITY=6 | LINES=9 */
 
 impl crate::IndexedVal for Layout {
     fn to_val(index: usize) -> Self {
@@ -139,7 +127,6 @@ impl crate::IndexedVal for Layout {
         self.0
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=28 */
 
 /// Describes how the fields of a type are shaped in memory.
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -168,7 +155,6 @@ pub enum FieldsShape {
         offsets: Vec<Size>,
     },
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fields_by_offset_order | COMPLEXITY=18 | LINES=23 */
 
 impl FieldsShape {
     pub fn fields_by_offset_order(&self) -> Vec<FieldIdx> {
@@ -192,7 +178,6 @@ impl FieldsShape {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=22 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub enum VariantsShape {
@@ -215,7 +200,6 @@ pub enum VariantsShape {
         variants: Vec<LayoutShape>,
     },
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=23 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
 pub enum TagEncoding {
@@ -239,7 +223,6 @@ pub enum TagEncoding {
         niche_start: u128,
     },
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 /// Describes how values of the type are passed by target ABIs,
 /// in terms of categories of C types there are ABI rules for.
@@ -256,7 +239,6 @@ pub enum ValueAbi {
         sized: bool,
     },
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_unsized | COMPLEXITY=11 | LINES=10 */
 
 impl ValueAbi {
     /// Returns `true` if the layout corresponds to an unsized type.
@@ -267,7 +249,6 @@ impl ValueAbi {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=19 */
 
 /// Information about one scalar component of a Rust type.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, Serialize)]
@@ -287,7 +268,6 @@ pub enum Scalar {
         value: Primitive,
     },
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=has_niche | COMPLEXITY=10 | LINES=11 */
 
 impl Scalar {
     pub fn has_niche(&self, target: &MachineInfo) -> bool {
@@ -299,7 +279,6 @@ impl Scalar {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
 
 /// Fundamental unit of memory access and layout.
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize)]
@@ -320,7 +299,6 @@ pub enum Primitive {
     },
     Pointer(AddressSpace),
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=size | COMPLEXITY=9 | LINES=10 */
 
 impl Primitive {
     pub fn size(self, target: &MachineInfo) -> Size {
@@ -331,7 +309,6 @@ impl Primitive {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Enum representing the existing integer lengths.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
@@ -342,7 +319,6 @@ pub enum IntegerLength {
     I64,
     I128,
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Enum representing the existing float lengths.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
@@ -352,7 +328,6 @@ pub enum FloatLength {
     F64,
     F128,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=bits | COMPLEXITY=7 | LINES=12 */
 
 impl IntegerLength {
     pub fn bits(self) -> usize {
@@ -365,7 +340,6 @@ impl IntegerLength {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=bits | COMPLEXITY=7 | LINES=11 */
 
 impl FloatLength {
     pub fn bits(self) -> usize {
@@ -377,7 +351,6 @@ impl FloatLength {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=AddressSpace(pub | COMPLEXITY=2 | LINES=11 */
 
 /// An identifier that specifies the address space that some operation
 /// should operate on. Special address spaces have an effect on code generation,
@@ -389,7 +362,6 @@ impl AddressSpace {
     /// The default address space, corresponding to data space.
     pub const DATA: Self = AddressSpace(0);
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=WrappingRange | COMPLEXITY=4 | LINES=13 */
 
 /// Inclusive wrap-around range of valid values (bitwise representation), that is, if
 /// start > end, it represents `start..=MAX`, followed by `0..=end`.
@@ -403,7 +375,6 @@ pub struct WrappingRange {
     pub start: u128,
     pub end: u128,
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=is_full | COMPLEXITY=29 | LINES=33 */
 
 impl WrappingRange {
     /// Returns `true` if `size` completely fills the range.
@@ -437,7 +408,6 @@ impl WrappingRange {
         self.start > self.end
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
 
 impl Debug for WrappingRange {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -449,7 +419,6 @@ impl Debug for WrappingRange {
         Ok(())
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=38 */
 
 /// General language calling conventions.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -488,7 +457,6 @@ pub enum CallConvention {
 
     RiscvInterrupt,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=ReprFlags | COMPLEXITY=2 | LINES=9 */
 
 #[non_exhaustive]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
@@ -498,7 +466,6 @@ pub struct ReprFlags {
     pub is_transparent: bool,
     pub is_linear: bool,
 }
-/* AST_META: AST_ID=33 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=16 */
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
 pub enum IntegerType {
@@ -515,7 +482,6 @@ pub enum IntegerType {
         is_signed: bool,
     },
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=ReprOptions | COMPLEXITY=2 | LINES=10 */
 
 /// Representation options provided by the user
 #[non_exhaustive]

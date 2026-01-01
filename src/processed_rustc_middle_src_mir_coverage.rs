@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/coverage.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Metadata from source code coverage analysis and instrumentation.
 
 use std::fmt::{self, Debug, Formatter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=BlockMarkerId | COMPLEXITY=4 | LINES=10 */
 use crate::rustc_complete::Span;
 
 crate::rustc_index::newtype_index! {
@@ -20,7 +16,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "BlockMarkerId({})"]
     pub struct BlockMarkerId {}
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CounterId | COMPLEXITY=5 | LINES=17 */
 
 crate::rustc_index::newtype_index! {
     /// ID of a coverage counter. Values ascend from 0.
@@ -38,7 +33,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "CounterId({})"]
     pub struct CounterId {}
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ExpressionId | COMPLEXITY=5 | LINES=17 */
 
 crate::rustc_index::newtype_index! {
     /// ID of a coverage-counter expression. Values ascend from 0.
@@ -56,7 +50,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "ExpressionId({})"]
     pub struct ExpressionId {}
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Enum that can hold a constant zero value, the ID of an physical coverage
 /// counter, or the ID of a coverage-counter expression.
@@ -67,7 +60,6 @@ pub enum CovTerm {
     Counter(CounterId),
     Expression(ExpressionId),
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl Debug for CovTerm {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
@@ -78,7 +70,6 @@ impl Debug for CovTerm {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 #[derive(Clone, PartialEq, TyEncodable, TyDecodable, Hash, HashStable)]
 pub enum CoverageKind {
@@ -101,7 +92,6 @@ pub enum CoverageKind {
     /// to a no-op, depending on the outcome of counter-creation.
     VirtualCounter { bcb: BasicCoverageBlock },
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
 
 impl Debug for CoverageKind {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -113,7 +103,6 @@ impl Debug for CoverageKind {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, HashStable)]
 #[derive(TyEncodable, TyDecodable)]
@@ -121,7 +110,6 @@ pub enum Op {
     Subtract,
     Add,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_add | COMPLEXITY=4 | LINES=10 */
 
 impl Op {
     pub fn is_add(&self) -> bool {
@@ -132,7 +120,6 @@ impl Op {
         matches!(self, Self::Subtract)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Expression | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[derive(TyEncodable, TyDecodable, Hash, HashStable)]
@@ -141,7 +128,6 @@ pub struct Expression {
     pub op: Op,
     pub rhs: CovTerm,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[derive(Clone, Debug)]
 #[derive(TyEncodable, TyDecodable, Hash, HashStable)]
@@ -151,7 +137,6 @@ pub enum MappingKind {
     /// Associates a branch region with separate counters for true and false.
     Branch { true_bcb: BasicCoverageBlock, false_bcb: BasicCoverageBlock },
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Mapping | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug)]
 #[derive(TyEncodable, TyDecodable, Hash, HashStable)]
@@ -159,7 +144,6 @@ pub struct Mapping {
     pub kind: MappingKind,
     pub span: Span,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=FunctionCoverageInfo | COMPLEXITY=3 | LINES=16 */
 
 /// Stores per-function coverage information attached to a `mir::Body`,
 /// to be used in conjunction with the individual coverage statements injected
@@ -176,7 +160,6 @@ pub struct FunctionCoverageInfo {
 
     pub mappings: Vec<Mapping>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=CoverageInfoHi | COMPLEXITY=5 | LINES=16 */
 
 /// Coverage information for a function, recorded during MIR building and
 /// attached to the corresponding `mir::Body`. Used by the `InstrumentCoverage`
@@ -193,7 +176,6 @@ pub struct CoverageInfoHi {
     pub num_block_markers: usize,
     pub branch_spans: Vec<BranchSpan>,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=BranchSpan | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug)]
 #[derive(TyEncodable, TyDecodable, Hash, HashStable)]
@@ -202,7 +184,6 @@ pub struct BranchSpan {
     pub true_marker: BlockMarkerId,
     pub false_marker: BlockMarkerId,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=CoverageIdsInfo | COMPLEXITY=2 | LINES=12 */
 
 /// Contains information needed during codegen, obtained by inspecting the
 /// function's MIR after MIR optimizations.
@@ -215,7 +196,6 @@ pub struct CoverageIdsInfo {
     pub term_for_bcb: IndexVec<BasicCoverageBlock, Option<CovTerm>>,
     pub expressions: IndexVec<ExpressionId, Expression>,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=BasicCoverageBlock | COMPLEXITY=5 | LINES=16 */
 
 crate::rustc_index::newtype_index! {
     /// During the `InstrumentCoverage` MIR pass, a BCB is a node in the
@@ -232,7 +212,6 @@ crate::rustc_index::newtype_index! {
         const START_BCB = 0;
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=NodeFlowData | COMPLEXITY=6 | LINES=25 */
 
 /// Data representing a view of some underlying graph, in which each node's
 /// successors have been merged into a single "supernode".

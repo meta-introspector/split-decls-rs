@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/normalize_erasing_regions.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 // Methods for normalizing when you don't care about regions (and
 // aren't doing type inference). If either of those things don't
 // apply to you, use `infcx.normalize(...)`.
@@ -10,23 +9,19 @@
 // or constant found within. (This underlying query is what is cached.)
 
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::traits::query::NoSolution;
 use crate::ty::{
     self, EarlyBinder, FallibleTypeFolder, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeVisitableExt,
 };
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Copy, Clone, HashStable, TyEncodable, TyDecodable)]
 pub enum NormalizationError<'tcx> {
     Type(Ty<'tcx>),
     Const(ty::Const<'tcx>),
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=get_type_for_failure | COMPLEXITY=9 | LINES=9 */
 
 impl<'tcx> NormalizationError<'tcx> {
     pub fn get_type_for_failure(&self) -> String {
@@ -36,7 +31,6 @@ impl<'tcx> NormalizationError<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=normalize_erasing_regions | COMPLEXITY=33 | LINES=125 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Erase the regions in `value` and then fully normalize all the
@@ -162,13 +156,11 @@ impl<'tcx> TyCtxt<'tcx> {
         self.try_normalize_erasing_regions(typing_env, instantiated)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=NormalizeAfterErasingRegionsFolder | COMPLEXITY=2 | LINES=5 */
 
 struct NormalizeAfterErasingRegionsFolder<'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=normalize_generic_arg_after_erasing_regions | COMPLEXITY=7 | LINES=17 */
 
 impl<'tcx> NormalizeAfterErasingRegionsFolder<'tcx> {
     fn normalize_generic_arg_after_erasing_regions(
@@ -186,7 +178,6 @@ impl<'tcx> NormalizeAfterErasingRegionsFolder<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=7 | LINES=14 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for NormalizeAfterErasingRegionsFolder<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -201,13 +192,11 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for NormalizeAfterErasingRegionsFolder<'tcx>
         self.normalize_generic_arg_after_erasing_regions(c.into()).expect_const()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TryNormalizeAfterErasingRegionsFolder | COMPLEXITY=2 | LINES=5 */
 
 struct TryNormalizeAfterErasingRegionsFolder<'tcx> {
     tcx: TyCtxt<'tcx>,
     typing_env: ty::TypingEnv<'tcx>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=15 */
 
 impl<'tcx> TryNormalizeAfterErasingRegionsFolder<'tcx> {
     fn new(tcx: TyCtxt<'tcx>, typing_env: ty::TypingEnv<'tcx>) -> Self {
@@ -223,7 +212,6 @@ impl<'tcx> TryNormalizeAfterErasingRegionsFolder<'tcx> {
         self.tcx.try_normalize_generic_arg_after_erasing_regions(input)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=16 | LINES=22 */
 
 impl<'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for TryNormalizeAfterErasingRegionsFolder<'tcx> {
     type Error = NormalizationError<'tcx>;

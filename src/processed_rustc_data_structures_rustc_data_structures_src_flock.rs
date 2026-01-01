@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flock.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
 // Simple file-locking apis for each OS.
 //
 // This is not meant to be in the standard library, it does nothing with
@@ -23,6 +22,5 @@ cfg_select! {
         use unsupported as imp;
     }
 }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 
 pub use imp::Lock;

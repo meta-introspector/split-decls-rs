@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_query_system/src/dep_graph/query.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, LinkedGraph, NodeIndex};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::IndexVec;
 
 use super::{DepNode, DepNodeIndex};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=DepGraphQuery | COMPLEXITY=2 | LINES=6 */
 
 pub struct DepGraphQuery {
     pub graph: LinkedGraph<DepNode, ()>,
     pub indices: FxHashMap<DepNode, NodeIndex>,
     pub dep_index_to_index: IndexVec<DepNodeIndex, Option<NodeIndex>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=24 | LINES=54 */
 
 impl DepGraphQuery {
     pub fn new(prev_node_count: usize) -> DepGraphQuery {

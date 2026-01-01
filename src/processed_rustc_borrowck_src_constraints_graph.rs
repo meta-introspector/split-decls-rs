@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/constraints/graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::graph;
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::ty::RegionVid;
 
 use crate::constraints::{OutlivesConstraint, OutlivesConstraintIndex, OutlivesConstraintSet};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// The construct graph organizes the constraints by their end-points.
 /// It can be used to view a `R1: R2` constraint as either an edge `R1
@@ -15,7 +13,6 @@ pub(crate) struct ConstraintGraph<D: ConstraintGraphDirection> {
     first_constraints: IndexVec<RegionVid, Option<OutlivesConstraintIndex>>,
     next_constraints: IndexVec<OutlivesConstraintIndex, Option<OutlivesConstraintIndex>>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=start_region | COMPLEXITY=2 | LINES=12 */
 
 pub(crate) type NormalConstraintGraph = ConstraintGraph<Normal>;
 
@@ -28,7 +25,6 @@ pub(crate) trait ConstraintGraphDirection: Copy + 'static {
     fn end_region(sup: RegionVid, sub: RegionVid) -> RegionVid;
     fn is_normal() -> bool;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=start_region | COMPLEXITY=8 | LINES=21 */
 
 /// In normal mode, a `R1: R2` constraint results in an edge `R1 ->
 /// R2`. This is what we use when constructing the SCCs for
@@ -50,7 +46,6 @@ impl ConstraintGraphDirection for Normal {
         true
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=start_region | COMPLEXITY=10 | LINES=21 */
 
 /// In reverse mode, a `R1: R2` constraint results in an edge `R2 ->
 /// R1`. We use this for optimizing liveness computation, because then
@@ -72,7 +67,6 @@ impl ConstraintGraphDirection for Reverse {
         false
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=54 */
 
 impl<D: ConstraintGraphDirection> ConstraintGraph<D> {
     /// Creates a "dependency graph" where each region constraint `R1:
@@ -127,14 +121,12 @@ impl<D: ConstraintGraphDirection> ConstraintGraph<D> {
         EdgesFromStatic { next_static_idx: 0, end_static_idx: self.first_constraints.len() }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct EdgesFromGraph<'a, 'tcx, D: ConstraintGraphDirection> {
     graph: &'a ConstraintGraph<D>,
     constraints: &'a OutlivesConstraintSet<'tcx>,
     pointer: Option<OutlivesConstraintIndex>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=13 */
 
 impl<'a, 'tcx, D: ConstraintGraphDirection> Iterator for EdgesFromGraph<'a, 'tcx, D> {
     type Item = &'a OutlivesConstraint<'tcx>;
@@ -148,13 +140,11 @@ impl<'a, 'tcx, D: ConstraintGraphDirection> Iterator for EdgesFromGraph<'a, 'tcx
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct EdgesFromStatic {
     next_static_idx: usize,
     end_static_idx: usize,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=next | COMPLEXITY=9 | LINES=14 */
 
 impl Iterator for EdgesFromStatic {
     type Item = RegionVid;
@@ -169,7 +159,6 @@ impl Iterator for EdgesFromStatic {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 /// This struct brings together a constraint set and a (normal, not
 /// reverse) constraint graph. It implements the graph traits and is
@@ -179,7 +168,6 @@ pub(crate) struct RegionGraph<'a, 'tcx, D: ConstraintGraphDirection> {
     constraint_graph: &'a ConstraintGraph<D>,
     static_region: RegionVid,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=29 */
 
 impl<'a, 'tcx, D: ConstraintGraphDirection> RegionGraph<'a, 'tcx, D> {
     /// Creates a "dependency graph" where each region constraint `R1:
@@ -209,13 +197,11 @@ impl<'a, 'tcx, D: ConstraintGraphDirection> RegionGraph<'a, 'tcx, D> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) enum Successors<'a, 'tcx, D: ConstraintGraphDirection> {
     FromStatic(EdgesFromStatic),
     FromGraph(EdgesFromGraph<'a, 'tcx, D>),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=next | COMPLEXITY=12 | LINES=17 */
 
 impl<'a, 'tcx, D: ConstraintGraphDirection> Iterator for Successors<'a, 'tcx, D> {
     type Item = RegionVid;
@@ -233,7 +219,6 @@ impl<'a, 'tcx, D: ConstraintGraphDirection> Iterator for Successors<'a, 'tcx, D>
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=8 */
 
 impl<'a, 'tcx, D: ConstraintGraphDirection> graph::DirectedGraph for RegionGraph<'a, 'tcx, D> {
     type Node = RegionVid;
@@ -242,7 +227,6 @@ impl<'a, 'tcx, D: ConstraintGraphDirection> graph::DirectedGraph for RegionGraph
         self.constraint_graph.first_constraints.len()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, 'tcx, D: ConstraintGraphDirection> graph::Successors for RegionGraph<'a, 'tcx, D> {
     fn successors(&self, node: Self::Node) -> impl Iterator<Item = Self::Node> {

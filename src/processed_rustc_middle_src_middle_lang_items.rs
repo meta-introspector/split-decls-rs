@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/lang_items.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 // Detecting lang items.
 //
 // Language items are items that represent concepts intrinsic to the language
@@ -15,7 +14,6 @@ use crate::rustc_complete::Span;
 use crate::rustc_target::spec::PanicStrategy;
 
 use crate::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=require_lang_item | COMPLEXITY=41 | LINES=69 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Returns the `DefId` for a given `LangItem`.
@@ -85,7 +83,6 @@ impl<'tcx> TyCtxt<'tcx> {
         self.fn_trait_kind_from_def_id(id).is_some()
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=required | COMPLEXITY=14 | LINES=18 */
 
 /// Returns `true` if the specified `lang_item` must be present for this
 /// compilation.

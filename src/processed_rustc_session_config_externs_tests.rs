@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/config/externs/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_split_extern_opt | COMPLEXITY=4 | LINES=33 */
 use std::path::PathBuf;
 
 use super::split_extern_opt;
@@ -33,7 +32,6 @@ fn test_split_extern_opt() {
     assert_eq!(extern_opt.path, None);
     assert_eq!(extern_opt.options, None);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_split_extern_opt_invalid | COMPLEXITY=5 | LINES=17 */
 
 /// Tests some invalid cases for split_extern_opt.
 #[test]
@@ -51,7 +49,6 @@ fn test_split_extern_opt_invalid() {
     assert!(result.is_err());
     let _ = result.map_err(|e| e.cancel());
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_split_extern_opt_nested | COMPLEXITY=7 | LINES=29 */
 
 /// Tests some cases for split_extern_opt with nested crates like `foo::bar`.
 #[test]
@@ -81,7 +78,6 @@ fn test_split_extern_opt_nested() {
     assert_eq!(extern_opt.path, None);
     assert_eq!(extern_opt.options, None);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_split_extern_opt_nested_invalid | COMPLEXITY=6 | LINES=13 */
 
 /// Tests some invalid cases for split_extern_opt with nested crates like `foo::bar`.
 #[test]

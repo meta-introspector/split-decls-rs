@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/used_muts.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::{
     Local, Location, Place, Statement, StatementKind, Terminator, TerminatorKind,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=40 */
 use tracing::debug;
 
 use crate::MirBorrowckCtxt;
@@ -47,7 +44,6 @@ impl<'tcx> MirBorrowckCtxt<'_, '_, 'tcx> {
         self.used_mut = self.used_mut.union(&never_initialized_mut_locals).cloned().collect();
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=GatherUsedMutsVisitor | COMPLEXITY=4 | LINES=8 */
 
 /// MIR visitor for collecting used mutable variables.
 /// The 'visit lifetime represents the duration of the MIR walk.
@@ -56,7 +52,6 @@ struct GatherUsedMutsVisitor<'a, 'b, 'infcx, 'tcx> {
     never_initialized_mut_locals: &'a mut FxIndexSet<Local>,
     mbcx: &'a mut MirBorrowckCtxt<'b, 'infcx, 'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=remove_never_initialized_mut_locals | COMPLEXITY=4 | LINES=12 */
 
 impl GatherUsedMutsVisitor<'_, '_, '_, '_> {
     fn remove_never_initialized_mut_locals(&mut self, into: Place<'_>) {
@@ -69,7 +64,6 @@ impl GatherUsedMutsVisitor<'_, '_, '_, '_> {
         self.never_initialized_mut_locals.swap_remove(&into.local);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_terminator | COMPLEXITY=36 | LINES=44 */
 
 impl<'tcx> Visitor<'tcx> for GatherUsedMutsVisitor<'_, '_, '_, 'tcx> {
     fn visit_terminator(&mut self, terminator: &Terminator<'tcx>, location: Location) {

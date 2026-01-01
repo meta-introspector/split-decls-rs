@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=23 */
 // This module defines traits for attribute parsers, little state machines that recognize and parse
 // attributes out of a longer list of attributes. The main trait is called [`AttributeParser`].
 // You can find more docs about [`AttributeParser`]s on the trait itself.
@@ -23,14 +22,11 @@
 use std::marker::PhantomData;
 
 use crate::rustc_feature::{AttributeTemplate, AttributeType, template};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 use crate::context::{AcceptContext, FinalizeContext, Stage};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=16 | LINES=78 */
 use crate::parser::ArgParser;
 use crate::session_diagnostics::UnusedMultiple;
 use crate::target_checking::AllowedTargets;
@@ -80,7 +76,6 @@ pub(crate) trait AttributeParser<S: Stage>: Default + 'static {
     /// Your accept mappings should determine whether this returns something.
     fn finalize(self, cx: &FinalizeContext<'_, '_, S>) -> Option<AttributeKind>;
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=13 | LINES=36 */
 
 /// Alternative to [`AttributeParser`] that automatically handles state management.
 /// A slightly simpler and more restricted way to convert attributes.
@@ -117,7 +112,6 @@ pub(crate) trait SingleAttributeParser<S: Stage>: 'static {
     /// Converts a single syntactical attribute to a single semantic attribute, or [`AttributeKind`]
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind>;
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=13 */
 
 /// Use in combination with [`SingleAttributeParser`].
 /// `Single<T: SingleAttributeParser>` implements [`AttributeParser`].
@@ -131,7 +125,6 @@ impl<T: SingleAttributeParser<S>, S: Stage> Default for Single<T, S> {
         Self(Default::default(), Default::default())
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=23 | LINES=36 */
 
 impl<T: SingleAttributeParser<S>, S: Stage> AttributeParser<S> for Single<T, S> {
     const ATTRIBUTES: AcceptMapping<Self, S> = &[(
@@ -168,7 +161,6 @@ impl<T: SingleAttributeParser<S>, S: Stage> AttributeParser<S> for Single<T, S> 
         Some(self.1?.0)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
 
 pub(crate) enum OnDuplicate<S: Stage> {
     /// Give a default warning
@@ -190,7 +182,6 @@ pub(crate) enum OnDuplicate<S: Stage> {
     /// - `used` is the span of the attribute that was used in favor of the unused attribute
     Custom(fn(cx: &AcceptContext<'_, '_, S>, used: Span, unused: Span)),
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=exec | COMPLEXITY=11 | LINES=25 */
 
 impl<S: Stage> OnDuplicate<S> {
     fn exec<P: SingleAttributeParser<S>>(
@@ -216,7 +207,6 @@ impl<S: Stage> OnDuplicate<S> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
 
 pub(crate) enum AttributeOrder {
     /// Duplicates after the innermost instance of the attribute will be an error/warning.
@@ -241,7 +231,6 @@ pub(crate) enum AttributeOrder {
     /// ```
     KeepOutermost,
 }
-/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 
 /// An even simpler version of [`SingleAttributeParser`]:
 /// now automatically check that there are no arguments provided to the attribute.
@@ -257,7 +246,6 @@ pub(crate) trait NoArgsAttributeParser<S: Stage>: 'static {
     /// Create the [`AttributeKind`] given attribute's [`Span`].
     const CREATE: fn(Span) -> AttributeKind;
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=8 */
 
 pub(crate) struct WithoutArgs<T: NoArgsAttributeParser<S>, S: Stage>(PhantomData<(S, T)>);
 
@@ -266,7 +254,6 @@ impl<T: NoArgsAttributeParser<S>, S: Stage> Default for WithoutArgs<T, S> {
         Self(Default::default())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=16 */
 
 impl<T: NoArgsAttributeParser<S>, S: Stage> SingleAttributeParser<S> for WithoutArgs<T, S> {
     const PATH: &[Symbol] = T::PATH;
@@ -283,7 +270,6 @@ impl<T: NoArgsAttributeParser<S>, S: Stage> SingleAttributeParser<S> for Without
         Some(T::CREATE(cx.attr_span))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=33 */
 
 type ConvertFn<E> = fn(ThinVec<E>, Span) -> AttributeKind;
 
@@ -317,7 +303,6 @@ pub(crate) trait CombineAttributeParser<S: Stage>: 'static {
         args: &'c ArgParser<'_>,
     ) -> impl IntoIterator<Item = Self::Item> + 'c;
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 /// Use in combination with [`CombineAttributeParser`].
 /// `Combine<T: CombineAttributeParser>` implements [`AttributeParser`].
@@ -328,7 +313,6 @@ pub(crate) struct Combine<T: CombineAttributeParser<S>, S: Stage> {
     /// The full span of the first attribute that was encountered.
     first_span: Option<Span>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=10 */
 
 impl<T: CombineAttributeParser<S>, S: Stage> Default for Combine<T, S> {
     fn default() -> Self {
@@ -339,7 +323,6 @@ impl<T: CombineAttributeParser<S>, S: Stage> Default for Combine<T, S> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=13 | LINES=19 */
 
 impl<T: CombineAttributeParser<S>, S: Stage> AttributeParser<S> for Combine<T, S> {
     const ATTRIBUTES: AcceptMapping<Self, S> =

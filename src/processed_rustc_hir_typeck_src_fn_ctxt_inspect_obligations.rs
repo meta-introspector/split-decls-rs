@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/fn_ctxt/inspect_obligations.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // A utility module to inspect currently ambiguous obligations in the current context.
 
 use crate::rustc_infer::traits::{self, ObligationCause, PredicateObligations};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::traits::solve::GoalSource;
 use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Span;
 use crate::rustc_trait_selection::solve::Certainty;
 use crate::rustc_trait_selection::solve::inspect::{
     InspectConfig, InspectGoal, ProofTreeInferCtxtExt, ProofTreeVisitor,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predicate_has_self_ty | COMPLEXITY=34 | LINES=89 */
 
 use crate::FnCtxt;
 
@@ -104,7 +99,6 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         obligations_for_self_ty
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=NestedObligationsForSelfTy | COMPLEXITY=2 | LINES=7 */
 
 struct NestedObligationsForSelfTy<'a, 'tcx> {
     fcx: &'a FnCtxt<'a, 'tcx>,
@@ -112,7 +106,6 @@ struct NestedObligationsForSelfTy<'a, 'tcx> {
     root_cause: &'a ObligationCause<'tcx>,
     obligations_for_self_ty: &'a mut PredicateObligations<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=span | COMPLEXITY=30 | LINES=54 */
 
 impl<'a, 'tcx> ProofTreeVisitor<'tcx> for NestedObligationsForSelfTy<'a, 'tcx> {
     fn span(&self) -> Span {

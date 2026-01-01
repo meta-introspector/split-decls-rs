@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/rustc_info.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{Command, Stdio};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 pub(crate) fn get_host_triple(rustc: &Path) -> String {
     let version_info =
@@ -20,7 +17,6 @@ pub(crate) fn get_host_triple(rustc: &Path) -> String {
         .trim()
         .to_owned()
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn get_toolchain_name() -> String {
     let active_toolchain = Command::new("rustup")
@@ -31,7 +27,6 @@ pub(crate) fn get_toolchain_name() -> String {
         .stdout;
     String::from_utf8(active_toolchain).unwrap().trim().split_once(' ').unwrap().0.to_owned()
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) fn get_cargo_path() -> PathBuf {
     if let Ok(cargo) = std::env::var("CARGO") {
@@ -45,7 +40,6 @@ pub(crate) fn get_cargo_path() -> PathBuf {
         .stdout;
     Path::new(String::from_utf8(cargo_path).unwrap().trim()).to_owned()
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) fn get_rustc_path() -> PathBuf {
     if let Ok(rustc) = std::env::var("RUSTC") {
@@ -59,7 +53,6 @@ pub(crate) fn get_rustc_path() -> PathBuf {
         .stdout;
     Path::new(String::from_utf8(rustc_path).unwrap().trim()).to_owned()
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 pub(crate) fn get_rustdoc_path() -> PathBuf {
     if let Ok(rustdoc) = std::env::var("RUSTDOC") {
@@ -73,7 +66,6 @@ pub(crate) fn get_rustdoc_path() -> PathBuf {
         .stdout;
     Path::new(String::from_utf8(rustc_path).unwrap().trim()).to_owned()
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 pub(crate) fn get_default_sysroot(rustc: &Path) -> PathBuf {
     let default_sysroot = Command::new(rustc)
@@ -84,7 +76,6 @@ pub(crate) fn get_default_sysroot(rustc: &Path) -> PathBuf {
         .stdout;
     Path::new(String::from_utf8(default_sysroot).unwrap().trim()).to_owned()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 // FIXME call once for each target and pass result around in struct
 pub(crate) fn get_file_name(rustc: &Path, crate_name: &str, crate_type: &str) -> String {

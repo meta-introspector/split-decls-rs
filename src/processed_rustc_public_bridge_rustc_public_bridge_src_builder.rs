@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public_bridge/src/builder.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Logic required to produce a monomorphic body.
 //
 // We retrieve and monomorphize the rustc body representation, i.e., we generate a
@@ -9,14 +8,12 @@ use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::mir::visit::MutVisitor;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 /// Builds a monomorphic body for a given instance.
 pub(crate) struct BodyBuilder<'tcx> {
     tcx: TyCtxt<'tcx>,
     instance: ty::Instance<'tcx>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=37 */
 
 impl<'tcx> BodyBuilder<'tcx> {
     pub(crate) fn new(tcx: TyCtxt<'tcx>, instance: ty::Instance<'tcx>) -> Self {
@@ -54,7 +51,6 @@ impl<'tcx> BodyBuilder<'tcx> {
         mono_body
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit_const_operand | COMPLEXITY=13 | LINES=24 */
 
 impl<'tcx> MutVisitor<'tcx> for BodyBuilder<'tcx> {
     fn visit_const_operand(

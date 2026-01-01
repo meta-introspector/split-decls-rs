@@ -1,18 +1,14 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/region_kind.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::fmt;
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use self::RegionKind::*;
 use crate::{DebruijnIndex, Interner};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=RegionVid | COMPLEXITY=4 | LINES=10 */
 
 crate::rustc_index::newtype_index! {
     /// A **region** **v**ariable **ID**.
@@ -23,7 +19,6 @@ crate::rustc_index::newtype_index! {
     #[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
     pub struct RegionVid {}
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=35 | LINES=158 */
 
 /// Representation of regions. Note that the NLL checker uses a distinct
 /// representation of regions. For this reason, it internally replaces all the
@@ -182,10 +177,8 @@ pub enum RegionKind<I: Interner> {
     /// A region that resulted from some other error. Used exclusively for diagnostics.
     ReError(I::ErrorGuaranteed),
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for RegionKind<I> {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=28 */
 
 impl<I: Interner> fmt::Debug for RegionKind<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -214,7 +207,6 @@ impl<I: Interner> fmt::Debug for RegionKind<I> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=20 | LINES=36 */
 
 #[cfg(feature = "nightly")]
 // This is not a derived impl because a derive would require `I: HashStable`

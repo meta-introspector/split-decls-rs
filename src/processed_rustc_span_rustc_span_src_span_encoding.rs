@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_span/src/span_encoding.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 use crate::rustc_data_structures::fx::FxIndexSet;
 // This code is very hot and uses lots of arithmetic, avoid overflow checks for performance.
 // See https://github.com/rust-lang/rust/pull/119440#issuecomment-1874255727
 use crate::rustc_serialize::int_overflow::DebugStrictAdd;
 
 use crate::def_id::{DefIndex, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::hygiene::SyntaxContext;
 use crate::{BytePos, SPAN_TRACK, SpanData};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Span | COMPLEXITY=36 | LINES=77 */
 
 /// A compressed span.
 ///
@@ -87,7 +84,6 @@ pub struct Span {
     len_with_tag_or_marker: u16,
     ctxt_or_parent_or_marker: u16,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=InlineCtxt | COMPLEXITY=4 | LINES=8 */
 
 // Convenience structures for all span formats.
 #[derive(Clone, Copy)]
@@ -96,7 +92,6 @@ struct InlineCtxt {
     len: u16,
     ctxt: u16,
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=InlineParent | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy)]
 struct InlineParent {
@@ -104,20 +99,17 @@ struct InlineParent {
     len_with_tag: u16,
     parent: u16,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=PartiallyInterned | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 struct PartiallyInterned {
     index: u32,
     ctxt: u16,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=Interned | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Copy)]
 struct Interned {
     index: u32,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=data | COMPLEXITY=9 | LINES=24 */
 
 impl InlineCtxt {
     #[inline]
@@ -142,7 +134,6 @@ impl InlineCtxt {
         InlineCtxt { lo, len, ctxt }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=data | COMPLEXITY=10 | LINES=26 */
 
 impl InlineParent {
     #[inline]
@@ -169,7 +160,6 @@ impl InlineParent {
         InlineParent { lo, len_with_tag, parent }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=data | COMPLEXITY=9 | LINES=20 */
 
 impl PartiallyInterned {
     #[inline]
@@ -190,7 +180,6 @@ impl PartiallyInterned {
         PartiallyInterned { index: span.lo_or_index, ctxt: span.ctxt_or_parent_or_marker }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=data | COMPLEXITY=8 | LINES=17 */
 
 impl Interned {
     #[inline]
@@ -208,7 +197,6 @@ impl Interned {
         Interned { index: span.lo_or_index }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=21 | LINES=33 */
 
 // This code is very hot, and converting span to an enum and matching on it doesn't optimize away
 // properly. So we are using a macro emulating such a match, but expand it directly to an if-else
@@ -242,7 +230,6 @@ macro_rules! match_span_kind {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 // `MAX_LEN` is chosen so that `PARENT_TAG | MAX_LEN` is distinct from
 // `BASE_LEN_INTERNED_MARKER`. (If `MAX_LEN` was 1 higher, this wouldn't be true.)
@@ -255,7 +242,6 @@ const CTXT_INTERNED_MARKER: u16 = 0b1111_1111_1111_1111;
 /// The dummy span has zero position, length, and context, and no parent.
 pub const DUMMY_SP: Span =
     Span { lo_or_index: 0, len_with_tag_or_marker: 0, ctxt_or_parent_or_marker: 0 };
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=new | COMPLEXITY=97 | LINES=201 */
 
 impl Span {
     #[inline]
@@ -457,13 +443,11 @@ impl Span {
         }
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub(crate) struct SpanInterner {
     spans: FxIndexSet<SpanData>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=intern | COMPLEXITY=3 | LINES=7 */
 
 impl SpanInterner {
     fn intern(&mut self, span_data: &SpanData) -> u32 {
@@ -471,7 +455,6 @@ impl SpanInterner {
         index as u32
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=with_span_interner | COMPLEXITY=2 | LINES=6 */
 
 // If an interner exists, return it. Otherwise, prepare a fresh one.
 #[inline]

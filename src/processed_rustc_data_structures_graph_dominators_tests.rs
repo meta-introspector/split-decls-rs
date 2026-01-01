@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/graph/dominators/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=diamond | COMPLEXITY=2 | LINES=13 */
 use super::super::tests::TestGraph;
 use super::*;
 
@@ -13,7 +12,6 @@ fn diamond() {
     assert_eq!(d.immediate_dominator(2), Some(0));
     assert_eq!(d.immediate_dominator(3), Some(0));
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=paper | COMPLEXITY=3 | LINES=18 */
 
 #[test]
 fn paper() {
@@ -32,7 +30,6 @@ fn paper() {
     assert_eq!(d.immediate_dominator(5), Some(6));
     assert_eq!(d.immediate_dominator(6), None);
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=paper_slt | COMPLEXITY=2 | LINES=11 */
 
 #[test]
 fn paper_slt() {
@@ -44,7 +41,6 @@ fn paper_slt() {
 
     dominators(&graph);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=immediate_dominator | COMPLEXITY=2 | LINES=10 */
 
 #[test]
 fn immediate_dominator() {
@@ -55,7 +51,6 @@ fn immediate_dominator() {
     assert_eq!(d.immediate_dominator(2), Some(1));
     assert_eq!(d.immediate_dominator(3), Some(2));
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=transitive_dominator | COMPLEXITY=5 | LINES=26 */
 
 #[test]
 fn transitive_dominator() {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/ssa.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 // We denote as "SSA" the set of locals that verify the following properties:
 // 1/ They are only assigned-to once, either as a function parameter, or in an assign statement;
 // 2/ This single assignment dominates all uses;
@@ -11,15 +10,12 @@
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::middle::resolve_bound_vars::Set1;
 use crate::rustc_complete::mir::visit::*;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 
 pub(super) struct SsaLocals {
     /// Assignments to each local. This defines whether the local is SSA.
@@ -36,7 +32,6 @@ pub(super) struct SsaLocals {
     /// Set of SSA locals that are immutably borrowed.
     borrowed_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=70 | LINES=165 */
 
 impl SsaLocals {
     pub(super) fn new<'tcx>(
@@ -202,7 +197,6 @@ impl SsaLocals {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SsaVisitor | COMPLEXITY=2 | LINES=10 */
 
 struct SsaVisitor<'a, 'tcx> {
     body: &'a Body<'tcx>,
@@ -213,7 +207,6 @@ struct SsaVisitor<'a, 'tcx> {
     // Track locals that are immutably borrowed, so we can check their type is `Freeze` later.
     borrowed_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_dominates | COMPLEXITY=13 | LINES=16 */
 
 impl SsaVisitor<'_, '_> {
     fn check_dominates(&mut self, local: Local, loc: Location) {
@@ -230,7 +223,6 @@ impl SsaVisitor<'_, '_> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=50 | LINES=68 */
 
 impl<'tcx> Visitor<'tcx> for SsaVisitor<'_, 'tcx> {
     fn visit_local(&mut self, local: Local, ctxt: PlaceContext, loc: Location) {
@@ -299,7 +291,6 @@ impl<'tcx> Visitor<'tcx> for SsaVisitor<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=compute_copy_classes | COMPLEXITY=43 | LINES=70 */
 
 #[instrument(level = "trace", skip(ssa, body))]
 fn compute_copy_classes(ssa: &mut SsaLocals, body: &Body<'_>) {
@@ -370,14 +361,12 @@ fn compute_copy_classes(ssa: &mut SsaLocals, body: &Body<'_>) {
     ssa.direct_uses = direct_uses;
     ssa.copy_classes = copies;
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 #[derive(Debug)]
 pub(crate) struct StorageLiveLocals {
     /// Set of "StorageLive" statements for each local.
     storage_live: IndexVec<Local, Set1<DefLocation>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=27 */
 
 impl StorageLiveLocals {
     pub(crate) fn new(

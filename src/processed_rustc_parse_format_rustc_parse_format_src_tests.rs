@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_parse_format/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=same | COMPLEXITY=2 | LINES=9 */
 use Piece::*;
 
 use super::*;
@@ -9,7 +8,6 @@ fn same(fmt: &'static str, p: &[Piece<'static>]) {
     let parser = Parser::new(fmt, None, None, false, ParseMode::Format);
     assert_eq!(parser.collect::<Vec<Piece<'static>>>(), p);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmtdflt | COMPLEXITY=3 | LINES=18 */
 
 fn fmtdflt() -> FormatSpec<'static> {
     return FormatSpec {
@@ -28,14 +26,12 @@ fn fmtdflt() -> FormatSpec<'static> {
         ty_span: None,
     };
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=musterr | COMPLEXITY=2 | LINES=6 */
 
 fn musterr(s: &str) {
     let mut p = Parser::new(s, None, None, false, ParseMode::Format);
     p.next();
     assert!(!p.errors.is_empty());
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=simple | COMPLEXITY=5 | LINES=10 */
 
 #[test]
 fn simple() {
@@ -46,50 +42,41 @@ fn simple() {
     same("}}", &[Lit("}")]);
     same("\\}}", &[Lit("\\"), Lit("}")]);
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=invalid01 | COMPLEXITY=3 | LINES=4 */
 #[test]
 fn invalid01() {
     musterr("{")
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=invalid02 | COMPLEXITY=2 | LINES=4 */
 #[test]
 fn invalid02() {
     musterr("}")
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=invalid04 | COMPLEXITY=3 | LINES=4 */
 #[test]
 fn invalid04() {
     musterr("{3a}")
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=invalid05 | COMPLEXITY=3 | LINES=4 */
 #[test]
 fn invalid05() {
     musterr("{:|}")
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=invalid06 | COMPLEXITY=3 | LINES=4 */
 #[test]
 fn invalid06() {
     musterr("{:>>>}")
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=invalid_position | COMPLEXITY=3 | LINES=5 */
 
 #[test]
 fn invalid_position() {
     musterr("{18446744073709551616}");
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=invalid_width | COMPLEXITY=3 | LINES=5 */
 
 #[test]
 fn invalid_width() {
     musterr("{:18446744073709551616}");
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=invalid_precision | COMPLEXITY=3 | LINES=5 */
 
 #[test]
 fn invalid_precision() {
     musterr("{:.18446744073709551616}");
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=format_empty | COMPLEXITY=4 | LINES=12 */
 
 #[test]
 fn format_empty() {
@@ -102,7 +89,6 @@ fn format_empty() {
         }))],
     );
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=format_tab_empty | COMPLEXITY=5 | LINES=17 */
 #[test]
 fn format_tab_empty() {
     let fmt_pre = r###""\t{}""###;
@@ -120,7 +106,6 @@ fn format_tab_empty() {
         ],
     );
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=format_open_brace_tab | COMPLEXITY=114 | LINES=490 */
 #[test]
 fn format_open_brace_tab() {
     let fmt_pre = r###""{\t""###;

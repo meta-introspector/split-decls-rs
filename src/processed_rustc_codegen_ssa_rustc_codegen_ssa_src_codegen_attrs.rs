@@ -1,32 +1,22 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/codegen_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::str::FromStr;
 
 use crate::rustc_abi::{Align, ExternAbi};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, attr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, InstructionSetAttr, UsedBy};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self as hir, Attribute, LangItem, find_attr, lang_items};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::middle::codegen_fn_attrs::{
     CodegenFnAttrFlags, CodegenFnAttrs, PatchableFunctionEntry,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::{self as ty, TyCtxt};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{Ident, Span, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_target::spec::SanitizerSet;
 
 use crate::errors;
@@ -34,7 +24,6 @@ use crate::errors::NoMangleNameless;
 use crate::target_features::{
     check_target_feature_trait_unsafe, check_tied_features, from_target_feature_attr,
 };
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_fn_sig | COMPLEXITY=9 | LINES=21 */
 
 /// In some cases, attributes are only valid on functions, but it's the `check_attr`
 /// pass that checks that they aren't used anywhere else, rather than this module.
@@ -56,7 +45,6 @@ fn try_fn_sig<'tcx>(
         None
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=parse_instruction_set_attr | COMPLEXITY=23 | LINES=31 */
 
 // FIXME(jdonszelmann): remove when instruction_set becomes a parsed attr
 fn parse_instruction_set_attr(tcx: TyCtxt<'_>, attr: &Attribute) -> Option<InstructionSetAttr> {
@@ -88,7 +76,6 @@ fn parse_instruction_set_attr(tcx: TyCtxt<'_>, attr: &Attribute) -> Option<Instr
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=parse_patchable_function_entry | COMPLEXITY=26 | LINES=53 */
 
 // FIXME(jdonszelmann): remove when patchable_function_entry becomes a parsed attr
 fn parse_patchable_function_entry(
@@ -142,7 +129,6 @@ fn parse_patchable_function_entry(
         Some(PatchableFunctionEntry::from_prefix_and_entry(prefix.unwrap_or(0), entry.unwrap_or(0)))
     })
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=InterestingAttributeDiagnosticSpans | COMPLEXITY=4 | LINES=10 */
 
 /// Spans that are collected when processing built-in attributes,
 /// that are useful for emitting diagnostics later.
@@ -153,7 +139,6 @@ struct InterestingAttributeDiagnosticSpans {
     inline: Option<Span>,
     no_mangle: Option<Span>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=process_builtin_attrs | COMPLEXITY=116 | LINES=188 */
 
 /// Process the builtin attrs ([`hir::Attribute`]) on the item.
 /// Many of them directly translate to codegen attrs.
@@ -342,7 +327,6 @@ fn process_builtin_attrs(
 
     interesting_spans
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=apply_overrides | COMPLEXITY=47 | LINES=80 */
 
 /// Applies overrides for codegen fn attrs. These often have a specific reason why they're necessary.
 /// Please comment why when adding a new one!
@@ -423,7 +407,6 @@ fn apply_overrides(tcx: TyCtxt<'_>, did: LocalDefId, codegen_fn_attrs: &mut Code
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=check_result | COMPLEXITY=29 | LINES=80 */
 
 fn check_result(
     tcx: TyCtxt<'_>,
@@ -504,7 +487,6 @@ fn check_result(
             .emit();
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=handle_lang_items | COMPLEXITY=20 | LINES=47 */
 
 fn handle_lang_items(
     tcx: TyCtxt<'_>,
@@ -552,7 +534,6 @@ fn handle_lang_items(
         err.emit();
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=codegen_fn_attrs | COMPLEXITY=12 | LINES=28 */
 
 /// Generate the [`CodegenFnAttrs`] for an item (identified by the [`LocalDefId`]).
 ///
@@ -581,7 +562,6 @@ fn codegen_fn_attrs(tcx: TyCtxt<'_>, did: LocalDefId) -> CodegenFnAttrs {
 
     codegen_fn_attrs
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=disabled_sanitizers_for | COMPLEXITY=14 | LINES=26 */
 
 fn disabled_sanitizers_for(tcx: TyCtxt<'_>, did: LocalDefId) -> SanitizerSet {
     // Backtrack to the crate root.
@@ -608,7 +588,6 @@ fn disabled_sanitizers_for(tcx: TyCtxt<'_>, did: LocalDefId) -> SanitizerSet {
     }
     disabled
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=should_inherit_track_caller | COMPLEXITY=7 | LINES=8 */
 
 /// Checks if the provided DefId is a method in a trait impl for a trait which has track_caller
 /// applied to the method prototype.
@@ -617,14 +596,12 @@ fn should_inherit_track_caller(tcx: TyCtxt<'_>, def_id: DefId) -> bool {
         tcx.codegen_fn_attrs(id).flags.intersects(CodegenFnAttrFlags::TRACK_CALLER)
     })
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=inherited_align | COMPLEXITY=4 | LINES=6 */
 
 /// If the provided DefId is a method in a trait impl, return the value of the `#[align]`
 /// attribute on the method prototype (if any).
 fn inherited_align<'tcx>(tcx: TyCtxt<'tcx>, def_id: DefId) -> Option<Align> {
     tcx.codegen_fn_attrs(tcx.trait_item_of(def_id)?).alignment
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=autodiff_attrs | COMPLEXITY=77 | LINES=110 */
 
 /// We now check the #\[rustc_autodiff\] attributes which we generated from the #[autodiff(...)]
 /// macros. There are two forms. The pure one without args to mark primal functions (the functions
@@ -735,7 +712,6 @@ pub fn autodiff_attrs(tcx: TyCtxt<'_>, id: DefId) -> Option<AutoDiffAttrs> {
 
     Some(AutoDiffAttrs { mode, width, ret_activity, input_activity: arg_activities })
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

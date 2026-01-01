@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/unhash.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::collections::{HashMap, HashSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::hash::{BuildHasherDefault, Hasher};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Unhasher | COMPLEXITY=2 | LINES=11 */
 
 pub type UnhashMap<K, V> = HashMap<K, V, BuildHasherDefault<Unhasher>>;
 pub type UnhashSet<V> = HashSet<V, BuildHasherDefault<Unhasher>>;
@@ -15,7 +12,6 @@ pub type UnindexMap<K, V> = indexmap::IndexMap<K, V, BuildHasherDefault<Unhasher
 pub struct Unhasher {
     value: u64,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=finish | COMPLEXITY=7 | LINES=17 */
 
 impl Hasher for Unhasher {
     #[inline]

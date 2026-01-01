@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/meth.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{self, GenericArgKind, Ty, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config::Lto;
 use rustc_symbol_mangling::typeid_for_trait_ref;
 use crate::rustc_target::callconv::FnAbi;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=get_fn_inner | COMPLEXITY=15 | LINES=65 */
 
 use crate::traits::*;
 
@@ -73,7 +70,6 @@ impl<'a, 'tcx> VirtualIndex {
         load_vtable(bx, llvtable, llty, vtable_byte_offset, ty, false)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=dyn_trait_in_self | COMPLEXITY=14 | LINES=21 */
 
 /// This takes a valid `self` receiver type and extracts the principal trait
 /// ref of the type. Return `None` if there is no principal trait.
@@ -95,7 +91,6 @@ fn dyn_trait_in_self<'tcx>(
 
     bug!("expected a `dyn Trait` ty, found {ty:?}")
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=33 */
 
 /// Creates a dynamic vtable for the given type and vtable origin.
 /// This is used only for objects.
@@ -129,7 +124,6 @@ pub(crate) fn get_vtable<'tcx, Cx: CodegenMethods<'tcx>>(
     cx.vtables().borrow_mut().insert((ty, trait_ref), vtable);
     vtable
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=34 */
 
 /// Call this function whenever you need to load a vtable.
 pub(crate) fn load_vtable<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(

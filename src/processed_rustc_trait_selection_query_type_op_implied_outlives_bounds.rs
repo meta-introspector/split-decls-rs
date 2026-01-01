@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/type_op/implied_outlives_bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use std::ops::ControlFlow;
 
 use crate::rustc_infer::infer::TypeOutlivesConstraint;
@@ -9,18 +8,13 @@ use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
 use crate::rustc_complete::infer::canonical::CanonicalQueryResponse;
 use crate::rustc_complete::traits::ObligationCause;
 use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use crate::rustc_complete::{DUMMY_SP, Span, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use smallvec::{SmallVec, smallvec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::traits::query::NoSolution;
 use crate::traits::{ObligationCtxt, wf};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=try_fast_path | COMPLEXITY=18 | LINES=33 */
 
 impl<'tcx> super::QueryTypeOp<'tcx> for ImpliedOutlivesBounds<'tcx> {
     type QueryResponse = Vec<OutlivesBound<'tcx>>;
@@ -54,7 +48,6 @@ impl<'tcx> super::QueryTypeOp<'tcx> for ImpliedOutlivesBounds<'tcx> {
         compute_implied_outlives_bounds_inner(ocx, key.param_env, key.value.ty, span, false)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=compute_implied_outlives_bounds_inner | COMPLEXITY=45 | LINES=106 */
 
 pub fn compute_implied_outlives_bounds_inner<'tcx>(
     ocx: &ObligationCtxt<'_, 'tcx>,
@@ -161,12 +154,10 @@ pub fn compute_implied_outlives_bounds_inner<'tcx>(
 
     Ok(outlives_bounds)
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ContainsBevyParamSet | COMPLEXITY=2 | LINES=4 */
 
 struct ContainsBevyParamSet<'tcx> {
     tcx: TyCtxt<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=18 | LINES=21 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ContainsBevyParamSet<'tcx> {
     type Result = ControlFlow<()>;
@@ -188,7 +179,6 @@ impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ContainsBevyParamSet<'tcx> {
         ControlFlow::Continue(())
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=implied_bounds_from_components | COMPLEXITY=16 | LINES=38 */
 
 /// When we have an implied bound that `T: 'a`, we can further break
 /// this down to determine what relationships would have to hold for

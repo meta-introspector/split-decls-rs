@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/root_cx.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::mem;
 use std::rc::Rc;
 
 use crate::rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::mir::ConstraintCategory;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::ErrorGuaranteed;
 use smallvec::SmallVec;
 
@@ -19,15 +16,12 @@ use crate::region_infer::opaque_types::{
     apply_computed_concrete_opaque_types, clone_and_resolve_opaque_types,
     compute_concrete_opaque_types, detect_opaque_types_added_while_handling_opaque_types,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::type_check::{Locations, constraint_conversion};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::{
     ClosureRegionRequirements, CollectRegionConstraintsResult, ConcreteOpaqueTypes,
     PropagatedBorrowCheckResults, borrowck_check_region_constraints,
     borrowck_collect_region_constraints,
 };
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 /// The shared context used by both the root as well as all its nested
 /// items.
@@ -46,7 +40,6 @@ pub(super) struct BorrowCheckRootCtxt<'tcx> {
     /// information on how this is used.
     pub consumer: Option<BorrowckConsumer<'tcx>>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=handle_opaque_type_uses | COMPLEXITY=92 | LINES=251 */
 
 impl<'tcx> BorrowCheckRootCtxt<'tcx> {
     pub(super) fn new(

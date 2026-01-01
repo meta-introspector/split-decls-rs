@@ -1,35 +1,24 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/solve/fulfill/derive_errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::ops::ControlFlow;
 
 use crate::rustc_complete::LangItem;
 use crate::rustc_infer::infer::InferCtxt;
 use crate::rustc_infer::traits::solve::{CandidateSource, GoalSource, MaybeCause};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::{
     self, MismatchedProjectionTypes, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_next_trait_solver::solve::{GoalEvaluation, SolverDelegateEvalExt as _};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{instrument, trace};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::solve::delegate::SolverDelegate;
 use crate::solve::inspect::{self, ProofTreeInferCtxtExt, ProofTreeVisitor};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::solve::{Certainty, deeply_normalize_for_diagnostics};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{FulfillmentError, FulfillmentErrorCode, wf};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=66 */
 
 pub(super) fn fulfillment_error_for_no_solution<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -96,7 +85,6 @@ pub(super) fn fulfillment_error_for_no_solution<'tcx>(
 
     FulfillmentError { obligation, code, root_obligation }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=58 */
 
 pub(super) fn fulfillment_error_for_stalled<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -155,7 +143,6 @@ pub(super) fn fulfillment_error_for_stalled<'tcx>(
         root_obligation,
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 
 pub(super) fn fulfillment_error_for_overflow<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -167,7 +154,6 @@ pub(super) fn fulfillment_error_for_overflow<'tcx>(
         root_obligation,
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=find_best_leaf_obligation | COMPLEXITY=6 | LINES=26 */
 
 #[instrument(level = "debug", skip(infcx), ret)]
 fn find_best_leaf_obligation<'tcx>(
@@ -194,13 +180,11 @@ fn find_best_leaf_obligation<'tcx>(
         .unwrap_or(obligation);
     deeply_normalize_for_diagnostics(infcx, obligation.param_env, obligation)
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=BestObligation | COMPLEXITY=2 | LINES=5 */
 
 struct BestObligation<'tcx> {
     obligation: PredicateObligation<'tcx>,
     consider_ambiguities: bool,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=with_derived_obligation | COMPLEXITY=76 | LINES=210 */
 
 impl<'tcx> BestObligation<'tcx> {
     fn with_derived_obligation(
@@ -411,7 +395,6 @@ impl<'tcx> BestObligation<'tcx> {
         ControlFlow::Break(self.obligation.clone())
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=span | COMPLEXITY=79 | LINES=158 */
 
 impl<'tcx> ProofTreeVisitor<'tcx> for BestObligation<'tcx> {
     type Result = ControlFlow<PredicateObligation<'tcx>>;
@@ -570,7 +553,6 @@ impl<'tcx> ProofTreeVisitor<'tcx> for BestObligation<'tcx> {
         ControlFlow::Break(self.obligation.clone())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 
 #[derive(Debug, Copy, Clone)]
 enum ChildMode<'tcx> {
@@ -587,7 +569,6 @@ enum ChildMode<'tcx> {
     // obligation.
     PassThrough,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=derive_cause | COMPLEXITY=18 | LINES=36 */
 
 fn derive_cause<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -624,7 +605,6 @@ fn derive_cause<'tcx>(
     };
     cause
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=derive_host_cause | COMPLEXITY=20 | LINES=49 */
 
 fn derive_host_cause<'tcx>(
     tcx: TyCtxt<'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_pattern_analysis/src/lints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::lint::LevelAndSource;
 use crate::rustc_complete::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
 use crate::rustc_complete::ErrorGuaranteed;
@@ -8,10 +7,8 @@ use tracing::instrument;
 use crate::MatchArm;
 use crate::constructor::Constructor;
 use crate::errors::{NonExhaustiveOmittedPattern, NonExhaustiveOmittedPatternLintOnArm, Uncovered};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::pat_column::PatternColumn;
 use crate::rustc::{RevealedTy, RustcPatCtxt, WitnessPat};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=collect_nonexhaustive_missing_variants | COMPLEXITY=29 | LINES=49 */
 
 /// Traverse the patterns to collect any variants of a non_exhaustive enum that fail to be mentioned
 /// in a given column.
@@ -61,7 +58,6 @@ fn collect_nonexhaustive_missing_variants<'p, 'tcx>(
     }
     Ok(witnesses)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=51 */
 
 pub(crate) fn lint_nonexhaustive_missing_variants<'p, 'tcx>(
     rcx: &RustcPatCtxt<'p, 'tcx>,

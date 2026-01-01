@@ -1,62 +1,45 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/expr.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 // ignore-tidy-filelength
 
 use core::mem;
 use core::ops::{Bound, ControlFlow};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use ast::mut_visit::{self, MutVisitor};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use ast::token::IdentIsRaw;
 use ast::{CoroutineKind, ForLoopKind, GenBlockKind, MatchKind, Pat, Path, PathSegment, Recovered};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, Token, TokenKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::tokenstream::TokenTree;
 use crate::rustc_complete::util::case::Case;
 use crate::rustc_complete::util::classify;
 use crate::rustc_complete::util::parser::{AssocOp, ExprPrecedence, Fixity, prec_let_scrutinee_needs_par};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::visit::{Visitor, walk_expr};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::{
     self as ast, AnonConst, Arm, AssignOp, AssignOpKind, AttrStyle, AttrVec, BinOp, BinOpKind,
     BlockCheckMode, CaptureBy, ClosureBinder, DUMMY_NODE_ID, Expr, ExprField, ExprKind, FnDecl,
     FnRetTy, Label, MacCall, MetaItemLit, Movability, Param, RangeLimits, StmtKind, Ty, TyKind,
     UnOp, UnsafeBinderCastKind, YieldKind,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_literal_escaper::unescape_char;
 use rustc_macros::Subdiagnostic;
 use crate::rustc_complete::errors::{ExprParenthesesNeeded, report_lit_error};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::BREAK_WITH_LABEL_AND_LOOP;
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::source_map::{self, Spanned};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Pos, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use thin_vec::{ThinVec, thin_vec};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use tracing::instrument;
 
 use super::diagnostics::SnapshotParser;
 use super::pat::{CommaRecoveryMode, Expected, RecoverColon, RecoverComma};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::ty::{AllowPlus, RecoverQPath, RecoverReturnSign};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use super::{
     AttrWrapper, BlockMode, ClosureSpans, ExpTokenPair, ForceCollect, Parser, PathStyle,
     Restrictions, SemiColonMode, SeqSep, TokenType, Trailing, UsePreAttrPos,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{errors, exp, maybe_recover_from_interpolated_ty_qpath};
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Debug)]
 pub(super) enum DestructuredFloat {
@@ -69,7 +52,6 @@ pub(super) enum DestructuredFloat {
     /// Invalid
     Error,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=parse_expr | COMPLEXITY=1486 | LINES=2671 */
 
 impl<'a> Parser<'a> {
     /// Parses an expression.
@@ -2741,7 +2723,6 @@ impl<'a> Parser<'a> {
         let els = if self.eat_keyword(exp!(Else)) { Some(self.parse_expr_else()?) } else { None };
         Ok(self.mk_expr(lo.to(self.prev_token.span), ExprKind::If(cond, thn, els)))
     }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=parse_expr_cond | COMPLEXITY=5 | LINES=19 */
 
     /// Parses the condition of a `if` or `while` expression.
     ///
@@ -2761,7 +2742,6 @@ impl<'a> Parser<'a> {
 
         Ok(cond)
     }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_expr_let | COMPLEXITY=19 | LINES=42 */
 
     /// Parses a `let $pat = $expr` pseudo-expression.
     fn parse_expr_let(&mut self, restrictions: Restrictions) -> PResult<'a, Box<Expr>> {
@@ -2804,10 +2784,8 @@ impl<'a> Parser<'a> {
         let span = lo.to(expr.span);
         Ok(self.mk_expr(span, ExprKind::Let(pat, expr, span, recovered)))
     }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
     /// Parses an `else { ... }` expression (`else` token already eaten).
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=parse_expr_else | COMPLEXITY=50 | LINES=74 */
     fn parse_expr_else(&mut self) -> PResult<'a, Box<Expr>> {
         let else_span = self.prev_token.span; // `else`
         let attrs = self.parse_outer_attributes()?; // For recovery.
@@ -2882,7 +2860,6 @@ impl<'a> Parser<'a> {
         self.error_on_if_block_attrs(else_span, true, expr.span, attrs);
         Ok(expr)
     }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=error_on_if_block_attrs | COMPLEXITY=11 | LINES=23 */
 
     fn error_on_if_block_attrs(
         &self,
@@ -2906,7 +2883,6 @@ impl<'a> Parser<'a> {
             });
         }
     }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=error_on_extra_if | COMPLEXITY=7 | LINES=13 */
 
     fn error_on_extra_if(&mut self, cond: &Box<Expr>) -> PResult<'a, ()> {
         if let ExprKind::Binary(Spanned { span: binop_span, node: binop }, _, right) = &cond.kind
@@ -2920,7 +2896,6 @@ impl<'a> Parser<'a> {
             Ok(())
         }
     }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=parse_for_head | COMPLEXITY=55 | LINES=66 */
 
     // Public to use it for custom `for` expressions in rustfmt forks like https://github.com/tucant/rustfmt
     pub fn parse_for_head(&mut self) -> PResult<'a, (Box<Pat>, Box<Expr>)> {
@@ -2987,7 +2962,6 @@ impl<'a> Parser<'a> {
         let (expr, _) = self.parse_expr_res(Restrictions::NO_STRUCT_LITERAL, attrs)?;
         Ok((pat, expr))
     }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=parse_expr_for | COMPLEXITY=24 | LINES=41 */
 
     /// Parses `for await? <src_pat> in <src_expr> <src_loop_block>` (`for` token already eaten).
     fn parse_expr_for(&mut self, opt_label: Option<Label>, lo: Span) -> PResult<'a, Box<Expr>> {
@@ -3029,7 +3003,6 @@ impl<'a> Parser<'a> {
 
         Ok(self.mk_expr_with_attrs(lo.to(self.prev_token.span), kind, attrs))
     }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=recover_loop_else | COMPLEXITY=9 | LINES=15 */
 
     /// Recovers from an `else` clause after a loop (`for...else`, `while...else`)
     fn recover_loop_else(&mut self, loop_kind: &'static str, loop_kw: Span) -> PResult<'a, ()> {
@@ -3045,7 +3018,6 @@ impl<'a> Parser<'a> {
         }
         Ok(())
     }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=error_missing_in_for_loop | COMPLEXITY=11 | LINES=15 */
 
     fn error_missing_in_for_loop(&mut self) {
         let (span, sub): (_, fn(_) -> _) = if self.token.is_ident_named(sym::of) {
@@ -3061,7 +3033,6 @@ impl<'a> Parser<'a> {
 
         self.dcx().emit_err(errors::MissingInInForLoop { span, sub: sub(span) });
     }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=parse_expr_while | COMPLEXITY=17 | LINES=28 */
 
     /// Parses a `while` or `while let` expression (`while` token already eaten).
     fn parse_expr_while(&mut self, opt_label: Option<Label>, lo: Span) -> PResult<'a, Box<Expr>> {
@@ -3090,10 +3061,8 @@ impl<'a> Parser<'a> {
             attrs,
         ))
     }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
     /// Parses `loop { ... }` (`loop` token already eaten).
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=parse_expr_loop | COMPLEXITY=7 | LINES=14 */
     fn parse_expr_loop(&mut self, opt_label: Option<Label>, lo: Span) -> PResult<'a, Box<Expr>> {
         let loop_span = self.prev_token.span;
         let (attrs, body) = self.parse_inner_attrs_and_block(
@@ -3108,7 +3077,6 @@ impl<'a> Parser<'a> {
             attrs,
         ))
     }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=14 */
 
     pub(crate) fn eat_label(&mut self) -> Option<Label> {
         if let Some((ident, is_raw)) = self.token.lifetime() {
@@ -3123,10 +3091,8 @@ impl<'a> Parser<'a> {
             None
         }
     }
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=2 */
 
     /// Parses a `match ... { ... }` expression (`match` token already eaten).
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=parse_expr_match | COMPLEXITY=2 | LINES=7 */
     fn parse_expr_match(&mut self) -> PResult<'a, Box<Expr>> {
         let match_span = self.prev_token.span;
         let attrs = self.parse_outer_attributes()?;
@@ -3134,10 +3100,8 @@ impl<'a> Parser<'a> {
 
         self.parse_match_block(match_span, match_span, scrutinee, MatchKind::Prefix)
     }
-/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=2 */
 
     /// Parses the block of a `match expr { ... }` or a `expr.match { ... }`
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=parse_match_block | COMPLEXITY=34 | LINES=60 */
     /// expression. This is after the match token and scrutinee are eaten
     fn parse_match_block(
         &mut self,
@@ -3198,7 +3162,6 @@ impl<'a> Parser<'a> {
         self.bump();
         Ok(self.mk_expr_with_attrs(lo.to(hi), ExprKind::Match(scrutinee, arms, match_kind), attrs))
     }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=parse_arm_body_missing_braces | COMPLEXITY=49 | LINES=79 */
 
     /// Attempt to recover from match arm body with statements and no surrounding braces.
     fn parse_arm_body_missing_braces(
@@ -3278,7 +3241,6 @@ impl<'a> Parser<'a> {
         }
         None
     }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=91 | LINES=195 */
 
     pub(super) fn parse_arm(&mut self) -> PResult<'a, Arm> {
         let attrs = self.parse_outer_attributes()?;
@@ -3474,7 +3436,6 @@ impl<'a> Parser<'a> {
                 UsePreAttrPos::No,
             ))
         })
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=parse_match_arm_guard | COMPLEXITY=10 | LINES=16 */
     }
 
     fn parse_match_arm_guard(&mut self) -> PResult<'a, Option<Box<Expr>>> {
@@ -3491,12 +3452,10 @@ impl<'a> Parser<'a> {
                 _ => false,
             }
         }
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
         if !self.eat_keyword(exp!(If)) {
             // No match arm guard present.
             return Ok(None);
         }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 
         let if_span = self.prev_token.span;
         let mut cond = self.parse_match_guard_condition()?;
@@ -3507,7 +3466,6 @@ impl<'a> Parser<'a> {
             let span = if_span.to(cond.span);
             self.psess.gated_spans.gate(sym::if_let_guard, span);
         }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=parse_match_arm_pat_and_guard | COMPLEXITY=19 | LINES=32 */
         Ok(Some(cond))
     }
 
@@ -3540,7 +3498,6 @@ impl<'a> Parser<'a> {
                 Ok((pat, self.parse_match_arm_guard()?))
             }
         } else {
-/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=9 */
             // Regular parser flow:
             let pat = self.parse_pat_no_top_guard(
                 None,
@@ -3550,7 +3507,6 @@ impl<'a> Parser<'a> {
             )?;
             Ok((pat, self.parse_match_arm_guard()?))
         }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=parse_match_guard_condition | COMPLEXITY=32 | LINES=29 */
     }
 
     fn parse_match_guard_condition(&mut self) -> PResult<'a, Box<Expr>> {
@@ -3580,7 +3536,6 @@ impl<'a> Parser<'a> {
                 Err(err)
             }
         }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=parse_try_block | COMPLEXITY=10 | LINES=12 */
     }
 
     pub(crate) fn is_builtin(&self) -> bool {
@@ -3593,12 +3548,10 @@ impl<'a> Parser<'a> {
         if self.eat_keyword(exp!(Catch)) {
             Err(self.dcx().create_err(errors::CatchAfterTry { span: self.prev_token.span }))
         } else {
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
             let span = span_lo.to(body.span);
             self.psess.gated_spans.gate(sym::try_blocks, span);
             Ok(self.mk_expr_with_attrs(span, ExprKind::TryBlock(body), attrs))
         }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=is_do_catch_block | COMPLEXITY=17 | LINES=25 */
     }
 
     fn is_do_catch_block(&self) -> bool {
@@ -3624,11 +3577,9 @@ impl<'a> Parser<'a> {
         let kind = if self.eat_keyword(exp!(Async)) {
             if self.eat_keyword(exp!(Gen)) { GenBlockKind::AsyncGen } else { GenBlockKind::Async }
         } else {
-/* AST_META: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=3 */
             assert!(self.eat_keyword(exp!(Gen)));
             GenBlockKind::Gen
         };
-/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
         match kind {
             GenBlockKind::Async => {
                 // `async` blocks are stable
@@ -3637,7 +3588,6 @@ impl<'a> Parser<'a> {
                 self.psess.gated_spans.gate(sym::gen_blocks, lo.to(self.prev_token.span));
             }
         }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=is_gen_block | COMPLEXITY=294 | LINES=648 */
         let capture_clause = self.parse_capture_clause()?;
         let decl_span = lo.to(self.prev_token.span);
         let (attrs, body) = self.parse_inner_attrs_and_block(None)?;

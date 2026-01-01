@@ -1,35 +1,25 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/ambiguity.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ops::ControlFlow;
 
 use crate::rustc_complete::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_hir as hir;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::intravisit::Visitor as _;
 use crate::rustc_infer::infer::{BoundRegionConversionTime, InferCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::traits::util::elaborate;
 use crate::rustc_infer::traits::{
     Obligation, ObligationCause, ObligationCauseCode, PolyTraitObligation, PredicateObligation,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitable as _, TypeVisitableExt as _};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::parse::feature_err_unstable_feature_bound;
 use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::error_reporting::TypeErrCtxt;
 use crate::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
 use crate::error_reporting::traits::{FindExprBySpan, to_pretty_impl_header};
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::traits::ObligationCtxt;
 use crate::traits::query::evaluate_obligation::InferCtxtExt;
 
@@ -38,7 +28,6 @@ pub enum CandidateSource {
     DefId(DefId),
     ParamEnv(Span),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=compute_applicable_impls_for_diagnostics | COMPLEXITY=50 | LINES=128 */
 
 pub fn compute_applicable_impls_for_diagnostics<'tcx>(
     infcx: &InferCtxt<'tcx>,
@@ -167,7 +156,6 @@ pub fn compute_applicable_impls_for_diagnostics<'tcx>(
 
     ambiguities
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=annotate_source_of_ambiguity | COMPLEXITY=304 | LINES=599 */
 
 impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
     #[instrument(skip(self), level = "debug")]
@@ -767,7 +755,6 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=HasNumericInferVisitor; | COMPLEXITY=9 | LINES=14 */
 
 struct HasNumericInferVisitor;
 

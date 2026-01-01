@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_expand/src/mbe/macro_parser.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=74 */
 // This is an NFA-based parser, which calls out to the main Rust parser for named non-terminals
 // (which it commits to fully when it hits one in a grammar). There's a set of current NFA threads
 // and a set of next ones. Instead of NTs, we have a special case for Kleene star. The big-O, in
@@ -74,25 +73,20 @@
 
 use std::borrow::Cow;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt::Display;
 use std::rc::Rc;
 
 pub(crate) use NamedMatch::*;
 pub(crate) use ParseResult::*;
 use crate::rustc_complete::token::{self, DocComment, NonterminalKind, Token, TokenKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_lint_defs::pluralize;
 use crate::rustc_parse::parser::{ParseNtResult, Parser, token_descr};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::mbe::macro_rules::Tracker;
 use crate::mbe::{KleeneOp, TokenTree};
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=42 */
 
 /// A unit within a matcher that a `MatcherPos` can refer to. Similar to (and derived from)
 /// `mbe::TokenTree`, but designed specifically for fast and easy traversal during matching.
@@ -135,7 +129,6 @@ pub(crate) enum MatcherLoc {
     },
     Eof,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=15 */
 
 impl MatcherLoc {
     pub(super) fn span(&self) -> Option<Span> {
@@ -151,7 +144,6 @@ impl MatcherLoc {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=20 */
 
 impl Display for MatcherLoc {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -172,7 +164,6 @@ impl Display for MatcherLoc {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=inner | COMPLEXITY=35 | LINES=76 */
 
 pub(super) fn compute_locs(matcher: &[TokenTree]) -> Vec<MatcherLoc> {
     fn inner(
@@ -249,7 +240,6 @@ pub(super) fn compute_locs(matcher: &[TokenTree]) -> Vec<MatcherLoc> {
 
     locs
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=MatcherPos | COMPLEXITY=5 | LINES=17 */
 
 /// A single matcher position, representing the state of matching.
 #[derive(Debug)]
@@ -267,7 +257,6 @@ struct MatcherPos {
     /// up failing.
     matches: Rc<Vec<NamedMatch>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=push_match | COMPLEXITY=27 | LINES=35 */
 
 // This type is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
@@ -303,14 +292,12 @@ impl MatcherPos {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 enum EofMatcherPositions {
     None,
     One(MatcherPos),
     Multiple,
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// Represents the possible results of an attempted parse.
 #[derive(Debug)]
@@ -325,7 +312,6 @@ pub(crate) enum ParseResult<T, F> {
     Error(crate::rustc_span::Span, String),
     ErrorReported(ErrorGuaranteed),
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 /// A `ParseResult` where the `Success` variant contains a mapping of
 /// `MacroRulesNormalizedIdent`s to `NamedMatch`es. This represents the mapping
@@ -349,7 +335,6 @@ pub(super) fn count_metavar_decls(matcher: &[TokenTree]) -> usize {
         })
         .sum()
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=24 */
 
 /// `NamedMatch` is a pattern-match result for a single metavar. All
 /// `MatchedNonterminal`s in the `NamedMatch` have the same non-terminal type
@@ -374,7 +359,6 @@ pub(super) fn count_metavar_decls(matcher: &[TokenTree]) -> usize {
 /// macro_rules! foo {
 ///   ($($($x:ident),+);+) => {}
 /// }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=29 */
 ///
 /// foo!(a, b, c, d; a, b, c, d, e);
 /// ```
@@ -404,7 +388,6 @@ pub(crate) enum NamedMatch {
     MatchedSeq(Vec<NamedMatch>),
     MatchedSingle(ParseNtResult),
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=token_name_eq | COMPLEXITY=16 | LINES=29 */
 
 /// Performs a token equality check, ignoring syntax context (that is, an unhygienic comparison)
 fn token_name_eq(t1: &Token, t2: &Token) -> bool {
@@ -434,7 +417,6 @@ fn token_name_eq(t1: &Token, t2: &Token) -> bool {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=21 */
 
 // Note: the vectors could be created and dropped within `parse_tt`, but to avoid excess
 // allocations we have a single vector for each kind that is cleared and reused repeatedly.
@@ -456,7 +438,6 @@ pub(crate) struct TtParser {
     /// that have no metavars.
     empty_matches: Rc<Vec<NamedMatch>>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=parse_tt_inner | COMPLEXITY=184 | LINES=320 */
 
 impl TtParser {
     pub(super) fn new(macro_name: Ident) -> TtParser {

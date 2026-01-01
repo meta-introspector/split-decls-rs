@@ -1,30 +1,23 @@
 // SRC: ../rust/compiler/rustc_parse/src/parser/tokenstream/tests.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 #[allow(rustc::symbol_intern_string_literal)]
 
 use crate::rustc_complete::token::{self, IdentIsRaw};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{BytePos, Span, Symbol, create_default_session_globals_then};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=string_to_ts | COMPLEXITY=2 | LINES=6 */
 
 use crate::parser::tests::string_to_stream;
 
 fn string_to_ts(string: &str) -> TokenStream {
     string_to_stream(string.to_owned())
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=sp | COMPLEXITY=2 | LINES=4 */
 
 fn sp(a: u32, b: u32) -> Span {
     Span::with_root_ctxt(BytePos(a), BytePos(b))
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cmp_token_stream | COMPLEXITY=2 | LINES=4 */
 
 fn cmp_token_stream(a: &TokenStream, b: &TokenStream) -> bool {
     a.len() == b.len() && a.iter().zip(b.iter()).all(|(x, y)| x.eq_unspanned(y))
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_concat | COMPLEXITY=4 | LINES=15 */
 
 #[test]
 fn test_concat() {
@@ -40,7 +33,6 @@ fn test_concat() {
         assert_eq!(cmp_token_stream(&test_res, &eq_res), true);
     })
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=test_to_from_bijection | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_to_from_bijection() {
@@ -50,7 +42,6 @@ fn test_to_from_bijection() {
         assert_eq!(test_start, test_end)
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=test_eq_0 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_eq_0() {
@@ -60,7 +51,6 @@ fn test_eq_0() {
         assert_eq!(test_res, test_eqs)
     })
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_eq_1 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_eq_1() {
@@ -70,7 +60,6 @@ fn test_eq_1() {
         assert_eq!(test_res, test_eqs)
     })
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=test_eq_3 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_eq_3() {
@@ -80,7 +69,6 @@ fn test_eq_3() {
         assert_eq!(test_res, test_eqs)
     })
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=test_diseq_0 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_diseq_0() {
@@ -90,7 +78,6 @@ fn test_diseq_0() {
         assert_eq!(test_res == test_eqs, false)
     })
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=test_diseq_1 | COMPLEXITY=3 | LINES=9 */
 
 #[test]
 fn test_diseq_1() {
@@ -100,7 +87,6 @@ fn test_diseq_1() {
         assert_eq!(test_res == test_eqs, false)
     })
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=test_is_empty | COMPLEXITY=3 | LINES=14 */
 
 #[test]
 fn test_is_empty() {
@@ -115,7 +101,6 @@ fn test_is_empty() {
         assert_eq!(test2.is_empty(), false);
     })
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=test_dotdotdot | COMPLEXITY=3 | LINES=12 */
 
 #[test]
 fn test_dotdotdot() {

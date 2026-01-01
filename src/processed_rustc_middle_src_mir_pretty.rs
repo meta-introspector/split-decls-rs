@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/pretty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::collections::BTreeSet;
 use std::fmt::{Display, Write as _};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{fs, io};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 use crate::rustc_abi::Size;
 use crate::rustc_complete::InlineAsmTemplatePiece;
@@ -18,7 +14,6 @@ use crate::mir::interpret::{
     AllocBytes, AllocId, Allocation, ConstAllocation, GlobalAlloc, Pointer, Provenance,
     alloc_range, read_target_uint,
 };
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
 use crate::mir::visit::Visitor;
 use crate::mir::*;
 
@@ -46,7 +41,6 @@ pub enum PassWhere {
     AfterLocation(Location),
 
     /// We just dumped the terminator for a block but not the closing `}`.
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=PrettyPrintMirOptions | COMPLEXITY=8 | LINES=16 */
     AfterTerminator(BasicBlock),
 }
 
@@ -63,7 +57,6 @@ impl PrettyPrintMirOptions {
     pub fn from_cli(tcx: TyCtxt<'_>) -> Self {
         Self { include_extra_comments: tcx.sess.opts.unstable_opts.mir_include_spans.is_enabled() }
     }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=MirDumper | COMPLEXITY=16 | LINES=44 */
 }
 
 /// Manages MIR dumping, which is MIR writing done to a file with a specific name. In particular,
@@ -108,26 +101,22 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
             writer: MirWriter::new(tcx),
         })
     }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=2 | LINES=4 */
 
     pub fn tcx(&self) -> TyCtxt<'tcx> {
         self.writer.tcx
     }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=set_show_pass_num | COMPLEXITY=2 | LINES=6 */
 
     #[must_use]
     pub fn set_show_pass_num(mut self) -> Self {
         self.show_pass_num = true;
         self
     }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=set_disambiguator | COMPLEXITY=2 | LINES=6 */
 
     #[must_use]
     pub fn set_disambiguator(mut self, disambiguator: &'dis dyn Display) -> Self {
         self.disambiguator = disambiguator;
         self
     }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=set_extra_data | COMPLEXITY=2 | LINES=9 */
 
     #[must_use]
     pub fn set_extra_data(
@@ -137,14 +126,12 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
         self.writer.extra_data = extra_data;
         self
     }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=set_options | COMPLEXITY=2 | LINES=6 */
 
     #[must_use]
     pub fn set_options(mut self, options: PrettyPrintMirOptions) -> Self {
         self.writer.options = options;
         self
     }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=dump_mir | COMPLEXITY=34 | LINES=38 */
 
     /// If the session is properly configured, dumps a human-readable representation of the MIR
     /// (with default pretty-printing options) into:
@@ -183,7 +170,6 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
             };
         }
     }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=dump_mir_to_writer | COMPLEXITY=20 | LINES=25 */
 
     // #41697 -- we use `with_forced_impl_filename_line()` because `def_path_str()` would otherwise
     // trigger `type_of`, and this can run while we are already attempting to evaluate `type_of`.
@@ -209,7 +195,6 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
         self.writer.write_mir_fn(body, w)?;
         (self.writer.extra_data)(PassWhere::AfterCFG, w)
     }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=dump_path | COMPLEXITY=61 | LINES=90 */
 
     /// Returns the path to the filename where we should dump a given MIR.
     /// Also used by other bits of code (e.g., NLL inference) that dump
@@ -300,7 +285,6 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
 
         file_path
     }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=create_dump_file | COMPLEXITY=12 | LINES=23 */
 
     /// Attempts to open a file where we should dump a given MIR or other
     /// bit of MIR-related data. Used by `mir-dump`, but also by other
@@ -324,7 +308,6 @@ impl<'dis, 'de, 'tcx> MirDumper<'dis, 'de, 'tcx> {
             io::Error::new(e.kind(), format!("IO error creating MIR dump file: {file_path:?}; {e}"))
         })
     }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=write_mir_pretty | COMPLEXITY=28 | LINES=50 */
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -375,7 +358,6 @@ pub fn write_mir_pretty<'tcx>(
             render_body(w, instance_mir)?;
         }
     }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=MirWriter | COMPLEXITY=5 | LINES=14 */
     Ok(())
 }
 
@@ -390,7 +372,6 @@ impl<'de, 'tcx> MirWriter<'de, 'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>) -> Self {
         MirWriter { tcx, extra_data: &|_, _| Ok(()), options: PrettyPrintMirOptions::from_cli(tcx) }
     }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=write_mir_fn | COMPLEXITY=11 | LINES=18 */
 
     /// Write out a human-readable textual representation for the given function.
     pub fn write_mir_fn(&self, body: &Body<'tcx>, w: &mut dyn io::Write) -> io::Result<()> {
@@ -409,7 +390,6 @@ impl<'de, 'tcx> MirWriter<'de, 'tcx> {
 
         Ok(())
     }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=write_scope_tree | COMPLEXITY=18 | LINES=35 */
 }
 
 /// Prints local variables in a scope tree.
@@ -445,7 +425,6 @@ fn write_scope_tree(
             writeln!(w, "{indented_debug_info}")?;
         }
     }
-/* AST_META: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=35 | LINES=41 */
 
     // Local variable types.
     for (local, local_decl) in body.local_decls.iter_enumerated() {
@@ -487,12 +466,10 @@ fn write_scope_tree(
             writeln!(w, "{indented_decl}",)?;
         }
     }
-/* AST_META: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
     let Some(children) = scope_tree.get(&parent) else {
         return Ok(());
     };
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=34 | LINES=39 */
 
     for &child in children {
         let child_data = &body.source_scopes[child];
@@ -532,7 +509,6 @@ fn write_scope_tree(
         write_scope_tree(tcx, body, scope_tree, w, child, depth + 1, options)?;
         writeln!(w, "{0:1$}}}", "", depth * INDENT.len())?;
     }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=14 | LINES=16 */
 
     Ok(())
 }
@@ -549,7 +525,6 @@ impl Debug for VarDebugInfo<'_> {
 
         write!(fmt, " => {:?}", self.value)
     }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=write_mir_intro | COMPLEXITY=12 | LINES=23 */
 }
 
 /// Write out a human-readable textual representation of the MIR's `fn` type and the types of its
@@ -573,7 +548,6 @@ fn write_mir_intro<'tcx>(
             assert_eq!(index, OUTERMOST_SOURCE_SCOPE);
         }
     }
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
     write_scope_tree(tcx, body, &scope_tree, w, OUTERMOST_SOURCE_SCOPE, 1, options)?;
 
@@ -583,11 +557,9 @@ fn write_mir_intro<'tcx>(
     if let Some(coverage_info_hi) = &body.coverage_info_hi {
         write_coverage_info_hi(coverage_info_hi, w)?;
     }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
     if let Some(function_coverage_info) = &body.function_coverage_info {
         write_function_coverage_info(function_coverage_info, w)?;
     }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=write_coverage_info_hi | COMPLEXITY=3 | LINES=9 */
 
     Ok(())
 }
@@ -597,25 +569,21 @@ fn write_coverage_info_hi(
     w: &mut dyn io::Write,
 ) -> io::Result<()> {
     let coverage::CoverageInfoHi { num_block_markers: _, branch_spans } = coverage_info_hi;
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=5 */
 
     // Only add an extra trailing newline if we printed at least one thing.
     let mut did_print = false;
 
     for coverage::BranchSpan { span, true_marker, false_marker } in branch_spans {
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=6 */
         writeln!(
             w,
             "{INDENT}coverage branch {{ true: {true_marker:?}, false: {false_marker:?} }} => {span:?}",
         )?;
         did_print = true;
     }
-/* AST_META: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
     if did_print {
         writeln!(w)?;
     }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=write_function_coverage_info | COMPLEXITY=3 | LINES=9 */
 
     Ok(())
 }
@@ -625,13 +593,10 @@ fn write_function_coverage_info(
     w: &mut dyn io::Write,
 ) -> io::Result<()> {
     let coverage::FunctionCoverageInfo { mappings, .. } = function_coverage_info;
-/* AST_META: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=2 */
 
     for coverage::Mapping { kind, span } in mappings {
-/* AST_META: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
         writeln!(w, "{INDENT}coverage {kind:?} => {span:?};")?;
     }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=write_mir_sig | COMPLEXITY=9 | LINES=17 */
     writeln!(w)?;
 
     Ok(())
@@ -649,7 +614,6 @@ fn write_mir_sig(tcx: TyCtxt<'_>, body: &Body<'_>, w: &mut dyn io::Write) -> io:
         }
         _ => tcx.is_closure_like(def_id),
     };
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=16 */
     match (kind, body.source.promoted) {
         (_, Some(_)) => write!(w, "const ")?, // promoteds are the closest to consts
         (DefKind::Const | DefKind::AssocConst, _) => write!(w, "const ")?,
@@ -666,17 +630,14 @@ fn write_mir_sig(tcx: TyCtxt<'_>, body: &Body<'_>, w: &mut dyn io::Write) -> io:
         (DefKind::GlobalAsm, _) => {}
         _ => bug!("Unexpected def kind {:?}", kind),
     }
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
     ty::print::with_forced_impl_filename_line! {
         // see notes on #41697 elsewhere
         write!(w, "{}", tcx.def_path_str(def_id))?
     }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=3 */
     if let Some(p) = body.source.promoted {
         write!(w, "::{p:?}")?;
     }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=14 */
 
     if body.source.promoted.is_none() && is_function {
         write!(w, "(")?;
@@ -691,24 +652,20 @@ fn write_mir_sig(tcx: TyCtxt<'_>, body: &Body<'_>, w: &mut dyn io::Write) -> io:
 
         write!(w, ") -> {}", body.return_ty())?;
     } else {
-/* AST_META: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
         assert_eq!(body.arg_count, 0);
         write!(w, ": {} =", body.return_ty())?;
     }
-/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5 */
 
     if let Some(yield_ty) = body.yield_ty() {
         writeln!(w)?;
         writeln!(w, "yields {yield_ty}")?;
     }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
     write!(w, " ")?;
     // Next thing that gets printed is the opening {
 
     Ok(())
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=write_user_type_annotations | COMPLEXITY=17 | LINES=24 */
 
 fn write_user_type_annotations(
     tcx: TyCtxt<'_>,
@@ -733,7 +690,6 @@ fn write_user_type_annotations(
     }
     Ok(())
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=dump_mir_def_ids | COMPLEXITY=6 | LINES=8 */
 
 pub fn dump_mir_def_ids(tcx: TyCtxt<'_>, single: Option<DefId>) -> Vec<DefId> {
     if let Some(i) = single {
@@ -742,7 +698,6 @@ pub fn dump_mir_def_ids(tcx: TyCtxt<'_>, single: Option<DefId>) -> Vec<DefId> {
         tcx.mir_keys(()).iter().map(|def_id| def_id.to_def_id()).collect()
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=write_basic_block | COMPLEXITY=60 | LINES=87 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Basic blocks and their parts (statements, terminators, ...)
@@ -830,7 +785,6 @@ impl<'de, 'tcx> MirWriter<'de, 'tcx> {
         writeln!(w, "{INDENT}}}")
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=42 | LINES=44 */
 
 impl Debug for Statement<'_> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -875,7 +829,6 @@ impl Debug for Statement<'_> {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=15 | LINES=11 */
 
 impl Display for NonDivergingIntrinsic<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -887,7 +840,6 @@ impl Display for NonDivergingIntrinsic<'_> {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=33 | LINES=47 */
 
 impl<'tcx> Debug for TerminatorKind<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -935,7 +887,6 @@ impl<'tcx> Debug for TerminatorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=fmt_head | COMPLEXITY=156 | LINES=164 */
 
 impl<'tcx> TerminatorKind<'tcx> {
     /// Writes the "head" part of the terminator; that is, its name and the data it uses to pick the
@@ -1100,7 +1051,6 @@ impl<'tcx> TerminatorKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=153 | LINES=179 */
 
 impl<'tcx> Debug for Rvalue<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -1280,7 +1230,6 @@ impl<'tcx> Debug for Rvalue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=11 */
 
 impl<'tcx> Debug for Operand<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -1292,14 +1241,12 @@ impl<'tcx> Debug for Operand<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> Debug for ConstOperand<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
         write!(fmt, "{self}")
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=10 */
 
 impl<'tcx> Display for ConstOperand<'tcx> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -1310,14 +1257,12 @@ impl<'tcx> Display for ConstOperand<'tcx> {
         Display::fmt(&self.const_, fmt)
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl Debug for Place<'_> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
         self.as_ref().fmt(fmt)
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=8 */
 
 impl Debug for PlaceRef<'_> {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
@@ -1326,7 +1271,6 @@ impl Debug for PlaceRef<'_> {
         post_fmt_projection(self.projection, fmt)
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=pre_fmt_projection | COMPLEXITY=16 | LINES=24 */
 
 fn pre_fmt_projection(projection: &[PlaceElem<'_>], fmt: &mut Formatter<'_>) -> fmt::Result {
     for &elem in projection.iter().rev() {
@@ -1351,7 +1295,6 @@ fn pre_fmt_projection(projection: &[PlaceElem<'_>], fmt: &mut Formatter<'_>) -> 
 
     Ok(())
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=post_fmt_projection | COMPLEXITY=50 | LINES=51 */
 
 fn post_fmt_projection(projection: &[PlaceElem<'_>], fmt: &mut Formatter<'_>) -> fmt::Result {
     for &elem in projection.iter() {
@@ -1403,7 +1346,6 @@ fn post_fmt_projection(projection: &[PlaceElem<'_>], fmt: &mut Formatter<'_>) ->
 
     Ok(())
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=write_extra | COMPLEXITY=12 | LINES=19 */
 
 /// After we print the main statement, we sometimes dump extra
 /// information. There's often a lot of little things "nuzzled up" in
@@ -1423,13 +1365,11 @@ fn write_extra<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=ExtraComments | COMPLEXITY=2 | LINES=5 */
 
 struct ExtraComments<'tcx> {
     tcx: TyCtxt<'tcx>,
     comments: Vec<String>,
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=push | COMPLEXITY=6 | LINES=8 */
 
 impl<'tcx> ExtraComments<'tcx> {
     fn push(&mut self, lines: &str) {
@@ -1438,7 +1378,6 @@ impl<'tcx> ExtraComments<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=use_verbose | COMPLEXITY=8 | LINES=12 */
 
 fn use_verbose(ty: Ty<'_>, fn_def: bool) -> bool {
     match *ty.kind() {
@@ -1451,7 +1390,6 @@ fn use_verbose(ty: Ty<'_>, fn_def: bool) -> bool {
         _ => true,
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=visit_const_operand | COMPLEXITY=66 | LINES=89 */
 
 impl<'tcx> Visitor<'tcx> for ExtraComments<'tcx> {
     fn visit_const_operand(&mut self, constant: &ConstOperand<'tcx>, _location: Location) {
@@ -1541,14 +1479,11 @@ impl<'tcx> Visitor<'tcx> for ExtraComments<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=comment | COMPLEXITY=3 | LINES=2 */
 
 fn comment(tcx: TyCtxt<'_>, SourceInfo { span, scope }: SourceInfo) -> String {
-/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3 */
     let location = tcx.sess.source_map().span_to_embeddable_string(span);
     format!("scope {} at {}", scope.index(), location,)
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=write_allocations | COMPLEXITY=79 | LINES=108 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Allocations
@@ -1657,7 +1592,6 @@ pub fn write_allocations<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=66 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 /// Dumps the size and metadata and content of an allocation to the given writer.
 /// The expectation is that the caller first prints other relevant metadata, so the exact
@@ -1665,10 +1599,8 @@ pub fn write_allocations<'tcx>(
 ///
 /// ```text
 /// size: {}, align: {}) {
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
 ///     <bytes>
 /// }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=display_allocation | COMPLEXITY=4 | LINES=14 */
 /// ```
 ///
 /// The byte format is similar to how hex editors print bytes. Each line starts with the address of
@@ -1683,14 +1615,12 @@ pub fn display_allocation<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>(
 ) -> RenderAllocation<'a, 'tcx, Prov, Extra, Bytes> {
     RenderAllocation { tcx, alloc }
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=RenderAllocation | COMPLEXITY=2 | LINES=6 */
 
 #[doc(hidden)]
 pub struct RenderAllocation<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes> {
     tcx: TyCtxt<'tcx>,
     alloc: &'a Allocation<Prov, Extra, Bytes>,
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=21 | LINES=21 */
 
 impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes> std::fmt::Display
     for RenderAllocation<'a, 'tcx, Prov, Extra, Bytes>
@@ -1712,7 +1642,6 @@ impl<'a, 'tcx, Prov: Provenance, Extra, Bytes: AllocBytes> std::fmt::Display
         Ok(())
     }
 }
-/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=write_allocation_endline | COMPLEXITY=6 | LINES=7 */
 
 fn write_allocation_endline(w: &mut dyn std::fmt::Write, ascii: &str) -> std::fmt::Result {
     for _ in 0..(BYTES_PER_LINE - ascii.chars().count()) {
@@ -1720,7 +1649,6 @@ fn write_allocation_endline(w: &mut dyn std::fmt::Write, ascii: &str) -> std::fm
     }
     writeln!(w, " │ {ascii}")
 }
-/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=write_allocation_newline | COMPLEXITY=5 | LINES=17 */
 
 /// Number of bytes to print per allocation hex dump line.
 const BYTES_PER_LINE: usize = 16;
@@ -1738,7 +1666,6 @@ fn write_allocation_newline(
     write!(w, "{}0x{:02$x} │ ", prefix, line_start.bytes(), pos_width)?;
     Ok(line_start)
 }
-/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=write_allocation_bytes | COMPLEXITY=87 | LINES=143 */
 
 /// The `prefix` argument allows callers to add an arbitrary prefix before each line (even if there
 /// is only one line). Note that your prefix should contain a trailing space as the lines are
@@ -1882,7 +1809,6 @@ pub fn write_allocation_bytes<'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>(
 
     Ok(())
 }
-/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=pretty_print_byte_str | COMPLEXITY=3 | LINES=7 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Constants
@@ -1890,7 +1816,6 @@ pub fn write_allocation_bytes<'tcx, Prov: Provenance, Extra, Bytes: AllocBytes>(
 fn pretty_print_byte_str(fmt: &mut Formatter<'_>, byte_str: &[u8]) -> fmt::Result {
     write!(fmt, "b\"{}\"", byte_str.escape_ascii())
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=comma_sep | COMPLEXITY=8 | LINES=16 */
 
 fn comma_sep<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1907,7 +1832,6 @@ fn comma_sep<'tcx>(
     }
     Ok(())
 }
-/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=pretty_print_const_value_tcx | COMPLEXITY=89 | LINES=129 */
 
 fn pretty_print_const_value_tcx<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -2037,7 +1961,6 @@ fn pretty_print_const_value_tcx<'tcx>(
     // Fall back to debug pretty printing for invalid constants.
     write!(fmt, "{ct:?}: {ty}")
 }
-/* AST_META: AST_ID=77 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 pub(crate) fn pretty_print_const_value<'tcx>(
     ct: ConstValue,
@@ -2050,7 +1973,6 @@ pub(crate) fn pretty_print_const_value<'tcx>(
         pretty_print_const_value_tcx(tcx, ct, ty, fmt)
     })
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=hex_number_length | COMPLEXITY=9 | LINES=23 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Miscellaneous

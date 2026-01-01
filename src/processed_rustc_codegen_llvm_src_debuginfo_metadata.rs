@@ -1,71 +1,50 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/debuginfo/metadata.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::borrow::Cow;
 use std::fmt::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::sync::Arc;
 use std::{iter, ptr};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use libc::{c_longlong, c_uint};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{Align, Size};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::debuginfo::type_names::{VTableNameKind, cpp_like_debuginfo};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::def::{CtorKind, DefKind};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{
     HasTypingEnv, LayoutOf, TyAndLayout, WIDE_PTR_ADDR, WIDE_PTR_EXTRA,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ty::{
     self, AdtKind, CoroutineArgsExt, ExistentialTraitRef, Instance, Ty, TyCtxt, Visibility,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{self, DebugInfo, Lto};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::{
     DUMMY_SP, FileName, FileNameDisplayPreference, SourceFile, Span, Symbol, hygiene,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_symbol_mangling::typeid_for_trait_ref;
 use crate::rustc_target::spec::DebuginfoKind;
 use smallvec::smallvec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub(crate) use self::type_map::TypeMap;
 use self::type_map::{DINodeCreationResult, Stub, UniqueTypeId};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use super::CodegenUnitDebugContext;
 use super::namespace::mangled_name_of_instance;
 use super::type_names::{compute_debuginfo_type_name, compute_debuginfo_vtable_name};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use super::utils::{
     DIB, create_DIArray, debug_context, get_namespace_for_item, is_node_local_to_unit,
 };
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{AsCCharPtr, CodegenCx};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::debuginfo::dwarf_const;
 use crate::debuginfo::metadata::type_map::build_type_with_children;
 use crate::debuginfo::utils::{WidePtrKind, wide_pointer_kind};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::llvm;
 use crate::llvm::debuginfo::{
     DIBasicType, DIBuilder, DICompositeType, DIDescriptor, DIFile, DIFlags, DILexicalBlock,
     DIScope, DIType, DebugEmissionKind, DebugNameTableKind,
 };
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=7 */
 use crate::value::Value;
 
 impl PartialEq for llvm::Metadata {
@@ -73,24 +52,20 @@ impl PartialEq for llvm::Metadata {
         ptr::eq(self, other)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for llvm::Metadata {}
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=6 */
 
 impl Hash for llvm::Metadata {
     fn hash<H: Hasher>(&self, hasher: &mut H) {
         (self as *const Self).hash(hasher);
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for llvm::Metadata {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         (self as *const Self).fmt(f)
     }
 }
-/* AST_META: AST_ID=25 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=14 | LINES=25 */
 
 pub(super) const UNKNOWN_LINE_NUMBER: c_uint = 0;
 pub(super) const UNKNOWN_COLUMN_NUMBER: c_uint = 0;
@@ -114,14 +89,12 @@ macro_rules! return_if_di_node_created_in_meantime {
         }
     };
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=size_and_align_of | COMPLEXITY=2 | LINES=6 */
 
 /// Extract size and alignment from a TyAndLayout.
 #[inline]
 fn size_and_align_of(ty_and_layout: TyAndLayout<'_>) -> (Size, Align) {
     (ty_and_layout.size, ty_and_layout.align.abi)
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=build_fixed_size_array_di_node | COMPLEXITY=18 | LINES=39 */
 
 /// Creates debuginfo for a fixed size array (e.g. `[u64; 123]`).
 /// For slices (that is, "arrays" of unknown size) use [build_slice_type_di_node].
@@ -161,7 +134,6 @@ fn build_fixed_size_array_di_node<'ll, 'tcx>(
 
     DINodeCreationResult::new(di_node, false)
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=build_pointer_or_reference_di_node | COMPLEXITY=49 | LINES=138 */
 
 /// Creates debuginfo for built-in pointer-like things:
 ///
@@ -300,7 +272,6 @@ fn build_pointer_or_reference_di_node<'ll, 'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=build_subroutine_type_di_node | COMPLEXITY=24 | LINES=70 */
 
 fn build_subroutine_type_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -371,7 +342,6 @@ fn build_subroutine_type_di_node<'ll, 'tcx>(
 
     DINodeCreationResult::new(di_node, false)
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
 
 pub(super) fn create_subroutine_type<'ll>(
     cx: &CodegenCx<'ll, '_>,
@@ -379,7 +349,6 @@ pub(super) fn create_subroutine_type<'ll>(
 ) -> &'ll DICompositeType {
     unsafe { llvm::LLVMRustDIBuilderCreateSubroutineType(DIB(cx), signature) }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=build_dyn_type_di_node | COMPLEXITY=13 | LINES=32 */
 
 /// Create debuginfo for `dyn SomeTrait` types. Currently these are empty structs
 /// we with the correct type name (e.g. "dyn SomeTrait<Foo, Item=u32> + Sync").
@@ -412,7 +381,6 @@ fn build_dyn_type_di_node<'ll, 'tcx>(
         )
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=15 */
 
 /// Create debuginfo for `[T]` and `str`. These are unsized.
 ///
@@ -428,9 +396,7 @@ fn build_dyn_type_di_node<'ll, 'tcx>(
 ///
 /// As a side effect of the current encoding every instance of a type like
 /// `struct Foo { unsized_field: [u8] }` will look like
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// `struct Foo { unsized_field: u8 }` in debuginfo. If the length of the
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=build_slice_type_di_node | COMPLEXITY=12 | LINES=22 */
 /// slice is zero, then accessing `unsized_field` in the debugger would
 /// result in an out-of-bounds access.
 fn build_slice_type_di_node<'ll, 'tcx>(
@@ -453,7 +419,6 @@ fn build_slice_type_di_node<'ll, 'tcx>(
     return_if_di_node_created_in_meantime!(cx, unique_type_id);
     DINodeCreationResult { di_node: element_type_di_node, already_stored_in_typemap: false }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Get the debuginfo node for the given type.
 ///
@@ -462,7 +427,6 @@ fn build_slice_type_di_node<'ll, 'tcx>(
 pub(crate) fn type_di_node<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>, t: Ty<'tcx>) -> &'ll DIType {
     spanned_type_di_node(cx, t, DUMMY_SP)
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=51 | LINES=74 */
 
 pub(crate) fn spanned_type_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -537,7 +501,6 @@ pub(crate) fn spanned_type_di_node<'ll, 'tcx>(
 
     di_node
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=recursion_marker_type_di_node | COMPLEXITY=6 | LINES=22 */
 
 // FIXME(mw): Cache this via a regular UniqueTypeId instead of an extra field in the debug context.
 fn recursion_marker_type_di_node<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>) -> &'ll DIType {
@@ -560,7 +523,6 @@ fn recursion_marker_type_di_node<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>) -> &'ll D
         )
     })
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=hex_encode | COMPLEXITY=6 | LINES=8 */
 
 fn hex_encode(data: &[u8]) -> String {
     let mut hex_string = String::with_capacity(data.len() * 2);
@@ -569,7 +531,6 @@ fn hex_encode(data: &[u8]) -> String {
     }
     hex_string
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=alloc_new_file_metadata | COMPLEXITY=45 | LINES=106 */
 
 pub(crate) fn file_metadata<'ll>(cx: &CodegenCx<'ll, '_>, source_file: &SourceFile) -> &'ll DIFile {
     let cache_key = Some((source_file.stable_id, source_file.src_hash));
@@ -676,14 +637,12 @@ pub(crate) fn file_metadata<'ll>(cx: &CodegenCx<'ll, '_>, source_file: &SourceFi
         create_file(DIB(cx), &file_name, &directory, &hash_value, hash_kind, source)
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=unknown_file_metadata | COMPLEXITY=3 | LINES=6 */
 
 fn unknown_file_metadata<'ll>(cx: &CodegenCx<'ll, '_>) -> &'ll DIFile {
     debug_context(cx).created_files.borrow_mut().entry(None).or_insert_with(|| {
         create_file(DIB(cx), "<unknown>", "", "", llvm::ChecksumKind::None, None)
     })
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=create_file | COMPLEXITY=8 | LINES=24 */
 
 fn create_file<'ll>(
     builder: &DIBuilder<'ll>,
@@ -708,12 +667,10 @@ fn create_file<'ll>(
         )
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=msvc_basic_name | COMPLEXITY=2 | LINES=4 */
 
 trait MsvcBasicName {
     fn msvc_basic_name(self) -> &'static str;
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=msvc_basic_name | COMPLEXITY=9 | LINES=13 */
 
 impl MsvcBasicName for ty::IntTy {
     fn msvc_basic_name(self) -> &'static str {
@@ -727,7 +684,6 @@ impl MsvcBasicName for ty::IntTy {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=msvc_basic_name | COMPLEXITY=9 | LINES=13 */
 
 impl MsvcBasicName for ty::UintTy {
     fn msvc_basic_name(self) -> &'static str {
@@ -741,7 +697,6 @@ impl MsvcBasicName for ty::UintTy {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=msvc_basic_name | COMPLEXITY=11 | LINES=15 */
 
 impl MsvcBasicName for ty::FloatTy {
     fn msvc_basic_name(self) -> &'static str {
@@ -757,7 +712,6 @@ impl MsvcBasicName for ty::FloatTy {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=build_cpp_f16_di_node | COMPLEXITY=25 | LINES=50 */
 
 fn build_cpp_f16_di_node<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>) -> DINodeCreationResult<'ll> {
     // MSVC has no native support for `f16`. Instead, emit `struct f16 { bits: u16 }` to allow the
@@ -808,7 +762,6 @@ fn build_cpp_f16_di_node<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>) -> DINodeCreation
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=build_basic_type_di_node | COMPLEXITY=42 | LINES=63 */
 
 fn build_basic_type_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -872,7 +825,6 @@ fn build_basic_type_di_node<'ll, 'tcx>(
 
     DINodeCreationResult::new(typedef_di_node, false)
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=create_basic_type | COMPLEXITY=7 | LINES=17 */
 
 fn create_basic_type<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -890,7 +842,6 @@ fn create_basic_type<'ll, 'tcx>(
         )
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=build_foreign_type_di_node | COMPLEXITY=6 | LINES=31 */
 
 fn build_foreign_type_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -922,7 +873,6 @@ fn build_foreign_type_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=38 | LINES=108 */
 
 pub(crate) fn build_compile_unit_di_node<'ll, 'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -1031,7 +981,6 @@ pub(crate) fn build_compile_unit_di_node<'ll, 'tcx>(
         return unit_metadata;
     };
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=build_field_di_node | COMPLEXITY=7 | LINES=30 */
 
 /// Creates a `DW_TAG_member` entry inside the DIE represented by the given `type_di_node`.
 fn build_field_di_node<'ll, 'tcx>(
@@ -1062,7 +1011,6 @@ fn build_field_di_node<'ll, 'tcx>(
         type_di_node,
     )
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=create_member_type | COMPLEXITY=8 | LINES=28 */
 
 fn create_member_type<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -1091,12 +1039,10 @@ fn create_member_type<'ll, 'tcx>(
         )
     }
 }
-/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 /// Returns the `DIFlags` corresponding to the visibility of the item identified by `did`.
 ///
 /// `DIFlags::Flag{Public,Protected,Private}` correspond to `DW_AT_accessibility`
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=visibility_di_flags | COMPLEXITY=11 | LINES=17 */
 /// (public/protected/private) aren't exactly right for Rust, but neither is `DW_AT_visibility`
 /// (local/exported/qualified), and there's no way to set `DW_AT_visibility` in LLVM's API.
 fn visibility_di_flags<'ll, 'tcx>(
@@ -1114,7 +1060,6 @@ fn visibility_di_flags<'ll, 'tcx>(
         Visibility::Restricted(..) => DIFlags::FlagProtected,
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=build_struct_type_di_node | COMPLEXITY=25 | LINES=68 */
 
 /// Creates the debuginfo node for a Rust struct type. Maybe be a regular struct or a tuple-struct.
 fn build_struct_type_di_node<'ll, 'tcx>(
@@ -1183,7 +1128,6 @@ fn build_struct_type_di_node<'ll, 'tcx>(
         |cx| build_generic_type_param_di_nodes(cx, struct_type),
     )
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=build_upvar_field_di_nodes | COMPLEXITY=14 | LINES=47 */
 
 //=-----------------------------------------------------------------------------
 // Tuples
@@ -1231,7 +1175,6 @@ fn build_upvar_field_di_nodes<'ll, 'tcx>(
         })
         .collect()
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=build_tuple_type_di_node | COMPLEXITY=11 | LINES=48 */
 
 /// Builds the DW_TAG_structure_type debuginfo node for a Rust tuple type.
 fn build_tuple_type_di_node<'ll, 'tcx>(
@@ -1280,7 +1223,6 @@ fn build_tuple_type_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=build_closure_env_di_node | COMPLEXITY=12 | LINES=37 */
 
 /// Builds the debuginfo node for a closure environment.
 fn build_closure_env_di_node<'ll, 'tcx>(
@@ -1318,7 +1260,6 @@ fn build_closure_env_di_node<'ll, 'tcx>(
         NO_GENERICS,
     )
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=build_union_type_di_node | COMPLEXITY=22 | LINES=62 */
 
 /// Build the debuginfo node for a Rust `union` type.
 fn build_union_type_di_node<'ll, 'tcx>(
@@ -1381,7 +1322,6 @@ fn build_union_type_di_node<'ll, 'tcx>(
         |cx| build_generic_type_param_di_nodes(cx, union_type),
     )
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=build_generic_type_param_di_nodes | COMPLEXITY=19 | LINES=34 */
 
 /// Computes the type parameters for a type, if any, for the given metadata.
 fn build_generic_type_param_di_nodes<'ll, 'tcx>(
@@ -1416,7 +1356,6 @@ fn build_generic_type_param_di_nodes<'ll, 'tcx>(
         names
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=60 */
 
 /// Creates debug information for the given global variable.
 ///
@@ -1477,7 +1416,6 @@ pub(crate) fn build_global_var_di_node<'ll>(
         );
     }
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=build_vtable_type_di_node | COMPLEXITY=36 | LINES=102 */
 
 /// Generates LLVM debuginfo for a vtable.
 ///
@@ -1580,7 +1518,6 @@ fn build_vtable_type_di_node<'ll, 'tcx>(
     )
     .di_node
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=find_vtable_behind_cast | COMPLEXITY=18 | LINES=20 */
 
 /// Get the global variable for the vtable.
 ///
@@ -1601,7 +1538,6 @@ fn find_vtable_behind_cast<'ll>(vtable: &'ll Value) -> &'ll Value {
     }
     vtable
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=72 */
 
 pub(crate) fn apply_vcall_visibility_metadata<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
@@ -1674,7 +1610,6 @@ pub(crate) fn apply_vcall_visibility_metadata<'ll, 'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=51 */
 
 /// Creates debug information for the given vtable, which is for the
 /// given type.
@@ -1726,7 +1661,6 @@ pub(crate) fn create_vtable_di_node<'ll, 'tcx>(
         );
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 /// Creates an "extension" of an existing `DIScope` into another file.
 pub(crate) fn extend_scope_to_file<'ll>(
@@ -1744,7 +1678,6 @@ pub(crate) fn extend_scope_to_file<'ll>(
         )
     }
 }
-/* AST_META: AST_ID=67 | TYPE=FUNCTION | NAME=tuple_field_name | COMPLEXITY=3 | LINES=11 */
 
 fn tuple_field_name(field_index: usize) -> Cow<'static, str> {
     const TUPLE_FIELD_NAMES: [&'static str; 16] = [
@@ -1756,7 +1689,6 @@ fn tuple_field_name(field_index: usize) -> Cow<'static, str> {
         .map(|s| Cow::from(*s))
         .unwrap_or_else(|| Cow::from(format!("__{field_index}")))
 }
-/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 pub(crate) type DefinitionLocation<'ll> = (&'ll DIFile, c_uint);
 

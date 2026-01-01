@@ -1,64 +1,48 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/context.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::cell::RefCell;
 use std::collections::BTreeMap;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::sync::LazyLock;
 
 use private::Sealed;
 use crate::rustc_complete::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Diag, Diagnostic, Level};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{AttributeTemplate, AttributeType};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{AttrPath, CRATE_HIR_ID, HirId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::AttributeParser;
 use crate::attributes::allow_unstable::{
     AllowConstFnUnstableParser, AllowInternalUnstableParser, UnstableFeatureBoundParser,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::attributes::body::CoroutineParser;
 use crate::attributes::codegen_attrs::{
     ColdParser, CoverageParser, ExportNameParser, ForceTargetFeatureParser, NakedParser,
     NoMangleParser, OptimizeParser, SanitizeParser, TargetFeatureParser, TrackCallerParser,
     UsedParser,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::attributes::confusables::ConfusablesParser;
 use crate::attributes::crate_level::{
     CrateNameParser, MoveSizeLimitParser, NoCoreParser, NoStdParser, PatternComplexityLimitParser,
     RecursionLimitParser, TypeLengthLimitParser,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::attributes::deprecation::DeprecationParser;
 use crate::attributes::dummy::DummyParser;
 use crate::attributes::inline::{InlineParser, RustcForceInlineParser};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::attributes::link_attrs::{
     ExportStableParser, FfiConstParser, FfiPureParser, LinkNameParser, LinkOrdinalParser,
     LinkParser, LinkSectionParser, LinkageParser, StdInternalSymbolParser,
 };
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::attributes::lint_helpers::{
     AsPtrParser, AutomaticallyDerivedParser, PassByValueParser, PubTransparentParser,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::attributes::loop_match::{ConstContinueParser, LoopMatchParser};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::attributes::macro_attrs::{
     AllowInternalUnsafeParser, MacroEscapeParser, MacroUseParser,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::attributes::must_use::MustUseParser;
 use crate::attributes::no_implicit_prelude::NoImplicitPreludeParser;
 use crate::attributes::non_exhaustive::NonExhaustiveParser;
@@ -66,36 +50,27 @@ use crate::attributes::path::PathParser as PathAttributeParser;
 use crate::attributes::proc_macro_attrs::{
     ProcMacroAttributeParser, ProcMacroDeriveParser, ProcMacroParser, RustcBuiltinMacroParser,
 };
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::attributes::prototype::CustomMirParser;
 use crate::attributes::repr::{AlignParser, AlignStaticParser, ReprParser};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::attributes::rustc_internal::{
     RustcLayoutScalarValidRangeEnd, RustcLayoutScalarValidRangeStart,
     RustcObjectLifetimeDefaultParser,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::attributes::semantics::MayDangleParser;
 use crate::attributes::stability::{
     BodyStabilityParser, ConstStabilityIndirectParser, ConstStabilityParser, StabilityParser,
 };
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::attributes::test_attrs::{IgnoreParser, ShouldPanicParser};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::attributes::traits::{
     AllowIncoherentImplParser, CoherenceIsCoreParser, CoinductiveParser, ConstTraitParser,
     DenyExplicitImplParser, DoNotImplementViaObjectParser, FundamentalParser, MarkerParser,
     ParenSugarParser, PointeeParser, SkipDuringMethodDispatchParser, SpecializationTraitParser,
     TypeConstParser, UnsafeSpecializationMarkerParser,
 };
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::attributes::transparency::TransparencyParser;
 use crate::attributes::{AttributeParser as _, Combine, Single, WithoutArgs};
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::parser::{ArgParser, PathParser};
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::session_diagnostics::{AttributeParseError, AttributeParseErrorReason, UnknownMetaItem};
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::target_checking::AllowedTargets;
 
 type GroupType<S> = LazyLock<GroupTypeInner<S>>;
@@ -104,7 +79,6 @@ pub(super) struct GroupTypeInner<S: Stage> {
     pub(super) accepters: BTreeMap<&'static [Symbol], Vec<GroupTypeInnerAccept<S>>>,
     pub(super) finalizers: Vec<FinalizeFn<S>>,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(super) struct GroupTypeInnerAccept<S: Stage> {
     pub(super) template: AttributeTemplate,
@@ -112,7 +86,6 @@ pub(super) struct GroupTypeInnerAccept<S: Stage> {
     pub(super) allowed_targets: AllowedTargets,
     pub(super) attribute_type: AttributeType,
 }
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=27 | LINES=63 */
 
 type AcceptFn<S> =
     Box<dyn for<'sess, 'a> Fn(&mut AcceptContext<'_, 'sess, S>, &ArgParser<'a>) + Send + Sync>;
@@ -176,7 +149,6 @@ macro_rules! attribute_parsers {
         });
     };
 }
-/* AST_META: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=16 | LINES=100 */
 attribute_parsers!(
     pub(crate) static ATTRIBUTE_PARSERS = [
         // tidy-alphabetical-start
@@ -277,7 +249,6 @@ mod private {
     impl Sealed for super::Early {}
     impl Sealed for super::Late {}
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=2 | LINES=18 */
 
 // allow because it's a sealed trait
 #[allow(private_interfaces)]
@@ -296,7 +267,6 @@ pub trait Stage: Sized + 'static + Sealed {
 
     fn id_is_crate_root(id: Self::Id) -> bool;
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=9 | LINES=25 */
 
 // allow because it's a sealed trait
 #[allow(private_interfaces)]
@@ -322,7 +292,6 @@ impl Stage for Early {
         id == CRATE_NODE_ID
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=9 | LINES=25 */
 
 // allow because it's a sealed trait
 #[allow(private_interfaces)]
@@ -348,7 +317,6 @@ impl Stage for Late {
         id == CRATE_HIR_ID
     }
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=Early | COMPLEXITY=6 | LINES=8 */
 
 /// used when parsing attributes for miscellaneous things *before* ast lowering
 pub struct Early {
@@ -357,7 +325,6 @@ pub struct Early {
     /// But for some, such as `cfg`, the attribute will be removed before the `Late` stage so errors must be emitted
     pub emit_errors: ShouldEmit,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=Late; | COMPLEXITY=5 | LINES=22 */
 /// used when parsing attributes during ast lowering
 pub struct Late;
 
@@ -380,7 +347,6 @@ pub struct AcceptContext<'f, 'sess, S: Stage> {
     /// The name of the attribute we're currently accepting.
     pub(crate) attr_path: AttrPath,
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=46 */
 
 impl<'f, 'sess: 'f, S: Stage> SharedContext<'f, 'sess, S> {
     pub(crate) fn emit_err(&self, diag: impl for<'x> Diagnostic<'x>) -> ErrorGuaranteed {
@@ -427,7 +393,6 @@ impl<'f, 'sess: 'f, S: Stage> SharedContext<'f, 'sess, S> {
         )
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=54 | LINES=204 */
 
 impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
     pub(crate) fn unknown_key(
@@ -632,7 +597,6 @@ impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
         self.emit_lint(AttributeLintKind::EmptyAttribute { first_span: span }, span);
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'f, 'sess, S: Stage> Deref for AcceptContext<'f, 'sess, S> {
     type Target = SharedContext<'f, 'sess, S>;
@@ -641,14 +605,12 @@ impl<'f, 'sess, S: Stage> Deref for AcceptContext<'f, 'sess, S> {
         &self.shared
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'f, 'sess, S: Stage> DerefMut for AcceptContext<'f, 'sess, S> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.shared
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=SharedContext | COMPLEXITY=9 | LINES=16 */
 
 /// Context given to every attribute parser during finalization.
 ///
@@ -665,7 +627,6 @@ pub struct SharedContext<'p, 'sess, S: Stage> {
 
     pub(crate) emit_lint: &'p mut dyn FnMut(AttributeLint<S::Id>),
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
 
 /// Context given to every attribute parser during finalization.
 ///
@@ -682,7 +643,6 @@ pub(crate) struct FinalizeContext<'p, 'sess, S: Stage> {
     /// especially when making a *denylist* of other attributes.
     pub(crate) all_attrs: &'p [PathParser<'p>],
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'p, 'sess: 'p, S: Stage> Deref for FinalizeContext<'p, 'sess, S> {
     type Target = SharedContext<'p, 'sess, S>;
@@ -691,14 +651,12 @@ impl<'p, 'sess: 'p, S: Stage> Deref for FinalizeContext<'p, 'sess, S> {
         &self.shared
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'p, 'sess: 'p, S: Stage> DerefMut for FinalizeContext<'p, 'sess, S> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.shared
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<'p, 'sess: 'p, S: Stage> Deref for SharedContext<'p, 'sess, S> {
     type Target = AttributeParser<'sess, S>;
@@ -707,21 +665,18 @@ impl<'p, 'sess: 'p, S: Stage> Deref for SharedContext<'p, 'sess, S> {
         self.cx
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'p, 'sess: 'p, S: Stage> DerefMut for SharedContext<'p, 'sess, S> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         self.cx
     }
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq, Clone, Copy, Debug)]
 pub enum OmitDoc {
     Lower,
     Skip,
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 #[derive(Copy, Clone, Debug)]
 pub enum ShouldEmit {
@@ -737,7 +692,6 @@ pub enum ShouldEmit {
     /// Use this if you are *sure* that this operation will be called at a different time with `ShouldEmit::ErrorsAndLints`.
     Nothing,
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=11 */
 
 impl ShouldEmit {
     pub(crate) fn emit_err(&self, diag: Diag<'_>) -> ErrorGuaranteed {

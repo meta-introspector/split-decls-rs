@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/float-minmax-pass.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // Copied from https://github.com/rust-lang/rust/blob/3fe3b89cd57229343eeca753fdd8c63d9b03c65c/src/test/ui/simd/intrinsic/float-minmax-pass.rs
 // run-pass
 // ignore-emscripten
 
 // Test that the simd_f{min,max} intrinsics produce the correct results.
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=f32x4(pub | COMPLEXITY=8 | LINES=13 */
 
 #[feature(repr_simd, core_intrinsics)]
 #[allow(internal_features, non_camel_case_types)]
@@ -19,7 +17,6 @@ impl f32x4 {
         unsafe { std::mem::transmute(self) }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=main | COMPLEXITY=9 | LINES=38 */
 
 use std::intrinsics::simd::*;
 

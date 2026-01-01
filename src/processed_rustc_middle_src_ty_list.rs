@@ -1,22 +1,16 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/list.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::alloc::Layout;
 use std::cmp::Ordering;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::ops::Deref;
 use std::{fmt, iter, mem, ptr, slice};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::aligned::{Aligned, align_of};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::sync::DynSync;
 use crate::rustc_serialize::{Encodable, Encoder};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_type_ir::FlagComputation;
 
 use super::{DebruijnIndex, TyCtxt, TypeFlags};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=RawList | COMPLEXITY=8 | LINES=29 */
 use crate::arena::Arena;
 
 /// `List<T>` is a bit like `&[T]`, but with some critical differences.
@@ -46,7 +40,6 @@ pub struct RawList<H, T> {
     skel: ListSkeleton<H, T>,
     opaque: OpaqueListContents,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ListSkeleton | COMPLEXITY=4 | LINES=11 */
 
 /// A [`RawList`] without the unsized tail. This type is used for layout computation
 /// and constructing empty lists.
@@ -58,21 +51,18 @@ struct ListSkeleton<H, T> {
     /// elements are actually present.
     data: [T; 0],
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl<T> Default for &List<T> {
     fn default() -> Self {
         List::empty()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6 */
 
 unsafe extern "C" {
     /// A dummy type used to force `List` to be unsized while not requiring
     /// references to it be wide pointers.
     type OpaqueListContents;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=len | COMPLEXITY=16 | LINES=66 */
 
 impl<H, T> RawList<H, T> {
     #[inline(always)]
@@ -139,7 +129,6 @@ impl<H, T> RawList<H, T> {
         self.into_iter()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=14 */
 
 impl<'a, H, T: Copy> rustc_type_ir::inherent::SliceLike for &'a RawList<H, T> {
     type Item = T;
@@ -154,7 +143,6 @@ impl<'a, H, T: Copy> rustc_type_ir::inherent::SliceLike for &'a RawList<H, T> {
         (*self).as_slice()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=19 | LINES=22 */
 
 macro_rules! impl_list_empty {
     ($header_ty:ty, $header_init:expr) => {
@@ -177,7 +165,6 @@ macro_rules! impl_list_empty {
         }
     };
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=8 */
 
 impl_list_empty!((), ());
 
@@ -186,7 +173,6 @@ impl<H, T: fmt::Debug> fmt::Debug for RawList<H, T> {
         (**self).fmt(f)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=7 */
 
 impl<H, S: Encoder, T: Encodable<S>> Encodable<S> for RawList<H, T> {
     #[inline]
@@ -194,7 +180,6 @@ impl<H, S: Encoder, T: Encodable<S>> Encodable<S> for RawList<H, T> {
         (**self).encode(s);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=9 */
 
 impl<H, T: PartialEq> PartialEq for RawList<H, T> {
     #[inline]
@@ -204,10 +189,8 @@ impl<H, T: PartialEq> PartialEq for RawList<H, T> {
         ptr::eq(self, other)
     }
 }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<H, T: Eq> Eq for RawList<H, T> {}
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=cmp | COMPLEXITY=9 | LINES=11 */
 
 impl<H, T> Ord for RawList<H, T>
 where
@@ -219,7 +202,6 @@ where
         if self == other { Ordering::Equal } else { <[T] as Ord>::cmp(&**self, &**other) }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=partial_cmp | COMPLEXITY=9 | LINES=15 */
 
 impl<H, T> PartialOrd for RawList<H, T>
 where
@@ -235,7 +217,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=9 */
 
 impl<Hdr, T> Hash for RawList<Hdr, T> {
     #[inline]
@@ -245,7 +226,6 @@ impl<Hdr, T> Hash for RawList<Hdr, T> {
         ptr::from_ref(self).hash(s)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
 
 impl<H, T> Deref for RawList<H, T> {
     type Target = [T];
@@ -254,7 +234,6 @@ impl<H, T> Deref for RawList<H, T> {
         self.as_ref()
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=11 | LINES=12 */
 
 impl<H, T> AsRef<[T]> for RawList<H, T> {
     #[inline(always)]
@@ -267,7 +246,6 @@ impl<H, T> AsRef<[T]> for RawList<H, T> {
         unsafe { slice::from_raw_parts(data_ptr, self.skel.len) }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=9 */
 
 impl<'a, H, T: Copy> IntoIterator for &'a RawList<H, T> {
     type Item = T;
@@ -277,14 +255,11 @@ impl<'a, H, T: Copy> IntoIterator for &'a RawList<H, T> {
         self[..].iter().copied()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl<H: Sync, T: Sync> Sync for RawList<H, T> {}
-/* AST_META: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=3 */
 
 // We need this since `List` uses extern type `OpaqueListContents`.
 unsafe impl<H: DynSync, T: DynSync> DynSync for RawList<H, T> {}
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 // Safety:
 // Layouts of `ListSkeleton<H, T>` and `RawList<H, T>` are the same, modulo opaque tail,
@@ -292,7 +267,6 @@ unsafe impl<H: DynSync, T: DynSync> DynSync for RawList<H, T> {}
 unsafe impl<H, T> Aligned for RawList<H, T> {
     const ALIGN: ptr::Alignment = align_of::<ListSkeleton<H, T>>();
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=4 | LINES=16 */
 
 /// A [`List`] that additionally stores type information inline to speed up
 /// [`TypeVisitableExt`](super::TypeVisitableExt) operations.
@@ -309,7 +283,6 @@ impl<T> ListWithCachedTypeInfo<T> {
         self.skel.header.outer_exclusive_binder
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=TypeInfo | COMPLEXITY=2 | LINES=10 */
 
 impl_list_empty!(TypeInfo, TypeInfo::empty());
 
@@ -320,14 +293,12 @@ pub struct TypeInfo {
     flags: TypeFlags,
     outer_exclusive_binder: DebruijnIndex,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 impl TypeInfo {
     const fn empty() -> Self {
         Self { flags: TypeFlags::empty(), outer_exclusive_binder: super::INNERMOST }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=9 */
 
 impl<'tcx> From<FlagComputation<TyCtxt<'tcx>>> for TypeInfo {
     fn from(computation: FlagComputation<TyCtxt<'tcx>>) -> TypeInfo {

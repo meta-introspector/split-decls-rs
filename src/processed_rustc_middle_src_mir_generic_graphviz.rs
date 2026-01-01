@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/generic_graphviz.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::graph::{self, iterate};
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=GraphvizWriter | COMPLEXITY=2 | LINES=17 */
 use rustc_graphviz as dot;
 
 use crate::ty::TyCtxt;
@@ -22,7 +19,6 @@ pub struct GraphvizWriter<
     node_content_fn: NodeContentFn,
     edge_labels_fn: EdgeLabelsFn,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=99 | LINES=154 */
 
 impl<
     'a,

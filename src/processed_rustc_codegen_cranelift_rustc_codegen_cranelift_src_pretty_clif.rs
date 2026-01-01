@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/pretty_clif.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=91 | LINES=56 */
 // This module provides the [CommentWriter] which makes it possible
 // to add comments to the written cranelift ir.
 //
@@ -56,7 +55,6 @@
 // ; return
 //     return v5, v6
 // }
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // ```
 
 use std::fmt;
@@ -66,10 +64,8 @@ use cranelift_codegen::entity::SecondaryMap;
 use cranelift_codegen::ir::Fact;
 use cranelift_codegen::ir::entities::AnyEntity;
 use cranelift_codegen::write::{FuncWriter, PlainWriter};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::config::{OutputFilenames, OutputType};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use crate::rustc_target::callconv::FnAbi;
 
 use crate::prelude::*;
@@ -81,7 +77,6 @@ pub(crate) struct CommentWriter {
     entity_comments: FxHashMap<AnyEntity, String>,
     inst_post_comments: FxHashMap<Inst, String>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
 
 impl CommentWriter {
     pub(crate) fn new<'tcx>(
@@ -111,7 +106,6 @@ impl CommentWriter {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=49 */
 
 impl CommentWriter {
     pub(crate) fn enabled(&self) -> bool {
@@ -161,7 +155,6 @@ impl CommentWriter {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_preamble | COMPLEXITY=44 | LINES=70 */
 
 impl FuncWriter for &'_ CommentWriter {
     fn write_preamble(
@@ -232,7 +225,6 @@ impl FuncWriter for &'_ CommentWriter {
         Ok(())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
 
 impl FunctionCx<'_, '_, '_> {
     pub(crate) fn add_global_comment<S: Into<String>>(&mut self, comment: S) {
@@ -255,12 +247,10 @@ impl FunctionCx<'_, '_, '_> {
         self.clif_comments.add_post_comment(entity, comment);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) fn should_write_ir(tcx: TyCtxt<'_>) -> bool {
     tcx.sess.opts.output_types.contains_key(&OutputType::LlvmAssembly)
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=24 */
 
 pub(crate) fn write_ir_file(
     output_filenames: &OutputFilenames,
@@ -285,7 +275,6 @@ pub(crate) fn write_ir_file(
         handler.early_warn(format!("error writing ir file: {}", err));
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
 
 pub(crate) fn write_clif_file(
     output_filenames: &OutputFilenames,
@@ -313,7 +302,6 @@ pub(crate) fn write_clif_file(
         Ok(())
     });
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=16 */
 
 impl fmt::Debug for FunctionCx<'_, '_, '_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

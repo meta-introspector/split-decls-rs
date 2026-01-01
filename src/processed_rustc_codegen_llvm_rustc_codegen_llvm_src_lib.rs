@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=28 */
 // The Rust compiler.
 //
 // # Note
@@ -28,35 +27,28 @@ use std::path::PathBuf;
 
 use back::owned_target_machine::OwnedTargetMachine;
 use back::write::{create_informational_target_machine, create_target_machine};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use context::SimpleCx;
 use errors::ParseTargetMachineConfig;
 use llvm_util::target_config;
 use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryConfig, TargetMachineFactoryFn,
 };
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::DiagCtxtHandle;
 use crate::rustc_metadata::EncodedMetadata;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::util::Providers;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{OptLevel, OutputFilenames, PrintKind, PrintRequest};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=27 */
 use crate::rustc_complete::Symbol;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=LlvmCodegenBackend(()); | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone)]
 pub struct LlvmCodegenBackend(());
@@ -64,7 +56,6 @@ pub struct LlvmCodegenBackend(());
 struct TimeTraceProfiler {
     enabled: bool,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=9 */
 
 impl TimeTraceProfiler {
     fn new(enabled: bool) -> Self {
@@ -74,7 +65,6 @@ impl TimeTraceProfiler {
         TimeTraceProfiler { enabled }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=13 | LINES=8 */
 
 impl Drop for TimeTraceProfiler {
     fn drop(&mut self) {
@@ -83,7 +73,6 @@ impl Drop for TimeTraceProfiler {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=codegen_allocator | COMPLEXITY=16 | LINES=49 */
 
 impl ExtraBackendMethods for LlvmCodegenBackend {
     fn codegen_allocator<'tcx>(
@@ -133,7 +122,6 @@ impl ExtraBackendMethods for LlvmCodegenBackend {
         })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=print_pass_timings | COMPLEXITY=30 | LINES=74 */
 
 impl WriteBackendMethods for LlvmCodegenBackend {
     type Module = ModuleLlvm;
@@ -208,14 +196,12 @@ impl WriteBackendMethods for LlvmCodegenBackend {
         (module.name, back::lto::ModuleBuffer::new(module.module_llvm.llmod()))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=3 | LINES=6 */
 
 impl LlvmCodegenBackend {
     pub fn new() -> Box<dyn CodegenBackend> {
         Box::new(LlvmCodegenBackend(()))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=locale_resource | COMPLEXITY=51 | LINES=138 */
 
 impl CodegenBackend for LlvmCodegenBackend {
     fn locale_resource(&self) -> &'static str {
@@ -354,7 +340,6 @@ impl CodegenBackend for LlvmCodegenBackend {
         link_binary(sess, &LlvmArchiveBuilderBuilder, codegen_results, metadata, outputs);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=ModuleLlvm | COMPLEXITY=2 | LINES=9 */
 
 pub struct ModuleLlvm {
     llcx: &'static mut llvm::Context,
@@ -364,12 +349,9 @@ pub struct ModuleLlvm {
     // is disposed prior to the `Context` being disposed otherwise UAFs can occur.
     tm: ManuallyDrop<OwnedTargetMachine>,
 }
-/* AST_META: AST_ID=16 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 
 unsafe impl Send for ModuleLlvm {}
-/* AST_META: AST_ID=17 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=8 | LINES=1 */
 unsafe impl Sync for ModuleLlvm {}
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=38 | LINES=59 */
 
 impl ModuleLlvm {
     fn new(tcx: TyCtxt<'_>, mod_name: &str) -> Self {
@@ -429,7 +411,6 @@ impl ModuleLlvm {
         unsafe { &*self.llmod_raw }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=9 */
 
 impl Drop for ModuleLlvm {
     fn drop(&mut self) {

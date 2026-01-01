@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/levels.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::attr::AttributeExt;
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::unord::UnordSet;
 use crate::rustc_complete::{Diag, LintDiagnostic, MultiSpan};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{Features, GateIssue};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::hir::nested_filter;
@@ -19,33 +14,24 @@ use crate::rustc_complete::lint::{
     LevelAndSource, LintExpectation, LintLevelSource, ShallowLintLevelMap, lint_level,
     reveal_actual_level,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::Session;
 use crate::rustc_complete::lint::builtin::{
     self, FORBIDDEN_LINT_GROUPS, RENAMED_AND_REMOVED_LINTS, SINGLE_USE_LIFETIMES,
     UNFULFILLED_LINT_EXPECTATIONS, UNKNOWN_LINTS, UNUSED_ATTRIBUTES,
 };
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{Level, Lint, LintExpectationId, LintId};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::builtin::MISSING_DOCS;
 use crate::context::{CheckLintNameResult, LintStore};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::errors::{
     CheckNameUnknownTool, MalformedAttribute, MalformedAttributeSub, OverruledAttribute,
     OverruledAttributeSub, RequestedLevel, UnknownToolInScopedLint, UnsupportedGroup,
 };
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::fluent_generated as fluent;
 use crate::late::unerased_lint_store;
 use crate::lints::{
@@ -54,7 +40,6 @@ use crate::lints::{
     RenamedLintFromCommandLine, RenamedLintSuggestion, UnknownLint, UnknownLintFromCommandLine,
     UnknownLintSuggestion,
 };
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=LintLevelSets | COMPLEXITY=4 | LINES=9 */
 
 /// Collection of lint levels for the whole crate.
 /// This is used by AST-based lints, which do not
@@ -64,14 +49,12 @@ struct LintLevelSets {
     /// Linked list of specifications.
     list: IndexVec<LintStackIndex, LintSet>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=LintStackIndex | COMPLEXITY=3 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     struct LintStackIndex {
         const COMMAND_LINE = 0;
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=LintSet | COMPLEXITY=11 | LINES=16 */
 
 /// Specifications found at this position in the stack. This map only represents the lints
 /// found for one set of attributes (like `shallow_lint_levels_on` does).
@@ -88,7 +71,6 @@ struct LintSet {
     specs: FxIndexMap<LintId, LevelAndSource>,
     parent: LintStackIndex,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=25 | LINES=45 */
 
 impl LintLevelSets {
     fn new() -> Self {
@@ -134,7 +116,6 @@ impl LintLevelSets {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=lints_that_dont_need_to_run | COMPLEXITY=19 | LINES=40 */
 
 fn lints_that_dont_need_to_run(tcx: TyCtxt<'_>, (): ()) -> UnordSet<LintId> {
     let store = unerased_lint_store(&tcx.sess);
@@ -175,7 +156,6 @@ fn lints_that_dont_need_to_run(tcx: TyCtxt<'_>, (): ()) -> UnordSet<LintId> {
 
     dont_need_to_run.into()
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=shallow_lint_levels_on | COMPLEXITY=27 | LINES=55 */
 
 #[instrument(level = "trace", skip(tcx), ret)]
 fn shallow_lint_levels_on(tcx: TyCtxt<'_>, owner: hir::OwnerId) -> ShallowLintLevelMap {
@@ -231,13 +211,11 @@ fn shallow_lint_levels_on(tcx: TyCtxt<'_>, owner: hir::OwnerId) -> ShallowLintLe
 
     specs
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=TopDown | COMPLEXITY=2 | LINES=5 */
 
 pub struct TopDown {
     sets: LintLevelSets,
     cur: LintStackIndex,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=current_specs | COMPLEXITY=2 | LINES=7 */
 
 pub trait LintLevelsProvider {
     fn current_specs(&self) -> &FxIndexMap<LintId, LevelAndSource>;
@@ -245,7 +223,6 @@ pub trait LintLevelsProvider {
     fn get_lint_level(&self, lint: &'static Lint, sess: &Session) -> LevelAndSource;
     fn push_expectation(&mut self, id: LintExpectationId, expectation: LintExpectation);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=current_specs | COMPLEXITY=9 | LINES=16 */
 
 impl LintLevelsProvider for TopDown {
     fn current_specs(&self) -> &FxIndexMap<LintId, LevelAndSource> {
@@ -262,7 +239,6 @@ impl LintLevelsProvider for TopDown {
 
     fn push_expectation(&mut self, _: LintExpectationId, _: LintExpectation) {}
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=LintLevelQueryMap | COMPLEXITY=2 | LINES=9 */
 
 struct LintLevelQueryMap<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -272,7 +248,6 @@ struct LintLevelQueryMap<'tcx> {
     empty: FxIndexMap<LintId, LevelAndSource>,
     attrs: &'tcx hir::AttributeMap<'tcx>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=current_specs | COMPLEXITY=9 | LINES=15 */
 
 impl LintLevelsProvider for LintLevelQueryMap<'_> {
     fn current_specs(&self) -> &FxIndexMap<LintId, LevelAndSource> {
@@ -288,7 +263,6 @@ impl LintLevelsProvider for LintLevelQueryMap<'_> {
         self.specs.expectations.push((id, expectation))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=add_id | COMPLEXITY=3 | LINES=11 */
 
 impl<'tcx> LintLevelsBuilder<'_, LintLevelQueryMap<'tcx>> {
     fn add_id(&mut self, hir_id: HirId) {
@@ -300,7 +274,6 @@ impl<'tcx> LintLevelsBuilder<'_, LintLevelQueryMap<'tcx>> {
         );
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=22 | LINES=73 */
 
 impl<'tcx> Visitor<'tcx> for LintLevelsBuilder<'_, LintLevelQueryMap<'tcx>> {
     type NestedFilter = nested_filter::OnlyBodies;
@@ -374,7 +347,6 @@ impl<'tcx> Visitor<'tcx> for LintLevelsBuilder<'_, LintLevelQueryMap<'tcx>> {
         intravisit::walk_impl_item(self, impl_item);
     }
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=LintLevelsBuilder | COMPLEXITY=2 | LINES=9 */
 
 pub struct LintLevelsBuilder<'s, P> {
     sess: &'s Session,
@@ -384,12 +356,10 @@ pub struct LintLevelsBuilder<'s, P> {
     store: &'s LintStore,
     registered_tools: &'s RegisteredTools,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct BuilderPush {
     prev: LintStackIndex,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=crate_root | COMPLEXITY=22 | LINES=84 */
 
 impl<'s> LintLevelsBuilder<'s, TopDown> {
     pub(crate) fn new(
@@ -474,7 +444,6 @@ impl<'s> LintLevelsBuilder<'s, TopDown> {
         std::mem::forget(push);
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=5 | LINES=7 */
 
 #[cfg(debug_assertions)]
 impl Drop for BuilderPush {
@@ -482,7 +451,6 @@ impl Drop for BuilderPush {
         panic!("Found a `push` without a `pop`.");
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=current_specs | COMPLEXITY=326 | LINES=557 */
 
 impl<'s, P: LintLevelsProvider> LintLevelsBuilder<'s, P> {
     pub(crate) fn sess(&self) -> &Session {
@@ -1040,12 +1008,10 @@ impl<'s, P: LintLevelsProvider> LintLevelsBuilder<'s, P> {
         });
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { shallow_lint_levels_on, lints_that_dont_need_to_run, ..*providers };
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
 
 pub(crate) fn parse_lint_and_tool_name(lint_name: &str) -> (Option<Symbol>, &str) {
     match lint_name.split_once("::") {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/assembly/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 // Code shared by trait and projection goals for candidate assembly.
 
 
@@ -16,26 +15,21 @@ use rustc_type_ir::{
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
     elaborate,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::trait_goals::TraitGoalProvenVia;
 use super::{has_only_region_constraints, inspect};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::delegate::SolverDelegate;
 use crate::solve::inspect::ProbeKind;
 use crate::solve::{
     BuiltinImplSource, CandidateSource, CanonicalResponse, Certainty, EvalCtxt, Goal, GoalSource,
     MaybeCause, NoSolution, ParamEnvSource, QueryResult, has_no_inference_or_external_constraints,
 };
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 enum AliasBoundKind {
     SelfBounds,
     NonSelfBounds,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 /// A candidate is a possible way to prove a goal.
 ///
@@ -47,7 +41,6 @@ pub(super) struct Candidate<I: Interner> {
     pub(super) result: CanonicalResponse<I>,
     pub(super) head_usages: CandidateHeadUsages,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=104 | LINES=310 */
 
 /// Methods used to assemble candidates for either trait or projection goals.
 pub(super) trait GoalKind<D, I = <D as SolverDelegate>::Interner>:
@@ -358,7 +351,6 @@ where
         goal: Goal<I, Self>,
     ) -> Vec<Candidate<I>>;
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 
 /// Allows callers of `assemble_and_evaluate_candidates` to choose whether to limit
 /// candidate assembly to param-env and alias-bound candidates.
@@ -374,7 +366,6 @@ pub(super) enum AssembleCandidatesFrom {
     /// candidates to be assembled.
     EnvAndBounds,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=should_assemble_impl_candidates | COMPLEXITY=7 | LINES=9 */
 
 impl AssembleCandidatesFrom {
     fn should_assemble_impl_candidates(&self) -> bool {
@@ -384,7 +375,6 @@ impl AssembleCandidatesFrom {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
 
 /// This is currently used to track the [CandidateHeadUsages] of all failed `ParamEnv`
 /// candidates. This is then used to ignore their head usages in case there's another
@@ -398,7 +388,6 @@ impl AssembleCandidatesFrom {
 pub(super) struct FailedCandidateInfo {
     pub param_env_head_usages: CandidateHeadUsages,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=assemble_impl_candidates | COMPLEXITY=224 | LINES=505 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -904,13 +893,11 @@ where
         })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(super) enum AllowInferenceConstraints {
     Yes,
     No,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=try_assemble_bounds_via_registered_opaques | COMPLEXITY=175 | LINES=299 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -1210,14 +1197,12 @@ where
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=FindParamInClause | COMPLEXITY=2 | LINES=6 */
 
 struct FindParamInClause<'a, 'b, D: SolverDelegate<Interner = I>, I: Interner> {
     ecx: &'a mut EvalCtxt<'b, D>,
     param_env: I::ParamEnv,
     universes: Vec<Option<ty::UniverseIndex>>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=47 | LINES=70 */
 
 impl<D, I> TypeVisitor<I> for FindParamInClause<'_, '_, D, I>
 where

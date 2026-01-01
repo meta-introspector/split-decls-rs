@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/polonius/legacy/loan_invalidations.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::graph::dominators::Dominators;
@@ -10,14 +9,12 @@ use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use super::{PoloniusFacts, PoloniusLocationTable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::borrow_set::BorrowSet;
 use crate::path_utils::*;
 use crate::{
     AccessDepth, Activation, ArtificialField, BorrowIndex, Deep, LocalMutationIsAllowed, Read,
     ReadKind, ReadOrWrite, Reservation, Shallow, Write, WriteKind,
 };
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 /// Emit `loan_invalidated_at` facts.
 pub(super) fn emit_loan_invalidations<'tcx>(
@@ -32,7 +29,6 @@ pub(super) fn emit_loan_invalidations<'tcx>(
         LoanInvalidationsGenerator { facts, borrow_set, tcx, location_table, body, dominators };
     visitor.visit_body(body);
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=LoanInvalidationsGenerator | COMPLEXITY=2 | LINES=9 */
 
 struct LoanInvalidationsGenerator<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -42,7 +38,6 @@ struct LoanInvalidationsGenerator<'a, 'tcx> {
     dominators: &'a Dominators<BasicBlock>,
     borrow_set: &'a BorrowSet<'tcx>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=115 | LINES=180 */
 
 /// Visits the whole MIR and generates `invalidates()` facts.
 /// Most of the code implementing this was stolen from `borrow_check/mod.rs`.
@@ -223,7 +218,6 @@ impl<'a, 'tcx> Visitor<'tcx> for LoanInvalidationsGenerator<'a, 'tcx> {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=mutate_place | COMPLEXITY=104 | LINES=232 */
 
 impl<'a, 'tcx> LoanInvalidationsGenerator<'a, 'tcx> {
     /// Simulates mutation of a place.

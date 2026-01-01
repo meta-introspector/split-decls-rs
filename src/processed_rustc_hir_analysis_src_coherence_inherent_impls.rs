@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/inherent_impls.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // The code in this module gathers up all of the inherent impls in
 // the current crate and organizes them in a map. It winds up
 // touching the whole crate and thus must be recomputed completely
@@ -13,15 +12,11 @@ use rustc_hir as hir;
 use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LocalDefId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::find_attr;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::fast_reject::{SimplifiedType, TreatParams, simplify_type};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, CrateInherentImpls, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, sym};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17 */
 
 use crate::errors;
 
@@ -39,7 +34,6 @@ pub(crate) fn crate_inherent_impls(
 
     (tcx.arena.alloc(collect.impls_map), res)
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) fn crate_inherent_impls_validity_check(
     tcx: TyCtxt<'_>,
@@ -47,7 +41,6 @@ pub(crate) fn crate_inherent_impls_validity_check(
 ) -> Result<(), ErrorGuaranteed> {
     tcx.crate_inherent_impls(()).1
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) fn crate_incoherent_impls(tcx: TyCtxt<'_>, simp: SimplifiedType) -> &[DefId] {
     let (crate_map, _) = tcx.crate_inherent_impls(());
@@ -55,7 +48,6 @@ pub(crate) fn crate_incoherent_impls(tcx: TyCtxt<'_>, simp: SimplifiedType) -> &
         crate_map.incoherent_impls.get(&simp).unwrap_or(&Vec::new()).iter().map(|d| d.to_def_id()),
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
 
 /// On-demand query: yields a vector of the inherent impls for a specific type.
 pub(crate) fn inherent_impls(tcx: TyCtxt<'_>, ty_def_id: LocalDefId) -> &[DefId] {
@@ -65,13 +57,11 @@ pub(crate) fn inherent_impls(tcx: TyCtxt<'_>, ty_def_id: LocalDefId) -> &[DefId]
         None => &[],
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=InherentCollect | COMPLEXITY=2 | LINES=5 */
 
 struct InherentCollect<'tcx> {
     tcx: TyCtxt<'tcx>,
     impls_map: CrateInherentImpls,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_def_id | COMPLEXITY=89 | LINES=146 */
 
 impl<'tcx> InherentCollect<'tcx> {
     fn check_def_id(

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/trait_def.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::iter;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
@@ -7,18 +6,14 @@ use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
 use crate::rustc_complete::def::DefKind;
 use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::symbol::sym;
 use tracing::debug;
 
 use crate::query::LocalCrate;
 use crate::traits::specialization_graph;
 use crate::ty::fast_reject::{self, SimplifiedType, TreatParams};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{Ident, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=TraitDef | COMPLEXITY=13 | LINES=66 */
 
 /// A trait's definition with type information.
 #[derive(HashStable, Encodable, Decodable)]
@@ -85,7 +80,6 @@ pub struct TraitDef {
     /// `#[rustc_deny_explicit_impl]`.
     pub deny_explicit_impl: bool,
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
 
 /// Whether this trait is treated specially by the standard library
 /// specialization lint.
@@ -104,7 +98,6 @@ pub enum TraitSpecializationKind {
     /// Applies to traits with the `rustc_specialization_trait` attribute.
     AlwaysApplicable,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=TraitImpls | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Default, Debug, HashStable)]
 pub struct TraitImpls {
@@ -112,7 +105,6 @@ pub struct TraitImpls {
     /// Impls indexed by their simplified self type, for fast lookup.
     non_blanket_impls: FxIndexMap<SimplifiedType, Vec<DefId>>,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=5 | LINES=14 */
 
 impl TraitImpls {
     pub fn is_empty(&self) -> bool {
@@ -127,7 +119,6 @@ impl TraitImpls {
         &self.non_blanket_impls
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=ancestors | COMPLEXITY=3 | LINES=10 */
 
 impl<'tcx> TraitDef {
     pub fn ancestors(
@@ -138,7 +129,6 @@ impl<'tcx> TraitDef {
         specialization_graph::ancestors(tcx, self.def_id, of_impl)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=for_each_relevant_impl | COMPLEXITY=52 | LINES=68 */
 
 impl<'tcx> TyCtxt<'tcx> {
     /// Iterate over every impl that could possibly match the self type `self_ty`.
@@ -207,7 +197,6 @@ impl<'tcx> TyCtxt<'tcx> {
         blanket_impls.iter().chain(non_blanket_impls.iter().flat_map(|(_, v)| v)).cloned()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=41 */
 
 /// Query provider for `trait_impls_of`.
 pub(super) fn trait_impls_of_provider(tcx: TyCtxt<'_>, trait_id: DefId) -> TraitImpls {
@@ -249,7 +238,6 @@ pub(super) fn trait_impls_of_provider(tcx: TyCtxt<'_>, trait_id: DefId) -> Trait
 
     impls
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=19 */
 
 /// Query provider for `incoherent_impls`.
 pub(super) fn incoherent_impls_provider(tcx: TyCtxt<'_>, simp: SimplifiedType) -> &[DefId] {
@@ -269,7 +257,6 @@ pub(super) fn incoherent_impls_provider(tcx: TyCtxt<'_>, simp: SimplifiedType) -
 
     tcx.arena.alloc_slice(&impls)
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=11 */
 
 pub(super) fn traits_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> &[DefId] {
     let mut traits = Vec::new();
@@ -281,7 +268,6 @@ pub(super) fn traits_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> &[DefId] {
 
     tcx.arena.alloc_slice(&traits)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=13 */
 
 pub(super) fn trait_impls_in_crate_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> &[DefId] {
     let mut trait_impls = Vec::new();

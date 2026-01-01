@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_ty_utils/src/layout/invariant.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::assert_matches::assert_matches;
 
 use crate::rustc_abi::{BackendRepr, FieldsShape, Scalar, Size, TagEncoding, Variants};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutCx, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=non_zst_fields | COMPLEXITY=222 | LINES=335 */
 
 /// Enforce some basic invariants on layouts.
 pub(super) fn layout_sanity_check<'tcx>(cx: &LayoutCx<'tcx>, layout: &TyAndLayout<'tcx>) {

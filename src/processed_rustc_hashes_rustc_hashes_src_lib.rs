@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hashes/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=19 */
 // rustc encodes a lot of hashes. If hashes are stored as `u64` or `u128`, a `derive(Encodable)`
 // will apply varint encoding to the hashes, which is less efficient than directly encoding the 8
 // or 16 bytes of the hash. And if that hash depends on the `StableCrateHash` (which most in rustc
@@ -19,14 +18,12 @@ use std::fmt;
 use std::ops::BitXorAssign;
 
 use rustc_stable_hash::{FromStableHash, SipHasher128Hash as StableHasherHash};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Hash64 | COMPLEXITY=4 | LINES=6 */
 
 /// A `u64` but encoded with a fixed size; for hashes this encoding is more compact than `u64`.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Hash64 {
     inner: u64,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=19 */
 
 impl Hash64 {
     pub const ZERO: Hash64 = Hash64 { inner: 0 };
@@ -46,7 +43,6 @@ impl Hash64 {
         Self { inner: self.inner.wrapping_add(other.inner) }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=bitxor_assign | COMPLEXITY=5 | LINES=7 */
 
 impl BitXorAssign<u64> for Hash64 {
     #[inline]
@@ -54,7 +50,6 @@ impl BitXorAssign<u64> for Hash64 {
         self.inner ^= rhs;
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=9 */
 
 impl FromStableHash for Hash64 {
     type Hash = StableHasherHash;
@@ -64,28 +59,24 @@ impl FromStableHash for Hash64 {
         Self { inner: _0 }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for Hash64 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.inner.fmt(f)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::LowerHex for Hash64 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::LowerHex::fmt(&self.inner, f)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Hash128 | COMPLEXITY=4 | LINES=6 */
 
 /// A `u128` but encoded with a fixed size; for hashes this encoding is more compact than `u128`.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Default)]
 pub struct Hash128 {
     inner: u128,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=10 */
 
 // We expect Hash128 to be well mixed. So there's no point in hashing both parts.
 //
@@ -96,7 +87,6 @@ impl std::hash::Hash for Hash128 {
         h.write_u64(self.truncate().as_u64());
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=22 */
 
 impl Hash128 {
     #[inline]
@@ -119,7 +109,6 @@ impl Hash128 {
         self.inner
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=9 */
 
 impl FromStableHash for Hash128 {
     type Hash = StableHasherHash;
@@ -129,14 +118,12 @@ impl FromStableHash for Hash128 {
         Self { inner: u128::from(_0) | (u128::from(_1) << 64) }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Debug for Hash128 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.inner.fmt(f)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::LowerHex for Hash128 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

@@ -1,8 +1,6 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/add_moves_for_packed_drops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 use tracing::debug;
 
 use crate::patch::MirPatch;
@@ -19,7 +17,6 @@ use crate::util;
 ///     dealign: u8,
 ///     data: Vec<u8>
 /// }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=24 | LINES=57 */
 ///
 /// let foo = ...;
 /// ```
@@ -77,7 +74,6 @@ impl<'tcx> crate::MirPass<'tcx> for AddMovesForPackedDrops {
         true
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=add_move_for_packed_drop | COMPLEXITY=11 | LINES=40 */
 
 fn add_move_for_packed_drop<'tcx>(
     tcx: TyCtxt<'tcx>,

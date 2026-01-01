@@ -1,30 +1,22 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/basic_blocks.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::sync::OnceLock;
 
 use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::graph::dominators::{Dominators, dominators};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_index::{IndexSlice, IndexVec};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use smallvec::SmallVec;
 
 use crate::mir::traversal::Postorder;
 use crate::mir::{BasicBlock, BasicBlockData, START_BLOCK};
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=BasicBlocks | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, TyEncodable, TyDecodable, Debug, HashStable, TypeFoldable, TypeVisitable)]
 pub struct BasicBlocks<'tcx> {
     basic_blocks: IndexVec<BasicBlock, BasicBlockData<'tcx>>,
     cache: Cache,
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 // Typically 95%+ of basic blocks have 4 or fewer predecessors.
 type Predecessors = IndexVec<BasicBlock, SmallVec<[BasicBlock; 4]>>;
@@ -36,7 +28,6 @@ pub enum SwitchTargetValue {
     // The final "otherwise" fallback value.
     Otherwise,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Cache | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Default, Debug)]
 struct Cache {
@@ -44,7 +35,6 @@ struct Cache {
     reverse_postorder: OnceLock<Vec<BasicBlock>>,
     dominators: OnceLock<Dominators<BasicBlock>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=30 | LINES=73 */
 
 impl<'tcx> BasicBlocks<'tcx> {
     #[inline]
@@ -118,7 +108,6 @@ impl<'tcx> BasicBlocks<'tcx> {
         self.cache = Cache::default();
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> std::ops::Deref for BasicBlocks<'tcx> {
     type Target = IndexSlice<BasicBlock, BasicBlockData<'tcx>>;
@@ -128,7 +117,6 @@ impl<'tcx> std::ops::Deref for BasicBlocks<'tcx> {
         &self.basic_blocks
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=num_nodes | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx> graph::DirectedGraph for BasicBlocks<'tcx> {
     type Node = BasicBlock;
@@ -138,7 +126,6 @@ impl<'tcx> graph::DirectedGraph for BasicBlocks<'tcx> {
         self.basic_blocks.len()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=start_node | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> graph::StartNode for BasicBlocks<'tcx> {
     #[inline]
@@ -146,7 +133,6 @@ impl<'tcx> graph::StartNode for BasicBlocks<'tcx> {
         START_BLOCK
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=successors | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> graph::Successors for BasicBlocks<'tcx> {
     #[inline]
@@ -154,7 +140,6 @@ impl<'tcx> graph::Successors for BasicBlocks<'tcx> {
         self.basic_blocks[node].terminator().successors()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=predecessors | COMPLEXITY=5 | LINES=7 */
 
 impl<'tcx> graph::Predecessors for BasicBlocks<'tcx> {
     #[inline]
@@ -162,17 +147,14 @@ impl<'tcx> graph::Predecessors for BasicBlocks<'tcx> {
         self.predecessors()[node].iter().copied()
     }
 }
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 // Done here instead of in `structural_impls.rs` because `Cache` is private, as is `basic_blocks`.
 TrivialTypeTraversalImpls! { Cache }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=5 */
 
 impl<S: Encoder> Encodable<S> for Cache {
     #[inline]
     fn encode(&self, _s: &mut S) {}
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7 */
 
 impl<D: Decoder> Decodable<D> for Cache {
     #[inline]
@@ -180,7 +162,6 @@ impl<D: Decoder> Decodable<D> for Cache {
         Default::default()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=5 */
 
 impl<CTX> HashStable<CTX> for Cache {
     #[inline]

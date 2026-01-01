@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/instance.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::assert_matches::assert_matches;
 use std::fmt;
 
@@ -7,29 +6,22 @@ use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
 use crate::rustc_complete::def::{CtorKind, DefKind, Namespace};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_index::bit_set::FiniteBitSet;
 use rustc_macros::{Decodable, Encodable, HashStable, Lift, TyDecodable, TyEncodable};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::error;
 use crate::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::ty::normalize_erasing_regions::NormalizationError;
 use crate::ty::print::{FmtPrinter, Print};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::ty::{
     self, AssocContainer, EarlyBinder, GenericArgs, GenericArgsRef, Ty, TyCtxt, TypeFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Instance | COMPLEXITY=3 | LINES=15 */
 
 /// An `InstanceKind` along with the args that are needed to substitute the instance.
 ///
@@ -45,7 +37,6 @@ pub struct Instance<'tcx> {
     pub def: InstanceKind<'tcx>,
     pub args: GenericArgsRef<'tcx>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=22 */
 
 /// Describes why a `ReifyShim` was created. This is needed to distinguish a ReifyShim created to
 /// adjust for things like `#[track_caller]` in a vtable from a `ReifyShim` created to produce a
@@ -68,7 +59,6 @@ pub enum ReifyReason {
     /// This includes the case of `::call`-like methods in closure-likes' vtables.
     Vtable,
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=50 | LINES=125 */
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 #[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable, Lift)]
@@ -194,7 +184,6 @@ pub enum InstanceKind<'tcx> {
     /// `Ty` here is `async_drop_in_place<T>::{closure}` coroutine type, not just `T`
     AsyncDropGlue(DefId, Ty<'tcx>),
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=ty | COMPLEXITY=28 | LINES=55 */
 
 impl<'tcx> Instance<'tcx> {
     /// Returns the `Ty` corresponding to this `Instance`, with generic instantiations applied and
@@ -250,7 +239,6 @@ impl<'tcx> Instance<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=51 | LINES=116 */
 
 impl<'tcx> InstanceKind<'tcx> {
     #[inline]
@@ -367,7 +355,6 @@ impl<'tcx> InstanceKind<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=type_length | COMPLEXITY=19 | LINES=33 */
 
 fn type_length<'tcx>(item: impl TypeVisitable<TyCtxt<'tcx>>) -> usize {
     struct Visitor<'tcx> {
@@ -401,7 +388,6 @@ fn type_length<'tcx>(item: impl TypeVisitable<TyCtxt<'tcx>>) -> usize {
 
     visitor.type_length
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=12 */
 
 impl<'tcx> fmt::Display for Instance<'tcx> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -414,7 +400,6 @@ impl<'tcx> fmt::Display for Instance<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=resolve_async_drop_poll | COMPLEXITY=25 | LINES=45 */
 
 // async_drop_in_place<T>::coroutine.poll, when T is a standard coroutine,
 // should be resolved to this coroutine's future_drop_poll (through FutureDropPollShim proxy).
@@ -460,7 +445,6 @@ fn resolve_async_drop_poll<'tcx>(mut cor_ty: Ty<'tcx>) -> Instance<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new_raw | COMPLEXITY=239 | LINES=477 */
 
 impl<'tcx> Instance<'tcx> {
     /// Creates a new [`InstanceKind::Item`] from the `def_id` and `args`.
@@ -938,7 +922,6 @@ impl<'tcx> Instance<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=needs_fn_once_adapter_shim | COMPLEXITY=13 | LINES=30 */
 
 fn needs_fn_once_adapter_shim(
     actual_closure_kind: ty::ClosureKind,
@@ -969,7 +952,6 @@ fn needs_fn_once_adapter_shim(
         (ty::ClosureKind::FnMut | ty::ClosureKind::FnOnce, _) => Err(()),
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UnusedGenericParams(FiniteBitSet | COMPLEXITY=5 | LINES=11 */
 
 // Set bits represent unused generic parameters.
 // An empty set indicates that all parameters are used.
@@ -981,7 +963,6 @@ impl Default for UnusedGenericParams {
         UnusedGenericParams::new_all_used()
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new_all_unused | COMPLEXITY=11 | LINES=36 */
 
 impl UnusedGenericParams {
     pub fn new_all_unused(amount: u32) -> Self {

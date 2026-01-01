@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_ast/src/node_id.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=NodeId | COMPLEXITY=7 | LINES=19 */
 use std::fmt;
 
 use crate::rustc_complete::LocalExpnId;
@@ -19,7 +18,6 @@ crate::rustc_index::newtype_index! {
         const CRATE_NODE_ID = 0;
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=placeholder_from_expn_id | COMPLEXITY=5 | LINES=17 */
 
 crate::rustc_data_structures::define_id_collections!(NodeMap, NodeSet, NodeMapEntry, NodeId);
 
@@ -37,7 +35,6 @@ impl NodeId {
         LocalExpnId::from_u32(self.as_u32())
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl fmt::Display for NodeId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

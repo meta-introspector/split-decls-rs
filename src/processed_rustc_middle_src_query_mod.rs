@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/query/mod.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=28 */
 //
 // # The rustc Query System: Query Definitions and Modifiers
 //
@@ -28,10 +27,8 @@
 // The main modifiers are:
 //
 // - `desc { ... }`: Sets the human-readable description for diagnostics and profiling. Required for every query.
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
 // - `arena_cache`: Use an arena for in-memory caching of the query result.
 // - `cache_on_disk_if { ... }`: Cache the query result to disk if the provided block evaluates to true.
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=27 | LINES=44 */
 // - `fatal_cycle`: If a dependency cycle is detected, abort compilation with a fatal error.
 // - `cycle_delay_bug`: If a dependency cycle is detected, emit a delayed bug instead of aborting immediately.
 // - `cycle_stash`: If a dependency cycle is detected, stash the error for later handling.
@@ -76,24 +73,18 @@ use rustc_arena::TypedArena;
 use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::ErrorGuaranteed;
 use crate::rustc_complete::attrs::StrippedCfgItem;
 use crate::rustc_complete::def::{DefKind, DocLinkResMap};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::def_id::{
     CrateNum, DefId, DefIdMap, LocalDefId, LocalDefIdMap, LocalDefIdSet, LocalModDefId,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lang_items::{LangItem, LanguageItems};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Crate, ItemLocalId, ItemLocalMap, PreciseCapturingArgKind, TraitCandidate};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_lint_defs::LintId;
 use rustc_macros::rustc_queries;
@@ -101,50 +92,37 @@ use rustc_query_system::ich::StableHashingContext;
 use rustc_query_system::query::{
     QueryCache, QueryMode, QueryStackDeferred, QueryState, try_get_cached,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Limits;
 use crate::rustc_complete::config::{EntryFnType, OptLevel, OutputFilenames, SymbolManglingVersion};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::cstore::{
     CrateDepKind, CrateSource, ExternCrate, ForeignModule, LinkagePreference, NativeLib,
 };
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::lint::LintExpectationId;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{PanicStrategy, SanitizerSet};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use {rustc_abi as abi, rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::infer::canonical::{self, Canonical};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::lint::LintExpectation;
 use crate::metadata::ModChild;
 use crate::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::middle::debugger_visualizer::DebuggerVisualizerFile;
 use crate::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::middle::lib_features::LibFeatures;
 use crate::middle::privacy::EffectiveVisibilities;
 use crate::middle::resolve_bound_vars::{ObjectLifetimeDefault, ResolveBoundVars, ResolvedArg};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::middle::stability::DeprecationEntry;
 use crate::mir::interpret::{
     EvalStaticInitializerRawResult, EvalToAllocationRawResult, EvalToConstValueResult,
     EvalToValTreeResult, GlobalId, LitToConstInput,
 };
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::mono::{CodegenUnit, CollectionMode, MonoItem, MonoItemPartitions};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::query::erase::{Erase, erase, restore};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::query::plumbing::{
     CyclePlaceholder, DynamicQuery, query_ensure, query_ensure_error_guaranteed, query_get_at,
 };
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use crate::traits::query::{
     CanonicalAliasGoal, CanonicalDropckOutlivesGoal, CanonicalImpliedOutlivesBoundsGoal,
     CanonicalPredicateGoal, CanonicalTyGoal, CanonicalTypeOpAscribeUserTypeGoal,
@@ -152,12 +130,10 @@ use crate::traits::query::{
     DropckOutlivesResult, MethodAutoderefStepsResult, NoSolution, NormalizationResult,
     OutlivesBound,
 };
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::traits::{
     CodegenObligationError, DynCompatibilityViolation, EvaluationResult, ImplSource,
     ObligationCause, OverflowError, WellFormedLoc, solve, specialization_graph,
 };
-/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::ty::fast_reject::SimplifiedType;
 use crate::ty::layout::ValidityRequirement;
 use crate::ty::print::PrintTraitRefExt;
@@ -166,15 +142,11 @@ use crate::ty::{
     self, CrateInherentImpls, GenericArg, GenericArgsRef, PseudoCanonicalInput, SizedTraitKind, Ty,
     TyCtxt, TyCtxtFeed,
 };
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{dep_graph, mir, thir};
-/* AST_META: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub use keys::{AsLocalKey, Key, LocalCrate};
-/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 #[macro_use]
 pub use plumbing::{IntoQueryParam, TyCtxtAt, TyCtxtEnsureDone, TyCtxtEnsureOk};
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=1785 | LINES=2578 */
 
 // Each of these queries corresponds to a function pointer field in the
 // `Providers` struct for requesting a value of that type, and a method
@@ -2753,12 +2725,9 @@ rustc_queries! {
         feedable
     }
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 rustc_with_all_queries! { define_callbacks! }
-/* AST_META: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 rustc_feedable_queries! { define_feedable! }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=describe_as_module | COMPLEXITY=7 | LINES=9 */
 
 fn describe_as_module(def_id: impl Into<LocalDefId>, tcx: TyCtxt<'_>) -> String {
     let def_id = def_id.into();

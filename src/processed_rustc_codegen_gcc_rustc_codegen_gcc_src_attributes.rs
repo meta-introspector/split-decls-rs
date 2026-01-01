@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/attributes.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=recursively_inline | COMPLEXITY=29 | LINES=44 */
 #[cfg(feature = "master")]
 use gccjit::FnAttribute;
 use gccjit::Function;
@@ -44,7 +43,6 @@ fn recursively_inline<'gcc, 'tcx>(
     }
     false
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=inline_attr | COMPLEXITY=23 | LINES=37 */
 
 /// Get GCC attribute for the provided inline heuristic, attached to `instance`.
 #[cfg(feature = "master")]
@@ -82,7 +80,6 @@ fn inline_attr<'gcc, 'tcx>(
         InlineAttr::None => None,
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=from_fn_attrs | COMPLEXITY=59 | LINES=83 */
 
 /// Composite function which sets GCC attributes for function depending on its AST (`#[attribute]`)
 /// attributes.

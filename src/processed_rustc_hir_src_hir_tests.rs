@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir/src/hir/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=24 | LINES=19 */
 use crate::rustc_complete::def_id::DefIndex;
 
 use super::*;
@@ -19,7 +18,6 @@ macro_rules! define_tests {
         }
     )*};
 }
-/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=19 | LINES=24 */
 
 define_tests! {
     cast_never TyKind Never {}
@@ -44,14 +42,12 @@ define_tests! {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=trait_object_roundtrips | COMPLEXITY=2 | LINES=6 */
 
 #[test]
 fn trait_object_roundtrips() {
     trait_object_roundtrips_impl(TraitObjectSyntax::Dyn);
     trait_object_roundtrips_impl(TraitObjectSyntax::None);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=trait_object_roundtrips_impl | COMPLEXITY=24 | LINES=28 */
 
 fn trait_object_roundtrips_impl(syntax: TraitObjectSyntax) {
     let lt = Lifetime {

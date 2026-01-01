@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/canonical/instantiate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 // This module contains code to instantiate new values into a
 // `Canonical<'tcx, T>`.
 //
@@ -13,11 +12,9 @@ use crate::rustc_complete::ty::{
     self, DelayedMap, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_type_ir::TypeVisitable;
 
 use crate::infer::canonical::{Canonical, CanonicalVarValues};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=instantiate | COMPLEXITY=6 | LINES=34 */
 
 /// FIXME(-Znext-solver): This or public because it is shared with the
 /// new trait solver implementation. We should deduplicate canonicalization.
@@ -52,7 +49,6 @@ impl<'tcx, V> Canonical<'tcx, V> {
         instantiate_value(tcx, var_values, value)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 /// Instantiate the values from `var_values` into `value`. `var_values`
 /// must be values for the set of canonical variables that appear in
@@ -76,7 +72,6 @@ where
         cache: Default::default(),
     })
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CanonicalInstantiator | COMPLEXITY=3 | LINES=15 */
 
 /// Replaces the bound vars in a canonical binder with var values.
 struct CanonicalInstantiator<'tcx> {
@@ -92,7 +87,6 @@ struct CanonicalInstantiator<'tcx> {
     // Instantiation is a pure function of `DebruijnIndex` and `Ty`.
     cache: DelayedMap<(ty::DebruijnIndex, Ty<'tcx>), Ty<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=63 | LINES=95 */
 
 impl<'tcx> TypeFolder<TyCtxt<'tcx>> for CanonicalInstantiator<'tcx> {
     fn cx(&self) -> TyCtxt<'tcx> {
@@ -188,7 +182,6 @@ impl<'tcx> TypeFolder<TyCtxt<'tcx>> for CanonicalInstantiator<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=highest_var_in_clauses | COMPLEXITY=29 | LINES=46 */
 
 fn highest_var_in_clauses<'tcx>(c: ty::Clauses<'tcx>) -> usize {
     struct HighestVarInClauses {

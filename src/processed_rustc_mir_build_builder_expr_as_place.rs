@@ -1,31 +1,23 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/as_place.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // See docs in build/expr/mod.rs
 
 use std::assert_matches::assert_matches;
 use std::iter;
 
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::hir::place::{Projection as HirProjection, ProjectionKind as HirProjectionKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::AssertKind::BoundsCheck;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use crate::rustc_complete::ty::{self, AdtDef, CanonicalUserTypeAnnotation, Ty, Variance};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::builder::ForGuard::{OutsideGuard, RefWithinGuard};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::builder::expr::category::Category;
 use crate::builder::{BlockAnd, BlockAndExtension, Builder, Capture, CaptureMap};
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=12 | LINES=43 */
 
 /// The "outermost" place that holds this value.
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -69,7 +61,6 @@ pub(crate) enum PlaceBase {
         closure_def_id: LocalDefId,
     },
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=12 */
 
 /// `PlaceBuilder` is used to create places during MIR construction. It allows you to "build up" a
 /// place by pushing more and more projections onto the end, and then convert the final set into a
@@ -82,7 +73,6 @@ pub struct PlaceBuilder<'tcx> {
     base: PlaceBase,
     projection: Vec<PlaceElem<'tcx>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=convert_to_hir_projections_and_truncate_for_capture | COMPLEXITY=20 | LINES=46 */
 
 /// Given a list of MIR projections, convert them to list of HIR ProjectionKind.
 /// The projections are truncated to represent a path that might be captured by a
@@ -129,7 +119,6 @@ fn convert_to_hir_projections_and_truncate_for_capture(
 
     hir_projections
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_ancestor_or_same_capture | COMPLEXITY=11 | LINES=26 */
 
 /// Return true if the `proj_possible_ancestor` represents an ancestor path
 /// to `proj_capture` or `proj_possible_ancestor` is same as `proj_capture`,
@@ -156,7 +145,6 @@ fn is_ancestor_or_same_capture(
 
     iter::zip(proj_possible_ancestor, proj_capture).all(|(a, b)| a == b)
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=find_capture_matching_projections | COMPLEXITY=6 | LINES=21 */
 
 /// Given a closure, returns the index of a capture within the desugared closure struct and the
 /// `ty::CapturedPlace` which is the ancestor of the Place represented using the `var_hir_id`
@@ -178,7 +166,6 @@ fn find_capture_matching_projections<'a, 'tcx>(
         is_ancestor_or_same_capture(&possible_ancestor_proj_kinds, &hir_projections)
     })
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=to_upvars_resolved_place_builder | COMPLEXITY=18 | LINES=44 */
 
 /// Takes an upvar place and tries to resolve it into a `PlaceBuilder`
 /// with `PlaceBase::Local`
@@ -223,7 +210,6 @@ fn to_upvars_resolved_place_builder<'tcx>(
 
     Some(upvar_resolved_place_builder)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=strip_prefix | COMPLEXITY=21 | LINES=42 */
 
 /// Returns projections remaining after stripping an initial prefix of HIR
 /// projections.
@@ -266,7 +252,6 @@ fn strip_prefix<'tcx>(
     }
     iter
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=index | COMPLEXITY=41 | LINES=83 */
 
 impl<'tcx> PlaceBuilder<'tcx> {
     pub fn to_place(&self, cx: &Builder<'_, 'tcx>) -> Place<'tcx> {
@@ -350,28 +335,24 @@ impl<'tcx> PlaceBuilder<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> From<Local> for PlaceBuilder<'tcx> {
     fn from(local: Local) -> Self {
         Self { base: PlaceBase::Local(local), projection: Vec::new() }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> From<PlaceBase> for PlaceBuilder<'tcx> {
     fn from(base: PlaceBase) -> Self {
         Self { base, projection: Vec::new() }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> From<Place<'tcx>> for PlaceBuilder<'tcx> {
     fn from(p: Place<'tcx>) -> Self {
         Self { base: PlaceBase::Local(p.local), projection: p.projection.to_vec() }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=as_read_only_place_builder | COMPLEXITY=192 | LINES=473 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Compile `expr`, yielding a place that we can move from etc.
@@ -845,7 +826,6 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=enable_precise_capture | COMPLEXITY=4 | LINES=5 */
 
 /// Precise capture is enabled if user is using Rust Edition 2021 or higher.
 fn enable_precise_capture(closure_span: Span) -> bool {

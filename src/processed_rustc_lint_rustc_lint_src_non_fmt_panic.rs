@@ -1,26 +1,18 @@
 // SRC: ../rust/compiler/rustc_lint/src/non_fmt_panic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast as ast;
 use crate::rustc_complete::Applicability;
 use crate::rustc_complete::{self as hir, LangItem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_infer::infer::TyCtxtInferExt;
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_parse_format::{ParseMode, Parser, Piece};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{InnerSpan, Span, Symbol, hygiene, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 
 use crate::lints::{NonFmtPanicBraces, NonFmtPanicUnused};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext, fluent_generated as fluent};
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=31 */
 
 declare_lint! {
     /// The `non_fmt_panics` lint detects `panic!(..)` invocations where the first
@@ -52,7 +44,6 @@ declare_lint! {
     };
     report_in_external_macro
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=30 | LINES=42 */
 
 declare_lint_pass!(NonPanicFmt => [NON_FMT_PANICS]);
 
@@ -95,7 +86,6 @@ impl<'tcx> LateLintPass<'tcx> for NonPanicFmt {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_panic | COMPLEXITY=65 | LINES=129 */
 
 fn check_panic<'tcx>(cx: &LateContext<'tcx>, f: &'tcx hir::Expr<'tcx>, arg: &'tcx hir::Expr<'tcx>) {
     if let hir::ExprKind::Lit(lit) = &arg.kind {
@@ -225,7 +215,6 @@ fn check_panic<'tcx>(cx: &LateContext<'tcx>, f: &'tcx hir::Expr<'tcx>, arg: &'tc
         }
     });
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=check_panic_str | COMPLEXITY=57 | LINES=124 */
 
 fn check_panic_str<'tcx>(
     cx: &LateContext<'tcx>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_errors/src/json/tests.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=TestData | COMPLEXITY=2 | LINES=13 */
 use std::str;
 
 use crate::rustc_complete::BytePos;
@@ -13,7 +12,6 @@ use crate::DiagCtxt;
 struct TestData {
     spans: Vec<SpanTestData>,
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=SpanTestData | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Deserialize, Debug, PartialEq, Eq)]
 struct SpanTestData {
@@ -24,12 +22,10 @@ struct SpanTestData {
     pub line_end: u32,
     pub column_end: u32,
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Shared | COMPLEXITY=2 | LINES=4 */
 
 struct Shared<T> {
     data: Arc<Mutex<T>>,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=write | COMPLEXITY=6 | LINES=10 */
 
 impl<T: Write> Write for Shared<T> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
@@ -40,7 +36,6 @@ impl<T: Write> Write for Shared<T> {
         self.data.lock().unwrap().flush()
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_positions | COMPLEXITY=6 | LINES=31 */
 
 /// Test the span yields correct positions in JSON.
 fn test_positions(code: &str, span: (u32, u32), expected_output: SpanTestData) {
@@ -72,7 +67,6 @@ fn test_positions(code: &str, span: (u32, u32), expected_output: SpanTestData) {
         assert_eq!(expected_output, spans[0])
     })
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn empty() {
@@ -89,7 +83,6 @@ fn empty() {
         },
     )
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=bom | COMPLEXITY=4 | LINES=16 */
 
 #[test]
 fn bom() {
@@ -106,7 +99,6 @@ fn bom() {
         },
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=lf_newlines | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn lf_newlines() {
@@ -122,7 +114,6 @@ fn lf_newlines() {
         },
     )
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=crlf_newlines | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn crlf_newlines() {
@@ -138,7 +129,6 @@ fn crlf_newlines() {
         },
     )
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=crlf_newlines_with_bom | COMPLEXITY=4 | LINES=16 */
 
 #[test]
 fn crlf_newlines_with_bom() {
@@ -154,7 +144,6 @@ fn crlf_newlines_with_bom() {
         },
     )
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=span_before_crlf | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn span_before_crlf() {
@@ -171,7 +160,6 @@ fn span_before_crlf() {
         },
     )
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=span_on_crlf | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn span_on_crlf() {
@@ -188,7 +176,6 @@ fn span_on_crlf() {
         },
     )
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=span_after_crlf | COMPLEXITY=3 | LINES=16 */
 
 #[test]
 fn span_after_crlf() {

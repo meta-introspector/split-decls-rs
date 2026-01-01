@@ -1,7 +1,5 @@
 // SRC: ../rust/compiler/rustc_middle/src/mir/generic_graph.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use gsgdt::{Edge, Graph, Node, NodeStyle};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=33 */
 
 use crate::mir::*;
 
@@ -35,7 +33,6 @@ pub(crate) fn mir_fn_to_generic_graph<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'_>) 
 
     Graph::new(graph_name, nodes, edges)
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=bb_to_graph_node | COMPLEXITY=19 | LINES=24 */
 
 fn bb_to_graph_node(block: BasicBlock, body: &Body<'_>, dark_mode: bool) -> Node {
     let def_id = body.source.def_id();
@@ -60,14 +57,12 @@ fn bb_to_graph_node(block: BasicBlock, body: &Body<'_>, dark_mode: bool) -> Node
 
     Node::new(stmts, label, title, style)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=graphviz_safe_def_name | COMPLEXITY=7 | LINES=6 */
 
 // Must match `[0-9A-Za-z_]*`. This does not appear in the rendered graph, so
 // it does not have to be user friendly.
 pub fn graphviz_safe_def_name(def_id: DefId) -> String {
     format!("{}_{}", def_id.krate.index(), def_id.index.index(),)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=node | COMPLEXITY=4 | LINES=4 */
 
 fn node(def_id: DefId, block: BasicBlock) -> String {
     format!("bb{}__{}", block.index(), graphviz_safe_def_name(def_id))

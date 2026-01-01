@@ -1,21 +1,14 @@
 // SRC: ../rust/compiler/rustc_lint/src/static_mut_refs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::{Expr, Stmt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{Mutability, TyKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::lint::FutureIncompatibilityReason;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::{BytePos, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{MutRefSugg, RefOfMutStatic};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=51 */
 
 declare_lint! {
     /// The `static_mut_refs` lint checks for shared or mutable references
@@ -67,7 +60,6 @@ declare_lint! {
     };
     @edition Edition2024 => Deny;
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=29 | LINES=57 */
 
 declare_lint_pass!(StaticMutRefs => [STATIC_MUT_REFS]);
 
@@ -125,7 +117,6 @@ impl<'tcx> LateLintPass<'tcx> for StaticMutRefs {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=path_is_static_mut | COMPLEXITY=13 | LINES=20 */
 
 fn path_is_static_mut(mut expr: &hir::Expr<'_>, mut err_span: Span) -> Option<Span> {
     if err_span.from_expansion() {
@@ -146,7 +137,6 @@ fn path_is_static_mut(mut expr: &hir::Expr<'_>, mut err_span: Span) -> Option<Sp
     }
     None
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=emit_static_mut_refs | COMPLEXITY=20 | LINES=27 */
 
 fn emit_static_mut_refs(
     cx: &LateContext<'_>,

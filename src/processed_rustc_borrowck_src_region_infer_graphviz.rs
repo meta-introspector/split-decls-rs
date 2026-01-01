@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/graphviz.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // This module provides linkage between RegionInferenceContext and
 // `rustc_graphviz` traits, specialized to attaching borrowck analysis
 // data to rendered labels.
 
 use std::borrow::Cow;
 use std::io::{self, Write};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=render_outlives_constraint | COMPLEXITY=13 | LINES=17 */
 
 use itertools::Itertools;
 use rustc_graphviz as dot;
@@ -24,7 +22,6 @@ fn render_outlives_constraint(constraint: &OutlivesConstraint<'_>) -> String {
         }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=render_universe | COMPLEXITY=6 | LINES=8 */
 
 fn render_universe(u: UniverseIndex) -> String {
     if u.is_root() {
@@ -33,7 +30,6 @@ fn render_universe(u: UniverseIndex) -> String {
 
     format!("/{:?}", u)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=render_region_vid | COMPLEXITY=29 | LINES=33 */
 
 fn render_region_vid<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -67,7 +63,6 @@ fn render_region_vid<'tcx>(
 
     format!("{:?}{universe_str}{external_name_str}{extra_info}", rvid)
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
 
 impl<'tcx> RegionInferenceContext<'tcx> {
     /// Write out the region constraint graph.
@@ -96,13 +91,11 @@ impl<'tcx> RegionInferenceContext<'tcx> {
         dot::render(&SccConstraints { tcx, regioncx: self, nodes_per_scc }, &mut w)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=RawConstraints | COMPLEXITY=2 | LINES=5 */
 
 struct RawConstraints<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     regioncx: &'a RegionInferenceContext<'tcx>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=11 | LINES=21 */
 
 impl<'a, 'this, 'tcx> dot::Labeller<'this> for RawConstraints<'a, 'tcx> {
     type Node = RegionVid;
@@ -124,7 +117,6 @@ impl<'a, 'this, 'tcx> dot::Labeller<'this> for RawConstraints<'a, 'tcx> {
         dot::LabelText::LabelStr(render_outlives_constraint(e).into())
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=9 | LINES=24 */
 
 impl<'a, 'this, 'tcx> dot::GraphWalk<'this> for RawConstraints<'a, 'tcx> {
     type Node = RegionVid;
@@ -149,14 +141,12 @@ impl<'a, 'this, 'tcx> dot::GraphWalk<'this> for RawConstraints<'a, 'tcx> {
         edge.sub
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=SccConstraints | COMPLEXITY=2 | LINES=6 */
 
 struct SccConstraints<'a, 'tcx> {
     tcx: TyCtxt<'tcx>,
     regioncx: &'a RegionInferenceContext<'tcx>,
     nodes_per_scc: IndexVec<ConstraintSccIndex, Vec<RegionVid>>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=graph_id | COMPLEXITY=14 | LINES=22 */
 
 impl<'a, 'this, 'tcx> dot::Labeller<'this> for SccConstraints<'a, 'tcx> {
     type Node = ConstraintSccIndex;
@@ -179,7 +169,6 @@ impl<'a, 'this, 'tcx> dot::Labeller<'this> for SccConstraints<'a, 'tcx> {
         dot::LabelText::LabelStr(format!("SCC({n}) = {{{nodes_str}}}", n = n.as_usize()).into())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=nodes | COMPLEXITY=11 | LINES=37 */
 
 impl<'a, 'this, 'tcx> dot::GraphWalk<'this> for SccConstraints<'a, 'tcx> {
     type Node = ConstraintSccIndex;

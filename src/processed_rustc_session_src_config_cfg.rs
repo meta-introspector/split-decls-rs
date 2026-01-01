@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/config/cfg.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=28 */
 // cfg and check-cfg configuration
 //
 // This module contains the definition of [`Cfg`] and [`CheckCfg`]
@@ -28,17 +27,12 @@ use std::iter;
 use crate::rustc_abi::Align;
 use crate::rustc_complete::ast;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_lint_defs::builtin::EXPLICIT_BUILTIN_CFGS_IN_FLAGS;
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{PanicStrategy, RelocModel, SanitizerSet, Target};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::config::{CrateType, FmtDebug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{Session, errors};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=CheckCfg | COMPLEXITY=7 | LINES=20 */
 
 /// The parsed `--cfg` options that define the compilation environment of the
 /// crate, used to drive conditional compilation.
@@ -59,13 +53,11 @@ pub struct CheckCfg {
     /// Well known names (only used for diagnostics purposes)
     pub well_known_names: FxHashSet<Symbol>,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum ExpectedValues<T> {
     Some(FxHashSet<Option<T>>),
     Any,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=7 | LINES=9 */
 
 impl<T: Eq + Hash> ExpectedValues<T> {
     fn insert(&mut self, value: T) -> bool {
@@ -75,7 +67,6 @@ impl<T: Eq + Hash> ExpectedValues<T> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=9 */
 
 impl<T: Eq + Hash> Extend<T> for ExpectedValues<T> {
     fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
@@ -85,7 +76,6 @@ impl<T: Eq + Hash> Extend<T> for ExpectedValues<T> {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=9 */
 
 impl<'a, T: Eq + Hash + Copy + 'a> Extend<&'a T> for ExpectedValues<T> {
     fn extend<I: IntoIterator<Item = &'a T>>(&mut self, iter: I) {
@@ -95,7 +85,6 @@ impl<'a, T: Eq + Hash + Copy + 'a> Extend<&'a T> for ExpectedValues<T> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=68 */
 
 /// Disallow builtin cfgs from the CLI.
 pub(crate) fn disallow_cfgs(sess: &Session, user_cfgs: &Cfg) {
@@ -164,7 +153,6 @@ pub(crate) fn disallow_cfgs(sess: &Session, user_cfgs: &Cfg) {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=121 | LINES=159 */
 
 /// Generate the default configs for a given session
 pub(crate) fn default_configuration(sess: &Session) -> Cfg {
@@ -324,7 +312,6 @@ pub(crate) fn default_configuration(sess: &Session) -> Cfg {
 
     ret
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fill_well_known | COMPLEXITY=54 | LINES=164 */
 
 impl CheckCfg {
     /// Fill the current [`CheckCfg`] with all the well known cfgs

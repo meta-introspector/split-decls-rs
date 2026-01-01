@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flock/linux.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // We use `flock` rather than `fcntl` on Linux, because WSL1 does not support
 // `fcntl`-style advisory locks properly (rust-lang/rust#72157). For other Unix
 // targets we still use `fcntl` because it's more portable than `flock`.
 
 use std::fs::{File, OpenOptions};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=2 | LINES=8 */
 use std::io;
 use std::os::unix::prelude::*;
 use std::path::Path;
@@ -14,7 +12,6 @@ use std::path::Path;
 pub struct Lock {
     _file: File,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=22 | LINES=18 */
 
 impl Lock {
     pub fn new(p: &Path, wait: bool, create: bool, exclusive: bool) -> io::Result<Lock> {
@@ -33,7 +30,6 @@ impl Lock {
         matches!(err.raw_os_error(), Some(libc::ENOTSUP) | Some(libc::ENOSYS))
     }
 }
-/* AST_META: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
 
 // Note that we don't need a Drop impl to execute `flock(fd, LOCK_UN)`. A lock acquired by
 // `flock` is associated with the file descriptor and closing the file releases it

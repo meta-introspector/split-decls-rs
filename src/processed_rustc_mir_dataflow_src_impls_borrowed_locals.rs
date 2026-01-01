@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/impls/borrowed_locals.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::Visitor;
 use crate::rustc_complete::mir::*;
 
 use crate::{Analysis, GenKill};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=MaybeBorrowedLocals; | COMPLEXITY=5 | LINES=16 */
 
 /// A dataflow analysis that tracks whether a pointer or reference could possibly exist that points
 /// to a given local. This analysis ignores fake borrows, so it should not be used by
@@ -22,7 +20,6 @@ impl MaybeBorrowedLocals {
         TransferFunction { trans }
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=bottom_value | COMPLEXITY=10 | LINES=33 */
 
 impl<'tcx> Analysis<'tcx> for MaybeBorrowedLocals {
     type Domain = DenseBitSet<Local>;
@@ -56,13 +53,11 @@ impl<'tcx> Analysis<'tcx> for MaybeBorrowedLocals {
         terminator.edges()
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 /// A `Visitor` that defines the transfer function for `MaybeBorrowedLocals`.
 pub(super) struct TransferFunction<'a, T> {
     trans: &'a mut T,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=47 | LINES=80 */
 
 impl<'tcx, T> Visitor<'tcx> for TransferFunction<'_, T>
 where
@@ -143,7 +138,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=borrowed_locals | COMPLEXITY=9 | LINES=20 */
 
 /// The set of locals that are borrowed at some point in the MIR body.
 pub fn borrowed_locals(body: &Body<'_>) -> DenseBitSet<Local> {

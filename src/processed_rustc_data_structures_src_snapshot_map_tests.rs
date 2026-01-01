@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/snapshot_map/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=basic | COMPLEXITY=2 | LINES=17 */
 use super::SnapshotMap;
 
 #[test]
@@ -17,7 +16,6 @@ fn basic() {
     assert_eq!(map.get(&33), None);
     assert_eq!(map.get(&44), None);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=out_of_order | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 #[should_panic]
@@ -31,7 +29,6 @@ fn out_of_order() {
     map.rollback_to(snapshot1); // bogus, but accepted
     map.rollback_to(snapshot2); // asserts
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=nested_commit_then_rollback | COMPLEXITY=2 | LINES=13 */
 
 #[test]
 fn nested_commit_then_rollback() {

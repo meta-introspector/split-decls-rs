@@ -1,63 +1,46 @@
 // SRC: ../rust/compiler/rustc_metadata/src/rmeta/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::marker::PhantomData;
 use std::num::NonZero;
 
 pub(crate) use decoder::{CrateMetadata, CrateNumMap, MetadataBlob, TargetModifiers};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use decoder::{DecodeContext, Metadata};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use def_path_hash_map::DefPathHashMapRef;
 use encoder::EncodeContext;
 pub use encoder::{EncodedMetadata, encode_metadata, rendered_const};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 pub(crate) use parameterized::ParameterizedOverTcx;
 use crate::rustc_abi::{FieldIdx, ReprOptions, VariantIdx};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_complete::attrs::StrippedCfgItem;
 use crate::rustc_complete::def::{CtorKind, DefKind, DocLinkResMap, MacroKinds};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, DefIndex, DefPathHash, StableCrateId};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::definitions::DefKey;
 use crate::rustc_complete::lang_items::LangItem;
 use crate::rustc_complete::{PreciseCapturingArgKind, attrs};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use rustc_macros::{
     Decodable, Encodable, MetadataDecodable, MetadataEncodable, TyDecodable, TyEncodable,
 };
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::metadata::ModChild;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
 use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
 use crate::rustc_complete::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::middle::lib_features::FeatureStability;
 use crate::rustc_complete::middle::resolve_bound_vars::ObjectLifetimeDefault;
 use crate::rustc_complete::mir;
 use crate::rustc_complete::ty::fast_reject::SimplifiedType;
 use crate::rustc_complete::ty::{self, DeducedParamAttrs, Ty, TyCtxt, UnusedGenericParams};
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::util::Providers;
 use crate::rustc_serialize::opaque::FileEncoder;
 use crate::rustc_complete::config::{SymbolManglingVersion, TargetModifier};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::cstore::{CrateDepKind, ForeignModule, LinkagePreference, NativeLib};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::{ExpnIndex, MacroKind, SyntaxContextKey};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{self, ExpnData, ExpnHash, ExpnId, Ident, Span, Symbol};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::spec::{PanicStrategy, TargetTuple};
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use table::TableBuilder;
 use {rustc_ast as ast, rustc_hir as hir};
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 use crate::creader::CrateMetadataRef;
 
@@ -65,7 +48,6 @@ use crate::creader::CrateMetadataRef;
 pub(crate) fn rustc_version(cfg_version: &'static str) -> String {
     format!("rustc {cfg_version}")
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=LazyValue | COMPLEXITY=8 | LINES=33 */
 
 /// Metadata encoding version.
 /// N.B., increment this if you change the format of metadata such that
@@ -99,14 +81,12 @@ struct LazyValue<T> {
     position: NonZero<usize>,
     _marker: PhantomData<fn() -> T>,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from_position | COMPLEXITY=4 | LINES=6 */
 
 impl<T> LazyValue<T> {
     fn from_position(position: NonZero<usize>) -> LazyValue<T> {
         LazyValue { position, _marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=LazyArray | COMPLEXITY=3 | LINES=16 */
 
 /// A list of lazily-decoded values.
 ///
@@ -123,21 +103,18 @@ struct LazyArray<T> {
     num_elems: usize,
     _marker: PhantomData<fn() -> T>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=6 */
 
 impl<T> Default for LazyArray<T> {
     fn default() -> LazyArray<T> {
         LazyArray::from_position_and_num_elems(NonZero::new(1).unwrap(), 0)
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from_position_and_num_elems | COMPLEXITY=4 | LINES=6 */
 
 impl<T> LazyArray<T> {
     fn from_position_and_num_elems(position: NonZero<usize>, num_elems: usize) -> LazyArray<T> {
         LazyArray { position, num_elems, _marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=LazyTable | COMPLEXITY=5 | LINES=15 */
 
 /// A list of lazily-decoded values, with the added capability of random access.
 ///
@@ -153,7 +130,6 @@ struct LazyTable<I, T> {
     len: usize,
     _marker: PhantomData<fn(I) -> T>,
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from_position_and_encoded_size | COMPLEXITY=4 | LINES=10 */
 
 impl<I, T> LazyTable<I, T> {
     fn from_position_and_encoded_size(
@@ -164,34 +140,27 @@ impl<I, T> LazyTable<I, T> {
         LazyTable { position, width, len, _marker: PhantomData }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T> Copy for LazyValue<T> {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=5 | LINES=5 */
 impl<T> Clone for LazyValue<T> {
     fn clone(&self) -> Self {
         *self
     }
 }
-/* AST_META: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T> Copy for LazyArray<T> {}
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=5 | LINES=5 */
 impl<T> Clone for LazyArray<T> {
     fn clone(&self) -> Self {
         *self
     }
 }
-/* AST_META: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I, T> Copy for LazyTable<I, T> {}
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=5 | LINES=5 */
 impl<I, T> Clone for LazyTable<I, T> {
     fn clone(&self) -> Self {
         *self
     }
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 /// Encoding / decoding state for `Lazy`s (`LazyValue`, `LazyArray`, and `LazyTable`).
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
@@ -207,7 +176,6 @@ enum LazyState {
     /// The position is where that previous `Lazy` would start.
     Previous(NonZero<usize>),
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 type SyntaxContextTable = LazyTable<u32, Option<LazyValue<SyntaxContextKey>>>;
 type ExpnDataTable = LazyTable<ExpnIndex, Option<LazyValue<ExpnData>>>;
@@ -219,7 +187,6 @@ pub(crate) struct ProcMacroData {
     stability: Option<hir::Stability>,
     macros: LazyArray<DefIndex>,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=10 | LINES=25 */
 
 /// Serialized crate metadata.
 ///
@@ -245,7 +212,6 @@ pub(crate) struct CrateHeader {
     /// This is used inside rlibs and dylibs when using `-Zembed-metadata=no`.
     pub(crate) is_stub: bool,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=76 */
 
 /// Serialized `.rmeta` data for a crate.
 ///
@@ -322,7 +288,6 @@ pub(crate) struct CrateRoot {
 
     specialization_enabled_in: bool,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// On-disk representation of `DefId`.
 /// This creates a type-safe way to enforce that we remap the CrateNum between the on-disk
@@ -332,14 +297,12 @@ pub(crate) struct RawDefId {
     krate: u32,
     index: u32,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl From<DefId> for RawDefId {
     fn from(val: DefId) -> Self {
         RawDefId { krate: val.krate.as_u32(), index: val.index.as_u32() }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=13 */
 
 impl RawDefId {
     /// This exists so that `provide_one!` is happy
@@ -353,7 +316,6 @@ impl RawDefId {
         DefId { krate, index: DefIndex::from_u32(self.index) }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Encodable, Decodable)]
 pub(crate) struct CrateDep {
@@ -364,21 +326,18 @@ pub(crate) struct CrateDep {
     pub extra_filename: String,
     pub is_private: bool,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(MetadataEncodable, MetadataDecodable)]
 pub(crate) struct TraitImpls {
     trait_id: (u32, DefIndex),
     impls: LazyArray<(DefIndex, Option<SimplifiedType>)>,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(MetadataEncodable, MetadataDecodable)]
 pub(crate) struct IncoherentImpls {
     self_ty: SimplifiedType,
     impls: LazyArray<DefIndex>,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=TableBuilders | COMPLEXITY=14 | LINES=29 */
 
 /// Define `LazyTables` and `TableBuilders` at the same time.
 macro_rules! define_tables {
@@ -408,7 +367,6 @@ macro_rules! define_tables {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=99 */
 
 define_tables! {
 - defaulted:
@@ -508,7 +466,6 @@ define_tables! {
     anon_const_kind: Table<DefIndex, LazyValue<ty::AnonConstKind>>,
     associated_types_for_impl_traits_in_trait_or_impl: Table<DefIndex, LazyValue<DefIdMap<Vec<DefId>>>>,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=VariantData | COMPLEXITY=2 | LINES=9 */
 
 #[derive(TyEncodable, TyDecodable)]
 struct VariantData {
@@ -518,7 +475,6 @@ struct VariantData {
     ctor: Option<(CtorKind, DefIndex)>,
     is_non_exhaustive: bool,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=AttrFlags: | COMPLEXITY=3 | LINES=7 */
 
 bitflags::bitflags! {
     #[derive(Default)]
@@ -526,7 +482,6 @@ bitflags::bitflags! {
         const IS_DOC_HIDDEN = 1 << 0;
     }
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=SpanTag(u8); | COMPLEXITY=8 | LINES=30 */
 
 /// A span tag byte encodes a bunch of data, so that we can cut out a few extra bytes from span
 /// encodings (which are very common, for example, libcore has ~650,000 unique spans and over 1.1
@@ -557,7 +512,6 @@ enum SpanKind {
     // absolute offset.
     Indirect = 0b11,
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=new | COMPLEXITY=35 | LINES=55 */
 
 impl SpanTag {
     fn new(kind: SpanKind, context: crate::rustc_span::SyntaxContext, length: usize) -> SpanTag {
@@ -613,7 +567,6 @@ impl SpanTag {
         if len != all_1s_len { Some(crate::rustc_span::BytePos(u32::from(len))) } else { None }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=10 */
 
 // Tags for encoding Symbol's
 const SYMBOL_STR: u8 = 0;

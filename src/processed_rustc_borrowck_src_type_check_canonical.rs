@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/type_check/canonical.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::fmt;
 
 use crate::rustc_complete::ErrorGuaranteed;
@@ -7,25 +6,19 @@ use crate::rustc_infer::infer::canonical::Canonical;
 use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{Body, ConstraintCategory};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_trait_selection::solve::NoSolution;
 use crate::rustc_trait_selection::traits::ObligationCause;
 use crate::rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
 use crate::rustc_trait_selection::traits::query::type_op::{self, TypeOpOutput};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::{Locations, NormalizeLocation, TypeChecker};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::BorrowckInferCtxt;
 use crate::diagnostics::ToUniverseInfo;
 use crate::type_check::{MirTypeckRegionConstraints, constraint_conversion};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=59 */
 use crate::universal_regions::UniversalRegions;
 
 #[instrument(skip(infcx, constraints, op), level = "trace")]
@@ -85,7 +78,6 @@ where
 
     Ok(output)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=70 | LINES=281 */
 
 impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     /// Given some operation `op` that manipulates types, proves

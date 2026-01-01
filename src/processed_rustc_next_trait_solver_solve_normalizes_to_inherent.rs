@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/normalizes_to/inherent.rs
-/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 // Computes a normalizes-to (projection) goal for inherent associated types,
 // `#[feature(inherent_associated_type)]`. Since HIR ty lowering already determines
 // which impl the IAT is being projected from, we just:
@@ -8,11 +7,9 @@
 // 3. instantiate and register where clauses.
 
 use rustc_type_ir::{self as ty, Interner};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::{Certainty, EvalCtxt, Goal, GoalSource, QueryResult};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=52 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/remove_unneeded_drops.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
 // This pass replaces a drop of a type that does not need dropping, with a goto.
 //
 // When the MIR is built, we check `needs_drop` before emitting a `Drop` for a place. This pass is
@@ -16,7 +15,6 @@ use crate::rustc_complete::LangItem;
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=35 | LINES=46 */
 
 use super::simplify::simplify_cfg;
 

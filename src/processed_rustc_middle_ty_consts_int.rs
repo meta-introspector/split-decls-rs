@@ -1,16 +1,12 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/consts/int.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::fmt;
 use std::num::NonZero;
 
 use crate::rustc_abi::Size;
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=ConstInt | COMPLEXITY=6 | LINES=13 */
 
 use crate::ty::TyCtxt;
 
@@ -24,14 +20,12 @@ pub struct ConstInt {
     /// Whether the value is a `usize` or `isize` type.
     is_ptr_sized_integral: bool,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl ConstInt {
     pub fn new(int: ScalarInt, signed: bool, is_ptr_sized_integral: bool) -> Self {
         Self { int, signed, is_ptr_sized_integral }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 
 /// An enum to represent the compiler-side view of `intrinsics::AtomicOrdering`.
 /// This lives here because there's a method in this file that needs it and it is entirely unclear
@@ -45,7 +39,6 @@ pub enum AtomicOrdering {
     AcqRel = 3,
     SeqCst = 4,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=90 | LINES=89 */
 
 impl std::fmt::Debug for ConstInt {
     fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -135,7 +128,6 @@ impl std::fmt::Debug for ConstInt {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=8 */
 
 impl IntoDiagArg for ConstInt {
     // FIXME this simply uses the Debug impl, but we could probably do better by converting both
@@ -144,7 +136,6 @@ impl IntoDiagArg for ConstInt {
         DiagArgValue::Str(format!("{self:?}").into())
     }
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ScalarInt | COMPLEXITY=2 | LINES=13 */
 
 /// The raw bytes of a simple value.
 ///
@@ -158,7 +149,6 @@ pub struct ScalarInt {
     data: u128,
     size: NonZero<u8>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=8 | LINES=13 */
 
 // Cannot derive these, as the derives take references to the fields, and we
 // can't take references to fields of packed structs.
@@ -172,7 +162,6 @@ impl<CTX> crate::ty::HashStable<CTX> for ScalarInt {
         self.size.get().hash_stable(hcx, hasher);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=8 */
 
 impl<S: Encoder> Encodable<S> for ScalarInt {
     fn encode(&self, s: &mut S) {
@@ -181,7 +170,6 @@ impl<S: Encoder> Encodable<S> for ScalarInt {
         s.emit_raw_bytes(&self.data.to_le_bytes()[..size as usize]);
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=6 | LINES=9 */
 
 impl<D: Decoder> Decodable<D> for ScalarInt {
     fn decode(d: &mut D) -> ScalarInt {
@@ -191,7 +179,6 @@ impl<D: Decoder> Decodable<D> for ScalarInt {
         ScalarInt { data: u128::from_le_bytes(data), size: NonZero::new(size).unwrap() }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=raw | COMPLEXITY=125 | LINES=253 */
 
 impl ScalarInt {
     pub const TRUE: ScalarInt = ScalarInt { data: 1_u128, size: NonZero::new(1).unwrap() };
@@ -445,7 +432,6 @@ impl ScalarInt {
         self.to_float()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=13 | LINES=16 */
 
 macro_rules! from_x_for_scalar_int {
     ($($ty:ty),*) => {
@@ -462,7 +448,6 @@ macro_rules! from_x_for_scalar_int {
         )*
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from | COMPLEXITY=15 | LINES=16 */
 
 macro_rules! from_scalar_int_for_x {
     ($($ty:ty),*) => {
@@ -479,7 +464,6 @@ macro_rules! from_scalar_int_for_x {
         )*
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=try_from | COMPLEXITY=5 | LINES=11 */
 
 from_x_for_scalar_int!(u8, u16, u32, u64, u128, bool);
 from_scalar_int_for_x!(u8, u16, u32, u64, u128);
@@ -491,7 +475,6 @@ impl TryFrom<ScalarInt> for bool {
         int.try_to_bool()
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<char> for ScalarInt {
     #[inline]
@@ -499,7 +482,6 @@ impl From<char> for ScalarInt {
         (c as u32).into()
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=from | COMPLEXITY=13 | LINES=16 */
 
 macro_rules! from_x_for_scalar_int_signed {
     ($($ty:ty),*) => {
@@ -516,7 +498,6 @@ macro_rules! from_x_for_scalar_int_signed {
         )*
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=from | COMPLEXITY=15 | LINES=16 */
 
 macro_rules! from_scalar_int_for_x_signed {
     ($($ty:ty),*) => {
@@ -533,7 +514,6 @@ macro_rules! from_scalar_int_for_x_signed {
         )*
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=11 */
 
 from_x_for_scalar_int_signed!(i8, i16, i32, i64, i128);
 from_scalar_int_for_x_signed!(i8, i16, i32, i64, i128);
@@ -545,7 +525,6 @@ impl From<std::cmp::Ordering> for ScalarInt {
         ScalarInt::from(c as i8)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=CharTryFromScalarInt; | COMPLEXITY=9 | LINES=16 */
 
 /// Error returned when a conversion from ScalarInt to char fails.
 #[derive(Debug)]
@@ -562,7 +541,6 @@ impl TryFrom<ScalarInt> for char {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=8 */
 
 impl From<Half> for ScalarInt {
     #[inline]
@@ -571,7 +549,6 @@ impl From<Half> for ScalarInt {
         Self { data: f.to_bits(), size: NonZero::new((Half::BITS / 8) as u8).unwrap() }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ScalarInt> for Half {
     #[inline]
@@ -579,7 +556,6 @@ impl From<ScalarInt> for Half {
         Self::from_bits(int.to_bits(Size::from_bytes(2)))
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=8 */
 
 impl From<Single> for ScalarInt {
     #[inline]
@@ -588,7 +564,6 @@ impl From<Single> for ScalarInt {
         Self { data: f.to_bits(), size: NonZero::new((Single::BITS / 8) as u8).unwrap() }
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ScalarInt> for Single {
     #[inline]
@@ -596,7 +571,6 @@ impl From<ScalarInt> for Single {
         Self::from_bits(int.to_bits(Size::from_bytes(4)))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=8 */
 
 impl From<Double> for ScalarInt {
     #[inline]
@@ -605,7 +579,6 @@ impl From<Double> for ScalarInt {
         Self { data: f.to_bits(), size: NonZero::new((Double::BITS / 8) as u8).unwrap() }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ScalarInt> for Double {
     #[inline]
@@ -613,7 +586,6 @@ impl From<ScalarInt> for Double {
         Self::from_bits(int.to_bits(Size::from_bytes(8)))
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=8 */
 
 impl From<Quad> for ScalarInt {
     #[inline]
@@ -622,7 +594,6 @@ impl From<Quad> for ScalarInt {
         Self { data: f.to_bits(), size: NonZero::new((Quad::BITS / 8) as u8).unwrap() }
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
 
 impl From<ScalarInt> for Quad {
     #[inline]
@@ -630,7 +601,6 @@ impl From<ScalarInt> for Quad {
         Self::from_bits(int.to_bits(Size::from_bytes(16)))
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=7 */
 
 impl fmt::Debug for ScalarInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -638,7 +608,6 @@ impl fmt::Debug for ScalarInt {
         write!(f, "0x{self:x}")
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=18 */
 
 impl fmt::LowerHex for ScalarInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -657,7 +626,6 @@ impl fmt::LowerHex for ScalarInt {
         write!(f, "{:01$x}", { self.data }, self.size.get() as usize * 2)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=14 */
 
 impl fmt::UpperHex for ScalarInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -672,7 +640,6 @@ impl fmt::UpperHex for ScalarInt {
         write!(f, "{:01$X}", { self.data }, self.size.get() as usize * 2)
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=7 */
 
 impl fmt::Display for ScalarInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

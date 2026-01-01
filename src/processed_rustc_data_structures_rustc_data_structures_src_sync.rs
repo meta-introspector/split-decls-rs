@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/sync.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=31 */
 // This module defines various operations and types that are implemented in
 // one way for the serial compiler, and another way the parallel compiler.
 //
@@ -31,30 +30,22 @@
 
 use std::collections::HashMap;
 use std::hash::{BuildHasher, Hash};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub use parking_lot::{
     MappedRwLockReadGuard as MappedReadGuard, MappedRwLockWriteGuard as MappedWriteGuard,
     RwLockReadGuard as ReadGuard, RwLockWriteGuard as WriteGuard,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 pub use self::atomic::AtomicU64;
 pub use self::freeze::{FreezeLock, FreezeReadGuard, FreezeWriteGuard};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 #[doc(no_inline)]
 pub use self::lock::{Lock, LockGuard, Mode};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::mode::{is_dyn_thread_safe, set_dyn_thread_safe_mode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 pub use self::parallel::{
     broadcast, join, par_for_each_in, par_map, parallel_guard, scope, spawn, try_par_for_each_in,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::vec::{AppendOnlyIndexVec, AppendOnlyVec};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use self::worker_local::{Registry, WorkerLocal};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 pub use crate::marker::*;
 
 
@@ -69,7 +60,6 @@ mod atomic {
     #[cfg(not(target_has_atomic = "64"))]
     pub use portable_atomic::AtomicU64;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=is_dyn_thread_safe | COMPLEXITY=16 | LINES=40 */
 
 mod mode {
     use std::sync::atomic::{AtomicU8, Ordering};
@@ -110,7 +100,6 @@ mod mode {
         assert!(previous.is_ok() || previous == Err(set));
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=MTLock | COMPLEXITY=8 | LINES=32 */
 
 // FIXME(parallel_compiler): Get rid of these aliases across the compiler.
 
@@ -143,7 +132,6 @@ impl<T> MTLock<T> {
         self.lock()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=CacheAligned | COMPLEXITY=8 | LINES=14 */
 
 /// This makes locks panic if they are already held.
 /// It is only useful when you are running in a single thread
@@ -158,14 +146,12 @@ pub trait HashMapExt<K, V> {
     /// entry for `key` with a value not equal to `value`
     fn insert_same(&mut self, key: K, value: V);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=insert_same | COMPLEXITY=5 | LINES=6 */
 
 impl<K: Eq + Hash, V: Eq, S: BuildHasher> HashMapExt<K, V> for HashMap<K, V, S> {
     fn insert_same(&mut self, key: K, value: V) {
         self.entry(key).and_modify(|old| assert!(*old == value)).or_insert(value);
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=RwLock | COMPLEXITY=20 | LINES=55 */
 
 #[derive(Debug, Default)]
 pub struct RwLock<T>(parking_lot::RwLock<T>);

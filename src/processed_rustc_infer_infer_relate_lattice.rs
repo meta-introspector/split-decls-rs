@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/relate/lattice.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=21 */
 // # Lattice variables
 //
 // Generic code for operating on [lattices] of inference variables
@@ -21,28 +20,21 @@
 
 use crate::rustc_complete::traits::solve::Goal;
 use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::relate::{Relate, RelateResult, TypeRelation};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, TyVar, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use super::StructurallyRelateAliases;
 use super::combine::PredicateEmittingRelation;
 use crate::infer::{DefineOpaqueTypes, InferCtxt, SubregionOrigin, TypeTrace};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{Obligation, PredicateObligations};
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy)]
 pub(crate) enum LatticeOpKind {
     Glb,
     Lub,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=invert | COMPLEXITY=7 | LINES=9 */
 
 impl LatticeOpKind {
     fn invert(self) -> Self {
@@ -52,7 +44,6 @@ impl LatticeOpKind {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=64 | LINES=166 */
 
 /// A greatest lower bound" (common subtype) or least upper bound (common supertype).
 pub(crate) struct LatticeOp<'infcx, 'tcx> {
@@ -219,7 +210,6 @@ impl<'tcx> TypeRelation<TyCtxt<'tcx>> for LatticeOp<'_, 'tcx> {
         }
 
         debug!("binders(a={:?}, b={:?})", a, b);
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=relate_bound | COMPLEXITY=32 | LINES=77 */
         if a.skip_binder().has_escaping_bound_vars() || b.skip_binder().has_escaping_bound_vars() {
             // When higher-ranked types are involved, computing the GLB/LUB is
             // very challenging, switch to invariance. This is obviously

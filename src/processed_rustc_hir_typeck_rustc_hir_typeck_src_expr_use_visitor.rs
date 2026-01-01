@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_hir_typeck/src/expr_use_visitor.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 // A different sort of visitor for walking fn bodies. Unlike the
 // normal visitor, which just walks the entire body in one shot, the
 // `ExprUseVisitor` determines how expressions are being used.
@@ -8,7 +7,6 @@
 // are many uses within clippy.
 
 use std::cell::{Ref, RefCell};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::ops::Deref;
 use std::slice::from_ref;
 
@@ -16,31 +14,23 @@ use hir::Expr;
 use hir::def::DefKind;
 use hir::pat_util::EnumerateAndAdjustIterator as _;
 use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::UnsafeBinderCastKind;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::def::{CtorOf, Res};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{self as hir, HirId, PatExpr, PatExprKind, PatKind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_lint::LateContext;
 use crate::rustc_complete::hir::place::ProjectionKind;
 // Export these here so that Clippy can use them.
 pub use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::mir::FakeReadCause;
 use crate::rustc_complete::ty::{
     self, BorrowKind, Ty, TyCtxt, TypeFoldable, TypeVisitableExt as _, adjustment,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, span_bug};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=consume | COMPLEXITY=31 | LINES=75 */
 
 use crate::fn_ctxt::FnCtxt;
 
@@ -116,7 +106,6 @@ pub trait Delegate<'tcx> {
         diag_expr_id: HirId,
     );
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=consume | COMPLEXITY=13 | LINES=40 */
 
 impl<'tcx, D: Delegate<'tcx>> Delegate<'tcx> for &mut D {
     fn consume(&mut self, place_with_id: &PlaceWithHirId<'tcx>, diag_expr_id: HirId) {
@@ -157,7 +146,6 @@ impl<'tcx, D: Delegate<'tcx>> Delegate<'tcx> for &mut D {
         (**self).fake_read(place_with_id, cause, diag_expr_id)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=3 | LINES=30 */
 
 /// This trait makes `ExprUseVisitor` usable with both [`FnCtxt`]
 /// and [`LateContext`], depending on where in the compiler it is used.
@@ -188,7 +176,6 @@ pub trait TypeInformationCtxt<'tcx> {
 
     fn tcx(&self) -> TyCtxt<'tcx>;
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=20 | LINES=49 */
 
 impl<'tcx> TypeInformationCtxt<'tcx> for &FnCtxt<'_, 'tcx> {
     type TypeckResults<'a>
@@ -238,7 +225,6 @@ impl<'tcx> TypeInformationCtxt<'tcx> for &FnCtxt<'_, 'tcx> {
         self.tcx
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=typeck_results | COMPLEXITY=17 | LINES=50 */
 
 impl<'tcx> TypeInformationCtxt<'tcx> for (&LateContext<'tcx>, LocalDefId) {
     type TypeckResults<'a>
@@ -289,7 +275,6 @@ impl<'tcx> TypeInformationCtxt<'tcx> for (&LateContext<'tcx>, LocalDefId) {
         self.0.tcx
     }
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=ExprUseVisitor | COMPLEXITY=4 | LINES=11 */
 
 /// A visitor that reports how each expression is being used.
 ///
@@ -301,14 +286,12 @@ pub struct ExprUseVisitor<'tcx, Cx: TypeInformationCtxt<'tcx>, D: Delegate<'tcx>
     delegate: RefCell<D>,
     upvars: Option<&'tcx FxIndexMap<HirId, hir::Upvar>>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=for_clippy | COMPLEXITY=3 | LINES=6 */
 
 impl<'a, 'tcx, D: Delegate<'tcx>> ExprUseVisitor<'tcx, (&'a LateContext<'tcx>, LocalDefId), D> {
     pub fn for_clippy(cx: &'a LateContext<'tcx>, body_def_id: LocalDefId, delegate: D) -> Self {
         Self::new((cx, body_def_id), delegate)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=consume_body | COMPLEXITY=439 | LINES=875 */
 
 impl<'tcx, Cx: TypeInformationCtxt<'tcx>, D: Delegate<'tcx>> ExprUseVisitor<'tcx, Cx, D> {
     /// Creates the ExprUseVisitor, configuring it with the various options provided:
@@ -1184,7 +1167,6 @@ impl<'tcx, Cx: TypeInformationCtxt<'tcx>, D: Delegate<'tcx>> ExprUseVisitor<'tcx
         Ok(())
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=expect_and_resolve_type | COMPLEXITY=322 | LINES=734 */
 
 /// The job of the methods whose name starts with `cat_` is to analyze
 /// expressions and construct the corresponding [`Place`]s. The `cat`

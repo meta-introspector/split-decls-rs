@@ -1,26 +1,18 @@
 // SRC: ../rust/compiler/rustc_public/src/ty.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::fmt::{self, Debug, Display, Formatter};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::Range;
 
 use serde::Serialize;
 
 use super::abi::ReprOptions;
 use super::mir::{Body, Mutability, Safety};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{DefId, Error, Symbol, with};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::abi::{FnAbi, Layout};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::crate_def::{CrateDef, CrateDefItems, CrateDefType};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::alloc::{AllocId, read_target_int, read_target_uint};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::mir::mono::StaticDef;
 use crate::target::MachineInfo;
 use crate::{Filename, IndexedVal, Opaque};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=Ty(usize); | COMPLEXITY=5 | LINES=9 */
 
 #[derive(Copy, Clone, Eq, PartialEq, Hash, Serialize)]
 pub struct Ty(usize);
@@ -30,7 +22,6 @@ impl Debug for Ty {
         f.debug_struct("Ty").field("id", &self.0).field("kind", &self.kind()).finish()
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_rigid_kind | COMPLEXITY=25 | LINES=78 */
 
 /// Constructors for `Ty`.
 impl Ty {
@@ -109,21 +100,18 @@ impl Ty {
         with(|cx| cx.ty_layout(self))
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=3 | LINES=6 */
 
 impl Ty {
     pub fn kind(&self) -> TyKind {
         with(|context| context.ty_kind(*self))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 /// Represents a pattern in the type system
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum Pattern {
     Range { start: Option<TyConst>, end: Option<TyConst>, include_end: bool },
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=TyConst | COMPLEXITY=2 | LINES=7 */
 
 /// Represents a constant in the type system
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
@@ -131,7 +119,6 @@ pub struct TyConst {
     pub(crate) kind: TyConstKind,
     pub id: TyConstId,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=21 */
 
 impl TyConst {
     pub fn new(kind: TyConstKind, id: TyConstId) -> TyConst {
@@ -153,7 +140,6 @@ impl TyConst {
         with(|cx| cx.eval_target_usize_ty(self))
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum TyConstKind {
@@ -165,7 +151,6 @@ pub enum TyConstKind {
     Value(Ty, Allocation),
     ZSTValue(Ty),
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=TyConstId(usize); | COMPLEXITY=4 | LINES=14 */
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct TyConstId(usize);
@@ -180,7 +165,6 @@ pub struct MirConst {
     /// Used for internal tracking of the internal constant.
     pub id: MirConstId,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=18 | LINES=47 */
 
 impl MirConst {
     /// Build a constant. Note that this should only be used by the compiler.
@@ -228,7 +212,6 @@ impl MirConst {
         with(|cx| cx.try_new_const_uint(value, uint_ty))
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=MirConstId(usize); | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize)]
 pub struct MirConstId(usize);
@@ -239,7 +222,6 @@ type Ident = Opaque;
 pub struct Region {
     pub kind: RegionKind,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum RegionKind {
@@ -249,7 +231,6 @@ pub enum RegionKind {
     RePlaceholder(Placeholder<BoundRegion>),
     ReErased,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=EarlyParamRegion | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) type DebruijnIndex = u32;
 
@@ -258,7 +239,6 @@ pub struct EarlyParamRegion {
     pub index: u32,
     pub name: Symbol,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=BoundRegion | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) type BoundVar = u32;
 
@@ -267,7 +247,6 @@ pub struct BoundRegion {
     pub var: BoundVar,
     pub kind: BoundRegionKind,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=Placeholder | COMPLEXITY=2 | LINES=8 */
 
 pub(crate) type UniverseIndex = u32;
 
@@ -276,7 +255,6 @@ pub struct Placeholder<T> {
     pub universe: UniverseIndex,
     pub bound: T,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=Span(usize); | COMPLEXITY=5 | LINES=12 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Serialize)]
 pub struct Span(usize);
@@ -289,7 +267,6 @@ impl Debug for Span {
             .finish()
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=get_filename | COMPLEXITY=8 | LINES=20 */
 
 impl Span {
     /// Return filename for diagnostic purposes
@@ -310,7 +287,6 @@ impl Span {
         with(|c| c.span_to_string(*self))
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=LineInfo | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, Serialize)]
 /// Information you get from `Span` in a struct form.
@@ -321,14 +297,12 @@ pub struct LineInfo {
     pub end_line: usize,
     pub end_col: usize,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=from | COMPLEXITY=4 | LINES=6 */
 
 impl LineInfo {
     pub fn from(lines: (usize, usize, usize, usize)) -> Self {
         LineInfo { start_line: lines.0, start_col: lines.1, end_line: lines.2, end_col: lines.3 }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum TyKind {
@@ -337,7 +311,6 @@ pub enum TyKind {
     Param(ParamTy),
     Bound(usize, BoundTy),
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=rigid | COMPLEXITY=118 | LINES=226 */
 
 impl TyKind {
     pub fn rigid(&self) -> Option<&RigidTy> {
@@ -564,13 +537,11 @@ impl TyKind {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=TypeAndMut | COMPLEXITY=2 | LINES=5 */
 
 pub struct TypeAndMut {
     pub ty: Ty,
     pub mutability: Mutability,
 }
-/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=26 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum RigidTy {
@@ -597,7 +568,6 @@ pub enum RigidTy {
     Tuple(Vec<Ty>),
     CoroutineWitness(CoroutineWitnessDef, GenericArgs),
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=discriminant_ty | COMPLEXITY=5 | LINES=7 */
 
 impl RigidTy {
     /// Get the discriminant type for this type.
@@ -605,14 +575,12 @@ impl RigidTy {
         with(|cx| cx.rigid_ty_discriminant_ty(self))
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<RigidTy> for TyKind {
     fn from(value: RigidTy) -> Self {
         TyKind::RigidTy(value)
     }
 }
-/* AST_META: AST_ID=32 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum IntTy {
@@ -623,7 +591,6 @@ pub enum IntTy {
     I64,
     I128,
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=num_bytes | COMPLEXITY=7 | LINES=13 */
 
 impl IntTy {
     pub fn num_bytes(self) -> usize {
@@ -637,7 +604,6 @@ impl IntTy {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum UintTy {
@@ -648,7 +614,6 @@ pub enum UintTy {
     U64,
     U128,
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=num_bytes | COMPLEXITY=7 | LINES=13 */
 
 impl UintTy {
     pub fn num_bytes(self) -> usize {
@@ -662,7 +627,6 @@ impl UintTy {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum FloatTy {
@@ -671,54 +635,46 @@ pub enum FloatTy {
     F64,
     F128,
 }
-/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum Movability {
     Static,
     Movable,
 }
-/* AST_META: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub ForeignModuleDef;
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=module | COMPLEXITY=3 | LINES=6 */
 
 impl ForeignModuleDef {
     pub fn module(&self) -> ForeignModule {
         with(|cx| cx.foreign_module(*self))
     }
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=ForeignModule | COMPLEXITY=2 | LINES=5 */
 
 pub struct ForeignModule {
     pub def_id: ForeignModuleDef,
     pub abi: Abi,
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=items | COMPLEXITY=3 | LINES=6 */
 
 impl ForeignModule {
     pub fn items(&self) -> Vec<ForeignDef> {
         with(|cx| cx.foreign_items(self.def_id))
     }
 }
-/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 crate_def_with_ty! {
     /// Hold information about a ForeignItem in a crate.
     #[derive(Serialize)]
     pub ForeignDef;
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=3 | LINES=6 */
 
 impl ForeignDef {
     pub fn kind(&self) -> ForeignItemKind {
         with(|cx| cx.foreign_item_kind(*self))
     }
 }
-/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, Serialize)]
 pub enum ForeignItemKind {
@@ -726,14 +682,12 @@ pub enum ForeignItemKind {
     Static(StaticDef),
     Type(Ty),
 }
-/* AST_META: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 crate_def_with_ty! {
     /// Hold information about a function definition in a crate.
     #[derive(Serialize)]
     pub FnDef;
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=body | COMPLEXITY=18 | LINES=29 */
 
 impl FnDef {
     // Get the function body if available.
@@ -763,13 +717,11 @@ impl FnDef {
         kind.fn_sig().unwrap()
     }
 }
-/* AST_META: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def_with_ty! {
     #[derive(Serialize)]
     pub IntrinsicDef;
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=fn_name | COMPLEXITY=6 | LINES=14 */
 
 impl IntrinsicDef {
     /// Returns the plain name of the intrinsic.
@@ -784,20 +736,17 @@ impl IntrinsicDef {
         with(|cx| !cx.has_body(self.0))
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
 
 impl From<IntrinsicDef> for FnDef {
     fn from(def: IntrinsicDef) -> Self {
         FnDef(def.0)
     }
 }
-/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub ClosureDef;
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=body | COMPLEXITY=5 | LINES=8 */
 
 impl ClosureDef {
     /// Retrieves the body of the closure definition. Returns None if the body
@@ -806,13 +755,11 @@ impl ClosureDef {
         with(|ctx| ctx.has_body(self.0).then(|| ctx.mir_body(self.0)))
     }
 }
-/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub CoroutineDef;
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=body | COMPLEXITY=6 | LINES=12 */
 
 impl CoroutineDef {
     /// Retrieves the body of the coroutine definition. Returns None if the body
@@ -825,31 +772,26 @@ impl CoroutineDef {
         with(|cx| cx.coroutine_discr_for_variant(*self, args, idx))
     }
 }
-/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub CoroutineClosureDef;
 }
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub ParamDef;
 }
-/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub BrNamedDef;
 }
-/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub AdtDef;
 }
-/* AST_META: AST_ID=58 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, Serialize)]
 pub enum AdtKind {
@@ -857,7 +799,6 @@ pub enum AdtKind {
     Union,
     Struct,
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=18 | LINES=54 */
 
 impl AdtDef {
     pub fn kind(&self) -> AdtKind {
@@ -912,13 +853,11 @@ impl AdtDef {
         with(|cx| cx.adt_discr_for_variant(*self, idx))
     }
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=Discr | COMPLEXITY=2 | LINES=5 */
 
 pub struct Discr {
     pub val: u128,
     pub ty: Ty,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=VariantDef | COMPLEXITY=3 | LINES=17 */
 
 /// Definition of a variant, which can be either a struct / union field or an enum variant.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize)]
@@ -936,7 +875,6 @@ pub struct VariantDef {
     /// Do not access this field directly!
     pub adt_def: AdtDef,
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=name | COMPLEXITY=4 | LINES=13 */
 
 impl VariantDef {
     pub fn name(&self) -> Symbol {
@@ -950,7 +888,6 @@ impl VariantDef {
         with(|cx| cx.variant_fields(*self))
     }
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=FieldDef | COMPLEXITY=4 | LINES=12 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct FieldDef {
@@ -963,7 +900,6 @@ pub struct FieldDef {
     /// The field name.
     pub name: Symbol,
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=ty_with_args | COMPLEXITY=4 | LINES=14 */
 
 impl FieldDef {
     /// Retrieve the type of this field instantiating and normalizing it with the given arguments.
@@ -978,7 +914,6 @@ impl FieldDef {
         with(|cx| cx.def_ty(self.def))
     }
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl Display for AdtKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
@@ -989,7 +924,6 @@ impl Display for AdtKind {
         })
     }
 }
-/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=is_enum | COMPLEXITY=5 | LINES=14 */
 
 impl AdtKind {
     pub fn is_enum(&self) -> bool {
@@ -1004,56 +938,47 @@ impl AdtKind {
         matches!(self, AdtKind::Union)
     }
 }
-/* AST_META: AST_ID=67 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub AliasDef;
 }
-/* AST_META: AST_ID=68 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 crate_def! {
     /// A trait's definition.
     #[derive(Serialize)]
     pub TraitDef;
 }
-/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 impl_crate_def_items! {
     TraitDef;
 }
-/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=declaration | COMPLEXITY=3 | LINES=6 */
 
 impl TraitDef {
     pub fn declaration(trait_def: &TraitDef) -> TraitDecl {
         with(|cx| cx.trait_decl(trait_def))
     }
 }
-/* AST_META: AST_ID=71 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub GenericDef;
 }
-/* AST_META: AST_ID=72 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def_with_ty! {
     #[derive(Serialize)]
     pub ConstDef;
 }
-/* AST_META: AST_ID=73 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 crate_def! {
     /// A trait impl definition.
     #[derive(Serialize)]
     pub ImplDef;
 }
-/* AST_META: AST_ID=74 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 impl_crate_def_items! {
     ImplDef;
 }
-/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=trait_impl | COMPLEXITY=3 | LINES=7 */
 
 impl ImplDef {
     /// Retrieve information about this implementation.
@@ -1061,19 +986,16 @@ impl ImplDef {
         with(|cx| cx.trait_impl(self))
     }
 }
-/* AST_META: AST_ID=76 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub RegionDef;
 }
-/* AST_META: AST_ID=77 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub CoroutineWitnessDef;
 }
-/* AST_META: AST_ID=78 | TYPE=FUNCTION | NAME=GenericArgs(pub | COMPLEXITY=5 | LINES=12 */
 
 /// A list of generic arguments.
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
@@ -1086,7 +1008,6 @@ impl std::ops::Index<ParamTy> for GenericArgs {
         self.0[index.index as usize].expect_ty()
     }
 }
-/* AST_META: AST_ID=79 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl std::ops::Index<ParamConst> for GenericArgs {
     type Output = TyConst;
@@ -1095,7 +1016,6 @@ impl std::ops::Index<ParamConst> for GenericArgs {
         self.0[index.index as usize].expect_const()
     }
 }
-/* AST_META: AST_ID=80 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum GenericArgKind {
@@ -1103,7 +1023,6 @@ pub enum GenericArgKind {
     Type(Ty),
     Const(TyConst),
 }
-/* AST_META: AST_ID=81 | TYPE=FUNCTION | NAME=expect_ty | COMPLEXITY=26 | LINES=30 */
 
 impl GenericArgKind {
     /// Panic if this generic argument is not a type, otherwise
@@ -1134,14 +1053,12 @@ impl GenericArgKind {
         }
     }
 }
-/* AST_META: AST_ID=82 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum TermKind {
     Type(Ty),
     Const(TyConst),
 }
-/* AST_META: AST_ID=83 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum AliasKind {
@@ -1150,21 +1067,18 @@ pub enum AliasKind {
     Opaque,
     Free,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=AliasTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct AliasTy {
     pub def_id: AliasDef,
     pub args: GenericArgs,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=AliasTerm | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct AliasTerm {
     pub def_id: AliasDef,
     pub args: GenericArgs,
 }
-/* AST_META: AST_ID=86 | TYPE=FUNCTION | NAME=fn_ptr_abi | COMPLEXITY=5 | LINES=12 */
 
 pub type PolyFnSig = Binder<FnSig>;
 
@@ -1177,7 +1091,6 @@ impl PolyFnSig {
         with(|cx| cx.fn_ptr_abi(self))
     }
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=FnSig | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct FnSig {
@@ -1186,7 +1099,6 @@ pub struct FnSig {
     pub safety: Safety,
     pub abi: Abi,
 }
-/* AST_META: AST_ID=88 | TYPE=FUNCTION | NAME=output | COMPLEXITY=4 | LINES=10 */
 
 impl FnSig {
     pub fn output(&self) -> Ty {
@@ -1197,7 +1109,6 @@ impl FnSig {
         &self.inputs_and_output[..self.inputs_and_output.len() - 1]
     }
 }
-/* AST_META: AST_ID=89 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=31 */
 
 #[derive(Clone, PartialEq, Eq, Debug, Serialize)]
 pub enum Abi {
@@ -1229,7 +1140,6 @@ pub enum Abi {
     RustInvalid,
     Custom,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=Binder | COMPLEXITY=2 | LINES=7 */
 
 /// A binder represents a possibly generic type and its bound vars.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -1237,7 +1147,6 @@ pub struct Binder<T> {
     pub value: T,
     pub bound_vars: Vec<BoundVariableKind>,
 }
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=bind_with_vars | COMPLEXITY=14 | LINES=34 */
 
 impl<T> Binder<T> {
     /// Create a new binder with the given bound vars.
@@ -1272,13 +1181,11 @@ impl<T> Binder<T> {
         Binder { value: new_value, bound_vars }
     }
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=EarlyBinder | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct EarlyBinder<T> {
     pub value: T,
 }
-/* AST_META: AST_ID=93 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum BoundVariableKind {
@@ -1286,14 +1193,12 @@ pub enum BoundVariableKind {
     Region(BoundRegionKind),
     Const,
 }
-/* AST_META: AST_ID=94 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, PartialEq, Eq, Debug, Serialize)]
 pub enum BoundTyKind {
     Anon,
     Param(ParamDef, String),
 }
-/* AST_META: AST_ID=95 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum BoundRegionKind {
@@ -1301,13 +1206,11 @@ pub enum BoundRegionKind {
     BrNamed(BrNamedDef, String),
     BrEnv,
 }
-/* AST_META: AST_ID=96 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum DynKind {
     Dyn,
 }
-/* AST_META: AST_ID=97 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum ExistentialPredicate {
@@ -1315,7 +1218,6 @@ pub enum ExistentialPredicate {
     Projection(ExistentialProjection),
     AutoTrait(TraitDef),
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=ExistentialTraitRef | COMPLEXITY=2 | LINES=9 */
 
 /// An existential reference to a trait where `Self` is not included.
 ///
@@ -1325,21 +1227,18 @@ pub struct ExistentialTraitRef {
     pub def_id: TraitDef,
     pub generic_args: GenericArgs,
 }
-/* AST_META: AST_ID=99 | TYPE=FUNCTION | NAME=with_self_ty | COMPLEXITY=3 | LINES=6 */
 
 impl Binder<ExistentialTraitRef> {
     pub fn with_self_ty(&self, self_ty: Ty) -> Binder<TraitRef> {
         self.map_bound_ref(|trait_ref| trait_ref.with_self_ty(self_ty))
     }
 }
-/* AST_META: AST_ID=100 | TYPE=FUNCTION | NAME=with_self_ty | COMPLEXITY=3 | LINES=6 */
 
 impl ExistentialTraitRef {
     pub fn with_self_ty(&self, self_ty: Ty) -> TraitRef {
         TraitRef::new(self.def_id, self_ty, &self.generic_args)
     }
 }
-/* AST_META: AST_ID=101 | TYPE=STRUCT | NAME=ExistentialProjection | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct ExistentialProjection {
@@ -1347,21 +1246,18 @@ pub struct ExistentialProjection {
     pub generic_args: GenericArgs,
     pub term: TermKind,
 }
-/* AST_META: AST_ID=102 | TYPE=STRUCT | NAME=ParamTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct ParamTy {
     pub index: u32,
     pub name: String,
 }
-/* AST_META: AST_ID=103 | TYPE=STRUCT | NAME=BoundTy | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct BoundTy {
     pub var: usize,
     pub kind: BoundTyKind,
 }
-/* AST_META: AST_ID=104 | TYPE=STRUCT | NAME=Prov(pub | COMPLEXITY=5 | LINES=20 */
 
 pub type Bytes = Vec<Option<u8>>;
 
@@ -1382,7 +1278,6 @@ pub struct ProvenanceMap {
     /// bytes. Two entries in this map are always at least a pointer size apart.
     pub ptrs: Vec<(Size, Prov)>,
 }
-/* AST_META: AST_ID=105 | TYPE=STRUCT | NAME=Allocation | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct Allocation {
@@ -1391,7 +1286,6 @@ pub struct Allocation {
     pub align: Align,
     pub mutability: Mutability,
 }
-/* AST_META: AST_ID=106 | TYPE=FUNCTION | NAME=raw_bytes | COMPLEXITY=43 | LINES=68 */
 
 impl Allocation {
     /// Get a vector of bytes for an Allocation that has been fully initialized
@@ -1460,7 +1354,6 @@ impl Allocation {
         Ok(self.read_uint()? == 0 && self.provenance.ptrs.is_empty())
     }
 }
-/* AST_META: AST_ID=107 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub enum ConstantKind {
@@ -1472,14 +1365,12 @@ pub enum ConstantKind {
     /// We have to special handle these constants since its type might be generic.
     ZeroSized,
 }
-/* AST_META: AST_ID=108 | TYPE=STRUCT | NAME=ParamConst | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct ParamConst {
     pub index: u32,
     pub name: String,
 }
-/* AST_META: AST_ID=109 | TYPE=STRUCT | NAME=UnevaluatedConst | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize)]
 pub struct UnevaluatedConst {
@@ -1487,7 +1378,6 @@ pub struct UnevaluatedConst {
     pub args: GenericArgs,
     pub promoted: Option<Promoted>,
 }
-/* AST_META: AST_ID=110 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum TraitSpecializationKind {
@@ -1495,7 +1385,6 @@ pub enum TraitSpecializationKind {
     Marker,
     AlwaysApplicable,
 }
-/* AST_META: AST_ID=111 | TYPE=STRUCT | NAME=TraitDecl | COMPLEXITY=3 | LINES=16 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct TraitDecl {
@@ -1512,7 +1401,6 @@ pub struct TraitDecl {
     pub implement_via_object: bool,
     pub deny_explicit_impl: bool,
 }
-/* AST_META: AST_ID=112 | TYPE=FUNCTION | NAME=generics_of | COMPLEXITY=5 | LINES=14 */
 
 impl TraitDecl {
     pub fn generics_of(&self) -> Generics {
@@ -1527,7 +1415,6 @@ impl TraitDecl {
         with(|cx| cx.explicit_predicates_of(self.def_id.0))
     }
 }
-/* AST_META: AST_ID=113 | TYPE=STRUCT | NAME=TraitRef | COMPLEXITY=4 | LINES=11 */
 
 pub type ImplTrait = EarlyBinder<TraitRef>;
 
@@ -1539,7 +1426,6 @@ pub struct TraitRef {
     /// The first element must always be type, and it represents `Self`.
     args: GenericArgs,
 }
-/* AST_META: AST_ID=114 | TYPE=FUNCTION | NAME=new | COMPLEXITY=15 | LINES=26 */
 
 impl TraitRef {
     pub fn new(def_id: TraitDef, self_ty: Ty, gen_args: &GenericArgs) -> TraitRef {
@@ -1566,7 +1452,6 @@ impl TraitRef {
         self_ty
     }
 }
-/* AST_META: AST_ID=115 | TYPE=STRUCT | NAME=Generics | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct Generics {
@@ -1577,7 +1462,6 @@ pub struct Generics {
     pub has_self: bool,
     pub has_late_bound_regions: Option<Span>,
 }
-/* AST_META: AST_ID=116 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum GenericParamDefKind {
@@ -1585,7 +1469,6 @@ pub enum GenericParamDefKind {
     Type { has_default: bool, synthetic: bool },
     Const { has_default: bool },
 }
-/* AST_META: AST_ID=117 | TYPE=STRUCT | NAME=GenericParamDef | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct GenericParamDef {
@@ -1595,13 +1478,11 @@ pub struct GenericParamDef {
     pub pure_wrt_drop: bool,
     pub kind: GenericParamDefKind,
 }
-/* AST_META: AST_ID=118 | TYPE=STRUCT | NAME=GenericPredicates | COMPLEXITY=2 | LINES=5 */
 
 pub struct GenericPredicates {
     pub parent: Option<TraitDef>,
     pub predicates: Vec<(PredicateKind, Span)>,
 }
-/* AST_META: AST_ID=119 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum PredicateKind {
@@ -1613,7 +1494,6 @@ pub enum PredicateKind {
     Ambiguous,
     AliasRelate(TermKind, TermKind, AliasRelationDirection),
 }
-/* AST_META: AST_ID=120 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum ClauseKind {
@@ -1625,7 +1505,6 @@ pub enum ClauseKind {
     WellFormed(TermKind),
     ConstEvaluatable(TyConst),
 }
-/* AST_META: AST_ID=121 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum ClosureKind {
@@ -1633,35 +1512,30 @@ pub enum ClosureKind {
     FnMut,
     FnOnce,
 }
-/* AST_META: AST_ID=122 | TYPE=STRUCT | NAME=SubtypePredicate | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct SubtypePredicate {
     pub a: Ty,
     pub b: Ty,
 }
-/* AST_META: AST_ID=123 | TYPE=STRUCT | NAME=CoercePredicate | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct CoercePredicate {
     pub a: Ty,
     pub b: Ty,
 }
-/* AST_META: AST_ID=124 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum AliasRelationDirection {
     Equate,
     Subtype,
 }
-/* AST_META: AST_ID=125 | TYPE=STRUCT | NAME=TraitPredicate | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct TraitPredicate {
     pub trait_ref: TraitRef,
     pub polarity: PredicatePolarity,
 }
-/* AST_META: AST_ID=126 | TYPE=STRUCT | NAME=OutlivesPredicate | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct OutlivesPredicate<A, B>(pub A, pub B);
@@ -1674,7 +1548,6 @@ pub struct ProjectionPredicate {
     pub projection_term: AliasTerm,
     pub term: TermKind,
 }
-/* AST_META: AST_ID=127 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum ImplPolarity {
@@ -1682,14 +1555,12 @@ pub enum ImplPolarity {
     Negative,
     Reservation,
 }
-/* AST_META: AST_ID=128 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum PredicatePolarity {
     Positive,
     Negative,
 }
-/* AST_META: AST_ID=129 | TYPE=FUNCTION | NAME=to_val | COMPLEXITY=13 | LINES=13 */
 
 macro_rules! index_impl {
     ($name:ident) => {
@@ -1703,7 +1574,6 @@ macro_rules! index_impl {
         }
     };
 }
-/* AST_META: AST_ID=130 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
 
 index_impl!(TyConstId);
 index_impl!(MirConstId);
@@ -1718,9 +1588,7 @@ index_impl!(Span);
 ///    Variant0 { a: bool, b: i32 },
 ///    Variant1 { c: u8, d: u64 },
 /// }
-/* AST_META: AST_ID=131 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 /// struct Demo2 { e: u8, f: u16, g: u8 }
-/* AST_META: AST_ID=132 | TYPE=STRUCT | NAME=VariantIdx(usize); | COMPLEXITY=2 | LINES=14 */
 /// ```
 /// `a` is in the variant with the `VariantIdx` of `0`,
 /// `c` is in the variant with the `VariantIdx` of `1`, and
@@ -1735,13 +1603,11 @@ crate_def! {
     #[derive(Serialize)]
     pub OpaqueDef;
 }
-/* AST_META: AST_ID=133 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 crate_def! {
     #[derive(Serialize)]
     pub AssocDef;
 }
-/* AST_META: AST_ID=134 | TYPE=STRUCT | NAME=AssocItem | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct AssocItem {
@@ -1749,7 +1615,6 @@ pub struct AssocItem {
     pub kind: AssocKind,
     pub container: AssocContainer,
 }
-/* AST_META: AST_ID=135 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Clone, PartialEq, Debug, Eq, Serialize)]
 pub enum AssocTypeData {
@@ -1759,7 +1624,6 @@ pub enum AssocTypeData {
     /// source.
     Rpitit(ImplTraitInTraitData),
 }
-/* AST_META: AST_ID=136 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=7 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum AssocKind {
@@ -1767,7 +1631,6 @@ pub enum AssocKind {
     Fn { name: Symbol, has_self: bool },
     Type { data: AssocTypeData },
 }
-/* AST_META: AST_ID=137 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub enum AssocContainer {
@@ -1776,14 +1639,12 @@ pub enum AssocContainer {
     TraitImpl(AssocDef),
     Trait,
 }
-/* AST_META: AST_ID=138 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, Serialize)]
 pub enum ImplTraitInTraitData {
     Trait { fn_def_id: FnDef, opaque_def_id: OpaqueDef },
     Impl { fn_def_id: FnDef },
 }
-/* AST_META: AST_ID=139 | TYPE=FUNCTION | NAME=is_impl_trait_in_trait | COMPLEXITY=4 | LINES=6 */
 
 impl AssocItem {
     pub fn is_impl_trait_in_trait(&self) -> bool {

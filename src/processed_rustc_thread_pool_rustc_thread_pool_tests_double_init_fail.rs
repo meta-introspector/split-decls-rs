@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_thread_pool/tests/double_init_fail.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=double_init_fail | COMPLEXITY=3 | LINES=15 */
 #[allow(unused_crate_dependencies)]
 
 use std::error::Error;

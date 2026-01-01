@@ -1,20 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
     MultiSpan, Subdiagnostic, pluralize,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_pattern_analysis::errors::Uncovered;
 use crate::rustc_pattern_analysis::rustc::RustcPatCtxt;
 use crate::rustc_complete::{Ident, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 use crate::fluent_generated as fluent;
 
@@ -28,7 +23,6 @@ pub(crate) struct CallToDeprecatedSafeFnRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) sub: CallToDeprecatedSafeFnRequiresUnsafeSub,
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
 
 #[derive(Subdiagnostic)]
 #[multipart_suggestion(mir_build_suggestion, applicability = "machine-applicable")]
@@ -41,7 +35,6 @@ pub(crate) struct CallToDeprecatedSafeFnRequiresUnsafeSub {
     #[suggestion_part(code = " }}")]
     pub(crate) right: Span,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_call_to_unsafe_fn_requires_unsafe, code = E0133)]
@@ -53,7 +46,6 @@ pub(crate) struct UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_call_to_unsafe_fn_requires_unsafe_nameless, code = E0133)]
@@ -64,7 +56,6 @@ pub(crate) struct UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafeNameless {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_inline_assembly_requires_unsafe, code = E0133)]
@@ -75,7 +66,6 @@ pub(crate) struct UnsafeOpInUnsafeFnUseOfInlineAssemblyRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_initializing_type_with_requires_unsafe, code = E0133)]
@@ -86,7 +76,6 @@ pub(crate) struct UnsafeOpInUnsafeFnInitializingTypeWithRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_initializing_type_with_unsafe_field_requires_unsafe, code = E0133)]
@@ -97,7 +86,6 @@ pub(crate) struct UnsafeOpInUnsafeFnInitializingTypeWithUnsafeFieldRequiresUnsaf
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_mutable_static_requires_unsafe, code = E0133)]
@@ -108,7 +96,6 @@ pub(crate) struct UnsafeOpInUnsafeFnUseOfMutableStaticRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_extern_static_requires_unsafe, code = E0133)]
@@ -119,7 +106,6 @@ pub(crate) struct UnsafeOpInUnsafeFnUseOfExternStaticRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_unsafe_field_requires_unsafe, code = E0133)]
@@ -130,7 +116,6 @@ pub(crate) struct UnsafeOpInUnsafeFnUseOfUnsafeFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_deref_raw_pointer_requires_unsafe, code = E0133)]
@@ -141,7 +126,6 @@ pub(crate) struct UnsafeOpInUnsafeFnDerefOfRawPointerRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_union_field_requires_unsafe, code = E0133)]
@@ -152,7 +136,6 @@ pub(crate) struct UnsafeOpInUnsafeFnAccessToUnionFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(LintDiagnostic)]
 #[diag(
@@ -166,7 +149,6 @@ pub(crate) struct UnsafeOpInUnsafeFnMutationOfLayoutConstrainedFieldRequiresUnsa
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(
@@ -179,7 +161,6 @@ pub(crate) struct UnsafeOpInUnsafeFnBorrowOfLayoutConstrainedFieldRequiresUnsafe
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(LintDiagnostic)]
 #[diag(
@@ -192,7 +173,6 @@ pub(crate) struct UnsafeOpInUnsafeFnUnsafeBinderCastRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unsafe_op_in_unsafe_fn_call_to_fn_with_requires_unsafe, code = E0133)]
@@ -210,7 +190,6 @@ pub(crate) struct UnsafeOpInUnsafeFnCallToFunctionWithRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedLintNote>,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_call_to_unsafe_fn_requires_unsafe, code = E0133)]
@@ -223,7 +202,6 @@ pub(crate) struct CallToUnsafeFunctionRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_call_to_unsafe_fn_requires_unsafe_nameless, code = E0133)]
@@ -235,7 +213,6 @@ pub(crate) struct CallToUnsafeFunctionRequiresUnsafeNameless {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_call_to_unsafe_fn_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -248,7 +225,6 @@ pub(crate) struct CallToUnsafeFunctionRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -263,7 +239,6 @@ pub(crate) struct CallToUnsafeFunctionRequiresUnsafeNamelessUnsafeOpInUnsafeFnAl
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_inline_assembly_requires_unsafe, code = E0133)]
@@ -275,7 +250,6 @@ pub(crate) struct UseOfInlineAssemblyRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_inline_assembly_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -287,7 +261,6 @@ pub(crate) struct UseOfInlineAssemblyRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_initializing_type_with_requires_unsafe, code = E0133)]
@@ -299,7 +272,6 @@ pub(crate) struct InitializingTypeWithRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_initializing_type_with_unsafe_field_requires_unsafe, code = E0133)]
@@ -311,7 +283,6 @@ pub(crate) struct InitializingTypeWithUnsafeFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -326,7 +297,6 @@ pub(crate) struct InitializingTypeWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -341,7 +311,6 @@ pub(crate) struct InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeF
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_mutable_static_requires_unsafe, code = E0133)]
@@ -353,7 +322,6 @@ pub(crate) struct UseOfMutableStaticRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_mutable_static_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -365,7 +333,6 @@ pub(crate) struct UseOfMutableStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_extern_static_requires_unsafe, code = E0133)]
@@ -377,7 +344,6 @@ pub(crate) struct UseOfExternStaticRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_extern_static_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -389,7 +355,6 @@ pub(crate) struct UseOfExternStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_unsafe_field_requires_unsafe, code = E0133)]
@@ -401,7 +366,6 @@ pub(crate) struct UseOfUnsafeFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_unsafe_field_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -413,7 +377,6 @@ pub(crate) struct UseOfUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_deref_raw_pointer_requires_unsafe, code = E0133)]
@@ -425,7 +388,6 @@ pub(crate) struct DerefOfRawPointerRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_deref_raw_pointer_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -437,7 +399,6 @@ pub(crate) struct DerefOfRawPointerRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_union_field_requires_unsafe, code = E0133)]
@@ -449,7 +410,6 @@ pub(crate) struct AccessToUnionFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_union_field_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -461,7 +421,6 @@ pub(crate) struct AccessToUnionFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_mutation_of_layout_constrained_field_requires_unsafe, code = E0133)]
@@ -473,7 +432,6 @@ pub(crate) struct MutationOfLayoutConstrainedFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -488,7 +446,6 @@ pub(crate) struct MutationOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafe
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_borrow_of_layout_constrained_field_requires_unsafe, code = E0133)]
@@ -500,7 +457,6 @@ pub(crate) struct BorrowOfLayoutConstrainedFieldRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -515,7 +471,6 @@ pub(crate) struct BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFn
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_call_to_fn_with_requires_unsafe, code = E0133)]
@@ -534,7 +489,6 @@ pub(crate) struct CallToFunctionWithRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_call_to_fn_with_requires_unsafe_unsafe_op_in_unsafe_fn_allowed, code = E0133)]
@@ -553,7 +507,6 @@ pub(crate) struct CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -567,7 +520,6 @@ pub(crate) struct UnsafeBinderCastRequiresUnsafe {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(
@@ -581,7 +533,6 @@ pub(crate) struct UnsafeBinderCastRequiresUnsafeUnsafeOpInUnsafeFnAllowed {
     #[subdiagnostic]
     pub(crate) unsafe_not_inherited_note: Option<UnsafeNotInheritedNote>,
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Subdiagnostic)]
 #[label(mir_build_unsafe_not_inherited)]
@@ -589,13 +540,11 @@ pub(crate) struct UnsafeNotInheritedNote {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) struct UnsafeNotInheritedLintNote {
     pub(crate) signature_span: Span,
     pub(crate) body_span: Span,
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=11 | LINES=13 */
 
 impl Subdiagnostic for UnsafeNotInheritedLintNote {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -609,7 +558,6 @@ impl Subdiagnostic for UnsafeNotInheritedLintNote {
         );
     }
 }
-/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unused_unsafe)]
@@ -619,7 +567,6 @@ pub(crate) struct UnusedUnsafe {
     #[subdiagnostic]
     pub(crate) enclosing: Option<UnusedUnsafeEnclosing>,
 }
-/* AST_META: AST_ID=53 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=9 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum UnusedUnsafeEnclosing {
@@ -629,7 +576,6 @@ pub(crate) enum UnusedUnsafeEnclosing {
         span: Span,
     },
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 pub(crate) struct NonExhaustivePatternsTypeNotEmpty<'p, 'tcx, 'm> {
     pub(crate) cx: &'m RustcPatCtxt<'p, 'tcx>,
@@ -637,7 +583,6 @@ pub(crate) struct NonExhaustivePatternsTypeNotEmpty<'p, 'tcx, 'm> {
     pub(crate) braces_span: Option<Span>,
     pub(crate) ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=44 | LINES=63 */
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for NonExhaustivePatternsTypeNotEmpty<'_, '_, '_> {
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
@@ -701,7 +646,6 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for NonExhaustivePatternsTypeNo
         diag
     }
 }
-/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[note(mir_build_non_exhaustive_match_all_arms_guarded)]
@@ -716,7 +660,6 @@ pub(crate) struct StaticInPattern {
     #[label(mir_build_static_in_pattern_def)]
     pub(crate) static_span: Span,
 }
-/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_param_in_pattern, code = E0158)]
@@ -727,7 +670,6 @@ pub(crate) struct ConstParamInPattern {
     #[label(mir_build_const_param_in_pattern_def)]
     pub(crate) const_span: Span,
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_non_const_path, code = E0080)]
@@ -736,7 +678,6 @@ pub(crate) struct NonConstPath {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=29 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_unreachable_pattern)]
@@ -766,7 +707,6 @@ pub(crate) struct UnreachablePattern<'tcx> {
     #[suggestion(code = "", applicability = "machine-applicable")]
     pub(crate) suggest_remove: Option<Span>,
 }
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=14 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -781,7 +721,6 @@ pub(crate) struct WantedConstant {
     pub(crate) const_name: String,
     pub(crate) const_path: String,
 }
-/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_pattern_depends_on_generic_parameter, code = E0158)]
@@ -790,7 +729,6 @@ pub(crate) struct ConstPatternDependsOnGenericParameter {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_could_not_eval_const_pattern)]
@@ -799,7 +737,6 @@ pub(crate) struct CouldNotEvalConstPattern {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_lower_range_bound_must_be_less_than_or_equal_to_upper, code = E0030)]
@@ -810,7 +747,6 @@ pub(crate) struct LowerRangeBoundMustBeLessThanOrEqualToUpper {
     #[note(mir_build_teach_note)]
     pub(crate) teach: bool,
 }
-/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_literal_in_range_out_of_bounds)]
@@ -822,7 +758,6 @@ pub(crate) struct LiteralOutOfRange<'tcx> {
     pub(crate) min: i128,
     pub(crate) max: u128,
 }
-/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_lower_range_bound_must_be_less_than_upper, code = E0579)]
@@ -830,7 +765,6 @@ pub(crate) struct LowerRangeBoundMustBeLessThanUpper {
     #[primary_span]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_leading_irrefutable_let_patterns)]
@@ -839,7 +773,6 @@ pub(crate) struct LowerRangeBoundMustBeLessThanUpper {
 pub(crate) struct LeadingIrrefutableLetPatterns {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_trailing_irrefutable_let_patterns)]
@@ -848,7 +781,6 @@ pub(crate) struct LeadingIrrefutableLetPatterns {
 pub(crate) struct TrailingIrrefutableLetPatterns {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_bindings_with_variant_name, code = E0170)]
@@ -858,7 +790,6 @@ pub(crate) struct BindingsWithVariantName {
     pub(crate) ty_path: String,
     pub(crate) name: Ident,
 }
-/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_irrefutable_let_patterns_if_let)]
@@ -867,7 +798,6 @@ pub(crate) struct BindingsWithVariantName {
 pub(crate) struct IrrefutableLetPatternsIfLet {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=70 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_irrefutable_let_patterns_if_let_guard)]
@@ -876,7 +806,6 @@ pub(crate) struct IrrefutableLetPatternsIfLet {
 pub(crate) struct IrrefutableLetPatternsIfLetGuard {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=71 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_irrefutable_let_patterns_let_else)]
@@ -885,7 +814,6 @@ pub(crate) struct IrrefutableLetPatternsIfLetGuard {
 pub(crate) struct IrrefutableLetPatternsLetElse {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=72 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_irrefutable_let_patterns_while_let)]
@@ -894,7 +822,6 @@ pub(crate) struct IrrefutableLetPatternsLetElse {
 pub(crate) struct IrrefutableLetPatternsWhileLet {
     pub(crate) count: usize,
 }
-/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_borrow_of_moved_value)]
@@ -910,7 +837,6 @@ pub(crate) struct BorrowOfMovedValue<'tcx> {
     #[suggestion(code = "ref ", applicability = "machine-applicable")]
     pub(crate) suggest_borrowing: Option<Span>,
 }
-/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_multiple_mut_borrows)]
@@ -920,7 +846,6 @@ pub(crate) struct MultipleMutBorrows {
     #[subdiagnostic]
     pub(crate) occurrences: Vec<Conflict>,
 }
-/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_already_borrowed)]
@@ -930,7 +855,6 @@ pub(crate) struct AlreadyBorrowed {
     #[subdiagnostic]
     pub(crate) occurrences: Vec<Conflict>,
 }
-/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_already_mut_borrowed)]
@@ -940,7 +864,6 @@ pub(crate) struct AlreadyMutBorrowed {
     #[subdiagnostic]
     pub(crate) occurrences: Vec<Conflict>,
 }
-/* AST_META: AST_ID=77 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_moved_while_borrowed)]
@@ -950,7 +873,6 @@ pub(crate) struct MovedWhileBorrowed {
     #[subdiagnostic]
     pub(crate) occurrences: Vec<Conflict>,
 }
-/* AST_META: AST_ID=78 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum Conflict {
@@ -973,7 +895,6 @@ pub(crate) enum Conflict {
         name: Symbol,
     },
 }
-/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_union_pattern)]
@@ -982,7 +903,6 @@ pub(crate) struct UnionPattern {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_type_not_structural)]
@@ -998,7 +918,6 @@ pub(crate) struct TypeNotStructural<'tcx> {
     #[note(mir_build_type_not_structural_more_info)]
     pub(crate) manual_partialeq_impl_note: bool,
 }
-/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_non_partial_eq_match)]
@@ -1009,7 +928,6 @@ pub(crate) struct TypeNotPartialEq<'tcx> {
     pub(crate) span: Span,
     pub(crate) ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_invalid_pattern)]
@@ -1020,7 +938,6 @@ pub(crate) struct InvalidPattern<'tcx> {
     pub(crate) non_sm_ty: Ty<'tcx>,
     pub(crate) prefix: String,
 }
-/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_unsized_pattern)]
@@ -1029,7 +946,6 @@ pub(crate) struct UnsizedPattern<'tcx> {
     pub(crate) span: Span,
     pub(crate) non_sm_ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_nan_pattern)]
@@ -1040,7 +956,6 @@ pub(crate) struct NaNPattern {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_pointer_pattern)]
@@ -1050,7 +965,6 @@ pub(crate) struct PointerPattern {
     #[label]
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_non_empty_never_pattern)]
@@ -1061,7 +975,6 @@ pub(crate) struct NonEmptyNeverPattern<'tcx> {
     pub(crate) span: Span,
     pub(crate) ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=87 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=28 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_pattern_not_covered, code = E0005)]
@@ -1090,7 +1003,6 @@ pub(crate) struct PatternNotCovered<'s, 'tcx> {
     #[subdiagnostic]
     pub(crate) misc_suggestion: Option<MiscPatternSuggestion>,
 }
-/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[note(mir_build_inform_irrefutable)]
@@ -1104,19 +1016,16 @@ pub(crate) struct InterpretedAsConst {
     pub(crate) span: Span,
     pub(crate) variable: String,
 }
-/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct AdtDefinedHere<'tcx> {
     pub(crate) adt_def_span: Span,
     pub(crate) ty: Ty<'tcx>,
     pub(crate) variants: Vec<Variant>,
 }
-/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 pub(crate) struct Variant {
     pub(crate) span: Span,
 }
-/* AST_META: AST_ID=91 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=9 | LINES=13 */
 
 impl<'tcx> Subdiagnostic for AdtDefinedHere<'tcx> {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1130,7 +1039,6 @@ impl<'tcx> Subdiagnostic for AdtDefinedHere<'tcx> {
         diag.span_note(spans, fluent::mir_build_adt_defined_here);
     }
 }
-/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 #[suggestion(
@@ -1144,7 +1052,6 @@ pub(crate) struct InterpretedAsConstSugg {
     pub(crate) span: Span,
     pub(crate) variable: String,
 }
-/* AST_META: AST_ID=93 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=22 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum SuggestLet {
@@ -1167,7 +1074,6 @@ pub(crate) enum SuggestLet {
         count: usize,
     },
 }
-/* AST_META: AST_ID=94 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum MiscPatternSuggestion {
@@ -1181,7 +1087,6 @@ pub(crate) enum MiscPatternSuggestion {
         start_span: Span,
     },
 }
-/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(LintDiagnostic)]
 #[diag(mir_build_rust_2024_incompatible_pat)]
@@ -1192,7 +1097,6 @@ pub(crate) struct Rust2024IncompatiblePat {
     pub(crate) bad_ref_pats: bool,
     pub(crate) is_hard_error: bool,
 }
-/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
 
 pub(crate) struct Rust2024IncompatiblePatSugg {
     /// If true, our suggestion is to elide explicit binding modifiers.
@@ -1204,7 +1108,6 @@ pub(crate) struct Rust2024IncompatiblePatSugg {
     /// Labels for where incompatibility-causing by-ref default binding modes were introduced.
     pub(crate) default_mode_labels: FxIndexMap<Span, ty::Mutability>,
 }
-/* AST_META: AST_ID=97 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=39 | LINES=42 */
 
 impl Subdiagnostic for Rust2024IncompatiblePatSugg {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
@@ -1247,7 +1150,6 @@ impl Subdiagnostic for Rust2024IncompatiblePatSugg {
         }
     }
 }
-/* AST_META: AST_ID=98 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_invalid_update)]
@@ -1257,7 +1159,6 @@ pub(crate) struct LoopMatchInvalidUpdate {
     #[label]
     pub scrutinee: Span,
 }
-/* AST_META: AST_ID=99 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_invalid_match)]
@@ -1266,7 +1167,6 @@ pub(crate) struct LoopMatchInvalidMatch {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=100 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_unsupported_type)]
@@ -1276,7 +1176,6 @@ pub(crate) struct LoopMatchUnsupportedType<'tcx> {
     pub span: Span,
     pub ty: Ty<'tcx>,
 }
-/* AST_META: AST_ID=101 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_bad_statements)]
@@ -1284,7 +1183,6 @@ pub(crate) struct LoopMatchBadStatements {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=102 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_bad_rhs)]
@@ -1292,7 +1190,6 @@ pub(crate) struct LoopMatchBadRhs {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=103 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_missing_assignment)]
@@ -1300,7 +1197,6 @@ pub(crate) struct LoopMatchMissingAssignment {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=104 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_loop_match_arm_with_guard)]
@@ -1308,7 +1204,6 @@ pub(crate) struct LoopMatchArmWithGuard {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=105 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_continue_not_const)]
@@ -1320,7 +1215,6 @@ pub(crate) struct ConstContinueNotMonomorphicConst {
     #[subdiagnostic]
     pub reason: ConstContinueNotMonomorphicConstReason,
 }
-/* AST_META: AST_ID=106 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=21 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum ConstContinueNotMonomorphicConstReason {
@@ -1342,7 +1236,6 @@ pub(crate) enum ConstContinueNotMonomorphicConstReason {
         span: Span,
     },
 }
-/* AST_META: AST_ID=107 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_continue_bad_const)]
@@ -1351,7 +1244,6 @@ pub(crate) struct ConstContinueBadConst {
     #[label]
     pub span: Span,
 }
-/* AST_META: AST_ID=108 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_continue_missing_label_or_value)]
@@ -1359,7 +1251,6 @@ pub(crate) struct ConstContinueMissingLabelOrValue {
     #[primary_span]
     pub span: Span,
 }
-/* AST_META: AST_ID=109 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Diagnostic)]
 #[diag(mir_build_const_continue_unknown_jump_target)]

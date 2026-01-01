@@ -1,21 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/back/archive.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::env;
 use std::error::Error;
 use std::ffi::OsString;
 use std::fs::{self, File};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, BufWriter, Write};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use ar_archive_writer::{
     ArchiveKind, COFFShortExport, MachineTypes, NewArchiveMember, write_archive_to_stream,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 pub use ar_archive_writer::{DEFAULT_OBJECT_READER, ObjectReader};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 use object::read::archive::ArchiveFile;
 use object::read::macho::FatArch;
 use crate::rustc_data_structures::fx::FxIndexSet;
@@ -27,15 +21,12 @@ use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use super::metadata::{create_compressed_metadata_file, search_for_section};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 use crate::common;
 // Re-exporting for rustc_codegen_llvm::back::archive
 pub use crate::errors::{ArchiveBuildFailure, ExtractBundledLibsError, UnknownArchiveKind};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::errors::{
     DlltoolFailImportLibrary, ErrorCallingDllTool, ErrorCreatingImportLibrary, ErrorWritingDEFFile,
 };
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=ImportLibraryItem | COMPLEXITY=10 | LINES=13 */
 
 /// An item to be included in an import library.
 /// This is a slimmed down version of `COFFShortExport` from `ar-archive-writer`.
@@ -49,7 +40,6 @@ pub struct ImportLibraryItem {
     /// True if this is a data export, false if it is a function export.
     pub is_data: bool,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_coff_short_export | COMPLEXITY=5 | LINES=18 */
 
 impl ImportLibraryItem {
     fn into_coff_short_export(self, sess: &Session) -> COFFShortExport {
@@ -68,7 +58,6 @@ impl ImportLibraryItem {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=new_archive_builder | COMPLEXITY=60 | LINES=124 */
 
 pub trait ArchiveBuilderBuilder {
     fn new_archive_builder<'a>(&self, sess: &'a Session) -> Box<dyn ArchiveBuilder + 'a>;
@@ -193,7 +182,6 @@ pub trait ArchiveBuilderBuilder {
         Ok(())
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=create_mingw_dll_import_lib | COMPLEXITY=42 | LINES=88 */
 
 fn create_mingw_dll_import_lib(
     sess: &Session,
@@ -282,7 +270,6 @@ fn create_mingw_dll_import_lib(
         _ => {}
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=find_binutils_dlltool | COMPLEXITY=21 | LINES=36 */
 
 fn find_binutils_dlltool(sess: &Session) -> OsString {
     assert!(sess.target.options.is_like_windows && !sess.target.options.is_like_msvc);
@@ -319,7 +306,6 @@ fn find_binutils_dlltool(sess: &Session) -> OsString {
     // and let the invocation fail with a hopefully useful error message.
     tool_name
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=add_file | COMPLEXITY=2 | LINES=12 */
 
 pub trait ArchiveBuilder {
     fn add_file(&mut self, path: &Path);
@@ -332,7 +318,6 @@ pub trait ArchiveBuilder {
 
     fn build(self: Box<Self>, output: &Path) -> bool;
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=ArArchiveBuilderBuilder; | COMPLEXITY=5 | LINES=8 */
 
 pub struct ArArchiveBuilderBuilder;
 
@@ -341,7 +326,6 @@ impl ArchiveBuilderBuilder for ArArchiveBuilderBuilder {
         Box::new(ArArchiveBuilder::new(sess, &DEFAULT_OBJECT_READER))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=ArArchiveBuilder | COMPLEXITY=4 | LINES=11 */
 
 #[must_use = "must call build() to finish building the archive"]
 pub struct ArArchiveBuilder<'a> {
@@ -353,21 +337,18 @@ pub struct ArArchiveBuilder<'a> {
     // to be at the end of an archive in some cases for linkers to not get confused.
     entries: Vec<(Vec<u8>, ArchiveEntry)>,
 }
-/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Debug)]
 enum ArchiveEntry {
     FromArchive { archive_index: usize, file_range: (u64, u64) },
     File(PathBuf),
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl<'a> ArArchiveBuilder<'a> {
     pub fn new(sess: &'a Session, object_reader: &'static ObjectReader) -> ArArchiveBuilder<'a> {
         ArArchiveBuilder { sess, object_reader, src_archives: vec![], entries: vec![] }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=try_filter_fat_archs | COMPLEXITY=7 | LINES=24 */
 
 fn try_filter_fat_archs(
     archs: &[impl FatArch],
@@ -392,7 +373,6 @@ fn try_filter_fat_archs(
 
     Ok(Some(extracted_path))
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=try_extract_macho_fat_archive | COMPLEXITY=19 | LINES=23 */
 
 pub fn try_extract_macho_fat_archive(
     sess: &Session,
@@ -416,7 +396,6 @@ pub fn try_extract_macho_fat_archive(
         Ok(None)
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=add_archive | COMPLEXITY=39 | LINES=64 */
 
 impl<'a> ArchiveBuilder for ArArchiveBuilder<'a> {
     fn add_archive(
@@ -481,7 +460,6 @@ impl<'a> ArchiveBuilder for ArArchiveBuilder<'a> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=build_inner | COMPLEXITY=41 | LINES=92 */
 
 impl<'a> ArArchiveBuilder<'a> {
     fn build_inner(self, output: &Path) -> io::Result<bool> {
@@ -574,7 +552,6 @@ impl<'a> ArArchiveBuilder<'a> {
         Ok(any_entries)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=io_error_context | COMPLEXITY=4 | LINES=4 */
 
 fn io_error_context(context: &str, err: io::Error) -> io::Error {
     io::Error::new(io::ErrorKind::Other, format!("{context}: {err}"))

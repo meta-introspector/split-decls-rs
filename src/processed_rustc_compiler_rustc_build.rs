@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc/build.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=6 | LINES=12 */
 use std::env;
 
 fn main() {
@@ -12,7 +11,6 @@ fn main() {
         println!("cargo:rerun-if-changed=build.rs");
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=set_windows_exe_options | COMPLEXITY=5 | LINES=15 */
 
 // Add a manifest file to rustc.exe.
 fn set_windows_exe_options() {

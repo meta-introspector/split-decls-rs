@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_abi/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=align_constants | COMPLEXITY=2 | LINES=7 */
 use super::*;
 
 #[test]
@@ -7,7 +6,6 @@ fn align_constants() {
     assert_eq!(Align::ONE, Align::from_bytes(1).unwrap());
     assert_eq!(Align::EIGHT, Align::from_bytes(8).unwrap());
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=wrapping_range_contains_range | COMPLEXITY=40 | LINES=63 */
 
 #[test]
 fn wrapping_range_contains_range() {

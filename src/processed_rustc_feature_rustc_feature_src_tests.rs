@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_feature/src/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=rustc_bootstrap_parsing | COMPLEXITY=6 | LINES=37 */
 use super::UnstableFeatures;
 
 #[test]

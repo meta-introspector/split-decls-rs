@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_query_system/src/dep_graph/serialized.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=47 */
 // The data that we will serialize and deserialize.
 //
 // Notionally, the dep-graph is a sequence of NodeInfo with the dependencies
@@ -47,31 +46,23 @@ use std::marker::PhantomData;
 use std::sync::Arc;
 use std::sync::atomic::Ordering;
 use std::{iter, mem, u64};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::outline;
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::sync::{AtomicU64, Lock, WorkerLocal, broadcast};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_data_structures::unhash::UnhashMap;
 use crate::rustc_index::IndexVec;
 use crate::rustc_serialize::opaque::mem_encoder::MemEncoder;
 use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::graph::{CurrentDepGraph, DepNodeColor, DepNodeColorMap};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use super::query::DepGraphQuery;
 use super::{DepKind, DepNode, DepNodeIndex, Deps};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=SerializedDepNodeIndex | COMPLEXITY=3 | LINES=10 */
 use crate::dep_graph::edges::EdgesVec;
 
 // The maximum value of `SerializedDepNodeIndex` leaves the upper two bits
@@ -82,7 +73,6 @@ crate::rustc_index::newtype_index! {
     #[max = 0x7FFF_FFFF]
     pub struct SerializedDepNodeIndex {}
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=SerializedDepGraph | COMPLEXITY=10 | LINES=36 */
 
 const DEP_NODE_SIZE: usize = size_of::<SerializedDepNodeIndex>();
 /// Amount of padding we need to add to the edge list data so that we can retrieve every
@@ -119,7 +109,6 @@ pub struct SerializedDepGraph {
     /// unique anon dep nodes per session.
     session_count: u64,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=edge_targets_from | COMPLEXITY=12 | LINES=49 */
 
 impl SerializedDepGraph {
     #[inline]
@@ -169,7 +158,6 @@ impl SerializedDepGraph {
         self.session_count
     }
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=EdgeHeader | COMPLEXITY=2 | LINES=10 */
 
 /// A packed representation of an edge's start index and byte width.
 ///
@@ -180,7 +168,6 @@ struct EdgeHeader {
     repr: usize,
     num_edges: u32,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=start | COMPLEXITY=5 | LINES=17 */
 
 impl EdgeHeader {
     #[inline]
@@ -198,13 +185,11 @@ impl EdgeHeader {
         mask(self.bytes_per_index() * 8) as u32
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mask | COMPLEXITY=2 | LINES=5 */
 
 #[inline]
 fn mask(bits: usize) -> usize {
     usize::MAX >> ((size_of::<usize>() * 8) - bits)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=60 | LINES=112 */
 
 impl SerializedDepGraph {
     #[instrument(level = "debug", skip(d, deps))]
@@ -317,7 +302,6 @@ impl SerializedDepGraph {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=SerializedNodeHeader | COMPLEXITY=17 | LINES=17 */
 
 /// A packed representation of all the fixed-size fields in a `NodeInfo`.
 ///
@@ -335,7 +319,6 @@ struct SerializedNodeHeader<D> {
     bytes: [u8; 38],
     _marker: PhantomData<D>,
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=Unpacked | COMPLEXITY=2 | LINES=11 */
 
 // The fields of a `SerializedNodeHeader`, this struct is an implementation detail and exists only
 // to make the implementation of `SerializedNodeHeader` simpler.
@@ -347,7 +330,6 @@ struct Unpacked {
     hash: PackedFingerprint,
     fingerprint: Fingerprint,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=32 | LINES=113 */
 
 // Bit fields, where
 // M: bits used to store the length of a node's edge list
@@ -461,7 +443,6 @@ impl<D: Deps> SerializedNodeHeader<D> {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=NodeInfo | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 struct NodeInfo {
@@ -469,7 +450,6 @@ struct NodeInfo {
     fingerprint: Fingerprint,
     edges: EdgesVec,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=23 | LINES=67 */
 
 impl NodeInfo {
     fn encode<D: Deps>(&self, e: &mut MemEncoder, index: DepNodeIndex) {
@@ -537,14 +517,12 @@ impl NodeInfo {
         edge_count
     }
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=Stat | COMPLEXITY=2 | LINES=6 */
 
 struct Stat {
     kind: DepKind,
     node_counter: u64,
     edge_counter: u64,
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=LocalEncoderState | COMPLEXITY=2 | LINES=11 */
 
 struct LocalEncoderState {
     next_node_index: u32,
@@ -556,7 +534,6 @@ struct LocalEncoderState {
     /// Stores the number of times we've encoded each dep kind.
     kind_stats: Vec<u32>,
 }
-/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=LocalEncoderResult | COMPLEXITY=2 | LINES=9 */
 
 struct LocalEncoderResult {
     node_max: u32,
@@ -566,7 +543,6 @@ struct LocalEncoderResult {
     /// Stores the number of times we've encoded each dep kind.
     kind_stats: Vec<u32>,
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=EncoderState | COMPLEXITY=2 | LINES=9 */
 
 struct EncoderState<D: Deps> {
     next_node_index: AtomicU64,
@@ -576,7 +552,6 @@ struct EncoderState<D: Deps> {
     stats: Option<Lock<FxHashMap<DepKind, Stat>>>,
     marker: PhantomData<D>,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=new | COMPLEXITY=99 | LINES=283 */
 
 impl<D: Deps> EncoderState<D> {
     fn new(encoder: FileEncoder, record_stats: bool, previous: Arc<SerializedDepGraph>) -> Self {
@@ -860,14 +835,12 @@ impl<D: Deps> EncoderState<D> {
         }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) struct GraphEncoder<D: Deps> {
     profiler: SelfProfilerRef,
     status: EncoderState<D>,
     record_graph: Option<Lock<DepGraphQuery>>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=35 | LINES=113 */
 
 impl<D: Deps> GraphEncoder<D> {
     pub(crate) fn new(

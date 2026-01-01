@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/trait_goals.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 // Dealing with trait goals, i.e. `T: Trait<'a, U>`.
 
 use rustc_type_ir::data_structures::IndexSet;
@@ -7,28 +6,22 @@ use rustc_type_ir::fast_reject::DeepRejectCtxt;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::lang_items::SolverTraitLangItem;
 use rustc_type_ir::solve::{CanonicalResponse, SizedTraitKind};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_type_ir::{
     self as ty, Interner, Movability, PredicatePolarity, TraitPredicate, TraitRef,
     TypeVisitableExt as _, TypingMode, Upcast as _, elaborate,
 };
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::delegate::SolverDelegate;
 use crate::solve::assembly::structural_traits::{self, AsyncCallableRelevantTypes};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::solve::assembly::{
     self, AllowInferenceConstraints, AssembleCandidatesFrom, Candidate, FailedCandidateInfo,
 };
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::solve::inspect::ProbeKind;
 use crate::solve::{
     BuiltinImplSource, CandidateSource, Certainty, EvalCtxt, Goal, GoalSource, MaybeCause,
     MergeCandidateInfo, NoSolution, ParamEnvSource, QueryResult, has_only_region_constraints,
 };
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=359 | LINES=827 */
 
 impl<D, I> assembly::GoalKind<D> for TraitPredicate<I>
 where
@@ -856,7 +849,6 @@ where
         })
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=trait_predicate_with_def_id | COMPLEXITY=4 | LINES=19 */
 
 /// Small helper function to change the `def_id` of a trait predicate - this is not normally
 /// something that you want to do, as different traits will require different args and so making
@@ -876,7 +868,6 @@ fn trait_predicate_with_def_id<I: Interner>(
         })
         .upcast(cx)
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=consider_builtin_dyn_upcast_candidates | COMPLEXITY=177 | LINES=424 */
 
 impl<D, I> EvalCtxt<'_, D>
 where
@@ -1301,7 +1292,6 @@ where
         })
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=22 */
 
 /// How we've proven this trait goal.
 ///
@@ -1324,7 +1314,6 @@ pub(super) enum TraitGoalProvenVia {
     ParamEnv,
     AliasBound,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=try_stall_coroutine | COMPLEXITY=116 | LINES=187 */
 
 impl<D, I> EvalCtxt<'_, D>
 where

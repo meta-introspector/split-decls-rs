@@ -1,43 +1,33 @@
 // SRC: ../rust/compiler/rustc_codegen_llvm/src/attributes.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 // Set and unset common attributes on LLVM values.
 use crate::rustc_codegen_ssa::traits::*;
 use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, OptimizeAttr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, PatchableFunctionEntry};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey, PacRet};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_symbol_mangling::mangle_internal_symbol;
 use crate::rustc_target::spec::{FramePointer, SanitizerSet, StackProbeType, StackProtector};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use smallvec::SmallVec;
 
 use crate::context::CodegenCx;
 use crate::errors::SanitizerMemtagRequiresMte;
 use crate::llvm::AttributePlace::Function;
 use crate::llvm::{self, AllocKindFlags, Attribute, AttributeKind, AttributePlace, MemoryEffects};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::value::Value;
 use crate::{attributes, llvm_util};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
 
 pub(crate) fn apply_to_llfn(llfn: &Value, idx: AttributePlace, attrs: &[&Attribute]) {
     if !attrs.is_empty() {
         llvm::AddFunctionAttributes(llfn, idx, attrs);
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
 
 pub(crate) fn apply_to_callsite(callsite: &Value, idx: AttributePlace, attrs: &[&Attribute]) {
     if !attrs.is_empty() {
         llvm::AddCallSiteAttributes(callsite, idx, attrs);
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=33 */
 
 /// Get LLVM attribute for the provided inline heuristic.
 pub(crate) fn inline_attr<'ll, 'tcx>(
@@ -71,7 +61,6 @@ pub(crate) fn inline_attr<'ll, 'tcx>(
         InlineAttr::None => None,
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=patchable_function_entry_attrs | COMPLEXITY=12 | LINES=28 */
 
 #[inline]
 fn patchable_function_entry_attrs<'ll>(
@@ -100,7 +89,6 @@ fn patchable_function_entry_attrs<'ll>(
     }
     attrs
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=40 */
 
 /// Get LLVM sanitize attributes.
 #[inline]
@@ -141,7 +129,6 @@ pub(crate) fn sanitize_attrs<'ll>(
     }
     attrs
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=10 */
 
 /// Tell LLVM to emit or not emit the information necessary to unwind the stack for the function.
 #[inline]
@@ -152,7 +139,6 @@ pub(crate) fn uwtable_attr(llcx: &llvm::Context, use_sync_unwind: Option<bool>) 
     let async_unwind = !use_sync_unwind.unwrap_or(false);
     llvm::CreateUWTableAttr(llcx, async_unwind)
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=17 */
 
 pub(crate) fn frame_pointer_type_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     let mut fp = cx.sess().target.frame_pointer;
@@ -170,7 +156,6 @@ pub(crate) fn frame_pointer_type_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'
     };
     Some(llvm::CreateAttrStringValue(cx.llcx, "frame-pointer", attr_value))
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=function_return_attr | COMPLEXITY=6 | LINES=9 */
 
 fn function_return_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     let function_return_attr = match cx.sess().opts.unstable_opts.function_return {
@@ -180,7 +165,6 @@ fn function_return_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> 
 
     Some(function_return_attr.create_attr(cx.llcx))
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=instrument_function_attr | COMPLEXITY=34 | LINES=52 */
 
 /// Tell LLVM what instrument function to insert.
 #[inline]
@@ -233,7 +217,6 @@ fn instrument_function_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> SmallVec<[&'ll Attr
     }
     attrs
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=nojumptables_attr | COMPLEXITY=5 | LINES=8 */
 
 fn nojumptables_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     if !cx.sess().opts.unstable_opts.no_jump_tables {
@@ -242,7 +225,6 @@ fn nojumptables_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
 
     Some(llvm::CreateAttrStringValue(cx.llcx, "no-jump-tables", "true"))
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=probestack_attr | COMPLEXITY=25 | LINES=39 */
 
 fn probestack_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     // Currently stack probes seem somewhat incompatible with the address
@@ -282,7 +264,6 @@ fn probestack_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     };
     Some(llvm::CreateAttrStringValue(cx.llcx, "probe-stack", attr_value))
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stackprotector_attr | COMPLEXITY=6 | LINES=11 */
 
 fn stackprotector_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     let sspattr = match cx.sess().stack_protector() {
@@ -294,7 +275,6 @@ fn stackprotector_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
 
     Some(sspattr.create_attr(cx.llcx))
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=backchain_attr | COMPLEXITY=9 | LINES=11 */
 
 fn backchain_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     if cx.sess().target.arch != "s390x" {
@@ -306,19 +286,16 @@ fn backchain_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
 
     if found_positive { Some(llvm::CreateAttrString(cx.llcx, "backchain")) } else { None }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn target_cpu_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> &'ll Attribute {
     let target_cpu = llvm_util::target_cpu(cx.tcx.sess);
     llvm::CreateAttrStringValue(cx.llcx, "target-cpu", target_cpu)
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub(crate) fn tune_cpu_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll Attribute> {
     llvm_util::tune_cpu(cx.tcx.sess)
         .map(|tune_cpu| llvm::CreateAttrStringValue(cx.llcx, "tune-cpu", tune_cpu))
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 /// Get the `target-features` LLVM attribute.
 pub(crate) fn target_features_attr<'ll>(
@@ -332,7 +309,6 @@ pub(crate) fn target_features_attr<'ll>(
     (!target_features.is_empty())
         .then(|| llvm::CreateAttrStringValue(cx.llcx, "target-features", &target_features))
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=11 */
 
 /// Get the `NonLazyBind` LLVM attribute,
 /// if the codegen options allow skipping the PLT.
@@ -344,7 +320,6 @@ pub(crate) fn non_lazy_bind_attr<'ll>(cx: &CodegenCx<'ll, '_>) -> Option<&'ll At
         None
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
 
 /// Get the default optimizations attrs for a function.
 #[inline]
@@ -364,12 +339,10 @@ pub(crate) fn default_optimisation_attrs<'ll>(
     }
     attrs
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=create_alloc_family_attr | COMPLEXITY=2 | LINES=4 */
 
 fn create_alloc_family_attr(llcx: &llvm::Context) -> &llvm::Attribute {
     llvm::CreateAttrStringValue(llcx, "alloc-family", "__rust_alloc")
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=119 | LINES=188 */
 
 /// Helper for `FnAbi::apply_attrs_llfn`:
 /// Composite function which sets LLVM attributes for function depending on its AST (`#[attribute]`)
@@ -558,7 +531,6 @@ pub(crate) fn llfn_attrs_from_instance<'ll, 'tcx>(
 
     attributes::apply_to_llfn(llfn, Function, &to_add);
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=wasm_import_module | COMPLEXITY=2 | LINES=4 */
 
 fn wasm_import_module(tcx: TyCtxt<'_>, id: DefId) -> Option<&String> {
     tcx.wasm_import_module_map(id.krate).get(&id)

@@ -1,22 +1,15 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::iter;
 
 use crate::rustc_index::IndexVec;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 use crate::rustc_complete::mir::{Body, Local, UnwindTerminateReason, traversal};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_target::callconv::{FnAbi, PassMode};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=19 */
 
 use crate::base;
 use crate::traits::*;
@@ -24,9 +17,7 @@ use crate::traits::*;
 
 pub use self::block::store_cast;
 use self::debuginfo::{FunctionDebugContext, PerLocalVarDebugInfo};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use self::operand::{OperandRef, OperandValue};
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
 use self::place::PlaceRef;
 
 // Used for tracking the state of generated basic blocks.
@@ -40,7 +31,6 @@ enum CachedLlbb<T> {
     /// Nothing created yet, and nothing should be.
     Skip,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FunctionCx | COMPLEXITY=33 | LINES=79 */
 
 type PerLocalVarDebugInfoIndexVec<'tcx, V> =
     IndexVec<mir::Local, Vec<PerLocalVarDebugInfo<'tcx, V>>>;
@@ -120,7 +110,6 @@ pub struct FunctionCx<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> {
     /// Caller location propagated if this function has `#[track_caller]`.
     caller_location: Option<OperandRef<'tcx, Bx::Value>>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=monomorphize | COMPLEXITY=4 | LINES=14 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     pub fn monomorphize<T>(&self, value: T) -> T
@@ -135,7 +124,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         )
     }
 }
-/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
 
 enum LocalRef<'tcx, V> {
     Place(PlaceRef<'tcx, V>),
@@ -154,7 +142,6 @@ enum LocalRef<'tcx, V> {
     /// Will be a `Self::Operand` once we get to its definition.
     PendingOperand,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new_operand | COMPLEXITY=7 | LINES=13 */
 
 impl<'tcx, V: CodegenObject> LocalRef<'tcx, V> {
     fn new_operand(layout: TyAndLayout<'tcx>) -> LocalRef<'tcx, V> {
@@ -168,7 +155,6 @@ impl<'tcx, V: CodegenObject> LocalRef<'tcx, V> {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=codegen_mir | COMPLEXITY=67 | LINES=150 */
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -319,7 +305,6 @@ pub fn codegen_mir<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
         fx.codegen_block_as_unreachable(bb);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=optimize_use_clone | COMPLEXITY=19 | LINES=55 */
 
 // FIXME: Move this function to mir::transform when post-mono MIR passes land.
 fn optimize_use_clone<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
@@ -375,7 +360,6 @@ fn optimize_use_clone<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
 
     mir
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=arg_local_refs | COMPLEXITY=84 | LINES=182 */
 
 /// Produces, for each argument, a `Value` pointing at the
 /// argument's value. As arguments are places, these are always
@@ -558,7 +542,6 @@ fn arg_local_refs<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
 
     args
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=find_cold_blocks | COMPLEXITY=22 | LINES=47 */
 
 fn find_cold_blocks<'tcx>(
     tcx: TyCtxt<'tcx>,

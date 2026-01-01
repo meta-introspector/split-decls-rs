@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/statement.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, NonDivergingIntrinsic};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::span_bug;
 use tracing::instrument;
 
 use super::{FunctionCx, LocalRef};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=59 | LINES=99 */
 use crate::traits::*;
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {

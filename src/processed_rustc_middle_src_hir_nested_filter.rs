@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/hir/nested_filter.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 use crate::rustc_complete::intravisit::nested_filter::NestedFilter;
 
 use crate::ty::TyCtxt;
@@ -9,7 +8,6 @@ use crate::ty::TyCtxt;
 ///
 /// Notably, possible occurrences of bodies in non-item-like things
 /// include: closures/coroutines, inline `const {}` blocks, and
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=OnlyBodies(()); | COMPLEXITY=4 | LINES=12 */
 /// constant arguments of types, e.g. in `let _: [(); /* HERE */];`.
 ///
 /// **This is the most common choice.** A very common pattern is
@@ -22,7 +20,6 @@ impl<'tcx> NestedFilter<'tcx> for OnlyBodies {
     const INTER: bool = false;
     const INTRA: bool = true;
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=All(()); | COMPLEXITY=4 | LINES=12 */
 
 /// Visits all nested things, including item-likes.
 ///

@@ -1,30 +1,21 @@
 // SRC: ../rust/compiler/rustc_const_eval/src/const_eval/valtrees.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_abi::{BackendRepr, FieldIdx, VariantIdx};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::mir::interpret::{EvalToValTreeResult, GlobalId, ValTreeCreationError};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::layout::{LayoutCx, TyAndLayout};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, instrument, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::VALTREE_MAX_NODES;
 use super::eval_queries::{mk_eval_cx_to_read_const_val, op_to_const};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use super::machine::CompileTimeInterpCx;
 use crate::const_eval::CanAccessMutGlobal;
 use crate::interpret::{
     ImmTy, Immediate, InternKind, MPlaceTy, MemPlaceMeta, MemoryKind, PlaceTy, Projectable, Scalar,
     intern_const_alloc_recursive,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=branches | COMPLEXITY=19 | LINES=36 */
 
 #[instrument(skip(ecx), level = "debug")]
 fn branches<'tcx>(
@@ -61,7 +52,6 @@ fn branches<'tcx>(
 
     Ok(ty::ValTree::from_branches(*ecx.tcx, branches))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=slice_branches | COMPLEXITY=7 | LINES=18 */
 
 #[instrument(skip(ecx), level = "debug")]
 fn slice_branches<'tcx>(
@@ -80,7 +70,6 @@ fn slice_branches<'tcx>(
 
     Ok(ty::ValTree::from_branches(*ecx.tcx, elems))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=const_to_valtree_inner | COMPLEXITY=45 | LINES=111 */
 
 #[instrument(skip(ecx), level = "debug")]
 fn const_to_valtree_inner<'tcx>(
@@ -192,7 +181,6 @@ fn const_to_valtree_inner<'tcx>(
         | ty::UnsafeBinder(_) => Err(ValTreeCreationError::NonSupportedType(ty)),
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=reconstruct_place_meta | COMPLEXITY=13 | LINES=33 */
 
 /// Valtrees don't store the `MemPlaceMeta` that all dynamically sized values have in the interpreter.
 /// This function reconstructs it.
@@ -226,7 +214,6 @@ fn reconstruct_place_meta<'tcx>(
     let num_elems = last_valtree.unwrap_branch().len();
     MemPlaceMeta::Meta(Scalar::from_target_usize(num_elems as u64, &tcx))
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=create_valtree_place | COMPLEXITY=2 | LINES=10 */
 
 #[instrument(skip(ecx), level = "debug", ret)]
 fn create_valtree_place<'tcx>(
@@ -237,7 +224,6 @@ fn create_valtree_place<'tcx>(
     let meta = reconstruct_place_meta(layout, valtree, ecx.tcx.tcx);
     ecx.allocate_dyn(layout, MemoryKind::Stack, meta).unwrap()
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 
 /// Evaluates a constant and turns it into a type-level constant value.
 pub(crate) fn eval_to_valtree<'tcx>(
@@ -265,7 +251,6 @@ pub(crate) fn eval_to_valtree<'tcx>(
     let mut num_nodes = 0;
     const_to_valtree_inner(&ecx, &place, &mut num_nodes)
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=valtree_to_const_value | COMPLEXITY=48 | LINES=96 */
 
 /// Converts a `ValTree` to a `ConstValue`, which is needed after mir
 /// construction has finished.
@@ -362,7 +347,6 @@ pub fn valtree_to_const_value<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=valtree_to_ref | COMPLEXITY=3 | LINES=16 */
 
 /// Put a valtree into memory and return a reference to that.
 fn valtree_to_ref<'tcx>(
@@ -379,7 +363,6 @@ fn valtree_to_ref<'tcx>(
 
     pointee_place.to_ref(&ecx.tcx)
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=valtree_into_mplace | COMPLEXITY=46 | LINES=79 */
 
 #[instrument(skip(ecx), level = "debug")]
 fn valtree_into_mplace<'tcx>(
@@ -459,7 +442,6 @@ fn valtree_into_mplace<'tcx>(
         _ => bug!("shouldn't have created a ValTree for {:?}", ty),
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=dump_place | COMPLEXITY=3 | LINES=4 */
 
 fn dump_place<'tcx>(ecx: &CompileTimeInterpCx<'tcx>, place: &MPlaceTy<'tcx>) {
     trace!("{:?}", ecx.dump_place(&PlaceTy::from(place.clone())));

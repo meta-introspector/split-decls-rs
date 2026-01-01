@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/macro_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 use crate::rustc_complete::DiagArgValue;
 use crate::rustc_complete::attrs::MacroUseArgs;
 
@@ -13,7 +12,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for MacroEscapeParser {
     const ALLOWED_TARGETS: AllowedTargets = MACRO_USE_ALLOWED_TARGETS;
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::MacroEscape;
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=15 */
 
 /// `#[macro_use]` attributes can either:
 /// - Use all macros from a crate, if provided without arguments
@@ -29,7 +27,6 @@ pub(crate) struct MacroUseParser {
     /// If `state` is `UseAll`, stores the span of the first `#[macro_use]` arguments without arguments
     first_span: Option<Span>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=52 | LINES=93 */
 
 const MACRO_USE_TEMPLATE: AttributeTemplate = template!(
     Word, List: &["name1, name2, ..."],
@@ -123,7 +120,6 @@ impl<S: Stage> AttributeParser<S> for MacroUseParser {
         Some(AttributeKind::MacroUse { span: self.first_span?, arguments: self.state })
     }
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 pub(crate) struct AllowInternalUnsafeParser;
 

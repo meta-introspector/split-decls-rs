@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_session/src/parse.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 // Contains `ParseSess` which holds state living beyond what one `Parser` might.
 // It also serves as an input to the parser itself.
 
@@ -9,37 +8,27 @@ use std::sync::Arc;
 use crate::rustc_complete::attr::AttrIdGenerator;
 use crate::rustc_complete::node_id::NodeId;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::sync::{AppendOnlyVec, Lock};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::emitter::{FatalOnlyEmitter, HumanEmitter, stderr_destination};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::translation::Translator;
 use crate::rustc_complete::{
     BufferedEarlyLint, ColorConfig, DecorateDiagCompat, Diag, DiagCtxt, DiagCtxtHandle,
     DiagMessage, EmissionGuarantee, MultiSpan, StashKey,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{GateIssue, UnstableFeatures, find_feature_issue};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::edition::Edition;
 use crate::rustc_complete::hygiene::ExpnId;
 use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::Session;
 use crate::config::{Cfg, CheckCfg};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::errors::{
     CliFeatureDiagnosticHelp, FeatureDiagnosticForIssue, FeatureDiagnosticHelp,
     FeatureDiagnosticSuggestion, FeatureGateError, SuggestUpgradeCompiler,
 };
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::lint::builtin::UNSTABLE_SYNTAX_PRE_EXPANSION;
 use crate::lint::{Lint, LintId};
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=GatedSpans | COMPLEXITY=4 | LINES=7 */
 
 /// Collected spans during parsing for places where a certain feature was
 /// used and should be feature gated accordingly in `check_crate`.
@@ -47,7 +36,6 @@ use crate::lint::{Lint, LintId};
 pub struct GatedSpans {
     pub spans: Lock<FxHashMap<Symbol, Vec<Span>>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=gate | COMPLEXITY=12 | LINES=29 */
 
 impl GatedSpans {
     /// Feature gate the given `span` under the given `feature`
@@ -77,14 +65,12 @@ impl GatedSpans {
         *inner = spans;
     }
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=SymbolGallery | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Default)]
 pub struct SymbolGallery {
     /// All symbols occurred and their first occurrence span.
     pub symbols: Lock<FxIndexMap<Symbol, Span>>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=insert | COMPLEXITY=3 | LINES=8 */
 
 impl SymbolGallery {
     /// Insert a symbol and its span into symbol gallery.
@@ -93,7 +79,6 @@ impl SymbolGallery {
         self.symbols.lock().entry(symbol).or_insert(span);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=feature_err | COMPLEXITY=5 | LINES=13 */
 
 // todo: this function now accepts `Session` instead of `ParseSess` and should be relocated
 /// Construct a diagnostic for a language feature error due to the given `span`.
@@ -107,7 +92,6 @@ pub fn feature_err(
 ) -> Diag<'_> {
     feature_err_issue(sess, feature, span, GateIssue::Language, explain)
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=feature_err_issue | COMPLEXITY=15 | LINES=26 */
 
 /// Construct a diagnostic for a feature gate error.
 ///
@@ -134,7 +118,6 @@ pub fn feature_err_issue(
     add_feature_diagnostics_for_issue(&mut err, sess, feature, issue, false, None);
     err
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=feature_warn | COMPLEXITY=4 | LINES=8 */
 
 /// Construct a future incompatibility diagnostic for a feature gate.
 ///
@@ -143,7 +126,6 @@ pub fn feature_err_issue(
 pub fn feature_warn(sess: &Session, feature: Symbol, span: Span, explain: &'static str) {
     feature_warn_issue(sess, feature, span, GateIssue::Language, explain);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=feature_warn_issue | COMPLEXITY=11 | LINES=30 */
 
 /// Construct a future incompatibility diagnostic for a feature gate.
 ///
@@ -174,7 +156,6 @@ pub fn feature_warn_issue(
     // A later feature_err call can steal and cancel this warning.
     err.stash(span, StashKey::EarlySyntaxWarning);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=add_feature_diagnostics | COMPLEXITY=4 | LINES=10 */
 
 /// Adds the diagnostics for a feature to an existing error.
 /// Must be a language feature!
@@ -185,7 +166,6 @@ pub fn add_feature_diagnostics<G: EmissionGuarantee>(
 ) {
     add_feature_diagnostics_for_issue(err, sess, feature, GateIssue::Language, false, None);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=add_feature_diagnostics_for_issue | COMPLEXITY=37 | LINES=39 */
 
 /// Adds the diagnostics for a feature to an existing error.
 ///
@@ -225,7 +205,6 @@ pub fn add_feature_diagnostics_for_issue<G: EmissionGuarantee>(
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=feature_err_unstable_feature_bound | COMPLEXITY=37 | LINES=40 */
 
 /// This is only used by unstable_feature_bound as it does not have issue number information for now.
 /// This is basically the same as `feature_err_issue`
@@ -266,7 +245,6 @@ pub fn feature_err_unstable_feature_bound(
     }
     err
 }
-/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=ParseSess | COMPLEXITY=5 | LINES=35 */
 
 /// Info about a parsing session.
 pub struct ParseSess {
@@ -302,7 +280,6 @@ pub struct ParseSess {
     /// Used to generate new `AttrId`s. Every `AttrId` is unique.
     pub attr_id_generator: AttrIdGenerator,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=new | COMPLEXITY=24 | LINES=99 */
 
 impl ParseSess {
     /// Used for testing.

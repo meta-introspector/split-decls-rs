@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/values.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 use std::collections::VecDeque;
 use std::fmt::Write;
 use std::ops::ControlFlow;
@@ -7,21 +6,16 @@ use std::ops::ControlFlow;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{Applicability, MultiSpan, pluralize, struct_span_code_err};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_hir as hir;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_query_system::Value;
 use rustc_query_system::query::{CycleError, report_cycle};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::{ErrorGuaranteed, Span};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::dep_graph::dep_kinds;
 use crate::query::plumbing::CyclePlaceholder;
 use crate::ty::{self, Representability, Ty, TyCtxt};
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=10 | LINES=8 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for Ty<'_> {
     fn from_cycle_error(tcx: TyCtxt<'tcx>, _: &CycleError, guar: ErrorGuaranteed) -> Self {
@@ -30,14 +24,12 @@ impl<'tcx> Value<TyCtxt<'tcx>> for Ty<'_> {
         unsafe { std::mem::transmute::<Ty<'tcx>, Ty<'_>>(Ty::new_error(tcx, guar)) }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for Result<ty::EarlyBinder<'_, Ty<'_>>, CyclePlaceholder> {
     fn from_cycle_error(_tcx: TyCtxt<'tcx>, _: &CycleError, guar: ErrorGuaranteed) -> Self {
         Err(CyclePlaceholder(guar))
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=10 | LINES=12 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for ty::SymbolName<'_> {
     fn from_cycle_error(tcx: TyCtxt<'tcx>, _: &CycleError, _guar: ErrorGuaranteed) -> Self {
@@ -50,7 +42,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for ty::SymbolName<'_> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=16 | LINES=34 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for ty::Binder<'_, ty::FnSig<'_>> {
     fn from_cycle_error(
@@ -85,7 +76,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for ty::Binder<'_, ty::FnSig<'_>> {
         unsafe { std::mem::transmute::<ty::PolyFnSig<'tcx>, ty::Binder<'_, ty::FnSig<'_>>>(fn_sig) }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=23 | LINES=36 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for Representability {
     fn from_cycle_error(
@@ -122,7 +112,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for Representability {
         Representability::Infinite(guar)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for ty::EarlyBinder<'_, Ty<'_>> {
     fn from_cycle_error(
@@ -133,7 +122,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for ty::EarlyBinder<'_, Ty<'_>> {
         ty::EarlyBinder::bind(Ty::from_cycle_error(tcx, cycle_error, guar))
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for ty::EarlyBinder<'_, ty::Binder<'_, ty::FnSig<'_>>> {
     fn from_cycle_error(
@@ -144,7 +132,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for ty::EarlyBinder<'_, ty::Binder<'_, ty::FnSig<
         ty::EarlyBinder::bind(ty::Binder::from_cycle_error(tcx, cycle_error, guar))
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=12 | LINES=29 */
 
 impl<'tcx> Value<TyCtxt<'tcx>> for &[ty::Variance] {
     fn from_cycle_error(
@@ -174,7 +161,6 @@ impl<'tcx> Value<TyCtxt<'tcx>> for &[ty::Variance] {
         )
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=search_for_cycle_permutation | COMPLEXITY=11 | LINES=19 */
 
 // Take a cycle of `Q` and try `try_cycle` on every permutation, falling back to `otherwise`.
 fn search_for_cycle_permutation<Q, T>(
@@ -194,7 +180,6 @@ fn search_for_cycle_permutation<Q, T>(
 
     otherwise()
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=52 | LINES=91 */
 
 impl<'tcx, T> Value<TyCtxt<'tcx>> for Result<T, &'_ ty::layout::LayoutError<'_>> {
     fn from_cycle_error(
@@ -286,7 +271,6 @@ impl<'tcx, T> Value<TyCtxt<'tcx>> for Result<T, &'_ ty::layout::LayoutError<'_>>
         Err(Box::leak(Box::new(ty::layout::LayoutError::Cycle(guar))))
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=recursive_type_error | COMPLEXITY=38 | LINES=85 */
 
 // item_and_field_ids should form a cycle where each field contains the
 // type in the next element in the list
@@ -372,7 +356,6 @@ pub fn recursive_type_error(
     )
     .emit()
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=find_item_ty_spans | COMPLEXITY=28 | LINES=46 */
 
 fn find_item_ty_spans(
     tcx: TyCtxt<'_>,

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/visit.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
@@ -8,7 +7,6 @@ use rustc_type_ir::TypeFoldable;
 use crate::ty::{
     self, Binder, Ty, TyCtxt, TypeFlags, TypeSuperVisitable, TypeVisitable, TypeVisitor,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=for_each_free_region | COMPLEXITY=59 | LINES=138 */
 
 ///////////////////////////////////////////////////////////////////////////
 // Region folder
@@ -147,7 +145,6 @@ impl<'tcx> TyCtxt<'tcx> {
         collector.regions
     }
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=LateBoundRegionsCollector | COMPLEXITY=9 | LINES=16 */
 
 /// Collects all the late-bound regions at the innermost binding level
 /// into a hash set.
@@ -164,14 +161,12 @@ struct LateBoundRegionsCollector {
     /// so they are not considered *constrained*.
     just_constrained: bool,
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
 
 impl LateBoundRegionsCollector {
     fn new(just_constrained: bool) -> Self {
         Self { current_index: ty::INNERMOST, regions: Default::default(), just_constrained }
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=38 | LINES=46 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for LateBoundRegionsCollector {
     fn visit_binder<T: TypeVisitable<TyCtxt<'tcx>>>(&mut self, t: &Binder<'tcx, T>) {

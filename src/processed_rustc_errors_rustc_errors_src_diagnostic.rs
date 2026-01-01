@@ -1,27 +1,19 @@
 // SRC: ../rust/compiler/rustc_errors/src/diagnostic.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::borrow::Cow;
 use std::fmt::{self, Debug};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::marker::PhantomData;
 use std::ops::{Deref, DerefMut};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::panic;
 use std::path::PathBuf;
 use std::thread::panicking;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_error_messages::{DiagArgName, DiagArgValue, IntoDiagArg};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_lint_defs::{Applicability, LintExpectationId};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Decodable, Encodable};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::source_map::Spanned;
 use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use tracing::debug;
 
 use crate::snippet::Style;
@@ -30,7 +22,6 @@ use crate::{
     MultiSpan, StashKey, SubdiagMessage, Substitution, SubstitutionPart, SuggestionStyle,
     Suggestions,
 };
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_producing_guarantee | COMPLEXITY=5 | LINES=16 */
 
 pub type DiagArgMap = FxIndexMap<DiagArgName, DiagArgValue>;
 
@@ -47,21 +38,18 @@ pub trait EmissionGuarantee: Sized {
     #[track_caller]
     fn emit_producing_guarantee(diag: Diag<'_, Self>) -> Self::EmitResult;
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=emit_producing_guarantee | COMPLEXITY=5 | LINES=6 */
 
 impl EmissionGuarantee for ErrorGuaranteed {
     fn emit_producing_guarantee(diag: Diag<'_, Self>) -> Self::EmitResult {
         diag.emit_producing_error_guaranteed()
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=emit_producing_guarantee | COMPLEXITY=5 | LINES=6 */
 
 impl EmissionGuarantee for () {
     fn emit_producing_guarantee(diag: Diag<'_, Self>) -> Self::EmitResult {
         diag.emit_producing_nothing();
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=BugAbort; | COMPLEXITY=5 | LINES=14 */
 
 /// Marker type which enables implementation of `create_bug` and `emit_bug` functions for
 /// bug diagnostics.
@@ -76,7 +64,6 @@ impl EmissionGuarantee for BugAbort {
         panic::panic_any(ExplicitBug);
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=FatalAbort; | COMPLEXITY=5 | LINES=14 */
 
 /// Marker type which enables implementation of `create_fatal` and `emit_fatal` functions for
 /// fatal diagnostics.
@@ -91,7 +78,6 @@ impl EmissionGuarantee for FatalAbort {
         crate::FatalError.raise()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=emit_producing_guarantee | COMPLEXITY=5 | LINES=7 */
 
 impl EmissionGuarantee for crate::rustc_span::fatal_error::FatalError {
     fn emit_producing_guarantee(diag: Diag<'_, Self>) -> Self::EmitResult {
@@ -99,7 +85,6 @@ impl EmissionGuarantee for crate::rustc_span::fatal_error::FatalError {
         crate::rustc_span::fatal_error::FatalError
     }
 }
-/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 
 /// Trait implemented by error types. This is rarely implemented manually. Instead, use
 /// `#[derive(Diagnostic)]` -- see [rustc_macros::Diagnostic].
@@ -108,14 +93,11 @@ impl EmissionGuarantee for crate::rustc_span::fatal_error::FatalError {
 /// guarantee, i.e.:
 /// ```ignore (fragment)
 /// impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for Foo { ... }
-/* AST_META: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 /// ```
 /// rather than being specific:
 /// ```ignore (fragment)
 /// impl<'a> Diagnostic<'a> for Bar { ... }  // the default type param is `ErrorGuaranteed`
-/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 /// impl<'a> Diagnostic<'a, ()> for Baz { ... }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=9 | LINES=15 */
 /// ```
 /// There are two reasons for this.
 /// - A diagnostic like `Foo` *could* be emitted at any level -- `level` is
@@ -131,7 +113,6 @@ pub trait Diagnostic<'a, G: EmissionGuarantee = ErrorGuaranteed> {
     #[must_use]
     fn into_diag(self, dcx: DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G>;
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=5 | LINES=10 */
 
 impl<'a, T, G> Diagnostic<'a, G> for Spanned<T>
 where
@@ -142,7 +123,6 @@ where
         self.node.into_diag(dcx, level).with_span(self.span)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=2 | LINES=11 */
 
 /// Trait implemented by error types. This should not be implemented manually. Instead, use
 /// `#[derive(Subdiagnostic)]` -- see [rustc_macros::Subdiagnostic].
@@ -154,7 +134,6 @@ where
     /// Add a subdiagnostic to an existing diagnostic.
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=2 | LINES=8 */
 
 /// Trait implemented by lint types. This should not be implemented manually. Instead, use
 /// `#[derive(LintDiagnostic)]` -- see [rustc_macros::LintDiagnostic].
@@ -163,19 +142,16 @@ pub trait LintDiagnostic<'a, G: EmissionGuarantee> {
     /// Decorate a lint with the information from this type.
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=decorate_lint_box | COMPLEXITY=2 | LINES=4 */
 
 pub trait LintDiagnosticBox<'a, G: EmissionGuarantee> {
     fn decorate_lint_box<'b>(self: Box<Self>, diag: &'b mut Diag<'a, G>);
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=decorate_lint_box | COMPLEXITY=5 | LINES=6 */
 
 impl<'a, G: EmissionGuarantee, D: LintDiagnostic<'a, G>> LintDiagnosticBox<'a, G> for D {
     fn decorate_lint_box<'b>(self: Box<Self>, diag: &'b mut Diag<'a, G>) {
         self.decorate_lint(diag);
     }
 }
-/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, Encodable, Decodable)]
 pub(crate) struct DiagLocation {
@@ -183,7 +159,6 @@ pub(crate) struct DiagLocation {
     line: u32,
     col: u32,
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=caller | COMPLEXITY=4 | LINES=8 */
 
 impl DiagLocation {
     #[track_caller]
@@ -192,14 +167,12 @@ impl DiagLocation {
         DiagLocation { file: loc.file().into(), line: loc.line(), col: loc.column() }
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=8 | LINES=6 */
 
 impl fmt::Display for DiagLocation {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}:{}:{}", self.file, self.line, self.col)
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=IsLint | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Encodable, Decodable)]
 pub struct IsLint {
@@ -208,7 +181,6 @@ pub struct IsLint {
     /// Indicates whether this lint should show up in cargo's future breakage report.
     has_future_breakage: bool,
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=DiagStyledString(pub | COMPLEXITY=14 | LINES=33 */
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct DiagStyledString(pub Vec<StringPart>);
@@ -242,14 +214,12 @@ impl DiagStyledString {
         self.0.iter().map(|x| x.content.as_str()).collect::<String>()
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=StringPart | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct StringPart {
     content: String,
     style: Style,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=normal | COMPLEXITY=6 | LINES=10 */
 
 impl StringPart {
     pub fn normal<S: Into<String>>(content: S) -> StringPart {
@@ -260,7 +230,6 @@ impl StringPart {
         StringPart { content: content.into(), style: Style::Highlight }
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=DiagInner | COMPLEXITY=10 | LINES=35 */
 
 /// The main part of a diagnostic. Note that `Diag`, which wraps this type, is
 /// used for most operations, and should be used instead whenever possible.
@@ -296,7 +265,6 @@ pub struct DiagInner {
     /// we print where in rustc this error was emitted.
     pub(crate) emitted_at: DiagLocation,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=new | COMPLEXITY=41 | LINES=149 */
 
 impl DiagInner {
     #[track_caller]
@@ -446,7 +414,6 @@ impl DiagInner {
         )
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=9 */
 
 impl Hash for DiagInner {
     fn hash<H>(&self, state: &mut H)
@@ -456,14 +423,12 @@ impl Hash for DiagInner {
         self.keys().hash(state);
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=6 */
 
 impl PartialEq for DiagInner {
     fn eq(&self, other: &Self) -> bool {
         self.keys() == other.keys()
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=Subdiag | COMPLEXITY=2 | LINES=9 */
 
 /// A "sub"-diagnostic attached to a parent diagnostic.
 /// For example, a note attached to an error.
@@ -473,7 +438,6 @@ pub struct Subdiag {
     pub messages: Vec<(DiagMessage, Style)>,
     pub span: MultiSpan,
 }
-/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=Diag | COMPLEXITY=10 | LINES=30 */
 
 /// Used for emitting structured error messages and other diagnostic information.
 /// Wraps a `DiagInner`, adding some useful things.
@@ -504,12 +468,10 @@ pub struct Diag<'a, G: EmissionGuarantee = ErrorGuaranteed> {
 
     _marker: PhantomData<G>,
 }
-/* AST_META: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
 
 // Cloning a `Diag` is a recipe for a diagnostic being emitted twice, which
 // would be bad.
 impl<G> !Clone for Diag<'_, G> {}
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=10 */
 
 crate::rustc_data_structures::static_assert_size!(Diag<'_, ()>, 3 * size_of::<usize>());
 
@@ -520,21 +482,18 @@ impl<G: EmissionGuarantee> Deref for Diag<'_, G> {
         self.diag.as_ref().unwrap()
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<G: EmissionGuarantee> DerefMut for Diag<'_, G> {
     fn deref_mut(&mut self) -> &mut DiagInner {
         self.diag.as_mut().unwrap()
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
 
 impl<G: EmissionGuarantee> Debug for Diag<'_, G> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.diag.fmt(f)
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=$f:ident | COMPLEXITY=15 | LINES=43 */
 
 /// `Diag` impls many `&mut self -> &mut Self` methods. Each one modifies an
 /// existing diagnostic, either in a standalone fashion, e.g.
@@ -578,7 +537,6 @@ macro_rules! with_fn {
         }
     };
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=new | COMPLEXITY=286 | LINES=916 */
 
 impl<'a, G: EmissionGuarantee> Diag<'a, G> {
     #[rustc_lint_diagnostics]
@@ -1495,7 +1453,6 @@ impl<'a, G: EmissionGuarantee> Diag<'a, G> {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=14 | LINES=18 */
 
 /// Destructor bomb: every `Diag` must be consumed (emitted, cancelled, etc.)
 /// or we emit a bug.
@@ -1514,7 +1471,6 @@ impl<G: EmissionGuarantee> Drop for Diag<'_, G> {
         }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
 
 #[macro_export]
 macro_rules! struct_span_code_err {

@@ -1,20 +1,14 @@
 // SRC: ../rust/compiler/rustc_borrowck/src/region_infer/values.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt::Debug;
 use std::rc::Rc;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_index::Idx;
 use crate::rustc_index::bit_set::SparseBitMatrix;
 use crate::rustc_index::interval::{IntervalSet, SparseIntervalMatrix};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{BasicBlock, Location};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, RegionVid};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_mir_dataflow::points::{DenseLocationMap, PointIndex};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
 use tracing::debug;
 
 use crate::BorrowIndex;
@@ -25,7 +19,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "PlaceholderIndex({})"]
     pub(crate) struct PlaceholderIndex {}
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 /// An individual element in a region value -- the value of a
 /// particular region variable consists of a set of these elements.
@@ -42,7 +35,6 @@ pub(crate) enum RegionElement {
     /// type).
     PlaceholderRegion(ty::PlaceholderRegion),
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
 
 /// Records the CFG locations where each region is live. When we initially compute liveness, we use
 /// an interval matrix storing liveness ranges for each region-vid.
@@ -64,7 +56,6 @@ pub(crate) struct LivenessValues {
     /// When using `-Zpolonius=next`, the set of loans that are live at a given point in the CFG.
     live_loans: Option<LiveLoans>,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=live_points | COMPLEXITY=61 | LINES=135 */
 
 impl LivenessValues {
     /// Create an empty map of regions to locations where they're live.
@@ -200,7 +191,6 @@ impl LivenessValues {
             .contains(point, loan_idx)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// Maps from `ty::PlaceholderRegion` values that are used in the rest of
 /// rustc to the internal `PlaceholderIndex` values that are used in
@@ -210,7 +200,6 @@ impl LivenessValues {
 pub(crate) struct PlaceholderIndices {
     indices: FxIndexSet<ty::PlaceholderRegion>,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
 
 impl PlaceholderIndices {
     /// Returns the `PlaceholderIndex` for the inserted `PlaceholderRegion`
@@ -234,7 +223,6 @@ impl PlaceholderIndices {
         self.indices.len()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 /// Stores the full values for a set of regions (in contrast to
 /// `LivenessValues`, which only stores those points in the where a
@@ -249,7 +237,6 @@ impl PlaceholderIndices {
 ///    let y: &'0 u32 = x; // let's call this `'0`
 ///    y
 /// }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=15 */
 /// ```
 ///
 /// Here, the variable `'0` would contain the free region `'a`,
@@ -265,7 +252,6 @@ pub(crate) struct RegionValues<N: Idx> {
     /// in `for<'a> fn(&'a u32)`.
     placeholders: SparseBitMatrix<N, PlaceholderIndex>,
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=134 */
 
 impl<N: Idx> RegionValues<N> {
     /// Creates a new set of "region values" that tracks causal information.
@@ -400,14 +386,12 @@ impl<N: Idx> RegionValues<N> {
         pretty_print_region_elements(self.elements_contained_in(r))
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=add_to_row | COMPLEXITY=2 | LINES=6 */
 
 pub(crate) trait ToElementIndex: Debug + Copy {
     fn add_to_row<N: Idx>(self, values: &mut RegionValues<N>, row: N) -> bool;
 
     fn contained_in_row<N: Idx>(self, values: &RegionValues<N>, row: N) -> bool;
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=add_to_row | COMPLEXITY=6 | LINES=12 */
 
 impl ToElementIndex for Location {
     fn add_to_row<N: Idx>(self, values: &mut RegionValues<N>, row: N) -> bool {
@@ -420,7 +404,6 @@ impl ToElementIndex for Location {
         values.points.contains(row, index)
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=add_to_row | COMPLEXITY=6 | LINES=10 */
 
 impl ToElementIndex for RegionVid {
     fn add_to_row<N: Idx>(self, values: &mut RegionValues<N>, row: N) -> bool {
@@ -431,7 +414,6 @@ impl ToElementIndex for RegionVid {
         values.free_regions.contains(row, self)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=add_to_row | COMPLEXITY=6 | LINES=12 */
 
 impl ToElementIndex for ty::PlaceholderRegion {
     fn add_to_row<N: Idx>(self, values: &mut RegionValues<N>, row: N) -> bool {
@@ -444,7 +426,6 @@ impl ToElementIndex for ty::PlaceholderRegion {
         values.placeholders.contains(row, index)
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
 
 /// For debugging purposes, returns a pretty-printed string of the given points.
 pub(crate) fn pretty_print_points(
@@ -459,7 +440,6 @@ pub(crate) fn pretty_print_points(
             .map(RegionElement::Location),
     )
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=pretty_print_region_elements | COMPLEXITY=47 | LINES=81 */
 
 /// For debugging purposes, returns a pretty-printed string of the given region elements.
 fn pretty_print_region_elements(elements: impl IntoIterator<Item = RegionElement>) -> String {

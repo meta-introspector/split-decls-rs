@@ -1,16 +1,13 @@
 // SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/direction.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use std::ops::RangeInclusive;
 
 use crate::rustc_complete::bug;
 use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use super::visitor::ResultsVisitor;
 use super::{Analysis, Effect, EffectIndex};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=apply_effects_in_block | COMPLEXITY=6 | LINES=41 */
 
 pub trait Direction {
     const IS_FORWARD: bool;
@@ -52,7 +49,6 @@ pub trait Direction {
     ) where
         A: Analysis<'tcx>;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=Backward; | COMPLEXITY=86 | LINES=186 */
 
 /// Dataflow that runs from the exit of a block (terminator), to its entry (the first statement).
 pub struct Backward;
@@ -239,7 +235,6 @@ impl Direction for Backward {
         vis.visit_block_start(state);
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=Forward; | COMPLEXITY=91 | LINES=180 */
 
 /// Dataflow that runs from the entry of a block (the first statement), to its exit (terminator).
 pub struct Forward;

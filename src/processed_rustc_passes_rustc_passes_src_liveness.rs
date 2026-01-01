@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_passes/src/liveness.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=28 | LINES=93 */
 // A classic liveness analysis based on dataflow over the AST. Computes,
 // for each local variable in a function, whether that variable is live
 // at a given point. Program execution points are identified by their
@@ -93,21 +92,16 @@ use crate::rustc_complete::attrs::AttributeKind;
 use crate::rustc_complete::def::*;
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_complete::intravisit::{self, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Expr, HirId, HirIdMap, HirIdSet, find_attr};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_index::IndexVec;
 use crate::rustc_complete::query::Providers;
 use crate::rustc_complete::span_bug;
 use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use crate::rustc_complete::ty::{self, RootVariableMinCaptureList, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::lint;
 use crate::rustc_complete::edit_distance::find_best_match_for_name;
 use crate::rustc_complete::{BytePos, Span, Symbol};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Variable | COMPLEXITY=4 | LINES=11 */
 
 use self::LiveNodeKind::*;
 use self::VarKind::*;
@@ -118,13 +112,11 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "v({})"]
     pub struct Variable {}
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LiveNode | COMPLEXITY=4 | LINES=5 */
 
 crate::rustc_index::newtype_index! {
     #[debug_format = "ln({})"]
     pub struct LiveNode {}
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 enum LiveNodeKind {
@@ -134,7 +126,6 @@ enum LiveNodeKind {
     ClosureNode,
     ExitNode,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=live_node_kind_to_string | COMPLEXITY=9 | LINES=11 */
 
 fn live_node_kind_to_string(lnk: LiveNodeKind, tcx: TyCtxt<'_>) -> String {
     let sm = tcx.sess.source_map();
@@ -146,7 +137,6 @@ fn live_node_kind_to_string(lnk: LiveNodeKind, tcx: TyCtxt<'_>) -> String {
         ExitNode => "Exit node".to_owned(),
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_liveness | COMPLEXITY=23 | LINES=40 */
 
 fn check_liveness(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     // Don't run unused pass for #[derive()]
@@ -187,12 +177,10 @@ fn check_liveness(tcx: TyCtxt<'_>, def_id: LocalDefId) {
     lsets.warn_about_unused_upvars(entry_ln);
     lsets.warn_about_unused_args(&body, entry_ln);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4 */
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers { check_liveness, ..*providers };
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=CaptureInfo | COMPLEXITY=10 | LINES=27 */
 
 // ______________________________________________________________________
 // Creating ir_maps
@@ -220,7 +208,6 @@ struct CaptureInfo {
     ln: LiveNode,
     var_hid: HirId,
 }
-/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=LocalInfo | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug)]
 struct LocalInfo {
@@ -228,7 +215,6 @@ struct LocalInfo {
     name: Symbol,
     is_shorthand: bool,
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Copy, Clone, Debug)]
 enum VarKind {
@@ -236,12 +222,10 @@ enum VarKind {
     Local(LocalInfo),
     Upvar(HirId, Symbol),
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=CollectLitsVisitor | COMPLEXITY=2 | LINES=4 */
 
 struct CollectLitsVisitor<'tcx> {
     lit_exprs: Vec<&'tcx hir::Expr<'tcx>>,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=visit_expr | COMPLEXITY=8 | LINES=9 */
 
 impl<'tcx> Visitor<'tcx> for CollectLitsVisitor<'tcx> {
     fn visit_expr(&mut self, expr: &'tcx Expr<'tcx>) {
@@ -251,7 +235,6 @@ impl<'tcx> Visitor<'tcx> for CollectLitsVisitor<'tcx> {
         intravisit::walk_expr(self, expr);
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=IrMaps | COMPLEXITY=2 | LINES=9 */
 
 struct IrMaps<'tcx> {
     tcx: TyCtxt<'tcx>,
@@ -261,7 +244,6 @@ struct IrMaps<'tcx> {
     var_kinds: IndexVec<Variable, VarKind>,
     lnks: IndexVec<LiveNode, LiveNodeKind>,
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=new | COMPLEXITY=54 | LINES=96 */
 
 impl<'tcx> IrMaps<'tcx> {
     fn new(tcx: TyCtxt<'tcx>) -> IrMaps<'tcx> {
@@ -358,7 +340,6 @@ impl<'tcx> IrMaps<'tcx> {
         });
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=59 | LINES=116 */
 
 impl<'tcx> Visitor<'tcx> for IrMaps<'tcx> {
     fn visit_local(&mut self, local: &'tcx hir::LetStmt<'tcx>) {
@@ -475,7 +456,6 @@ impl<'tcx> Visitor<'tcx> for IrMaps<'tcx> {
         intravisit::walk_expr(self, expr);
     }
 }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Liveness | COMPLEXITY=10 | LINES=33 */
 
 // ______________________________________________________________________
 // Computing liveness sets
@@ -509,7 +489,6 @@ struct Liveness<'a, 'tcx> {
     break_ln: HirIdMap<LiveNode>,
     cont_ln: HirIdMap<LiveNode>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=448 | LINES=876 */
 
 impl<'a, 'tcx> Liveness<'a, 'tcx> {
     fn new(ir: &'a mut IrMaps<'tcx>, body_owner: LocalDefId) -> Liveness<'a, 'tcx> {
@@ -1386,7 +1365,6 @@ impl<'a, 'tcx> Liveness<'a, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=15 | LINES=25 */
 
 // _______________________________________________________________________
 // Checking for error conditions
@@ -1412,7 +1390,6 @@ impl<'a, 'tcx> Visitor<'tcx> for Liveness<'a, 'tcx> {
         intravisit::walk_arm(self, arm);
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=40 | LINES=72 */
 
 fn check_expr<'tcx>(this: &mut Liveness<'_, 'tcx>, expr: &'tcx Expr<'tcx>) {
     match expr.kind {
@@ -1485,7 +1462,6 @@ fn check_expr<'tcx>(this: &mut Liveness<'_, 'tcx>, expr: &'tcx Expr<'tcx>) {
         | hir::ExprKind::Err(_) => {}
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=check_place | COMPLEXITY=225 | LINES=431 */
 
 impl<'tcx> Liveness<'_, 'tcx> {
     fn check_place(&mut self, expr: &'tcx Expr<'tcx>) {

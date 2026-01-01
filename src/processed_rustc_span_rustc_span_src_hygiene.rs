@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_span/src/hygiene.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
 // Machinery for hygienic macros.
 //
 // Inspired by Matthew Flatt et al., “Macros That Work Together: Compile-Time Bindings, Partial
@@ -29,32 +28,23 @@
 use std::hash::Hash;
 use std::sync::Arc;
 use std::{fmt, iter, mem};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::sync::Lock;
 use crate::rustc_data_structures::unhash::UnhashMap;
 use rustc_hashes::Hash64;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::def_id::{CRATE_DEF_ID, CrateNum, DefId, LOCAL_CRATE, StableCrateId};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::edition::Edition;
 use crate::source_map::SourceMap;
 use crate::symbol::{Symbol, kw, sym};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{DUMMY_SP, HashStableContext, Span, SpanDecoder, SpanEncoder, with_session_globals};
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=SyntaxContext(u32); | COMPLEXITY=6 | LINES=11 */
 
 /// A `SyntaxContext` represents a chain of pairs `(ExpnId, Transparency)` named "marks".
 ///
@@ -66,9 +56,7 @@ pub struct SyntaxContext(u32);
 // `SyntaxContext` must not implement `Ord` or `PartialOrd`.
 // See https://github.com/rust-lang/rust/issues/90317.
 impl !Ord for SyntaxContext {}
-/* AST_META: AST_ID=11 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !PartialOrd for SyntaxContext {}
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=SyntaxContextData | COMPLEXITY=5 | LINES=20 */
 
 /// If this part of two syntax contexts is equal, then the whole syntax contexts should be equal.
 /// The other fields are only for caching.
@@ -89,7 +77,6 @@ struct SyntaxContextData {
     /// Name of the crate to which `$crate` with this context would resolve.
     dollar_crate_name: Symbol,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=root | COMPLEXITY=6 | LINES=17 */
 
 impl SyntaxContextData {
     fn root() -> SyntaxContextData {
@@ -107,14 +94,12 @@ impl SyntaxContextData {
         (self.parent, self.outer_expn, self.outer_transparency)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=ExpnIndex | COMPLEXITY=3 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     /// A unique ID associated with a macro invocation and expansion.
     #[orderable]
     pub struct ExpnIndex {}
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=ExpnId | COMPLEXITY=2 | LINES=7 */
 
 /// A unique ID associated with a macro invocation and expansion.
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
@@ -122,7 +107,6 @@ pub struct ExpnId {
     pub krate: CrateNum,
     pub local_id: ExpnIndex,
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=7 */
 
 impl fmt::Debug for ExpnId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -130,22 +114,18 @@ impl fmt::Debug for ExpnId {
         write!(f, "{:?}::{{{{expn{}}}}}", self.krate, self.local_id.as_u32())
     }
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=LocalExpnId | COMPLEXITY=4 | LINES=6 */
 
 crate::rustc_index::newtype_index! {
     /// A unique ID associated with a macro invocation and expansion.
     #[debug_format = "expn{}"]
     pub struct LocalExpnId {}
 }
-/* AST_META: AST_ID=18 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
 
 // To ensure correctness of incremental compilation,
 // `LocalExpnId` must not implement `Ord` or `PartialOrd`.
 // See https://github.com/rust-lang/rust/issues/90317.
 impl !Ord for LocalExpnId {}
-/* AST_META: AST_ID=19 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !PartialOrd for LocalExpnId {}
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=assert_default_hashing_controls | COMPLEXITY=22 | LINES=21 */
 
 /// Assert that the provided `HashStableContext` is configured with the 'default'
 /// `HashingControls`. We should always have bailed out before getting to here
@@ -167,7 +147,6 @@ fn assert_default_hashing_controls(ctx: &impl HashStableContext, msg: &str) {
         other => panic!("Attempted hashing of {msg} with non-default HashingControls: {other:?}"),
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=ExpnHash(Fingerprint); | COMPLEXITY=9 | LINES=32 */
 
 /// A unique hash value associated to an expansion.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, Encodable, Decodable, HashStable_Generic)]
@@ -200,7 +179,6 @@ impl ExpnHash {
         ExpnHash(Fingerprint::new(stable_crate_id.0, local_hash))
     }
 }
-/* AST_META: AST_ID=22 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
 
 /// A property of a macro expansion that determines how identifiers
 /// produced by that expansion are resolved.
@@ -221,14 +199,12 @@ pub enum Transparency {
     /// Def-site spans in procedural macros, identifiers from `macro` by default use this.
     Opaque,
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fallback | COMPLEXITY=7 | LINES=6 */
 
 impl Transparency {
     pub fn fallback(macro_rules: bool) -> Self {
         if macro_rules { Transparency::SemiOpaque } else { Transparency::Opaque }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from_raw | COMPLEXITY=24 | LINES=75 */
 
 impl LocalExpnId {
     /// The ID of the theoretical expansion that generates freshly parsed, unexpanded AST.
@@ -304,7 +280,6 @@ impl LocalExpnId {
         self.to_expn_id().expansion_cause()
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=expn_hash | COMPLEXITY=37 | LINES=74 */
 
 impl ExpnId {
     /// The ID of the theoretical expansion that generates freshly parsed, unexpanded AST.
@@ -379,7 +354,6 @@ impl ExpnId {
         last_macro
     }
 }
-/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=22 */
 
 #[derive(Debug)]
 pub(crate) struct HygieneData {
@@ -402,7 +376,6 @@ pub(crate) struct HygieneData {
     /// set to 0.
     expn_data_disambiguators: UnhashMap<Hash64, u32>,
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=with | COMPLEXITY=142 | LINES=255 */
 
 impl HygieneData {
     pub(crate) fn new(edition: Edition) -> Self {
@@ -658,12 +631,10 @@ impl HygieneData {
         ctxt
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=walk_chain | COMPLEXITY=2 | LINES=4 */
 
 pub fn walk_chain(span: Span, to: SyntaxContext) -> Span {
     HygieneData::with(|data| data.walk_chain(span, to))
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=walk_chain_collapsed | COMPLEXITY=5 | LINES=9 */
 
 /// In order to have good line stepping behavior in debugger, for the given span we return its
 /// outermost macro call site that still has a `#[collapse_debuginfo(yes)]` property on it.
@@ -673,7 +644,6 @@ pub fn walk_chain(span: Span, to: SyntaxContext) -> Span {
 pub fn walk_chain_collapsed(span: Span, to: Span) -> Span {
     HygieneData::with(|data| data.walk_chain_collapsed(span, to))
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=update_dollar_crate_names | COMPLEXITY=18 | LINES=24 */
 
 pub fn update_dollar_crate_names(mut get_name: impl FnMut(SyntaxContext) -> Symbol) {
     // The new contexts that need updating are at the end of the list and have `$crate` as a name.
@@ -698,7 +668,6 @@ pub fn update_dollar_crate_names(mut get_name: impl FnMut(SyntaxContext) -> Symb
         }
     })
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=debug_hygiene_data | COMPLEXITY=27 | LINES=39 */
 
 pub fn debug_hygiene_data(verbose: bool) -> String {
     HygieneData::with(|data| {
@@ -738,7 +707,6 @@ pub fn debug_hygiene_data(verbose: bool) -> String {
         }
     })
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=from_usize | COMPLEXITY=114 | LINES=254 */
 
 impl SyntaxContext {
     #[inline]
@@ -993,14 +961,12 @@ impl SyntaxContext {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
 
 impl fmt::Debug for SyntaxContext {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "#{}", self.0)
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=mark_with_reason | COMPLEXITY=5 | LINES=19 */
 
 impl Span {
     /// Reuses the span but adds information like the kind of the desugaring and features that are
@@ -1020,7 +986,6 @@ impl Span {
         self.apply_mark(expn_id.to_expn_id(), Transparency::Transparent)
     }
 }
-/* AST_META: AST_ID=35 | TYPE=STRUCT | NAME=ExpnData | COMPLEXITY=24 | LINES=61 */
 
 /// A subset of properties from both macro definition and macro call available through global data.
 /// Avoid using this if you have access to the original definition or call structures.
@@ -1082,12 +1047,9 @@ pub struct ExpnData {
     /// When true, we do not display the note telling people to use the `-Zmacro-backtrace` flag.
     pub hide_backtrace: bool,
 }
-/* AST_META: AST_ID=36 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl !PartialEq for ExpnData {}
-/* AST_META: AST_ID=37 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
 impl !Hash for ExpnData {}
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=84 */
 
 impl ExpnData {
     pub fn new(
@@ -1172,7 +1134,6 @@ impl ExpnData {
         hasher.finish()
     }
 }
-/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 /// Expansion kind.
 #[derive(Clone, Debug, PartialEq, Encodable, Decodable, HashStable_Generic)]
@@ -1186,7 +1147,6 @@ pub enum ExpnKind {
     /// Desugaring done by the compiler during AST lowering.
     Desugaring(DesugaringKind),
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=16 | LINES=15 */
 
 impl ExpnKind {
     pub fn descr(&self) -> String {
@@ -1202,7 +1162,6 @@ impl ExpnKind {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
 
 /// The kind of macro invocation or definition.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Encodable, Decodable, Hash, Debug)]
@@ -1215,7 +1174,6 @@ pub enum MacroKind {
     /// A derive macro `#[derive(Foo)]`
     Derive,
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=18 | LINES=24 */
 
 impl MacroKind {
     pub fn descr(self) -> &'static str {
@@ -1240,7 +1198,6 @@ impl MacroKind {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 /// The kind of AST transform.
 #[derive(Clone, Copy, Debug, PartialEq, Encodable, Decodable, HashStable_Generic)]
@@ -1249,7 +1206,6 @@ pub enum AstPass {
     TestHarness,
     ProcMacroHarness,
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=7 | LINES=10 */
 
 impl AstPass {
     pub fn descr(self) -> &'static str {
@@ -1260,7 +1216,6 @@ impl AstPass {
         }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=33 */
 
 /// The kind of compiler desugaring.
 #[derive(Clone, Copy, PartialEq, Debug, Encodable, Decodable, HashStable_Generic)]
@@ -1294,7 +1249,6 @@ pub enum DesugaringKind {
         source: bool,
     },
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=21 | LINES=42 */
 
 impl DesugaringKind {
     /// The description wording should combine well with "desugaring of {}".
@@ -1337,7 +1291,6 @@ impl DesugaringKind {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=HygieneEncodeContext | COMPLEXITY=5 | LINES=17 */
 
 #[derive(Default)]
 pub struct HygieneEncodeContext {
@@ -1355,7 +1308,6 @@ pub struct HygieneEncodeContext {
 
     latest_expns: Lock<FxHashSet<ExpnId>>,
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=schedule_expn_data_for_encoding | COMPLEXITY=35 | LINES=58 */
 
 impl HygieneEncodeContext {
     /// Record the fact that we need to serialize the corresponding `ExpnData`.
@@ -1414,7 +1366,6 @@ impl HygieneEncodeContext {
         debug!("encode_hygiene: Done serializing SyntaxContextData");
     }
 }
-/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=HygieneDecodeContext | COMPLEXITY=2 | LINES=8 */
 
 /// Additional information used to assist in decoding hygiene data
 #[derive(Default)]
@@ -1423,7 +1374,6 @@ pub struct HygieneDecodeContext {
     // `SyntaxContext`s in the current global `HygieneData`.
     remapped_ctxts: Lock<IndexVec<u32, Option<SyntaxContext>>>,
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=register_local_expn_id | COMPLEXITY=6 | LINES=16 */
 
 /// Register an expansion which has been decoded from the on-disk-cache for the local crate.
 pub fn register_local_expn_id(data: ExpnData, hash: ExpnHash) -> ExpnId {
@@ -1440,7 +1390,6 @@ pub fn register_local_expn_id(data: ExpnData, hash: ExpnHash) -> ExpnId {
         expn_id
     })
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=register_expn_id | COMPLEXITY=5 | LINES=19 */
 
 /// Register an expansion which has been decoded from the metadata of a foreign crate.
 pub fn register_expn_id(
@@ -1460,7 +1409,6 @@ pub fn register_expn_id(
     });
     expn_id
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=decode_expn_id | COMPLEXITY=12 | LINES=29 */
 
 /// Decode an expansion from the metadata of a foreign crate.
 pub fn decode_expn_id(
@@ -1490,7 +1438,6 @@ pub fn decode_expn_id(
 
     register_expn_id(krate, index, expn_data, hash)
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=decode_syntax_context | COMPLEXITY=14 | LINES=34 */
 
 // Decodes `SyntaxContext`, using the provided `HygieneDecodeContext`
 // to track which `SyntaxContext`s we have already decoded.
@@ -1525,21 +1472,18 @@ pub fn decode_syntax_context<D: Decoder>(
 
     ctxt
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=encode | COMPLEXITY=5 | LINES=6 */
 
 impl<E: SpanEncoder> Encodable<E> for LocalExpnId {
     fn encode(&self, e: &mut E) {
         self.to_expn_id().encode(e);
     }
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=6 */
 
 impl<D: SpanDecoder> Decodable<D> for LocalExpnId {
     fn decode(d: &mut D) -> Self {
         ExpnId::expect_local(ExpnId::decode(d))
     }
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=raw_encode_syntax_context | COMPLEXITY=5 | LINES=11 */
 
 pub fn raw_encode_syntax_context(
     ctxt: SyntaxContext,
@@ -1551,7 +1495,6 @@ pub fn raw_encode_syntax_context(
     }
     ctxt.0.encode(e);
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=update_disambiguator | COMPLEXITY=19 | LINES=44 */
 
 /// Updates the `disambiguator` field of the corresponding `ExpnData`
 /// such that the `Fingerprint` of the `ExpnData` does not collide with
@@ -1596,7 +1539,6 @@ fn update_disambiguator(expn_data: &mut ExpnData, mut ctx: impl HashStableContex
 
     ExpnHash::new(ctx.def_path_hash(LOCAL_CRATE.as_def_id()).stable_crate_id(), expn_hash)
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=10 | LINES=16 */
 
 impl<CTX: HashStableContext> HashStable<CTX> for SyntaxContext {
     fn hash_stable(&self, ctx: &mut CTX, hasher: &mut StableHasher) {
@@ -1613,7 +1555,6 @@ impl<CTX: HashStableContext> HashStable<CTX> for SyntaxContext {
         }
     }
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=11 | LINES=14 */
 
 impl<CTX: HashStableContext> HashStable<CTX> for ExpnId {
     fn hash_stable(&self, ctx: &mut CTX, hasher: &mut StableHasher) {

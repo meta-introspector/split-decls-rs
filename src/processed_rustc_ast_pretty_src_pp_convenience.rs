@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_ast_pretty/src/pp/convenience.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::borrow::Cow;
 
 use crate::pp::{
     BeginToken, BoxMarker, BreakToken, Breaks, IndentStyle, Printer, SIZE_INFINITY, Token,
 };
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=rbox | COMPLEXITY=33 | LINES=86 */
 
 impl Printer {
     /// "raw box"
@@ -92,7 +90,6 @@ impl Printer {
         });
     }
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 impl Token {
     pub(crate) fn is_hardbreak_tok(&self) -> bool {

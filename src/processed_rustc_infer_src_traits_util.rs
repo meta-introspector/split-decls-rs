@@ -1,14 +1,10 @@
 // SRC: ../rust/compiler/rustc_infer/src/traits/util.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::fx::FxHashSet;
 pub use crate::rustc_complete::ty::elaborate::*;
 use crate::rustc_complete::ty::{self, TyCtxt};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Ident, Span};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::traits::{self, Obligation, ObligationCauseCode, PredicateObligation};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=anonymize_predicate | COMPLEXITY=2 | LINES=8 */
 
 pub fn anonymize_predicate<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -17,13 +13,11 @@ pub fn anonymize_predicate<'tcx>(
     let new = tcx.anonymize_bound_vars(pred.kind());
     tcx.reuse_or_mk_predicate(pred, new)
 }
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=PredicateSet | COMPLEXITY=2 | LINES=5 */
 
 pub struct PredicateSet<'tcx> {
     tcx: TyCtxt<'tcx>,
     set: FxHashSet<ty::Predicate<'tcx>>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=27 */
 
 impl<'tcx> PredicateSet<'tcx> {
     pub fn new(tcx: TyCtxt<'tcx>) -> Self {
@@ -51,7 +45,6 @@ impl<'tcx> PredicateSet<'tcx> {
         self.set.insert(anonymize_predicate(self.tcx, pred))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=16 */
 
 impl<'tcx> Extend<ty::Predicate<'tcx>> for PredicateSet<'tcx> {
     fn extend<I: IntoIterator<Item = ty::Predicate<'tcx>>>(&mut self, iter: I) {
@@ -68,7 +61,6 @@ impl<'tcx> Extend<ty::Predicate<'tcx>> for PredicateSet<'tcx> {
         Extend::<ty::Predicate<'tcx>>::extend_reserve(&mut self.set, additional);
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=13 | LINES=40 */
 
 /// For [`Obligation`], a sub-obligation is combined with the current obligation's
 /// param-env and cause code.
@@ -109,7 +101,6 @@ impl<'tcx> Elaboratable<TyCtxt<'tcx>> for PredicateObligation<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=transitive_bounds_that_define_assoc_item | COMPLEXITY=11 | LINES=35 */
 
 /// A specialized variant of `elaborate` that only elaborates trait references that may
 /// define the given associated item with the name `assoc_name`. It uses the

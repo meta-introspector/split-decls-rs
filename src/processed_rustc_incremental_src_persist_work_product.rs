@@ -1,17 +1,14 @@
 // SRC: ../rust/compiler/rustc_incremental/src/persist/work_product.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 // Functions for saving and removing intermediate [work products].
 //
 // [work products]: WorkProduct
 
 use std::fs as std_fs;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_fs_util::link_or_copy;
 use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=copy_cgu_workproduct_to_incr_comp_cache_dir | COMPLEXITY=20 | LINES=44 */
 use crate::rustc_complete::Session;
 use tracing::debug;
 
@@ -56,7 +53,6 @@ pub fn copy_cgu_workproduct_to_incr_comp_cache_dir(
     let work_product_id = WorkProductId::from_cgu_name(cgu_name);
     Some((work_product_id, work_product))
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=10 */
 
 /// Removes files for a given work product.
 pub(crate) fn delete_workproduct_files(sess: &Session, work_product: &WorkProduct) {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/abi_test.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=show_usage | COMPLEXITY=2 | LINES=12 */
 use std::ffi::OsStr;
 use std::path::Path;
 
@@ -12,7 +11,6 @@ fn show_usage() {
     --help                 : Show this help"#
     );
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run | COMPLEXITY=23 | LINES=53 */
 
 pub fn run() -> Result<(), String> {
     let mut args = std::env::args().skip(2);

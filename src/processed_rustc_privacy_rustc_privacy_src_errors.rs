@@ -1,12 +1,8 @@
 // SRC: ../rust/compiler/rustc_privacy/src/errors.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::{DiagArgFromDisplay, MultiSpan};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Span, Symbol};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive(Diagnostic)]
 #[diag(privacy_field_is_private, code = E0451)]
@@ -22,7 +18,6 @@ pub(crate) struct FieldIsPrivate {
     pub labels: Vec<FieldIsPrivateLabel>,
     pub len: usize,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
 
 #[derive(Subdiagnostic)]
 pub(crate) enum FieldIsPrivateLabel {
@@ -39,7 +34,6 @@ pub(crate) enum FieldIsPrivateLabel {
         span: Span,
     },
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Diagnostic)]
 #[diag(privacy_item_is_private)]
@@ -50,7 +44,6 @@ pub(crate) struct ItemIsPrivate<'a> {
     pub kind: &'a str,
     pub descr: DiagArgFromDisplay<'a>,
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(privacy_unnamed_item_is_private)]
@@ -59,7 +52,6 @@ pub(crate) struct UnnamedItemIsPrivate {
     pub span: Span,
     pub kind: &'static str,
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
 
 #[derive(Diagnostic)]
 #[diag(privacy_in_public_interface, code = E0446)]
@@ -73,7 +65,6 @@ pub(crate) struct InPublicInterface<'a> {
     #[label(privacy_visibility_label)]
     pub vis_span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(Diagnostic)]
 #[diag(privacy_report_effective_visibility)]
@@ -82,7 +73,6 @@ pub(crate) struct ReportEffectiveVisibility {
     pub span: Span,
     pub descr: String,
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 
 #[derive(LintDiagnostic)]
 #[diag(privacy_from_private_dep_in_public_interface)]
@@ -91,7 +81,6 @@ pub(crate) struct FromPrivateDependencyInPublicInterface<'a> {
     pub descr: DiagArgFromDisplay<'a>,
     pub krate: Symbol,
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
 
 #[derive(LintDiagnostic)]
 #[diag(privacy_unnameable_types_lint)]
@@ -103,7 +92,6 @@ pub(crate) struct UnnameableTypesLint<'a> {
     pub reachable_vis: &'a str,
     pub reexported_vis: &'a str,
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 // Used for `private_interfaces` and `private_bounds` lints.
 // They will replace private-in-public errors and compatibility lints in future.

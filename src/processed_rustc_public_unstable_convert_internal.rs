@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/unstable/convert/internal.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 // Module containing the translation from rustc_public constructs to the rustc counterpart.
 //
 // This module will only include a few constructs to allow users to invoke internal rustc APIs
@@ -8,27 +7,21 @@
 // Prefer importing rustc_public over internal rustc constructs to make this file more readable.
 
 use crate::rustc_complete::ty::{self as rustc_ty, Const as InternalConst, Ty as InternalTy};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_public_bridge::Tables;
 
 use crate::abi::Layout;
 use crate::compiler_interface::BridgeTys;
 use crate::mir::alloc::AllocId;
 use crate::mir::mono::{Instance, MonoItem, StaticDef};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::mir::{BinOp, Mutability, Place, ProjectionElem, RawPtrKind, Safety, UnOp};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::ty::{
     Abi, AdtDef, Binder, BoundRegionKind, BoundTyKind, BoundVariableKind, ClosureKind, DynKind,
     ExistentialPredicate, ExistentialProjection, ExistentialTraitRef, FloatTy, FnSig,
     GenericArgKind, GenericArgs, IntTy, MirConst, Movability, Pattern, Region, RigidTy, Span,
     TermKind, TraitRef, Ty, TyConst, UintTy, VariantDef, VariantIdx,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::unstable::{InternalCx, RustcInternal};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CrateItem, CrateNum, DefId, IndexedVal};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for CrateItem {
     type T<'tcx> = crate::rustc_span::def_id::DefId;
@@ -40,7 +33,6 @@ impl RustcInternal for CrateItem {
         self.0.internal(tables, tcx)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for CrateNum {
     type T<'tcx> = crate::rustc_span::def_id::CrateNum;
@@ -52,7 +44,6 @@ impl RustcInternal for CrateNum {
         crate::rustc_span::def_id::CrateNum::from_usize(*self)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for DefId {
     type T<'tcx> = crate::rustc_span::def_id::DefId;
@@ -64,7 +55,6 @@ impl RustcInternal for DefId {
         tcx.lift(tables.def_ids[*self]).unwrap()
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for GenericArgs {
     type T<'tcx> = rustc_ty::GenericArgsRef<'tcx>;
@@ -76,7 +66,6 @@ impl RustcInternal for GenericArgs {
         InternalCx::mk_args_from_iter(tcx, self.0.iter().map(|arg| arg.internal(tables, tcx)))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=10 | LINES=16 */
 
 impl RustcInternal for GenericArgKind {
     type T<'tcx> = rustc_ty::GenericArg<'tcx>;
@@ -93,7 +82,6 @@ impl RustcInternal for GenericArgKind {
         tcx.lift(arg).unwrap()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=7 | LINES=12 */
 
 impl RustcInternal for Region {
     type T<'tcx> = rustc_ty::Region<'tcx>;
@@ -106,7 +94,6 @@ impl RustcInternal for Region {
         tcx.lifetimes_re_erased()
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for Ty {
     type T<'tcx> = InternalTy<'tcx>;
@@ -118,7 +105,6 @@ impl RustcInternal for Ty {
         tcx.lift(tables.types[*self]).unwrap()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for TyConst {
     type T<'tcx> = InternalConst<'tcx>;
@@ -130,7 +116,6 @@ impl RustcInternal for TyConst {
         tcx.lift(tables.ty_consts[self.id]).unwrap()
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=12 | LINES=16 */
 
 impl RustcInternal for Pattern {
     type T<'tcx> = rustc_ty::Pattern<'tcx>;
@@ -147,7 +132,6 @@ impl RustcInternal for Pattern {
         })
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=24 | LINES=68 */
 
 impl RustcInternal for RigidTy {
     type T<'tcx> = rustc_ty::TyKind<'tcx>;
@@ -216,7 +200,6 @@ impl RustcInternal for RigidTy {
         }
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=10 | LINES=19 */
 
 impl RustcInternal for IntTy {
     type T<'tcx> = rustc_ty::IntTy;
@@ -236,7 +219,6 @@ impl RustcInternal for IntTy {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=10 | LINES=19 */
 
 impl RustcInternal for UintTy {
     type T<'tcx> = rustc_ty::UintTy;
@@ -256,7 +238,6 @@ impl RustcInternal for UintTy {
         }
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=17 */
 
 impl RustcInternal for FloatTy {
     type T<'tcx> = rustc_ty::FloatTy;
@@ -274,7 +255,6 @@ impl RustcInternal for FloatTy {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=15 */
 
 impl RustcInternal for Mutability {
     type T<'tcx> = rustc_ty::Mutability;
@@ -290,7 +270,6 @@ impl RustcInternal for Mutability {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=15 */
 
 impl RustcInternal for Movability {
     type T<'tcx> = rustc_ty::Movability;
@@ -306,7 +285,6 @@ impl RustcInternal for Movability {
         }
     }
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=10 | LINES=16 */
 
 impl RustcInternal for RawPtrKind {
     type T<'tcx> = crate::rustc_middle::mir::RawPtrKind;
@@ -323,7 +301,6 @@ impl RustcInternal for RawPtrKind {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=7 | LINES=18 */
 
 impl RustcInternal for FnSig {
     type T<'tcx> = rustc_ty::FnSig<'tcx>;
@@ -342,7 +319,6 @@ impl RustcInternal for FnSig {
         .unwrap()
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=12 */
 
 impl RustcInternal for VariantIdx {
     type T<'tcx> = crate::rustc_abi::VariantIdx;
@@ -355,7 +331,6 @@ impl RustcInternal for VariantIdx {
         crate::rustc_abi::VariantIdx::from(self.to_index())
     }
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=12 */
 
 impl RustcInternal for VariantDef {
     type T<'tcx> = &'tcx rustc_ty::VariantDef;
@@ -368,7 +343,6 @@ impl RustcInternal for VariantDef {
         self.adt_def.internal(tables, tcx).variant(self.idx.internal(tables, tcx))
     }
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=13 | LINES=25 */
 
 impl RustcInternal for MirConst {
     type T<'tcx> = crate::rustc_middle::mir::Const<'tcx>;
@@ -394,7 +368,6 @@ impl RustcInternal for MirConst {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=11 | LINES=19 */
 
 impl RustcInternal for MonoItem {
     type T<'tcx> = crate::rustc_middle::mir::mono::MonoItem<'tcx>;
@@ -414,7 +387,6 @@ impl RustcInternal for MonoItem {
         }
     }
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=12 */
 
 impl RustcInternal for Instance {
     type T<'tcx> = rustc_ty::Instance<'tcx>;
@@ -427,7 +399,6 @@ impl RustcInternal for Instance {
         tcx.lift(tables.instances[self.def]).unwrap()
     }
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=12 */
 
 impl RustcInternal for StaticDef {
     type T<'tcx> = crate::rustc_span::def_id::DefId;
@@ -440,7 +411,6 @@ impl RustcInternal for StaticDef {
         self.0.internal(tables, tcx)
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=6 | LINES=22 */
 
 #[allow(rustc::usage_of_qualified_ty)]
 impl<T> RustcInternal for Binder<T>
@@ -463,7 +433,6 @@ where
         )
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=21 | LINES=27 */
 
 impl RustcInternal for BoundVariableKind {
     type T<'tcx> = rustc_ty::BoundVariableKind;
@@ -491,7 +460,6 @@ impl RustcInternal for BoundVariableKind {
         }
     }
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=14 */
 
 impl RustcInternal for DynKind {
     type T<'tcx> = rustc_ty::DynKind;
@@ -506,7 +474,6 @@ impl RustcInternal for DynKind {
         }
     }
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=13 | LINES=22 */
 
 impl RustcInternal for ExistentialPredicate {
     type T<'tcx> = rustc_ty::ExistentialPredicate<'tcx>;
@@ -529,7 +496,6 @@ impl RustcInternal for ExistentialPredicate {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=6 | LINES=17 */
 
 impl RustcInternal for ExistentialProjection {
     type T<'tcx> = rustc_ty::ExistentialProjection<'tcx>;
@@ -547,7 +513,6 @@ impl RustcInternal for ExistentialProjection {
         )
     }
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=15 */
 
 impl RustcInternal for TermKind {
     type T<'tcx> = rustc_ty::Term<'tcx>;
@@ -563,7 +528,6 @@ impl RustcInternal for TermKind {
         }
     }
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=16 */
 
 impl RustcInternal for ExistentialTraitRef {
     type T<'tcx> = rustc_ty::ExistentialTraitRef<'tcx>;
@@ -580,7 +544,6 @@ impl RustcInternal for ExistentialTraitRef {
         )
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=13 */
 
 impl RustcInternal for TraitRef {
     type T<'tcx> = rustc_ty::TraitRef<'tcx>;
@@ -594,7 +557,6 @@ impl RustcInternal for TraitRef {
         tcx.new_from_args(self.def_id.0.internal(tables, tcx), self.args().internal(tables, tcx))
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for AllocId {
     type T<'tcx> = crate::rustc_middle::mir::interpret::AllocId;
@@ -606,7 +568,6 @@ impl RustcInternal for AllocId {
         tcx.lift(tables.alloc_ids[*self]).unwrap()
     }
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=16 */
 
 impl RustcInternal for ClosureKind {
     type T<'tcx> = rustc_ty::ClosureKind;
@@ -623,7 +584,6 @@ impl RustcInternal for ClosureKind {
         }
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 
 impl RustcInternal for AdtDef {
     type T<'tcx> = rustc_ty::AdtDef<'tcx>;
@@ -635,7 +595,6 @@ impl RustcInternal for AdtDef {
         InternalCx::adt_def(tcx, self.0.internal(tables, tcx))
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=33 | LINES=40 */
 
 impl RustcInternal for Abi {
     type T<'tcx> = crate::rustc_abi::ExternAbi;
@@ -676,7 +635,6 @@ impl RustcInternal for Abi {
         }
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=15 */
 
 impl RustcInternal for Safety {
     type T<'tcx> = crate::rustc_hir::Safety;
@@ -692,7 +650,6 @@ impl RustcInternal for Safety {
         }
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=11 */
 impl RustcInternal for Span {
     type T<'tcx> = crate::rustc_span::Span;
 
@@ -704,7 +661,6 @@ impl RustcInternal for Span {
         tables.spans[*self]
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=12 */
 
 impl RustcInternal for Layout {
     type T<'tcx> = crate::rustc_abi::Layout<'tcx>;
@@ -717,7 +673,6 @@ impl RustcInternal for Layout {
         tcx.lift(tables.layouts[*self]).unwrap()
     }
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=6 | LINES=15 */
 
 impl RustcInternal for Place {
     type T<'tcx> = crate::rustc_middle::mir::Place<'tcx>;
@@ -733,7 +688,6 @@ impl RustcInternal for Place {
         }
     }
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=22 | LINES=37 */
 
 impl RustcInternal for ProjectionElem {
     type T<'tcx> = crate::rustc_middle::mir::PlaceElem<'tcx>;
@@ -771,7 +725,6 @@ impl RustcInternal for ProjectionElem {
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=12 | LINES=36 */
 
 impl RustcInternal for BinOp {
     type T<'tcx> = crate::rustc_middle::mir::BinOp;
@@ -808,7 +761,6 @@ impl RustcInternal for BinOp {
         }
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=16 */
 
 impl RustcInternal for UnOp {
     type T<'tcx> = crate::rustc_middle::mir::UnOp;
@@ -825,7 +777,6 @@ impl RustcInternal for UnOp {
         }
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=15 */
 
 impl<T> RustcInternal for &T
 where
@@ -841,7 +792,6 @@ where
         (*self).internal(tables, tcx)
     }
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=15 */
 
 impl<T> RustcInternal for Option<T>
 where
@@ -857,7 +807,6 @@ where
         self.as_ref().map(|inner| inner.internal(tables, tcx))
     }
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=5 | LINES=15 */
 
 impl<T> RustcInternal for Vec<T>
 where

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_driver_impl/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
 // The Rust compiler.
 //
 // # Note
@@ -20,73 +19,53 @@
 
 use std::cmp::max;
 use std::collections::{BTreeMap, BTreeSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use std::ffi::OsString;
 use std::fmt::Write as _;
 use std::fs::{self, File};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::io::{self, IsTerminal, Read, Write};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::panic::{self, PanicHookInfo, catch_unwind};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{self, Command, Stdio};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::sync::OnceLock;
 use std::sync::atomic::{AtomicBool, Ordering};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::time::Instant;
 use std::{env, str};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use rustc_ast as ast;
 use crate::rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_codegen_ssa::{CodegenErrors, CodegenResults};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_data_structures::profiling::{
     TimePassesFormat, get_resident_set_size, print_time_passes_entry,
 };
-/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::emitter::stderr_destination;
 use crate::rustc_complete::registry::Registry;
 use crate::rustc_complete::translation::Translator;
 use crate::rustc_complete::{ColorConfig, DiagCtxt, ErrCode, FatalError, PResult, markdown};
-/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 use crate::rustc_feature::find_gated_cfg;
 // This avoids a false positive with `-Wunused_crate_dependencies`.
 // `rust_index` isn't used in this crate's code, but it must be named in the
 // `Cargo.toml` for the `rustc_randomized_layouts` feature.
 use rustc_index as _;
 use rustc_interface::util::{self, get_codegen_backend};
-/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_interface::{Linker, create_and_enter_global_ctxt, interface, passes};
-/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 use crate::rustc_lint::unerased_lint_store;
 use crate::rustc_metadata::creader::MetadataLoader;
 use crate::rustc_metadata::locator;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_parse::lexer::StripTokens;
 use crate::rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
-/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::config::{
     CG_OPTIONS, CrateType, ErrorOutputType, Input, OptionDesc, OutFileName, OutputType, Sysroot,
     UnstableOptions, Z_OPTIONS, nightly_options, parse_target_triple,
 };
-/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::getopts::{self, Matches};
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::lint::{Lint, LintId};
-/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::output::{CRATE_TYPES, collect_crate_types, invalid_output_for_target};
-/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{EarlyDiagCtxt, Session, config};
-/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::FileName;
 use crate::rustc_complete::def_id::LOCAL_CRATE;
 use crate::rustc_target::json::ToJson;
 use crate::rustc_target::spec::{Target, TargetTuple};
-/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use tracing::trace;
 
 #[allow(unused_macros)]
@@ -95,20 +74,17 @@ macro do_not_use_print($($t:tt)*) {
         "Don't use `print` or `println` here, use `safe_print` or `safe_println` instead"
     )
 }
-/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 #[allow(unused_macros)]
 macro do_not_use_safe_print($($t:tt)*) {
     std::compile_error!("Don't use `safe_print` or `safe_println` here, use `println_info` instead")
 }
-/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 // This import blocks the use of panicking `print` and `println` in all the code
 // below. Please use `safe_print` and `safe_println` to avoid ICE when
 // encountering an I/O error during print.
 #[allow(unused_imports)]
 use {do_not_use_print as print, do_not_use_print as println};
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=19 */
 
 #[macro_use]
 
@@ -123,21 +99,17 @@ mod signal_handler {
     /// simply use the default signal handler provided by std.
     pub(super) fn install() {}
 }
-/* AST_META: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use crate::session_diagnostics::{
     CantEmitMIR, RLinkEmptyVersionNumber, RLinkEncodingVersionMismatch, RLinkRustcVersionMismatch,
     RLinkWrongFileType, RlinkCorruptFile, RlinkNotAFile, RlinkUnableToRead, UnstableFeatureUsage,
 };
-/* AST_META: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=default_translator | COMPLEXITY=2 | LINES=4 */
 
 pub fn default_translator() -> Translator {
     Translator::with_fallback_bundle(DEFAULT_LOCALE_RESOURCES.to_vec(), false)
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=config | COMPLEXITY=16 | LINES=78 */
 
 pub static DEFAULT_LOCALE_RESOURCES: &[&str] = &[
     // tidy-alphabetical-start
@@ -216,13 +188,11 @@ pub trait Callbacks {
         Compilation::Continue
     }
 }
-/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=TimePassesCallbacks | COMPLEXITY=2 | LINES=5 */
 
 #[derive(Default)]
 pub struct TimePassesCallbacks {
     time_passes: Option<TimePassesFormat>,
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=config | COMPLEXITY=6 | LINES=13 */
 
 impl Callbacks for TimePassesCallbacks {
     // JUSTIFICATION: the session doesn't exist at this point.
@@ -236,12 +206,10 @@ impl Callbacks for TimePassesCallbacks {
         config.opts.trimmed_def_paths = true;
     }
 }
-/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=diagnostics_registry | COMPLEXITY=2 | LINES=4 */
 
 pub fn diagnostics_registry() -> Registry {
     Registry::new(crate::rustc_errors::codes::DIAGNOSTICS)
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=run_compiler | COMPLEXITY=84 | LINES=180 */
 
 /// This is the primary entry point for rustc.
 pub fn run_compiler(at_args: &[String], callbacks: &mut (dyn Callbacks + Send)) {
@@ -422,7 +390,6 @@ pub fn run_compiler(at_args: &[String], callbacks: &mut (dyn Callbacks + Send)) 
         }
     })
 }
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=dump_feature_usage_metrics | COMPLEXITY=9 | LINES=13 */
 
 fn dump_feature_usage_metrics(tcxt: TyCtxt<'_>, metrics_dir: &Path) {
     let hash = tcxt.crate_hash(LOCAL_CRATE);
@@ -436,7 +403,6 @@ fn dump_feature_usage_metrics(tcxt: TyCtxt<'_>, metrics_dir: &Path) {
         tcxt.dcx().emit_err(UnstableFeatureUsage { error });
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=make_output | COMPLEXITY=6 | LINES=10 */
 
 /// Extract output directory and file from matches.
 fn make_output(matches: &getopts::Matches) -> (Option<PathBuf>, Option<OutFileName>) {
@@ -447,7 +413,6 @@ fn make_output(matches: &getopts::Matches) -> (Option<PathBuf>, Option<OutFileNa
     });
     (odir, ofile)
 }
-/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=make_input | COMPLEXITY=31 | LINES=38 */
 
 /// Extract input (string or file and optional path) from matches.
 /// This handles reading from stdin if `-` is provided.
@@ -486,7 +451,6 @@ fn make_input(early_dcx: &EarlyDiagCtxt, free_matches: &[String]) -> Option<Inpu
         )),
     }
 }
-/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
 
 /// Whether to stop or continue compilation.
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
@@ -494,7 +458,6 @@ pub enum Compilation {
     Stop,
     Continue,
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=handle_explain | COMPLEXITY=24 | LINES=34 */
 
 fn handle_explain(early_dcx: &EarlyDiagCtxt, registry: Registry, code: &str, color: ColorConfig) {
     // Allow "E0123" or "0123" form.
@@ -529,7 +492,6 @@ fn handle_explain(early_dcx: &EarlyDiagCtxt, registry: Registry, code: &str, col
         early_dcx.early_fatal(format!("{code} is not a valid error code"));
     }
 }
-/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=show_md_content_with_pager | COMPLEXITY=40 | LINES=59 */
 
 /// If `color` is `always` or `auto`, try to print pretty (formatted & colorized) markdown. If
 /// that fails or `color` is `never`, print the raw markdown.
@@ -589,7 +551,6 @@ fn show_md_content_with_pager(content: &str, color: ColorConfig) {
     // Everything failed. Print the raw markdown text.
     safe_print!("{content}");
 }
-/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=process_rlink | COMPLEXITY=42 | LINES=40 */
 
 fn process_rlink(sess: &Session, compiler: &interface::Compiler) {
     assert!(sess.opts.unstable_opts.link_only);
@@ -630,7 +591,6 @@ fn process_rlink(sess: &Session, compiler: &interface::Compiler) {
         dcx.emit_fatal(RlinkNotAFile {});
     }
 }
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=list_metadata | COMPLEXITY=13 | LINES=23 */
 
 fn list_metadata(sess: &Session, metadata_loader: &dyn MetadataLoader) {
     match sess.io.input {
@@ -654,7 +614,6 @@ fn list_metadata(sess: &Session, metadata_loader: &dyn MetadataLoader) {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=print_crate_info | COMPLEXITY=150 | LINES=229 */
 
 fn print_crate_info(
     codegen_backend: &dyn CodegenBackend,
@@ -884,7 +843,6 @@ fn print_crate_info(
     }
     Compilation::Stop
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=unw | COMPLEXITY=4 | LINES=18 */
 
 /// Prints version information
 ///
@@ -903,7 +861,6 @@ pub macro version($early_dcx: expr, $binary: literal, $matches: expr) {
         unw(option_env!("CFG_RELEASE")),
     )
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=version_at_macro_invocation | COMPLEXITY=16 | LINES=34 */
 
 #[doc(hidden)] // use the macro instead
 pub fn version_at_macro_invocation(
@@ -938,7 +895,6 @@ pub fn version_at_macro_invocation(
         get_backend_from_raw_matches(early_dcx, matches).print_version();
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=usage | COMPLEXITY=23 | LINES=37 */
 
 fn usage(verbose: bool, include_unstable_options: bool, nightly_build: bool) {
     let mut options = getopts::Options::new();
@@ -976,7 +932,6 @@ fn usage(verbose: bool, include_unstable_options: bool, nightly_build: bool) {
         verbose = verbose_help
     );
 }
-/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=print_wall_help | COMPLEXITY=2 | LINES=11 */
 
 fn print_wall_help() {
     safe_println!(
@@ -988,7 +943,6 @@ the command line flag directly.
 "
     );
 }
-/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=describe_lints | COMPLEXITY=52 | LINES=126 */
 
 /// Write to stdout lint command options, together with a list of all available lints
 pub fn describe_lints(sess: &Session, registered_lints: bool) {
@@ -1115,7 +1069,6 @@ Available lint options:
         }
     }
 }
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=describe_flag_categories | COMPLEXITY=17 | LINES=32 */
 
 /// Show help for flag categories shared between rustdoc and rustc.
 ///
@@ -1148,7 +1101,6 @@ pub fn describe_flag_categories(early_dcx: &EarlyDiagCtxt, matches: &Matches) ->
 
     false
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=get_backend_from_raw_matches | COMPLEXITY=3 | LINES=21 */
 
 /// Get the codegen backend based on the raw [`Matches`].
 ///
@@ -1170,19 +1122,16 @@ fn get_backend_from_raw_matches(
 
     get_codegen_backend(early_dcx, &sysroot, backend_name, &target)
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=describe_debug_flags | COMPLEXITY=2 | LINES=5 */
 
 fn describe_debug_flags() {
     safe_println!("\nAvailable options:\n");
     print_flag_list("-Z", config::Z_OPTIONS);
 }
-/* AST_META: AST_ID=50 | TYPE=FUNCTION | NAME=describe_codegen_flags | COMPLEXITY=2 | LINES=5 */
 
 fn describe_codegen_flags() {
     safe_println!("\nAvailable codegen options:\n");
     print_flag_list("-C", config::CG_OPTIONS);
 }
-/* AST_META: AST_ID=51 | TYPE=FUNCTION | NAME=print_flag_list | COMPLEXITY=8 | LINES=15 */
 
 fn print_flag_list<T>(cmdline_opt: &str, flag_list: &[OptionDesc<T>]) {
     let max_len =
@@ -1198,7 +1147,6 @@ fn print_flag_list<T>(cmdline_opt: &str, flag_list: &[OptionDesc<T>]) {
         );
     }
 }
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=handle_options | COMPLEXITY=47 | LINES=95 */
 
 /// Process command line options. Emits messages as appropriate. If compilation
 /// should continue, returns a getopts::Matches object parsed from args,
@@ -1294,7 +1242,6 @@ pub fn handle_options(early_dcx: &EarlyDiagCtxt, args: &[String]) -> Option<geto
 
     Some(matches)
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=warn_on_confusing_output_filename_flag | COMPLEXITY=26 | LINES=44 */
 
 /// Warn if `-o` is used without a space between the flag name and the value
 /// and the value is a high-value confusables,
@@ -1339,7 +1286,6 @@ fn warn_on_confusing_output_filename_flag(
         }
     }
 }
-/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=parse_crate_attrs | COMPLEXITY=9 | LINES=15 */
 
 fn parse_crate_attrs<'a>(sess: &'a Session) -> PResult<'a, ast::AttrVec> {
     let mut parser = unwrap_or_emit_fatal(match &sess.io.input {
@@ -1355,7 +1301,6 @@ fn parse_crate_attrs<'a>(sess: &'a Session) -> PResult<'a, ast::AttrVec> {
     });
     parser.parse_inner_attributes()
 }
-/* AST_META: AST_ID=55 | TYPE=FUNCTION | NAME=catch_fatal_errors | COMPLEXITY=8 | LINES=15 */
 
 /// Runs a closure and catches unwinds triggered by fatal errors.
 ///
@@ -1371,7 +1316,6 @@ pub fn catch_fatal_errors<F: FnOnce() -> R, R>(f: F) -> Result<R, FatalError> {
         }
     })
 }
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=catch_with_exit_code | COMPLEXITY=8 | LINES=9 */
 
 /// Variant of `catch_fatal_errors` for the `interface::Result` return type
 /// that also computes the exit code.
@@ -1381,7 +1325,6 @@ pub fn catch_with_exit_code(f: impl FnOnce()) -> i32 {
         _ => EXIT_FAILURE,
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=ice_path | COMPLEXITY=3 | LINES=13 */
 
 static ICE_PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
 
@@ -1395,7 +1338,6 @@ static ICE_PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
 fn ice_path() -> &'static Option<PathBuf> {
     ice_path_with_config(None)
 }
-/* AST_META: AST_ID=58 | TYPE=FUNCTION | NAME=ice_path_with_config | COMPLEXITY=26 | LINES=35 */
 
 fn ice_path_with_config(config: Option<&UnstableOptions>) -> &'static Option<PathBuf> {
     if ICE_PATH.get().is_some() && config.is_some() && cfg!(debug_assertions) {
@@ -1431,7 +1373,6 @@ fn ice_path_with_config(config: Option<&UnstableOptions>) -> &'static Option<Pat
         Some(path)
     })
 }
-/* AST_META: AST_ID=59 | TYPE=FUNCTION | NAME=install_ice_hook | COMPLEXITY=44 | LINES=86 */
 
 pub static USING_INTERNAL_FEATURES: AtomicBool = AtomicBool::new(false);
 
@@ -1518,7 +1459,6 @@ pub fn install_ice_hook(bug_report_url: &'static str, extra_info: fn(&DiagCtxt))
         },
     ));
 }
-/* AST_META: AST_ID=60 | TYPE=FUNCTION | NAME=report_ice | COMPLEXITY=63 | LINES=97 */
 
 /// Prints the ICE message, including query stack, but without backtrace.
 ///
@@ -1616,14 +1556,12 @@ fn report_ice(
         unsafe { windows::Win32::System::Diagnostics::Debug::DebugBreak() };
     }
 }
-/* AST_META: AST_ID=61 | TYPE=FUNCTION | NAME=init_rustc_env_logger | COMPLEXITY=5 | LINES=6 */
 
 /// This allows tools to enable rust logging without having to magically match rustc's
 /// tracing crate version.
 pub fn init_rustc_env_logger(early_dcx: &EarlyDiagCtxt) {
     init_logger(early_dcx, rustc_log::LoggerConfig::from_env("RUSTC_LOG"));
 }
-/* AST_META: AST_ID=62 | TYPE=FUNCTION | NAME=init_logger | COMPLEXITY=8 | LINES=9 */
 
 /// This allows tools to enable rust logging without having to magically match rustc's
 /// tracing crate version. In contrast to `init_rustc_env_logger` it allows you to choose
@@ -1633,7 +1571,6 @@ pub fn init_logger(early_dcx: &EarlyDiagCtxt, cfg: rustc_log::LoggerConfig) {
         early_dcx.early_fatal(error.to_string());
     }
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=init_logger_with_additional_layer | COMPLEXITY=11 | LINES=18 */
 
 /// This allows tools to enable rust logging without having to magically match rustc's
 /// tracing crate version. In contrast to `init_rustc_env_logger`, it allows you to
@@ -1652,7 +1589,6 @@ pub fn init_logger_with_additional_layer<F, T>(
         early_dcx.early_fatal(error.to_string());
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=install_ctrlc_handler | COMPLEXITY=8 | LINES=16 */
 
 /// Install our usual `ctrlc` handler, which sets [`rustc_const_eval::CTRL_C_RECEIVED`].
 /// Making this handler optional lets tools can install a different handler, if they wish.
@@ -1669,7 +1605,6 @@ pub fn install_ctrlc_handler() {
     })
     .expect("Unable to install ctrlc handler");
 }
-/* AST_META: AST_ID=65 | TYPE=FUNCTION | NAME=main | COMPLEXITY=6 | LINES=23 */
 
 pub fn main() -> ! {
     let start_time = Instant::now();

@@ -1,13 +1,9 @@
 // SRC: ../rust/compiler/rustc_llvm/build.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::env;
 use std::ffi::{OsStr, OsString};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use std::fmt::Display;
 use std::path::{Path, PathBuf};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::process::{Command, Stdio};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=detect_llvm_link | COMPLEXITY=7 | LINES=36 */
 
 const OPTIONAL_COMPONENTS: &[&str] = &[
     "x86",
@@ -44,7 +40,6 @@ fn detect_llvm_link() -> (&'static str, &'static str) {
         ("static", "--link-static")
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=restore_library_path | COMPLEXITY=22 | LINES=21 */
 
 // Because Cargo adds the compiler's dylib path to our library search path, llvm-config may
 // break: the dylib path for the compiler, as of this writing, contains a copy of the LLVM
@@ -66,7 +61,6 @@ fn restore_library_path() {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=tracked_env_var_os | COMPLEXITY=7 | LINES=8 */
 
 /// Reads an environment variable and adds it to dependencies.
 /// Supposed to be used for all variables except those set for build scripts by cargo
@@ -75,7 +69,6 @@ fn tracked_env_var_os<K: AsRef<OsStr> + Display>(key: K) -> Option<OsString> {
     println!("cargo:rerun-if-env-changed={key}");
     env::var_os(key)
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=rerun_if_changed_anything_in_dir | COMPLEXITY=11 | LINES=17 */
 
 fn rerun_if_changed_anything_in_dir(dir: &Path) {
     let mut stack = dir
@@ -93,7 +86,6 @@ fn rerun_if_changed_anything_in_dir(dir: &Path) {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=output | COMPLEXITY=15 | LINES=19 */
 
 #[track_caller]
 fn output(cmd: &mut Command) -> String {
@@ -113,7 +105,6 @@ fn output(cmd: &mut Command) -> String {
     }
     String::from_utf8(output.stdout).unwrap()
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=main | COMPLEXITY=255 | LINES=334 */
 
 fn main() {
     if cfg!(feature = "check_only") {

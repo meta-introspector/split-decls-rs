@@ -1,37 +1,29 @@
 // SRC: ../rust/compiler/rustc_hir_analysis/src/hir_ty_lowering/bounds.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::codes::*;
 use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
 use crate::rustc_complete::PolyTraitRef;
 use crate::rustc_complete::def::{DefKind, Res};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::{
     self as ty, IsSuggestable, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt,
     TypeVisitor, Upcast,
 };
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_trait_selection::traits;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use super::errors::GenericsArgsErrExtend;
 use crate::errors;
 use crate::hir_ty_lowering::{
     AssocItemQSelf, FeedConstTy, HirTyLowerer, PredicateFilter, RegionInferReason,
 };
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=CollectedBound | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Debug, Default)]
 struct CollectedBound {
@@ -42,7 +34,6 @@ struct CollectedBound {
     /// `!Trait`
     negative: bool,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=any | COMPLEXITY=5 | LINES=7 */
 
 impl CollectedBound {
     /// Returns `true` if any of `Trait`, `?Trait` or `!Trait` were encountered.
@@ -50,7 +41,6 @@ impl CollectedBound {
         self.positive || self.maybe || self.negative
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=CollectedSizednessBounds | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Debug)]
 struct CollectedSizednessBounds {
@@ -61,7 +51,6 @@ struct CollectedSizednessBounds {
     // Collected `PointeeSized` bounds
     pointee_sized: CollectedBound,
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=any | COMPLEXITY=7 | LINES=8 */
 
 impl CollectedSizednessBounds {
     /// Returns `true` if any of `Trait`, `?Trait` or `!Trait` were encountered for `Sized`,
@@ -70,7 +59,6 @@ impl CollectedSizednessBounds {
         self.sized.any() || self.meta_sized.any() || self.pointee_sized.any()
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=search_bounds_for | COMPLEXITY=17 | LINES=27 */
 
 fn search_bounds_for<'tcx>(
     hir_bounds: &'tcx [hir::GenericBound<'tcx>],
@@ -98,7 +86,6 @@ fn search_bounds_for<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=collect_relaxed_bounds | COMPLEXITY=7 | LINES=13 */
 
 fn collect_relaxed_bounds<'tcx>(
     hir_bounds: &'tcx [hir::GenericBound<'tcx>],
@@ -112,7 +99,6 @@ fn collect_relaxed_bounds<'tcx>(
     });
     relaxed_bounds
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=collect_bounds | COMPLEXITY=13 | LINES=20 */
 
 fn collect_bounds<'a, 'tcx>(
     hir_bounds: &'a [hir::GenericBound<'tcx>],
@@ -133,7 +119,6 @@ fn collect_bounds<'a, 'tcx>(
     });
     collect_into
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=collect_sizedness_bounds | COMPLEXITY=4 | LINES=18 */
 
 fn collect_sizedness_bounds<'tcx>(
     tcx: TyCtxt<'tcx>,
@@ -152,7 +137,6 @@ fn collect_sizedness_bounds<'tcx>(
 
     CollectedSizednessBounds { sized, meta_sized, pointee_sized }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=add_trait_bound | COMPLEXITY=6 | LINES=14 */
 
 /// Add a trait bound for `did`.
 fn add_trait_bound<'tcx>(
@@ -167,7 +151,6 @@ fn add_trait_bound<'tcx>(
     // ambiguity.
     bounds.insert(0, (trait_ref.upcast(tcx), span));
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=should_add_default_traits | COMPLEXITY=278 | LINES=656 */
 
 impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     /// Adds sizedness bounds to a trait, trait alias, parameter, opaque type or associated type.
@@ -824,7 +807,6 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         Ok(ty::EarlyBinder::bind(shifted_output).instantiate(tcx, args))
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=check_assoc_const_binding_type | COMPLEXITY=41 | LINES=83 */
 
 /// Detect and reject early-bound & escaping late-bound generic params in the type of assoc const bindings.
 ///
@@ -908,7 +890,6 @@ fn check_assoc_const_binding_type<'tcx>(
     let guar = guar.unwrap_or_else(|| bug!("failed to find gen params or bound vars in ty"));
     Ty::new_error(tcx, guar)
 }
-/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=GenericParamAndBoundVarCollector | COMPLEXITY=2 | LINES=7 */
 
 struct GenericParamAndBoundVarCollector<'a, 'tcx> {
     cx: &'a dyn HirTyLowerer<'tcx>,
@@ -916,7 +897,6 @@ struct GenericParamAndBoundVarCollector<'a, 'tcx> {
     vars: FxIndexSet<DefId>,
     depth: ty::DebruijnIndex,
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=visit_binder | COMPLEXITY=58 | LINES=75 */
 
 impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for GenericParamAndBoundVarCollector<'_, 'tcx> {
     type Result = ControlFlow<ErrorGuaranteed>;

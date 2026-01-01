@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_hir/src/attrs/pretty_printing.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::num::NonZero;
 
 use crate::rustc_abi::Align;
 use crate::rustc_complete::token::CommentKind;
 use crate::rustc_complete::{AttrStyle, IntTy, UintTy};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use rustc_ast_pretty::pp::Printer;
 use crate::rustc_complete::hygiene::Transparency;
 use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=5 | LINES=19 */
 use crate::rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 
@@ -29,7 +26,6 @@ pub trait PrintAttribute {
 
     fn print_attribute(&self, p: &mut Printer);
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=6 | LINES=10 */
 
 impl PrintAttribute for u128 {
     fn should_render(&self) -> bool {
@@ -40,7 +36,6 @@ impl PrintAttribute for u128 {
         p.word(self.to_string())
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=6 | LINES=10 */
 
 impl<T: PrintAttribute> PrintAttribute for &T {
     fn should_render(&self) -> bool {
@@ -51,7 +46,6 @@ impl<T: PrintAttribute> PrintAttribute for &T {
         T::print_attribute(self, p)
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=9 | LINES=11 */
 impl<T: PrintAttribute> PrintAttribute for Option<T> {
     fn should_render(&self) -> bool {
         self.as_ref().is_some_and(|x| x.should_render())
@@ -63,7 +57,6 @@ impl<T: PrintAttribute> PrintAttribute for Option<T> {
         }
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=12 | LINES=18 */
 impl<T: PrintAttribute> PrintAttribute for ThinVec<T> {
     fn should_render(&self) -> bool {
         self.is_empty() || self[0].should_render()
@@ -82,7 +75,6 @@ impl<T: PrintAttribute> PrintAttribute for ThinVec<T> {
         p.word("]");
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=13 | LINES=8 */
 macro_rules! print_skip {
     ($($t: ty),* $(,)?) => {$(
         impl PrintAttribute for $t {
@@ -91,7 +83,6 @@ macro_rules! print_skip {
         })*
     };
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=14 | LINES=11 */
 
 macro_rules! print_disp {
     ($($t: ty),* $(,)?) => {$(
@@ -103,7 +94,6 @@ macro_rules! print_disp {
         }
     )*};
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=14 | LINES=10 */
 macro_rules! print_debug {
     ($($t: ty),* $(,)?) => {$(
         impl PrintAttribute for $t {
@@ -114,7 +104,6 @@ macro_rules! print_debug {
         }
     )*};
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=29 | LINES=42 */
 
 macro_rules! print_tup {
     (num_should_render $($ts: ident)*) => { 0 $(+ $ts.should_render() as usize)* };
@@ -157,7 +146,6 @@ macro_rules! print_tup {
         print_tup!($($ts)*);
     };
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=15 */
 
 print_tup!(A B C D E F G H);
 print_skip!(Span, (), ErrorGuaranteed);

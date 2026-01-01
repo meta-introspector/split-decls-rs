@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_type_ir/src/predicate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use std::fmt;
 use std::hash::Hash;
 
@@ -8,17 +7,13 @@ use derive_where::derive_where;
 use rustc_macros::{
     Decodable, Decodable_NoContext, Encodable, Encodable_NoContext, HashStable_NoContext,
 };
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::inherent::*;
 use crate::lift::Lift;
 use crate::upcast::{Upcast, UpcastFrom};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::visit::TypeVisitableExt as _;
 use crate::{self as ty, Interner};
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=OutlivesPredicate | COMPLEXITY=4 | LINES=12 */
 
 /// `A: 'region`
 #[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, A)]
@@ -31,7 +26,6 @@ use crate::{self as ty, Interner};
 pub struct OutlivesPredicate<I: Interner, A>(pub A, pub I::Region);
 
 impl<I: Interner, A: Eq> Eq for OutlivesPredicate<I, A> {}
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=lift_to_interner | COMPLEXITY=6 | LINES=14 */
 
 // FIXME: We manually derive `Lift` because the `derive(Lift_Generic)` doesn't
 // understand how to turn `A` to `A::Lifted` in the output `type Lifted`.
@@ -46,7 +40,6 @@ where
         Some(OutlivesPredicate(self.0.lift_to_interner(cx)?, self.1.lift_to_interner(cx)?))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=TraitRef | COMPLEXITY=6 | LINES=25 */
 
 /// A complete reference to a trait. These take numerous guises in syntax,
 /// but perhaps the most recognizable form is in a where-clause:
@@ -72,10 +65,8 @@ pub struct TraitRef<I: Interner> {
     /// calling [`TraitRef::new_from_args`].
     _use_trait_ref_new_instead: (),
 }
-/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TraitRef<I> {}
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=11 | LINES=44 */
 
 impl<I: Interner> TraitRef<I> {
     pub fn new_from_args(interner: I, trait_def_id: I::TraitId, args: I::GenericArgs) -> Self {
@@ -120,7 +111,6 @@ impl<I: Interner> TraitRef<I> {
         self.args.type_at(0)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=7 | LINES=17 */
 
 impl<I: Interner> ty::Binder<I, TraitRef<I>> {
     pub fn self_ty(&self) -> ty::Binder<I, I::Ty> {
@@ -138,7 +128,6 @@ impl<I: Interner> ty::Binder<I, TraitRef<I>> {
         .upcast(cx)
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TraitPredicate | COMPLEXITY=3 | LINES=17 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
@@ -156,10 +145,8 @@ pub struct TraitPredicate<I: Interner> {
     /// exist via a series of predicates.)
     pub polarity: PredicatePolarity,
 }
-/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for TraitPredicate<I> {}
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=with_replaced_self_ty | COMPLEXITY=6 | LINES=17 */
 
 impl<I: Interner> TraitPredicate<I> {
     pub fn with_replaced_self_ty(self, interner: I, self_ty: I::Ty) -> Self {
@@ -177,7 +164,6 @@ impl<I: Interner> TraitPredicate<I> {
         self.trait_ref.self_ty()
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=5 | LINES=16 */
 
 impl<I: Interner> ty::Binder<I, TraitPredicate<I>> {
     pub fn def_id(self) -> I::TraitId {
@@ -194,14 +180,12 @@ impl<I: Interner> ty::Binder<I, TraitPredicate<I>> {
         self.skip_binder().polarity
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=6 | LINES=6 */
 
 impl<I: Interner> UpcastFrom<I, TraitRef<I>> for TraitPredicate<I> {
     fn upcast_from(from: TraitRef<I>, _tcx: I) -> Self {
         TraitPredicate { trait_ref: from, polarity: PredicatePolarity::Positive }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=6 | LINES=9 */
 
 impl<I: Interner> UpcastFrom<I, ty::Binder<I, TraitRef<I>>> for ty::Binder<I, TraitPredicate<I>> {
     fn upcast_from(from: ty::Binder<I, TraitRef<I>>, _tcx: I) -> Self {
@@ -211,14 +195,12 @@ impl<I: Interner> UpcastFrom<I, ty::Binder<I, TraitRef<I>>> for ty::Binder<I, Tr
         })
     }
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<I: Interner> fmt::Debug for TraitPredicate<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "TraitPredicate({:?}, polarity:{:?})", self.trait_ref, self.polarity)
     }
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=17 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 #[cfg_attr(
@@ -236,7 +218,6 @@ pub enum ImplPolarity {
     /// See #64631 for details.
     Reservation,
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
 
 impl fmt::Display for ImplPolarity {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -247,7 +228,6 @@ impl fmt::Display for ImplPolarity {
         }
     }
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=as_str | COMPLEXITY=9 | LINES=11 */
 
 impl ImplPolarity {
     /// The polarity marker in front of the impl trait ref if applicable.
@@ -259,7 +239,6 @@ impl ImplPolarity {
         }
     }
 }
-/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
 
 /// Polarity for a trait predicate. May either be negative or positive.
 /// Distinguished from [`ImplPolarity`] since we never compute goals with
@@ -275,7 +254,6 @@ pub enum PredicatePolarity {
     /// `Type: !Trait`
     Negative,
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=flip | COMPLEXITY=7 | LINES=10 */
 
 impl PredicatePolarity {
     /// Flips polarity by turning `Positive` into `Negative` and `Negative` into `Positive`.
@@ -286,7 +264,6 @@ impl PredicatePolarity {
         }
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl fmt::Display for PredicatePolarity {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -296,7 +273,6 @@ impl fmt::Display for PredicatePolarity {
         }
     }
 }
-/* AST_META: AST_ID=24 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
@@ -312,10 +288,8 @@ pub enum ExistentialPredicate<I: Interner> {
     /// E.g., `Send`.
     AutoTrait(I::TraitId),
 }
-/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ExistentialPredicate<I> {}
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=with_self_ty | COMPLEXITY=17 | LINES=27 */
 
 impl<I: Interner> ty::Binder<I, ExistentialPredicate<I>> {
     /// Given an existential predicate like `?Self: PartialEq<u32>` (e.g., derived from `dyn PartialEq<u32>`),
@@ -343,7 +317,6 @@ impl<I: Interner> ty::Binder<I, ExistentialPredicate<I>> {
         }
     }
 }
-/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=ExistentialTraitRef | COMPLEXITY=3 | LINES=21 */
 
 /// An existential reference to a trait, where `Self` is erased.
 /// For example, the trait object `Trait<'a, 'b, X, Y>` is:
@@ -365,10 +338,8 @@ pub struct ExistentialTraitRef<I: Interner> {
     /// calling [`ExistentialTraitRef::new_from_args`].
     _use_existential_trait_ref_new_instead: (),
 }
-/* AST_META: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ExistentialTraitRef<I> {}
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=11 | LINES=38 */
 
 impl<I: Interner> ExistentialTraitRef<I> {
     pub fn new_from_args(interner: I, trait_def_id: I::TraitId, args: I::GenericArgs) -> Self {
@@ -407,7 +378,6 @@ impl<I: Interner> ExistentialTraitRef<I> {
         TraitRef::new(interner, self.def_id, [self_ty.into()].into_iter().chain(self.args.iter()))
     }
 }
-/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=5 | LINES=14 */
 
 impl<I: Interner> ty::Binder<I, ExistentialTraitRef<I>> {
     pub fn def_id(&self) -> I::TraitId {
@@ -422,7 +392,6 @@ impl<I: Interner> ty::Binder<I, ExistentialTraitRef<I>> {
         self.map_bound(|trait_ref| trait_ref.with_self_ty(cx, self_ty))
     }
 }
-/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=ExistentialProjection | COMPLEXITY=5 | LINES=17 */
 
 /// A `ProjectionPredicate` for an `ExistentialTraitRef`.
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
@@ -440,10 +409,8 @@ pub struct ExistentialProjection<I: Interner> {
     /// without using [`ExistentialProjection::new_from_args`].
     use_existential_projection_new_instead: (),
 }
-/* AST_META: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ExistentialProjection<I> {}
-/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=16 | LINES=59 */
 
 impl<I: Interner> ExistentialProjection<I> {
     pub fn new_from_args(
@@ -503,7 +470,6 @@ impl<I: Interner> ExistentialProjection<I> {
         }
     }
 }
-/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=with_self_ty | COMPLEXITY=4 | LINES=10 */
 
 impl<I: Interner> ty::Binder<I, ExistentialProjection<I>> {
     pub fn with_self_ty(&self, cx: I, self_ty: I::Ty) -> ty::Binder<I, ProjectionPredicate<I>> {
@@ -514,7 +480,6 @@ impl<I: Interner> ty::Binder<I, ExistentialProjection<I>> {
         self.skip_binder().def_id
     }
 }
-/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=26 */
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 #[cfg_attr(feature = "nightly", derive(Encodable, Decodable, HashStable_NoContext))]
@@ -541,7 +506,6 @@ pub enum AliasTermKind {
     /// An associated const in an inherent `impl`
     InherentConst,
 }
-/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=descr | COMPLEXITY=14 | LINES=29 */
 
 impl AliasTermKind {
     pub fn descr(self) -> &'static str {
@@ -571,7 +535,6 @@ impl AliasTermKind {
         }
     }
 }
-/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=11 */
 
 impl From<ty::AliasTyKind> for AliasTermKind {
     fn from(value: ty::AliasTyKind) -> Self {
@@ -583,7 +546,6 @@ impl From<ty::AliasTyKind> for AliasTermKind {
         }
     }
 }
-/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=AliasTerm | COMPLEXITY=25 | LINES=41 */
 
 /// Represents the unprojected term of a projection goal.
 ///
@@ -625,10 +587,8 @@ pub struct AliasTerm<I: Interner> {
     #[derive_where(skip(Debug))]
     _use_alias_term_new_instead: (),
 }
-/* AST_META: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for AliasTerm<I> {}
-/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=new_from_args | COMPLEXITY=28 | LINES=73 */
 
 impl<I: Interner> AliasTerm<I> {
     pub fn new_from_args(interner: I, def_id: I::DefId, args: I::GenericArgs) -> AliasTerm<I> {
@@ -702,7 +662,6 @@ impl<I: Interner> AliasTerm<I> {
         }
     }
 }
-/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=20 | LINES=52 */
 
 /// The following methods work only with (trait) associated term projections.
 impl<I: Interner> AliasTerm<I> {
@@ -755,7 +714,6 @@ impl<I: Interner> AliasTerm<I> {
         self.trait_ref_and_own_args(interner).1
     }
 }
-/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=rebase_inherent_args_onto_impl | COMPLEXITY=4 | LINES=25 */
 
 /// The following methods work only with inherent associated term projections.
 impl<I: Interner> AliasTerm<I> {
@@ -781,21 +739,18 @@ impl<I: Interner> AliasTerm<I> {
         interner.mk_args_from_iter(impl_args.iter().chain(self.args.iter().skip(1)))
     }
 }
-/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<I: Interner> From<ty::AliasTy<I>> for AliasTerm<I> {
     fn from(ty: ty::AliasTy<I>) -> Self {
         AliasTerm { args: ty.args, def_id: ty.def_id, _use_alias_term_new_instead: () }
     }
 }
-/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<I: Interner> From<ty::UnevaluatedConst<I>> for AliasTerm<I> {
     fn from(ct: ty::UnevaluatedConst<I>) -> Self {
         AliasTerm { args: ct.args, def_id: ct.def, _use_alias_term_new_instead: () }
     }
 }
-/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=ProjectionPredicate | COMPLEXITY=3 | LINES=23 */
 
 /// This kind of predicate has no *direct* correspondent in the
 /// syntax, but it roughly corresponds to the syntactic forms:
@@ -819,10 +774,8 @@ pub struct ProjectionPredicate<I: Interner> {
     pub projection_term: AliasTerm<I>,
     pub term: I::Term,
 }
-/* AST_META: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for ProjectionPredicate<I> {}
-/* AST_META: AST_ID=47 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=8 | LINES=21 */
 
 impl<I: Interner> ProjectionPredicate<I> {
     pub fn self_ty(self) -> I::Ty {
@@ -844,7 +797,6 @@ impl<I: Interner> ProjectionPredicate<I> {
         self.projection_term.def_id
     }
 }
-/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=trait_def_id | COMPLEXITY=8 | LINES=21 */
 
 impl<I: Interner> ty::Binder<I, ProjectionPredicate<I>> {
     /// Returns the `DefId` of the trait of the associated item being projected.
@@ -866,14 +818,12 @@ impl<I: Interner> ty::Binder<I, ProjectionPredicate<I>> {
         self.skip_binder().projection_term.def_id
     }
 }
-/* AST_META: AST_ID=49 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<I: Interner> fmt::Debug for ProjectionPredicate<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "ProjectionPredicate({:?}, {:?})", self.projection_term, self.term)
     }
 }
-/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=NormalizesTo | COMPLEXITY=2 | LINES=13 */
 
 /// Used by the new solver to normalize an alias. This always expects the `term` to
 /// be an unconstrained inference variable which is used as the output.
@@ -887,10 +837,8 @@ pub struct NormalizesTo<I: Interner> {
     pub alias: AliasTerm<I>,
     pub term: I::Term,
 }
-/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for NormalizesTo<I> {}
-/* AST_META: AST_ID=52 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=7 | LINES=18 */
 
 impl<I: Interner> NormalizesTo<I> {
     pub fn self_ty(self) -> I::Ty {
@@ -909,14 +857,12 @@ impl<I: Interner> NormalizesTo<I> {
         self.alias.def_id
     }
 }
-/* AST_META: AST_ID=53 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=6 */
 
 impl<I: Interner> fmt::Debug for NormalizesTo<I> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "NormalizesTo({:?}, {:?})", self.alias, self.term)
     }
 }
-/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=HostEffectPredicate | COMPLEXITY=2 | LINES=11 */
 
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
 #[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
@@ -928,10 +874,8 @@ pub struct HostEffectPredicate<I: Interner> {
     pub trait_ref: ty::TraitRef<I>,
     pub constness: BoundConstness,
 }
-/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for HostEffectPredicate<I> {}
-/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=self_ty | COMPLEXITY=6 | LINES=14 */
 
 impl<I: Interner> HostEffectPredicate<I> {
     pub fn self_ty(self) -> I::Ty {
@@ -946,7 +890,6 @@ impl<I: Interner> HostEffectPredicate<I> {
         self.trait_ref.def_id
     }
 }
-/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=def_id | COMPLEXITY=5 | LINES=16 */
 
 impl<I: Interner> ty::Binder<I, HostEffectPredicate<I>> {
     pub fn def_id(self) -> I::TraitId {
@@ -963,7 +906,6 @@ impl<I: Interner> ty::Binder<I, HostEffectPredicate<I>> {
         self.skip_binder().constness
     }
 }
-/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=SubtypePredicate | COMPLEXITY=3 | LINES=15 */
 
 /// Encodes that `a` must be a subtype of `b`. The `a_is_expected` flag indicates
 /// whether the `a` type is the type that we should label as "expected" when
@@ -979,10 +921,8 @@ pub struct SubtypePredicate<I: Interner> {
     pub a: I::Ty,
     pub b: I::Ty,
 }
-/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for SubtypePredicate<I> {}
-/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=CoercePredicate | COMPLEXITY=2 | LINES=12 */
 
 /// Encodes that we have to coerce *from* the `a` type to the `b` type.
 #[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
@@ -995,10 +935,8 @@ pub struct CoercePredicate<I: Interner> {
     pub a: I::Ty,
     pub b: I::Ty,
 }
-/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<I: Interner> Eq for CoercePredicate<I> {}
-/* AST_META: AST_ID=62 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
 
 #[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
 #[cfg_attr(
@@ -1015,7 +953,6 @@ pub enum BoundConstness {
     /// Requires resolving to const only when we are in a const context.
     Maybe,
 }
-/* AST_META: AST_ID=63 | TYPE=FUNCTION | NAME=satisfies | COMPLEXITY=13 | LINES=17 */
 
 impl BoundConstness {
     pub fn satisfies(self, goal: BoundConstness) -> bool {
@@ -1033,7 +970,6 @@ impl BoundConstness {
         }
     }
 }
-/* AST_META: AST_ID=64 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
 
 impl fmt::Display for BoundConstness {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

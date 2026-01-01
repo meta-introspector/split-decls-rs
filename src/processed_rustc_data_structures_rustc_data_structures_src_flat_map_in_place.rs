@@ -1,10 +1,7 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/flat_map_in_place.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{mem, ptr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use smallvec::{Array, SmallVec};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=flat_map_in_place | COMPLEXITY=2 | LINES=8 */
 use thin_vec::ThinVec;
 
 pub trait FlatMapInPlace<T>: Sized {
@@ -13,7 +10,6 @@ pub trait FlatMapInPlace<T>: Sized {
         F: FnMut(T) -> I,
         I: IntoIterator<Item = T>;
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=flat_map_in_place | COMPLEXITY=39 | LINES=58 */
 
 // The implementation of this method is syntactically identical for all the
 // different vector types.
@@ -72,17 +68,14 @@ macro_rules! flat_map_in_place {
         }
     };
 }
-/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> FlatMapInPlace<T> for Vec<T> {
     flat_map_in_place!(Vec);
 }
-/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T, A: Array<Item = T>> FlatMapInPlace<T> for SmallVec<A> {
     flat_map_in_place!(SmallVec where T: Array);
 }
-/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
 
 impl<T> FlatMapInPlace<T> for ThinVec<T> {
     flat_map_in_place!(ThinVec);

@@ -1,10 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/build_system/src/fmt.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ffi::OsStr;
 use std::path::Path;
 
 use crate::utils::{run_command_with_output, walk_dir};
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=show_usage | COMPLEXITY=2 | LINES=10 */
 
 fn show_usage() {
     println!(
@@ -15,7 +13,6 @@ fn show_usage() {
     --help                 : Show this help"#
     );
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run | COMPLEXITY=16 | LINES=24 */
 
 pub fn run() -> Result<(), String> {
     let mut check = false;
@@ -40,7 +37,6 @@ pub fn run() -> Result<(), String> {
 
     run_rustfmt_recursively("tests/run", check)
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_rustfmt_recursively | COMPLEXITY=12 | LINES=24 */
 
 fn run_rustfmt_recursively<P>(dir: P, check: bool) -> Result<(), String>
 where

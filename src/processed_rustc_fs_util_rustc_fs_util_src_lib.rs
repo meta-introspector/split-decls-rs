@@ -1,11 +1,7 @@
 // SRC: ../rust/compiler/rustc_fs_util/src/lib.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::ffi::{CString, OsStr};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::path::{Path, PathBuf, absolute};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use std::{env, fs, io};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fix_windows_verbatim_for_gcc | COMPLEXITY=60 | LINES=143 */
 
 use tempfile::TempDir;
 

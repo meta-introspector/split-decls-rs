@@ -1,11 +1,7 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/on_unimplemented_condition.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{MetaItemInner, MetaItemKind, MetaItemLit};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_parse_format::{ParseMode, Parser, Piece, Position};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{DesugaringKind, Ident, Span, Symbol, kw, sym};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 use crate::errors::InvalidOnClause;
 
@@ -15,7 +11,6 @@ pub(crate) struct OnUnimplementedCondition {
     span: Span,
     pred: Predicate,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=25 */
 
 impl OnUnimplementedCondition {
     pub(crate) fn span(&self) -> Span {
@@ -41,7 +36,6 @@ impl OnUnimplementedCondition {
         Ok(OnUnimplementedCondition { span, pred })
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// Predicate(s) in `#[rustc_on_unimplemented]`'s `on` filter. See [`OnUnimplementedCondition`].
 ///
@@ -60,7 +54,6 @@ enum Predicate {
     /// True if any predicate is true, like `on(any($a, $b, $c))`.
     Any(Vec<Predicate>),
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=42 | LINES=62 */
 
 impl Predicate {
     fn parse(input: &MetaItemInner, generics: &[Symbol]) -> Result<Self, InvalidOnClause> {
@@ -123,7 +116,6 @@ impl Predicate {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 
 /// Represents a `MetaWord` in an `on`-filter.
 #[derive(Debug, Clone, Copy)]
@@ -137,7 +129,6 @@ enum Flag {
     /// `?` or `try { .. }`.
     FromDesugaring,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=9 | LINES=11 */
 
 impl Flag {
     fn parse(Ident { name, span }: Ident) -> Result<Self, InvalidOnClause> {
@@ -149,7 +140,6 @@ impl Flag {
         }
     }
 }
-/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=NameValue | COMPLEXITY=5 | LINES=12 */
 
 /// A `MetaNameValueStr` in an `on`-filter.
 ///
@@ -162,7 +152,6 @@ struct NameValue {
     /// But if it is something like `"&[{A}]"` then it must be formatted later.
     value: FilterFormatString,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
 
 /// The valid names of the `on` filter.
 #[derive(Debug, Clone, Copy)]
@@ -172,7 +161,6 @@ enum Name {
     SelfUpper,
     GenericArg(Symbol),
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=11 | LINES=12 */
 
 impl Name {
     fn parse(Ident { name, span }: Ident, generics: &[Symbol]) -> Result<Self, InvalidOnClause> {
@@ -185,14 +173,12 @@ impl Name {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone)]
 enum FlagOrNv<'p> {
     Flag(&'p Flag),
     NameValue(&'p NameValue),
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=FilterFormatString | COMPLEXITY=3 | LINES=11 */
 
 /// Represents a value inside an `on` filter.
 ///
@@ -204,14 +190,12 @@ enum FlagOrNv<'p> {
 struct FilterFormatString {
     pieces: Vec<LitOrArg>,
 }
-/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Debug, Clone)]
 enum LitOrArg {
     Lit(String),
     Arg(String),
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=parse | COMPLEXITY=48 | LINES=53 */
 
 impl FilterFormatString {
     fn parse(input: Symbol) -> Self {
@@ -265,7 +249,6 @@ impl FilterFormatString {
         ret
     }
 }
-/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// Used with `OnUnimplementedCondition::matches_predicate` to evaluate the
 /// [`OnUnimplementedCondition`].
@@ -284,14 +267,12 @@ impl FilterFormatString {
 /// pub trait FromResidual<R = <Self as Try>::Residual> {
 ///    ...
 /// }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 ///
 /// async fn an_async_function() -> u32 {
 ///     let x: Option<u32> = None;
 ///     x?; //~ ERROR the `?` operator
 ///     22
 /// }
-/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 ///  ```
 /// it will look like this:
 ///
@@ -307,7 +288,6 @@ impl FilterFormatString {
 ///         ("R", "core::option::Option<T>" ),
 ///     ],
 /// }
-/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
 /// ```
 #[derive(Debug)]
 pub(crate) struct ConditionOptions {
@@ -323,7 +303,6 @@ pub(crate) struct ConditionOptions {
     // A list of the generic arguments and their reified types.
     pub(crate) generic_args: Vec<(Symbol, String)>,
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=has_flag | COMPLEXITY=13 | LINES=18 */
 
 impl ConditionOptions {
     fn has_flag(&self, name: Flag) -> bool {

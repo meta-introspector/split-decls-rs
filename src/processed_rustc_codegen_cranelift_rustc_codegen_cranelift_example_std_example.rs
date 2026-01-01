@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/example/std_example.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=54 | LINES=183 */
 #[feature(
     core_intrinsics,
     coroutines,
@@ -183,12 +182,10 @@ fn main() {
 
     println!("{:?}", STATIC_WITH_MAYBE_NESTED_BOX);
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=panic | COMPLEXITY=2 | LINES=4 */
 
 fn panic(_: u128) {
     panic!();
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=transmute_wide_pointer | COMPLEXITY=7 | LINES=11 */
 
 use std::mem::transmute;
 
@@ -200,16 +197,13 @@ type TwoPtrs = i128;
 fn transmute_wide_pointer() -> TwoPtrs {
     unsafe { transmute::<_, TwoPtrs>("true !") }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 extern "rust-call" fn rust_call_abi_callee<T: std::marker::Tuple>(_: T) {}
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=rust_call_abi | COMPLEXITY=2 | LINES=5 */
 
 fn rust_call_abi() {
     rust_call_abi_callee(());
     rust_call_abi_callee((1, 2));
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=I64X2([i64; | COMPLEXITY=2 | LINES=8 */
 
 #[cfg_attr(target_arch = "s390x", allow(dead_code))]
 #[repr(simd)]
@@ -218,7 +212,6 @@ struct I64X2([i64; 2]);
 #[cfg_attr(target_arch = "s390x", allow(dead_code))]
 #[allow(improper_ctypes_definitions)]
 extern "C" fn foo(_a: I64X2) {}
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse4.2")]
@@ -234,7 +227,6 @@ unsafe fn test_crc32() {
     assert_eq!(_mm_crc32_u32(a, b as u32), 2543798776);
     assert_eq!(_mm_crc32_u64(a as u64, b as u64), 241952147);
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=50 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -285,7 +277,6 @@ unsafe fn test_simd() {
     #[cfg(not(jit))]
     test_crc32();
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -313,7 +304,6 @@ unsafe fn test_mm_slli_si128() {
     let r = _mm_slli_si128(a, 16);
     assert_eq_m128i(r, _mm_set1_epi8(0));
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -328,7 +318,6 @@ unsafe fn test_mm_movemask_epi8() {
     let r = _mm_movemask_epi8(a);
     assert_eq!(r, 0b10100100_00100101);
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -338,7 +327,6 @@ unsafe fn test_mm256_movemask_epi8() {
     let e = -1;
     assert_eq!(r, e);
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=16 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -355,7 +343,6 @@ unsafe fn test_mm_add_epi8() {
     );
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -365,7 +352,6 @@ unsafe fn test_mm_add_pd() {
     let r = _mm_add_pd(a, b);
     assert_eq_m128d(r, _mm_setr_pd(6.0, 12.0));
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=assert_eq_m128i | COMPLEXITY=7 | LINES=7 */
 
 #[cfg(target_arch = "x86_64")]
 fn assert_eq_m128i(x: std::arch::x86_64::__m128i, y: std::arch::x86_64::__m128i) {
@@ -373,7 +359,6 @@ fn assert_eq_m128i(x: std::arch::x86_64::__m128i, y: std::arch::x86_64::__m128i)
         assert_eq!(std::mem::transmute::<_, [u8; 16]>(x), std::mem::transmute::<_, [u8; 16]>(y));
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=8 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -382,14 +367,12 @@ pub unsafe fn assert_eq_m128d(a: __m128d, b: __m128d) {
         panic!("{:?} != {:?}", a, b);
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx")]
 pub unsafe fn assert_eq_m256i(a: __m256i, b: __m256i) {
     assert_eq!(std::mem::transmute::<_, [u64; 4]>(a), std::mem::transmute::<_, [u64; 4]>(b))
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -397,7 +380,6 @@ unsafe fn test_mm_cvtsi128_si64() {
     let r = _mm_cvtsi128_si64(std::mem::transmute::<[i64; 2], _>([5, 0]));
     assert_eq!(r, 5);
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse4.1")]
@@ -411,7 +393,6 @@ unsafe fn test_mm_cvtepi8_epi16() {
     let e = _mm_set1_epi16(-10);
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=14 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse4.1")]
@@ -426,7 +407,6 @@ unsafe fn test_mm_extract_epi8() {
     assert_eq!(r1, 0xFF);
     assert_eq!(r2, 3);
 }
-/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -436,7 +416,6 @@ unsafe fn test_mm_insert_epi16() {
     let e = _mm_setr_epi16(9, 1, 2, 3, 4, 5, 6, 7);
     assert_eq_m128i(r, e);
 }
-/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=20 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "ssse3")]
@@ -457,7 +436,6 @@ unsafe fn test_mm_shuffle_epi8() {
     let r = _mm_shuffle_epi8(a, b);
     assert_eq_m128i(r, expected);
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 
 // Currently one cannot `load` a &[u8] that is less than 16
 // in length. This makes loading strings less than 16 in length
@@ -473,7 +451,6 @@ unsafe fn str_to_m128i(s: &[u8]) -> __m128i {
     std::ptr::copy_nonoverlapping(s.as_ptr(), slice.as_mut_ptr(), s.len());
     _mm_loadu_si128(slice.as_ptr() as *const _)
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(not(jit))]
 #[cfg(target_arch = "x86_64")]
@@ -484,7 +461,6 @@ unsafe fn test_mm_cmpestri() {
     let i = _mm_cmpestri::<_SIDD_CMP_EQUAL_ORDERED>(a, 3, b, 6);
     assert_eq!(3, i);
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=28 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -513,7 +489,6 @@ unsafe fn test_mm256_shuffle_epi8() {
     let r = _mm256_shuffle_epi8(a, b);
     assert_eq_m256i(r, expected);
 }
-/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -524,7 +499,6 @@ unsafe fn test_mm256_permute2x128_si256() {
     let e = _mm256_setr_epi64x(700, 800, 500, 600);
     assert_eq_m256i(r, e);
 }
-/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=10 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -535,7 +509,6 @@ unsafe fn test_mm256_permutevar8x32_epi32() {
     let e = _mm256_permutevar8x32_epi32(a, idx);
     assert_eq_m256i(r, e);
 }
-/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -554,7 +527,6 @@ unsafe fn test_mm_cvtps_epi32() {
 
     assert_eq!(ints, expected_ints);
 }
-/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
@@ -572,7 +544,6 @@ unsafe fn test_mm_cvttps_epi32() {
 
     assert_eq!(ints, expected_ints);
 }
-/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=test_checked_mul | COMPLEXITY=3 | LINES=21 */
 
 fn test_checked_mul() {
     let u: Option<u8> = u8::from_str_radix("1000", 10).ok();
@@ -594,20 +565,17 @@ fn test_checked_mul() {
     assert_eq!(1i64.checked_mul(i64::MIN), Some(i64::MIN));
     assert_eq!(i64::MIN.checked_mul(i64::MIN), None);
 }
-/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq)]
 enum LoopState {
     Continue(()),
     Break(()),
 }
-/* AST_META: AST_ID=31 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 pub enum Instruction {
     Increment,
     Loop,
 }
-/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=map | COMPLEXITY=6 | LINES=7 */
 
 fn map(a: Option<(u8, Box<Instruction>)>) -> Option<Box<Instruction>> {
     match a {

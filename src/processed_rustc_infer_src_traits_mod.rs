@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_infer/src/traits/mod.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
 // Trait Resolution. See the [rustc-dev-guide] for more information on how this works.
 //
 // [rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
@@ -7,28 +6,23 @@
 
 use std::cmp;
 use std::hash::{Hash, Hasher};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use hir::def_id::LocalDefId;
 use rustc_hir as hir;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::traits::query::NoSolution;
 use crate::rustc_complete::traits::solve::Certainty;
 pub use crate::rustc_complete::traits::*;
 use crate::rustc_complete::ty::{self, Ty, TyCtxt, Upcast};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 
 pub use self::engine::{FromSolverError, ScrubbedTraitError, TraitEngine};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 pub(crate) use self::project::UndoLog;
 pub use self::project::{
     MismatchedProjectionTypes, Normalized, NormalizedTerm, ProjectionCache, ProjectionCacheEntry,
     ProjectionCacheKey, ProjectionCacheStorage,
 };
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Obligation | COMPLEXITY=8 | LINES=30 */
 use crate::infer::InferCtxt;
 
 /// An `Obligation` represents some trait reference (e.g., `i32: Eq`) for
@@ -59,14 +53,12 @@ pub struct Obligation<'tcx, T> {
     #[type_visitable(ignore)]
     pub recursion_depth: usize,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=as_goal | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx, T: Copy> Obligation<'tcx, T> {
     pub fn as_goal(&self) -> solve::Goal<'tcx, T> {
         solve::Goal { param_env: self.param_env, predicate: self.predicate }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=10 | LINES=11 */
 
 impl<'tcx, T: PartialEq> PartialEq<Obligation<'tcx, T>> for Obligation<'tcx, T> {
     #[inline]
@@ -78,10 +70,8 @@ impl<'tcx, T: PartialEq> PartialEq<Obligation<'tcx, T>> for Obligation<'tcx, T> 
         self.param_env == other.param_env && self.predicate == other.predicate
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl<T: Eq> Eq for Obligation<'_, T> {}
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=8 */
 
 impl<T: Hash> Hash for Obligation<'_, T> {
     fn hash<H: Hasher>(&self, state: &mut H) -> () {
@@ -90,7 +80,6 @@ impl<T: Hash> Hash for Obligation<'_, T> {
         self.predicate.hash(state);
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=flip_polarity | COMPLEXITY=5 | LINES=20 */
 
 pub type PredicateObligation<'tcx> = Obligation<'tcx, ty::Predicate<'tcx>>;
 pub type TraitObligation<'tcx> = Obligation<'tcx, ty::TraitPredicate<'tcx>>;
@@ -111,7 +100,6 @@ impl<'tcx> PredicateObligation<'tcx> {
         })
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=derived_cause | COMPLEXITY=3 | LINES=9 */
 
 impl<'tcx> PolyTraitObligation<'tcx> {
     pub fn derived_cause(
@@ -121,7 +109,6 @@ impl<'tcx> PolyTraitObligation<'tcx> {
         self.cause.clone().derived_cause(self.predicate, variant)
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=59 */
 
 // `PredicateObligation` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
@@ -181,7 +168,6 @@ impl<'tcx, O> Obligation<'tcx, O> {
         Obligation::with_depth(tcx, self.cause.clone(), self.recursion_depth, self.param_env, value)
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=polarity | COMPLEXITY=4 | LINES=10 */
 
 impl<'tcx> PolyTraitObligation<'tcx> {
     pub fn polarity(&self) -> ty::PredicatePolarity {

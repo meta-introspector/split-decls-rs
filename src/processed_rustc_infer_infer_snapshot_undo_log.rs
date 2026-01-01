@@ -1,27 +1,20 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/snapshot/undo_log.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::assert_matches::assert_matches;
 use std::marker::PhantomData;
 
 use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use tracing::debug;
 
 use crate::infer::unify_key::{ConstVidKey, RegionVidKey};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{InferCtxtInner, region_constraints, type_variable};
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Snapshot | COMPLEXITY=2 | LINES=6 */
 use crate::traits;
 
 pub struct Snapshot<'tcx> {
     pub(crate) undo_len: usize,
     _marker: PhantomData<&'tcx ()>,
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
 
 /// Records the "undo" data for a single operation that affects some form of inference variable.
 #[derive(Clone)]
@@ -39,7 +32,6 @@ pub(crate) enum UndoLog<'tcx> {
     PushRegionAssumption,
     PushHirTypeckPotentiallyRegionDependentGoal,
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from | COMPLEXITY=12 | LINES=12 */
 
 macro_rules! impl_from {
     ($($ctor:ident ($ty:ty),)*) => {
@@ -52,7 +44,6 @@ macro_rules! impl_from {
         )*
     }
 }
-/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
 
 // Upcast from a single kind of "undoable action" to the general enum
 impl_from! {
@@ -69,7 +60,6 @@ impl_from! {
     RegionUnificationTable(sv::UndoLog<ut::Delegate<RegionVidKey<'tcx>>>),
     ProjectionCache(traits::UndoLog<'tcx>),
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=17 | LINES=33 */
 
 /// The Rollback trait defines how to rollback a particular action.
 impl<'tcx> Rollback<UndoLog<'tcx>> for InferCtxtInner<'tcx> {
@@ -103,7 +93,6 @@ impl<'tcx> Rollback<UndoLog<'tcx>> for InferCtxtInner<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
 
 /// The combined undo log for all the various unification tables. For each change to the storage
 /// for any kind of inference variable, we record an UndoLog entry in the vector here.
@@ -112,7 +101,6 @@ pub(crate) struct InferCtxtUndoLogs<'tcx> {
     logs: Vec<UndoLog<'tcx>>,
     num_open_snapshots: usize,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=num_open_snapshots | COMPLEXITY=15 | LINES=34 */
 
 /// The UndoLogs trait defines how we undo a particular kind of action (of type T). We can undo any
 /// action that is convertible into an UndoLog (per the From impls above).
@@ -147,7 +135,6 @@ where
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=rollback_to | COMPLEXITY=17 | LINES=36 */
 
 impl<'tcx> InferCtxtInner<'tcx> {
     pub fn rollback_to(&mut self, snapshot: Snapshot<'tcx>) {
@@ -184,7 +171,6 @@ impl<'tcx> InferCtxtInner<'tcx> {
         self.undo_log.num_open_snapshots -= 1;
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=assert_open_snapshot | COMPLEXITY=12 | LINES=27 */
 
 impl<'tcx> InferCtxtUndoLogs<'tcx> {
     pub(crate) fn start_snapshot(&mut self) -> Snapshot<'tcx> {
@@ -212,7 +198,6 @@ impl<'tcx> InferCtxtUndoLogs<'tcx> {
         assert!(self.num_open_snapshots > 0);
     }
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
 
 impl<'tcx> std::ops::Index<usize> for InferCtxtUndoLogs<'tcx> {
     type Output = UndoLog<'tcx>;
@@ -221,7 +206,6 @@ impl<'tcx> std::ops::Index<usize> for InferCtxtUndoLogs<'tcx> {
         &self.logs[key]
     }
 }
-/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=index_mut | COMPLEXITY=5 | LINES=6 */
 
 impl<'tcx> std::ops::IndexMut<usize> for InferCtxtUndoLogs<'tcx> {
     fn index_mut(&mut self, key: usize) -> &mut Self::Output {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/deduce_param_attrs.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
 // Deduces supplementary parameter attributes from MIR.
 //
 // Deduced parameter attributes are those that can only be soundly determined by examining the
@@ -10,11 +9,8 @@
 use crate::rustc_complete::def_id::LocalDefId;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=DeduceReadOnly | COMPLEXITY=9 | LINES=10 */
 use crate::rustc_complete::config::OptLevel;
 
 /// A visitor that determines which arguments have been mutated. We can't use the mutability field
@@ -25,7 +21,6 @@ struct DeduceReadOnly {
     /// been up to the point we're at.
     mutable_args: DenseBitSet<usize>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=7 */
 
 impl DeduceReadOnly {
     /// Returns a new DeduceReadOnly instance.
@@ -33,7 +28,6 @@ impl DeduceReadOnly {
         Self { mutable_args: DenseBitSet::new_empty(arg_count) }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_place | COMPLEXITY=47 | LINES=72 */
 
 impl<'tcx> Visitor<'tcx> for DeduceReadOnly {
     fn visit_place(&mut self, place: &Place<'tcx>, context: PlaceContext, _location: Location) {
@@ -106,7 +100,6 @@ impl<'tcx> Visitor<'tcx> for DeduceReadOnly {
         self.super_terminator(terminator, location);
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=type_will_always_be_passed_directly | COMPLEXITY=4 | LINES=15 */
 
 /// Returns true if values of a given type will never be passed indirectly, regardless of ABI.
 fn type_will_always_be_passed_directly(ty: Ty<'_>) -> bool {
@@ -122,7 +115,6 @@ fn type_will_always_be_passed_directly(ty: Ty<'_>) -> bool {
             | ty::Uint(..)
     )
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=80 */
 
 /// Returns the deduced parameter attributes for a function.
 ///

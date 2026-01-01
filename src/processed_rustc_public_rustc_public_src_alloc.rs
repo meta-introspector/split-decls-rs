@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_public/src/alloc.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=12 */
 // Memory allocation implementation for rustc_public.
 //
 // This module is responsible for constructing stable components.
@@ -12,13 +11,11 @@ use crate::rustc_complete::mir::interpret::AllocRange;
 use crate::rustc_public_bridge::bridge::Error as _;
 use crate::rustc_public_bridge::context::CompilerCtxt;
 use crate::rustc_public_bridge::{Tables, alloc};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 
 use super::Error;
 use super::compiler_interface::BridgeTys;
 use super::mir::Mutability;
 use super::ty::{Allocation, ProvenanceMap};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new_empty_allocation | COMPLEXITY=4 | LINES=11 */
 use super::unstable::Stable;
 
 /// Creates new empty `Allocation` from given `Align`.
@@ -30,7 +27,6 @@ fn new_empty_allocation(align: Align) -> Allocation {
         mutability: Mutability::Not,
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
 
 // We need this method instead of a Stable implementation
 // because we need to get `Ty` of the const we are trying to create, to do that
@@ -45,7 +41,6 @@ pub(crate) fn new_allocation<'tcx>(
     try_new_allocation(ty, const_value, tables, cx)
         .unwrap_or_else(|_| panic!("Failed to convert: {const_value:?} to {ty:?}"))
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=24 */
 
 #[allow(rustc::usage_of_qualified_ty)]
 pub(crate) fn try_new_allocation<'tcx>(
@@ -70,7 +65,6 @@ pub(crate) fn try_new_allocation<'tcx>(
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 /// Creates an `Allocation` only from information within the `AllocRange`.
 pub(super) fn allocation_filter<'tcx>(

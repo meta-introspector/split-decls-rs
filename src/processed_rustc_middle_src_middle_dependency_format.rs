@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_middle/src/middle/dependency_format.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
 // Type definitions for learning about the dependency formats of all upstream
 // crates (rlibs/dylibs/oh my).
 //
@@ -13,7 +12,6 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_complete::def_id::CrateNum;
 use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable};
-/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=17 */
 use crate::rustc_complete::config::CrateType;
 
 /// A list of dependencies for a certain crate type.

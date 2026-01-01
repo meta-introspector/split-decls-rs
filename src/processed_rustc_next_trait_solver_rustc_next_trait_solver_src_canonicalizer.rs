@@ -1,15 +1,11 @@
 // SRC: ../rust/compiler/rustc_next_trait_solver/src/canonicalizer.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use rustc_type_ir::data_structures::{HashMap, ensure_sufficient_stack};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::solve::{Goal, QueryInput};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use rustc_type_ir::{
     self as ty, Canonical, CanonicalParamEnvCacheEntry, CanonicalVarKind, Flags, InferCtxtLike,
     Interner, TypeFlags, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=22 */
 
 use crate::delegate::SolverDelegate;
 
@@ -32,7 +28,6 @@ enum CanonicalizeInputKind {
     /// When canonicalizing predicates, we don't keep `'static`.
     Predicate,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
 
 /// Whether we're canonicalizing a query input or the query response.
 ///
@@ -62,7 +57,6 @@ enum CanonicalizeMode {
         max_input_universe: ty::UniverseIndex,
     },
 }
-/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Canonicalizer | COMPLEXITY=4 | LINES=25 */
 
 pub struct Canonicalizer<'a, D: SolverDelegate<Interner = I>, I: Interner> {
     delegate: &'a D,
@@ -88,7 +82,6 @@ pub struct Canonicalizer<'a, D: SolverDelegate<Interner = I>, I: Interner> {
     /// bound variable regardless of how many times it is encountered.
     cache: HashMap<(ty::DebruijnIndex, I::Ty), I::Ty>,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=canonicalize_response | COMPLEXITY=147 | LINES=332 */
 
 impl<'a, D: SolverDelegate<Interner = I>, I: Interner> Canonicalizer<'a, D, I> {
     pub fn canonicalize_response<T: TypeFoldable<I>>(
@@ -421,7 +414,6 @@ impl<'a, D: SolverDelegate<Interner = I>, I: Interner> Canonicalizer<'a, D, I> {
         Ty::new_anon_bound(self.cx(), self.binder_index, var)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=129 | LINES=158 */
 
 impl<D: SolverDelegate<Interner = I>, I: Interner> TypeFolder<I> for Canonicalizer<'_, D, I> {
     fn cx(&self) -> I {

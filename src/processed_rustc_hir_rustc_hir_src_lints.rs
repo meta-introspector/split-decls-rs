@@ -1,11 +1,9 @@
 // SRC: ../rust/compiler/rustc_hir/src/lints.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use rustc_macros::HashStable_Generic;
 use crate::rustc_complete::Span;
 
 use crate::{AttrPath, HirId, Target};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=DelayedLints | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 pub struct DelayedLints {
@@ -13,7 +11,6 @@ pub struct DelayedLints {
     // Only present when the crate hash is needed.
     pub opt_hash: Option<Fingerprint>,
 }
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
 
 /// During ast lowering, no lints can be emitted.
 /// That is because lints attach to nodes either in the AST, or on the built HIR.
@@ -25,7 +22,6 @@ pub struct DelayedLints {
 pub enum DelayedLint {
     AttributeParsing(AttributeLint<HirId>),
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=AttributeLint | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Clone, Debug, HashStable_Generic)]
 pub struct AttributeLint<Id> {
@@ -33,7 +29,6 @@ pub struct AttributeLint<Id> {
     pub span: Span,
     pub kind: AttributeLintKind,
 }
-/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=9 */
 
 #[derive(Clone, Debug, HashStable_Generic)]
 pub enum AttributeLintKind {

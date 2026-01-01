@@ -1,12 +1,10 @@
 // SRC: ../rust/compiler/rustc_mir_transform/src/dest_prop.rs
-/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Propagates assignment destinations backwards in the CFG to eliminate redundant assignments.
 //
 // # Motivation
 //
 // MIR building can insert a lot of redundant copies, and Rust code in general often tends to move
 // values around a lot. The result is a lot of assignments of the form `dest = {move} src;` in MIR.
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=49 | LINES=137 */
 // MIR building for constants in particular tends to create additional locals that are only used
 // inside a single block to shuffle a value around unnecessarily.
 //
@@ -144,18 +142,13 @@ use crate::rustc_data_structures::union_find::UnionFind;
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::interval::SparseIntervalMatrix;
 use crate::rustc_index::{IndexVec, newtype_index};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_mir_dataflow::impls::{DefUse, MaybeLiveLocals};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_mir_dataflow::points::DenseLocationMap;
 use crate::rustc_mir_dataflow::{Analysis, Results};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, trace};
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=40 | LINES=97 */
 
 pub(super) struct DestinationPropagation;
 
@@ -253,7 +246,6 @@ impl<'tcx> crate::MirPass<'tcx> for DestinationPropagation {
         false
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=apply_merges | COMPLEXITY=3 | LINES=15 */
 
 //////////////////////////////////////////////////////////
 // Merging
@@ -269,14 +261,12 @@ fn apply_merges<'tcx>(
     let mut merger = Merger { tcx, relevant, merged_locals };
     merger.visit_body_preserves_cfg(body);
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Merger | COMPLEXITY=2 | LINES=6 */
 
 struct Merger<'tcx> {
     tcx: TyCtxt<'tcx>,
     relevant: RelevantLocals,
     merged_locals: DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=36 | LINES=44 */
 
 impl<'tcx> MutVisitor<'tcx> for Merger<'tcx> {
     fn tcx(&self) -> TyCtxt<'tcx> {
@@ -321,7 +311,6 @@ impl<'tcx> MutVisitor<'tcx> for Merger<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=RelevantLocal | COMPLEXITY=3 | LINES=11 */
 
 //////////////////////////////////////////////////////////
 // Relevant locals
@@ -333,7 +322,6 @@ newtype_index! {
     /// Represent a subset of locals which appear in candidates.
     struct RelevantLocal {}
 }
-/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=RelevantLocals | COMPLEXITY=2 | LINES=7 */
 
 #[derive(Debug)]
 struct RelevantLocals {
@@ -341,7 +329,6 @@ struct RelevantLocals {
     shrink: IndexVec<Local, Option<RelevantLocal>>,
     renames: UnionFind<RelevantLocal>,
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=compute | COMPLEXITY=12 | LINES=34 */
 
 impl RelevantLocals {
     #[tracing::instrument(level = "trace", skip(candidates, num_locals), ret)]
@@ -376,7 +363,6 @@ impl RelevantLocals {
         head
     }
 }
-/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Candidates | COMPLEXITY=5 | LINES=20 */
 
 /////////////////////////////////////////////////////
 // Candidate accumulation
@@ -397,7 +383,6 @@ struct Candidates {
     /// remove that assignment.
     c: Vec<(Local, Local)>,
 }
-/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=find | COMPLEXITY=10 | LINES=15 */
 
 // We first implement some utility functions which we will expose removing candidates according to
 // different needs. Throughout the liveness filtering, the `candidates` are only ever accessed
@@ -413,14 +398,12 @@ impl Candidates {
         Candidates { c: visitor.candidates }
     }
 }
-/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=FindAssignments | COMPLEXITY=2 | LINES=6 */
 
 struct FindAssignments<'a, 'tcx> {
     body: &'a Body<'tcx>,
     candidates: Vec<(Local, Local)>,
     borrowed: &'a DenseBitSet<Local>,
 }
-/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=20 | LINES=31 */
 
 impl<'tcx> Visitor<'tcx> for FindAssignments<'_, 'tcx> {
     fn visit_statement(&mut self, statement: &Statement<'tcx>, _: Location) {
@@ -452,7 +435,6 @@ impl<'tcx> Visitor<'tcx> for FindAssignments<'_, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=is_local_required | COMPLEXITY=6 | LINES=11 */
 
 /// Some locals are part of the function's interface and can not be removed.
 ///
@@ -464,7 +446,6 @@ fn is_local_required(local: Local, body: &Body<'_>) -> bool {
         LocalKind::Temp => false,
     }
 }
-/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=dest_prop_mir_dump | COMPLEXITY=19 | LINES=36 */
 
 /////////////////////////////////////////////////////////
 // MIR Dump
@@ -501,14 +482,12 @@ fn dest_prop_mir_dump<'tcx>(
         dumper.set_extra_data(extra_data).dump_mir(body)
     }
 }
-/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 enum Effect {
     Before,
     After,
 }
-/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=TwoStepIndex | COMPLEXITY=6 | LINES=9 */
 
 crate::rustc_index::newtype_index! {
     /// A reversed `PointIndex` but with the lower bit encoding early/late inside the statement.
@@ -518,7 +497,6 @@ crate::rustc_index::newtype_index! {
     #[debug_format = "TwoStepIndex({})"]
     struct TwoStepIndex {}
 }
-/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=14 */
 
 impl TwoStepIndex {
     fn new(elements: &DenseLocationMap, location: Location, effect: Effect) -> TwoStepIndex {
@@ -533,7 +511,6 @@ impl TwoStepIndex {
         TwoStepIndex::from_u32(max_index - index)
     }
 }
-/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=VisitPlacesWith | COMPLEXITY=6 | LINES=16 */
 
 struct VisitPlacesWith<F>(F);
 
@@ -550,7 +527,6 @@ where
         self.visit_projection(place.as_ref(), ctxt, location);
     }
 }
-/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=save_as_intervals | COMPLEXITY=50 | LINES=86 */
 
 /// Add points depending on the result of the given dataflow analysis.
 fn save_as_intervals<'tcx>(

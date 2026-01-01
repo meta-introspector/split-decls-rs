@@ -1,19 +1,15 @@
 // SRC: ../rust/compiler/rustc_mir_build/src/builder/expr/as_temp.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 // See docs in build/expr/mod.rs
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_complete::HirId;
 use crate::rustc_complete::middle::region::{Scope, ScopeData};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::mir::*;
 use crate::rustc_complete::thir::*;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 
 use crate::builder::scope::DropKind;
 use crate::builder::{BlockAnd, BlockAndExtension, Builder};
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=as_temp_inner | COMPLEXITY=82 | LINES=132 */
 
 impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// Compile `expr` into a fresh temporary. This is used when building

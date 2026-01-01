@@ -1,17 +1,12 @@
 // SRC: ../rust/compiler/rustc_lint/src/let_underscore.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_complete::MultiSpan;
 use rustc_hir as hir;
 use crate::rustc_complete::ty;
 use crate::rustc_complete::{declare_lint, declare_lint_pass};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{Symbol, sym};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::lints::{NonBindingLet, NonBindingLetSub};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{LateContext, LateLintPass, LintContext};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=47 */
 
 declare_lint! {
     /// The `let_underscore_drop` lint checks for statements which don't bind
@@ -59,7 +54,6 @@ declare_lint! {
     Allow,
     "non-binding let on a type that has a destructor"
 }
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=41 */
 
 declare_lint! {
     /// The `let_underscore_lock` lint checks for statements which don't bind
@@ -101,7 +95,6 @@ declare_lint! {
     Deny,
     "non-binding let on a synchronization lock"
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_local | COMPLEXITY=47 | LINES=74 */
 
 declare_lint_pass!(LetUnderscore => [LET_UNDERSCORE_DROP, LET_UNDERSCORE_LOCK]);
 

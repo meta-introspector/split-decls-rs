@@ -1,32 +1,23 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/placeholder_error.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::fmt;
 
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_complete::{Diag, IntoDiagArg};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::def::Namespace;
 use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::error::ExpectedFound;
 use crate::rustc_complete::ty::print::{FmtPrinter, Print, PrintTraitRefExt as _, RegionHighlightMode};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, GenericArgsRef, RePlaceholder, Region, TyCtxt};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::errors::{
     ActualImplExpectedKind, ActualImplExpectedLifetimeKind, ActualImplExplNotes,
     TraitPlaceholderMismatch, TyOrSig,
 };
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::infer::{RegionResolutionError, SubregionOrigin, TypeTrace, ValuePairs};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::traits::{ObligationCause, ObligationCauseCode};
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=Highlighted | COMPLEXITY=2 | LINES=9 */
 
 // HACK(eddyb) maybe move this in a more central location.
 #[derive(Copy, Clone)]
@@ -36,7 +27,6 @@ pub struct Highlighted<'tcx, T> {
     pub value: T,
     pub ns: Namespace,
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=9 */
 
 impl<'tcx, T> IntoDiagArg for Highlighted<'tcx, T>
 where
@@ -46,14 +36,12 @@ where
         crate::rustc_errors::DiagArgValue::Str(self.to_string().into())
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=map | COMPLEXITY=4 | LINES=6 */
 
 impl<'tcx, T> Highlighted<'tcx, T> {
     fn map<U>(self, f: impl FnOnce(T) -> U) -> Highlighted<'tcx, U> {
         Highlighted { tcx: self.tcx, highlight: self.highlight, value: f(self.value), ns: self.ns }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=13 */
 
 impl<'tcx, T> fmt::Display for Highlighted<'tcx, T>
 where
@@ -67,7 +55,6 @@ where
         f.write_str(&p.into_buffer())
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=try_report_trait_placeholder_mismatch | COMPLEXITY=160 | LINES=441 */
 
 impl<'tcx> NiceRegionError<'_, 'tcx> {
     /// When given a `ConcreteFailure` for a function with arguments containing a named region and

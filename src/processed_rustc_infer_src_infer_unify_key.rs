@@ -1,12 +1,9 @@
 // SRC: ../rust/compiler/rustc_infer/src/infer/unify_key.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::cmp;
 use std::marker::PhantomData;
 
 use crate::rustc_data_structures::unify::{NoError, UnifyKey, UnifyValue};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, ty};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
 use crate::rustc_complete::Span;
 use crate::rustc_complete::def_id::DefId;
 
@@ -15,21 +12,18 @@ pub(crate) enum RegionVariableValue<'tcx> {
     Known { value: ty::Region<'tcx> },
     Unknown { universe: ty::UniverseIndex },
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq, Copy, Clone, Debug)]
 pub(crate) struct RegionVidKey<'tcx> {
     pub vid: ty::RegionVid,
     pub phantom: PhantomData<RegionVariableValue<'tcx>>,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> From<ty::RegionVid> for RegionVidKey<'tcx> {
     fn from(vid: ty::RegionVid) -> Self {
         RegionVidKey { vid, phantom: PhantomData }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=index | COMPLEXITY=7 | LINES=15 */
 
 impl<'tcx> UnifyKey for RegionVidKey<'tcx> {
     type Value = RegionVariableValue<'tcx>;
@@ -45,7 +39,6 @@ impl<'tcx> UnifyKey for RegionVidKey<'tcx> {
         "RegionVidKey"
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=unify_values | COMPLEXITY=33 | LINES=45 */
 
 pub(crate) struct RegionUnificationError;
 
@@ -91,7 +84,6 @@ impl<'tcx> UnifyValue for RegionVariableValue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ConstVariableOrigin | COMPLEXITY=6 | LINES=11 */
 
 // Generic consts.
 
@@ -103,14 +95,12 @@ pub struct ConstVariableOrigin {
     /// This should only be used for diagnostics.
     pub param_def_id: Option<DefId>,
 }
-/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum ConstVariableValue<'tcx> {
     Known { value: ty::Const<'tcx> },
     Unknown { origin: ConstVariableOrigin, universe: ty::UniverseIndex },
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
 
 impl<'tcx> ConstVariableValue<'tcx> {
     /// If this value is known, returns the const it is known to be.
@@ -122,21 +112,18 @@ impl<'tcx> ConstVariableValue<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(PartialEq, Copy, Clone, Debug)]
 pub(crate) struct ConstVidKey<'tcx> {
     pub vid: ty::ConstVid,
     pub phantom: PhantomData<ty::Const<'tcx>>,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
 
 impl<'tcx> From<ty::ConstVid> for ConstVidKey<'tcx> {
     fn from(vid: ty::ConstVid) -> Self {
         ConstVidKey { vid, phantom: PhantomData }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=index | COMPLEXITY=13 | LINES=18 */
 
 impl<'tcx> UnifyKey for ConstVidKey<'tcx> {
     type Value = ConstVariableValue<'tcx>;
@@ -155,7 +142,6 @@ impl<'tcx> UnifyKey for ConstVidKey<'tcx> {
         if a.vid.as_u32() < b.vid.as_u32() { Some((a, b)) } else { Some((b, a)) }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=unify_values | COMPLEXITY=22 | LINES=30 */
 
 impl<'tcx> UnifyValue for ConstVariableValue<'tcx> {
     type Error = NoError;

@@ -1,15 +1,12 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/adjustment.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use crate::rustc_abi::FieldIdx;
 use rustc_hir as hir;
 use crate::rustc_complete::def_id::DefId;
 use crate::rustc_complete::lang_items::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::Span;
 
 use crate::ty::{Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=31 */
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, TyEncodable, TyDecodable, Hash, HashStable)]
 pub enum PointerCoercion {
@@ -41,7 +38,6 @@ pub enum PointerCoercion {
     /// based on the precise source/target type at hand.
     Unsize,
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=8 | LINES=31 */
 
 /// Represents coercing a value to a different type of value.
 ///
@@ -73,7 +69,6 @@ pub enum PointerCoercion {
 ///
 ///    Note that for a struct, the 'deep' unsizing of the struct is not recorded.
 ///    E.g., `struct Foo<T> { x: T }` we can coerce `&Foo<[i32; 4]>` to `&Foo<[i32]>`
-/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Adjustment | COMPLEXITY=3 | LINES=15 */
 ///    The autoderef and -ref are the same as in the above example, but the type
 ///    stored in `unsize` is `Foo<[i32]>`, we don't store any further detail about
 ///    the underlying conversions from `[i32; 4]` to `[i32]`.
@@ -89,14 +84,12 @@ pub struct Adjustment<'tcx> {
     pub kind: Adjust,
     pub target: Ty<'tcx>,
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_region_borrow | COMPLEXITY=3 | LINES=6 */
 
 impl<'tcx> Adjustment<'tcx> {
     pub fn is_region_borrow(&self) -> bool {
         matches!(self.kind, Adjust::Borrow(AutoBorrow::Ref(..)))
     }
 }
-/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=17 */
 
 #[derive(Clone, Debug, TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
 pub enum Adjust {
@@ -114,7 +107,6 @@ pub enum Adjust {
     /// Take a pinned reference and reborrow as a `Pin<&mut T>` or `Pin<&T>`.
     ReborrowPin(hir::Mutability),
 }
-/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=OverloadedDeref | COMPLEXITY=3 | LINES=13 */
 
 /// An overloaded autoderef step, representing a `Deref(Mut)::deref(_mut)`
 /// call, with the signature `&'a T -> &'a U` or `&'a mut T -> &'a mut U`.
@@ -128,7 +120,6 @@ pub struct OverloadedDeref {
     /// that triggered this overloaded deref.
     pub span: Span,
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=method_call | COMPLEXITY=12 | LINES=16 */
 
 impl OverloadedDeref {
     /// Get the [`DefId`] of the method call for the given `Deref`/`DerefMut` trait
@@ -145,7 +136,6 @@ impl OverloadedDeref {
             .def_id
     }
 }
-/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
 
 /// At least for initial deployment, we want to limit two-phase borrows to
 /// only a few specific cases. Right now, those are mostly "things that desugar"
@@ -164,14 +154,12 @@ pub enum AllowTwoPhase {
     Yes,
     No,
 }
-/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
 
 #[derive(Copy, Clone, PartialEq, Debug, TyEncodable, TyDecodable, HashStable)]
 pub enum AutoBorrowMutability {
     Mut { allow_two_phase_borrow: AllowTwoPhase },
     Not,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=12 */
 
 impl AutoBorrowMutability {
     /// Creates an `AutoBorrowMutability` from a mutability and allowance of two phase borrows.
@@ -184,7 +172,6 @@ impl AutoBorrowMutability {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=from | COMPLEXITY=10 | LINES=9 */
 
 impl From<AutoBorrowMutability> for hir::Mutability {
     fn from(m: AutoBorrowMutability) -> Self {
@@ -194,7 +181,6 @@ impl From<AutoBorrowMutability> for hir::Mutability {
         }
     }
 }
-/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(Copy, Clone, PartialEq, Debug, TyEncodable, TyDecodable, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
@@ -205,7 +191,6 @@ pub enum AutoBorrow {
     /// Converts from T to *T.
     RawPtr(hir::Mutability),
 }
-/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=CoerceUnsizedInfo | COMPLEXITY=7 | LINES=15 */
 
 /// Information for `CoerceUnsized` impls, storing information we
 /// have computed about the coercion.
@@ -221,14 +206,12 @@ pub struct CoerceUnsizedInfo {
     /// fields need to be coerced.
     pub custom_kind: Option<CustomCoerceUnsized>,
 }
-/* AST_META: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 
 #[derive(Clone, Copy, TyEncodable, TyDecodable, Debug, HashStable)]
 pub enum CustomCoerceUnsized {
     /// Records the index of the field being coerced.
     Struct(FieldIdx),
 }
-/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=PatAdjustment | COMPLEXITY=7 | LINES=10 */
 
 /// Represents an implicit coercion applied to the scrutinee of a match before testing a pattern
 /// against it. Currently, this is used only for implicit dereferences.
@@ -239,7 +222,6 @@ pub struct PatAdjustment<'tcx> {
     /// pattern.
     pub source: Ty<'tcx>,
 }
-/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
 
 /// Represents implicit coercions of patterns' types, rather than values' types.
 #[derive(Clone, Copy, PartialEq, Debug, TyEncodable, TyDecodable, HashStable)]

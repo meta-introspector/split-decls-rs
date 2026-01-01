@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_interface/src/queries.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
 use std::any::Any;
 use std::sync::Arc;
 
@@ -13,7 +12,6 @@ use crate::rustc_complete::dep_graph::DepGraph;
 use crate::rustc_complete::ty::TyCtxt;
 use crate::rustc_complete::Session;
 use crate::rustc_complete::config::{self, OutputFilenames, OutputType};
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Linker | COMPLEXITY=2 | LINES=12 */
 
 use crate::errors::FailedWritingFile;
 use crate::passes;
@@ -26,7 +24,6 @@ pub struct Linker {
     metadata: EncodedMetadata,
     ongoing_codegen: Box<dyn Any>,
 }
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=codegen_and_build_linker | COMPLEXITY=27 | LINES=84 */
 
 impl Linker {
     pub fn codegen_and_build_linker(

@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/abi_cafe.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::path::Dirs;
 use crate::prepare::GitRepo;
 use crate::utils::{CargoProject, Compiler, spawn_and_wait};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::{CodegenBackend, SysrootKind, build_sysroot};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=69 */
 
 static ABI_CAFE_REPO: GitRepo = GitRepo::github(
     "Gankra",

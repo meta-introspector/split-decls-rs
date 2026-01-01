@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_middle/src/ty/relate.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
 use std::iter;
 
 pub use rustc_type_ir::relate::*;
 
 use crate::ty::error::{ExpectedFound, TypeError};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::ty::{self as ty, Ty, TyCtxt};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=14 | LINES=26 */
 
 pub type RelateResult<'tcx, T> = rustc_type_ir::relate::RelateResult<TyCtxt<'tcx>, T>;
 
@@ -34,7 +31,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::ImplSubject<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=5 | LINES=11 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for Ty<'tcx> {
     #[inline]
@@ -46,7 +42,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for Ty<'tcx> {
         relation.tys(a, b)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=20 | LINES=30 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Pattern<'tcx> {
     #[inline]
@@ -77,7 +72,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Pattern<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=25 | LINES=36 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -114,7 +108,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for &'tcx ty::List<ty::PolyExistentialPredicate<
         tcx.mk_poly_existential_predicates_from_iter(v)
     }
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::GenericArgsRef<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -125,7 +118,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::GenericArgsRef<'tcx> {
         relate_args_invariantly(relation, a, b)
     }
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Region<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -136,7 +128,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Region<'tcx> {
         relation.regions(a, b)
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=5 | LINES=10 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Const<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -147,7 +138,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Const<'tcx> {
         relation.consts(a, b)
     }
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=21 | LINES=25 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Expr<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -173,7 +163,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Expr<'tcx> {
         Ok(ty::Expr::new(ae.kind, args))
     }
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=15 | LINES=21 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::GenericArg<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(
@@ -195,7 +184,6 @@ impl<'tcx> Relate<TyCtxt<'tcx>> for ty::GenericArg<'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=relate | COMPLEXITY=9 | LINES=14 */
 
 impl<'tcx> Relate<TyCtxt<'tcx>> for ty::Term<'tcx> {
     fn relate<R: TypeRelation<TyCtxt<'tcx>>>(

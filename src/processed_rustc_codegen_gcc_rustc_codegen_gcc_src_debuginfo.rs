@@ -1,25 +1,17 @@
 // SRC: ../rust/compiler/rustc_codegen_gcc/src/debuginfo.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use std::ops::Range;
 use std::sync::Arc;
 
 use gccjit::{Function, Location, RValue};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_abi::Size;
 use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_codegen_ssa::traits::{DebugInfoBuilderMethods, DebugInfoCodegenMethods};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_index::bit_set::DenseBitSet;
 use crate::rustc_index::{Idx, IndexVec};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::mir::{self, Body, SourceScope};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::DebugInfo;
 use crate::rustc_complete::{BytePos, Pos, SourceFile, SourceFileAndLine, Span, Symbol};
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dbg_var_addr | COMPLEXITY=16 | LINES=42 */
 use crate::rustc_target::callconv::FnAbi;
 
 use crate::builder::Builder;
@@ -62,7 +54,6 @@ impl<'a, 'gcc, 'tcx> DebugInfoBuilderMethods for Builder<'a, 'gcc, 'tcx> {
         self.location = None;
     }
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=compute_mir_scopes | COMPLEXITY=14 | LINES=33 */
 
 /// Generate the `debug_context` in an MIR Body.
 /// # Source of Origin
@@ -96,7 +87,6 @@ fn compute_mir_scopes<'gcc, 'tcx>(
     }
     assert!(instantiated.count() == mir.source_scopes.len());
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=make_mir_scope | COMPLEXITY=30 | LINES=76 */
 
 /// Update the `debug_context`, adding new scope to it,
 /// if it's not added as is denoted in `instantiated`.
@@ -173,7 +163,6 @@ fn make_mir_scope<'gcc, 'tcx>(
     };
     instantiated.insert(scope);
 }
-/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=DebugLoc | COMPLEXITY=2 | LINES=13 */
 
 /// A source code location used to generate debug information.
 // FIXME(eddyb) rename this to better indicate it's a duplicate of
@@ -187,7 +176,6 @@ pub struct DebugLoc {
     /// The (1-based) column number.
     pub col: u32,
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lookup_debug_loc | COMPLEXITY=17 | LINES=31 */
 
 impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
     /// Looks up debug source information about a `BytePos`.
@@ -219,7 +207,6 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=create_vtable_debuginfo | COMPLEXITY=46 | LINES=107 */
 
 impl<'gcc, 'tcx> DebugInfoCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
     fn create_vtable_debuginfo(

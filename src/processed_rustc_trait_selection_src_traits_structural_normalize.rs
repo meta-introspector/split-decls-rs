@@ -1,13 +1,10 @@
 // SRC: ../rust/compiler/rustc_trait_selection/src/traits/structural_normalize.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 use crate::rustc_infer::infer::at::At;
 use crate::rustc_infer::traits::TraitEngine;
 use rustc_macros::extension;
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use crate::traits::{NormalizeExt, Obligation};
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=structurally_normalize_ty | COMPLEXITY=22 | LINES=59 */
 
 #[extension(pub trait StructurallyNormalizeExt<'tcx>)]
 impl<'tcx> At<'_, 'tcx> {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/lint_helpers.rs
-/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
 use crate::prelude::*;
 
 pub(crate) struct AsPtrParser;
@@ -15,7 +14,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for AsPtrParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::AsPtr;
 }
-/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 pub(crate) struct PubTransparentParser;
 impl<S: Stage> NoArgsAttributeParser<S> for PubTransparentParser {
@@ -28,7 +26,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for PubTransparentParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::PubTransparent;
 }
-/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
 
 pub(crate) struct PassByValueParser;
 impl<S: Stage> NoArgsAttributeParser<S> for PassByValueParser {
@@ -41,7 +38,6 @@ impl<S: Stage> NoArgsAttributeParser<S> for PassByValueParser {
     ]);
     const CREATE: fn(Span) -> AttributeKind = AttributeKind::PassByValue;
 }
-/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
 
 pub(crate) struct AutomaticallyDerivedParser;
 impl<S: Stage> NoArgsAttributeParser<S> for AutomaticallyDerivedParser {

@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_data_structures/src/intern/tests.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=S(u32); | COMPLEXITY=5 | LINES=10 */
 use super::*;
 
 #[derive(Debug)]
@@ -10,10 +9,8 @@ impl PartialEq for S {
         panic!("shouldn't be called");
     }
 }
-/* AST_META: AST_ID=2 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
 
 impl Eq for S {}
-/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=partial_cmp | COMPLEXITY=5 | LINES=8 */
 
 impl PartialOrd for S {
     fn partial_cmp(&self, other: &S) -> Option<Ordering> {
@@ -22,7 +19,6 @@ impl PartialOrd for S {
         self.0.partial_cmp(&other.0)
     }
 }
-/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cmp | COMPLEXITY=5 | LINES=8 */
 
 impl Ord for S {
     fn cmp(&self, other: &S) -> Ordering {
@@ -31,7 +27,6 @@ impl Ord for S {
         self.0.cmp(&other.0)
     }
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_uniq | COMPLEXITY=4 | LINES=30 */
 
 #[test]
 fn test_uniq() {

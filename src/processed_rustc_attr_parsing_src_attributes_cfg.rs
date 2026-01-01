@@ -1,9 +1,6 @@
 // SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/cfg.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{LitKind, NodeId};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_feature::{AttributeTemplate, Features, template};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
 use crate::rustc_complete::RustcVersion;
 use crate::rustc_complete::attrs::CfgEntry;
 use crate::rustc_complete::Session;
@@ -12,17 +9,13 @@ use crate::rustc_complete::lint::BuiltinLintDiag;
 use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
 use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::{Span, Symbol, sym};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use thin_vec::ThinVec;
 
 use crate::context::{AcceptContext, ShouldEmit, Stage};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::parser::{ArgParser, MetaItemListParser, MetaItemOrLitParser, NameValueParser};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::{
     CfgMatchesLintEmitter, fluent_generated, parse_version, session_diagnostics, try_gate_cfg,
 };
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=parse_cfg_attr | COMPLEXITY=5 | LINES=20 */
 
 pub const CFG_TEMPLATE: AttributeTemplate = template!(
     List: &["predicate"],
@@ -43,7 +36,6 @@ pub fn parse_cfg_attr<'c, S: Stage>(
     };
     parse_cfg_entry(cx, single)
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=53 */
 
 pub(crate) fn parse_cfg_entry<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,
@@ -97,7 +89,6 @@ pub(crate) fn parse_cfg_entry<S: Stage>(
         MetaItemOrLitParser::Err(_, _) => return None,
     })
 }
-/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parse_cfg_entry_version | COMPLEXITY=12 | LINES=29 */
 
 fn parse_cfg_entry_version<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,
@@ -127,7 +118,6 @@ fn parse_cfg_entry_version<S: Stage>(
 
     Some(CfgEntry::Version(min_version, list.span))
 }
-/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=parse_cfg_entry_target | COMPLEXITY=18 | LINES=46 */
 
 fn parse_cfg_entry_target<S: Stage>(
     cx: &mut AcceptContext<'_, '_, S>,
@@ -174,7 +164,6 @@ fn parse_cfg_entry_target<S: Stage>(
     }
     Some(CfgEntry::All(result, list.span))
 }
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=parse_name_value | COMPLEXITY=10 | LINES=23 */
 
 fn parse_name_value<S: Stage>(
     name: Symbol,
@@ -198,7 +187,6 @@ fn parse_name_value<S: Stage>(
 
     Some(CfgEntry::NameValue { name, name_span, value, span })
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=eval_config_entry | COMPLEXITY=75 | LINES=100 */
 
 pub fn eval_config_entry(
     sess: &Session,
@@ -299,13 +287,11 @@ pub fn eval_config_entry(
         }
     }
 }
-/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=5 */
 
 pub enum EvalConfigResult {
     True,
     False { reason: CfgEntry, reason_span: Span },
 }
-/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=as_bool | COMPLEXITY=8 | LINES=9 */
 
 impl EvalConfigResult {
     pub fn as_bool(&self) -> bool {

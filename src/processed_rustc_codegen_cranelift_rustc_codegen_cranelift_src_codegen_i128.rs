@@ -1,5 +1,4 @@
 // SRC: ../rust/compiler/rustc_codegen_cranelift/src/codegen_i128.rs
-/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=49 */
 // Replaces 128-bit operators with lang item calls where necessary
 
 use cranelift_codegen::ir::ArgumentPurpose;
@@ -49,7 +48,6 @@ pub(crate) fn maybe_codegen<'tcx>(
         BinOp::AddWithOverflow | BinOp::SubWithOverflow | BinOp::MulWithOverflow => unreachable!(),
     }
 }
-/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=34 */
 
 pub(crate) fn maybe_codegen_mul_checked<'tcx>(
     fx: &mut FunctionCx<'_, '_, 'tcx>,

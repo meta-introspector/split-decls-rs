@@ -1,11 +1,8 @@
 // SRC: ../rust/compiler/rustc_ast/src/util/parser.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
 use crate::rustc_complete::kw;
 
 use crate::ast::{self, AssignOpKind, BinOpKind, RangeLimits};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::token::{self, Token};
-/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
 
 /// Associative operator.
 #[derive(Copy, Clone, PartialEq, Debug)]
@@ -21,7 +18,6 @@ pub enum AssocOp {
     /// `..` or `..=` range
     Range(RangeLimits),
 }
-/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
 
 #[derive(PartialEq, Debug)]
 pub enum Fixity {
@@ -32,7 +28,6 @@ pub enum Fixity {
     /// The operator is not associative
     None,
 }
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_token | COMPLEXITY=58 | LINES=110 */
 
 impl AssocOp {
     /// Creates a new AssocOp from a token.
@@ -143,7 +138,6 @@ impl AssocOp {
         )
     }
 }
-/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=34 */
 
 #[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub enum ExprPrecedence {
@@ -178,13 +172,11 @@ pub enum ExprPrecedence {
     // paths, loops, function calls, array indexing, field expressions, method calls
     Unambiguous,
 }
-/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=prec_let_scrutinee_needs_par | COMPLEXITY=2 | LINES=5 */
 
 /// In `let p = e`, operators with precedence `<=` this one requires parentheses in `e`.
 pub fn prec_let_scrutinee_needs_par() -> ExprPrecedence {
     ExprPrecedence::LAnd
 }
-/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=needs_par_as_let_scrutinee | COMPLEXITY=2 | LINES=9 */
 
 /// Suppose we have `let _ = e` and the `order` of `e`.
 /// Is the `order` such that `e` in `let _ = e` needs parentheses when it is on the RHS?
@@ -194,13 +186,10 @@ pub fn prec_let_scrutinee_needs_par() -> ExprPrecedence {
 pub fn needs_par_as_let_scrutinee(order: ExprPrecedence) -> bool {
     order <= prec_let_scrutinee_needs_par()
 }
-/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
 
 /// Expressions that syntactically contain an "exterior" struct literal i.e., not surrounded by any
 /// parens or other delimiters, e.g., `X { y: 1 }`, `X { y: 1 }.method()`, `foo == X { y: 1 }` and
-/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=1 */
 /// `X { y: 1 } == foo` all do, but `(X { y: 1 }) == foo` does not.
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=contains_exterior_struct_lit | COMPLEXITY=16 | LINES=29 */
 pub fn contains_exterior_struct_lit(value: &ast::Expr) -> bool {
     match &value.kind {
         ast::ExprKind::Struct(..) => true,

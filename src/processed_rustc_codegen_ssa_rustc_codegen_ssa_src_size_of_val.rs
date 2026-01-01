@@ -1,22 +1,17 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/size_of_val.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
 // Computing the size and alignment of a value.
 
 use crate::rustc_abi::WrappingRange;
 use crate::rustc_complete::LangItem;
 use crate::rustc_complete::bug;
 use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Ty};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, trace};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
 
 use crate::common::IntPredicate;
 use crate::traits::*;
 use crate::{common, meth};
-/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=size_and_align_of_dst | COMPLEXITY=57 | LINES=169 */
 
 pub fn size_and_align_of_dst<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     bx: &mut Bx,

@@ -1,30 +1,19 @@
 // SRC: ../rust/compiler/rustc_codegen_ssa/src/mir/rvalue.rs
-/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use itertools::Itertools as _;
 use crate::rustc_abi::{self as abi, FIRST_VARIANT};
-/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::ty::adjustment::PointerCoercion;
 use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
-/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::rustc_complete::{bug, mir, span_bug};
-/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
-/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 
 use super::operand::{OperandRef, OperandRefBuilder, OperandValue};
-/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::place::{PlaceRef, PlaceValue, codegen_tag_value};
-/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use super::{FunctionCx, LocalRef};
-/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
 use crate::common::{IntPredicate, TypeKind};
-/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
 use crate::traits::*;
 use crate::{MemFlags, base};
-/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=codegen_transmute | COMPLEXITY=521 | LINES=985 */
 
 impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
     #[instrument(level = "trace", skip(self, bx))]
@@ -1010,7 +999,6 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         OperandValue::Pair(val, of)
     }
 }
-/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=78 */
 
 /// Transmutes a single scalar value `imm` from `from_scalar` to `to_scalar`.
 ///
@@ -1089,7 +1077,6 @@ pub(super) fn transmute_scalar<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     imm = bx.to_immediate_scalar(imm, to_scalar);
     imm
 }
-/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=assume_scalar_range | COMPLEXITY=32 | LINES=44 */
 
 /// Emits an `assume` call that `imm`'s value is within the known range of `scalar`.
 ///
