@@ -1,0 +1,317 @@
+# AST Trace: ../rust/library/core/src/iter/adapters/intersperse.rs
+
+Generated 13 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+use crate::fmt;
+use crate::iter::{Fuse, FusedIterator};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=Intersperse | COMPLEXITY=4 | LINES=16
+
+```rust
+/// An iterator adapter that places a separator between all elements.
+///
+/// This `struct` is created by [`Iterator::intersperse`]. See its documentation
+/// for more information.
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+#[derive(Debug, Clone)]
+pub struct Intersperse<I: Iterator>
+where
+    I::Item: Clone,
+{
+    started: bool,
+    separator: I::Item,
+    next_item: Option<I::Item>,
+    iter: Fuse<I>,
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I> FusedIterator for Intersperse<I>
+where
+    I: FusedIterator,
+    I::Item: Clone,
+{
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
+
+```rust
+impl<I: Iterator> Intersperse<I>
+where
+    I::Item: Clone,
+{
+    pub(in crate::iter) fn new(iter: I, separator: I::Item) -> Self {
+        Self { started: false, separator, next_item: None, iter: iter.fuse() }
+    }
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=next | COMPLEXITY=21 | LINES=49
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I> Iterator for Intersperse<I>
+where
+    I: Iterator,
+    I::Item: Clone,
+{
+    type Item = I::Item;
+
+    #[inline]
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.started {
+            if let Some(v) = self.next_item.take() {
+                Some(v)
+            } else {
+                let next_item = self.iter.next();
+                if next_item.is_some() {
+                    self.next_item = next_item;
+                    Some(self.separator.clone())
+                } else {
+                    None
+                }
+            }
+        } else {
+            self.started = true;
+            self.iter.next()
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        intersperse_size_hint(&self.iter, self.started, self.next_item.is_some())
+    }
+
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        Self: Sized,
+        F: FnMut(B, Self::Item) -> B,
+    {
+        let separator = self.separator;
+        intersperse_fold(
+            self.iter,
+            init,
+            f,
+            move || separator.clone(),
+            self.started,
+            self.next_item,
+        )
+    }
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=IntersperseWith | COMPLEXITY=4 | LINES=15
+
+```rust
+/// An iterator adapter that places a separator between all elements.
+///
+/// This `struct` is created by [`Iterator::intersperse_with`]. See its
+/// documentation for more information.
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+pub struct IntersperseWith<I, G>
+where
+    I: Iterator,
+{
+    started: bool,
+    separator: G,
+    next_item: Option<I::Item>,
+    iter: Fuse<I>,
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I, G> FusedIterator for IntersperseWith<I, G>
+where
+    I: FusedIterator,
+    G: FnMut() -> I::Item,
+{
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=17
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I, G> fmt::Debug for IntersperseWith<I, G>
+where
+    I: Iterator + fmt::Debug,
+    I::Item: fmt::Debug,
+    G: fmt::Debug,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("IntersperseWith")
+            .field("started", &self.started)
+            .field("separator", &self.separator)
+            .field("iter", &self.iter)
+            .field("next_item", &self.next_item)
+            .finish()
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=17
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I, G> Clone for IntersperseWith<I, G>
+where
+    I: Iterator + Clone,
+    I::Item: Clone,
+    G: Clone,
+{
+    fn clone(&self) -> Self {
+        Self {
+            started: self.started,
+            separator: self.separator.clone(),
+            iter: self.iter.clone(),
+            next_item: self.next_item.clone(),
+        }
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10
+
+```rust
+impl<I, G> IntersperseWith<I, G>
+where
+    I: Iterator,
+    G: FnMut() -> I::Item,
+{
+    pub(in crate::iter) fn new(iter: I, separator: G) -> Self {
+        Self { started: false, separator, next_item: None, iter: iter.fuse() }
+    }
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=next | COMPLEXITY=21 | LINES=41
+
+```rust
+#[unstable(feature = "iter_intersperse", reason = "recently added", issue = "79524")]
+impl<I, G> Iterator for IntersperseWith<I, G>
+where
+    I: Iterator,
+    G: FnMut() -> I::Item,
+{
+    type Item = I::Item;
+
+    #[inline]
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.started {
+            if let Some(v) = self.next_item.take() {
+                Some(v)
+            } else {
+                let next_item = self.iter.next();
+                if next_item.is_some() {
+                    self.next_item = next_item;
+                    Some((self.separator)())
+                } else {
+                    None
+                }
+            }
+        } else {
+            self.started = true;
+            self.iter.next()
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        intersperse_size_hint(&self.iter, self.started, self.next_item.is_some())
+    }
+
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        Self: Sized,
+        F: FnMut(B, Self::Item) -> B,
+    {
+        intersperse_fold(self.iter, init, f, self.separator, self.started, self.next_item)
+    }
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=intersperse_size_hint | COMPLEXITY=3 | LINES=17
+
+```rust
+fn intersperse_size_hint<I>(iter: &I, started: bool, next_is_some: bool) -> (usize, Option<usize>)
+where
+    I: Iterator,
+{
+    let (lo, hi) = iter.size_hint();
+    (
+        lo.saturating_sub(!started as usize)
+            .saturating_add(next_is_some as usize)
+            .saturating_add(lo),
+        hi.and_then(|hi| {
+            hi.saturating_sub(!started as usize)
+                .saturating_add(next_is_some as usize)
+                .checked_add(hi)
+        }),
+    )
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=intersperse_fold | COMPLEXITY=16 | LINES=36
+
+```rust
+fn intersperse_fold<I, B, F, G>(
+    mut iter: I,
+    init: B,
+    mut f: F,
+    mut separator: G,
+    started: bool,
+    mut next_item: Option<I::Item>,
+) -> B
+where
+    I: Iterator,
+    F: FnMut(B, I::Item) -> B,
+    G: FnMut() -> I::Item,
+{
+    let mut accum = init;
+
+    let first = if started {
+        next_item.take()
+    } else {
+        let n = iter.next();
+        // skip invoking fold() for empty iterators
+        if n.is_none() {
+            return accum;
+        }
+        n
+    };
+    if let Some(x) = first {
+        accum = f(accum, x);
+    }
+
+    iter.fold(accum, |mut accum, x| {
+        accum = f(accum, separator());
+        accum = f(accum, x);
+        accum
+    })
+}
+```
+
+---
+*Generated by AST tracing system*

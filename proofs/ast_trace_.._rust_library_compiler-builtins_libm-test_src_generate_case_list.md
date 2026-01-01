@@ -1,0 +1,1758 @@
+# AST Trace: ../rust/library/compiler-builtins/libm-test/src/generate/case_list.rs
+
+Generated 171 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=13
+
+```rust
+//! Test cases to verify specific values.
+//!
+//! Each routine can have a set of inputs and, optinoally, outputs. If an output is provided, it
+//! will be used to check against. If only inputs are provided, the case will be checked against
+//! a basis.
+//!
+//! This is useful for adding regression tests or expected failures.
+
+use libm::hf64;
+#[cfg(f128_enabled)]
+use libm::hf128;
+
+use crate::{CheckBasis, CheckCtx, GeneratorKind, MathOp, op};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=TestCase | COMPLEXITY=2 | LINES=5
+
+```rust
+pub struct TestCase<Op: MathOp> {
+    pub input: Op::RustArgs,
+    pub output: Option<Op::RustRet>,
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=append_inputs | COMPLEXITY=7 | LINES=21
+
+```rust
+impl<Op: MathOp> TestCase<Op> {
+    #[expect(dead_code)]
+    fn append_inputs(v: &mut Vec<Self>, l: &[Op::RustArgs]) {
+        v.extend(l.iter().copied().map(|input| Self {
+            input,
+            output: None,
+        }));
+    }
+
+    fn append_pairs(v: &mut Vec<Self>, l: &[(Op::RustArgs, Option<Op::RustRet>)])
+    where
+        Op::RustRet: Copy,
+    {
+        v.extend(
+            l.iter()
+                .copied()
+                .map(|(input, output)| Self { input, output }),
+        );
+    }
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=acos_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn acos_cases() -> Vec<TestCase<op::acos::Routine>> {
+    vec![]
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=acosf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn acosf_cases() -> Vec<TestCase<op::acosf::Routine>> {
+    vec![]
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=acosh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn acosh_cases() -> Vec<TestCase<op::acosh::Routine>> {
+    vec![]
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=acoshf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn acoshf_cases() -> Vec<TestCase<op::acoshf::Routine>> {
+    vec![]
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=asin_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn asin_cases() -> Vec<TestCase<op::asin::Routine>> {
+    vec![]
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=asinf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn asinf_cases() -> Vec<TestCase<op::asinf::Routine>> {
+    vec![]
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=asinh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn asinh_cases() -> Vec<TestCase<op::asinh::Routine>> {
+    vec![]
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=asinhf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn asinhf_cases() -> Vec<TestCase<op::asinhf::Routine>> {
+    vec![]
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=atan_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atan_cases() -> Vec<TestCase<op::atan::Routine>> {
+    vec![]
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=atan2_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atan2_cases() -> Vec<TestCase<op::atan2::Routine>> {
+    vec![]
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=atan2f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atan2f_cases() -> Vec<TestCase<op::atan2f::Routine>> {
+    vec![]
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=atanf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atanf_cases() -> Vec<TestCase<op::atanf::Routine>> {
+    vec![]
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=atanh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atanh_cases() -> Vec<TestCase<op::atanh::Routine>> {
+    vec![]
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=atanhf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn atanhf_cases() -> Vec<TestCase<op::atanhf::Routine>> {
+    vec![]
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=cbrt_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn cbrt_cases() -> Vec<TestCase<op::cbrt::Routine>> {
+    vec![]
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=cbrtf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn cbrtf_cases() -> Vec<TestCase<op::cbrtf::Routine>> {
+    vec![]
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=ceil_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ceil_cases() -> Vec<TestCase<op::ceil::Routine>> {
+    vec![]
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=ceilf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ceilf_cases() -> Vec<TestCase<op::ceilf::Routine>> {
+    vec![]
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=ceilf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn ceilf128_cases() -> Vec<TestCase<op::ceilf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=ceilf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn ceilf16_cases() -> Vec<TestCase<op::ceilf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=copysign_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn copysign_cases() -> Vec<TestCase<op::copysign::Routine>> {
+    vec![]
+}
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=copysignf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn copysignf_cases() -> Vec<TestCase<op::copysignf::Routine>> {
+    vec![]
+}
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=FUNCTION | NAME=copysignf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn copysignf128_cases() -> Vec<TestCase<op::copysignf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=FUNCTION | NAME=copysignf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn copysignf16_cases() -> Vec<TestCase<op::copysignf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=cos_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn cos_cases() -> Vec<TestCase<op::cos::Routine>> {
+    vec![]
+}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=cosf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn cosf_cases() -> Vec<TestCase<op::cosf::Routine>> {
+    vec![]
+}
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=cosh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn cosh_cases() -> Vec<TestCase<op::cosh::Routine>> {
+    vec![]
+}
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=FUNCTION | NAME=coshf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn coshf_cases() -> Vec<TestCase<op::coshf::Routine>> {
+    vec![]
+}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=erf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn erf_cases() -> Vec<TestCase<op::erf::Routine>> {
+    vec![]
+}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=erfc_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn erfc_cases() -> Vec<TestCase<op::erfc::Routine>> {
+    vec![]
+}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=FUNCTION | NAME=erfcf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn erfcf_cases() -> Vec<TestCase<op::erfcf::Routine>> {
+    vec![]
+}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=FUNCTION | NAME=erff_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn erff_cases() -> Vec<TestCase<op::erff::Routine>> {
+    vec![]
+}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=exp_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn exp_cases() -> Vec<TestCase<op::exp::Routine>> {
+    vec![]
+}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=exp10_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn exp10_cases() -> Vec<TestCase<op::exp10::Routine>> {
+    vec![]
+}
+```
+
+## Block 38
+**Metadata**: AST_ID=38 | TYPE=FUNCTION | NAME=exp10f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn exp10f_cases() -> Vec<TestCase<op::exp10f::Routine>> {
+    vec![]
+}
+```
+
+## Block 39
+**Metadata**: AST_ID=39 | TYPE=FUNCTION | NAME=exp2_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn exp2_cases() -> Vec<TestCase<op::exp2::Routine>> {
+    vec![]
+}
+```
+
+## Block 40
+**Metadata**: AST_ID=40 | TYPE=FUNCTION | NAME=exp2f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn exp2f_cases() -> Vec<TestCase<op::exp2f::Routine>> {
+    vec![]
+}
+```
+
+## Block 41
+**Metadata**: AST_ID=41 | TYPE=FUNCTION | NAME=expf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn expf_cases() -> Vec<TestCase<op::expf::Routine>> {
+    vec![]
+}
+```
+
+## Block 42
+**Metadata**: AST_ID=42 | TYPE=FUNCTION | NAME=expm1_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn expm1_cases() -> Vec<TestCase<op::expm1::Routine>> {
+    vec![]
+}
+```
+
+## Block 43
+**Metadata**: AST_ID=43 | TYPE=FUNCTION | NAME=expm1f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn expm1f_cases() -> Vec<TestCase<op::expm1f::Routine>> {
+    vec![]
+}
+```
+
+## Block 44
+**Metadata**: AST_ID=44 | TYPE=FUNCTION | NAME=fabs_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fabs_cases() -> Vec<TestCase<op::fabs::Routine>> {
+    vec![]
+}
+```
+
+## Block 45
+**Metadata**: AST_ID=45 | TYPE=FUNCTION | NAME=fabsf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fabsf_cases() -> Vec<TestCase<op::fabsf::Routine>> {
+    vec![]
+}
+```
+
+## Block 46
+**Metadata**: AST_ID=46 | TYPE=FUNCTION | NAME=fabsf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fabsf128_cases() -> Vec<TestCase<op::fabsf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 47
+**Metadata**: AST_ID=47 | TYPE=FUNCTION | NAME=fabsf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fabsf16_cases() -> Vec<TestCase<op::fabsf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 48
+**Metadata**: AST_ID=48 | TYPE=FUNCTION | NAME=fdim_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fdim_cases() -> Vec<TestCase<op::fdim::Routine>> {
+    vec![]
+}
+```
+
+## Block 49
+**Metadata**: AST_ID=49 | TYPE=FUNCTION | NAME=fdimf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fdimf_cases() -> Vec<TestCase<op::fdimf::Routine>> {
+    vec![]
+}
+```
+
+## Block 50
+**Metadata**: AST_ID=50 | TYPE=FUNCTION | NAME=fdimf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fdimf128_cases() -> Vec<TestCase<op::fdimf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 51
+**Metadata**: AST_ID=51 | TYPE=FUNCTION | NAME=fdimf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fdimf16_cases() -> Vec<TestCase<op::fdimf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 52
+**Metadata**: AST_ID=52 | TYPE=FUNCTION | NAME=floor_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn floor_cases() -> Vec<TestCase<op::floor::Routine>> {
+    vec![]
+}
+```
+
+## Block 53
+**Metadata**: AST_ID=53 | TYPE=FUNCTION | NAME=floorf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn floorf_cases() -> Vec<TestCase<op::floorf::Routine>> {
+    vec![]
+}
+```
+
+## Block 54
+**Metadata**: AST_ID=54 | TYPE=FUNCTION | NAME=floorf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn floorf128_cases() -> Vec<TestCase<op::floorf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 55
+**Metadata**: AST_ID=55 | TYPE=FUNCTION | NAME=floorf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn floorf16_cases() -> Vec<TestCase<op::floorf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 56
+**Metadata**: AST_ID=56 | TYPE=FUNCTION | NAME=fma_cases | COMPLEXITY=2 | LINES=12
+
+```rust
+fn fma_cases() -> Vec<TestCase<op::fma::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Previous failure with incorrect sign
+            ((5e-324, -5e-324, 0.0), Some(-0.0)),
+        ],
+    );
+    v
+}
+```
+
+## Block 57
+**Metadata**: AST_ID=57 | TYPE=FUNCTION | NAME=fmaf_cases | COMPLEXITY=4 | LINES=15
+
+```rust
+fn fmaf_cases() -> Vec<TestCase<op::fmaf::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Known rounding error for some implementations (notably MinGW)
+            (
+                (-1.9369631e13f32, 2.1513551e-7, -1.7354427e-24),
+                Some(-4167095.8),
+            ),
+        ],
+    );
+    v
+}
+```
+
+## Block 58
+**Metadata**: AST_ID=58 | TYPE=FUNCTION | NAME=fmaf128_cases | COMPLEXITY=4 | LINES=29
+
+```rust
+#[cfg(f128_enabled)]
+fn fmaf128_cases() -> Vec<TestCase<op::fmaf128::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            (
+                // Tricky rounding case that previously failed in extensive tests
+                (
+                    hf128!("-0x1.1966cc01966cc01966cc01966f06p-25"),
+                    hf128!("-0x1.669933fe69933fe69933fe6997c9p-16358"),
+                    hf128!("-0x0.000000000000000000000000048ap-16382"),
+                ),
+                Some(hf128!("0x0.c5171470a3ff5e0f68d751491b18p-16382")),
+            ),
+            (
+                // Subnormal edge case that caused a failure
+                (
+                    hf128!("0x0.7ffffffffffffffffffffffffff7p-16382"),
+                    hf128!("0x1.ffffffffffffffffffffffffffffp-1"),
+                    hf128!("0x0.8000000000000000000000000009p-16382"),
+                ),
+                Some(hf128!("0x1.0000000000000000000000000000p-16382")),
+            ),
+        ],
+    );
+    v
+}
+```
+
+## Block 59
+**Metadata**: AST_ID=59 | TYPE=FUNCTION | NAME=fmaxf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fmaxf16_cases() -> Vec<TestCase<op::fmaxf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 60
+**Metadata**: AST_ID=60 | TYPE=FUNCTION | NAME=fmaxf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmaxf_cases() -> Vec<TestCase<op::fmaxf::Routine>> {
+    vec![]
+}
+```
+
+## Block 61
+**Metadata**: AST_ID=61 | TYPE=FUNCTION | NAME=fmax_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmax_cases() -> Vec<TestCase<op::fmax::Routine>> {
+    vec![]
+}
+```
+
+## Block 62
+**Metadata**: AST_ID=62 | TYPE=FUNCTION | NAME=fmaxf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fmaxf128_cases() -> Vec<TestCase<op::fmaxf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 63
+**Metadata**: AST_ID=63 | TYPE=FUNCTION | NAME=fmaximumf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fmaximumf16_cases() -> Vec<TestCase<op::fmaximumf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 64
+**Metadata**: AST_ID=64 | TYPE=FUNCTION | NAME=fmaximumf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmaximumf_cases() -> Vec<TestCase<op::fmaximumf::Routine>> {
+    vec![]
+}
+```
+
+## Block 65
+**Metadata**: AST_ID=65 | TYPE=FUNCTION | NAME=fmaximum_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmaximum_cases() -> Vec<TestCase<op::fmaximum::Routine>> {
+    vec![]
+}
+```
+
+## Block 66
+**Metadata**: AST_ID=66 | TYPE=FUNCTION | NAME=fmaximumf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fmaximumf128_cases() -> Vec<TestCase<op::fmaximumf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 67
+**Metadata**: AST_ID=67 | TYPE=FUNCTION | NAME=fmaximum_numf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fmaximum_numf16_cases() -> Vec<TestCase<op::fmaximum_numf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 68
+**Metadata**: AST_ID=68 | TYPE=FUNCTION | NAME=fmaximum_numf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmaximum_numf_cases() -> Vec<TestCase<op::fmaximum_numf::Routine>> {
+    vec![]
+}
+```
+
+## Block 69
+**Metadata**: AST_ID=69 | TYPE=FUNCTION | NAME=fmaximum_num_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmaximum_num_cases() -> Vec<TestCase<op::fmaximum_num::Routine>> {
+    vec![]
+}
+```
+
+## Block 70
+**Metadata**: AST_ID=70 | TYPE=FUNCTION | NAME=fmaximum_numf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fmaximum_numf128_cases() -> Vec<TestCase<op::fmaximum_numf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 71
+**Metadata**: AST_ID=71 | TYPE=FUNCTION | NAME=fminf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fminf16_cases() -> Vec<TestCase<op::fminf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 72
+**Metadata**: AST_ID=72 | TYPE=FUNCTION | NAME=fminf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fminf_cases() -> Vec<TestCase<op::fminf::Routine>> {
+    vec![]
+}
+```
+
+## Block 73
+**Metadata**: AST_ID=73 | TYPE=FUNCTION | NAME=fmin_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fmin_cases() -> Vec<TestCase<op::fmin::Routine>> {
+    vec![]
+}
+```
+
+## Block 74
+**Metadata**: AST_ID=74 | TYPE=FUNCTION | NAME=fminf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fminf128_cases() -> Vec<TestCase<op::fminf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 75
+**Metadata**: AST_ID=75 | TYPE=FUNCTION | NAME=fminimumf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fminimumf16_cases() -> Vec<TestCase<op::fminimumf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 76
+**Metadata**: AST_ID=76 | TYPE=FUNCTION | NAME=fminimumf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fminimumf_cases() -> Vec<TestCase<op::fminimumf::Routine>> {
+    vec![]
+}
+```
+
+## Block 77
+**Metadata**: AST_ID=77 | TYPE=FUNCTION | NAME=fminimum_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fminimum_cases() -> Vec<TestCase<op::fminimum::Routine>> {
+    vec![]
+}
+```
+
+## Block 78
+**Metadata**: AST_ID=78 | TYPE=FUNCTION | NAME=fminimumf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fminimumf128_cases() -> Vec<TestCase<op::fminimumf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 79
+**Metadata**: AST_ID=79 | TYPE=FUNCTION | NAME=fminimum_numf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fminimum_numf16_cases() -> Vec<TestCase<op::fminimum_numf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 80
+**Metadata**: AST_ID=80 | TYPE=FUNCTION | NAME=fminimum_numf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fminimum_numf_cases() -> Vec<TestCase<op::fminimum_numf::Routine>> {
+    vec![]
+}
+```
+
+## Block 81
+**Metadata**: AST_ID=81 | TYPE=FUNCTION | NAME=fminimum_num_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn fminimum_num_cases() -> Vec<TestCase<op::fminimum_num::Routine>> {
+    vec![]
+}
+```
+
+## Block 82
+**Metadata**: AST_ID=82 | TYPE=FUNCTION | NAME=fminimum_numf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fminimum_numf128_cases() -> Vec<TestCase<op::fminimum_numf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 83
+**Metadata**: AST_ID=83 | TYPE=FUNCTION | NAME=fmod_cases | COMPLEXITY=4 | LINES=14
+
+```rust
+fn fmod_cases() -> Vec<TestCase<op::fmod::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Previous failure with incorrect loop iteration
+            // <https://github.com/rust-lang/libm/pull/469#discussion_r2022337272>
+            ((2.1, 3.123e-320), Some(2.0696e-320)),
+            ((2.1, 2.253547e-318), Some(1.772535e-318)),
+        ],
+    );
+    v
+}
+```
+
+## Block 84
+**Metadata**: AST_ID=84 | TYPE=FUNCTION | NAME=fmodf_cases | COMPLEXITY=5 | LINES=16
+
+```rust
+fn fmodf_cases() -> Vec<TestCase<op::fmodf::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Previous failure with incorrect loop iteration
+            // <https://github.com/rust-lang/libm/pull/469#discussion_r2022337272>
+            ((2.1, 8.858e-42), Some(8.085e-42)),
+            ((2.1, 6.39164e-40), Some(6.1636e-40)),
+            ((5.5, 6.39164e-40), Some(4.77036e-40)),
+            ((-151.189, 6.39164e-40), Some(-5.64734e-40)),
+        ],
+    );
+    v
+}
+```
+
+## Block 85
+**Metadata**: AST_ID=85 | TYPE=FUNCTION | NAME=fmodf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn fmodf128_cases() -> Vec<TestCase<op::fmodf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 86
+**Metadata**: AST_ID=86 | TYPE=FUNCTION | NAME=fmodf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn fmodf16_cases() -> Vec<TestCase<op::fmodf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 87
+**Metadata**: AST_ID=87 | TYPE=FUNCTION | NAME=frexp_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn frexp_cases() -> Vec<TestCase<op::frexp::Routine>> {
+    vec![]
+}
+```
+
+## Block 88
+**Metadata**: AST_ID=88 | TYPE=FUNCTION | NAME=frexpf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn frexpf_cases() -> Vec<TestCase<op::frexpf::Routine>> {
+    vec![]
+}
+```
+
+## Block 89
+**Metadata**: AST_ID=89 | TYPE=FUNCTION | NAME=hypot_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn hypot_cases() -> Vec<TestCase<op::hypot::Routine>> {
+    vec![]
+}
+```
+
+## Block 90
+**Metadata**: AST_ID=90 | TYPE=FUNCTION | NAME=hypotf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn hypotf_cases() -> Vec<TestCase<op::hypotf::Routine>> {
+    vec![]
+}
+```
+
+## Block 91
+**Metadata**: AST_ID=91 | TYPE=FUNCTION | NAME=ilogb_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ilogb_cases() -> Vec<TestCase<op::ilogb::Routine>> {
+    vec![]
+}
+```
+
+## Block 92
+**Metadata**: AST_ID=92 | TYPE=FUNCTION | NAME=ilogbf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ilogbf_cases() -> Vec<TestCase<op::ilogbf::Routine>> {
+    vec![]
+}
+```
+
+## Block 93
+**Metadata**: AST_ID=93 | TYPE=FUNCTION | NAME=j0_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn j0_cases() -> Vec<TestCase<op::j0::Routine>> {
+    vec![]
+}
+```
+
+## Block 94
+**Metadata**: AST_ID=94 | TYPE=FUNCTION | NAME=j0f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn j0f_cases() -> Vec<TestCase<op::j0f::Routine>> {
+    vec![]
+}
+```
+
+## Block 95
+**Metadata**: AST_ID=95 | TYPE=FUNCTION | NAME=j1_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn j1_cases() -> Vec<TestCase<op::j1::Routine>> {
+    vec![]
+}
+```
+
+## Block 96
+**Metadata**: AST_ID=96 | TYPE=FUNCTION | NAME=j1f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn j1f_cases() -> Vec<TestCase<op::j1f::Routine>> {
+    vec![]
+}
+```
+
+## Block 97
+**Metadata**: AST_ID=97 | TYPE=FUNCTION | NAME=jn_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn jn_cases() -> Vec<TestCase<op::jn::Routine>> {
+    vec![]
+}
+```
+
+## Block 98
+**Metadata**: AST_ID=98 | TYPE=FUNCTION | NAME=jnf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn jnf_cases() -> Vec<TestCase<op::jnf::Routine>> {
+    vec![]
+}
+```
+
+## Block 99
+**Metadata**: AST_ID=99 | TYPE=FUNCTION | NAME=ldexp_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ldexp_cases() -> Vec<TestCase<op::ldexp::Routine>> {
+    vec![]
+}
+```
+
+## Block 100
+**Metadata**: AST_ID=100 | TYPE=FUNCTION | NAME=ldexpf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ldexpf_cases() -> Vec<TestCase<op::ldexpf::Routine>> {
+    vec![]
+}
+```
+
+## Block 101
+**Metadata**: AST_ID=101 | TYPE=FUNCTION | NAME=ldexpf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn ldexpf128_cases() -> Vec<TestCase<op::ldexpf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 102
+**Metadata**: AST_ID=102 | TYPE=FUNCTION | NAME=ldexpf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn ldexpf16_cases() -> Vec<TestCase<op::ldexpf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 103
+**Metadata**: AST_ID=103 | TYPE=FUNCTION | NAME=lgamma_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn lgamma_cases() -> Vec<TestCase<op::lgamma::Routine>> {
+    vec![]
+}
+```
+
+## Block 104
+**Metadata**: AST_ID=104 | TYPE=FUNCTION | NAME=lgamma_r_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn lgamma_r_cases() -> Vec<TestCase<op::lgamma_r::Routine>> {
+    vec![]
+}
+```
+
+## Block 105
+**Metadata**: AST_ID=105 | TYPE=FUNCTION | NAME=lgammaf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn lgammaf_cases() -> Vec<TestCase<op::lgammaf::Routine>> {
+    vec![]
+}
+```
+
+## Block 106
+**Metadata**: AST_ID=106 | TYPE=FUNCTION | NAME=lgammaf_r_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn lgammaf_r_cases() -> Vec<TestCase<op::lgammaf_r::Routine>> {
+    vec![]
+}
+```
+
+## Block 107
+**Metadata**: AST_ID=107 | TYPE=FUNCTION | NAME=log_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log_cases() -> Vec<TestCase<op::log::Routine>> {
+    vec![]
+}
+```
+
+## Block 108
+**Metadata**: AST_ID=108 | TYPE=FUNCTION | NAME=log10_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log10_cases() -> Vec<TestCase<op::log10::Routine>> {
+    vec![]
+}
+```
+
+## Block 109
+**Metadata**: AST_ID=109 | TYPE=FUNCTION | NAME=log10f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log10f_cases() -> Vec<TestCase<op::log10f::Routine>> {
+    vec![]
+}
+```
+
+## Block 110
+**Metadata**: AST_ID=110 | TYPE=FUNCTION | NAME=log1p_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log1p_cases() -> Vec<TestCase<op::log1p::Routine>> {
+    vec![]
+}
+```
+
+## Block 111
+**Metadata**: AST_ID=111 | TYPE=FUNCTION | NAME=log1pf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log1pf_cases() -> Vec<TestCase<op::log1pf::Routine>> {
+    vec![]
+}
+```
+
+## Block 112
+**Metadata**: AST_ID=112 | TYPE=FUNCTION | NAME=log2_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log2_cases() -> Vec<TestCase<op::log2::Routine>> {
+    vec![]
+}
+```
+
+## Block 113
+**Metadata**: AST_ID=113 | TYPE=FUNCTION | NAME=log2f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn log2f_cases() -> Vec<TestCase<op::log2f::Routine>> {
+    vec![]
+}
+```
+
+## Block 114
+**Metadata**: AST_ID=114 | TYPE=FUNCTION | NAME=logf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn logf_cases() -> Vec<TestCase<op::logf::Routine>> {
+    vec![]
+}
+```
+
+## Block 115
+**Metadata**: AST_ID=115 | TYPE=FUNCTION | NAME=modf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn modf_cases() -> Vec<TestCase<op::modf::Routine>> {
+    vec![]
+}
+```
+
+## Block 116
+**Metadata**: AST_ID=116 | TYPE=FUNCTION | NAME=modff_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn modff_cases() -> Vec<TestCase<op::modff::Routine>> {
+    vec![]
+}
+```
+
+## Block 117
+**Metadata**: AST_ID=117 | TYPE=FUNCTION | NAME=nextafter_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn nextafter_cases() -> Vec<TestCase<op::nextafter::Routine>> {
+    vec![]
+}
+```
+
+## Block 118
+**Metadata**: AST_ID=118 | TYPE=FUNCTION | NAME=nextafterf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn nextafterf_cases() -> Vec<TestCase<op::nextafterf::Routine>> {
+    vec![]
+}
+```
+
+## Block 119
+**Metadata**: AST_ID=119 | TYPE=FUNCTION | NAME=pow_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn pow_cases() -> Vec<TestCase<op::pow::Routine>> {
+    vec![]
+}
+```
+
+## Block 120
+**Metadata**: AST_ID=120 | TYPE=FUNCTION | NAME=powf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn powf_cases() -> Vec<TestCase<op::powf::Routine>> {
+    vec![]
+}
+```
+
+## Block 121
+**Metadata**: AST_ID=121 | TYPE=FUNCTION | NAME=remainder_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn remainder_cases() -> Vec<TestCase<op::remainder::Routine>> {
+    vec![]
+}
+```
+
+## Block 122
+**Metadata**: AST_ID=122 | TYPE=FUNCTION | NAME=remainderf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn remainderf_cases() -> Vec<TestCase<op::remainderf::Routine>> {
+    vec![]
+}
+```
+
+## Block 123
+**Metadata**: AST_ID=123 | TYPE=FUNCTION | NAME=remquo_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn remquo_cases() -> Vec<TestCase<op::remquo::Routine>> {
+    vec![]
+}
+```
+
+## Block 124
+**Metadata**: AST_ID=124 | TYPE=FUNCTION | NAME=remquof_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn remquof_cases() -> Vec<TestCase<op::remquof::Routine>> {
+    vec![]
+}
+```
+
+## Block 125
+**Metadata**: AST_ID=125 | TYPE=FUNCTION | NAME=rint_cases | COMPLEXITY=3 | LINES=21
+
+```rust
+fn rint_cases() -> Vec<TestCase<op::rint::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Known failure on i586
+            #[cfg(not(x86_no_sse))]
+            (
+                (hf64!("-0x1.e3f13ff995ffcp+38"),),
+                Some(hf64!("-0x1.e3f13ff994000p+38")),
+            ),
+            #[cfg(x86_no_sse)]
+            (
+                (hf64!("-0x1.e3f13ff995ffcp+38"),),
+                Some(hf64!("-0x1.e3f13ff998000p+38")),
+            ),
+        ],
+    );
+    v
+}
+```
+
+## Block 126
+**Metadata**: AST_ID=126 | TYPE=FUNCTION | NAME=rintf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn rintf_cases() -> Vec<TestCase<op::rintf::Routine>> {
+    vec![]
+}
+```
+
+## Block 127
+**Metadata**: AST_ID=127 | TYPE=FUNCTION | NAME=rintf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn rintf128_cases() -> Vec<TestCase<op::rintf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 128
+**Metadata**: AST_ID=128 | TYPE=FUNCTION | NAME=rintf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn rintf16_cases() -> Vec<TestCase<op::rintf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 129
+**Metadata**: AST_ID=129 | TYPE=FUNCTION | NAME=roundf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn roundf16_cases() -> Vec<TestCase<op::roundf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 130
+**Metadata**: AST_ID=130 | TYPE=FUNCTION | NAME=round_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn round_cases() -> Vec<TestCase<op::round::Routine>> {
+    vec![]
+}
+```
+
+## Block 131
+**Metadata**: AST_ID=131 | TYPE=FUNCTION | NAME=roundf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn roundf_cases() -> Vec<TestCase<op::roundf::Routine>> {
+    vec![]
+}
+```
+
+## Block 132
+**Metadata**: AST_ID=132 | TYPE=FUNCTION | NAME=roundf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn roundf128_cases() -> Vec<TestCase<op::roundf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 133
+**Metadata**: AST_ID=133 | TYPE=FUNCTION | NAME=roundevenf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn roundevenf16_cases() -> Vec<TestCase<op::roundevenf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 134
+**Metadata**: AST_ID=134 | TYPE=FUNCTION | NAME=roundeven_cases | COMPLEXITY=3 | LINES=21
+
+```rust
+fn roundeven_cases() -> Vec<TestCase<op::roundeven::Routine>> {
+    let mut v = vec![];
+    TestCase::append_pairs(
+        &mut v,
+        &[
+            // Known failure on i586
+            #[cfg(not(x86_no_sse))]
+            (
+                (hf64!("-0x1.e3f13ff995ffcp+38"),),
+                Some(hf64!("-0x1.e3f13ff994000p+38")),
+            ),
+            #[cfg(x86_no_sse)]
+            (
+                (hf64!("-0x1.e3f13ff995ffcp+38"),),
+                Some(hf64!("-0x1.e3f13ff998000p+38")),
+            ),
+        ],
+    );
+    v
+}
+```
+
+## Block 135
+**Metadata**: AST_ID=135 | TYPE=FUNCTION | NAME=roundevenf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn roundevenf_cases() -> Vec<TestCase<op::roundevenf::Routine>> {
+    vec![]
+}
+```
+
+## Block 136
+**Metadata**: AST_ID=136 | TYPE=FUNCTION | NAME=roundevenf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn roundevenf128_cases() -> Vec<TestCase<op::roundevenf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 137
+**Metadata**: AST_ID=137 | TYPE=FUNCTION | NAME=scalbn_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn scalbn_cases() -> Vec<TestCase<op::scalbn::Routine>> {
+    vec![]
+}
+```
+
+## Block 138
+**Metadata**: AST_ID=138 | TYPE=FUNCTION | NAME=scalbnf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn scalbnf_cases() -> Vec<TestCase<op::scalbnf::Routine>> {
+    vec![]
+}
+```
+
+## Block 139
+**Metadata**: AST_ID=139 | TYPE=FUNCTION | NAME=scalbnf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn scalbnf128_cases() -> Vec<TestCase<op::scalbnf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 140
+**Metadata**: AST_ID=140 | TYPE=FUNCTION | NAME=scalbnf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn scalbnf16_cases() -> Vec<TestCase<op::scalbnf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 141
+**Metadata**: AST_ID=141 | TYPE=FUNCTION | NAME=sin_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sin_cases() -> Vec<TestCase<op::sin::Routine>> {
+    vec![]
+}
+```
+
+## Block 142
+**Metadata**: AST_ID=142 | TYPE=FUNCTION | NAME=sincos_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sincos_cases() -> Vec<TestCase<op::sincos::Routine>> {
+    vec![]
+}
+```
+
+## Block 143
+**Metadata**: AST_ID=143 | TYPE=FUNCTION | NAME=sincosf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sincosf_cases() -> Vec<TestCase<op::sincosf::Routine>> {
+    vec![]
+}
+```
+
+## Block 144
+**Metadata**: AST_ID=144 | TYPE=FUNCTION | NAME=sinf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sinf_cases() -> Vec<TestCase<op::sinf::Routine>> {
+    vec![]
+}
+```
+
+## Block 145
+**Metadata**: AST_ID=145 | TYPE=FUNCTION | NAME=sinh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sinh_cases() -> Vec<TestCase<op::sinh::Routine>> {
+    vec![]
+}
+```
+
+## Block 146
+**Metadata**: AST_ID=146 | TYPE=FUNCTION | NAME=sinhf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sinhf_cases() -> Vec<TestCase<op::sinhf::Routine>> {
+    vec![]
+}
+```
+
+## Block 147
+**Metadata**: AST_ID=147 | TYPE=FUNCTION | NAME=sqrt_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sqrt_cases() -> Vec<TestCase<op::sqrt::Routine>> {
+    vec![]
+}
+```
+
+## Block 148
+**Metadata**: AST_ID=148 | TYPE=FUNCTION | NAME=sqrtf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn sqrtf_cases() -> Vec<TestCase<op::sqrtf::Routine>> {
+    vec![]
+}
+```
+
+## Block 149
+**Metadata**: AST_ID=149 | TYPE=FUNCTION | NAME=sqrtf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn sqrtf128_cases() -> Vec<TestCase<op::sqrtf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 150
+**Metadata**: AST_ID=150 | TYPE=FUNCTION | NAME=sqrtf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn sqrtf16_cases() -> Vec<TestCase<op::sqrtf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 151
+**Metadata**: AST_ID=151 | TYPE=FUNCTION | NAME=tan_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tan_cases() -> Vec<TestCase<op::tan::Routine>> {
+    vec![]
+}
+```
+
+## Block 152
+**Metadata**: AST_ID=152 | TYPE=FUNCTION | NAME=tanf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tanf_cases() -> Vec<TestCase<op::tanf::Routine>> {
+    vec![]
+}
+```
+
+## Block 153
+**Metadata**: AST_ID=153 | TYPE=FUNCTION | NAME=tanh_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tanh_cases() -> Vec<TestCase<op::tanh::Routine>> {
+    vec![]
+}
+```
+
+## Block 154
+**Metadata**: AST_ID=154 | TYPE=FUNCTION | NAME=tanhf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tanhf_cases() -> Vec<TestCase<op::tanhf::Routine>> {
+    vec![]
+}
+```
+
+## Block 155
+**Metadata**: AST_ID=155 | TYPE=FUNCTION | NAME=tgamma_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tgamma_cases() -> Vec<TestCase<op::tgamma::Routine>> {
+    vec![]
+}
+```
+
+## Block 156
+**Metadata**: AST_ID=156 | TYPE=FUNCTION | NAME=tgammaf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn tgammaf_cases() -> Vec<TestCase<op::tgammaf::Routine>> {
+    vec![]
+}
+```
+
+## Block 157
+**Metadata**: AST_ID=157 | TYPE=FUNCTION | NAME=trunc_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn trunc_cases() -> Vec<TestCase<op::trunc::Routine>> {
+    vec![]
+}
+```
+
+## Block 158
+**Metadata**: AST_ID=158 | TYPE=FUNCTION | NAME=truncf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn truncf_cases() -> Vec<TestCase<op::truncf::Routine>> {
+    vec![]
+}
+```
+
+## Block 159
+**Metadata**: AST_ID=159 | TYPE=FUNCTION | NAME=truncf128_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f128_enabled)]
+fn truncf128_cases() -> Vec<TestCase<op::truncf128::Routine>> {
+    vec![]
+}
+```
+
+## Block 160
+**Metadata**: AST_ID=160 | TYPE=FUNCTION | NAME=truncf16_cases | COMPLEXITY=2 | LINES=5
+
+```rust
+#[cfg(f16_enabled)]
+fn truncf16_cases() -> Vec<TestCase<op::truncf16::Routine>> {
+    vec![]
+}
+```
+
+## Block 161
+**Metadata**: AST_ID=161 | TYPE=FUNCTION | NAME=y0_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn y0_cases() -> Vec<TestCase<op::y0::Routine>> {
+    vec![]
+}
+```
+
+## Block 162
+**Metadata**: AST_ID=162 | TYPE=FUNCTION | NAME=y0f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn y0f_cases() -> Vec<TestCase<op::y0f::Routine>> {
+    vec![]
+}
+```
+
+## Block 163
+**Metadata**: AST_ID=163 | TYPE=FUNCTION | NAME=y1_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn y1_cases() -> Vec<TestCase<op::y1::Routine>> {
+    vec![]
+}
+```
+
+## Block 164
+**Metadata**: AST_ID=164 | TYPE=FUNCTION | NAME=y1f_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn y1f_cases() -> Vec<TestCase<op::y1f::Routine>> {
+    vec![]
+}
+```
+
+## Block 165
+**Metadata**: AST_ID=165 | TYPE=FUNCTION | NAME=yn_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn yn_cases() -> Vec<TestCase<op::yn::Routine>> {
+    vec![]
+}
+```
+
+## Block 166
+**Metadata**: AST_ID=166 | TYPE=FUNCTION | NAME=ynf_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+fn ynf_cases() -> Vec<TestCase<op::ynf::Routine>> {
+    vec![]
+}
+```
+
+## Block 167
+**Metadata**: AST_ID=167 | TYPE=FUNCTION | NAME=get_cases | COMPLEXITY=2 | LINES=4
+
+```rust
+pub trait CaseListInput: MathOp + Sized {
+    fn get_cases() -> Vec<TestCase<Self>>;
+}
+```
+
+## Block 168
+**Metadata**: AST_ID=168 | TYPE=FUNCTION | NAME=get_cases | COMPLEXITY=13 | LINES=16
+
+```rust
+macro_rules! impl_case_list {
+    (
+        fn_name: $fn_name:ident,
+        attrs: [$($attr:meta),*],
+    ) => {
+        paste::paste! {
+            $(#[$attr])*
+            impl CaseListInput for crate::op::$fn_name::Routine {
+                fn get_cases() -> Vec<TestCase<Self>> {
+                    [< $fn_name _cases >]()
+                }
+            }
+        }
+    };
+}
+```
+
+## Block 169
+**Metadata**: AST_ID=169 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+libm_macros::for_each_function! {
+    callback: impl_case_list,
+}
+```
+
+## Block 170
+**Metadata**: AST_ID=170 | TYPE=FUNCTION | NAME=get_test_cases_standalone | COMPLEXITY=5 | LINES=15
+
+```rust
+/// This is the test generator for standalone tests, i.e. those with no basis. For this, it
+/// only extracts tests with a known output.
+pub fn get_test_cases_standalone<Op>(
+    ctx: &CheckCtx,
+) -> impl Iterator<Item = (Op::RustArgs, Op::RustRet)> + use<'_, Op>
+where
+    Op: MathOp + CaseListInput,
+{
+    assert_eq!(ctx.basis, CheckBasis::None);
+    assert_eq!(ctx.gen_kind, GeneratorKind::List);
+    Op::get_cases()
+        .into_iter()
+        .filter_map(|x| x.output.map(|o| (x.input, o)))
+}
+```
+
+## Block 171
+**Metadata**: AST_ID=171 | TYPE=FUNCTION | NAME=get_test_cases_basis | COMPLEXITY=3 | LINES=28
+
+```rust
+/// Opposite of the above; extract only test cases that don't have a known output, to be run
+/// against a basis.
+pub fn get_test_cases_basis<Op>(
+    ctx: &CheckCtx,
+) -> (impl Iterator<Item = Op::RustArgs> + use<'_, Op>, u64)
+where
+    Op: MathOp + CaseListInput,
+{
+    assert_ne!(ctx.basis, CheckBasis::None);
+    assert_eq!(ctx.gen_kind, GeneratorKind::List);
+
+    let cases = Op::get_cases();
+    let count: u64 = cases
+        .iter()
+        .filter(|case| case.output.is_none())
+        .count()
+        .try_into()
+        .unwrap();
+
+    (
+        cases
+            .into_iter()
+            .filter(|x| x.output.is_none())
+            .map(|x| x.input),
+        count,
+    )
+}
+```
+
+---
+*Generated by AST tracing system*

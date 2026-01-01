@@ -1,0 +1,239 @@
+# AST Trace: ../rust/compiler/rustc_query_system/src/dep_graph/mod.rs
+
+Generated 11 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
+
+```rust
+pub mod debug;
+pub mod dep_node;
+mod edges;
+mod graph;
+mod query;
+mod serialized;
+
+use std::panic;
+
+pub use dep_node::{DepKind, DepKindStruct, DepNode, DepNodeParams, WorkProductId};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+pub(crate) use graph::DepGraphData;
+pub use graph::{DepGraph, DepNodeIndex, TaskDepsRef, WorkProduct, WorkProductMap, hash_result};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
+
+```rust
+pub use query::DepGraphQuery;
+use rustc_data_structures::profiling::SelfProfilerRef;
+use rustc_data_structures::sync::DynSync;
+use rustc_session::Session;
+pub use serialized::{SerializedDepGraph, SerializedDepNodeIndex};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use tracing::instrument;
+
+use self::graph::{MarkFrame, print_markframe_trace};
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=with_stable_hashing_context | COMPLEXITY=34 | LINES=73
+
+```rust
+use crate::ich::StableHashingContext;
+
+pub trait DepContext: Copy {
+    type Deps: Deps;
+
+    /// Create a hashing context for hashing new results.
+    fn with_stable_hashing_context<R>(self, f: impl FnOnce(StableHashingContext<'_>) -> R) -> R;
+
+    /// Access the DepGraph.
+    fn dep_graph(&self) -> &DepGraph<Self::Deps>;
+
+    /// Access the profiler.
+    fn profiler(&self) -> &SelfProfilerRef;
+
+    /// Access the compiler session.
+    fn sess(&self) -> &Session;
+
+    fn dep_kind_info(&self, dep_node: DepKind) -> &DepKindStruct<Self>;
+
+    #[inline(always)]
+    fn fingerprint_style(self, kind: DepKind) -> FingerprintStyle {
+        let data = self.dep_kind_info(kind);
+        if data.is_anon {
+            return FingerprintStyle::Opaque;
+        }
+        data.fingerprint_style
+    }
+
+    #[inline(always)]
+    /// Return whether this kind always require evaluation.
+    fn is_eval_always(self, kind: DepKind) -> bool {
+        self.dep_kind_info(kind).is_eval_always
+    }
+
+    /// Try to force a dep node to execute and see if it's green.
+    ///
+    /// Returns true if the query has actually been forced. It is valid that a query
+    /// fails to be forced, e.g. when the query key cannot be reconstructed from the
+    /// dep-node or when the query kind outright does not support it.
+    #[inline]
+    #[instrument(skip(self, frame), level = "debug")]
+    fn try_force_from_dep_node(
+        self,
+        dep_node: DepNode,
+        prev_index: SerializedDepNodeIndex,
+        frame: Option<&MarkFrame<'_>>,
+    ) -> bool {
+        let cb = self.dep_kind_info(dep_node.kind);
+        if let Some(f) = cb.force_from_dep_node {
+            match panic::catch_unwind(panic::AssertUnwindSafe(|| f(self, dep_node, prev_index))) {
+                Err(value) => {
+                    if !value.is::<rustc_errors::FatalErrorMarker>() {
+                        print_markframe_trace(self.dep_graph(), frame);
+                    }
+                    panic::resume_unwind(value)
+                }
+                Ok(query_has_been_forced) => query_has_been_forced,
+            }
+        } else {
+            false
+        }
+    }
+
+    /// Load data from the on-disk cache.
+    fn try_load_from_on_disk_cache(self, dep_node: DepNode) {
+        let cb = self.dep_kind_info(dep_node.kind);
+        if let Some(f) = cb.try_load_from_on_disk_cache {
+            f(self, dep_node)
+        }
+    }
+
+    fn with_reduced_queries<T>(self, _: impl FnOnce() -> T) -> T;
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=with_deps | COMPLEXITY=5 | LINES=30
+
+```rust
+pub trait Deps: DynSync {
+    /// Execute the operation with provided dependencies.
+    fn with_deps<OP, R>(deps: TaskDepsRef<'_>, op: OP) -> R
+    where
+        OP: FnOnce() -> R;
+
+    /// Access dependencies from current implicit context.
+    fn read_deps<OP>(op: OP)
+    where
+        OP: for<'a> FnOnce(TaskDepsRef<'a>);
+
+    fn name(&self, dep_kind: DepKind) -> &'static str;
+
+    /// We use this for most things when incr. comp. is turned off.
+    const DEP_KIND_NULL: DepKind;
+
+    /// We use this to create a forever-red node.
+    const DEP_KIND_RED: DepKind;
+
+    /// We use this to create a side effect node.
+    const DEP_KIND_SIDE_EFFECT: DepKind;
+
+    /// We use this to create the anon node with zero dependencies.
+    const DEP_KIND_ANON_ZERO_DEPS: DepKind;
+
+    /// This is the highest value a `DepKind` can have. It's used during encoding to
+    /// pack information into the unused bits.
+    const DEP_KIND_MAX: u16;
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=dep_context | COMPLEXITY=2 | LINES=7
+
+```rust
+pub trait HasDepContext: Copy {
+    type Deps: self::Deps;
+    type DepContext: self::DepContext<Deps = Self::Deps>;
+
+    fn dep_context(&self) -> &Self::DepContext;
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=dep_context | COMPLEXITY=5 | LINES=9
+
+```rust
+impl<T: DepContext> HasDepContext for T {
+    type Deps = T::Deps;
+    type DepContext = Self;
+
+    fn dep_context(&self) -> &Self::DepContext {
+        self
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=dep_context | COMPLEXITY=5 | LINES=9
+
+```rust
+impl<T: HasDepContext, Q: Copy> HasDepContext for (T, Q) {
+    type Deps = T::Deps;
+    type DepContext = T::DepContext;
+
+    fn dep_context(&self) -> &Self::DepContext {
+        self.0.dep_context()
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
+
+```rust
+/// Describes the contents of the fingerprint generated by a given query.
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+pub enum FingerprintStyle {
+    /// The fingerprint is actually a DefPathHash.
+    DefPathHash,
+    /// The fingerprint is actually a HirId.
+    HirId,
+    /// Query key was `()` or equivalent, so fingerprint is just zero.
+    Unit,
+    /// Some opaque hash.
+    Opaque,
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=12
+
+```rust
+impl FingerprintStyle {
+    #[inline]
+    pub const fn reconstructible(self) -> bool {
+        match self {
+            FingerprintStyle::DefPathHash | FingerprintStyle::Unit | FingerprintStyle::HirId => {
+                true
+            }
+            FingerprintStyle::Opaque => false,
+        }
+    }
+}
+```
+
+---
+*Generated by AST tracing system*

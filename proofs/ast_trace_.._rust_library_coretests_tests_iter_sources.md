@@ -1,0 +1,249 @@
+# AST Trace: ../rust/library/coretests/tests/iter/sources.rs
+
+Generated 12 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=test_repeat | COMPLEXITY=2 | LINES=12
+
+```rust
+use core::iter::*;
+
+use super::*;
+
+#[test]
+fn test_repeat() {
+    let mut it = repeat(42);
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(repeat(42).size_hint(), (usize::MAX, None));
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=test_repeat_take | COMPLEXITY=2 | LINES=13
+
+```rust
+#[test]
+fn test_repeat_take() {
+    let mut it = repeat(42).take(3);
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), None);
+    is_trusted_len(repeat(42).take(3));
+    assert_eq!(repeat(42).take(3).size_hint(), (3, Some(3)));
+    assert_eq!(repeat(42).take(0).size_hint(), (0, Some(0)));
+    assert_eq!(repeat(42).take(usize::MAX).size_hint(), (usize::MAX, Some(usize::MAX)));
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=test_repeat_take_collect | COMPLEXITY=2 | LINES=6
+
+```rust
+#[test]
+fn test_repeat_take_collect() {
+    let v: Vec<_> = repeat(42).take(3).collect();
+    assert_eq!(v, vec![42, 42, 42]);
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=test_repeat_with | COMPLEXITY=2 | LINES=11
+
+```rust
+#[test]
+fn test_repeat_with() {
+    #[derive(PartialEq, Debug)]
+    struct NotClone(usize);
+    let mut it = repeat_with(|| NotClone(42));
+    assert_eq!(it.next(), Some(NotClone(42)));
+    assert_eq!(it.next(), Some(NotClone(42)));
+    assert_eq!(it.next(), Some(NotClone(42)));
+    assert_eq!(repeat_with(|| NotClone(42)).size_hint(), (usize::MAX, None));
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=test_repeat_with_take | COMPLEXITY=3 | LINES=13
+
+```rust
+#[test]
+fn test_repeat_with_take() {
+    let mut it = repeat_with(|| 42).take(3);
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), None);
+    is_trusted_len(repeat_with(|| 42).take(3));
+    assert_eq!(repeat_with(|| 42).take(3).size_hint(), (3, Some(3)));
+    assert_eq!(repeat_with(|| 42).take(0).size_hint(), (0, Some(0)));
+    assert_eq!(repeat_with(|| 42).take(usize::MAX).size_hint(), (usize::MAX, Some(usize::MAX)));
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=test_repeat_with_take_collect | COMPLEXITY=3 | LINES=13
+
+```rust
+#[test]
+fn test_repeat_with_take_collect() {
+    let mut curr = 1;
+    let v: Vec<_> = repeat_with(|| {
+        let tmp = curr;
+        curr *= 2;
+        tmp
+    })
+    .take(5)
+    .collect();
+    assert_eq!(v, vec![1, 2, 4, 8, 16]);
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=test_successors | COMPLEXITY=2 | LINES=11
+
+```rust
+#[test]
+fn test_successors() {
+    let mut powers_of_10 = successors(Some(1_u16), |n| n.checked_mul(10));
+    assert_eq!(powers_of_10.by_ref().collect::<Vec<_>>(), &[1, 10, 100, 1_000, 10_000]);
+    assert_eq!(powers_of_10.next(), None);
+
+    let mut empty = successors(None::<u32>, |_| unimplemented!());
+    assert_eq!(empty.next(), None);
+    assert_eq!(empty.next(), None);
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=test_once | COMPLEXITY=2 | LINES=7
+
+```rust
+#[test]
+fn test_once() {
+    let mut it = once(42);
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(it.next(), None);
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=test_once_with | COMPLEXITY=3 | LINES=17
+
+```rust
+#[test]
+fn test_once_with() {
+    let count = Cell::new(0);
+    let mut it = once_with(|| {
+        count.set(count.get() + 1);
+        42
+    });
+
+    assert_eq!(count.get(), 0);
+    assert_eq!(it.next(), Some(42));
+    assert_eq!(count.get(), 1);
+    assert_eq!(it.next(), None);
+    assert_eq!(count.get(), 1);
+    assert_eq!(it.next(), None);
+    assert_eq!(count.get(), 1);
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=test_empty | COMPLEXITY=2 | LINES=6
+
+```rust
+#[test]
+fn test_empty() {
+    let mut it = empty::<i32>();
+    assert_eq!(it.next(), None);
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=test_repeat_n_drop | COMPLEXITY=12 | LINES=49
+
+```rust
+#[test]
+fn test_repeat_n_drop() {
+    #[derive(Clone, Debug)]
+    struct DropCounter<'a>(&'a Cell<usize>);
+    impl Drop for DropCounter<'_> {
+        fn drop(&mut self) {
+            self.0.set(self.0.get() + 1);
+        }
+    }
+
+    // `repeat_n(x, 0)` drops `x` immediately
+    let count = Cell::new(0);
+    let item = DropCounter(&count);
+    let mut it = repeat_n(item, 0);
+    assert_eq!(count.get(), 1);
+    assert!(it.next().is_none());
+    assert_eq!(count.get(), 1);
+    drop(it);
+    assert_eq!(count.get(), 1);
+
+    // Dropping the iterator needs to drop the item if it's non-empty
+    let count = Cell::new(0);
+    let item = DropCounter(&count);
+    let it = repeat_n(item, 3);
+    assert_eq!(count.get(), 0);
+    drop(it);
+    assert_eq!(count.get(), 1);
+
+    // Dropping the iterator doesn't drop the item if it was exhausted
+    let count = Cell::new(0);
+    let item = DropCounter(&count);
+    let mut it = repeat_n(item, 3);
+    assert_eq!(count.get(), 0);
+    let x0 = it.next().unwrap();
+    assert_eq!(count.get(), 0);
+    let x1 = it.next().unwrap();
+    assert_eq!(count.get(), 0);
+    let x2 = it.next().unwrap();
+    assert_eq!(count.get(), 0);
+    assert!(it.next().is_none());
+    assert_eq!(count.get(), 0);
+    assert!(it.next().is_none());
+    assert_eq!(count.get(), 0);
+    drop(it);
+    assert_eq!(count.get(), 0);
+    drop((x0, x1, x2));
+    assert_eq!(count.get(), 3);
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=test_repeat_n_soundness | COMPLEXITY=10 | LINES=24
+
+```rust
+#[test]
+fn test_repeat_n_soundness() {
+    let x = std::iter::repeat_n(String::from("use after free"), 0);
+    println!("{x:?}");
+
+    pub struct PanicOnClone;
+
+    impl Clone for PanicOnClone {
+        fn clone(&self) -> Self {
+            unreachable!()
+        }
+    }
+
+    // `repeat_n` should drop the element immediately if `count` is zero.
+    // `Clone` should then not try to clone the element.
+    let x = std::iter::repeat_n(PanicOnClone, 0);
+    let _ = x.clone();
+
+    let mut y = std::iter::repeat_n(Box::new(0), 1);
+    let x = y.next().unwrap();
+    let _z = y;
+    assert_eq!(0, *x);
+}
+```
+
+---
+*Generated by AST tracing system*

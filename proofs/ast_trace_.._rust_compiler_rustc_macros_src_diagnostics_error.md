@@ -1,0 +1,167 @@
+# AST Trace: ../rust/compiler/rustc_macros/src/diagnostics/error.rs
+
+Generated 12 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use proc_macro::{Diagnostic, Level, MultiSpan};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+use proc_macro2::TokenStream;
+use quote::quote;
+use syn::spanned::Spanned;
+use syn::{Attribute, Error as SynError, Meta};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
+
+```rust
+#[derive(Debug)]
+pub(crate) enum DiagnosticDeriveError {
+    SynError(SynError),
+    ErrorHandled,
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=15
+
+```rust
+impl DiagnosticDeriveError {
+    pub(crate) fn to_compile_error(self) -> TokenStream {
+        match self {
+            DiagnosticDeriveError::SynError(e) => e.to_compile_error(),
+            DiagnosticDeriveError::ErrorHandled => {
+                // Return ! to avoid having to create a blank Diag to return when an
+                // error has already been emitted to the compiler.
+                quote! {
+                    { unreachable!(); }
+                }
+            }
+        }
+    }
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6
+
+```rust
+impl From<SynError> for DiagnosticDeriveError {
+    fn from(e: SynError) -> Self {
+        DiagnosticDeriveError::SynError(e)
+    }
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
+
+```rust
+/// Helper function for use with `throw_*` macros - constraints `$f` to an `impl FnOnce`.
+pub(crate) fn _throw_err(
+    diag: Diagnostic,
+    f: impl FnOnce(Diagnostic) -> Diagnostic,
+) -> DiagnosticDeriveError {
+    f(diag).emit();
+    DiagnosticDeriveError::ErrorHandled
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=path_to_string | COMPLEXITY=10 | LINES=13
+
+```rust
+/// Helper function for printing `syn::Path` - doesn't handle arguments in paths and these are
+/// unlikely to come up much in use of the macro.
+fn path_to_string(path: &syn::Path) -> String {
+    let mut out = String::new();
+    for (i, segment) in path.segments.iter().enumerate() {
+        if i > 0 || path.leading_colon.is_some() {
+            out.push_str("::");
+        }
+        out.push_str(&segment.ident.to_string());
+    }
+    out
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6
+
+```rust
+/// Returns an error diagnostic on span `span` with msg `msg`.
+#[must_use]
+pub(crate) fn span_err<T: Into<String>>(span: impl MultiSpan, msg: T) -> Diagnostic {
+    Diagnostic::spanned(span, Level::Error, format!("derive(Diagnostic): {}", msg.into()))
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=12
+
+```rust
+/// Emit a diagnostic on span `$span` with msg `$msg` (optionally performing additional decoration
+/// using the `FnOnce` passed in `diag`) and return `Err(ErrorHandled)`.
+///
+/// For methods that return a `Result<_, DiagnosticDeriveError>`:
+macro_rules! throw_span_err {
+    ($span:expr, $msg:expr) => {{ throw_span_err!($span, $msg, |diag| diag) }};
+    ($span:expr, $msg:expr, $f:expr) => {{
+        let diag = span_err($span, $msg);
+        return Err(crate::diagnostics::error::_throw_err(diag, $f));
+    }};
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=13
+
+```rust
+pub(crate) use throw_span_err;
+
+/// Returns an error diagnostic for an invalid attribute.
+pub(crate) fn invalid_attr(attr: &Attribute) -> Diagnostic {
+    let span = attr.span().unwrap();
+    let path = path_to_string(attr.path());
+    match attr.meta {
+        Meta::Path(_) => span_err(span, format!("`#[{path}]` is not a valid attribute")),
+        Meta::NameValue(_) => span_err(span, format!("`#[{path} = ...]` is not a valid attribute")),
+        Meta::List(_) => span_err(span, format!("`#[{path}(...)]` is not a valid attribute")),
+    }
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=14 | LINES=12
+
+```rust
+/// Emit an error diagnostic for an invalid attribute (optionally performing additional decoration
+/// using the `FnOnce` passed in `diag`) and return `Err(ErrorHandled)`.
+///
+/// For methods that return a `Result<_, DiagnosticDeriveError>`:
+macro_rules! throw_invalid_attr {
+    ($attr:expr) => {{ throw_invalid_attr!($attr, |diag| diag) }};
+    ($attr:expr, $f:expr) => {{
+        let diag = crate::diagnostics::error::invalid_attr($attr);
+        return Err(crate::diagnostics::error::_throw_err(diag, $f));
+    }};
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=1 | LINES=2
+
+```rust
+pub(crate) use throw_invalid_attr;
+```
+
+---
+*Generated by AST tracing system*

@@ -1,0 +1,242 @@
+# AST Trace: ../rust/library/stdarch/crates/core_arch/src/aarch64/test_support.rs
+
+Generated 10 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use crate::core_arch::{aarch64::neon::*, arm_shared::*, simd::*};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use std::{mem::transmute, vec::Vec};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=14
+
+```rust
+macro_rules! V_u64 {
+    () => {
+        vec![
+            0x0000000000000000u64,
+            0x0101010101010101u64,
+            0x0202020202020202u64,
+            0x0F0F0F0F0F0F0F0Fu64,
+            0x8080808080808080u64,
+            0xF0F0F0F0F0F0F0F0u64,
+            0xFFFFFFFFFFFFFFFFu64,
+        ]
+    };
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=17
+
+```rust
+macro_rules! V_f64 {
+    () => {
+        vec![
+            0.0f64,
+            1.0f64,
+            -1.0f64,
+            1.2f64,
+            2.4f64,
+            f64::MAX,
+            f64::MIN,
+            f64::INFINITY,
+            f64::NEG_INFINITY,
+            f64::NAN,
+        ]
+    };
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6
+
+```rust
+macro_rules! to64 {
+    ($t : ident) => {
+        |v: $t| -> u64 { transmute(v) }
+    };
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6
+
+```rust
+macro_rules! to128 {
+    ($t : ident) => {
+        |v: $t| -> u128 { transmute(v) }
+    };
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=34
+
+```rust
+pub(crate) fn test<T, U, V, W, X>(
+    vals: Vec<T>,
+    fill1: fn(T) -> V,
+    fill2: fn(U) -> W,
+    cast: fn(W) -> X,
+    test_fun: fn(V, V) -> W,
+    verify_fun: fn(T, T) -> U,
+) where
+    T: Copy + core::fmt::Debug,
+    U: Copy + core::fmt::Debug + std::cmp::PartialEq,
+    V: Copy + core::fmt::Debug,
+    W: Copy + core::fmt::Debug,
+    X: Copy + core::fmt::Debug + std::cmp::PartialEq,
+{
+    let pairs = vals.iter().zip(vals.iter());
+
+    for (i, j) in pairs {
+        let a: V = fill1(*i);
+        let b: V = fill1(*j);
+
+        let actual_pre: W = test_fun(a, b);
+        let expected_pre: W = fill2(verify_fun(*i, *j));
+
+        let actual: X = cast(actual_pre);
+        let expected: X = cast(expected_pre);
+
+        assert_eq!(
+            actual, expected,
+            "[{:?}:{:?}] :\nf({:?}, {:?}) = {:?}\ng({:?}, {:?}) = {:?}\n",
+            *i, *j, &a, &b, actual_pre, &a, &b, expected_pre
+        );
+    }
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=10
+
+```rust
+macro_rules! gen_test_fn {
+    ($n: ident, $t: ident, $u: ident, $v: ident, $w: ident, $x: ident, $vals: expr, $fill1: expr, $fill2: expr, $cast: expr) => {
+        pub(crate) fn $n(test_fun: fn($v, $v) -> $w, verify_fun: fn($t, $t) -> $u) {
+            unsafe {
+                test::<$t, $u, $v, $w, $x>($vals, $fill1, $fill2, $cast, test_fun, verify_fun)
+            };
+        }
+    };
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=24 | LINES=14
+
+```rust
+macro_rules! gen_fill_fn {
+    ($id: ident, $el_width: expr, $num_els: expr, $in_t : ident, $out_t: ident, $cmp_t: ident) => {
+        pub(crate) fn $id(val: $in_t) -> $out_t {
+            let initial: [$in_t; $num_els] = [val; $num_els];
+            let result: $cmp_t = unsafe { transmute(initial) };
+            let result_out: $out_t = unsafe { transmute(result) };
+
+            // println!("FILL: {:016x} as {} x {}: {:016x}", val.reverse_bits(), $el_width, $num_els, (result as u64).reverse_bits());
+
+            result_out
+        }
+    };
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=81
+
+```rust
+gen_fill_fn!(fill_u64, 64, 1, u64, uint64x1_t, u64);
+gen_fill_fn!(fillq_u64, 64, 2, u64, uint64x2_t, u128);
+gen_fill_fn!(fill_f64, 64, 1, f64, float64x1_t, u64);
+gen_fill_fn!(fillq_f64, 64, 2, f64, float64x2_t, u128);
+gen_fill_fn!(fill_p64, 64, 1, u64, poly64x1_t, u64);
+gen_fill_fn!(fillq_p64, 64, 2, u64, poly64x2_t, u128);
+
+gen_test_fn!(
+    test_ari_f64,
+    f64,
+    f64,
+    float64x1_t,
+    float64x1_t,
+    u64,
+    V_f64!(),
+    fill_f64,
+    fill_f64,
+    to64!(float64x1_t)
+);
+gen_test_fn!(
+    test_cmp_f64,
+    f64,
+    u64,
+    float64x1_t,
+    uint64x1_t,
+    u64,
+    V_f64!(),
+    fill_f64,
+    fill_u64,
+    to64!(uint64x1_t)
+);
+gen_test_fn!(
+    testq_ari_f64,
+    f64,
+    f64,
+    float64x2_t,
+    float64x2_t,
+    u128,
+    V_f64!(),
+    fillq_f64,
+    fillq_f64,
+    to128!(float64x2_t)
+);
+gen_test_fn!(
+    testq_cmp_f64,
+    f64,
+    u64,
+    float64x2_t,
+    uint64x2_t,
+    u128,
+    V_f64!(),
+    fillq_f64,
+    fillq_u64,
+    to128!(uint64x2_t)
+);
+
+gen_test_fn!(
+    test_cmp_p64,
+    u64,
+    u64,
+    poly64x1_t,
+    uint64x1_t,
+    u64,
+    V_u64!(),
+    fill_p64,
+    fill_u64,
+    to64!(uint64x1_t)
+);
+gen_test_fn!(
+    testq_cmp_p64,
+    u64,
+    u64,
+    poly64x2_t,
+    uint64x2_t,
+    u128,
+    V_u64!(),
+    fillq_p64,
+    fillq_u64,
+    to128!(uint64x2_t)
+);
+```
+
+---
+*Generated by AST tracing system*

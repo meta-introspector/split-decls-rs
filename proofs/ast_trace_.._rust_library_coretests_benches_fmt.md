@@ -1,0 +1,561 @@
+# AST Trace: ../rust/library/coretests/benches/fmt.rs
+
+Generated 37 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use std::fmt::{self, Write as FmtWrite};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use std::io::{self, Write as IoWrite};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+use test::{Bencher, black_box};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=write_vec_value | COMPLEXITY=6 | LINES=10
+
+```rust
+#[bench]
+fn write_vec_value(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = Vec::new();
+        for _ in 0..1000 {
+            mem.write_all(black_box("abc").as_bytes()).unwrap();
+        }
+    });
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=write_vec_ref | COMPLEXITY=6 | LINES=11
+
+```rust
+#[bench]
+fn write_vec_ref(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = Vec::new();
+        let wr = &mut mem as &mut dyn io::Write;
+        for _ in 0..1000 {
+            wr.write_all(black_box("abc").as_bytes()).unwrap();
+        }
+    });
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=write_vec_macro1 | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_vec_macro1(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = Vec::new();
+        let wr = &mut mem as &mut dyn io::Write;
+        for _ in 0..1000 {
+            write!(wr, "{}", black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=write_vec_macro2 | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_vec_macro2(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = Vec::new();
+        let wr = &mut mem as &mut dyn io::Write;
+        for _ in 0..1000 {
+            write!(wr, "{}", black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=write_vec_macro_debug | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_vec_macro_debug(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = Vec::new();
+        let wr = &mut mem as &mut dyn io::Write;
+        for _ in 0..1000 {
+            write!(wr, "{:?}", black_box("☃")).unwrap();
+        }
+    });
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=write_str_value | COMPLEXITY=6 | LINES=10
+
+```rust
+#[bench]
+fn write_str_value(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        for _ in 0..1000 {
+            mem.write_str(black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=write_str_ref | COMPLEXITY=6 | LINES=11
+
+```rust
+#[bench]
+fn write_str_ref(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        let wr = &mut mem as &mut dyn fmt::Write;
+        for _ in 0..1000 {
+            wr.write_str(black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=write_str_macro1 | COMPLEXITY=7 | LINES=10
+
+```rust
+#[bench]
+fn write_str_macro1(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        for _ in 0..1000 {
+            write!(mem, "{}", black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=write_str_macro2 | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_str_macro2(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        let wr = &mut mem as &mut dyn fmt::Write;
+        for _ in 0..1000 {
+            write!(wr, "{}", black_box("abc")).unwrap();
+        }
+    });
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=write_str_macro_debug | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_str_macro_debug(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        let wr = &mut mem as &mut dyn fmt::Write;
+        for _ in 0..1000 {
+            write!(wr, "{:?}", black_box("☃")).unwrap();
+        }
+    });
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=write_str_macro_debug_ascii | COMPLEXITY=7 | LINES=11
+
+```rust
+#[bench]
+fn write_str_macro_debug_ascii(bh: &mut Bencher) {
+    bh.iter(|| {
+        let mut mem = String::new();
+        let wr = &mut mem as &mut dyn fmt::Write;
+        for _ in 0..1000 {
+            write!(wr, "{:?}", black_box("Hello, World!")).unwrap();
+        }
+    });
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=write_u128_max | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u128_max(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u128::MAX)));
+    });
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=write_u128_min | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u128_min(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u128::MIN)));
+    });
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=write_u64_max | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u64_max(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u64::MAX)));
+    });
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=write_u64_min | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u64_min(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u64::MIN)));
+    });
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=write_u8_max | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u8_max(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u8::MAX)));
+    });
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=write_u8_min | COMPLEXITY=4 | LINES=7
+
+```rust
+#[bench]
+fn write_u8_min(bh: &mut Bencher) {
+    bh.iter(|| {
+        black_box(format!("{}", black_box(u8::MIN)));
+    });
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=write_i8_bin | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i8_bin(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:b}", black_box(0_i8)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(-100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(1_i8 << 4)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=write_i16_bin | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i16_bin(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:b}", black_box(0_i16)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(-100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(1_i16 << 8)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=write_i32_bin | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i32_bin(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:b}", black_box(0_i32)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(-100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(1_i32 << 16)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=write_i64_bin | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i64_bin(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:b}", black_box(0_i64)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(-100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(1_i64 << 32)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=write_i128_bin | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i128_bin(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:b}", black_box(0_i128)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(-100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:b}", black_box(1_i128 << 64)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=FUNCTION | NAME=write_i8_oct | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i8_oct(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:o}", black_box(0_i8)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(-100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(1_i8 << 4)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=FUNCTION | NAME=write_i16_oct | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i16_oct(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:o}", black_box(0_i16)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(-100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(1_i16 << 8)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=write_i32_oct | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i32_oct(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:o}", black_box(0_i32)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(-100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(1_i32 << 16)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=write_i64_oct | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i64_oct(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:o}", black_box(0_i64)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(-100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(1_i64 << 32)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=write_i128_oct | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i128_oct(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:o}", black_box(0_i128)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(-100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:o}", black_box(1_i128 << 64)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=FUNCTION | NAME=write_i8_hex | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i8_hex(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:x}", black_box(0_i8)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(-100_i8)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(1_i8 << 4)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=write_i16_hex | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i16_hex(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:x}", black_box(0_i16)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(-100_i16)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(1_i16 << 8)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=write_i32_hex | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i32_hex(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:x}", black_box(0_i32)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(-100_i32)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(1_i32 << 16)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=FUNCTION | NAME=write_i64_hex | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i64_hex(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:x}", black_box(0_i64)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(-100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(1_i64 << 32)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=FUNCTION | NAME=write_i128_hex | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i128_hex(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(256);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:x}", black_box(0_i128)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(-100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:x}", black_box(1_i128 << 64)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=write_i64_exp | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i64_exp(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(1024);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:e}", black_box(0_i64)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(-100_i64)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(1_i64 << 32)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=write_i128_exp | COMPLEXITY=7 | LINES=12
+
+```rust
+#[bench]
+fn write_i128_exp(bh: &mut Bencher) {
+    let mut buf = String::with_capacity(1024);
+    bh.iter(|| {
+        write!(black_box(&mut buf), "{:e}", black_box(0_i128)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(-100_i128)).unwrap();
+        write!(black_box(&mut buf), "{:e}", black_box(1_i128 << 64)).unwrap();
+        black_box(&mut buf).clear();
+    });
+}
+```
+
+---
+*Generated by AST tracing system*

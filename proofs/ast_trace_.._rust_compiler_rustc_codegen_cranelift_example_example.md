@@ -1,0 +1,426 @@
+# AST Trace: ../rust/compiler/rustc_codegen_cranelift/example/example.rs
+
+Generated 43 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=abc | COMPLEXITY=2 | LINES=11
+
+```rust
+#![feature(no_core, unboxed_closures)]
+#![no_core]
+#![allow(dead_code, unnecessary_transmutes)]
+
+extern crate mini_core;
+
+use mini_core::*;
+
+pub fn abc(a: u8) -> u8 {
+    a * 2
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=bcd | COMPLEXITY=6 | LINES=4
+
+```rust
+pub fn bcd(b: bool, a: u8) -> u8 {
+    if b { a * 2 } else { a * 3 }
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=call | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn call() {
+    abc(42);
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=indirect_call | COMPLEXITY=2 | LINES=5
+
+```rust
+pub fn indirect_call() {
+    let f: fn() = call;
+    f();
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
+
+```rust
+pub enum BoolOption {
+    Some(bool),
+    None,
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=option_unwrap_or | COMPLEXITY=6 | LINES=7
+
+```rust
+pub fn option_unwrap_or(o: BoolOption, d: bool) -> bool {
+    match o {
+        BoolOption::Some(b) => b,
+        BoolOption::None => d,
+    }
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=ret_42 | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn ret_42() -> u8 {
+    42
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=return_str | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn return_str() -> &'static str {
+    "hello world"
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=promoted_val | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn promoted_val() -> &'static u8 {
+    &(1 * 2)
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=cast_ref_to_raw_ptr | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn cast_ref_to_raw_ptr(abc: &u8) -> *const u8 {
+    abc as *const u8
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=cmp_raw_ptr | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn cmp_raw_ptr(a: *const u8, b: *const u8) -> bool {
+    a == b
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=int_cast | COMPLEXITY=2 | LINES=7
+
+```rust
+pub fn int_cast(a: u16, b: i16) -> (u8, u16, u32, usize, i8, i16, i32, isize, u8, u32) {
+    (
+        a as u8, a as u16, a as u32, a as usize, a as i8, a as i16, a as i32, a as isize, b as u8,
+        b as u32,
+    )
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=char_cast | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn char_cast(c: char) -> u8 {
+    c as u8
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=DebugTuple(()); | COMPLEXITY=2 | LINES=6
+
+```rust
+pub struct DebugTuple(());
+
+pub fn debug_tuple() -> DebugTuple {
+    DebugTuple(())
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=size_of | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn size_of<T>() -> usize {
+    intrinsics::size_of::<T>()
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=use_size_of | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn use_size_of() -> usize {
+    size_of::<u64>()
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=4
+
+```rust
+pub unsafe fn use_copy_intrinsic(src: *const u8, dst: *mut u8) {
+    intrinsics::copy::<u8>(src, dst, 1);
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=5
+
+```rust
+pub unsafe fn use_copy_intrinsic_ref(src: *const u8, dst: *mut u8) {
+    let copy2 = &intrinsics::copy::<u8>;
+    copy2(src, dst, 1);
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=use_const | COMPLEXITY=2 | LINES=6
+
+```rust
+pub const ABC: u8 = 6 * 7;
+
+pub fn use_const() -> u8 {
+    ABC
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=call_closure_3arg | COMPLEXITY=3 | LINES=4
+
+```rust
+pub fn call_closure_3arg() {
+    (|_, _, _| {})(0u8, 42u16, 0u8)
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=call_closure_2arg | COMPLEXITY=3 | LINES=4
+
+```rust
+pub fn call_closure_2arg() {
+    (|_, _| {})(0u8, 42u16)
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=IsNotEmpty; | COMPLEXITY=5 | LINES=11
+
+```rust
+pub struct IsNotEmpty;
+
+impl<'a, 'b> FnOnce<(&'a &'b [u16],)> for IsNotEmpty {
+    type Output = (u8, u8);
+
+    #[inline]
+    extern "rust-call" fn call_once(mut self, arg: (&'a &'b [u16],)) -> (u8, u8) {
+        self.call_mut(arg)
+    }
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7
+
+```rust
+impl<'a, 'b> FnMut<(&'a &'b [u16],)> for IsNotEmpty {
+    #[inline]
+    extern "rust-call" fn call_mut(&mut self, _arg: (&'a &'b [u16],)) -> (u8, u8) {
+        (0, 42)
+    }
+}
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=call_is_not_empty | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn call_is_not_empty() {
+    IsNotEmpty.call_once((&(&[0u16] as &[_]),));
+}
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=eq_char | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn eq_char(a: char, b: char) -> bool {
+    a == b
+}
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=4
+
+```rust
+pub unsafe fn transmute(c: char) -> u32 {
+    intrinsics::transmute(c)
+}
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=4
+
+```rust
+pub unsafe fn deref_str_ptr(s: *const str) -> &'static str {
+    &*s
+}
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=use_array | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn use_array(arr: [u8; 3]) -> u8 {
+    arr[1]
+}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=repeat_array | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn repeat_array() -> [u8; 3] {
+    [0; 3]
+}
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=array_as_slice | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn array_as_slice(arr: &[u8; 3]) -> &[u8] {
+    arr
+}
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=4
+
+```rust
+pub unsafe fn use_ctlz_nonzero(a: u16) -> u32 {
+    intrinsics::ctlz_nonzero(a)
+}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=ptr_as_usize | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn ptr_as_usize(ptr: *const u8) -> usize {
+    ptr as usize
+}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=float_cast | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn float_cast(a: f32, b: f64) -> (f64, f32) {
+    (a as f64, b as f32)
+}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=FUNCTION | NAME=int_to_float | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn int_to_float(a: u8, b: i32) -> (f64, f32) {
+    (a as f64, b as f32)
+}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=FUNCTION | NAME=make_array | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn make_array() -> [u8; 3] {
+    [42, 0, 5]
+}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=some_promoted_tuple | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn some_promoted_tuple() -> &'static (&'static str, &'static str) {
+    &("abc", "some")
+}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=index_slice | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn index_slice(s: &[u8]) -> u8 {
+    s[2]
+}
+```
+
+## Block 38
+**Metadata**: AST_ID=38 | TYPE=STRUCT | NAME=StrWrapper | COMPLEXITY=2 | LINES=4
+
+```rust
+pub struct StrWrapper {
+    s: str,
+}
+```
+
+## Block 39
+**Metadata**: AST_ID=39 | TYPE=FUNCTION | NAME=str_wrapper_get | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn str_wrapper_get(w: &StrWrapper) -> &str {
+    &w.s
+}
+```
+
+## Block 40
+**Metadata**: AST_ID=40 | TYPE=FUNCTION | NAME=i16_as_i8 | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn i16_as_i8(a: i16) -> i8 {
+    a as i8
+}
+```
+
+## Block 41
+**Metadata**: AST_ID=41 | TYPE=FUNCTION | NAME=Unsized(u8, | COMPLEXITY=2 | LINES=6
+
+```rust
+pub struct Unsized(u8, str);
+
+pub fn get_sized_field_ref_from_unsized_type(u: &Unsized) -> &u8 {
+    &u.0
+}
+```
+
+## Block 42
+**Metadata**: AST_ID=42 | TYPE=FUNCTION | NAME=get_unsized_field_ref_from_unsized_type | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn get_unsized_field_ref_from_unsized_type(u: &Unsized) -> &str {
+    &u.1
+}
+```
+
+## Block 43
+**Metadata**: AST_ID=43 | TYPE=FUNCTION | NAME=reuse_byref_argument_storage | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn reuse_byref_argument_storage(a: (u8, u16, u32)) -> u8 {
+    a.0
+}
+```
+
+---
+*Generated by AST tracing system*

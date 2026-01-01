@@ -1,0 +1,260 @@
+# AST Trace: ../rust/library/std/src/sys/fd/hermit.rs
+
+Generated 15 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+#![unstable(reason = "not public", issue = "none", feature = "fd")]
+
+use crate::cmp;
+use crate::io::{self, BorrowedCursor, IoSlice, IoSliceMut, Read, SeekFrom};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+use crate::os::hermit::hermit_abi;
+use crate::os::hermit::io::{AsFd, AsRawFd, BorrowedFd, FromRawFd, IntoRawFd, OwnedFd, RawFd};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use crate::sys::{cvt, unsupported};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use crate::sys_common::{AsInner, FromInner, IntoInner};
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+const fn max_iov() -> usize {
+    hermit_abi::IOV_MAX
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=FileDesc | COMPLEXITY=2 | LINES=5
+
+```rust
+#[derive(Debug)]
+pub struct FileDesc {
+    fd: OwnedFd,
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=read | COMPLEXITY=68 | LINES=107
+
+```rust
+impl FileDesc {
+    pub fn read(&self, buf: &mut [u8]) -> io::Result<usize> {
+        let result =
+            cvt(unsafe { hermit_abi::read(self.fd.as_raw_fd(), buf.as_mut_ptr(), buf.len()) })?;
+        Ok(result as usize)
+    }
+
+    pub fn read_buf(&self, mut buf: BorrowedCursor<'_>) -> io::Result<()> {
+        // SAFETY: The `read` syscall does not read from the buffer, so it is
+        // safe to use `&mut [MaybeUninit<u8>]`.
+        let result = cvt(unsafe {
+            hermit_abi::read(
+                self.fd.as_raw_fd(),
+                buf.as_mut().as_mut_ptr() as *mut u8,
+                buf.capacity(),
+            )
+        })?;
+        // SAFETY: Exactly `result` bytes have been filled.
+        unsafe { buf.advance_unchecked(result as usize) };
+        Ok(())
+    }
+
+    pub fn read_vectored(&self, bufs: &mut [IoSliceMut<'_>]) -> io::Result<usize> {
+        let ret = cvt(unsafe {
+            hermit_abi::readv(
+                self.as_raw_fd(),
+                bufs.as_mut_ptr() as *mut hermit_abi::iovec as *const hermit_abi::iovec,
+                cmp::min(bufs.len(), max_iov()),
+            )
+        })?;
+        Ok(ret as usize)
+    }
+
+    #[inline]
+    pub fn is_read_vectored(&self) -> bool {
+        true
+    }
+
+    pub fn read_to_end(&self, buf: &mut Vec<u8>) -> io::Result<usize> {
+        let mut me = self;
+        (&mut me).read_to_end(buf)
+    }
+
+    pub fn write(&self, buf: &[u8]) -> io::Result<usize> {
+        let result =
+            cvt(unsafe { hermit_abi::write(self.fd.as_raw_fd(), buf.as_ptr(), buf.len()) })?;
+        Ok(result as usize)
+    }
+
+    pub fn write_vectored(&self, bufs: &[IoSlice<'_>]) -> io::Result<usize> {
+        let ret = cvt(unsafe {
+            hermit_abi::writev(
+                self.as_raw_fd(),
+                bufs.as_ptr() as *const hermit_abi::iovec,
+                cmp::min(bufs.len(), max_iov()),
+            )
+        })?;
+        Ok(ret as usize)
+    }
+
+    #[inline]
+    pub fn is_write_vectored(&self) -> bool {
+        true
+    }
+
+    pub fn seek(&self, pos: SeekFrom) -> io::Result<u64> {
+        let (whence, pos) = match pos {
+            // Casting to `i64` is fine, too large values will end up as
+            // negative which will cause an error in `lseek`.
+            SeekFrom::Start(off) => (hermit_abi::SEEK_SET, off as i64),
+            SeekFrom::End(off) => (hermit_abi::SEEK_END, off),
+            SeekFrom::Current(off) => (hermit_abi::SEEK_CUR, off),
+        };
+        let n = cvt(unsafe { hermit_abi::lseek(self.as_raw_fd(), pos as isize, whence) })?;
+        Ok(n as u64)
+    }
+
+    pub fn tell(&self) -> io::Result<u64> {
+        self.seek(SeekFrom::Current(0))
+    }
+
+    pub fn duplicate(&self) -> io::Result<FileDesc> {
+        self.duplicate_path(&[])
+    }
+
+    pub fn duplicate_path(&self, _path: &[u8]) -> io::Result<FileDesc> {
+        unsupported()
+    }
+
+    pub fn nonblocking(&self) -> io::Result<bool> {
+        Ok(false)
+    }
+
+    pub fn set_cloexec(&self) -> io::Result<()> {
+        unsupported()
+    }
+
+    pub fn set_nonblocking(&self, _nonblocking: bool) -> io::Result<()> {
+        unsupported()
+    }
+
+    pub fn fstat(&self, stat: *mut hermit_abi::stat) -> io::Result<()> {
+        cvt(unsafe { hermit_abi::fstat(self.fd.as_raw_fd(), stat) })?;
+        Ok(())
+    }
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=read | COMPLEXITY=5 | LINES=6
+
+```rust
+impl<'a> Read for &'a FileDesc {
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+        (**self).read(buf)
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=into_inner | COMPLEXITY=5 | LINES=6
+
+```rust
+impl IntoInner<OwnedFd> for FileDesc {
+    fn into_inner(self) -> OwnedFd {
+        self.fd
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=from_inner | COMPLEXITY=6 | LINES=6
+
+```rust
+impl FromInner<OwnedFd> for FileDesc {
+    fn from_inner(owned_fd: OwnedFd) -> Self {
+        Self { fd: owned_fd }
+    }
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=7
+
+```rust
+impl FromRawFd for FileDesc {
+    unsafe fn from_raw_fd(raw_fd: RawFd) -> Self {
+        let fd = unsafe { OwnedFd::from_raw_fd(raw_fd) };
+        Self { fd }
+    }
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=as_inner | COMPLEXITY=5 | LINES=7
+
+```rust
+impl AsInner<OwnedFd> for FileDesc {
+    #[inline]
+    fn as_inner(&self) -> &OwnedFd {
+        &self.fd
+    }
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=as_fd | COMPLEXITY=5 | LINES=6
+
+```rust
+impl AsFd for FileDesc {
+    fn as_fd(&self) -> BorrowedFd<'_> {
+        self.fd.as_fd()
+    }
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=as_raw_fd | COMPLEXITY=5 | LINES=7
+
+```rust
+impl AsRawFd for FileDesc {
+    #[inline]
+    fn as_raw_fd(&self) -> RawFd {
+        self.fd.as_raw_fd()
+    }
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=into_raw_fd | COMPLEXITY=5 | LINES=6
+
+```rust
+impl IntoRawFd for FileDesc {
+    fn into_raw_fd(self) -> RawFd {
+        self.fd.into_raw_fd()
+    }
+}
+```
+
+---
+*Generated by AST tracing system*

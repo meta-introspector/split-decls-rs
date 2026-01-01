@@ -1,0 +1,308 @@
+# AST Trace: ../rust/library/coretests/tests/macros.rs
+
+Generated 16 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=blah | COMPLEXITY=2 | LINES=6
+
+```rust
+#![allow(unused_must_use)]
+
+#[allow(dead_code)]
+trait Trait {
+    fn blah(&self);
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=Struct; | COMPLEXITY=9 | LINES=18
+
+```rust
+#[allow(dead_code)]
+struct Struct;
+
+impl Trait for Struct {
+    cfg_select! {
+        feature = "blah" => {
+            fn blah(&self) {
+                unimplemented!();
+            }
+        }
+        _ => {
+            fn blah(&self) {
+                unimplemented!();
+            }
+        }
+    }
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=assert_eq_trailing_comma | COMPLEXITY=2 | LINES=5
+
+```rust
+#[test]
+fn assert_eq_trailing_comma() {
+    assert_eq!(1, 1,);
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=assert_escape | COMPLEXITY=2 | LINES=5
+
+```rust
+#[test]
+fn assert_escape() {
+    assert!(r#"☃\backslash"#.contains("\\"));
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=assert_ne_trailing_comma | COMPLEXITY=2 | LINES=5
+
+```rust
+#[test]
+fn assert_ne_trailing_comma() {
+    assert_ne!(1, 2,);
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=matches_leading_pipe | COMPLEXITY=2 | LINES=6
+
+```rust
+#[rustfmt::skip]
+#[test]
+fn matches_leading_pipe() {
+    matches!(1, | 1 | 2 | 3);
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=cfg_select_basic | COMPLEXITY=22 | LINES=39
+
+```rust
+#[test]
+fn cfg_select_basic() {
+    cfg_select! {
+        target_pointer_width = "64" => { fn f0_() -> bool { true }}
+        _ => {}
+    }
+
+    cfg_select! {
+        unix => { fn f1_() -> bool { true } }
+        _ => { fn f1_() -> bool { false }}
+    }
+
+    cfg_select! {
+        target_pointer_width = "32" => { fn f2_() -> bool { false } }
+        target_pointer_width = "64" => { fn f2_() -> bool { true } }
+    }
+
+    cfg_select! {
+        target_pointer_width = "16" => { fn f3_() -> i32 { 1 } }
+        _ => { fn f3_() -> i32 { 2 }}
+    }
+
+    #[cfg(target_pointer_width = "64")]
+    assert!(f0_());
+
+    #[cfg(unix)]
+    assert!(f1_());
+    #[cfg(not(unix))]
+    assert!(!f1_());
+
+    #[cfg(target_pointer_width = "32")]
+    assert!(!f2_());
+    #[cfg(target_pointer_width = "64")]
+    assert!(f2_());
+
+    #[cfg(not(target_pointer_width = "16"))]
+    assert_eq!(f3_(), 2);
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=cfg_select_debug_assertions | COMPLEXITY=5 | LINES=14
+
+```rust
+#[test]
+fn cfg_select_debug_assertions() {
+    cfg_select! {
+        debug_assertions => {
+            assert!(cfg!(debug_assertions));
+            assert_eq!(4, 2+2);
+        }
+        _ => {
+            assert!(cfg!(not(debug_assertions)));
+            assert_eq!(10, 5+5);
+        }
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=cfg_select_no_duplication_on_64 | COMPLEXITY=9 | LINES=17
+
+```rust
+#[cfg(target_pointer_width = "64")]
+#[test]
+fn cfg_select_no_duplication_on_64() {
+    cfg_select! {
+        windows => {
+            fn foo() {}
+        }
+        unix => {
+            fn foo() {}
+        }
+        target_pointer_width = "64" => {
+            fn foo() {}
+        }
+    }
+    foo();
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=cfg_select_options | COMPLEXITY=28 | LINES=40
+
+```rust
+#[test]
+fn cfg_select_options() {
+    cfg_select! {
+        test => {
+            use core::option::Option as Option2;
+            fn works1() -> Option2<u32> { Some(1) }
+        }
+        _ => { fn works1() -> Option<u32> { None } }
+    }
+
+    cfg_select! {
+        feature = "foo" => { fn works2() -> bool { false } }
+        test => { fn works2() -> bool { true } }
+        _ => { fn works2() -> bool { false } }
+    }
+
+    cfg_select! {
+        feature = "foo" => { fn works3() -> bool { false } }
+        _ => { fn works3() -> bool { true } }
+    }
+
+    cfg_select! {
+        test => {
+            use core::option::Option as Option3;
+            fn works4() -> Option3<u32> { Some(1) }
+        }
+    }
+
+    cfg_select! {
+        feature = "foo" => { fn works5() -> bool { false } }
+        test => { fn works5() -> bool { true } }
+    }
+
+    assert!(works1().is_some());
+    assert!(works2());
+    assert!(works3());
+    assert!(works4().is_some());
+    assert!(works5());
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=cfg_select_two_functions | COMPLEXITY=11 | LINES=25
+
+```rust
+#[test]
+fn cfg_select_two_functions() {
+    cfg_select! {
+        target_pointer_width = "64" => {
+            fn foo1() {}
+            fn bar1() {}
+        }
+        _ => {
+            fn foo2() {}
+            fn bar2() {}
+        }
+    }
+
+    #[cfg(target_pointer_width = "64")]
+    {
+        foo1();
+        bar1();
+    }
+    #[cfg(not(target_pointer_width = "64"))]
+    {
+        foo2();
+        bar2();
+    }
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=_accepts_expressions | COMPLEXITY=5 | LINES=7
+
+```rust
+fn _accepts_expressions() -> i32 {
+    cfg_select! {
+        unix => { 1 }
+        _ => { 2 }
+    }
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=_accepts_only_wildcard | COMPLEXITY=4 | LINES=6
+
+```rust
+fn _accepts_only_wildcard() -> i32 {
+    cfg_select! {
+        _ => { 1 }
+    }
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=_allows_stmt_expr_attributes | COMPLEXITY=5 | LINES=11
+
+```rust
+// The current implementation expands to a macro call, which allows the use of expression
+// statements.
+fn _allows_stmt_expr_attributes() {
+    let one = 1;
+    let two = 2;
+    cfg_select! {
+        unix => { one * two; }
+        _ => { one + two; }
+    }
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=_expression | COMPLEXITY=4 | LINES=11
+
+```rust
+fn _expression() {
+    let _ = cfg_select!(
+        windows => {
+            " XP"
+        }
+        _ => {
+            ""
+        }
+    );
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=_matches_does_not_trigger_non_exhaustive_omitted_patterns_lint | COMPLEXITY=2 | LINES=6
+
+```rust
+#[deny(non_exhaustive_omitted_patterns)]
+fn _matches_does_not_trigger_non_exhaustive_omitted_patterns_lint(o: core::sync::atomic::Ordering) {
+    // Ordering is a #[non_exhaustive] enum from a separate crate
+    let _m = matches!(o, core::sync::atomic::Ordering::Relaxed);
+}
+```
+
+---
+*Generated by AST tracing system*

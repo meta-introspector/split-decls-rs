@@ -1,0 +1,792 @@
+# AST Trace: ../rust/library/std/src/error.rs
+
+Generated 39 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
+
+```rust
+#![doc = include_str!("../../core/src/error.md")]
+#![stable(feature = "rust1", since = "1.0.0")]
+
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::error::Error;
+#[unstable(feature = "error_generic_member_access", issue = "99301")]
+pub use core::error::{Request, request_ref, request_value};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use crate::backtrace::Backtrace;
+use crate::fmt::{self, Write};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=14
+
+```rust
+/// An error reporter that prints an error and its sources.
+///
+/// Report also exposes configuration options for formatting the error sources, either entirely on a
+/// single line, or in multi-line format with each source on a new line.
+///
+/// `Report` only requires that the wrapped error implement `Error`. It doesn't require that the
+/// wrapped error be `Send`, `Sync`, or `'static`.
+///
+/// # Examples
+///
+/// ```rust
+/// #![feature(error_reporter)]
+/// use std::error::{Error, Report};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
+
+```rust
+/// use std::fmt;
+///
+/// #[derive(Debug)]
+/// struct SuperError {
+///     source: SuperErrorSideKick,
+/// }
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6
+
+```rust
+///
+/// impl fmt::Display for SuperError {
+///     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+///         write!(f, "SuperError is here!")
+///     }
+/// }
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6
+
+```rust
+///
+/// impl Error for SuperError {
+///     fn source(&self) -> Option<&(dyn Error + 'static)> {
+///         Some(&self.source)
+///     }
+/// }
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=9
+
+```rust
+///
+/// #[derive(Debug)]
+/// struct SuperErrorSideKick;
+///
+/// impl fmt::Display for SuperErrorSideKick {
+///     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+///         write!(f, "SuperErrorSideKick is here!")
+///     }
+/// }
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2
+
+```rust
+///
+/// impl Error for SuperErrorSideKick {}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4
+
+```rust
+///
+/// fn get_super_error() -> Result<(), SuperError> {
+///     Err(SuperError { source: SuperErrorSideKick })
+/// }
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7
+
+```rust
+///
+/// fn main() {
+///     match get_super_error() {
+///         Err(e) => println!("Error: {}", Report::new(e)),
+///         _ => println!("No error"),
+///     }
+/// }
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=22
+
+```rust
+/// ```
+///
+/// This example produces the following output:
+///
+/// ```console
+/// Error: SuperError is here!: SuperErrorSideKick is here!
+/// ```
+///
+/// ## Output consistency
+///
+/// Report prints the same output via `Display` and `Debug`, so it works well with
+/// [`Result::unwrap`]/[`Result::expect`] which print their `Err` variant via `Debug`:
+///
+/// ```should_panic
+/// #![feature(error_reporter)]
+/// use std::error::Report;
+/// # use std::error::Error;
+/// # use std::fmt;
+/// # #[derive(Debug)]
+/// # struct SuperError {
+/// #     source: SuperErrorSideKick,
+/// # }
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl fmt::Display for SuperError {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperError is here!")
+/// #     }
+/// # }
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl Error for SuperError {
+/// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+/// #         Some(&self.source)
+/// #     }
+/// # }
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7
+
+```rust
+/// # #[derive(Debug)]
+/// # struct SuperErrorSideKick;
+/// # impl fmt::Display for SuperErrorSideKick {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperErrorSideKick is here!")
+/// #     }
+/// # }
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
+
+```rust
+/// # impl Error for SuperErrorSideKick {}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=3
+
+```rust
+/// # fn get_super_error() -> Result<(), SuperError> {
+/// #     Err(SuperError { source: SuperErrorSideKick })
+/// # }
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=27
+
+```rust
+///
+/// get_super_error().map_err(Report::new).unwrap();
+/// ```
+///
+/// This example produces the following output:
+///
+/// ```console
+/// thread 'main' panicked at src/error.rs:34:40:
+/// called `Result::unwrap()` on an `Err` value: SuperError is here!: SuperErrorSideKick is here!
+/// note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+/// ```
+///
+/// ## Return from `main`
+///
+/// `Report` also implements `From` for all types that implement [`Error`]; this when combined with
+/// the `Debug` output means `Report` is an ideal starting place for formatting errors returned
+/// from `main`.
+///
+/// ```should_panic
+/// #![feature(error_reporter)]
+/// use std::error::Report;
+/// # use std::error::Error;
+/// # use std::fmt;
+/// # #[derive(Debug)]
+/// # struct SuperError {
+/// #     source: SuperErrorSideKick,
+/// # }
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl fmt::Display for SuperError {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperError is here!")
+/// #     }
+/// # }
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl Error for SuperError {
+/// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+/// #         Some(&self.source)
+/// #     }
+/// # }
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7
+
+```rust
+/// # #[derive(Debug)]
+/// # struct SuperErrorSideKick;
+/// # impl fmt::Display for SuperErrorSideKick {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperErrorSideKick is here!")
+/// #     }
+/// # }
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
+
+```rust
+/// # impl Error for SuperErrorSideKick {}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=3
+
+```rust
+/// # fn get_super_error() -> Result<(), SuperError> {
+/// #     Err(SuperError { source: SuperErrorSideKick })
+/// # }
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
+
+```rust
+///
+/// fn main() -> Result<(), Report<SuperError>> {
+///     get_super_error()?;
+///     Ok(())
+/// }
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=21
+
+```rust
+/// ```
+///
+/// This example produces the following output:
+///
+/// ```console
+/// Error: SuperError is here!: SuperErrorSideKick is here!
+/// ```
+///
+/// **Note**: `Report`s constructed via `?` and `From` will be configured to use the single line
+/// output format. If you want to make sure your `Report`s are pretty printed and include backtrace
+/// you will need to manually convert and enable those flags.
+///
+/// ```should_panic
+/// #![feature(error_reporter)]
+/// use std::error::Report;
+/// # use std::error::Error;
+/// # use std::fmt;
+/// # #[derive(Debug)]
+/// # struct SuperError {
+/// #     source: SuperErrorSideKick,
+/// # }
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl fmt::Display for SuperError {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperError is here!")
+/// #     }
+/// # }
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
+
+```rust
+/// # impl Error for SuperError {
+/// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+/// #         Some(&self.source)
+/// #     }
+/// # }
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=7
+
+```rust
+/// # #[derive(Debug)]
+/// # struct SuperErrorSideKick;
+/// # impl fmt::Display for SuperErrorSideKick {
+/// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+/// #         write!(f, "SuperErrorSideKick is here!")
+/// #     }
+/// # }
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
+
+```rust
+/// # impl Error for SuperErrorSideKick {}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=3
+
+```rust
+/// # fn get_super_error() -> Result<(), SuperError> {
+/// #     Err(SuperError { source: SuperErrorSideKick })
+/// # }
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
+
+```rust
+///
+/// fn main() -> Result<(), Report<SuperError>> {
+///     get_super_error()
+///         .map_err(Report::from)
+///         .map_err(|r| r.pretty(true).show_backtrace(true))?;
+///     Ok(())
+/// }
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=STRUCT | NAME=Report | COMPLEXITY=2 | LINES=19
+
+```rust
+/// ```
+///
+/// This example produces the following output:
+///
+/// ```console
+/// Error: SuperError is here!
+///
+/// Caused by:
+///       SuperErrorSideKick is here!
+/// ```
+#[unstable(feature = "error_reporter", issue = "90172")]
+pub struct Report<E = Box<dyn Error>> {
+    /// The error being reported.
+    error: E,
+    /// Whether a backtrace should be included as part of the report.
+    show_backtrace: bool,
+    /// Whether the report should be pretty-printed.
+    pretty: bool,
+}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=new | COMPLEXITY=3 | LINES=11
+
+```rust
+impl<E> Report<E>
+where
+    Report<E>: From<E>,
+{
+    /// Creates a new `Report` from an input error.
+    #[unstable(feature = "error_reporter", issue = "90172")]
+    pub fn new(error: E) -> Report<E> {
+        Self::from(error)
+    }
+}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=pretty | COMPLEXITY=92 | LINES=204
+
+```rust
+impl<E> Report<E> {
+    /// Enable pretty-printing the report across multiple lines.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// #![feature(error_reporter)]
+    /// use std::error::Report;
+    /// # use std::error::Error;
+    /// # use std::fmt;
+    /// # #[derive(Debug)]
+    /// # struct SuperError {
+    /// #     source: SuperErrorSideKick,
+    /// # }
+    /// # impl fmt::Display for SuperError {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperError is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperError {
+    /// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+    /// #         Some(&self.source)
+    /// #     }
+    /// # }
+    /// # #[derive(Debug)]
+    /// # struct SuperErrorSideKick;
+    /// # impl fmt::Display for SuperErrorSideKick {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperErrorSideKick is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperErrorSideKick {}
+    ///
+    /// let error = SuperError { source: SuperErrorSideKick };
+    /// let report = Report::new(error).pretty(true);
+    /// eprintln!("Error: {report:?}");
+    /// ```
+    ///
+    /// This example produces the following output:
+    ///
+    /// ```console
+    /// Error: SuperError is here!
+    ///
+    /// Caused by:
+    ///       SuperErrorSideKick is here!
+    /// ```
+    ///
+    /// When there are multiple source errors the causes will be numbered in order of iteration
+    /// starting from the outermost error.
+    ///
+    /// ```rust
+    /// #![feature(error_reporter)]
+    /// use std::error::Report;
+    /// # use std::error::Error;
+    /// # use std::fmt;
+    /// # #[derive(Debug)]
+    /// # struct SuperError {
+    /// #     source: SuperErrorSideKick,
+    /// # }
+    /// # impl fmt::Display for SuperError {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperError is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperError {
+    /// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+    /// #         Some(&self.source)
+    /// #     }
+    /// # }
+    /// # #[derive(Debug)]
+    /// # struct SuperErrorSideKick {
+    /// #     source: SuperErrorSideKickSideKick,
+    /// # }
+    /// # impl fmt::Display for SuperErrorSideKick {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperErrorSideKick is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperErrorSideKick {
+    /// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+    /// #         Some(&self.source)
+    /// #     }
+    /// # }
+    /// # #[derive(Debug)]
+    /// # struct SuperErrorSideKickSideKick;
+    /// # impl fmt::Display for SuperErrorSideKickSideKick {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperErrorSideKickSideKick is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperErrorSideKickSideKick { }
+    ///
+    /// let source = SuperErrorSideKickSideKick;
+    /// let source = SuperErrorSideKick { source };
+    /// let error = SuperError { source };
+    /// let report = Report::new(error).pretty(true);
+    /// eprintln!("Error: {report:?}");
+    /// ```
+    ///
+    /// This example produces the following output:
+    ///
+    /// ```console
+    /// Error: SuperError is here!
+    ///
+    /// Caused by:
+    ///    0: SuperErrorSideKick is here!
+    ///    1: SuperErrorSideKickSideKick is here!
+    /// ```
+    #[unstable(feature = "error_reporter", issue = "90172")]
+    pub fn pretty(mut self, pretty: bool) -> Self {
+        self.pretty = pretty;
+        self
+    }
+
+    /// Display backtrace if available when using pretty output format.
+    ///
+    /// # Examples
+    ///
+    /// **Note**: Report will search for the first `Backtrace` it can find starting from the
+    /// outermost error. In this example it will display the backtrace from the second error in the
+    /// sources, `SuperErrorSideKick`.
+    ///
+    /// ```rust
+    /// #![feature(error_reporter)]
+    /// #![feature(error_generic_member_access)]
+    /// # use std::error::Error;
+    /// # use std::fmt;
+    /// use std::error::Request;
+    /// use std::error::Report;
+    /// use std::backtrace::Backtrace;
+    ///
+    /// # #[derive(Debug)]
+    /// # struct SuperError {
+    /// #     source: SuperErrorSideKick,
+    /// # }
+    /// # impl fmt::Display for SuperError {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperError is here!")
+    /// #     }
+    /// # }
+    /// # impl Error for SuperError {
+    /// #     fn source(&self) -> Option<&(dyn Error + 'static)> {
+    /// #         Some(&self.source)
+    /// #     }
+    /// # }
+    /// #[derive(Debug)]
+    /// struct SuperErrorSideKick {
+    ///     backtrace: Backtrace,
+    /// }
+    ///
+    /// impl SuperErrorSideKick {
+    ///     fn new() -> SuperErrorSideKick {
+    ///         SuperErrorSideKick { backtrace: Backtrace::force_capture() }
+    ///     }
+    /// }
+    ///
+    /// impl Error for SuperErrorSideKick {
+    ///     fn provide<'a>(&'a self, request: &mut Request<'a>) {
+    ///         request.provide_ref::<Backtrace>(&self.backtrace);
+    ///     }
+    /// }
+    ///
+    /// // The rest of the example is unchanged ...
+    /// # impl fmt::Display for SuperErrorSideKick {
+    /// #     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    /// #         write!(f, "SuperErrorSideKick is here!")
+    /// #     }
+    /// # }
+    ///
+    /// let source = SuperErrorSideKick::new();
+    /// let error = SuperError { source };
+    /// let report = Report::new(error).pretty(true).show_backtrace(true);
+    /// eprintln!("Error: {report:?}");
+    /// ```
+    ///
+    /// This example produces something similar to the following output:
+    ///
+    /// ```console
+    /// Error: SuperError is here!
+    ///
+    /// Caused by:
+    ///       SuperErrorSideKick is here!
+    ///
+    /// Stack backtrace:
+    ///    0: rust_out::main::_doctest_main_src_error_rs_1158_0::SuperErrorSideKick::new
+    ///    1: rust_out::main::_doctest_main_src_error_rs_1158_0
+    ///    2: rust_out::main
+    ///    3: core::ops::function::FnOnce::call_once
+    ///    4: std::sys::backtrace::__rust_begin_short_backtrace
+    ///    5: std::rt::lang_start::{{closure}}
+    ///    6: std::panicking::try
+    ///    7: std::rt::lang_start_internal
+    ///    8: std::rt::lang_start
+    ///    9: main
+    ///   10: __libc_start_main
+    ///   11: _start
+    /// ```
+    #[unstable(feature = "error_reporter", issue = "90172")]
+    pub fn show_backtrace(mut self, show_backtrace: bool) -> Self {
+        self.show_backtrace = show_backtrace;
+        self
+    }
+}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=FUNCTION | NAME=backtrace | COMPLEXITY=36 | LINES=64
+
+```rust
+impl<E> Report<E>
+where
+    E: Error,
+{
+    fn backtrace(&self) -> Option<&Backtrace> {
+        // have to grab the backtrace on the first error directly since that error may not be
+        // 'static
+        let backtrace = request_ref(&self.error);
+        let backtrace = backtrace.or_else(|| {
+            self.error
+                .source()
+                .map(|source| source.sources().find_map(|source| request_ref(source)))
+                .flatten()
+        });
+        backtrace
+    }
+
+    /// Format the report as a single line.
+    #[unstable(feature = "error_reporter", issue = "90172")]
+    fn fmt_singleline(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.error)?;
+
+        let sources = self.error.source().into_iter().flat_map(<dyn Error>::sources);
+
+        for cause in sources {
+            write!(f, ": {cause}")?;
+        }
+
+        Ok(())
+    }
+
+    /// Format the report as multiple lines, with each error cause on its own line.
+    #[unstable(feature = "error_reporter", issue = "90172")]
+    fn fmt_multiline(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let error = &self.error;
+
+        write!(f, "{error}")?;
+
+        if let Some(cause) = error.source() {
+            write!(f, "\n\nCaused by:")?;
+
+            let multiple = cause.source().is_some();
+
+            for (ind, error) in cause.sources().enumerate() {
+                writeln!(f)?;
+                let mut indented = Indented { inner: f };
+                if multiple {
+                    write!(indented, "{ind: >4}: {error}")?;
+                } else {
+                    write!(indented, "      {error}")?;
+                }
+            }
+        }
+
+        if self.show_backtrace {
+            if let Some(backtrace) = self.backtrace() {
+                write!(f, "\n\nStack backtrace:\n{}", backtrace.to_string().trim_end())?;
+            }
+        }
+
+        Ok(())
+    }
+}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=10
+
+```rust
+#[unstable(feature = "error_reporter", issue = "90172")]
+impl<E> From<E> for Report<E>
+where
+    E: Error,
+{
+    fn from(error: E) -> Self {
+        Report { error, show_backtrace: false, pretty: false }
+    }
+}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10
+
+```rust
+#[unstable(feature = "error_reporter", issue = "90172")]
+impl<E> fmt::Display for Report<E>
+where
+    E: Error,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.pretty { self.fmt_multiline(f) } else { self.fmt_singleline(f) }
+    }
+}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=12
+
+```rust
+// This type intentionally outputs the same format for `Display` and `Debug`for
+// situations where you unwrap a `Report` or return it from main.
+#[unstable(feature = "error_reporter", issue = "90172")]
+impl<E> fmt::Debug for Report<E>
+where
+    Report<E>: fmt::Display,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Display::fmt(self, f)
+    }
+}
+```
+
+## Block 38
+**Metadata**: AST_ID=38 | TYPE=STRUCT | NAME=Indented | COMPLEXITY=4 | LINES=5
+
+```rust
+/// Wrapper type for indenting the inner source.
+struct Indented<'a, D> {
+    inner: &'a mut D,
+}
+```
+
+## Block 39
+**Metadata**: AST_ID=39 | TYPE=FUNCTION | NAME=write_str | COMPLEXITY=11 | LINES=18
+
+```rust
+impl<T> Write for Indented<'_, T>
+where
+    T: Write,
+{
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        for (i, line) in s.split('\n').enumerate() {
+            if i > 0 {
+                self.inner.write_char('\n')?;
+                self.inner.write_str("      ")?;
+            }
+
+            self.inner.write_str(line)?;
+        }
+
+        Ok(())
+    }
+}
+```
+
+---
+*Generated by AST tracing system*

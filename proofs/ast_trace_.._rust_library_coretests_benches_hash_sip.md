@@ -1,0 +1,216 @@
+# AST Trace: ../rust/library/coretests/benches/hash/sip.rs
+
+Generated 17 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
+
+```rust
+#![allow(deprecated)]
+
+use core::hash::*;
+
+use test::{Bencher, black_box};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=hash_bytes | COMPLEXITY=2 | LINES=5
+
+```rust
+fn hash_bytes<H: Hasher>(mut s: H, x: &[u8]) -> u64 {
+    Hasher::write(&mut s, x);
+    s.finish()
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=hash_with | COMPLEXITY=2 | LINES=5
+
+```rust
+fn hash_with<H: Hasher, T: Hash>(mut st: H, x: &T) -> u64 {
+    x.hash(&mut st);
+    st.finish()
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=2 | LINES=4
+
+```rust
+fn hash<T: Hash>(x: &T) -> u64 {
+    hash_with(SipHasher::new(), x)
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=bench_str_under_8_bytes | COMPLEXITY=3 | LINES=8
+
+```rust
+#[bench]
+fn bench_str_under_8_bytes(b: &mut Bencher) {
+    let s = "foo";
+    b.iter(|| {
+        assert_eq!(hash(&s), 16262950014981195938);
+    })
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=bench_str_of_8_bytes | COMPLEXITY=3 | LINES=8
+
+```rust
+#[bench]
+fn bench_str_of_8_bytes(b: &mut Bencher) {
+    let s = "foobar78";
+    b.iter(|| {
+        assert_eq!(hash(&s), 4898293253460910787);
+    })
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=bench_str_over_8_bytes | COMPLEXITY=3 | LINES=8
+
+```rust
+#[bench]
+fn bench_str_over_8_bytes(b: &mut Bencher) {
+    let s = "foobarbaz0";
+    b.iter(|| {
+        assert_eq!(hash(&s), 10581415515220175264);
+    })
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=bench_long_str | COMPLEXITY=4 | LINES=13
+
+```rust
+#[bench]
+fn bench_long_str(b: &mut Bencher) {
+    let s = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor \
+             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud \
+             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute \
+             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla \
+             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui \
+             officia deserunt mollit anim id est laborum.";
+    b.iter(|| {
+        assert_eq!(hash(&s), 17717065544121360093);
+    })
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=bench_u32 | COMPLEXITY=2 | LINES=8
+
+```rust
+#[bench]
+fn bench_u32(b: &mut Bencher) {
+    let u = 162629500u32;
+    let u = black_box(u);
+    b.iter(|| hash(&u));
+    b.bytes = 8;
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=bench_u32_keyed | COMPLEXITY=2 | LINES=10
+
+```rust
+#[bench]
+fn bench_u32_keyed(b: &mut Bencher) {
+    let u = 162629500u32;
+    let u = black_box(u);
+    let k1 = black_box(0x1);
+    let k2 = black_box(0x2);
+    b.iter(|| hash_with(SipHasher::new_with_keys(k1, k2), &u));
+    b.bytes = 8;
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=bench_u64 | COMPLEXITY=2 | LINES=8
+
+```rust
+#[bench]
+fn bench_u64(b: &mut Bencher) {
+    let u = 16262950014981195938u64;
+    let u = black_box(u);
+    b.iter(|| hash(&u));
+    b.bytes = 8;
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=bench_bytes_4 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_4(b: &mut Bencher) {
+    let data = black_box([b' '; 4]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 4;
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=bench_bytes_7 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_7(b: &mut Bencher) {
+    let data = black_box([b' '; 7]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 7;
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=bench_bytes_8 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_8(b: &mut Bencher) {
+    let data = black_box([b' '; 8]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 8;
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=bench_bytes_a_16 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_a_16(b: &mut Bencher) {
+    let data = black_box([b' '; 16]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 16;
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=bench_bytes_b_32 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_b_32(b: &mut Bencher) {
+    let data = black_box([b' '; 32]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 32;
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=bench_bytes_c_128 | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_bytes_c_128(b: &mut Bencher) {
+    let data = black_box([b' '; 128]);
+    b.iter(|| hash_bytes(SipHasher::default(), &data));
+    b.bytes = 128;
+}
+```
+
+---
+*Generated by AST tracing system*

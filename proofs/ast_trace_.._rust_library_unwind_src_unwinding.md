@@ -1,0 +1,184 @@
+# AST Trace: ../rust/library/unwind/src/unwinding.rs
+
+Generated 15 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+#![allow(nonstandard_style)]
+
+use core::ffi::{c_int, c_void};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=23
+
+```rust
+pub type _Unwind_Action = c_int;
+
+pub const _UA_SEARCH_PHASE: c_int = 1;
+pub const _UA_CLEANUP_PHASE: c_int = 2;
+pub const _UA_HANDLER_FRAME: c_int = 4;
+pub const _UA_FORCE_UNWIND: c_int = 8;
+pub const _UA_END_OF_STACK: c_int = 16;
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub enum _Unwind_Reason_Code {
+    _URC_NO_REASON = 0,
+    _URC_FOREIGN_EXCEPTION_CAUGHT = 1,
+    _URC_FATAL_PHASE2_ERROR = 2,
+    _URC_FATAL_PHASE1_ERROR = 3,
+    _URC_NORMAL_STOP = 4,
+    _URC_END_OF_STACK = 5,
+    _URC_HANDLER_FOUND = 6,
+    _URC_INSTALL_CONTEXT = 7,
+    _URC_CONTINUE_UNWIND = 8,
+    _URC_FAILURE = 9, // used only by ARM EHABI
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+pub use _Unwind_Reason_Code::*;
+pub use unwinding::abi::{UnwindContext, UnwindException};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+pub enum _Unwind_Context {}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+pub use unwinding::custom_eh_frame_finder::{
+    EhFrameFinder, FrameInfo, FrameInfoKind, set_custom_eh_frame_finder,
+};
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=_Unwind_Exception | COMPLEXITY=3 | LINES=18
+
+```rust
+pub type _Unwind_Exception_Class = u64;
+pub type _Unwind_Word = *const u8;
+pub type _Unwind_Ptr = *const u8;
+
+pub const unwinder_private_data_size: usize = size_of::<UnwindException>()
+    - size_of::<_Unwind_Exception_Class>()
+    - size_of::<_Unwind_Exception_Cleanup_Fn>();
+
+pub type _Unwind_Exception_Cleanup_Fn =
+    Option<extern "C" fn(unwind_code: _Unwind_Reason_Code, exception: *mut _Unwind_Exception)>;
+
+#[repr(C)]
+pub struct _Unwind_Exception {
+    pub exception_class: _Unwind_Exception_Class,
+    pub exception_cleanup: _Unwind_Exception_Cleanup_Fn,
+    pub private: [_Unwind_Word; unwinder_private_data_size],
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_GetDataRelBase(ctx: *mut _Unwind_Context) -> _Unwind_Ptr {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_GetDataRelBase(ctx) as _Unwind_Ptr
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_GetTextRelBase(ctx: *mut _Unwind_Context) -> _Unwind_Ptr {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_GetTextRelBase(ctx) as _Unwind_Ptr
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_GetRegionStart(ctx: *mut _Unwind_Context) -> _Unwind_Ptr {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_GetRegionStart(ctx) as _Unwind_Ptr
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_SetGR(ctx: *mut _Unwind_Context, reg_index: c_int, value: _Unwind_Word) {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_SetGR(ctx, reg_index, value as usize)
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_SetIP(ctx: *mut _Unwind_Context, value: _Unwind_Word) {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_SetIP(ctx, value as usize)
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=9
+
+```rust
+pub unsafe fn _Unwind_GetIPInfo(
+    ctx: *mut _Unwind_Context,
+    ip_before_insn: *mut c_int,
+) -> _Unwind_Word {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    let ip_before_insn = unsafe { &mut *(ip_before_insn as *mut c_int) };
+    unsafe { &*(unwinding::abi::_Unwind_GetIPInfo(ctx, ip_before_insn) as _Unwind_Word) }
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_GetLanguageSpecificData(ctx: *mut _Unwind_Context) -> *mut c_void {
+    let ctx = unsafe { &mut *(ctx as *mut UnwindContext<'_>) };
+    unwinding::abi::_Unwind_GetLanguageSpecificData(ctx)
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_RaiseException(exception: *mut _Unwind_Exception) -> _Unwind_Reason_Code {
+    let exception = unsafe { &mut *(exception as *mut UnwindException) };
+    unsafe { core::mem::transmute(unwinding::abi::_Unwind_RaiseException(exception)) }
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=5
+
+```rust
+pub unsafe fn _Unwind_DeleteException(exception: *mut _Unwind_Exception) {
+    let exception = unsafe { &mut *(exception as *mut UnwindException) };
+    unsafe { unwinding::abi::_Unwind_DeleteException(exception) }
+}
+```
+
+---
+*Generated by AST tracing system*

@@ -1,0 +1,308 @@
+# AST Trace: ../rust/compiler/rustc_data_structures/src/sorted_map/tests.rs
+
+Generated 15 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use super::{SortedIndexMultiMap, SortedMap};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=test_sorted_index_multi_map | COMPLEXITY=6 | LINES=30
+
+```rust
+#[test]
+fn test_sorted_index_multi_map() {
+    let entries: Vec<_> = vec![(2, 0), (1, 0), (2, 1), (3, 0), (2, 2)];
+    let set: SortedIndexMultiMap<usize, _, _> = entries.iter().copied().collect();
+
+    // Insertion order is preserved.
+    assert!(entries.iter().map(|(k, v)| (k, v)).eq(set.iter()));
+
+    // Indexing
+    for (i, expect) in entries.iter().enumerate() {
+        assert_eq!(set[i], expect.1);
+    }
+
+    // `get_by_key` works.
+    assert_eq!(set.get_by_key(3).copied().collect::<Vec<_>>(), vec![0]);
+    assert!(set.get_by_key(4).next().is_none());
+
+    // `contains_key` works
+    assert!(set.contains_key(3));
+    assert!(!set.contains_key(4));
+
+    // `get_by_key` returns items in insertion order.
+    let twos: Vec<_> = set.get_by_key_enumerated(2).collect();
+    let idxs: Vec<usize> = twos.iter().map(|(i, _)| *i).collect();
+    let values: Vec<usize> = twos.iter().map(|&(_, &v)| v).collect();
+
+    assert_eq!(idxs, vec![0, 2, 4]);
+    assert_eq!(values, vec![0, 1, 2]);
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=test_insert_and_iter | COMPLEXITY=5 | LINES=14
+
+```rust
+#[test]
+fn test_insert_and_iter() {
+    let mut map = SortedMap::new();
+    let mut expected = Vec::new();
+
+    for x in 0..100 {
+        assert_eq!(map.iter().cloned().collect::<Vec<_>>(), expected);
+
+        let x = 1000 - x * 2;
+        map.insert(x, x);
+        expected.insert(0, (x, x));
+    }
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=test_get_and_index | COMPLEXITY=16 | LINES=26
+
+```rust
+#[test]
+fn test_get_and_index() {
+    let mut map = SortedMap::new();
+    let mut expected = Vec::new();
+
+    for x in 0..100 {
+        let x = 1000 - x;
+        if x & 1 == 0 {
+            map.insert(x, x);
+        }
+        expected.push(x);
+    }
+
+    for mut x in expected {
+        if x & 1 == 0 {
+            assert_eq!(map.get(&x), Some(&x));
+            assert_eq!(map.get_mut(&x), Some(&mut x));
+            assert_eq!(map[&x], x);
+            assert_eq!(&mut map[&x], &mut x);
+        } else {
+            assert_eq!(map.get(&x), None);
+            assert_eq!(map.get_mut(&x), None);
+        }
+    }
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=test_range | COMPLEXITY=14 | LINES=24
+
+```rust
+#[test]
+fn test_range() {
+    let mut map = SortedMap::new();
+    map.insert(1, 1);
+    map.insert(3, 3);
+    map.insert(6, 6);
+    map.insert(9, 9);
+
+    let keys = |s: &[(_, _)]| s.into_iter().map(|e| e.0).collect::<Vec<u32>>();
+
+    for start in 0..11 {
+        for end in 0..11 {
+            if end < start {
+                continue;
+            }
+
+            let mut expected = vec![1, 3, 6, 9];
+            expected.retain(|&x| x >= start && x < end);
+
+            assert_eq!(keys(map.range(start..end)), expected, "range = {}..{}", start, end);
+        }
+    }
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=test_offset_keys | COMPLEXITY=2 | LINES=17
+
+```rust
+#[test]
+fn test_offset_keys() {
+    let mut map = SortedMap::new();
+    map.insert(1, 1);
+    map.insert(3, 3);
+    map.insert(6, 6);
+
+    map.offset_keys(|k| *k += 1);
+
+    let mut expected = SortedMap::new();
+    expected.insert(2, 1);
+    expected.insert(4, 3);
+    expected.insert(7, 6);
+
+    assert_eq!(map, expected);
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=keys | COMPLEXITY=2 | LINES=4
+
+```rust
+fn keys(s: SortedMap<u32, u32>) -> Vec<u32> {
+    s.into_iter().map(|(k, _)| k).collect::<Vec<u32>>()
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=elements | COMPLEXITY=2 | LINES=4
+
+```rust
+fn elements(s: SortedMap<u32, u32>) -> Vec<(u32, u32)> {
+    s.into_iter().collect::<Vec<(u32, u32)>>()
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=test_remove_range | COMPLEXITY=14 | LINES=25
+
+```rust
+#[test]
+fn test_remove_range() {
+    let mut map = SortedMap::new();
+    map.insert(1, 1);
+    map.insert(3, 3);
+    map.insert(6, 6);
+    map.insert(9, 9);
+
+    for start in 0..11 {
+        for end in 0..11 {
+            if end < start {
+                continue;
+            }
+
+            let mut expected = vec![1, 3, 6, 9];
+            expected.retain(|&x| x < start || x >= end);
+
+            let mut map = map.clone();
+            map.remove_range(start..end);
+
+            assert_eq!(keys(map), expected, "range = {}..{}", start, end);
+        }
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=test_remove | COMPLEXITY=8 | LINES=21
+
+```rust
+#[test]
+fn test_remove() {
+    let mut map = SortedMap::new();
+    let mut expected = Vec::new();
+
+    for x in 0..10 {
+        map.insert(x, x);
+        expected.push((x, x));
+    }
+
+    for x in 0..10 {
+        let mut map = map.clone();
+        let mut expected = expected.clone();
+
+        assert_eq!(map.remove(&x), Some(x));
+        expected.remove(x as usize);
+
+        assert_eq!(map.iter().cloned().collect::<Vec<_>>(), expected);
+    }
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=test_insert_presorted_non_overlapping | COMPLEXITY=2 | LINES=12
+
+```rust
+#[test]
+fn test_insert_presorted_non_overlapping() {
+    let mut map = SortedMap::new();
+    map.insert(2, 0);
+    map.insert(8, 0);
+
+    map.insert_presorted(vec![(3, 0), (7, 0)]);
+
+    let expected = vec![2, 3, 7, 8];
+    assert_eq!(keys(map), expected);
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=test_insert_presorted_first_elem_equal | COMPLEXITY=2 | LINES=12
+
+```rust
+#[test]
+fn test_insert_presorted_first_elem_equal() {
+    let mut map = SortedMap::new();
+    map.insert(2, 2);
+    map.insert(8, 8);
+
+    map.insert_presorted(vec![(2, 0), (7, 7)]);
+
+    let expected = vec![(2, 0), (7, 7), (8, 8)];
+    assert_eq!(elements(map), expected);
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=test_insert_presorted_last_elem_equal | COMPLEXITY=2 | LINES=12
+
+```rust
+#[test]
+fn test_insert_presorted_last_elem_equal() {
+    let mut map = SortedMap::new();
+    map.insert(2, 2);
+    map.insert(8, 8);
+
+    map.insert_presorted(vec![(3, 3), (8, 0)]);
+
+    let expected = vec![(2, 2), (3, 3), (8, 0)];
+    assert_eq!(elements(map), expected);
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=test_insert_presorted_shuffle | COMPLEXITY=2 | LINES=12
+
+```rust
+#[test]
+fn test_insert_presorted_shuffle() {
+    let mut map = SortedMap::new();
+    map.insert(2, 2);
+    map.insert(7, 7);
+
+    map.insert_presorted(vec![(1, 1), (3, 3), (8, 8)]);
+
+    let expected = vec![(1, 1), (2, 2), (3, 3), (7, 7), (8, 8)];
+    assert_eq!(elements(map), expected);
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=test_insert_presorted_at_end | COMPLEXITY=2 | LINES=12
+
+```rust
+#[test]
+fn test_insert_presorted_at_end() {
+    let mut map = SortedMap::new();
+    map.insert(1, 1);
+    map.insert(2, 2);
+
+    map.insert_presorted(vec![(3, 3), (8, 8)]);
+
+    let expected = vec![(1, 1), (2, 2), (3, 3), (8, 8)];
+    assert_eq!(elements(map), expected);
+}
+```
+
+---
+*Generated by AST tracing system*

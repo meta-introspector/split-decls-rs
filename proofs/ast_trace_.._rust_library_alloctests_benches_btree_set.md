@@ -1,0 +1,496 @@
+# AST Trace: ../rust/library/alloctests/benches/btree/set.rs
+
+Generated 48 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=random | COMPLEXITY=5 | LINES=14
+
+```rust
+use std::collections::BTreeSet;
+
+use rand::Rng;
+use test::Bencher;
+
+fn random(n: u32) -> BTreeSet<u32> {
+    let mut rng = crate::bench_rng();
+    let mut set = BTreeSet::new();
+    while set.len() < n as usize {
+        set.insert(rng.random());
+    }
+    assert_eq!(set.len(), n as usize);
+    set
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=neg | COMPLEXITY=2 | LINES=6
+
+```rust
+fn neg(n: usize) -> BTreeSet<i32> {
+    let set: BTreeSet<i32> = (-(n as i32)..=-1).collect();
+    assert_eq!(set.len(), n);
+    set
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=pos | COMPLEXITY=2 | LINES=6
+
+```rust
+fn pos(n: usize) -> BTreeSet<i32> {
+    let set: BTreeSet<i32> = (1..=(n as i32)).collect();
+    assert_eq!(set.len(), n);
+    set
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=stagger | COMPLEXITY=5 | LINES=12
+
+```rust
+fn stagger(n1: usize, factor: usize) -> [BTreeSet<u32>; 2] {
+    let n2 = n1 * factor;
+    let mut sets = [BTreeSet::new(), BTreeSet::new()];
+    for i in 0..(n1 + n2) {
+        let b = i % (factor + 1) != 0;
+        sets[b as usize].insert(i as u32);
+    }
+    assert_eq!(sets[0].len(), n1);
+    assert_eq!(sets[1].len(), n2);
+    sets
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=9 | LINES=13
+
+```rust
+macro_rules! set_bench {
+    ($name: ident, $set_func: ident, $result_func: ident, $sets: expr) => {
+        #[bench]
+        pub fn $name(b: &mut Bencher) {
+            // setup
+            let sets = $sets;
+
+            // measure
+            b.iter(|| sets[0].$set_func(&sets[1]).$result_func())
+        }
+    };
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=slim_set | COMPLEXITY=2 | LINES=4
+
+```rust
+fn slim_set(n: usize) -> BTreeSet<usize> {
+    (0..n).collect::<BTreeSet<_>>()
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=clone_100 | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_100(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| src.clone())
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=clone_100_and_clear | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_100_and_clear(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| src.clone().clear())
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=clone_100_and_drain_all | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_100_and_drain_all(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| src.clone().extract_if(.., |_| true).count())
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=clone_100_and_drain_half | COMPLEXITY=3 | LINES=10
+
+```rust
+#[bench]
+pub fn clone_100_and_drain_half(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| {
+        let mut set = src.clone();
+        assert_eq!(set.extract_if(.., |i| i % 2 == 0).count(), 100 / 2);
+        assert_eq!(set.len(), 100 / 2);
+    })
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=clone_100_and_into_iter | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_100_and_into_iter(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| src.clone().into_iter().count())
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=clone_100_and_pop_all | COMPLEXITY=6 | LINES=10
+
+```rust
+#[bench]
+pub fn clone_100_and_pop_all(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| {
+        let mut set = src.clone();
+        while set.pop_first().is_some() {}
+        set
+    });
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=clone_100_and_remove_all | COMPLEXITY=6 | LINES=13
+
+```rust
+#[bench]
+pub fn clone_100_and_remove_all(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| {
+        let mut set = src.clone();
+        while let Some(elt) = set.iter().copied().next() {
+            let ok = set.remove(&elt);
+            debug_assert!(ok);
+        }
+        set
+    });
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=clone_100_and_remove_half | COMPLEXITY=6 | LINES=14
+
+```rust
+#[bench]
+pub fn clone_100_and_remove_half(b: &mut Bencher) {
+    let src = slim_set(100);
+    b.iter(|| {
+        let mut set = src.clone();
+        for i in (0..100).step_by(2) {
+            let ok = set.remove(&i);
+            debug_assert!(ok);
+        }
+        assert_eq!(set.len(), 100 / 2);
+        set
+    })
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=clone_10k | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_10k(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| src.clone())
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=clone_10k_and_clear | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_10k_and_clear(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| src.clone().clear())
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=clone_10k_and_drain_all | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_10k_and_drain_all(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| src.clone().extract_if(.., |_| true).count())
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=clone_10k_and_drain_half | COMPLEXITY=3 | LINES=10
+
+```rust
+#[bench]
+pub fn clone_10k_and_drain_half(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| {
+        let mut set = src.clone();
+        assert_eq!(set.extract_if(.., |i| i % 2 == 0).count(), 10_000 / 2);
+        assert_eq!(set.len(), 10_000 / 2);
+    })
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=clone_10k_and_into_iter | COMPLEXITY=2 | LINES=6
+
+```rust
+#[bench]
+pub fn clone_10k_and_into_iter(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| src.clone().into_iter().count())
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=clone_10k_and_pop_all | COMPLEXITY=6 | LINES=10
+
+```rust
+#[bench]
+pub fn clone_10k_and_pop_all(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| {
+        let mut set = src.clone();
+        while set.pop_first().is_some() {}
+        set
+    });
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=clone_10k_and_remove_all | COMPLEXITY=6 | LINES=13
+
+```rust
+#[bench]
+pub fn clone_10k_and_remove_all(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| {
+        let mut set = src.clone();
+        while let Some(elt) = set.iter().copied().next() {
+            let ok = set.remove(&elt);
+            debug_assert!(ok);
+        }
+        set
+    });
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=clone_10k_and_remove_half | COMPLEXITY=6 | LINES=14
+
+```rust
+#[bench]
+pub fn clone_10k_and_remove_half(b: &mut Bencher) {
+    let src = slim_set(10_000);
+    b.iter(|| {
+        let mut set = src.clone();
+        for i in (0..10_000).step_by(2) {
+            let ok = set.remove(&i);
+            debug_assert!(ok);
+        }
+        assert_eq!(set.len(), 10_000 / 2);
+        set
+    })
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+set_bench! {intersection_100_neg_vs_100_pos, intersection, count, [neg(100), pos(100)]}
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_100_neg_vs_10k_pos, intersection, count, [neg(100), pos(10_000)]}
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_100_pos_vs_100_neg, intersection, count, [pos(100), neg(100)]}
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_100_pos_vs_10k_neg, intersection, count, [pos(100), neg(10_000)]}
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_10k_neg_vs_100_pos, intersection, count, [neg(10_000), pos(100)]}
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_10k_neg_vs_10k_pos, intersection, count, [neg(10_000), pos(10_000)]}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_10k_pos_vs_100_neg, intersection, count, [pos(10_000), neg(100)]}
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_10k_pos_vs_10k_neg, intersection, count, [pos(10_000), neg(10_000)]}
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_random_100_vs_100, intersection, count, [random(100), random(100)]}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_random_100_vs_10k, intersection, count, [random(100), random(10_000)]}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_random_10k_vs_100, intersection, count, [random(10_000), random(100)]}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_random_10k_vs_10k, intersection, count, [random(10_000), random(10_000)]}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_staggered_100_vs_100, intersection, count, stagger(100, 1)}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_staggered_10k_vs_10k, intersection, count, stagger(10_000, 1)}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {intersection_staggered_100_vs_10k, intersection, count, stagger(100, 100)}
+```
+
+## Block 38
+**Metadata**: AST_ID=38 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_random_100_vs_100, difference, count, [random(100), random(100)]}
+```
+
+## Block 39
+**Metadata**: AST_ID=39 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_random_100_vs_10k, difference, count, [random(100), random(10_000)]}
+```
+
+## Block 40
+**Metadata**: AST_ID=40 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_random_10k_vs_100, difference, count, [random(10_000), random(100)]}
+```
+
+## Block 41
+**Metadata**: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_random_10k_vs_10k, difference, count, [random(10_000), random(10_000)]}
+```
+
+## Block 42
+**Metadata**: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_staggered_100_vs_100, difference, count, stagger(100, 1)}
+```
+
+## Block 43
+**Metadata**: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_staggered_10k_vs_10k, difference, count, stagger(10_000, 1)}
+```
+
+## Block 44
+**Metadata**: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {difference_staggered_100_vs_10k, difference, count, stagger(100, 100)}
+```
+
+## Block 45
+**Metadata**: AST_ID=45 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {is_subset_100_vs_100, is_subset, clone, [pos(100), pos(100)]}
+```
+
+## Block 46
+**Metadata**: AST_ID=46 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {is_subset_100_vs_10k, is_subset, clone, [pos(100), pos(10_000)]}
+```
+
+## Block 47
+**Metadata**: AST_ID=47 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {is_subset_10k_vs_100, is_subset, clone, [pos(10_000), pos(100)]}
+```
+
+## Block 48
+**Metadata**: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+set_bench! {is_subset_10k_vs_10k, is_subset, clone, [pos(10_000), pos(10_000)]}
+```
+
+---
+*Generated by AST tracing system*

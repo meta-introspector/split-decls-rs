@@ -1,0 +1,272 @@
+# AST Trace: ../rust/library/std/tests/sync/lazy_lock.rs
+
+Generated 15 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+use std::cell::LazyCell;
+use std::sync::atomic::AtomicUsize;
+use std::sync::atomic::Ordering::SeqCst;
+use std::sync::{LazyLock, Mutex, OnceLock};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use std::{panic, thread};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=spawn_and_wait | COMPLEXITY=2 | LINES=4
+
+```rust
+fn spawn_and_wait<R: Send + 'static>(f: impl FnOnce() -> R + Send + 'static) -> R {
+    thread::spawn(f).join().unwrap()
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=lazy_default | COMPLEXITY=7 | LINES=25
+
+```rust
+#[test]
+fn lazy_default() {
+    static CALLED: AtomicUsize = AtomicUsize::new(0);
+
+    struct Foo(u8);
+    impl Default for Foo {
+        fn default() -> Self {
+            CALLED.fetch_add(1, SeqCst);
+            Foo(42)
+        }
+    }
+
+    let lazy: LazyCell<Mutex<Foo>> = <_>::default();
+
+    assert_eq!(CALLED.load(SeqCst), 0);
+
+    assert_eq!(lazy.lock().unwrap().0, 42);
+    assert_eq!(CALLED.load(SeqCst), 1);
+
+    lazy.lock().unwrap().0 = 21;
+
+    assert_eq!(lazy.lock().unwrap().0, 21);
+    assert_eq!(CALLED.load(SeqCst), 1);
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=sync_lazy_new | COMPLEXITY=5 | LINES=22
+
+```rust
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_os = "wasi"), ignore)] // no threads
+fn sync_lazy_new() {
+    static CALLED: AtomicUsize = AtomicUsize::new(0);
+    static SYNC_LAZY: LazyLock<i32> = LazyLock::new(|| {
+        CALLED.fetch_add(1, SeqCst);
+        92
+    });
+
+    assert_eq!(CALLED.load(SeqCst), 0);
+
+    spawn_and_wait(|| {
+        let y = *SYNC_LAZY - 30;
+        assert_eq!(y, 62);
+        assert_eq!(CALLED.load(SeqCst), 1);
+    });
+
+    let y = *SYNC_LAZY - 30;
+    assert_eq!(y, 62);
+    assert_eq!(CALLED.load(SeqCst), 1);
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=sync_lazy_default | COMPLEXITY=7 | LINES=25
+
+```rust
+#[test]
+fn sync_lazy_default() {
+    static CALLED: AtomicUsize = AtomicUsize::new(0);
+
+    struct Foo(u8);
+    impl Default for Foo {
+        fn default() -> Self {
+            CALLED.fetch_add(1, SeqCst);
+            Foo(42)
+        }
+    }
+
+    let lazy: LazyLock<Mutex<Foo>> = <_>::default();
+
+    assert_eq!(CALLED.load(SeqCst), 0);
+
+    assert_eq!(lazy.lock().unwrap().0, 42);
+    assert_eq!(CALLED.load(SeqCst), 1);
+
+    lazy.lock().unwrap().0 = 21;
+
+    assert_eq!(lazy.lock().unwrap().0, 21);
+    assert_eq!(CALLED.load(SeqCst), 1);
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=static_sync_lazy | COMPLEXITY=4 | LINES=18
+
+```rust
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_os = "wasi"), ignore)] // no threads
+fn static_sync_lazy() {
+    static XS: LazyLock<Vec<i32>> = LazyLock::new(|| {
+        let mut xs = Vec::new();
+        xs.push(1);
+        xs.push(2);
+        xs.push(3);
+        xs
+    });
+
+    spawn_and_wait(|| {
+        assert_eq!(&*XS, &vec![1, 2, 3]);
+    });
+
+    assert_eq!(&*XS, &vec![1, 2, 3]);
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=static_sync_lazy_via_fn | COMPLEXITY=4 | LINES=15
+
+```rust
+#[test]
+fn static_sync_lazy_via_fn() {
+    fn xs() -> &'static Vec<i32> {
+        static XS: OnceLock<Vec<i32>> = OnceLock::new();
+        XS.get_or_init(|| {
+            let mut xs = Vec::new();
+            xs.push(1);
+            xs.push(2);
+            xs.push(3);
+            xs
+        })
+    }
+    assert_eq!(xs(), &vec![1, 2, 3]);
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=lazy_type_inference | COMPLEXITY=2 | LINES=6
+
+```rust
+// Check that we can infer `T` from closure's type.
+#[test]
+fn lazy_type_inference() {
+    let _ = LazyCell::new(|| ());
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=is_sync_send | COMPLEXITY=3 | LINES=6
+
+```rust
+#[test]
+fn is_sync_send() {
+    fn assert_traits<T: Send + Sync>() {}
+    assert_traits::<LazyLock<String>>();
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=lazy_force_mut | COMPLEXITY=2 | LINES=10
+
+```rust
+#[test]
+fn lazy_force_mut() {
+    let s = "abc".to_owned();
+    let mut lazy = LazyLock::new(move || s);
+    LazyLock::force_mut(&mut lazy);
+    let p = LazyLock::force_mut(&mut lazy);
+    p.clear();
+    LazyLock::force_mut(&mut lazy);
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=lazy_poisoning | COMPLEXITY=5 | LINES=10
+
+```rust
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore = "test requires unwinding support")]
+fn lazy_poisoning() {
+    let x: LazyCell<String> = LazyCell::new(|| panic!("kaboom"));
+    for _ in 0..2 {
+        let res = panic::catch_unwind(panic::AssertUnwindSafe(|| x.len()));
+        assert!(res.is_err());
+    }
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=lazy_lock_deref_panic | COMPLEXITY=4 | LINES=17
+
+```rust
+/// Verifies that when a `LazyLock` is poisoned, it panics with the correct error message ("LazyLock
+/// instance has previously been poisoned") instead of the underlying `Once` error message.
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore = "test requires unwinding support")]
+#[should_panic(expected = "LazyLock instance has previously been poisoned")]
+fn lazy_lock_deref_panic() {
+    let lazy: LazyLock<String> = LazyLock::new(|| panic!("initialization failed"));
+
+    // First access will panic during initialization.
+    let _ = panic::catch_unwind(panic::AssertUnwindSafe(|| {
+        let _ = &*lazy;
+    }));
+
+    // Second access should panic with the poisoned message.
+    let _ = &*lazy;
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=lazy_lock_deref_mut_panic | COMPLEXITY=3 | LINES=14
+
+```rust
+#[test]
+#[should_panic(expected = "LazyLock instance has previously been poisoned")]
+fn lazy_lock_deref_mut_panic() {
+    let mut lazy: LazyLock<String> = LazyLock::new(|| panic!("initialization failed"));
+
+    // First access will panic during initialization.
+    let _ = panic::catch_unwind(panic::AssertUnwindSafe(|| {
+        let _ = LazyLock::force_mut(&mut lazy);
+    }));
+
+    // Second access should panic with the poisoned message.
+    let _ = &*lazy;
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=lazy_lock_preserves_closure_panic_message | COMPLEXITY=3 | LINES=12
+
+```rust
+/// Verifies that when the initialization closure panics with a custom message, that message is
+/// preserved and not overridden by `LazyLock`.
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore = "test requires unwinding support")]
+#[should_panic(expected = "custom panic message from closure")]
+fn lazy_lock_preserves_closure_panic_message() {
+    let lazy: LazyLock<String> = LazyLock::new(|| panic!("custom panic message from closure"));
+
+    // This should panic with the original message from the closure.
+    let _ = &*lazy;
+}
+```
+
+---
+*Generated by AST tracing system*

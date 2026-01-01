@@ -1,0 +1,288 @@
+# AST Trace: ../rust/library/alloctests/tests/sort/patterns.rs
+
+Generated 14 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=random | COMPLEXITY=4 | LINES=22
+
+```rust
+use std::env;
+use std::str::FromStr;
+use std::sync::OnceLock;
+
+use rand::distr::Uniform;
+use rand::prelude::*;
+use rand_xorshift::XorShiftRng;
+
+use crate::sort::zipf::ZipfDistribution;
+
+/// Provides a set of patterns useful for testing and benchmarking sorting algorithms.
+/// Currently limited to i32 values.
+
+// --- Public ---
+
+pub fn random(len: usize) -> Vec<i32> {
+    //     .
+    // : . : :
+    // :.:::.::
+
+    random_vec(len)
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=random_uniform | COMPLEXITY=2 | LINES=13
+
+```rust
+pub fn random_uniform<R>(len: usize, range: R) -> Vec<i32>
+where
+    Uniform<i32>: TryFrom<R, Error: std::fmt::Debug>,
+{
+    // :.:.:.::
+
+    let mut rng: XorShiftRng = rand::SeedableRng::seed_from_u64(get_or_init_rand_seed());
+
+    // Abstracting over ranges in Rust :(
+    let dist = Uniform::try_from(range).unwrap();
+    (0..len).map(|_| dist.sample(&mut rng)).collect()
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=random_zipf | COMPLEXITY=2 | LINES=10
+
+```rust
+pub fn random_zipf(len: usize, exponent: f64) -> Vec<i32> {
+    // https://en.wikipedia.org/wiki/Zipf's_law
+
+    let mut rng: XorShiftRng = rand::SeedableRng::seed_from_u64(get_or_init_rand_seed());
+
+    // Abstracting over ranges in Rust :(
+    let dist = ZipfDistribution::new(len, exponent).unwrap();
+    (0..len).map(|_| dist.sample(&mut rng) as i32).collect()
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=random_sorted | COMPLEXITY=3 | LINES=20
+
+```rust
+pub fn random_sorted(len: usize, sorted_percent: f64) -> Vec<i32> {
+    //     .:
+    //   .:::. :
+    // .::::::.::
+    // [----][--]
+    //  ^      ^
+    //  |      |
+    // sorted  |
+    //     unsorted
+
+    // Simulate pre-existing sorted slice, where len - sorted_percent are the new unsorted values
+    // and part of the overall distribution.
+    let mut v = random_vec(len);
+    let sorted_len = ((len as f64) * (sorted_percent / 100.0)).round() as usize;
+
+    v[0..sorted_len].sort_unstable();
+
+    v
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=all_equal | COMPLEXITY=2 | LINES=7
+
+```rust
+pub fn all_equal(len: usize) -> Vec<i32> {
+    // ......
+    // ::::::
+
+    (0..len).map(|_| 66).collect::<Vec<_>>()
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=ascending | COMPLEXITY=2 | LINES=8
+
+```rust
+pub fn ascending(len: usize) -> Vec<i32> {
+    //     .:
+    //   .:::
+    // .:::::
+
+    (0..len as i32).collect::<Vec<_>>()
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=descending | COMPLEXITY=2 | LINES=8
+
+```rust
+pub fn descending(len: usize) -> Vec<i32> {
+    // :.
+    // :::.
+    // :::::.
+
+    (0..len as i32).rev().collect::<Vec<_>>()
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=saw_mixed | COMPLEXITY=16 | LINES=25
+
+```rust
+pub fn saw_mixed(len: usize, saw_count: usize) -> Vec<i32> {
+    // :.  :.    .::.    .:
+    // :::.:::..::::::..:::
+
+    if len == 0 {
+        return Vec::new();
+    }
+
+    let mut vals = random_vec(len);
+    let chunks_size = len / saw_count.max(1);
+    let saw_directions = random_uniform((len / chunks_size) + 1, 0..=1);
+
+    for (i, chunk) in vals.chunks_mut(chunks_size).enumerate() {
+        if saw_directions[i] == 0 {
+            chunk.sort_unstable();
+        } else if saw_directions[i] == 1 {
+            chunk.sort_unstable_by_key(|&e| std::cmp::Reverse(e));
+        } else {
+            unreachable!();
+        }
+    }
+
+    vals
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=saw_mixed_range | COMPLEXITY=17 | LINES=39
+
+```rust
+pub fn saw_mixed_range(len: usize, range: std::ops::Range<usize>) -> Vec<i32> {
+    //     :.
+    // :.  :::.    .::.      .:
+    // :::.:::::..::::::..:.:::
+
+    // ascending and descending randomly picked, with length in `range`.
+
+    if len == 0 {
+        return Vec::new();
+    }
+
+    let mut vals = random_vec(len);
+
+    let max_chunks = len / range.start;
+    let saw_directions = random_uniform(max_chunks + 1, 0..=1);
+    let chunk_sizes = random_uniform(max_chunks + 1, (range.start as i32)..(range.end as i32));
+
+    let mut i = 0;
+    let mut l = 0;
+    while l < len {
+        let chunk_size = chunk_sizes[i] as usize;
+        let chunk_end = std::cmp::min(l + chunk_size, len);
+        let chunk = &mut vals[l..chunk_end];
+
+        if saw_directions[i] == 0 {
+            chunk.sort_unstable();
+        } else if saw_directions[i] == 1 {
+            chunk.sort_unstable_by_key(|&e| std::cmp::Reverse(e));
+        } else {
+            unreachable!();
+        }
+
+        i += 1;
+        l += chunk_size;
+    }
+
+    vals
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=pipe_organ | COMPLEXITY=2 | LINES=15
+
+```rust
+pub fn pipe_organ(len: usize) -> Vec<i32> {
+    //   .:.
+    // .:::::.
+
+    let mut vals = random_vec(len);
+
+    let first_half = &mut vals[0..(len / 2)];
+    first_half.sort_unstable();
+
+    let second_half = &mut vals[(len / 2)..len];
+    second_half.sort_unstable_by_key(|&e| std::cmp::Reverse(e));
+
+    vals
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=get_or_init_rand_seed | COMPLEXITY=3 | LINES=9
+
+```rust
+pub fn get_or_init_rand_seed() -> u64 {
+    *SEED_VALUE.get_or_init(|| {
+        env::var("OVERRIDE_SEED")
+            .ok()
+            .map(|seed| u64::from_str(&seed).unwrap())
+            .unwrap_or_else(rand_root_seed)
+    })
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=rand_root_seed | COMPLEXITY=6 | LINES=20
+
+```rust
+// --- Private ---
+
+static SEED_VALUE: OnceLock<u64> = OnceLock::new();
+
+#[cfg(not(miri))]
+fn rand_root_seed() -> u64 {
+    // Other test code hashes `panic::Location::caller()` and constructs a seed from that, in these
+    // tests we want to have a fuzzer like exploration of the test space, if we used the same caller
+    // based construction we would always test the same.
+    //
+    // Instead we use the seconds since UNIX epoch / 10, given CI log output this value should be
+    // reasonably easy to re-construct.
+
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    let epoch_seconds = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
+
+    epoch_seconds / 10
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=rand_root_seed | COMPLEXITY=3 | LINES=10
+
+```rust
+#[cfg(miri)]
+fn rand_root_seed() -> u64 {
+    // Miri is usually run with isolation with gives us repeatability but also permutations based on
+    // other code that runs before.
+    use core::hash::{BuildHasher, Hash, Hasher};
+    let mut hasher = std::hash::RandomState::new().build_hasher();
+    core::panic::Location::caller().hash(&mut hasher);
+    hasher.finish()
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=random_vec | COMPLEXITY=2 | LINES=5
+
+```rust
+fn random_vec(len: usize) -> Vec<i32> {
+    let mut rng: XorShiftRng = rand::SeedableRng::seed_from_u64(get_or_init_rand_seed());
+    (0..len).map(|_| rng.random::<i32>()).collect()
+}
+```
+
+---
+*Generated by AST tracing system*

@@ -1,0 +1,250 @@
+# AST Trace: ../rust/compiler/rustc_trait_selection/src/errors/note_and_explain.rs
+
+Generated 12 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_errors::{Diag, EmissionGuarantee, IntoDiagArg, Subdiagnostic};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use rustc_hir::def_id::LocalDefId;
+use rustc_middle::bug;
+use rustc_middle::ty::{self, TyCtxt};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_span::{Span, kw};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=DescriptionCtx | COMPLEXITY=2 | LINES=9
+
+```rust
+use crate::error_reporting::infer::nice_region_error::find_anon_type;
+use crate::fluent_generated as fluent;
+
+struct DescriptionCtx<'a> {
+    span: Option<Span>,
+    kind: &'a str,
+    arg: String,
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=45 | LINES=70
+
+```rust
+impl<'a> DescriptionCtx<'a> {
+    fn new<'tcx>(
+        tcx: TyCtxt<'tcx>,
+        generic_param_scope: LocalDefId,
+        region: ty::Region<'tcx>,
+        alt_span: Option<Span>,
+    ) -> Option<Self> {
+        let (span, kind, arg) = match region.kind() {
+            ty::ReEarlyParam(br) => {
+                let scope = tcx
+                    .parent(tcx.generics_of(generic_param_scope).region_param(br, tcx).def_id)
+                    .expect_local();
+                let span = if let Some(param) =
+                    tcx.hir_get_generics(scope).and_then(|generics| generics.get_named(br.name))
+                {
+                    param.span
+                } else {
+                    tcx.def_span(scope)
+                };
+                if br.is_named() {
+                    (Some(span), "as_defined", br.name.to_string())
+                } else {
+                    (Some(span), "as_defined_anon", String::new())
+                }
+            }
+            ty::ReLateParam(ref fr) => {
+                if !fr.kind.is_named(tcx)
+                    && let Some((ty, _)) = find_anon_type(tcx, generic_param_scope, region)
+                {
+                    (Some(ty.span), "defined_here", String::new())
+                } else {
+                    let scope = fr.scope.expect_local();
+                    match fr.kind {
+                        ty::LateParamRegionKind::Named(def_id) => {
+                            let name = tcx.item_name(def_id);
+                            let span = if let Some(param) = tcx
+                                .hir_get_generics(scope)
+                                .and_then(|generics| generics.get_named(name))
+                            {
+                                param.span
+                            } else {
+                                tcx.def_span(scope)
+                            };
+                            if name == kw::UnderscoreLifetime {
+                                (Some(span), "as_defined_anon", String::new())
+                            } else {
+                                (Some(span), "as_defined", name.to_string())
+                            }
+                        }
+                        ty::LateParamRegionKind::Anon(_) => {
+                            let span = Some(tcx.def_span(scope));
+                            (span, "defined_here", String::new())
+                        }
+                        _ => (Some(tcx.def_span(scope)), "defined_here_reg", region.to_string()),
+                    }
+                }
+            }
+
+            ty::ReStatic => (alt_span, "restatic", String::new()),
+
+            ty::RePlaceholder(_) | ty::ReError(_) => return None,
+
+            ty::ReVar(_) | ty::ReBound(..) | ty::ReErased => {
+                bug!("unexpected region for DescriptionCtx: {:?}", region);
+            }
+        };
+        Some(DescriptionCtx { span, kind, arg })
+    }
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16
+
+```rust
+pub enum PrefixKind {
+    Empty,
+    RefValidFor,
+    ContentValidFor,
+    TypeObjValidFor,
+    SourcePointerValidFor,
+    TypeSatisfy,
+    TypeOutlive,
+    LfParamInstantiatedWith,
+    LfParamMustOutlive,
+    LfInstantiatedWith,
+    LfMustOutlive,
+    PointerValidFor,
+    DataValidFor,
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
+
+```rust
+pub enum SuffixKind {
+    Empty,
+    Continues,
+    ReqByBinding,
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=10 | LINES=22
+
+```rust
+impl IntoDiagArg for PrefixKind {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+        let kind = match self {
+            Self::Empty => "empty",
+            Self::RefValidFor => "ref_valid_for",
+            Self::ContentValidFor => "content_valid_for",
+            Self::TypeObjValidFor => "type_obj_valid_for",
+            Self::SourcePointerValidFor => "source_pointer_valid_for",
+            Self::TypeSatisfy => "type_satisfy",
+            Self::TypeOutlive => "type_outlive",
+            Self::LfParamInstantiatedWith => "lf_param_instantiated_with",
+            Self::LfParamMustOutlive => "lf_param_must_outlive",
+            Self::LfInstantiatedWith => "lf_instantiated_with",
+            Self::LfMustOutlive => "lf_must_outlive",
+            Self::PointerValidFor => "pointer_valid_for",
+            Self::DataValidFor => "data_valid_for",
+        }
+        .into();
+        rustc_errors::DiagArgValue::Str(kind)
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12
+
+```rust
+impl IntoDiagArg for SuffixKind {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+        let kind = match self {
+            Self::Empty => "empty",
+            Self::Continues => "continues",
+            Self::ReqByBinding => "req_by_binding",
+        }
+        .into();
+        rustc_errors::DiagArgValue::Str(kind)
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=STRUCT | NAME=RegionExplanation | COMPLEXITY=2 | LINES=6
+
+```rust
+pub struct RegionExplanation<'a> {
+    desc: DescriptionCtx<'a>,
+    prefix: PrefixKind,
+    suffix: SuffixKind,
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=17
+
+```rust
+impl RegionExplanation<'_> {
+    pub fn new<'tcx>(
+        tcx: TyCtxt<'tcx>,
+        generic_param_scope: LocalDefId,
+        region: ty::Region<'tcx>,
+        alt_span: Option<Span>,
+        prefix: PrefixKind,
+        suffix: SuffixKind,
+    ) -> Option<Self> {
+        Some(Self {
+            desc: DescriptionCtx::new(tcx, generic_param_scope, region, alt_span)?,
+            prefix,
+            suffix,
+        })
+    }
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=10 | LINES=18
+
+```rust
+impl Subdiagnostic for RegionExplanation<'_> {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        diag.store_args();
+        diag.arg("pref_kind", self.prefix);
+        diag.arg("suff_kind", self.suffix);
+        diag.arg("desc_kind", self.desc.kind);
+        diag.arg("desc_arg", self.desc.arg);
+
+        let msg = diag.eagerly_translate(fluent::trait_selection_region_explanation);
+        diag.restore_args();
+        if let Some(span) = self.desc.span {
+            diag.span_note(span, msg);
+        } else {
+            diag.note(msg);
+        }
+    }
+}
+```
+
+---
+*Generated by AST tracing system*

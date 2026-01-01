@@ -675,7 +675,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let symbol_map = load_symbol_map(symbol_map_path)?;
     let mut processed_count = 0;
     
-    for (file_path, _) in symbol_map.iter() {
+    let mut unique_files = HashSet::new();
+    for (symbol_name, symbol_data) in symbol_map.iter() {
+        if let Some(source_file) = symbol_data.get("source_file").and_then(|v| v.as_str()) {
+            unique_files.insert(source_file.to_string());
+        }
+    }
+    
+    for file_path in unique_files.iter() {
         if processed_count >= max_files {
             println!("🛑 Reached max files limit ({})", max_files);
             break;

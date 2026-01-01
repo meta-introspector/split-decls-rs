@@ -1,0 +1,196 @@
+# AST Trace: ../rust/library/std/src/sys/pal/sgx/mod.rs
+
+Generated 12 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9
+
+```rust
+//! System bindings for the Fortanix SGX platform
+//!
+//! This module contains the facade (aka platform-specific) implementations of
+//! OS level functionality for Fortanix SGX.
+#![deny(unsafe_op_in_unsafe_fn)]
+#![allow(fuzzy_provenance_casts)] // FIXME: this entire module systematically confuses pointers and integers
+
+use crate::io::ErrorKind;
+use crate::sync::atomic::{Atomic, AtomicBool, Ordering};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=17
+
+```rust
+pub mod abi;
+mod libunwind_integration;
+pub mod os;
+#[path = "../unsupported/pipe.rs"]
+pub mod pipe;
+pub mod thread_parking;
+pub mod time;
+pub mod waitqueue;
+
+// SAFETY: must be called only once during runtime initialization.
+// NOTE: this is not guaranteed to run, for example when Rust code is called externally.
+pub unsafe fn init(argc: isize, argv: *const *const u8, _sigpipe: u8) {
+    unsafe {
+        crate::sys::args::init(argc, argv);
+    }
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=4
+
+```rust
+// SAFETY: must be called only once during runtime cleanup.
+// NOTE: this is not guaranteed to run, for example when the program aborts.
+pub unsafe fn cleanup() {}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=unsupported | COMPLEXITY=2 | LINES=6
+
+```rust
+/// This function is used to implement functionality that simply doesn't exist.
+/// Programs relying on this functionality will need to deal with the error.
+pub fn unsupported<T>() -> crate::io::Result<T> {
+    Err(unsupported_err())
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=unsupported_err | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn unsupported_err() -> crate::io::Error {
+    crate::io::const_error!(ErrorKind::Unsupported, "operation not supported on SGX yet")
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=sgx_ineffective | COMPLEXITY=9 | LINES=17
+
+```rust
+/// This function is used to implement various functions that doesn't exist,
+/// but the lack of which might not be reason for error. If no error is
+/// returned, the program might very well be able to function normally. This is
+/// what happens when `SGX_INEFFECTIVE_ERROR` is set to `true`. If it is
+/// `false`, the behavior is the same as `unsupported`.
+pub fn sgx_ineffective<T>(v: T) -> crate::io::Result<T> {
+    static SGX_INEFFECTIVE_ERROR: Atomic<bool> = AtomicBool::new(false);
+    if SGX_INEFFECTIVE_ERROR.load(Ordering::Relaxed) {
+        Err(crate::io::const_error!(
+            ErrorKind::Uncategorized,
+            "operation can't be trusted to have any effect on SGX",
+        ))
+    } else {
+        Ok(v)
+    }
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=is_interrupted | COMPLEXITY=2 | LINES=5
+
+```rust
+#[inline]
+pub fn is_interrupted(code: i32) -> bool {
+    code == fortanix_sgx_abi::Error::Interrupted as _
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=decode_error_kind | COMPLEXITY=60 | LINES=45
+
+```rust
+pub fn decode_error_kind(code: i32) -> ErrorKind {
+    use fortanix_sgx_abi::Error;
+
+    // FIXME: not sure how to make sure all variants of Error are covered
+    if code == Error::NotFound as _ {
+        ErrorKind::NotFound
+    } else if code == Error::PermissionDenied as _ {
+        ErrorKind::PermissionDenied
+    } else if code == Error::ConnectionRefused as _ {
+        ErrorKind::ConnectionRefused
+    } else if code == Error::ConnectionReset as _ {
+        ErrorKind::ConnectionReset
+    } else if code == Error::ConnectionAborted as _ {
+        ErrorKind::ConnectionAborted
+    } else if code == Error::NotConnected as _ {
+        ErrorKind::NotConnected
+    } else if code == Error::AddrInUse as _ {
+        ErrorKind::AddrInUse
+    } else if code == Error::AddrNotAvailable as _ {
+        ErrorKind::AddrNotAvailable
+    } else if code == Error::BrokenPipe as _ {
+        ErrorKind::BrokenPipe
+    } else if code == Error::AlreadyExists as _ {
+        ErrorKind::AlreadyExists
+    } else if code == Error::WouldBlock as _ {
+        ErrorKind::WouldBlock
+    } else if code == Error::InvalidInput as _ {
+        ErrorKind::InvalidInput
+    } else if code == Error::InvalidData as _ {
+        ErrorKind::InvalidData
+    } else if code == Error::TimedOut as _ {
+        ErrorKind::TimedOut
+    } else if code == Error::WriteZero as _ {
+        ErrorKind::WriteZero
+    } else if code == Error::Interrupted as _ {
+        ErrorKind::Interrupted
+    } else if code == Error::Other as _ {
+        ErrorKind::Uncategorized
+    } else if code == Error::UnexpectedEof as _ {
+        ErrorKind::UnexpectedEof
+    } else {
+        ErrorKind::Uncategorized
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=abort_internal | COMPLEXITY=2 | LINES=4
+
+```rust
+pub fn abort_internal() -> ! {
+    abi::usercalls::exit(true)
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
+
+```rust
+// This function is needed by libunwind. The symbol is named in
+// pre-link args for the target specification, so keep that in sync.
+// Note: contrary to the `__rust_abort` in `crate::rt`, this uses `no_mangle`
+//       because it is actually used from C code. Because symbols annotated with
+//       #[rustc_std_internal_symbol] get mangled, this will not lead to linker
+//       conflicts.
+#[cfg(not(test))]
+#[unsafe(no_mangle)]
+pub extern "C" fn __rust_abort() {
+    abort_internal();
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+pub use crate::sys_common::{AsInner, FromInner, IntoInner};
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=try_into_inner | COMPLEXITY=2 | LINES=4
+
+```rust
+pub trait TryIntoInner<Inner>: Sized {
+    fn try_into_inner(self) -> Result<Inner, Self>;
+}
+```
+
+---
+*Generated by AST tracing system*

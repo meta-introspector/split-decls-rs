@@ -1,0 +1,215 @@
+# AST Trace: ../rust/library/stdarch/crates/core_arch/src/loongarch64/mod.rs
+
+Generated 14 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=rdtime_d | COMPLEXITY=10 | LINES=20
+
+```rust
+//! `LoongArch64` intrinsics
+
+mod lasx;
+mod lsx;
+
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub use self::lasx::*;
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub use self::lsx::*;
+
+use crate::arch::asm;
+
+/// Reads the 64-bit stable counter value and the counter ID
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub fn rdtime_d() -> (i64, isize) {
+    let (val, tid): (i64, isize);
+    unsafe { asm!("rdtime.d {}, {}", out(reg) val, out(reg) tid, options(readonly, nostack)) };
+    (val, tid)
+}
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=__crc_w_d_w | COMPLEXITY=8 | LINES=28
+
+```rust
+#[allow(improper_ctypes)]
+unsafe extern "unadjusted" {
+    #[link_name = "llvm.loongarch.crc.w.d.w"]
+    fn __crc_w_d_w(a: i64, b: i32) -> i32;
+    #[link_name = "llvm.loongarch.crcc.w.d.w"]
+    fn __crcc_w_d_w(a: i64, b: i32) -> i32;
+    #[link_name = "llvm.loongarch.cacop.d"]
+    fn __cacop(a: i64, b: i64, c: i64);
+    #[link_name = "llvm.loongarch.csrrd.d"]
+    fn __csrrd(a: i32) -> i64;
+    #[link_name = "llvm.loongarch.csrwr.d"]
+    fn __csrwr(a: i64, b: i32) -> i64;
+    #[link_name = "llvm.loongarch.csrxchg.d"]
+    fn __csrxchg(a: i64, b: i64, c: i32) -> i64;
+    #[link_name = "llvm.loongarch.iocsrrd.d"]
+    fn __iocsrrd_d(a: i32) -> i64;
+    #[link_name = "llvm.loongarch.iocsrwr.d"]
+    fn __iocsrwr_d(a: i64, b: i32);
+    #[link_name = "llvm.loongarch.asrtle.d"]
+    fn __asrtle(a: i64, b: i64);
+    #[link_name = "llvm.loongarch.asrtgt.d"]
+    fn __asrtgt(a: i64, b: i64);
+    #[link_name = "llvm.loongarch.lddir.d"]
+    fn __lddir(a: i64, b: i64) -> i64;
+    #[link_name = "llvm.loongarch.ldpte.d"]
+    fn __ldpte(a: i64, b: i64);
+}
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=crc_w_d_w | COMPLEXITY=7 | LINES=7
+
+```rust
+/// Calculate the CRC value using the IEEE 802.3 polynomial (0xEDB88320)
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub fn crc_w_d_w(a: i64, b: i32) -> i32 {
+    unsafe { __crc_w_d_w(a, b) }
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=crcc_w_d_w | COMPLEXITY=7 | LINES=7
+
+```rust
+/// Calculate the CRC value using the Castagnoli polynomial (0x82F63B78)
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub fn crcc_w_d_w(a: i64, b: i32) -> i32 {
+    unsafe { __crcc_w_d_w(a, b) }
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Generates the cache operation instruction
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn cacop<const IMM12: i64>(a: i64, b: i64) {
+    static_assert_simm_bits!(IMM12, 12);
+    __cacop(a, b, IMM12);
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Reads the CSR
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn csrrd<const IMM14: i32>() -> i64 {
+    static_assert_uimm_bits!(IMM14, 14);
+    __csrrd(IMM14)
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Writes the CSR
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn csrwr<const IMM14: i32>(a: i64) -> i64 {
+    static_assert_uimm_bits!(IMM14, 14);
+    __csrwr(a, IMM14)
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Exchanges the CSR
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn csrxchg<const IMM14: i32>(a: i64, b: i64) -> i64 {
+    static_assert_uimm_bits!(IMM14, 14);
+    __csrxchg(a, b, IMM14)
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
+
+```rust
+/// Reads the 64-bit IO-CSR
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn iocsrrd_d(a: i32) -> i64 {
+    __iocsrrd_d(a)
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
+
+```rust
+/// Writes the 64-bit IO-CSR
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn iocsrwr_d(a: i64, b: i32) {
+    __iocsrwr_d(a, b)
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
+
+```rust
+/// Generates the less-than-or-equal asseration instruction
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn asrtle(a: i64, b: i64) {
+    __asrtle(a, b);
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
+
+```rust
+/// Generates the greater-than asseration instruction
+#[inline]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn asrtgt(a: i64, b: i64) {
+    __asrtgt(a, b);
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Loads the page table directory entry
+#[inline]
+#[rustc_legacy_const_generics(1)]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn lddir<const B: i64>(a: i64) -> i64 {
+    __lddir(a, B)
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
+
+```rust
+/// Loads the page table entry
+#[inline]
+#[rustc_legacy_const_generics(1)]
+#[unstable(feature = "stdarch_loongarch", issue = "117427")]
+pub unsafe fn ldpte<const B: i64>(a: i64) {
+    __ldpte(a, B)
+}
+```
+
+---
+*Generated by AST tracing system*

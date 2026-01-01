@@ -1,0 +1,365 @@
+# AST Trace: ../rust/library/alloctests/benches/vec_deque.rs
+
+Generated 18 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use std::collections::{VecDeque, vec_deque};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use std::mem;
+
+use test::{Bencher, black_box};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=bench_new | COMPLEXITY=3 | LINES=8
+
+```rust
+#[bench]
+fn bench_new(b: &mut Bencher) {
+    b.iter(|| {
+        let ring: VecDeque<i32> = VecDeque::new();
+        black_box(ring);
+    })
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=bench_grow_1025 | COMPLEXITY=6 | LINES=11
+
+```rust
+#[bench]
+fn bench_grow_1025(b: &mut Bencher) {
+    b.iter(|| {
+        let mut deq = VecDeque::new();
+        for i in 0..1025 {
+            deq.push_front(i);
+        }
+        black_box(deq);
+    })
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=bench_iter_1000 | COMPLEXITY=6 | LINES=13
+
+```rust
+#[bench]
+fn bench_iter_1000(b: &mut Bencher) {
+    let ring: VecDeque<_> = (0..1000).collect();
+
+    b.iter(|| {
+        let mut sum = 0;
+        for &i in &ring {
+            sum += i;
+        }
+        black_box(sum);
+    })
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=bench_mut_iter_1000 | COMPLEXITY=6 | LINES=13
+
+```rust
+#[bench]
+fn bench_mut_iter_1000(b: &mut Bencher) {
+    let mut ring: VecDeque<_> = (0..1000).collect();
+
+    b.iter(|| {
+        let mut sum = 0;
+        for i in &mut ring {
+            sum += *i;
+        }
+        black_box(sum);
+    })
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=bench_try_fold | COMPLEXITY=2 | LINES=7
+
+```rust
+#[bench]
+fn bench_try_fold(b: &mut Bencher) {
+    let ring: VecDeque<_> = (0..1000).collect();
+
+    b.iter(|| black_box(ring.iter().try_fold(0, |a, b| Some(a + b))))
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=into_iter_helper | COMPLEXITY=9 | LINES=31
+
+```rust
+/// does the memory bookkeeping to reuse the buffer of the Vec between iterations.
+/// `setup` must not modify its argument's length or capacity. `g` must not move out of its argument.
+fn into_iter_helper<
+    T: Copy,
+    F: FnOnce(&mut VecDeque<T>),
+    G: FnOnce(&mut vec_deque::IntoIter<T>),
+>(
+    v: &mut Vec<T>,
+    setup: F,
+    g: G,
+) {
+    let ptr = v.as_mut_ptr();
+    let len = v.len();
+    // ensure that the vec is full, to make sure that any wrapping from the deque doesn't
+    // access uninitialized memory.
+    assert_eq!(v.len(), v.capacity());
+
+    let mut deque = VecDeque::from(mem::take(v));
+    setup(&mut deque);
+
+    let mut it = deque.into_iter();
+    g(&mut it);
+
+    mem::forget(it);
+
+    // SAFETY: the provided functions are not allowed to modify the allocation, so the buffer is still alive.
+    // len and capacity are accurate due to the above assertion.
+    // All the elements in the buffer are still valid, because of `T: Copy` which implies `T: !Drop`.
+    mem::forget(mem::replace(v, unsafe { Vec::from_raw_parts(ptr, len, len) }));
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=bench_into_iter | COMPLEXITY=15 | LINES=35
+
+```rust
+#[bench]
+fn bench_into_iter(b: &mut Bencher) {
+    let len = 1024;
+    // we reuse this allocation for every run
+    let mut vec: Vec<usize> = (0..len).collect();
+    vec.shrink_to_fit();
+
+    b.iter(|| {
+        let mut sum = 0;
+        into_iter_helper(
+            &mut vec,
+            |_| {},
+            |it| {
+                for i in it {
+                    sum += i;
+                }
+            },
+        );
+        black_box(sum);
+
+        let mut sum = 0;
+        // rotating a full deque doesn't move any memory.
+        into_iter_helper(
+            &mut vec,
+            |d| d.rotate_left(len / 2),
+            |it| {
+                for i in it {
+                    sum += i;
+                }
+            },
+        );
+        black_box(sum);
+    });
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=bench_into_iter_fold | COMPLEXITY=6 | LINES=23
+
+```rust
+#[bench]
+fn bench_into_iter_fold(b: &mut Bencher) {
+    let len = 1024;
+
+    // because `fold` takes ownership of the iterator,
+    // we can't prevent it from dropping the memory,
+    // so we have to bite the bullet and reallocate
+    // for every iteration.
+    b.iter(|| {
+        let deque: VecDeque<usize> = (0..len).collect();
+        assert_eq!(deque.len(), deque.capacity());
+        let sum = deque.into_iter().fold(0, |a, b| a + b);
+        black_box(sum);
+
+        // rotating a full deque doesn't move any memory.
+        let mut deque: VecDeque<usize> = (0..len).collect();
+        assert_eq!(deque.len(), deque.capacity());
+        deque.rotate_left(len / 2);
+        let sum = deque.into_iter().fold(0, |a, b| a + b);
+        black_box(sum);
+    });
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=bench_into_iter_try_fold | COMPLEXITY=7 | LINES=18
+
+```rust
+#[bench]
+fn bench_into_iter_try_fold(b: &mut Bencher) {
+    let len = 1024;
+    // we reuse this allocation for every run
+    let mut vec: Vec<usize> = (0..len).collect();
+    vec.shrink_to_fit();
+
+    // Iterator::any uses Iterator::try_fold under the hood
+    b.iter(|| {
+        let mut b = false;
+        into_iter_helper(&mut vec, |_| {}, |it| b = it.any(|i| i == len - 1));
+        black_box(b);
+
+        into_iter_helper(&mut vec, |d| d.rotate_left(len / 2), |it| b = it.any(|i| i == len - 1));
+        black_box(b);
+    });
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=bench_into_iter_next_chunk | COMPLEXITY=15 | LINES=33
+
+```rust
+#[bench]
+fn bench_into_iter_next_chunk(b: &mut Bencher) {
+    let len = 1024;
+    // we reuse this allocation for every run
+    let mut vec: Vec<usize> = (0..len).collect();
+    vec.shrink_to_fit();
+
+    b.iter(|| {
+        let mut buf = [0; 64];
+        into_iter_helper(
+            &mut vec,
+            |_| {},
+            |it| {
+                while let Ok(a) = it.next_chunk() {
+                    buf = a;
+                }
+            },
+        );
+        black_box(buf);
+
+        into_iter_helper(
+            &mut vec,
+            |d| d.rotate_left(len / 2),
+            |it| {
+                while let Ok(a) = it.next_chunk() {
+                    buf = a;
+                }
+            },
+        );
+        black_box(buf);
+    });
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=bench_from_array_1000 | COMPLEXITY=6 | LINES=15
+
+```rust
+#[bench]
+fn bench_from_array_1000(b: &mut Bencher) {
+    const N: usize = 1000;
+    let mut array: [usize; N] = [0; N];
+
+    for i in 0..N {
+        array[i] = i;
+    }
+
+    b.iter(|| {
+        let deq: VecDeque<_> = array.into();
+        black_box(deq);
+    })
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=bench_extend_bytes | COMPLEXITY=3 | LINES=11
+
+```rust
+#[bench]
+fn bench_extend_bytes(b: &mut Bencher) {
+    let mut ring: VecDeque<u8> = VecDeque::with_capacity(1000);
+    let input: &[u8] = &[128; 512];
+
+    b.iter(|| {
+        ring.clear();
+        ring.extend(black_box(input));
+    });
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=bench_extend_vec | COMPLEXITY=3 | LINES=13
+
+```rust
+#[bench]
+fn bench_extend_vec(b: &mut Bencher) {
+    let mut ring: VecDeque<u8> = VecDeque::with_capacity(1000);
+    let input = vec![128; 512];
+
+    b.iter(|| {
+        ring.clear();
+
+        let input = input.clone();
+        ring.extend(black_box(input));
+    });
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=bench_extend_trustedlen | COMPLEXITY=3 | LINES=10
+
+```rust
+#[bench]
+fn bench_extend_trustedlen(b: &mut Bencher) {
+    let mut ring: VecDeque<u16> = VecDeque::with_capacity(1000);
+
+    b.iter(|| {
+        ring.clear();
+        ring.extend(black_box(0..512));
+    });
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=bench_extend_chained_trustedlen | COMPLEXITY=3 | LINES=10
+
+```rust
+#[bench]
+fn bench_extend_chained_trustedlen(b: &mut Bencher) {
+    let mut ring: VecDeque<u16> = VecDeque::with_capacity(1000);
+
+    b.iter(|| {
+        ring.clear();
+        ring.extend(black_box((0..256).chain(768..1024)));
+    });
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=bench_extend_chained_bytes | COMPLEXITY=3 | LINES=12
+
+```rust
+#[bench]
+fn bench_extend_chained_bytes(b: &mut Bencher) {
+    let mut ring: VecDeque<u16> = VecDeque::with_capacity(1000);
+    let input1: &[u16] = &[128; 256];
+    let input2: &[u16] = &[255; 256];
+
+    b.iter(|| {
+        ring.clear();
+        ring.extend(black_box(input1.iter().chain(input2.iter())));
+    });
+}
+```
+
+---
+*Generated by AST tracing system*

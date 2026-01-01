@@ -1,0 +1,364 @@
+# AST Trace: ../rust/library/core/src/iter/adapters/map.rs
+
+Generated 22 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use crate::fmt;
+use crate::iter::adapters::zip::try_get_unchecked;
+use crate::iter::adapters::{SourceIter, TrustedRandomAccess, TrustedRandomAccessNoCoerce};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use crate::iter::{FusedIterator, InPlaceIterable, TrustedFused, TrustedLen, UncheckedIterator};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=32
+
+```rust
+use crate::num::NonZero;
+use crate::ops::Try;
+
+/// An iterator that maps the values of `iter` with `f`.
+///
+/// This `struct` is created by the [`map`] method on [`Iterator`]. See its
+/// documentation for more.
+///
+/// [`map`]: Iterator::map
+/// [`Iterator`]: trait.Iterator.html
+///
+/// # Notes about side effects
+///
+/// The [`map`] iterator implements [`DoubleEndedIterator`], meaning that
+/// you can also [`map`] backwards:
+///
+/// ```rust
+/// let v: Vec<i32> = [1, 2, 3].into_iter().map(|x| x + 1).rev().collect();
+///
+/// assert_eq!(v, [4, 3, 2]);
+/// ```
+///
+/// [`DoubleEndedIterator`]: trait.DoubleEndedIterator.html
+///
+/// But if your closure has state, iterating backwards may act in a way you do
+/// not expect. Let's go through an example. First, in the forward direction:
+///
+/// ```rust
+/// let mut c = 0;
+///
+/// for pair in ['a', 'b', 'c'].into_iter()
+///                                .map(|letter| { c += 1; (letter, c) }) {
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
+
+```rust
+///     println!("{pair:?}");
+/// }
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15
+
+```rust
+/// ```
+///
+/// This will print `('a', 1), ('b', 2), ('c', 3)`.
+///
+/// Now consider this twist where we add a call to `rev`. This version will
+/// print `('c', 1), ('b', 2), ('a', 3)`. Note that the letters are reversed,
+/// but the values of the counter still go in order. This is because `map()` is
+/// still being called lazily on each item, but we are popping items off the
+/// back of the vector now, instead of shifting them from the front.
+///
+/// ```rust
+/// let mut c = 0;
+///
+/// for pair in ['a', 'b', 'c'].into_iter()
+///                                .map(|letter| { c += 1; (letter, c) })
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=3
+
+```rust
+///                                .rev() {
+///     println!("{pair:?}");
+/// }
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=Map | COMPLEXITY=4 | LINES=9
+
+```rust
+/// ```
+#[must_use = "iterators are lazy and do nothing unless consumed"]
+#[stable(feature = "rust1", since = "1.0.0")]
+#[derive(Clone)]
+pub struct Map<I, F> {
+    // Used for `SplitWhitespace` and `SplitAsciiWhitespace` `as_str` methods
+    pub(crate) iter: I,
+    f: F,
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10
+
+```rust
+impl<I, F> Map<I, F> {
+    pub(in crate::iter) fn new(iter: I, f: F) -> Map<I, F> {
+        Map { iter, f }
+    }
+
+    pub(crate) fn into_inner(self) -> I {
+        self.iter
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=7
+
+```rust
+#[stable(feature = "core_impl_debug", since = "1.9.0")]
+impl<I: fmt::Debug, F> fmt::Debug for Map<I, F> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Map").field("iter", &self.iter).finish()
+    }
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=map_fold | COMPLEXITY=2 | LINES=7
+
+```rust
+fn map_fold<T, B, Acc>(
+    mut f: impl FnMut(T) -> B,
+    mut g: impl FnMut(Acc, B) -> Acc,
+) -> impl FnMut(Acc, T) -> Acc {
+    move |acc, elt| g(acc, f(elt))
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=map_try_fold | COMPLEXITY=2 | LINES=7
+
+```rust
+fn map_try_fold<'a, T, B, Acc, R>(
+    f: &'a mut impl FnMut(T) -> B,
+    mut g: impl FnMut(Acc, B) -> R + 'a,
+) -> impl FnMut(Acc, T) -> R + 'a {
+    move |acc, elt| g(acc, f(elt))
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=next | COMPLEXITY=20 | LINES=44
+
+```rust
+#[stable(feature = "rust1", since = "1.0.0")]
+impl<B, I: Iterator, F> Iterator for Map<I, F>
+where
+    F: FnMut(I::Item) -> B,
+{
+    type Item = B;
+
+    #[inline]
+    fn next(&mut self) -> Option<B> {
+        self.iter.next().map(&mut self.f)
+    }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.iter.size_hint()
+    }
+
+    fn try_fold<Acc, G, R>(&mut self, init: Acc, g: G) -> R
+    where
+        Self: Sized,
+        G: FnMut(Acc, Self::Item) -> R,
+        R: Try<Output = Acc>,
+    {
+        self.iter.try_fold(init, map_try_fold(&mut self.f, g))
+    }
+
+    fn fold<Acc, G>(self, init: Acc, g: G) -> Acc
+    where
+        G: FnMut(Acc, Self::Item) -> Acc,
+    {
+        self.iter.fold(init, map_fold(self.f, g))
+    }
+
+    #[inline]
+    unsafe fn __iterator_get_unchecked(&mut self, idx: usize) -> B
+    where
+        Self: TrustedRandomAccessNoCoerce,
+    {
+        // SAFETY: the caller must uphold the contract for
+        // `Iterator::__iterator_get_unchecked`.
+        unsafe { (self.f)(try_get_unchecked(&mut self.iter, idx)) }
+    }
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=next_back | COMPLEXITY=8 | LINES=27
+
+```rust
+#[stable(feature = "rust1", since = "1.0.0")]
+impl<B, I: DoubleEndedIterator, F> DoubleEndedIterator for Map<I, F>
+where
+    F: FnMut(I::Item) -> B,
+{
+    #[inline]
+    fn next_back(&mut self) -> Option<B> {
+        self.iter.next_back().map(&mut self.f)
+    }
+
+    fn try_rfold<Acc, G, R>(&mut self, init: Acc, g: G) -> R
+    where
+        Self: Sized,
+        G: FnMut(Acc, Self::Item) -> R,
+        R: Try<Output = Acc>,
+    {
+        self.iter.try_rfold(init, map_try_fold(&mut self.f, g))
+    }
+
+    fn rfold<Acc, G>(self, init: Acc, g: G) -> Acc
+    where
+        G: FnMut(Acc, Self::Item) -> Acc,
+    {
+        self.iter.rfold(init, map_fold(self.f, g))
+    }
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=len | COMPLEXITY=6 | LINES=14
+
+```rust
+#[stable(feature = "rust1", since = "1.0.0")]
+impl<B, I: ExactSizeIterator, F> ExactSizeIterator for Map<I, F>
+where
+    F: FnMut(I::Item) -> B,
+{
+    fn len(&self) -> usize {
+        self.iter.len()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.iter.is_empty()
+    }
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
+
+```rust
+#[stable(feature = "fused", since = "1.26.0")]
+impl<B, I: FusedIterator, F> FusedIterator for Map<I, F> where F: FnMut(I::Item) -> B {}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=3
+
+```rust
+#[unstable(issue = "none", feature = "trusted_fused")]
+unsafe impl<I: TrustedFused, F> TrustedFused for Map<I, F> {}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8
+
+```rust
+#[unstable(feature = "trusted_len", issue = "37572")]
+unsafe impl<B, I, F> TrustedLen for Map<I, F>
+where
+    I: TrustedLen,
+    F: FnMut(I::Item) -> B,
+{
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=13
+
+```rust
+impl<B, I, F> UncheckedIterator for Map<I, F>
+where
+    I: UncheckedIterator,
+    F: FnMut(I::Item) -> B,
+{
+    unsafe fn next_unchecked(&mut self) -> B {
+        // SAFETY: `Map` is 1:1 with the inner iterator, so if the caller promised
+        // that there's an element left, the inner iterator has one too.
+        let item = unsafe { self.iter.next_unchecked() };
+        (self.f)(item)
+    }
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4
+
+```rust
+#[doc(hidden)]
+#[unstable(feature = "trusted_random_access", issue = "none")]
+unsafe impl<I, F> TrustedRandomAccess for Map<I, F> where I: TrustedRandomAccess {}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9
+
+```rust
+#[doc(hidden)]
+#[unstable(feature = "trusted_random_access", issue = "none")]
+unsafe impl<I, F> TrustedRandomAccessNoCoerce for Map<I, F>
+where
+    I: TrustedRandomAccessNoCoerce,
+{
+    const MAY_HAVE_SIDE_EFFECT: bool = true;
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=26 | LINES=14
+
+```rust
+#[unstable(issue = "none", feature = "inplace_iteration")]
+unsafe impl<I, F> SourceIter for Map<I, F>
+where
+    I: SourceIter,
+{
+    type Source = I::Source;
+
+    #[inline]
+    unsafe fn as_inner(&mut self) -> &mut I::Source {
+        // SAFETY: unsafe function forwarding to unsafe function with the same requirements
+        unsafe { SourceIter::as_inner(&mut self.iter) }
+    }
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=6
+
+```rust
+#[unstable(issue = "none", feature = "inplace_iteration")]
+unsafe impl<I: InPlaceIterable, F> InPlaceIterable for Map<I, F> {
+    const EXPAND_BY: Option<NonZero<usize>> = I::EXPAND_BY;
+    const MERGE_BY: Option<NonZero<usize>> = I::MERGE_BY;
+}
+```
+
+---
+*Generated by AST tracing system*

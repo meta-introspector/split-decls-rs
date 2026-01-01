@@ -1,0 +1,348 @@
+# AST Trace: ../rust/compiler/rustc_session/src/cstore.rs
+
+Generated 23 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
+
+```rust
+//! the rustc crate store interface. This also includes types that
+//! are *mostly* used as a part of that interface, but these should
+//! probably get a better home if someone can find one.
+
+use std::any::Any;
+use std::path::PathBuf;
+
+use rustc_abi::ExternAbi;
+use rustc_data_structures::sync::{self, AppendOnlyIndexVec, FreezeLock};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_hir::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+use rustc_hir::def_id::{
+    CrateNum, DefId, LOCAL_CRATE, LocalDefId, StableCrateId, StableCrateIdMap,
+};
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_hir::definitions::{DefKey, DefPath, DefPathHash, Definitions};
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_macros::{Decodable, Encodable, HashStable_Generic};
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
+
+```rust
+use rustc_span::{Span, Symbol};
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=CrateSource | COMPLEXITY=4 | LINES=14
+
+```rust
+use crate::search_paths::PathKind;
+
+// lonely orphan structs and enums looking for a better home
+
+/// Where a crate came from on the local filesystem. One of these three options
+/// must be non-None.
+#[derive(PartialEq, Clone, Debug, HashStable_Generic, Encodable, Decodable)]
+pub struct CrateSource {
+    pub dylib: Option<(PathBuf, PathKind)>,
+    pub rlib: Option<(PathBuf, PathKind)>,
+    pub rmeta: Option<(PathBuf, PathKind)>,
+    pub sdylib_interface: Option<(PathBuf, PathKind)>,
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=paths | COMPLEXITY=3 | LINES=7
+
+```rust
+impl CrateSource {
+    #[inline]
+    pub fn paths(&self) -> impl Iterator<Item = &PathBuf> {
+        self.dylib.iter().chain(self.rlib.iter()).chain(self.rmeta.iter()).map(|p| &p.0)
+    }
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
+
+```rust
+#[derive(Encodable, Decodable, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Debug)]
+#[derive(HashStable_Generic)]
+pub enum CrateDepKind {
+    /// A dependency that is only used for its macros.
+    MacrosOnly,
+    /// A dependency that is always injected into the dependency list and so
+    /// doesn't need to be linked to an rlib, e.g., the injected panic runtime.
+    Implicit,
+    /// A dependency that is required by an rlib version of this crate.
+    /// Ordinary `extern crate`s result in `Explicit` dependencies.
+    Explicit,
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=macros_only | COMPLEXITY=7 | LINES=10
+
+```rust
+impl CrateDepKind {
+    #[inline]
+    pub fn macros_only(self) -> bool {
+        match self {
+            CrateDepKind::MacrosOnly => true,
+            CrateDepKind::Implicit | CrateDepKind::Explicit => false,
+        }
+    }
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
+
+```rust
+#[derive(Copy, Debug, PartialEq, Clone, Encodable, Decodable, HashStable_Generic)]
+pub enum LinkagePreference {
+    RequireDynamic,
+    RequireStatic,
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=STRUCT | NAME=NativeLib | COMPLEXITY=2 | LINES=12
+
+```rust
+#[derive(Debug, Encodable, Decodable, HashStable_Generic)]
+pub struct NativeLib {
+    pub kind: NativeLibKind,
+    pub name: Symbol,
+    /// If packed_bundled_libs enabled, actual filename of library is stored.
+    pub filename: Option<Symbol>,
+    pub cfg: Option<CfgEntry>,
+    pub foreign_module: Option<DefId>,
+    pub verbatim: Option<bool>,
+    pub dll_imports: Vec<DllImport>,
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=has_modifiers | COMPLEXITY=8 | LINES=10
+
+```rust
+impl NativeLib {
+    pub fn has_modifiers(&self) -> bool {
+        self.verbatim.is_some() || self.kind.has_modifiers()
+    }
+
+    pub fn wasm_import_module(&self) -> Option<Symbol> {
+        if self.kind == NativeLibKind::WasmImportModule { Some(self.name) } else { None }
+    }
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=STRUCT | NAME=DllImport | COMPLEXITY=9 | LINES=15
+
+```rust
+#[derive(Clone, Debug, Encodable, Decodable, HashStable_Generic)]
+pub struct DllImport {
+    pub name: Symbol,
+    pub import_name_type: Option<PeImportNameType>,
+    /// Calling convention for the function.
+    ///
+    /// On x86_64, this is always `DllCallingConvention::C`; on i686, it can be any
+    /// of the values, and we use `DllCallingConvention::C` to represent `"cdecl"`.
+    pub calling_convention: DllCallingConvention,
+    /// Span of import's "extern" declaration; used for diagnostics.
+    pub span: Span,
+    /// Is this for a function (rather than a static variable).
+    pub is_fn: bool,
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=ordinal | COMPLEXITY=8 | LINES=15
+
+```rust
+impl DllImport {
+    pub fn ordinal(&self) -> Option<u16> {
+        if let Some(PeImportNameType::Ordinal(ordinal)) = self.import_name_type {
+            Some(ordinal)
+        } else {
+            None
+        }
+    }
+
+    pub fn is_missing_decorations(&self) -> bool {
+        self.import_name_type == Some(PeImportNameType::Undecorated)
+            || self.import_name_type == Some(PeImportNameType::NoPrefix)
+    }
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
+
+```rust
+/// Calling convention for a function defined in an external library.
+///
+/// The usize value, where present, indicates the size of the function's argument list
+/// in bytes.
+#[derive(Clone, PartialEq, Debug, Encodable, Decodable, HashStable_Generic)]
+pub enum DllCallingConvention {
+    C,
+    Stdcall(usize),
+    Fastcall(usize),
+    Vectorcall(usize),
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=STRUCT | NAME=ForeignModule | COMPLEXITY=2 | LINES=7
+
+```rust
+#[derive(Clone, Encodable, Decodable, HashStable_Generic, Debug)]
+pub struct ForeignModule {
+    pub foreign_items: Vec<DefId>,
+    pub def_id: DefId,
+    pub abi: ExternAbi,
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=STRUCT | NAME=ExternCrate | COMPLEXITY=2 | LINES=15
+
+```rust
+#[derive(Copy, Clone, Debug, HashStable_Generic)]
+pub struct ExternCrate {
+    pub src: ExternCrateSource,
+
+    /// span of the extern crate that caused this to be loaded
+    pub span: Span,
+
+    /// Number of links to reach the extern;
+    /// used to select the extern with the shortest path
+    pub path_len: usize,
+
+    /// Crate that depends on this crate
+    pub dependency_of: CrateNum,
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=is_direct | COMPLEXITY=4 | LINES=18
+
+```rust
+impl ExternCrate {
+    /// If true, then this crate is the crate named by the extern
+    /// crate referenced above. If false, then this crate is a dep
+    /// of the crate.
+    #[inline]
+    pub fn is_direct(&self) -> bool {
+        self.dependency_of == LOCAL_CRATE
+    }
+
+    #[inline]
+    pub fn rank(&self) -> impl PartialOrd {
+        // Prefer:
+        // - direct extern crate to indirect
+        // - shorter paths to longer
+        (self.is_direct(), !self.path_len)
+    }
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
+
+```rust
+#[derive(Copy, Clone, Debug, HashStable_Generic)]
+pub enum ExternCrateSource {
+    /// Crate is loaded by `extern crate`.
+    Extern(
+        /// def_id of the item in the current crate that caused
+        /// this crate to be loaded; note that there could be multiple
+        /// such ids
+        DefId,
+    ),
+    /// Crate is implicitly loaded by a path resolving through extern prelude.
+    Path,
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
+
+```rust
+/// A store of Rust crates, through which their metadata can be accessed.
+///
+/// Note that this trait should probably not be expanding today. All new
+/// functionality should be driven through queries instead!
+///
+/// If you find a method on this trait named `{name}_untracked` it signifies
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=as_any | COMPLEXITY=5 | LINES=19
+
+```rust
+/// that it's *not* tracked for dependency information throughout compilation
+/// (it'd break incremental compilation) and should only be called pre-HIR (e.g.
+/// during resolve)
+pub trait CrateStore: std::fmt::Debug {
+    fn as_any(&self) -> &dyn Any;
+    fn untracked_as_any(&mut self) -> &mut dyn Any;
+
+    // Foreign definitions.
+    // This information is safe to access, since it's hashed as part of the DefPathHash, which incr.
+    // comp. uses to identify a DefId.
+    fn def_key(&self, def: DefId) -> DefKey;
+    fn def_path(&self, def: DefId) -> DefPath;
+    fn def_path_hash(&self, def: DefId) -> DefPathHash;
+
+    // This information is safe to access, since it's hashed as part of the StableCrateId, which
+    // incr. comp. uses to identify a CrateNum.
+    fn crate_name(&self, cnum: CrateNum) -> Symbol;
+    fn stable_crate_id(&self, cnum: CrateNum) -> StableCrateId;
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=STRUCT | NAME=Untracked | COMPLEXITY=4 | LINES=11
+
+```rust
+pub type CrateStoreDyn = dyn CrateStore + sync::DynSync + sync::DynSend;
+
+pub struct Untracked {
+    pub cstore: FreezeLock<Box<CrateStoreDyn>>,
+    /// Reference span for definitions.
+    pub source_span: AppendOnlyIndexVec<LocalDefId, Span>,
+    pub definitions: FreezeLock<Definitions>,
+    /// The interned [StableCrateId]s.
+    pub stable_crate_ids: FreezeLock<StableCrateIdMap>,
+}
+```
+
+---
+*Generated by AST tracing system*

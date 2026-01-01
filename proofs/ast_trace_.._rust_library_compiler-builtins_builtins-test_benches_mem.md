@@ -1,0 +1,759 @@
+# AST Trace: ../rust/library/compiler-builtins/builtins-test/benches/mem.rs
+
+Generated 68 AST blocks from source file
+
+## Block 1
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
+
+```rust
+#![feature(test)]
+
+extern crate test;
+use test::{Bencher, black_box};
+```
+
+## Block 2
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
+
+```rust
+extern crate compiler_builtins;
+use compiler_builtins::mem::{memcmp, memcpy, memmove, memset};
+```
+
+## Block 3
+**Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=AlignedVec | COMPLEXITY=2 | LINES=7
+
+```rust
+const WORD_SIZE: usize = core::mem::size_of::<usize>();
+
+struct AlignedVec {
+    vec: Vec<usize>,
+    size: usize,
+}
+```
+
+## Block 4
+**Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=7 | LINES=14
+
+```rust
+impl AlignedVec {
+    fn new(fill: u8, size: usize) -> Self {
+        let mut broadcast = fill as usize;
+        let mut bits = 8;
+        while bits < WORD_SIZE * 8 {
+            broadcast |= broadcast << bits;
+            bits *= 2;
+        }
+
+        let vec = vec![broadcast; (size + WORD_SIZE - 1) & !WORD_SIZE];
+        AlignedVec { vec, size }
+    }
+}
+```
+
+## Block 5
+**Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=7
+
+```rust
+impl core::ops::Deref for AlignedVec {
+    type Target = [u8];
+    fn deref(&self) -> &[u8] {
+        unsafe { core::slice::from_raw_parts(self.vec.as_ptr() as *const u8, self.size) }
+    }
+}
+```
+
+## Block 6
+**Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=10 | LINES=6
+
+```rust
+impl core::ops::DerefMut for AlignedVec {
+    fn deref_mut(&mut self) -> &mut [u8] {
+        unsafe { core::slice::from_raw_parts_mut(self.vec.as_mut_ptr() as *mut u8, self.size) }
+    }
+}
+```
+
+## Block 7
+**Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=memcpy_builtin | COMPLEXITY=3 | LINES=11
+
+```rust
+fn memcpy_builtin(b: &mut Bencher, n: usize, offset1: usize, offset2: usize) {
+    let v1 = AlignedVec::new(1, n + offset1);
+    let mut v2 = AlignedVec::new(0, n + offset2);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let src: &[u8] = black_box(&v1[offset1..]);
+        let dst: &mut [u8] = black_box(&mut v2[offset2..]);
+        dst.copy_from_slice(src);
+    })
+}
+```
+
+## Block 8
+**Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=memcpy_rust | COMPLEXITY=8 | LINES=11
+
+```rust
+fn memcpy_rust(b: &mut Bencher, n: usize, offset1: usize, offset2: usize) {
+    let v1 = AlignedVec::new(1, n + offset1);
+    let mut v2 = AlignedVec::new(0, n + offset2);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let src: &[u8] = black_box(&v1[offset1..]);
+        let dst: &mut [u8] = black_box(&mut v2[offset2..]);
+        unsafe { memcpy(dst.as_mut_ptr(), src.as_ptr(), n) }
+    })
+}
+```
+
+## Block 9
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=memset_builtin | COMPLEXITY=6 | LINES=12
+
+```rust
+fn memset_builtin(b: &mut Bencher, n: usize, offset: usize) {
+    let mut v1 = AlignedVec::new(0, n + offset);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let dst: &mut [u8] = black_box(&mut v1[offset..]);
+        let val: u8 = black_box(27);
+        for b in dst {
+            *b = val;
+        }
+    })
+}
+```
+
+## Block 10
+**Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=memset_rust | COMPLEXITY=8 | LINES=10
+
+```rust
+fn memset_rust(b: &mut Bencher, n: usize, offset: usize) {
+    let mut v1 = AlignedVec::new(0, n + offset);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let dst: &mut [u8] = black_box(&mut v1[offset..]);
+        let val = black_box(27);
+        unsafe { memset(dst.as_mut_ptr(), val, n) }
+    })
+}
+```
+
+## Block 11
+**Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=memcmp_builtin | COMPLEXITY=3 | LINES=12
+
+```rust
+fn memcmp_builtin(b: &mut Bencher, n: usize) {
+    let v1 = AlignedVec::new(0, n);
+    let mut v2 = AlignedVec::new(0, n);
+    v2[n - 1] = 1;
+    b.bytes = n as u64;
+    b.iter(|| {
+        let s1: &[u8] = black_box(&v1);
+        let s2: &[u8] = black_box(&v2);
+        s1.cmp(s2)
+    })
+}
+```
+
+## Block 12
+**Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned | COMPLEXITY=3 | LINES=12
+
+```rust
+fn memcmp_builtin_unaligned(b: &mut Bencher, n: usize) {
+    let v1 = AlignedVec::new(0, n);
+    let mut v2 = AlignedVec::new(0, n);
+    v2[n - 1] = 1;
+    b.bytes = n as u64;
+    b.iter(|| {
+        let s1: &[u8] = black_box(&v1[0..]);
+        let s2: &[u8] = black_box(&v2[1..]);
+        s1.cmp(s2)
+    })
+}
+```
+
+## Block 13
+**Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=memcmp_rust | COMPLEXITY=8 | LINES=12
+
+```rust
+fn memcmp_rust(b: &mut Bencher, n: usize) {
+    let v1 = AlignedVec::new(0, n);
+    let mut v2 = AlignedVec::new(0, n);
+    v2[n - 1] = 1;
+    b.bytes = n as u64;
+    b.iter(|| {
+        let s1: &[u8] = black_box(&v1);
+        let s2: &[u8] = black_box(&v2);
+        unsafe { memcmp(s1.as_ptr(), s2.as_ptr(), n) }
+    })
+}
+```
+
+## Block 14
+**Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned | COMPLEXITY=8 | LINES=12
+
+```rust
+fn memcmp_rust_unaligned(b: &mut Bencher, n: usize) {
+    let v1 = AlignedVec::new(0, n);
+    let mut v2 = AlignedVec::new(0, n);
+    v2[n - 1] = 1;
+    b.bytes = n as u64;
+    b.iter(|| {
+        let s1: &[u8] = black_box(&v1[0..]);
+        let s2: &[u8] = black_box(&v2[1..]);
+        unsafe { memcmp(s1.as_ptr(), s2.as_ptr(), n - 1) }
+    })
+}
+```
+
+## Block 15
+**Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=memmove_builtin | COMPLEXITY=3 | LINES=9
+
+```rust
+fn memmove_builtin(b: &mut Bencher, n: usize, offset: usize) {
+    let mut v = AlignedVec::new(0, n + n / 2 + offset);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let s: &mut [u8] = black_box(&mut v);
+        s.copy_within(0..n, n / 2 + offset);
+    })
+}
+```
+
+## Block 16
+**Metadata**: AST_ID=16 | TYPE=FUNCTION | NAME=memmove_rust | COMPLEXITY=8 | LINES=10
+
+```rust
+fn memmove_rust(b: &mut Bencher, n: usize, offset: usize) {
+    let mut v = AlignedVec::new(0, n + n / 2 + offset);
+    b.bytes = n as u64;
+    b.iter(|| {
+        let dst: *mut u8 = black_box(&mut v[n / 2 + offset..]).as_mut_ptr();
+        let src: *const u8 = black_box(&v).as_ptr();
+        unsafe { memmove(dst, src, n) };
+    })
+}
+```
+
+## Block 17
+**Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=memcpy_builtin_4096 | COMPLEXITY=2 | LINES=5
+
+```rust
+#[bench]
+fn memcpy_builtin_4096(b: &mut Bencher) {
+    memcpy_builtin(b, 4096, 0, 0)
+}
+```
+
+## Block 18
+**Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=memcpy_rust_4096 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_4096(b: &mut Bencher) {
+    memcpy_rust(b, 4096, 0, 0)
+}
+```
+
+## Block 19
+**Metadata**: AST_ID=19 | TYPE=FUNCTION | NAME=memcpy_builtin_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_builtin_1048576(b: &mut Bencher) {
+    memcpy_builtin(b, 1048576, 0, 0)
+}
+```
+
+## Block 20
+**Metadata**: AST_ID=20 | TYPE=FUNCTION | NAME=memcpy_rust_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_1048576(b: &mut Bencher) {
+    memcpy_rust(b, 1048576, 0, 0)
+}
+```
+
+## Block 21
+**Metadata**: AST_ID=21 | TYPE=FUNCTION | NAME=memcpy_builtin_4096_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_builtin_4096_offset(b: &mut Bencher) {
+    memcpy_builtin(b, 4096, 65, 65)
+}
+```
+
+## Block 22
+**Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=memcpy_rust_4096_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_4096_offset(b: &mut Bencher) {
+    memcpy_rust(b, 4096, 65, 65)
+}
+```
+
+## Block 23
+**Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=memcpy_builtin_1048576_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_builtin_1048576_offset(b: &mut Bencher) {
+    memcpy_builtin(b, 1048576, 65, 65)
+}
+```
+
+## Block 24
+**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=memcpy_rust_1048576_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_1048576_offset(b: &mut Bencher) {
+    memcpy_rust(b, 1048576, 65, 65)
+}
+```
+
+## Block 25
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=memcpy_builtin_4096_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_builtin_4096_misalign(b: &mut Bencher) {
+    memcpy_builtin(b, 4096, 65, 66)
+}
+```
+
+## Block 26
+**Metadata**: AST_ID=26 | TYPE=FUNCTION | NAME=memcpy_rust_4096_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_4096_misalign(b: &mut Bencher) {
+    memcpy_rust(b, 4096, 65, 66)
+}
+```
+
+## Block 27
+**Metadata**: AST_ID=27 | TYPE=FUNCTION | NAME=memcpy_builtin_1048576_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_builtin_1048576_misalign(b: &mut Bencher) {
+    memcpy_builtin(b, 1048576, 65, 66)
+}
+```
+
+## Block 28
+**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=memcpy_rust_1048576_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcpy_rust_1048576_misalign(b: &mut Bencher) {
+    memcpy_rust(b, 1048576, 65, 66)
+}
+```
+
+## Block 29
+**Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=memset_builtin_4096 | COMPLEXITY=2 | LINES=5
+
+```rust
+#[bench]
+fn memset_builtin_4096(b: &mut Bencher) {
+    memset_builtin(b, 4096, 0)
+}
+```
+
+## Block 30
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=memset_rust_4096 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_rust_4096(b: &mut Bencher) {
+    memset_rust(b, 4096, 0)
+}
+```
+
+## Block 31
+**Metadata**: AST_ID=31 | TYPE=FUNCTION | NAME=memset_builtin_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_builtin_1048576(b: &mut Bencher) {
+    memset_builtin(b, 1048576, 0)
+}
+```
+
+## Block 32
+**Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=memset_rust_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_rust_1048576(b: &mut Bencher) {
+    memset_rust(b, 1048576, 0)
+}
+```
+
+## Block 33
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=memset_builtin_4096_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_builtin_4096_offset(b: &mut Bencher) {
+    memset_builtin(b, 4096, 65)
+}
+```
+
+## Block 34
+**Metadata**: AST_ID=34 | TYPE=FUNCTION | NAME=memset_rust_4096_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_rust_4096_offset(b: &mut Bencher) {
+    memset_rust(b, 4096, 65)
+}
+```
+
+## Block 35
+**Metadata**: AST_ID=35 | TYPE=FUNCTION | NAME=memset_builtin_1048576_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_builtin_1048576_offset(b: &mut Bencher) {
+    memset_builtin(b, 1048576, 65)
+}
+```
+
+## Block 36
+**Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=memset_rust_1048576_offset | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memset_rust_1048576_offset(b: &mut Bencher) {
+    memset_rust(b, 1048576, 65)
+}
+```
+
+## Block 37
+**Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=memcmp_builtin_8 | COMPLEXITY=2 | LINES=5
+
+```rust
+#[bench]
+fn memcmp_builtin_8(b: &mut Bencher) {
+    memcmp_builtin(b, 8)
+}
+```
+
+## Block 38
+**Metadata**: AST_ID=38 | TYPE=FUNCTION | NAME=memcmp_rust_8 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_8(b: &mut Bencher) {
+    memcmp_rust(b, 8)
+}
+```
+
+## Block 39
+**Metadata**: AST_ID=39 | TYPE=FUNCTION | NAME=memcmp_builtin_16 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_16(b: &mut Bencher) {
+    memcmp_builtin(b, 16)
+}
+```
+
+## Block 40
+**Metadata**: AST_ID=40 | TYPE=FUNCTION | NAME=memcmp_rust_16 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_16(b: &mut Bencher) {
+    memcmp_rust(b, 16)
+}
+```
+
+## Block 41
+**Metadata**: AST_ID=41 | TYPE=FUNCTION | NAME=memcmp_builtin_32 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_32(b: &mut Bencher) {
+    memcmp_builtin(b, 32)
+}
+```
+
+## Block 42
+**Metadata**: AST_ID=42 | TYPE=FUNCTION | NAME=memcmp_rust_32 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_32(b: &mut Bencher) {
+    memcmp_rust(b, 32)
+}
+```
+
+## Block 43
+**Metadata**: AST_ID=43 | TYPE=FUNCTION | NAME=memcmp_builtin_64 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_64(b: &mut Bencher) {
+    memcmp_builtin(b, 64)
+}
+```
+
+## Block 44
+**Metadata**: AST_ID=44 | TYPE=FUNCTION | NAME=memcmp_rust_64 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_64(b: &mut Bencher) {
+    memcmp_rust(b, 64)
+}
+```
+
+## Block 45
+**Metadata**: AST_ID=45 | TYPE=FUNCTION | NAME=memcmp_builtin_4096 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_4096(b: &mut Bencher) {
+    memcmp_builtin(b, 4096)
+}
+```
+
+## Block 46
+**Metadata**: AST_ID=46 | TYPE=FUNCTION | NAME=memcmp_rust_4096 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_4096(b: &mut Bencher) {
+    memcmp_rust(b, 4096)
+}
+```
+
+## Block 47
+**Metadata**: AST_ID=47 | TYPE=FUNCTION | NAME=memcmp_builtin_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_1048576(b: &mut Bencher) {
+    memcmp_builtin(b, 1048576)
+}
+```
+
+## Block 48
+**Metadata**: AST_ID=48 | TYPE=FUNCTION | NAME=memcmp_rust_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_1048576(b: &mut Bencher) {
+    memcmp_rust(b, 1048576)
+}
+```
+
+## Block 49
+**Metadata**: AST_ID=49 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_7 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_7(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 8)
+}
+```
+
+## Block 50
+**Metadata**: AST_ID=50 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_7 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_7(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 8)
+}
+```
+
+## Block 51
+**Metadata**: AST_ID=51 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_15 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_15(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 16)
+}
+```
+
+## Block 52
+**Metadata**: AST_ID=52 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_15 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_15(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 16)
+}
+```
+
+## Block 53
+**Metadata**: AST_ID=53 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_31 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_31(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 32)
+}
+```
+
+## Block 54
+**Metadata**: AST_ID=54 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_31 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_31(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 32)
+}
+```
+
+## Block 55
+**Metadata**: AST_ID=55 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_63 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_63(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 64)
+}
+```
+
+## Block 56
+**Metadata**: AST_ID=56 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_63 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_63(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 64)
+}
+```
+
+## Block 57
+**Metadata**: AST_ID=57 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_4095 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_4095(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 4096)
+}
+```
+
+## Block 58
+**Metadata**: AST_ID=58 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_4095 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_4095(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 4096)
+}
+```
+
+## Block 59
+**Metadata**: AST_ID=59 | TYPE=FUNCTION | NAME=memcmp_builtin_unaligned_1048575 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_builtin_unaligned_1048575(b: &mut Bencher) {
+    memcmp_builtin_unaligned(b, 1048576)
+}
+```
+
+## Block 60
+**Metadata**: AST_ID=60 | TYPE=FUNCTION | NAME=memcmp_rust_unaligned_1048575 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memcmp_rust_unaligned_1048575(b: &mut Bencher) {
+    memcmp_rust_unaligned(b, 1048576)
+}
+```
+
+## Block 61
+**Metadata**: AST_ID=61 | TYPE=FUNCTION | NAME=memmove_builtin_4096 | COMPLEXITY=2 | LINES=5
+
+```rust
+#[bench]
+fn memmove_builtin_4096(b: &mut Bencher) {
+    memmove_builtin(b, 4096, 0)
+}
+```
+
+## Block 62
+**Metadata**: AST_ID=62 | TYPE=FUNCTION | NAME=memmove_rust_4096 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_rust_4096(b: &mut Bencher) {
+    memmove_rust(b, 4096, 0)
+}
+```
+
+## Block 63
+**Metadata**: AST_ID=63 | TYPE=FUNCTION | NAME=memmove_builtin_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_builtin_1048576(b: &mut Bencher) {
+    memmove_builtin(b, 1048576, 0)
+}
+```
+
+## Block 64
+**Metadata**: AST_ID=64 | TYPE=FUNCTION | NAME=memmove_rust_1048576 | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_rust_1048576(b: &mut Bencher) {
+    memmove_rust(b, 1048576, 0)
+}
+```
+
+## Block 65
+**Metadata**: AST_ID=65 | TYPE=FUNCTION | NAME=memmove_builtin_4096_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_builtin_4096_misalign(b: &mut Bencher) {
+    memmove_builtin(b, 4096, 1)
+}
+```
+
+## Block 66
+**Metadata**: AST_ID=66 | TYPE=FUNCTION | NAME=memmove_rust_4096_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_rust_4096_misalign(b: &mut Bencher) {
+    memmove_rust(b, 4096, 1)
+}
+```
+
+## Block 67
+**Metadata**: AST_ID=67 | TYPE=FUNCTION | NAME=memmove_builtin_1048576_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_builtin_1048576_misalign(b: &mut Bencher) {
+    memmove_builtin(b, 1048576, 1)
+}
+```
+
+## Block 68
+**Metadata**: AST_ID=68 | TYPE=FUNCTION | NAME=memmove_rust_1048576_misalign | COMPLEXITY=2 | LINES=4
+
+```rust
+#[bench]
+fn memmove_rust_1048576_misalign(b: &mut Bencher) {
+    memmove_rust(b, 1048576, 1)
+}
+```
+
+---
+*Generated by AST tracing system*
