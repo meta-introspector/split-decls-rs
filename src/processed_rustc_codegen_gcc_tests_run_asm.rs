@@ -8,7 +8,7 @@
 /* FP:asm.rs-0008 */      add rax, rsi
 /* FP:asm.rs-0009 */      ret") ;
 /* FP:asm.rs-0010 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_asm_OTHER_0003
-/* FP:asm.rs-0011 */ # [cfg (target_arch = "x86_64")] unsafe extern "C" { fn add_asm (a : i64 , b : i64) -> i64 ; }
+/* FP:asm.rs-0011 */ # [cfg (target_arch = "x86_64")] extern "C" { fn add_asm (a : i64 , b : i64) -> i64 ; }
 /* FP:asm.rs-0012 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_asm_FN_0004
 /* FP:asm.rs-0013 */ # [cfg (target_arch = "x86_64")] pub unsafe fn mem_cpy (dst : * mut u8 , src : * const u8 , len : usize) { asm ! ("rep movsb" , inout ("rdi") dst => _ , inout ("rsi") src => _ , inout ("rcx") len => _ , options (preserves_flags , nostack)) ; }
 /* FP:asm.rs-0014 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_asm_FN_0005

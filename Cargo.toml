@@ -3,6 +3,7 @@ name = "split-decls-genesis"
 version = "0.1.0"
 edition = "2024"
 description = "Self-creating Rust system through macro emergence"
+default-run = "split-decls-genesis"
 
 [workspace]
 

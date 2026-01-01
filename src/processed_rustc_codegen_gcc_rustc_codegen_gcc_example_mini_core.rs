@@ -286,7 +286,7 @@
 /* FP:mini_core.rs-0289 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_mini_core_IMPL_0145
 /* FP:mini_core.rs-0290 */ impl < T > Index < usize > for [T] { type Output = T ; fn index (& self , index : usize) -> & Self :: Output { & self [index] } }
 /* FP:mini_core.rs-0291 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_mini_core_OTHER_0146
-/* FP:mini_core.rs-0292 */ unsafe extern "C" { type VaListImpl ; }
+/* FP:mini_core.rs-0292 */ extern "C" { type VaListImpl ; }
 /* FP:mini_core.rs-0293 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_mini_core_STRUCT_0147
 /* FP:mini_core.rs-0294 */ # [lang = "va_list"] # [repr (transparent)] pub struct VaList < 'a > (& 'a mut VaListImpl) ;
 /* FP:mini_core.rs-0295 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_mini_core_OTHER_0148

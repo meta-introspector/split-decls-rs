@@ -5,7 +5,7 @@
 /* FP:alloc_example.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_alloc_example_STATIC_0003
 /* FP:alloc_example.rs-0006 */ # [global_allocator] static ALLOC : System = System ;
 /* FP:alloc_example.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_alloc_example_OTHER_0004
-/* FP:alloc_example.rs-0008 */ # [link (name = "c")] unsafe extern "C" { fn puts (s : * const u8) -> i32 ; }
+/* FP:alloc_example.rs-0008 */ # [link (name = "c")] extern "C" { fn puts (s : * const u8) -> i32 ; }
 /* FP:alloc_example.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_alloc_example_FN_0005
 /* FP:alloc_example.rs-0010 */ # [panic_handler] fn panic_handler (_ : & core :: panic :: PanicInfo < '_ >) -> ! { core :: intrinsics :: abort () ; }
 /* FP:alloc_example.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_alloc_example_FN_0006
