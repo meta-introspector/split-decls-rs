@@ -97,15 +97,30 @@ fn generate_wrap_types(imports: &[String]) -> Result<()> {
         }
     }
     
+    let mut seen_types = std::collections::HashSet::new();
+    
     for (module, types) in modules {
+        if module == "super" {
+            continue; // Skip 'super' module as it's a keyword
+        }
         wrap_types.push_str(&format!("pub mod {} {{\n", module));
         for type_name in types {
             for t in type_name.split(',') {
-                let t = t.trim();
+                let t = t.trim()
+                    .replace("{", "")
+                    .replace("}", "")
+                    .replace("*", "Star")
+                    .replace(":", "");
+                
                 if t == "self" {
-                    wrap_types.push_str(&format!("    pub struct {}Stub;\n", module));
-                } else if !t.is_empty() {
-                    wrap_types.push_str(&format!("    pub struct {};\n", t));
+                    let stub_name = format!("{}Stub", module);
+                    if seen_types.insert(stub_name.clone()) {
+                        wrap_types.push_str(&format!("    pub struct {};\n", stub_name));
+                    }
+                } else if !t.is_empty() && t.chars().all(|c| c.is_alphanumeric() || c == '_') && t != "super" {
+                    if seen_types.insert(t.clone()) {
+                        wrap_types.push_str(&format!("    pub struct {};\n", t));
+                    }
                 }
             }
         }
