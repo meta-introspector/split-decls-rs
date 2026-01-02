@@ -1,3 +1,623 @@
-# ! [doc = " # The Rust Standard Library"] # ! [doc = ""] # ! [doc = " The Rust Standard Library is the foundation of portable Rust software, a"] # ! [doc = " set of minimal and battle-tested shared abstractions for the [broader Rust"] # ! [doc = " ecosystem][crates.io]. It offers core types, like [`Vec<T>`] and"] # ! [doc = " [`Option<T>`], library-defined [operations on language"] # ! [doc = " primitives](#primitives), [standard macros](#macros), [I/O] and"] # ! [doc = " [multithreading], among [many other things][other]."] # ! [doc = ""] # ! [doc = " `std` is available to all Rust crates by default. Therefore, the"] # ! [doc = " standard library can be accessed in [`use`] statements through the path"] # ! [doc = " `std`, as in [`use std::env`]."] # ! [doc = ""] # ! [doc = " # How to read this documentation"] # ! [doc = ""] # ! [doc = " If you already know the name of what you are looking for, the fastest way to"] # ! [doc = " find it is to use the <a href=\"#\" onclick=\"window.searchState.focus();\">search"] # ! [doc = " button</a> at the top of the page."] # ! [doc = ""] # ! [doc = " Otherwise, you may want to jump to one of these useful sections:"] # ! [doc = ""] # ! [doc = " * [`std::*` modules](#modules)"] # ! [doc = " * [Primitive types](#primitives)"] # ! [doc = " * [Standard macros](#macros)"] # ! [doc = " * [The Rust Prelude]"] # ! [doc = ""] # ! [doc = " If this is your first time, the documentation for the standard library is"] # ! [doc = " written to be casually perused. Clicking on interesting things should"] # ! [doc = " generally lead you to interesting places. Still, there are important bits"] # ! [doc = " you don't want to miss, so read on for a tour of the standard library and"] # ! [doc = " its documentation!"] # ! [doc = ""] # ! [doc = " Once you are familiar with the contents of the standard library you may"] # ! [doc = " begin to find the verbosity of the prose distracting. At this stage in your"] # ! [doc = " development you may want to press the"] # ! [doc = " \"<svg style=\"width:0.75rem;height:0.75rem\" viewBox=\"0 0 12 12\" stroke=\"currentColor\" fill=\"none\"><path d=\"M2,2l4,4l4,-4M2,6l4,4l4,-4\"/></svg>&nbsp;Summary\""] # ! [doc = " button near the top of the page to collapse it into a more skimmable view."] # ! [doc = ""] # ! [doc = " While you are looking at the top of the page, also notice the"] # ! [doc = " \"Source\" link. Rust's API documentation comes with the source"] # ! [doc = " code and you are encouraged to read it. The standard library source is"] # ! [doc = " generally high quality and a peek behind the curtains is"] # ! [doc = " often enlightening."] # ! [doc = ""] # ! [doc = " # What is in the standard library documentation?"] # ! [doc = ""] # ! [doc = " First of all, The Rust Standard Library is divided into a number of focused"] # ! [doc = " modules, [all listed further down this page](#modules). These modules are"] # ! [doc = " the bedrock upon which all of Rust is forged, and they have mighty names"] # ! [doc = " like [`std::slice`] and [`std::cmp`]. Modules' documentation typically"] # ! [doc = " includes an overview of the module along with examples, and are a smart"] # ! [doc = " place to start familiarizing yourself with the library."] # ! [doc = ""] # ! [doc = " Second, implicit methods on [primitive types] are documented here. This can"] # ! [doc = " be a source of confusion for two reasons:"] # ! [doc = ""] # ! [doc = " 1. While primitives are implemented by the compiler, the standard library"] # ! [doc = "    implements methods directly on the primitive types (and it is the only"] # ! [doc = "    library that does so), which are [documented in the section on"] # ! [doc = "    primitives](#primitives)."] # ! [doc = " 2. The standard library exports many modules *with the same name as"] # ! [doc = "    primitive types*. These define additional items related to the primitive"] # ! [doc = "    type, but not the all-important methods."] # ! [doc = ""] # ! [doc = " So for example there is a [page for the primitive type"] # ! [doc = " `i32`](primitive::i32) that lists all the methods that can be called on"] # ! [doc = " 32-bit integers (very useful), and there is a [page for the module"] # ! [doc = " `std::i32`] that documents the constant values [`MIN`] and [`MAX`] (rarely"] # ! [doc = " useful)."] # ! [doc = ""] # ! [doc = " Note the documentation for the primitives [`str`] and [`[T]`][prim@slice] (also"] # ! [doc = " called 'slice'). Many method calls on [`String`] and [`Vec<T>`] are actually"] # ! [doc = " calls to methods on [`str`] and [`[T]`][prim@slice] respectively, via [deref"] # ! [doc = " coercions][deref-coercions]."] # ! [doc = ""] # ! [doc = " Third, the standard library defines [The Rust Prelude], a small collection"] # ! [doc = " of items - mostly traits - that are imported into every module of every"] # ! [doc = " crate. The traits in the prelude are pervasive, making the prelude"] # ! [doc = " documentation a good entry point to learning about the library."] # ! [doc = ""] # ! [doc = " And finally, the standard library exports a number of standard macros, and"] # ! [doc = " [lists them on this page](#macros) (technically, not all of the standard"] # ! [doc = " macros are defined by the standard library - some are defined by the"] # ! [doc = " compiler - but they are documented here the same). Like the prelude, the"] # ! [doc = " standard macros are imported by default into all crates."] # ! [doc = ""] # ! [doc = " # Contributing changes to the documentation"] # ! [doc = ""] # ! [doc = " Check out the Rust contribution guidelines [here]("] # ! [doc = " https://rustc-dev-guide.rust-lang.org/contributing.html#writing-documentation)."] # ! [doc = " The source for this documentation can be found on"] # ! [doc = " [GitHub](https://github.com/rust-lang/rust) in the 'library/std/' directory."] # ! [doc = " To contribute changes, make sure you read the guidelines first, then submit"] # ! [doc = " pull-requests for your suggested changes."] # ! [doc = ""] # ! [doc = " Contributions are appreciated! If you see a part of the docs that can be"] # ! [doc = " improved, submit a PR, or chat with us first on [Discord][rust-discord]"] # ! [doc = " #docs."] # ! [doc = ""] # ! [doc = " # A Tour of The Rust Standard Library"] # ! [doc = ""] # ! [doc = " The rest of this crate documentation is dedicated to pointing out notable"] # ! [doc = " features of The Rust Standard Library."] # ! [doc = ""] # ! [doc = " ## Containers and collections"] # ! [doc = ""] # ! [doc = " The [`option`] and [`result`] modules define optional and error-handling"] # ! [doc = " types, [`Option<T>`] and [`Result<T, E>`]. The [`iter`] module defines"] # ! [doc = " Rust's iterator trait, [`Iterator`], which works with the [`for`] loop to"] # ! [doc = " access collections."] # ! [doc = ""] # ! [doc = " The standard library exposes three common ways to deal with contiguous"] # ! [doc = " regions of memory:"] # ! [doc = ""] # ! [doc = " * [`Vec<T>`] - A heap-allocated *vector* that is resizable at runtime."] # ! [doc = " * [`[T; N]`][prim@array] - An inline *array* with a fixed size at compile time."] # ! [doc = " * [`[T]`][prim@slice] - A dynamically sized *slice* into any other kind of contiguous"] # ! [doc = "   storage, whether heap-allocated or not."] # ! [doc = ""] # ! [doc = " Slices can only be handled through some kind of *pointer*, and as such come"] # ! [doc = " in many flavors such as:"] # ! [doc = ""] # ! [doc = " * `&[T]` - *shared slice*"] # ! [doc = " * `&mut [T]` - *mutable slice*"] # ! [doc = " * [`Box<[T]>`][owned slice] - *owned slice*"] # ! [doc = ""] # ! [doc = " [`str`], a UTF-8 string slice, is a primitive type, and the standard library"] # ! [doc = " defines many methods for it. Rust [`str`]s are typically accessed as"] # ! [doc = " immutable references: `&str`. Use the owned [`String`] for building and"] # ! [doc = " mutating strings."] # ! [doc = ""] # ! [doc = " For converting to strings use the [`format!`] macro, and for converting from"] # ! [doc = " strings use the [`FromStr`] trait."] # ! [doc = ""] # ! [doc = " Data may be shared by placing it in a reference-counted box or the [`Rc`]"] # ! [doc = " type, and if further contained in a [`Cell`] or [`RefCell`], may be mutated"] # ! [doc = " as well as shared. Likewise, in a concurrent setting it is common to pair an"] # ! [doc = " atomically-reference-counted box, [`Arc`], with a [`Mutex`] to get the same"] # ! [doc = " effect."] # ! [doc = ""] # ! [doc = " The [`collections`] module defines maps, sets, linked lists and other"] # ! [doc = " typical collection types, including the common [`HashMap<K, V>`]."] # ! [doc = ""] # ! [doc = " ## Platform abstractions and I/O"] # ! [doc = ""] # ! [doc = " Besides basic data types, the standard library is largely concerned with"] # ! [doc = " abstracting over differences in common platforms, most notably Windows and"] # ! [doc = " Unix derivatives."] # ! [doc = ""] # ! [doc = " Common types of I/O, including [files], [TCP], and [UDP], are defined in"] # ! [doc = " the [`io`], [`fs`], and [`net`] modules."] # ! [doc = ""] # ! [doc = " The [`thread`] module contains Rust's threading abstractions. [`sync`]"] # ! [doc = " contains further primitive shared memory types, including [`atomic`], [`mpmc`] and"] # ! [doc = " [`mpsc`], which contains the channel types for message passing."] # ! [doc = ""] # ! [doc = " # Use before and after `main()`"] # ! [doc = ""] # ! [doc = " Many parts of the standard library are expected to work before and after `main()`;"] # ! [doc = " but this is not guaranteed or ensured by tests. It is recommended that you write your own tests"] # ! [doc = " and run them on each platform you wish to support."] # ! [doc = " This means that use of `std` before/after main, especially of features that interact with the"] # ! [doc = " OS or global state, is exempted from stability and portability guarantees and instead only"] # ! [doc = " provided on a best-effort basis. Nevertheless bug reports are appreciated."] # ! [doc = ""] # ! [doc = " On the other hand `core` and `alloc` are most likely to work in such environments with"] # ! [doc = " the caveat that any hookable behavior such as panics, oom handling or allocators will also"] # ! [doc = " depend on the compatibility of the hooks."] # ! [doc = ""] # ! [doc = " Some features may also behave differently outside main, e.g. stdio could become unbuffered,"] # ! [doc = " some panics might turn into aborts, backtraces might not get symbolicated or similar."] # ! [doc = ""] # ! [doc = " Non-exhaustive list of known limitations:"] # ! [doc = ""] # ! [doc = " - after-main use of thread-locals, which also affects additional features:"] # ! [doc = "   - [`thread::current()`]"] # ! [doc = " - under UNIX, before main, file descriptors 0, 1, and 2 may be unchanged"] # ! [doc = "   (they are guaranteed to be open during main,"] # ! [doc = "    and are opened to /dev/null O_RDWR if they weren't open on program start)"] # ! [doc = ""] # ! [doc = ""] # ! [doc = " [I/O]: io"] # ! [doc = " [`MIN`]: i32::MIN"] # ! [doc = " [`MAX`]: i32::MAX"] # ! [doc = " [page for the module `std::i32`]: crate::i32"] # ! [doc = " [TCP]: net::TcpStream"] # ! [doc = " [The Rust Prelude]: prelude"] # ! [doc = " [UDP]: net::UdpSocket"] # ! [doc = " [`Arc`]: sync::Arc"] # ! [doc = " [owned slice]: boxed"] # ! [doc = " [`Cell`]: cell::Cell"] # ! [doc = " [`FromStr`]: str::FromStr"] # ! [doc = " [`HashMap<K, V>`]: collections::HashMap"] # ! [doc = " [`Mutex`]: sync::Mutex"] # ! [doc = " [`Option<T>`]: option::Option"] # ! [doc = " [`Rc`]: rc::Rc"] # ! [doc = " [`RefCell`]: cell::RefCell"] # ! [doc = " [`Result<T, E>`]: result::Result"] # ! [doc = " [`Vec<T>`]: vec::Vec"] # ! [doc = " [`atomic`]: sync::atomic"] # ! [doc = " [`for`]: ../book/ch03-05-control-flow.html#looping-through-a-collection-with-for"] # ! [doc = " [`str`]: prim@str"] # ! [doc = " [`mpmc`]: sync::mpmc"] # ! [doc = " [`mpsc`]: sync::mpsc"] # ! [doc = " [`std::cmp`]: cmp"] # ! [doc = " [`std::slice`]: mod@slice"] # ! [doc = " [`use std::env`]: env/index.html"] # ! [doc = " [`use`]: ../book/ch07-02-defining-modules-to-control-scope-and-privacy.html"] # ! [doc = " [crates.io]: https://crates.io"] # ! [doc = " [deref-coercions]: ../book/ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods"] # ! [doc = " [files]: fs::File"] # ! [doc = " [multithreading]: thread"] # ! [doc = " [other]: #what-is-in-the-standard-library-documentation"] # ! [doc = " [primitive types]: ../book/ch03-02-data-types.html"] # ! [doc = " [rust-discord]: https://discord.gg/rust-lang"] # ! [doc = " [array]: prim@array"] # ! [doc = " [slice]: prim@slice"] # ! [cfg_attr (not (restricted_std) , stable (feature = "rust1" , since = "1.0.0"))] # ! [cfg_attr (restricted_std , unstable (feature = "restricted_std" , issue = "none" , reason = "You have attempted to use a standard library built for a platform that it doesn't \
+// Generated by unified_build.rs
+use crate::*;
+
+//! # The Rust Standard Library
+//!
+//! The Rust Standard Library is the foundation of portable Rust software, a
+//! set of minimal and battle-tested shared abstractions for the [broader Rust
+//! ecosystem][crates.io]. It offers core types, like [`Vec<T>`] and
+//! [`Option<T>`], library-defined [operations on language
+//! primitives](#primitives), [standard macros](#macros), [I/O] and
+//! [multithreading], among [many other things][other].
+//!
+//! `std` is available to all Rust crates by default. Therefore, the
+//! standard library can be accessed in [`use`] statements through the path
+//! `std`, as in [`use std::env`].
+//!
+//! # How to read this documentation
+//!
+//! If you already know the name of what you are looking for, the fastest way to
+//! find it is to use the <a href="#" onclick="window.searchState.focus();">search
+//! button</a> at the top of the page.
+//!
+//! Otherwise, you may want to jump to one of these useful sections:
+//!
+//! * [`std::*` modules](#modules)
+//! * [Primitive types](#primitives)
+//! * [Standard macros](#macros)
+//! * [The Rust Prelude]
+//!
+//! If this is your first time, the documentation for the standard library is
+//! written to be casually perused. Clicking on interesting things should
+//! generally lead you to interesting places. Still, there are important bits
+//! you don't want to miss, so read on for a tour of the standard library and
+//! its documentation!
+//!
+//! Once you are familiar with the contents of the standard library you may
+//! begin to find the verbosity of the prose distracting. At this stage in your
+//! development you may want to press the
+//! "<svg style="width:0.75rem;height:0.75rem" viewBox="0 0 12 12" stroke="currentColor" fill="none"><path d="M2,2l4,4l4,-4M2,6l4,4l4,-4"/></svg>&nbsp;Summary"
+//! button near the top of the page to collapse it into a more skimmable view.
+//!
+//! While you are looking at the top of the page, also notice the
+//! "Source" link. Rust's API documentation comes with the source
+//! code and you are encouraged to read it. The standard library source is
+//! generally high quality and a peek behind the curtains is
+//! often enlightening.
+//!
+//! # What is in the standard library documentation?
+//!
+//! First of all, The Rust Standard Library is divided into a number of focused
+//! modules, [all listed further down this page](#modules). These modules are
+//! the bedrock upon which all of Rust is forged, and they have mighty names
+//! like [`std::slice`] and [`std::cmp`]. Modules' documentation typically
+//! includes an overview of the module along with examples, and are a smart
+//! place to start familiarizing yourself with the library.
+//!
+//! Second, implicit methods on [primitive types] are documented here. This can
+//! be a source of confusion for two reasons:
+//!
+//! 1. While primitives are implemented by the compiler, the standard library
+//!    implements methods directly on the primitive types (and it is the only
+//!    library that does so), which are [documented in the section on
+//!    primitives](#primitives).
+//! 2. The standard library exports many modules *with the same name as
+//!    primitive types*. These define additional items related to the primitive
+//!    type, but not the all-important methods.
+//!
+//! So for example there is a [page for the primitive type
+//! `i32`](primitive::i32) that lists all the methods that can be called on
+//! 32-bit integers (very useful), and there is a [page for the module
+//! `std::i32`] that documents the constant values [`MIN`] and [`MAX`] (rarely
+//! useful).
+//!
+//! Note the documentation for the primitives [`str`] and [`[T]`][prim@slice] (also
+//! called 'slice'). Many method calls on [`String`] and [`Vec<T>`] are actually
+//! calls to methods on [`str`] and [`[T]`][prim@slice] respectively, via [deref
+//! coercions][deref-coercions].
+//!
+//! Third, the standard library defines [The Rust Prelude], a small collection
+//! of items - mostly traits - that are imported into every module of every
+//! crate. The traits in the prelude are pervasive, making the prelude
+//! documentation a good entry point to learning about the library.
+//!
+//! And finally, the standard library exports a number of standard macros, and
+//! [lists them on this page](#macros) (technically, not all of the standard
+//! macros are defined by the standard library - some are defined by the
+//! compiler - but they are documented here the same). Like the prelude, the
+//! standard macros are imported by default into all crates.
+//!
+//! # Contributing changes to the documentation
+//!
+//! Check out the Rust contribution guidelines [here](
+//! https://rustc-dev-guide.rust-lang.org/contributing.html#writing-documentation).
+//! The source for this documentation can be found on
+//! [GitHub](https://github.com/rust-lang/rust) in the 'library/std/' directory.
+//! To contribute changes, make sure you read the guidelines first, then submit
+//! pull-requests for your suggested changes.
+//!
+//! Contributions are appreciated! If you see a part of the docs that can be
+//! improved, submit a PR, or chat with us first on [Discord][rust-discord]
+//! #docs.
+//!
+//! # A Tour of The Rust Standard Library
+//!
+//! The rest of this crate documentation is dedicated to pointing out notable
+//! features of The Rust Standard Library.
+//!
+//! ## Containers and collections
+//!
+//! The [`option`] and [`result`] modules define optional and error-handling
+//! types, [`Option<T>`] and [`Result<T, E>`]. The [`iter`] module defines
+//! Rust's iterator trait, [`Iterator`], which works with the [`for`] loop to
+//! access collections.
+//!
+//! The standard library exposes three common ways to deal with contiguous
+//! regions of memory:
+//!
+//! * [`Vec<T>`] - A heap-allocated *vector* that is resizable at runtime.
+//! * [`[T; N]`][prim@array] - An inline *array* with a fixed size at compile time.
+//! * [`[T]`][prim@slice] - A dynamically sized *slice* into any other kind of contiguous
+//!   storage, whether heap-allocated or not.
+//!
+//! Slices can only be handled through some kind of *pointer*, and as such come
+//! in many flavors such as:
+//!
+//! * `&[T]` - *shared slice*
+//! * `&mut [T]` - *mutable slice*
+//! * [`Box<[T]>`][owned slice] - *owned slice*
+//!
+//! [`str`], a UTF-8 string slice, is a primitive type, and the standard library
+//! defines many methods for it. Rust [`str`]s are typically accessed as
+//! immutable references: `&str`. Use the owned [`String`] for building and
+//! mutating strings.
+//!
+//! For converting to strings use the [`format!`] macro, and for converting from
+//! strings use the [`FromStr`] trait.
+//!
+//! Data may be shared by placing it in a reference-counted box or the [`Rc`]
+//! type, and if further contained in a [`Cell`] or [`RefCell`], may be mutated
+//! as well as shared. Likewise, in a concurrent setting it is common to pair an
+//! atomically-reference-counted box, [`Arc`], with a [`Mutex`] to get the same
+//! effect.
+//!
+//! The [`collections`] module defines maps, sets, linked lists and other
+//! typical collection types, including the common [`HashMap<K, V>`].
+//!
+//! ## Platform abstractions and I/O
+//!
+//! Besides basic data types, the standard library is largely concerned with
+//! abstracting over differences in common platforms, most notably Windows and
+//! Unix derivatives.
+//!
+//! Common types of I/O, including [files], [TCP], and [UDP], are defined in
+//! the [`io`], [`fs`], and [`net`] modules.
+//!
+//! The [`thread`] module contains Rust's threading abstractions. [`sync`]
+//! contains further primitive shared memory types, including [`atomic`], [`mpmc`] and
+//! [`mpsc`], which contains the channel types for message passing.
+//!
+//! # Use before and after `main()`
+//!
+//! Many parts of the standard library are expected to work before and after `main()`;
+//! but this is not guaranteed or ensured by tests. It is recommended that you write your own tests
+//! and run them on each platform you wish to support.
+//! This means that use of `std` before/after main, especially of features that interact with the
+//! OS or global state, is exempted from stability and portability guarantees and instead only
+//! provided on a best-effort basis. Nevertheless bug reports are appreciated.
+//!
+//! On the other hand `core` and `alloc` are most likely to work in such environments with
+//! the caveat that any hookable behavior such as panics, oom handling or allocators will also
+//! depend on the compatibility of the hooks.
+//!
+//! Some features may also behave differently outside main, e.g. stdio could become unbuffered,
+//! some panics might turn into aborts, backtraces might not get symbolicated or similar.
+//!
+//! Non-exhaustive list of known limitations:
+//!
+//! - after-main use of thread-locals, which also affects additional features:
+//!   - [`thread::current()`]
+//! - under UNIX, before main, file descriptors 0, 1, and 2 may be unchanged
+//!   (they are guaranteed to be open during main,
+//!    and are opened to /dev/null O_RDWR if they weren't open on program start)
+//!
+//!
+//! [I/O]: io
+//! [`MIN`]: i32::MIN
+//! [`MAX`]: i32::MAX
+//! [page for the module `std::i32`]: crate::i32
+//! [TCP]: net::TcpStream
+//! [The Rust Prelude]: prelude
+//! [UDP]: net::UdpSocket
+//! [`Arc`]: sync::Arc
+//! [owned slice]: boxed
+//! [`Cell`]: cell::Cell
+//! [`FromStr`]: str::FromStr
+//! [`HashMap<K, V>`]: collections::HashMap
+//! [`Mutex`]: sync::Mutex
+//! [`Option<T>`]: option::Option
+//! [`Rc`]: rc::Rc
+//! [`RefCell`]: cell::RefCell
+//! [`Result<T, E>`]: result::Result
+//! [`Vec<T>`]: vec::Vec
+//! [`atomic`]: sync::atomic
+//! [`for`]: book/ch03-05-control-flow.html#looping-through-a-collection-with-for
+//! [`str`]: prim@str
+//! [`mpmc`]: sync::mpmc
+//! [`mpsc`]: sync::mpsc
+//! [`std::cmp`]: cmp
+//! [`std::slice`]: mod@slice
+//! [`use std::env`]: env/index.html
+//! [`use`]: book/ch07-02-defining-modules-to-control-scope-and-privacy.html
+//! [crates.io]: https://crates.io
+//! [deref-coercions]: book/ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
+//! [files]: fs::File
+//! [multithreading]: thread
+//! [other]: #what-is-in-the-standard-library-documentation
+//! [primitive types]: book/ch03-02-data-types.html
+//! [rust-discord]: https://discord.gg/rust-lang
+//! [array]: prim@array
+//! [slice]: prim@slice
+
+    restricted_std,
+    unstable(
+        feature = "restricted_std",
+        issue = "none",
+        reason = "You have attempted to use a standard library built for a platform that it doesn't \
             know how to support. Consider building it for a known environment, disabling it with \
-            `#![no_std]` or overriding this warning by enabling this feature."))] # ! [rustc_preserve_ub_checks] # ! [doc (html_playground_url = "https://play.rust-lang.org/" , issue_tracker_base_url = "https://github.com/rust-lang/rust/issues/" , test (no_crate_inject , attr (deny (warnings))) , test (attr (allow (dead_code , deprecated , unused_variables , unused_mut))))] # ! [doc (rust_logo)] # ! [doc (cfg_hide (not (test) , no_global_oom_handling , not (no_global_oom_handling)))] # ! [no_std] # ! [needs_panic_runtime] # ! [warn (deprecated_in_future)] # ! [warn (missing_docs)] # ! [warn (missing_debug_implementations)] # ! [allow (explicit_outlives_requirements)] # ! [allow (unused_lifetimes)] # ! [allow (internal_features)] # ! [deny (fuzzy_provenance_casts)] # ! [deny (unsafe_op_in_unsafe_fn)] # ! [allow (rustdoc :: redundant_explicit_links)] # ! [warn (rustdoc :: unescaped_backticks)] # ! [deny (ffi_unwind_calls)] # ! [allow (unused_features)] # ! [cfg_attr (test , feature (internal_output_capture , print_internals , update_panic_count , rt))] # ! [cfg_attr (all (target_vendor = "fortanix" , target_env = "sgx") , feature (slice_index_methods , coerce_unsized , sgx_platform))] # ! [cfg_attr (target_family = "wasm" , feature (stdarch_wasm_atomic_wait))] # ! [cfg_attr (target_arch = "wasm64" , feature (simd_wasm64))] # ! [feature (alloc_error_handler)] # ! [feature (allocator_internals)] # ! [feature (allow_internal_unsafe)] # ! [feature (allow_internal_unstable)] # ! [feature (asm_experimental_arch)] # ! [feature (autodiff)] # ! [feature (cfg_sanitizer_cfi)] # ! [feature (cfg_target_thread_local)] # ! [feature (cfi_encoding)] # ! [feature (char_max_len)] # ! [feature (const_trait_impl)] # ! [feature (core_float_math)] # ! [feature (decl_macro)] # ! [feature (deprecated_suggestion)] # ! [feature (doc_cfg)] # ! [feature (doc_cfg_hide)] # ! [feature (doc_masked)] # ! [feature (doc_notable_trait)] # ! [feature (dropck_eyepatch)] # ! [feature (f16)] # ! [feature (f128)] # ! [feature (ffi_const)] # ! [feature (formatting_options)] # ! [feature (funnel_shifts)] # ! [feature (if_let_guard)] # ! [feature (intra_doc_pointers)] # ! [feature (iter_advance_by)] # ! [feature (iter_next_chunk)] # ! [feature (lang_items)] # ! [feature (link_cfg)] # ! [feature (linkage)] # ! [feature (macro_metavar_expr_concat)] # ! [feature (maybe_uninit_fill)] # ! [feature (min_specialization)] # ! [feature (must_not_suspend)] # ! [feature (needs_panic_runtime)] # ! [feature (negative_impls)] # ! [feature (never_type)] # ! [feature (optimize_attribute)] # ! [feature (prelude_import)] # ! [feature (rustc_attrs)] # ! [feature (rustdoc_internals)] # ! [feature (staged_api)] # ! [feature (stmt_expr_attributes)] # ! [feature (strict_provenance_lints)] # ! [feature (thread_local)] # ! [feature (try_blocks)] # ! [feature (try_trait_v2)] # ! [feature (type_alias_impl_trait)] # ! [feature (bstr)] # ! [feature (bstr_internals)] # ! [feature (cast_maybe_uninit)] # ! [feature (cfg_select)] # ! [feature (char_internals)] # ! [feature (clone_to_uninit)] # ! [feature (const_convert)] # ! [feature (core_intrinsics)] # ! [feature (core_io_borrowed_buf)] # ! [feature (drop_guard)] # ! [feature (duration_constants)] # ! [feature (error_generic_member_access)] # ! [feature (error_iter)] # ! [feature (exact_size_is_empty)] # ! [feature (exclusive_wrapper)] # ! [feature (extend_one)] # ! [feature (float_algebraic)] # ! [feature (float_gamma)] # ! [feature (float_minimum_maximum)] # ! [feature (fmt_internals)] # ! [feature (fn_ptr_trait)] # ! [feature (generic_atomic)] # ! [feature (hasher_prefixfree_extras)] # ! [feature (hashmap_internals)] # ! [feature (hint_must_use)] # ! [feature (int_from_ascii)] # ! [feature (ip)] # ! [feature (lazy_get)] # ! [feature (maybe_uninit_slice)] # ! [feature (maybe_uninit_write_slice)] # ! [feature (panic_can_unwind)] # ! [feature (panic_internals)] # ! [feature (pin_coerce_unsized_trait)] # ! [feature (pointer_is_aligned_to)] # ! [feature (portable_simd)] # ! [feature (ptr_as_uninit)] # ! [feature (ptr_mask)] # ! [feature (random)] # ! [feature (slice_internals)] # ! [feature (slice_ptr_get)] # ! [feature (slice_range)] # ! [feature (slice_split_once)] # ! [feature (std_internals)] # ! [feature (str_internals)] # ! [feature (sync_unsafe_cell)] # ! [feature (temporary_niche_types)] # ! [feature (ub_checks)] # ! [feature (used_with_arg)] # ! [feature (alloc_layout_extra)] # ! [feature (allocator_api)] # ! [feature (get_mut_unchecked)] # ! [feature (map_try_insert)] # ! [feature (new_zeroed_alloc)] # ! [feature (slice_concat_trait)] # ! [feature (thin_box)] # ! [feature (try_reserve_kind)] # ! [feature (try_with_capacity)] # ! [feature (unique_rc_arc)] # ! [feature (vec_into_raw_parts)] # ! [feature (wtf8_internals)] # ! [feature (panic_unwind)] # ! [feature (stdarch_internal)] # ! [feature (assert_matches)] # ! [feature (async_iterator)] # ! [feature (c_variadic)] # ! [feature (cfg_accessible)] # ! [feature (cfg_eval)] # ! [feature (concat_bytes)] # ! [feature (const_format_args)] # ! [feature (custom_test_frameworks)] # ! [feature (edition_panic)] # ! [feature (format_args_nl)] # ! [feature (log_syntax)] # ! [feature (test)] # ! [feature (trace_macros)] # ! [feature (io_const_error)] # ! [default_lib_allocator] use split_decls_genesis :: ourprelude :: * ; pub mod prelude ; #[prelude_import] #[allow (unused)] use prelude :: rust_2024 :: * ; #[cfg (test)] extern crate test ; #[allow (unused_imports)] #[macro_use] extern crate alloc as alloc_crate ; #[doc (masked)] #[allow (unused_extern_crates)] #[cfg (not (all (windows , target_env = "msvc")))] extern crate libc ; #[doc (masked)] #[allow (unused_extern_crates)] extern crate unwind ; #[doc (masked)] #[allow (unused_extern_crates)] #[cfg (all (not (all (windows , target_env = "msvc" , not (target_vendor = "uwp"))) , feature = "miniz_oxide"))] extern crate miniz_oxide ; #[cfg (test)] extern crate std as realstd ; #[macro_use] mod macros ; #[macro_use] pub mod rt ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: any ; #[stable (feature = "core_array" , since = "1.35.0")] pub use core :: array ; #[unstable (feature = "async_iterator" , issue = "79024")] pub use core :: async_iter ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: cell ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: char ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: clone ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: cmp ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: convert ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: default ; #[stable (feature = "futures_api" , since = "1.36.0")] pub use core :: future ; #[stable (feature = "core_hint" , since = "1.27.0")] pub use core :: hint ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: i8 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: i16 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: i32 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: i64 ; #[stable (feature = "i128" , since = "1.26.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: i128 ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: intrinsics ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: isize ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: iter ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: marker ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: mem ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: ops ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: option ; #[stable (feature = "pin" , since = "1.33.0")] pub use core :: pin ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: ptr ; #[unstable (feature = "new_range_api" , issue = "125687")] pub use core :: range ; #[stable (feature = "rust1" , since = "1.0.0")] pub use core :: result ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: u8 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: u16 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: u32 ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: u64 ; #[stable (feature = "i128" , since = "1.26.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: u128 ; #[unstable (feature = "unsafe_binders" , issue = "130516")] pub use core :: unsafe_binder ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: usize ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: borrow ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: boxed ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: fmt ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: format ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: rc ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: slice ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: str ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: string ; #[stable (feature = "rust1" , since = "1.0.0")] pub use alloc_crate :: vec ; #[path = "num/f128.rs"] pub mod f128 ; #[path = "num/f16.rs"] pub mod f16 ; #[path = "num/f32.rs"] pub mod f32 ; #[path = "num/f64.rs"] pub mod f64 ; #[macro_use] pub mod thread ; pub mod ascii ; pub mod backtrace ; #[unstable (feature = "bstr" , issue = "134915")] pub mod bstr ; pub mod collections ; pub mod env ; pub mod error ; pub mod ffi ; pub mod fs ; pub mod hash ; pub mod io ; pub mod net ; pub mod num ; pub mod os ; pub mod panic ; #[unstable (feature = "pattern_type_macro" , issue = "123646")] pub mod pat ; pub mod path ; pub mod process ; #[unstable (feature = "random" , issue = "130703")] pub mod random ; pub mod sync ; pub mod time ; #[path = "../../portable-simd/crates/std_float/src/lib.rs"] #[allow (missing_debug_implementations , dead_code , unsafe_op_in_unsafe_fn)] #[allow (rustdoc :: bare_urls)] #[unstable (feature = "portable_simd" , issue = "86656")] mod std_float ; #[unstable (feature = "portable_simd" , issue = "86656")] pub mod simd { # ! [doc = include_str ! ("../../portable-simd/crates/core_simd/src/core_simd_docs.md")] #[doc (inline)] pub use core :: simd :: * ; #[doc (inline)] pub use crate :: std_float :: StdFloat ; } #[unstable (feature = "autodiff" , issue = "124509")] #[doc = " This module provides support for automatic differentiation."] pub mod autodiff { #[doc = " This macro handles automatic differentiation."] pub use core :: autodiff :: { autodiff_forward , autodiff_reverse } ; } #[stable (feature = "futures_api" , since = "1.36.0")] pub mod task { # ! [doc = " Types and Traits for working with asynchronous tasks."] #[doc (inline)] #[stable (feature = "wake_trait" , since = "1.51.0")] pub use alloc :: task :: * ; #[doc (inline)] #[stable (feature = "futures_api" , since = "1.36.0")] pub use core :: task :: * ; } #[doc = include_str ! ("../../stdarch/crates/core_arch/src/core_arch_docs.md")] #[stable (feature = "simd_arch" , since = "1.27.0")] pub mod arch { #[stable (feature = "simd_arch" , since = "1.27.0")] #[doc (no_inline)] pub use core :: arch :: * ; #[stable (feature = "simd_aarch64" , since = "1.60.0")] pub use std_detect :: is_aarch64_feature_detected ; #[unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] pub use std_detect :: is_arm_feature_detected ; #[unstable (feature = "is_loongarch_feature_detected" , issue = "117425")] pub use std_detect :: is_loongarch_feature_detected ; #[unstable (feature = "is_riscv_feature_detected" , issue = "111192")] pub use std_detect :: is_riscv_feature_detected ; #[unstable (feature = "stdarch_s390x_feature_detection" , issue = "135413")] pub use std_detect :: is_s390x_feature_detected ; #[stable (feature = "simd_x86" , since = "1.27.0")] pub use std_detect :: is_x86_feature_detected ; #[unstable (feature = "stdarch_mips_feature_detection" , issue = "111188")] pub use std_detect :: { is_mips_feature_detected , is_mips64_feature_detected } ; #[unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] pub use std_detect :: { is_powerpc_feature_detected , is_powerpc64_feature_detected } ; } #[stable (feature = "simd_x86" , since = "1.27.0")] pub use std_detect :: is_x86_feature_detected ; mod sys ; mod sys_common ; pub mod alloc ; mod panicking ; #[path = "../../backtrace/src/lib.rs"] #[allow (dead_code , unused_attributes , fuzzy_provenance_casts , unsafe_op_in_unsafe_fn)] mod backtrace_rs ; #[unstable (feature = "cfg_select" , issue = "115585")] pub use core :: cfg_select ; #[unstable (feature = "concat_bytes" , issue = "87555" , reason = "`concat_bytes` is not stable enough for use and is subject to change")] pub use core :: concat_bytes ; #[stable (feature = "matches_macro" , since = "1.42.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: matches ; #[stable (feature = "core_primitive" , since = "1.43.0")] pub use core :: primitive ; #[stable (feature = "todo_macro" , since = "1.40.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: todo ; #[stable (feature = "builtin_macro_prelude" , since = "1.38.0")] pub use core :: { assert , assert_matches , cfg , column , compile_error , concat , const_format_args , env , file , format_args , format_args_nl , include , include_bytes , include_str , line , log_syntax , module_path , option_env , stringify , trace_macros , } ; #[stable (feature = "rust1" , since = "1.0.0")] #[allow (deprecated , deprecated_in_future)] pub use core :: { assert_eq , assert_ne , debug_assert , debug_assert_eq , debug_assert_ne , r#try , unimplemented , unreachable , write , writeln , } ; #[unstable (feature = "derive_from" , issue = "144889")] #[doc = " Unstable module containing the unstable `From` derive macro."] pub mod from { #[unstable (feature = "derive_from" , issue = "144889")] pub use core :: from :: From ; } include ! ("../../core/src/primitive_docs.rs") ; include ! ("keyword_docs.rs") ; #[unstable (feature = "restricted_std" , issue = "none")] mod __restricted_std_workaround { } mod sealed { #[doc = " This trait being unreachable from outside the crate"] #[doc = " prevents outside implementations of our extension traits."] #[doc = " This allows adding more trait methods in the future."] #[unstable (feature = "sealed" , issue = "none")] pub trait Sealed { } } #[cfg (test)] #[allow (dead_code)] pub (crate) mod test_helpers ;
+            `#![no_std]` or overriding this warning by enabling this feature."
+    )
+)]
+    html_playground_url = "https://play.rust-lang.org/",
+    issue_tracker_base_url = "https://github.com/rust-lang/rust/issues/",
+    test(no_crate_inject, attr(deny(warnings))),
+    test(attr(allow(dead_code, deprecated, unused_variables, unused_mut)))
+)]
+// Don't link to std. We are std.
+// Tell the compiler to link to either panic_abort or panic_unwind
+//
+// Lints:
+// Ensure that std can be linked against panic_abort despite compiled with `-C panic=unwind`
+// std may use features in a platform-specific way
+//
+// Features:
+    all(target_vendor = "fortanix", target_env = "sgx"),
+    feature(slice_index_methods, coerce_unsized, sgx_platform)
+)]
+//
+// Language features:
+// tidy-alphabetical-start
+
+// stabilization was reverted after it hit beta
+// tidy-alphabetical-end
+//
+// Library features (core):
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+// Library features (alloc):
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+// Library features (unwind):
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+// Library features (std_detect):
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+// Only for re-exporting:
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+// Only used in tests/benchmarks:
+//
+// Only for const-ness:
+// tidy-alphabetical-start
+// tidy-alphabetical-end
+//
+
+// The Rust prelude
+// The compiler expects the prelude definition to be defined before it's use statement.
+pub mod prelude;
+
+// Explicitly import the prelude. The compiler uses this same unstable attribute
+// to import the prelude implicitly when building crates that depend on std.
+#[prelude_import]
+#[allow(unused)]
+use prelude::rust_2024::*;
+
+// Access to Bencher, etc.
+#[cfg(test)]
+extern crate test;
+
+#[allow(unused_imports)] // macros from `alloc` are not used on all platforms
+#[macro_use]
+extern crate alloc as alloc_crate;
+
+// Many compiler tests depend on libc being pulled in by std
+// so include it here even if it's unused.
+#[doc(masked)]
+#[allow(unused_extern_crates)]
+#[cfg(not(all(windows, target_env = "msvc")))]
+extern crate libc;
+
+// We always need an unwinder currently for backtraces
+#[doc(masked)]
+#[allow(unused_extern_crates)]
+extern crate unwind;
+
+// FIXME: #94122 this extern crate definition only exist here to stop
+// miniz_oxide docs leaking into std docs. Find better way to do it.
+// Remove exclusion from tidy platform check when this removed.
+#[doc(masked)]
+#[allow(unused_extern_crates)]
+#[cfg(all(
+    not(all(windows, target_env = "msvc", not(target_vendor = "uwp"))),
+    feature = "miniz_oxide"
+))]
+extern crate miniz_oxide;
+
+// During testing, this crate is not actually the "real" std library, but rather
+// it links to the real std library, which was compiled from this same source
+// code. So any lang items std defines are conditionally excluded (or else they
+// would generate duplicate lang item errors), and any globals it defines are
+// _not_ the globals used by "real" std. So this import, defined only during
+// testing gives test-std access to real-std lang items and globals. See #2912
+#[cfg(test)]
+extern crate std as realstd;
+
+// The standard macros that are not built-in to the compiler.
+#[macro_use]
+mod macros;
+
+// The runtime entry point and a few unstable public functions used by the
+// compiler
+#[macro_use]
+pub mod rt;
+
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::any;
+#[stable(feature = "core_array", since = "1.35.0")]
+pub use core::array;
+#[unstable(feature = "async_iterator", issue = "79024")]
+pub use core::async_iter;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::cell;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::char;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::clone;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::cmp;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::convert;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::default;
+#[stable(feature = "futures_api", since = "1.36.0")]
+pub use core::future;
+#[stable(feature = "core_hint", since = "1.27.0")]
+pub use core::hint;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::i8;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::i16;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::i32;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::i64;
+#[stable(feature = "i128", since = "1.26.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::i128;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::intrinsics;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::isize;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::iter;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::marker;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::mem;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::ops;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::option;
+#[stable(feature = "pin", since = "1.33.0")]
+pub use core::pin;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::ptr;
+#[unstable(feature = "new_range_api", issue = "125687")]
+pub use core::range;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use core::result;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::u8;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::u16;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::u32;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::u64;
+#[stable(feature = "i128", since = "1.26.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::u128;
+#[unstable(feature = "unsafe_binders", issue = "130516")]
+pub use core::unsafe_binder;
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::usize;
+
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::borrow;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::boxed;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::fmt;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::format;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::rc;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::slice;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::str;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::string;
+#[stable(feature = "rust1", since = "1.0.0")]
+pub use alloc_crate::vec;
+
+#[path = "num/f128.rs"]
+pub mod f128;
+#[path = "num/f16.rs"]
+pub mod f16;
+#[path = "num/f32.rs"]
+pub mod f32;
+#[path = "num/f64.rs"]
+pub mod f64;
+
+#[macro_use]
+pub mod thread;
+pub mod ascii;
+pub mod backtrace;
+#[unstable(feature = "bstr", issue = "134915")]
+pub mod bstr;
+pub mod collections;
+pub mod env;
+pub mod error;
+pub mod ffi;
+pub mod fs;
+pub mod hash;
+pub mod io;
+pub mod net;
+pub mod num;
+pub mod os;
+pub mod panic;
+#[unstable(feature = "pattern_type_macro", issue = "123646")]
+pub mod pat;
+pub mod path;
+pub mod process;
+#[unstable(feature = "random", issue = "130703")]
+pub mod random;
+pub mod sync;
+pub mod time;
+
+// Pull in `std_float` crate  into std. The contents of
+// `std_float` are in a different repository: rust-lang/portable-simd.
+#[path = "portable-simd/crates/std_float/src/lib.rs"]
+#[allow(missing_debug_implementations, dead_code, unsafe_op_in_unsafe_fn)]
+#[allow(rustdoc::bare_urls)]
+#[unstable(feature = "portable_simd", issue = "86656")]
+mod std_float;
+
+#[unstable(feature = "portable_simd", issue = "86656")]
+pub mod simd {
+
+    #[doc(inline)]
+    pub use core::simd::*;
+
+    #[doc(inline)]
+    pub use crate::std_float::StdFloat;
+}
+
+#[unstable(feature = "autodiff", issue = "124509")]
+/// This module provides support for automatic differentiation.
+pub mod autodiff {
+    /// This macro handles automatic differentiation.
+    pub use core::autodiff::{autodiff_forward, autodiff_reverse};
+}
+
+#[stable(feature = "futures_api", since = "1.36.0")]
+pub mod task {
+    //! Types and Traits for working with asynchronous tasks.
+
+    #[doc(inline)]
+    #[stable(feature = "wake_trait", since = "1.51.0")]
+    pub use alloc::task::*;
+    #[doc(inline)]
+    #[stable(feature = "futures_api", since = "1.36.0")]
+    pub use core::task::*;
+}
+
+#[doc = include_str!("stdarch/crates/core_arch/src/core_arch_docs.md")]
+#[stable(feature = "simd_arch", since = "1.27.0")]
+pub mod arch {
+    #[stable(feature = "simd_arch", since = "1.27.0")]
+    // The `no_inline`-attribute is required to make the documentation of all
+    // targets available.
+    // See https://github.com/rust-lang/rust/pull/57808#issuecomment-457390549 for
+    // more information.
+    #[doc(no_inline)] // Note (#82861): required for correct documentation
+    pub use core::arch::*;
+
+    #[stable(feature = "simd_aarch64", since = "1.60.0")]
+    pub use std_detect::is_aarch64_feature_detected;
+    #[unstable(feature = "stdarch_arm_feature_detection", issue = "111190")]
+    pub use std_detect::is_arm_feature_detected;
+    #[unstable(feature = "is_loongarch_feature_detected", issue = "117425")]
+    pub use std_detect::is_loongarch_feature_detected;
+    #[unstable(feature = "is_riscv_feature_detected", issue = "111192")]
+    pub use std_detect::is_riscv_feature_detected;
+    #[unstable(feature = "stdarch_s390x_feature_detection", issue = "135413")]
+    pub use std_detect::is_s390x_feature_detected;
+    #[stable(feature = "simd_x86", since = "1.27.0")]
+    pub use std_detect::is_x86_feature_detected;
+    #[unstable(feature = "stdarch_mips_feature_detection", issue = "111188")]
+    pub use std_detect::{is_mips_feature_detected, is_mips64_feature_detected};
+    #[unstable(feature = "stdarch_powerpc_feature_detection", issue = "111191")]
+    pub use std_detect::{is_powerpc_feature_detected, is_powerpc64_feature_detected};
+}
+
+// This was stabilized in the crate root so we have to keep it there.
+#[stable(feature = "simd_x86", since = "1.27.0")]
+pub use std_detect::is_x86_feature_detected;
+
+// Platform-abstraction modules
+mod sys;
+mod sys_common;
+
+pub mod alloc;
+
+// Private support modules
+mod panicking;
+
+#[path = "backtrace/src/lib.rs"]
+#[allow(dead_code, unused_attributes, fuzzy_provenance_casts, unsafe_op_in_unsafe_fn)]
+mod backtrace_rs;
+
+#[unstable(feature = "cfg_select", issue = "115585")]
+pub use core::cfg_select;
+#[unstable(
+    feature = "concat_bytes",
+    issue = "87555",
+    reason = "`concat_bytes` is not stable enough for use and is subject to change"
+)]
+pub use core::concat_bytes;
+#[stable(feature = "matches_macro", since = "1.42.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::matches;
+#[stable(feature = "core_primitive", since = "1.43.0")]
+pub use core::primitive;
+#[stable(feature = "todo_macro", since = "1.40.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::todo;
+// Re-export built-in macros defined through core.
+#[stable(feature = "builtin_macro_prelude", since = "1.38.0")]
+pub use core::{
+    assert, assert_matches, cfg, column, compile_error, concat, const_format_args, env, file,
+    format_args, format_args_nl, include, include_bytes, include_str, line, log_syntax,
+    module_path, option_env, stringify, trace_macros,
+};
+// Re-export macros defined in core.
+#[stable(feature = "rust1", since = "1.0.0")]
+#[allow(deprecated, deprecated_in_future)]
+pub use core::{
+    assert_eq, assert_ne, debug_assert, debug_assert_eq, debug_assert_ne, r#try, unimplemented,
+    unreachable, write, writeln,
+};
+
+// Re-export unstable derive macro defined through core.
+#[unstable(feature = "derive_from", issue = "144889")]
+/// Unstable module containing the unstable `From` derive macro.
+pub mod from {
+    #[unstable(feature = "derive_from", issue = "144889")]
+    pub use core::from::From;
+}
+
+// Include a number of private modules that exist solely to provide
+// the rustdoc documentation for primitive types. Using `include!`
+// because rustdoc only looks for these modules at the crate level.
+include!("core/src/primitive_docs.rs");
+
+// Include a number of private modules that exist solely to provide
+// the rustdoc documentation for the existing keywords. Using `include!`
+// because rustdoc only looks for these modules at the crate level.
+include!("keyword_docs.rs");
+
+// This is required to avoid an unstable error when `restricted-std` is not
+// enabled. The use of #![feature(restricted_std)] in rustc-std-workspace-std
+// is unconditional, so the unstable feature needs to be defined somewhere.
+#[unstable(feature = "restricted_std", issue = "none")]
+mod __restricted_std_workaround {}
+
+mod sealed {
+    /// This trait being unreachable from outside the crate
+    /// prevents outside implementations of our extension traits.
+    /// This allows adding more trait methods in the future.
+    #[unstable(feature = "sealed", issue = "none")]
+    pub trait Sealed {}
+}
+
+#[cfg(test)]
+#[allow(dead_code)] // Not used in all configurations.
+pub(crate) mod test_helpers;

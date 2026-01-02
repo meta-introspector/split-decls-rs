@@ -1,1 +1,1164 @@
-# ! [doc = " Inspection and manipulation of the process's environment."] # ! [doc = ""] # ! [doc = " This module contains functions to inspect various aspects such as"] # ! [doc = " environment variables, process arguments, the current directory, and various"] # ! [doc = " other important directories."] # ! [doc = ""] # ! [doc = " There are several functions and structs in this module that have a"] # ! [doc = " counterpart ending in `os`. Those ending in `os` will return an [`OsString`]"] # ! [doc = " and those without will return a [`String`]."] # ! [stable (feature = "env" , since = "1.0.0")] use split_decls_genesis :: ourprelude :: * ; use crate :: error :: Error ; use crate :: ffi :: { OsStr , OsString } ; use crate :: num :: NonZero ; use crate :: ops :: Try ; use crate :: path :: { Path , PathBuf } ; use crate :: sys :: { env as env_imp , os as os_imp } ; use crate :: { array , fmt , io , sys } ; #[doc = " Returns the current working directory as a [`PathBuf`]."] #[doc = ""] #[doc = " # Platform-specific behavior"] #[doc = ""] #[doc = " This function [currently] corresponds to the `getcwd` function on Unix"] #[doc = " and the `GetCurrentDirectoryW` function on Windows."] #[doc = ""] #[doc = " [currently]: crate::io#platform-specific-behavior"] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returns an [`Err`] if the current working directory value is invalid."] #[doc = " Possible cases:"] #[doc = ""] #[doc = " * Current directory does not exist."] #[doc = " * There are insufficient permissions to access the current directory."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " fn main() -> std::io::Result<()> {"] #[doc = "     let path = env::current_dir()?;"] #[doc = "     println!(\"The current directory is {}\", path.display());"] #[doc = "     Ok(())"] #[doc = " }"] #[doc = " ```"] #[doc (alias = "pwd")] #[doc (alias = "getcwd")] #[doc (alias = "GetCurrentDirectory")] #[stable (feature = "env" , since = "1.0.0")] pub fn current_dir () -> io :: Result < PathBuf > { os_imp :: getcwd () } #[doc = " Changes the current working directory to the specified path."] #[doc = ""] #[doc = " # Platform-specific behavior"] #[doc = ""] #[doc = " This function [currently] corresponds to the `chdir` function on Unix"] #[doc = " and the `SetCurrentDirectoryW` function on Windows."] #[doc = ""] #[doc = " Returns an [`Err`] if the operation fails."] #[doc = ""] #[doc = " [currently]: crate::io#platform-specific-behavior"] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = " use std::path::Path;"] #[doc = ""] #[doc = " let root = Path::new(\"/\");"] #[doc = " assert!(env::set_current_dir(&root).is_ok());"] #[doc = " println!(\"Successfully changed working directory to {}!\", root.display());"] #[doc = " ```"] #[doc (alias = "chdir" , alias = "SetCurrentDirectory" , alias = "SetCurrentDirectoryW")] #[stable (feature = "env" , since = "1.0.0")] pub fn set_current_dir < P : AsRef < Path > > (path : P) -> io :: Result < () > { os_imp :: chdir (path . as_ref ()) } #[doc = " An iterator over a snapshot of the environment variables of this process."] #[doc = ""] #[doc = " This structure is created by [`env::vars()`]. See its documentation for more."] #[doc = ""] #[doc = " [`env::vars()`]: vars"] #[stable (feature = "env" , since = "1.0.0")] pub struct Vars { inner : VarsOs , } #[doc = " An iterator over a snapshot of the environment variables of this process."] #[doc = ""] #[doc = " This structure is created by [`env::vars_os()`]. See its documentation for more."] #[doc = ""] #[doc = " [`env::vars_os()`]: vars_os"] #[stable (feature = "env" , since = "1.0.0")] pub struct VarsOs { inner : env_imp :: Env , } #[doc = " Returns an iterator of (variable, value) pairs of strings, for all the"] #[doc = " environment variables of the current process."] #[doc = ""] #[doc = " The returned iterator contains a snapshot of the process's environment"] #[doc = " variables at the time of this invocation. Modifications to environment"] #[doc = " variables afterwards will not be reflected in the returned iterator."] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " While iterating, the returned iterator will panic if any key or value in the"] #[doc = " environment is not valid unicode. If this is not desired, consider using"] #[doc = " [`env::vars_os()`]."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " // Print all environment variables."] #[doc = " for (key, value) in std::env::vars() {"] #[doc = "     println!(\"{key}: {value}\");"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " [`env::vars_os()`]: vars_os"] #[must_use] #[stable (feature = "env" , since = "1.0.0")] pub fn vars () -> Vars { Vars { inner : vars_os () } } #[doc = " Returns an iterator of (variable, value) pairs of OS strings, for all the"] #[doc = " environment variables of the current process."] #[doc = ""] #[doc = " The returned iterator contains a snapshot of the process's environment"] #[doc = " variables at the time of this invocation. Modifications to environment"] #[doc = " variables afterwards will not be reflected in the returned iterator."] #[doc = ""] #[doc = " Note that the returned iterator will not check if the environment variables"] #[doc = " are valid Unicode. If you want to panic on invalid UTF-8,"] #[doc = " use the [`vars`] function instead."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " // Print all environment variables."] #[doc = " for (key, value) in std::env::vars_os() {"] #[doc = "     println!(\"{key:?}: {value:?}\");"] #[doc = " }"] #[doc = " ```"] #[must_use] #[stable (feature = "env" , since = "1.0.0")] pub fn vars_os () -> VarsOs { VarsOs { inner : env_imp :: env () } } #[stable (feature = "env" , since = "1.0.0")] impl Iterator for Vars { type Item = (String , String) ; fn next (& mut self) -> Option < (String , String) > { self . inner . next () . map (| (a , b) | (a . into_string () . unwrap () , b . into_string () . unwrap ())) } fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for Vars { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { inner : VarsOs { inner } } = self ; f . debug_struct ("Vars") . field ("inner" , & inner . str_debug ()) . finish () } } #[stable (feature = "env" , since = "1.0.0")] impl Iterator for VarsOs { type Item = (OsString , OsString) ; fn next (& mut self) -> Option < (OsString , OsString) > { self . inner . next () } fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for VarsOs { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { inner } = self ; f . debug_struct ("VarsOs") . field ("inner" , inner) . finish () } } #[doc = " Fetches the environment variable `key` from the current process."] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returns [`VarError::NotPresent`] if:"] #[doc = " - The variable is not set."] #[doc = " - The variable's name contains an equal sign or NUL (`'='` or `'\\0'`)."] #[doc = ""] #[doc = " Returns [`VarError::NotUnicode`] if the variable's value is not valid"] #[doc = " Unicode. If this is not desired, consider using [`var_os`]."] #[doc = ""] #[doc = " Use [`env!`] or [`option_env!`] instead if you want to check environment"] #[doc = " variables at compile time."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " let key = \"HOME\";"] #[doc = " match env::var(key) {"] #[doc = "     Ok(val) => println!(\"{key}: {val:?}\"),"] #[doc = "     Err(e) => println!(\"couldn't interpret {key}: {e}\"),"] #[doc = " }"] #[doc = " ```"] #[stable (feature = "env" , since = "1.0.0")] pub fn var < K : AsRef < OsStr > > (key : K) -> Result < String , VarError > { _var (key . as_ref ()) } fn _var (key : & OsStr) -> Result < String , VarError > { match var_os (key) { Some (s) => s . into_string () . map_err (VarError :: NotUnicode) , None => Err (VarError :: NotPresent) , } } #[doc = " Fetches the environment variable `key` from the current process, returning"] #[doc = " [`None`] if the variable isn't set or if there is another error."] #[doc = ""] #[doc = " It may return `None` if the environment variable's name contains"] #[doc = " the equal sign character (`=`) or the NUL character."] #[doc = ""] #[doc = " Note that this function will not check if the environment variable"] #[doc = " is valid Unicode. If you want to have an error on invalid UTF-8,"] #[doc = " use the [`var`] function instead."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " let key = \"HOME\";"] #[doc = " match env::var_os(key) {"] #[doc = "     Some(val) => println!(\"{key}: {val:?}\"),"] #[doc = "     None => println!(\"{key} is not defined in the environment.\")"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " If expecting a delimited variable (such as `PATH`), [`split_paths`]"] #[doc = " can be used to separate items."] #[must_use] #[stable (feature = "env" , since = "1.0.0")] pub fn var_os < K : AsRef < OsStr > > (key : K) -> Option < OsString > { _var_os (key . as_ref ()) } fn _var_os (key : & OsStr) -> Option < OsString > { env_imp :: getenv (key) } #[doc = " The error type for operations interacting with environment variables."] #[doc = " Possibly returned from [`env::var()`]."] #[doc = ""] #[doc = " [`env::var()`]: var"] #[derive (Debug , PartialEq , Eq , Clone)] #[stable (feature = "env" , since = "1.0.0")] pub enum VarError { #[doc = " The specified environment variable was not present in the current"] #[doc = " process's environment."] #[stable (feature = "env" , since = "1.0.0")] NotPresent , #[doc = " The specified environment variable was found, but it did not contain"] #[doc = " valid unicode data. The found data is returned as a payload of this"] #[doc = " variant."] #[stable (feature = "env" , since = "1.0.0")] NotUnicode (#[stable (feature = "env" , since = "1.0.0")] OsString) , } #[stable (feature = "env" , since = "1.0.0")] impl fmt :: Display for VarError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match * self { VarError :: NotPresent => write ! (f , "environment variable not found") , VarError :: NotUnicode (ref s) => { write ! (f , "environment variable was not valid unicode: {:?}" , s) } } } } #[stable (feature = "env" , since = "1.0.0")] impl Error for VarError { } #[doc = " Sets the environment variable `key` to the value `value` for the currently running"] #[doc = " process."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " This function is safe to call in a single-threaded program."] #[doc = ""] #[doc = " This function is also always safe to call on Windows, in single-threaded"] #[doc = " and multi-threaded programs."] #[doc = ""] #[doc = " In multi-threaded programs on other operating systems, the only safe option is"] #[doc = " to not use `set_var` or `remove_var` at all."] #[doc = ""] #[doc = " The exact requirement is: you"] #[doc = " must ensure that there are no other threads concurrently writing or"] #[doc = " *reading*(!) the environment through functions or global variables other"] #[doc = " than the ones in this module. The problem is that these operating systems"] #[doc = " do not provide a thread-safe way to read the environment, and most C"] #[doc = " libraries, including libc itself, do not advertise which functions read"] #[doc = " from the environment. Even functions from the Rust standard library may"] #[doc = " read the environment without going through this module, e.g. for DNS"] #[doc = " lookups from [`std::net::ToSocketAddrs`]. No stable guarantee is made about"] #[doc = " which functions may read from the environment in future versions of a"] #[doc = " library. All this makes it not practically possible for you to guarantee"] #[doc = " that no other thread will read the environment, so the only safe option is"] #[doc = " to not use `set_var` or `remove_var` in multi-threaded programs at all."] #[doc = ""] #[doc = " Discussion of this unsafety on Unix may be found in:"] #[doc = ""] #[doc = "  - [Austin Group Bugzilla (for POSIX)](https://austingroupbugs.net/view.php?id=188)"] #[doc = "  - [GNU C library Bugzilla](https://sourceware.org/bugzilla/show_bug.cgi?id=15607#c2)"] #[doc = ""] #[doc = " To pass an environment variable to a child process, you can instead use [`Command::env`]."] #[doc = ""] #[doc = " [`std::net::ToSocketAddrs`]: crate::net::ToSocketAddrs"] #[doc = " [`Command::env`]: crate::process::Command::env"] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " This function may panic if `key` is empty, contains an ASCII equals sign `'='`"] #[doc = " or the NUL character `'\\0'`, or when `value` contains the NUL character."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " let key = \"KEY\";"] #[doc = " unsafe {"] #[doc = "     env::set_var(key, \"VALUE\");"] #[doc = " }"] #[doc = " assert_eq!(env::var(key), Ok(\"VALUE\".to_string()));"] #[doc = " ```"] #[rustc_deprecated_safe_2024 (audit_that = "the environment access only happens in single-threaded code")] #[stable (feature = "env" , since = "1.0.0")] pub unsafe fn set_var < K : AsRef < OsStr > , V : AsRef < OsStr > > (key : K , value : V) { let (key , value) = (key . as_ref () , value . as_ref ()) ; unsafe { env_imp :: setenv (key , value) } . unwrap_or_else (| e | { panic ! ("failed to set environment variable `{key:?}` to `{value:?}`: {e}") }) } #[doc = " Removes an environment variable from the environment of the currently running process."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " This function is safe to call in a single-threaded program."] #[doc = ""] #[doc = " This function is also always safe to call on Windows, in single-threaded"] #[doc = " and multi-threaded programs."] #[doc = ""] #[doc = " In multi-threaded programs on other operating systems, the only safe option is"] #[doc = " to not use `set_var` or `remove_var` at all."] #[doc = ""] #[doc = " The exact requirement is: you"] #[doc = " must ensure that there are no other threads concurrently writing or"] #[doc = " *reading*(!) the environment through functions or global variables other"] #[doc = " than the ones in this module. The problem is that these operating systems"] #[doc = " do not provide a thread-safe way to read the environment, and most C"] #[doc = " libraries, including libc itself, do not advertise which functions read"] #[doc = " from the environment. Even functions from the Rust standard library may"] #[doc = " read the environment without going through this module, e.g. for DNS"] #[doc = " lookups from [`std::net::ToSocketAddrs`]. No stable guarantee is made about"] #[doc = " which functions may read from the environment in future versions of a"] #[doc = " library. All this makes it not practically possible for you to guarantee"] #[doc = " that no other thread will read the environment, so the only safe option is"] #[doc = " to not use `set_var` or `remove_var` in multi-threaded programs at all."] #[doc = ""] #[doc = " Discussion of this unsafety on Unix may be found in:"] #[doc = ""] #[doc = "  - [Austin Group Bugzilla](https://austingroupbugs.net/view.php?id=188)"] #[doc = "  - [GNU C library Bugzilla](https://sourceware.org/bugzilla/show_bug.cgi?id=15607#c2)"] #[doc = ""] #[doc = " To prevent a child process from inheriting an environment variable, you can"] #[doc = " instead use [`Command::env_remove`] or [`Command::env_clear`]."] #[doc = ""] #[doc = " [`std::net::ToSocketAddrs`]: crate::net::ToSocketAddrs"] #[doc = " [`Command::env_remove`]: crate::process::Command::env_remove"] #[doc = " [`Command::env_clear`]: crate::process::Command::env_clear"] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " This function may panic if `key` is empty, contains an ASCII equals sign"] #[doc = " `'='` or the NUL character `'\\0'`, or when the value contains the NUL"] #[doc = " character."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```no_run"] #[doc = " use std::env;"] #[doc = ""] #[doc = " let key = \"KEY\";"] #[doc = " unsafe {"] #[doc = "     env::set_var(key, \"VALUE\");"] #[doc = " }"] #[doc = " assert_eq!(env::var(key), Ok(\"VALUE\".to_string()));"] #[doc = ""] #[doc = " unsafe {"] #[doc = "     env::remove_var(key);"] #[doc = " }"] #[doc = " assert!(env::var(key).is_err());"] #[doc = " ```"] #[rustc_deprecated_safe_2024 (audit_that = "the environment access only happens in single-threaded code")] #[stable (feature = "env" , since = "1.0.0")] pub unsafe fn remove_var < K : AsRef < OsStr > > (key : K) { let key = key . as_ref () ; unsafe { env_imp :: unsetenv (key) } . unwrap_or_else (| e | panic ! ("failed to remove environment variable `{key:?}`: {e}")) } #[doc = " An iterator that splits an environment variable into paths according to"] #[doc = " platform-specific conventions."] #[doc = ""] #[doc = " The iterator element type is [`PathBuf`]."] #[doc = ""] #[doc = " This structure is created by [`env::split_paths()`]. See its"] #[doc = " documentation for more."] #[doc = ""] #[doc = " [`env::split_paths()`]: split_paths"] #[must_use = "iterators are lazy and do nothing unless consumed"] #[stable (feature = "env" , since = "1.0.0")] pub struct SplitPaths < 'a > { inner : os_imp :: SplitPaths < 'a > , } #[doc = " Parses input according to platform conventions for the `PATH`"] #[doc = " environment variable."] #[doc = ""] #[doc = " Returns an iterator over the paths contained in `unparsed`. The iterator"] #[doc = " element type is [`PathBuf`]."] #[doc = ""] #[doc = " On most Unix platforms, the separator is `:` and on Windows it is `;`. This"] #[doc = " also performs unquoting on Windows."] #[doc = ""] #[doc = " [`join_paths`] can be used to recombine elements."] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " This will panic on systems where there is no delimited `PATH` variable,"] #[doc = " such as UEFI."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " let key = \"PATH\";"] #[doc = " match env::var_os(key) {"] #[doc = "     Some(paths) => {"] #[doc = "         for path in env::split_paths(&paths) {"] #[doc = "             println!(\"'{}'\", path.display());"] #[doc = "         }"] #[doc = "     }"] #[doc = "     None => println!(\"{key} is not defined in the environment.\")"] #[doc = " }"] #[doc = " ```"] #[stable (feature = "env" , since = "1.0.0")] pub fn split_paths < T : AsRef < OsStr > + ? Sized > (unparsed : & T) -> SplitPaths < '_ > { SplitPaths { inner : os_imp :: split_paths (unparsed . as_ref ()) } } #[stable (feature = "env" , since = "1.0.0")] impl < 'a > Iterator for SplitPaths < 'a > { type Item = PathBuf ; fn next (& mut self) -> Option < PathBuf > { self . inner . next () } fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for SplitPaths < '_ > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("SplitPaths") . finish_non_exhaustive () } } #[doc = " The error type for operations on the `PATH` variable. Possibly returned from"] #[doc = " [`env::join_paths()`]."] #[doc = ""] #[doc = " [`env::join_paths()`]: join_paths"] #[derive (Debug)] #[stable (feature = "env" , since = "1.0.0")] pub struct JoinPathsError { inner : os_imp :: JoinPathsError , } #[doc = " Joins a collection of [`Path`]s appropriately for the `PATH`"] #[doc = " environment variable."] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returns an [`Err`] (containing an error message) if one of the input"] #[doc = " [`Path`]s contains an invalid character for constructing the `PATH`"] #[doc = " variable (a double quote on Windows or a colon on Unix), or if the system"] #[doc = " does not have a `PATH`-like variable (e.g. UEFI or WASI)."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " Joining paths on a Unix-like platform:"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = " use std::ffi::OsString;"] #[doc = " use std::path::Path;"] #[doc = ""] #[doc = " fn main() -> Result<(), env::JoinPathsError> {"] #[doc = " # if cfg!(unix) {"] #[doc = "     let paths = [Path::new(\"/bin\"), Path::new(\"/usr/bin\")];"] #[doc = "     let path_os_string = env::join_paths(paths.iter())?;"] #[doc = "     assert_eq!(path_os_string, OsString::from(\"/bin:/usr/bin\"));"] #[doc = " # }"] #[doc = "     Ok(())"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " Joining a path containing a colon on a Unix-like platform results in an"] #[doc = " error:"] #[doc = ""] #[doc = " ```"] #[doc = " # if cfg!(unix) {"] #[doc = " use std::env;"] #[doc = " use std::path::Path;"] #[doc = ""] #[doc = " let paths = [Path::new(\"/bin\"), Path::new(\"/usr/bi:n\")];"] #[doc = " assert!(env::join_paths(paths.iter()).is_err());"] #[doc = " # }"] #[doc = " ```"] #[doc = ""] #[doc = " Using `env::join_paths()` with [`env::split_paths()`] to append an item to"] #[doc = " the `PATH` environment variable:"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = " use std::path::PathBuf;"] #[doc = ""] #[doc = " fn main() -> Result<(), env::JoinPathsError> {"] #[doc = "     if let Some(path) = env::var_os(\"PATH\") {"] #[doc = "         let mut paths = env::split_paths(&path).collect::<Vec<_>>();"] #[doc = "         paths.push(PathBuf::from(\"/home/xyz/bin\"));"] #[doc = "         let new_path = env::join_paths(paths)?;"] #[doc = "         unsafe { env::set_var(\"PATH\", &new_path); }"] #[doc = "     }"] #[doc = ""] #[doc = "     Ok(())"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " [`env::split_paths()`]: split_paths"] #[stable (feature = "env" , since = "1.0.0")] pub fn join_paths < I , T > (paths : I) -> Result < OsString , JoinPathsError > where I : IntoIterator < Item = T > , T : AsRef < OsStr > , { os_imp :: join_paths (paths . into_iter ()) . map_err (| e | JoinPathsError { inner : e }) } #[stable (feature = "env" , since = "1.0.0")] impl fmt :: Display for JoinPathsError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . inner . fmt (f) } } #[stable (feature = "env" , since = "1.0.0")] impl Error for JoinPathsError { #[allow (deprecated , deprecated_in_future)] fn description (& self) -> & str { self . inner . description () } } #[doc = " Returns the path of the current user's home directory if known."] #[doc = ""] #[doc = " This may return `None` if getting the directory fails or if the platform does not have user home directories."] #[doc = ""] #[doc = " For storing user data and configuration it is often preferable to use more specific directories."] #[doc = " For example, [XDG Base Directories] on Unix or the `LOCALAPPDATA` and `APPDATA` environment variables on Windows."] #[doc = ""] #[doc = " [XDG Base Directories]: https://specifications.freedesktop.org/basedir-spec/latest/"] #[doc = ""] #[doc = " # Unix"] #[doc = ""] #[doc = " - Returns the value of the 'HOME' environment variable if it is set"] #[doc = "   (and not an empty string)."] #[doc = " - Otherwise, it tries to determine the home directory by invoking the `getpwuid_r` function"] #[doc = "   using the UID of the current user. An empty home directory field returned from the"] #[doc = "   `getpwuid_r` function is considered to be a valid value."] #[doc = " - Returns `None` if the current user has no entry in the /etc/passwd file."] #[doc = ""] #[doc = " # Windows"] #[doc = ""] #[doc = " - Returns the value of the 'USERPROFILE' environment variable if it is set, and is not an empty string."] #[doc = " - Otherwise, [`GetUserProfileDirectory`][msdn] is used to return the path. This may change in the future."] #[doc = ""] #[doc = " [msdn]: https://docs.microsoft.com/en-us/windows/win32/api/userenv/nf-userenv-getuserprofiledirectorya"] #[doc = ""] #[doc = " In UWP (Universal Windows Platform) targets this function is unimplemented and always returns `None`."] #[doc = ""] #[doc = " Before Rust 1.85.0, this function used to return the value of the 'HOME' environment variable"] #[doc = " on Windows, which in Cygwin or Mingw environments could return non-standard paths like `/home/you`"] #[doc = " instead of `C:\\Users\\you`."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " match env::home_dir() {"] #[doc = "     Some(path) => println!(\"Your home directory, probably: {}\", path.display()),"] #[doc = "     None => println!(\"Impossible to get your home dir!\"),"] #[doc = " }"] #[doc = " ```"] #[must_use] #[stable (feature = "env" , since = "1.0.0")] pub fn home_dir () -> Option < PathBuf > { os_imp :: home_dir () } #[doc = " Returns the path of a temporary directory."] #[doc = ""] #[doc = " The temporary directory may be shared among users, or between processes"] #[doc = " with different privileges; thus, the creation of any files or directories"] #[doc = " in the temporary directory must use a secure method to create a uniquely"] #[doc = " named file. Creating a file or directory with a fixed or predictable name"] #[doc = " may result in \"insecure temporary file\" security vulnerabilities. Consider"] #[doc = " using a crate that securely creates temporary files or directories."] #[doc = ""] #[doc = " Note that the returned value may be a symbolic link, not a directory."] #[doc = ""] #[doc = " # Platform-specific behavior"] #[doc = ""] #[doc = " On Unix, returns the value of the `TMPDIR` environment variable if it is"] #[doc = " set, otherwise the value is OS-specific:"] #[doc = " - On Android, there is no global temporary folder (it is usually allocated"] #[doc = "   per-app), it will return the application's cache dir if the program runs"] #[doc = "   in application's namespace and system version is Android 13 (or above), or"] #[doc = "   `/data/local/tmp` otherwise."] #[doc = " - On Darwin-based OSes (macOS, iOS, etc) it returns the directory provided"] #[doc = "   by `confstr(_CS_DARWIN_USER_TEMP_DIR, ...)`, as recommended by [Apple's"] #[doc = "   security guidelines][appledoc]."] #[doc = " - On all other unix-based OSes, it returns `/tmp`."] #[doc = ""] #[doc = " On Windows, the behavior is equivalent to that of [`GetTempPath2`][GetTempPath2] /"] #[doc = " [`GetTempPath`][GetTempPath], which this function uses internally."] #[doc = ""] #[doc = " Note that, this [may change in the future][changes]."] #[doc = ""] #[doc = " [changes]: io#platform-specific-behavior"] #[doc = " [GetTempPath2]: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-gettemppath2a"] #[doc = " [GetTempPath]: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-gettemppatha"] #[doc = " [appledoc]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/SecureCodingGuide/Articles/RaceConditions.html#//apple_ref/doc/uid/TP40002585-SW10"] #[doc = ""] #[doc = " ```no_run"] #[doc = " use std::env;"] #[doc = ""] #[doc = " fn main() {"] #[doc = "     let dir = env::temp_dir();"] #[doc = "     println!(\"Temporary directory: {}\", dir.display());"] #[doc = " }"] #[doc = " ```"] #[must_use] #[doc (alias = "GetTempPath" , alias = "GetTempPath2")] #[stable (feature = "env" , since = "1.0.0")] pub fn temp_dir () -> PathBuf { os_imp :: temp_dir () } #[doc = " Returns the full filesystem path of the current running executable."] #[doc = ""] #[doc = " # Platform-specific behavior"] #[doc = ""] #[doc = " If the executable was invoked through a symbolic link, some platforms will"] #[doc = " return the path of the symbolic link and other platforms will return the"] #[doc = " path of the symbolic link’s target."] #[doc = ""] #[doc = " If the executable is renamed while it is running, platforms may return the"] #[doc = " path at the time it was loaded instead of the new path."] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Acquiring the path of the current executable is a platform-specific operation"] #[doc = " that can fail for a good number of reasons. Some errors can include, but not"] #[doc = " be limited to, filesystem operations failing or general syscall failures."] #[doc = ""] #[doc = " # Security"] #[doc = ""] #[doc = " The output of this function should not be trusted for anything"] #[doc = " that might have security implications. Basically, if users can run"] #[doc = " the executable, they can change the output arbitrarily."] #[doc = ""] #[doc = " As an example, you can easily introduce a race condition. It goes"] #[doc = " like this:"] #[doc = ""] #[doc = " 1. You get the path to the current executable using `current_exe()`, and"] #[doc = "    store it in a variable."] #[doc = " 2. Time passes. A malicious actor removes the current executable, and"] #[doc = "    replaces it with a malicious one."] #[doc = " 3. You then use the stored path to re-execute the current"] #[doc = "    executable."] #[doc = ""] #[doc = " You expected to safely execute the current executable, but you're"] #[doc = " instead executing something completely different. The code you"] #[doc = " just executed run with your privileges."] #[doc = ""] #[doc = " This sort of behavior has been known to [lead to privilege escalation] when"] #[doc = " used incorrectly."] #[doc = ""] #[doc = " [lead to privilege escalation]: https://securityvulns.com/Wdocument183.html"] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " match env::current_exe() {"] #[doc = "     Ok(exe_path) => println!(\"Path of this executable is: {}\","] #[doc = "                              exe_path.display()),"] #[doc = "     Err(e) => println!(\"failed to get current exe path: {e}\"),"] #[doc = " };"] #[doc = " ```"] #[stable (feature = "env" , since = "1.0.0")] pub fn current_exe () -> io :: Result < PathBuf > { os_imp :: current_exe () } #[doc = " An iterator over the arguments of a process, yielding a [`String`] value for"] #[doc = " each argument."] #[doc = ""] #[doc = " This struct is created by [`env::args()`]. See its documentation"] #[doc = " for more."] #[doc = ""] #[doc = " The first element is traditionally the path of the executable, but it can be"] #[doc = " set to arbitrary text, and might not even exist. This means this property"] #[doc = " should not be relied upon for security purposes."] #[doc = ""] #[doc = " [`env::args()`]: args"] #[must_use = "iterators are lazy and do nothing unless consumed"] #[stable (feature = "env" , since = "1.0.0")] pub struct Args { inner : ArgsOs , } #[doc = " An iterator over the arguments of a process, yielding an [`OsString`] value"] #[doc = " for each argument."] #[doc = ""] #[doc = " This struct is created by [`env::args_os()`]. See its documentation"] #[doc = " for more."] #[doc = ""] #[doc = " The first element is traditionally the path of the executable, but it can be"] #[doc = " set to arbitrary text, and might not even exist. This means this property"] #[doc = " should not be relied upon for security purposes."] #[doc = ""] #[doc = " [`env::args_os()`]: args_os"] #[must_use = "iterators are lazy and do nothing unless consumed"] #[stable (feature = "env" , since = "1.0.0")] pub struct ArgsOs { inner : sys :: args :: Args , } #[doc = " Returns the arguments that this program was started with (normally passed"] #[doc = " via the command line)."] #[doc = ""] #[doc = " The first element is traditionally the path of the executable, but it can be"] #[doc = " set to arbitrary text, and might not even exist. This means this property should"] #[doc = " not be relied upon for security purposes."] #[doc = ""] #[doc = " On Unix systems the shell usually expands unquoted arguments with glob patterns"] #[doc = " (such as `*` and `?`). On Windows this is not done, and such arguments are"] #[doc = " passed as-is."] #[doc = ""] #[doc = " On glibc Linux systems, arguments are retrieved by placing a function in `.init_array`."] #[doc = " glibc passes `argc`, `argv`, and `envp` to functions in `.init_array`, as a non-standard"] #[doc = " extension. This allows `std::env::args` to work even in a `cdylib` or `staticlib`, as it"] #[doc = " does on macOS and Windows."] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " The returned iterator will panic during iteration if any argument to the"] #[doc = " process is not valid Unicode. If this is not desired,"] #[doc = " use the [`args_os`] function instead."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " // Prints each argument on a separate line"] #[doc = " for argument in env::args() {"] #[doc = "     println!(\"{argument}\");"] #[doc = " }"] #[doc = " ```"] #[stable (feature = "env" , since = "1.0.0")] pub fn args () -> Args { Args { inner : args_os () } } #[doc = " Returns the arguments that this program was started with (normally passed"] #[doc = " via the command line)."] #[doc = ""] #[doc = " The first element is traditionally the path of the executable, but it can be"] #[doc = " set to arbitrary text, and might not even exist. This means this property should"] #[doc = " not be relied upon for security purposes."] #[doc = ""] #[doc = " On Unix systems the shell usually expands unquoted arguments with glob patterns"] #[doc = " (such as `*` and `?`). On Windows this is not done, and such arguments are"] #[doc = " passed as-is."] #[doc = ""] #[doc = " On glibc Linux systems, arguments are retrieved by placing a function in `.init_array`."] #[doc = " glibc passes `argc`, `argv`, and `envp` to functions in `.init_array`, as a non-standard"] #[doc = " extension. This allows `std::env::args_os` to work even in a `cdylib` or `staticlib`, as it"] #[doc = " does on macOS and Windows."] #[doc = ""] #[doc = " Note that the returned iterator will not check if the arguments to the"] #[doc = " process are valid Unicode. If you want to panic on invalid UTF-8,"] #[doc = " use the [`args`] function instead."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::env;"] #[doc = ""] #[doc = " // Prints each argument on a separate line"] #[doc = " for argument in env::args_os() {"] #[doc = "     println!(\"{argument:?}\");"] #[doc = " }"] #[doc = " ```"] #[stable (feature = "env" , since = "1.0.0")] pub fn args_os () -> ArgsOs { ArgsOs { inner : sys :: args :: args () } } #[stable (feature = "env_unimpl_send_sync" , since = "1.26.0")] impl ! Send for Args { } #[stable (feature = "env_unimpl_send_sync" , since = "1.26.0")] impl ! Sync for Args { } #[stable (feature = "env" , since = "1.0.0")] impl Iterator for Args { type Item = String ; fn next (& mut self) -> Option < String > { self . inner . next () . map (| s | s . into_string () . unwrap ()) } #[inline] fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } } #[stable (feature = "env" , since = "1.0.0")] impl ExactSizeIterator for Args { #[inline] fn len (& self) -> usize { self . inner . len () } #[inline] fn is_empty (& self) -> bool { self . inner . is_empty () } } #[stable (feature = "env_iterators" , since = "1.12.0")] impl DoubleEndedIterator for Args { fn next_back (& mut self) -> Option < String > { self . inner . next_back () . map (| s | s . into_string () . unwrap ()) } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for Args { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { inner : ArgsOs { inner } } = self ; f . debug_struct ("Args") . field ("inner" , inner) . finish () } } #[stable (feature = "env_unimpl_send_sync" , since = "1.26.0")] impl ! Send for ArgsOs { } #[stable (feature = "env_unimpl_send_sync" , since = "1.26.0")] impl ! Sync for ArgsOs { } #[stable (feature = "env" , since = "1.0.0")] impl Iterator for ArgsOs { type Item = OsString ; #[inline] fn next (& mut self) -> Option < OsString > { self . inner . next () } #[inline] fn next_chunk < const N : usize > (& mut self ,) -> Result < [OsString ; N] , array :: IntoIter < OsString , N > > { self . inner . next_chunk () } #[inline] fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } #[inline] fn count (self) -> usize { self . inner . len () } #[inline] fn last (self) -> Option < OsString > { self . inner . last () } #[inline] fn advance_by (& mut self , n : usize) -> Result < () , NonZero < usize > > { self . inner . advance_by (n) } #[inline] fn try_fold < B , F , R > (& mut self , init : B , f : F) -> R where F : FnMut (B , Self :: Item) -> R , R : Try < Output = B > , { self . inner . try_fold (init , f) } #[inline] fn fold < B , F > (self , init : B , f : F) -> B where F : FnMut (B , Self :: Item) -> B , { self . inner . fold (init , f) } } #[stable (feature = "env" , since = "1.0.0")] impl ExactSizeIterator for ArgsOs { #[inline] fn len (& self) -> usize { self . inner . len () } #[inline] fn is_empty (& self) -> bool { self . inner . is_empty () } } #[stable (feature = "env_iterators" , since = "1.12.0")] impl DoubleEndedIterator for ArgsOs { #[inline] fn next_back (& mut self) -> Option < OsString > { self . inner . next_back () } #[inline] fn advance_back_by (& mut self , n : usize) -> Result < () , NonZero < usize > > { self . inner . advance_back_by (n) } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for ArgsOs { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { inner } = self ; f . debug_struct ("ArgsOs") . field ("inner" , inner) . finish () } } #[doc = " Constants associated with the current target"] #[stable (feature = "env" , since = "1.0.0")] pub mod consts { use crate :: sys :: env_consts :: os ; #[doc = " A string describing the architecture of the CPU that is currently in use."] #[doc = " An example value may be: `\"x86\"`, `\"arm\"` or `\"riscv64\"`."] #[doc = ""] #[doc = " <details><summary>Full list of possible values</summary>"] #[doc = ""] #[doc = " * `\"x86\"`"] #[doc = " * `\"x86_64\"`"] #[doc = " * `\"arm\"`"] #[doc = " * `\"aarch64\"`"] #[doc = " * `\"m68k\"`"] #[doc = " * `\"mips\"`"] #[doc = " * `\"mips32r6\"`"] #[doc = " * `\"mips64\"`"] #[doc = " * `\"mips64r6\"`"] #[doc = " * `\"csky\"`"] #[doc = " * `\"powerpc\"`"] #[doc = " * `\"powerpc64\"`"] #[doc = " * `\"riscv32\"`"] #[doc = " * `\"riscv64\"`"] #[doc = " * `\"s390x\"`"] #[doc = " * `\"sparc\"`"] #[doc = " * `\"sparc64\"`"] #[doc = " * `\"hexagon\"`"] #[doc = " * `\"loongarch32\"`"] #[doc = " * `\"loongarch64\"`"] #[doc = ""] #[doc = " </details>"] #[stable (feature = "env" , since = "1.0.0")] pub const ARCH : & str = env ! ("STD_ENV_ARCH") ; #[doc = " A string describing the family of the operating system."] #[doc = " An example value may be: `\"unix\"`, or `\"windows\"`."] #[doc = ""] #[doc = " This value may be an empty string if the family is unknown."] #[doc = ""] #[doc = " <details><summary>Full list of possible values</summary>"] #[doc = ""] #[doc = " * `\"unix\"`"] #[doc = " * `\"windows\"`"] #[doc = " * `\"itron\"`"] #[doc = " * `\"wasm\"`"] #[doc = " * `\"\"`"] #[doc = ""] #[doc = " </details>"] #[stable (feature = "env" , since = "1.0.0")] pub const FAMILY : & str = os :: FAMILY ; #[doc = " A string describing the specific operating system in use."] #[doc = " An example value may be: `\"linux\"`, or `\"freebsd\"`."] #[doc = ""] #[doc = " <details><summary>Full list of possible values</summary>"] #[doc = ""] #[doc = " * `\"linux\"`"] #[doc = " * `\"windows\"`"] #[doc = " * `\"macos\"`"] #[doc = " * `\"android\"`"] #[doc = " * `\"ios\"`"] #[doc = " * `\"openbsd\"`"] #[doc = " * `\"freebsd\"`"] #[doc = " * `\"netbsd\"`"] #[doc = " * `\"wasi\"`"] #[doc = " * `\"hermit\"`"] #[doc = " * `\"aix\"`"] #[doc = " * `\"apple\"`"] #[doc = " * `\"dragonfly\"`"] #[doc = " * `\"emscripten\"`"] #[doc = " * `\"espidf\"`"] #[doc = " * `\"fortanix\"`"] #[doc = " * `\"uefi\"`"] #[doc = " * `\"fuchsia\"`"] #[doc = " * `\"haiku\"`"] #[doc = " * `\"hermit\"`"] #[doc = " * `\"watchos\"`"] #[doc = " * `\"visionos\"`"] #[doc = " * `\"tvos\"`"] #[doc = " * `\"horizon\"`"] #[doc = " * `\"hurd\"`"] #[doc = " * `\"illumos\"`"] #[doc = " * `\"l4re\"`"] #[doc = " * `\"nto\"`"] #[doc = " * `\"redox\"`"] #[doc = " * `\"solaris\"`"] #[doc = " * `\"solid_asp3`"] #[doc = " * `\"vita\"`"] #[doc = " * `\"vxworks\"`"] #[doc = " * `\"xous\"`"] #[doc = ""] #[doc = " </details>"] #[stable (feature = "env" , since = "1.0.0")] pub const OS : & str = os :: OS ; #[doc = " Specifies the filename prefix, if any, used for shared libraries on this platform."] #[doc = " This is either `\"lib\"` or an empty string. (`\"\"`)."] #[stable (feature = "env" , since = "1.0.0")] pub const DLL_PREFIX : & str = os :: DLL_PREFIX ; #[doc = " Specifies the filename suffix, if any, used for shared libraries on this platform."] #[doc = " An example value may be: `\".so\"`, `\".elf\"`, or `\".dll\"`."] #[doc = ""] #[doc = " The possible values are identical to those of [`DLL_EXTENSION`], but with the leading period included."] #[stable (feature = "env" , since = "1.0.0")] pub const DLL_SUFFIX : & str = os :: DLL_SUFFIX ; #[doc = " Specifies the file extension, if any, used for shared libraries on this platform that goes after the dot."] #[doc = " An example value may be: `\"so\"`, `\"elf\"`, or `\"dll\"`."] #[doc = ""] #[doc = " <details><summary>Full list of possible values</summary>"] #[doc = ""] #[doc = " * `\"so\"`"] #[doc = " * `\"dylib\"`"] #[doc = " * `\"dll\"`"] #[doc = " * `\"sgxs\"`"] #[doc = " * `\"a\"`"] #[doc = " * `\"elf\"`"] #[doc = " * `\"wasm\"`"] #[doc = " * `\"\"` (an empty string)"] #[doc = ""] #[doc = " </details>"] #[stable (feature = "env" , since = "1.0.0")] pub const DLL_EXTENSION : & str = os :: DLL_EXTENSION ; #[doc = " Specifies the filename suffix, if any, used for executable binaries on this platform."] #[doc = " An example value may be: `\".exe\"`, or `\".efi\"`."] #[doc = ""] #[doc = " The possible values are identical to those of [`EXE_EXTENSION`], but with the leading period included."] #[stable (feature = "env" , since = "1.0.0")] pub const EXE_SUFFIX : & str = os :: EXE_SUFFIX ; #[doc = " Specifies the file extension, if any, used for executable binaries on this platform."] #[doc = " An example value may be: `\"exe\"`, or an empty string (`\"\"`)."] #[doc = ""] #[doc = " <details><summary>Full list of possible values</summary>"] #[doc = ""] #[doc = " * `\"exe\"`"] #[doc = " * `\"efi\"`"] #[doc = " * `\"js\"`"] #[doc = " * `\"sgxs\"`"] #[doc = " * `\"elf\"`"] #[doc = " * `\"wasm\"`"] #[doc = " * `\"\"` (an empty string)"] #[doc = ""] #[doc = " </details>"] #[stable (feature = "env" , since = "1.0.0")] pub const EXE_EXTENSION : & str = os :: EXE_EXTENSION ; }
+// Generated by unified_build.rs
+use crate::*;
+
+//! Inspection and manipulation of the process's environment.
+//!
+//! This module contains functions to inspect various aspects such as
+//! environment variables, process arguments, the current directory, and various
+//! other important directories.
+//!
+//! There are several functions and structs in this module that have a
+//! counterpart ending in `os`. Those ending in `os` will return an [`OsString`]
+//! and those without will return a [`String`].
+
+
+use crate::error::Error;
+use crate::ffi::{OsStr, OsString};
+use crate::num::NonZero;
+use crate::ops::Try;
+use crate::path::{Path, PathBuf};
+use crate::sys::{env as env_imp, os as os_imp};
+use crate::{array, fmt, io, sys};
+
+/// Returns the current working directory as a [`PathBuf`].
+///
+/// # Platform-specific behavior
+///
+/// This function [currently] corresponds to the `getcwd` function on Unix
+/// and the `GetCurrentDirectoryW` function on Windows.
+///
+/// [currently]: crate::io#platform-specific-behavior
+///
+/// # Errors
+///
+/// Returns an [`Err`] if the current working directory value is invalid.
+/// Possible cases:
+///
+/// * Current directory does not exist.
+/// * There are insufficient permissions to access the current directory.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// fn main() -> std::io::Result<()> {
+///     let path = env::current_dir()?;
+///     println!("The current directory is {}", path.display());
+///     Ok(())
+/// }
+/// ```
+#[doc(alias = "pwd")]
+#[doc(alias = "getcwd")]
+#[doc(alias = "GetCurrentDirectory")]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn current_dir() -> io::Result<PathBuf> {
+    os_imp::getcwd()
+}
+
+/// Changes the current working directory to the specified path.
+///
+/// # Platform-specific behavior
+///
+/// This function [currently] corresponds to the `chdir` function on Unix
+/// and the `SetCurrentDirectoryW` function on Windows.
+///
+/// Returns an [`Err`] if the operation fails.
+///
+/// [currently]: crate::io#platform-specific-behavior
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+/// use std::path::Path;
+///
+/// let root = Path::new("/");
+/// assert!(env::set_current_dir(&root).is_ok());
+/// println!("Successfully changed working directory to {}!", root.display());
+/// ```
+#[doc(alias = "chdir", alias = "SetCurrentDirectory", alias = "SetCurrentDirectoryW")]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn set_current_dir<P: AsRef<Path>>(path: P) -> io::Result<()> {
+    os_imp::chdir(path.as_ref())
+}
+
+/// An iterator over a snapshot of the environment variables of this process.
+///
+/// This structure is created by [`env::vars()`]. See its documentation for more.
+///
+/// [`env::vars()`]: vars
+#[stable(feature = "env", since = "1.0.0")]
+pub struct Vars {
+    inner: VarsOs,
+}
+
+/// An iterator over a snapshot of the environment variables of this process.
+///
+/// This structure is created by [`env::vars_os()`]. See its documentation for more.
+///
+/// [`env::vars_os()`]: vars_os
+#[stable(feature = "env", since = "1.0.0")]
+pub struct VarsOs {
+    inner: env_imp::Env,
+}
+
+/// Returns an iterator of (variable, value) pairs of strings, for all the
+/// environment variables of the current process.
+///
+/// The returned iterator contains a snapshot of the process's environment
+/// variables at the time of this invocation. Modifications to environment
+/// variables afterwards will not be reflected in the returned iterator.
+///
+/// # Panics
+///
+/// While iterating, the returned iterator will panic if any key or value in the
+/// environment is not valid unicode. If this is not desired, consider using
+/// [`env::vars_os()`].
+///
+/// # Examples
+///
+/// ```
+/// // Print all environment variables.
+/// for (key, value) in std::env::vars() {
+///     println!("{key}: {value}");
+/// }
+/// ```
+///
+/// [`env::vars_os()`]: vars_os
+#[must_use]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn vars() -> Vars {
+    Vars { inner: vars_os() }
+}
+
+/// Returns an iterator of (variable, value) pairs of OS strings, for all the
+/// environment variables of the current process.
+///
+/// The returned iterator contains a snapshot of the process's environment
+/// variables at the time of this invocation. Modifications to environment
+/// variables afterwards will not be reflected in the returned iterator.
+///
+/// Note that the returned iterator will not check if the environment variables
+/// are valid Unicode. If you want to panic on invalid UTF-8,
+/// use the [`vars`] function instead.
+///
+/// # Examples
+///
+/// ```
+/// // Print all environment variables.
+/// for (key, value) in std::env::vars_os() {
+///     println!("{key:?}: {value:?}");
+/// }
+/// ```
+#[must_use]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn vars_os() -> VarsOs {
+    VarsOs { inner: env_imp::env() }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Iterator for Vars {
+    type Item = (String, String);
+    fn next(&mut self) -> Option<(String, String)> {
+        self.inner.next().map(|(a, b)| (a.into_string().unwrap(), b.into_string().unwrap()))
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.inner.size_hint()
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for Vars {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self { inner: VarsOs { inner } } = self;
+        f.debug_struct("Vars").field("inner", &inner.str_debug()).finish()
+    }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Iterator for VarsOs {
+    type Item = (OsString, OsString);
+    fn next(&mut self) -> Option<(OsString, OsString)> {
+        self.inner.next()
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.inner.size_hint()
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for VarsOs {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self { inner } = self;
+        f.debug_struct("VarsOs").field("inner", inner).finish()
+    }
+}
+
+/// Fetches the environment variable `key` from the current process.
+///
+/// # Errors
+///
+/// Returns [`VarError::NotPresent`] if:
+/// - The variable is not set.
+/// - The variable's name contains an equal sign or NUL (`'='` or `'\0'`).
+///
+/// Returns [`VarError::NotUnicode`] if the variable's value is not valid
+/// Unicode. If this is not desired, consider using [`var_os`].
+///
+/// Use [`env!`] or [`option_env!`] instead if you want to check environment
+/// variables at compile time.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// let key = "HOME";
+/// match env::var(key) {
+///     Ok(val) => println!("{key}: {val:?}"),
+///     Err(e) => println!("couldn't interpret {key}: {e}"),
+/// }
+/// ```
+#[stable(feature = "env", since = "1.0.0")]
+pub fn var<K: AsRef<OsStr>>(key: K) -> Result<String, VarError> {
+    _var(key.as_ref())
+}
+
+fn _var(key: &OsStr) -> Result<String, VarError> {
+    match var_os(key) {
+        Some(s) => s.into_string().map_err(VarError::NotUnicode),
+        None => Err(VarError::NotPresent),
+    }
+}
+
+/// Fetches the environment variable `key` from the current process, returning
+/// [`None`] if the variable isn't set or if there is another error.
+///
+/// It may return `None` if the environment variable's name contains
+/// the equal sign character (`=`) or the NUL character.
+///
+/// Note that this function will not check if the environment variable
+/// is valid Unicode. If you want to have an error on invalid UTF-8,
+/// use the [`var`] function instead.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// let key = "HOME";
+/// match env::var_os(key) {
+///     Some(val) => println!("{key}: {val:?}"),
+///     None => println!("{key} is not defined in the environment.")
+/// }
+/// ```
+///
+/// If expecting a delimited variable (such as `PATH`), [`split_paths`]
+/// can be used to separate items.
+#[must_use]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn var_os<K: AsRef<OsStr>>(key: K) -> Option<OsString> {
+    _var_os(key.as_ref())
+}
+
+fn _var_os(key: &OsStr) -> Option<OsString> {
+    env_imp::getenv(key)
+}
+
+/// The error type for operations interacting with environment variables.
+/// Possibly returned from [`env::var()`].
+///
+/// [`env::var()`]: var
+#[derive(Debug, PartialEq, Eq, Clone)]
+#[stable(feature = "env", since = "1.0.0")]
+pub enum VarError {
+    /// The specified environment variable was not present in the current
+    /// process's environment.
+    #[stable(feature = "env", since = "1.0.0")]
+    NotPresent,
+
+    /// The specified environment variable was found, but it did not contain
+    /// valid unicode data. The found data is returned as a payload of this
+    /// variant.
+    #[stable(feature = "env", since = "1.0.0")]
+    NotUnicode(#[stable(feature = "env", since = "1.0.0")] OsString),
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl fmt::Display for VarError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match *self {
+            VarError::NotPresent => write!(f, "environment variable not found"),
+            VarError::NotUnicode(ref s) => {
+                write!(f, "environment variable was not valid unicode: {:?}", s)
+            }
+        }
+    }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Error for VarError {}
+
+/// Sets the environment variable `key` to the value `value` for the currently running
+/// process.
+///
+/// # Safety
+///
+/// This function is safe to call in a single-threaded program.
+///
+/// This function is also always safe to call on Windows, in single-threaded
+/// and multi-threaded programs.
+///
+/// In multi-threaded programs on other operating systems, the only safe option is
+/// to not use `set_var` or `remove_var` at all.
+///
+/// The exact requirement is: you
+/// must ensure that there are no other threads concurrently writing or
+/// *reading*(!) the environment through functions or global variables other
+/// than the ones in this module. The problem is that these operating systems
+/// do not provide a thread-safe way to read the environment, and most C
+/// libraries, including libc itself, do not advertise which functions read
+/// from the environment. Even functions from the Rust standard library may
+/// read the environment without going through this module, e.g. for DNS
+/// lookups from [`std::net::ToSocketAddrs`]. No stable guarantee is made about
+/// which functions may read from the environment in future versions of a
+/// library. All this makes it not practically possible for you to guarantee
+/// that no other thread will read the environment, so the only safe option is
+/// to not use `set_var` or `remove_var` in multi-threaded programs at all.
+///
+/// Discussion of this unsafety on Unix may be found in:
+///
+///  - [Austin Group Bugzilla (for POSIX)](https://austingroupbugs.net/view.php?id=188)
+///  - [GNU C library Bugzilla](https://sourceware.org/bugzilla/show_bug.cgi?id=15607#c2)
+///
+/// To pass an environment variable to a child process, you can instead use [`Command::env`].
+///
+/// [`std::net::ToSocketAddrs`]: crate::net::ToSocketAddrs
+/// [`Command::env`]: crate::process::Command::env
+///
+/// # Panics
+///
+/// This function may panic if `key` is empty, contains an ASCII equals sign `'='`
+/// or the NUL character `'\0'`, or when `value` contains the NUL character.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// let key = "KEY";
+/// unsafe {
+///     env::set_var(key, "VALUE");
+/// }
+/// assert_eq!(env::var(key), Ok("VALUE".to_string()));
+/// ```
+#[rustc_deprecated_safe_2024(
+    audit_that = "the environment access only happens in single-threaded code"
+)]
+#[stable(feature = "env", since = "1.0.0")]
+pub unsafe fn set_var<K: AsRef<OsStr>, V: AsRef<OsStr>>(key: K, value: V) {
+    let (key, value) = (key.as_ref(), value.as_ref());
+    unsafe { env_imp::setenv(key, value) }.unwrap_or_else(|e| {
+        panic!("failed to set environment variable `{key:?}` to `{value:?}`: {e}")
+    })
+}
+
+/// Removes an environment variable from the environment of the currently running process.
+///
+/// # Safety
+///
+/// This function is safe to call in a single-threaded program.
+///
+/// This function is also always safe to call on Windows, in single-threaded
+/// and multi-threaded programs.
+///
+/// In multi-threaded programs on other operating systems, the only safe option is
+/// to not use `set_var` or `remove_var` at all.
+///
+/// The exact requirement is: you
+/// must ensure that there are no other threads concurrently writing or
+/// *reading*(!) the environment through functions or global variables other
+/// than the ones in this module. The problem is that these operating systems
+/// do not provide a thread-safe way to read the environment, and most C
+/// libraries, including libc itself, do not advertise which functions read
+/// from the environment. Even functions from the Rust standard library may
+/// read the environment without going through this module, e.g. for DNS
+/// lookups from [`std::net::ToSocketAddrs`]. No stable guarantee is made about
+/// which functions may read from the environment in future versions of a
+/// library. All this makes it not practically possible for you to guarantee
+/// that no other thread will read the environment, so the only safe option is
+/// to not use `set_var` or `remove_var` in multi-threaded programs at all.
+///
+/// Discussion of this unsafety on Unix may be found in:
+///
+///  - [Austin Group Bugzilla](https://austingroupbugs.net/view.php?id=188)
+///  - [GNU C library Bugzilla](https://sourceware.org/bugzilla/show_bug.cgi?id=15607#c2)
+///
+/// To prevent a child process from inheriting an environment variable, you can
+/// instead use [`Command::env_remove`] or [`Command::env_clear`].
+///
+/// [`std::net::ToSocketAddrs`]: crate::net::ToSocketAddrs
+/// [`Command::env_remove`]: crate::process::Command::env_remove
+/// [`Command::env_clear`]: crate::process::Command::env_clear
+///
+/// # Panics
+///
+/// This function may panic if `key` is empty, contains an ASCII equals sign
+/// `'='` or the NUL character `'\0'`, or when the value contains the NUL
+/// character.
+///
+/// # Examples
+///
+/// ```no_run
+/// use std::env;
+///
+/// let key = "KEY";
+/// unsafe {
+///     env::set_var(key, "VALUE");
+/// }
+/// assert_eq!(env::var(key), Ok("VALUE".to_string()));
+///
+/// unsafe {
+///     env::remove_var(key);
+/// }
+/// assert!(env::var(key).is_err());
+/// ```
+#[rustc_deprecated_safe_2024(
+    audit_that = "the environment access only happens in single-threaded code"
+)]
+#[stable(feature = "env", since = "1.0.0")]
+pub unsafe fn remove_var<K: AsRef<OsStr>>(key: K) {
+    let key = key.as_ref();
+    unsafe { env_imp::unsetenv(key) }
+        .unwrap_or_else(|e| panic!("failed to remove environment variable `{key:?}`: {e}"))
+}
+
+/// An iterator that splits an environment variable into paths according to
+/// platform-specific conventions.
+///
+/// The iterator element type is [`PathBuf`].
+///
+/// This structure is created by [`env::split_paths()`]. See its
+/// documentation for more.
+///
+/// [`env::split_paths()`]: split_paths
+#[must_use = "iterators are lazy and do nothing unless consumed"]
+#[stable(feature = "env", since = "1.0.0")]
+pub struct SplitPaths<'a> {
+    inner: os_imp::SplitPaths<'a>,
+}
+
+/// Parses input according to platform conventions for the `PATH`
+/// environment variable.
+///
+/// Returns an iterator over the paths contained in `unparsed`. The iterator
+/// element type is [`PathBuf`].
+///
+/// On most Unix platforms, the separator is `:` and on Windows it is `;`. This
+/// also performs unquoting on Windows.
+///
+/// [`join_paths`] can be used to recombine elements.
+///
+/// # Panics
+///
+/// This will panic on systems where there is no delimited `PATH` variable,
+/// such as UEFI.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// let key = "PATH";
+/// match env::var_os(key) {
+///     Some(paths) => {
+///         for path in env::split_paths(&paths) {
+///             println!("'{}'", path.display());
+///         }
+///     }
+///     None => println!("{key} is not defined in the environment.")
+/// }
+/// ```
+#[stable(feature = "env", since = "1.0.0")]
+pub fn split_paths<T: AsRef<OsStr> + ?Sized>(unparsed: &T) -> SplitPaths<'_> {
+    SplitPaths { inner: os_imp::split_paths(unparsed.as_ref()) }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl<'a> Iterator for SplitPaths<'a> {
+    type Item = PathBuf;
+    fn next(&mut self) -> Option<PathBuf> {
+        self.inner.next()
+    }
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.inner.size_hint()
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for SplitPaths<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("SplitPaths").finish_non_exhaustive()
+    }
+}
+
+/// The error type for operations on the `PATH` variable. Possibly returned from
+/// [`env::join_paths()`].
+///
+/// [`env::join_paths()`]: join_paths
+#[derive(Debug)]
+#[stable(feature = "env", since = "1.0.0")]
+pub struct JoinPathsError {
+    inner: os_imp::JoinPathsError,
+}
+
+/// Joins a collection of [`Path`]s appropriately for the `PATH`
+/// environment variable.
+///
+/// # Errors
+///
+/// Returns an [`Err`] (containing an error message) if one of the input
+/// [`Path`]s contains an invalid character for constructing the `PATH`
+/// variable (a double quote on Windows or a colon on Unix), or if the system
+/// does not have a `PATH`-like variable (e.g. UEFI or WASI).
+///
+/// # Examples
+///
+/// Joining paths on a Unix-like platform:
+///
+/// ```
+/// use std::env;
+/// use std::ffi::OsString;
+/// use std::path::Path;
+///
+/// fn main() -> Result<(), env::JoinPathsError> {
+/// # if cfg!(unix) {
+///     let paths = [Path::new("/bin"), Path::new("/usr/bin")];
+///     let path_os_string = env::join_paths(paths.iter())?;
+///     assert_eq!(path_os_string, OsString::from("/bin:/usr/bin"));
+/// # }
+///     Ok(())
+/// }
+/// ```
+///
+/// Joining a path containing a colon on a Unix-like platform results in an
+/// error:
+///
+/// ```
+/// # if cfg!(unix) {
+/// use std::env;
+/// use std::path::Path;
+///
+/// let paths = [Path::new("/bin"), Path::new("/usr/bi:n")];
+/// assert!(env::join_paths(paths.iter()).is_err());
+/// # }
+/// ```
+///
+/// Using `env::join_paths()` with [`env::split_paths()`] to append an item to
+/// the `PATH` environment variable:
+///
+/// ```
+/// use std::env;
+/// use std::path::PathBuf;
+///
+/// fn main() -> Result<(), env::JoinPathsError> {
+///     if let Some(path) = env::var_os("PATH") {
+///         let mut paths = env::split_paths(&path).collect::<Vec<_>>();
+///         paths.push(PathBuf::from("/home/xyz/bin"));
+///         let new_path = env::join_paths(paths)?;
+///         unsafe { env::set_var("PATH", &new_path); }
+///     }
+///
+///     Ok(())
+/// }
+/// ```
+///
+/// [`env::split_paths()`]: split_paths
+#[stable(feature = "env", since = "1.0.0")]
+pub fn join_paths<I, T>(paths: I) -> Result<OsString, JoinPathsError>
+where
+    I: IntoIterator<Item = T>,
+    T: AsRef<OsStr>,
+{
+    os_imp::join_paths(paths.into_iter()).map_err(|e| JoinPathsError { inner: e })
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl fmt::Display for JoinPathsError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.inner.fmt(f)
+    }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Error for JoinPathsError {
+    #[allow(deprecated, deprecated_in_future)]
+    fn description(&self) -> &str {
+        self.inner.description()
+    }
+}
+
+/// Returns the path of the current user's home directory if known.
+///
+/// This may return `None` if getting the directory fails or if the platform does not have user home directories.
+///
+/// For storing user data and configuration it is often preferable to use more specific directories.
+/// For example, [XDG Base Directories] on Unix or the `LOCALAPPDATA` and `APPDATA` environment variables on Windows.
+///
+/// [XDG Base Directories]: https://specifications.freedesktop.org/basedir-spec/latest/
+///
+/// # Unix
+///
+/// - Returns the value of the 'HOME' environment variable if it is set
+///   (and not an empty string).
+/// - Otherwise, it tries to determine the home directory by invoking the `getpwuid_r` function
+///   using the UID of the current user. An empty home directory field returned from the
+///   `getpwuid_r` function is considered to be a valid value.
+/// - Returns `None` if the current user has no entry in the /etc/passwd file.
+///
+/// # Windows
+///
+/// - Returns the value of the 'USERPROFILE' environment variable if it is set, and is not an empty string.
+/// - Otherwise, [`GetUserProfileDirectory`][msdn] is used to return the path. This may change in the future.
+///
+/// [msdn]: https://docs.microsoft.com/en-us/windows/win32/api/userenv/nf-userenv-getuserprofiledirectorya
+///
+/// In UWP (Universal Windows Platform) targets this function is unimplemented and always returns `None`.
+///
+/// Before Rust 1.85.0, this function used to return the value of the 'HOME' environment variable
+/// on Windows, which in Cygwin or Mingw environments could return non-standard paths like `/home/you`
+/// instead of `C:\Users\you`.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// match env::home_dir() {
+///     Some(path) => println!("Your home directory, probably: {}", path.display()),
+///     None => println!("Impossible to get your home dir!"),
+/// }
+/// ```
+#[must_use]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn home_dir() -> Option<PathBuf> {
+    os_imp::home_dir()
+}
+
+/// Returns the path of a temporary directory.
+///
+/// The temporary directory may be shared among users, or between processes
+/// with different privileges; thus, the creation of any files or directories
+/// in the temporary directory must use a secure method to create a uniquely
+/// named file. Creating a file or directory with a fixed or predictable name
+/// may result in "insecure temporary file" security vulnerabilities. Consider
+/// using a crate that securely creates temporary files or directories.
+///
+/// Note that the returned value may be a symbolic link, not a directory.
+///
+/// # Platform-specific behavior
+///
+/// On Unix, returns the value of the `TMPDIR` environment variable if it is
+/// set, otherwise the value is OS-specific:
+/// - On Android, there is no global temporary folder (it is usually allocated
+///   per-app), it will return the application's cache dir if the program runs
+///   in application's namespace and system version is Android 13 (or above), or
+///   `/data/local/tmp` otherwise.
+/// - On Darwin-based OSes (macOS, iOS, etc) it returns the directory provided
+///   by `confstr(_CS_DARWIN_USER_TEMP_DIR, ...)`, as recommended by [Apple's
+///   security guidelines][appledoc].
+/// - On all other unix-based OSes, it returns `/tmp`.
+///
+/// On Windows, the behavior is equivalent to that of [`GetTempPath2`][GetTempPath2] /
+/// [`GetTempPath`][GetTempPath], which this function uses internally.
+///
+/// Note that, this [may change in the future][changes].
+///
+/// [changes]: io#platform-specific-behavior
+/// [GetTempPath2]: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-gettemppath2a
+/// [GetTempPath]: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-gettemppatha
+/// [appledoc]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/SecureCodingGuide/Articles/RaceConditions.html#//apple_ref/doc/uid/TP40002585-SW10
+///
+/// ```no_run
+/// use std::env;
+///
+/// fn main() {
+///     let dir = env::temp_dir();
+///     println!("Temporary directory: {}", dir.display());
+/// }
+/// ```
+#[must_use]
+#[doc(alias = "GetTempPath", alias = "GetTempPath2")]
+#[stable(feature = "env", since = "1.0.0")]
+pub fn temp_dir() -> PathBuf {
+    os_imp::temp_dir()
+}
+
+/// Returns the full filesystem path of the current running executable.
+///
+/// # Platform-specific behavior
+///
+/// If the executable was invoked through a symbolic link, some platforms will
+/// return the path of the symbolic link and other platforms will return the
+/// path of the symbolic link’s target.
+///
+/// If the executable is renamed while it is running, platforms may return the
+/// path at the time it was loaded instead of the new path.
+///
+/// # Errors
+///
+/// Acquiring the path of the current executable is a platform-specific operation
+/// that can fail for a good number of reasons. Some errors can include, but not
+/// be limited to, filesystem operations failing or general syscall failures.
+///
+/// # Security
+///
+/// The output of this function should not be trusted for anything
+/// that might have security implications. Basically, if users can run
+/// the executable, they can change the output arbitrarily.
+///
+/// As an example, you can easily introduce a race condition. It goes
+/// like this:
+///
+/// 1. You get the path to the current executable using `current_exe()`, and
+///    store it in a variable.
+/// 2. Time passes. A malicious actor removes the current executable, and
+///    replaces it with a malicious one.
+/// 3. You then use the stored path to re-execute the current
+///    executable.
+///
+/// You expected to safely execute the current executable, but you're
+/// instead executing something completely different. The code you
+/// just executed run with your privileges.
+///
+/// This sort of behavior has been known to [lead to privilege escalation] when
+/// used incorrectly.
+///
+/// [lead to privilege escalation]: https://securityvulns.com/Wdocument183.html
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// match env::current_exe() {
+///     Ok(exe_path) => println!("Path of this executable is: {}",
+///                              exe_path.display()),
+///     Err(e) => println!("failed to get current exe path: {e}"),
+/// };
+/// ```
+#[stable(feature = "env", since = "1.0.0")]
+pub fn current_exe() -> io::Result<PathBuf> {
+    os_imp::current_exe()
+}
+
+/// An iterator over the arguments of a process, yielding a [`String`] value for
+/// each argument.
+///
+/// This struct is created by [`env::args()`]. See its documentation
+/// for more.
+///
+/// The first element is traditionally the path of the executable, but it can be
+/// set to arbitrary text, and might not even exist. This means this property
+/// should not be relied upon for security purposes.
+///
+/// [`env::args()`]: args
+#[must_use = "iterators are lazy and do nothing unless consumed"]
+#[stable(feature = "env", since = "1.0.0")]
+pub struct Args {
+    inner: ArgsOs,
+}
+
+/// An iterator over the arguments of a process, yielding an [`OsString`] value
+/// for each argument.
+///
+/// This struct is created by [`env::args_os()`]. See its documentation
+/// for more.
+///
+/// The first element is traditionally the path of the executable, but it can be
+/// set to arbitrary text, and might not even exist. This means this property
+/// should not be relied upon for security purposes.
+///
+/// [`env::args_os()`]: args_os
+#[must_use = "iterators are lazy and do nothing unless consumed"]
+#[stable(feature = "env", since = "1.0.0")]
+pub struct ArgsOs {
+    inner: sys::args::Args,
+}
+
+/// Returns the arguments that this program was started with (normally passed
+/// via the command line).
+///
+/// The first element is traditionally the path of the executable, but it can be
+/// set to arbitrary text, and might not even exist. This means this property should
+/// not be relied upon for security purposes.
+///
+/// On Unix systems the shell usually expands unquoted arguments with glob patterns
+/// (such as `*` and `?`). On Windows this is not done, and such arguments are
+/// passed as-is.
+///
+/// On glibc Linux systems, arguments are retrieved by placing a function in `.init_array`.
+/// glibc passes `argc`, `argv`, and `envp` to functions in `.init_array`, as a non-standard
+/// extension. This allows `std::env::args` to work even in a `cdylib` or `staticlib`, as it
+/// does on macOS and Windows.
+///
+/// # Panics
+///
+/// The returned iterator will panic during iteration if any argument to the
+/// process is not valid Unicode. If this is not desired,
+/// use the [`args_os`] function instead.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// // Prints each argument on a separate line
+/// for argument in env::args() {
+///     println!("{argument}");
+/// }
+/// ```
+#[stable(feature = "env", since = "1.0.0")]
+pub fn args() -> Args {
+    Args { inner: args_os() }
+}
+
+/// Returns the arguments that this program was started with (normally passed
+/// via the command line).
+///
+/// The first element is traditionally the path of the executable, but it can be
+/// set to arbitrary text, and might not even exist. This means this property should
+/// not be relied upon for security purposes.
+///
+/// On Unix systems the shell usually expands unquoted arguments with glob patterns
+/// (such as `*` and `?`). On Windows this is not done, and such arguments are
+/// passed as-is.
+///
+/// On glibc Linux systems, arguments are retrieved by placing a function in `.init_array`.
+/// glibc passes `argc`, `argv`, and `envp` to functions in `.init_array`, as a non-standard
+/// extension. This allows `std::env::args_os` to work even in a `cdylib` or `staticlib`, as it
+/// does on macOS and Windows.
+///
+/// Note that the returned iterator will not check if the arguments to the
+/// process are valid Unicode. If you want to panic on invalid UTF-8,
+/// use the [`args`] function instead.
+///
+/// # Examples
+///
+/// ```
+/// use std::env;
+///
+/// // Prints each argument on a separate line
+/// for argument in env::args_os() {
+///     println!("{argument:?}");
+/// }
+/// ```
+#[stable(feature = "env", since = "1.0.0")]
+pub fn args_os() -> ArgsOs {
+    ArgsOs { inner: sys::args::args() }
+}
+
+#[stable(feature = "env_unimpl_send_sync", since = "1.26.0")]
+impl !Send for Args {}
+
+#[stable(feature = "env_unimpl_send_sync", since = "1.26.0")]
+impl !Sync for Args {}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Iterator for Args {
+    type Item = String;
+
+    fn next(&mut self) -> Option<String> {
+        self.inner.next().map(|s| s.into_string().unwrap())
+    }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.inner.size_hint()
+    }
+
+    // Methods which skip args cannot simply delegate to the inner iterator,
+    // because `env::args` states that we will "panic during iteration if any
+    // argument to the process is not valid Unicode".
+    //
+    // This offers two possible interpretations:
+    // - a skipped argument is never encountered "during iteration"
+    // - even a skipped argument is encountered "during iteration"
+    //
+    // As a panic can be observed, we err towards validating even skipped
+    // arguments for now, though this is not explicitly promised by the API.
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl ExactSizeIterator for Args {
+    #[inline]
+    fn len(&self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    fn is_empty(&self) -> bool {
+        self.inner.is_empty()
+    }
+}
+
+#[stable(feature = "env_iterators", since = "1.12.0")]
+impl DoubleEndedIterator for Args {
+    fn next_back(&mut self) -> Option<String> {
+        self.inner.next_back().map(|s| s.into_string().unwrap())
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for Args {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self { inner: ArgsOs { inner } } = self;
+        f.debug_struct("Args").field("inner", inner).finish()
+    }
+}
+
+#[stable(feature = "env_unimpl_send_sync", since = "1.26.0")]
+impl !Send for ArgsOs {}
+
+#[stable(feature = "env_unimpl_send_sync", since = "1.26.0")]
+impl !Sync for ArgsOs {}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl Iterator for ArgsOs {
+    type Item = OsString;
+
+    #[inline]
+    fn next(&mut self) -> Option<OsString> {
+        self.inner.next()
+    }
+
+    #[inline]
+    fn next_chunk<const N: usize>(
+        &mut self,
+    ) -> Result<[OsString; N], array::IntoIter<OsString, N>> {
+        self.inner.next_chunk()
+    }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.inner.size_hint()
+    }
+
+    #[inline]
+    fn count(self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    fn last(self) -> Option<OsString> {
+        self.inner.last()
+    }
+
+    #[inline]
+    fn advance_by(&mut self, n: usize) -> Result<(), NonZero<usize>> {
+        self.inner.advance_by(n)
+    }
+
+    #[inline]
+    fn try_fold<B, F, R>(&mut self, init: B, f: F) -> R
+    where
+        F: FnMut(B, Self::Item) -> R,
+        R: Try<Output = B>,
+    {
+        self.inner.try_fold(init, f)
+    }
+
+    #[inline]
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, f)
+    }
+}
+
+#[stable(feature = "env", since = "1.0.0")]
+impl ExactSizeIterator for ArgsOs {
+    #[inline]
+    fn len(&self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    fn is_empty(&self) -> bool {
+        self.inner.is_empty()
+    }
+}
+
+#[stable(feature = "env_iterators", since = "1.12.0")]
+impl DoubleEndedIterator for ArgsOs {
+    #[inline]
+    fn next_back(&mut self) -> Option<OsString> {
+        self.inner.next_back()
+    }
+
+    #[inline]
+    fn advance_back_by(&mut self, n: usize) -> Result<(), NonZero<usize>> {
+        self.inner.advance_back_by(n)
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for ArgsOs {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self { inner } = self;
+        f.debug_struct("ArgsOs").field("inner", inner).finish()
+    }
+}
+
+/// Constants associated with the current target
+#[stable(feature = "env", since = "1.0.0")]
+pub mod consts {
+    use crate::sys::env_consts::os;
+
+    /// A string describing the architecture of the CPU that is currently in use.
+    /// An example value may be: `"x86"`, `"arm"` or `"riscv64"`.
+    ///
+    /// <details><summary>Full list of possible values</summary>
+    ///
+    /// * `"x86"`
+    /// * `"x86_64"`
+    /// * `"arm"`
+    /// * `"aarch64"`
+    /// * `"m68k"`
+    /// * `"mips"`
+    /// * `"mips32r6"`
+    /// * `"mips64"`
+    /// * `"mips64r6"`
+    /// * `"csky"`
+    /// * `"powerpc"`
+    /// * `"powerpc64"`
+    /// * `"riscv32"`
+    /// * `"riscv64"`
+    /// * `"s390x"`
+    /// * `"sparc"`
+    /// * `"sparc64"`
+    /// * `"hexagon"`
+    /// * `"loongarch32"`
+    /// * `"loongarch64"`
+    ///
+    /// </details>
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const ARCH: &str = option_env!("STD_ENV_ARCH");
+
+    /// A string describing the family of the operating system.
+    /// An example value may be: `"unix"`, or `"windows"`.
+    ///
+    /// This value may be an empty string if the family is unknown.
+    ///
+    /// <details><summary>Full list of possible values</summary>
+    ///
+    /// * `"unix"`
+    /// * `"windows"`
+    /// * `"itron"`
+    /// * `"wasm"`
+    /// * `""`
+    ///
+    /// </details>
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const FAMILY: &str = os::FAMILY;
+
+    /// A string describing the specific operating system in use.
+    /// An example value may be: `"linux"`, or `"freebsd"`.
+    ///
+    /// <details><summary>Full list of possible values</summary>
+    ///
+    /// * `"linux"`
+    /// * `"windows"`
+    /// * `"macos"`
+    /// * `"android"`
+    /// * `"ios"`
+    /// * `"openbsd"`
+    /// * `"freebsd"`
+    /// * `"netbsd"`
+    /// * `"wasi"`
+    /// * `"hermit"`
+    /// * `"aix"`
+    /// * `"apple"`
+    /// * `"dragonfly"`
+    /// * `"emscripten"`
+    /// * `"espidf"`
+    /// * `"fortanix"`
+    /// * `"uefi"`
+    /// * `"fuchsia"`
+    /// * `"haiku"`
+    /// * `"hermit"`
+    /// * `"watchos"`
+    /// * `"visionos"`
+    /// * `"tvos"`
+    /// * `"horizon"`
+    /// * `"hurd"`
+    /// * `"illumos"`
+    /// * `"l4re"`
+    /// * `"nto"`
+    /// * `"redox"`
+    /// * `"solaris"`
+    /// * `"solid_asp3`
+    /// * `"vita"`
+    /// * `"vxworks"`
+    /// * `"xous"`
+    ///
+    /// </details>
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const OS: &str = os::OS;
+
+    /// Specifies the filename prefix, if any, used for shared libraries on this platform.
+    /// This is either `"lib"` or an empty string. (`""`).
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const DLL_PREFIX: &str = os::DLL_PREFIX;
+
+    /// Specifies the filename suffix, if any, used for shared libraries on this platform.
+    /// An example value may be: `".so"`, `".elf"`, or `".dll"`.
+    ///
+    /// The possible values are identical to those of [`DLL_EXTENSION`], but with the leading period included.
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const DLL_SUFFIX: &str = os::DLL_SUFFIX;
+
+    /// Specifies the file extension, if any, used for shared libraries on this platform that goes after the dot.
+    /// An example value may be: `"so"`, `"elf"`, or `"dll"`.
+    ///
+    /// <details><summary>Full list of possible values</summary>
+    ///
+    /// * `"so"`
+    /// * `"dylib"`
+    /// * `"dll"`
+    /// * `"sgxs"`
+    /// * `"a"`
+    /// * `"elf"`
+    /// * `"wasm"`
+    /// * `""` (an empty string)
+    ///
+    /// </details>
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const DLL_EXTENSION: &str = os::DLL_EXTENSION;
+
+    /// Specifies the filename suffix, if any, used for executable binaries on this platform.
+    /// An example value may be: `".exe"`, or `".efi"`.
+    ///
+    /// The possible values are identical to those of [`EXE_EXTENSION`], but with the leading period included.
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const EXE_SUFFIX: &str = os::EXE_SUFFIX;
+
+    /// Specifies the file extension, if any, used for executable binaries on this platform.
+    /// An example value may be: `"exe"`, or an empty string (`""`).
+    ///
+    /// <details><summary>Full list of possible values</summary>
+    ///
+    /// * `"exe"`
+    /// * `"efi"`
+    /// * `"js"`
+    /// * `"sgxs"`
+    /// * `"elf"`
+    /// * `"wasm"`
+    /// * `""` (an empty string)
+    ///
+    /// </details>
+    #[stable(feature = "env", since = "1.0.0")]
+    pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
+}

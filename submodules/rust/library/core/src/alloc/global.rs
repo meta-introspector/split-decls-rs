@@ -1,1 +1,280 @@
-use split_decls_genesis :: ourprelude :: * ; use crate :: alloc :: Layout ; use crate :: { cmp , ptr } ; #[doc = " A memory allocator that can be registered as the standard library’s default"] #[doc = " through the `#[global_allocator]` attribute."] #[doc = ""] #[doc = " Some of the methods require that a memory block be *currently"] #[doc = " allocated* via an allocator. This means that:"] #[doc = ""] #[doc = " * the starting address for that memory block was previously"] #[doc = "   returned by a previous call to an allocation method"] #[doc = "   such as `alloc`, and"] #[doc = ""] #[doc = " * the memory block has not been subsequently deallocated, where"] #[doc = "   blocks are deallocated either by being passed to a deallocation"] #[doc = "   method such as `dealloc` or by being"] #[doc = "   passed to a reallocation method that returns a non-null pointer."] #[doc = ""] #[doc = ""] #[doc = " # Example"] #[doc = ""] #[doc = " ```"] #[doc = " use std::alloc::{GlobalAlloc, Layout};"] #[doc = " use std::cell::UnsafeCell;"] #[doc = " use std::ptr::null_mut;"] #[doc = " use std::sync::atomic::{AtomicUsize, Ordering::Relaxed};"] #[doc = ""] #[doc = " const ARENA_SIZE: usize = 128 * 1024;"] #[doc = " const MAX_SUPPORTED_ALIGN: usize = 4096;"] #[doc = " #[repr(C, align(4096))] // 4096 == MAX_SUPPORTED_ALIGN"] #[doc = " struct SimpleAllocator {"] #[doc = "     arena: UnsafeCell<[u8; ARENA_SIZE]>,"] #[doc = "     remaining: AtomicUsize, // we allocate from the top, counting down"] #[doc = " }"] #[doc = ""] #[doc = " #[global_allocator]"] #[doc = " static ALLOCATOR: SimpleAllocator = SimpleAllocator {"] #[doc = "     arena: UnsafeCell::new([0x55; ARENA_SIZE]),"] #[doc = "     remaining: AtomicUsize::new(ARENA_SIZE),"] #[doc = " };"] #[doc = ""] #[doc = " unsafe impl Sync for SimpleAllocator {}"] #[doc = ""] #[doc = " unsafe impl GlobalAlloc for SimpleAllocator {"] #[doc = "     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {"] #[doc = "         let size = layout.size();"] #[doc = "         let align = layout.align();"] #[doc = ""] #[doc = "         // `Layout` contract forbids making a `Layout` with align=0, or align not power of 2."] #[doc = "         // So we can safely use a mask to ensure alignment without worrying about UB."] #[doc = "         let align_mask_to_round_down = !(align - 1);"] #[doc = ""] #[doc = "         if align > MAX_SUPPORTED_ALIGN {"] #[doc = "             return null_mut();"] #[doc = "         }"] #[doc = ""] #[doc = "         let mut allocated = 0;"] #[doc = "         if self"] #[doc = "             .remaining"] #[doc = "             .fetch_update(Relaxed, Relaxed, |mut remaining| {"] #[doc = "                 if size > remaining {"] #[doc = "                     return None;"] #[doc = "                 }"] #[doc = "                 remaining -= size;"] #[doc = "                 remaining &= align_mask_to_round_down;"] #[doc = "                 allocated = remaining;"] #[doc = "                 Some(remaining)"] #[doc = "             })"] #[doc = "             .is_err()"] #[doc = "         {"] #[doc = "             return null_mut();"] #[doc = "         };"] #[doc = "         unsafe { self.arena.get().cast::<u8>().add(allocated) }"] #[doc = "     }"] #[doc = "     unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {}"] #[doc = " }"] #[doc = ""] #[doc = " fn main() {"] #[doc = "     let _s = format!(\"allocating a string!\");"] #[doc = "     let currently = ALLOCATOR.remaining.load(Relaxed);"] #[doc = "     println!(\"allocated so far: {}\", ARENA_SIZE - currently);"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " The `GlobalAlloc` trait is an `unsafe` trait for a number of reasons, and"] #[doc = " implementors must ensure that they adhere to these contracts:"] #[doc = ""] #[doc = " * It's undefined behavior if global allocators unwind. This restriction may"] #[doc = "   be lifted in the future, but currently a panic from any of these"] #[doc = "   functions may lead to memory unsafety."] #[doc = ""] #[doc = " * `Layout` queries and calculations in general must be correct. Callers of"] #[doc = "   this trait are allowed to rely on the contracts defined on each method,"] #[doc = "   and implementors must ensure such contracts remain true."] #[doc = ""] #[doc = " * You must not rely on allocations actually happening, even if there are explicit"] #[doc = "   heap allocations in the source. The optimizer may detect unused allocations that it can either"] #[doc = "   eliminate entirely or move to the stack and thus never invoke the allocator. The"] #[doc = "   optimizer may further assume that allocation is infallible, so code that used to fail due"] #[doc = "   to allocator failures may now suddenly work because the optimizer worked around the"] #[doc = "   need for an allocation. More concretely, the following code example is unsound, irrespective"] #[doc = "   of whether your custom allocator allows counting how many allocations have happened."] #[doc = ""] #[doc = "   ```rust,ignore (unsound and has placeholders)"] #[doc = "   drop(Box::new(42));"] #[doc = "   let number_of_heap_allocs = /* call private allocator API */;"] #[doc = "   unsafe { std::hint::assert_unchecked(number_of_heap_allocs > 0); }"] #[doc = "   ```"] #[doc = ""] #[doc = "   Note that the optimizations mentioned above are not the only"] #[doc = "   optimization that can be applied. You may generally not rely on heap allocations"] #[doc = "   happening if they can be removed without changing program behavior."] #[doc = "   Whether allocations happen or not is not part of the program behavior, even if it"] #[doc = "   could be detected via an allocator that tracks allocations by printing or otherwise"] #[doc = "   having side effects."] #[stable (feature = "global_alloc" , since = "1.28.0")] pub unsafe trait GlobalAlloc { #[doc = " Allocates memory as described by the given `layout`."] #[doc = ""] #[doc = " Returns a pointer to newly-allocated memory,"] #[doc = " or null to indicate allocation failure."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " `layout` must have non-zero size. Attempting to allocate for a zero-sized `layout` may"] #[doc = " result in undefined behavior."] #[doc = ""] #[doc = " (Extension subtraits might provide more specific bounds on"] #[doc = " behavior, e.g., guarantee a sentinel address or a null pointer"] #[doc = " in response to a zero-size allocation request.)"] #[doc = ""] #[doc = " The allocated block of memory may or may not be initialized."] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returning a null pointer indicates that either memory is exhausted"] #[doc = " or `layout` does not meet this allocator's size or alignment constraints."] #[doc = ""] #[doc = " Implementations are encouraged to return null on memory"] #[doc = " exhaustion rather than aborting, but this is not"] #[doc = " a strict requirement. (Specifically: it is *legal* to"] #[doc = " implement this trait atop an underlying native allocation"] #[doc = " library that aborts on memory exhaustion.)"] #[doc = ""] #[doc = " Clients wishing to abort computation in response to an"] #[doc = " allocation error are encouraged to call the [`handle_alloc_error`] function,"] #[doc = " rather than directly invoking `panic!` or similar."] #[doc = ""] #[doc = " [`handle_alloc_error`]: ../../alloc/alloc/fn.handle_alloc_error.html"] #[stable (feature = "global_alloc" , since = "1.28.0")] unsafe fn alloc (& self , layout : Layout) -> * mut u8 ; #[doc = " Deallocates the block of memory at the given `ptr` pointer with the given `layout`."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " The caller must ensure:"] #[doc = ""] #[doc = " * `ptr` is a block of memory currently allocated via this allocator and,"] #[doc = ""] #[doc = " * `layout` is the same layout that was used to allocate that block of"] #[doc = "   memory."] #[doc = ""] #[doc = " Otherwise undefined behavior can result."] #[stable (feature = "global_alloc" , since = "1.28.0")] unsafe fn dealloc (& self , ptr : * mut u8 , layout : Layout) ; #[doc = " Behaves like `alloc`, but also ensures that the contents"] #[doc = " are set to zero before being returned."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " The caller has to ensure that `layout` has non-zero size. Like `alloc`"] #[doc = " zero sized `layout` can result in undefined behavior."] #[doc = " However the allocated block of memory is guaranteed to be initialized."] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returning a null pointer indicates that either memory is exhausted"] #[doc = " or `layout` does not meet allocator's size or alignment constraints,"] #[doc = " just as in `alloc`."] #[doc = ""] #[doc = " Clients wishing to abort computation in response to an"] #[doc = " allocation error are encouraged to call the [`handle_alloc_error`] function,"] #[doc = " rather than directly invoking `panic!` or similar."] #[doc = ""] #[doc = " [`handle_alloc_error`]: ../../alloc/alloc/fn.handle_alloc_error.html"] #[stable (feature = "global_alloc" , since = "1.28.0")] unsafe fn alloc_zeroed (& self , layout : Layout) -> * mut u8 { let size = layout . size () ; let ptr = unsafe { self . alloc (layout) } ; if ! ptr . is_null () { unsafe { ptr :: write_bytes (ptr , 0 , size) } ; } ptr } #[doc = " Shrinks or grows a block of memory to the given `new_size` in bytes."] #[doc = " The block is described by the given `ptr` pointer and `layout`."] #[doc = ""] #[doc = " If this returns a non-null pointer, then ownership of the memory block"] #[doc = " referenced by `ptr` has been transferred to this allocator."] #[doc = " Any access to the old `ptr` is Undefined Behavior, even if the"] #[doc = " allocation remained in-place. The newly returned pointer is the only valid pointer"] #[doc = " for accessing this memory now."] #[doc = ""] #[doc = " The new memory block is allocated with `layout`,"] #[doc = " but with the `size` updated to `new_size` in bytes."] #[doc = " This new layout must be used when deallocating the new memory block with `dealloc`."] #[doc = " The range `0..min(layout.size(), new_size)` of the new memory block is"] #[doc = " guaranteed to have the same values as the original block."] #[doc = ""] #[doc = " If this method returns null, then ownership of the memory"] #[doc = " block has not been transferred to this allocator, and the"] #[doc = " contents of the memory block are unaltered."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " The caller must ensure that:"] #[doc = ""] #[doc = " * `ptr` is allocated via this allocator,"] #[doc = ""] #[doc = " * `layout` is the same layout that was used"] #[doc = "   to allocate that block of memory,"] #[doc = ""] #[doc = " * `new_size` is greater than zero."] #[doc = ""] #[doc = " * `new_size`, when rounded up to the nearest multiple of `layout.align()`,"] #[doc = "   does not overflow `isize` (i.e., the rounded value must be less than or"] #[doc = "   equal to `isize::MAX`)."] #[doc = ""] #[doc = " If these are not followed, undefined behavior can result."] #[doc = ""] #[doc = " (Extension subtraits might provide more specific bounds on"] #[doc = " behavior, e.g., guarantee a sentinel address or a null pointer"] #[doc = " in response to a zero-size allocation request.)"] #[doc = ""] #[doc = " # Errors"] #[doc = ""] #[doc = " Returns null if the new layout does not meet the size"] #[doc = " and alignment constraints of the allocator, or if reallocation"] #[doc = " otherwise fails."] #[doc = ""] #[doc = " Implementations are encouraged to return null on memory"] #[doc = " exhaustion rather than panicking or aborting, but this is not"] #[doc = " a strict requirement. (Specifically: it is *legal* to"] #[doc = " implement this trait atop an underlying native allocation"] #[doc = " library that aborts on memory exhaustion.)"] #[doc = ""] #[doc = " Clients wishing to abort computation in response to a"] #[doc = " reallocation error are encouraged to call the [`handle_alloc_error`] function,"] #[doc = " rather than directly invoking `panic!` or similar."] #[doc = ""] #[doc = " [`handle_alloc_error`]: ../../alloc/alloc/fn.handle_alloc_error.html"] #[stable (feature = "global_alloc" , since = "1.28.0")] unsafe fn realloc (& self , ptr : * mut u8 , layout : Layout , new_size : usize) -> * mut u8 { let new_layout = unsafe { Layout :: from_size_align_unchecked (new_size , layout . align ()) } ; let new_ptr = unsafe { self . alloc (new_layout) } ; if ! new_ptr . is_null () { unsafe { ptr :: copy_nonoverlapping (ptr , new_ptr , cmp :: min (layout . size () , new_size)) ; self . dealloc (ptr , layout) ; } } new_ptr } }
+// Generated by unified_build.rs
+use crate::*;
+
+use crate::alloc::Layout;
+use crate::{cmp, ptr};
+
+/// A memory allocator that can be registered as the standard library’s default
+/// through the `#[global_allocator]` attribute.
+///
+/// Some of the methods require that a memory block be *currently
+/// allocated* via an allocator. This means that:
+///
+/// * the starting address for that memory block was previously
+///   returned by a previous call to an allocation method
+///   such as `alloc`, and
+///
+/// * the memory block has not been subsequently deallocated, where
+///   blocks are deallocated either by being passed to a deallocation
+///   method such as `dealloc` or by being
+///   passed to a reallocation method that returns a non-null pointer.
+///
+///
+/// # Example
+///
+/// ```
+/// use std::alloc::{GlobalAlloc, Layout};
+/// use std::cell::UnsafeCell;
+/// use std::ptr::null_mut;
+/// use std::sync::atomic::{AtomicUsize, Ordering::Relaxed};
+///
+/// const ARENA_SIZE: usize = 128 * 1024;
+/// const MAX_SUPPORTED_ALIGN: usize = 4096;
+/// #[repr(C, align(4096))] // 4096 == MAX_SUPPORTED_ALIGN
+/// struct SimpleAllocator {
+///     arena: UnsafeCell<[u8; ARENA_SIZE]>,
+///     remaining: AtomicUsize, // we allocate from the top, counting down
+/// }
+///
+/// #[global_allocator]
+/// static ALLOCATOR: SimpleAllocator = SimpleAllocator {
+///     arena: UnsafeCell::new([0x55; ARENA_SIZE]),
+///     remaining: AtomicUsize::new(ARENA_SIZE),
+/// };
+///
+/// unsafe impl Sync for SimpleAllocator {}
+///
+/// unsafe impl GlobalAlloc for SimpleAllocator {
+///     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+///         let size = layout.size();
+///         let align = layout.align();
+///
+///         // `Layout` contract forbids making a `Layout` with align=0, or align not power of 2.
+///         // So we can safely use a mask to ensure alignment without worrying about UB.
+///         let align_mask_to_round_down = !(align - 1);
+///
+///         if align > MAX_SUPPORTED_ALIGN {
+///             return null_mut();
+///         }
+///
+///         let mut allocated = 0;
+///         if self
+///             .remaining
+///             .fetch_update(Relaxed, Relaxed, |mut remaining| {
+///                 if size > remaining {
+///                     return None;
+///                 }
+///                 remaining -= size;
+///                 remaining &= align_mask_to_round_down;
+///                 allocated = remaining;
+///                 Some(remaining)
+///             })
+///             .is_err()
+///         {
+///             return null_mut();
+///         };
+///         unsafe { self.arena.get().cast::<u8>().add(allocated) }
+///     }
+///     unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {}
+/// }
+///
+/// fn main() {
+///     let _s = format!("allocating a string!");
+///     let currently = ALLOCATOR.remaining.load(Relaxed);
+///     println!("allocated so far: {}", ARENA_SIZE - currently);
+/// }
+/// ```
+///
+/// # Safety
+///
+/// The `GlobalAlloc` trait is an `unsafe` trait for a number of reasons, and
+/// implementors must ensure that they adhere to these contracts:
+///
+/// * It's undefined behavior if global allocators unwind. This restriction may
+///   be lifted in the future, but currently a panic from any of these
+///   functions may lead to memory unsafety.
+///
+/// * `Layout` queries and calculations in general must be correct. Callers of
+///   this trait are allowed to rely on the contracts defined on each method,
+///   and implementors must ensure such contracts remain true.
+///
+/// * You must not rely on allocations actually happening, even if there are explicit
+///   heap allocations in the source. The optimizer may detect unused allocations that it can either
+///   eliminate entirely or move to the stack and thus never invoke the allocator. The
+///   optimizer may further assume that allocation is infallible, so code that used to fail due
+///   to allocator failures may now suddenly work because the optimizer worked around the
+///   need for an allocation. More concretely, the following code example is unsound, irrespective
+///   of whether your custom allocator allows counting how many allocations have happened.
+///
+///   ```rust,ignore (unsound and has placeholders)
+///   drop(Box::new(42));
+///   let number_of_heap_allocs = /* call private allocator API */;
+///   unsafe { std::hint::assert_unchecked(number_of_heap_allocs > 0); }
+///   ```
+///
+///   Note that the optimizations mentioned above are not the only
+///   optimization that can be applied. You may generally not rely on heap allocations
+///   happening if they can be removed without changing program behavior.
+///   Whether allocations happen or not is not part of the program behavior, even if it
+///   could be detected via an allocator that tracks allocations by printing or otherwise
+///   having side effects.
+#[stable(feature = "global_alloc", since = "1.28.0")]
+pub unsafe trait GlobalAlloc {
+    /// Allocates memory as described by the given `layout`.
+    ///
+    /// Returns a pointer to newly-allocated memory,
+    /// or null to indicate allocation failure.
+    ///
+    /// # Safety
+    ///
+    /// `layout` must have non-zero size. Attempting to allocate for a zero-sized `layout` may
+    /// result in undefined behavior.
+    ///
+    /// (Extension subtraits might provide more specific bounds on
+    /// behavior, e.g., guarantee a sentinel address or a null pointer
+    /// in response to a zero-size allocation request.)
+    ///
+    /// The allocated block of memory may or may not be initialized.
+    ///
+    /// # Errors
+    ///
+    /// Returning a null pointer indicates that either memory is exhausted
+    /// or `layout` does not meet this allocator's size or alignment constraints.
+    ///
+    /// Implementations are encouraged to return null on memory
+    /// exhaustion rather than aborting, but this is not
+    /// a strict requirement. (Specifically: it is *legal* to
+    /// implement this trait atop an underlying native allocation
+    /// library that aborts on memory exhaustion.)
+    ///
+    /// Clients wishing to abort computation in response to an
+    /// allocation error are encouraged to call the [`handle_alloc_error`] function,
+    /// rather than directly invoking `panic!` or similar.
+    ///
+    /// [`handle_alloc_error`]: alloc/alloc/fn.handle_alloc_error.html
+    #[stable(feature = "global_alloc", since = "1.28.0")]
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8;
+
+    /// Deallocates the block of memory at the given `ptr` pointer with the given `layout`.
+    ///
+    /// # Safety
+    ///
+    /// The caller must ensure:
+    ///
+    /// * `ptr` is a block of memory currently allocated via this allocator and,
+    ///
+    /// * `layout` is the same layout that was used to allocate that block of
+    ///   memory.
+    ///
+    /// Otherwise undefined behavior can result.
+    #[stable(feature = "global_alloc", since = "1.28.0")]
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout);
+
+    /// Behaves like `alloc`, but also ensures that the contents
+    /// are set to zero before being returned.
+    ///
+    /// # Safety
+    ///
+    /// The caller has to ensure that `layout` has non-zero size. Like `alloc`
+    /// zero sized `layout` can result in undefined behavior.
+    /// However the allocated block of memory is guaranteed to be initialized.
+    ///
+    /// # Errors
+    ///
+    /// Returning a null pointer indicates that either memory is exhausted
+    /// or `layout` does not meet allocator's size or alignment constraints,
+    /// just as in `alloc`.
+    ///
+    /// Clients wishing to abort computation in response to an
+    /// allocation error are encouraged to call the [`handle_alloc_error`] function,
+    /// rather than directly invoking `panic!` or similar.
+    ///
+    /// [`handle_alloc_error`]: alloc/alloc/fn.handle_alloc_error.html
+    #[stable(feature = "global_alloc", since = "1.28.0")]
+    unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
+        let size = layout.size();
+        // SAFETY: the safety contract for `alloc` must be upheld by the caller.
+        let ptr = unsafe { self.alloc(layout) };
+        if !ptr.is_null() {
+            // SAFETY: as allocation succeeded, the region from `ptr`
+            // of size `size` is guaranteed to be valid for writes.
+            unsafe { ptr::write_bytes(ptr, 0, size) };
+        }
+        ptr
+    }
+
+    /// Shrinks or grows a block of memory to the given `new_size` in bytes.
+    /// The block is described by the given `ptr` pointer and `layout`.
+    ///
+    /// If this returns a non-null pointer, then ownership of the memory block
+    /// referenced by `ptr` has been transferred to this allocator.
+    /// Any access to the old `ptr` is Undefined Behavior, even if the
+    /// allocation remained in-place. The newly returned pointer is the only valid pointer
+    /// for accessing this memory now.
+    ///
+    /// The new memory block is allocated with `layout`,
+    /// but with the `size` updated to `new_size` in bytes.
+    /// This new layout must be used when deallocating the new memory block with `dealloc`.
+    /// The range `0..min(layout.size(), new_size)` of the new memory block is
+    /// guaranteed to have the same values as the original block.
+    ///
+    /// If this method returns null, then ownership of the memory
+    /// block has not been transferred to this allocator, and the
+    /// contents of the memory block are unaltered.
+    ///
+    /// # Safety
+    ///
+    /// The caller must ensure that:
+    ///
+    /// * `ptr` is allocated via this allocator,
+    ///
+    /// * `layout` is the same layout that was used
+    ///   to allocate that block of memory,
+    ///
+    /// * `new_size` is greater than zero.
+    ///
+    /// * `new_size`, when rounded up to the nearest multiple of `layout.align()`,
+    ///   does not overflow `isize` (i.e., the rounded value must be less than or
+    ///   equal to `isize::MAX`).
+    ///
+    /// If these are not followed, undefined behavior can result.
+    ///
+    /// (Extension subtraits might provide more specific bounds on
+    /// behavior, e.g., guarantee a sentinel address or a null pointer
+    /// in response to a zero-size allocation request.)
+    ///
+    /// # Errors
+    ///
+    /// Returns null if the new layout does not meet the size
+    /// and alignment constraints of the allocator, or if reallocation
+    /// otherwise fails.
+    ///
+    /// Implementations are encouraged to return null on memory
+    /// exhaustion rather than panicking or aborting, but this is not
+    /// a strict requirement. (Specifically: it is *legal* to
+    /// implement this trait atop an underlying native allocation
+    /// library that aborts on memory exhaustion.)
+    ///
+    /// Clients wishing to abort computation in response to a
+    /// reallocation error are encouraged to call the [`handle_alloc_error`] function,
+    /// rather than directly invoking `panic!` or similar.
+    ///
+    /// [`handle_alloc_error`]: alloc/alloc/fn.handle_alloc_error.html
+    #[stable(feature = "global_alloc", since = "1.28.0")]
+    unsafe fn realloc(&self, ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8 {
+        // SAFETY: the caller must ensure that the `new_size` does not overflow.
+        // `layout.align()` comes from a `Layout` and is thus guaranteed to be valid.
+        let new_layout = unsafe { Layout::from_size_align_unchecked(new_size, layout.align()) };
+        // SAFETY: the caller must ensure that `new_layout` is greater than zero.
+        let new_ptr = unsafe { self.alloc(new_layout) };
+        if !new_ptr.is_null() {
+            // SAFETY: the previously allocated block cannot overlap the newly allocated block.
+            // The safety contract for `dealloc` must be upheld by the caller.
+            unsafe {
+                ptr::copy_nonoverlapping(ptr, new_ptr, cmp::min(layout.size(), new_size));
+                self.dealloc(ptr, layout);
+            }
+        }
+        new_ptr
+    }
+}

@@ -1,1 +1,164 @@
-use split_decls_genesis :: ourprelude :: * ; #[doc = " An iterator that knows its exact length."] #[doc = ""] #[doc = " Many [`Iterator`]s don't know how many times they will iterate, but some do."] #[doc = " If an iterator knows how many times it can iterate, providing access to"] #[doc = " that information can be useful. For example, if you want to iterate"] #[doc = " backwards, a good start is to know where the end is."] #[doc = ""] #[doc = " When implementing an `ExactSizeIterator`, you must also implement"] #[doc = " [`Iterator`]. When doing so, the implementation of [`Iterator::size_hint`]"] #[doc = " *must* return the exact size of the iterator."] #[doc = ""] #[doc = " The [`len`] method has a default implementation, so you usually shouldn't"] #[doc = " implement it. However, you may be able to provide a more performant"] #[doc = " implementation than the default, so overriding it in this case makes sense."] #[doc = ""] #[doc = " Note that this trait is a safe trait and as such does *not* and *cannot*"] #[doc = " guarantee that the returned length is correct. This means that `unsafe`"] #[doc = " code **must not** rely on the correctness of [`Iterator::size_hint`]. The"] #[doc = " unstable and unsafe [`TrustedLen`](super::marker::TrustedLen) trait gives"] #[doc = " this additional guarantee."] #[doc = ""] #[doc = " [`len`]: ExactSizeIterator::len"] #[doc = ""] #[doc = " # When *shouldn't* an adapter be `ExactSizeIterator`?"] #[doc = ""] #[doc = " If an adapter makes an iterator *longer*, then it's usually incorrect for"] #[doc = " that adapter to implement `ExactSizeIterator`.  The inner exact-sized"] #[doc = " iterator might already be `usize::MAX`-long, and thus the length of the"] #[doc = " longer adapted iterator would no longer be exactly representable in `usize`."] #[doc = ""] #[doc = " This is why [`Chain<A, B>`](crate::iter::Chain) isn't `ExactSizeIterator`,"] #[doc = " even when `A` and `B` are both `ExactSizeIterator`."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " Basic usage:"] #[doc = ""] #[doc = " ```"] #[doc = " // a finite range knows exactly how many times it will iterate"] #[doc = " let five = 0..5;"] #[doc = ""] #[doc = " assert_eq!(5, five.len());"] #[doc = " ```"] #[doc = ""] #[doc = " In the [module-level docs], we implemented an [`Iterator`], `Counter`."] #[doc = " Let's implement `ExactSizeIterator` for it as well:"] #[doc = ""] #[doc = " [module-level docs]: crate::iter"] #[doc = ""] #[doc = " ```"] #[doc = " # struct Counter {"] #[doc = " #     count: usize,"] #[doc = " # }"] #[doc = " # impl Counter {"] #[doc = " #     fn new() -> Counter {"] #[doc = " #         Counter { count: 0 }"] #[doc = " #     }"] #[doc = " # }"] #[doc = " # impl Iterator for Counter {"] #[doc = " #     type Item = usize;"] #[doc = " #     fn next(&mut self) -> Option<Self::Item> {"] #[doc = " #         self.count += 1;"] #[doc = " #         if self.count < 6 {"] #[doc = " #             Some(self.count)"] #[doc = " #         } else {"] #[doc = " #             None"] #[doc = " #         }"] #[doc = " #     }"] #[doc = " # }"] #[doc = " impl ExactSizeIterator for Counter {"] #[doc = "     // We can easily calculate the remaining number of iterations."] #[doc = "     fn len(&self) -> usize {"] #[doc = "         5 - self.count"] #[doc = "     }"] #[doc = " }"] #[doc = ""] #[doc = " // And now we can use it!"] #[doc = ""] #[doc = " let mut counter = Counter::new();"] #[doc = ""] #[doc = " assert_eq!(5, counter.len());"] #[doc = " let _ = counter.next();"] #[doc = " assert_eq!(4, counter.len());"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] pub trait ExactSizeIterator : Iterator { #[doc = " Returns the exact remaining length of the iterator."] #[doc = ""] #[doc = " The implementation ensures that the iterator will return exactly `len()`"] #[doc = " more times a [`Some(T)`] value, before returning [`None`]."] #[doc = " This method has a default implementation, so you usually should not"] #[doc = " implement it directly. However, if you can provide a more efficient"] #[doc = " implementation, you can do so. See the [trait-level] docs for an"] #[doc = " example."] #[doc = ""] #[doc = " This function has the same safety guarantees as the"] #[doc = " [`Iterator::size_hint`] function."] #[doc = ""] #[doc = " [trait-level]: ExactSizeIterator"] #[doc = " [`Some(T)`]: Some"] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " Basic usage:"] #[doc = ""] #[doc = " ```"] #[doc = " // a finite range knows exactly how many times it will iterate"] #[doc = " let mut range = 0..5;"] #[doc = ""] #[doc = " assert_eq!(5, range.len());"] #[doc = " let _ = range.next();"] #[doc = " assert_eq!(4, range.len());"] #[doc = " ```"] #[inline] #[stable (feature = "rust1" , since = "1.0.0")] fn len (& self) -> usize { let (lower , upper) = self . size_hint () ; assert_eq ! (upper , Some (lower)) ; lower } #[doc = " Returns `true` if the iterator is empty."] #[doc = ""] #[doc = " This method has a default implementation using"] #[doc = " [`ExactSizeIterator::len()`], so you don't need to implement it yourself."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " Basic usage:"] #[doc = ""] #[doc = " ```"] #[doc = " #![feature(exact_size_is_empty)]"] #[doc = ""] #[doc = " let mut one_element = std::iter::once(0);"] #[doc = " assert!(!one_element.is_empty());"] #[doc = ""] #[doc = " assert_eq!(one_element.next(), Some(0));"] #[doc = " assert!(one_element.is_empty());"] #[doc = ""] #[doc = " assert_eq!(one_element.next(), None);"] #[doc = " ```"] #[inline] #[unstable (feature = "exact_size_is_empty" , issue = "35428")] fn is_empty (& self) -> bool { self . len () == 0 } } #[stable (feature = "rust1" , since = "1.0.0")] impl < I : ExactSizeIterator + ? Sized > ExactSizeIterator for & mut I { fn len (& self) -> usize { (* * self) . len () } fn is_empty (& self) -> bool { (* * self) . is_empty () } }
+// Generated by unified_build.rs
+use crate::*;
+
+/// An iterator that knows its exact length.
+///
+/// Many [`Iterator`]s don't know how many times they will iterate, but some do.
+/// If an iterator knows how many times it can iterate, providing access to
+/// that information can be useful. For example, if you want to iterate
+/// backwards, a good start is to know where the end is.
+///
+/// When implementing an `ExactSizeIterator`, you must also implement
+/// [`Iterator`]. When doing so, the implementation of [`Iterator::size_hint`]
+/// *must* return the exact size of the iterator.
+///
+/// The [`len`] method has a default implementation, so you usually shouldn't
+/// implement it. However, you may be able to provide a more performant
+/// implementation than the default, so overriding it in this case makes sense.
+///
+/// Note that this trait is a safe trait and as such does *not* and *cannot*
+/// guarantee that the returned length is correct. This means that `unsafe`
+/// code **must not** rely on the correctness of [`Iterator::size_hint`]. The
+/// unstable and unsafe [`TrustedLen`](super::marker::TrustedLen) trait gives
+/// this additional guarantee.
+///
+/// [`len`]: ExactSizeIterator::len
+///
+/// # When *shouldn't* an adapter be `ExactSizeIterator`?
+///
+/// If an adapter makes an iterator *longer*, then it's usually incorrect for
+/// that adapter to implement `ExactSizeIterator`.  The inner exact-sized
+/// iterator might already be `usize::MAX`-long, and thus the length of the
+/// longer adapted iterator would no longer be exactly representable in `usize`.
+///
+/// This is why [`Chain<A, B>`](crate::iter::Chain) isn't `ExactSizeIterator`,
+/// even when `A` and `B` are both `ExactSizeIterator`.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// // a finite range knows exactly how many times it will iterate
+/// let five = 0..5;
+///
+/// assert_eq!(5, five.len());
+/// ```
+///
+/// In the [module-level docs], we implemented an [`Iterator`], `Counter`.
+/// Let's implement `ExactSizeIterator` for it as well:
+///
+/// [module-level docs]: crate::iter
+///
+/// ```
+/// # struct Counter {
+/// #     count: usize,
+/// # }
+/// # impl Counter {
+/// #     fn new() -> Counter {
+/// #         Counter { count: 0 }
+/// #     }
+/// # }
+/// # impl Iterator for Counter {
+/// #     type Item = usize;
+/// #     fn next(&mut self) -> Option<Self::Item> {
+/// #         self.count += 1;
+/// #         if self.count < 6 {
+/// #             Some(self.count)
+/// #         } else {
+/// #             None
+/// #         }
+/// #     }
+/// # }
+/// impl ExactSizeIterator for Counter {
+///     // We can easily calculate the remaining number of iterations.
+///     fn len(&self) -> usize {
+///         5 - self.count
+///     }
+/// }
+///
+/// // And now we can use it!
+///
+/// let mut counter = Counter::new();
+///
+/// assert_eq!(5, counter.len());
+/// let _ = counter.next();
+/// assert_eq!(4, counter.len());
+/// ```
+#[stable(feature = "rust1", since = "1.0.0")]
+pub trait ExactSizeIterator: Iterator {
+    /// Returns the exact remaining length of the iterator.
+    ///
+    /// The implementation ensures that the iterator will return exactly `len()`
+    /// more times a [`Some(T)`] value, before returning [`None`].
+    /// This method has a default implementation, so you usually should not
+    /// implement it directly. However, if you can provide a more efficient
+    /// implementation, you can do so. See the [trait-level] docs for an
+    /// example.
+    ///
+    /// This function has the same safety guarantees as the
+    /// [`Iterator::size_hint`] function.
+    ///
+    /// [trait-level]: ExactSizeIterator
+    /// [`Some(T)`]: Some
+    ///
+    /// # Examples
+    ///
+    /// Basic usage:
+    ///
+    /// ```
+    /// // a finite range knows exactly how many times it will iterate
+    /// let mut range = 0..5;
+    ///
+    /// assert_eq!(5, range.len());
+    /// let _ = range.next();
+    /// assert_eq!(4, range.len());
+    /// ```
+    #[inline]
+    #[stable(feature = "rust1", since = "1.0.0")]
+    fn len(&self) -> usize {
+        let (lower, upper) = self.size_hint();
+        // Note: This assertion is overly defensive, but it checks the invariant
+        // guaranteed by the trait. If this trait were rust-internal,
+        // we could use debug_assert!; assert_eq! will check all Rust user
+        // implementations too.
+        assert_eq!(upper, Some(lower));
+        lower
+    }
+
+    /// Returns `true` if the iterator is empty.
+    ///
+    /// This method has a default implementation using
+    /// [`ExactSizeIterator::len()`], so you don't need to implement it yourself.
+    ///
+    /// # Examples
+    ///
+    /// Basic usage:
+    ///
+    /// ```
+    /// #![feature(exact_size_is_empty)]
+    ///
+    /// let mut one_element = std::iter::once(0);
+    /// assert!(!one_element.is_empty());
+    ///
+    /// assert_eq!(one_element.next(), Some(0));
+    /// assert!(one_element.is_empty());
+    ///
+    /// assert_eq!(one_element.next(), None);
+    /// ```
+    #[inline]
+    #[unstable(feature = "exact_size_is_empty", issue = "35428")]
+    fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+}
+
+#[stable(feature = "rust1", since = "1.0.0")]
+impl<I: ExactSizeIterator + ?Sized> ExactSizeIterator for &mut I {
+    fn len(&self) -> usize {
+        (**self).len()
+    }
+    fn is_empty(&self) -> bool {
+        (**self).is_empty()
+    }
+}

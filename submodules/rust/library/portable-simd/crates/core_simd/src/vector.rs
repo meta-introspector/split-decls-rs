@@ -1,1 +1,1254 @@
-use split_decls_genesis :: ourprelude :: * ; use crate :: simd :: { LaneCount , Mask , MaskElement , SupportedLaneCount , Swizzle , cmp :: SimdPartialOrd , num :: SimdUint , ptr :: { SimdConstPtr , SimdMutPtr } , } ; #[doc = " A SIMD vector with the shape of `[T; N]` but the operations of `T`."] #[doc = ""] #[doc = " `Simd<T, N>` supports the operators (+, *, etc.) that `T` does in \"elementwise\" fashion."] #[doc = " These take the element at each index from the left-hand side and right-hand side,"] #[doc = " perform the operation, then return the result in the same index in a vector of equal size."] #[doc = " However, `Simd` differs from normal iteration and normal arrays:"] #[doc = " - `Simd<T, N>` executes `N` operations in a single step with no `break`s"] #[doc = " - `Simd<T, N>` can have an alignment greater than `T`, for better mechanical sympathy"] #[doc = ""] #[doc = " By always imposing these constraints on `Simd`, it is easier to compile elementwise operations"] #[doc = " into machine instructions that can themselves be executed in parallel."] #[doc = ""] #[doc = " ```rust"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::{Simd};"] #[doc = " # use core::array;"] #[doc = " let a: [i32; 4] = [-2, 0, 2, 4];"] #[doc = " let b = [10, 9, 8, 7];"] #[doc = " let sum = array::from_fn(|i| a[i] + b[i]);"] #[doc = " let prod = array::from_fn(|i| a[i] * b[i]);"] #[doc = ""] #[doc = " // `Simd<T, N>` implements `From<[T; N]>`"] #[doc = " let (v, w) = (Simd::from(a), Simd::from(b));"] #[doc = " // Which means arrays implement `Into<Simd<T, N>>`."] #[doc = " assert_eq!(v + w, sum.into());"] #[doc = " assert_eq!(v * w, prod.into());"] #[doc = " ```"] #[doc = ""] #[doc = ""] #[doc = " `Simd` with integer elements treats operators as wrapping, as if `T` was [`Wrapping<T>`]."] #[doc = " Thus, `Simd` does not implement `wrapping_add`, because that is the default behavior."] #[doc = " This means there is no warning on overflows, even in \"debug\" builds."] #[doc = " For most applications where `Simd` is appropriate, it is \"not a bug\" to wrap,"] #[doc = " and even \"debug builds\" are unlikely to tolerate the loss of performance."] #[doc = " You may want to consider using explicitly checked arithmetic if such is required."] #[doc = " Division by zero on integers still causes a panic, so"] #[doc = " you may want to consider using `f32` or `f64` if that is unacceptable."] #[doc = ""] #[doc = " [`Wrapping<T>`]: core::num::Wrapping"] #[doc = ""] #[doc = " # Layout"] #[doc = " `Simd<T, N>` has a layout similar to `[T; N]` (identical \"shapes\"), with a greater alignment."] #[doc = " `[T; N]` is aligned to `T`, but `Simd<T, N>` will have an alignment based on both `T` and `N`."] #[doc = " Thus it is sound to [`transmute`] `Simd<T, N>` to `[T; N]` and should optimize to \"zero cost\","] #[doc = " but the reverse transmutation may require a copy the compiler cannot simply elide."] #[doc = ""] #[doc = " # ABI \"Features\""] #[doc = " Due to Rust's safety guarantees, `Simd<T, N>` is currently passed and returned via memory,"] #[doc = " not SIMD registers, except as an optimization. Using `#[inline]` on functions that accept"] #[doc = " `Simd<T, N>` or return it is recommended, at the cost of code generation time, as"] #[doc = " inlining SIMD-using functions can omit a large function prolog or epilog and thus"] #[doc = " improve both speed and code size. The need for this may be corrected in the future."] #[doc = ""] #[doc = " Using `#[inline(always)]` still requires additional care."] #[doc = ""] #[doc = " # Safe SIMD with Unsafe Rust"] #[doc = ""] #[doc = " Operations with `Simd` are typically safe, but there are many reasons to want to combine SIMD with `unsafe` code."] #[doc = " Care must be taken to respect differences between `Simd` and other types it may be transformed into or derived from."] #[doc = " In particular, the layout of `Simd<T, N>` may be similar to `[T; N]`, and may allow some transmutations,"] #[doc = " but references to `[T; N]` are not interchangeable with those to `Simd<T, N>`."] #[doc = " Thus, when using `unsafe` Rust to read and write `Simd<T, N>` through [raw pointers], it is a good idea to first try with"] #[doc = " [`read_unaligned`] and [`write_unaligned`]. This is because:"] #[doc = " - [`read`] and [`write`] require full alignment (in this case, `Simd<T, N>`'s alignment)"] #[doc = " - `Simd<T, N>` is often read from or written to [`[T]`](slice) and other types aligned to `T`"] #[doc = " - combining these actions violates the `unsafe` contract and explodes the program into"] #[doc = "   a puff of **undefined behavior**"] #[doc = " - the compiler can implicitly adjust layouts to make unaligned reads or writes fully aligned"] #[doc = "   if it sees the optimization"] #[doc = " - most contemporary processors with \"aligned\" and \"unaligned\" read and write instructions"] #[doc = "   exhibit no performance difference if the \"unaligned\" variant is aligned at runtime"] #[doc = ""] #[doc = " Less obligations mean unaligned reads and writes are less likely to make the program unsound,"] #[doc = " and may be just as fast as stricter alternatives."] #[doc = " When trying to guarantee alignment, [`[T]::as_simd`][as_simd] is an option for"] #[doc = " converting `[T]` to `[Simd<T, N>]`, and allows soundly operating on an aligned SIMD body,"] #[doc = " but it may cost more time when handling the scalar head and tail."] #[doc = " If these are not enough, it is most ideal to design data structures to be already aligned"] #[doc = " to `align_of::<Simd<T, N>>()` before using `unsafe` Rust to read or write."] #[doc = " Other ways to compensate for these facts, like materializing `Simd` to or from an array first,"] #[doc = " are handled by safe methods like [`Simd::from_array`] and [`Simd::from_slice`]."] #[doc = ""] #[doc = " [`transmute`]: core::mem::transmute"] #[doc = " [raw pointers]: pointer"] #[doc = " [`read_unaligned`]: pointer::read_unaligned"] #[doc = " [`write_unaligned`]: pointer::write_unaligned"] #[doc = " [`read`]: pointer::read"] #[doc = " [`write`]: pointer::write"] #[doc = " [as_simd]: slice::as_simd"] #[repr (simd , packed)] pub struct Simd < T , const N : usize > ([T ; N]) where LaneCount < N > : SupportedLaneCount , T : SimdElement ; impl < T , const N : usize > Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[doc = " Number of elements in this vector."] pub const LEN : usize = N ; #[doc = " Returns the number of elements in this SIMD vector."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::u32x4;"] #[doc = " let v = u32x4::splat(0);"] #[doc = " assert_eq!(v.len(), 4);"] #[doc = " ```"] #[inline] #[allow (clippy :: len_without_is_empty)] pub const fn len (& self) -> usize { Self :: LEN } #[doc = " Constructs a new SIMD vector with all elements set to the given value."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::u32x4;"] #[doc = " let v = u32x4::splat(8);"] #[doc = " assert_eq!(v.as_array(), &[8, 8, 8, 8]);"] #[doc = " ```"] #[inline] #[rustc_const_unstable (feature = "portable_simd" , issue = "86656")] pub const fn splat (value : T) -> Self { const fn splat_const < T , const N : usize > (value : T) -> Simd < T , N > where T : SimdElement , LaneCount < N > : SupportedLaneCount , { Simd :: from_array ([value ; N]) } fn splat_rt < T , const N : usize > (value : T) -> Simd < T , N > where T : SimdElement , LaneCount < N > : SupportedLaneCount , { struct Splat ; impl < const N : usize > Swizzle < N > for Splat { const INDEX : [usize ; N] = [0 ; N] ; } Splat :: swizzle :: < T , 1 > (Simd :: < T , 1 > :: from ([value])) } core :: intrinsics :: const_eval_select ((value ,) , splat_const , splat_rt) } #[doc = " Returns an array reference containing the entire SIMD vector."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::{Simd, u64x4};"] #[doc = " let v: u64x4 = Simd::from_array([0, 1, 2, 3]);"] #[doc = " assert_eq!(v.as_array(), &[0, 1, 2, 3]);"] #[doc = " ```"] #[inline] pub const fn as_array (& self) -> & [T ; N] { unsafe { & * (self as * const Self as * const [T ; N]) } } #[doc = " Returns a mutable array reference containing the entire SIMD vector."] #[inline] pub fn as_mut_array (& mut self) -> & mut [T ; N] { unsafe { & mut * (self as * mut Self as * mut [T ; N]) } } #[doc = " Loads a vector from an array of `T`."] #[doc = ""] #[doc = " This function is necessary since `repr(simd)` has padding for non-power-of-2 vectors (at the time of writing)."] #[doc = " With padding, `read_unaligned` will read past the end of an array of N elements."] #[doc = ""] #[doc = " # Safety"] #[doc = " Reading `ptr` must be safe, as if by `<*const [T; N]>::read`."] #[inline] const unsafe fn load (ptr : * const [T ; N]) -> Self { let mut tmp = core :: mem :: MaybeUninit :: < Self > :: uninit () ; unsafe { core :: ptr :: copy_nonoverlapping (ptr , tmp . as_mut_ptr () . cast () , 1) ; tmp . assume_init () } } #[doc = " Store a vector to an array of `T`."] #[doc = ""] #[doc = " See `load` as to why this function is necessary."] #[doc = ""] #[doc = " # Safety"] #[doc = " Writing to `ptr` must be safe, as if by `<*mut [T; N]>::write`."] #[inline] const unsafe fn store (self , ptr : * mut [T ; N]) { let tmp = self ; unsafe { core :: ptr :: copy_nonoverlapping (tmp . as_array () , ptr , 1) } } #[doc = " Converts an array to a SIMD vector."] #[inline] pub const fn from_array (array : [T ; N]) -> Self { unsafe { Self :: load (& array) } } #[doc = " Converts a SIMD vector to an array."] #[inline] pub const fn to_array (self) -> [T ; N] { let mut tmp = core :: mem :: MaybeUninit :: uninit () ; unsafe { self . store (tmp . as_mut_ptr ()) ; tmp . assume_init () } } #[doc = " Converts a slice to a SIMD vector containing `slice[..N]`."] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " Panics if the slice's length is less than the vector's `Simd::N`."] #[doc = " Use `load_or_default` for an alternative that does not panic."] #[doc = ""] #[doc = " # Example"] #[doc = ""] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::u32x4;"] #[doc = " let source = vec![1, 2, 3, 4, 5, 6];"] #[doc = " let v = u32x4::from_slice(&source);"] #[doc = " assert_eq!(v.as_array(), &[1, 2, 3, 4]);"] #[doc = " ```"] #[must_use] #[inline] #[track_caller] pub const fn from_slice (slice : & [T]) -> Self { assert ! (slice . len () >= Self :: LEN , "slice length must be at least the number of elements") ; unsafe { Self :: load (slice . as_ptr () . cast ()) } } #[doc = " Writes a SIMD vector to the first `N` elements of a slice."] #[doc = ""] #[doc = " # Panics"] #[doc = ""] #[doc = " Panics if the slice's length is less than the vector's `Simd::N`."] #[doc = ""] #[doc = " # Example"] #[doc = ""] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::u32x4;"] #[doc = " let mut dest = vec![0; 6];"] #[doc = " let v = u32x4::from_array([1, 2, 3, 4]);"] #[doc = " v.copy_to_slice(&mut dest);"] #[doc = " assert_eq!(&dest, &[1, 2, 3, 4, 0, 0]);"] #[doc = " ```"] #[inline] #[track_caller] pub fn copy_to_slice (self , slice : & mut [T]) { assert ! (slice . len () >= Self :: LEN , "slice length must be at least the number of elements") ; unsafe { self . store (slice . as_mut_ptr () . cast ()) } } #[doc = " Reads contiguous elements from `slice`. Elements are read so long as they're in-bounds for"] #[doc = " the `slice`. Otherwise, the default value for the element type is returned."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::Simd;"] #[doc = " let vec: Vec<i32> = vec![10, 11];"] #[doc = ""] #[doc = " let result = Simd::<i32, 4>::load_or_default(&vec);"] #[doc = " assert_eq!(result, Simd::from_array([10, 11, 0, 0]));"] #[doc = " ```"] #[must_use] #[inline] pub fn load_or_default (slice : & [T]) -> Self where T : Default , { Self :: load_or (slice , Default :: default ()) } #[doc = " Reads contiguous elements from `slice`. Elements are read so long as they're in-bounds for"] #[doc = " the `slice`. Otherwise, the corresponding value from `or` is passed through."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::Simd;"] #[doc = " let vec: Vec<i32> = vec![10, 11];"] #[doc = " let or = Simd::from_array([-5, -4, -3, -2]);"] #[doc = ""] #[doc = " let result = Simd::load_or(&vec, or);"] #[doc = " assert_eq!(result, Simd::from_array([10, 11, -3, -2]));"] #[doc = " ```"] #[must_use] #[inline] pub fn load_or (slice : & [T] , or : Self) -> Self { Self :: load_select (slice , Mask :: splat (true) , or) } #[doc = " Reads contiguous elements from `slice`. Each element is read from memory if its"] #[doc = " corresponding element in `enable` is `true`."] #[doc = ""] #[doc = " When the element is disabled or out of bounds for the slice, that memory location"] #[doc = " is not accessed and the corresponding value from `or` is passed through."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, Mask};"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let enable = Mask::from_array([true, true, false, true]);"] #[doc = " let or = Simd::from_array([-5, -4, -3, -2]);"] #[doc = ""] #[doc = " let result = Simd::load_select(&vec, enable, or);"] #[doc = " assert_eq!(result, Simd::from_array([10, 11, -3, 13]));"] #[doc = " ```"] #[must_use] #[inline] pub fn load_select_or_default (slice : & [T] , enable : Mask < < T as SimdElement > :: Mask , N >) -> Self where T : Default , { Self :: load_select (slice , enable , Default :: default ()) } #[doc = " Reads contiguous elements from `slice`. Each element is read from memory if its"] #[doc = " corresponding element in `enable` is `true`."] #[doc = ""] #[doc = " When the element is disabled or out of bounds for the slice, that memory location"] #[doc = " is not accessed and the corresponding value from `or` is passed through."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, Mask};"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let enable = Mask::from_array([true, true, false, true]);"] #[doc = " let or = Simd::from_array([-5, -4, -3, -2]);"] #[doc = ""] #[doc = " let result = Simd::load_select(&vec, enable, or);"] #[doc = " assert_eq!(result, Simd::from_array([10, 11, -3, 13]));"] #[doc = " ```"] #[must_use] #[inline] pub fn load_select (slice : & [T] , mut enable : Mask < < T as SimdElement > :: Mask , N > , or : Self ,) -> Self { enable &= mask_up_to (slice . len ()) ; unsafe { Self :: load_select_ptr (slice . as_ptr () , enable , or) } } #[doc = " Reads contiguous elements from `slice`. Each element is read from memory if its"] #[doc = " corresponding element in `enable` is `true`."] #[doc = ""] #[doc = " When the element is disabled, that memory location is not accessed and the corresponding"] #[doc = " value from `or` is passed through."] #[doc = ""] #[doc = " # Safety"] #[doc = " Enabled loads must not exceed the length of `slice`."] #[must_use] #[inline] pub unsafe fn load_select_unchecked (slice : & [T] , enable : Mask < < T as SimdElement > :: Mask , N > , or : Self ,) -> Self { let ptr = slice . as_ptr () ; unsafe { Self :: load_select_ptr (ptr , enable , or) } } #[doc = " Reads contiguous elements starting at `ptr`. Each element is read from memory if its"] #[doc = " corresponding element in `enable` is `true`."] #[doc = ""] #[doc = " When the element is disabled, that memory location is not accessed and the corresponding"] #[doc = " value from `or` is passed through."] #[doc = ""] #[doc = " # Safety"] #[doc = " Enabled `ptr` elements must be safe to read as if by `std::ptr::read`."] #[must_use] #[inline] pub unsafe fn load_select_ptr (ptr : * const T , enable : Mask < < T as SimdElement > :: Mask , N > , or : Self ,) -> Self { unsafe { core :: intrinsics :: simd :: simd_masked_load (enable . to_int () , ptr , or) } } #[doc = " Reads from potentially discontiguous indices in `slice` to construct a SIMD vector."] #[doc = " If an index is out-of-bounds, the element is instead selected from the `or` vector."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::Simd;"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 5]);  // Note the index that is out-of-bounds"] #[doc = " let alt = Simd::from_array([-5, -4, -3, -2]);"] #[doc = ""] #[doc = " let result = Simd::gather_or(&vec, idxs, alt);"] #[doc = " assert_eq!(result, Simd::from_array([-5, 13, 10, 15]));"] #[doc = " ```"] #[must_use] #[inline] pub fn gather_or (slice : & [T] , idxs : Simd < usize , N > , or : Self) -> Self { Self :: gather_select (slice , Mask :: splat (true) , idxs , or) } #[doc = " Reads from indices in `slice` to construct a SIMD vector."] #[doc = " If an index is out-of-bounds, the element is set to the default given by `T: Default`."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::Simd;"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 5]);  // Note the index that is out-of-bounds"] #[doc = ""] #[doc = " let result = Simd::gather_or_default(&vec, idxs);"] #[doc = " assert_eq!(result, Simd::from_array([0, 13, 10, 15]));"] #[doc = " ```"] #[must_use] #[inline] pub fn gather_or_default (slice : & [T] , idxs : Simd < usize , N >) -> Self where T : Default , { Self :: gather_or (slice , idxs , Self :: splat (T :: default ())) } #[doc = " Reads from indices in `slice` to construct a SIMD vector."] #[doc = " The mask `enable`s all `true` indices and disables all `false` indices."] #[doc = " If an index is disabled or is out-of-bounds, the element is selected from the `or` vector."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::{Simd, Mask};"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 5]); // Includes an out-of-bounds index"] #[doc = " let alt = Simd::from_array([-5, -4, -3, -2]);"] #[doc = " let enable = Mask::from_array([true, true, true, false]); // Includes a masked element"] #[doc = ""] #[doc = " let result = Simd::gather_select(&vec, enable, idxs, alt);"] #[doc = " assert_eq!(result, Simd::from_array([-5, 13, 10, -2]));"] #[doc = " ```"] #[must_use] #[inline] pub fn gather_select (slice : & [T] , enable : Mask < isize , N > , idxs : Simd < usize , N > , or : Self ,) -> Self { let enable : Mask < isize , N > = enable & idxs . simd_lt (Simd :: splat (slice . len ())) ; unsafe { Self :: gather_select_unchecked (slice , enable , idxs , or) } } #[doc = " Reads from indices in `slice` to construct a SIMD vector."] #[doc = " The mask `enable`s all `true` indices and disables all `false` indices."] #[doc = " If an index is disabled, the element is selected from the `or` vector."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Calling this function with an `enable`d out-of-bounds index is *[undefined behavior]*"] #[doc = " even if the resulting value is not used."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, cmp::SimdPartialOrd, Mask};"] #[doc = " let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 5]); // Includes an out-of-bounds index"] #[doc = " let alt = Simd::from_array([-5, -4, -3, -2]);"] #[doc = " let enable = Mask::from_array([true, true, true, false]); // Includes a masked element"] #[doc = " // If this mask was used to gather, it would be unsound. Let's fix that."] #[doc = " let enable = enable & idxs.simd_lt(Simd::splat(vec.len()));"] #[doc = ""] #[doc = " // The out-of-bounds index has been masked, so it's safe to gather now."] #[doc = " let result = unsafe { Simd::gather_select_unchecked(&vec, enable, idxs, alt) };"] #[doc = " assert_eq!(result, Simd::from_array([-5, 13, 10, -2]));"] #[doc = " ```"] #[doc = " [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html"] #[must_use] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn gather_select_unchecked (slice : & [T] , enable : Mask < isize , N > , idxs : Simd < usize , N > , or : Self ,) -> Self { let base_ptr = Simd :: < * const T , N > :: splat (slice . as_ptr ()) ; let ptrs = base_ptr . wrapping_add (idxs) ; unsafe { Self :: gather_select_ptr (ptrs , enable , or) } } #[doc = " Reads elementwise from pointers into a SIMD vector."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Each read must satisfy the same conditions as [`core::ptr::read`]."] #[doc = ""] #[doc = " # Example"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::prelude::*;"] #[doc = " let values = [6, 2, 4, 9];"] #[doc = " let offsets = Simd::from_array([1, 0, 0, 3]);"] #[doc = " let source = Simd::splat(values.as_ptr()).wrapping_add(offsets);"] #[doc = " let gathered = unsafe { Simd::gather_ptr(source) };"] #[doc = " assert_eq!(gathered, Simd::from_array([2, 6, 6, 9]));"] #[doc = " ```"] #[must_use] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn gather_ptr (source : Simd < * const T , N >) -> Self where T : Default , { unsafe { Self :: gather_select_ptr (source , Mask :: splat (true) , Self :: default ()) } } #[doc = " Conditionally read elementwise from pointers into a SIMD vector."] #[doc = " The mask `enable`s all `true` pointers and disables all `false` pointers."] #[doc = " If a pointer is disabled, the element is selected from the `or` vector,"] #[doc = " and no read is performed."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Enabled elements must satisfy the same conditions as [`core::ptr::read`]."] #[doc = ""] #[doc = " # Example"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::prelude::*;"] #[doc = " let values = [6, 2, 4, 9];"] #[doc = " let enable = Mask::from_array([true, true, false, true]);"] #[doc = " let offsets = Simd::from_array([1, 0, 0, 3]);"] #[doc = " let source = Simd::splat(values.as_ptr()).wrapping_add(offsets);"] #[doc = " let gathered = unsafe { Simd::gather_select_ptr(source, enable, Simd::splat(0)) };"] #[doc = " assert_eq!(gathered, Simd::from_array([2, 6, 0, 9]));"] #[doc = " ```"] #[must_use] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn gather_select_ptr (source : Simd < * const T , N > , enable : Mask < isize , N > , or : Self ,) -> Self { unsafe { core :: intrinsics :: simd :: simd_gather (or , source , enable . to_int ()) } } #[doc = " Conditionally write contiguous elements to `slice`. The `enable` mask controls"] #[doc = " which elements are written, as long as they're in-bounds of the `slice`."] #[doc = " If the element is disabled or out of bounds, no memory access to that location"] #[doc = " is made."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, Mask};"] #[doc = " let mut arr = [0i32; 4];"] #[doc = " let write = Simd::from_array([-5, -4, -3, -2]);"] #[doc = " let enable = Mask::from_array([false, true, true, true]);"] #[doc = ""] #[doc = " write.store_select(&mut arr[..3], enable);"] #[doc = " assert_eq!(arr, [0, -4, -3, 0]);"] #[doc = " ```"] #[inline] pub fn store_select (self , slice : & mut [T] , mut enable : Mask < < T as SimdElement > :: Mask , N >) { enable &= mask_up_to (slice . len ()) ; unsafe { self . store_select_ptr (slice . as_mut_ptr () , enable) } } #[doc = " Conditionally write contiguous elements to `slice`. The `enable` mask controls"] #[doc = " which elements are written."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Every enabled element must be in bounds for the `slice`."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, Mask};"] #[doc = " let mut arr = [0i32; 4];"] #[doc = " let write = Simd::from_array([-5, -4, -3, -2]);"] #[doc = " let enable = Mask::from_array([false, true, true, true]);"] #[doc = ""] #[doc = " unsafe { write.store_select_unchecked(&mut arr, enable) };"] #[doc = " assert_eq!(arr, [0, -4, -3, -2]);"] #[doc = " ```"] #[inline] pub unsafe fn store_select_unchecked (self , slice : & mut [T] , enable : Mask < < T as SimdElement > :: Mask , N > ,) { let ptr = slice . as_mut_ptr () ; unsafe { self . store_select_ptr (ptr , enable) } } #[doc = " Conditionally write contiguous elements starting from `ptr`."] #[doc = " The `enable` mask controls which elements are written."] #[doc = " When disabled, the memory location corresponding to that element is not accessed."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Memory addresses for element are calculated [`pointer::wrapping_offset`] and"] #[doc = " each enabled element must satisfy the same conditions as [`core::ptr::write`]."] #[inline] pub unsafe fn store_select_ptr (self , ptr : * mut T , enable : Mask < < T as SimdElement > :: Mask , N >) { unsafe { core :: intrinsics :: simd :: simd_masked_store (enable . to_int () , ptr , self) } } #[doc = " Writes the values in a SIMD vector to potentially discontiguous indices in `slice`."] #[doc = " If an index is out-of-bounds, the write is suppressed without panicking."] #[doc = " If two elements in the scattered vector would write to the same index"] #[doc = " only the last element is guaranteed to actually be written."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # use core::simd::Simd;"] #[doc = " let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 0]); // Note the duplicate index."] #[doc = " let vals = Simd::from_array([-27, 82, -41, 124]);"] #[doc = ""] #[doc = " vals.scatter(&mut vec, idxs); // two logical writes means the last wins."] #[doc = " assert_eq!(vec, vec![124, 11, 12, 82, 14, 15, 16, 17, 18]);"] #[doc = " ```"] #[inline] pub fn scatter (self , slice : & mut [T] , idxs : Simd < usize , N >) { self . scatter_select (slice , Mask :: splat (true) , idxs) } #[doc = " Writes values from a SIMD vector to multiple potentially discontiguous indices in `slice`."] #[doc = " The mask `enable`s all `true` indices and disables all `false` indices."] #[doc = " If an enabled index is out-of-bounds, the write is suppressed without panicking."] #[doc = " If two enabled elements in the scattered vector would write to the same index,"] #[doc = " only the last element is guaranteed to actually be written."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, Mask};"] #[doc = " let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 0]); // Includes an out-of-bounds index"] #[doc = " let vals = Simd::from_array([-27, 82, -41, 124]);"] #[doc = " let enable = Mask::from_array([true, true, true, false]); // Includes a masked element"] #[doc = ""] #[doc = " vals.scatter_select(&mut vec, enable, idxs); // The last write is masked, thus omitted."] #[doc = " assert_eq!(vec, vec![-41, 11, 12, 82, 14, 15, 16, 17, 18]);"] #[doc = " ```"] #[inline] pub fn scatter_select (self , slice : & mut [T] , enable : Mask < isize , N > , idxs : Simd < usize , N >) { let enable : Mask < isize , N > = enable & idxs . simd_lt (Simd :: splat (slice . len ())) ; unsafe { self . scatter_select_unchecked (slice , enable , idxs) } } #[doc = " Writes values from a SIMD vector to multiple potentially discontiguous indices in `slice`."] #[doc = " The mask `enable`s all `true` indices and disables all `false` indices."] #[doc = " If two enabled elements in the scattered vector would write to the same index,"] #[doc = " only the last element is guaranteed to actually be written."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Calling this function with an enabled out-of-bounds index is *[undefined behavior]*,"] #[doc = " and may lead to memory corruption."] #[doc = ""] #[doc = " # Examples"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, cmp::SimdPartialOrd, Mask};"] #[doc = " let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];"] #[doc = " let idxs = Simd::from_array([9, 3, 0, 0]);"] #[doc = " let vals = Simd::from_array([-27, 82, -41, 124]);"] #[doc = " let enable = Mask::from_array([true, true, true, false]); // Masks the final index"] #[doc = " // If this mask was used to scatter, it would be unsound. Let's fix that."] #[doc = " let enable = enable & idxs.simd_lt(Simd::splat(vec.len()));"] #[doc = ""] #[doc = " // We have masked the OOB index, so it's safe to scatter now."] #[doc = " unsafe { vals.scatter_select_unchecked(&mut vec, enable, idxs); }"] #[doc = " // The second write to index 0 was masked, thus omitted."] #[doc = " assert_eq!(vec, vec![-41, 11, 12, 82, 14, 15, 16, 17, 18]);"] #[doc = " ```"] #[doc = " [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html"] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn scatter_select_unchecked (self , slice : & mut [T] , enable : Mask < isize , N > , idxs : Simd < usize , N > ,) { unsafe { let base_ptr = Simd :: < * mut T , N > :: splat (slice . as_mut_ptr ()) ; let ptrs = base_ptr . wrapping_add (idxs) ; self . scatter_select_ptr (ptrs , enable) ; } } #[doc = " Writes pointers elementwise into a SIMD vector."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Each write must satisfy the same conditions as [`core::ptr::write`]."] #[doc = ""] #[doc = " # Example"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Simd, ptr::SimdMutPtr};"] #[doc = " let mut values = [0; 4];"] #[doc = " let offset = Simd::from_array([3, 2, 1, 0]);"] #[doc = " let ptrs = Simd::splat(values.as_mut_ptr()).wrapping_add(offset);"] #[doc = " unsafe { Simd::from_array([6, 3, 5, 7]).scatter_ptr(ptrs); }"] #[doc = " assert_eq!(values, [7, 5, 3, 6]);"] #[doc = " ```"] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn scatter_ptr (self , dest : Simd < * mut T , N >) { unsafe { self . scatter_select_ptr (dest , Mask :: splat (true)) } } #[doc = " Conditionally write pointers elementwise into a SIMD vector."] #[doc = " The mask `enable`s all `true` pointers and disables all `false` pointers."] #[doc = " If a pointer is disabled, the write to its pointee is skipped."] #[doc = ""] #[doc = " # Safety"] #[doc = ""] #[doc = " Enabled pointers must satisfy the same conditions as [`core::ptr::write`]."] #[doc = ""] #[doc = " # Example"] #[doc = " ```"] #[doc = " # #![feature(portable_simd)]"] #[doc = " # #[cfg(feature = \"as_crate\")] use core_simd::simd;"] #[doc = " # #[cfg(not(feature = \"as_crate\"))] use core::simd;"] #[doc = " # use simd::{Mask, Simd, ptr::SimdMutPtr};"] #[doc = " let mut values = [0; 4];"] #[doc = " let offset = Simd::from_array([3, 2, 1, 0]);"] #[doc = " let ptrs = Simd::splat(values.as_mut_ptr()).wrapping_add(offset);"] #[doc = " let enable = Mask::from_array([true, true, false, false]);"] #[doc = " unsafe { Simd::from_array([6, 3, 5, 7]).scatter_select_ptr(ptrs, enable); }"] #[doc = " assert_eq!(values, [0, 0, 3, 6]);"] #[doc = " ```"] #[inline] #[cfg_attr (miri , track_caller)] pub unsafe fn scatter_select_ptr (self , dest : Simd < * mut T , N > , enable : Mask < isize , N >) { unsafe { core :: intrinsics :: simd :: simd_scatter (self , dest , enable . to_int ()) } } } impl < T , const N : usize > Copy for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { } impl < T , const N : usize > Clone for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn clone (& self) -> Self { * self } } impl < T , const N : usize > Default for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + Default , { #[inline] fn default () -> Self { Self :: splat (T :: default ()) } } impl < T , const N : usize > PartialEq for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + PartialEq , { #[inline] fn eq (& self , other : & Self) -> bool { let mask = unsafe { let tfvec : Simd < < T as SimdElement > :: Mask , N > = core :: intrinsics :: simd :: simd_eq (* self , * other) ; Mask :: from_int_unchecked (tfvec) } ; mask . all () } #[allow (clippy :: partialeq_ne_impl)] #[inline] fn ne (& self , other : & Self) -> bool { let mask = unsafe { let tfvec : Simd < < T as SimdElement > :: Mask , N > = core :: intrinsics :: simd :: simd_ne (* self , * other) ; Mask :: from_int_unchecked (tfvec) } ; mask . any () } } #[doc = " Lexicographic order. For the SIMD elementwise minimum and maximum, use simd_min and simd_max instead."] impl < T , const N : usize > PartialOrd for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + PartialOrd , { #[inline] fn partial_cmp (& self , other : & Self) -> Option < core :: cmp :: Ordering > { self . to_array () . partial_cmp (other . as_ref ()) } } impl < T , const N : usize > Eq for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + Eq , { } #[doc = " Lexicographic order. For the SIMD elementwise minimum and maximum, use simd_min and simd_max instead."] impl < T , const N : usize > Ord for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + Ord , { #[inline] fn cmp (& self , other : & Self) -> core :: cmp :: Ordering { self . to_array () . cmp (other . as_ref ()) } } impl < T , const N : usize > core :: hash :: Hash for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement + core :: hash :: Hash , { #[inline] fn hash < H > (& self , state : & mut H) where H : core :: hash :: Hasher , { self . as_array () . hash (state) } } impl < T , const N : usize > AsRef < [T ; N] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn as_ref (& self) -> & [T ; N] { self . as_array () } } impl < T , const N : usize > AsMut < [T ; N] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn as_mut (& mut self) -> & mut [T ; N] { self . as_mut_array () } } impl < T , const N : usize > AsRef < [T] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn as_ref (& self) -> & [T] { self . as_array () } } impl < T , const N : usize > AsMut < [T] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn as_mut (& mut self) -> & mut [T] { self . as_mut_array () } } impl < T , const N : usize > From < [T ; N] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn from (array : [T ; N]) -> Self { Self :: from_array (array) } } impl < T , const N : usize > From < Simd < T , N > > for [T ; N] where LaneCount < N > : SupportedLaneCount , T : SimdElement , { #[inline] fn from (vector : Simd < T , N >) -> Self { vector . to_array () } } impl < T , const N : usize > TryFrom < & [T] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { type Error = core :: array :: TryFromSliceError ; #[inline] fn try_from (slice : & [T]) -> Result < Self , core :: array :: TryFromSliceError > { Ok (Self :: from_array (slice . try_into () ?)) } } impl < T , const N : usize > TryFrom < & mut [T] > for Simd < T , N > where LaneCount < N > : SupportedLaneCount , T : SimdElement , { type Error = core :: array :: TryFromSliceError ; #[inline] fn try_from (slice : & mut [T]) -> Result < Self , core :: array :: TryFromSliceError > { Ok (Self :: from_array (slice . try_into () ?)) } } mod sealed { pub trait Sealed { } } use sealed :: Sealed ; #[doc = " Marker trait for types that may be used as SIMD vector elements."] #[doc = ""] #[doc = " # Safety"] #[doc = " This trait, when implemented, asserts the compiler can monomorphize"] #[doc = " `#[repr(simd)]` structs with the marked type as an element."] #[doc = " Strictly, it is valid to impl if the vector will not be miscompiled."] #[doc = " Practically, it is user-unfriendly to impl it if the vector won't compile,"] #[doc = " even when no soundness guarantees are broken by allowing the user to try."] pub unsafe trait SimdElement : Sealed + Copy { #[doc = " The mask element type corresponding to this element type."] type Mask : MaskElement ; } impl Sealed for u8 { } unsafe impl SimdElement for u8 { type Mask = i8 ; } impl Sealed for u16 { } unsafe impl SimdElement for u16 { type Mask = i16 ; } impl Sealed for u32 { } unsafe impl SimdElement for u32 { type Mask = i32 ; } impl Sealed for u64 { } unsafe impl SimdElement for u64 { type Mask = i64 ; } impl Sealed for usize { } unsafe impl SimdElement for usize { type Mask = isize ; } impl Sealed for i8 { } unsafe impl SimdElement for i8 { type Mask = i8 ; } impl Sealed for i16 { } unsafe impl SimdElement for i16 { type Mask = i16 ; } impl Sealed for i32 { } unsafe impl SimdElement for i32 { type Mask = i32 ; } impl Sealed for i64 { } unsafe impl SimdElement for i64 { type Mask = i64 ; } impl Sealed for isize { } unsafe impl SimdElement for isize { type Mask = isize ; } impl Sealed for f32 { } unsafe impl SimdElement for f32 { type Mask = i32 ; } impl Sealed for f64 { } unsafe impl SimdElement for f64 { type Mask = i64 ; } impl < T > Sealed for * const T { } unsafe impl < T > SimdElement for * const T where T : core :: ptr :: Pointee < Metadata = () > , { type Mask = isize ; } impl < T > Sealed for * mut T { } unsafe impl < T > SimdElement for * mut T where T : core :: ptr :: Pointee < Metadata = () > , { type Mask = isize ; } #[inline] fn lane_indices < const N : usize > () -> Simd < usize , N > where LaneCount < N > : SupportedLaneCount , { # ! [allow (clippy :: needless_range_loop)] let mut index = [0 ; N] ; for i in 0 .. N { index [i] = i ; } Simd :: from_array (index) } #[inline] fn mask_up_to < M , const N : usize > (len : usize) -> Mask < M , N > where LaneCount < N > : SupportedLaneCount , M : MaskElement , { let index = lane_indices :: < N > () ; let max_value : u64 = M :: max_unsigned () ; macro_rules ! case { ($ ty : ty) => { if N < <$ ty >:: MAX as usize && max_value as $ ty as u64 == max_value { return index . cast () . simd_lt (Simd :: splat (len . min (N) as $ ty)) . cast () ; } } ; } case ! (u8) ; case ! (u16) ; case ! (u32) ; case ! (u64) ; index . simd_lt (Simd :: splat (len)) . cast () }
+// Generated by unified_build.rs
+use crate::*;
+
+use crate::simd::{
+    LaneCount, Mask, MaskElement, SupportedLaneCount, Swizzle,
+    cmp::SimdPartialOrd,
+    num::SimdUint,
+    ptr::{SimdConstPtr, SimdMutPtr},
+};
+
+/// A SIMD vector with the shape of `[T; N]` but the operations of `T`.
+///
+/// `Simd<T, N>` supports the operators (+, *, etc.) that `T` does in "elementwise" fashion.
+/// These take the element at each index from the left-hand side and right-hand side,
+/// perform the operation, then return the result in the same index in a vector of equal size.
+/// However, `Simd` differs from normal iteration and normal arrays:
+/// - `Simd<T, N>` executes `N` operations in a single step with no `break`s
+/// - `Simd<T, N>` can have an alignment greater than `T`, for better mechanical sympathy
+///
+/// By always imposing these constraints on `Simd`, it is easier to compile elementwise operations
+/// into machine instructions that can themselves be executed in parallel.
+///
+/// ```rust
+/// # #![feature(portable_simd)]
+/// # use core::simd::{Simd};
+/// # use core::array;
+/// let a: [i32; 4] = [-2, 0, 2, 4];
+/// let b = [10, 9, 8, 7];
+/// let sum = array::from_fn(|i| a[i] + b[i]);
+/// let prod = array::from_fn(|i| a[i] * b[i]);
+///
+/// // `Simd<T, N>` implements `From<[T; N]>`
+/// let (v, w) = (Simd::from(a), Simd::from(b));
+/// // Which means arrays implement `Into<Simd<T, N>>`.
+/// assert_eq!(v + w, sum.into());
+/// assert_eq!(v * w, prod.into());
+/// ```
+///
+///
+/// `Simd` with integer elements treats operators as wrapping, as if `T` was [`Wrapping<T>`].
+/// Thus, `Simd` does not implement `wrapping_add`, because that is the default behavior.
+/// This means there is no warning on overflows, even in "debug" builds.
+/// For most applications where `Simd` is appropriate, it is "not a bug" to wrap,
+/// and even "debug builds" are unlikely to tolerate the loss of performance.
+/// You may want to consider using explicitly checked arithmetic if such is required.
+/// Division by zero on integers still causes a panic, so
+/// you may want to consider using `f32` or `f64` if that is unacceptable.
+///
+/// [`Wrapping<T>`]: core::num::Wrapping
+///
+/// # Layout
+/// `Simd<T, N>` has a layout similar to `[T; N]` (identical "shapes"), with a greater alignment.
+/// `[T; N]` is aligned to `T`, but `Simd<T, N>` will have an alignment based on both `T` and `N`.
+/// Thus it is sound to [`transmute`] `Simd<T, N>` to `[T; N]` and should optimize to "zero cost",
+/// but the reverse transmutation may require a copy the compiler cannot simply elide.
+///
+/// # ABI "Features"
+/// Due to Rust's safety guarantees, `Simd<T, N>` is currently passed and returned via memory,
+/// not SIMD registers, except as an optimization. Using `#[inline]` on functions that accept
+/// `Simd<T, N>` or return it is recommended, at the cost of code generation time, as
+/// inlining SIMD-using functions can omit a large function prolog or epilog and thus
+/// improve both speed and code size. The need for this may be corrected in the future.
+///
+/// Using `#[inline(always)]` still requires additional care.
+///
+/// # Safe SIMD with Unsafe Rust
+///
+/// Operations with `Simd` are typically safe, but there are many reasons to want to combine SIMD with `unsafe` code.
+/// Care must be taken to respect differences between `Simd` and other types it may be transformed into or derived from.
+/// In particular, the layout of `Simd<T, N>` may be similar to `[T; N]`, and may allow some transmutations,
+/// but references to `[T; N]` are not interchangeable with those to `Simd<T, N>`.
+/// Thus, when using `unsafe` Rust to read and write `Simd<T, N>` through [raw pointers], it is a good idea to first try with
+/// [`read_unaligned`] and [`write_unaligned`]. This is because:
+/// - [`read`] and [`write`] require full alignment (in this case, `Simd<T, N>`'s alignment)
+/// - `Simd<T, N>` is often read from or written to [`[T]`](slice) and other types aligned to `T`
+/// - combining these actions violates the `unsafe` contract and explodes the program into
+///   a puff of **undefined behavior**
+/// - the compiler can implicitly adjust layouts to make unaligned reads or writes fully aligned
+///   if it sees the optimization
+/// - most contemporary processors with "aligned" and "unaligned" read and write instructions
+///   exhibit no performance difference if the "unaligned" variant is aligned at runtime
+///
+/// Less obligations mean unaligned reads and writes are less likely to make the program unsound,
+/// and may be just as fast as stricter alternatives.
+/// When trying to guarantee alignment, [`[T]::as_simd`][as_simd] is an option for
+/// converting `[T]` to `[Simd<T, N>]`, and allows soundly operating on an aligned SIMD body,
+/// but it may cost more time when handling the scalar head and tail.
+/// If these are not enough, it is most ideal to design data structures to be already aligned
+/// to `align_of::<Simd<T, N>>()` before using `unsafe` Rust to read or write.
+/// Other ways to compensate for these facts, like materializing `Simd` to or from an array first,
+/// are handled by safe methods like [`Simd::from_array`] and [`Simd::from_slice`].
+///
+/// [`transmute`]: core::mem::transmute
+/// [raw pointers]: pointer
+/// [`read_unaligned`]: pointer::read_unaligned
+/// [`write_unaligned`]: pointer::write_unaligned
+/// [`read`]: pointer::read
+/// [`write`]: pointer::write
+/// [as_simd]: slice::as_simd
+//
+// NOTE: Accessing the inner array directly in any way (e.g. by using the `.0` field syntax) or
+// directly constructing an instance of the type (i.e. `let vector = Simd(array)`) should be
+// avoided, as it will likely become illegal on `#[repr(simd)]` structs in the future. It also
+// causes rustc to emit illegal LLVM IR in some cases.
+#[repr(simd, packed)]
+pub struct Simd<T, const N: usize>([T; N])
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement;
+
+impl<T, const N: usize> Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    /// Number of elements in this vector.
+    pub const LEN: usize = N;
+
+    /// Returns the number of elements in this SIMD vector.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::u32x4;
+    /// let v = u32x4::splat(0);
+    /// assert_eq!(v.len(), 4);
+    /// ```
+    #[inline]
+    #[allow(clippy::len_without_is_empty)]
+    pub const fn len(&self) -> usize {
+        Self::LEN
+    }
+
+    /// Constructs a new SIMD vector with all elements set to the given value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::u32x4;
+    /// let v = u32x4::splat(8);
+    /// assert_eq!(v.as_array(), &[8, 8, 8, 8]);
+    /// ```
+    #[inline]
+    #[rustc_const_unstable(feature = "portable_simd", issue = "86656")]
+    pub const fn splat(value: T) -> Self {
+        const fn splat_const<T, const N: usize>(value: T) -> Simd<T, N>
+        where
+            T: SimdElement,
+            LaneCount<N>: SupportedLaneCount,
+        {
+            Simd::from_array([value; N])
+        }
+
+        fn splat_rt<T, const N: usize>(value: T) -> Simd<T, N>
+        where
+            T: SimdElement,
+            LaneCount<N>: SupportedLaneCount,
+        {
+            // This is preferred over `[value; N]`, since it's explicitly a splat:
+            // https://github.com/rust-lang/rust/issues/97804
+            struct Splat;
+            impl<const N: usize> Swizzle<N> for Splat {
+                const INDEX: [usize; N] = [0; N];
+            }
+
+            Splat::swizzle::<T, 1>(Simd::<T, 1>::from([value]))
+        }
+
+        core::intrinsics::const_eval_select((value,), splat_const, splat_rt)
+    }
+
+    /// Returns an array reference containing the entire SIMD vector.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::{Simd, u64x4};
+    /// let v: u64x4 = Simd::from_array([0, 1, 2, 3]);
+    /// assert_eq!(v.as_array(), &[0, 1, 2, 3]);
+    /// ```
+    #[inline]
+    pub const fn as_array(&self) -> &[T; N] {
+        // SAFETY: `Simd<T, N>` is just an overaligned `[T; N]` with
+        // potential padding at the end, so pointer casting to a
+        // `&[T; N]` is safe.
+        //
+        // NOTE: This deliberately doesn't just use `&self.0`, see the comment
+        // on the struct definition for details.
+        unsafe { &*(self as *const Self as *const [T; N]) }
+    }
+
+    /// Returns a mutable array reference containing the entire SIMD vector.
+    #[inline]
+    pub fn as_mut_array(&mut self) -> &mut [T; N] {
+        // SAFETY: `Simd<T, N>` is just an overaligned `[T; N]` with
+        // potential padding at the end, so pointer casting to a
+        // `&mut [T; N]` is safe.
+        //
+        // NOTE: This deliberately doesn't just use `&mut self.0`, see the comment
+        // on the struct definition for details.
+        unsafe { &mut *(self as *mut Self as *mut [T; N]) }
+    }
+
+    /// Loads a vector from an array of `T`.
+    ///
+    /// This function is necessary since `repr(simd)` has padding for non-power-of-2 vectors (at the time of writing).
+    /// With padding, `read_unaligned` will read past the end of an array of N elements.
+    ///
+    /// # Safety
+    /// Reading `ptr` must be safe, as if by `<*const [T; N]>::read`.
+    #[inline]
+    const unsafe fn load(ptr: *const [T; N]) -> Self {
+        // There are potentially simpler ways to write this function, but this should result in
+        // LLVM `load <N x T>`
+
+        let mut tmp = core::mem::MaybeUninit::<Self>::uninit();
+        // SAFETY: `Simd<T, N>` always contains `N` elements of type `T`.  It may have padding
+        // which does not need to be initialized.  The safety of reading `ptr` is ensured by the
+        // caller.
+        unsafe {
+            core::ptr::copy_nonoverlapping(ptr, tmp.as_mut_ptr().cast(), 1);
+            tmp.assume_init()
+        }
+    }
+
+    /// Store a vector to an array of `T`.
+    ///
+    /// See `load` as to why this function is necessary.
+    ///
+    /// # Safety
+    /// Writing to `ptr` must be safe, as if by `<*mut [T; N]>::write`.
+    #[inline]
+    const unsafe fn store(self, ptr: *mut [T; N]) {
+        // There are potentially simpler ways to write this function, but this should result in
+        // LLVM `store <N x T>`
+
+        // Creating a temporary helps LLVM turn the memcpy into a store.
+        let tmp = self;
+        // SAFETY: `Simd<T, N>` always contains `N` elements of type `T`.  The safety of writing
+        // `ptr` is ensured by the caller.
+        unsafe { core::ptr::copy_nonoverlapping(tmp.as_array(), ptr, 1) }
+    }
+
+    /// Converts an array to a SIMD vector.
+    #[inline]
+    pub const fn from_array(array: [T; N]) -> Self {
+        // SAFETY: `&array` is safe to read.
+        //
+        // FIXME: We currently use a pointer load instead of `transmute_copy` because `repr(simd)`
+        // results in padding for non-power-of-2 vectors (so vectors are larger than arrays).
+        //
+        // NOTE: This deliberately doesn't just use `Self(array)`, see the comment
+        // on the struct definition for details.
+        unsafe { Self::load(&array) }
+    }
+
+    /// Converts a SIMD vector to an array.
+    #[inline]
+    pub const fn to_array(self) -> [T; N] {
+        let mut tmp = core::mem::MaybeUninit::uninit();
+        // SAFETY: writing to `tmp` is safe and initializes it.
+        //
+        // FIXME: We currently use a pointer store instead of `transmute_copy` because `repr(simd)`
+        // results in padding for non-power-of-2 vectors (so vectors are larger than arrays).
+        //
+        // NOTE: This deliberately doesn't just use `self.0`, see the comment
+        // on the struct definition for details.
+        unsafe {
+            self.store(tmp.as_mut_ptr());
+            tmp.assume_init()
+        }
+    }
+
+    /// Converts a slice to a SIMD vector containing `slice[..N]`.
+    ///
+    /// # Panics
+    ///
+    /// Panics if the slice's length is less than the vector's `Simd::N`.
+    /// Use `load_or_default` for an alternative that does not panic.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::u32x4;
+    /// let source = vec![1, 2, 3, 4, 5, 6];
+    /// let v = u32x4::from_slice(&source);
+    /// assert_eq!(v.as_array(), &[1, 2, 3, 4]);
+    /// ```
+    #[must_use]
+    #[inline]
+    #[track_caller]
+    pub const fn from_slice(slice: &[T]) -> Self {
+        assert!(
+            slice.len() >= Self::LEN,
+            "slice length must be at least the number of elements"
+        );
+        // SAFETY: We just checked that the slice contains
+        // at least `N` elements.
+        unsafe { Self::load(slice.as_ptr().cast()) }
+    }
+
+    /// Writes a SIMD vector to the first `N` elements of a slice.
+    ///
+    /// # Panics
+    ///
+    /// Panics if the slice's length is less than the vector's `Simd::N`.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::u32x4;
+    /// let mut dest = vec![0; 6];
+    /// let v = u32x4::from_array([1, 2, 3, 4]);
+    /// v.copy_to_slice(&mut dest);
+    /// assert_eq!(&dest, &[1, 2, 3, 4, 0, 0]);
+    /// ```
+    #[inline]
+    #[track_caller]
+    pub fn copy_to_slice(self, slice: &mut [T]) {
+        assert!(
+            slice.len() >= Self::LEN,
+            "slice length must be at least the number of elements"
+        );
+        // SAFETY: We just checked that the slice contains
+        // at least `N` elements.
+        unsafe { self.store(slice.as_mut_ptr().cast()) }
+    }
+
+    /// Reads contiguous elements from `slice`. Elements are read so long as they're in-bounds for
+    /// the `slice`. Otherwise, the default value for the element type is returned.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::Simd;
+    /// let vec: Vec<i32> = vec![10, 11];
+    ///
+    /// let result = Simd::<i32, 4>::load_or_default(&vec);
+    /// assert_eq!(result, Simd::from_array([10, 11, 0, 0]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn load_or_default(slice: &[T]) -> Self
+    where
+        T: Default,
+    {
+        Self::load_or(slice, Default::default())
+    }
+
+    /// Reads contiguous elements from `slice`. Elements are read so long as they're in-bounds for
+    /// the `slice`. Otherwise, the corresponding value from `or` is passed through.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::Simd;
+    /// let vec: Vec<i32> = vec![10, 11];
+    /// let or = Simd::from_array([-5, -4, -3, -2]);
+    ///
+    /// let result = Simd::load_or(&vec, or);
+    /// assert_eq!(result, Simd::from_array([10, 11, -3, -2]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn load_or(slice: &[T], or: Self) -> Self {
+        Self::load_select(slice, Mask::splat(true), or)
+    }
+
+    /// Reads contiguous elements from `slice`. Each element is read from memory if its
+    /// corresponding element in `enable` is `true`.
+    ///
+    /// When the element is disabled or out of bounds for the slice, that memory location
+    /// is not accessed and the corresponding value from `or` is passed through.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, Mask};
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let enable = Mask::from_array([true, true, false, true]);
+    /// let or = Simd::from_array([-5, -4, -3, -2]);
+    ///
+    /// let result = Simd::load_select(&vec, enable, or);
+    /// assert_eq!(result, Simd::from_array([10, 11, -3, 13]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn load_select_or_default(slice: &[T], enable: Mask<<T as SimdElement>::Mask, N>) -> Self
+    where
+        T: Default,
+    {
+        Self::load_select(slice, enable, Default::default())
+    }
+
+    /// Reads contiguous elements from `slice`. Each element is read from memory if its
+    /// corresponding element in `enable` is `true`.
+    ///
+    /// When the element is disabled or out of bounds for the slice, that memory location
+    /// is not accessed and the corresponding value from `or` is passed through.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, Mask};
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let enable = Mask::from_array([true, true, false, true]);
+    /// let or = Simd::from_array([-5, -4, -3, -2]);
+    ///
+    /// let result = Simd::load_select(&vec, enable, or);
+    /// assert_eq!(result, Simd::from_array([10, 11, -3, 13]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn load_select(
+        slice: &[T],
+        mut enable: Mask<<T as SimdElement>::Mask, N>,
+        or: Self,
+    ) -> Self {
+        enable &= mask_up_to(slice.len());
+        // SAFETY: We performed the bounds check by updating the mask. &[T] is properly aligned to
+        // the element.
+        unsafe { Self::load_select_ptr(slice.as_ptr(), enable, or) }
+    }
+
+    /// Reads contiguous elements from `slice`. Each element is read from memory if its
+    /// corresponding element in `enable` is `true`.
+    ///
+    /// When the element is disabled, that memory location is not accessed and the corresponding
+    /// value from `or` is passed through.
+    ///
+    /// # Safety
+    /// Enabled loads must not exceed the length of `slice`.
+    #[must_use]
+    #[inline]
+    pub unsafe fn load_select_unchecked(
+        slice: &[T],
+        enable: Mask<<T as SimdElement>::Mask, N>,
+        or: Self,
+    ) -> Self {
+        let ptr = slice.as_ptr();
+        // SAFETY: The safety of reading elements from `slice` is ensured by the caller.
+        unsafe { Self::load_select_ptr(ptr, enable, or) }
+    }
+
+    /// Reads contiguous elements starting at `ptr`. Each element is read from memory if its
+    /// corresponding element in `enable` is `true`.
+    ///
+    /// When the element is disabled, that memory location is not accessed and the corresponding
+    /// value from `or` is passed through.
+    ///
+    /// # Safety
+    /// Enabled `ptr` elements must be safe to read as if by `std::ptr::read`.
+    #[must_use]
+    #[inline]
+    pub unsafe fn load_select_ptr(
+        ptr: *const T,
+        enable: Mask<<T as SimdElement>::Mask, N>,
+        or: Self,
+    ) -> Self {
+        // SAFETY: The safety of reading elements through `ptr` is ensured by the caller.
+        unsafe { core::intrinsics::simd::simd_masked_load(enable.to_int(), ptr, or) }
+    }
+
+    /// Reads from potentially discontiguous indices in `slice` to construct a SIMD vector.
+    /// If an index is out-of-bounds, the element is instead selected from the `or` vector.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::Simd;
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 5]);  // Note the index that is out-of-bounds
+    /// let alt = Simd::from_array([-5, -4, -3, -2]);
+    ///
+    /// let result = Simd::gather_or(&vec, idxs, alt);
+    /// assert_eq!(result, Simd::from_array([-5, 13, 10, 15]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn gather_or(slice: &[T], idxs: Simd<usize, N>, or: Self) -> Self {
+        Self::gather_select(slice, Mask::splat(true), idxs, or)
+    }
+
+    /// Reads from indices in `slice` to construct a SIMD vector.
+    /// If an index is out-of-bounds, the element is set to the default given by `T: Default`.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::Simd;
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 5]);  // Note the index that is out-of-bounds
+    ///
+    /// let result = Simd::gather_or_default(&vec, idxs);
+    /// assert_eq!(result, Simd::from_array([0, 13, 10, 15]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn gather_or_default(slice: &[T], idxs: Simd<usize, N>) -> Self
+    where
+        T: Default,
+    {
+        Self::gather_or(slice, idxs, Self::splat(T::default()))
+    }
+
+    /// Reads from indices in `slice` to construct a SIMD vector.
+    /// The mask `enable`s all `true` indices and disables all `false` indices.
+    /// If an index is disabled or is out-of-bounds, the element is selected from the `or` vector.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::{Simd, Mask};
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 5]); // Includes an out-of-bounds index
+    /// let alt = Simd::from_array([-5, -4, -3, -2]);
+    /// let enable = Mask::from_array([true, true, true, false]); // Includes a masked element
+    ///
+    /// let result = Simd::gather_select(&vec, enable, idxs, alt);
+    /// assert_eq!(result, Simd::from_array([-5, 13, 10, -2]));
+    /// ```
+    #[must_use]
+    #[inline]
+    pub fn gather_select(
+        slice: &[T],
+        enable: Mask<isize, N>,
+        idxs: Simd<usize, N>,
+        or: Self,
+    ) -> Self {
+        let enable: Mask<isize, N> = enable & idxs.simd_lt(Simd::splat(slice.len()));
+        // Safety: We have masked-off out-of-bounds indices.
+        unsafe { Self::gather_select_unchecked(slice, enable, idxs, or) }
+    }
+
+    /// Reads from indices in `slice` to construct a SIMD vector.
+    /// The mask `enable`s all `true` indices and disables all `false` indices.
+    /// If an index is disabled, the element is selected from the `or` vector.
+    ///
+    /// # Safety
+    ///
+    /// Calling this function with an `enable`d out-of-bounds index is *[undefined behavior]*
+    /// even if the resulting value is not used.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, cmp::SimdPartialOrd, Mask};
+    /// let vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 5]); // Includes an out-of-bounds index
+    /// let alt = Simd::from_array([-5, -4, -3, -2]);
+    /// let enable = Mask::from_array([true, true, true, false]); // Includes a masked element
+    /// // If this mask was used to gather, it would be unsound. Let's fix that.
+    /// let enable = enable & idxs.simd_lt(Simd::splat(vec.len()));
+    ///
+    /// // The out-of-bounds index has been masked, so it's safe to gather now.
+    /// let result = unsafe { Simd::gather_select_unchecked(&vec, enable, idxs, alt) };
+    /// assert_eq!(result, Simd::from_array([-5, 13, 10, -2]));
+    /// ```
+    /// [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html
+    #[must_use]
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn gather_select_unchecked(
+        slice: &[T],
+        enable: Mask<isize, N>,
+        idxs: Simd<usize, N>,
+        or: Self,
+    ) -> Self {
+        let base_ptr = Simd::<*const T, N>::splat(slice.as_ptr());
+        // Ferris forgive me, I have done pointer arithmetic here.
+        let ptrs = base_ptr.wrapping_add(idxs);
+        // Safety: The caller is responsible for determining the indices are okay to read
+        unsafe { Self::gather_select_ptr(ptrs, enable, or) }
+    }
+
+    /// Reads elementwise from pointers into a SIMD vector.
+    ///
+    /// # Safety
+    ///
+    /// Each read must satisfy the same conditions as [`core::ptr::read`].
+    ///
+    /// # Example
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::prelude::*;
+    /// let values = [6, 2, 4, 9];
+    /// let offsets = Simd::from_array([1, 0, 0, 3]);
+    /// let source = Simd::splat(values.as_ptr()).wrapping_add(offsets);
+    /// let gathered = unsafe { Simd::gather_ptr(source) };
+    /// assert_eq!(gathered, Simd::from_array([2, 6, 6, 9]));
+    /// ```
+    #[must_use]
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn gather_ptr(source: Simd<*const T, N>) -> Self
+    where
+        T: Default,
+    {
+        // TODO: add an intrinsic that doesn't use a passthru vector, and remove the T: Default bound
+        // Safety: The caller is responsible for upholding all invariants
+        unsafe { Self::gather_select_ptr(source, Mask::splat(true), Self::default()) }
+    }
+
+    /// Conditionally read elementwise from pointers into a SIMD vector.
+    /// The mask `enable`s all `true` pointers and disables all `false` pointers.
+    /// If a pointer is disabled, the element is selected from the `or` vector,
+    /// and no read is performed.
+    ///
+    /// # Safety
+    ///
+    /// Enabled elements must satisfy the same conditions as [`core::ptr::read`].
+    ///
+    /// # Example
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::prelude::*;
+    /// let values = [6, 2, 4, 9];
+    /// let enable = Mask::from_array([true, true, false, true]);
+    /// let offsets = Simd::from_array([1, 0, 0, 3]);
+    /// let source = Simd::splat(values.as_ptr()).wrapping_add(offsets);
+    /// let gathered = unsafe { Simd::gather_select_ptr(source, enable, Simd::splat(0)) };
+    /// assert_eq!(gathered, Simd::from_array([2, 6, 0, 9]));
+    /// ```
+    #[must_use]
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn gather_select_ptr(
+        source: Simd<*const T, N>,
+        enable: Mask<isize, N>,
+        or: Self,
+    ) -> Self {
+        // Safety: The caller is responsible for upholding all invariants
+        unsafe { core::intrinsics::simd::simd_gather(or, source, enable.to_int()) }
+    }
+
+    /// Conditionally write contiguous elements to `slice`. The `enable` mask controls
+    /// which elements are written, as long as they're in-bounds of the `slice`.
+    /// If the element is disabled or out of bounds, no memory access to that location
+    /// is made.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, Mask};
+    /// let mut arr = [0i32; 4];
+    /// let write = Simd::from_array([-5, -4, -3, -2]);
+    /// let enable = Mask::from_array([false, true, true, true]);
+    ///
+    /// write.store_select(&mut arr[..3], enable);
+    /// assert_eq!(arr, [0, -4, -3, 0]);
+    /// ```
+    #[inline]
+    pub fn store_select(self, slice: &mut [T], mut enable: Mask<<T as SimdElement>::Mask, N>) {
+        enable &= mask_up_to(slice.len());
+        // SAFETY: We performed the bounds check by updating the mask. &[T] is properly aligned to
+        // the element.
+        unsafe { self.store_select_ptr(slice.as_mut_ptr(), enable) }
+    }
+
+    /// Conditionally write contiguous elements to `slice`. The `enable` mask controls
+    /// which elements are written.
+    ///
+    /// # Safety
+    ///
+    /// Every enabled element must be in bounds for the `slice`.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, Mask};
+    /// let mut arr = [0i32; 4];
+    /// let write = Simd::from_array([-5, -4, -3, -2]);
+    /// let enable = Mask::from_array([false, true, true, true]);
+    ///
+    /// unsafe { write.store_select_unchecked(&mut arr, enable) };
+    /// assert_eq!(arr, [0, -4, -3, -2]);
+    /// ```
+    #[inline]
+    pub unsafe fn store_select_unchecked(
+        self,
+        slice: &mut [T],
+        enable: Mask<<T as SimdElement>::Mask, N>,
+    ) {
+        let ptr = slice.as_mut_ptr();
+        // SAFETY: The safety of writing elements in `slice` is ensured by the caller.
+        unsafe { self.store_select_ptr(ptr, enable) }
+    }
+
+    /// Conditionally write contiguous elements starting from `ptr`.
+    /// The `enable` mask controls which elements are written.
+    /// When disabled, the memory location corresponding to that element is not accessed.
+    ///
+    /// # Safety
+    ///
+    /// Memory addresses for element are calculated [`pointer::wrapping_offset`] and
+    /// each enabled element must satisfy the same conditions as [`core::ptr::write`].
+    #[inline]
+    pub unsafe fn store_select_ptr(self, ptr: *mut T, enable: Mask<<T as SimdElement>::Mask, N>) {
+        // SAFETY: The safety of writing elements through `ptr` is ensured by the caller.
+        unsafe { core::intrinsics::simd::simd_masked_store(enable.to_int(), ptr, self) }
+    }
+
+    /// Writes the values in a SIMD vector to potentially discontiguous indices in `slice`.
+    /// If an index is out-of-bounds, the write is suppressed without panicking.
+    /// If two elements in the scattered vector would write to the same index
+    /// only the last element is guaranteed to actually be written.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # use core::simd::Simd;
+    /// let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 0]); // Note the duplicate index.
+    /// let vals = Simd::from_array([-27, 82, -41, 124]);
+    ///
+    /// vals.scatter(&mut vec, idxs); // two logical writes means the last wins.
+    /// assert_eq!(vec, vec![124, 11, 12, 82, 14, 15, 16, 17, 18]);
+    /// ```
+    #[inline]
+    pub fn scatter(self, slice: &mut [T], idxs: Simd<usize, N>) {
+        self.scatter_select(slice, Mask::splat(true), idxs)
+    }
+
+    /// Writes values from a SIMD vector to multiple potentially discontiguous indices in `slice`.
+    /// The mask `enable`s all `true` indices and disables all `false` indices.
+    /// If an enabled index is out-of-bounds, the write is suppressed without panicking.
+    /// If two enabled elements in the scattered vector would write to the same index,
+    /// only the last element is guaranteed to actually be written.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, Mask};
+    /// let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 0]); // Includes an out-of-bounds index
+    /// let vals = Simd::from_array([-27, 82, -41, 124]);
+    /// let enable = Mask::from_array([true, true, true, false]); // Includes a masked element
+    ///
+    /// vals.scatter_select(&mut vec, enable, idxs); // The last write is masked, thus omitted.
+    /// assert_eq!(vec, vec![-41, 11, 12, 82, 14, 15, 16, 17, 18]);
+    /// ```
+    #[inline]
+    pub fn scatter_select(self, slice: &mut [T], enable: Mask<isize, N>, idxs: Simd<usize, N>) {
+        let enable: Mask<isize, N> = enable & idxs.simd_lt(Simd::splat(slice.len()));
+        // Safety: We have masked-off out-of-bounds indices.
+        unsafe { self.scatter_select_unchecked(slice, enable, idxs) }
+    }
+
+    /// Writes values from a SIMD vector to multiple potentially discontiguous indices in `slice`.
+    /// The mask `enable`s all `true` indices and disables all `false` indices.
+    /// If two enabled elements in the scattered vector would write to the same index,
+    /// only the last element is guaranteed to actually be written.
+    ///
+    /// # Safety
+    ///
+    /// Calling this function with an enabled out-of-bounds index is *[undefined behavior]*,
+    /// and may lead to memory corruption.
+    ///
+    /// # Examples
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, cmp::SimdPartialOrd, Mask};
+    /// let mut vec: Vec<i32> = vec![10, 11, 12, 13, 14, 15, 16, 17, 18];
+    /// let idxs = Simd::from_array([9, 3, 0, 0]);
+    /// let vals = Simd::from_array([-27, 82, -41, 124]);
+    /// let enable = Mask::from_array([true, true, true, false]); // Masks the final index
+    /// // If this mask was used to scatter, it would be unsound. Let's fix that.
+    /// let enable = enable & idxs.simd_lt(Simd::splat(vec.len()));
+    ///
+    /// // We have masked the OOB index, so it's safe to scatter now.
+    /// unsafe { vals.scatter_select_unchecked(&mut vec, enable, idxs); }
+    /// // The second write to index 0 was masked, thus omitted.
+    /// assert_eq!(vec, vec![-41, 11, 12, 82, 14, 15, 16, 17, 18]);
+    /// ```
+    /// [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn scatter_select_unchecked(
+        self,
+        slice: &mut [T],
+        enable: Mask<isize, N>,
+        idxs: Simd<usize, N>,
+    ) {
+        // Safety: This block works with *mut T derived from &mut 'a [T],
+        // which means it is delicate in Rust's borrowing model, circa 2021:
+        // &mut 'a [T] asserts uniqueness, so deriving &'a [T] invalidates live *mut Ts!
+        // Even though this block is largely safe methods, it must be exactly this way
+        // to prevent invalidating the raw ptrs while they're live.
+        // Thus, entering this block requires all values to use being already ready:
+        // 0. idxs we want to write to, which are used to construct the mask.
+        // 1. enable, which depends on an initial &'a [T] and the idxs.
+        // 2. actual values to scatter (self).
+        // 3. &mut [T] which will become our base ptr.
+        unsafe {
+            // Now Entering ☢️ *mut T Zone
+            let base_ptr = Simd::<*mut T, N>::splat(slice.as_mut_ptr());
+            // Ferris forgive me, I have done pointer arithmetic here.
+            let ptrs = base_ptr.wrapping_add(idxs);
+            // The ptrs have been bounds-masked to prevent memory-unsafe writes insha'allah
+            self.scatter_select_ptr(ptrs, enable);
+            // Cleared ☢️ *mut T Zone
+        }
+    }
+
+    /// Writes pointers elementwise into a SIMD vector.
+    ///
+    /// # Safety
+    ///
+    /// Each write must satisfy the same conditions as [`core::ptr::write`].
+    ///
+    /// # Example
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Simd, ptr::SimdMutPtr};
+    /// let mut values = [0; 4];
+    /// let offset = Simd::from_array([3, 2, 1, 0]);
+    /// let ptrs = Simd::splat(values.as_mut_ptr()).wrapping_add(offset);
+    /// unsafe { Simd::from_array([6, 3, 5, 7]).scatter_ptr(ptrs); }
+    /// assert_eq!(values, [7, 5, 3, 6]);
+    /// ```
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn scatter_ptr(self, dest: Simd<*mut T, N>) {
+        // Safety: The caller is responsible for upholding all invariants
+        unsafe { self.scatter_select_ptr(dest, Mask::splat(true)) }
+    }
+
+    /// Conditionally write pointers elementwise into a SIMD vector.
+    /// The mask `enable`s all `true` pointers and disables all `false` pointers.
+    /// If a pointer is disabled, the write to its pointee is skipped.
+    ///
+    /// # Safety
+    ///
+    /// Enabled pointers must satisfy the same conditions as [`core::ptr::write`].
+    ///
+    /// # Example
+    /// ```
+    /// # #![feature(portable_simd)]
+    /// # #[cfg(feature = "as_crate")] use core_simd::simd;
+    /// # #[cfg(not(feature = "as_crate"))] use core::simd;
+    /// # use simd::{Mask, Simd, ptr::SimdMutPtr};
+    /// let mut values = [0; 4];
+    /// let offset = Simd::from_array([3, 2, 1, 0]);
+    /// let ptrs = Simd::splat(values.as_mut_ptr()).wrapping_add(offset);
+    /// let enable = Mask::from_array([true, true, false, false]);
+    /// unsafe { Simd::from_array([6, 3, 5, 7]).scatter_select_ptr(ptrs, enable); }
+    /// assert_eq!(values, [0, 0, 3, 6]);
+    /// ```
+    #[inline]
+    #[cfg_attr(miri, track_caller)] // even without panics, this helps for Miri backtraces
+    pub unsafe fn scatter_select_ptr(self, dest: Simd<*mut T, N>, enable: Mask<isize, N>) {
+        // Safety: The caller is responsible for upholding all invariants
+        unsafe { core::intrinsics::simd::simd_scatter(self, dest, enable.to_int()) }
+    }
+}
+
+impl<T, const N: usize> Copy for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+}
+
+impl<T, const N: usize> Clone for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<T, const N: usize> Default for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + Default,
+{
+    #[inline]
+    fn default() -> Self {
+        Self::splat(T::default())
+    }
+}
+
+impl<T, const N: usize> PartialEq for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + PartialEq,
+{
+    #[inline]
+    fn eq(&self, other: &Self) -> bool {
+        // Safety: All SIMD vectors are SimdPartialEq, and the comparison produces a valid mask.
+        let mask = unsafe {
+            let tfvec: Simd<<T as SimdElement>::Mask, N> =
+                core::intrinsics::simd::simd_eq(*self, *other);
+            Mask::from_int_unchecked(tfvec)
+        };
+
+        // Two vectors are equal if all elements are equal when compared elementwise
+        mask.all()
+    }
+
+    #[allow(clippy::partialeq_ne_impl)]
+    #[inline]
+    fn ne(&self, other: &Self) -> bool {
+        // Safety: All SIMD vectors are SimdPartialEq, and the comparison produces a valid mask.
+        let mask = unsafe {
+            let tfvec: Simd<<T as SimdElement>::Mask, N> =
+                core::intrinsics::simd::simd_ne(*self, *other);
+            Mask::from_int_unchecked(tfvec)
+        };
+
+        // Two vectors are non-equal if any elements are non-equal when compared elementwise
+        mask.any()
+    }
+}
+
+/// Lexicographic order. For the SIMD elementwise minimum and maximum, use simd_min and simd_max instead.
+impl<T, const N: usize> PartialOrd for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + PartialOrd,
+{
+    #[inline]
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+        // TODO use SIMD equality
+        self.to_array().partial_cmp(other.as_ref())
+    }
+}
+
+impl<T, const N: usize> Eq for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + Eq,
+{
+}
+
+/// Lexicographic order. For the SIMD elementwise minimum and maximum, use simd_min and simd_max instead.
+impl<T, const N: usize> Ord for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + Ord,
+{
+    #[inline]
+    fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+        // TODO use SIMD equality
+        self.to_array().cmp(other.as_ref())
+    }
+}
+
+impl<T, const N: usize> core::hash::Hash for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement + core::hash::Hash,
+{
+    #[inline]
+    fn hash<H>(&self, state: &mut H)
+    where
+        H: core::hash::Hasher,
+    {
+        self.as_array().hash(state)
+    }
+}
+
+// array references
+impl<T, const N: usize> AsRef<[T; N]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn as_ref(&self) -> &[T; N] {
+        self.as_array()
+    }
+}
+
+impl<T, const N: usize> AsMut<[T; N]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn as_mut(&mut self) -> &mut [T; N] {
+        self.as_mut_array()
+    }
+}
+
+// slice references
+impl<T, const N: usize> AsRef<[T]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn as_ref(&self) -> &[T] {
+        self.as_array()
+    }
+}
+
+impl<T, const N: usize> AsMut<[T]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn as_mut(&mut self) -> &mut [T] {
+        self.as_mut_array()
+    }
+}
+
+// vector/array conversion
+impl<T, const N: usize> From<[T; N]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn from(array: [T; N]) -> Self {
+        Self::from_array(array)
+    }
+}
+
+impl<T, const N: usize> From<Simd<T, N>> for [T; N]
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    #[inline]
+    fn from(vector: Simd<T, N>) -> Self {
+        vector.to_array()
+    }
+}
+
+impl<T, const N: usize> TryFrom<&[T]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    type Error = core::array::TryFromSliceError;
+
+    #[inline]
+    fn try_from(slice: &[T]) -> Result<Self, core::array::TryFromSliceError> {
+        Ok(Self::from_array(slice.try_into()?))
+    }
+}
+
+impl<T, const N: usize> TryFrom<&mut [T]> for Simd<T, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    T: SimdElement,
+{
+    type Error = core::array::TryFromSliceError;
+
+    #[inline]
+    fn try_from(slice: &mut [T]) -> Result<Self, core::array::TryFromSliceError> {
+        Ok(Self::from_array(slice.try_into()?))
+    }
+}
+
+mod sealed {
+    pub trait Sealed {}
+}
+use sealed::Sealed;
+
+/// Marker trait for types that may be used as SIMD vector elements.
+///
+/// # Safety
+/// This trait, when implemented, asserts the compiler can monomorphize
+/// `#[repr(simd)]` structs with the marked type as an element.
+/// Strictly, it is valid to impl if the vector will not be miscompiled.
+/// Practically, it is user-unfriendly to impl it if the vector won't compile,
+/// even when no soundness guarantees are broken by allowing the user to try.
+pub unsafe trait SimdElement: Sealed + Copy {
+    /// The mask element type corresponding to this element type.
+    type Mask: MaskElement;
+}
+
+impl Sealed for u8 {}
+
+// Safety: u8 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for u8 {
+    type Mask = i8;
+}
+
+impl Sealed for u16 {}
+
+// Safety: u16 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for u16 {
+    type Mask = i16;
+}
+
+impl Sealed for u32 {}
+
+// Safety: u32 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for u32 {
+    type Mask = i32;
+}
+
+impl Sealed for u64 {}
+
+// Safety: u64 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for u64 {
+    type Mask = i64;
+}
+
+impl Sealed for usize {}
+
+// Safety: usize is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for usize {
+    type Mask = isize;
+}
+
+impl Sealed for i8 {}
+
+// Safety: i8 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for i8 {
+    type Mask = i8;
+}
+
+impl Sealed for i16 {}
+
+// Safety: i16 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for i16 {
+    type Mask = i16;
+}
+
+impl Sealed for i32 {}
+
+// Safety: i32 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for i32 {
+    type Mask = i32;
+}
+
+impl Sealed for i64 {}
+
+// Safety: i64 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for i64 {
+    type Mask = i64;
+}
+
+impl Sealed for isize {}
+
+// Safety: isize is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for isize {
+    type Mask = isize;
+}
+
+impl Sealed for f32 {}
+
+// Safety: f32 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for f32 {
+    type Mask = i32;
+}
+
+impl Sealed for f64 {}
+
+// Safety: f64 is a valid SIMD element type, and is supported by this API
+unsafe impl SimdElement for f64 {
+    type Mask = i64;
+}
+
+impl<T> Sealed for *const T {}
+
+// Safety: (thin) const pointers are valid SIMD element types, and are supported by this API
+//
+// Fat pointers may be supported in the future.
+unsafe impl<T> SimdElement for *const T
+where
+    T: core::ptr::Pointee<Metadata = ()>,
+{
+    type Mask = isize;
+}
+
+impl<T> Sealed for *mut T {}
+
+// Safety: (thin) mut pointers are valid SIMD element types, and are supported by this API
+//
+// Fat pointers may be supported in the future.
+unsafe impl<T> SimdElement for *mut T
+where
+    T: core::ptr::Pointee<Metadata = ()>,
+{
+    type Mask = isize;
+}
+
+#[inline]
+fn lane_indices<const N: usize>() -> Simd<usize, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+{
+    let mut index = [0; N];
+    for i in 0..N {
+        index[i] = i;
+    }
+    Simd::from_array(index)
+}
+
+#[inline]
+fn mask_up_to<M, const N: usize>(len: usize) -> Mask<M, N>
+where
+    LaneCount<N>: SupportedLaneCount,
+    M: MaskElement,
+{
+    let index = lane_indices::<N>();
+    let max_value: u64 = M::max_unsigned();
+    macro_rules! case {
+        ($ty:ty) => {
+            if N < <$ty>::MAX as usize && max_value as $ty as u64 == max_value {
+                return index.cast().simd_lt(Simd::splat(len.min(N) as $ty)).cast();
+            }
+        };
+    }
+    case!(u8);
+    case!(u16);
+    case!(u32);
+    case!(u64);
+    index.simd_lt(Simd::splat(len)).cast()
+}

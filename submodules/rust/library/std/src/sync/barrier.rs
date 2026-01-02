@@ -1,1 +1,170 @@
-use split_decls_genesis :: ourprelude :: * ; use crate :: fmt ; use crate :: panic :: RefUnwindSafe ; use crate :: sync :: nonpoison :: { Condvar , Mutex } ; #[doc = " A barrier enables multiple threads to synchronize the beginning"] #[doc = " of some computation."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::sync::Barrier;"] #[doc = " use std::thread;"] #[doc = ""] #[doc = " let n = 10;"] #[doc = " let barrier = Barrier::new(n);"] #[doc = " thread::scope(|s| {"] #[doc = "     for _ in 0..n {"] #[doc = "         // The same messages will be printed together."] #[doc = "         // You will NOT see any interleaving."] #[doc = "         s.spawn(|| {"] #[doc = "             println!(\"before wait\");"] #[doc = "             barrier.wait();"] #[doc = "             println!(\"after wait\");"] #[doc = "         });"] #[doc = "     }"] #[doc = " });"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] pub struct Barrier { lock : Mutex < BarrierState > , cvar : Condvar , num_threads : usize , } #[stable (feature = "unwind_safe_lock_refs" , since = "1.12.0")] impl RefUnwindSafe for Barrier { } struct BarrierState { count : usize , generation_id : usize , } #[doc = " A `BarrierWaitResult` is returned by [`Barrier::wait()`] when all threads"] #[doc = " in the [`Barrier`] have rendezvoused."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::sync::Barrier;"] #[doc = ""] #[doc = " let barrier = Barrier::new(1);"] #[doc = " let barrier_wait_result = barrier.wait();"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] pub struct BarrierWaitResult (bool) ; #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for Barrier { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Barrier") . finish_non_exhaustive () } } impl Barrier { #[doc = " Creates a new barrier that can block a given number of threads."] #[doc = ""] #[doc = " A barrier will block `n`-1 threads which call [`wait()`] and then wake"] #[doc = " up all threads at once when the `n`th thread calls [`wait()`]."] #[doc = ""] #[doc = " [`wait()`]: Barrier::wait"] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::sync::Barrier;"] #[doc = ""] #[doc = " let barrier = Barrier::new(10);"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] #[rustc_const_stable (feature = "const_barrier" , since = "1.78.0")] #[must_use] #[inline] pub const fn new (n : usize) -> Barrier { Barrier { lock : Mutex :: new (BarrierState { count : 0 , generation_id : 0 }) , cvar : Condvar :: new () , num_threads : n , } } #[doc = " Blocks the current thread until all threads have rendezvoused here."] #[doc = ""] #[doc = " Barriers are re-usable after all threads have rendezvoused once, and can"] #[doc = " be used continuously."] #[doc = ""] #[doc = " A single (arbitrary) thread will receive a [`BarrierWaitResult`] that"] #[doc = " returns `true` from [`BarrierWaitResult::is_leader()`] when returning"] #[doc = " from this function, and all other threads will receive a result that"] #[doc = " will return `false` from [`BarrierWaitResult::is_leader()`]."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::sync::Barrier;"] #[doc = " use std::thread;"] #[doc = ""] #[doc = " let n = 10;"] #[doc = " let barrier = Barrier::new(n);"] #[doc = " thread::scope(|s| {"] #[doc = "     for _ in 0..n {"] #[doc = "         // The same messages will be printed together."] #[doc = "         // You will NOT see any interleaving."] #[doc = "         s.spawn(|| {"] #[doc = "             println!(\"before wait\");"] #[doc = "             barrier.wait();"] #[doc = "             println!(\"after wait\");"] #[doc = "         });"] #[doc = "     }"] #[doc = " });"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] pub fn wait (& self) -> BarrierWaitResult { let mut lock = self . lock . lock () ; let local_gen = lock . generation_id ; lock . count += 1 ; if lock . count < self . num_threads { let _guard = self . cvar . wait_while (lock , | state | local_gen == state . generation_id) ; BarrierWaitResult (false) } else { lock . count = 0 ; lock . generation_id = lock . generation_id . wrapping_add (1) ; self . cvar . notify_all () ; BarrierWaitResult (true) } } } #[stable (feature = "std_debug" , since = "1.16.0")] impl fmt :: Debug for BarrierWaitResult { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("BarrierWaitResult") . field ("is_leader" , & self . is_leader ()) . finish () } } impl BarrierWaitResult { #[doc = " Returns `true` if this thread is the \"leader thread\" for the call to"] #[doc = " [`Barrier::wait()`]."] #[doc = ""] #[doc = " Only one thread will have `true` returned from their result, all other"] #[doc = " threads will have `false` returned."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::sync::Barrier;"] #[doc = ""] #[doc = " let barrier = Barrier::new(1);"] #[doc = " let barrier_wait_result = barrier.wait();"] #[doc = " println!(\"{:?}\", barrier_wait_result.is_leader());"] #[doc = " ```"] #[stable (feature = "rust1" , since = "1.0.0")] #[must_use] pub fn is_leader (& self) -> bool { self . 0 } }
+// Generated by unified_build.rs
+use crate::*;
+
+use crate::fmt;
+use crate::panic::RefUnwindSafe;
+use crate::sync::nonpoison::{Condvar, Mutex};
+
+/// A barrier enables multiple threads to synchronize the beginning
+/// of some computation.
+///
+/// # Examples
+///
+/// ```
+/// use std::sync::Barrier;
+/// use std::thread;
+///
+/// let n = 10;
+/// let barrier = Barrier::new(n);
+/// thread::scope(|s| {
+///     for _ in 0..n {
+///         // The same messages will be printed together.
+///         // You will NOT see any interleaving.
+///         s.spawn(|| {
+///             println!("before wait");
+///             barrier.wait();
+///             println!("after wait");
+///         });
+///     }
+/// });
+/// ```
+#[stable(feature = "rust1", since = "1.0.0")]
+pub struct Barrier {
+    lock: Mutex<BarrierState>,
+    cvar: Condvar,
+    num_threads: usize,
+}
+
+#[stable(feature = "unwind_safe_lock_refs", since = "1.12.0")]
+impl RefUnwindSafe for Barrier {}
+
+// The inner state of a double barrier
+struct BarrierState {
+    count: usize,
+    generation_id: usize,
+}
+
+/// A `BarrierWaitResult` is returned by [`Barrier::wait()`] when all threads
+/// in the [`Barrier`] have rendezvoused.
+///
+/// # Examples
+///
+/// ```
+/// use std::sync::Barrier;
+///
+/// let barrier = Barrier::new(1);
+/// let barrier_wait_result = barrier.wait();
+/// ```
+#[stable(feature = "rust1", since = "1.0.0")]
+pub struct BarrierWaitResult(bool);
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for Barrier {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Barrier").finish_non_exhaustive()
+    }
+}
+
+impl Barrier {
+    /// Creates a new barrier that can block a given number of threads.
+    ///
+    /// A barrier will block `n`-1 threads which call [`wait()`] and then wake
+    /// up all threads at once when the `n`th thread calls [`wait()`].
+    ///
+    /// [`wait()`]: Barrier::wait
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::sync::Barrier;
+    ///
+    /// let barrier = Barrier::new(10);
+    /// ```
+    #[stable(feature = "rust1", since = "1.0.0")]
+    #[rustc_const_stable(feature = "const_barrier", since = "1.78.0")]
+    #[must_use]
+    #[inline]
+    pub const fn new(n: usize) -> Barrier {
+        Barrier {
+            lock: Mutex::new(BarrierState { count: 0, generation_id: 0 }),
+            cvar: Condvar::new(),
+            num_threads: n,
+        }
+    }
+
+    /// Blocks the current thread until all threads have rendezvoused here.
+    ///
+    /// Barriers are re-usable after all threads have rendezvoused once, and can
+    /// be used continuously.
+    ///
+    /// A single (arbitrary) thread will receive a [`BarrierWaitResult`] that
+    /// returns `true` from [`BarrierWaitResult::is_leader()`] when returning
+    /// from this function, and all other threads will receive a result that
+    /// will return `false` from [`BarrierWaitResult::is_leader()`].
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::sync::Barrier;
+    /// use std::thread;
+    ///
+    /// let n = 10;
+    /// let barrier = Barrier::new(n);
+    /// thread::scope(|s| {
+    ///     for _ in 0..n {
+    ///         // The same messages will be printed together.
+    ///         // You will NOT see any interleaving.
+    ///         s.spawn(|| {
+    ///             println!("before wait");
+    ///             barrier.wait();
+    ///             println!("after wait");
+    ///         });
+    ///     }
+    /// });
+    /// ```
+    #[stable(feature = "rust1", since = "1.0.0")]
+    pub fn wait(&self) -> BarrierWaitResult {
+        let mut lock = self.lock.lock();
+        let local_gen = lock.generation_id;
+        lock.count += 1;
+        if lock.count < self.num_threads {
+            let _guard = self.cvar.wait_while(lock, |state| local_gen == state.generation_id);
+            BarrierWaitResult(false)
+        } else {
+            lock.count = 0;
+            lock.generation_id = lock.generation_id.wrapping_add(1);
+            self.cvar.notify_all();
+            BarrierWaitResult(true)
+        }
+    }
+}
+
+#[stable(feature = "std_debug", since = "1.16.0")]
+impl fmt::Debug for BarrierWaitResult {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("BarrierWaitResult").field("is_leader", &self.is_leader()).finish()
+    }
+}
+
+impl BarrierWaitResult {
+    /// Returns `true` if this thread is the "leader thread" for the call to
+    /// [`Barrier::wait()`].
+    ///
+    /// Only one thread will have `true` returned from their result, all other
+    /// threads will have `false` returned.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::sync::Barrier;
+    ///
+    /// let barrier = Barrier::new(1);
+    /// let barrier_wait_result = barrier.wait();
+    /// println!("{:?}", barrier_wait_result.is_leader());
+    /// ```
+    #[stable(feature = "rust1", since = "1.0.0")]
+    #[must_use]
+    pub fn is_leader(&self) -> bool {
+        self.0
+    }
+}

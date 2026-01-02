@@ -1,1 +1,159 @@
-use split_decls_genesis :: ourprelude :: * ; mod diagnostic ; mod diagnostic_builder ; mod error ; mod subdiagnostic ; mod utils ; use diagnostic :: { DiagnosticDerive , LintDiagnosticDerive } ; use proc_macro2 :: TokenStream ; use subdiagnostic :: SubdiagnosticDerive ; use synstructure :: Structure ; #[doc = " Implements `#[derive(Diagnostic)]`, which allows for errors to be specified as a struct,"] #[doc = " independent from the actual diagnostics emitting code."] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " # extern crate rustc_errors;"] #[doc = " # use rustc_errors::Applicability;"] #[doc = " # extern crate rustc_span;"] #[doc = " # use rustc_span::{Ident, Span};"] #[doc = " # extern crate rust_middle;"] #[doc = " # use rustc_middle::ty::Ty;"] #[doc = " #[derive(Diagnostic)]"] #[doc = " #[diag(borrowck_move_out_of_borrow, code = E0505)]"] #[doc = " pub struct MoveOutOfBorrowError<'tcx> {"] #[doc = "     pub name: Ident,"] #[doc = "     pub ty: Ty<'tcx>,"] #[doc = "     #[primary_span]"] #[doc = "     #[label]"] #[doc = "     pub span: Span,"] #[doc = "     #[label(first_borrow_label)]"] #[doc = "     pub first_borrow_span: Span,"] #[doc = "     #[suggestion(code = \"{name}.clone()\")]"] #[doc = "     pub clone_sugg: Option<(Span, Applicability)>"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " ```fluent"] #[doc = " move_out_of_borrow = cannot move out of {$name} because it is borrowed"] #[doc = "     .label = cannot move out of borrow"] #[doc = "     .first_borrow_label = `{$ty}` first borrowed here"] #[doc = "     .suggestion = consider cloning here"] #[doc = " ```"] #[doc = ""] #[doc = " Then, later, to emit the error:"] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " sess.emit_err(MoveOutOfBorrowError {"] #[doc = "     expected,"] #[doc = "     actual,"] #[doc = "     span,"] #[doc = "     first_borrow_span,"] #[doc = "     clone_sugg: Some(suggestion, Applicability::MachineApplicable),"] #[doc = " });"] #[doc = " ```"] #[doc = ""] #[doc = " See rustc dev guide for more examples on using the `#[derive(Diagnostic)]`:"] #[doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html>"] pub (super) fn diagnostic_derive (s : Structure < '_ >) -> TokenStream { DiagnosticDerive :: new (s) . into_tokens () } #[doc = " Implements `#[derive(LintDiagnostic)]`, which allows for lints to be specified as a struct,"] #[doc = " independent from the actual lint emitting code."] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " #[derive(LintDiagnostic)]"] #[doc = " #[diag(lint_atomic_ordering_invalid_fail_success)]"] #[doc = " pub struct AtomicOrderingInvalidLint {"] #[doc = "     method: Symbol,"] #[doc = "     success_ordering: Symbol,"] #[doc = "     fail_ordering: Symbol,"] #[doc = "     #[label(fail_label)]"] #[doc = "     fail_order_arg_span: Span,"] #[doc = "     #[label(success_label)]"] #[doc = "     #[suggestion("] #[doc = "         code = \"std::sync::atomic::Ordering::{success_suggestion}\","] #[doc = "         applicability = \"maybe-incorrect\""] #[doc = "     )]"] #[doc = "     success_order_arg_span: Span,"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " ```fluent"] #[doc = " lint_atomic_ordering_invalid_fail_success = `{$method}`'s success ordering must be at least as strong as its failure ordering"] #[doc = "     .fail_label = `{$fail_ordering}` failure ordering"] #[doc = "     .success_label = `{$success_ordering}` success ordering"] #[doc = "     .suggestion = consider using `{$success_suggestion}` success ordering instead"] #[doc = " ```"] #[doc = ""] #[doc = " Then, later, to emit the error:"] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " cx.emit_span_lint(INVALID_ATOMIC_ORDERING, fail_order_arg_span, AtomicOrderingInvalidLint {"] #[doc = "     method,"] #[doc = "     success_ordering,"] #[doc = "     fail_ordering,"] #[doc = "     fail_order_arg_span,"] #[doc = "     success_order_arg_span,"] #[doc = " });"] #[doc = " ```"] #[doc = ""] #[doc = " See rustc dev guide for more examples on using the `#[derive(LintDiagnostic)]`:"] #[doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html#reference>"] pub (super) fn lint_diagnostic_derive (s : Structure < '_ >) -> TokenStream { LintDiagnosticDerive :: new (s) . into_tokens () } #[doc = " Implements `#[derive(Subdiagnostic)]`, which allows for labels, notes, helps and"] #[doc = " suggestions to be specified as a structs or enums, independent from the actual diagnostics"] #[doc = " emitting code or diagnostic derives."] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " #[derive(Subdiagnostic)]"] #[doc = " pub enum ExpectedIdentifierLabel<'tcx> {"] #[doc = "     #[label(expected_identifier)]"] #[doc = "     WithoutFound {"] #[doc = "         #[primary_span]"] #[doc = "         span: Span,"] #[doc = "     }"] #[doc = "     #[label(expected_identifier_found)]"] #[doc = "     WithFound {"] #[doc = "         #[primary_span]"] #[doc = "         span: Span,"] #[doc = "         found: String,"] #[doc = "     }"] #[doc = " }"] #[doc = ""] #[doc = " #[derive(Subdiagnostic)]"] #[doc = " #[suggestion(style = \"verbose\",parser::raw_identifier)]"] #[doc = " pub struct RawIdentifierSuggestion<'tcx> {"] #[doc = "     #[primary_span]"] #[doc = "     span: Span,"] #[doc = "     #[applicability]"] #[doc = "     applicability: Applicability,"] #[doc = "     ident: Ident,"] #[doc = " }"] #[doc = " ```"] #[doc = ""] #[doc = " ```fluent"] #[doc = " parser_expected_identifier = expected identifier"] #[doc = ""] #[doc = " parser_expected_identifier_found = expected identifier, found {$found}"] #[doc = ""] #[doc = " parser_raw_identifier = escape `{$ident}` to use it as an identifier"] #[doc = " ```"] #[doc = ""] #[doc = " Then, later, to add the subdiagnostic:"] #[doc = ""] #[doc = " ```ignore (rust)"] #[doc = " diag.subdiagnostic(ExpectedIdentifierLabel::WithoutFound { span });"] #[doc = ""] #[doc = " diag.subdiagnostic(RawIdentifierSuggestion { span, applicability, ident });"] #[doc = " ```"] pub (super) fn subdiagnostic_derive (s : Structure < '_ >) -> TokenStream { SubdiagnosticDerive :: new () . into_tokens (s) }
+// Generated by unified_build.rs
+use crate::*;
+
+mod diagnostic;
+mod diagnostic_builder;
+mod error;
+mod subdiagnostic;
+mod utils;
+
+use diagnostic::{DiagnosticDerive, LintDiagnosticDerive};
+use proc_macro2::TokenStream;
+use subdiagnostic::SubdiagnosticDerive;
+use synstructure::Structure;
+
+/// Implements `#[derive(Diagnostic)]`, which allows for errors to be specified as a struct,
+/// independent from the actual diagnostics emitting code.
+///
+/// ```ignore (rust)
+/// # extern crate rustc_errors;
+/// # use rustc_errors::Applicability;
+/// # extern crate rustc_span;
+/// # use rustc_span::{Ident, Span};
+/// # extern crate rust_middle;
+/// # use rustc_middle::ty::Ty;
+/// #[derive(Diagnostic)]
+/// #[diag(borrowck_move_out_of_borrow, code = E0505)]
+/// pub struct MoveOutOfBorrowError<'tcx> {
+///     pub name: Ident,
+///     pub ty: Ty<'tcx>,
+///     #[primary_span]
+///     #[label]
+///     pub span: Span,
+///     #[label(first_borrow_label)]
+///     pub first_borrow_span: Span,
+///     #[suggestion(code = "{name}.clone()")]
+///     pub clone_sugg: Option<(Span, Applicability)>
+/// }
+/// ```
+///
+/// ```fluent
+/// move_out_of_borrow = cannot move out of {$name} because it is borrowed
+///     .label = cannot move out of borrow
+///     .first_borrow_label = `{$ty}` first borrowed here
+///     .suggestion = consider cloning here
+/// ```
+///
+/// Then, later, to emit the error:
+///
+/// ```ignore (rust)
+/// sess.emit_err(MoveOutOfBorrowError {
+///     expected,
+///     actual,
+///     span,
+///     first_borrow_span,
+///     clone_sugg: Some(suggestion, Applicability::MachineApplicable),
+/// });
+/// ```
+///
+/// See rustc dev guide for more examples on using the `#[derive(Diagnostic)]`:
+/// <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html>
+pub(super) fn diagnostic_derive(s: Structure<'_>) -> TokenStream {
+    DiagnosticDerive::new(s).into_tokens()
+}
+
+/// Implements `#[derive(LintDiagnostic)]`, which allows for lints to be specified as a struct,
+/// independent from the actual lint emitting code.
+///
+/// ```ignore (rust)
+/// #[derive(LintDiagnostic)]
+/// #[diag(lint_atomic_ordering_invalid_fail_success)]
+/// pub struct AtomicOrderingInvalidLint {
+///     method: Symbol,
+///     success_ordering: Symbol,
+///     fail_ordering: Symbol,
+///     #[label(fail_label)]
+///     fail_order_arg_span: Span,
+///     #[label(success_label)]
+///     #[suggestion(
+///         code = "std::sync::atomic::Ordering::{success_suggestion}",
+///         applicability = "maybe-incorrect"
+///     )]
+///     success_order_arg_span: Span,
+/// }
+/// ```
+///
+/// ```fluent
+/// lint_atomic_ordering_invalid_fail_success = `{$method}`'s success ordering must be at least as strong as its failure ordering
+///     .fail_label = `{$fail_ordering}` failure ordering
+///     .success_label = `{$success_ordering}` success ordering
+///     .suggestion = consider using `{$success_suggestion}` success ordering instead
+/// ```
+///
+/// Then, later, to emit the error:
+///
+/// ```ignore (rust)
+/// cx.emit_span_lint(INVALID_ATOMIC_ORDERING, fail_order_arg_span, AtomicOrderingInvalidLint {
+///     method,
+///     success_ordering,
+///     fail_ordering,
+///     fail_order_arg_span,
+///     success_order_arg_span,
+/// });
+/// ```
+///
+/// See rustc dev guide for more examples on using the `#[derive(LintDiagnostic)]`:
+/// <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html#reference>
+pub(super) fn lint_diagnostic_derive(s: Structure<'_>) -> TokenStream {
+    LintDiagnosticDerive::new(s).into_tokens()
+}
+
+/// Implements `#[derive(Subdiagnostic)]`, which allows for labels, notes, helps and
+/// suggestions to be specified as a structs or enums, independent from the actual diagnostics
+/// emitting code or diagnostic derives.
+///
+/// ```ignore (rust)
+/// #[derive(Subdiagnostic)]
+/// pub enum ExpectedIdentifierLabel<'tcx> {
+///     #[label(expected_identifier)]
+///     WithoutFound {
+///         #[primary_span]
+///         span: Span,
+///     }
+///     #[label(expected_identifier_found)]
+///     WithFound {
+///         #[primary_span]
+///         span: Span,
+///         found: String,
+///     }
+/// }
+///
+/// #[derive(Subdiagnostic)]
+/// #[suggestion(style = "verbose",parser::raw_identifier)]
+/// pub struct RawIdentifierSuggestion<'tcx> {
+///     #[primary_span]
+///     span: Span,
+///     #[applicability]
+///     applicability: Applicability,
+///     ident: Ident,
+/// }
+/// ```
+///
+/// ```fluent
+/// parser_expected_identifier = expected identifier
+///
+/// parser_expected_identifier_found = expected identifier, found {$found}
+///
+/// parser_raw_identifier = escape `{$ident}` to use it as an identifier
+/// ```
+///
+/// Then, later, to add the subdiagnostic:
+///
+/// ```ignore (rust)
+/// diag.subdiagnostic(ExpectedIdentifierLabel::WithoutFound { span });
+///
+/// diag.subdiagnostic(RawIdentifierSuggestion { span, applicability, ident });
+/// ```
+pub(super) fn subdiagnostic_derive(s: Structure<'_>) -> TokenStream {
+    SubdiagnosticDerive::new().into_tokens(s)
+}

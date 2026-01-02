@@ -1,1 +1,428 @@
-use split_decls_genesis :: ourprelude :: * ; use crate :: { convert , ops } ; #[doc = " Used to tell an operation whether it should exit early or go on as usual."] #[doc = ""] #[doc = " This is used when exposing things (like graph traversals or visitors) where"] #[doc = " you want the user to be able to choose whether to exit early."] #[doc = " Having the enum makes it clearer -- no more wondering \"wait, what did `false`"] #[doc = " mean again?\" -- and allows including a value."] #[doc = ""] #[doc = " Similar to [`Option`] and [`Result`], this enum can be used with the `?` operator"] #[doc = " to return immediately if the [`Break`] variant is present or otherwise continue normally"] #[doc = " with the value inside the [`Continue`] variant."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " Early-exiting from [`Iterator::try_for_each`]:"] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " let r = (2..100).try_for_each(|x| {"] #[doc = "     if 403 % x == 0 {"] #[doc = "         return ControlFlow::Break(x)"] #[doc = "     }"] #[doc = ""] #[doc = "     ControlFlow::Continue(())"] #[doc = " });"] #[doc = " assert_eq!(r, ControlFlow::Break(13));"] #[doc = " ```"] #[doc = ""] #[doc = " A basic tree traversal:"] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " pub struct TreeNode<T> {"] #[doc = "     value: T,"] #[doc = "     left: Option<Box<TreeNode<T>>>,"] #[doc = "     right: Option<Box<TreeNode<T>>>,"] #[doc = " }"] #[doc = ""] #[doc = " impl<T> TreeNode<T> {"] #[doc = "     pub fn traverse_inorder<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> ControlFlow<B> {"] #[doc = "         if let Some(left) = &self.left {"] #[doc = "             left.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         f(&self.value)?;"] #[doc = "         if let Some(right) = &self.right {"] #[doc = "             right.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         ControlFlow::Continue(())"] #[doc = "     }"] #[doc = "     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {"] #[doc = "         Some(Box::new(Self { value, left: None, right: None }))"] #[doc = "     }"] #[doc = " }"] #[doc = ""] #[doc = " let node = TreeNode {"] #[doc = "     value: 0,"] #[doc = "     left: TreeNode::leaf(1),"] #[doc = "     right: Some(Box::new(TreeNode {"] #[doc = "         value: -1,"] #[doc = "         left: TreeNode::leaf(5),"] #[doc = "         right: TreeNode::leaf(2),"] #[doc = "     }))"] #[doc = " };"] #[doc = " let mut sum = 0;"] #[doc = ""] #[doc = " let res = node.traverse_inorder(&mut |val| {"] #[doc = "     if *val < 0 {"] #[doc = "         ControlFlow::Break(*val)"] #[doc = "     } else {"] #[doc = "         sum += *val;"] #[doc = "         ControlFlow::Continue(())"] #[doc = "     }"] #[doc = " });"] #[doc = " assert_eq!(res, ControlFlow::Break(-1));"] #[doc = " assert_eq!(sum, 6);"] #[doc = " ```"] #[doc = ""] #[doc = " [`Break`]: ControlFlow::Break"] #[doc = " [`Continue`]: ControlFlow::Continue"] #[stable (feature = "control_flow_enum_type" , since = "1.55.0")] #[rustc_diagnostic_item = "ControlFlow"] #[must_use] #[derive (Copy , Debug , Hash)] #[derive_const (Clone , PartialEq , Eq)] pub enum ControlFlow < B , C = () > { #[doc = " Move on to the next phase of the operation as normal."] #[stable (feature = "control_flow_enum_type" , since = "1.55.0")] #[lang = "Continue"] Continue (C) , #[doc = " Exit the operation without running subsequent phases."] #[stable (feature = "control_flow_enum_type" , since = "1.55.0")] #[lang = "Break"] Break (B) , } #[unstable (feature = "try_trait_v2" , issue = "84277" , old_name = "try_trait")] #[rustc_const_unstable (feature = "const_try" , issue = "74935")] impl < B , C > const ops :: Try for ControlFlow < B , C > { type Output = C ; type Residual = ControlFlow < B , convert :: Infallible >; #[inline] fn from_output (output : Self :: Output) -> Self { ControlFlow :: Continue (output) } #[inline] fn branch (self) -> ControlFlow < Self :: Residual , Self :: Output > { match self { ControlFlow :: Continue (c) => ControlFlow :: Continue (c) , ControlFlow :: Break (b) => ControlFlow :: Break (ControlFlow :: Break (b)) , } } } #[unstable (feature = "try_trait_v2" , issue = "84277" , old_name = "try_trait")] #[rustc_const_unstable (feature = "const_try" , issue = "74935")] impl < B , C > const ops :: FromResidual < ControlFlow < B , convert :: Infallible >> for ControlFlow < B , C > { #[inline] fn from_residual (residual : ControlFlow < B , convert :: Infallible >) -> Self { match residual { ControlFlow :: Break (b) => ControlFlow :: Break (b) , } } } #[unstable (feature = "try_trait_v2_residual" , issue = "91285")] impl < B , C > ops :: Residual < C > for ControlFlow < B , convert :: Infallible > { type TryType = ControlFlow < B , C > ; } impl < B , C > ControlFlow < B , C > { #[doc = " Returns `true` if this is a `Break` variant."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " assert!(ControlFlow::<&str, i32>::Break(\"Stop right there!\").is_break());"] #[doc = " assert!(!ControlFlow::<&str, i32>::Continue(3).is_break());"] #[doc = " ```"] #[inline] #[stable (feature = "control_flow_enum_is" , since = "1.59.0")] pub fn is_break (& self) -> bool { matches ! (* self , ControlFlow :: Break (_)) } #[doc = " Returns `true` if this is a `Continue` variant."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " assert!(!ControlFlow::<&str, i32>::Break(\"Stop right there!\").is_continue());"] #[doc = " assert!(ControlFlow::<&str, i32>::Continue(3).is_continue());"] #[doc = " ```"] #[inline] #[stable (feature = "control_flow_enum_is" , since = "1.59.0")] pub fn is_continue (& self) -> bool { matches ! (* self , ControlFlow :: Continue (_)) } #[doc = " Converts the `ControlFlow` into an `Option` which is `Some` if the"] #[doc = " `ControlFlow` was `Break` and `None` otherwise."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " assert_eq!(ControlFlow::<&str, i32>::Break(\"Stop right there!\").break_value(), Some(\"Stop right there!\"));"] #[doc = " assert_eq!(ControlFlow::<&str, i32>::Continue(3).break_value(), None);"] #[doc = " ```"] #[inline] #[stable (feature = "control_flow_enum" , since = "1.83.0")] pub fn break_value (self) -> Option < B > { match self { ControlFlow :: Continue (..) => None , ControlFlow :: Break (x) => Some (x) , } } #[doc = " Converts the `ControlFlow` into an `Result` which is `Ok` if the"] #[doc = " `ControlFlow` was `Break` and `Err` if otherwise."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " #![feature(control_flow_ok)]"] #[doc = ""] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " struct TreeNode<T> {"] #[doc = "     value: T,"] #[doc = "     left: Option<Box<TreeNode<T>>>,"] #[doc = "     right: Option<Box<TreeNode<T>>>,"] #[doc = " }"] #[doc = ""] #[doc = " impl<T> TreeNode<T> {"] #[doc = "     fn find<'a>(&'a self, mut predicate: impl FnMut(&T) -> bool) -> Result<&'a T, ()> {"] #[doc = "         let mut f = |t: &'a T| -> ControlFlow<&'a T> {"] #[doc = "             if predicate(t) {"] #[doc = "                 ControlFlow::Break(t)"] #[doc = "             } else {"] #[doc = "                 ControlFlow::Continue(())"] #[doc = "             }"] #[doc = "         };"] #[doc = ""] #[doc = "         self.traverse_inorder(&mut f).break_ok()"] #[doc = "     }"] #[doc = ""] #[doc = "     fn traverse_inorder<'a, B>("] #[doc = "         &'a self,"] #[doc = "         f: &mut impl FnMut(&'a T) -> ControlFlow<B>,"] #[doc = "     ) -> ControlFlow<B> {"] #[doc = "         if let Some(left) = &self.left {"] #[doc = "             left.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         f(&self.value)?;"] #[doc = "         if let Some(right) = &self.right {"] #[doc = "             right.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         ControlFlow::Continue(())"] #[doc = "     }"] #[doc = ""] #[doc = "     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {"] #[doc = "         Some(Box::new(Self {"] #[doc = "             value,"] #[doc = "             left: None,"] #[doc = "             right: None,"] #[doc = "         }))"] #[doc = "     }"] #[doc = " }"] #[doc = ""] #[doc = " let node = TreeNode {"] #[doc = "     value: 0,"] #[doc = "     left: TreeNode::leaf(1),"] #[doc = "     right: Some(Box::new(TreeNode {"] #[doc = "         value: -1,"] #[doc = "         left: TreeNode::leaf(5),"] #[doc = "         right: TreeNode::leaf(2),"] #[doc = "     })),"] #[doc = " };"] #[doc = ""] #[doc = " let res = node.find(|val: &i32| *val > 3);"] #[doc = " assert_eq!(res, Ok(&5));"] #[doc = " ```"] #[inline] #[unstable (feature = "control_flow_ok" , issue = "140266")] pub fn break_ok (self) -> Result < B , C > { match self { ControlFlow :: Continue (c) => Err (c) , ControlFlow :: Break (b) => Ok (b) , } } #[doc = " Maps `ControlFlow<B, C>` to `ControlFlow<T, C>` by applying a function"] #[doc = " to the break value in case it exists."] #[inline] #[stable (feature = "control_flow_enum" , since = "1.83.0")] pub fn map_break < T > (self , f : impl FnOnce (B) -> T) -> ControlFlow < T , C > { match self { ControlFlow :: Continue (x) => ControlFlow :: Continue (x) , ControlFlow :: Break (x) => ControlFlow :: Break (f (x)) , } } #[doc = " Converts the `ControlFlow` into an `Option` which is `Some` if the"] #[doc = " `ControlFlow` was `Continue` and `None` otherwise."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " assert_eq!(ControlFlow::<&str, i32>::Break(\"Stop right there!\").continue_value(), None);"] #[doc = " assert_eq!(ControlFlow::<&str, i32>::Continue(3).continue_value(), Some(3));"] #[doc = " ```"] #[inline] #[stable (feature = "control_flow_enum" , since = "1.83.0")] pub fn continue_value (self) -> Option < C > { match self { ControlFlow :: Continue (x) => Some (x) , ControlFlow :: Break (..) => None , } } #[doc = " Converts the `ControlFlow` into an `Result` which is `Ok` if the"] #[doc = " `ControlFlow` was `Continue` and `Err` if otherwise."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " #![feature(control_flow_ok)]"] #[doc = ""] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " struct TreeNode<T> {"] #[doc = "     value: T,"] #[doc = "     left: Option<Box<TreeNode<T>>>,"] #[doc = "     right: Option<Box<TreeNode<T>>>,"] #[doc = " }"] #[doc = ""] #[doc = " impl<T> TreeNode<T> {"] #[doc = "     fn validate<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> Result<(), B> {"] #[doc = "         self.traverse_inorder(f).continue_ok()"] #[doc = "     }"] #[doc = ""] #[doc = "     fn traverse_inorder<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> ControlFlow<B> {"] #[doc = "         if let Some(left) = &self.left {"] #[doc = "             left.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         f(&self.value)?;"] #[doc = "         if let Some(right) = &self.right {"] #[doc = "             right.traverse_inorder(f)?;"] #[doc = "         }"] #[doc = "         ControlFlow::Continue(())"] #[doc = "     }"] #[doc = ""] #[doc = "     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {"] #[doc = "         Some(Box::new(Self {"] #[doc = "             value,"] #[doc = "             left: None,"] #[doc = "             right: None,"] #[doc = "         }))"] #[doc = "     }"] #[doc = " }"] #[doc = ""] #[doc = " let node = TreeNode {"] #[doc = "     value: 0,"] #[doc = "     left: TreeNode::leaf(1),"] #[doc = "     right: Some(Box::new(TreeNode {"] #[doc = "         value: -1,"] #[doc = "         left: TreeNode::leaf(5),"] #[doc = "         right: TreeNode::leaf(2),"] #[doc = "     })),"] #[doc = " };"] #[doc = ""] #[doc = " let res = node.validate(&mut |val| {"] #[doc = "     if *val < 0 {"] #[doc = "         return ControlFlow::Break(\"negative value detected\");"] #[doc = "     }"] #[doc = ""] #[doc = "     if *val > 4 {"] #[doc = "         return ControlFlow::Break(\"too big value detected\");"] #[doc = "     }"] #[doc = ""] #[doc = "     ControlFlow::Continue(())"] #[doc = " });"] #[doc = " assert_eq!(res, Err(\"too big value detected\"));"] #[doc = " ```"] #[inline] #[unstable (feature = "control_flow_ok" , issue = "140266")] pub fn continue_ok (self) -> Result < C , B > { match self { ControlFlow :: Continue (c) => Ok (c) , ControlFlow :: Break (b) => Err (b) , } } #[doc = " Maps `ControlFlow<B, C>` to `ControlFlow<B, T>` by applying a function"] #[doc = " to the continue value in case it exists."] #[inline] #[stable (feature = "control_flow_enum" , since = "1.83.0")] pub fn map_continue < T > (self , f : impl FnOnce (C) -> T) -> ControlFlow < B , T > { match self { ControlFlow :: Continue (x) => ControlFlow :: Continue (f (x)) , ControlFlow :: Break (x) => ControlFlow :: Break (x) , } } } impl < T > ControlFlow < T , T > { #[doc = " Extracts the value `T` that is wrapped by `ControlFlow<T, T>`."] #[doc = ""] #[doc = " # Examples"] #[doc = ""] #[doc = " ```"] #[doc = " #![feature(control_flow_into_value)]"] #[doc = " use std::ops::ControlFlow;"] #[doc = ""] #[doc = " assert_eq!(ControlFlow::<i32, i32>::Break(1024).into_value(), 1024);"] #[doc = " assert_eq!(ControlFlow::<i32, i32>::Continue(512).into_value(), 512);"] #[doc = " ```"] #[unstable (feature = "control_flow_into_value" , issue = "137461")] #[rustc_allow_const_fn_unstable (const_precise_live_drops)] pub const fn into_value (self) -> T { match self { ControlFlow :: Continue (x) | ControlFlow :: Break (x) => x , } } } #[doc = " These are used only as part of implementing the iterator adapters."] #[doc = " They have mediocre names and non-obvious semantics, so aren't"] #[doc = " currently on a path to potential stabilization."] impl < R : ops :: Try > ControlFlow < R , R :: Output > { #[doc = " Creates a `ControlFlow` from any type implementing `Try`."] #[inline] pub (crate) fn from_try (r : R) -> Self { match R :: branch (r) { ControlFlow :: Continue (v) => ControlFlow :: Continue (v) , ControlFlow :: Break (v) => ControlFlow :: Break (R :: from_residual (v)) , } } #[doc = " Converts a `ControlFlow` into any type implementing `Try`."] #[inline] pub (crate) fn into_try (self) -> R { match self { ControlFlow :: Continue (v) => R :: from_output (v) , ControlFlow :: Break (v) => v , } } }
+// Generated by unified_build.rs
+use crate::*;
+
+use crate::{convert, ops};
+
+/// Used to tell an operation whether it should exit early or go on as usual.
+///
+/// This is used when exposing things (like graph traversals or visitors) where
+/// you want the user to be able to choose whether to exit early.
+/// Having the enum makes it clearer -- no more wondering "wait, what did `false`
+/// mean again?" -- and allows including a value.
+///
+/// Similar to [`Option`] and [`Result`], this enum can be used with the `?` operator
+/// to return immediately if the [`Break`] variant is present or otherwise continue normally
+/// with the value inside the [`Continue`] variant.
+///
+/// # Examples
+///
+/// Early-exiting from [`Iterator::try_for_each`]:
+/// ```
+/// use std::ops::ControlFlow;
+///
+/// let r = (2..100).try_for_each(|x| {
+///     if 403 % x == 0 {
+///         return ControlFlow::Break(x)
+///     }
+///
+///     ControlFlow::Continue(())
+/// });
+/// assert_eq!(r, ControlFlow::Break(13));
+/// ```
+///
+/// A basic tree traversal:
+/// ```
+/// use std::ops::ControlFlow;
+///
+/// pub struct TreeNode<T> {
+///     value: T,
+///     left: Option<Box<TreeNode<T>>>,
+///     right: Option<Box<TreeNode<T>>>,
+/// }
+///
+/// impl<T> TreeNode<T> {
+///     pub fn traverse_inorder<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> ControlFlow<B> {
+///         if let Some(left) = &self.left {
+///             left.traverse_inorder(f)?;
+///         }
+///         f(&self.value)?;
+///         if let Some(right) = &self.right {
+///             right.traverse_inorder(f)?;
+///         }
+///         ControlFlow::Continue(())
+///     }
+///     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {
+///         Some(Box::new(Self { value, left: None, right: None }))
+///     }
+/// }
+///
+/// let node = TreeNode {
+///     value: 0,
+///     left: TreeNode::leaf(1),
+///     right: Some(Box::new(TreeNode {
+///         value: -1,
+///         left: TreeNode::leaf(5),
+///         right: TreeNode::leaf(2),
+///     }))
+/// };
+/// let mut sum = 0;
+///
+/// let res = node.traverse_inorder(&mut |val| {
+///     if *val < 0 {
+///         ControlFlow::Break(*val)
+///     } else {
+///         sum += *val;
+///         ControlFlow::Continue(())
+///     }
+/// });
+/// assert_eq!(res, ControlFlow::Break(-1));
+/// assert_eq!(sum, 6);
+/// ```
+///
+/// [`Break`]: ControlFlow::Break
+/// [`Continue`]: ControlFlow::Continue
+#[stable(feature = "control_flow_enum_type", since = "1.55.0")]
+#[rustc_diagnostic_item = "ControlFlow"]
+#[must_use]
+// ControlFlow should not implement PartialOrd or Ord, per RFC 3058:
+// https://rust-lang.github.io/rfcs/3058-try-trait-v2.html#traits-for-controlflow
+#[derive(Copy, Debug, Hash)]
+#[derive_const(Clone, PartialEq, Eq)]
+pub enum ControlFlow<B, C = ()> {
+    /// Move on to the next phase of the operation as normal.
+    #[stable(feature = "control_flow_enum_type", since = "1.55.0")]
+    #[lang = "Continue"]
+    Continue(C),
+    /// Exit the operation without running subsequent phases.
+    #[stable(feature = "control_flow_enum_type", since = "1.55.0")]
+    #[lang = "Break"]
+    Break(B),
+    // Yes, the order of the variants doesn't match the type parameters.
+    // They're in this order so that `ControlFlow<A, B>` <-> `Result<B, A>`
+    // is a no-op conversion in the `Try` implementation.
+}
+
+#[unstable(feature = "try_trait_v2", issue = "84277", old_name = "try_trait")]
+#[rustc_const_unstable(feature = "const_try", issue = "74935")]
+impl<B, C> const ops::Try for ControlFlow<B, C> {
+    type Output = C;
+    type Residual = ControlFlow<B, convert::Infallible>;
+
+    #[inline]
+    fn from_output(output: Self::Output) -> Self {
+        ControlFlow::Continue(output)
+    }
+
+    #[inline]
+    fn branch(self) -> ControlFlow<Self::Residual, Self::Output> {
+        match self {
+            ControlFlow::Continue(c) => ControlFlow::Continue(c),
+            ControlFlow::Break(b) => ControlFlow::Break(ControlFlow::Break(b)),
+        }
+    }
+}
+
+#[unstable(feature = "try_trait_v2", issue = "84277", old_name = "try_trait")]
+#[rustc_const_unstable(feature = "const_try", issue = "74935")]
+// Note: manually specifying the residual type instead of using the default to work around
+// https://github.com/rust-lang/rust/issues/99940
+impl<B, C> const ops::FromResidual<ControlFlow<B, convert::Infallible>> for ControlFlow<B, C> {
+    #[inline]
+    fn from_residual(residual: ControlFlow<B, convert::Infallible>) -> Self {
+        match residual {
+            ControlFlow::Break(b) => ControlFlow::Break(b),
+        }
+    }
+}
+
+#[unstable(feature = "try_trait_v2_residual", issue = "91285")]
+impl<B, C> ops::Residual<C> for ControlFlow<B, convert::Infallible> {
+    type TryType = ControlFlow<B, C>;
+}
+
+impl<B, C> ControlFlow<B, C> {
+    /// Returns `true` if this is a `Break` variant.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::ops::ControlFlow;
+    ///
+    /// assert!(ControlFlow::<&str, i32>::Break("Stop right there!").is_break());
+    /// assert!(!ControlFlow::<&str, i32>::Continue(3).is_break());
+    /// ```
+    #[inline]
+    #[stable(feature = "control_flow_enum_is", since = "1.59.0")]
+    pub fn is_break(&self) -> bool {
+        matches!(*self, ControlFlow::Break(_))
+    }
+
+    /// Returns `true` if this is a `Continue` variant.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::ops::ControlFlow;
+    ///
+    /// assert!(!ControlFlow::<&str, i32>::Break("Stop right there!").is_continue());
+    /// assert!(ControlFlow::<&str, i32>::Continue(3).is_continue());
+    /// ```
+    #[inline]
+    #[stable(feature = "control_flow_enum_is", since = "1.59.0")]
+    pub fn is_continue(&self) -> bool {
+        matches!(*self, ControlFlow::Continue(_))
+    }
+
+    /// Converts the `ControlFlow` into an `Option` which is `Some` if the
+    /// `ControlFlow` was `Break` and `None` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::ops::ControlFlow;
+    ///
+    /// assert_eq!(ControlFlow::<&str, i32>::Break("Stop right there!").break_value(), Some("Stop right there!"));
+    /// assert_eq!(ControlFlow::<&str, i32>::Continue(3).break_value(), None);
+    /// ```
+    #[inline]
+    #[stable(feature = "control_flow_enum", since = "1.83.0")]
+    pub fn break_value(self) -> Option<B> {
+        match self {
+            ControlFlow::Continue(..) => None,
+            ControlFlow::Break(x) => Some(x),
+        }
+    }
+
+    /// Converts the `ControlFlow` into an `Result` which is `Ok` if the
+    /// `ControlFlow` was `Break` and `Err` if otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// #![feature(control_flow_ok)]
+    ///
+    /// use std::ops::ControlFlow;
+    ///
+    /// struct TreeNode<T> {
+    ///     value: T,
+    ///     left: Option<Box<TreeNode<T>>>,
+    ///     right: Option<Box<TreeNode<T>>>,
+    /// }
+    ///
+    /// impl<T> TreeNode<T> {
+    ///     fn find<'a>(&'a self, mut predicate: impl FnMut(&T) -> bool) -> Result<&'a T, ()> {
+    ///         let mut f = |t: &'a T| -> ControlFlow<&'a T> {
+    ///             if predicate(t) {
+    ///                 ControlFlow::Break(t)
+    ///             } else {
+    ///                 ControlFlow::Continue(())
+    ///             }
+    ///         };
+    ///
+    ///         self.traverse_inorder(&mut f).break_ok()
+    ///     }
+    ///
+    ///     fn traverse_inorder<'a, B>(
+    ///         &'a self,
+    ///         f: &mut impl FnMut(&'a T) -> ControlFlow<B>,
+    ///     ) -> ControlFlow<B> {
+    ///         if let Some(left) = &self.left {
+    ///             left.traverse_inorder(f)?;
+    ///         }
+    ///         f(&self.value)?;
+    ///         if let Some(right) = &self.right {
+    ///             right.traverse_inorder(f)?;
+    ///         }
+    ///         ControlFlow::Continue(())
+    ///     }
+    ///
+    ///     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {
+    ///         Some(Box::new(Self {
+    ///             value,
+    ///             left: None,
+    ///             right: None,
+    ///         }))
+    ///     }
+    /// }
+    ///
+    /// let node = TreeNode {
+    ///     value: 0,
+    ///     left: TreeNode::leaf(1),
+    ///     right: Some(Box::new(TreeNode {
+    ///         value: -1,
+    ///         left: TreeNode::leaf(5),
+    ///         right: TreeNode::leaf(2),
+    ///     })),
+    /// };
+    ///
+    /// let res = node.find(|val: &i32| *val > 3);
+    /// assert_eq!(res, Ok(&5));
+    /// ```
+    #[inline]
+    #[unstable(feature = "control_flow_ok", issue = "140266")]
+    pub fn break_ok(self) -> Result<B, C> {
+        match self {
+            ControlFlow::Continue(c) => Err(c),
+            ControlFlow::Break(b) => Ok(b),
+        }
+    }
+
+    /// Maps `ControlFlow<B, C>` to `ControlFlow<T, C>` by applying a function
+    /// to the break value in case it exists.
+    #[inline]
+    #[stable(feature = "control_flow_enum", since = "1.83.0")]
+    pub fn map_break<T>(self, f: impl FnOnce(B) -> T) -> ControlFlow<T, C> {
+        match self {
+            ControlFlow::Continue(x) => ControlFlow::Continue(x),
+            ControlFlow::Break(x) => ControlFlow::Break(f(x)),
+        }
+    }
+
+    /// Converts the `ControlFlow` into an `Option` which is `Some` if the
+    /// `ControlFlow` was `Continue` and `None` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::ops::ControlFlow;
+    ///
+    /// assert_eq!(ControlFlow::<&str, i32>::Break("Stop right there!").continue_value(), None);
+    /// assert_eq!(ControlFlow::<&str, i32>::Continue(3).continue_value(), Some(3));
+    /// ```
+    #[inline]
+    #[stable(feature = "control_flow_enum", since = "1.83.0")]
+    pub fn continue_value(self) -> Option<C> {
+        match self {
+            ControlFlow::Continue(x) => Some(x),
+            ControlFlow::Break(..) => None,
+        }
+    }
+
+    /// Converts the `ControlFlow` into an `Result` which is `Ok` if the
+    /// `ControlFlow` was `Continue` and `Err` if otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// #![feature(control_flow_ok)]
+    ///
+    /// use std::ops::ControlFlow;
+    ///
+    /// struct TreeNode<T> {
+    ///     value: T,
+    ///     left: Option<Box<TreeNode<T>>>,
+    ///     right: Option<Box<TreeNode<T>>>,
+    /// }
+    ///
+    /// impl<T> TreeNode<T> {
+    ///     fn validate<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> Result<(), B> {
+    ///         self.traverse_inorder(f).continue_ok()
+    ///     }
+    ///
+    ///     fn traverse_inorder<B>(&self, f: &mut impl FnMut(&T) -> ControlFlow<B>) -> ControlFlow<B> {
+    ///         if let Some(left) = &self.left {
+    ///             left.traverse_inorder(f)?;
+    ///         }
+    ///         f(&self.value)?;
+    ///         if let Some(right) = &self.right {
+    ///             right.traverse_inorder(f)?;
+    ///         }
+    ///         ControlFlow::Continue(())
+    ///     }
+    ///
+    ///     fn leaf(value: T) -> Option<Box<TreeNode<T>>> {
+    ///         Some(Box::new(Self {
+    ///             value,
+    ///             left: None,
+    ///             right: None,
+    ///         }))
+    ///     }
+    /// }
+    ///
+    /// let node = TreeNode {
+    ///     value: 0,
+    ///     left: TreeNode::leaf(1),
+    ///     right: Some(Box::new(TreeNode {
+    ///         value: -1,
+    ///         left: TreeNode::leaf(5),
+    ///         right: TreeNode::leaf(2),
+    ///     })),
+    /// };
+    ///
+    /// let res = node.validate(&mut |val| {
+    ///     if *val < 0 {
+    ///         return ControlFlow::Break("negative value detected");
+    ///     }
+    ///
+    ///     if *val > 4 {
+    ///         return ControlFlow::Break("too big value detected");
+    ///     }
+    ///
+    ///     ControlFlow::Continue(())
+    /// });
+    /// assert_eq!(res, Err("too big value detected"));
+    /// ```
+    #[inline]
+    #[unstable(feature = "control_flow_ok", issue = "140266")]
+    pub fn continue_ok(self) -> Result<C, B> {
+        match self {
+            ControlFlow::Continue(c) => Ok(c),
+            ControlFlow::Break(b) => Err(b),
+        }
+    }
+
+    /// Maps `ControlFlow<B, C>` to `ControlFlow<B, T>` by applying a function
+    /// to the continue value in case it exists.
+    #[inline]
+    #[stable(feature = "control_flow_enum", since = "1.83.0")]
+    pub fn map_continue<T>(self, f: impl FnOnce(C) -> T) -> ControlFlow<B, T> {
+        match self {
+            ControlFlow::Continue(x) => ControlFlow::Continue(f(x)),
+            ControlFlow::Break(x) => ControlFlow::Break(x),
+        }
+    }
+}
+
+impl<T> ControlFlow<T, T> {
+    /// Extracts the value `T` that is wrapped by `ControlFlow<T, T>`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// #![feature(control_flow_into_value)]
+    /// use std::ops::ControlFlow;
+    ///
+    /// assert_eq!(ControlFlow::<i32, i32>::Break(1024).into_value(), 1024);
+    /// assert_eq!(ControlFlow::<i32, i32>::Continue(512).into_value(), 512);
+    /// ```
+    #[unstable(feature = "control_flow_into_value", issue = "137461")]
+    #[rustc_allow_const_fn_unstable(const_precise_live_drops)]
+    pub const fn into_value(self) -> T {
+        match self {
+            ControlFlow::Continue(x) | ControlFlow::Break(x) => x,
+        }
+    }
+}
+
+/// These are used only as part of implementing the iterator adapters.
+/// They have mediocre names and non-obvious semantics, so aren't
+/// currently on a path to potential stabilization.
+impl<R: ops::Try> ControlFlow<R, R::Output> {
+    /// Creates a `ControlFlow` from any type implementing `Try`.
+    #[inline]
+    pub(crate) fn from_try(r: R) -> Self {
+        match R::branch(r) {
+            ControlFlow::Continue(v) => ControlFlow::Continue(v),
+            ControlFlow::Break(v) => ControlFlow::Break(R::from_residual(v)),
+        }
+    }
+
+    /// Converts a `ControlFlow` into any type implementing `Try`.
+    #[inline]
+    pub(crate) fn into_try(self) -> R {
+        match self {
+            ControlFlow::Continue(v) => R::from_output(v),
+            ControlFlow::Break(v) => v,
+        }
+    }
+}
