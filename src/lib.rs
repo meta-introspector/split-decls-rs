@@ -9,6 +9,10 @@
 
 pub mod ourprelude;
 pub mod build_lib;
+pub mod rustc_matrix;
+pub mod monster_trinity;
+pub mod galois_transform;
+pub mod rust_lattice;
 
 // Minimal external crates
 pub mod compiler_feedback;
