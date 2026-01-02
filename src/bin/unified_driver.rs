@@ -9,6 +9,12 @@ use syn::{parse_file, visit::Visit};
 
 const AUTO_FIX_CACHE_FILE: &str = "autofix_cache.json";
 
+#[derive(Debug, Clone)]
+struct UseStatement {
+    module_path: String,
+    use_stmt: String,
+}
+
 #[derive(Debug)]
 struct UnifiedDriver {
     symbol_map: HashMap<String, Value>,
@@ -16,6 +22,8 @@ struct UnifiedDriver {
     resolved_order: Vec<String>,
     included_crates: HashSet<String>,
     autofix_cache: HashMap<String, String>,
+    use_statements: Vec<UseStatement>,
+    unresolved_symbols: HashMap<String, Vec<String>>, // symbol -> modules that need it
 }
 
 impl UnifiedDriver {
@@ -51,41 +59,166 @@ impl UnifiedDriver {
         
         println!("✅ Loaded {} symbols and {} processed files", symbol_map.len(), processed_files.len());
         
-        Ok(Self {
+        let mut driver = Self {
             symbol_map,
             processed_files,
             resolved_order: Vec::new(),
             included_crates: HashSet::new(),
             autofix_cache,
-        })
+            use_statements: Vec::new(),
+            unresolved_symbols: HashMap::new(),
+        };
+        
+        // Load USE statements from quasi-interpretation
+        driver.load_use_statements("extract_output2.log")?;
+        driver.analyze_unresolved_symbols();
+        
+        Ok(driver)
+    }
+    
+    fn load_use_statements(&mut self, log_file: &str) -> Result<(), Box<dyn std::error::Error>> {
+        if let Ok(content) = fs::read_to_string(log_file) {
+            for line in content.lines() {
+                if line.contains("error: USE|") {
+                    if let Some(use_part) = line.split("error: USE|").nth(1) {
+                        let parts: Vec<&str> = use_part.split('|').collect();
+                        if parts.len() >= 2 {
+                            self.use_statements.push(UseStatement {
+                                module_path: parts[0].to_string(),
+                                use_stmt: parts[1].to_string(),
+                            });
+                        }
+                    }
+                }
+            }
+            println!("📋 Loaded {} USE statements from quasi-interpretation", self.use_statements.len());
+        }
+        Ok(())
+    }
+    
+    fn analyze_unresolved_symbols(&mut self) {
+        for use_stmt in &self.use_statements {
+            let symbols = self.extract_symbols_from_use(&use_stmt.use_stmt);
+            
+            for symbol in symbols {
+                let modules = self.unresolved_symbols.entry(symbol).or_insert_with(Vec::new);
+                modules.push(use_stmt.module_path.clone());
+            }
+        }
+        println!("🎯 Analyzed {} unresolved symbols", self.unresolved_symbols.len());
+    }
+    
+    fn extract_symbols_from_use(&self, use_stmt: &str) -> Vec<String> {
+        let mut symbols = Vec::new();
+        
+        if let Some(use_part) = use_stmt.strip_prefix("use ") {
+            if use_part.contains('{') && use_part.contains('}') {
+                if let Some(start) = use_part.find('{') {
+                    if let Some(end) = use_part.find('}') {
+                        let items = &use_part[start+1..end];
+                        for item in items.split(',') {
+                            let symbol = item.trim().split(' ').next().unwrap_or("").trim();
+                            if !symbol.is_empty() {
+                                symbols.push(symbol.to_string());
+                            }
+                        }
+                    }
+                }
+            } else {
+                let parts: Vec<&str> = use_part.split("::").collect();
+                if let Some(last_part) = parts.last() {
+                    let symbol = last_part.trim_end_matches(';').trim();
+                    if !symbol.is_empty() && symbol != "*" {
+                        symbols.push(symbol.to_string());
+                    }
+                }
+            }
+        }
+        
+        symbols
     }
     
     pub fn resolve_target_with_deps(&mut self, target: &str) -> Result<(), Box<dyn std::error::Error>> {
         println!("🎯 Analyzing dependency requirements for: {}", target);
         
-        // Load a processed file to trigger mkuse! registrations
-        if let Some(entry) = self.symbol_map.get(target) {
-            if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
-                let file_path = format!("processed_{}", source_file.replace("/", "_"));
-                if std::path::Path::new(&file_path).exists() {
-                    println!("📁 Loading processed file: {}", file_path);
-                    // This would trigger mkuse! registrations when compiled
-                }
-            }
-        }
-        
-        // Print suggestions instead of auto-resolving
-        println!("\n📋 SUGGESTIONS:");
-        println!("1. Compile a processed file to register mkuse! calls");
-        println!("2. Check USE_MATRIX for module->use relationships");
-        println!("3. Resolve dependencies systematically from the matrix");
-        
-        println!("\n🛑 STOPPING - Manual resolution required");
-        println!("Next: Use the USE_MATRIX to build precise dependency graph");
+        // Use quasi-interpretation data to resolve dependencies
+        self.print_symbol_usage_report(target);
+        self.generate_unified_imports_for_target(target);
         
         Ok(())
     }
     
+    fn print_symbol_usage_report(&self, target: &str) {
+        println!("\n🔍 Symbol Usage Report for: {}", target);
+        
+        // Find modules that use symbols from the target
+        let mut relevant_symbols = Vec::new();
+        for (symbol, modules) in &self.unresolved_symbols {
+            if modules.iter().any(|m| m.contains(target)) {
+                relevant_symbols.push((symbol, modules));
+            }
+        }
+        
+        if relevant_symbols.is_empty() {
+            println!("  ℹ️  No direct symbol usage found in quasi-interpretation data");
+        } else {
+            println!("  📊 Found {} symbols used by modules containing '{}':", relevant_symbols.len(), target);
+            for (symbol, modules) in relevant_symbols.iter().take(10) {
+                println!("    🎯 {} needed by:", symbol);
+                for module in modules.iter().take(3) {
+                    println!("      └─ {}", module);
+                }
+                if modules.len() > 3 {
+                    println!("      ... and {} more", modules.len() - 3);
+                }
+            }
+        }
+    }
+    
+    fn generate_unified_imports_for_target(&self, target: &str) {
+        println!("\n🎯 Unified Import Suggestions:");
+        
+        let mut crate_imports: HashMap<String, Vec<String>> = HashMap::new();
+        
+        // Collect all symbols needed by modules related to target
+        for (symbol, modules) in &self.unresolved_symbols {
+            if modules.iter().any(|m| m.contains(target)) {
+                if let Some(crate_name) = self.get_crate_for_symbol(symbol) {
+                    let imports = crate_imports.entry(crate_name).or_insert_with(Vec::new);
+                    if !imports.contains(symbol) {
+                        imports.push(symbol.clone());
+                    }
+                }
+            }
+        }
+        
+        if crate_imports.is_empty() {
+            println!("  ℹ️  No specific imports identified for target");
+        } else {
+            for (crate_name, symbols) in &crate_imports {
+                println!("extern crate {};", crate_name);
+                if symbols.len() <= 5 {
+                    println!("use {}::{{{}}};", crate_name, symbols.join(", "));
+                } else {
+                    println!("use {}::*; // {} symbols needed", crate_name, symbols.len());
+                }
+            }
+        }
+    }
+    
+    fn get_crate_for_symbol(&self, symbol: &str) -> Option<String> {
+        for (_, symbol_info) in &self.symbol_map {
+            if let Some(name) = symbol_info.get("name").and_then(|n| n.as_str()) {
+                if name == symbol {
+                    if let Some(crate_name) = symbol_info.get("crate_name").and_then(|c| c.as_str()) {
+                        return Some(crate_name.to_string());
+                    }
+                }
+            }
+        }
+        None
+    }
+            
     fn find_all_dependencies_comprehensive(&mut self, target: &str) -> Result<HashSet<String>, Box<dyn std::error::Error>> {
         let mut all_deps = HashSet::new();
         let mut queue = VecDeque::new();
@@ -366,3 +499,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     Ok(())
 }
+

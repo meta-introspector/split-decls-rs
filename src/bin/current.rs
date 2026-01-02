@@ -1684,8 +1684,9 @@ pub fn main() -> ! {
     }
 
     process::exit(exit_code)
-}
-}};
+} // main
+} // include de
+} // include dep 0
 
 pub mod signal_handler {
 }
