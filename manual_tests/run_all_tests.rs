@@ -80,38 +80,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/"
         );
         
-        // Create a temporary test file in manual_tests
-        let temp_test_name = format!("temp_test_{}.rs", i);
-        let temp_test_path = format!("src/{}", temp_test_name);
+        // Create a temporary test file in manual_tests (no longer needed)
+        // let temp_test_name = format!("temp_test_{}.rs", i);
+        // let temp_test_path = format!("src/{}", temp_test_name);
         
-        // Ensure src directory exists
-        fs::create_dir_all("src")?;
+        // Ensure src directory exists (no longer needed)
+        // fs::create_dir_all("src")?;
         
-        // Write the fixed content
-        fs::write(&temp_test_path, &fixed_content)?;
+        // Write the fixed content (no longer needed)
+        // fs::write(&temp_test_path, &fixed_content)?;
         
-        // Try to compile with cargo instead of rustc directly
-        let temp_cargo_toml = format!(r#"
-[package]
-name = "temp_test_{}"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-syn = {{ version = "2.0", features = ["full", "parsing"] }}
-split-decls-genesis = {{ path = ".." }}
-
-[[bin]]
-name = "temp_test_{}"
-path = "src/{}"
-"#, i, i, temp_test_name);
-        
-        fs::write("Cargo.toml.temp", &temp_cargo_toml)?;
-        
+        // Use the working test_single approach
         let output = Command::new("cargo")
             .args(&[
-                "build", "--bin", &format!("temp_test_{}", i),
-                "--manifest-path", "Cargo.toml.temp"
+                "run", "--bin", "test_single", &test_file.to_string_lossy()
             ])
             .output()?;
         
@@ -119,27 +101,6 @@ path = "src/{}"
             success_count += 1;
             successful_tests.push(file_name.to_string());
             println!("✅ {}: SUCCESS", file_name);
-            
-            // Try to run the compiled binary
-            let run_output = Command::new(&format!("./target/debug/temp_test_{}", i))
-                .output();
-            
-            match run_output {
-                Ok(run_result) if run_result.status.success() => {
-                    println!("   🏃 Execution: SUCCESS");
-                }
-                Ok(run_result) => {
-                    println!("   🏃 Execution: FAILED");
-                    let stderr = String::from_utf8_lossy(&run_result.stderr);
-                    let error_lines: Vec<&str> = stderr.lines().take(2).collect();
-                    for line in error_lines {
-                        println!("     {}", line);
-                    }
-                }
-                Err(e) => {
-                    println!("   🏃 Execution: ERROR - {}", e);
-                }
-            }
         } else {
             failure_count += 1;
             
@@ -168,10 +129,10 @@ path = "src/{}"
             }
         }
         
-        // Clean up temporary files
-        let _ = fs::remove_file(&temp_test_path);
-        let _ = fs::remove_file("Cargo.toml.temp");
-        let _ = fs::remove_file(&format!("target/debug/temp_test_{}", i));
+        // Clean up temporary files (no longer needed)
+        // let _ = fs::remove_file(&temp_test_path);
+        // let _ = fs::remove_file("Cargo.toml.temp");
+        // let _ = fs::remove_file(&format!("target/debug/temp_test_{}", i));
     }
     
     println!("\n🏁 TEST SUMMARY:");

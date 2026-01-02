@@ -1,6 +1,6 @@
-// Test case for parsing error: Original content doesn't parse: expected `,`
-// Original file: ../rust/compiler/rustc_parse/src/parser/stmt.rs
-// Error type: expected_comma
+// Test case for parsing error: Original content doesn't parse: expected identifier or integer
+// Original file: ../rust/compiler/rustc_middle/src/ty/context.rs
+// Error type: expected_identifier
 // Sample #1 of 3
 
 use syn::parse_file;
@@ -54,5 +54,5 @@ macro_rules! runbuild {
 }
 
 fn main() {
-    runbuild!("../rust/compiler/rustc_parse/src/parser/stmt.rs");
+    runbuild!("../rust/compiler/rustc_middle/src/ty/context.rs");
 }

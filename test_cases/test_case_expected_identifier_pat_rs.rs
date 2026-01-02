@@ -1,7 +1,7 @@
 // Test case for parsing error: Original content doesn't parse: expected identifier or `_`
 // Original file: ../rust/library/core/src/pat.rs
 // Error type: expected_identifier
-// Sample #1 of 3
+// Sample #2 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;

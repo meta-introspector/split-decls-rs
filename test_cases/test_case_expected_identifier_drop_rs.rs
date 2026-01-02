@@ -1,7 +1,7 @@
-// Test case for parsing error: Original content doesn't parse: expected `,`
-// Original file: ../rust/compiler/rustc_parse/src/parser/stmt.rs
-// Error type: expected_comma
-// Sample #1 of 3
+// Test case for parsing error: Original content doesn't parse: expected identifier or `_`
+// Original file: ../rust/library/core/src/ops/drop.rs
+// Error type: expected_identifier
+// Sample #2 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;
@@ -54,5 +54,5 @@ macro_rules! runbuild {
 }
 
 fn main() {
-    runbuild!("../rust/compiler/rustc_parse/src/parser/stmt.rs");
+    runbuild!("../rust/library/core/src/ops/drop.rs");
 }

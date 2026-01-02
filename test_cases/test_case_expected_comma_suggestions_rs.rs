@@ -1,7 +1,7 @@
 // Test case for parsing error: Original content doesn't parse: expected `,`
 // Original file: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/suggestions.rs
 // Error type: expected_comma
-// Sample #1 of 3
+// Sample #3 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;

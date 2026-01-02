@@ -1,0 +1,21 @@
+[package]
+name = "test_runner"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "parsing"] }
+split-decls-genesis = { path = ".." }
+
+[[bin]]
+name = "run_tests"
+path = "src/main.rs"
+
+[[bin]]
+name = "test_5"
+path = "src/test_5.rs"
+[[bin]]
+name = "test_20"
+path = "src/test_20.rs"
