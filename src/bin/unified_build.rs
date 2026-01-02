@@ -11,10 +11,12 @@ use std::collections::{HashMap, BTreeMap};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::time::{SystemTime, UNIX_EPOCH};
+use std::sync::{Arc, Mutex};
 use serde_json;
 use flate2::write::GzEncoder;
 use flate2::Compression;
 use std::io::Write;
+use rayon::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 Unified Build: Complete rustc processing pipeline");
@@ -116,6 +118,8 @@ fn apply_transformations(content: &str, file_path: &str) -> Result<String, Box<d
 fn export_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     let rustc_deps = get_rustc_dependencies().unwrap_or_default();
     let mut file_symbols: HashMap<String, Vec<Symbol>> = HashMap::new();
+    let mut all_symbols: HashMap<String, Symbol> = HashMap::new();
+    let mut symbol_usage_counts: HashMap<String, usize> = HashMap::new();
     let mut file_count = 0;
     let mut total_files = 0;
     
@@ -125,7 +129,9 @@ fn export_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
         total_files += rust_files.len();
     }
     
-    // Group symbols by source file
+    println!("🔍 Step 2a: Extracting symbols from {} files...", total_files);
+    
+    // First pass: Extract all symbols
     for dep in &rustc_deps {
         let rust_files = find_rust_files_in_dependency_fast(&dep.path);
         
@@ -133,6 +139,9 @@ fn export_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
             file_count += 1;
             if let Ok(symbols) = extract_all_symbols_from_file_fast(&file.to_string_lossy(), &dep.name) {
                 for symbol in symbols {
+                    let symbol_key = format!("{}::{}", symbol.crate_name, symbol.name);
+                    all_symbols.insert(symbol_key.clone(), symbol.clone());
+                    symbol_usage_counts.insert(symbol_key, 0); // Initialize usage count
                     file_symbols.entry(symbol.source_file.clone()).or_insert_with(Vec::new).push(symbol);
                 }
             }
@@ -145,24 +154,75 @@ fn export_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     
-    // Calculate dependencies and sort
-    let mut dependency_counts: Vec<(String, usize)> = Vec::new();
+    println!("🔍 Step 2b: Counting symbol usage across {} files (parallel)...", total_files);
+    
+    // Collect all files for parallel processing
+    let mut all_files = Vec::new();
+    for dep in &rustc_deps {
+        let rust_files = find_rust_files_in_dependency_fast(&dep.path);
+        all_files.extend(rust_files);
+    }
+    
+    // Parallel usage counting
+    let symbol_usage_counts = Arc::new(Mutex::new(symbol_usage_counts));
+    let processed_count = Arc::new(Mutex::new(0usize));
+    
+    all_files.par_iter().for_each(|file| {
+        if let Ok(content) = fs::read_to_string(file) {
+            let mut local_counts = HashMap::new();
+            
+            // Count all symbols in this file
+            for (symbol_key, _) in &all_symbols {
+                if let Some(symbol_name) = symbol_key.split("::").last() {
+                    let count = content.matches(symbol_name).count();
+                    if count > 0 {
+                        local_counts.insert(symbol_key.clone(), count);
+                    }
+                }
+            }
+            
+            // Merge local counts into global counts
+            if !local_counts.is_empty() {
+                let mut global_counts = symbol_usage_counts.lock().unwrap();
+                for (symbol_key, count) in local_counts {
+                    *global_counts.get_mut(&symbol_key).unwrap() += count;
+                }
+            }
+        }
+        
+        // Progress reporting
+        let mut count = processed_count.lock().unwrap();
+        *count += 1;
+        if *count % 200 == 0 {
+            println!("  📊 Analyzed usage in {}/{} files ({:.1}%)", 
+                *count, total_files, 
+                (*count as f32 / total_files as f32) * 100.0);
+        }
+    });
+    
+    let symbol_usage_counts = Arc::try_unwrap(symbol_usage_counts).unwrap().into_inner().unwrap();
+    
+    // Build final symbol map with usage data
     let mut symbol_map: BTreeMap<String, serde_json::Value> = BTreeMap::new();
+    let mut dependency_counts: Vec<(String, usize)> = Vec::new();
     
     for (file_path, symbols) in &file_symbols {
         let mut total_deps = 0;
         for symbol in symbols {
             total_deps += symbol.dependencies.len();
             
+            let symbol_key = format!("{}::{}", symbol.crate_name, symbol.name);
+            let usage_count = symbol_usage_counts.get(&symbol_key).unwrap_or(&0);
+            
             let symbol_data = serde_json::json!({
                 "name": symbol.name,
                 "symbol_type": symbol.symbol_type,
                 "source_file": symbol.source_file,
                 "crate_name": symbol.crate_name,
-                "dependencies": symbol.dependencies
+                "dependencies": symbol.dependencies,
+                "usage_count": usage_count
             });
             
-            let symbol_key = format!("{}::{}", symbol.crate_name, symbol.name);
             symbol_map.insert(symbol_key, symbol_data);
         }
         dependency_counts.push((file_path.clone(), total_deps));
@@ -178,9 +238,17 @@ fn export_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     encoder.write_all(json_output.as_bytes())?;
     encoder.finish()?;
     
+    // Calculate usage statistics
+    let total_usage: usize = symbol_usage_counts.values().sum();
+    let used_symbols = symbol_usage_counts.values().filter(|&&count| count > 0).count();
+    
     println!("✅ Exported {} symbols to symbol_map_original.json.gz", symbol_map.len());
     println!("📊 Files with 0 dependencies: {}", 
         dependency_counts.iter().filter(|(_, count)| *count == 0).count());
+    println!("📊 Symbols with usage: {}/{} ({:.1}%)", 
+        used_symbols, symbol_map.len(),
+        (used_symbols as f32 / symbol_map.len() as f32) * 100.0);
+    println!("📊 Total symbol usages found: {}", total_usage);
     
     Ok(())
 }
@@ -204,7 +272,7 @@ fn get_output_path(input_path: &Path, crate_name: &str) -> Result<PathBuf, Box<d
 
 // Transformation functions (from run_build.rs)
 fn add_prelude(content: &str) -> String {
-    format!("// Generated by unified_build.rs\nuse crate::*;\n\n{}", content)
+    format!("// Generated by unified_build.rs\n\n{}", content)
 }
 
 fn fix_file_paths(content: &str, _file_path: &str) -> String {

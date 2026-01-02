@@ -1,0 +1,144 @@
+{
+  "crate_stats": {
+    "rustc_arena": [
+      31,
+      0
+    ],
+    "rustc_ast": [
+      59,
+      0
+    ],
+    "rustc_ast_passes": [
+      7,
+      0
+    ],
+    "rustc_ast_pretty": [
+      29,
+      0
+    ],
+    "rustc_attr_parsing": [
+      215,
+      0
+    ],
+    "rustc_baked_icu_data": [
+      0,
+      0
+    ],
+    "rustc_data_structures": [
+      249,
+      0
+    ],
+    "rustc_driver": [
+      0,
+      0
+    ],
+    "rustc_error_codes": [
+      0,
+      0
+    ],
+    "rustc_expand": [
+      200,
+      0
+    ],
+    "rustc_fluent_macro": [
+      6,
+      0
+    ],
+    "rustc_fs_util": [
+      8,
+      0
+    ],
+    "rustc_graphviz": [
+      20,
+      0
+    ],
+    "rustc_hir": [
+      203,
+      0
+    ],
+    "rustc_index": [
+      79,
+      0
+    ],
+    "rustc_index_macros": [
+      3,
+      0
+    ],
+    "rustc_infer": [
+      68,
+      0
+    ],
+    "rustc_interface": [
+      95,
+      0
+    ],
+    "rustc_lexer": [
+      22,
+      0
+    ],
+    "rustc_llvm": [
+      11,
+      0
+    ],
+    "rustc_log": [
+      0,
+      0
+    ],
+    "rustc_macros": [
+      94,
+      0
+    ],
+    "rustc_metadata": [
+      137,
+      0
+    ],
+    "rustc_middle": [
+      459,
+      0
+    ],
+    "rustc_next_trait_solver": [
+      30,
+      0
+    ],
+    "rustc_parse_format": [
+      30,
+      0
+    ],
+    "rustc_pattern_analysis": [
+      35,
+      0
+    ],
+    "rustc_query_system": [
+      53,
+      0
+    ],
+    "rustc_sanitizers": [
+      0,
+      0
+    ],
+    "rustc_serialize": [
+      40,
+      0
+    ],
+    "rustc_session": [
+      259,
+      0
+    ],
+    "rustc_thread_pool": [
+      193,
+      0
+    ],
+    "rustc_trait_selection": [
+      233,
+      0
+    ],
+    "rustc_type_ir_macros": [
+      6,
+      0
+    ]
+  },
+  "level": 0,
+  "timestamp": "2026-01-02T21:01:37.235247593+00:00",
+  "total_symbols": 2874,
+  "total_usages": 0
+}

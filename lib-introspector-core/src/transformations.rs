@@ -50,14 +50,40 @@ pub fn fix_env_vars(content: &str) -> String {
 
 /// Fix attribute spacing issues (# [attr] -> #[attr])
 pub fn fix_attribute_spacing(content: &str) -> String {
-    // Placeholder - implement based on build.rs  
-    content.to_string()
+    // Fix the common attribute spacing issue: # [attr] -> #[attr]
+    let mut result = content.replace("# [", "#[");
+    
+    // Also handle multiple spaces: #  [attr] -> #[attr]
+    while result.contains("#  [") {
+        result = result.replace("#  [", "#[");
+    }
+    
+    // Handle tab characters: #\t[attr] -> #[attr]
+    result = result.replace("#\t[", "#[");
+    
+    result
 }
 
 /// Remove problematic crate attributes
 pub fn remove_crate_attrs(content: &str) -> String {
-    // Placeholder - implement based on build.rs
-    content.to_string()
+    let lines: Vec<&str> = content.lines().collect();
+    let mut result = Vec::new();
+    
+    for line in lines {
+        let trimmed = line.trim();
+        // Skip problematic crate-level attributes
+        if trimmed.starts_with("#![") && (
+            trimmed.contains("feature(") ||
+            trimmed.contains("allow(") ||
+            trimmed.contains("warn(") ||
+            trimmed.contains("deny(")
+        ) {
+            continue;
+        }
+        result.push(line);
+    }
+    
+    result.join("\n")
 }
 
 /// Strip incomplete doc comments that break parsing
