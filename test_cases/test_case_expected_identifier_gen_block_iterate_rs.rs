@@ -1,7 +1,7 @@
 // Test case for parsing error: Original content doesn't parse: expected identifier or integer
 // Original file: ../rust/compiler/rustc_codegen_cranelift/example/gen_block_iterate.rs
 // Error type: expected_identifier
-// Sample #3 of 3
+// Sample #2 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;

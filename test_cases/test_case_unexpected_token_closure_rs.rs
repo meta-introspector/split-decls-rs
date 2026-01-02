@@ -1,7 +1,7 @@
 // Test case for parsing error: Original content doesn't parse: unexpected token, expected `;`
 // Original file: ../rust/compiler/rustc_middle/src/ty/closure.rs
 // Error type: unexpected_token
-// Sample #1 of 3
+// Sample #3 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;

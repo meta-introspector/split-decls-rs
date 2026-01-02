@@ -15,5 +15,13 @@ name = "test_single"
 path = "src/test_single.rs"
 
 [[bin]]
+name = "test_single_case"
+path = "src/test_single_case.rs"
+
+[[bin]]
+name = "run_all_tests"
+path = "run_all_tests.rs"
+
+[[bin]]
 name = "test_case_expected_expression_need_type_info_rs"
 path = "../test_cases/test_case_expected_expression_need_type_info_rs.rs"

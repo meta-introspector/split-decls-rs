@@ -395,21 +395,64 @@ fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     }
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn oldmain() -> Result<(), Box<dyn std::error::Error>> {
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=symbol_map.json.gz");
+    println!("cargo:rerun-if-changed=../rust");
+    
+    // Check environment variables
+    println!("🔍 Checking environment variables...");
+    if let Ok(skip) = std::env::var("SKIP_BUILD") {
+        println!("⏭️ SKIP_BUILD={}, exiting early", skip);
+        return Ok(());
+    }
+    
+    if let Ok(scripts) = std::env::var("CARGO_BUILD_SCRIPTS") {
+        println!("📋 CARGO_BUILD_SCRIPTS={}", scripts);
+        if scripts == "false" {
+            println!("⏭️ Build scripts disabled, exiting early");
+            return Ok(());
+        }
+    }
+    
     println!("🚀 Building with macro wrappers...");
     
-    // Load symbol map to find all source files
-    if Path::new("symbol_map.json.gz").exists() {
-        println!("📊 Loading symbol map...");
+    // Check if we have a recent successful build
+    if Path::new("build_cache.json").exists() {
+        if let Ok(cache_content) = std::fs::read_to_string("build_cache.json") {
+            if let Ok(cache_data) = serde_json::from_str::<serde_json::Value>(&cache_content) {
+                if let Some(timestamp) = cache_data.get("timestamp").and_then(|t| t.as_u64()) {
+                    let cache_age = std::time::SystemTime::now()
+                        .duration_since(std::time::UNIX_EPOCH)?
+                        .as_secs() - timestamp;
+                    
+                    println!("💾 Build cache age: {} seconds", cache_age);
+                    
+                    // Only rebuild if cache is older than 1 hour (3600 seconds)
+                    if cache_age < 3600 {
+                        println!("✅ Build cache is recent (< 1 hour old), skipping symbol processing");
+                        println!("💡 To force rebuild: rm build_cache.json");
+                        return Ok(());
+                    }
+                }
+            }
+        }
+    }
+    
+    println!("🚀 Starting symbol map processing...");
+    println!("📊 Loading symbol map from symbol_map.json.gz...");
+        let start_time = std::time::Instant::now();
         let file = std::fs::File::open("symbol_map.json.gz")?;
         let decoder = flate2::read::GzDecoder::new(file);
         let symbol_map: serde_json::Value = serde_json::from_reader(decoder)?;
+        println!("⏱️ Symbol map loaded in {:?}", start_time.elapsed());
         
         if let Some(obj) = symbol_map.as_object() {
+            println!("🔍 Processing {} symbol entries...", obj.len());
             let mut source_files = std::collections::HashSet::new();
             
             // Extract unique source files from symbol map
-            for (_, entry) in obj.iter() {
+            for (_symbol_name, entry) in obj.iter() {
                 if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
                     if source_file.ends_with(".rs") && !source_file.contains("test") {
                         source_files.insert(source_file.to_string());
@@ -417,76 +460,167 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             
-            println!("📁 Found {} unique source files", source_files.len());
+            println!("📁 Found {} unique source files from {} symbols", source_files.len(), obj.len());
             
             // Create submodules directory structure
+            println!("📂 Creating submodules directory...");
             fs::create_dir_all("submodules")?;
+            
+            let total_files = source_files.len();
+            let mut processed_count = 0;
+            let mut success_count = 0;
+            let mut failure_count = 0;
+            let start_time = std::time::Instant::now();
             
             // Process each source file
             for (i, source_file) in source_files.iter().enumerate() {
-                let file_path = source_file.replace("../rust/", "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/");
-                if Path::new(&file_path).exists() {
-                    println!("🔄 Processing {}/{}: {}", i+1, source_files.len(), source_file);
-                    match process_file(&file_path) {
-                        Ok(wrapped_content) => {
-                            // Create proper submodules directory structure
-                            let output_path = format!("submodules/{}", source_file.replace("../rust/", "rust/"));
-                            
-                            // Create parent directories
-                            if let Some(parent) = Path::new(&output_path).parent() {
-                                fs::create_dir_all(parent)?;
-                            }
-                            
-                            fs::write(&output_path, wrapped_content)?;
-                            println!("✅ {}/{}: {} -> {}", i+1, source_files.len(), source_file, output_path);
+                let file_path = source_file.replace("../rust/", "/home/mdupont/nix/vendor/rust/cargo2nix/submodules/rust/");
+                
+                if !Path::new(&file_path).exists() {
+                    println!("⚠️  File not found: {}", file_path);
+                    continue;
+                }
+                
+                processed_count += 1;
+                let file_start = std::time::Instant::now();
+                
+                println!("🔄 Processing {}/{}: {} ({})", i+1, total_files, source_file, file_path);
+                
+                match process_file(&file_path) {
+                    Ok(wrapped_content) => {
+                        // Create proper submodules directory structure
+                        let output_path = format!("submodules/{}", source_file.replace("../rust/", "rust/"));
+                        
+                        // Create parent directories
+                        if let Some(parent) = Path::new(&output_path).parent() {
+                            fs::create_dir_all(parent)?;
                         }
-                        Err(e) => {
-                            println!("❌ Failed to process {}: {}", source_file, e);
-                            
-                            // Create minimal test case for this failure
-                            if let Ok(content) = fs::read_to_string(&file_path) {
-                                if let Err(test_err) = create_minimal_test_case(&source_file, &content, e.as_ref()) {
-                                    println!("⚠️  Failed to create test case: {}", test_err);
+                        
+                        fs::write(&output_path, wrapped_content)?;
+                        success_count += 1;
+                        let msg = format!("✅ {}/{}: {} -> {} ({:?})", i+1, total_files, source_file, output_path, file_start.elapsed());
+                        println!("{}", msg);
+                        
+                        // Also log to file
+                        if let Ok(mut audit_log) = AUDIT_LOG.lock() {
+                            audit_log.push(msg);
+                        }
+                    }
+                    Err(e) => {
+                        failure_count += 1;
+                        let msg = format!("❌ Failed to process {} ({:?}): {}", source_file, file_start.elapsed(), e);
+                        println!("{}", msg);
+                        
+                        // Also log to file
+                        if let Ok(mut audit_log) = AUDIT_LOG.lock() {
+                            audit_log.push(msg.clone());
+                        }
+                        
+                        // Create minimal test case for this failure
+                        if let Ok(content) = fs::read_to_string(&file_path) {
+                            if let Err(test_err) = create_minimal_test_case(&source_file, &content, e.as_ref()) {
+                                let test_msg = format!("⚠️  Failed to create test case: {}", test_err);
+                                println!("{}", test_msg);
+                                if let Ok(mut audit_log) = AUDIT_LOG.lock() {
+                                    audit_log.push(test_msg);
                                 }
                             }
                         }
                     }
-                } else {
-                    if i < 10 {
-                        println!("⚠️  File not found: {}", file_path);
+                }
+                
+                // Progress report every 100 files
+                if processed_count % 100 == 0 {
+                    let elapsed = start_time.elapsed();
+                    let rate = processed_count as f64 / elapsed.as_secs_f64();
+                    let progress_msg = format!("📊 Progress: {}/{} files ({:.1}%), {:.1} files/sec, ✅{} ❌{}", 
+                             processed_count, total_files, 
+                             (processed_count as f64 / total_files as f64) * 100.0,
+                             rate, success_count, failure_count);
+                    println!("{}", progress_msg);
+                    
+                    // Also log to file
+                    if let Ok(mut audit_log) = AUDIT_LOG.lock() {
+                        audit_log.push(progress_msg);
                     }
                 }
             }
+            
+            // Final summary
+            let total_elapsed = start_time.elapsed();
+            let final_rate = processed_count as f64 / total_elapsed.as_secs_f64();
+            println!("\n🏁 BUILD.RS COMPLETE");
+            println!("📊 Final Summary:");
+            println!("   Total time: {:?}", total_elapsed);
+            println!("   Files processed: {}/{}", processed_count, total_files);
+            println!("   Success rate: {:.1}% ({}/{})", 
+                     (success_count as f64 / processed_count as f64) * 100.0, 
+                     success_count, processed_count);
+            println!("   Failures: {}", failure_count);
+            println!("   Average rate: {:.1} files/sec", final_rate);
+            
+            // Create build cache to avoid reprocessing
+            let cache_data = serde_json::json!({
+                "timestamp": std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)?.as_secs(),
+                "source_files_count": source_files.len(),
+                "symbols_count": obj.len()
+            });
+            std::fs::write("build_cache.json", serde_json::to_string_pretty(&cache_data)?)?;
+            println!("💾 Build cache updated");
+            
+            // Write audit log
+            if let Ok(audit_log) = AUDIT_LOG.lock() {
+                if !audit_log.is_empty() {
+                    println!("📝 Writing audit log ({} entries)...", audit_log.len());
+                    fs::write("build_audit.log", audit_log.join("\n"))?;
+                }
+            }
         }
-    } else {
-        println!("❌ symbol_map.json.gz not found. Run: cargo run --bin export_symbol_map");
-        return Err("Missing symbol map".into());
-    }
-    
-    // Write audit log
-    write_audit_log()?;
     
     Ok(())
 }
 
-fn write_audit_log() -> Result<(), Box<dyn std::error::Error>> {
-    if let Ok(log) = AUDIT_LOG.lock() {
-        if !log.is_empty() {
-            println!("📝 Writing audit log to build_audit.log...");
-            let audit_content = log.join("\n");
-            fs::write("build_audit.log", audit_content)?;
-            
-            // Print summary
-            let total_files = log.iter().filter(|line| line.starts_with("📁")).count();
-            let successful_files = log.iter().filter(|line| line.contains("final: true")).count();
-            let bisection_files = log.iter().filter(|line| line.contains("🔍 Bisection performed")).count();
-            
-            println!("📊 Build Audit Summary:");
-            println!("  Total files processed: {}", total_files);
-            println!("  Successful files: {}", successful_files);
-            println!("  Files requiring bisection: {}", bisection_files);
-            println!("  Success rate: {:.1}%", (successful_files as f64 / total_files as f64) * 100.0);
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔍 BUILD.RS VERBOSE DIAGNOSTICS:");
+    
+    // Check current directory
+    if let Ok(current_dir) = std::env::current_dir() {
+        println!("📁 Current directory: {}", current_dir.display());
+    }
+    
+    // Check if symbol map exists
+    let symbol_map_exists = Path::new("symbol_map.json.gz").exists();
+    println!("📊 symbol_map.json.gz exists: {}", symbol_map_exists);
+    
+    if symbol_map_exists {
+        if let Ok(metadata) = std::fs::metadata("symbol_map.json.gz") {
+            println!("📊 symbol_map.json.gz size: {} bytes", metadata.len());
         }
     }
+    
+    // Check cache file
+    let cache_exists = Path::new("build_cache.json").exists();
+    println!("💾 build_cache.json exists: {}", cache_exists);
+    
+    // Check environment variables
+    println!("🔍 Environment variables:");
+    if let Ok(skip) = std::env::var("SKIP_BUILD") {
+        println!("⏭️ SKIP_BUILD={}", skip);
+    } else {
+        println!("⏭️ SKIP_BUILD not set");
+    }
+    
+    if let Ok(scripts) = std::env::var("CARGO_BUILD_SCRIPTS") {
+        println!("📋 CARGO_BUILD_SCRIPTS={}", scripts);
+    } else {
+        println!("📋 CARGO_BUILD_SCRIPTS not set");
+    }
+    
+    // Check rust directory
+    let rust_dir_exists = Path::new("../rust").exists();
+    println!("🦀 ../rust directory exists: {}", rust_dir_exists);
+    
+    println!("🚀 Calling oldmain()...");
+    oldmain();
     Ok(())
 }

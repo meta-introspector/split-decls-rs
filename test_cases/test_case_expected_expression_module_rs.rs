@@ -1,7 +1,7 @@
 // Test case for parsing error: Original content doesn't parse: expected an expression
 // Original file: ../rust/compiler/rustc_expand/src/module.rs
 // Error type: expected_expression
-// Sample #2 of 3
+// Sample #3 of 3
 
 use syn::parse_file;
 use split_decls_genesis::build_lib::*;
