@@ -11,7 +11,7 @@ members = ["runbuild"]
 [dependencies]
 anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-syn = { version = "2.0", features = ["full", "visit"] }
+syn = { version = "2.0", features = ["full", "visit", "parsing"] }
 toml = "0.8"
 serde_json = "1.0"
 rayon = "1.8"
@@ -77,7 +77,7 @@ anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
-syn = { version = "2.0", features = ["full", "visit"] }
+syn = { version = "2.0", features = ["full", "visit", "parsing"] }
 quote = "1.0"
 walkdir = "2.0"
 flate2 = "1.0"
