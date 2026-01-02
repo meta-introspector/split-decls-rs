@@ -429,9 +429,7 @@ pub mod rustc_complete {
     }
 }
 
-pub mod rustc_feature {
-    pub fn find_gated_cfg() {}
-}
+// Removed duplicate rustc_feature module - already defined in main file
 
 pub mod session_diagnostics {
     pub struct CantEmitMIR;

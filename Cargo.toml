@@ -84,7 +84,7 @@ flate2 = "1.0"
 
 [[bin]]
 name = "unified_rustc_wrapped"
-path = "unified_rustc_wrapped.rs"
+path = "src/bin/unified_rustc_wrapped.rs"
 
 # [[bin]]
 # name = "test_dependency_tracking"
