@@ -1,0 +1,56 @@
+mkuse!{use rustc_codegen_ssa :: traits :: { BaseTypeCodegenMethods , ConstCodegenMethods } ;}
+mkuse!{use rustc_data_structures :: fx :: FxHashSet ;}
+mkuse!{use rustc_hir :: def_id :: { DefId , LocalDefId } ;}
+mkuse!{use rustc_middle :: mir ;}
+mkuse!{use rustc_middle :: mir :: mono :: MonoItemPartitions ;}
+mkuse!{use rustc_middle :: ty :: { self , TyCtxt } ;}
+mkuse!{use rustc_span :: def_id :: DefIdSet ;}
+mkuse!{use crate :: common :: CodegenCx ;}
+mkuse!{use crate :: coverageinfo :: mapgen :: covfun :: { CovfunRecord , prepare_covfun_record } ;}
+mkuse!{use crate :: llvm ;}
+
+macro_rules! prepare_covfun_records_for_unused_functions_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function prepare_covfun_records_for_unused_functions in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    prepare_covfun_records_for_unused_functions_introspect!();
+    # [doc = " Each CGU will normally only emit coverage metadata for the functions that it actually generates."] # [doc = " But since we don't want unused functions to disappear from coverage reports, we also scan for"] # [doc = " functions that were instrumented but are not participating in codegen."] # [doc = ""] # [doc = " These unused functions don't need to be codegenned, but we do need to add them to the function"] # [doc = " coverage map (in a single designated CGU) so that we still emit coverage mappings for them."] # [doc = " We also end up adding their symbol names to a special global array that LLVM will include in"] # [doc = " its embedded coverage data."] pub (crate) fn prepare_covfun_records_for_unused_functions < 'tcx > (cx : & CodegenCx < '_ , 'tcx > , covfun_records : & mut Vec < CovfunRecord < 'tcx > > ,) { assert ! (cx . codegen_unit . is_code_coverage_dead_code_cgu ()) ; let mut unused_instances = gather_unused_function_instances (cx) ; unused_instances . sort_by_key (| instance | instance . symbol_name) ; let mut name_globals = Vec :: with_capacity (unused_instances . len ()) ; covfun_records . extend (unused_instances . into_iter () . filter_map (| unused | try { let record = prepare_covfun_record (cx . tcx , unused . instance , false) ? ; name_globals . push (cx . const_str (unused . symbol_name . name) . 0) ; record })) ; if ! name_globals . is_empty () { let initializer = cx . const_array (cx . type_ptr () , & name_globals) ; let array = llvm :: add_global (cx . llmod , cx . val_ty (initializer) , c"__llvm_coverage_names") ; llvm :: set_global_constant (array , true) ; llvm :: set_linkage (array , llvm :: Linkage :: InternalLinkage) ; llvm :: set_initializer (array , initializer) ; } }
+}
+mkitem!{mkstruct!{# [doc = " Holds a dummy function instance along with its symbol name, to avoid having"] # [doc = " to repeatedly query for the name."] struct UnusedInstance < 'tcx > { instance : ty :: Instance < 'tcx > , symbol_name : ty :: SymbolName < 'tcx > , }}}
+
+macro_rules! gather_unused_function_instances_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function gather_unused_function_instances in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    gather_unused_function_instances_introspect!();
+    fn gather_unused_function_instances < 'tcx > (cx : & CodegenCx < '_ , 'tcx >) -> Vec < UnusedInstance < 'tcx > > { assert ! (cx . codegen_unit . is_code_coverage_dead_code_cgu ()) ; let tcx = cx . tcx ; let usage = prepare_usage_sets (tcx) ; let is_unused_fn = | def_id : LocalDefId | -> bool { let d : DefId = LocalDefId :: to_def_id (def_id) ; tcx . is_eligible_for_coverage (def_id) && (! usage . all_mono_items . contains (& d) || usage . missing_own_coverage . contains (& d)) && ! usage . used_via_inlining . contains (& d) } ; tcx . mir_keys (()) . iter () . copied () . filter (| & def_id | is_unused_fn (def_id)) . map (| def_id | make_dummy_instance (tcx , def_id)) . map (| instance | UnusedInstance { instance , symbol_name : tcx . symbol_name (instance) }) . collect :: < Vec < _ > > () }
+}
+mkitem!{mkstruct!{struct UsageSets < 'tcx > { all_mono_items : & 'tcx DefIdSet , used_via_inlining : FxHashSet < DefId > , missing_own_coverage : FxHashSet < DefId > , }}}
+
+macro_rules! prepare_usage_sets_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function prepare_usage_sets in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    prepare_usage_sets_introspect!();
+    # [doc = " Prepare sets of definitions that are relevant to deciding whether something"] # [doc = " is an \"unused function\" for coverage purposes."] fn prepare_usage_sets < 'tcx > (tcx : TyCtxt < 'tcx >) -> UsageSets < 'tcx > { let MonoItemPartitions { all_mono_items , codegen_units , .. } = tcx . collect_and_partition_mono_items (()) ; let mut def_ids_seen = FxHashSet :: default () ; let def_and_mir_for_all_mono_fns = codegen_units . iter () . flat_map (| cgu | cgu . items () . keys ()) . filter_map (| item | match item { mir :: mono :: MonoItem :: Fn (instance) => Some (instance) , mir :: mono :: MonoItem :: Static (_) | mir :: mono :: MonoItem :: GlobalAsm (_) => None , }) . filter (move | instance | def_ids_seen . insert (instance . def_id ())) . map (| instance | { let body = tcx . instance_mir (instance . def) ; (instance . def_id () , body) }) ; let mut used_via_inlining = FxHashSet :: default () ; let mut missing_own_coverage = FxHashSet :: default () ; for (def_id , body) in def_and_mir_for_all_mono_fns { let mut saw_own_coverage = false ; for stmt in body . basic_blocks . iter () . flat_map (| block | & block . statements) . filter (| stmt | matches ! (stmt . kind , mir :: StatementKind :: Coverage (_))) { if let Some (inlined) = stmt . source_info . scope . inlined_instance (& body . source_scopes) { used_via_inlining . insert (inlined . def_id ()) ; } else { saw_own_coverage = true ; } } if ! saw_own_coverage && body . function_coverage_info . is_some () { missing_own_coverage . insert (def_id) ; } } UsageSets { all_mono_items , used_via_inlining , missing_own_coverage } }
+}
+
+macro_rules! make_dummy_instance_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function make_dummy_instance in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    make_dummy_instance_introspect!();
+    fn make_dummy_instance < 'tcx > (tcx : TyCtxt < 'tcx > , local_def_id : LocalDefId) -> ty :: Instance < 'tcx > { let def_id = local_def_id . to_def_id () ; ty :: Instance :: new_raw (def_id , ty :: GenericArgs :: for_item (tcx , def_id , | param , _ | { if let ty :: GenericParamDefKind :: Lifetime = param . kind { tcx . lifetimes . re_erased . into () } else { tcx . mk_param_from_def (param) } }) ,) }
+}

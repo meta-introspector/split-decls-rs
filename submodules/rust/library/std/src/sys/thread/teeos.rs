@@ -1,0 +1,44 @@
+mkuse!{use crate :: mem :: { self , ManuallyDrop } ;}
+mkuse!{use crate :: sys :: os ;}
+mkuse!{use crate :: time :: Duration ;}
+mkuse!{use crate :: { cmp , io , ptr } ;}
+mkitem!{pub const DEFAULT_MIN_STACK_SIZE : usize = 8 * 1024 ;}
+mkitem!{unsafe extern "C" { safe fn TEE_Wait (timeout : u32) -> u32 ; }}
+
+macro_rules! min_stack_size_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function min_stack_size in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    min_stack_size_introspect!();
+    fn min_stack_size (_ : * const libc :: pthread_attr_t) -> usize { libc :: PTHREAD_STACK_MIN . try_into () . expect ("Infallible") }
+}
+mkitem!{mkstruct!{pub struct Thread { id : libc :: pthread_t , }}}
+mkitem!{mkimpl!{unsafe impl Send for Thread { }}}
+mkitem!{mkimpl!{unsafe impl Sync for Thread { }}}
+mkitem!{mkimpl!{impl Thread { pub unsafe fn new (stack : usize , _name : Option < & str > , p : Box < dyn FnOnce () > ,) -> io :: Result < Thread > { let p = Box :: into_raw (Box :: new (p)) ; let mut native : libc :: pthread_t = unsafe { mem :: zeroed () } ; let mut attr : libc :: pthread_attr_t = unsafe { mem :: zeroed () } ; assert_eq ! (unsafe { libc :: pthread_attr_init (& mut attr) } , 0) ; assert_eq ! (unsafe { libc :: pthread_attr_settee (& mut attr , libc :: TEESMP_THREAD_ATTR_CA_INHERIT , libc :: TEESMP_THREAD_ATTR_TASK_ID_INHERIT , libc :: TEESMP_THREAD_ATTR_HAS_SHADOW ,) } , 0 ,) ; let stack_size = cmp :: max (stack , min_stack_size (& attr)) ; match unsafe { libc :: pthread_attr_setstacksize (& mut attr , stack_size) } { 0 => { } n => { assert_eq ! (n , libc :: EINVAL) ; let page_size = os :: page_size () ; let stack_size = (stack_size + page_size - 1) & (- (page_size as isize - 1) as usize - 1) ; assert_eq ! (unsafe { libc :: pthread_attr_setstacksize (& mut attr , stack_size) } , 0) ; } } ; let ret = unsafe { libc :: pthread_create (& mut native , & attr , thread_start , p as * mut _) } ; assert_eq ! (unsafe { libc :: pthread_attr_destroy (& mut attr) } , 0) ; return if ret != 0 { drop (unsafe { Box :: from_raw (p) }) ; Err (io :: Error :: from_raw_os_error (ret)) } else { yield_now () ; Ok (Thread { id : native }) } ; extern "C" fn thread_start (main : * mut libc :: c_void) -> * mut libc :: c_void { unsafe { Box :: from_raw (main as * mut Box < dyn FnOnce () >) () ; } ptr :: null_mut () } } # [doc = " must join, because no pthread_detach supported"] pub fn join (self) { let id = self . into_id () ; let ret = unsafe { libc :: pthread_join (id , ptr :: null_mut ()) } ; assert ! (ret == 0 , "failed to join thread: {}" , io :: Error :: from_raw_os_error (ret)) ; } pub fn into_id (self) -> libc :: pthread_t { ManuallyDrop :: new (self) . id } }}}
+mkitem!{mkimpl!{impl Drop for Thread { fn drop (& mut self) { panic ! ("thread must join, detach is not supported!") ; } }}}
+
+macro_rules! yield_now_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function yield_now in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    yield_now_introspect!();
+    pub fn yield_now () { let ret = unsafe { libc :: sched_yield () } ; debug_assert_eq ! (ret , 0) ; }
+}
+
+macro_rules! sleep_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function sleep in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    sleep_introspect!();
+    # [doc = " only main thread could wait for sometime in teeos"] pub fn sleep (dur : Duration) { let sleep_millis = dur . as_millis () ; let final_sleep : u32 = if sleep_millis >= u32 :: MAX as u128 { u32 :: MAX } else { sleep_millis as u32 } ; TEE_Wait (final_sleep) ; }
+}

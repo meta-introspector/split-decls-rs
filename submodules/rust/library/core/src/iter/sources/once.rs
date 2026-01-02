@@ -1,0 +1,18 @@
+mkuse!{use crate :: iter :: { FusedIterator , TrustedLen } ;}
+
+macro_rules! once_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function once in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    once_introspect!();
+    # [doc = " Creates an iterator that yields an element exactly once."] # [doc = ""] # [doc = " This is commonly used to adapt a single value into a [`chain()`] of other"] # [doc = " kinds of iteration. Maybe you have an iterator that covers almost"] # [doc = " everything, but you need an extra special case. Maybe you have a function"] # [doc = " which works on iterators, but you only need to process one value."] # [doc = ""] # [doc = " [`chain()`]: Iterator::chain"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Basic usage:"] # [doc = ""] # [doc = " ```"] # [doc = " use std::iter;"] # [doc = ""] # [doc = " // one is the loneliest number"] # [doc = " let mut one = iter::once(1);"] # [doc = ""] # [doc = " assert_eq!(Some(1), one.next());"] # [doc = ""] # [doc = " // just one, that's all we get"] # [doc = " assert_eq!(None, one.next());"] # [doc = " ```"] # [doc = ""] # [doc = " Chaining together with another iterator. Let's say that we want to iterate"] # [doc = " over each file of the `.foo` directory, but also a configuration file,"] # [doc = " `.foorc`:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::iter;"] # [doc = " use std::fs;"] # [doc = " use std::path::PathBuf;"] # [doc = ""] # [doc = " let dirs = fs::read_dir(\".foo\")?;"] # [doc = ""] # [doc = " // we need to convert from an iterator of DirEntry-s to an iterator of"] # [doc = " // PathBufs, so we use map"] # [doc = " let dirs = dirs.map(|file| file.unwrap().path());"] # [doc = ""] # [doc = " // now, our iterator just for our config file"] # [doc = " let config = iter::once(PathBuf::from(\".foorc\"));"] # [doc = ""] # [doc = " // chain the two iterators together into one big iterator"] # [doc = " let files = dirs.chain(config);"] # [doc = ""] # [doc = " // this will give us all of the files in .foo as well as .foorc"] # [doc = " for f in files {"] # [doc = "     println!(\"{f:?}\");"] # [doc = " }"] # [doc = " # std::io::Result::Ok(())"] # [doc = " ```"] # [stable (feature = "iter_once" , since = "1.2.0")] pub fn once < T > (value : T) -> Once < T > { Once { inner : Some (value) . into_iter () } }
+}
+mkitem!{mkstruct!{# [doc = " An iterator that yields an element exactly once."] # [doc = ""] # [doc = " This `struct` is created by the [`once()`] function. See its documentation for more."] # [derive (Clone , Debug)] # [stable (feature = "iter_once" , since = "1.2.0")] # [rustc_diagnostic_item = "IterOnce"] pub struct Once < T > { inner : crate :: option :: IntoIter < T > , }}}
+mkitem!{mkimpl!{# [stable (feature = "iter_once" , since = "1.2.0")] impl < T > Iterator for Once < T > { type Item = T ; fn next (& mut self) -> Option < T > { self . inner . next () } fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } }}}
+mkitem!{mkimpl!{# [stable (feature = "iter_once" , since = "1.2.0")] impl < T > DoubleEndedIterator for Once < T > { fn next_back (& mut self) -> Option < T > { self . inner . next_back () } }}}
+mkitem!{mkimpl!{# [stable (feature = "iter_once" , since = "1.2.0")] impl < T > ExactSizeIterator for Once < T > { fn len (& self) -> usize { self . inner . len () } }}}
+mkitem!{mkimpl!{# [unstable (feature = "trusted_len" , issue = "37572")] unsafe impl < T > TrustedLen for Once < T > { }}}
+mkitem!{mkimpl!{# [stable (feature = "fused" , since = "1.26.0")] impl < T > FusedIterator for Once < T > { }}}

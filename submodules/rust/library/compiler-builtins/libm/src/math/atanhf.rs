@@ -1,0 +1,12 @@
+mkuse!{use super :: log1pf ;}
+
+macro_rules! atanhf_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function atanhf in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    atanhf_introspect!();
+    # [doc = " Inverse hyperbolic tangent (f32)"] # [doc = ""] # [doc = " Calculates the inverse hyperbolic tangent of `x`."] # [doc = " Is defined as `log((1+x)/(1-x))/2 = log1p(2x/(1-x))/2`."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn atanhf (mut x : f32) -> f32 { let mut u = x . to_bits () ; let sign = (u >> 31) != 0 ; u &= 0x7fffffff ; x = f32 :: from_bits (u) ; if u < 0x3f800000 - (1 << 23) { if u < 0x3f800000 - (32 << 23) { if u < (1 << 23) { force_eval ! (x * x) ; } } else { x = 0.5 * log1pf (2.0 * x + 2.0 * x * x / (1.0 - x)) ; } } else { x = 0.5 * log1pf (2.0 * (x / (1.0 - x))) ; } if sign { - x } else { x } }
+}

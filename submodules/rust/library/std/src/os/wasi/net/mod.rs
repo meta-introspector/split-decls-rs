@@ -1,0 +1,4 @@
+mkuse!{use crate :: sys_common :: AsInner ;}
+mkuse!{use crate :: { io , net } ;}
+mkitem!{mktrait!{# [doc = " WASI-specific extensions to [`std::net::TcpListener`]."] # [doc = ""] # [doc = " [`std::net::TcpListener`]: crate::net::TcpListener"] pub trait TcpListenerExt { # [doc = " Accept a socket."] # [doc = ""] # [doc = " This corresponds to the `sock_accept` syscall."] fn sock_accept (& self , flags : u16) -> io :: Result < u32 > ; }}}
+mkitem!{mkimpl!{impl TcpListenerExt for net :: TcpListener { fn sock_accept (& self , flags : u16) -> io :: Result < u32 > { self . as_inner () . as_inner () . as_inner () . sock_accept (flags) } }}}

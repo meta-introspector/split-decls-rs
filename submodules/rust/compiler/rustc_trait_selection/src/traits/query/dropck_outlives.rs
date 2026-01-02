@@ -1,0 +1,55 @@
+mkuse!{use rustc_data_structures :: fx :: FxHashSet ;}
+mkuse!{use rustc_infer :: traits :: query :: type_op :: DropckOutlives ;}
+mkuse!{use rustc_middle :: traits :: query :: { DropckConstraint , DropckOutlivesResult } ;}
+mkuse!{use rustc_middle :: ty :: { self , EarlyBinder , ParamEnvAnd , Ty , TyCtxt } ;}
+mkuse!{use rustc_span :: Span ;}
+mkuse!{use tracing :: { debug , instrument } ;}
+mkuse!{use crate :: solve :: NextSolverError ;}
+mkuse!{use crate :: traits :: query :: NoSolution ;}
+mkuse!{use crate :: traits :: query :: normalize :: QueryNormalizeExt ;}
+mkuse!{use crate :: traits :: { FromSolverError , Normalized , ObligationCause , ObligationCtxt } ;}
+
+macro_rules! trivial_dropck_outlives_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function trivial_dropck_outlives in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    trivial_dropck_outlives_introspect!();
+    # [doc = " This returns true if the type `ty` is \"trivial\" for"] # [doc = " dropck-outlives -- that is, if it doesn't require any types to"] # [doc = " outlive. This is similar but not *quite* the same as the"] # [doc = " `needs_drop` test in the compiler already -- that is, for every"] # [doc = " type T for which this function return true, needs-drop would"] # [doc = " return `false`. But the reverse does not hold: in particular,"] # [doc = " `needs_drop` returns false for `PhantomData`, but it is not"] # [doc = " trivial for dropck-outlives."] # [doc = ""] # [doc = " Note also that `needs_drop` requires a \"global\" type (i.e., one"] # [doc = " with erased regions), but this function does not."] # [doc = ""] pub fn trivial_dropck_outlives < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> bool { match ty . kind () { ty :: Infer (ty :: FreshIntTy (_)) | ty :: Infer (ty :: FreshFloatTy (_)) | ty :: Bool | ty :: Int (_) | ty :: Uint (_) | ty :: Float (_) | ty :: Never | ty :: FnDef (..) | ty :: FnPtr (..) | ty :: Char | ty :: CoroutineWitness (..) | ty :: RawPtr (_ , _) | ty :: Ref (..) | ty :: Str | ty :: Foreign (..) | ty :: Error (_) => true , ty :: Pat (ty , _) | ty :: Slice (ty) => trivial_dropck_outlives (tcx , * ty) , ty :: Array (ty , size) => { match size . try_to_target_usize (tcx) { Some (0) => true , _ => trivial_dropck_outlives (tcx , * ty) , } } ty :: Tuple (tys) => tys . iter () . all (| t | trivial_dropck_outlives (tcx , t)) , ty :: Closure (_ , args) => trivial_dropck_outlives (tcx , args . as_closure () . tupled_upvars_ty ()) , ty :: CoroutineClosure (_ , args) => { trivial_dropck_outlives (tcx , args . as_coroutine_closure () . tupled_upvars_ty ()) } ty :: Adt (def , _) => { if def . is_manually_drop () { true } else { false } } ty :: Dynamic (..) | ty :: Alias (..) | ty :: Param (_) | ty :: Placeholder (..) | ty :: Infer (_) | ty :: Bound (..) | ty :: Coroutine (..) | ty :: UnsafeBinder (_) => false , } }
+}
+
+macro_rules! compute_dropck_outlives_inner_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compute_dropck_outlives_inner in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compute_dropck_outlives_inner_introspect!();
+    pub fn compute_dropck_outlives_inner < 'tcx > (ocx : & ObligationCtxt < '_ , 'tcx > , goal : ParamEnvAnd < 'tcx , DropckOutlives < 'tcx > > , span : Span ,) -> Result < DropckOutlivesResult < 'tcx > , NoSolution > { match compute_dropck_outlives_with_errors (ocx , goal , span) { Ok (r) => Ok (r) , Err (_) => Err (NoSolution) , } }
+}
+
+macro_rules! compute_dropck_outlives_with_errors_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compute_dropck_outlives_with_errors in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compute_dropck_outlives_with_errors_introspect!();
+    pub fn compute_dropck_outlives_with_errors < 'tcx , E > (ocx : & ObligationCtxt < '_ , 'tcx , E > , goal : ParamEnvAnd < 'tcx , DropckOutlives < 'tcx > > , span : Span ,) -> Result < DropckOutlivesResult < 'tcx > , Vec < E > > where E : FromSolverError < 'tcx , NextSolverError < 'tcx > > , { let tcx = ocx . infcx . tcx ; let ParamEnvAnd { param_env , value : DropckOutlives { dropped_ty } } = goal ; let mut result = DropckOutlivesResult { kinds : vec ! [] , overflows : vec ! [] } ; let mut ty_stack = vec ! [(dropped_ty , 0)] ; let mut ty_set = FxHashSet :: default () ; let cause = ObligationCause :: dummy_with_span (span) ; let mut constraints = DropckConstraint :: empty () ; while let Some ((ty , depth)) = ty_stack . pop () { debug ! ("{} kinds, {} overflows, {} ty_stack" , result . kinds . len () , result . overflows . len () , ty_stack . len ()) ; dtorck_constraint_for_ty_inner (tcx , ocx . infcx . typing_env (param_env) , span , depth , ty , & mut constraints ,) ; result . kinds . append (& mut constraints . outlives) ; result . overflows . append (& mut constraints . overflows) ; if ! result . overflows . is_empty () { break ; } for ty in constraints . dtorck_types . drain (..) { let ty = if let Ok (Normalized { value : ty , obligations }) = ocx . infcx . at (& cause , param_env) . query_normalize (ty) { ocx . register_obligations (obligations) ; debug ! ("dropck_outlives: ty from dtorck_types = {:?}" , ty) ; ty } else { let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { return Err (errors) ; } match ocx . deeply_normalize (& cause , param_env , ty) { Ok (_) => { tcx . dcx () . span_delayed_bug (span , format ! ("query normalize succeeded of {ty}, \
+                                but deep normalize failed" ,) ,) ; ty } Err (errors) => return Err (errors) , } } ; match ty . kind () { ty :: Param (..) => { } ty :: Alias (..) => { result . kinds . push (ty . into ()) ; } _ => { if ty_set . insert (ty) { ty_stack . push ((ty , depth + 1)) ; } } } } } debug ! ("dropck_outlives: result = {:#?}" , result) ; Ok (result) }
+}
+
+macro_rules! dtorck_constraint_for_ty_inner_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function dtorck_constraint_for_ty_inner in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    dtorck_constraint_for_ty_inner_introspect!();
+    # [doc = " Returns a set of constraints that needs to be satisfied in"] # [doc = " order for `ty` to be valid for destruction."] # [instrument (level = "debug" , skip (tcx , typing_env , span , constraints))] pub fn dtorck_constraint_for_ty_inner < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , span : Span , depth : usize , ty : Ty < 'tcx > , constraints : & mut DropckConstraint < 'tcx > ,) { if ! tcx . recursion_limit () . value_within_limit (depth) { constraints . overflows . push (ty) ; return ; } if trivial_dropck_outlives (tcx , ty) { return ; } match ty . kind () { ty :: Bool | ty :: Char | ty :: Int (_) | ty :: Uint (_) | ty :: Float (_) | ty :: Str | ty :: Never | ty :: Foreign (..) | ty :: RawPtr (..) | ty :: Ref (..) | ty :: FnDef (..) | ty :: FnPtr (..) | ty :: CoroutineWitness (..) => { } ty :: Pat (ety , _) | ty :: Array (ety , _) | ty :: Slice (ety) => { rustc_data_structures :: stack :: ensure_sufficient_stack (| | { dtorck_constraint_for_ty_inner (tcx , typing_env , span , depth + 1 , * ety , constraints) }) ; } ty :: Tuple (tys) => rustc_data_structures :: stack :: ensure_sufficient_stack (| | { for ty in tys . iter () { dtorck_constraint_for_ty_inner (tcx , typing_env , span , depth + 1 , ty , constraints) ; } }) , ty :: Closure (_ , args) => rustc_data_structures :: stack :: ensure_sufficient_stack (| | { for ty in args . as_closure () . upvar_tys () { dtorck_constraint_for_ty_inner (tcx , typing_env , span , depth + 1 , ty , constraints) ; } }) , ty :: CoroutineClosure (_ , args) => { rustc_data_structures :: stack :: ensure_sufficient_stack (| | { for ty in args . as_coroutine_closure () . upvar_tys () { dtorck_constraint_for_ty_inner (tcx , typing_env , span , depth + 1 , ty , constraints ,) ; } }) } ty :: Coroutine (def_id , args) => { let args = args . as_coroutine () ; let typing_env = tcx . erase_and_anonymize_regions (typing_env) ; let needs_drop = tcx . mir_coroutine_witnesses (def_id) . is_some_and (| witness | { witness . field_tys . iter () . any (| field | field . ty . needs_drop (tcx , typing_env)) }) ; if needs_drop { constraints . outlives . extend (args . upvar_tys () . iter () . map (ty :: GenericArg :: from)) ; constraints . outlives . push (args . resume_ty () . into ()) ; } else { for ty in args . upvar_tys () { dtorck_constraint_for_ty_inner (tcx , typing_env , span , depth + 1 , ty , constraints ,) ; } } } ty :: Adt (def , args) => { let DropckConstraint { dtorck_types , outlives , overflows } = tcx . at (span) . adt_dtorck_constraint (def . did ()) ; constraints . dtorck_types . extend (dtorck_types . iter () . map (| t | EarlyBinder :: bind (* t) . instantiate (tcx , args))) ; constraints . outlives . extend (outlives . iter () . map (| t | EarlyBinder :: bind (* t) . instantiate (tcx , args))) ; constraints . overflows . extend (overflows . iter () . map (| t | EarlyBinder :: bind (* t) . instantiate (tcx , args))) ; } ty :: Dynamic (..) => { constraints . outlives . push (ty . into ()) ; } ty :: Alias (..) | ty :: Param (..) => { constraints . dtorck_types . push (ty) ; } ty :: UnsafeBinder (_) => { constraints . dtorck_types . push (ty) ; } ty :: Placeholder (..) | ty :: Bound (..) | ty :: Infer (..) | ty :: Error (_) => { tcx . dcx () . span_delayed_bug (span , format ! ("Unresolved type in dropck: {:?}." , ty)) ; } } }
+}

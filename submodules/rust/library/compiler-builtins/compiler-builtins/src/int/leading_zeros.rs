@@ -1,0 +1,34 @@
+mkuse!{# [cfg (feature = "unstable-public-internals")] pub use implementation :: { leading_zeros_default , leading_zeros_riscv } ;}
+mkuse!{# [cfg (not (feature = "unstable-public-internals"))] pub (crate) use implementation :: { leading_zeros_default , leading_zeros_riscv } ;}
+mkmod!{implementation, { 
+                getname!(implementation);
+                getsrc!(implementation);
+                getpath!(implementation);
+                get_deps!(implementation);
+                get_crates!(implementation);
+                mkinclude!(implementation);
+                mkuse!{use crate :: int :: { CastFrom , Int } ;}
+
+macro_rules! leading_zeros_default_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function leading_zeros_default in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    leading_zeros_default_introspect!();
+    # [doc = " Returns the number of leading binary zeros in `x`."] # [allow (dead_code)] pub fn leading_zeros_default < I : Int > (x : I) -> usize where usize : CastFrom < I > , { let mut x = x ; let mut z = I :: BITS as usize ; let mut t : I ; const { assert ! (I :: BITS <= 64) } ; if I :: BITS >= 64 { t = x >> 32 ; if t != I :: ZERO { z -= 32 ; x = t ; } } if I :: BITS >= 32 { t = x >> 16 ; if t != I :: ZERO { z -= 16 ; x = t ; } } const { assert ! (I :: BITS >= 16) } ; t = x >> 8 ; if t != I :: ZERO { z -= 8 ; x = t ; } t = x >> 4 ; if t != I :: ZERO { z -= 4 ; x = t ; } t = x >> 2 ; if t != I :: ZERO { z -= 2 ; x = t ; } t = x >> 1 ; if t != I :: ZERO { z - 2 } else { z - usize :: cast_from (x) } }
+}
+
+macro_rules! leading_zeros_riscv_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function leading_zeros_riscv in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    leading_zeros_riscv_introspect!();
+    # [doc = " Returns the number of leading binary zeros in `x`."] # [allow (dead_code)] pub fn leading_zeros_riscv < I : Int > (x : I) -> usize where usize : CastFrom < I > , { let mut x = x ; let mut z = I :: BITS ; let mut t : u32 ; const { assert ! (I :: BITS <= 64) } ; if I :: BITS >= 64 { t = ((x >= (I :: ONE << 32)) as u32) << 5 ; x >>= t ; z -= t ; } if I :: BITS >= 32 { t = ((x >= (I :: ONE << 16)) as u32) << 4 ; x >>= t ; z -= t ; } const { assert ! (I :: BITS >= 16) } ; t = ((x >= (I :: ONE << 8)) as u32) << 3 ; x >>= t ; z -= t ; t = ((x >= (I :: ONE << 4)) as u32) << 2 ; x >>= t ; z -= t ; t = ((x >= (I :: ONE << 2)) as u32) << 1 ; x >>= t ; z -= t ; t = (x >= (I :: ONE << 1)) as u32 ; x >>= t ; z -= t ; z as usize - usize :: cast_from (x) }
+} 
+            }}
+mkitem!{intrinsics ! { # [doc = " Returns the number of leading binary zeros in `x`"] pub extern "C" fn __clzsi2 (x : u32) -> usize { if cfg ! (any (target_arch = "riscv32" , target_arch = "riscv64")) { leading_zeros_riscv (x) } else { leading_zeros_default (x) } } # [doc = " Returns the number of leading binary zeros in `x`"] pub extern "C" fn __clzdi2 (x : u64) -> usize { if cfg ! (any (target_arch = "riscv32" , target_arch = "riscv64")) { leading_zeros_riscv (x) } else { leading_zeros_default (x) } } # [doc = " Returns the number of leading binary zeros in `x`"] pub extern "C" fn __clzti2 (x : u128) -> usize { let hi = (x >> 64) as u64 ; if hi == 0 { 64 + __clzdi2 (x as u64) } else { __clzdi2 (hi) } } }}

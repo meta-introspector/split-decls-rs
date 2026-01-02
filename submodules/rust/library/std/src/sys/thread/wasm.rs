@@ -1,0 +1,13 @@
+mkuse!{use crate :: cmp ;}
+mkuse!{use crate :: time :: Duration ;}
+
+macro_rules! sleep_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function sleep in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    sleep_introspect!();
+    pub fn sleep (dur : Duration) { # [cfg (target_arch = "wasm32")] use core :: arch :: wasm32 as wasm ; # [cfg (target_arch = "wasm64")] use core :: arch :: wasm64 as wasm ; let mut nanos = dur . as_nanos () ; while nanos > 0 { let amt = cmp :: min (i64 :: MAX as u128 , nanos) ; let mut x = 0 ; let val = unsafe { wasm :: memory_atomic_wait32 (& mut x , 0 , amt as i64) } ; debug_assert_eq ! (val , 2) ; nanos -= amt ; } }
+}

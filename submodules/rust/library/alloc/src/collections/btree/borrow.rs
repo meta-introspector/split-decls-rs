@@ -1,0 +1,15 @@
+mkuse!{use core :: marker :: PhantomData ;}
+mkuse!{use core :: ptr :: NonNull ;}
+mkitem!{mkstruct!{# [doc = " Models a reborrow of some unique reference, when you know that the reborrow"] # [doc = " and all its descendants (i.e., all pointers and references derived from it)"] # [doc = " will not be used any more at some point, after which you want to use the"] # [doc = " original unique reference again."] # [doc = ""] # [doc = " The borrow checker usually handles this stacking of borrows for you, but"] # [doc = " some control flows that accomplish this stacking are too complicated for"] # [doc = " the compiler to follow. A `DormantMutRef` allows you to check borrowing"] # [doc = " yourself, while still expressing its stacked nature, and encapsulating"] # [doc = " the raw pointer code needed to do this without undefined behavior."] pub (super) struct DormantMutRef < 'a , T > { ptr : NonNull < T > , _marker : PhantomData < & 'a mut T > , }}}
+mkitem!{mkimpl!{unsafe impl < 'a , T > Sync for DormantMutRef < 'a , T > where & 'a mut T : Sync { }}}
+mkitem!{mkimpl!{unsafe impl < 'a , T > Send for DormantMutRef < 'a , T > where & 'a mut T : Send { }}}
+mkitem!{mkimpl!{impl < 'a , T > DormantMutRef < 'a , T > { # [doc = " Capture a unique borrow, and immediately reborrow it. For the compiler,"] # [doc = " the lifetime of the new reference is the same as the lifetime of the"] # [doc = " original reference, but you promise to use it for a shorter period."] pub (super) fn new (t : & 'a mut T) -> (& 'a mut T , Self) { let ptr = NonNull :: from (t) ; let new_ref = unsafe { & mut * ptr . as_ptr () } ; (new_ref , Self { ptr , _marker : PhantomData }) } # [doc = " Revert to the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn awaken (self) -> & 'a mut T { unsafe { & mut * self . ptr . as_ptr () } } # [doc = " Borrows a new mutable reference from the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn reborrow (& mut self) -> & 'a mut T { unsafe { & mut * self . ptr . as_ptr () } } # [doc = " Borrows a new shared reference from the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn reborrow_shared (& self) -> & 'a T { unsafe { & * self . ptr . as_ptr () } } }}}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}

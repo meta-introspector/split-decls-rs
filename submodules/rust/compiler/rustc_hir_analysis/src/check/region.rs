@@ -1,0 +1,118 @@
+mkuse!{use std :: mem ;}
+mkuse!{use rustc_data_structures :: fx :: FxHashMap ;}
+mkuse!{use rustc_hir as hir ;}
+mkuse!{use rustc_hir :: def :: { CtorKind , DefKind , Res } ;}
+mkuse!{use rustc_hir :: def_id :: DefId ;}
+mkuse!{use rustc_hir :: intravisit :: { self , Visitor } ;}
+mkuse!{use rustc_hir :: { Arm , Block , Expr , LetStmt , Pat , PatKind , Stmt } ;}
+mkuse!{use rustc_index :: Idx ;}
+mkuse!{use rustc_middle :: middle :: region :: * ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_session :: lint ;}
+mkuse!{use rustc_span :: source_map ;}
+mkuse!{use tracing :: debug ;}
+mkitem!{mkstruct!{# [derive (Debug , Copy , Clone)] struct Context { # [doc = " The scope that contains any new variables declared."] var_parent : (Option < Scope > , ScopeCompatibility) , # [doc = " Region parent of expressions, etc."] parent : Option < Scope > , }}}
+mkitem!{mkstruct!{struct ScopeResolutionVisitor < 'tcx > { tcx : TyCtxt < 'tcx > , scope_tree : ScopeTree , cx : Context , extended_super_lets : FxHashMap < hir :: ItemLocalId , ExtendedTemporaryScope > , }}}
+mkitem!{mkstruct!{# [derive (Copy , Clone)] struct ExtendedTemporaryScope { # [doc = " The scope of extended temporaries."] scope : Option < Scope > , # [doc = " Whether this lifetime originated from a regular `let` or a `super let` initializer. In the"] # [doc = " latter case, this scope may shorten after #145838 if applied to temporaries within block"] # [doc = " tail expressions."] let_kind : LetKind , # [doc = " Whether this scope will shorten after #145838. If this is applied to a temporary value,"] # [doc = " we'll emit the `macro_extended_temporary_scopes` lint."] compat : ScopeCompatibility , }}}
+
+macro_rules! record_var_lifetime_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function record_var_lifetime in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    record_var_lifetime_introspect!();
+    # [doc = " Records the lifetime of a local variable as `cx.var_parent`"] fn record_var_lifetime (visitor : & mut ScopeResolutionVisitor < '_ > , var_id : hir :: ItemLocalId) { let (var_parent_scope , var_parent_compat) = visitor . cx . var_parent ; match var_parent_scope { None => { } Some (parent_scope) => visitor . scope_tree . record_var_scope (var_id , parent_scope) , } if let ScopeCompatibility :: FutureIncompatible { shortens_to } = var_parent_compat { visitor . scope_tree . record_future_incompatible_var_scope (var_id , shortens_to) ; } }
+}
+
+macro_rules! resolve_block_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_block in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_block_introspect!();
+    fn resolve_block < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , blk : & 'tcx hir :: Block < 'tcx > , terminating : bool ,) { debug ! ("resolve_block(blk.hir_id={:?})" , blk . hir_id) ; let prev_cx = visitor . cx ; visitor . enter_node_scope_with_dtor (blk . hir_id . local_id , terminating) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; { for (i , statement) in blk . stmts . iter () . enumerate () { match statement . kind { hir :: StmtKind :: Let (LetStmt { els : Some (els) , .. }) => { let mut prev_cx = visitor . cx ; visitor . enter_scope (Scope { local_id : blk . hir_id . local_id , data : ScopeData :: Remainder (FirstStatementIndex :: new (i)) , }) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; visitor . visit_stmt (statement) ; mem :: swap (& mut prev_cx , & mut visitor . cx) ; resolve_block (visitor , els , true) ; visitor . cx = prev_cx ; } hir :: StmtKind :: Let (..) => { visitor . enter_scope (Scope { local_id : blk . hir_id . local_id , data : ScopeData :: Remainder (FirstStatementIndex :: new (i)) , }) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; visitor . visit_stmt (statement) } hir :: StmtKind :: Item (..) => { } hir :: StmtKind :: Expr (..) | hir :: StmtKind :: Semi (..) => visitor . visit_stmt (statement) , } } if let Some (tail_expr) = blk . expr { let local_id = tail_expr . hir_id . local_id ; let edition = blk . span . edition () ; let terminating = edition . at_least_rust_2024 () ; if ! terminating && ! visitor . tcx . lints_that_dont_need_to_run (()) . contains (& lint :: LintId :: of (lint :: builtin :: TAIL_EXPR_DROP_ORDER)) { visitor . scope_tree . backwards_incompatible_scope . insert (local_id , Scope { local_id , data : ScopeData :: Node }) ; } resolve_expr (visitor , tail_expr , terminating) ; } } visitor . cx = prev_cx ; }
+}
+
+macro_rules! resolve_cond_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_cond in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_cond_introspect!();
+    # [doc = " Resolve a condition from an `if` expression or match guard so that it is a terminating scope"] # [doc = " if it doesn't contain `let` expressions."] fn resolve_cond < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , cond : & 'tcx hir :: Expr < 'tcx >) { let terminate = match cond . kind { hir :: ExprKind :: Let (_) => false , hir :: ExprKind :: Binary (source_map :: Spanned { node : hir :: BinOpKind :: And | hir :: BinOpKind :: Or , .. } , _ , _ ,) => false , _ => true , } ; resolve_expr (visitor , cond , terminate) ; }
+}
+
+macro_rules! resolve_arm_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_arm in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_arm_introspect!();
+    fn resolve_arm < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , arm : & 'tcx hir :: Arm < 'tcx >) { let prev_cx = visitor . cx ; visitor . enter_node_scope_with_dtor (arm . hir_id . local_id , true) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; resolve_pat (visitor , arm . pat) ; if let Some (guard) = arm . guard { visitor . enter_scope (Scope { local_id : arm . hir_id . local_id , data : ScopeData :: MatchGuard }) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; resolve_cond (visitor , guard) ; } resolve_expr (visitor , arm . body , false) ; visitor . cx = prev_cx ; }
+}
+
+macro_rules! resolve_pat_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_pat in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_pat_introspect!();
+    # [tracing :: instrument (level = "debug" , skip (visitor))] fn resolve_pat < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , pat : & 'tcx hir :: Pat < 'tcx >) { if let PatKind :: Binding (..) = pat . kind { record_var_lifetime (visitor , pat . hir_id . local_id) ; } intravisit :: walk_pat (visitor , pat) ; }
+}
+
+macro_rules! resolve_stmt_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_stmt in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_stmt_introspect!();
+    fn resolve_stmt < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , stmt : & 'tcx hir :: Stmt < 'tcx >) { let stmt_id = stmt . hir_id . local_id ; debug ! ("resolve_stmt(stmt.id={:?})" , stmt_id) ; if let hir :: StmtKind :: Let (LetStmt { super_ : Some (_) , .. }) = stmt . kind { intravisit :: walk_stmt (visitor , stmt) ; } else { let prev_parent = visitor . cx . parent ; visitor . enter_node_scope_with_dtor (stmt_id , true) ; intravisit :: walk_stmt (visitor , stmt) ; visitor . cx . parent = prev_parent ; } }
+}
+
+macro_rules! resolve_expr_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_expr in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_expr_introspect!();
+    # [tracing :: instrument (level = "debug" , skip (visitor))] fn resolve_expr < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , expr : & 'tcx hir :: Expr < 'tcx > , terminating : bool ,) { let prev_cx = visitor . cx ; visitor . enter_node_scope_with_dtor (expr . hir_id . local_id , terminating) ; match expr . kind { hir :: ExprKind :: Binary (source_map :: Spanned { node : hir :: BinOpKind :: And | hir :: BinOpKind :: Or , .. } , left , right ,) => { let terminate_lhs = match left . kind { hir :: ExprKind :: Let (_) => false , hir :: ExprKind :: Binary (source_map :: Spanned { node : hir :: BinOpKind :: And | hir :: BinOpKind :: Or , .. } , .. ,) => false , _ => true , } ; let terminate_rhs = ! matches ! (right . kind , hir :: ExprKind :: Let (_)) ; resolve_expr (visitor , left , terminate_lhs) ; resolve_expr (visitor , right , terminate_rhs) ; } hir :: ExprKind :: Closure (& hir :: Closure { body , .. }) => { let body = visitor . tcx . hir_body (body) ; visitor . visit_body (body) ; } hir :: ExprKind :: AssignOp (_ , left_expr , right_expr) => { visitor . visit_expr (right_expr) ; visitor . visit_expr (left_expr) ; } hir :: ExprKind :: If (cond , then , Some (otherwise)) => { let expr_cx = visitor . cx ; let data = if expr . span . at_least_rust_2024 () { ScopeData :: IfThenRescope } else { ScopeData :: IfThen } ; visitor . enter_scope (Scope { local_id : then . hir_id . local_id , data }) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; resolve_cond (visitor , cond) ; resolve_expr (visitor , then , true) ; visitor . cx = expr_cx ; resolve_expr (visitor , otherwise , true) ; } hir :: ExprKind :: If (cond , then , None) => { let expr_cx = visitor . cx ; let data = if expr . span . at_least_rust_2024 () { ScopeData :: IfThenRescope } else { ScopeData :: IfThen } ; visitor . enter_scope (Scope { local_id : then . hir_id . local_id , data }) ; visitor . cx . var_parent = (visitor . cx . parent , ScopeCompatibility :: FutureCompatible) ; resolve_cond (visitor , cond) ; resolve_expr (visitor , then , true) ; visitor . cx = expr_cx ; } hir :: ExprKind :: Loop (body , _ , _ , _) => { resolve_block (visitor , body , true) ; } hir :: ExprKind :: DropTemps (expr) => { resolve_expr (visitor , expr , true) ; } _ => intravisit :: walk_expr (visitor , expr) , } visitor . cx = prev_cx ; }
+}
+mkitem!{mkenum!{# [derive (Copy , Clone , PartialEq , Eq , Debug)] enum LetKind { Regular , Super , }}}
+
+macro_rules! resolve_local_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_local in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_local_introspect!();
+    fn resolve_local < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , pat : Option < & 'tcx hir :: Pat < 'tcx > > , init : Option < & 'tcx hir :: Expr < 'tcx > > , let_kind : LetKind ,) { debug ! ("resolve_local(pat={:?}, init={:?}, let_kind={:?})" , pat , init , let_kind) ; let (source_let_kind , compat) = match let_kind { LetKind :: Regular => { (LetKind :: Regular , ScopeCompatibility :: FutureCompatible) } LetKind :: Super => { if let Some (scope) = visitor . extended_super_lets . remove (& pat . unwrap () . hir_id . local_id) { visitor . cx . var_parent = (scope . scope , scope . compat) ; (scope . let_kind , scope . compat) } else { if let (Some (inner_scope) , _) = visitor . cx . var_parent { visitor . cx . var_parent = (visitor . scope_tree . default_temporary_scope (inner_scope) . 0 , ScopeCompatibility :: FutureCompatible) ; } (LetKind :: Super , ScopeCompatibility :: FutureCompatible) } } } ; if let Some (expr) = init { let scope = ExtendedTemporaryScope { scope : visitor . cx . var_parent . 0 , let_kind : source_let_kind , compat , } ; record_rvalue_scope_if_borrow_expr (visitor , expr , scope) ; if let Some (pat) = pat { if is_binding_pat (pat) { visitor . scope_tree . record_rvalue_candidate (expr . hir_id , RvalueCandidate { target : expr . hir_id . local_id , lifetime : visitor . cx . var_parent . 0 , compat : visitor . cx . var_parent . 1 , } ,) ; } } } if let Some (expr) = init { visitor . visit_expr (expr) ; } if let Some (pat) = pat { visitor . visit_pat (pat) ; } # [doc = " Returns `true` if `pat` match the `P&` non-terminal."] # [doc = ""] # [doc = " ```text"] # [doc = "     P& = ref X"] # [doc = "        | StructName { ..., P&, ... }"] # [doc = "        | VariantName(..., P&, ...)"] # [doc = "        | [ ..., P&, ... ]"] # [doc = "        | ( ..., P&, ... )"] # [doc = "        | ... \"|\" P& \"|\" ..."] # [doc = "        | box P&"] # [doc = "        | P& if ..."] # [doc = " ```"] fn is_binding_pat (pat : & hir :: Pat < '_ >) -> bool { match pat . kind { PatKind :: Binding (hir :: BindingMode (hir :: ByRef :: Yes (_) , _) , ..) => true , PatKind :: Struct (_ , field_pats , _) => field_pats . iter () . any (| fp | is_binding_pat (fp . pat)) , PatKind :: Slice (pats1 , pats2 , pats3) => { pats1 . iter () . any (| p | is_binding_pat (p)) || pats2 . iter () . any (| p | is_binding_pat (p)) || pats3 . iter () . any (| p | is_binding_pat (p)) } PatKind :: Or (subpats) | PatKind :: TupleStruct (_ , subpats , _) | PatKind :: Tuple (subpats , _) => subpats . iter () . any (| p | is_binding_pat (p)) , PatKind :: Box (subpat) | PatKind :: Deref (subpat) | PatKind :: Guard (subpat , _) => { is_binding_pat (subpat) } PatKind :: Ref (_ , _) | PatKind :: Binding (hir :: BindingMode (hir :: ByRef :: No , _) , ..) | PatKind :: Missing | PatKind :: Wild | PatKind :: Never | PatKind :: Expr (_) | PatKind :: Range (_ , _ , _) | PatKind :: Err (_) => false , } } # [doc = " If `expr` matches the `E&` grammar, then records an extended rvalue scope as appropriate:"] # [doc = ""] # [doc = " ```text"] # [doc = "     E& = & ET"] # [doc = "        | StructName { ..., f: E&, ... }"] # [doc = "        | [ ..., E&, ... ]"] # [doc = "        | ( ..., E&, ... )"] # [doc = "        | {...; E&}"] # [doc = "        | { super let ... = E&; ... }"] # [doc = "        | if _ { ...; E& } else { ...; E& }"] # [doc = "        | match _ { ..., _ => E&, ... }"] # [doc = "        | box E&"] # [doc = "        | E& as ..."] # [doc = "        | ( E& )"] # [doc = " ```"] fn record_rvalue_scope_if_borrow_expr < 'tcx > (visitor : & mut ScopeResolutionVisitor < 'tcx > , expr : & hir :: Expr < '_ > , scope : ExtendedTemporaryScope ,) { match expr . kind { hir :: ExprKind :: AddrOf (_ , _ , subexpr) => { record_rvalue_scope_if_borrow_expr (visitor , subexpr , scope) ; visitor . scope_tree . record_rvalue_candidate (subexpr . hir_id , RvalueCandidate { target : subexpr . hir_id . local_id , lifetime : scope . scope , compat : scope . compat , } ,) ; } hir :: ExprKind :: Struct (_ , fields , _) => { for field in fields { record_rvalue_scope_if_borrow_expr (visitor , field . expr , scope) ; } } hir :: ExprKind :: Array (subexprs) | hir :: ExprKind :: Tup (subexprs) => { for subexpr in subexprs { record_rvalue_scope_if_borrow_expr (visitor , subexpr , scope) ; } } hir :: ExprKind :: Cast (subexpr , _) => { record_rvalue_scope_if_borrow_expr (visitor , subexpr , scope) } hir :: ExprKind :: Block (block , _) => { if let Some (subexpr) = block . expr { let tail_expr_scope = if scope . let_kind == LetKind :: Super && block . span . at_least_rust_2024 () { ExtendedTemporaryScope { compat : ScopeCompatibility :: FutureIncompatible { shortens_to : Scope { local_id : subexpr . hir_id . local_id , data : ScopeData :: Node , } , } , .. scope } } else { scope } ; record_rvalue_scope_if_borrow_expr (visitor , subexpr , tail_expr_scope) ; } for stmt in block . stmts { if let hir :: StmtKind :: Let (local) = stmt . kind && let Some (_) = local . super_ { visitor . extended_super_lets . insert (local . pat . hir_id . local_id , scope) ; } } } hir :: ExprKind :: If (_ , then_block , else_block) => { let then_scope = if scope . let_kind == LetKind :: Super { ExtendedTemporaryScope { compat : ScopeCompatibility :: FutureIncompatible { shortens_to : Scope { local_id : then_block . hir_id . local_id , data : ScopeData :: Node , } , } , .. scope } } else { scope } ; record_rvalue_scope_if_borrow_expr (visitor , then_block , then_scope) ; if let Some (else_block) = else_block { let else_scope = if scope . let_kind == LetKind :: Super { ExtendedTemporaryScope { compat : ScopeCompatibility :: FutureIncompatible { shortens_to : Scope { local_id : else_block . hir_id . local_id , data : ScopeData :: Node , } , } , .. scope } } else { scope } ; record_rvalue_scope_if_borrow_expr (visitor , else_block , else_scope) ; } } hir :: ExprKind :: Match (_ , arms , _) => { for arm in arms { record_rvalue_scope_if_borrow_expr (visitor , arm . body , scope) ; } } hir :: ExprKind :: Call (func , args) => { if let hir :: ExprKind :: Path (path) = & func . kind && let hir :: QPath :: Resolved (None , path) = path && let Res :: SelfCtor (_) | Res :: Def (DefKind :: Ctor (_ , CtorKind :: Fn) , _) = path . res { for arg in args { record_rvalue_scope_if_borrow_expr (visitor , arg , scope) ; } } } _ => { } } } }
+}
+mkitem!{mkimpl!{impl < 'tcx > ScopeResolutionVisitor < 'tcx > { # [doc = " Records the current parent (if any) as the parent of `child_scope`."] fn record_child_scope (& mut self , child_scope : Scope) { let parent = self . cx . parent ; self . scope_tree . record_scope_parent (child_scope , parent) ; } # [doc = " Records the current parent (if any) as the parent of `child_scope`,"] # [doc = " and sets `child_scope` as the new current parent."] fn enter_scope (& mut self , child_scope : Scope) { self . record_child_scope (child_scope) ; self . cx . parent = Some (child_scope) ; } fn enter_node_scope_with_dtor (& mut self , id : hir :: ItemLocalId , terminating : bool) { if terminating { self . enter_scope (Scope { local_id : id , data : ScopeData :: Destruction }) ; } self . enter_scope (Scope { local_id : id , data : ScopeData :: Node }) ; } fn enter_body (& mut self , hir_id : hir :: HirId , f : impl FnOnce (& mut Self)) { let outer_cx = self . cx ; self . enter_scope (Scope { local_id : hir_id . local_id , data : ScopeData :: CallSite }) ; self . enter_scope (Scope { local_id : hir_id . local_id , data : ScopeData :: Arguments }) ; f (self) ; self . cx = outer_cx ; } }}}
+mkitem!{mkimpl!{impl < 'tcx > Visitor < 'tcx > for ScopeResolutionVisitor < 'tcx > { fn visit_block (& mut self , b : & 'tcx Block < 'tcx >) { resolve_block (self , b , false) ; } fn visit_body (& mut self , body : & hir :: Body < 'tcx >) { let body_id = body . id () ; let owner_id = self . tcx . hir_body_owner_def_id (body_id) ; debug ! ("visit_body(id={:?}, span={:?}, body.id={:?}, cx.parent={:?})" , owner_id , self . tcx . sess . source_map () . span_to_diagnostic_string (body . value . span) , body_id , self . cx . parent) ; self . enter_body (body . value . hir_id , | this | { if this . tcx . hir_body_owner_kind (owner_id) . is_fn_or_closure () { this . cx . var_parent = (this . cx . parent , ScopeCompatibility :: FutureCompatible) ; for param in body . params { this . visit_pat (param . pat) ; } resolve_expr (this , body . value , true) ; } else { this . cx . var_parent = (None , ScopeCompatibility :: FutureCompatible) ; this . enter_scope (Scope { local_id : body . value . hir_id . local_id , data : ScopeData :: Destruction , }) ; resolve_local (this , None , Some (body . value) , LetKind :: Regular) ; } }) } fn visit_arm (& mut self , a : & 'tcx Arm < 'tcx >) { resolve_arm (self , a) ; } fn visit_pat (& mut self , p : & 'tcx Pat < 'tcx >) { resolve_pat (self , p) ; } fn visit_stmt (& mut self , s : & 'tcx Stmt < 'tcx >) { resolve_stmt (self , s) ; } fn visit_expr (& mut self , ex : & 'tcx Expr < 'tcx >) { resolve_expr (self , ex , false) ; } fn visit_local (& mut self , l : & 'tcx LetStmt < 'tcx >) { let let_kind = match l . super_ { Some (_) => LetKind :: Super , None => LetKind :: Regular , } ; resolve_local (self , Some (l . pat) , l . init , let_kind) ; } fn visit_inline_const (& mut self , c : & 'tcx hir :: ConstBlock) { let body = self . tcx . hir_body (c . body) ; self . visit_body (body) ; } }}}
+
+macro_rules! region_scope_tree_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function region_scope_tree in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    region_scope_tree_introspect!();
+    # [doc = " Per-body `region::ScopeTree`. The `DefId` should be the owner `DefId` for the body;"] # [doc = " in the case of closures, this will be redirected to the enclosing function."] # [doc = ""] # [doc = " Performance: This is a query rather than a simple function to enable"] # [doc = " re-use in incremental scenarios. We may sometimes need to rerun the"] # [doc = " type checker even when the HIR hasn't changed, and in those cases"] # [doc = " we can avoid reconstructing the region scope tree."] pub (crate) fn region_scope_tree (tcx : TyCtxt < '_ > , def_id : DefId) -> & ScopeTree { let typeck_root_def_id = tcx . typeck_root_def_id (def_id) ; if typeck_root_def_id != def_id { return tcx . region_scope_tree (typeck_root_def_id) ; } let scope_tree = if let Some (body) = tcx . hir_maybe_body_owned_by (def_id . expect_local ()) { let mut visitor = ScopeResolutionVisitor { tcx , scope_tree : ScopeTree :: default () , cx : Context { parent : None , var_parent : (None , ScopeCompatibility :: FutureCompatible) } , extended_super_lets : Default :: default () , } ; visitor . scope_tree . root_body = Some (body . value . hir_id) ; visitor . visit_body (& body) ; visitor . scope_tree } else { ScopeTree :: default () } ; tcx . arena . alloc (scope_tree) }
+}

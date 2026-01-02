@@ -1,0 +1,40 @@
+mkuse!{use std :: borrow :: Borrow ;}
+mkuse!{use std :: ops :: Deref ;}
+mkuse!{use std :: sync :: Arc ;}
+mkitem!{mkstruct!{# [doc = " An owned slice."] # [doc = ""] # [doc = " This is similar to `Arc<[u8]>` but allows slicing and using anything as the"] # [doc = " backing buffer."] # [doc = ""] # [doc = " See [`slice_owned`] for `OwnedSlice` construction and examples."] # [doc = ""] # [doc = " ---------------------------------------------------------------------------"] # [doc = ""] # [doc = " This is essentially a replacement for `owning_ref` which is a lot simpler"] # [doc = " and even sound! 🌸"] # [derive (Clone)] pub struct OwnedSlice { # [doc = " This is conceptually a `&'self.owner [u8]`."] bytes : * const [u8] , # [expect (dead_code)] owner : Arc < dyn Send + Sync > , }}}
+
+macro_rules! slice_owned_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function slice_owned in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    slice_owned_introspect!();
+    # [doc = " Makes an [`OwnedSlice`] out of an `owner` and a `slicer` function."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use rustc_data_structures::owned_slice::{OwnedSlice, slice_owned};"] # [doc = " let vec = vec![1, 2, 3, 4];"] # [doc = ""] # [doc = " // Identical to slicing via `&v[1..3]` but produces an owned slice"] # [doc = " let slice: OwnedSlice = slice_owned(vec, |v| &v[1..3]);"] # [doc = " assert_eq!(&*slice, [2, 3]);"] # [doc = " ```"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use rustc_data_structures::owned_slice::{OwnedSlice, slice_owned};"] # [doc = " # use std::ops::Deref;"] # [doc = " let vec = vec![1, 2, 3, 4];"] # [doc = ""] # [doc = " // Identical to slicing via `&v[..]` but produces an owned slice"] # [doc = " let slice: OwnedSlice = slice_owned(vec, Deref::deref);"] # [doc = " assert_eq!(&*slice, [1, 2, 3, 4]);"] # [doc = " ```"] pub fn slice_owned < O , F > (owner : O , slicer : F) -> OwnedSlice where O : Send + Sync + 'static , F : FnOnce (& O) -> & [u8] , { try_slice_owned (owner , | x | Ok :: < _ , ! > (slicer (x))) . into_ok () }
+}
+
+macro_rules! try_slice_owned_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function try_slice_owned in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    try_slice_owned_introspect!();
+    # [doc = " Makes an [`OwnedSlice`] out of an `owner` and a `slicer` function that can fail."] # [doc = ""] # [doc = " See [`slice_owned`] for the infallible version."] pub fn try_slice_owned < O , F , E > (owner : O , slicer : F) -> Result < OwnedSlice , E > where O : Send + Sync + 'static , F : FnOnce (& O) -> Result < & [u8] , E > , { let owner = Arc :: new (owner) ; let bytes = slicer (& * owner) ? ; Ok (OwnedSlice { bytes , owner }) }
+}
+mkitem!{mkimpl!{impl OwnedSlice { # [doc = " Slice this slice by `slicer`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use rustc_data_structures::owned_slice::{OwnedSlice, slice_owned};"] # [doc = " let vec = vec![1, 2, 3, 4];"] # [doc = ""] # [doc = " // Identical to slicing via `&v[1..3]` but produces an owned slice"] # [doc = " let slice: OwnedSlice = slice_owned(vec, |v| &v[..]);"] # [doc = " assert_eq!(&*slice, [1, 2, 3, 4]);"] # [doc = ""] # [doc = " let slice = slice.slice(|slice| &slice[1..][..2]);"] # [doc = " assert_eq!(&*slice, [2, 3]);"] # [doc = " ```"] # [doc = ""] pub fn slice (self , slicer : impl FnOnce (& [u8]) -> & [u8]) -> OwnedSlice { let bytes = slicer (& self) ; OwnedSlice { bytes , .. self } } }}}
+mkitem!{mkimpl!{impl Deref for OwnedSlice { type Target = [u8] ; # [inline] fn deref (& self) -> & [u8] { unsafe { & * self . bytes } } }}}
+mkitem!{mkimpl!{impl Borrow < [u8] > for OwnedSlice { # [inline] fn borrow (& self) -> & [u8] { self } }}}
+mkitem!{mkimpl!{unsafe impl Send for OwnedSlice { }}}
+mkitem!{mkimpl!{unsafe impl Sync for OwnedSlice { }}}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}

@@ -1,0 +1,46 @@
+mkuse!{use std :: ptr ;}
+mkuse!{use rustc_ast :: expand :: autodiff_attrs :: { AutoDiffAttrs , DiffActivity , DiffMode } ;}
+mkuse!{use rustc_codegen_ssa :: common :: TypeKind ;}
+mkuse!{use rustc_codegen_ssa :: traits :: { BaseTypeCodegenMethods , BuilderMethods } ;}
+mkuse!{use rustc_middle :: ty :: { PseudoCanonicalInput , Ty , TyCtxt , TypingEnv } ;}
+mkuse!{use rustc_middle :: { bug , ty } ;}
+mkuse!{use tracing :: debug ;}
+mkuse!{use crate :: builder :: { Builder , PlaceRef , UNNAMED } ;}
+mkuse!{use crate :: context :: SimpleCx ;}
+mkuse!{use crate :: declare :: declare_simple_fn ;}
+mkuse!{use crate :: llvm ;}
+mkuse!{use crate :: llvm :: { Metadata , TRUE , Type } ;}
+mkuse!{use crate :: value :: Value ;}
+
+macro_rules! adjust_activity_to_abi_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function adjust_activity_to_abi in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    adjust_activity_to_abi_introspect!();
+    pub (crate) fn adjust_activity_to_abi < 'tcx > (tcx : TyCtxt < 'tcx > , fn_ty : Ty < 'tcx > , da : & mut Vec < DiffActivity > ,) { if ! matches ! (fn_ty . kind () , ty :: FnDef (..)) { bug ! ("expected fn def for autodiff, got {:?}" , fn_ty) ; } let sig = fn_ty . fn_sig (tcx) . skip_binder () ; let mut new_activities = vec ! [] ; let mut new_positions = vec ! [] ; for (i , ty) in sig . inputs () . iter () . enumerate () { if let Some (inner_ty) = ty . builtin_deref (true) { if inner_ty . is_slice () { let sty = match inner_ty . builtin_index () { Some (sty) => sty , None => { panic ! ("slice element type unknown") ; } } ; let pci = PseudoCanonicalInput { typing_env : TypingEnv :: fully_monomorphized () , value : sty , } ; let layout = tcx . layout_of (pci) ; let elem_size = match layout { Ok (layout) => layout . size , Err (_) => { bug ! ("autodiff failed to compute slice element size") ; } } ; let elem_size : u32 = elem_size . bytes () as u32 ; if ! da . is_empty () { let activity = match da [i] { DiffActivity :: DualOnly | DiffActivity :: Dual | DiffActivity :: Dualv | DiffActivity :: DuplicatedOnly | DiffActivity :: Duplicated => { DiffActivity :: FakeActivitySize (Some (elem_size)) } DiffActivity :: Const => DiffActivity :: Const , _ => bug ! ("unexpected activity for ptr/ref") , } ; new_activities . push (activity) ; new_positions . push (i + 1) ; } continue ; } } } for _ in 0 .. new_activities . len () { let pos = new_positions . pop () . unwrap () ; let activity = new_activities . pop () . unwrap () ; da . insert (pos , activity) ; } }
+}
+
+macro_rules! match_args_from_caller_to_enzyme_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function match_args_from_caller_to_enzyme in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    match_args_from_caller_to_enzyme_introspect!();
+    fn match_args_from_caller_to_enzyme < 'll , 'tcx > (cx : & SimpleCx < 'll > , builder : & mut Builder < '_ , 'll , 'tcx > , width : u32 , args : & mut Vec < & 'll llvm :: Value > , inputs : & [DiffActivity] , outer_args : & [& 'll llvm :: Value] ,) { debug ! ("matching autodiff arguments") ; let mut outer_pos : usize = 0 ; let mut activity_pos = 0 ; let enzyme_const = cx . create_metadata (b"enzyme_const") ; let enzyme_out = cx . create_metadata (b"enzyme_out") ; let enzyme_dup = cx . create_metadata (b"enzyme_dup") ; let enzyme_dupv = cx . create_metadata (b"enzyme_dupv") ; let enzyme_dupnoneed = cx . create_metadata (b"enzyme_dupnoneed") ; let enzyme_dupnoneedv = cx . create_metadata (b"enzyme_dupnoneedv") ; while activity_pos < inputs . len () { let diff_activity = inputs [activity_pos as usize] ; let (activity , duplicated) : (& Metadata , bool) = match diff_activity { DiffActivity :: None => panic ! ("not a valid input activity") , DiffActivity :: Const => (enzyme_const , false) , DiffActivity :: Active => (enzyme_out , false) , DiffActivity :: ActiveOnly => (enzyme_out , false) , DiffActivity :: Dual => (enzyme_dup , true) , DiffActivity :: Dualv => (enzyme_dupv , true) , DiffActivity :: DualOnly => (enzyme_dupnoneed , true) , DiffActivity :: DualvOnly => (enzyme_dupnoneedv , true) , DiffActivity :: Duplicated => (enzyme_dup , true) , DiffActivity :: DuplicatedOnly => (enzyme_dupnoneed , true) , DiffActivity :: FakeActivitySize (_) => (enzyme_const , false) , } ; let outer_arg = outer_args [outer_pos] ; args . push (cx . get_metadata_value (activity)) ; if matches ! (diff_activity , DiffActivity :: Dualv) { let next_outer_arg = outer_args [outer_pos + 1] ; let elem_bytes_size : u64 = match inputs [activity_pos + 1] { DiffActivity :: FakeActivitySize (Some (s)) => s . into () , _ => bug ! ("incorrect Dualv handling recognized.") , } ; let mul = unsafe { llvm :: LLVMBuildMul (builder . llbuilder , cx . get_const_int (cx . type_i64 () , elem_bytes_size) , next_outer_arg , UNNAMED ,) } ; args . push (mul) ; } args . push (outer_arg) ; if duplicated { let next_outer_arg = outer_args [outer_pos + 1] ; let next_outer_ty = cx . val_ty (next_outer_arg) ; let slice = { if activity_pos + 1 >= inputs . len () { false } else { let next_activity = inputs [activity_pos + 1] ; matches ! (next_activity , DiffActivity :: FakeActivitySize (_)) } } ; if slice { assert_eq ! (cx . type_kind (next_outer_ty) , TypeKind :: Integer) ; let iterations = if matches ! (diff_activity , DiffActivity :: Dualv) { 1 } else { width as usize } ; for i in 0 .. iterations { let next_outer_arg2 = outer_args [outer_pos + 2 * (i + 1)] ; let next_outer_ty2 = cx . val_ty (next_outer_arg2) ; assert_eq ! (cx . type_kind (next_outer_ty2) , TypeKind :: Pointer) ; let next_outer_arg3 = outer_args [outer_pos + 2 * (i + 1) + 1] ; let next_outer_ty3 = cx . val_ty (next_outer_arg3) ; assert_eq ! (cx . type_kind (next_outer_ty3) , TypeKind :: Integer) ; args . push (next_outer_arg2) ; } args . push (cx . get_metadata_value (enzyme_const)) ; args . push (next_outer_arg) ; outer_pos += 2 + 2 * iterations ; activity_pos += 2 ; } else { if matches ! (diff_activity , DiffActivity :: Duplicated | DiffActivity :: DuplicatedOnly) { assert_eq ! (cx . type_kind (next_outer_ty) , TypeKind :: Pointer) ; } args . push (next_outer_arg) ; outer_pos += 2 ; activity_pos += 1 ; for _ in 1 .. width { let next_outer_arg = outer_args [outer_pos] ; args . push (next_outer_arg) ; outer_pos += 1 ; } } } else { outer_pos += 1 ; activity_pos += 1 ; } } }
+}
+
+macro_rules! generate_enzyme_call_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function generate_enzyme_call in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    generate_enzyme_call_introspect!();
+    # [doc = " When differentiating `fn_to_diff`, take a `outer_fn` and generate another"] # [doc = " function with expected naming and calling conventions[^1] which will be"] # [doc = " discovered by the enzyme LLVM pass and its body populated with the differentiated"] # [doc = " `fn_to_diff`. `outer_fn` is then modified to have a call to the generated"] # [doc = " function and handle the differences between the Rust calling convention and"] # [doc = " Enzyme."] # [doc = " [^1]: <https://enzyme.mit.edu/getting_started/CallingConvention/>"] pub (crate) fn generate_enzyme_call < 'll , 'tcx > (builder : & mut Builder < '_ , 'll , 'tcx > , cx : & SimpleCx < 'll > , fn_to_diff : & 'll Value , outer_name : & str , ret_ty : & 'll Type , fn_args : & [& 'll Value] , attrs : AutoDiffAttrs , dest : PlaceRef < 'tcx , & 'll Value > ,) { let mut ad_name : String = match attrs . mode { DiffMode :: Forward => "__enzyme_fwddiff" , DiffMode :: Reverse => "__enzyme_autodiff" , _ => panic ! ("logic bug in autodiff, unrecognized mode") , } . to_string () ; ad_name . push_str (outer_name) ; let enzyme_ty = unsafe { llvm :: LLVMFunctionType (ret_ty , ptr :: null () , 0 , TRUE) } ; let cc = unsafe { llvm :: LLVMGetFunctionCallConv (fn_to_diff) } ; let ad_fn = declare_simple_fn (cx , & ad_name , llvm :: CallConv :: try_from (cc) . expect ("invalid callconv") , llvm :: UnnamedAddr :: No , llvm :: Visibility :: Default , enzyme_ty ,) ; let num_args = llvm :: LLVMCountParams (& fn_to_diff) ; let mut args = Vec :: with_capacity (num_args as usize + 1) ; args . push (fn_to_diff) ; let enzyme_primal_ret = cx . create_metadata (b"enzyme_primal_return") ; if matches ! (attrs . ret_activity , DiffActivity :: Dual | DiffActivity :: Active) { args . push (cx . get_metadata_value (enzyme_primal_ret)) ; } if attrs . width > 1 { let enzyme_width = cx . create_metadata (b"enzyme_width") ; args . push (cx . get_metadata_value (enzyme_width)) ; args . push (cx . get_const_int (cx . type_i64 () , attrs . width as u64)) ; } match_args_from_caller_to_enzyme (& cx , builder , attrs . width , & mut args , & attrs . input_activity , fn_args ,) ; let call = builder . call (enzyme_ty , None , None , ad_fn , & args , None , None) ; builder . store_to_place (call , dest . val) ; }
+}

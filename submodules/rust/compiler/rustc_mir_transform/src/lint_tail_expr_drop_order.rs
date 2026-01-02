@@ -1,0 +1,85 @@
+mkuse!{use std :: cell :: RefCell ;}
+mkuse!{use std :: collections :: hash_map ;}
+mkuse!{use std :: rc :: Rc ;}
+mkuse!{use itertools :: Itertools as _ ;}
+mkuse!{use rustc_data_structures :: fx :: { FxHashMap , FxHashSet , FxIndexMap } ;}
+mkuse!{use rustc_data_structures :: unord :: { UnordMap , UnordSet } ;}
+mkuse!{use rustc_errors :: Subdiagnostic ;}
+mkuse!{use rustc_hir :: CRATE_HIR_ID ;}
+mkuse!{use rustc_hir :: def_id :: LocalDefId ;}
+mkuse!{use rustc_index :: bit_set :: MixedBitSet ;}
+mkuse!{use rustc_index :: { IndexSlice , IndexVec } ;}
+mkuse!{use rustc_macros :: { LintDiagnostic , Subdiagnostic } ;}
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: mir :: { self , BackwardIncompatibleDropReason , BasicBlock , Body , ClearCrossCrate , Local , Location , MirDumper , Place , StatementKind , TerminatorKind , } ;}
+mkuse!{use rustc_middle :: ty :: significant_drop_order :: { extract_component_with_significant_dtor , ty_dtor_span , } ;}
+mkuse!{use rustc_middle :: ty :: { self , TyCtxt } ;}
+mkuse!{use rustc_mir_dataflow :: impls :: MaybeInitializedPlaces ;}
+mkuse!{use rustc_mir_dataflow :: move_paths :: { LookupResult , MoveData , MovePathIndex } ;}
+mkuse!{use rustc_mir_dataflow :: { Analysis , MaybeReachable , ResultsCursor } ;}
+mkuse!{use rustc_session :: lint :: builtin :: TAIL_EXPR_DROP_ORDER ;}
+mkuse!{use rustc_session :: lint :: { self } ;}
+mkuse!{use rustc_span :: { DUMMY_SP , Span , Symbol } ;}
+mkuse!{use tracing :: debug ;}
+
+macro_rules! place_has_common_prefix_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function place_has_common_prefix in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    place_has_common_prefix_introspect!();
+    fn place_has_common_prefix < 'tcx > (left : & Place < 'tcx > , right : & Place < 'tcx >) -> bool { left . local == right . local && left . projection . iter () . zip (right . projection) . all (| (left , right) | left == right) }
+}
+mkitem!{mkenum!{# [doc = " Cache entry of `drop` at a `BasicBlock`"] # [derive (Debug , Clone , Copy)] enum MovePathIndexAtBlock { # [doc = " We know nothing yet"] Unknown , # [doc = " We know that the `drop` here has no effect"] None , # [doc = " We know that the `drop` here will invoke a destructor"] Some (MovePathIndex) , }}}
+mkitem!{mkstruct!{struct DropsReachable < 'a , 'mir , 'tcx > { body : & 'a Body < 'tcx > , place : & 'a Place < 'tcx > , drop_span : & 'a mut Option < Span > , move_data : & 'a MoveData < 'tcx > , maybe_init : & 'a mut ResultsCursor < 'mir , 'tcx , MaybeInitializedPlaces < 'mir , 'tcx > > , block_drop_value_info : & 'a mut IndexSlice < BasicBlock , MovePathIndexAtBlock > , collected_drops : & 'a mut MixedBitSet < MovePathIndex > , visited : FxHashMap < BasicBlock , Rc < RefCell < MixedBitSet < MovePathIndex > > > > , }}}
+mkitem!{mkimpl!{impl < 'a , 'mir , 'tcx > DropsReachable < 'a , 'mir , 'tcx > { fn visit (& mut self , block : BasicBlock) { let move_set_size = self . move_data . move_paths . len () ; let make_new_path_set = | | Rc :: new (RefCell :: new (MixedBitSet :: new_empty (move_set_size))) ; let data = & self . body . basic_blocks [block] ; let Some (terminator) = & data . terminator else { return } ; let dropped_local_here = Rc :: clone (self . visited . entry (block) . or_insert_with (make_new_path_set)) ; match self . block_drop_value_info [block] { MovePathIndexAtBlock :: Some (dropped) => { dropped_local_here . borrow_mut () . insert (dropped) ; } MovePathIndexAtBlock :: Unknown => { if let TerminatorKind :: Drop { place , .. } = & terminator . kind && let LookupResult :: Exact (idx) | LookupResult :: Parent (Some (idx)) = self . move_data . rev_lookup . find (place . as_ref ()) { self . maybe_init . seek_before_primary_effect (Location { block , statement_index : data . statements . len () , }) ; if let MaybeReachable :: Reachable (maybe_init) = self . maybe_init . get () && maybe_init . contains (idx) { self . block_drop_value_info [block] = MovePathIndexAtBlock :: Some (idx) ; dropped_local_here . borrow_mut () . insert (idx) ; } else { self . block_drop_value_info [block] = MovePathIndexAtBlock :: None ; } } } MovePathIndexAtBlock :: None => { } } for succ in terminator . successors () { let target = & self . body . basic_blocks [succ] ; if target . is_cleanup { continue ; } let dropped_local_there = match self . visited . entry (succ) { hash_map :: Entry :: Occupied (occupied_entry) => { if succ == block || ! occupied_entry . get () . borrow_mut () . union (& * dropped_local_here . borrow ()) { continue ; } Rc :: clone (occupied_entry . get ()) } hash_map :: Entry :: Vacant (vacant_entry) => Rc :: clone (vacant_entry . insert (Rc :: new (RefCell :: new (dropped_local_here . borrow () . clone ()))) ,) , } ; if let Some (terminator) = & target . terminator && let TerminatorKind :: Drop { place : dropped_place , target : _ , unwind : _ , replace : _ , drop : _ , async_fut : _ , } = & terminator . kind && place_has_common_prefix (dropped_place , self . place) { self . collected_drops . union (& * dropped_local_there . borrow ()) ; if self . drop_span . is_none () { * self . drop_span = Some (terminator . source_info . span) ; } } else { self . visit (succ) } } } }}}
+
+macro_rules! place_descendent_of_bids_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function place_descendent_of_bids in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    place_descendent_of_bids_introspect!();
+    # [doc = " Check if a moved place at `idx` is a part of a BID."] # [doc = " The use of this check is that we will consider drops on these"] # [doc = " as a drop of the overall BID and, thus, we can exclude it from the diagnosis."] fn place_descendent_of_bids < 'tcx > (mut idx : MovePathIndex , move_data : & MoveData < 'tcx > , bids : & UnordSet < & Place < 'tcx > > ,) -> bool { loop { let path = & move_data . move_paths [idx] ; if bids . contains (& path . place) { return true ; } if let Some (parent) = path . parent { idx = parent ; } else { return false ; } } }
+}
+
+macro_rules! run_lint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function run_lint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    run_lint_introspect!();
+    # [doc = " The core of the lint `tail-expr-drop-order`"] pub (crate) fn run_lint < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId , body : & Body < 'tcx >) { if matches ! (tcx . def_kind (def_id) , rustc_hir :: def :: DefKind :: SyntheticCoroutineBody) { return ; } if body . span . edition () . at_least_rust_2024 () || tcx . lints_that_dont_need_to_run (()) . contains (& lint :: LintId :: of (TAIL_EXPR_DROP_ORDER)) { return ; } let typing_env = ty :: TypingEnv :: non_body_analysis (tcx , def_id) ; let mut bid_per_block = FxIndexMap :: default () ; let mut bid_places = UnordSet :: new () ; let mut ty_dropped_components = UnordMap :: default () ; for (block , data) in body . basic_blocks . iter_enumerated () { for (statement_index , stmt) in data . statements . iter () . enumerate () { if let StatementKind :: BackwardIncompatibleDropHint { place , reason : BackwardIncompatibleDropReason :: Edition2024 , } = & stmt . kind { let ty = place . ty (body , tcx) . ty ; if ty_dropped_components . entry (ty) . or_insert_with (| | extract_component_with_significant_dtor (tcx , typing_env , ty)) . is_empty () { continue ; } bid_per_block . entry (block) . or_insert (vec ! []) . push ((Location { block , statement_index } , & * * place)) ; bid_places . insert (& * * place) ; } } } if bid_per_block . is_empty () { return ; } if let Some (dumper) = MirDumper :: new (tcx , "lint_tail_expr_drop_order" , body) { dumper . dump_mir (body) ; } let locals_with_user_names = collect_user_names (body) ; let is_closure_like = tcx . is_closure_like (def_id . to_def_id ()) ; let move_data = MoveData :: gather_moves (body , tcx , | _ | true) ; let mut maybe_init = MaybeInitializedPlaces :: new (tcx , body , & move_data) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) ; let mut block_drop_value_info = IndexVec :: from_elem_n (MovePathIndexAtBlock :: Unknown , body . basic_blocks . len ()) ; for (& block , candidates) in & bid_per_block { let mut all_locals_dropped = MixedBitSet :: new_empty (move_data . move_paths . len ()) ; let mut drop_span = None ; for & (_ , place) in candidates . iter () { let mut collected_drops = MixedBitSet :: new_empty (move_data . move_paths . len ()) ; DropsReachable { body , place , drop_span : & mut drop_span , move_data : & move_data , maybe_init : & mut maybe_init , block_drop_value_info : & mut block_drop_value_info , collected_drops : & mut collected_drops , visited : Default :: default () , } . visit (block) ; all_locals_dropped . union (& collected_drops) ; } { let mut to_exclude = MixedBitSet :: new_empty (all_locals_dropped . domain_size ()) ; for path_idx in all_locals_dropped . iter () { let move_path = & move_data . move_paths [path_idx] ; let dropped_local = move_path . place . local ; if dropped_local == Local :: ZERO { debug ! (? dropped_local , "skip return value") ; to_exclude . insert (path_idx) ; continue ; } if is_closure_like && matches ! (dropped_local , ty :: CAPTURE_STRUCT_LOCAL) { debug ! (? dropped_local , "skip closure captures") ; to_exclude . insert (path_idx) ; continue ; } if place_descendent_of_bids (path_idx , & move_data , & bid_places) { debug ! (? dropped_local , "skip descendent of bids") ; to_exclude . insert (path_idx) ; continue ; } let observer_ty = move_path . place . ty (body , tcx) . ty ; if ty_dropped_components . entry (observer_ty) . or_insert_with (| | { extract_component_with_significant_dtor (tcx , typing_env , observer_ty) }) . is_empty () { debug ! (? dropped_local , "skip non-droppy types") ; to_exclude . insert (path_idx) ; continue ; } } if let Ok (local) = candidates . iter () . map (| & (_ , place) | place . local) . all_equal_value () { for path_idx in all_locals_dropped . iter () { if move_data . move_paths [path_idx] . place . local == local { to_exclude . insert (path_idx) ; } } } all_locals_dropped . subtract (& to_exclude) ; } if all_locals_dropped . is_empty () { continue ; } let local_names = assign_observables_names (all_locals_dropped . iter () . map (| path_idx | move_data . move_paths [path_idx] . place . local) . chain (candidates . iter () . map (| (_ , place) | place . local)) , & locals_with_user_names ,) ; let mut lint_root = None ; let mut local_labels = vec ! [] ; for & (_ , place) in candidates { let linted_local_decl = & body . local_decls [place . local] ; let Some (& (ref name , is_generated_name)) = local_names . get (& place . local) else { bug ! ("a name should have been assigned") } ; let name = name . as_str () ; if lint_root . is_none () && let ClearCrossCrate :: Set (data) = & body . source_scopes [linted_local_decl . source_info . scope] . local_data { lint_root = Some (data . lint_root) ; } let mut seen_dyn = false ; let destructors = ty_dropped_components . get (& linted_local_decl . ty) . unwrap () . iter () . filter_map (| & ty | { if let Some (span) = ty_dtor_span (tcx , ty) { Some (DestructorLabel { span , name , dtor_kind : "concrete" }) } else if matches ! (ty . kind () , ty :: Dynamic (..)) { if seen_dyn { None } else { seen_dyn = true ; Some (DestructorLabel { span : DUMMY_SP , name , dtor_kind : "dyn" }) } } else { None } }) . collect () ; local_labels . push (LocalLabel { span : linted_local_decl . source_info . span , destructors , name , is_generated_name , is_dropped_first_edition_2024 : true , }) ; } for path_idx in all_locals_dropped . iter () { let place = & move_data . move_paths [path_idx] . place ; let observer_ty = place . ty (body , tcx) . ty ; let observer_local_decl = & body . local_decls [place . local] ; let Some (& (ref name , is_generated_name)) = local_names . get (& place . local) else { bug ! ("a name should have been assigned") } ; let name = name . as_str () ; let mut seen_dyn = false ; let destructors = extract_component_with_significant_dtor (tcx , typing_env , observer_ty) . into_iter () . filter_map (| ty | { if let Some (span) = ty_dtor_span (tcx , ty) { Some (DestructorLabel { span , name , dtor_kind : "concrete" }) } else if matches ! (ty . kind () , ty :: Dynamic (..)) { if seen_dyn { None } else { seen_dyn = true ; Some (DestructorLabel { span : DUMMY_SP , name , dtor_kind : "dyn" }) } } else { None } }) . collect () ; local_labels . push (LocalLabel { span : observer_local_decl . source_info . span , destructors , name , is_generated_name , is_dropped_first_edition_2024 : false , }) ; } let span = local_labels [0] . span ; tcx . emit_node_span_lint (lint :: builtin :: TAIL_EXPR_DROP_ORDER , lint_root . unwrap_or (CRATE_HIR_ID) , span , TailExprDropOrderLint { local_labels , drop_span , _epilogue : () } ,) ; } }
+}
+
+macro_rules! collect_user_names_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function collect_user_names in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    collect_user_names_introspect!();
+    # [doc = " Extract binding names if available for diagnosis"] fn collect_user_names (body : & Body < '_ >) -> FxIndexMap < Local , Symbol > { let mut names = FxIndexMap :: default () ; for var_debug_info in & body . var_debug_info { if let mir :: VarDebugInfoContents :: Place (place) = & var_debug_info . value && let Some (local) = place . local_or_deref_local () { names . entry (local) . or_insert (var_debug_info . name) ; } } names }
+}
+
+macro_rules! assign_observables_names_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function assign_observables_names in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    assign_observables_names_introspect!();
+    # [doc = " Assign names for anonymous or temporary values for diagnosis"] fn assign_observables_names (locals : impl IntoIterator < Item = Local > , user_names : & FxIndexMap < Local , Symbol > ,) -> FxIndexMap < Local , (String , bool) > { let mut names = FxIndexMap :: default () ; let mut assigned_names = FxHashSet :: default () ; let mut idx = 0u64 ; let mut fresh_name = | | { idx += 1 ; (format ! ("#{idx}") , true) } ; for local in locals { let name = if let Some (name) = user_names . get (& local) { let name = name . as_str () ; if assigned_names . contains (name) { fresh_name () } else { (name . to_owned () , false) } } else { fresh_name () } ; assigned_names . insert (name . 0 . clone ()) ; names . insert (local , name) ; } names }
+}
+mkitem!{mkstruct!{# [derive (LintDiagnostic)] # [diag (mir_transform_tail_expr_drop_order)] struct TailExprDropOrderLint < 'a > { # [subdiagnostic] local_labels : Vec < LocalLabel < 'a > > , # [label (mir_transform_drop_location)] drop_span : Option < Span > , # [note (mir_transform_note_epilogue)] _epilogue : () , }}}
+mkitem!{mkstruct!{struct LocalLabel < 'a > { span : Span , name : & 'a str , is_generated_name : bool , is_dropped_first_edition_2024 : bool , destructors : Vec < DestructorLabel < 'a > > , }}}
+mkitem!{mkimpl!{# [doc = " A custom `Subdiagnostic` implementation so that the notes are delivered in a specific order"] impl Subdiagnostic for LocalLabel < '_ > { fn add_to_diag < G : rustc_errors :: EmissionGuarantee > (self , diag : & mut rustc_errors :: Diag < '_ , G >) { diag . remove_arg ("name") ; diag . arg ("name" , self . name) ; diag . remove_arg ("is_generated_name") ; diag . arg ("is_generated_name" , self . is_generated_name) ; diag . remove_arg ("is_dropped_first_edition_2024") ; diag . arg ("is_dropped_first_edition_2024" , self . is_dropped_first_edition_2024) ; let msg = diag . eagerly_translate (crate :: fluent_generated :: mir_transform_tail_expr_local) ; diag . span_label (self . span , msg) ; for dtor in self . destructors { dtor . add_to_diag (diag) ; } let msg = diag . eagerly_translate (crate :: fluent_generated :: mir_transform_label_local_epilogue) ; diag . span_label (self . span , msg) ; } }}}
+mkitem!{mkstruct!{# [derive (Subdiagnostic)] # [note (mir_transform_tail_expr_dtor)] struct DestructorLabel < 'a > { # [primary_span] span : Span , dtor_kind : & 'static str , name : & 'a str , }}}

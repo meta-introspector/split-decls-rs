@@ -1,0 +1,8 @@
+mkuse!{use rustc_data_structures :: fingerprint :: Fingerprint ;}
+mkuse!{use rustc_macros :: HashStable_Generic ;}
+mkuse!{use rustc_span :: Span ;}
+mkuse!{use crate :: { AttrPath , HirId , Target } ;}
+mkitem!{mkstruct!{# [derive (Debug)] pub struct DelayedLints { pub lints : Box < [DelayedLint] > , pub opt_hash : Option < Fingerprint > , }}}
+mkitem!{mkenum!{# [doc = " During ast lowering, no lints can be emitted."] # [doc = " That is because lints attach to nodes either in the AST, or on the built HIR."] # [doc = " When attached to AST nodes, they're emitted just before building HIR,"] # [doc = " and then there's a gap where no lints can be emitted until HIR is done."] # [doc = " The variants in this enum represent lints that are temporarily stashed during"] # [doc = " AST lowering to be emitted once HIR is built."] # [derive (Clone , Debug , HashStable_Generic)] pub enum DelayedLint { AttributeParsing (AttributeLint < HirId >) , }}}
+mkitem!{mkstruct!{# [derive (Clone , Debug , HashStable_Generic)] pub struct AttributeLint < Id > { pub id : Id , pub span : Span , pub kind : AttributeLintKind , }}}
+mkitem!{mkenum!{# [derive (Clone , Debug , HashStable_Generic)] pub enum AttributeLintKind { UnusedDuplicate { this : Span , other : Span , warning : bool } , IllFormedAttributeInput { suggestions : Vec < String > } , EmptyAttribute { first_span : Span } , InvalidTarget { name : AttrPath , target : Target , applied : Vec < String > , only : & 'static str } , InvalidStyle { name : AttrPath , is_used_as_inner : bool , target : Target , target_span : Span } , }}}

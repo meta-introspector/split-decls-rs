@@ -1,0 +1,12 @@
+mkuse!{use super :: expm1f ;}
+
+macro_rules! tanhf_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function tanhf in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    tanhf_introspect!();
+    # [doc = " The hyperbolic tangent of `x` (f32)."] # [doc = ""] # [doc = " `x` is specified in radians."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn tanhf (mut x : f32) -> f32 { let mut ix = x . to_bits () ; let sign = (ix >> 31) != 0 ; ix &= 0x7fffffff ; x = f32 :: from_bits (ix) ; let w = ix ; let tt = if w > 0x3f0c9f54 { if w > 0x41200000 { 1. + 0. / x } else { let t = expm1f (2. * x) ; 1. - 2. / (t + 2.) } } else if w > 0x3e82c578 { let t = expm1f (2. * x) ; t / (t + 2.) } else if w >= 0x00800000 { let t = expm1f (- 2. * x) ; - t / (t + 2.) } else { force_eval ! (x * x) ; x } ; if sign { - tt } else { tt } }
+}

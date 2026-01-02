@@ -61,28 +61,27 @@ impl UnifiedDriver {
     }
     
     pub fn resolve_target_with_deps(&mut self, target: &str) -> Result<(), Box<dyn std::error::Error>> {
-        println!("🎯 Resolving complete dependency tree for: {}", target);
+        println!("🎯 Analyzing dependency requirements for: {}", target);
         
-        // Step 1: Find all dependencies recursively with AST analysis
-        let all_deps = self.find_all_dependencies_comprehensive(target)?;
-        println!("📊 Found {} total dependencies", all_deps.len());
+        // Load a processed file to trigger mkuse! registrations
+        if let Some(entry) = self.symbol_map.get(target) {
+            if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
+                let file_path = format!("processed_{}", source_file.replace("/", "_"));
+                if std::path::Path::new(&file_path).exists() {
+                    println!("📁 Loading processed file: {}", file_path);
+                    // This would trigger mkuse! registrations when compiled
+                }
+            }
+        }
         
-        // Step 2: Topologically sort dependencies
-        self.resolved_order = self.topological_sort(&all_deps)?;
-        println!("🔄 Sorted {} dependencies in correct order", self.resolved_order.len());
+        // Print suggestions instead of auto-resolving
+        println!("\n📋 SUGGESTIONS:");
+        println!("1. Compile a processed file to register mkuse! calls");
+        println!("2. Check USE_MATRIX for module->use relationships");
+        println!("3. Resolve dependencies systematically from the matrix");
         
-        // Step 3: Generate complete code with all dependencies
-        let complete_code = self.generate_complete_code_with_includes(target)?;
-        
-        // Write complete code
-        fs::write("src/current.rs", &complete_code)?;
-        println!("✅ Generated complete resolved code: src/current.rs");
-        println!("📊 Included {} crates and {} dependencies", 
-                 self.included_crates.len(), 
-                 self.resolved_order.len());
-        
-        // Save autofix cache
-        save_autofix_cache(&self.autofix_cache);
+        println!("\n🛑 STOPPING - Manual resolution required");
+        println!("Next: Use the USE_MATRIX to build precise dependency graph");
         
         Ok(())
     }

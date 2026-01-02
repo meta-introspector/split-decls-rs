@@ -1,0 +1,27 @@
+mkuse!{use rustc_hir :: lang_items :: LangItem ;}
+mkuse!{use rustc_infer :: infer :: TyCtxtInferExt ;}
+mkuse!{use rustc_middle :: query :: Providers ;}
+mkuse!{use rustc_middle :: ty :: { self , Ty , TyCtxt , TypingMode } ;}
+mkuse!{use rustc_trait_selection :: traits :: { ObligationCause , ObligationCtxt } ;}
+
+macro_rules! has_structural_eq_impl_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function has_structural_eq_impl in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    has_structural_eq_impl_introspect!();
+    # [doc = " This method returns true if and only if `adt_ty` itself has been marked as"] # [doc = " eligible for structural-match: namely, if it implements"] # [doc = " `StructuralPartialEq` (which is injected by `#[derive(PartialEq)]`)."] # [doc = ""] # [doc = " Note that this does *not* recursively check if the substructure of `adt_ty`"] # [doc = " implements the trait."] fn has_structural_eq_impl < 'tcx > (tcx : TyCtxt < 'tcx > , adt_ty : Ty < 'tcx >) -> bool { let infcx = & tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let cause = ObligationCause :: dummy () ; let ocx = ObligationCtxt :: new (infcx) ; let structural_peq_def_id = infcx . tcx . require_lang_item (LangItem :: StructuralPeq , cause . span) ; ocx . register_bound (cause . clone () , ty :: ParamEnv :: empty () , adt_ty , structural_peq_def_id) ; ocx . select_all_or_error () . is_empty () }
+}
+
+macro_rules! provide_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function provide in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    provide_introspect!();
+    pub (crate) fn provide (providers : & mut Providers) { providers . has_structural_eq_impl = has_structural_eq_impl ; }
+}

@@ -1,0 +1,13 @@
+mkuse!{# [doc = " This module provides types and traits for buffering lints until later in compilation."] use rustc_ast :: node_id :: NodeId ;}
+mkuse!{use rustc_data_structures :: fx :: FxIndexMap ;}
+mkuse!{use rustc_error_messages :: MultiSpan ;}
+mkuse!{use rustc_lint_defs :: { BuiltinLintDiag , Lint , LintId } ;}
+mkuse!{use crate :: { DynSend , LintDiagnostic , LintDiagnosticBox } ;}
+mkitem!{mkenum!{# [doc = " We can't implement `LintDiagnostic` for `BuiltinLintDiag`, because decorating some of its"] # [doc = " variants requires types we don't have yet. So, handle that case separately."] pub enum DecorateDiagCompat { Dynamic (Box < dyn for < 'a > LintDiagnosticBox < 'a , () > + DynSend + 'static >) , Builtin (BuiltinLintDiag) , }}}
+mkitem!{mkimpl!{impl std :: fmt :: Debug for DecorateDiagCompat { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { f . debug_struct ("DecorateDiagCompat") . finish () } }}}
+mkitem!{mkimpl!{impl ! LintDiagnostic < '_ , () > for BuiltinLintDiag { }}}
+mkitem!{mkimpl!{impl < D : for < 'a > LintDiagnostic < 'a , () > + DynSend + 'static > From < D > for DecorateDiagCompat { # [inline] fn from (d : D) -> Self { Self :: Dynamic (Box :: new (d)) } }}}
+mkitem!{mkimpl!{impl From < BuiltinLintDiag > for DecorateDiagCompat { # [inline] fn from (b : BuiltinLintDiag) -> Self { Self :: Builtin (b) } }}}
+mkitem!{mkstruct!{# [doc = " Lints that are buffered up early on in the `Session` before the"] # [doc = " `LintLevels` is calculated."] # [derive (Debug)] pub struct BufferedEarlyLint { # [doc = " The span of code that we are linting on."] pub span : Option < MultiSpan > , # [doc = " The `NodeId` of the AST node that generated the lint."] pub node_id : NodeId , # [doc = " A lint Id that can be passed to"] # [doc = " `rustc_lint::early::EarlyContextAndPass::check_id`."] pub lint_id : LintId , # [doc = " Customization of the `Diag<'_>` for the lint."] pub diagnostic : DecorateDiagCompat , }}}
+mkitem!{mkstruct!{# [derive (Default , Debug)] pub struct LintBuffer { pub map : FxIndexMap < NodeId , Vec < BufferedEarlyLint > > , }}}
+mkitem!{mkimpl!{impl LintBuffer { pub fn add_early_lint (& mut self , early_lint : BufferedEarlyLint) { self . map . entry (early_lint . node_id) . or_default () . push (early_lint) ; } pub fn take (& mut self , id : NodeId) -> Vec < BufferedEarlyLint > { self . map . swap_remove (& id) . unwrap_or_default () } pub fn buffer_lint (& mut self , lint : & 'static Lint , node_id : NodeId , span : impl Into < MultiSpan > , decorate : impl Into < DecorateDiagCompat > ,) { self . add_early_lint (BufferedEarlyLint { lint_id : LintId :: of (lint) , node_id , span : Some (span . into ()) , diagnostic : decorate . into () , }) ; } }}}

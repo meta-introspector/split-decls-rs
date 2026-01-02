@@ -97,75 +97,59 @@
   },
   "dependency_ordered_files": [
     [
-      "../rust/library/windows_targets/src/lib.rs",
+      "../rust/library/backtrace/src/symbolize/dladdr.rs",
       0
     ],
     [
-      "../rust/compiler/rustc_codegen_llvm/src/back/mod.rs",
+      "../rust/library/core/src/ops/deref.rs",
       0
     ],
     [
-      "../rust/library/std_detect/src/lib.rs",
+      "../rust/library/std/src/keyword_docs.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/nuttx/raw.rs",
+      "../rust/library/core/src/str/traits.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/linux/mod.rs",
+      "../rust/library/portable-simd/crates/core_simd/tests/mask_ops_impl/mod.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/android/mod.rs",
+      "../rust/library/std/src/os/horizon/mod.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/fuchsia/mod.rs",
+      "../rust/compiler/rustc_thread_pool/src/compile_fail/rc_return.rs",
       0
     ],
     [
-      "../rust/library/backtrace/src/backtrace/noop.rs",
+      "../rust/compiler/rustc_codegen_gcc/src/back/mod.rs",
       0
     ],
     [
-      "../rust/library/core/src/iter/sources/generator.rs",
+      "../rust/compiler/rustc_metadata/src/rmeta/decoder.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/net/linux_ext/mod.rs",
+      "../rust/library/std/src/os/haiku/mod.rs",
       0
     ],
     [
-      "../rust/library/std/src/os/vita/raw.rs",
+      "../rust/library/std/src/os/hurd/mod.rs",
       0
     ],
     [
-      "../rust/compiler/rustc_mir_build/src/thir/mod.rs",
+      "../rust/library/coretests/tests/io/mod.rs",
       0
     ],
     [
-      "../rust/compiler/rustc_middle/src/ty/context.rs",
+      "../rust/library/std/src/sys/pal/zkvm/abi.rs",
       0
     ],
     [
-      "../rust/library/backtrace/tests/smoke.rs",
-      0
-    ],
-    [
-      "../rust/library/std/src/os/uefi/mod.rs",
-      0
-    ],
-    [
-      "../rust/compiler/rustc_parse/src/parser/stmt.rs",
-      0
-    ],
-    [
-      "../rust/library/core/src/cmp.rs",
-      0
-    ],
-    [
-      "../rust/library/core/src/clone.rs",
+      "../rust/library/core/src/convert/mod.rs",
       0
     ],
     [
@@ -173,7 +157,23 @@
       0
     ],
     [
-      "../rust/library/backtrace/crates/cpp_smoke_test/src/lib.rs",
+      "../rust/compiler/rustc_errors/src/translation.rs",
+      0
+    ],
+    [
+      "../rust/library/std/src/os/vita/mod.rs",
+      0
+    ],
+    [
+      "../rust/library/std/src/os/dragonfly/mod.rs",
+      0
+    ],
+    [
+      "../rust/library/test/src/helpers/mod.rs",
+      0
+    ],
+    [
+      "../rust/library/std/benches/hash/mod.rs",
       0
     ]
   ],
@@ -9079,11 +9079,11 @@
     "toplevel_Discriminant(11)": 3,
     "toplevel_Discriminant(12)": 568,
     "toplevel_Discriminant(13)": 24,
-    "toplevel_Discriminant(14)": 17334,
+    "toplevel_Discriminant(14)": 17335,
     "toplevel_Discriminant(15)": 397,
     "toplevel_Discriminant(2)": 116,
     "toplevel_Discriminant(4)": 153,
-    "toplevel_Discriminant(5)": 10449,
+    "toplevel_Discriminant(5)": 10448,
     "toplevel_Discriminant(6)": 3483,
     "toplevel_Discriminant(7)": 2009,
     "toplevel_Discriminant(8)": 322,

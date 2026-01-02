@@ -1,0 +1,115 @@
+mkuse!{use rustc_data_structures :: fx :: { FxHashMap , FxHashSet , FxIndexSet } ;}
+mkuse!{use rustc_data_structures :: unord :: { UnordMap , UnordSet } ;}
+mkuse!{use rustc_hir :: attrs :: InstructionSetAttr ;}
+mkuse!{use rustc_hir :: def :: DefKind ;}
+mkuse!{use rustc_hir :: def_id :: { DefId , LOCAL_CRATE , LocalDefId } ;}
+mkuse!{use rustc_middle :: middle :: codegen_fn_attrs :: { TargetFeature , TargetFeatureKind } ;}
+mkuse!{use rustc_middle :: query :: Providers ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_session :: Session ;}
+mkuse!{use rustc_session :: lint :: builtin :: AARCH64_SOFTFLOAT_NEON ;}
+mkuse!{use rustc_session :: parse :: feature_err ;}
+mkuse!{use rustc_span :: { Span , Symbol , sym } ;}
+mkuse!{use rustc_target :: target_features :: { RUSTC_SPECIFIC_FEATURES , Stability } ;}
+mkuse!{use smallvec :: SmallVec ;}
+mkuse!{use crate :: errors :: FeatureNotValid ;}
+mkuse!{use crate :: { errors , target_features } ;}
+
+macro_rules! from_target_feature_attr_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function from_target_feature_attr in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    from_target_feature_attr_introspect!();
+    # [doc = " Compute the enabled target features from the `#[target_feature]` function attribute."] # [doc = " Enabled target features are added to `target_features`."] pub (crate) fn from_target_feature_attr (tcx : TyCtxt < '_ > , did : LocalDefId , features : & [(Symbol , Span)] , was_forced : bool , rust_target_features : & UnordMap < String , target_features :: Stability > , target_features : & mut Vec < TargetFeature > ,) { let rust_features = tcx . features () ; let abi_feature_constraints = tcx . sess . target . abi_required_features () ; for & (feature , feature_span) in features { let feature_str = feature . as_str () ; let Some (stability) = rust_target_features . get (feature_str) else { let plus_hint = feature_str . strip_prefix ('+') . is_some_and (| stripped | rust_target_features . contains_key (stripped)) ; tcx . dcx () . emit_err (FeatureNotValid { feature : feature_str , span : feature_span , plus_hint , }) ; continue ; } ; if let Err (reason) = stability . toggle_allowed () { tcx . dcx () . emit_err (errors :: ForbiddenTargetFeatureAttr { span : feature_span , feature : feature_str , reason , }) ; } else if let Some (nightly_feature) = stability . requires_nightly () && ! rust_features . enabled (nightly_feature) { feature_err (& tcx . sess , nightly_feature , feature_span , format ! ("the target feature `{feature}` is currently unstable") ,) . emit () ; } else { for & name in tcx . implied_target_features (feature) { if ! tcx . sess . opts . actually_rustdoc { if abi_feature_constraints . incompatible . contains (& name . as_str ()) { if tcx . sess . target . arch == "aarch64" && name . as_str () == "neon" { tcx . emit_node_span_lint (AARCH64_SOFTFLOAT_NEON , tcx . local_def_id_to_hir_id (did) , feature_span , errors :: Aarch64SoftfloatNeon ,) ; } else { tcx . dcx () . emit_err (errors :: ForbiddenTargetFeatureAttr { span : feature_span , feature : name . as_str () , reason : "this feature is incompatible with the target ABI" , }) ; } } } let kind = if name != feature { TargetFeatureKind :: Implied } else if was_forced { TargetFeatureKind :: Forced } else { TargetFeatureKind :: Enabled } ; target_features . push (TargetFeature { name , kind }) } } } }
+}
+
+macro_rules! asm_target_features_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function asm_target_features in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    asm_target_features_introspect!();
+    # [doc = " Computes the set of target features used in a function for the purposes of"] # [doc = " inline assembly."] fn asm_target_features (tcx : TyCtxt < '_ > , did : DefId) -> & FxIndexSet < Symbol > { let mut target_features = tcx . sess . unstable_target_features . clone () ; if tcx . def_kind (did) . has_codegen_attrs () { let attrs = tcx . codegen_fn_attrs (did) ; target_features . extend (attrs . target_features . iter () . map (| feature | feature . name)) ; match attrs . instruction_set { None => { } Some (InstructionSetAttr :: ArmA32) => { target_features . swap_remove (& sym :: thumb_mode) ; } Some (InstructionSetAttr :: ArmT32) => { target_features . insert (sym :: thumb_mode) ; } } } tcx . arena . alloc (target_features) }
+}
+
+macro_rules! check_target_feature_trait_unsafe_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function check_target_feature_trait_unsafe in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    check_target_feature_trait_unsafe_introspect!();
+    # [doc = " Checks the function annotated with `#[target_feature]` is not a safe"] # [doc = " trait method implementation, reporting an error if it is."] pub (crate) fn check_target_feature_trait_unsafe (tcx : TyCtxt < '_ > , id : LocalDefId , attr_span : Span) { if let DefKind :: AssocFn = tcx . def_kind (id) { let parent_id = tcx . local_parent (id) ; if let DefKind :: Trait | DefKind :: Impl { of_trait : true } = tcx . def_kind (parent_id) { tcx . dcx () . emit_err (errors :: TargetFeatureSafeTrait { span : attr_span , def : tcx . def_span (id) , }) ; } } }
+}
+
+macro_rules! parse_rust_feature_flag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function parse_rust_feature_flag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    parse_rust_feature_flag_introspect!();
+    # [doc = " Parse the value of `-Ctarget-feature`, also expanding implied features,"] # [doc = " and call the closure for each (expanded) Rust feature. If the list contains"] # [doc = " a syntactically invalid item (not starting with `+`/`-`), the error callback is invoked."] fn parse_rust_feature_flag < 'a > (sess : & 'a Session , err_callback : impl Fn (& 'a str) , mut callback : impl FnMut (& 'a str , FxHashSet < & 'a str > , bool ,) ,) { let mut inverse_implied_features : Option < FxHashMap < & str , FxHashSet < & str > > > = None ; for feature in sess . opts . cg . target_feature . split (',') { if let Some (base_feature) = feature . strip_prefix ('+') { if RUSTC_SPECIFIC_FEATURES . contains (& base_feature) { continue ; } callback (base_feature , sess . target . implied_target_features (base_feature) , true) } else if let Some (base_feature) = feature . strip_prefix ('-') { if RUSTC_SPECIFIC_FEATURES . contains (& base_feature) { continue ; } let inverse_implied_features = inverse_implied_features . get_or_insert_with (| | { let mut set : FxHashMap < & str , FxHashSet < & str > > = FxHashMap :: default () ; for (f , _ , is) in sess . target . rust_target_features () { for i in is . iter () { set . entry (i) . or_default () . insert (f) ; } } set }) ; let mut features = FxHashSet :: default () ; let mut new_features = vec ! [base_feature] ; while let Some (new_feature) = new_features . pop () { if features . insert (new_feature) { if let Some (implied_features) = inverse_implied_features . get (& new_feature) { # [allow (rustc :: potential_query_instability)] new_features . extend (implied_features) } } } callback (base_feature , features , false) } else if ! feature . is_empty () { err_callback (feature) } } }
+}
+
+macro_rules! cfg_target_feature_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function cfg_target_feature in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    cfg_target_feature_introspect!();
+    # [doc = " Utility function for a codegen backend to compute `cfg(target_feature)`, or more specifically,"] # [doc = " to populate `sess.unstable_target_features` and `sess.target_features` (these are the first and"] # [doc = " 2nd component of the return value, respectively)."] # [doc = ""] # [doc = " `target_base_has_feature` should check whether the given feature (a Rust feature name!) is"] # [doc = " enabled in the \"base\" target machine, i.e., without applying `-Ctarget-feature`. Note that LLVM"] # [doc = " may consider features to be implied that we do not and vice-versa. We want `cfg` to be entirely"] # [doc = " consistent with Rust feature implications, and thus only consult LLVM to expand the target CPU"] # [doc = " to target features."] # [doc = ""] # [doc = " We do not have to worry about RUSTC_SPECIFIC_FEATURES here, those are handled elsewhere."] pub fn cfg_target_feature (sess : & Session , mut target_base_has_feature : impl FnMut (& str) -> bool ,) -> (Vec < Symbol > , Vec < Symbol >) { let mut features : UnordSet < Symbol > = sess . target . rust_target_features () . iter () . filter (| (feature , _ , _) | target_base_has_feature (feature)) . flat_map (| (base_feature , _ , _) | { # [allow (rustc :: potential_query_instability)] sess . target . implied_target_features (base_feature) . into_iter () . map (| f | Symbol :: intern (f)) }) . collect () ; parse_rust_feature_flag (sess , | _ | { } , | _base_feature , new_features , enabled | { # [allow (rustc :: potential_query_instability)] if enabled { features . extend (new_features . into_iter () . map (| f | Symbol :: intern (f))) ; } else { for new in new_features { features . remove (& Symbol :: intern (new)) ; } } } ,) ; let f = | allow_unstable | { sess . target . rust_target_features () . iter () . filter_map (| (feature , gate , _) | { if allow_unstable || (gate . in_cfg () && (sess . is_nightly_build () || gate . requires_nightly () . is_none ())) { Some (Symbol :: intern (feature)) } else { None } }) . filter (| feature | features . contains (& feature)) . collect () } ; (f (true) , f (false)) }
+}
+
+macro_rules! check_tied_features_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function check_tied_features in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    check_tied_features_introspect!();
+    # [doc = " Given a map from target_features to whether they are enabled or disabled, ensure only valid"] # [doc = " combinations are allowed."] pub fn check_tied_features (sess : & Session , features : & FxHashMap < & str , bool > ,) -> Option < & 'static [& 'static str] > { if ! features . is_empty () { for tied in sess . target . tied_target_features () { let mut tied_iter = tied . iter () ; let enabled = features . get (tied_iter . next () . unwrap ()) ; if tied_iter . any (| f | enabled != features . get (f)) { return Some (tied) ; } } } None }
+}
+
+macro_rules! flag_to_backend_features_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function flag_to_backend_features in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    flag_to_backend_features_introspect!();
+    # [doc = " Translates the `-Ctarget-feature` flag into a backend target feature list."] # [doc = ""] # [doc = " `to_backend_features` converts a Rust feature name into a list of backend feature names; this is"] # [doc = " used for diagnostic purposes only."] # [doc = ""] # [doc = " `extend_backend_features` extends the set of backend features (assumed to be in mutable state"] # [doc = " accessible by that closure) to enable/disable the given Rust feature name."] pub fn flag_to_backend_features < 'a , const N : usize > (sess : & 'a Session , diagnostics : bool , to_backend_features : impl Fn (& 'a str) -> SmallVec < [& 'a str ; N] > , mut extend_backend_features : impl FnMut (& 'a str , bool) ,) { let known_features = sess . target . rust_target_features () ; let mut rust_features = vec ! [] ; parse_rust_feature_flag (sess , | feature | { if diagnostics { sess . dcx () . emit_warn (errors :: UnknownCTargetFeaturePrefix { feature }) ; } } , | base_feature , new_features , enable | { rust_features . extend (UnordSet :: from (new_features) . to_sorted_stable_ord () . iter () . map (| & & s | (enable , s)) ,) ; if diagnostics { let feature_state = known_features . iter () . find (| & & (v , _ , _) | v == base_feature) ; match feature_state { None => { let rust_feature = known_features . iter () . find_map (| & (rust_feature , _ , _) | { let backend_features = to_backend_features (rust_feature) ; if backend_features . contains (& base_feature) && ! backend_features . contains (& rust_feature) { Some (rust_feature) } else { None } }) ; let unknown_feature = if let Some (rust_feature) = rust_feature { errors :: UnknownCTargetFeature { feature : base_feature , rust_feature : errors :: PossibleFeature :: Some { rust_feature } , } } else { errors :: UnknownCTargetFeature { feature : base_feature , rust_feature : errors :: PossibleFeature :: None , } } ; sess . dcx () . emit_warn (unknown_feature) ; } Some ((_ , stability , _)) => { if let Err (reason) = stability . toggle_allowed () { sess . dcx () . emit_warn (errors :: ForbiddenCTargetFeature { feature : base_feature , enabled : if enable { "enabled" } else { "disabled" } , reason , }) ; } else if stability . requires_nightly () . is_some () { sess . dcx () . emit_warn (errors :: UnstableCTargetFeature { feature : base_feature , }) ; } } } } } ,) ; if diagnostics { if let Some (f) = check_tied_features (sess , & FxHashMap :: from_iter (rust_features . iter () . map (| & (enable , feature) | (feature , enable))) ,) { sess . dcx () . emit_err (errors :: TargetFeatureDisableOrEnable { features : f , span : None , missing_features : None , }) ; } } for (enable , feature) in rust_features { extend_backend_features (feature , enable) ; } }
+}
+
+macro_rules! retpoline_features_by_flags_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function retpoline_features_by_flags in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    retpoline_features_by_flags_introspect!();
+    # [doc = " Computes the backend target features to be added to account for retpoline flags."] # [doc = " Used by both LLVM and GCC since their target features are, conveniently, the same."] pub fn retpoline_features_by_flags (sess : & Session , features : & mut Vec < String >) { let unstable_opts = & sess . opts . unstable_opts ; if unstable_opts . retpoline && ! unstable_opts . retpoline_external_thunk { features . push ("+retpoline-indirect-branches" . into ()) ; features . push ("+retpoline-indirect-calls" . into ()) ; } if unstable_opts . retpoline_external_thunk { features . push ("+retpoline-external-thunk" . into ()) ; features . push ("+retpoline-indirect-branches" . into ()) ; features . push ("+retpoline-indirect-calls" . into ()) ; } }
+}
+
+macro_rules! provide_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function provide in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    provide_introspect!();
+    pub (crate) fn provide (providers : & mut Providers) { * providers = Providers { rust_target_features : | tcx , cnum | { assert_eq ! (cnum , LOCAL_CRATE) ; if tcx . sess . opts . actually_rustdoc { let mut result : UnordMap < String , Stability > = Default :: default () ; for (name , stability) in rustc_target :: target_features :: all_rust_features () { use std :: collections :: hash_map :: Entry ; match result . entry (name . to_owned ()) { Entry :: Vacant (vacant_entry) => { vacant_entry . insert (stability) ; } Entry :: Occupied (mut occupied_entry) => { match (occupied_entry . get () , stability) { (Stability :: Stable , _) | (Stability :: Unstable { .. } , Stability :: Unstable { .. } | Stability :: Forbidden { .. } ,) | (Stability :: Forbidden { .. } , Stability :: Forbidden { .. }) => { } _ => { occupied_entry . insert (stability) ; } } } } } result } else { tcx . sess . target . rust_target_features () . iter () . map (| (a , b , _) | (a . to_string () , * b)) . collect () } } , implied_target_features : | tcx , feature : Symbol | { let feature = feature . as_str () ; UnordSet :: from (tcx . sess . target . implied_target_features (feature)) . into_sorted_stable_ord () . into_iter () . map (| s | Symbol :: intern (s)) . collect () } , asm_target_features , .. * providers } }
+}

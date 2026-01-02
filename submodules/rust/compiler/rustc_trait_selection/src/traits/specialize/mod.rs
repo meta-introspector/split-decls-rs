@@ -1,0 +1,132 @@
+mkmod!{specialization_graph, { 
+                getname!(specialization_graph);
+                getsrc!(specialization_graph);
+                getpath!(specialization_graph);
+                get_deps!(specialization_graph);
+                get_crates!(specialization_graph);
+                mkinclude!(specialization_graph);
+                 
+            }}
+mkuse!{use rustc_data_structures :: fx :: FxIndexSet ;}
+mkuse!{use rustc_errors :: codes :: * ;}
+mkuse!{use rustc_errors :: { Diag , EmissionGuarantee } ;}
+mkuse!{use rustc_hir :: def_id :: { DefId , LocalDefId } ;}
+mkuse!{use rustc_infer :: traits :: Obligation ;}
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: query :: LocalCrate ;}
+mkuse!{use rustc_middle :: traits :: query :: NoSolution ;}
+mkuse!{use rustc_middle :: ty :: print :: PrintTraitRefExt as _ ;}
+mkuse!{use rustc_middle :: ty :: { self , GenericArgsRef , Ty , TyCtxt , TypeVisitableExt , TypingMode } ;}
+mkuse!{use rustc_session :: lint :: builtin :: COHERENCE_LEAK_CHECK ;}
+mkuse!{use rustc_span :: { DUMMY_SP , ErrorGuaranteed , Span , sym } ;}
+mkuse!{use specialization_graph :: GraphExt ;}
+mkuse!{use tracing :: { debug , instrument } ;}
+mkuse!{use crate :: error_reporting :: traits :: to_pretty_impl_header ;}
+mkuse!{use crate :: errors :: NegativePositiveConflict ;}
+mkuse!{use crate :: infer :: { InferCtxt , TyCtxtInferExt } ;}
+mkuse!{use crate :: traits :: select :: IntercrateAmbiguityCause ;}
+mkuse!{use crate :: traits :: { FutureCompatOverlapErrorKind , ObligationCause , ObligationCtxt , coherence , predicates_for_generics , } ;}
+mkitem!{mkstruct!{# [doc = " Information pertinent to an overlapping impl error."] # [derive (Debug)] pub struct OverlapError < 'tcx > { pub with_impl : DefId , pub trait_ref : ty :: TraitRef < 'tcx > , pub self_ty : Option < Ty < 'tcx > > , pub intercrate_ambiguity_causes : FxIndexSet < IntercrateAmbiguityCause < 'tcx > > , pub involves_placeholder : bool , pub overflowing_predicates : Vec < ty :: Predicate < 'tcx > > , }}}
+
+macro_rules! translate_args_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function translate_args in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    translate_args_introspect!();
+    # [doc = " Given the generic parameters for the requested impl, translate it to the generic parameters"] # [doc = " appropriate for the actual item definition (whether it be in that impl,"] # [doc = " a parent impl, or the trait)."] # [doc = ""] # [doc = " When we have selected one impl, but are actually using item definitions from"] # [doc = " a parent impl providing a default, we need a way to translate between the"] # [doc = " type parameters of the two impls. Here the `source_impl` is the one we've"] # [doc = " selected, and `source_args` is its generic parameters."] # [doc = " And `target_node` is the impl/trait we're actually going to get the"] # [doc = " definition from. The resulting instantiation will map from `target_node`'s"] # [doc = " generics to `source_impl`'s generics as instantiated by `source_args`."] # [doc = ""] # [doc = " For example, consider the following scenario:"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = " trait Foo { ... }"] # [doc = " impl<T, U> Foo for (T, U) { ... }  // target impl"] # [doc = " impl<V> Foo for (V, V) { ... }     // source impl"] # [doc = " ```"] # [doc = ""] # [doc = " Suppose we have selected \"source impl\" with `V` instantiated with `u32`."] # [doc = " This function will produce an instantiation with `T` and `U` both mapping to `u32`."] # [doc = ""] # [doc = " where-clauses add some trickiness here, because they can be used to \"define\""] # [doc = " an argument indirectly:"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = " impl<'a, I, T: 'a> Iterator for Cloned<I>"] # [doc = "    where I: Iterator<Item = &'a T>, T: Clone"] # [doc = " ```"] # [doc = ""] # [doc = " In a case like this, the instantiation for `T` is determined indirectly,"] # [doc = " through associated type projection. We deal with such cases by using"] # [doc = " *fulfillment* to relate the two impls, requiring that all projections are"] # [doc = " resolved."] pub fn translate_args < 'tcx > (infcx : & InferCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , source_impl : DefId , source_args : GenericArgsRef < 'tcx > , target_node : specialization_graph :: Node ,) -> GenericArgsRef < 'tcx > { translate_args_with_cause (infcx , param_env , source_impl , source_args , target_node , & ObligationCause :: dummy () ,) }
+}
+
+macro_rules! translate_args_with_cause_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function translate_args_with_cause in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    translate_args_with_cause_introspect!();
+    # [doc = " Like [translate_args], but obligations from the parent implementation"] # [doc = " are registered with the provided `ObligationCause`."] # [doc = ""] # [doc = " This is for reporting *region* errors from those bounds. Type errors should"] # [doc = " not happen because the specialization graph already checks for those, and"] # [doc = " will result in an ICE."] pub fn translate_args_with_cause < 'tcx > (infcx : & InferCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , source_impl : DefId , source_args : GenericArgsRef < 'tcx > , target_node : specialization_graph :: Node , cause : & ObligationCause < 'tcx > ,) -> GenericArgsRef < 'tcx > { debug ! ("translate_args({:?}, {:?}, {:?}, {:?})" , param_env , source_impl , source_args , target_node) ; let source_trait_ref = infcx . tcx . impl_trait_ref (source_impl) . unwrap () . instantiate (infcx . tcx , source_args) ; let target_args = match target_node { specialization_graph :: Node :: Impl (target_impl) => { if source_impl == target_impl { return source_args ; } fulfill_implication (infcx , param_env , source_trait_ref , source_impl , target_impl , cause) . unwrap_or_else (| _ | { bug ! ("When translating generic parameters from {source_impl:?} to \
+                        {target_impl:?}, the expected specialization failed to hold") }) } specialization_graph :: Node :: Trait (..) => source_trait_ref . args , } ; source_args . rebase_onto (infcx . tcx , source_impl , target_args) }
+}
+
+macro_rules! fulfill_implication_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function fulfill_implication in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    fulfill_implication_introspect!();
+    # [doc = " Attempt to fulfill all obligations of `target_impl` after unification with"] # [doc = " `source_trait_ref`. If successful, returns the generic parameters for *all* the"] # [doc = " generics of `target_impl`, including both those needed to unify with"] # [doc = " `source_trait_ref` and those whose identity is determined via a where"] # [doc = " clause in the impl."] fn fulfill_implication < 'tcx > (infcx : & InferCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , source_trait_ref : ty :: TraitRef < 'tcx > , source_impl : DefId , target_impl : DefId , cause : & ObligationCause < 'tcx > ,) -> Result < GenericArgsRef < 'tcx > , NoSolution > { debug ! ("fulfill_implication({:?}, trait_ref={:?} |- {:?} applies)" , param_env , source_trait_ref , target_impl) ; let ocx = ObligationCtxt :: new (infcx) ; let source_trait_ref = ocx . normalize (cause , param_env , source_trait_ref) ; if ! ocx . select_all_or_error () . is_empty () { infcx . dcx () . span_delayed_bug (infcx . tcx . def_span (source_impl) , format ! ("failed to fully normalize {source_trait_ref}") ,) ; return Err (NoSolution) ; } let target_args = infcx . fresh_args_for_item (DUMMY_SP , target_impl) ; let target_trait_ref = ocx . normalize (cause , param_env , infcx . tcx . impl_trait_ref (target_impl) . expect ("expected source impl to be a trait impl") . instantiate (infcx . tcx , target_args) ,) ; ocx . eq (cause , param_env , source_trait_ref , target_trait_ref) ? ; let predicates = ocx . normalize (cause , param_env , infcx . tcx . predicates_of (target_impl) . instantiate (infcx . tcx , target_args) ,) ; let obligations = predicates_for_generics (| _ , _ | cause . clone () , param_env , predicates) ; ocx . register_obligations (obligations) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { debug ! ("fulfill_implication: for impls on {:?} and {:?}, \
+                 could not fulfill: {:?} given {:?}" , source_trait_ref , target_trait_ref , errors , param_env . caller_bounds ()) ; return Err (NoSolution) ; } debug ! ("fulfill_implication: an impl for {:?} specializes {:?}" , source_trait_ref , target_trait_ref) ; Ok (infcx . resolve_vars_if_possible (target_args)) }
+}
+
+macro_rules! specialization_enabled_in_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function specialization_enabled_in in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    specialization_enabled_in_introspect!();
+    pub (super) fn specialization_enabled_in (tcx : TyCtxt < '_ > , _ : LocalCrate) -> bool { tcx . features () . specialization () || tcx . features () . min_specialization () }
+}
+
+macro_rules! specializes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function specializes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    specializes_introspect!();
+    # [doc = " Is `specializing_impl_def_id` a specialization of `parent_impl_def_id`?"] # [doc = ""] # [doc = " For every type that could apply to `specializing_impl_def_id`, we prove that"] # [doc = " the `parent_impl_def_id` also applies (i.e. it has a valid impl header and"] # [doc = " its where-clauses hold)."] # [doc = ""] # [doc = " For the purposes of const traits, we also check that the specializing"] # [doc = " impl is not more restrictive than the parent impl. That is, if the"] # [doc = " `parent_impl_def_id` is a const impl (conditionally based off of some `[const]`"] # [doc = " bounds), then `specializing_impl_def_id` must also be const for the same"] # [doc = " set of types."] # [instrument (skip (tcx) , level = "debug")] pub (super) fn specializes (tcx : TyCtxt < '_ > , (specializing_impl_def_id , parent_impl_def_id) : (DefId , DefId) ,) -> bool { if ! tcx . specialization_enabled_in (specializing_impl_def_id . krate) { let span = tcx . def_span (specializing_impl_def_id) ; if ! span . allows_unstable (sym :: specialization) && ! span . allows_unstable (sym :: min_specialization) { return false ; } } let specializing_impl_trait_header = tcx . impl_trait_header (specializing_impl_def_id) . unwrap () ; if specializing_impl_trait_header . polarity != tcx . impl_polarity (parent_impl_def_id) { return false ; } let param_env = tcx . param_env (specializing_impl_def_id) ; let infcx = tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let specializing_impl_trait_ref = specializing_impl_trait_header . trait_ref . instantiate_identity () ; let cause = & ObligationCause :: dummy () ; debug ! ("fulfill_implication({:?}, trait_ref={:?} |- {:?} applies)" , param_env , specializing_impl_trait_ref , parent_impl_def_id) ; let ocx = ObligationCtxt :: new (& infcx) ; let specializing_impl_trait_ref = ocx . normalize (cause , param_env , specializing_impl_trait_ref) ; if ! ocx . select_all_or_error () . is_empty () { infcx . dcx () . span_delayed_bug (infcx . tcx . def_span (specializing_impl_def_id) , format ! ("failed to fully normalize {specializing_impl_trait_ref}") ,) ; return false ; } let parent_args = infcx . fresh_args_for_item (DUMMY_SP , parent_impl_def_id) ; let parent_impl_trait_ref = ocx . normalize (cause , param_env , infcx . tcx . impl_trait_ref (parent_impl_def_id) . expect ("expected source impl to be a trait impl") . instantiate (infcx . tcx , parent_args) ,) ; let Ok (()) = ocx . eq (cause , param_env , specializing_impl_trait_ref , parent_impl_trait_ref) else { return false ; } ; let predicates = ocx . normalize (cause , param_env , infcx . tcx . predicates_of (parent_impl_def_id) . instantiate (infcx . tcx , parent_args) ,) ; let obligations = predicates_for_generics (| _ , _ | cause . clone () , param_env , predicates) ; ocx . register_obligations (obligations) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { debug ! ("fulfill_implication: for impls on {:?} and {:?}, \
+                 could not fulfill: {:?} given {:?}" , specializing_impl_trait_ref , parent_impl_trait_ref , errors , param_env . caller_bounds ()) ; return false ; } if tcx . is_conditionally_const (parent_impl_def_id) { if ! tcx . is_conditionally_const (specializing_impl_def_id) { return false ; } let const_conditions = ocx . normalize (cause , param_env , infcx . tcx . const_conditions (parent_impl_def_id) . instantiate (infcx . tcx , parent_args) ,) ; ocx . register_obligations (const_conditions . into_iter () . map (| (trait_ref , _) | { Obligation :: new (infcx . tcx , cause . clone () , param_env , trait_ref . to_host_effect_clause (infcx . tcx , ty :: BoundConstness :: Maybe) ,) })) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { debug ! ("fulfill_implication: for impls on {:?} and {:?}, \
+                 could not fulfill: {:?} given {:?}" , specializing_impl_trait_ref , parent_impl_trait_ref , errors , param_env . caller_bounds ()) ; return false ; } } debug ! ("fulfill_implication: an impl for {:?} specializes {:?}" , specializing_impl_trait_ref , parent_impl_trait_ref) ; true }
+}
+
+macro_rules! specialization_graph_provider_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function specialization_graph_provider in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    specialization_graph_provider_introspect!();
+    # [doc = " Query provider for `specialization_graph_of`."] pub (super) fn specialization_graph_provider (tcx : TyCtxt < '_ > , trait_id : DefId ,) -> Result < & '_ specialization_graph :: Graph , ErrorGuaranteed > { let mut sg = specialization_graph :: Graph :: new () ; let overlap_mode = specialization_graph :: OverlapMode :: get (tcx , trait_id) ; let mut trait_impls : Vec < _ > = tcx . all_impls (trait_id) . collect () ; trait_impls . sort_unstable_by_key (| def_id | (- (def_id . krate . as_u32 () as i64) , def_id . index . index ())) ; let mut errored = Ok (()) ; for impl_def_id in trait_impls { if let Some (impl_def_id) = impl_def_id . as_local () { let insert_result = sg . insert (tcx , impl_def_id . to_def_id () , overlap_mode) ; let (overlap , used_to_be_allowed) = match insert_result { Err (overlap) => (Some (overlap) , None) , Ok (Some (overlap)) => (Some (overlap . error) , Some (overlap . kind)) , Ok (None) => (None , None) , } ; if let Some (overlap) = overlap { errored = errored . and (report_overlap_conflict (tcx , overlap , impl_def_id , used_to_be_allowed ,)) ; } } else { let parent = tcx . impl_parent (impl_def_id) . unwrap_or (trait_id) ; sg . record_impl_from_cstore (tcx , parent , impl_def_id) } } errored ? ; Ok (tcx . arena . alloc (sg)) }
+}
+
+macro_rules! report_overlap_conflict_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function report_overlap_conflict in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    report_overlap_conflict_introspect!();
+    # [cold] # [inline (never)] fn report_overlap_conflict < 'tcx > (tcx : TyCtxt < 'tcx > , overlap : OverlapError < 'tcx > , impl_def_id : LocalDefId , used_to_be_allowed : Option < FutureCompatOverlapErrorKind > ,) -> Result < () , ErrorGuaranteed > { let impl_polarity = tcx . impl_polarity (impl_def_id . to_def_id ()) ; let other_polarity = tcx . impl_polarity (overlap . with_impl) ; match (impl_polarity , other_polarity) { (ty :: ImplPolarity :: Negative , ty :: ImplPolarity :: Positive) => { Err (report_negative_positive_conflict (tcx , & overlap , impl_def_id , impl_def_id . to_def_id () , overlap . with_impl ,)) } (ty :: ImplPolarity :: Positive , ty :: ImplPolarity :: Negative) => { Err (report_negative_positive_conflict (tcx , & overlap , impl_def_id , overlap . with_impl , impl_def_id . to_def_id () ,)) } _ => report_conflicting_impls (tcx , overlap , impl_def_id , used_to_be_allowed) , } }
+}
+
+macro_rules! report_negative_positive_conflict_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function report_negative_positive_conflict in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    report_negative_positive_conflict_introspect!();
+    fn report_negative_positive_conflict < 'tcx > (tcx : TyCtxt < 'tcx > , overlap : & OverlapError < 'tcx > , local_impl_def_id : LocalDefId , negative_impl_def_id : DefId , positive_impl_def_id : DefId ,) -> ErrorGuaranteed { let mut diag = tcx . dcx () . create_err (NegativePositiveConflict { impl_span : tcx . def_span (local_impl_def_id) , trait_desc : overlap . trait_ref , self_ty : overlap . self_ty , negative_impl_span : tcx . span_of_impl (negative_impl_def_id) , positive_impl_span : tcx . span_of_impl (positive_impl_def_id) , }) ; for cause in & overlap . intercrate_ambiguity_causes { cause . add_intercrate_ambiguity_hint (& mut diag) ; } diag . emit () }
+}
+
+macro_rules! report_conflicting_impls_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function report_conflicting_impls in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    report_conflicting_impls_introspect!();
+    fn report_conflicting_impls < 'tcx > (tcx : TyCtxt < 'tcx > , overlap : OverlapError < 'tcx > , impl_def_id : LocalDefId , used_to_be_allowed : Option < FutureCompatOverlapErrorKind > ,) -> Result < () , ErrorGuaranteed > { let impl_span = tcx . def_span (impl_def_id) ; fn decorate < 'tcx , G : EmissionGuarantee > (tcx : TyCtxt < 'tcx > , overlap : & OverlapError < 'tcx > , impl_span : Span , err : & mut Diag < '_ , G > ,) { match tcx . span_of_impl (overlap . with_impl) { Ok (span) => { err . span_label (span , "first implementation here") ; err . span_label (impl_span , format ! ("conflicting implementation{}" , overlap . self_ty . map_or_else (String :: new , | ty | format ! (" for `{ty}`"))) ,) ; } Err (cname) => { let msg = match to_pretty_impl_header (tcx , overlap . with_impl) { Some (s) => { format ! ("conflicting implementation in crate `{cname}`:\n- {s}") } None => format ! ("conflicting implementation in crate `{cname}`") , } ; err . note (msg) ; } } for cause in & overlap . intercrate_ambiguity_causes { cause . add_intercrate_ambiguity_hint (err) ; } if overlap . involves_placeholder { coherence :: add_placeholder_note (err) ; } if ! overlap . overflowing_predicates . is_empty () { coherence :: suggest_increasing_recursion_limit (tcx , err , & overlap . overflowing_predicates ,) ; } } let msg = | | { format ! ("conflicting implementations of trait `{}`{}" , overlap . trait_ref . print_trait_sugared () , overlap . self_ty . map_or_else (String :: new , | ty | format ! (" for type `{ty}`")) ,) } ; if let Err (err) = (overlap . trait_ref , overlap . self_ty) . error_reported () { return Err (err) ; } match used_to_be_allowed { None => { let reported = if overlap . with_impl . is_local () || tcx . ensure_ok () . orphan_check_impl (impl_def_id) . is_ok () { let mut err = tcx . dcx () . struct_span_err (impl_span , msg ()) ; err . code (E0119) ; decorate (tcx , & overlap , impl_span , & mut err) ; err . emit () } else { tcx . dcx () . span_delayed_bug (impl_span , "impl should have failed the orphan check") } ; Err (reported) } Some (kind) => { let lint = match kind { FutureCompatOverlapErrorKind :: LeakCheck => COHERENCE_LEAK_CHECK , } ; tcx . node_span_lint (lint , tcx . local_def_id_to_hir_id (impl_def_id) , impl_span , | err | { err . primary_message (msg ()) ; decorate (tcx , & overlap , impl_span , err) ; }) ; Ok (()) } } }
+}

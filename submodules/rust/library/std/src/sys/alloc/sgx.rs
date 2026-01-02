@@ -1,0 +1,31 @@
+mkuse!{use crate :: alloc :: { GlobalAlloc , Layout , System } ;}
+mkuse!{use crate :: ptr ;}
+mkuse!{use crate :: sync :: atomic :: { Atomic , AtomicBool , Ordering } ;}
+mkuse!{use crate :: sys :: pal :: abi :: mem as sgx_mem ;}
+mkuse!{use crate :: sys :: pal :: waitqueue :: SpinMutex ;}
+mkitem!{# [cfg_attr (test , linkage = "available_externally")] # [unsafe (export_name = "_ZN16__rust_internals3std3sys5alloc3sgx8DLMALLOCE")] static DLMALLOC : SpinMutex < dlmalloc :: Dlmalloc < Sgx > > = SpinMutex :: new (dlmalloc :: Dlmalloc :: new_with_allocator (Sgx { })) ;}
+mkitem!{mkstruct!{struct Sgx ;}}
+mkitem!{mkimpl!{unsafe impl dlmalloc :: Allocator for Sgx { # [doc = " Allocs system resources"] fn alloc (& self , _size : usize) -> (* mut u8 , usize , u32) { static INIT : Atomic < bool > = AtomicBool :: new (false) ; if ! INIT . swap (true , Ordering :: Relaxed) { (sgx_mem :: heap_base () as _ , sgx_mem :: heap_size () , 0) } else { (ptr :: null_mut () , 0 , 0) } } fn remap (& self , _ptr : * mut u8 , _oldsize : usize , _newsize : usize , _can_move : bool) -> * mut u8 { ptr :: null_mut () } fn free_part (& self , _ptr : * mut u8 , _oldsize : usize , _newsize : usize) -> bool { false } fn free (& self , _ptr : * mut u8 , _size : usize) -> bool { return false ; } fn can_release_part (& self , _flags : u32) -> bool { false } fn allocates_zeros (& self) -> bool { false } fn page_size (& self) -> usize { 0x1000 } }}}
+mkitem!{mkimpl!{# [stable (feature = "alloc_system_type" , since = "1.28.0")] unsafe impl GlobalAlloc for System { # [inline] unsafe fn alloc (& self , layout : Layout) -> * mut u8 { unsafe { DLMALLOC . lock () . malloc (layout . size () , layout . align ()) } } # [inline] unsafe fn alloc_zeroed (& self , layout : Layout) -> * mut u8 { unsafe { DLMALLOC . lock () . calloc (layout . size () , layout . align ()) } } # [inline] unsafe fn dealloc (& self , ptr : * mut u8 , layout : Layout) { unsafe { DLMALLOC . lock () . free (ptr , layout . size () , layout . align ()) } } # [inline] unsafe fn realloc (& self , ptr : * mut u8 , layout : Layout , new_size : usize) -> * mut u8 { unsafe { DLMALLOC . lock () . realloc (ptr , layout . size () , layout . align () , new_size) } } }}}
+
+macro_rules! __rust_c_alloc_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __rust_c_alloc in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __rust_c_alloc_introspect!();
+    # [cfg (not (test))] # [unsafe (no_mangle)] pub unsafe extern "C" fn __rust_c_alloc (size : usize , align : usize) -> * mut u8 { unsafe { crate :: alloc :: alloc (Layout :: from_size_align_unchecked (size , align)) } }
+}
+
+macro_rules! __rust_c_dealloc_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __rust_c_dealloc in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __rust_c_dealloc_introspect!();
+    # [cfg (not (test))] # [unsafe (no_mangle)] pub unsafe extern "C" fn __rust_c_dealloc (ptr : * mut u8 , size : usize , align : usize) { unsafe { crate :: alloc :: dealloc (ptr , Layout :: from_size_align_unchecked (size , align)) } }
+}

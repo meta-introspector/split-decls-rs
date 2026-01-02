@@ -1,0 +1,63 @@
+mkuse!{use std :: fmt ;}
+mkuse!{use std :: marker :: PhantomData ;}
+mkuse!{use std :: sync :: Arc ;}
+mkuse!{use std :: sync :: atomic :: { AtomicBool , Ordering } ;}
+mkuse!{use crate :: job :: { ArcJob , StackJob } ;}
+mkuse!{use crate :: latch :: { CountLatch , LatchRef } ;}
+mkuse!{use crate :: registry :: { Registry , WorkerThread } ;}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}
+
+macro_rules! broadcast_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function broadcast in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    broadcast_introspect!();
+    # [doc = " Executes `op` within every thread in the current threadpool. If this is"] # [doc = " called from a non-Rayon thread, it will execute in the global threadpool."] # [doc = " Any attempts to use `join`, `scope`, or parallel iterators will then operate"] # [doc = " within that threadpool. When the call has completed on each thread, returns"] # [doc = " a vector containing all of their return values."] # [doc = ""] # [doc = " For more information, see the [`ThreadPool::broadcast()`][m] method."] # [doc = ""] # [doc = " [m]: struct.ThreadPool.html#method.broadcast"] pub fn broadcast < OP , R > (op : OP) -> Vec < R > where OP : Fn (BroadcastContext < '_ >) -> R + Sync , R : Send , { unsafe { broadcast_in (op , & Registry :: current ()) } }
+}
+
+macro_rules! spawn_broadcast_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function spawn_broadcast in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    spawn_broadcast_introspect!();
+    # [doc = " Spawns an asynchronous task on every thread in this thread-pool. This task"] # [doc = " will run in the implicit, global scope, which means that it may outlast the"] # [doc = " current stack frame -- therefore, it cannot capture any references onto the"] # [doc = " stack (you will likely need a `move` closure)."] # [doc = ""] # [doc = " For more information, see the [`ThreadPool::spawn_broadcast()`][m] method."] # [doc = ""] # [doc = " [m]: struct.ThreadPool.html#method.spawn_broadcast"] pub fn spawn_broadcast < OP > (op : OP) where OP : Fn (BroadcastContext < '_ >) + Send + Sync + 'static , { unsafe { spawn_broadcast_in (op , & Registry :: current ()) } }
+}
+mkitem!{mkstruct!{# [doc = " Provides context to a closure called by `broadcast`."] pub struct BroadcastContext < 'a > { worker : & 'a WorkerThread , # [doc = " Make sure to prevent auto-traits like `Send` and `Sync`."] _marker : PhantomData < & 'a mut dyn Fn () > , }}}
+mkitem!{mkimpl!{impl < 'a > BroadcastContext < 'a > { pub (super) fn with < R > (f : impl FnOnce (BroadcastContext < '_ >) -> R) -> R { let worker_thread = WorkerThread :: current () ; assert ! (! worker_thread . is_null ()) ; f (BroadcastContext { worker : unsafe { & * worker_thread } , _marker : PhantomData }) } # [doc = " Our index amongst the broadcast threads (ranges from `0..self.num_threads()`)."] # [inline] pub fn index (& self) -> usize { self . worker . index () } # [doc = " The number of threads receiving the broadcast in the thread pool."] # [doc = ""] # [doc = " # Future compatibility note"] # [doc = ""] # [doc = " Future versions of Rayon might vary the number of threads over time, but"] # [doc = " this method will always return the number of threads which are actually"] # [doc = " receiving your particular `broadcast` call."] # [inline] pub fn num_threads (& self) -> usize { self . worker . registry () . num_threads () } }}}
+mkitem!{mkimpl!{impl < 'a > fmt :: Debug for BroadcastContext < 'a > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("BroadcastContext") . field ("index" , & self . index ()) . field ("num_threads" , & self . num_threads ()) . field ("pool_id" , & self . worker . registry () . id ()) . finish () } }}}
+
+macro_rules! broadcast_in_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function broadcast_in in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    broadcast_in_introspect!();
+    # [doc = " Execute `op` on every thread in the pool. It will be executed on each"] # [doc = " thread when they have nothing else to do locally, before they try to"] # [doc = " steal work from other threads. This function will not return until all"] # [doc = " threads have completed the `op`."] # [doc = ""] # [doc = " Unsafe because `registry` must not yet have terminated."] pub (super) unsafe fn broadcast_in < OP , R > (op : OP , registry : & Arc < Registry >) -> Vec < R > where OP : Fn (BroadcastContext < '_ >) -> R + Sync , R : Send , { let current_thread = WorkerThread :: current () ; let current_thread_addr = current_thread . expose_provenance () ; let started = & AtomicBool :: new (false) ; let f = move | injected : bool | { debug_assert ! (injected) ; if current_thread_addr == WorkerThread :: current () . expose_provenance () { started . store (true , Ordering :: Relaxed) ; } BroadcastContext :: with (& op) } ; let n_threads = registry . num_threads () ; let current_thread = unsafe { current_thread . as_ref () } ; let tlv = crate :: tlv :: get () ; let latch = CountLatch :: with_count (n_threads , current_thread) ; let jobs : Vec < _ > = (0 .. n_threads) . map (| _ | StackJob :: new (tlv , & f , LatchRef :: new (& latch))) . collect () ; let job_refs = jobs . iter () . map (| job | unsafe { job . as_job_ref () }) ; registry . inject_broadcast (job_refs) ; let current_thread_job_id = current_thread . and_then (| worker | (registry . id () == worker . registry . id ()) . then (| | worker)) . map (| worker | unsafe { jobs [worker . index ()] . as_job_ref () } . id ()) ; latch . wait (current_thread , | | started . load (Ordering :: Relaxed) , | job | Some (job . id ()) == current_thread_job_id ,) ; jobs . into_iter () . map (| job | unsafe { job . into_result () }) . collect () }
+}
+
+macro_rules! spawn_broadcast_in_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function spawn_broadcast_in in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    spawn_broadcast_in_introspect!();
+    # [doc = " Execute `op` on every thread in the pool. It will be executed on each"] # [doc = " thread when they have nothing else to do locally, before they try to"] # [doc = " steal work from other threads. This function returns immediately after"] # [doc = " injecting the jobs."] # [doc = ""] # [doc = " Unsafe because `registry` must not yet have terminated."] pub (super) unsafe fn spawn_broadcast_in < OP > (op : OP , registry : & Arc < Registry >) where OP : Fn (BroadcastContext < '_ >) + Send + Sync + 'static , { let job = ArcJob :: new ({ let registry = Arc :: clone (registry) ; move | _ | { registry . catch_unwind (| | BroadcastContext :: with (& op)) ; registry . terminate () ; } }) ; let n_threads = registry . num_threads () ; let job_refs = (0 .. n_threads) . map (| _ | { registry . increment_terminate_count () ; ArcJob :: as_static_job_ref (& job) }) ; registry . inject_broadcast (job_refs) ; }
+}

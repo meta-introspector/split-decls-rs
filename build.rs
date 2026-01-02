@@ -80,26 +80,62 @@ fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 Building with macro wrappers...");
     
-    // Process a few test files first
-    let test_files = [
-        "submodules/rust/compiler/rustc/build.rs",
-        "submodules/rust/compiler/rustc/src/main.rs",
-        "submodules/rust/compiler/rustc_driver_impl/src/lib.rs",
-    ];
-    
-    for file_path in &test_files {
-        if Path::new(file_path).exists() {
-            match process_file(file_path) {
-                Ok(wrapped_content) => {
-                    let output_path = format!("processed_{}", file_path.replace("/", "_"));
-                    fs::write(&output_path, wrapped_content)?;
-                    println!("✅ Processed: {} -> {}", file_path, output_path);
+    // Load symbol map to find all source files
+    if Path::new("symbol_map.json.gz").exists() {
+        println!("📊 Loading symbol map...");
+        let file = std::fs::File::open("symbol_map.json.gz")?;
+        let decoder = flate2::read::GzDecoder::new(file);
+        let symbol_map: serde_json::Value = serde_json::from_reader(decoder)?;
+        
+        if let Some(obj) = symbol_map.as_object() {
+            let mut source_files = std::collections::HashSet::new();
+            
+            // Extract unique source files from symbol map
+            for (_, entry) in obj.iter() {
+                if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
+                    if source_file.ends_with(".rs") && !source_file.contains("test") {
+                        source_files.insert(source_file.to_string());
+                    }
                 }
-                Err(e) => {
-                    println!("❌ Failed to process {}: {}", file_path, e);
+            }
+            
+            println!("📁 Found {} unique source files", source_files.len());
+            
+            // Create submodules directory structure
+            fs::create_dir_all("submodules")?;
+            
+            // Process each source file
+            for (i, source_file) in source_files.iter().enumerate() {
+                let file_path = source_file.replace("../rust/", "/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/");
+                if Path::new(&file_path).exists() {
+                    println!("🔄 Processing {}/{}: {}", i+1, source_files.len(), source_file);
+                    match process_file(&file_path) {
+                        Ok(wrapped_content) => {
+                            // Create proper submodules directory structure
+                            let output_path = format!("submodules/{}", source_file.replace("../rust/", "rust/"));
+                            
+                            // Create parent directories
+                            if let Some(parent) = Path::new(&output_path).parent() {
+                                fs::create_dir_all(parent)?;
+                            }
+                            
+                            fs::write(&output_path, wrapped_content)?;
+                            println!("✅ {}/{}: {} -> {}", i+1, source_files.len(), source_file, output_path);
+                        }
+                        Err(e) => {
+                            println!("❌ Failed to process {}: {}", source_file, e);
+                        }
+                    }
+                } else {
+                    if i < 10 {
+                        println!("⚠️  File not found: {}", file_path);
+                    }
                 }
             }
         }
+    } else {
+        println!("❌ symbol_map.json.gz not found. Run: cargo run --bin export_symbol_map");
+        return Err("Missing symbol map".into());
     }
     
     Ok(())

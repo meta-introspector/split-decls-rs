@@ -1,0 +1,77 @@
+mkuse!{# [cfg (not (feature = "optimize_for_size"))] use crate :: mem ;}
+mkuse!{use crate :: mem :: ManuallyDrop ;}
+mkuse!{# [cfg (not (feature = "optimize_for_size"))] use crate :: slice :: sort :: shared :: pivot :: choose_pivot ;}
+mkuse!{# [cfg (not (feature = "optimize_for_size"))] use crate :: slice :: sort :: shared :: smallsort :: UnstableSmallSortTypeImpl ;}
+mkuse!{# [cfg (not (feature = "optimize_for_size"))] use crate :: slice :: sort :: unstable :: heapsort ;}
+mkuse!{use crate :: { cfg_select , intrinsics , ptr } ;}
+
+macro_rules! quicksort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function quicksort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    quicksort_introspect!();
+    # [doc = " Sorts `v` recursively."] # [doc = ""] # [doc = " If the slice had a predecessor in the original array, it is specified as `ancestor_pivot`."] # [doc = ""] # [doc = " `limit` is the number of allowed imbalanced partitions before switching to `heapsort`. If zero,"] # [doc = " this function will immediately switch to heapsort."] # [cfg (not (feature = "optimize_for_size"))] pub (crate) fn quicksort < 'a , T , F > (mut v : & 'a mut [T] , mut ancestor_pivot : Option < & 'a T > , mut limit : u32 , is_less : & mut F ,) where F : FnMut (& T , & T) -> bool , { loop { if v . len () <= T :: small_sort_threshold () { T :: small_sort (v , is_less) ; return ; } if limit == 0 { heapsort :: heapsort (v , is_less) ; return ; } limit -= 1 ; let pivot_pos = choose_pivot (v , is_less) ; if let Some (p) = ancestor_pivot { if ! is_less (p , & v [pivot_pos]) { let num_lt = partition (v , pivot_pos , & mut | a , b | ! is_less (b , a)) ; v = & mut v [(num_lt + 1) ..] ; ancestor_pivot = None ; continue ; } } let num_lt = partition (v , pivot_pos , is_less) ; unsafe { intrinsics :: assume (num_lt < v . len ()) } ; let (left , right) = v . split_at_mut (num_lt) ; let (pivot , right) = right . split_at_mut (1) ; let pivot = & pivot [0] ; quicksort (left , ancestor_pivot , limit , is_less) ; v = right ; ancestor_pivot = Some (pivot) ; } }
+}
+
+macro_rules! partition_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function partition in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    partition_introspect!();
+    # [doc = " Takes the input slice `v` and re-arranges elements such that when the call returns normally"] # [doc = " all elements that compare true for `is_less(elem, pivot)` where `pivot == v[pivot_pos]` are"] # [doc = " on the left side of `v` followed by the other elements, notionally considered greater or"] # [doc = " equal to `pivot`."] # [doc = ""] # [doc = " Returns the number of elements that are compared true for `is_less(elem, pivot)`."] # [doc = ""] # [doc = " If `is_less` does not implement a total order the resulting order and return value are"] # [doc = " unspecified. All original elements will remain in `v` and any possible modifications via"] # [doc = " interior mutability will be observable. Same is true if `is_less` panics or `v.len()`"] # [doc = " exceeds `scratch.len()`."] pub (crate) fn partition < T , F > (v : & mut [T] , pivot : usize , is_less : & mut F) -> usize where F : FnMut (& T , & T) -> bool , { let len = v . len () ; if len == 0 { return 0 ; } if pivot >= len { intrinsics :: abort () ; } unsafe { v . swap_unchecked (0 , pivot) ; } let (pivot , v_without_pivot) = v . split_at_mut (1) ; let pivot = & mut pivot [0] ; let num_lt = (const { inst_partition :: < T , F > () }) (v_without_pivot , pivot , is_less) ; if num_lt >= len { intrinsics :: abort () ; } unsafe { v . swap_unchecked (0 , num_lt) ; } num_lt }
+}
+
+macro_rules! inst_partition_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function inst_partition in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    inst_partition_introspect!();
+    const fn inst_partition < T , F : FnMut (& T , & T) -> bool > () -> fn (& mut [T] , & T , & mut F) -> usize { const MAX_BRANCHLESS_PARTITION_SIZE : usize = 96 ; if size_of :: < T > () <= MAX_BRANCHLESS_PARTITION_SIZE { cfg_select ! { feature = "optimize_for_size" => { partition_lomuto_branchless_simple ::< T , F > } _ => { partition_lomuto_branchless_cyclic ::< T , F > } } } else { partition_hoare_branchy_cyclic :: < T , F > } }
+}
+
+macro_rules! partition_hoare_branchy_cyclic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function partition_hoare_branchy_cyclic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    partition_hoare_branchy_cyclic_introspect!();
+    # [doc = " See [`partition`]."] fn partition_hoare_branchy_cyclic < T , F > (v : & mut [T] , pivot : & T , is_less : & mut F) -> usize where F : FnMut (& T , & T) -> bool , { let len = v . len () ; if len == 0 { return 0 ; } let mut gap_opt : Option < GapGuard < T > > = None ; unsafe { let v_base = v . as_mut_ptr () ; let mut left = v_base ; let mut right = v_base . add (len) ; loop { while left < right && is_less (& * left , pivot) { left = left . add (1) ; } loop { right = right . sub (1) ; if left >= right || is_less (& * right , pivot) { break ; } } if left >= right { break ; } let is_first_swap_pair = gap_opt . is_none () ; if is_first_swap_pair { gap_opt = Some (GapGuard { pos : right , value : ManuallyDrop :: new (ptr :: read (left)) }) ; } let gap = gap_opt . as_mut () . unwrap_unchecked () ; if ! is_first_swap_pair { ptr :: copy_nonoverlapping (left , gap . pos , 1) ; } gap . pos = right ; ptr :: copy_nonoverlapping (right , left , 1) ; left = left . add (1) ; } left . offset_from_unsigned (v_base) } }
+}
+mkitem!{mkstruct!{# [cfg (not (feature = "optimize_for_size"))] struct PartitionState < T > { right : * mut T , num_lt : usize , gap : GapGuardRaw < T > , }}}
+
+macro_rules! partition_lomuto_branchless_cyclic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function partition_lomuto_branchless_cyclic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    partition_lomuto_branchless_cyclic_introspect!();
+    # [cfg (not (feature = "optimize_for_size"))] fn partition_lomuto_branchless_cyclic < T , F > (v : & mut [T] , pivot : & T , is_less : & mut F) -> usize where F : FnMut (& T , & T) -> bool , { let len = v . len () ; let v_base = v . as_mut_ptr () ; if len == 0 { return 0 ; } unsafe { let mut loop_body = | state : & mut PartitionState < T > | { let right_is_lt = is_less (& * state . right , pivot) ; let left = v_base . add (state . num_lt) ; ptr :: copy (left , state . gap . pos , 1) ; ptr :: copy_nonoverlapping (state . right , left , 1) ; state . gap . pos = state . right ; state . num_lt += right_is_lt as usize ; state . right = state . right . add (1) ; } ; let mut gap_value = ManuallyDrop :: new (ptr :: read (v_base)) ; let mut state = PartitionState { num_lt : 0 , right : v_base . add (1) , gap : GapGuardRaw { pos : v_base , value : & mut * gap_value } , } ; let unroll_len = const { if size_of :: < T > () <= 16 { 2 } else { 1 } } ; let unroll_end = v_base . add (len - (unroll_len - 1)) ; while state . right < unroll_end { if unroll_len == 2 { loop_body (& mut state) ; loop_body (& mut state) ; } else { loop_body (& mut state) ; } } let end = v_base . add (len) ; loop { let is_done = state . right == end ; state . right = if is_done { state . gap . value } else { state . right } ; loop_body (& mut state) ; if is_done { mem :: forget (state . gap) ; break ; } } state . num_lt } }
+}
+
+macro_rules! partition_lomuto_branchless_simple_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function partition_lomuto_branchless_simple in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    partition_lomuto_branchless_simple_introspect!();
+    # [cfg (feature = "optimize_for_size")] fn partition_lomuto_branchless_simple < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , pivot : & T , is_less : & mut F ,) -> usize { let mut left = 0 ; for right in 0 .. v . len () { unsafe { let right_is_lt = is_less (v . get_unchecked (right) , pivot) ; v . swap_unchecked (left , right) ; left += right_is_lt as usize ; } } left }
+}
+mkitem!{mkstruct!{struct GapGuard < T > { pos : * mut T , value : ManuallyDrop < T > , }}}
+mkitem!{mkimpl!{impl < T > Drop for GapGuard < T > { fn drop (& mut self) { unsafe { ptr :: copy_nonoverlapping (& * self . value , self . pos , 1) ; } } }}}
+mkitem!{mkstruct!{# [doc = " Ideally this wouldn't be needed and we could just use the regular GapGuard."] # [doc = " See comment in [`partition_lomuto_branchless_cyclic`]."] # [cfg (not (feature = "optimize_for_size"))] struct GapGuardRaw < T > { pos : * mut T , value : * mut T , }}}
+mkitem!{mkimpl!{# [cfg (not (feature = "optimize_for_size"))] impl < T > Drop for GapGuardRaw < T > { fn drop (& mut self) { unsafe { ptr :: copy_nonoverlapping (self . value , self . pos , 1) ; } } }}}

@@ -1,0 +1,98 @@
+mkuse!{use super :: * ;}
+mkitem!{mkstruct!{# [doc = " Preorder traversal of a graph."] # [doc = ""] # [doc = " Preorder traversal is when each node is visited after at least one of its predecessors. If you"] # [doc = " are familiar with some basic graph theory, then this performs a depth first search and returns"] # [doc = " nodes in order of discovery time."] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "         A"] # [doc = "        / \\"] # [doc = "       /   \\"] # [doc = "      B     C"] # [doc = "       \\   /"] # [doc = "        \\ /"] # [doc = "         D"] # [doc = " ```"] # [doc = ""] # [doc = " A preorder traversal of this graph is either `A B D C` or `A C D B`"] # [derive (Clone)] pub struct Preorder < 'a , 'tcx > { body : & 'a Body < 'tcx > , visited : DenseBitSet < BasicBlock > , worklist : Vec < BasicBlock > , }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > Preorder < 'a , 'tcx > { pub fn new (body : & 'a Body < 'tcx > , root : BasicBlock) -> Preorder < 'a , 'tcx > { let worklist = vec ! [root] ; Preorder { body , visited : DenseBitSet :: new_empty (body . basic_blocks . len ()) , worklist } } }}}
+
+macro_rules! preorder_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function preorder in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    preorder_introspect!();
+    # [doc = " Preorder traversal of a graph."] # [doc = ""] # [doc = " This function creates an iterator over the `Body`'s basic blocks, that"] # [doc = " returns basic blocks in a preorder."] # [doc = ""] # [doc = " See [`Preorder`]'s docs to learn what is preorder traversal."] pub fn preorder < 'a , 'tcx > (body : & 'a Body < 'tcx >) -> Preorder < 'a , 'tcx > { Preorder :: new (body , START_BLOCK) }
+}
+mkitem!{mkimpl!{impl < 'a , 'tcx > Iterator for Preorder < 'a , 'tcx > { type Item = (BasicBlock , & 'a BasicBlockData < 'tcx >) ; fn next (& mut self) -> Option < (BasicBlock , & 'a BasicBlockData < 'tcx >) > { while let Some (idx) = self . worklist . pop () { if ! self . visited . insert (idx) { continue ; } let data = & self . body [idx] ; if let Some (ref term) = data . terminator { self . worklist . extend (term . successors ()) ; } return Some ((idx , data)) ; } None } fn size_hint (& self) -> (usize , Option < usize >) { let lower = 0 ; let upper = self . body . basic_blocks . len () ; (lower , Some (upper)) } }}}
+mkitem!{mkstruct!{# [doc = " Postorder traversal of a graph."] # [doc = ""] # [doc = " Postorder traversal is when each node is visited after all of its successors, except when the"] # [doc = " successor is only reachable by a back-edge. If you are familiar with some basic graph theory,"] # [doc = " then this performs a depth first search and returns nodes in order of completion time."] # [doc = ""] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "         A"] # [doc = "        / \\"] # [doc = "       /   \\"] # [doc = "      B     C"] # [doc = "       \\   /"] # [doc = "        \\ /"] # [doc = "         D"] # [doc = " ```"] # [doc = ""] # [doc = " A Postorder traversal of this graph is `D B C A` or `D C B A`"] pub struct Postorder < 'a , 'tcx > { basic_blocks : & 'a IndexSlice < BasicBlock , BasicBlockData < 'tcx > > , visited : DenseBitSet < BasicBlock > , visit_stack : Vec < (BasicBlock , Successors < 'a >) > , # [doc = " A non-empty `extra` allows for a precise calculation of the successors."] extra : Option < (TyCtxt < 'tcx > , Instance < 'tcx >) > , }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > Postorder < 'a , 'tcx > { pub fn new (basic_blocks : & 'a IndexSlice < BasicBlock , BasicBlockData < 'tcx > > , root : BasicBlock , extra : Option < (TyCtxt < 'tcx > , Instance < 'tcx >) > ,) -> Postorder < 'a , 'tcx > { let mut po = Postorder { basic_blocks , visited : DenseBitSet :: new_empty (basic_blocks . len ()) , visit_stack : Vec :: new () , extra , } ; po . visit (root) ; po . traverse_successor () ; po } fn visit (& mut self , bb : BasicBlock) { if ! self . visited . insert (bb) { return ; } let data = & self . basic_blocks [bb] ; let successors = if let Some (extra) = self . extra { data . mono_successors (extra . 0 , extra . 1) } else { data . terminator () . successors () } ; self . visit_stack . push ((bb , successors)) ; } fn traverse_successor (& mut self) { while let Some (bb) = self . visit_stack . last_mut () . and_then (| (_ , iter) | iter . next_back ()) { self . visit (bb) ; } } }}}
+mkitem!{mkimpl!{impl < 'tcx > Iterator for Postorder < '_ , 'tcx > { type Item = BasicBlock ; fn next (& mut self) -> Option < BasicBlock > { let (bb , _) = self . visit_stack . pop () ? ; self . traverse_successor () ; Some (bb) } fn size_hint (& self) -> (usize , Option < usize >) { let lower = self . visit_stack . len () ; let upper = self . basic_blocks . len () ; (lower , Some (upper)) } }}}
+
+macro_rules! postorder_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function postorder in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    postorder_introspect!();
+    # [doc = " Postorder traversal of a graph."] # [doc = ""] # [doc = " This function creates an iterator over the `Body`'s basic blocks, that:"] # [doc = " - returns basic blocks in a postorder,"] # [doc = " - traverses the `BasicBlocks` CFG cache's reverse postorder backwards, and does not cache the"] # [doc = "   postorder itself."] # [doc = ""] # [doc = " See [`Postorder`]'s docs to learn what is postorder traversal."] pub fn postorder < 'a , 'tcx > (body : & 'a Body < 'tcx > ,) -> impl Iterator < Item = (BasicBlock , & 'a BasicBlockData < 'tcx >) > + ExactSizeIterator + DoubleEndedIterator { reverse_postorder (body) . rev () }
+}
+
+macro_rules! mono_reachable_reverse_postorder_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function mono_reachable_reverse_postorder in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    mono_reachable_reverse_postorder_introspect!();
+    pub fn mono_reachable_reverse_postorder < 'a , 'tcx > (body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > ,) -> Vec < BasicBlock > { let mut iter = Postorder :: new (& body . basic_blocks , START_BLOCK , Some ((tcx , instance))) ; let mut items = Vec :: with_capacity (body . basic_blocks . len ()) ; while let Some (block) = iter . next () { items . push (block) ; } items . reverse () ; items }
+}
+
+macro_rules! reachable_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function reachable in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    reachable_introspect!();
+    # [doc = " Returns an iterator over all basic blocks reachable from the `START_BLOCK` in no particular"] # [doc = " order."] # [doc = ""] # [doc = " This is clearer than writing `preorder` in cases where the order doesn't matter."] pub fn reachable < 'a , 'tcx > (body : & 'a Body < 'tcx > ,) -> impl 'a + Iterator < Item = (BasicBlock , & 'a BasicBlockData < 'tcx >) > { preorder (body) }
+}
+
+macro_rules! reachable_as_bitset_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function reachable_as_bitset in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    reachable_as_bitset_introspect!();
+    # [doc = " Returns a `DenseBitSet` containing all basic blocks reachable from the `START_BLOCK`."] pub fn reachable_as_bitset (body : & Body < '_ >) -> DenseBitSet < BasicBlock > { let mut iter = preorder (body) ; while let Some (_) = iter . next () { } iter . visited }
+}
+
+macro_rules! reverse_postorder_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function reverse_postorder in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    reverse_postorder_introspect!();
+    # [doc = " Reverse postorder traversal of a graph."] # [doc = ""] # [doc = " This function creates an iterator over the `Body`'s basic blocks, that:"] # [doc = " - returns basic blocks in a reverse postorder,"] # [doc = " - makes use of the `BasicBlocks` CFG cache's reverse postorder."] # [doc = ""] # [doc = " Reverse postorder is the reverse order of a postorder traversal."] # [doc = " This is different to a preorder traversal and represents a natural"] # [doc = " linearization of control-flow."] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "         A"] # [doc = "        / \\"] # [doc = "       /   \\"] # [doc = "      B     C"] # [doc = "       \\   /"] # [doc = "        \\ /"] # [doc = "         D"] # [doc = " ```"] # [doc = ""] # [doc = " A reverse postorder traversal of this graph is either `A B C D` or `A C B D`"] # [doc = " Note that for a graph containing no loops (i.e., A DAG), this is equivalent to"] # [doc = " a topological sort."] pub fn reverse_postorder < 'a , 'tcx > (body : & 'a Body < 'tcx > ,) -> impl Iterator < Item = (BasicBlock , & 'a BasicBlockData < 'tcx >) > + ExactSizeIterator + DoubleEndedIterator { body . basic_blocks . reverse_postorder () . iter () . map (| & bb | (bb , & body . basic_blocks [bb])) }
+}
+
+macro_rules! mono_reachable_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function mono_reachable in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    mono_reachable_introspect!();
+    # [doc = " Traversal of a [`Body`] that tries to avoid unreachable blocks in a monomorphized [`Instance`]."] # [doc = ""] # [doc = " This is allowed to have false positives; blocks may be visited even if they are not actually"] # [doc = " reachable."] # [doc = ""] # [doc = " Such a traversal is mostly useful because it lets us skip lowering the `false` side"] # [doc = " of `if <T as Trait>::CONST`, as well as [`NullOp::UbChecks`]."] # [doc = ""] # [doc = " [`NullOp::UbChecks`]: rustc_middle::mir::NullOp::UbChecks"] pub fn mono_reachable < 'a , 'tcx > (body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > ,) -> MonoReachable < 'a , 'tcx > { MonoReachable :: new (body , tcx , instance) }
+}
+
+macro_rules! mono_reachable_as_bitset_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function mono_reachable_as_bitset in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    mono_reachable_as_bitset_introspect!();
+    # [doc = " [`MonoReachable`] internally accumulates a [`DenseBitSet`] of visited blocks. This is just a"] # [doc = " convenience function to run that traversal then extract its set of reached blocks."] pub fn mono_reachable_as_bitset < 'a , 'tcx > (body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > ,) -> DenseBitSet < BasicBlock > { let mut iter = mono_reachable (body , tcx , instance) ; while let Some (_) = iter . next () { } iter . visited }
+}
+mkitem!{mkstruct!{pub struct MonoReachable < 'a , 'tcx > { body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > , visited : DenseBitSet < BasicBlock > , worklist : DenseBitSet < BasicBlock > , }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > MonoReachable < 'a , 'tcx > { pub fn new (body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > ,) -> MonoReachable < 'a , 'tcx > { let mut worklist = DenseBitSet :: new_empty (body . basic_blocks . len ()) ; worklist . insert (START_BLOCK) ; MonoReachable { body , tcx , instance , visited : DenseBitSet :: new_empty (body . basic_blocks . len ()) , worklist , } } fn add_work (& mut self , blocks : impl IntoIterator < Item = BasicBlock >) { for block in blocks . into_iter () { if ! self . visited . contains (block) { self . worklist . insert (block) ; } } } }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > Iterator for MonoReachable < 'a , 'tcx > { type Item = (BasicBlock , & 'a BasicBlockData < 'tcx >) ; fn next (& mut self) -> Option < (BasicBlock , & 'a BasicBlockData < 'tcx >) > { while let Some (idx) = self . worklist . iter () . next () { self . worklist . remove (idx) ; if ! self . visited . insert (idx) { continue ; } let data = & self . body [idx] ; let targets = data . mono_successors (self . tcx , self . instance) ; self . add_work (targets) ; return Some ((idx , data)) ; } None } }}}

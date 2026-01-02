@@ -1,0 +1,11 @@
+mkitem!{# [allow (unused)] macro_rules ! static_assert_rounding { ($ imm : ident) => { static_assert ! ($ imm == 4 || $ imm == 8 || $ imm == 9 || $ imm == 10 || $ imm == 11 , "Invalid IMM value") } ; }}
+mkitem!{# [allow (unused)] macro_rules ! static_assert_sae { ($ imm : ident) => { static_assert ! ($ imm == 4 || $ imm == 8 , "Invalid IMM value") } ; }}
+mkitem!{# [allow (unused)] macro_rules ! static_assert_extended_rounding { ($ imm : ident) => { static_assert ! (($ imm & 7) < 5 && ($ imm & ! 15) == 0 , "Invalid IMM value") } ; }}
+mkitem!{# [allow (unused)] macro_rules ! static_assert_mantissas_sae { ($ imm : ident) => { static_assert ! ($ imm == 4 || $ imm == 8 || $ imm == 12 , "Invalid IMM value") } ; }}
+mkitem!{# [allow (unused)] macro_rules ! static_assert_imm8_scale { ($ imm : ident) => { static_assert ! ($ imm == 1 || $ imm == 2 || $ imm == 4 || $ imm == 8 , "Invalid SCALE value") } ; }}
+mkitem!{# [cfg (test)] macro_rules ! assert_approx_eq { ($ a : expr , $ b : expr , $ eps : expr) => { { let (a , b) = (&$ a , &$ b) ; assert ! ((* a - * b) . abs () < $ eps , "assertion failed: `(left !== right)` \
+             (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)" , * a , * b , $ eps , (* a - * b) . abs ()) ; } } ; }}
+mkitem!{# [cfg (target_pointer_width = "32")] macro_rules ! vpl { ($ inst : expr) => { concat ! ($ inst , ", [{p:e}]") } ; }}
+mkitem!{# [cfg (target_pointer_width = "64")] macro_rules ! vpl { ($ inst : expr) => { concat ! ($ inst , ", [{p}]") } ; }}
+mkitem!{# [cfg (target_pointer_width = "32")] macro_rules ! vps { ($ inst1 : expr , $ inst2 : expr) => { concat ! ($ inst1 , " [{p:e}]" , $ inst2) } ; }}
+mkitem!{# [cfg (target_pointer_width = "64")] macro_rules ! vps { ($ inst1 : expr , $ inst2 : expr) => { concat ! ($ inst1 , " [{p}]" , $ inst2) } ; }}

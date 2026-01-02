@@ -1,3 +1,13 @@
+use std::sync::Mutex;
+use std::collections::HashMap;
+use std::sync::LazyLock;
+
+static USE_MATRIX: LazyLock<Mutex<HashMap<String, Vec<String>>>> = LazyLock::new(|| Mutex::new(HashMap::new()));
+
+pub fn get_use_matrix() -> HashMap<String, Vec<String>> {
+    USE_MATRIX.lock().unwrap().clone()
+}
+
 // Macro definitions for wrapping Rust constructs with handlers
 
 // Replace problematic print statements with emit_message
@@ -189,6 +199,81 @@ macro_rules! safe_print {
     };
 }
 
+#[macro_export]
+macro_rules! include_rust_compiler {
+    ($crate_name:literal, $subpath:literal, $file:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_compiler_rustc_", 
+            $crate_name, 
+            "_", 
+            $subpath, 
+            "_", 
+            $file, 
+            ".rs"
+        ));
+    };
+    ($crate_name:literal, $file:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_compiler_rustc_", 
+            $crate_name, 
+            "_src_", 
+            $file, 
+            ".rs"
+        ));
+    };
+    ($crate_name:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_compiler_rustc_", 
+            $crate_name, 
+            "_src_lib.rs"
+        ));
+    };
+}
+
+#[macro_export]
+macro_rules! include_rust_library {
+    ($lib_name:literal, $subpath:literal, $file:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_library_", 
+            $lib_name, 
+            "_", 
+            $subpath, 
+            "_", 
+            $file, 
+            ".rs"
+        ));
+    };
+    ($lib_name:literal, $file:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_library_", 
+            $lib_name, 
+            "_src_", 
+            $file, 
+            ".rs"
+        ));
+    };
+    ($lib_name:literal) => {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"), 
+            "/processed_submodules_rust_library_", 
+            $lib_name, 
+            "_src_lib.rs"
+        ));
+    };
+}
+
+#[macro_export]
+macro_rules! include_processed {
+    ($path:literal) => {
+        include!(concat!(env!("CARGO_MANIFEST_DIR"), "/processed_", $path, ".rs"));
+    };
+}
+
 macro_rules! mkinclude {
     ($path:ident) => {
         // Skip include! calls with identifiers - they're problematic
@@ -216,28 +301,38 @@ macro_rules! mkitem {
     ($item:item) => { $item };
 }
 
+#[macro_export]
 macro_rules! mkmod {
     // Handle introspection pattern: mkmod!{name, { content }}
     ($name:ident, { $($content:tt)* }) => {
+        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
         mod $name {
+            const MODULE_NAME: &str = stringify!($name);
             $($content)*
         }
     };
     // Handle standard patterns
     (pub mod $name:ident { $($content:tt)* }) => {
+        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
         pub mod $name {
+            const MODULE_NAME: &str = stringify!($name);
             $($content)*
         }
     };
     (mod $name:ident { $($content:tt)* }) => {
+        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
         mod $name {
+            const MODULE_NAME: &str = stringify!($name);
             $($content)*
         }
     };
 }
 
+#[macro_export]
 macro_rules! mkuse {
-    ($use_stmt:item) => { $use_stmt };
+    ($use_stmt:item) => { 
+        compile_error!(concat!("USE|", module_path!(), "|", stringify!($use_stmt)));
+    };
 }
 
 macro_rules! mkstruct {
@@ -246,6 +341,120 @@ macro_rules! mkstruct {
 
 macro_rules! mkenum {
     ($enum_def:item) => { $enum_def };
+}
+
+macro_rules! mktrait {
+    ($trait_def:item) => { $trait_def };
+}
+
+macro_rules! mkimpl {
+    ($impl_def:item) => { $impl_def };
+}
+
+// Introspection macros
+macro_rules! getname {
+    ($name:ident) => {
+        stringify!($name)
+    };
+}
+
+macro_rules! getsrc {
+    ($name:ident) => {
+        "processed file"
+    };
+}
+
+macro_rules! getpath {
+    ($name:ident) => {
+        "processed_path"
+    };
+}
+
+macro_rules! get_deps {
+    ($name:ident) => {
+        vec![]
+    };
+}
+
+pub mod rustc_complete {
+    pub mod emitter {
+        pub fn stderr_destination() {}
+    }
+    pub mod registry {
+        pub struct Registry;
+    }
+    pub mod translation {
+        pub struct Translator;
+    }
+    pub struct ColorConfig;
+    pub struct DiagCtxt;
+    pub struct ErrCode;
+    pub struct FatalError;
+    pub struct PResult<T>(pub T);
+    pub mod markdown {}
+    pub mod config {
+        pub struct CG_OPTIONS;
+        pub struct CrateType;
+        pub struct ErrorOutputType;
+        pub struct Input;
+        pub struct OptionDesc;
+        pub struct OutFileName;
+        pub struct OutputType;
+        pub struct Sysroot;
+        pub struct UnstableOptions;
+        pub struct Z_OPTIONS;
+        pub fn nightly_options() {}
+        pub fn parse_target_triple() {}
+    }
+    pub mod getopts {
+        pub struct Matches;
+    }
+    pub mod lint {
+        pub struct Lint;
+        pub struct LintId;
+    }
+    pub mod output {
+        pub struct CRATE_TYPES;
+        pub fn collect_crate_types() {}
+        pub fn invalid_output_for_target() {}
+    }
+    pub struct EarlyDiagCtxt;
+    pub struct Session;
+    pub struct FileName;
+    pub mod def_id {
+        pub struct LOCAL_CRATE;
+    }
+    pub mod ty {
+        pub struct TyCtxt<T>(pub T);
+    }
+}
+
+pub mod rustc_feature {
+    pub fn find_gated_cfg() {}
+}
+
+pub mod session_diagnostics {
+    pub struct CantEmitMIR;
+    pub struct RLinkEmptyVersionNumber;
+    pub struct RLinkEncodingVersionMismatch;
+    pub struct RLinkRustcVersionMismatch;
+    pub struct RLinkWrongFileType;
+    pub struct RlinkCorruptFile;
+    pub struct RlinkNotAFile;
+    pub struct RlinkUnableToRead;
+    pub struct UnstableFeatureUsage;
+}
+
+macro_rules! do_not_use_print {
+    ($($t:tt)*) => {
+        compile_error!("Don't use print")
+    };
+}
+
+macro_rules! do_not_use_safe_print {
+    ($($t:tt)*) => {
+        compile_error!("Don't use safe_print")
+    };
 }
 
 macro_rules! mktrait {

@@ -1,0 +1,12 @@
+mkuse!{use super :: log1p ;}
+
+macro_rules! atanh_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function atanh in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    atanh_introspect!();
+    # [doc = " Inverse hyperbolic tangent (f64)"] # [doc = ""] # [doc = " Calculates the inverse hyperbolic tangent of `x`."] # [doc = " Is defined as `log((1+x)/(1-x))/2 = log1p(2x/(1-x))/2`."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn atanh (x : f64) -> f64 { let u = x . to_bits () ; let e = ((u >> 52) as usize) & 0x7ff ; let sign = (u >> 63) != 0 ; let mut y = f64 :: from_bits (u & 0x7fff_ffff_ffff_ffff) ; if e < 0x3ff - 1 { if e < 0x3ff - 32 { if e == 0 { force_eval ! (y as f32) ; } } else { y = 0.5 * log1p (2.0 * y + 2.0 * y * y / (1.0 - y)) ; } } else { y = 0.5 * log1p (2.0 * (y / (1.0 - y))) ; } if sign { - y } else { y } }
+}

@@ -1,0 +1,13 @@
+mkitem!{macro_rules ! legacy_int_module { ($ T : ident) => (legacy_int_module ! ($ T , # [stable (feature = "rust1" , since = "1.0.0")]) ;) ; ($ T : ident , # [$ attr : meta]) => (# [$ attr] # [deprecated (since = "TBD" , note = "all constants in this module replaced by associated constants on the type")] # [rustc_diagnostic_item = concat ! (stringify ! ($ T) , "_legacy_mod")] pub mod $ T { #! [doc = concat ! ("Redundant constants module for the [`" , stringify ! ($ T) , "` primitive type][" , stringify ! ($ T) , "].")] # ! [doc = ""] # ! [doc = " New code should use the associated constants directly on the primitive type."] # [doc = concat ! ("The smallest value that can be represented by this integer type. Use " , "[`" , stringify ! ($ T) , "::MIN" , "`] instead.")] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " // deprecated way"] # [doc = concat ! ("let min = std::" , stringify ! ($ T) , "::MIN;")] # [doc = ""] # [doc = " // intended way"] # [doc = concat ! ("let min = " , stringify ! ($ T) , "::MIN;")] # [doc = " ```"] # [doc = ""] # [$ attr] # [deprecated (since = "TBD" , note = "replaced by the `MIN` associated constant on this type")] # [rustc_diagnostic_item = concat ! (stringify ! ($ T) , "_legacy_const_min")] pub const MIN : $ T = $ T :: MIN ; # [doc = concat ! ("The largest value that can be represented by this integer type. Use " , "[`" , stringify ! ($ T) , "::MAX" , "`] instead.")] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " // deprecated way"] # [doc = concat ! ("let max = std::" , stringify ! ($ T) , "::MAX;")] # [doc = ""] # [doc = " // intended way"] # [doc = concat ! ("let max = " , stringify ! ($ T) , "::MAX;")] # [doc = " ```"] # [doc = ""] # [$ attr] # [deprecated (since = "TBD" , note = "replaced by the `MAX` associated constant on this type")] # [rustc_diagnostic_item = concat ! (stringify ! ($ T) , "_legacy_const_max")] pub const MAX : $ T = $ T :: MAX ; }) }}
+mkitem!{legacy_int_module ! { i128 , # [stable (feature = "i128" , since = "1.26.0")] }}
+mkitem!{legacy_int_module ! { i16 }}
+mkitem!{legacy_int_module ! { i32 }}
+mkitem!{legacy_int_module ! { i64 }}
+mkitem!{legacy_int_module ! { i8 }}
+mkitem!{legacy_int_module ! { isize }}
+mkitem!{legacy_int_module ! { u128 , # [stable (feature = "i128" , since = "1.26.0")] }}
+mkitem!{legacy_int_module ! { u16 }}
+mkitem!{legacy_int_module ! { u32 }}
+mkitem!{legacy_int_module ! { u64 }}
+mkitem!{legacy_int_module ! { u8 }}
+mkitem!{legacy_int_module ! { usize }}

@@ -1,0 +1,68 @@
+mkitem!{pub (crate) const AT_NULL : usize = 0 ;}
+mkitem!{# [doc = " Key to access the CPU Hardware capabilities bitfield."] pub (crate) const AT_HWCAP : usize = 16 ;}
+mkitem!{# [doc = " Key to access the CPU Hardware capabilities 2 bitfield."] # [cfg (any (target_arch = "aarch64" , target_arch = "arm" , target_arch = "powerpc" , target_arch = "powerpc64" , target_arch = "s390x" ,))] pub (crate) const AT_HWCAP2 : usize = 26 ;}
+mkitem!{mkstruct!{# [doc = " Cache HWCAP bitfields of the ELF Auxiliary Vector."] # [doc = ""] # [doc = " If an entry cannot be read all the bits in the bitfield are set to zero."] # [doc = " This should be interpreted as all the features being disabled."] # [derive (Debug , Copy , Clone)] # [cfg_attr (test , derive (PartialEq))] pub (crate) struct AuxVec { pub hwcap : usize , # [cfg (any (target_arch = "aarch64" , target_arch = "arm" , target_arch = "powerpc" , target_arch = "powerpc64" , target_arch = "s390x" ,))] pub hwcap2 : usize , }}}
+
+macro_rules! auxv_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function auxv in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    auxv_introspect!();
+    # [doc = " ELF Auxiliary Vector"] # [doc = ""] # [doc = " The auxiliary vector is a memory region in a running ELF program's stack"] # [doc = " composed of (key: usize, value: usize) pairs."] # [doc = ""] # [doc = " The keys used in the aux vector are platform dependent. For Linux, they are"] # [doc = " defined in [linux/auxvec.h][auxvec_h]. The hardware capabilities of a given"] # [doc = " CPU can be queried with the  `AT_HWCAP` and `AT_HWCAP2` keys."] # [doc = ""] # [doc = " There is no perfect way of reading the auxiliary vector."] # [doc = ""] # [doc = " - If the `std_detect_dlsym_getauxval` cargo feature is enabled, this will use"] # [doc = "   `getauxval` if its linked to the binary, and otherwise proceed to a fallback implementation."] # [doc = "   When `std_detect_dlsym_getauxval` is disabled, this will assume that `getauxval` is"] # [doc = "   linked to the binary - if that is not the case the behavior is undefined."] # [doc = " - Otherwise, if the `std_detect_file_io` cargo feature is enabled, it will"] # [doc = "   try to read `/proc/self/auxv`."] # [doc = " - If that fails, this function returns an error."] # [doc = ""] # [doc = " Note that run-time feature detection is not invoked for features that can"] # [doc = " be detected at compile-time."] # [doc = ""] # [doc = "  Note: The `std_detect_dlsym_getauxval` cargo feature is ignored on"] # [doc = " `*-linux-{gnu,musl,ohos}*` and `*-android*` targets because we can safely assume `getauxval`"] # [doc = " is linked to the binary."] # [doc = " - `*-linux-gnu*` targets ([since Rust 1.64](https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html))"] # [doc = "   have glibc requirements higher than [glibc 2.16 that added `getauxval`](https://sourceware.org/legacy-ml/libc-announce/2012/msg00000.html)."] # [doc = " - `*-linux-musl*` targets ([at least since Rust 1.15](https://github.com/rust-lang/rust/blob/1.15.0/src/ci/docker/x86_64-musl/build-musl.sh#L15))"] # [doc = "   use musl newer than [musl 1.1.0 that added `getauxval`](https://git.musl-libc.org/cgit/musl/tree/WHATSNEW?h=v1.1.0#n1197)"] # [doc = " - `*-linux-ohos*` targets use a [fork of musl 1.2](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/native-lib/musl.md)"] # [doc = " - `*-android*` targets ([since Rust 1.68](https://blog.rust-lang.org/2023/01/09/android-ndk-update-r25.html))"] # [doc = "   have the minimum supported API level higher than [Android 4.3 (API level 18) that added `getauxval`](https://github.com/aosp-mirror/platform_bionic/blob/d3ebc2f7c49a9893b114124d4a6b315f3a328764/libc/include/sys/auxv.h#L49)."] # [doc = ""] # [doc = " For more information about when `getauxval` is available check the great"] # [doc = " [`auxv` crate documentation][auxv_docs]."] # [doc = ""] # [doc = " [auxvec_h]: https://github.com/torvalds/linux/blob/master/include/uapi/linux/auxvec.h"] # [doc = " [auxv_docs]: https://docs.rs/auxv/0.3.3/auxv/"] pub (crate) fn auxv () -> Result < AuxVec , () > { if let Ok (hwcap) = getauxval (AT_HWCAP) { # [cfg (any (target_arch = "riscv32" , target_arch = "riscv64" , target_arch = "mips" , target_arch = "mips64" , target_arch = "loongarch32" , target_arch = "loongarch64" ,))] { if hwcap != 0 { return Ok (AuxVec { hwcap }) ; } } # [cfg (any (target_arch = "aarch64" , target_arch = "arm" , target_arch = "powerpc" , target_arch = "powerpc64" , target_arch = "s390x" ,))] { if let Ok (hwcap2) = getauxval (AT_HWCAP2) { if hwcap != 0 || hwcap2 != 0 { return Ok (AuxVec { hwcap , hwcap2 }) ; } } } let _ = hwcap ; } # [cfg (feature = "std_detect_file_io")] { auxv_from_file ("/proc/self/auxv") . map_err (| _ | ()) } # [cfg (not (feature = "std_detect_file_io"))] { Err (()) } }
+}
+
+macro_rules! getauxval_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function getauxval in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    getauxval_introspect!();
+    # [doc = " Tries to read the `key` from the auxiliary vector by calling the"] # [doc = " `getauxval` function. If the function is not linked, this function return `Err`."] fn getauxval (key : usize) -> Result < usize , () > { type F = unsafe extern "C" fn (libc :: c_ulong) -> libc :: c_ulong ; cfg_select ! { all (feature = "std_detect_dlsym_getauxval" , not (all (target_os = "linux" , any (target_env = "gnu" , target_env = "musl" , target_env = "ohos") ,)) , not (target_os = "android") ,) => { let ffi_getauxval : F = unsafe { let ptr = libc :: dlsym (libc :: RTLD_DEFAULT , c"getauxval" . as_ptr ()) ; if ptr . is_null () { return Err (()) ; } core :: mem :: transmute (ptr) } ; } _ => { let ffi_getauxval : F = libc :: getauxval ; } } Ok (unsafe { ffi_getauxval (key as libc :: c_ulong) as usize }) }
+}
+
+macro_rules! auxv_from_file_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function auxv_from_file in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    auxv_from_file_introspect!();
+    # [doc = " Tries to read the auxiliary vector from the `file`. If this fails, this"] # [doc = " function returns `Err`."] # [cfg (feature = "std_detect_file_io")] pub (super) fn auxv_from_file (file : & str) -> Result < AuxVec , alloc :: string :: String > { let file = super :: read_file (file) ? ; auxv_from_file_bytes (& file) }
+}
+
+macro_rules! auxv_from_file_bytes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function auxv_from_file_bytes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    auxv_from_file_bytes_introspect!();
+    # [doc = " Read auxiliary vector from a slice of bytes."] # [cfg (feature = "std_detect_file_io")] pub (super) fn auxv_from_file_bytes (bytes : & [u8]) -> Result < AuxVec , alloc :: string :: String > { let len = bytes . len () ; let mut buf = alloc :: vec ! [0_usize ; 1 + len / core :: mem :: size_of ::< usize > ()] ; unsafe { core :: ptr :: copy_nonoverlapping (bytes . as_ptr () , buf . as_mut_ptr () as * mut u8 , len) ; } auxv_from_buf (& buf) }
+}
+
+macro_rules! auxv_from_buf_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function auxv_from_buf in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    auxv_from_buf_introspect!();
+    # [doc = " Tries to interpret the `buffer` as an auxiliary vector. If that fails, this"] # [doc = " function returns `Err`."] # [cfg (feature = "std_detect_file_io")] fn auxv_from_buf (buf : & [usize]) -> Result < AuxVec , alloc :: string :: String > { # [cfg (any (target_arch = "riscv32" , target_arch = "riscv64" , target_arch = "mips" , target_arch = "mips64" , target_arch = "loongarch32" , target_arch = "loongarch64" ,))] { for el in buf . chunks (2) { match el [0] { AT_NULL => break , AT_HWCAP => return Ok (AuxVec { hwcap : el [1] }) , _ => () , } } } # [cfg (any (target_arch = "aarch64" , target_arch = "arm" , target_arch = "powerpc" , target_arch = "powerpc64" , target_arch = "s390x" ,))] { let mut hwcap = None ; let mut hwcap2 = 0 ; for el in buf . chunks (2) { match el [0] { AT_NULL => break , AT_HWCAP => hwcap = Some (el [1]) , AT_HWCAP2 => hwcap2 = el [1] , _ => () , } } if let Some (hwcap) = hwcap { return Ok (AuxVec { hwcap , hwcap2 }) ; } } let _ = buf ; Err (alloc :: string :: String :: from ("hwcap not found")) }
+}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}

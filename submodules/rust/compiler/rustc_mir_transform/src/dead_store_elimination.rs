@@ -1,0 +1,21 @@
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: mir :: visit :: Visitor ;}
+mkuse!{use rustc_middle :: mir :: * ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_mir_dataflow :: Analysis ;}
+mkuse!{use rustc_mir_dataflow :: debuginfo :: debuginfo_locals ;}
+mkuse!{use rustc_mir_dataflow :: impls :: { LivenessTransferFunction , MaybeTransitiveLiveLocals , borrowed_locals , } ;}
+mkuse!{use crate :: util :: is_within_packed ;}
+
+macro_rules! eliminate_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function eliminate in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    eliminate_introspect!();
+    # [doc = " Performs the optimization on the body"] # [doc = ""] # [doc = " The `borrowed` set must be a `DenseBitSet` of all the locals that are ever borrowed in this"] # [doc = " body. It can be generated via the [`borrowed_locals`] function."] fn eliminate < 'tcx > (tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { let borrowed_locals = borrowed_locals (body) ; let mut always_live = debuginfo_locals (body) ; always_live . union (& borrowed_locals) ; let mut live = MaybeTransitiveLiveLocals :: new (& always_live) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) ; let mut call_operands_to_move = Vec :: new () ; let mut patch = Vec :: new () ; for (bb , bb_data) in traversal :: preorder (body) { if let TerminatorKind :: Call { ref args , .. } = bb_data . terminator () . kind { let loc = Location { block : bb , statement_index : bb_data . statements . len () } ; live . seek_to_block_end (bb) ; let mut state = live . get () . clone () ; for (index , arg) in args . iter () . map (| a | & a . node) . enumerate () . rev () { if let Operand :: Copy (place) = * arg && ! place . is_indirect () && ! borrowed_locals . contains (place . local) && ! state . contains (place . local) && is_within_packed (tcx , body , place) . is_none () { call_operands_to_move . push ((bb , index)) ; } LivenessTransferFunction (& mut state) . visit_operand (arg , loc) ; } } for (statement_index , statement) in bb_data . statements . iter () . enumerate () . rev () { let loc = Location { block : bb , statement_index } ; if let StatementKind :: Assign (assign) = & statement . kind { if ! assign . 1 . is_safe_to_remove () { continue ; } } match & statement . kind { StatementKind :: Assign (box (place , _)) | StatementKind :: SetDiscriminant { place : box place , .. } | StatementKind :: Deinit (box place) => { if ! place . is_indirect () && ! always_live . contains (place . local) { live . seek_before_primary_effect (loc) ; if ! live . get () . contains (place . local) { patch . push (loc) ; } } } StatementKind :: Retag (_ , _) | StatementKind :: StorageLive (_) | StatementKind :: StorageDead (_) | StatementKind :: Coverage (_) | StatementKind :: Intrinsic (_) | StatementKind :: ConstEvalCounter | StatementKind :: PlaceMention (_) | StatementKind :: BackwardIncompatibleDropHint { .. } | StatementKind :: Nop => { } StatementKind :: FakeRead (_) | StatementKind :: AscribeUserType (_ , _) => { bug ! ("{:?} not found in this MIR phase!" , statement . kind) } } } } if patch . is_empty () && call_operands_to_move . is_empty () { return ; } let bbs = body . basic_blocks . as_mut_preserves_cfg () ; for Location { block , statement_index } in patch { bbs [block] . statements [statement_index] . make_nop () ; } for (block , argument_index) in call_operands_to_move { let TerminatorKind :: Call { ref mut args , .. } = bbs [block] . terminator_mut () . kind else { bug ! () } ; let arg = & mut args [argument_index] . node ; let Operand :: Copy (place) = * arg else { bug ! () } ; * arg = Operand :: Move (place) ; } }
+}
+mkitem!{mkenum!{pub (super) enum DeadStoreElimination { Initial , Final , }}}
+mkitem!{mkimpl!{impl < 'tcx > crate :: MirPass < 'tcx > for DeadStoreElimination { fn name (& self) -> & 'static str { match self { DeadStoreElimination :: Initial => "DeadStoreElimination-initial" , DeadStoreElimination :: Final => "DeadStoreElimination-final" , } } fn is_enabled (& self , sess : & rustc_session :: Session) -> bool { sess . mir_opt_level () >= 2 } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { eliminate (tcx , body) ; } fn is_required (& self) -> bool { false } }}}

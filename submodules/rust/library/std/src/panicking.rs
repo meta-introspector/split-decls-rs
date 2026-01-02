@@ -1,0 +1,362 @@
+mkuse!{use core :: panic :: { Location , PanicPayload } ;}
+mkuse!{# [cfg (test)] use realstd :: io :: try_set_output_capture ;}
+mkuse!{use crate :: any :: Any ;}
+mkuse!{# [cfg (not (test))] use crate :: io :: try_set_output_capture ;}
+mkuse!{use crate :: mem :: { self , ManuallyDrop } ;}
+mkuse!{use crate :: panic :: { BacktraceStyle , PanicHookInfo } ;}
+mkuse!{use crate :: sync :: atomic :: { Atomic , AtomicBool , Ordering } ;}
+mkuse!{use crate :: sync :: { PoisonError , RwLock } ;}
+mkuse!{use crate :: sys :: backtrace ;}
+mkuse!{use crate :: sys :: stdio :: panic_output ;}
+mkuse!{use crate :: { fmt , intrinsics , process , thread } ;}
+mkitem!{# [unstable (feature = "libstd_sys_internals" , reason = "used by the panic! macro" , issue = "none")] # [doc (hidden)] # [allow (dead_code)] # [used (compiler)] pub static EMPTY_PANIC : fn (& 'static str) -> ! = begin_panic :: < & 'static str > as fn (& 'static str) -> ! ;}
+mkitem!{# [allow (improper_ctypes)] unsafe extern "C" { # [rustc_std_internal_symbol] fn __rust_panic_cleanup (payload : * mut u8) -> * mut (dyn Any + Send + 'static) ; }}
+mkitem!{unsafe extern "Rust" { # [doc = " `PanicPayload` lazily performs allocation only when needed (this avoids"] # [doc = " allocations when using the \"abort\" panic runtime)."] # [rustc_std_internal_symbol] fn __rust_start_panic (payload : & mut dyn PanicPayload) -> u32 ; }}
+
+macro_rules! __rust_drop_panic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __rust_drop_panic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __rust_drop_panic_introspect!();
+    # [doc = " This function is called by the panic runtime if FFI code catches a Rust"] # [doc = " panic but doesn't rethrow it. We don't support this case since it messes"] # [doc = " with our panic count."] # [cfg (not (test))] # [rustc_std_internal_symbol] extern "C" fn __rust_drop_panic () -> ! { rtabort ! ("Rust panics must be rethrown") ; }
+}
+
+macro_rules! __rust_foreign_exception_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __rust_foreign_exception in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __rust_foreign_exception_introspect!();
+    # [doc = " This function is called by the panic runtime if it catches an exception"] # [doc = " object which does not correspond to a Rust panic."] # [cfg (not (test))] # [rustc_std_internal_symbol] extern "C" fn __rust_foreign_exception () -> ! { rtabort ! ("Rust cannot catch foreign exceptions") ; }
+}
+mkitem!{mkenum!{# [derive (Default)] enum Hook { # [default] Default , Custom (Box < dyn Fn (& PanicHookInfo < '_ >) + 'static + Sync + Send >) , }}}
+mkitem!{mkimpl!{impl Hook { # [inline] fn into_box (self) -> Box < dyn Fn (& PanicHookInfo < '_ >) + 'static + Sync + Send > { match self { Hook :: Default => Box :: new (default_hook) , Hook :: Custom (hook) => hook , } } }}}
+mkitem!{static HOOK : RwLock < Hook > = RwLock :: new (Hook :: Default) ;}
+
+macro_rules! set_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function set_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    set_hook_introspect!();
+    # [doc = " Registers a custom panic hook, replacing the previously registered hook."] # [doc = ""] # [doc = " The panic hook is invoked when a thread panics, but before the panic runtime"] # [doc = " is invoked. As such, the hook will run with both the aborting and unwinding"] # [doc = " runtimes."] # [doc = ""] # [doc = " The default hook, which is registered at startup, prints a message to standard error and"] # [doc = " generates a backtrace if requested. This behavior can be customized using the `set_hook` function."] # [doc = " The current hook can be retrieved while reinstating the default hook with the [`take_hook`]"] # [doc = " function."] # [doc = ""] # [doc = " [`take_hook`]: ./fn.take_hook.html"] # [doc = ""] # [doc = " The hook is provided with a `PanicHookInfo` struct which contains information"] # [doc = " about the origin of the panic, including the payload passed to `panic!` and"] # [doc = " the source code location from which the panic originated."] # [doc = ""] # [doc = " The panic hook is a global resource."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if called from a panicking thread."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " The following will print \"Custom panic hook\":"] # [doc = ""] # [doc = " ```should_panic"] # [doc = " use std::panic;"] # [doc = ""] # [doc = " panic::set_hook(Box::new(|_| {"] # [doc = "     println!(\"Custom panic hook\");"] # [doc = " }));"] # [doc = ""] # [doc = " panic!(\"Normal panic\");"] # [doc = " ```"] # [stable (feature = "panic_hooks" , since = "1.10.0")] pub fn set_hook (hook : Box < dyn Fn (& PanicHookInfo < '_ >) + 'static + Sync + Send >) { if thread :: panicking () { panic ! ("cannot modify the panic hook from a panicking thread") ; } let new = Hook :: Custom (hook) ; let mut hook = HOOK . write () . unwrap_or_else (PoisonError :: into_inner) ; let old = mem :: replace (& mut * hook , new) ; drop (hook) ; drop (old) ; }
+}
+
+macro_rules! take_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function take_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    take_hook_introspect!();
+    # [doc = " Unregisters the current panic hook and returns it, registering the default hook"] # [doc = " in its place."] # [doc = ""] # [doc = " *See also the function [`set_hook`].*"] # [doc = ""] # [doc = " [`set_hook`]: ./fn.set_hook.html"] # [doc = ""] # [doc = " If the default hook is registered it will be returned, but remain registered."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if called from a panicking thread."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " The following will print \"Normal panic\":"] # [doc = ""] # [doc = " ```should_panic"] # [doc = " use std::panic;"] # [doc = ""] # [doc = " panic::set_hook(Box::new(|_| {"] # [doc = "     println!(\"Custom panic hook\");"] # [doc = " }));"] # [doc = ""] # [doc = " let _ = panic::take_hook();"] # [doc = ""] # [doc = " panic!(\"Normal panic\");"] # [doc = " ```"] # [must_use] # [stable (feature = "panic_hooks" , since = "1.10.0")] pub fn take_hook () -> Box < dyn Fn (& PanicHookInfo < '_ >) + 'static + Sync + Send > { if thread :: panicking () { panic ! ("cannot modify the panic hook from a panicking thread") ; } let mut hook = HOOK . write () . unwrap_or_else (PoisonError :: into_inner) ; let old_hook = mem :: take (& mut * hook) ; drop (hook) ; old_hook . into_box () }
+}
+
+macro_rules! update_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function update_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    update_hook_introspect!();
+    # [doc = " Atomic combination of [`take_hook`] and [`set_hook`]. Use this to replace the panic handler with"] # [doc = " a new panic handler that does something and then executes the old handler."] # [doc = ""] # [doc = " [`take_hook`]: ./fn.take_hook.html"] # [doc = " [`set_hook`]: ./fn.set_hook.html"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if called from a panicking thread."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " The following will print the custom message, and then the normal output of panic."] # [doc = ""] # [doc = " ```should_panic"] # [doc = " #![feature(panic_update_hook)]"] # [doc = " use std::panic;"] # [doc = ""] # [doc = " // Equivalent to"] # [doc = " // let prev = panic::take_hook();"] # [doc = " // panic::set_hook(move |info| {"] # [doc = " //     println!(\"...\");"] # [doc = " //     prev(info);"] # [doc = " // );"] # [doc = " panic::update_hook(move |prev, info| {"] # [doc = "     println!(\"Print custom message and execute panic handler as usual\");"] # [doc = "     prev(info);"] # [doc = " });"] # [doc = ""] # [doc = " panic!(\"Custom and then normal\");"] # [doc = " ```"] # [unstable (feature = "panic_update_hook" , issue = "92649")] pub fn update_hook < F > (hook_fn : F) where F : Fn (& (dyn Fn (& PanicHookInfo < '_ >) + Send + Sync + 'static) , & PanicHookInfo < '_ >) + Sync + Send + 'static , { if thread :: panicking () { panic ! ("cannot modify the panic hook from a panicking thread") ; } let mut hook = HOOK . write () . unwrap_or_else (PoisonError :: into_inner) ; let prev = mem :: take (& mut * hook) . into_box () ; * hook = Hook :: Custom (Box :: new (move | info | hook_fn (& prev , info))) ; }
+}
+
+macro_rules! default_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function default_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    default_hook_introspect!();
+    # [doc = " The default panic handler."] # [optimize (size)] fn default_hook (info : & PanicHookInfo < '_ >) { let backtrace = if info . force_no_backtrace () { None } else if panic_count :: get_count () >= 2 { BacktraceStyle :: full () } else { crate :: panic :: get_backtrace_style () } ; let location = info . location () . unwrap () ; let msg = payload_as_str (info . payload ()) ; let write = # [optimize (size)] | err : & mut dyn crate :: io :: Write | { let mut lock = backtrace :: lock () ; thread :: with_current_name (| name | { let name = name . unwrap_or ("<unnamed>") ; let tid = thread :: current_os_id () ; let mut buffer = [0u8 ; 512] ; let mut cursor = crate :: io :: Cursor :: new (& mut buffer [..]) ; let write_msg = | dst : & mut dyn crate :: io :: Write | { writeln ! (dst , "\nthread '{name}' ({tid}) panicked at {location}:\n{msg}") } ; if write_msg (& mut cursor) . is_ok () { let pos = cursor . position () as usize ; let _ = err . write_all (& buffer [0 .. pos]) ; } else { let _ = write_msg (err) ; } ; }) ; static FIRST_PANIC : Atomic < bool > = AtomicBool :: new (true) ; match backtrace { Some (BacktraceStyle :: Short) => { drop (lock . print (err , crate :: backtrace_rs :: PrintFmt :: Short)) } Some (BacktraceStyle :: Full) => { drop (lock . print (err , crate :: backtrace_rs :: PrintFmt :: Full)) } Some (BacktraceStyle :: Off) => { if FIRST_PANIC . swap (false , Ordering :: Relaxed) { let _ = writeln ! (err , "note: run with `RUST_BACKTRACE=1` environment variable to display a \
+                             backtrace") ; if cfg ! (miri) { let _ = writeln ! (err , "note: in Miri, you may have to set `MIRIFLAGS=-Zmiri-env-forward=RUST_BACKTRACE` \
+                                for the environment variable to have an effect") ; } } } None => { } } } ; if let Ok (Some (local)) = try_set_output_capture (None) { write (& mut * local . lock () . unwrap_or_else (| e | e . into_inner ())) ; try_set_output_capture (Some (local)) . ok () ; } else if let Some (mut out) = panic_output () { write (& mut out) ; } }
+}
+mkmod!{panic_count, { 
+                getname!(panic_count);
+                getsrc!(panic_count);
+                getpath!(panic_count);
+                get_deps!(panic_count);
+                get_crates!(panic_count);
+                mkinclude!(panic_count);
+                mkitem!{mkenum!{# [doc = " A reason for forcing an immediate abort on panic."] # [derive (Debug)] pub enum MustAbort { AlwaysAbort , PanicInHook , }}}
+
+macro_rules! increase_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function increase in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    increase_introspect!();
+    # [inline] pub fn increase (run_panic_hook : bool) -> Option < MustAbort > { None }
+}
+
+macro_rules! finished_panic_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function finished_panic_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    finished_panic_hook_introspect!();
+    # [inline] pub fn finished_panic_hook () { }
+}
+
+macro_rules! decrease_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function decrease in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    decrease_introspect!();
+    # [inline] pub fn decrease () { }
+}
+
+macro_rules! set_always_abort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function set_always_abort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    set_always_abort_introspect!();
+    # [inline] pub fn set_always_abort () { }
+}
+
+macro_rules! get_count_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function get_count in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    get_count_introspect!();
+    # [inline] # [must_use] pub fn get_count () -> usize { 0 }
+}
+
+macro_rules! count_is_zero_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function count_is_zero in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    count_is_zero_introspect!();
+    # [must_use] # [inline] pub fn count_is_zero () -> bool { true }
+} 
+            }}
+mkmod!{panic_count, { 
+                getname!(panic_count);
+                getsrc!(panic_count);
+                getpath!(panic_count);
+                get_deps!(panic_count);
+                get_crates!(panic_count);
+                mkinclude!(panic_count);
+                mkuse!{use crate :: cell :: Cell ;}
+mkuse!{use crate :: sync :: atomic :: { Atomic , AtomicUsize , Ordering } ;}
+mkitem!{const ALWAYS_ABORT_FLAG : usize = 1 << (usize :: BITS - 1) ;}
+mkitem!{mkenum!{# [doc = " A reason for forcing an immediate abort on panic."] # [derive (Debug)] pub enum MustAbort { AlwaysAbort , PanicInHook , }}}
+mkitem!{thread_local ! { static LOCAL_PANIC_COUNT : Cell < (usize , bool) > = const { Cell :: new ((0 , false)) } }}
+mkitem!{static GLOBAL_PANIC_COUNT : Atomic < usize > = AtomicUsize :: new (0) ;}
+
+macro_rules! increase_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function increase in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    increase_introspect!();
+    pub fn increase (run_panic_hook : bool) -> Option < MustAbort > { let global_count = GLOBAL_PANIC_COUNT . fetch_add (1 , Ordering :: Relaxed) ; if global_count & ALWAYS_ABORT_FLAG != 0 { return Some (MustAbort :: AlwaysAbort) ; } LOCAL_PANIC_COUNT . with (| c | { let (count , in_panic_hook) = c . get () ; if in_panic_hook { return Some (MustAbort :: PanicInHook) ; } c . set ((count + 1 , run_panic_hook)) ; None }) }
+}
+
+macro_rules! finished_panic_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function finished_panic_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    finished_panic_hook_introspect!();
+    pub fn finished_panic_hook () { LOCAL_PANIC_COUNT . with (| c | { let (count , _) = c . get () ; c . set ((count , false)) ; }) ; }
+}
+
+macro_rules! decrease_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function decrease in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    decrease_introspect!();
+    pub fn decrease () { GLOBAL_PANIC_COUNT . fetch_sub (1 , Ordering :: Relaxed) ; LOCAL_PANIC_COUNT . with (| c | { let (count , _) = c . get () ; c . set ((count - 1 , false)) ; }) ; }
+}
+
+macro_rules! set_always_abort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function set_always_abort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    set_always_abort_introspect!();
+    pub fn set_always_abort () { GLOBAL_PANIC_COUNT . fetch_or (ALWAYS_ABORT_FLAG , Ordering :: Relaxed) ; }
+}
+
+macro_rules! get_count_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function get_count in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    get_count_introspect!();
+    # [must_use] pub fn get_count () -> usize { LOCAL_PANIC_COUNT . with (| c | c . get () . 0) }
+}
+
+macro_rules! count_is_zero_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function count_is_zero in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    count_is_zero_introspect!();
+    # [must_use] # [inline] pub fn count_is_zero () -> bool { if GLOBAL_PANIC_COUNT . load (Ordering :: Relaxed) & ! ALWAYS_ABORT_FLAG == 0 { true } else { is_zero_slow_path () } }
+}
+
+macro_rules! is_zero_slow_path_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function is_zero_slow_path in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    is_zero_slow_path_introspect!();
+    # [inline (never)] # [cold] fn is_zero_slow_path () -> bool { LOCAL_PANIC_COUNT . with (| c | c . get () . 0 == 0) }
+} 
+            }}
+mkuse!{# [cfg (test)] pub use realstd :: rt :: panic_count ;}
+
+macro_rules! catch_unwind_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function catch_unwind in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    catch_unwind_introspect!();
+    # [doc = " Invoke a closure, capturing the cause of an unwinding panic if one occurs."] # [cfg (feature = "panic_immediate_abort")] pub unsafe fn catch_unwind < R , F : FnOnce () -> R > (f : F) -> Result < R , Box < dyn Any + Send > > { Ok (f ()) }
+}
+
+macro_rules! catch_unwind_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function catch_unwind in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    catch_unwind_introspect!();
+    # [doc = " Invoke a closure, capturing the cause of an unwinding panic if one occurs."] # [cfg (not (feature = "panic_immediate_abort"))] pub unsafe fn catch_unwind < R , F : FnOnce () -> R > (f : F) -> Result < R , Box < dyn Any + Send > > { union Data < F , R > { f : ManuallyDrop < F > , r : ManuallyDrop < R > , p : ManuallyDrop < Box < dyn Any + Send > > , } let mut data = Data { f : ManuallyDrop :: new (f) } ; let data_ptr = (& raw mut data) as * mut u8 ; unsafe { return if intrinsics :: catch_unwind (do_call :: < F , R > , data_ptr , do_catch :: < F , R >) == 0 { Ok (ManuallyDrop :: into_inner (data . r)) } else { Err (ManuallyDrop :: into_inner (data . p)) } ; } # [cold] # [optimize (size)] unsafe fn cleanup (payload : * mut u8) -> Box < dyn Any + Send + 'static > { let obj = unsafe { Box :: from_raw (__rust_panic_cleanup (payload)) } ; panic_count :: decrease () ; obj } # [inline] fn do_call < F : FnOnce () -> R , R > (data : * mut u8) { unsafe { let data = data as * mut Data < F , R > ; let data = & mut (* data) ; let f = ManuallyDrop :: take (& mut data . f) ; data . r = ManuallyDrop :: new (f ()) ; } } # [inline] # [rustc_nounwind] fn do_catch < F : FnOnce () -> R , R > (data : * mut u8 , payload : * mut u8) { unsafe { let data = data as * mut Data < F , R > ; let data = & mut (* data) ; let obj = cleanup (payload) ; data . p = ManuallyDrop :: new (obj) ; } } }
+}
+
+macro_rules! panicking_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function panicking in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    panicking_introspect!();
+    # [doc = " Determines whether the current thread is unwinding because of panic."] # [inline] pub fn panicking () -> bool { ! panic_count :: count_is_zero () }
+}
+
+macro_rules! panic_handler_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function panic_handler in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    panic_handler_introspect!();
+    # [doc = " Entry point of panics from the core crate (`panic_impl` lang item)."] # [cfg (not (any (test , doctest)))] # [panic_handler] pub fn panic_handler (info : & core :: panic :: PanicInfo < '_ >) -> ! { struct FormatStringPayload < 'a > { inner : & 'a core :: panic :: PanicMessage < 'a > , string : Option < String > , } impl FormatStringPayload < '_ > { fn fill (& mut self) -> & mut String { let inner = self . inner ; self . string . get_or_insert_with (| | { let mut s = String :: new () ; let mut fmt = fmt :: Formatter :: new (& mut s , fmt :: FormattingOptions :: new ()) ; let _err = fmt :: Display :: fmt (& inner , & mut fmt) ; s }) } } unsafe impl PanicPayload for FormatStringPayload < '_ > { fn take_box (& mut self) -> * mut (dyn Any + Send) { let contents = mem :: take (self . fill ()) ; Box :: into_raw (Box :: new (contents)) } fn get (& mut self) -> & (dyn Any + Send) { self . fill () } } impl fmt :: Display for FormatStringPayload < '_ > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if let Some (s) = & self . string { f . write_str (s) } else { fmt :: Display :: fmt (& self . inner , f) } } } struct StaticStrPayload (& 'static str) ; unsafe impl PanicPayload for StaticStrPayload { fn take_box (& mut self) -> * mut (dyn Any + Send) { Box :: into_raw (Box :: new (self . 0)) } fn get (& mut self) -> & (dyn Any + Send) { & self . 0 } fn as_str (& mut self) -> Option < & str > { Some (self . 0) } } impl fmt :: Display for StaticStrPayload { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str (self . 0) } } let loc = info . location () . unwrap () ; let msg = info . message () ; crate :: sys :: backtrace :: __rust_end_short_backtrace (move | | { if let Some (s) = msg . as_str () { panic_with_hook (& mut StaticStrPayload (s) , loc , info . can_unwind () , info . force_no_backtrace () ,) ; } else { panic_with_hook (& mut FormatStringPayload { inner : & msg , string : None } , loc , info . can_unwind () , info . force_no_backtrace () ,) ; } }) }
+}
+
+macro_rules! begin_panic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function begin_panic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    begin_panic_introspect!();
+    # [doc = " This is the entry point of panicking for the non-format-string variants of"] # [doc = " panic!() and assert!(). In particular, this is the only entry point that supports"] # [doc = " arbitrary payloads, not just format strings."] # [unstable (feature = "libstd_sys_internals" , reason = "used by the panic! macro" , issue = "none")] # [cfg_attr (not (any (test , doctest)) , lang = "begin_panic")] # [cfg_attr (not (feature = "panic_immediate_abort") , inline (never) , cold , optimize (size))] # [cfg_attr (feature = "panic_immediate_abort" , inline)] # [track_caller] # [rustc_do_not_const_check] pub const fn begin_panic < M : Any + Send > (msg : M) -> ! { if cfg ! (feature = "panic_immediate_abort") { intrinsics :: abort () } struct Payload < A > { inner : Option < A > , } unsafe impl < A : Send + 'static > PanicPayload for Payload < A > { fn take_box (& mut self) -> * mut (dyn Any + Send) { let data = match self . inner . take () { Some (a) => Box :: new (a) as Box < dyn Any + Send > , None => process :: abort () , } ; Box :: into_raw (data) } fn get (& mut self) -> & (dyn Any + Send) { match self . inner { Some (ref a) => a , None => process :: abort () , } } } impl < A : 'static > fmt :: Display for Payload < A > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match & self . inner { Some (a) => f . write_str (payload_as_str (a)) , None => process :: abort () , } } } let loc = Location :: caller () ; crate :: sys :: backtrace :: __rust_end_short_backtrace (move | | { panic_with_hook (& mut Payload { inner : Some (msg) } , loc , true , false ,) }) }
+}
+
+macro_rules! payload_as_str_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function payload_as_str in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    payload_as_str_introspect!();
+    fn payload_as_str (payload : & dyn Any) -> & str { if let Some (& s) = payload . downcast_ref :: < & 'static str > () { s } else if let Some (s) = payload . downcast_ref :: < String > () { s . as_str () } else { "Box<dyn Any>" } }
+}
+
+macro_rules! panic_with_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function panic_with_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    panic_with_hook_introspect!();
+    # [doc = " Central point for dispatching panics."] # [doc = ""] # [doc = " Executes the primary logic for a panic, including checking for recursive"] # [doc = " panics, panic hooks, and finally dispatching to the panic runtime to either"] # [doc = " abort or unwind."] # [optimize (size)] fn panic_with_hook (payload : & mut dyn PanicPayload , location : & Location < '_ > , can_unwind : bool , force_no_backtrace : bool ,) -> ! { let must_abort = panic_count :: increase (true) ; if let Some (must_abort) = must_abort { match must_abort { panic_count :: MustAbort :: PanicInHook => { let message : & str = payload . as_str () . unwrap_or_default () ; rtprintpanic ! ("panicked at {location}:\n{message}\nthread panicked while processing panic. aborting.\n") ; } panic_count :: MustAbort :: AlwaysAbort => { rtprintpanic ! ("aborting due to panic at {location}:\n{payload}\n") ; } } crate :: process :: abort () ; } match * HOOK . read () . unwrap_or_else (PoisonError :: into_inner) { Hook :: Default if panic_output () . is_none () => { } Hook :: Default => { default_hook (& PanicHookInfo :: new (location , payload . get () , can_unwind , force_no_backtrace ,)) ; } Hook :: Custom (ref hook) => { hook (& PanicHookInfo :: new (location , payload . get () , can_unwind , force_no_backtrace)) ; } } panic_count :: finished_panic_hook () ; if ! can_unwind { rtprintpanic ! ("thread caused non-unwinding panic. aborting.\n") ; crate :: process :: abort () ; } rust_panic (payload) }
+}
+
+macro_rules! resume_unwind_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resume_unwind in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resume_unwind_introspect!();
+    # [doc = " This is the entry point for `resume_unwind`."] # [doc = " It just forwards the payload to the panic runtime."] # [cfg_attr (feature = "panic_immediate_abort" , inline)] pub fn resume_unwind (payload : Box < dyn Any + Send >) -> ! { panic_count :: increase (false) ; struct RewrapBox (Box < dyn Any + Send >) ; unsafe impl PanicPayload for RewrapBox { fn take_box (& mut self) -> * mut (dyn Any + Send) { Box :: into_raw (mem :: replace (& mut self . 0 , Box :: new (()))) } fn get (& mut self) -> & (dyn Any + Send) { & * self . 0 } } impl fmt :: Display for RewrapBox { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str (payload_as_str (& self . 0)) } } rust_panic (& mut RewrapBox (payload)) }
+}
+
+macro_rules! rust_panic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function rust_panic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    rust_panic_introspect!();
+    # [doc = " A function with a fixed suffix (through `rustc_std_internal_symbol`)"] # [doc = " on which to slap yer breakpoints."] # [inline (never)] # [cfg_attr (not (test) , rustc_std_internal_symbol)] # [cfg (not (feature = "panic_immediate_abort"))] fn rust_panic (msg : & mut dyn PanicPayload) -> ! { let code = unsafe { __rust_start_panic (msg) } ; rtabort ! ("failed to initiate panic, error {code}") }
+}
+
+macro_rules! rust_panic_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function rust_panic in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    rust_panic_introspect!();
+    # [cfg_attr (not (test) , rustc_std_internal_symbol)] # [cfg (feature = "panic_immediate_abort")] fn rust_panic (_ : & mut dyn PanicPayload) -> ! { unsafe { crate :: intrinsics :: abort () ; } }
+}

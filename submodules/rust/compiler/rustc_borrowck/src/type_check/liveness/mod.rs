@@ -1,0 +1,80 @@
+mkuse!{use itertools :: { Either , Itertools } ;}
+mkuse!{use rustc_data_structures :: fx :: FxHashSet ;}
+mkuse!{use rustc_middle :: mir :: visit :: { TyContext , Visitor } ;}
+mkuse!{use rustc_middle :: mir :: { Body , Local , Location , SourceInfo } ;}
+mkuse!{use rustc_middle :: span_bug ;}
+mkuse!{use rustc_middle :: ty :: relate :: Relate ;}
+mkuse!{use rustc_middle :: ty :: { GenericArgsRef , Region , RegionVid , Ty , TyCtxt , TypeVisitable } ;}
+mkuse!{use rustc_mir_dataflow :: move_paths :: MoveData ;}
+mkuse!{use rustc_mir_dataflow :: points :: DenseLocationMap ;}
+mkuse!{use tracing :: debug ;}
+mkuse!{use super :: TypeChecker ;}
+mkuse!{use crate :: constraints :: OutlivesConstraintSet ;}
+mkuse!{use crate :: polonius :: PoloniusLivenessContext ;}
+mkuse!{use crate :: region_infer :: values :: LivenessValues ;}
+mkuse!{use crate :: universal_regions :: UniversalRegions ;}
+mkmod!{local_use_map, { 
+                getname!(local_use_map);
+                getsrc!(local_use_map);
+                getpath!(local_use_map);
+                get_deps!(local_use_map);
+                get_crates!(local_use_map);
+                mkinclude!(local_use_map);
+                 
+            }}
+mkmod!{trace, { 
+                getname!(trace);
+                getsrc!(trace);
+                getpath!(trace);
+                get_deps!(trace);
+                get_crates!(trace);
+                mkinclude!(trace);
+                 
+            }}
+
+macro_rules! generate_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function generate in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    generate_introspect!();
+    # [doc = " Combines liveness analysis with initialization analysis to"] # [doc = " determine which variables are live at which points, both due to"] # [doc = " ordinary uses and drops. Returns a set of (ty, location) pairs"] # [doc = " that indicate which types must be live at which point in the CFG."] # [doc = " This vector is consumed by `constraint_generation`."] # [doc = ""] # [doc = " N.B., this computation requires normalization; therefore, it must be"] # [doc = " performed before"] pub (super) fn generate < 'tcx > (typeck : & mut TypeChecker < '_ , 'tcx > , location_map : & DenseLocationMap , move_data : & MoveData < 'tcx > ,) { debug ! ("liveness::generate") ; let mut free_regions = regions_that_outlive_free_regions (typeck . infcx . num_region_vars () , & typeck . universal_regions , & typeck . constraints . outlives_constraints ,) ; if typeck . tcx () . sess . opts . unstable_opts . polonius . is_next_enabled () { let (_ , boring_locals) = compute_relevant_live_locals (typeck . tcx () , & free_regions , typeck . body) ; typeck . polonius_liveness . as_mut () . unwrap () . boring_nll_locals = boring_locals . into_iter () . collect () ; free_regions = typeck . universal_regions . universal_regions_iter () . collect () ; } let (relevant_live_locals , boring_locals) = compute_relevant_live_locals (typeck . tcx () , & free_regions , typeck . body) ; trace :: trace (typeck , location_map , move_data , relevant_live_locals , boring_locals) ; record_regular_live_regions (typeck . tcx () , & mut typeck . constraints . liveness_constraints , & typeck . universal_regions , & mut typeck . polonius_liveness , typeck . body ,) ; }
+}
+
+macro_rules! compute_relevant_live_locals_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compute_relevant_live_locals in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compute_relevant_live_locals_introspect!();
+    fn compute_relevant_live_locals < 'tcx > (tcx : TyCtxt < 'tcx > , free_regions : & FxHashSet < RegionVid > , body : & Body < 'tcx > ,) -> (Vec < Local > , Vec < Local >) { let (boring_locals , relevant_live_locals) : (Vec < _ > , Vec < _ >) = body . local_decls . iter_enumerated () . partition_map (| (local , local_decl) | { if tcx . all_free_regions_meet (& local_decl . ty , | r | free_regions . contains (& r . as_var ())) { Either :: Left (local) } else { Either :: Right (local) } }) ; debug ! ("{} total variables" , body . local_decls . len ()) ; debug ! ("{} variables need liveness" , relevant_live_locals . len ()) ; debug ! ("{} regions outlive free regions" , free_regions . len ()) ; (relevant_live_locals , boring_locals) }
+}
+
+macro_rules! regions_that_outlive_free_regions_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function regions_that_outlive_free_regions in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    regions_that_outlive_free_regions_introspect!();
+    # [doc = " Computes all regions that are (currently) known to outlive free"] # [doc = " regions. For these regions, we do not need to compute"] # [doc = " liveness, since the outlives constraints will ensure that they"] # [doc = " are live over the whole fn body anyhow."] fn regions_that_outlive_free_regions < 'tcx > (num_region_vars : usize , universal_regions : & UniversalRegions < 'tcx > , constraint_set : & OutlivesConstraintSet < 'tcx > ,) -> FxHashSet < RegionVid > { let rev_constraint_graph = constraint_set . reverse_graph (num_region_vars) ; let fr_static = universal_regions . fr_static ; let rev_region_graph = rev_constraint_graph . region_graph (constraint_set , fr_static) ; let mut stack : Vec < _ > = universal_regions . universal_regions_iter () . collect () ; let mut outlives_free_region : FxHashSet < _ > = stack . iter () . cloned () . collect () ; while let Some (sub_region) = stack . pop () { stack . extend (rev_region_graph . outgoing_regions (sub_region) . filter (| & r | outlives_free_region . insert (r)) ,) ; } outlives_free_region }
+}
+
+macro_rules! record_regular_live_regions_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function record_regular_live_regions in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    record_regular_live_regions_introspect!();
+    # [doc = " Some variables are \"regular live\" at `location` -- i.e., they may be used later. This means that"] # [doc = " all regions appearing in their type must be live at `location`."] fn record_regular_live_regions < 'tcx > (tcx : TyCtxt < 'tcx > , liveness_constraints : & mut LivenessValues , universal_regions : & UniversalRegions < 'tcx > , polonius_liveness : & mut Option < PoloniusLivenessContext > , body : & Body < 'tcx > ,) { let mut visitor = LiveVariablesVisitor { tcx , liveness_constraints , universal_regions , polonius_liveness } ; for (bb , data) in body . basic_blocks . iter_enumerated () { visitor . visit_basic_block_data (bb , data) ; } }
+}
+mkitem!{mkstruct!{# [doc = " Visitor looking for regions that should be live within rvalues or calls."] struct LiveVariablesVisitor < 'a , 'tcx > { tcx : TyCtxt < 'tcx > , liveness_constraints : & 'a mut LivenessValues , universal_regions : & 'a UniversalRegions < 'tcx > , polonius_liveness : & 'a mut Option < PoloniusLivenessContext > , }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > Visitor < 'tcx > for LiveVariablesVisitor < 'a , 'tcx > { # [doc = " We sometimes have `args` within an rvalue, or within a"] # [doc = " call. Make them live at the location where they appear."] fn visit_args (& mut self , args : & GenericArgsRef < 'tcx > , location : Location) { self . record_regions_live_at (* args , location) ; self . super_args (args) ; } # [doc = " We sometimes have `region`s within an rvalue, or within a"] # [doc = " call. Make them live at the location where they appear."] fn visit_region (& mut self , region : Region < 'tcx > , location : Location) { self . record_regions_live_at (region , location) ; self . super_region (region) ; } # [doc = " We sometimes have `ty`s within an rvalue, or within a"] # [doc = " call. Make them live at the location where they appear."] fn visit_ty (& mut self , ty : Ty < 'tcx > , ty_context : TyContext) { match ty_context { TyContext :: ReturnTy (SourceInfo { span , .. }) | TyContext :: YieldTy (SourceInfo { span , .. }) | TyContext :: ResumeTy (SourceInfo { span , .. }) | TyContext :: UserTy (span) | TyContext :: LocalDecl { source_info : SourceInfo { span , .. } , .. } => { span_bug ! (span , "should not be visiting outside of the CFG: {:?}" , ty_context) ; } TyContext :: Location (location) => { self . record_regions_live_at (ty , location) ; } } self . super_ty (ty) ; } }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > LiveVariablesVisitor < 'a , 'tcx > { # [doc = " Some variable is \"regular live\" at `location` -- i.e., it may be used later. This means that"] # [doc = " all regions appearing in the type of `value` must be live at `location`."] fn record_regions_live_at < T > (& mut self , value : T , location : Location) where T : TypeVisitable < TyCtxt < 'tcx > > + Relate < TyCtxt < 'tcx > > , { debug ! ("record_regions_live_at(value={:?}, location={:?})" , value , location) ; self . tcx . for_each_free_region (& value , | live_region | { let live_region_vid = live_region . as_var () ; self . liveness_constraints . add_location (live_region_vid , location) ; }) ; if let Some (polonius_liveness) = self . polonius_liveness { polonius_liveness . record_live_region_variance (self . tcx , self . universal_regions , value) ; } } }}}

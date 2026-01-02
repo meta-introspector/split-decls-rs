@@ -1,0 +1,7 @@
+mkuse!{use crate :: mem :: forget ;}
+mkuse!{use crate :: pin :: Pin ;}
+mkuse!{use crate :: sys :: pal :: sync as pal ;}
+mkuse!{use crate :: sys :: sync :: OnceBox ;}
+mkitem!{mkstruct!{pub struct Mutex { pub (in crate :: sys :: sync) pal : OnceBox < pal :: Mutex > , }}}
+mkitem!{mkimpl!{impl Mutex { # [inline] pub const fn new () -> Mutex { Mutex { pal : OnceBox :: new () } } # [inline] fn get (& self) -> Pin < & pal :: Mutex > { self . pal . get_or_init (| | { let mut pal = Box :: pin (pal :: Mutex :: new ()) ; unsafe { pal . as_mut () . init () } ; pal }) } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_lock")] pub fn lock (& self) { unsafe { self . get () . lock () } } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_unlock")] pub unsafe fn unlock (& self) { unsafe { self . pal . get_unchecked () . unlock () } } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_try_lock")] pub fn try_lock (& self) -> bool { unsafe { self . get () . try_lock () } } }}}
+mkitem!{mkimpl!{impl Drop for Mutex { fn drop (& mut self) { let Some (pal) = self . pal . take () else { return } ; if unsafe { pal . as_ref () . try_lock () } { unsafe { pal . as_ref () . unlock () } ; drop (pal) } else { forget (pal) } } }}}

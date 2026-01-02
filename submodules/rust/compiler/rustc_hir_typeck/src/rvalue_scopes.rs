@@ -1,0 +1,41 @@
+mkuse!{use hir :: Node ;}
+mkuse!{use hir :: def_id :: DefId ;}
+mkuse!{use rustc_hir as hir ;}
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: middle :: region :: { ScopeCompatibility , RvalueCandidate , Scope , ScopeTree , } ;}
+mkuse!{use rustc_middle :: ty :: RvalueScopes ;}
+mkuse!{use tracing :: debug ;}
+mkuse!{use super :: FnCtxt ;}
+
+macro_rules! record_rvalue_scope_rec_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function record_rvalue_scope_rec in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    record_rvalue_scope_rec_introspect!();
+    # [doc = " Applied to an expression `expr` if `expr` -- or something owned or partially owned by"] # [doc = " `expr` -- is going to be indirectly referenced by a variable in a let statement. In that"] # [doc = " case, the \"temporary lifetime\" or `expr` is extended to be the block enclosing the `let`"] # [doc = " statement."] # [doc = ""] # [doc = " More formally, if `expr` matches the grammar `ET`, record the rvalue scope of the matching"] # [doc = " `<rvalue>` as `blk_id`:"] # [doc = ""] # [doc = " ```text"] # [doc = "     ET = *ET"] # [doc = "        | ET[...]"] # [doc = "        | ET.f"] # [doc = "        | (ET)"] # [doc = "        | <rvalue>"] # [doc = " ```"] # [doc = ""] # [doc = " Note: ET is intended to match \"rvalues or places based on rvalues\"."] fn record_rvalue_scope_rec (rvalue_scopes : & mut RvalueScopes , mut expr : & hir :: Expr < '_ > , lifetime : Option < Scope > , compat : ScopeCompatibility ,) { loop { rvalue_scopes . record_rvalue_scope (expr . hir_id . local_id , lifetime , compat) ; match expr . kind { hir :: ExprKind :: AddrOf (_ , _ , subexpr) | hir :: ExprKind :: Unary (hir :: UnOp :: Deref , subexpr) | hir :: ExprKind :: Field (subexpr , _) | hir :: ExprKind :: Index (subexpr , _ , _) => { expr = subexpr ; } _ => { return ; } } } }
+}
+
+macro_rules! record_rvalue_scope_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function record_rvalue_scope in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    record_rvalue_scope_introspect!();
+    fn record_rvalue_scope (rvalue_scopes : & mut RvalueScopes , expr : & hir :: Expr < '_ > , candidate : & RvalueCandidate ,) { debug ! ("resolve_rvalue_scope(expr={expr:?}, candidate={candidate:?})") ; record_rvalue_scope_rec (rvalue_scopes , expr , candidate . lifetime , candidate . compat) }
+}
+
+macro_rules! resolve_rvalue_scopes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function resolve_rvalue_scopes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    resolve_rvalue_scopes_introspect!();
+    pub (crate) fn resolve_rvalue_scopes < 'a , 'tcx > (fcx : & 'a FnCtxt < 'a , 'tcx > , scope_tree : & 'a ScopeTree , def_id : DefId ,) -> RvalueScopes { let tcx = & fcx . tcx ; let mut rvalue_scopes = RvalueScopes :: new () ; debug ! ("start resolving rvalue scopes, def_id={def_id:?}") ; debug ! ("rvalue_scope: rvalue_candidates={:?}" , scope_tree . rvalue_candidates) ; for (& hir_id , candidate) in & scope_tree . rvalue_candidates { let Node :: Expr (expr) = tcx . hir_node (hir_id) else { bug ! ("hir node does not exist") } ; record_rvalue_scope (& mut rvalue_scopes , expr , candidate) ; } rvalue_scopes }
+}

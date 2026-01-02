@@ -1,0 +1,37 @@
+mkuse!{use super :: { k_cosf , k_sinf , rem_pio2f } ;}
+mkitem!{const PI_2 : f64 = 0.5 * 3.1415926535897931160E+00 ;}
+mkitem!{const S1PIO2 : f64 = 1.0 * PI_2 ;}
+mkitem!{const S2PIO2 : f64 = 2.0 * PI_2 ;}
+mkitem!{const S3PIO2 : f64 = 3.0 * PI_2 ;}
+mkitem!{const S4PIO2 : f64 = 4.0 * PI_2 ;}
+
+macro_rules! sincosf_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function sincosf in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    sincosf_introspect!();
+    # [doc = " Both the sine and cosine of `x` (f32)."] # [doc = ""] # [doc = " `x` is specified in radians and the return value is (sin(x), cos(x))."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn sincosf (x : f32) -> (f32 , f32) { let s : f32 ; let c : f32 ; let mut ix : u32 ; let sign : bool ; ix = x . to_bits () ; sign = (ix >> 31) != 0 ; ix &= 0x7fffffff ; if ix <= 0x3f490fda { if ix < 0x39800000 { let x1p120 = f32 :: from_bits (0x7b800000) ; if ix < 0x00100000 { force_eval ! (x / x1p120) ; } else { force_eval ! (x + x1p120) ; } return (x , 1.0) ; } return (k_sinf (x as f64) , k_cosf (x as f64)) ; } if ix <= 0x407b53d1 { if ix <= 0x4016cbe3 { if sign { s = - k_cosf (x as f64 + S1PIO2) ; c = k_sinf (x as f64 + S1PIO2) ; } else { s = k_cosf (S1PIO2 - x as f64) ; c = k_sinf (S1PIO2 - x as f64) ; } } else if sign { s = - k_sinf (x as f64 + S2PIO2) ; c = - k_cosf (x as f64 + S2PIO2) ; } else { s = - k_sinf (x as f64 - S2PIO2) ; c = - k_cosf (x as f64 - S2PIO2) ; } return (s , c) ; } if ix <= 0x40e231d5 { if ix <= 0x40afeddf { if sign { s = k_cosf (x as f64 + S3PIO2) ; c = - k_sinf (x as f64 + S3PIO2) ; } else { s = - k_cosf (x as f64 - S3PIO2) ; c = k_sinf (x as f64 - S3PIO2) ; } } else if sign { s = k_sinf (x as f64 + S4PIO2) ; c = k_cosf (x as f64 + S4PIO2) ; } else { s = k_sinf (x as f64 - S4PIO2) ; c = k_cosf (x as f64 - S4PIO2) ; } return (s , c) ; } if ix >= 0x7f800000 { let rv = x - x ; return (rv , rv) ; } let (n , y) = rem_pio2f (x) ; s = k_sinf (y) ; c = k_cosf (y) ; match n & 3 { 0 => (s , c) , 1 => (c , - s) , 2 => (- s , - c) , 3 => (- c , s) , # [cfg (debug_assertions)] _ => unreachable ! () , # [cfg (not (debug_assertions))] _ => (0.0 , 1.0) , } }
+}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                mkuse!{use super :: sincosf ;}
+
+macro_rules! rotational_symmetry_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function rotational_symmetry in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    rotational_symmetry_introspect!();
+    # [test] fn rotational_symmetry () { use core :: f32 :: consts :: PI ; const N : usize = 24 ; for n in 0 .. N { let theta = 2. * PI * (n as f32) / (N as f32) ; let (s , c) = sincosf (theta) ; let (s_plus , c_plus) = sincosf (theta + 2. * PI) ; let (s_minus , c_minus) = sincosf (theta - 2. * PI) ; const TOLERANCE : f32 = 1e-6 ; assert ! ((s - s_plus) . abs () < TOLERANCE , "|{} - {}| = {} >= {}" , s , s_plus , (s - s_plus) . abs () , TOLERANCE) ; assert ! ((s - s_minus) . abs () < TOLERANCE , "|{} - {}| = {} >= {}" , s , s_minus , (s - s_minus) . abs () , TOLERANCE) ; assert ! ((c - c_plus) . abs () < TOLERANCE , "|{} - {}| = {} >= {}" , c , c_plus , (c - c_plus) . abs () , TOLERANCE) ; assert ! ((c - c_minus) . abs () < TOLERANCE , "|{} - {}| = {} >= {}" , c , c_minus , (c - c_minus) . abs () , TOLERANCE) ; } }
+} 
+            }}

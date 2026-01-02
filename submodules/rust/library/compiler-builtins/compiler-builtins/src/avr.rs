@@ -1,0 +1,1 @@
+mkitem!{intrinsics ! { pub unsafe extern "C" fn abort () -> ! { loop { } } }}

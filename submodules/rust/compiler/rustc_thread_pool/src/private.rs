@@ -1,0 +1,3 @@
+mkitem!{mkstruct!{# [doc = " If this type is pub but not publicly reachable, third parties"] # [doc = " can't name it and can't implement traits using it."] # [allow (missing_debug_implementations)] pub struct PrivateMarker ;}}
+mkitem!{macro_rules ! private_decl { () => { # [doc = " This trait is private; this method exists to make it"] # [doc = " impossible to implement outside the crate."] # [doc (hidden)] fn __rayon_private__ (& self) -> crate :: private :: PrivateMarker ; } ; }}
+mkitem!{macro_rules ! private_impl { () => { fn __rayon_private__ (& self) -> crate :: private :: PrivateMarker { crate :: private :: PrivateMarker } } ; }}

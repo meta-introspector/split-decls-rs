@@ -1,0 +1,18 @@
+mkuse!{use rustc_codegen_ssa :: common ;}
+mkuse!{use rustc_middle :: ty :: layout :: { FnAbiOf , HasTyCtxt , HasTypingEnv } ;}
+mkuse!{use rustc_middle :: ty :: { self , Instance , TypeVisitableExt } ;}
+mkuse!{use tracing :: debug ;}
+mkuse!{use crate :: context :: CodegenCx ;}
+mkuse!{use crate :: llvm ;}
+mkuse!{use crate :: value :: Value ;}
+
+macro_rules! get_fn_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function get_fn in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    get_fn_introspect!();
+    # [doc = " Codegens a reference to a fn/method item, monomorphizing and"] # [doc = " inlining as it goes."] pub (crate) fn get_fn < 'll , 'tcx > (cx : & CodegenCx < 'll , 'tcx > , instance : Instance < 'tcx >) -> & 'll Value { let tcx = cx . tcx () ; debug ! ("get_fn(instance={:?})" , instance) ; assert ! (! instance . args . has_infer ()) ; assert ! (! instance . args . has_escaping_bound_vars ()) ; if let Some (& llfn) = cx . instances . borrow () . get (& instance) { return llfn ; } let sym = tcx . symbol_name (instance) . name ; debug ! ("get_fn({:?}: {:?}) => {}" , instance , instance . ty (cx . tcx () , cx . typing_env ()) , sym) ; let fn_abi = cx . fn_abi_of_instance (instance , ty :: List :: empty ()) ; let llfn = if let Some (llfn) = cx . get_declared_value (sym) { llfn } else { let instance_def_id = instance . def_id () ; let llfn = if tcx . sess . target . arch == "x86" && let Some (dllimport) = crate :: common :: get_dllimport (tcx , instance_def_id , sym) { let mingw_gnu_toolchain = common :: is_mingw_gnu_toolchain (& tcx . sess . target) ; let llfn = cx . declare_fn (& common :: i686_decorated_name (dllimport , mingw_gnu_toolchain , true , ! mingw_gnu_toolchain ,) , fn_abi , Some (instance) ,) ; llvm :: set_dllimport_storage_class (llfn) ; llfn } else { cx . declare_fn (sym , fn_abi , Some (instance)) } ; debug ! ("get_fn: not casting pointer!") ; llvm :: set_linkage (llfn , llvm :: Linkage :: ExternalLinkage) ; let is_generic = instance . args . non_erasable_generics () . next () . is_some () ; let is_hidden = if is_generic { if ! (cx . tcx . sess . opts . share_generics () || tcx . codegen_instance_attrs (instance . def) . inline == rustc_hir :: attrs :: InlineAttr :: Never) { true } else { if let Some (instance_def_id) = instance_def_id . as_local () { cx . tcx . is_unreachable_local_definition (instance_def_id) || ! cx . tcx . local_crate_exports_generics () } else { instance . upstream_monomorphization (tcx) . is_none () && ! cx . tcx . local_crate_exports_generics () } } } else { cx . tcx . is_codegened_item (instance_def_id) && (! instance_def_id . is_local () || ! cx . tcx . is_reachable_non_generic (instance_def_id)) } ; if is_hidden { llvm :: set_visibility (llfn , llvm :: Visibility :: Hidden) ; } if cx . use_dll_storage_attrs && let Some (library) = tcx . native_library (instance_def_id) && library . kind . is_dllimport () && ! matches ! (tcx . sess . target . env . as_ref () , "gnu" | "uclibc") { llvm :: set_dllimport_storage_class (llfn) ; } cx . assume_dso_local (llfn , true) ; llfn } ; cx . instances . borrow_mut () . insert (instance , llfn) ; llfn }
+}

@@ -1,0 +1,7 @@
+mkuse!{use rustc_middle :: mir :: { Body , START_BLOCK , TerminatorKind } ;}
+mkuse!{use rustc_middle :: ty :: { TyCtxt , TypeFlags , TypeVisitableExt } ;}
+mkuse!{use rustc_trait_selection :: traits ;}
+mkuse!{use tracing :: trace ;}
+mkuse!{use crate :: pass_manager :: MirPass ;}
+mkitem!{mkstruct!{pub (crate) struct ImpossiblePredicates ;}}
+mkitem!{mkimpl!{impl < 'tcx > MirPass < 'tcx > for ImpossiblePredicates { # [tracing :: instrument (level = "trace" , skip (self , tcx , body))] fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { tracing :: trace ! (def_id = ? body . source . def_id ()) ; let predicates = tcx . predicates_of (body . source . def_id ()) . instantiate_identity (tcx) ; tracing :: trace ! (? predicates) ; let predicates = predicates . predicates . into_iter () . filter (| p | { ! p . has_type_flags (TypeFlags :: HAS_FREE_LOCAL_NAMES | TypeFlags :: HAS_CT_PROJECTION ,) }) ; let predicates : Vec < _ > = traits :: elaborate (tcx , predicates) . collect () ; tracing :: trace ! (? predicates) ; if predicates . references_error () || traits :: impossible_predicates (tcx , predicates) { trace ! ("found unsatisfiable predicates") ; let bbs = body . basic_blocks . as_mut () ; bbs . raw . truncate (1) ; bbs [START_BLOCK] . statements . clear () ; bbs [START_BLOCK] . terminator_mut () . kind = TerminatorKind :: Unreachable ; body . var_debug_info . clear () ; body . local_decls . raw . truncate (body . arg_count + 1) ; } } fn is_required (& self) -> bool { true } }}}

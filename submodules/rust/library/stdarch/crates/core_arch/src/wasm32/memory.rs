@@ -1,0 +1,24 @@
+mkuse!{# [cfg (test)] use stdarch_test :: assert_instr ;}
+mkitem!{unsafe extern "unadjusted" { # [link_name = "llvm.wasm.memory.grow"] fn llvm_memory_grow (mem : u32 , pages : usize) -> usize ; # [link_name = "llvm.wasm.memory.size"] fn llvm_memory_size (mem : u32) -> usize ; }}
+
+macro_rules! memory_size_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memory_size in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memory_size_introspect!();
+    # [doc = " Corresponding intrinsic to wasm's [`memory.size` instruction][instr]"] # [doc = ""] # [doc = " This function, when called, will return the current memory size in units of"] # [doc = " pages. The current WebAssembly page size is 65536 bytes (64 KB)."] # [doc = ""] # [doc = " The argument `MEM` is the numerical index of which memory to return the"] # [doc = " size of. Note that currently the WebAssembly specification only supports one"] # [doc = " memory, so it is required that zero is passed in. The argument is present to"] # [doc = " be forward-compatible with future WebAssembly revisions. If a nonzero"] # [doc = " argument is passed to this function it will currently unconditionally abort."] # [doc = ""] # [doc = " [instr]: http://webassembly.github.io/spec/core/exec/instructions.html#exec-memory-size"] # [inline] # [cfg_attr (test , assert_instr ("memory.size" , MEM = 0))] # [rustc_legacy_const_generics (0)] # [stable (feature = "simd_wasm32" , since = "1.33.0")] # [doc (alias ("memory.size"))] pub fn memory_size < const MEM : u32 > () -> usize { static_assert ! (MEM == 0) ; unsafe { llvm_memory_size (MEM) } }
+}
+
+macro_rules! memory_grow_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memory_grow in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memory_grow_introspect!();
+    # [doc = " Corresponding intrinsic to wasm's [`memory.grow` instruction][instr]"] # [doc = ""] # [doc = " This function, when called, will attempt to grow the default linear memory"] # [doc = " by the specified `delta` of pages. The current WebAssembly page size is"] # [doc = " 65536 bytes (64 KB). If memory is successfully grown then the previous size"] # [doc = " of memory, in pages, is returned. If memory cannot be grown then"] # [doc = " `usize::MAX` is returned."] # [doc = ""] # [doc = " The argument `MEM` is the numerical index of which memory to return the"] # [doc = " size of. Note that currently the WebAssembly specification only supports one"] # [doc = " memory, so it is required that zero is passed in. The argument is present to"] # [doc = " be forward-compatible with future WebAssembly revisions. If a nonzero"] # [doc = " argument is passed to this function it will currently unconditionally abort."] # [doc = ""] # [doc = " [instr]: http://webassembly.github.io/spec/core/exec/instructions.html#exec-memory-grow"] # [inline] # [cfg_attr (test , assert_instr ("memory.grow" , MEM = 0))] # [rustc_legacy_const_generics (0)] # [stable (feature = "simd_wasm32" , since = "1.33.0")] # [doc (alias ("memory.grow"))] pub fn memory_grow < const MEM : u32 > (delta : usize) -> usize { unsafe { static_assert ! (MEM == 0) ; llvm_memory_grow (MEM , delta) } }
+}

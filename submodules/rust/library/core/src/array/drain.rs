@@ -1,0 +1,21 @@
+mkuse!{use crate :: iter :: { TrustedLen , UncheckedIterator } ;}
+mkuse!{use crate :: mem :: ManuallyDrop ;}
+mkuse!{use crate :: ptr :: drop_in_place ;}
+mkuse!{use crate :: slice ;}
+
+macro_rules! drain_array_with_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function drain_array_with in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    drain_array_with_introspect!();
+    # [doc = " A situationally-optimized version of `array.into_iter().for_each(func)`."] # [doc = ""] # [doc = " [`crate::array::IntoIter`]s are great when you need an owned iterator, but"] # [doc = " storing the entire array *inside* the iterator like that can sometimes"] # [doc = " pessimize code.  Notable, it can be more bytes than you really want to move"] # [doc = " around, and because the array accesses index into it SRoA has a harder time"] # [doc = " optimizing away the type than it does iterators that just hold a couple pointers."] # [doc = ""] # [doc = " Thus this function exists, which gives a way to get *moved* access to the"] # [doc = " elements of an array using a small iterator -- no bigger than a slice iterator."] # [doc = ""] # [doc = " The function-taking-a-closure structure makes it safe, as it keeps callers"] # [doc = " from looking at already-dropped elements."] pub (crate) fn drain_array_with < T , R , const N : usize > (array : [T ; N] , func : impl for < 'a > FnOnce (Drain < 'a , T >) -> R ,) -> R { let mut array = ManuallyDrop :: new (array) ; let drain = Drain (array . iter_mut ()) ; func (drain) }
+}
+mkitem!{mkstruct!{# [doc = " See [`drain_array_with`] -- this is `pub(crate)` only so it's allowed to be"] # [doc = " mentioned in the signature of that method.  (Otherwise it hits `E0446`.)"] pub (crate) struct Drain < 'a , T > (slice :: IterMut < 'a , T >) ;}}
+mkitem!{mkimpl!{impl < T > Drop for Drain < '_ , T > { fn drop (& mut self) { unsafe { drop_in_place (self . 0 . as_mut_slice ()) } } }}}
+mkitem!{mkimpl!{impl < T > Iterator for Drain < '_ , T > { type Item = T ; # [inline] fn next (& mut self) -> Option < T > { let p : * const T = self . 0 . next () ? ; Some (unsafe { p . read () }) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let n = self . len () ; (n , Some (n)) } }}}
+mkitem!{mkimpl!{impl < T > ExactSizeIterator for Drain < '_ , T > { # [inline] fn len (& self) -> usize { self . 0 . len () } }}}
+mkitem!{mkimpl!{unsafe impl < T > TrustedLen for Drain < '_ , T > { }}}
+mkitem!{mkimpl!{impl < T > UncheckedIterator for Drain < '_ , T > { unsafe fn next_unchecked (& mut self) -> T { let p : * const T = unsafe { self . 0 . next_unchecked () } ; unsafe { p . read () } } }}}

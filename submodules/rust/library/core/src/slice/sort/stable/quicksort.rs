@@ -1,0 +1,43 @@
+mkuse!{use crate :: mem :: { ManuallyDrop , MaybeUninit } ;}
+mkuse!{use crate :: slice :: sort :: shared :: FreezeMarker ;}
+mkuse!{use crate :: slice :: sort :: shared :: pivot :: choose_pivot ;}
+mkuse!{use crate :: slice :: sort :: shared :: smallsort :: StableSmallSortTypeImpl ;}
+mkuse!{use crate :: { intrinsics , ptr } ;}
+
+macro_rules! quicksort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function quicksort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    quicksort_introspect!();
+    # [doc = " Sorts `v` recursively using quicksort."] # [doc = " `scratch.len()` must be at least `max(v.len() - v.len() / 2, SMALL_SORT_GENERAL_SCRATCH_LEN)`"] # [doc = " otherwise the implementation may abort."] # [doc = ""] # [doc = " `limit` when initialized with `c*log(v.len())` for some c ensures we do not"] # [doc = " overflow the stack or go quadratic."] # [inline (never)] pub fn quicksort < T , F : FnMut (& T , & T) -> bool > (mut v : & mut [T] , scratch : & mut [MaybeUninit < T >] , mut limit : u32 , mut left_ancestor_pivot : Option < & T > , is_less : & mut F ,) { loop { let len = v . len () ; if len <= T :: small_sort_threshold () { T :: small_sort (v , scratch , is_less) ; return ; } if limit == 0 { crate :: slice :: sort :: stable :: drift :: sort (v , scratch , true , is_less) ; return ; } limit -= 1 ; let pivot_pos = choose_pivot (v , is_less) ; let pivot_copy = unsafe { ManuallyDrop :: new (ptr :: read (& v [pivot_pos])) } ; let pivot_ref = (! has_direct_interior_mutability :: < T > ()) . then_some (& * pivot_copy) ; let mut perform_equal_partition = false ; if let Some (la_pivot) = left_ancestor_pivot { perform_equal_partition = ! is_less (la_pivot , & v [pivot_pos]) ; } let mut left_partition_len = 0 ; if ! perform_equal_partition { left_partition_len = stable_partition (v , scratch , pivot_pos , false , is_less) ; perform_equal_partition = left_partition_len == 0 ; } if perform_equal_partition { let mid_eq = stable_partition (v , scratch , pivot_pos , true , & mut | a , b | ! is_less (b , a)) ; v = & mut v [mid_eq ..] ; left_ancestor_pivot = None ; continue ; } let (left , right) = v . split_at_mut (left_partition_len) ; quicksort (right , scratch , limit , pivot_ref , is_less) ; v = left ; } }
+}
+
+macro_rules! stable_partition_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function stable_partition in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    stable_partition_introspect!();
+    # [doc = " Partitions `v` using pivot `p = v[pivot_pos]` and returns the number of"] # [doc = " elements less than `p`. The relative order of elements that compare < p and"] # [doc = " those that compare >= p is preserved - it is a stable partition."] # [doc = ""] # [doc = " If `is_less` is not a strict total order or panics, `scratch.len() < v.len()`,"] # [doc = " or `pivot_pos >= v.len()`, the result and `v`'s state is sound but unspecified."] fn stable_partition < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , scratch : & mut [MaybeUninit < T >] , pivot_pos : usize , pivot_goes_left : bool , is_less : & mut F ,) -> usize { let len = v . len () ; if intrinsics :: unlikely (scratch . len () < len || pivot_pos >= len) { core :: intrinsics :: abort () } let v_base = v . as_ptr () ; let scratch_base = MaybeUninit :: slice_as_mut_ptr (scratch) ; unsafe { let pivot = v_base . add (pivot_pos) ; let mut state = PartitionState :: new (v_base , scratch_base , len) ; let mut pivot_in_scratch = ptr :: null_mut () ; let mut loop_end_pos = pivot_pos ; loop { if const { size_of :: < T > () <= 16 } { const UNROLL_LEN : usize = 4 ; let unroll_end = v_base . add (loop_end_pos . saturating_sub (UNROLL_LEN - 1)) ; while state . scan < unroll_end { state . partition_one (is_less (& * state . scan , & * pivot)) ; state . partition_one (is_less (& * state . scan , & * pivot)) ; state . partition_one (is_less (& * state . scan , & * pivot)) ; state . partition_one (is_less (& * state . scan , & * pivot)) ; } } let loop_end = v_base . add (loop_end_pos) ; while state . scan < loop_end { state . partition_one (is_less (& * state . scan , & * pivot)) ; } if loop_end_pos == len { break ; } pivot_in_scratch = state . partition_one (pivot_goes_left) ; loop_end_pos = len ; } if has_direct_interior_mutability :: < T > () { ptr :: copy_nonoverlapping (pivot , pivot_in_scratch , 1) ; } let v_base = v . as_mut_ptr () ; ptr :: copy_nonoverlapping (scratch_base , v_base , state . num_left) ; for i in 0 .. len - state . num_left { ptr :: copy_nonoverlapping (scratch_base . add (len - 1 - i) , v_base . add (state . num_left + i) , 1 ,) ; } state . num_left } }
+}
+mkitem!{mkstruct!{struct PartitionState < T > { scratch_base : * mut T , scan : * const T , num_left : usize , scratch_rev : * mut T , }}}
+mkitem!{mkimpl!{impl < T > PartitionState < T > { # [doc = " # Safety"] # [doc = ""] # [doc = " `scan` and `scratch` must point to valid disjoint buffers of length `len`. The"] # [doc = " scan buffer must be initialized."] unsafe fn new (scan : * const T , scratch : * mut T , len : usize) -> Self { unsafe { Self { scratch_base : scratch , scan , num_left : 0 , scratch_rev : scratch . add (len) } } } # [doc = " Depending on the value of `towards_left` this function will write a value"] # [doc = " to the growing left or right side of the scratch memory. This forms the"] # [doc = " branchless core of the partition."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function may be called at most `len` times. If it is called exactly"] # [doc = " `len` times the scratch buffer then contains a copy of each element from"] # [doc = " the scan buffer exactly once - a permutation, and num_left <= len."] unsafe fn partition_one (& mut self , towards_left : bool) -> * mut T { unsafe { self . scratch_rev = self . scratch_rev . sub (1) ; let dst_base = if towards_left { self . scratch_base } else { self . scratch_rev } ; let dst = dst_base . add (self . num_left) ; ptr :: copy_nonoverlapping (self . scan , dst , 1) ; self . num_left += towards_left as usize ; self . scan = self . scan . add (1) ; dst } } }}}
+mkitem!{mktrait!{trait IsFreeze { fn is_freeze () -> bool ; }}}
+mkitem!{mkimpl!{impl < T > IsFreeze for T { default fn is_freeze () -> bool { false } }}}
+mkitem!{mkimpl!{impl < T : FreezeMarker > IsFreeze for T { fn is_freeze () -> bool { true } }}}
+
+macro_rules! has_direct_interior_mutability_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function has_direct_interior_mutability in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    has_direct_interior_mutability_introspect!();
+    # [must_use] fn has_direct_interior_mutability < T > () -> bool { ! T :: is_freeze () }
+}

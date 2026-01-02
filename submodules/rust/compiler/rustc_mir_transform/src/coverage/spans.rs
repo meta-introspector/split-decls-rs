@@ -1,0 +1,87 @@
+mkuse!{use rustc_middle :: mir ;}
+mkuse!{use rustc_middle :: mir :: coverage :: { Mapping , MappingKind , START_BCB } ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_span :: source_map :: SourceMap ;}
+mkuse!{use rustc_span :: { BytePos , DesugaringKind , ExpnId , ExpnKind , MacroKind , Span } ;}
+mkuse!{use tracing :: instrument ;}
+mkuse!{use crate :: coverage :: expansion :: { self , ExpnTree , SpanWithBcb } ;}
+mkuse!{use crate :: coverage :: graph :: { BasicCoverageBlock , CoverageGraph } ;}
+mkuse!{use crate :: coverage :: hir_info :: ExtractedHirInfo ;}
+mkuse!{use crate :: coverage :: spans :: from_mir :: { Hole , RawSpanFromMir } ;}
+mkmod!{from_mir, { 
+                getname!(from_mir);
+                getsrc!(from_mir);
+                getpath!(from_mir);
+                get_deps!(from_mir);
+                get_crates!(from_mir);
+                mkinclude!(from_mir);
+                 
+            }}
+
+macro_rules! extract_refined_covspans_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function extract_refined_covspans in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    extract_refined_covspans_introspect!();
+    pub (super) fn extract_refined_covspans < 'tcx > (tcx : TyCtxt < 'tcx > , mir_body : & mir :: Body < 'tcx > , hir_info : & ExtractedHirInfo , graph : & CoverageGraph , mappings : & mut Vec < Mapping > ,) { if hir_info . is_async_fn { if let Some (span) = hir_info . fn_sig_span { mappings . push (Mapping { span , kind : MappingKind :: Code { bcb : START_BCB } }) } return ; } let & ExtractedHirInfo { body_span , .. } = hir_info ; let raw_spans = from_mir :: extract_raw_spans_from_mir (mir_body , graph) ; let expn_tree = expansion :: build_expn_tree (raw_spans . into_iter () . map (| RawSpanFromMir { raw_span , bcb } | SpanWithBcb { span : raw_span , bcb }) ,) ; let mut covspans = vec ! [] ; let mut push_covspan = | covspan : Covspan | { let covspan_span = covspan . span ; if ! body_span . contains (covspan_span) || body_span . source_equal (covspan_span) { return ; } if ! body_span . eq_ctxt (covspan_span) { debug_assert ! (false , "span context mismatch: body_span={body_span:?}, covspan.span={covspan_span:?}") ; return ; } covspans . push (covspan) ; } ; if let Some (node) = expn_tree . get (body_span . ctxt () . outer_expn ()) { for & SpanWithBcb { span , bcb } in & node . spans { push_covspan (Covspan { span , bcb }) ; } for & child_expn_id in & node . child_expn_ids { if let Some (covspan) = single_covspan_for_child_expn (tcx , graph , & expn_tree , child_expn_id) { push_covspan (covspan) ; } } } if covspans . is_empty () { return ; } covspans . push (Covspan { span : hir_info . fn_sig_span . unwrap_or_else (| | body_span . shrink_to_lo ()) , bcb : START_BCB , }) ; let compare_covspans = | a : & Covspan , b : & Covspan | { compare_spans (a . span , b . span) . then_with (| | graph . cmp_in_dominator_order (a . bcb , b . bcb) . reverse ()) } ; covspans . sort_by (compare_covspans) ; covspans . dedup_by (| b , a | a . span . source_equal (b . span)) ; let mut holes = hir_info . hole_spans . iter () . copied () . filter (| & hole_span | body_span . contains (hole_span) && body_span . eq_ctxt (hole_span)) . map (| span | Hole { span }) . collect :: < Vec < _ > > () ; holes . sort_by (| a , b | compare_spans (a . span , b . span)) ; holes . dedup_by (| b , a | a . merge_if_overlapping_or_adjacent (b)) ; discard_spans_overlapping_holes (& mut covspans , & holes) ; let mut covspans = remove_unwanted_overlapping_spans (covspans) ; let source_map = tcx . sess . source_map () ; covspans . retain_mut (| covspan | { let Some (span) = ensure_non_empty_span (source_map , covspan . span) else { return false } ; covspan . span = span ; true }) ; covspans . dedup_by (| b , a | a . merge_if_eligible (b)) ; mappings . extend (covspans . into_iter () . map (| Covspan { span , bcb } | { Mapping { span , kind : MappingKind :: Code { bcb } } })) ; }
+}
+
+macro_rules! single_covspan_for_child_expn_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function single_covspan_for_child_expn in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    single_covspan_for_child_expn_introspect!();
+    # [doc = " For a single child expansion, try to distill it into a single span+BCB mapping."] fn single_covspan_for_child_expn (tcx : TyCtxt < '_ > , graph : & CoverageGraph , expn_tree : & ExpnTree , expn_id : ExpnId ,) -> Option < Covspan > { let node = expn_tree . get (expn_id) ? ; let bcbs = expn_tree . iter_node_and_descendants (expn_id) . flat_map (| n | n . spans . iter () . map (| s | s . bcb)) ; let bcb = match node . expn_kind { ExpnKind :: Macro (MacroKind :: Bang , _) | ExpnKind :: Desugaring (DesugaringKind :: Await) => { bcbs . min_by (| & a , & b | graph . cmp_in_dominator_order (a , b)) ? } _ => bcbs . max_by (| & a , & b | graph . cmp_in_dominator_order (a , b)) ? , } ; let mut span = node . call_site ? ; if matches ! (node . expn_kind , ExpnKind :: Macro (MacroKind :: Bang , _)) { span = tcx . sess . source_map () . span_through_char (span , '!') ; } Some (Covspan { span , bcb }) }
+}
+
+macro_rules! discard_spans_overlapping_holes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function discard_spans_overlapping_holes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    discard_spans_overlapping_holes_introspect!();
+    # [doc = " Discard all covspans that overlap a hole."] # [doc = ""] # [doc = " The lists of covspans and holes must be sorted, and any holes that overlap"] # [doc = " with each other must have already been merged."] fn discard_spans_overlapping_holes (covspans : & mut Vec < Covspan > , holes : & [Hole]) { debug_assert ! (covspans . is_sorted_by (| a , b | compare_spans (a . span , b . span) . is_le ())) ; debug_assert ! (holes . is_sorted_by (| a , b | compare_spans (a . span , b . span) . is_le ())) ; debug_assert ! (holes . array_windows () . all (| [a , b] | ! a . span . overlaps_or_adjacent (b . span))) ; let mut curr_hole = 0usize ; let mut overlaps_hole = | covspan : & Covspan | -> bool { while let Some (hole) = holes . get (curr_hole) { if hole . span . hi () <= covspan . span . lo () { curr_hole += 1 ; continue ; } return hole . span . overlaps (covspan . span) ; } false } ; covspans . retain (| covspan | ! overlaps_hole (covspan)) ; }
+}
+
+macro_rules! remove_unwanted_overlapping_spans_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function remove_unwanted_overlapping_spans in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    remove_unwanted_overlapping_spans_introspect!();
+    # [doc = " Takes a list of sorted spans extracted from MIR, and \"refines\""] # [doc = " those spans by removing spans that overlap in unwanted ways."] # [instrument (level = "debug")] fn remove_unwanted_overlapping_spans (sorted_spans : Vec < Covspan >) -> Vec < Covspan > { debug_assert ! (sorted_spans . is_sorted_by (| a , b | compare_spans (a . span , b . span) . is_le ())) ; let mut pending = vec ! [] ; let mut refined = vec ! [] ; for curr in sorted_spans { pending . retain (| prev : & Covspan | { if prev . span . hi () <= curr . span . lo () { refined . push (prev . clone ()) ; false } else { prev . bcb == curr . bcb } }) ; pending . push (curr) ; } refined . extend (pending) ; refined }
+}
+mkitem!{mkstruct!{# [derive (Clone , Debug)] struct Covspan { span : Span , bcb : BasicCoverageBlock , }}}
+mkitem!{mkimpl!{impl Covspan { # [doc = " If `self` and `other` can be merged, mutates `self.span` to also"] # [doc = " include `other.span` and returns true."] # [doc = ""] # [doc = " Two covspans can be merged if they have the same BCB, and they are"] # [doc = " overlapping or adjacent."] fn merge_if_eligible (& mut self , other : & Self) -> bool { let eligible_for_merge = | a : & Self , b : & Self | (a . bcb == b . bcb) && a . span . overlaps_or_adjacent (b . span) ; if eligible_for_merge (self , other) { self . span = self . span . to (other . span) ; true } else { false } } }}}
+
+macro_rules! compare_spans_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compare_spans in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compare_spans_introspect!();
+    # [doc = " Compares two spans in (lo ascending, hi descending) order."] fn compare_spans (a : Span , b : Span) -> std :: cmp :: Ordering { Ord :: cmp (& a . lo () , & b . lo ()) . then_with (| | Ord :: cmp (& a . hi () , & b . hi ()) . reverse ()) }
+}
+
+macro_rules! ensure_non_empty_span_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function ensure_non_empty_span in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    ensure_non_empty_span_introspect!();
+    fn ensure_non_empty_span (source_map : & SourceMap , span : Span) -> Option < Span > { if ! span . is_empty () { return Some (span) ; } source_map . span_to_source (span , | src , start , end | try { if src . as_bytes () . get (end) . copied () == Some (b'{') { Some (span . with_hi (span . hi () + BytePos (1))) } else if start > 0 && src . as_bytes () [start - 1] == b'}' { Some (span . with_lo (span . lo () - BytePos (1))) } else { None } }) . ok () ? }
+}

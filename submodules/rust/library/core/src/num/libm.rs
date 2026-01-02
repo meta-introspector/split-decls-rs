@@ -1,0 +1,1 @@
+mkitem!{unsafe extern "C" { pub (crate) safe fn cbrt (n : f64) -> f64 ; pub (crate) safe fn cbrtf (n : f32) -> f32 ; pub (crate) safe fn fdim (a : f64 , b : f64) -> f64 ; pub (crate) safe fn fdimf (a : f32 , b : f32) -> f32 ; }}

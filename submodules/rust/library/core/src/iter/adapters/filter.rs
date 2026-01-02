@@ -1,0 +1,40 @@
+mkuse!{use core :: array ;}
+mkuse!{use core :: mem :: MaybeUninit ;}
+mkuse!{use core :: ops :: ControlFlow ;}
+mkuse!{use crate :: fmt ;}
+mkuse!{use crate :: iter :: adapters :: SourceIter ;}
+mkuse!{use crate :: iter :: { FusedIterator , InPlaceIterable , TrustedFused } ;}
+mkuse!{use crate :: num :: NonZero ;}
+mkuse!{use crate :: ops :: Try ;}
+mkitem!{mkstruct!{# [doc = " An iterator that filters the elements of `iter` with `predicate`."] # [doc = ""] # [doc = " This `struct` is created by the [`filter`] method on [`Iterator`]. See its"] # [doc = " documentation for more."] # [doc = ""] # [doc = " [`filter`]: Iterator::filter"] # [doc = " [`Iterator`]: trait.Iterator.html"] # [must_use = "iterators are lazy and do nothing unless consumed"] # [stable (feature = "rust1" , since = "1.0.0")] # [derive (Clone)] pub struct Filter < I , P > { pub (crate) iter : I , predicate : P , }}}
+mkitem!{mkimpl!{impl < I , P > Filter < I , P > { pub (in crate :: iter) fn new (iter : I , predicate : P) -> Filter < I , P > { Filter { iter , predicate } } }}}
+mkitem!{mkimpl!{impl < I , P > Filter < I , P > where I : Iterator , P : FnMut (& I :: Item) -> bool , { # [inline] fn next_chunk_dropless < const N : usize > (& mut self ,) -> Result < [I :: Item ; N] , array :: IntoIter < I :: Item , N > > { let mut array : [MaybeUninit < I :: Item > ; N] = [const { MaybeUninit :: uninit () } ; N] ; let mut initialized = 0 ; let result = self . iter . try_for_each (| element | { let idx = initialized ; initialized = idx + (self . predicate) (& element) as usize ; unsafe { array . get_unchecked_mut (idx) } . write (element) ; if initialized < N { ControlFlow :: Continue (()) } else { ControlFlow :: Break (()) } }) ; match result { ControlFlow :: Break (()) => { Ok (unsafe { MaybeUninit :: array_assume_init (array) }) } ControlFlow :: Continue (()) => { Err (unsafe { array :: IntoIter :: new_unchecked (array , 0 .. initialized) }) } } } }}}
+mkitem!{mkimpl!{# [stable (feature = "core_impl_debug" , since = "1.9.0")] impl < I : fmt :: Debug , P > fmt :: Debug for Filter < I , P > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Filter") . field ("iter" , & self . iter) . finish () } }}}
+
+macro_rules! filter_fold_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function filter_fold in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    filter_fold_introspect!();
+    fn filter_fold < T , Acc > (mut predicate : impl FnMut (& T) -> bool , mut fold : impl FnMut (Acc , T) -> Acc ,) -> impl FnMut (Acc , T) -> Acc { move | acc , item | if predicate (& item) { fold (acc , item) } else { acc } }
+}
+
+macro_rules! filter_try_fold_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function filter_try_fold in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    filter_try_fold_introspect!();
+    fn filter_try_fold < 'a , T , Acc , R : Try < Output = Acc > > (predicate : & 'a mut impl FnMut (& T) -> bool , mut fold : impl FnMut (Acc , T) -> R + 'a ,) -> impl FnMut (Acc , T) -> R + 'a { move | acc , item | if predicate (& item) { fold (acc , item) } else { try { acc } } }
+}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl < I : Iterator , P > Iterator for Filter < I , P > where P : FnMut (& I :: Item) -> bool , { type Item = I :: Item ; # [inline] fn next (& mut self) -> Option < I :: Item > { self . iter . find (& mut self . predicate) } # [inline] fn next_chunk < const N : usize > (& mut self ,) -> Result < [Self :: Item ; N] , array :: IntoIter < Self :: Item , N > > { let fun = const { if crate :: mem :: needs_drop :: < I :: Item > () { array :: iter_next_chunk :: < I :: Item , N > } else { Self :: next_chunk_dropless :: < N > } } ; fun (self) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let (_ , upper) = self . iter . size_hint () ; (0 , upper) } # [inline] fn count (self) -> usize { # [inline] fn to_usize < T > (mut predicate : impl FnMut (& T) -> bool) -> impl FnMut (T) -> usize { move | x | predicate (& x) as usize } self . iter . map (to_usize (self . predicate)) . sum () } # [inline] fn try_fold < Acc , Fold , R > (& mut self , init : Acc , fold : Fold) -> R where Self : Sized , Fold : FnMut (Acc , Self :: Item) -> R , R : Try < Output = Acc > , { self . iter . try_fold (init , filter_try_fold (& mut self . predicate , fold)) } # [inline] fn fold < Acc , Fold > (self , init : Acc , fold : Fold) -> Acc where Fold : FnMut (Acc , Self :: Item) -> Acc , { self . iter . fold (init , filter_fold (self . predicate , fold)) } }}}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl < I : DoubleEndedIterator , P > DoubleEndedIterator for Filter < I , P > where P : FnMut (& I :: Item) -> bool , { # [inline] fn next_back (& mut self) -> Option < I :: Item > { self . iter . rfind (& mut self . predicate) } # [inline] fn try_rfold < Acc , Fold , R > (& mut self , init : Acc , fold : Fold) -> R where Self : Sized , Fold : FnMut (Acc , Self :: Item) -> R , R : Try < Output = Acc > , { self . iter . try_rfold (init , filter_try_fold (& mut self . predicate , fold)) } # [inline] fn rfold < Acc , Fold > (self , init : Acc , fold : Fold) -> Acc where Fold : FnMut (Acc , Self :: Item) -> Acc , { self . iter . rfold (init , filter_fold (self . predicate , fold)) } }}}
+mkitem!{mkimpl!{# [stable (feature = "fused" , since = "1.26.0")] impl < I : FusedIterator , P > FusedIterator for Filter < I , P > where P : FnMut (& I :: Item) -> bool { }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "trusted_fused")] unsafe impl < I : TrustedFused , F > TrustedFused for Filter < I , F > { }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "inplace_iteration")] unsafe impl < P , I > SourceIter for Filter < I , P > where I : SourceIter , { type Source = I :: Source ; # [inline] unsafe fn as_inner (& mut self) -> & mut I :: Source { unsafe { SourceIter :: as_inner (& mut self . iter) } } }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "inplace_iteration")] unsafe impl < I : InPlaceIterable , P > InPlaceIterable for Filter < I , P > { const EXPAND_BY : Option < NonZero < usize > > = I :: EXPAND_BY ; const MERGE_BY : Option < NonZero < usize > > = I :: MERGE_BY ; }}}

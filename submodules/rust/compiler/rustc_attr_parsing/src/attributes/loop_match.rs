@@ -1,0 +1,5 @@
+mkuse!{use super :: prelude :: * ;}
+mkitem!{mkstruct!{pub (crate) struct LoopMatchParser ;}}
+mkitem!{mkimpl!{impl < S : Stage > NoArgsAttributeParser < S > for LoopMatchParser { const PATH : & [Symbol] = & [sym :: loop_match] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Warn ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Expression)]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: LoopMatch ; }}}
+mkitem!{mkstruct!{pub (crate) struct ConstContinueParser ;}}
+mkitem!{mkimpl!{impl < S : Stage > NoArgsAttributeParser < S > for ConstContinueParser { const PATH : & [Symbol] = & [sym :: const_continue] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Warn ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Expression)]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: ConstContinue ; }}}

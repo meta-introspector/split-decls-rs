@@ -1,0 +1,49 @@
+mkuse!{use rustc_abi :: CanonAbi ;}
+mkuse!{use rustc_data_structures :: fx :: FxHashMap ;}
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: ty :: { self , Instance , Ty , TyCtxt , TypeFoldable , TypeVisitableExt } ;}
+mkuse!{use rustc_target :: callconv :: { FnAbi , PassMode } ;}
+mkuse!{use tracing :: instrument ;}
+mkmod!{encode, { 
+                getname!(encode);
+                getsrc!(encode);
+                getpath!(encode);
+                get_deps!(encode);
+                get_crates!(encode);
+                mkinclude!(encode);
+                 
+            }}
+mkmod!{transform, { 
+                getname!(transform);
+                getsrc!(transform);
+                getpath!(transform);
+                get_deps!(transform);
+                get_crates!(transform);
+                mkinclude!(transform);
+                 
+            }}
+mkuse!{use crate :: cfi :: typeid :: TypeIdOptions ;}
+mkuse!{use crate :: cfi :: typeid :: itanium_cxx_abi :: encode :: { DictKey , EncodeTyOptions , encode_ty } ;}
+mkuse!{use crate :: cfi :: typeid :: itanium_cxx_abi :: transform :: { TransformTy , TransformTyOptions , transform_instance , } ;}
+
+macro_rules! typeid_for_fnabi_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function typeid_for_fnabi in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    typeid_for_fnabi_introspect!();
+    # [doc = " Returns a type metadata identifier for the specified FnAbi using the Itanium C++ ABI with vendor"] # [doc = " extended type qualifiers and types for Rust types that are not used at the FFI boundary."] # [instrument (level = "trace" , skip (tcx))] pub fn typeid_for_fnabi < 'tcx > (tcx : TyCtxt < 'tcx > , fn_abi : & FnAbi < 'tcx , Ty < 'tcx > > , options : TypeIdOptions ,) -> String { let mut typeid = String :: from ("_Z") ; typeid . push_str ("TS") ; typeid . push ('F') ; let mut dict : FxHashMap < DictKey < 'tcx > , usize > = FxHashMap :: default () ; let mut encode_ty_options = EncodeTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_fnabi: invalid option(s) `{:?}`" , options . bits ())) ; match fn_abi . conv { CanonAbi :: C => { encode_ty_options . insert (EncodeTyOptions :: GENERALIZE_REPR_C) ; } _ => { encode_ty_options . remove (EncodeTyOptions :: GENERALIZE_REPR_C) ; } } let transform_ty_options = TransformTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_fnabi: invalid option(s) `{:?}`" , options . bits ())) ; let mut type_folder = TransformTy :: new (tcx , transform_ty_options) ; let ty = fn_abi . ret . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; if ! fn_abi . c_variadic { let mut pushed_arg = false ; for arg in fn_abi . args . iter () . filter (| arg | arg . mode != PassMode :: Ignore) { pushed_arg = true ; let ty = arg . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; } if ! pushed_arg { typeid . push ('v') ; } } else { for n in 0 .. fn_abi . fixed_count as usize { if fn_abi . args [n] . mode == PassMode :: Ignore { continue ; } let ty = fn_abi . args [n] . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; } typeid . push ('z') ; } typeid . push ('E') ; if options . contains (EncodeTyOptions :: NORMALIZE_INTEGERS) { typeid . push_str (".normalized") ; } if options . contains (EncodeTyOptions :: GENERALIZE_POINTERS) { typeid . push_str (".generalized") ; } typeid }
+}
+
+macro_rules! typeid_for_instance_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function typeid_for_instance in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    typeid_for_instance_introspect!();
+    # [doc = " Returns a type metadata identifier for the specified Instance using the Itanium C++ ABI with"] # [doc = " vendor extended type qualifiers and types for Rust types that are not used at the FFI boundary."] # [instrument (level = "trace" , skip (tcx))] pub fn typeid_for_instance < 'tcx > (tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > , options : TypeIdOptions ,) -> String { assert ! (! instance . has_non_region_param () , "{instance:#?} must be fully monomorphic") ; let transform_ty_options = TransformTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_instance: invalid option(s) `{:?}`" , options . bits ())) ; let instance = transform_instance (tcx , instance , transform_ty_options) ; let fn_abi = tcx . fn_abi_of_instance (ty :: TypingEnv :: fully_monomorphized () . as_query_input ((instance , ty :: List :: empty ())) ,) . unwrap_or_else (| error | { bug ! ("typeid_for_instance: couldn't get fn_abi of instance {instance:?}: {error:?}") }) ; typeid_for_fnabi (tcx , fn_abi , options) }
+}

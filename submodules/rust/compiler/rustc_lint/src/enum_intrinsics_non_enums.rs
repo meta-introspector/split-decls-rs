@@ -1,0 +1,43 @@
+mkuse!{use rustc_hir as hir ;}
+mkuse!{use rustc_middle :: ty :: { Ty , TypeVisitableExt } ;}
+mkuse!{use rustc_session :: { declare_lint , declare_lint_pass } ;}
+mkuse!{use rustc_span :: { Span , sym } ;}
+mkuse!{use crate :: context :: LintContext ;}
+mkuse!{use crate :: lints :: { EnumIntrinsicsMemDiscriminate , EnumIntrinsicsMemVariant } ;}
+mkuse!{use crate :: { LateContext , LateLintPass } ;}
+mkitem!{declare_lint ! { # [doc = " The `enum_intrinsics_non_enums` lint detects calls to"] # [doc = " intrinsic functions that require an enum ([`core::mem::discriminant`],"] # [doc = " [`core::mem::variant_count`]), but are called with a non-enum type."] # [doc = ""] # [doc = " [`core::mem::discriminant`]: https://doc.rust-lang.org/core/mem/fn.discriminant.html"] # [doc = " [`core::mem::variant_count`]: https://doc.rust-lang.org/core/mem/fn.variant_count.html"] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(enum_intrinsics_non_enums)]"] # [doc = " core::mem::discriminant::<i32>(&123);"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " In order to accept any enum, the `mem::discriminant` and"] # [doc = " `mem::variant_count` functions are generic over a type `T`."] # [doc = " This makes it technically possible for `T` to be a non-enum,"] # [doc = " in which case the return value is unspecified."] # [doc = ""] # [doc = " This lint prevents such incorrect usage of these functions."] ENUM_INTRINSICS_NON_ENUMS , Deny , "detects calls to `core::mem::discriminant` and `core::mem::variant_count` with non-enum types" }}
+mkitem!{declare_lint_pass ! (EnumIntrinsicsNonEnums => [ENUM_INTRINSICS_NON_ENUMS]) ;}
+
+macro_rules! is_non_enum_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function is_non_enum in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    is_non_enum_introspect!();
+    # [doc = " Returns `true` if we know for sure that the given type is not an enum. Note that for cases where"] # [doc = " the type is generic, we can't be certain if it will be an enum so we have to assume that it is."] fn is_non_enum (t : Ty < '_ >) -> bool { ! t . is_enum () && ! t . has_param () }
+}
+
+macro_rules! enforce_mem_discriminant_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function enforce_mem_discriminant in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    enforce_mem_discriminant_introspect!();
+    fn enforce_mem_discriminant (cx : & LateContext < '_ > , func_expr : & hir :: Expr < '_ > , expr_span : Span , args_span : Span ,) { let ty_param = cx . typeck_results () . node_args (func_expr . hir_id) . type_at (0) ; if is_non_enum (ty_param) { cx . emit_span_lint (ENUM_INTRINSICS_NON_ENUMS , expr_span , EnumIntrinsicsMemDiscriminate { ty_param , note : args_span } ,) ; } }
+}
+
+macro_rules! enforce_mem_variant_count_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function enforce_mem_variant_count in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    enforce_mem_variant_count_introspect!();
+    fn enforce_mem_variant_count (cx : & LateContext < '_ > , func_expr : & hir :: Expr < '_ > , span : Span) { let ty_param = cx . typeck_results () . node_args (func_expr . hir_id) . type_at (0) ; if is_non_enum (ty_param) { cx . emit_span_lint (ENUM_INTRINSICS_NON_ENUMS , span , EnumIntrinsicsMemVariant { ty_param }) ; } }
+}
+mkitem!{mkimpl!{impl < 'tcx > LateLintPass < 'tcx > for EnumIntrinsicsNonEnums { fn check_expr (& mut self , cx : & LateContext < '_ > , expr : & hir :: Expr < '_ >) { let hir :: ExprKind :: Call (func , args) = & expr . kind else { return } ; let hir :: ExprKind :: Path (qpath) = & func . kind else { return } ; let Some (def_id) = cx . qpath_res (qpath , func . hir_id) . opt_def_id () else { return } ; let Some (name) = cx . tcx . get_diagnostic_name (def_id) else { return } ; match name { sym :: mem_discriminant => enforce_mem_discriminant (cx , func , expr . span , args [0] . span) , sym :: mem_variant_count => enforce_mem_variant_count (cx , func , expr . span) , _ => { } } } }}}

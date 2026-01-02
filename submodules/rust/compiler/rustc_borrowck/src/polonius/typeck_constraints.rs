@@ -1,0 +1,53 @@
+mkuse!{use rustc_data_structures :: fx :: FxHashSet ;}
+mkuse!{use rustc_middle :: mir :: { Body , Location , Statement , StatementKind , Terminator , TerminatorKind } ;}
+mkuse!{use rustc_middle :: ty :: { TyCtxt , TypeVisitable } ;}
+mkuse!{use rustc_mir_dataflow :: points :: PointIndex ;}
+mkuse!{use super :: { LocalizedOutlivesConstraint , LocalizedOutlivesConstraintSet } ;}
+mkuse!{use crate :: constraints :: OutlivesConstraint ;}
+mkuse!{use crate :: region_infer :: values :: LivenessValues ;}
+mkuse!{use crate :: type_check :: Locations ;}
+mkuse!{use crate :: universal_regions :: UniversalRegions ;}
+
+macro_rules! convert_typeck_constraints_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function convert_typeck_constraints in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    convert_typeck_constraints_introspect!();
+    # [doc = " Propagate loans throughout the subset graph at a given point (with some subtleties around the"] # [doc = " location where effects start to be visible)."] pub (super) fn convert_typeck_constraints < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , liveness : & LivenessValues , outlives_constraints : impl Iterator < Item = OutlivesConstraint < 'tcx > > , universal_regions : & UniversalRegions < 'tcx > , localized_outlives_constraints : & mut LocalizedOutlivesConstraintSet ,) { for outlives_constraint in outlives_constraints { match outlives_constraint . locations { Locations :: All (_) => { continue ; } Locations :: Single (location) => { let point = liveness . point_from_location (location) ; let localized_constraint = if let Some (stmt) = body [location . block] . statements . get (location . statement_index) { localize_statement_constraint (tcx , body , stmt , & outlives_constraint , point , universal_regions ,) } else { assert_eq ! (location . statement_index , body [location . block] . statements . len ()) ; let terminator = body [location . block] . terminator () ; localize_terminator_constraint (tcx , body , terminator , liveness , & outlives_constraint , point , universal_regions ,) } ; localized_outlives_constraints . push (localized_constraint) ; } } } }
+}
+
+macro_rules! localize_statement_constraint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function localize_statement_constraint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    localize_statement_constraint_introspect!();
+    # [doc = " For a given outlives constraint arising from a MIR statement, localize the constraint with the"] # [doc = " needed CFG `from`-`to` intra-block nodes."] fn localize_statement_constraint < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , stmt : & Statement < 'tcx > , outlives_constraint : & OutlivesConstraint < 'tcx > , current_point : PointIndex , universal_regions : & UniversalRegions < 'tcx > ,) -> LocalizedOutlivesConstraint { match & stmt . kind { StatementKind :: Assign (box (lhs , rhs)) => { debug_assert ! ({ let mut lhs_regions = FxHashSet :: default () ; tcx . for_each_free_region (lhs , | region | { let region = universal_regions . to_region_vid (region) ; lhs_regions . insert (region) ; }) ; let mut rhs_regions = FxHashSet :: default () ; tcx . for_each_free_region (rhs , | region | { let region = universal_regions . to_region_vid (region) ; rhs_regions . insert (region) ; }) ; lhs_regions . is_disjoint (& rhs_regions) } , "there should be no common regions between the LHS and RHS of an assignment") ; let lhs_ty = body . local_decls [lhs . local] . ty ; let successor_point = current_point ; compute_constraint_direction (tcx , outlives_constraint , & lhs_ty , current_point , successor_point , universal_regions ,) } _ => { LocalizedOutlivesConstraint { source : outlives_constraint . sup , from : current_point , target : outlives_constraint . sub , to : current_point , } } } }
+}
+
+macro_rules! localize_terminator_constraint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function localize_terminator_constraint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    localize_terminator_constraint_introspect!();
+    # [doc = " For a given outlives constraint arising from a MIR terminator, localize the constraint with the"] # [doc = " needed CFG `from`-`to` inter-block nodes."] fn localize_terminator_constraint < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , terminator : & Terminator < 'tcx > , liveness : & LivenessValues , outlives_constraint : & OutlivesConstraint < 'tcx > , current_point : PointIndex , universal_regions : & UniversalRegions < 'tcx > ,) -> LocalizedOutlivesConstraint { match & terminator . kind { TerminatorKind :: Call { destination , target : Some (target) , .. } => { let destination_ty = destination . ty (& body . local_decls , tcx) ; let successor_location = Location { block : * target , statement_index : 0 } ; let successor_point = liveness . point_from_location (successor_location) ; compute_constraint_direction (tcx , outlives_constraint , & destination_ty , current_point , successor_point , universal_regions ,) } _ => { LocalizedOutlivesConstraint { source : outlives_constraint . sup , from : current_point , target : outlives_constraint . sub , to : current_point , } } } }
+}
+
+macro_rules! compute_constraint_direction_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compute_constraint_direction in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compute_constraint_direction_introspect!();
+    # [doc = " For a given outlives constraint and CFG edge, returns the localized constraint with the"] # [doc = " appropriate `from`-`to` direction. This is computed according to whether the constraint flows to"] # [doc = " or from a free region in the given `value`, some kind of result for an effectful operation, like"] # [doc = " the LHS of an assignment."] fn compute_constraint_direction < 'tcx > (tcx : TyCtxt < 'tcx > , outlives_constraint : & OutlivesConstraint < 'tcx > , value : & impl TypeVisitable < TyCtxt < 'tcx > > , current_point : PointIndex , successor_point : PointIndex , universal_regions : & UniversalRegions < 'tcx > ,) -> LocalizedOutlivesConstraint { let mut to = current_point ; let mut from = current_point ; tcx . for_each_free_region (value , | region | { let region = universal_regions . to_region_vid (region) ; if region == outlives_constraint . sub { to = successor_point ; } else if region == outlives_constraint . sup { from = successor_point ; } }) ; LocalizedOutlivesConstraint { source : outlives_constraint . sup , from , target : outlives_constraint . sub , to , } }
+}

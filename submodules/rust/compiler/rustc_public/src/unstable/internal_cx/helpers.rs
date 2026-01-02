@@ -1,0 +1,4 @@
+mkuse!{use rustc_middle :: ty ;}
+mkitem!{mktrait!{pub (crate) trait ExistentialProjectionHelpers < 'tcx > { fn new_from_args (& self , def_id : rustc_span :: def_id :: DefId , args : ty :: GenericArgsRef < 'tcx > , term : ty :: Term < 'tcx > ,) -> ty :: ExistentialProjection < 'tcx > ; }}}
+mkitem!{mktrait!{pub (crate) trait ExistentialTraitRefHelpers < 'tcx > { fn new_from_args (& self , trait_def_id : rustc_span :: def_id :: DefId , args : ty :: GenericArgsRef < 'tcx > ,) -> ty :: ExistentialTraitRef < 'tcx > ; }}}
+mkitem!{mktrait!{pub (crate) trait TraitRefHelpers < 'tcx > { fn new_from_args (& self , trait_def_id : rustc_span :: def_id :: DefId , args : ty :: GenericArgsRef < 'tcx > ,) -> ty :: TraitRef < 'tcx > ; }}}

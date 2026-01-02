@@ -1,0 +1,32 @@
+mkuse!{use rustc_hir :: attrs :: AttributeKind ;}
+mkuse!{use rustc_hir :: def :: Res ;}
+mkuse!{use rustc_hir :: { self as hir , AmbigArg , GenericArg , PathSegment , QPath , TyKind , find_attr } ;}
+mkuse!{use rustc_middle :: ty ;}
+mkuse!{use rustc_session :: { declare_lint_pass , declare_tool_lint } ;}
+mkuse!{use crate :: lints :: PassByValueDiag ;}
+mkuse!{use crate :: { LateContext , LateLintPass , LintContext } ;}
+mkitem!{declare_tool_lint ! { # [doc = " The `rustc_pass_by_value` lint marks a type with `#[rustc_pass_by_value]` requiring it to"] # [doc = " always be passed by value. This is usually used for types that are thin wrappers around"] # [doc = " references, so there is no benefit to an extra layer of indirection. (Example: `Ty` which"] # [doc = " is a reference to an `Interned<TyKind>`)"] pub rustc :: PASS_BY_VALUE , Warn , "pass by reference of a type flagged as `#[rustc_pass_by_value]`" , report_in_external_macro : true }}
+mkitem!{declare_lint_pass ! (PassByValue => [PASS_BY_VALUE]) ;}
+mkitem!{mkimpl!{impl < 'tcx > LateLintPass < 'tcx > for PassByValue { fn check_ty (& mut self , cx : & LateContext < '_ > , ty : & 'tcx hir :: Ty < 'tcx , AmbigArg >) { match & ty . kind { TyKind :: Ref (_ , hir :: MutTy { ty : inner_ty , mutbl : hir :: Mutability :: Not }) => { if cx . tcx . trait_impl_of_assoc (ty . hir_id . owner . to_def_id ()) . is_some () { return ; } if let Some (t) = path_for_pass_by_value (cx , inner_ty) { cx . emit_span_lint (PASS_BY_VALUE , ty . span , PassByValueDiag { ty : t , suggestion : ty . span } ,) ; } } _ => { } } } }}}
+
+macro_rules! path_for_pass_by_value_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function path_for_pass_by_value in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    path_for_pass_by_value_introspect!();
+    fn path_for_pass_by_value (cx : & LateContext < '_ > , ty : & hir :: Ty < '_ >) -> Option < String > { if let TyKind :: Path (QPath :: Resolved (_ , path)) = & ty . kind { match path . res { Res :: Def (_ , def_id) if find_attr ! (cx . tcx . get_all_attrs (def_id) , AttributeKind :: PassByValue (_)) => { let name = cx . tcx . item_ident (def_id) ; let path_segment = path . segments . last () . unwrap () ; return Some (format ! ("{}{}" , name , gen_args (cx , path_segment))) ; } Res :: SelfTyAlias { alias_to : did , is_trait_impl : false , .. } => { if let ty :: Adt (adt , args) = cx . tcx . type_of (did) . instantiate_identity () . kind () { if find_attr ! (cx . tcx . get_all_attrs (adt . did ()) , AttributeKind :: PassByValue (_)) { return Some (cx . tcx . def_path_str_with_args (adt . did () , args)) ; } } } _ => () , } } None }
+}
+
+macro_rules! gen_args_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function gen_args in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    gen_args_introspect!();
+    fn gen_args (cx : & LateContext < '_ > , segment : & PathSegment < '_ >) -> String { if let Some (args) = & segment . args { let params = args . args . iter () . map (| arg | match arg { GenericArg :: Lifetime (lt) => lt . to_string () , GenericArg :: Type (ty) => { cx . tcx . sess . source_map () . span_to_snippet (ty . span) . unwrap_or_else (| _ | "_" . into ()) } GenericArg :: Const (c) => cx . tcx . sess . source_map () . span_to_snippet (c . span ()) . unwrap_or_else (| _ | "_" . into ()) , GenericArg :: Infer (_) => String :: from ("_") , }) . collect :: < Vec < _ > > () ; if ! params . is_empty () { return format ! ("<{}>" , params . join (", ")) ; } } String :: new () }
+}

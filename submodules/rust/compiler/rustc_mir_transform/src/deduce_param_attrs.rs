@@ -1,0 +1,31 @@
+mkuse!{use rustc_hir :: def_id :: LocalDefId ;}
+mkuse!{use rustc_index :: bit_set :: DenseBitSet ;}
+mkuse!{use rustc_middle :: mir :: visit :: { NonMutatingUseContext , PlaceContext , Visitor } ;}
+mkuse!{use rustc_middle :: mir :: { Body , Location , Operand , Place , RETURN_PLACE , Terminator , TerminatorKind } ;}
+mkuse!{use rustc_middle :: ty :: { self , DeducedParamAttrs , Ty , TyCtxt } ;}
+mkuse!{use rustc_session :: config :: OptLevel ;}
+mkitem!{mkstruct!{# [doc = " A visitor that determines which arguments have been mutated. We can't use the mutability field"] # [doc = " on LocalDecl for this because it has no meaning post-optimization."] struct DeduceReadOnly { # [doc = " Each bit is indexed by argument number, starting at zero (so 0 corresponds to local decl"] # [doc = " 1). The bit is true if the argument may have been mutated or false if we know it hasn't"] # [doc = " been up to the point we're at."] mutable_args : DenseBitSet < usize > , }}}
+mkitem!{mkimpl!{impl DeduceReadOnly { # [doc = " Returns a new DeduceReadOnly instance."] fn new (arg_count : usize) -> Self { Self { mutable_args : DenseBitSet :: new_empty (arg_count) } } }}}
+mkitem!{mkimpl!{impl < 'tcx > Visitor < 'tcx > for DeduceReadOnly { fn visit_place (& mut self , place : & Place < 'tcx > , context : PlaceContext , _location : Location) { if place . local == RETURN_PLACE || place . local . index () > self . mutable_args . domain_size () { return ; } let mark_as_mutable = match context { PlaceContext :: MutatingUse (..) => { true } PlaceContext :: NonMutatingUse (NonMutatingUseContext :: RawBorrow) => { ! place . is_indirect () } PlaceContext :: NonMutatingUse (..) | PlaceContext :: NonUse (..) => { false } } ; if mark_as_mutable { self . mutable_args . insert (place . local . index () - 1) ; } } fn visit_terminator (& mut self , terminator : & Terminator < 'tcx > , location : Location) { if let TerminatorKind :: Call { ref args , .. } = terminator . kind { for arg in args { if let Operand :: Move (place) = arg . node { let local = place . local ; if place . is_indirect () || local == RETURN_PLACE || local . index () > self . mutable_args . domain_size () { continue ; } self . mutable_args . insert (local . index () - 1) ; } } } ; self . super_terminator (terminator , location) ; } }}}
+
+macro_rules! type_will_always_be_passed_directly_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function type_will_always_be_passed_directly in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    type_will_always_be_passed_directly_introspect!();
+    # [doc = " Returns true if values of a given type will never be passed indirectly, regardless of ABI."] fn type_will_always_be_passed_directly (ty : Ty < '_ >) -> bool { matches ! (ty . kind () , ty :: Bool | ty :: Char | ty :: Float (..) | ty :: Int (..) | ty :: RawPtr (..) | ty :: Ref (..) | ty :: Slice (..) | ty :: Uint (..)) }
+}
+
+macro_rules! deduced_param_attrs_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function deduced_param_attrs in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    deduced_param_attrs_introspect!();
+    # [doc = " Returns the deduced parameter attributes for a function."] # [doc = ""] # [doc = " Deduced parameter attributes are those that can only be soundly determined by examining the"] # [doc = " body of the function instead of just the signature. These can be useful for optimization"] # [doc = " purposes on a best-effort basis. We compute them here and store them into the crate metadata so"] # [doc = " dependent crates can use them."] pub (super) fn deduced_param_attrs < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId ,) -> & 'tcx [DeducedParamAttrs] { if tcx . sess . opts . optimize == OptLevel :: No || tcx . sess . opts . incremental . is_some () { return & [] ; } if tcx . lang_items () . freeze_trait () . is_none () { return & [] ; } let fn_ty = tcx . type_of (def_id) . instantiate_identity () ; if matches ! (fn_ty . kind () , ty :: FnDef (..)) && fn_ty . fn_sig (tcx) . inputs () . skip_binder () . iter () . cloned () . all (type_will_always_be_passed_directly) { return & [] ; } if ! tcx . is_mir_available (def_id) { return & [] ; } let body : & Body < 'tcx > = tcx . optimized_mir (def_id) ; let mut deduce_read_only = DeduceReadOnly :: new (body . arg_count) ; deduce_read_only . visit_body (body) ; let typing_env = body . typing_env (tcx) ; let mut deduced_param_attrs = tcx . arena . alloc_from_iter (body . local_decls . iter () . skip (1) . take (body . arg_count) . enumerate () . map (| (arg_index , local_decl) | DeducedParamAttrs { read_only : ! deduce_read_only . mutable_args . contains (arg_index) && tcx . normalize_erasing_regions (typing_env , local_decl . ty) . is_freeze (tcx , typing_env) , } ,) ,) ; while deduced_param_attrs . last () == Some (& DeducedParamAttrs :: default ()) { let last_index = deduced_param_attrs . len () - 1 ; deduced_param_attrs = & mut deduced_param_attrs [0 .. last_index] ; } deduced_param_attrs }
+}

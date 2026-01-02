@@ -1,0 +1,92 @@
+mkuse!{use crate :: fmt :: { Debug , Display , Formatter , LowerExp , Result , UpperExp } ;}
+mkuse!{use crate :: mem :: MaybeUninit ;}
+mkuse!{use crate :: num :: { flt2dec , fmt as numfmt } ;}
+mkitem!{mktrait!{# [doc (hidden)] trait GeneralFormat : PartialOrd { # [doc = " Determines if a value should use exponential based on its magnitude, given the precondition"] # [doc = " that it will not be rounded any further before it is displayed."] fn already_rounded_value_should_use_exponential (& self) -> bool ; }}}
+mkitem!{macro_rules ! impl_general_format { ($ ($ t : ident) *) => { $ (impl GeneralFormat for $ t { fn already_rounded_value_should_use_exponential (& self) -> bool { let abs = $ t :: abs (* self) ; (abs != 0.0 && abs < 1e-4) || abs >= 1e+16 } }) * } }}
+mkitem!{# [cfg (target_has_reliable_f16)] impl_general_format ! { f16 }}
+mkitem!{impl_general_format ! { f32 f64 }}
+
+macro_rules! float_to_decimal_common_exact_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_decimal_common_exact in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_decimal_common_exact_introspect!();
+    # [inline (never)] fn float_to_decimal_common_exact < T > (fmt : & mut Formatter < '_ > , num : & T , sign : flt2dec :: Sign , precision : u16 ,) -> Result where T : flt2dec :: DecodableFloat , { let mut buf : [MaybeUninit < u8 > ; 1024] = [MaybeUninit :: uninit () ; 1024] ; let mut parts : [MaybeUninit < numfmt :: Part < '_ > > ; 4] = [MaybeUninit :: uninit () ; 4] ; let formatted = flt2dec :: to_exact_fixed_str (flt2dec :: strategy :: grisu :: format_exact , * num , sign , precision . into () , & mut buf , & mut parts ,) ; unsafe { fmt . pad_formatted_parts (& formatted) } }
+}
+
+macro_rules! float_to_decimal_common_shortest_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_decimal_common_shortest in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_decimal_common_shortest_introspect!();
+    # [inline (never)] fn float_to_decimal_common_shortest < T > (fmt : & mut Formatter < '_ > , num : & T , sign : flt2dec :: Sign , precision : u16 ,) -> Result where T : flt2dec :: DecodableFloat , { let mut buf : [MaybeUninit < u8 > ; flt2dec :: MAX_SIG_DIGITS] = [MaybeUninit :: uninit () ; flt2dec :: MAX_SIG_DIGITS] ; let mut parts : [MaybeUninit < numfmt :: Part < '_ > > ; 4] = [MaybeUninit :: uninit () ; 4] ; let formatted = flt2dec :: to_shortest_str (flt2dec :: strategy :: grisu :: format_shortest , * num , sign , precision . into () , & mut buf , & mut parts ,) ; unsafe { fmt . pad_formatted_parts (& formatted) } }
+}
+
+macro_rules! float_to_decimal_display_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_decimal_display in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_decimal_display_introspect!();
+    fn float_to_decimal_display < T > (fmt : & mut Formatter < '_ > , num : & T) -> Result where T : flt2dec :: DecodableFloat , { let force_sign = fmt . sign_plus () ; let sign = match force_sign { false => flt2dec :: Sign :: Minus , true => flt2dec :: Sign :: MinusPlus , } ; if let Some (precision) = fmt . options . get_precision () { float_to_decimal_common_exact (fmt , num , sign , precision) } else { let min_precision = 0 ; float_to_decimal_common_shortest (fmt , num , sign , min_precision) } }
+}
+
+macro_rules! float_to_exponential_common_exact_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_exponential_common_exact in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_exponential_common_exact_introspect!();
+    # [inline (never)] fn float_to_exponential_common_exact < T > (fmt : & mut Formatter < '_ > , num : & T , sign : flt2dec :: Sign , precision : u16 , upper : bool ,) -> Result where T : flt2dec :: DecodableFloat , { let mut buf : [MaybeUninit < u8 > ; 1024] = [MaybeUninit :: uninit () ; 1024] ; let mut parts : [MaybeUninit < numfmt :: Part < '_ > > ; 6] = [MaybeUninit :: uninit () ; 6] ; let formatted = flt2dec :: to_exact_exp_str (flt2dec :: strategy :: grisu :: format_exact , * num , sign , precision . into () , upper , & mut buf , & mut parts ,) ; unsafe { fmt . pad_formatted_parts (& formatted) } }
+}
+
+macro_rules! float_to_exponential_common_shortest_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_exponential_common_shortest in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_exponential_common_shortest_introspect!();
+    # [inline (never)] fn float_to_exponential_common_shortest < T > (fmt : & mut Formatter < '_ > , num : & T , sign : flt2dec :: Sign , upper : bool ,) -> Result where T : flt2dec :: DecodableFloat , { let mut buf : [MaybeUninit < u8 > ; flt2dec :: MAX_SIG_DIGITS] = [MaybeUninit :: uninit () ; flt2dec :: MAX_SIG_DIGITS] ; let mut parts : [MaybeUninit < numfmt :: Part < '_ > > ; 6] = [MaybeUninit :: uninit () ; 6] ; let formatted = flt2dec :: to_shortest_exp_str (flt2dec :: strategy :: grisu :: format_shortest , * num , sign , (0 , 0) , upper , & mut buf , & mut parts ,) ; unsafe { fmt . pad_formatted_parts (& formatted) } }
+}
+
+macro_rules! float_to_exponential_common_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_exponential_common in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_exponential_common_introspect!();
+    fn float_to_exponential_common < T > (fmt : & mut Formatter < '_ > , num : & T , upper : bool) -> Result where T : flt2dec :: DecodableFloat , { let force_sign = fmt . sign_plus () ; let sign = match force_sign { false => flt2dec :: Sign :: Minus , true => flt2dec :: Sign :: MinusPlus , } ; if let Some (precision) = fmt . options . get_precision () { float_to_exponential_common_exact (fmt , num , sign , precision + 1 , upper) } else { float_to_exponential_common_shortest (fmt , num , sign , upper) } }
+}
+
+macro_rules! float_to_general_debug_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function float_to_general_debug in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    float_to_general_debug_introspect!();
+    fn float_to_general_debug < T > (fmt : & mut Formatter < '_ > , num : & T) -> Result where T : flt2dec :: DecodableFloat + GeneralFormat , { let force_sign = fmt . sign_plus () ; let sign = match force_sign { false => flt2dec :: Sign :: Minus , true => flt2dec :: Sign :: MinusPlus , } ; if let Some (precision) = fmt . options . get_precision () { float_to_decimal_common_exact (fmt , num , sign , precision) } else { if num . already_rounded_value_should_use_exponential () { let upper = false ; float_to_exponential_common_shortest (fmt , num , sign , upper) } else { let min_precision = 1 ; float_to_decimal_common_shortest (fmt , num , sign , min_precision) } } }
+}
+mkitem!{macro_rules ! floating { ($ ($ ty : ident) *) => { $ (# [stable (feature = "rust1" , since = "1.0.0")] impl Debug for $ ty { fn fmt (& self , fmt : & mut Formatter <'_ >) -> Result { float_to_general_debug (fmt , self) } } # [stable (feature = "rust1" , since = "1.0.0")] impl Display for $ ty { fn fmt (& self , fmt : & mut Formatter <'_ >) -> Result { float_to_decimal_display (fmt , self) } } # [stable (feature = "rust1" , since = "1.0.0")] impl LowerExp for $ ty { fn fmt (& self , fmt : & mut Formatter <'_ >) -> Result { float_to_exponential_common (fmt , self , false) } } # [stable (feature = "rust1" , since = "1.0.0")] impl UpperExp for $ ty { fn fmt (& self , fmt : & mut Formatter <'_ >) -> Result { float_to_exponential_common (fmt , self , true) } }) * } ; }}
+mkitem!{floating ! { f32 f64 }}
+mkitem!{# [cfg (target_has_reliable_f16)] floating ! { f16 }}
+mkitem!{mkimpl!{# [cfg (not (target_has_reliable_f16))] # [stable (feature = "rust1" , since = "1.0.0")] impl Debug for f16 { # [inline] fn fmt (& self , f : & mut Formatter < '_ >) -> Result { write ! (f , "{:#06x}" , self . to_bits ()) } }}}
+mkitem!{mkimpl!{# [cfg (not (target_has_reliable_f16))] # [stable (feature = "rust1" , since = "1.0.0")] impl Display for f16 { # [inline] fn fmt (& self , fmt : & mut Formatter < '_ >) -> Result { Debug :: fmt (self , fmt) } }}}
+mkitem!{mkimpl!{# [cfg (not (target_has_reliable_f16))] # [stable (feature = "rust1" , since = "1.0.0")] impl LowerExp for f16 { # [inline] fn fmt (& self , fmt : & mut Formatter < '_ >) -> Result { Debug :: fmt (self , fmt) } }}}
+mkitem!{mkimpl!{# [cfg (not (target_has_reliable_f16))] # [stable (feature = "rust1" , since = "1.0.0")] impl UpperExp for f16 { # [inline] fn fmt (& self , fmt : & mut Formatter < '_ >) -> Result { Debug :: fmt (self , fmt) } }}}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl Debug for f128 { # [inline] fn fmt (& self , f : & mut Formatter < '_ >) -> Result { write ! (f , "{:#034x}" , self . to_bits ()) } }}}

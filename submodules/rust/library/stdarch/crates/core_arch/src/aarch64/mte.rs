@@ -1,0 +1,143 @@
+mkitem!{unsafe extern "unadjusted" { # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.irg")] fn irg_ (ptr : * const () , exclude : i64) -> * const () ; # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.gmi")] fn gmi_ (ptr : * const () , exclude : i64) -> i64 ; # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.ldg")] fn ldg_ (ptr : * const () , tag_ptr : * const ()) -> * const () ; # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.stg")] fn stg_ (tagged_ptr : * const () , addr_to_tag : * const ()) ; # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.addg")] fn addg_ (ptr : * const () , value : i64) -> * const () ; # [cfg_attr (any (target_arch = "aarch64" , target_arch = "arm64ec") , link_name = "llvm.aarch64.subp")] fn subp_ (ptr_a : * const () , ptr_b : * const ()) -> i64 ; }}
+
+macro_rules! __arm_mte_create_random_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_create_random_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_create_random_tag_introspect!();
+    # [doc = " Return a pointer containing a randomly generated logical address tag."] # [doc = ""] # [doc = " `src`: A pointer containing an address."] # [doc = " `mask`: A mask where each of the lower 16 bits specifies logical"] # [doc = "         tags which must be excluded from consideration. Zero excludes no"] # [doc = "         tags."] # [doc = ""] # [doc = " The returned pointer contains a copy of the `src` address, but with a"] # [doc = " randomly generated logical tag, excluding any specified by `mask`."] # [doc = ""] # [doc = " SAFETY: The pointer provided by this intrinsic will be invalid until the memory"] # [doc = " has been appropriately tagged with `__arm_mte_set_tag`. If using that intrinsic"] # [doc = " on the provided pointer is itself invalid, then it will be permanently invalid"] # [doc = " and Undefined Behavior to dereference it."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_create_random_tag < T > (src : * const T , mask : u64) -> * const T { irg_ (src as * const () , mask as i64) as * const T }
+}
+
+macro_rules! __arm_mte_increment_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_increment_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_increment_tag_introspect!();
+    # [doc = " Return a pointer with the logical address tag offset by a value."] # [doc = ""] # [doc = " `src`: A pointer containing an address and a logical tag."] # [doc = " `OFFSET`: A compile-time constant value in the range [0, 15]."] # [doc = ""] # [doc = " Adds offset to the logical address tag in `src`, wrapping if the result is"] # [doc = " outside of the valid 16 tags."] # [doc = ""] # [doc = " SAFETY: See `__arm_mte_create_random_tag`."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_increment_tag < const OFFSET : i64 , T > (src : * const T) -> * const T { addg_ (src as * const () , OFFSET) as * const T }
+}
+
+macro_rules! __arm_mte_exclude_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_exclude_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_exclude_tag_introspect!();
+    # [doc = " Add a logical tag to the set of excluded logical tags."] # [doc = ""] # [doc = " `src`: A pointer containing an address and a logical tag."] # [doc = " `excluded`: A mask where the lower 16 bits each specify currently-excluded"] # [doc = "             logical tags."] # [doc = ""] # [doc = " Adds the logical tag stored in `src` to the set in `excluded`, and returns"] # [doc = " the result."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_exclude_tag < T > (src : * const T , excluded : u64) -> u64 { gmi_ (src as * const () , excluded as i64) as u64 }
+}
+
+macro_rules! __arm_mte_set_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_set_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_set_tag_introspect!();
+    # [doc = " Store an allocation tag for the 16-byte granule of memory."] # [doc = ""] # [doc = " `tag_address`: A pointer containing an address and a logical tag, which"] # [doc = "                must be 16-byte aligned."] # [doc = ""] # [doc = " SAFETY: `tag_address` must be 16-byte aligned. The tag will apply to the"] # [doc = " entire 16-byte memory granule."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_set_tag < T > (tag_address : * const T) { stg_ (tag_address as * const () , tag_address as * const ()) ; }
+}
+
+macro_rules! __arm_mte_get_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_get_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_get_tag_introspect!();
+    # [doc = " Load an allocation tag from memory, returning a new pointer with the"] # [doc = " corresponding logical tag."] # [doc = ""] # [doc = " `address`: A pointer containing an address from which allocation tag memory"] # [doc = "            is read. This does not need to be 16-byte aligned."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_get_tag < T > (address : * const T) -> * const T { ldg_ (address as * const () , address as * const ()) as * const T }
+}
+
+macro_rules! __arm_mte_ptrdiff_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function __arm_mte_ptrdiff in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    __arm_mte_ptrdiff_introspect!();
+    # [doc = " Calculate the difference between the address parts of two pointers, ignoring"] # [doc = " the tags, and sign-extending the result."] # [inline] # [target_feature (enable = "mte")] # [unstable (feature = "stdarch_aarch64_mte" , issue = "129010")] pub unsafe fn __arm_mte_ptrdiff < T , U > (a : * const T , b : * const U) -> i64 { subp_ (a as * const () , b as * const ()) }
+}
+mkmod!{test, { 
+                getname!(test);
+                getsrc!(test);
+                getpath!(test);
+                get_deps!(test);
+                get_crates!(test);
+                mkinclude!(test);
+                mkuse!{use super :: * ;}
+mkuse!{use stdarch_test :: assert_instr ;}
+
+macro_rules! test_arm_mte_create_random_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_create_random_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_create_random_tag_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (irg))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_create_random_tag (src : * const () , mask : u64) -> * const () { __arm_mte_create_random_tag (src , mask) }
+}
+
+macro_rules! test_arm_mte_increment_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_increment_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_increment_tag_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (addg))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_increment_tag (src : * const ()) -> * const () { __arm_mte_increment_tag :: < 1 , _ > (src) }
+}
+
+macro_rules! test_arm_mte_exclude_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_exclude_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_exclude_tag_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (gmi))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_exclude_tag (src : * const () , excluded : u64) -> u64 { __arm_mte_exclude_tag (src , excluded) }
+}
+
+macro_rules! test_arm_mte_set_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_set_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_set_tag_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (stg))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_set_tag (src : * const ()) { __arm_mte_set_tag (src) }
+}
+
+macro_rules! test_arm_mte_get_tag_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_get_tag in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_get_tag_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (ldg))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_get_tag (src : * const ()) -> * const () { __arm_mte_get_tag (src) }
+}
+
+macro_rules! test_arm_mte_ptrdiff_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_arm_mte_ptrdiff in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_arm_mte_ptrdiff_introspect!();
+    # [cfg_attr (all (test , not (target_env = "msvc")) , assert_instr (subp))] # [allow (dead_code)] # [target_feature (enable = "mte")] unsafe fn test_arm_mte_ptrdiff (a : * const () , b : * const ()) -> i64 { __arm_mte_ptrdiff (a , b) }
+} 
+            }}

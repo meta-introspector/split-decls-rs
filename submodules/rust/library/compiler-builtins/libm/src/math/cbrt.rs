@@ -1,0 +1,44 @@
+mkuse!{use super :: Float ;}
+mkuse!{use super :: support :: { FpResult , Round , cold_path } ;}
+
+macro_rules! cbrt_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function cbrt in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    cbrt_introspect!();
+    # [doc = " Compute the cube root of the argument."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn cbrt (x : f64) -> f64 { cbrt_round (x , Round :: Nearest) . val }
+}
+
+macro_rules! cbrt_round_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function cbrt_round in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    cbrt_round_introspect!();
+    pub fn cbrt_round (x : f64 , round : Round) -> FpResult < f64 > { const ESCALE : [f64 ; 3] = [1.0 , hf64 ! ("0x1.428a2f98d728bp+0") , hf64 ! ("0x1.965fea53d6e3dp+0") ,] ; const C : [f64 ; 4] = [hf64 ! ("0x1.1b0babccfef9cp-1") , hf64 ! ("0x1.2c9a3e94d1da5p-1") , hf64 ! ("-0x1.4dc30b1a1ddbap-3") , hf64 ! ("0x1.7a8d3e4ec9b07p-6") ,] ; let u0 : f64 = hf64 ! ("0x1.5555555555555p-2") ; let u1 : f64 = hf64 ! ("0x1.c71c71c71c71cp-3") ; let rsc = [1.0 , - 1.0 , 0.5 , - 0.5 , 0.25 , - 0.25] ; let off = [hf64 ! ("0x1p-53") , 0.0 , 0.0 , 0.0] ; let hx : u64 = x . to_bits () ; let mut mant : u64 = hx & f64 :: SIG_MASK ; let sign : u64 = hx >> 63 ; let mut e : u32 = (hx >> f64 :: SIG_BITS) as u32 & f64 :: EXP_SAT ; if ((e + 1) & f64 :: EXP_SAT) < 2 { cold_path () ; let ix : u64 = hx & ! f64 :: SIGN_MASK ; if e == f64 :: EXP_SAT || ix == 0 { return FpResult :: ok (x + x) ; } let nz = ix . leading_zeros () - 11 ; mant <<= nz ; mant &= f64 :: SIG_MASK ; e = e . wrapping_sub (nz - 1) ; } e = e . wrapping_add (3072) ; let cvt1 : u64 = mant | (0x3ffu64 << 52) ; let mut cvt5 : u64 = cvt1 ; let et : u32 = e / 3 ; let it : u32 = e % 3 ; cvt5 += u64 :: from (it) << f64 :: SIG_BITS ; cvt5 |= sign << 63 ; let zz : f64 = f64 :: from_bits (cvt5) ; let mut isc : u64 = ESCALE [it as usize] . to_bits () ; isc |= sign << 63 ; let cvt2 : u64 = isc ; let z : f64 = f64 :: from_bits (cvt1) ; let r : f64 = 1.0 / z ; let rr : f64 = r * rsc [((it as usize) << 1) | sign as usize] ; let z2 : f64 = z * z ; let c0 : f64 = C [0] + z * C [1] ; let c2 : f64 = C [2] + z * C [3] ; let mut y : f64 = c0 + z2 * c2 ; let mut y2 : f64 = y * y ; let mut h : f64 = y2 * (y * r) - 1.0 ; y -= (h * y) * (u0 - u1 * h) ; y *= f64 :: from_bits (cvt2) ; y2 = y * y ; let mut y2l : f64 = y . fma (y , - y2) ; let mut y3 : f64 = y2 * y ; let mut y3l : f64 = y . fma (y2 , - y3) + y * y2l ; h = ((y3 - zz) + y3l) * rr ; let mut dy : f64 = h * (y * u0) ; let mut y1 : f64 = y - dy ; dy = (y - y1) - dy ; let mut ady : f64 = dy . abs () ; let mut ady0 : f64 = (ady - off [round as usize]) . abs () ; let mut ady1 : f64 = (ady - (hf64 ! ("0x1p-52") + off [round as usize])) . abs () ; if ady0 < hf64 ! ("0x1p-75") || ady1 < hf64 ! ("0x1p-75") { cold_path () ; y2 = y1 * y1 ; y2l = y1 . fma (y1 , - y2) ; y3 = y2 * y1 ; y3l = y1 . fma (y2 , - y3) + y1 * y2l ; h = ((y3 - zz) + y3l) * rr ; dy = h * (y1 * u0) ; y = y1 - dy ; dy = (y1 - y) - dy ; y1 = y ; ady = dy . abs () ; ady0 = (ady - off [round as usize]) . abs () ; ady1 = (ady - (hf64 ! ("0x1p-52") + off [round as usize])) . abs () ; if ady0 < hf64 ! ("0x1p-98") || ady1 < hf64 ! ("0x1p-98") { cold_path () ; let azz : f64 = zz . abs () ; if azz == hf64 ! ("0x1.9b78223aa307cp+1") { y1 = hf64 ! ("0x1.79d15d0e8d59cp+0") . copysign (zz) ; } if azz == hf64 ! ("0x1.a202bfc89ddffp+2") { y1 = hf64 ! ("0x1.de87aa837820fp+0") . copysign (zz) ; } if round != Round :: Nearest { let wlist = [(hf64 ! ("0x1.3a9ccd7f022dbp+0") , hf64 ! ("0x1.1236160ba9b93p+0")) , (hf64 ! ("0x1.7845d2faac6fep+0") , hf64 ! ("0x1.23115e657e49cp+0")) , (hf64 ! ("0x1.d1ef81cbbbe71p+0") , hf64 ! ("0x1.388fb44cdcf5ap+0")) , (hf64 ! ("0x1.0a2014f62987cp+1") , hf64 ! ("0x1.46bcbf47dc1e8p+0")) , (hf64 ! ("0x1.fe18a044a5501p+1") , hf64 ! ("0x1.95decfec9c904p+0")) , (hf64 ! ("0x1.a6bb8c803147bp+2") , hf64 ! ("0x1.e05335a6401dep+0")) , (hf64 ! ("0x1.ac8538a031cbdp+2") , hf64 ! ("0x1.e281d87098de8p+0")) ,] ; for (a , b) in wlist { if azz == a { let tmp = if round as u64 + sign == 2 { hf64 ! ("0x1p-52") } else { 0.0 } ; y1 = (b + tmp) . copysign (zz) ; } } } } } let mut cvt3 : u64 = y1 . to_bits () ; cvt3 = cvt3 . wrapping_add (((et . wrapping_sub (342) . wrapping_sub (1023)) as u64) << 52) ; let m0 : u64 = cvt3 << 30 ; let m1 = m0 >> 63 ; if (m0 ^ m1) <= (1u64 << 30) { cold_path () ; let mut cvt4 : u64 = y1 . to_bits () ; cvt4 = (cvt4 + (164 << 15)) & 0xffffffffffff0000u64 ; if ((f64 :: from_bits (cvt4) - y1) - dy) . abs () < hf64 ! ("0x1p-60") || (zz) . abs () == 1.0 { cvt3 = (cvt3 + (1u64 << 15)) & 0xffffffffffff0000u64 ; } } FpResult :: ok (f64 :: from_bits (cvt3)) }
+}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                mkuse!{use super :: * ;}
+
+macro_rules! spot_checks_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function spot_checks in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    spot_checks_introspect!();
+    # [test] fn spot_checks () { if ! cfg ! (x86_no_sse) { assert_biteq ! (cbrt (f64 :: from_bits (0xf7f792b28f600000)) , f64 :: from_bits (0xd29ce68655d962f3)) ; } }
+} 
+            }}

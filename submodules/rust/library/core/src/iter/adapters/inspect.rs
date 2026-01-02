@@ -1,0 +1,38 @@
+mkuse!{use crate :: fmt ;}
+mkuse!{use crate :: iter :: adapters :: SourceIter ;}
+mkuse!{use crate :: iter :: { FusedIterator , InPlaceIterable , TrustedFused } ;}
+mkuse!{use crate :: num :: NonZero ;}
+mkuse!{use crate :: ops :: Try ;}
+mkitem!{mkstruct!{# [doc = " An iterator that calls a function with a reference to each element before"] # [doc = " yielding it."] # [doc = ""] # [doc = " This `struct` is created by the [`inspect`] method on [`Iterator`]. See its"] # [doc = " documentation for more."] # [doc = ""] # [doc = " [`inspect`]: Iterator::inspect"] # [doc = " [`Iterator`]: trait.Iterator.html"] # [must_use = "iterators are lazy and do nothing unless consumed"] # [stable (feature = "rust1" , since = "1.0.0")] # [derive (Clone)] pub struct Inspect < I , F > { iter : I , f : F , }}}
+mkitem!{mkimpl!{impl < I , F > Inspect < I , F > { pub (in crate :: iter) fn new (iter : I , f : F) -> Inspect < I , F > { Inspect { iter , f } } }}}
+mkitem!{mkimpl!{# [stable (feature = "core_impl_debug" , since = "1.9.0")] impl < I : fmt :: Debug , F > fmt :: Debug for Inspect < I , F > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Inspect") . field ("iter" , & self . iter) . finish () } }}}
+mkitem!{mkimpl!{impl < I : Iterator , F > Inspect < I , F > where F : FnMut (& I :: Item) , { # [inline] fn do_inspect (& mut self , elt : Option < I :: Item >) -> Option < I :: Item > { if let Some (ref a) = elt { (self . f) (a) ; } elt } }}}
+
+macro_rules! inspect_fold_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function inspect_fold in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    inspect_fold_introspect!();
+    fn inspect_fold < T , Acc > (mut f : impl FnMut (& T) , mut fold : impl FnMut (Acc , T) -> Acc ,) -> impl FnMut (Acc , T) -> Acc { move | acc , item | { f (& item) ; fold (acc , item) } }
+}
+
+macro_rules! inspect_try_fold_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function inspect_try_fold in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    inspect_try_fold_introspect!();
+    fn inspect_try_fold < 'a , T , Acc , R > (f : & 'a mut impl FnMut (& T) , mut fold : impl FnMut (Acc , T) -> R + 'a ,) -> impl FnMut (Acc , T) -> R + 'a { move | acc , item | { f (& item) ; fold (acc , item) } }
+}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl < I : Iterator , F > Iterator for Inspect < I , F > where F : FnMut (& I :: Item) , { type Item = I :: Item ; # [inline] fn next (& mut self) -> Option < I :: Item > { let next = self . iter . next () ; self . do_inspect (next) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } # [inline] fn try_fold < Acc , Fold , R > (& mut self , init : Acc , fold : Fold) -> R where Self : Sized , Fold : FnMut (Acc , Self :: Item) -> R , R : Try < Output = Acc > , { self . iter . try_fold (init , inspect_try_fold (& mut self . f , fold)) } # [inline] fn fold < Acc , Fold > (self , init : Acc , fold : Fold) -> Acc where Fold : FnMut (Acc , Self :: Item) -> Acc , { self . iter . fold (init , inspect_fold (self . f , fold)) } }}}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl < I : DoubleEndedIterator , F > DoubleEndedIterator for Inspect < I , F > where F : FnMut (& I :: Item) , { # [inline] fn next_back (& mut self) -> Option < I :: Item > { let next = self . iter . next_back () ; self . do_inspect (next) } # [inline] fn try_rfold < Acc , Fold , R > (& mut self , init : Acc , fold : Fold) -> R where Self : Sized , Fold : FnMut (Acc , Self :: Item) -> R , R : Try < Output = Acc > , { self . iter . try_rfold (init , inspect_try_fold (& mut self . f , fold)) } # [inline] fn rfold < Acc , Fold > (self , init : Acc , fold : Fold) -> Acc where Fold : FnMut (Acc , Self :: Item) -> Acc , { self . iter . rfold (init , inspect_fold (self . f , fold)) } }}}
+mkitem!{mkimpl!{# [stable (feature = "rust1" , since = "1.0.0")] impl < I : ExactSizeIterator , F > ExactSizeIterator for Inspect < I , F > where F : FnMut (& I :: Item) , { fn len (& self) -> usize { self . iter . len () } fn is_empty (& self) -> bool { self . iter . is_empty () } }}}
+mkitem!{mkimpl!{# [stable (feature = "fused" , since = "1.26.0")] impl < I : FusedIterator , F > FusedIterator for Inspect < I , F > where F : FnMut (& I :: Item) { }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "trusted_fused")] unsafe impl < I : TrustedFused , F > TrustedFused for Inspect < I , F > { }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "inplace_iteration")] unsafe impl < I , F > SourceIter for Inspect < I , F > where I : SourceIter , { type Source = I :: Source ; # [inline] unsafe fn as_inner (& mut self) -> & mut I :: Source { unsafe { SourceIter :: as_inner (& mut self . iter) } } }}}
+mkitem!{mkimpl!{# [unstable (issue = "none" , feature = "inplace_iteration")] unsafe impl < I : InPlaceIterable , F > InPlaceIterable for Inspect < I , F > { const EXPAND_BY : Option < NonZero < usize > > = I :: EXPAND_BY ; const MERGE_BY : Option < NonZero < usize > > = I :: MERGE_BY ; }}}

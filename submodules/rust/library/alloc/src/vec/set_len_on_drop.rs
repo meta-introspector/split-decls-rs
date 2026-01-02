@@ -1,0 +1,3 @@
+mkitem!{mkstruct!{pub (super) struct SetLenOnDrop < 'a > { len : & 'a mut usize , local_len : usize , }}}
+mkitem!{mkimpl!{impl < 'a > SetLenOnDrop < 'a > { # [inline] pub (super) fn new (len : & 'a mut usize) -> Self { SetLenOnDrop { local_len : * len , len } } # [inline] pub (super) fn increment_len (& mut self , increment : usize) { self . local_len += increment ; } # [inline] pub (super) fn current_len (& self) -> usize { self . local_len } }}}
+mkitem!{mkimpl!{impl Drop for SetLenOnDrop < '_ > { # [inline] fn drop (& mut self) { * self . len = self . local_len ; } }}}

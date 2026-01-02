@@ -1,0 +1,82 @@
+mkmod!{diagnostic, { 
+                getname!(diagnostic);
+                getsrc!(diagnostic);
+                getpath!(diagnostic);
+                get_deps!(diagnostic);
+                get_crates!(diagnostic);
+                mkinclude!(diagnostic);
+                 
+            }}
+mkmod!{diagnostic_builder, { 
+                getname!(diagnostic_builder);
+                getsrc!(diagnostic_builder);
+                getpath!(diagnostic_builder);
+                get_deps!(diagnostic_builder);
+                get_crates!(diagnostic_builder);
+                mkinclude!(diagnostic_builder);
+                 
+            }}
+mkmod!{error, { 
+                getname!(error);
+                getsrc!(error);
+                getpath!(error);
+                get_deps!(error);
+                get_crates!(error);
+                mkinclude!(error);
+                 
+            }}
+mkmod!{subdiagnostic, { 
+                getname!(subdiagnostic);
+                getsrc!(subdiagnostic);
+                getpath!(subdiagnostic);
+                get_deps!(subdiagnostic);
+                get_crates!(subdiagnostic);
+                mkinclude!(subdiagnostic);
+                 
+            }}
+mkmod!{utils, { 
+                getname!(utils);
+                getsrc!(utils);
+                getpath!(utils);
+                get_deps!(utils);
+                get_crates!(utils);
+                mkinclude!(utils);
+                 
+            }}
+mkuse!{use diagnostic :: { DiagnosticDerive , LintDiagnosticDerive } ;}
+mkuse!{use proc_macro2 :: TokenStream ;}
+mkuse!{use subdiagnostic :: SubdiagnosticDerive ;}
+mkuse!{use synstructure :: Structure ;}
+
+macro_rules! diagnostic_derive_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function diagnostic_derive in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    diagnostic_derive_introspect!();
+    # [doc = " Implements `#[derive(Diagnostic)]`, which allows for errors to be specified as a struct,"] # [doc = " independent from the actual diagnostics emitting code."] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " # extern crate rustc_errors;"] # [doc = " # use rustc_errors::Applicability;"] # [doc = " # extern crate rustc_span;"] # [doc = " # use rustc_span::{Ident, Span};"] # [doc = " # extern crate rust_middle;"] # [doc = " # use rustc_middle::ty::Ty;"] # [doc = " #[derive(Diagnostic)]"] # [doc = " #[diag(borrowck_move_out_of_borrow, code = E0505)]"] # [doc = " pub struct MoveOutOfBorrowError<'tcx> {"] # [doc = "     pub name: Ident,"] # [doc = "     pub ty: Ty<'tcx>,"] # [doc = "     #[primary_span]"] # [doc = "     #[label]"] # [doc = "     pub span: Span,"] # [doc = "     #[label(first_borrow_label)]"] # [doc = "     pub first_borrow_span: Span,"] # [doc = "     #[suggestion(code = \"{name}.clone()\")]"] # [doc = "     pub clone_sugg: Option<(Span, Applicability)>"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```fluent"] # [doc = " move_out_of_borrow = cannot move out of {$name} because it is borrowed"] # [doc = "     .label = cannot move out of borrow"] # [doc = "     .first_borrow_label = `{$ty}` first borrowed here"] # [doc = "     .suggestion = consider cloning here"] # [doc = " ```"] # [doc = ""] # [doc = " Then, later, to emit the error:"] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " sess.emit_err(MoveOutOfBorrowError {"] # [doc = "     expected,"] # [doc = "     actual,"] # [doc = "     span,"] # [doc = "     first_borrow_span,"] # [doc = "     clone_sugg: Some(suggestion, Applicability::MachineApplicable),"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " See rustc dev guide for more examples on using the `#[derive(Diagnostic)]`:"] # [doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html>"] pub (super) fn diagnostic_derive (s : Structure < '_ >) -> TokenStream { DiagnosticDerive :: new (s) . into_tokens () }
+}
+
+macro_rules! lint_diagnostic_derive_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function lint_diagnostic_derive in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    lint_diagnostic_derive_introspect!();
+    # [doc = " Implements `#[derive(LintDiagnostic)]`, which allows for lints to be specified as a struct,"] # [doc = " independent from the actual lint emitting code."] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " #[derive(LintDiagnostic)]"] # [doc = " #[diag(lint_atomic_ordering_invalid_fail_success)]"] # [doc = " pub struct AtomicOrderingInvalidLint {"] # [doc = "     method: Symbol,"] # [doc = "     success_ordering: Symbol,"] # [doc = "     fail_ordering: Symbol,"] # [doc = "     #[label(fail_label)]"] # [doc = "     fail_order_arg_span: Span,"] # [doc = "     #[label(success_label)]"] # [doc = "     #[suggestion("] # [doc = "         code = \"std::sync::atomic::Ordering::{success_suggestion}\","] # [doc = "         applicability = \"maybe-incorrect\""] # [doc = "     )]"] # [doc = "     success_order_arg_span: Span,"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```fluent"] # [doc = " lint_atomic_ordering_invalid_fail_success = `{$method}`'s success ordering must be at least as strong as its failure ordering"] # [doc = "     .fail_label = `{$fail_ordering}` failure ordering"] # [doc = "     .success_label = `{$success_ordering}` success ordering"] # [doc = "     .suggestion = consider using `{$success_suggestion}` success ordering instead"] # [doc = " ```"] # [doc = ""] # [doc = " Then, later, to emit the error:"] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " cx.emit_span_lint(INVALID_ATOMIC_ORDERING, fail_order_arg_span, AtomicOrderingInvalidLint {"] # [doc = "     method,"] # [doc = "     success_ordering,"] # [doc = "     fail_ordering,"] # [doc = "     fail_order_arg_span,"] # [doc = "     success_order_arg_span,"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " See rustc dev guide for more examples on using the `#[derive(LintDiagnostic)]`:"] # [doc = " <https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html#reference>"] pub (super) fn lint_diagnostic_derive (s : Structure < '_ >) -> TokenStream { LintDiagnosticDerive :: new (s) . into_tokens () }
+}
+
+macro_rules! subdiagnostic_derive_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function subdiagnostic_derive in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    subdiagnostic_derive_introspect!();
+    # [doc = " Implements `#[derive(Subdiagnostic)]`, which allows for labels, notes, helps and"] # [doc = " suggestions to be specified as a structs or enums, independent from the actual diagnostics"] # [doc = " emitting code or diagnostic derives."] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " #[derive(Subdiagnostic)]"] # [doc = " pub enum ExpectedIdentifierLabel<'tcx> {"] # [doc = "     #[label(expected_identifier)]"] # [doc = "     WithoutFound {"] # [doc = "         #[primary_span]"] # [doc = "         span: Span,"] # [doc = "     }"] # [doc = "     #[label(expected_identifier_found)]"] # [doc = "     WithFound {"] # [doc = "         #[primary_span]"] # [doc = "         span: Span,"] # [doc = "         found: String,"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " #[derive(Subdiagnostic)]"] # [doc = " #[suggestion(style = \"verbose\",parser::raw_identifier)]"] # [doc = " pub struct RawIdentifierSuggestion<'tcx> {"] # [doc = "     #[primary_span]"] # [doc = "     span: Span,"] # [doc = "     #[applicability]"] # [doc = "     applicability: Applicability,"] # [doc = "     ident: Ident,"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```fluent"] # [doc = " parser_expected_identifier = expected identifier"] # [doc = ""] # [doc = " parser_expected_identifier_found = expected identifier, found {$found}"] # [doc = ""] # [doc = " parser_raw_identifier = escape `{$ident}` to use it as an identifier"] # [doc = " ```"] # [doc = ""] # [doc = " Then, later, to add the subdiagnostic:"] # [doc = ""] # [doc = " ```ignore (rust)"] # [doc = " diag.subdiagnostic(ExpectedIdentifierLabel::WithoutFound { span });"] # [doc = ""] # [doc = " diag.subdiagnostic(RawIdentifierSuggestion { span, applicability, ident });"] # [doc = " ```"] pub (super) fn subdiagnostic_derive (s : Structure < '_ >) -> TokenStream { SubdiagnosticDerive :: new () . into_tokens (s) }
+}

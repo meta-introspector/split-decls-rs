@@ -1,0 +1,47 @@
+mkuse!{use std :: mem ;}
+mkuse!{use rustc_errors :: { Diag , DiagArgName , DiagArgValue , DiagMessage , IntoDiagArg } ;}
+mkuse!{use rustc_middle :: mir :: AssertKind ;}
+mkuse!{use rustc_middle :: mir :: interpret :: { AllocId , Provenance , ReportedErrorInfo , UndefinedBehaviorInfo } ;}
+mkuse!{use rustc_middle :: query :: TyCtxtAt ;}
+mkuse!{use rustc_middle :: ty :: ConstInt ;}
+mkuse!{use rustc_middle :: ty :: layout :: LayoutError ;}
+mkuse!{use rustc_span :: { Span , Symbol } ;}
+mkuse!{use super :: CompileTimeMachine ;}
+mkuse!{use crate :: errors :: { self , FrameNote , ReportErrorExt } ;}
+mkuse!{use crate :: interpret :: { CtfeProvenance , ErrorHandled , Frame , InterpCx , InterpErrorInfo , InterpErrorKind , MachineStopType , Pointer , err_inval , err_machine_stop , } ;}
+mkitem!{mkenum!{# [doc = " The CTFE machine has some custom error kinds."] # [derive (Clone , Debug)] pub enum ConstEvalErrKind { ConstAccessesMutGlobal , ModifiedGlobal , RecursiveStatic , AssertFailure (AssertKind < ConstInt >) , Panic { msg : Symbol , line : u32 , col : u32 , file : Symbol , } , WriteThroughImmutablePointer , # [doc = " Called `const_make_global` twice."] ConstMakeGlobalPtrAlreadyMadeGlobal (AllocId) , # [doc = " Called `const_make_global` on a non-heap pointer."] ConstMakeGlobalPtrIsNonHeap (Pointer < Option < CtfeProvenance > >) , # [doc = " Called `const_make_global` on a dangling pointer."] ConstMakeGlobalWithDanglingPtr (Pointer < Option < CtfeProvenance > >) , # [doc = " Called `const_make_global` on a pointer that does not start at the"] # [doc = " beginning of an object."] ConstMakeGlobalWithOffset (Pointer < Option < CtfeProvenance > >) , }}}
+mkitem!{mkimpl!{impl MachineStopType for ConstEvalErrKind { fn diagnostic_message (& self) -> DiagMessage { use ConstEvalErrKind :: * ; use crate :: fluent_generated :: * ; match self { ConstAccessesMutGlobal => const_eval_const_accesses_mut_global , ModifiedGlobal => const_eval_modified_global , Panic { .. } => const_eval_panic , RecursiveStatic => const_eval_recursive_static , AssertFailure (x) => x . diagnostic_message () , WriteThroughImmutablePointer => const_eval_write_through_immutable_pointer , ConstMakeGlobalPtrAlreadyMadeGlobal { .. } => { const_eval_const_make_global_ptr_already_made_global } ConstMakeGlobalPtrIsNonHeap (_) => const_eval_const_make_global_ptr_is_non_heap , ConstMakeGlobalWithDanglingPtr (_) => const_eval_const_make_global_with_dangling_ptr , ConstMakeGlobalWithOffset (_) => const_eval_const_make_global_with_offset , } } fn add_args (self : Box < Self > , adder : & mut dyn FnMut (DiagArgName , DiagArgValue)) { use ConstEvalErrKind :: * ; match * self { RecursiveStatic | ConstAccessesMutGlobal | ModifiedGlobal | WriteThroughImmutablePointer => { } AssertFailure (kind) => kind . add_args (adder) , Panic { msg , .. } => { adder ("msg" . into () , msg . into_diag_arg (& mut None)) ; } ConstMakeGlobalPtrIsNonHeap (ptr) | ConstMakeGlobalWithOffset (ptr) | ConstMakeGlobalWithDanglingPtr (ptr) => { adder ("ptr" . into () , format ! ("{ptr:?}") . into_diag_arg (& mut None)) ; } ConstMakeGlobalPtrAlreadyMadeGlobal (alloc) => { adder ("alloc" . into () , alloc . into_diag_arg (& mut None)) ; } } } }}}
+mkitem!{mkimpl!{# [doc = " The errors become [`InterpErrorKind::MachineStop`] when being raised."] impl < 'tcx > Into < InterpErrorInfo < 'tcx > > for ConstEvalErrKind { fn into (self) -> InterpErrorInfo < 'tcx > { err_machine_stop ! (self) . into () } }}}
+
+macro_rules! get_span_and_frames_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function get_span_and_frames in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    get_span_and_frames_introspect!();
+    pub fn get_span_and_frames < 'tcx > (tcx : TyCtxtAt < 'tcx > , stack : & [Frame < 'tcx , impl Provenance , impl Sized >] ,) -> (Span , Vec < errors :: FrameNote >) { let mut stacktrace = Frame :: generate_stacktrace_from_stack (stack) ; stacktrace . retain (| frame | ! frame . instance . def . requires_caller_location (* tcx)) ; let span = stacktrace . last () . map (| f | f . span) . unwrap_or (tcx . span) ; let mut frames = Vec :: new () ; if stacktrace . len () > 1 { let mut add_frame = | mut frame : errors :: FrameNote | { frames . push (errors :: FrameNote { times : 0 , .. frame . clone () }) ; if frame . times < 3 { let times = frame . times ; frame . times = 0 ; frames . extend (std :: iter :: repeat (frame) . take (times as usize)) ; } else { frames . push (frame) ; } } ; let mut last_frame : Option < errors :: FrameNote > = None ; for frame_info in & stacktrace { let frame = frame_info . as_note (* tcx) ; match last_frame . as_mut () { Some (last_frame) if last_frame . span == frame . span && last_frame . where_ == frame . where_ && last_frame . instance == frame . instance => { last_frame . times += 1 ; } Some (last_frame) => { add_frame (mem :: replace (last_frame , frame)) ; } None => { last_frame = Some (frame) ; } } } if let Some (frame) = last_frame { add_frame (frame) ; } } frames . reverse () ; if frames . len () > 0 { frames . remove (0) ; } if let Some (last) = frames . last_mut () && tcx . sess . source_map () . span_to_snippet (last . span . source_callsite ()) . is_ok () { last . has_label = true ; } (span , frames) }
+}
+
+macro_rules! report_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function report in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    report_introspect!();
+    # [doc = " Create a diagnostic for a const eval error."] # [doc = ""] # [doc = " This will use the `mk` function for adding more information to the error."] # [doc = " You can use it to add a stacktrace of current execution according to"] # [doc = " `get_span_and_frames` or just give context on where the const eval error happened."] pub (super) fn report < 'tcx , C , F > (ecx : & InterpCx < 'tcx , CompileTimeMachine < 'tcx > > , error : InterpErrorKind < 'tcx > , span : Span , get_span_and_frames : C , mk : F ,) -> ErrorHandled where C : FnOnce () -> (Span , Vec < FrameNote >) , F : FnOnce (& mut Diag < '_ > , Span , Vec < FrameNote >) , { let tcx = ecx . tcx . tcx ; match error { err_inval ! (AlreadyReported (info)) => ErrorHandled :: Reported (info , span) , err_inval ! (Layout (LayoutError :: TooGeneric (_))) | err_inval ! (TooGeneric) => { ErrorHandled :: TooGeneric (span) } err_inval ! (Layout (LayoutError :: ReferencesError (guar))) => { ErrorHandled :: Reported (ReportedErrorInfo :: allowed_in_infallible (guar) , span) } _ => { let (our_span , frames) = get_span_and_frames () ; let span = span . substitute_dummy (our_span) ; let mut err = tcx . dcx () . struct_span_err (our_span , error . diagnostic_message ()) ; let allowed_in_infallible = matches ! (error , InterpErrorKind :: ResourceExhaustion (_) | InterpErrorKind :: InvalidProgram (_)) ; if let InterpErrorKind :: UndefinedBehavior (UndefinedBehaviorInfo :: InvalidUninitBytes (Some ((alloc_id , _access)) ,)) = error { let bytes = ecx . print_alloc_bytes_for_diagnostics (alloc_id) ; let info = ecx . get_alloc_info (alloc_id) ; let raw_bytes = errors :: RawBytesNote { size : info . size . bytes () , align : info . align . bytes () , bytes , } ; err . subdiagnostic (raw_bytes) ; } error . add_args (& mut err) ; mk (& mut err , span , frames) ; let g = err . emit () ; let reported = if allowed_in_infallible { ReportedErrorInfo :: allowed_in_infallible (g) } else { ReportedErrorInfo :: const_eval_error (g) } ; ErrorHandled :: Reported (reported , span) } } }
+}
+
+macro_rules! lint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function lint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    lint_introspect!();
+    # [doc = " Emit a lint from a const-eval situation, with a backtrace."] # [allow (unused)] pub (super) fn lint < 'tcx , L > (tcx : TyCtxtAt < 'tcx > , machine : & CompileTimeMachine < 'tcx > , lint : & 'static rustc_session :: lint :: Lint , decorator : impl FnOnce (Vec < errors :: FrameNote >) -> L ,) where L : for < 'a > rustc_errors :: LintDiagnostic < 'a , () > , { let (span , frames) = get_span_and_frames (tcx , & machine . stack) ; tcx . emit_node_span_lint (lint , machine . best_lint_scope (* tcx) , span , decorator (frames)) ; }
+}

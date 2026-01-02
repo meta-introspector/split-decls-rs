@@ -1,0 +1,85 @@
+mkuse!{use crate :: mem :: MaybeUninit ;}
+mkuse!{use crate :: slice :: sort :: shared :: find_existing_run ;}
+mkuse!{use crate :: slice :: sort :: shared :: smallsort :: StableSmallSortTypeImpl ;}
+mkuse!{use crate :: slice :: sort :: stable :: merge :: merge ;}
+mkuse!{use crate :: slice :: sort :: stable :: quicksort :: quicksort ;}
+mkuse!{use crate :: { cmp , intrinsics } ;}
+
+macro_rules! sort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function sort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    sort_introspect!();
+    # [doc = " Sorts `v` based on comparison function `is_less`. If `eager_sort` is true,"] # [doc = " it will only do small-sorts and physical merges, ensuring O(N * log(N))"] # [doc = " worst-case complexity. `scratch.len()` must be at least"] # [doc = " `max(v.len() - v.len() / 2, SMALL_SORT_GENERAL_SCRATCH_LEN)` otherwise the implementation may abort."] # [doc = " Fully ascending and descending inputs will be sorted with exactly N - 1"] # [doc = " comparisons."] # [doc = ""] # [doc = " This is the main loop for driftsort, which uses powersort's heuristic to"] # [doc = " determine in which order to merge runs, see below for details."] pub fn sort < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , scratch : & mut [MaybeUninit < T >] , eager_sort : bool , is_less : & mut F ,) { let len = v . len () ; if len < 2 { return ; } let scale_factor = merge_tree_scale_factor (len) ; const MIN_SQRT_RUN_LEN : usize = 64 ; let min_good_run_len = if len <= (MIN_SQRT_RUN_LEN * MIN_SQRT_RUN_LEN) { cmp :: min (len - len / 2 , MIN_SQRT_RUN_LEN) } else { sqrt_approx (len) } ; let mut stack_len = 0 ; let mut run_storage = MaybeUninit :: < [DriftsortRun ; 66] > :: uninit () ; let runs : * mut DriftsortRun = run_storage . as_mut_ptr () . cast () ; let mut desired_depth_storage = MaybeUninit :: < [u8 ; 66] > :: uninit () ; let desired_depths : * mut u8 = desired_depth_storage . as_mut_ptr () . cast () ; let mut scan_idx = 0 ; let mut prev_run = DriftsortRun :: new_sorted (0) ; loop { let (next_run , desired_depth) ; if scan_idx < len { next_run = create_run (& mut v [scan_idx ..] , scratch , min_good_run_len , eager_sort , is_less) ; desired_depth = merge_tree_depth (scan_idx - prev_run . len () , scan_idx , scan_idx + next_run . len () , scale_factor ,) ; } else { next_run = DriftsortRun :: new_sorted (0) ; desired_depth = 0 ; } ; unsafe { while stack_len > 1 && * desired_depths . add (stack_len - 1) >= desired_depth { let left = * runs . add (stack_len - 1) ; let merged_len = left . len () + prev_run . len () ; let merge_start_idx = scan_idx - merged_len ; let merge_slice = v . get_unchecked_mut (merge_start_idx .. scan_idx) ; prev_run = logical_merge (merge_slice , scratch , left , prev_run , is_less) ; stack_len -= 1 ; } * runs . add (stack_len) = prev_run ; * desired_depths . add (stack_len) = desired_depth ; stack_len += 1 ; } if scan_idx >= len { break ; } scan_idx += next_run . len () ; prev_run = next_run ; } if ! prev_run . sorted () { stable_quicksort (v , scratch , is_less) ; } }
+}
+
+macro_rules! merge_tree_scale_factor_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function merge_tree_scale_factor in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    merge_tree_scale_factor_introspect!();
+    # [inline (always)] fn merge_tree_scale_factor (n : usize) -> u64 { if usize :: BITS > u64 :: BITS { panic ! ("Platform not supported") ; } (1u64 << 62) . div_ceil (n as u64) }
+}
+
+macro_rules! merge_tree_depth_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function merge_tree_depth in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    merge_tree_depth_introspect!();
+    # [inline (always)] fn merge_tree_depth (left : usize , mid : usize , right : usize , scale_factor : u64) -> u8 { let x = left as u64 + mid as u64 ; let y = mid as u64 + right as u64 ; ((scale_factor * x) ^ (scale_factor * y)) . leading_zeros () as u8 }
+}
+
+macro_rules! sqrt_approx_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function sqrt_approx in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    sqrt_approx_introspect!();
+    fn sqrt_approx (n : usize) -> usize { let ilog = (n | 1) . ilog2 () ; let shift = ilog . div_ceil (2) ; ((1 << shift) + (n >> shift)) / 2 }
+}
+
+macro_rules! logical_merge_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function logical_merge in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    logical_merge_introspect!();
+    # [inline (always)] fn logical_merge < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , scratch : & mut [MaybeUninit < T >] , left : DriftsortRun , right : DriftsortRun , is_less : & mut F ,) -> DriftsortRun { let len = v . len () ; let can_fit_in_scratch = len <= scratch . len () ; if ! can_fit_in_scratch || left . sorted () || right . sorted () { if ! left . sorted () { stable_quicksort (& mut v [.. left . len ()] , scratch , is_less) ; } if ! right . sorted () { stable_quicksort (& mut v [left . len () ..] , scratch , is_less) ; } merge (v , scratch , left . len () , is_less) ; DriftsortRun :: new_sorted (len) } else { DriftsortRun :: new_unsorted (len) } }
+}
+
+macro_rules! create_run_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function create_run in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    create_run_introspect!();
+    # [doc = " Creates a new logical run."] # [doc = ""] # [doc = " A logical run can either be sorted or unsorted. If there is a pre-existing"] # [doc = " run that clears the `min_good_run_len` threshold it is returned as a sorted"] # [doc = " run. If not, the result depends on the value of `eager_sort`. If it is true,"] # [doc = " then a sorted run of length `T::SMALL_SORT_THRESHOLD` is returned, and if it"] # [doc = " is false an unsorted run of length `min_good_run_len` is returned."] fn create_run < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , scratch : & mut [MaybeUninit < T >] , min_good_run_len : usize , eager_sort : bool , is_less : & mut F ,) -> DriftsortRun { let len = v . len () ; if len >= min_good_run_len { let (run_len , was_reversed) = find_existing_run (v , is_less) ; unsafe { intrinsics :: assume (run_len <= len) } ; if run_len >= min_good_run_len { if was_reversed { v [.. run_len] . reverse () ; } return DriftsortRun :: new_sorted (run_len) ; } } if eager_sort { let eager_run_len = cmp :: min (T :: small_sort_threshold () , len) ; quicksort (& mut v [.. eager_run_len] , scratch , 0 , None , is_less) ; DriftsortRun :: new_sorted (eager_run_len) } else { DriftsortRun :: new_unsorted (cmp :: min (min_good_run_len , len)) } }
+}
+
+macro_rules! stable_quicksort_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function stable_quicksort in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    stable_quicksort_introspect!();
+    fn stable_quicksort < T , F : FnMut (& T , & T) -> bool > (v : & mut [T] , scratch : & mut [MaybeUninit < T >] , is_less : & mut F ,) { let limit = 2 * (v . len () | 1) . ilog2 () ; quicksort (v , scratch , limit , None , is_less) ; }
+}
+mkitem!{mkstruct!{# [doc = " Compactly stores the length of a run, and whether or not it is sorted. This"] # [doc = " can always fit in a `usize` because the maximum slice length is [`isize::MAX`]."] # [derive (Copy , Clone)] struct DriftsortRun (usize) ;}}
+mkitem!{mkimpl!{impl DriftsortRun { # [inline (always)] fn new_sorted (length : usize) -> Self { Self ((length << 1) | 1) } # [inline (always)] fn new_unsorted (length : usize) -> Self { Self (length << 1) } # [inline (always)] fn sorted (self) -> bool { self . 0 & 1 == 1 } # [inline (always)] fn len (self) -> usize { self . 0 >> 1 } }}}

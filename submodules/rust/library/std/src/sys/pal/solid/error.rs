@@ -1,0 +1,26 @@
+mkuse!{pub use self :: itron :: error :: { ItronError as SolidError , expect_success } ;}
+mkuse!{use super :: { abi , itron } ;}
+mkuse!{use crate :: io :: ErrorKind ;}
+mkuse!{use crate :: sys :: net ;}
+
+macro_rules! error_name_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function error_name in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    error_name_introspect!();
+    # [doc = " Describe the specified SOLID error code. Returns `None` if it's an"] # [doc = " undefined error code."] # [doc = ""] # [doc = " The SOLID error codes are a superset of μITRON error codes."] pub fn error_name (er : abi :: ER) -> Option < & 'static str > { match er { er if er >= 0 => None , er if er < abi :: sockets :: SOLID_NET_ERR_BASE => net :: error_name (er) , abi :: SOLID_ERR_NOTFOUND => Some ("not found") , abi :: SOLID_ERR_NOTSUPPORTED => Some ("not supported") , abi :: SOLID_ERR_EBADF => Some ("bad flags") , abi :: SOLID_ERR_INVALIDCONTENT => Some ("invalid content") , abi :: SOLID_ERR_NOTUSED => Some ("not used") , abi :: SOLID_ERR_ALREADYUSED => Some ("already used") , abi :: SOLID_ERR_OUTOFBOUND => Some ("out of bounds") , abi :: SOLID_ERR_BADSEQUENCE => Some ("bad sequence") , abi :: SOLID_ERR_UNKNOWNDEVICE => Some ("unknown device") , abi :: SOLID_ERR_BUSY => Some ("busy") , abi :: SOLID_ERR_TIMEOUT => Some ("operation timed out") , abi :: SOLID_ERR_INVALIDACCESS => Some ("invalid access") , abi :: SOLID_ERR_NOTREADY => Some ("not ready") , _ => itron :: error :: error_name (er) , } }
+}
+
+macro_rules! decode_error_kind_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function decode_error_kind in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    decode_error_kind_introspect!();
+    pub fn decode_error_kind (er : abi :: ER) -> ErrorKind { match er { er if er >= 0 => ErrorKind :: Uncategorized , er if er < abi :: sockets :: SOLID_NET_ERR_BASE => net :: decode_error_kind (er) , abi :: SOLID_ERR_NOTFOUND => ErrorKind :: NotFound , abi :: SOLID_ERR_NOTSUPPORTED => ErrorKind :: Unsupported , abi :: SOLID_ERR_EBADF => ErrorKind :: InvalidInput , abi :: SOLID_ERR_INVALIDCONTENT => ErrorKind :: InvalidData , abi :: SOLID_ERR_OUTOFBOUND => ErrorKind :: InvalidInput , abi :: SOLID_ERR_UNKNOWNDEVICE => ErrorKind :: NotFound , abi :: SOLID_ERR_TIMEOUT => ErrorKind :: TimedOut , _ => itron :: error :: decode_error_kind (er) , } }
+}

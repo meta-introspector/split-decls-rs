@@ -1,0 +1,7 @@
+mkuse!{use rustc_hir :: LangItem ;}
+mkuse!{use rustc_middle :: mir :: * ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use tracing :: { debug , trace } ;}
+mkuse!{use super :: simplify :: simplify_cfg ;}
+mkitem!{mkstruct!{pub (super) struct RemoveUnneededDrops ;}}
+mkitem!{mkimpl!{impl < 'tcx > crate :: MirPass < 'tcx > for RemoveUnneededDrops { fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { trace ! ("Running RemoveUnneededDrops on {:?}" , body . source) ; let typing_env = body . typing_env (tcx) ; let mut should_simplify = false ; for block in body . basic_blocks . as_mut () { let terminator = block . terminator_mut () ; let (ty , target) = match terminator . kind { TerminatorKind :: Drop { place , target , .. } => { (place . ty (& body . local_decls , tcx) . ty , target) } TerminatorKind :: Call { ref func , target : Some (target) , .. } if tcx . sess . mir_opt_level () > 0 && let Some ((def_id , generics)) = func . const_fn_def () && tcx . is_lang_item (def_id , LangItem :: DropInPlace) => { (generics . type_at (0) , target) } _ => continue , } ; if ty . needs_drop (tcx , typing_env) { continue ; } debug ! ("SUCCESS: replacing `drop` with goto({:?})" , target) ; terminator . kind = TerminatorKind :: Goto { target } ; should_simplify = true ; } if should_simplify { simplify_cfg (tcx , body) ; } } fn is_required (& self) -> bool { true } }}}

@@ -1,0 +1,16 @@
+mkuse!{use crate :: os :: windows :: io :: FromRawHandle ;}
+mkuse!{use crate :: sys :: c ;}
+mkuse!{use crate :: sys :: handle :: Handle ;}
+mkuse!{use crate :: { io , ptr } ;}
+mkitem!{pub type AnonPipe = Handle ;}
+
+macro_rules! pipe_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function pipe in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    pipe_introspect!();
+    pub fn pipe () -> io :: Result < (AnonPipe , AnonPipe) > { let mut read_pipe = c :: INVALID_HANDLE_VALUE ; let mut write_pipe = c :: INVALID_HANDLE_VALUE ; let ret = unsafe { c :: CreatePipe (& mut read_pipe , & mut write_pipe , ptr :: null_mut () , 0) } ; if ret == 0 { Err (io :: Error :: last_os_error ()) } else { unsafe { Ok ((Handle :: from_raw_handle (read_pipe) , Handle :: from_raw_handle (write_pipe))) } } }
+}

@@ -1,0 +1,40 @@
+mkuse!{use rustc_span :: kw ;}
+mkuse!{use crate :: ast :: { self , AssignOpKind , BinOpKind , RangeLimits } ;}
+mkuse!{use crate :: token :: { self , Token } ;}
+mkitem!{mkenum!{# [doc = " Associative operator."] # [derive (Copy , Clone , PartialEq , Debug)] pub enum AssocOp { # [doc = " A binary op."] Binary (BinOpKind) , # [doc = " `?=` where ? is one of the assignable BinOps"] AssignOp (AssignOpKind) , # [doc = " `=`"] Assign , # [doc = " `as`"] Cast , # [doc = " `..` or `..=` range"] Range (RangeLimits) , }}}
+mkitem!{mkenum!{# [derive (PartialEq , Debug)] pub enum Fixity { # [doc = " The operator is left-associative"] Left , # [doc = " The operator is right-associative"] Right , # [doc = " The operator is not associative"] None , }}}
+mkitem!{mkimpl!{impl AssocOp { # [doc = " Creates a new AssocOp from a token."] pub fn from_token (t : & Token) -> Option < AssocOp > { use AssocOp :: * ; match t . kind { token :: Eq => Some (Assign) , token :: Plus => Some (Binary (BinOpKind :: Add)) , token :: Minus => Some (Binary (BinOpKind :: Sub)) , token :: Star => Some (Binary (BinOpKind :: Mul)) , token :: Slash => Some (Binary (BinOpKind :: Div)) , token :: Percent => Some (Binary (BinOpKind :: Rem)) , token :: Caret => Some (Binary (BinOpKind :: BitXor)) , token :: And => Some (Binary (BinOpKind :: BitAnd)) , token :: Or => Some (Binary (BinOpKind :: BitOr)) , token :: Shl => Some (Binary (BinOpKind :: Shl)) , token :: Shr => Some (Binary (BinOpKind :: Shr)) , token :: PlusEq => Some (AssignOp (AssignOpKind :: AddAssign)) , token :: MinusEq => Some (AssignOp (AssignOpKind :: SubAssign)) , token :: StarEq => Some (AssignOp (AssignOpKind :: MulAssign)) , token :: SlashEq => Some (AssignOp (AssignOpKind :: DivAssign)) , token :: PercentEq => Some (AssignOp (AssignOpKind :: RemAssign)) , token :: CaretEq => Some (AssignOp (AssignOpKind :: BitXorAssign)) , token :: AndEq => Some (AssignOp (AssignOpKind :: BitAndAssign)) , token :: OrEq => Some (AssignOp (AssignOpKind :: BitOrAssign)) , token :: ShlEq => Some (AssignOp (AssignOpKind :: ShlAssign)) , token :: ShrEq => Some (AssignOp (AssignOpKind :: ShrAssign)) , token :: Lt => Some (Binary (BinOpKind :: Lt)) , token :: Le => Some (Binary (BinOpKind :: Le)) , token :: Ge => Some (Binary (BinOpKind :: Ge)) , token :: Gt => Some (Binary (BinOpKind :: Gt)) , token :: EqEq => Some (Binary (BinOpKind :: Eq)) , token :: Ne => Some (Binary (BinOpKind :: Ne)) , token :: AndAnd => Some (Binary (BinOpKind :: And)) , token :: OrOr => Some (Binary (BinOpKind :: Or)) , token :: DotDot => Some (Range (RangeLimits :: HalfOpen)) , token :: DotDotEq | token :: DotDotDot => Some (Range (RangeLimits :: Closed)) , token :: LArrow => Some (Binary (BinOpKind :: Lt)) , _ if t . is_keyword (kw :: As) => Some (Cast) , _ => None , } } # [doc = " Gets the precedence of this operator"] pub fn precedence (& self) -> ExprPrecedence { use AssocOp :: * ; match * self { Cast => ExprPrecedence :: Cast , Binary (bin_op) => bin_op . precedence () , Range (_) => ExprPrecedence :: Range , Assign | AssignOp (_) => ExprPrecedence :: Assign , } } # [doc = " Gets the fixity of this operator"] pub fn fixity (& self) -> Fixity { use AssocOp :: * ; match * self { Assign | AssignOp (_) => Fixity :: Right , Binary (binop) => binop . fixity () , Cast => Fixity :: Left , Range (_) => Fixity :: None , } } pub fn is_comparison (& self) -> bool { use AssocOp :: * ; match * self { Binary (binop) => binop . is_comparison () , Assign | AssignOp (_) | Cast | Range (_) => false , } } pub fn is_assign_like (& self) -> bool { use AssocOp :: * ; match * self { Assign | AssignOp (_) => true , Cast | Binary (_) | Range (_) => false , } } # [doc = " This operator could be used to follow a block unambiguously."] # [doc = ""] # [doc = " This is used for error recovery at the moment, providing a suggestion to wrap blocks with"] # [doc = " parentheses while having a high degree of confidence on the correctness of the suggestion."] pub fn can_continue_expr_unambiguously (& self) -> bool { use AssocOp :: * ; use BinOpKind :: * ; matches ! (self , Assign | Binary (BitXor | Div | Rem | Shr | Le | Gt | Ge) | AssignOp (_) | Cast) } }}}
+mkitem!{mkenum!{# [derive (Clone , Copy , PartialEq , PartialOrd)] pub enum ExprPrecedence { Jump , Assign , Range , LOr , LAnd , Compare , BitOr , BitXor , BitAnd , Shift , Sum , Product , Cast , Prefix , Unambiguous , }}}
+
+macro_rules! prec_let_scrutinee_needs_par_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function prec_let_scrutinee_needs_par in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    prec_let_scrutinee_needs_par_introspect!();
+    # [doc = " In `let p = e`, operators with precedence `<=` this one requires parentheses in `e`."] pub fn prec_let_scrutinee_needs_par () -> ExprPrecedence { ExprPrecedence :: LAnd }
+}
+
+macro_rules! needs_par_as_let_scrutinee_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function needs_par_as_let_scrutinee in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    needs_par_as_let_scrutinee_introspect!();
+    # [doc = " Suppose we have `let _ = e` and the `order` of `e`."] # [doc = " Is the `order` such that `e` in `let _ = e` needs parentheses when it is on the RHS?"] # [doc = ""] # [doc = " Conversely, suppose that we have `(let _ = a) OP b` and `order` is that of `OP`."] # [doc = " Can we print this as `let _ = a OP b`?"] pub fn needs_par_as_let_scrutinee (order : ExprPrecedence) -> bool { order <= prec_let_scrutinee_needs_par () }
+}
+
+macro_rules! contains_exterior_struct_lit_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function contains_exterior_struct_lit in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    contains_exterior_struct_lit_introspect!();
+    # [doc = " Expressions that syntactically contain an \"exterior\" struct literal i.e., not surrounded by any"] # [doc = " parens or other delimiters, e.g., `X { y: 1 }`, `X { y: 1 }.method()`, `foo == X { y: 1 }` and"] # [doc = " `X { y: 1 } == foo` all do, but `(X { y: 1 }) == foo` does not."] pub fn contains_exterior_struct_lit (value : & ast :: Expr) -> bool { match & value . kind { ast :: ExprKind :: Struct (..) => true , ast :: ExprKind :: Assign (lhs , rhs , _) | ast :: ExprKind :: AssignOp (_ , lhs , rhs) | ast :: ExprKind :: Binary (_ , lhs , rhs) => { contains_exterior_struct_lit (lhs) || contains_exterior_struct_lit (rhs) } ast :: ExprKind :: Await (x , _) | ast :: ExprKind :: Unary (_ , x) | ast :: ExprKind :: Cast (x , _) | ast :: ExprKind :: Type (x , _) | ast :: ExprKind :: Field (x , _) | ast :: ExprKind :: Index (x , _ , _) | ast :: ExprKind :: Match (x , _ , ast :: MatchKind :: Postfix) => { contains_exterior_struct_lit (x) } ast :: ExprKind :: MethodCall (box ast :: MethodCall { receiver , .. }) => { contains_exterior_struct_lit (receiver) } _ => false , } }
+}

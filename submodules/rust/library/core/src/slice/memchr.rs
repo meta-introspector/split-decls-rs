@@ -1,0 +1,59 @@
+mkuse!{use crate :: intrinsics :: const_eval_select ;}
+mkitem!{const LO_USIZE : usize = usize :: repeat_u8 (0x01) ;}
+mkitem!{const HI_USIZE : usize = usize :: repeat_u8 (0x80) ;}
+mkitem!{const USIZE_BYTES : usize = size_of :: < usize > () ;}
+
+macro_rules! contains_zero_byte_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function contains_zero_byte in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    contains_zero_byte_introspect!();
+    # [doc = " Returns `true` if `x` contains any zero byte."] # [doc = ""] # [doc = " From *Matters Computational*, J. Arndt:"] # [doc = ""] # [doc = " \"The idea is to subtract one from each of the bytes and then look for"] # [doc = " bytes where the borrow propagated all the way to the most significant"] # [doc = " bit.\""] # [inline] const fn contains_zero_byte (x : usize) -> bool { x . wrapping_sub (LO_USIZE) & ! x & HI_USIZE != 0 }
+}
+
+macro_rules! memchr_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memchr in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memchr_introspect!();
+    # [doc = " Returns the first index matching the byte `x` in `text`."] # [inline] # [must_use] pub const fn memchr (x : u8 , text : & [u8]) -> Option < usize > { if text . len () < 2 * USIZE_BYTES { return memchr_naive (x , text) ; } memchr_aligned (x , text) }
+}
+
+macro_rules! memchr_naive_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memchr_naive in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memchr_naive_introspect!();
+    # [inline] const fn memchr_naive (x : u8 , text : & [u8]) -> Option < usize > { let mut i = 0 ; while i < text . len () { if text [i] == x { return Some (i) ; } i += 1 ; } None }
+}
+
+macro_rules! memchr_aligned_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memchr_aligned in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memchr_aligned_introspect!();
+    # [rustc_allow_const_fn_unstable (const_eval_select)] const fn memchr_aligned (x : u8 , text : & [u8]) -> Option < usize > { const_eval_select ! (@ capture { x : u8 , text : & [u8] } -> Option < usize >: if const { memchr_naive (x , text) } else { let len = text . len () ; let ptr = text . as_ptr () ; let mut offset = ptr . align_offset (USIZE_BYTES) ; if offset > 0 { offset = offset . min (len) ; let slice = & text [.. offset] ; if let Some (index) = memchr_naive (x , slice) { return Some (index) ; } } let repeated_x = usize :: repeat_u8 (x) ; while offset <= len - 2 * USIZE_BYTES { unsafe { let u = * (ptr . add (offset) as * const usize) ; let v = * (ptr . add (offset + USIZE_BYTES) as * const usize) ; let zu = contains_zero_byte (u ^ repeated_x) ; let zv = contains_zero_byte (v ^ repeated_x) ; if zu || zv { break ; } } offset += USIZE_BYTES * 2 ; } let slice = unsafe { super :: from_raw_parts (text . as_ptr () . add (offset) , text . len () - offset) } ; if let Some (i) = memchr_naive (x , slice) { Some (offset + i) } else { None } }) }
+}
+
+macro_rules! memrchr_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function memrchr in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    memrchr_introspect!();
+    # [doc = " Returns the last index matching the byte `x` in `text`."] # [must_use] pub fn memrchr (x : u8 , text : & [u8]) -> Option < usize > { let len = text . len () ; let ptr = text . as_ptr () ; type Chunk = usize ; let (min_aligned_offset , max_aligned_offset) = { let (prefix , _ , suffix) = unsafe { text . align_to :: < (Chunk , Chunk) > () } ; (prefix . len () , len - suffix . len ()) } ; let mut offset = max_aligned_offset ; if let Some (index) = text [offset ..] . iter () . rposition (| elt | * elt == x) { return Some (offset + index) ; } let repeated_x = usize :: repeat_u8 (x) ; let chunk_bytes = size_of :: < Chunk > () ; while offset > min_aligned_offset { unsafe { let u = * (ptr . add (offset - 2 * chunk_bytes) as * const Chunk) ; let v = * (ptr . add (offset - chunk_bytes) as * const Chunk) ; let zu = contains_zero_byte (u ^ repeated_x) ; let zv = contains_zero_byte (v ^ repeated_x) ; if zu || zv { break ; } } offset -= 2 * chunk_bytes ; } text [.. offset] . iter () . rposition (| elt | * elt == x) }
+}

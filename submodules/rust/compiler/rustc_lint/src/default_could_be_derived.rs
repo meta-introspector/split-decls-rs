@@ -1,0 +1,29 @@
+mkuse!{use rustc_data_structures :: fx :: FxHashMap ;}
+mkuse!{use rustc_errors :: { Applicability , Diag } ;}
+mkuse!{use rustc_hir as hir ;}
+mkuse!{use rustc_hir :: attrs :: AttributeKind ;}
+mkuse!{use rustc_hir :: find_attr ;}
+mkuse!{use rustc_middle :: ty ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_session :: { declare_lint , impl_lint_pass } ;}
+mkuse!{use rustc_span :: Symbol ;}
+mkuse!{use rustc_span :: def_id :: DefId ;}
+mkuse!{use rustc_span :: symbol :: sym ;}
+mkuse!{use crate :: { LateContext , LateLintPass } ;}
+mkitem!{declare_lint ! { # [doc = " The `default_overrides_default_fields` lint checks for manual `impl` blocks of the"] # [doc = " `Default` trait of types with default field values."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![feature(default_field_values)]"] # [doc = " struct Foo {"] # [doc = "     x: i32 = 101,"] # [doc = "     y: NonDefault,"] # [doc = " }"] # [doc = ""] # [doc = " struct NonDefault;"] # [doc = ""] # [doc = " #[deny(default_overrides_default_fields)]"] # [doc = " impl Default for Foo {"] # [doc = "     fn default() -> Foo {"] # [doc = "         Foo { x: 100, y: NonDefault }"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Manually writing a `Default` implementation for a type that has"] # [doc = " default field values runs the risk of diverging behavior between"] # [doc = " `Type { .. }` and `<Type as Default>::default()`, which would be a"] # [doc = " foot-gun for users of that type that would expect these to be"] # [doc = " equivalent. If `Default` can't be derived due to some fields not"] # [doc = " having a `Default` implementation, we encourage the use of `..` for"] # [doc = " the fields that do have a default field value."] pub DEFAULT_OVERRIDES_DEFAULT_FIELDS , Deny , "detect `Default` impl that should use the type's default field values" , @ feature_gate = default_field_values ; }}
+mkitem!{mkstruct!{# [derive (Default)] pub (crate) struct DefaultCouldBeDerived ;}}
+mkitem!{impl_lint_pass ! (DefaultCouldBeDerived => [DEFAULT_OVERRIDES_DEFAULT_FIELDS]) ;}
+mkitem!{mkimpl!{impl < 'tcx > LateLintPass < 'tcx > for DefaultCouldBeDerived { fn check_impl_item (& mut self , cx : & LateContext < '_ > , impl_item : & hir :: ImplItem < '_ >) { let Some (default_def_id) = cx . tcx . get_diagnostic_item (sym :: Default) else { return } ; let hir :: ImplItemKind :: Fn (_sig , body_id) = impl_item . kind else { return } ; let parent = cx . tcx . parent (impl_item . owner_id . to_def_id ()) ; if find_attr ! (cx . tcx . get_all_attrs (parent) , AttributeKind :: AutomaticallyDerived (..)) { return ; } let Some (trait_ref) = cx . tcx . impl_trait_ref (parent) else { return } ; let trait_ref = trait_ref . instantiate_identity () ; if trait_ref . def_id != default_def_id { return ; } let ty = trait_ref . self_ty () ; let ty :: Adt (def , _) = ty . kind () else { return } ; let type_def_id = def . did () ; let body = cx . tcx . hir_body (body_id) ; let hir :: ExprKind :: Block (hir :: Block { stmts : _ , expr : Some (expr) , .. } , None) = body . value . kind else { return ; } ; let orig_fields = match cx . tcx . hir_get_if_local (type_def_id) { Some (hir :: Node :: Item (hir :: Item { kind : hir :: ItemKind :: Struct (_ , _generics , hir :: VariantData :: Struct { fields , recovered : _ } ,) , .. })) => fields . iter () . map (| f | (f . ident . name , f)) . collect :: < FxHashMap < _ , _ > > () , _ => return , } ; let hir :: ExprKind :: Struct (_qpath , fields , tail) = expr . kind else { return } ; if let hir :: StructTailExpr :: Base (_) = tail { return ; } let any_default_field_given = fields . iter () . any (| f | orig_fields . get (& f . ident . name) . and_then (| f | f . default) . is_some ()) ; if ! any_default_field_given { return ; } let Some (local) = parent . as_local () else { return } ; let hir_id = cx . tcx . local_def_id_to_hir_id (local) ; let hir :: Node :: Item (item) = cx . tcx . hir_node (hir_id) else { return } ; cx . tcx . node_span_lint (DEFAULT_OVERRIDES_DEFAULT_FIELDS , hir_id , item . span , | diag | { mk_lint (cx . tcx , diag , type_def_id , parent , orig_fields , fields) ; }) ; } }}}
+
+macro_rules! mk_lint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function mk_lint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    mk_lint_introspect!();
+    fn mk_lint (tcx : TyCtxt < '_ > , diag : & mut Diag < '_ , () > , type_def_id : DefId , impl_def_id : DefId , orig_fields : FxHashMap < Symbol , & hir :: FieldDef < '_ > > , fields : & [hir :: ExprField < '_ >] ,) { diag . primary_message ("`Default` impl doesn't use the declared default field values") ; let mut removed_all_fields = true ; for field in fields { if orig_fields . get (& field . ident . name) . and_then (| f | f . default) . is_some () { diag . span_label (field . expr . span , "this field has a default value") ; } else { removed_all_fields = false ; } } if removed_all_fields { let msg = "to avoid divergence in behavior between `Struct { .. }` and \
+                   `<Struct as Default>::default()`, derive the `Default`" ; if let Some (hir :: Node :: Item (impl_)) = tcx . hir_get_if_local (impl_def_id) { diag . multipart_suggestion_verbose (msg , vec ! [(tcx . def_span (type_def_id) . shrink_to_lo () , "#[derive(Default)] " . to_string ()) , (impl_ . span , String :: new ()) ,] , Applicability :: MachineApplicable ,) ; } else { diag . help (msg) ; } } else { let msg = "use the default values in the `impl` with `Struct { mandatory_field, .. }` to \
+                   avoid them diverging over time" ; diag . help (msg) ; } }
+}

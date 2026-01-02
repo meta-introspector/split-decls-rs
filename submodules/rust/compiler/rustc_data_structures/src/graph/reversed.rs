@@ -1,0 +1,6 @@
+mkuse!{use crate :: graph :: { DirectedGraph , Predecessors , Successors } ;}
+mkitem!{mkstruct!{# [doc = " View that reverses the direction of edges in its underlying graph, so that"] # [doc = " successors become predecessors and vice-versa."] # [doc = ""] # [doc = " Because of `impl<G: Graph> Graph for &G`, the underlying graph can be"] # [doc = " wrapped by-reference instead of by-value if desired."] # [derive (Clone , Copy , Debug)] pub struct ReversedGraph < G > { pub inner : G , }}}
+mkitem!{mkimpl!{impl < G > ReversedGraph < G > { pub fn new (inner : G) -> Self { Self { inner } } }}}
+mkitem!{mkimpl!{impl < G : DirectedGraph > DirectedGraph for ReversedGraph < G > { type Node = G :: Node ; fn num_nodes (& self) -> usize { self . inner . num_nodes () } }}}
+mkitem!{mkimpl!{impl < G : Predecessors > Successors for ReversedGraph < G > { fn successors (& self , node : Self :: Node) -> impl Iterator < Item = Self :: Node > { self . inner . predecessors (node) } }}}
+mkitem!{mkimpl!{impl < G : Successors > Predecessors for ReversedGraph < G > { fn predecessors (& self , node : Self :: Node) -> impl Iterator < Item = Self :: Node > { self . inner . successors (node) } }}}

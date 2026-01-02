@@ -1,0 +1,7 @@
+mkuse!{use std :: fmt ;}
+mkuse!{use rustc_span :: LocalExpnId ;}
+mkitem!{rustc_index :: newtype_index ! { # [doc = " Identifies an AST node."] # [doc = ""] # [doc = " This identifies top-level definitions, expressions, and everything in between."] # [doc = " This is later turned into [`DefId`] and `HirId` for the HIR."] # [doc = ""] # [doc = " [`DefId`]: rustc_span::def_id::DefId"] # [encodable] # [orderable] # [debug_format = "NodeId({})"] pub struct NodeId { # [doc = " The [`NodeId`] used to represent the root of the crate."] const CRATE_NODE_ID = 0 ; } }}
+mkitem!{rustc_data_structures :: define_id_collections ! (NodeMap , NodeSet , NodeMapEntry , NodeId) ;}
+mkitem!{# [doc = " When parsing and at the beginning of doing expansions, we initially give all AST nodes"] # [doc = " this dummy AST [`NodeId`]. Then, during a later phase of expansion, we renumber them"] # [doc = " to have small, positive IDs."] pub const DUMMY_NODE_ID : NodeId = NodeId :: MAX ;}
+mkitem!{mkimpl!{impl NodeId { pub fn placeholder_from_expn_id (expn_id : LocalExpnId) -> Self { NodeId :: from_u32 (expn_id . as_u32 ()) } pub fn placeholder_to_expn_id (self) -> LocalExpnId { LocalExpnId :: from_u32 (self . as_u32 ()) } }}}
+mkitem!{mkimpl!{impl fmt :: Display for NodeId { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Display :: fmt (& self . as_u32 () , f) } }}}

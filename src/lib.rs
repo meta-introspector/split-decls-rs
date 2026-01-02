@@ -18,6 +18,7 @@ extern crate proc_macro;
 pub mod rustc_topological;
 pub mod symbol_resolver;
 pub mod dependency_extractor;
+pub mod macro_wrappers;
 pub mod preprocessing;
 
 // Minimal stubs

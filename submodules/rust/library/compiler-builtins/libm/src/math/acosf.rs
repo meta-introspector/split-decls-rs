@@ -1,0 +1,29 @@
+mkuse!{use super :: sqrt :: sqrtf ;}
+mkitem!{const PIO2_HI : f32 = 1.5707962513e+00 ;}
+mkitem!{const PIO2_LO : f32 = 7.5497894159e-08 ;}
+mkitem!{const P_S0 : f32 = 1.6666586697e-01 ;}
+mkitem!{const P_S1 : f32 = - 4.2743422091e-02 ;}
+mkitem!{const P_S2 : f32 = - 8.6563630030e-03 ;}
+mkitem!{const Q_S1 : f32 = - 7.0662963390e-01 ;}
+
+macro_rules! r_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function r in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    r_introspect!();
+    fn r (z : f32) -> f32 { let p = z * (P_S0 + z * (P_S1 + z * P_S2)) ; let q = 1. + z * Q_S1 ; p / q }
+}
+
+macro_rules! acosf_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function acosf in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    acosf_introspect!();
+    # [doc = " Arccosine (f32)"] # [doc = ""] # [doc = " Computes the inverse cosine (arc cosine) of the input value."] # [doc = " Arguments must be in the range -1 to 1."] # [doc = " Returns values in radians, in the range of 0 to pi."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn acosf (x : f32) -> f32 { let x1p_120 = f32 :: from_bits (0x03800000) ; let z : f32 ; let w : f32 ; let s : f32 ; let mut hx = x . to_bits () ; let ix = hx & 0x7fffffff ; if ix >= 0x3f800000 { if ix == 0x3f800000 { if (hx >> 31) != 0 { return 2. * PIO2_HI + x1p_120 ; } return 0. ; } return 0. / (x - x) ; } if ix < 0x3f000000 { if ix <= 0x32800000 { return PIO2_HI + x1p_120 ; } return PIO2_HI - (x - (PIO2_LO - x * r (x * x))) ; } if (hx >> 31) != 0 { z = (1. + x) * 0.5 ; s = sqrtf (z) ; w = r (z) * s - PIO2_LO ; return 2. * (PIO2_HI - (s + w)) ; } z = (1. - x) * 0.5 ; s = sqrtf (z) ; hx = s . to_bits () ; let df = f32 :: from_bits (hx & 0xfffff000) ; let c = (z - df * df) / (s + df) ; w = r (z) * s + c ; 2. * (df + w) }
+}

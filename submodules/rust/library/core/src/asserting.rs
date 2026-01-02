@@ -1,0 +1,15 @@
+mkuse!{use crate :: fmt :: { Debug , Formatter } ;}
+mkuse!{use crate :: marker :: PhantomData ;}
+mkitem!{mkstruct!{# [doc = " Marker used by [Capture]"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub struct TryCaptureWithoutDebug ;}}
+mkitem!{mktrait!{# [doc = " Catches an arbitrary `E` and modifies `to` accordingly"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub trait TryCaptureGeneric < E , M > { # [doc = " Similar to [TryCapturePrintable] but generic to any `E`."] fn try_capture (& self , to : & mut Capture < E , M >) ; }}}
+mkitem!{mkimpl!{impl < E > TryCaptureGeneric < E , TryCaptureWithoutDebug > for & Wrapper < & E > { # [inline] fn try_capture (& self , _ : & mut Capture < E , TryCaptureWithoutDebug >) { } }}}
+mkitem!{mkimpl!{impl < E > Debug for Capture < E , TryCaptureWithoutDebug > { fn fmt (& self , f : & mut Formatter < '_ >) -> Result < () , core :: fmt :: Error > { f . write_str ("N/A") } }}}
+mkitem!{mkstruct!{# [doc = " Marker used by [Capture]"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub struct TryCaptureWithDebug ;}}
+mkitem!{mktrait!{# [doc = " Catches an arbitrary `E: Printable` and modifies `to` accordingly"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub trait TryCapturePrintable < E , M > { # [doc = " Similar as [TryCaptureGeneric] but specialized to any `E: Printable`."] fn try_capture (& self , to : & mut Capture < E , M >) ; }}}
+mkitem!{mkimpl!{impl < E > TryCapturePrintable < E , TryCaptureWithDebug > for Wrapper < & E > where E : Printable , { # [inline] fn try_capture (& self , to : & mut Capture < E , TryCaptureWithDebug >) { to . elem = Some (* self . 0) ; } }}}
+mkitem!{mkimpl!{impl < E > Debug for Capture < E , TryCaptureWithDebug > where E : Printable , { fn fmt (& self , f : & mut Formatter < '_ >) -> Result < () , core :: fmt :: Error > { match self . elem { None => f . write_str ("N/A") , Some (ref value) => Debug :: fmt (value , f) , } } }}}
+mkitem!{mkstruct!{# [doc = " All possible captured `assert!` elements"] # [doc = ""] # [doc = " # Types"] # [doc = ""] # [doc = " * `E`: **E**lement that is going to be displayed."] # [doc = " * `M`: **M**arker used to differentiate [Capture]s in regards to [Debug]."] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub struct Capture < E , M > { pub elem : Option < E > , phantom : PhantomData < M > , }}}
+mkitem!{mkimpl!{impl < M , T > Capture < M , T > { # [inline] pub const fn new () -> Self { Self { elem : None , phantom : PhantomData } } }}}
+mkitem!{mkstruct!{# [doc = " Necessary for the implementations of `TryCapture*`"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub struct Wrapper < T > (pub T) ;}}
+mkitem!{mktrait!{# [doc = " Tells which elements can be copied and displayed"] # [unstable (feature = "generic_assert_internals" , issue = "44838")] pub trait Printable : Copy + Debug { }}}
+mkitem!{mkimpl!{impl < T > Printable for T where T : Copy + Debug { }}}

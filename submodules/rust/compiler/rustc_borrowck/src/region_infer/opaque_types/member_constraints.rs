@@ -1,0 +1,33 @@
+mkuse!{use rustc_data_structures :: fx :: FxHashMap ;}
+mkuse!{use rustc_hir :: def_id :: DefId ;}
+mkuse!{use rustc_middle :: bug ;}
+mkuse!{use rustc_middle :: ty :: { self , GenericArgsRef , Region , RegionVid , Ty , TyCtxt , TypeSuperVisitable , TypeVisitable , TypeVisitor , } ;}
+mkuse!{use tracing :: { debug , instrument } ;}
+mkuse!{use super :: DefiningUse ;}
+mkuse!{use super :: region_ctxt :: RegionCtxt ;}
+mkuse!{use crate :: constraints :: ConstraintSccIndex ;}
+
+macro_rules! apply_member_constraints_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function apply_member_constraints in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    apply_member_constraints_introspect!();
+    pub (super) fn apply_member_constraints < 'tcx > (rcx : & mut RegionCtxt < '_ , 'tcx > , defining_uses : & [DefiningUse < 'tcx >] ,) { let mut member_constraints = Default :: default () ; for defining_use in defining_uses { let mut visitor = CollectMemberConstraintsVisitor { rcx , defining_use , member_constraints : & mut member_constraints , } ; defining_use . hidden_type . ty . visit_with (& mut visitor) ; } debug ! (? member_constraints) ; for scc_a in rcx . constraint_sccs . all_sccs () { debug ! (? scc_a) ; for & scc_b in rcx . constraint_sccs . successors (scc_a) { debug ! (? scc_b) ; rcx . scc_values . add_region (scc_a , scc_b) ; } for defining_use in member_constraints . get (& scc_a) . into_iter () . flatten () { apply_member_constraint (rcx , scc_a , & defining_use . arg_regions) ; } } }
+}
+
+macro_rules! apply_member_constraint_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function apply_member_constraint in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    apply_member_constraint_introspect!();
+    # [instrument (level = "debug" , skip (rcx))] fn apply_member_constraint < 'tcx > (rcx : & mut RegionCtxt < '_ , 'tcx > , member : ConstraintSccIndex , arg_regions : & [RegionVid] ,) { if ! rcx . max_placeholder_universe_reached (member) . is_root () { debug ! ("member region reached non root universe, bailing") ; return ; } let mut choice_regions = arg_regions . iter () . copied () . map (| r | rcx . representative (r) . rvid ()) . filter (| & choice_region | { rcx . scc_values . universal_regions_outlived_by (member) . all (| lower_bound | { rcx . universal_region_relations . outlives (choice_region , lower_bound) }) }) . collect :: < Vec < _ > > () ; debug ! (? choice_regions , "after enforcing lower-bound") ; for ub in rcx . rev_scc_graph . upper_bounds (member) { choice_regions . retain (| & choice_region | rcx . universal_region_relations . outlives (ub , choice_region)) ; } debug ! (? choice_regions , "after enforcing upper-bound") ; let totally_ordered_subset = choice_regions . iter () . copied () . filter (| & r1 | { choice_regions . iter () . all (| & r2 | { rcx . universal_region_relations . outlives (r1 , r2) || rcx . universal_region_relations . outlives (r2 , r1) }) }) ; let Some (min_choice) = totally_ordered_subset . reduce (| r1 , r2 | { let r1_outlives_r2 = rcx . universal_region_relations . outlives (r1 , r2) ; let r2_outlives_r1 = rcx . universal_region_relations . outlives (r2 , r1) ; match (r1_outlives_r2 , r2_outlives_r1) { (true , true) => r1 . min (r2) , (true , false) => r2 , (false , true) => r1 , (false , false) => bug ! ("incomparable regions in total order") , } }) else { debug ! ("no unique minimum choice") ; return ; } ; debug ! (? min_choice) ; let min_choice_scc = rcx . constraint_sccs . scc (min_choice) ; rcx . scc_values . add_region (member , min_choice_scc) ; }
+}
+mkitem!{mkstruct!{struct CollectMemberConstraintsVisitor < 'a , 'b , 'tcx > { rcx : & 'a RegionCtxt < 'a , 'tcx > , defining_use : & 'b DefiningUse < 'tcx > , member_constraints : & 'a mut FxHashMap < ConstraintSccIndex , Vec < & 'b DefiningUse < 'tcx > > > , }}}
+mkitem!{mkimpl!{impl < 'tcx > CollectMemberConstraintsVisitor < '_ , '_ , 'tcx > { fn cx (& self) -> TyCtxt < 'tcx > { self . rcx . infcx . tcx } fn visit_closure_args (& mut self , def_id : DefId , args : GenericArgsRef < 'tcx >) { let generics = self . cx () . generics_of (def_id) ; for arg in args . iter () . skip (generics . parent_count) { arg . visit_with (self) ; } } }}}
+mkitem!{mkimpl!{impl < 'tcx > TypeVisitor < TyCtxt < 'tcx > > for CollectMemberConstraintsVisitor < '_ , '_ , 'tcx > { fn visit_region (& mut self , r : Region < 'tcx >) { match r . kind () { ty :: ReBound (..) => return , ty :: ReVar (vid) => { let scc = self . rcx . constraint_sccs . scc (vid) ; self . member_constraints . entry (scc) . or_default () . push (self . defining_use) ; } _ => unreachable ! () , } } fn visit_ty (& mut self , ty : Ty < 'tcx >) { if ! ty . flags () . intersects (ty :: TypeFlags :: HAS_FREE_REGIONS) { return ; } match * ty . kind () { ty :: Closure (def_id , args) | ty :: CoroutineClosure (def_id , args) | ty :: Coroutine (def_id , args) => self . visit_closure_args (def_id , args) , ty :: Alias (kind , ty :: AliasTy { def_id , args , .. }) if let Some (variances) = self . cx () . opt_alias_variances (kind , def_id) => { for (& v , arg) in std :: iter :: zip (variances , args . iter ()) { if v != ty :: Bivariant { arg . visit_with (self) } } } _ => ty . super_visit_with (self) , } } }}}

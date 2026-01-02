@@ -1,0 +1,7 @@
+mkuse!{use core :: iter :: TrustedLen ;}
+mkuse!{use core :: { cmp , ptr } ;}
+mkuse!{use super :: { SpecExtend , Vec } ;}
+mkuse!{use crate :: raw_vec :: RawVec ;}
+mkitem!{mktrait!{# [doc = " Another specialization trait for Vec::from_iter"] # [doc = " necessary to manually prioritize overlapping specializations"] # [doc = " see [`SpecFromIter`](super::SpecFromIter) for details."] pub (super) trait SpecFromIterNested < T , I > { fn from_iter (iter : I) -> Self ; }}}
+mkitem!{mkimpl!{impl < T , I > SpecFromIterNested < T , I > for Vec < T > where I : Iterator < Item = T > , { # [track_caller] default fn from_iter (mut iterator : I) -> Self { let mut vector = match iterator . next () { None => return Vec :: new () , Some (element) => { let (lower , _) = iterator . size_hint () ; let initial_capacity = cmp :: max (RawVec :: < T > :: MIN_NON_ZERO_CAP , lower . saturating_add (1)) ; let mut vector = Vec :: with_capacity (initial_capacity) ; unsafe { ptr :: write (vector . as_mut_ptr () , element) ; vector . set_len (1) ; } vector } } ; < Vec < T > as SpecExtend < T , I > > :: spec_extend (& mut vector , iterator) ; vector } }}}
+mkitem!{mkimpl!{impl < T , I > SpecFromIterNested < T , I > for Vec < T > where I : TrustedLen < Item = T > , { # [track_caller] fn from_iter (iterator : I) -> Self { let mut vector = match iterator . size_hint () { (_ , Some (upper)) => Vec :: with_capacity (upper) , _ => panic ! ("capacity overflow") , } ; vector . spec_extend (iterator) ; vector } }}}

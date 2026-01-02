@@ -1,0 +1,9 @@
+mkuse!{use crate :: pin :: Pin ;}
+mkuse!{use crate :: ptr ;}
+mkuse!{use crate :: sync :: atomic :: Ordering :: Relaxed ;}
+mkuse!{use crate :: sync :: atomic :: { Atomic , AtomicUsize } ;}
+mkuse!{use crate :: sys :: pal :: sync as pal ;}
+mkuse!{use crate :: sys :: sync :: { Mutex , OnceBox } ;}
+mkuse!{use crate :: time :: { Duration , Instant } ;}
+mkitem!{mkstruct!{pub struct Condvar { cvar : OnceBox < pal :: Condvar > , mutex : Atomic < usize > , }}}
+mkitem!{mkimpl!{impl Condvar { pub const fn new () -> Condvar { Condvar { cvar : OnceBox :: new () , mutex : AtomicUsize :: new (0) } } # [inline] fn get (& self) -> Pin < & pal :: Condvar > { self . cvar . get_or_init (| | { let mut cvar = Box :: pin (pal :: Condvar :: new ()) ; unsafe { cvar . as_mut () . init () } ; cvar }) } # [inline] fn verify (& self , mutex : Pin < & pal :: Mutex >) { let addr = ptr :: from_ref :: < pal :: Mutex > (& mutex) . addr () ; match self . mutex . compare_exchange (0 , addr , Relaxed , Relaxed) { Ok (_) => { } Err (n) if n == addr => { } _ => panic ! ("attempted to use a condition variable with two mutexes") , } } # [inline] pub fn notify_one (& self) { unsafe { self . get () . notify_one () } } # [inline] pub fn notify_all (& self) { unsafe { self . get () . notify_all () } } # [inline] pub unsafe fn wait (& self , mutex : & Mutex) { let mutex = unsafe { mutex . pal . get_unchecked () } ; self . verify (mutex) ; unsafe { self . get () . wait (mutex) } } pub unsafe fn wait_timeout (& self , mutex : & Mutex , dur : Duration) -> bool { let mutex = unsafe { mutex . pal . get_unchecked () } ; self . verify (mutex) ; if pal :: Condvar :: PRECISE_TIMEOUT { unsafe { self . get () . wait_timeout (mutex , dur) } } else { let now = Instant :: now () ; let woken = unsafe { self . get () . wait_timeout (mutex , dur) } ; woken || now . elapsed () < dur } } }}}

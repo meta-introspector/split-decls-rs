@@ -1,0 +1,194 @@
+mkuse!{use crate :: sync :: atomic :: Atomic ;}
+mkuse!{use crate :: time :: Duration ;}
+mkitem!{# [doc = " An atomic for use as a futex that is at least 32-bits but may be larger"] pub type Futex = Atomic < Primitive > ;}
+mkitem!{# [doc = " Must be the underlying type of Futex"] pub type Primitive = u32 ;}
+mkitem!{# [doc = " An atomic for use as a futex that is at least 8-bits but may be larger."] pub type SmallFutex = Atomic < SmallPrimitive > ;}
+mkitem!{# [doc = " Must be the underlying type of SmallFutex"] pub type SmallPrimitive = u32 ;}
+
+macro_rules! futex_wait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wait_introspect!();
+    # [doc = " Waits for a `futex_wake` operation to wake us."] # [doc = ""] # [doc = " Returns directly if the futex doesn't hold the expected value."] # [doc = ""] # [doc = " Returns false on timeout, and true in all other cases."] # [cfg (any (target_os = "linux" , target_os = "android" , target_os = "freebsd"))] pub fn futex_wait (futex : & Atomic < u32 > , expected : u32 , timeout : Option < Duration >) -> bool { use super :: time :: Timespec ; use crate :: ptr :: null ; use crate :: sync :: atomic :: Ordering :: Relaxed ; let timespec = timeout . and_then (| d | Timespec :: now (libc :: CLOCK_MONOTONIC) . checked_add_duration (& d)) . and_then (| t | t . to_timespec ()) ; loop { if futex . load (Relaxed) != expected { return true ; } let r = unsafe { cfg_select ! { target_os = "freebsd" => { let umtx_timeout = timespec . map (| t | libc :: _umtx_time { _timeout : t , _flags : libc :: UMTX_ABSTIME , _clockid : libc :: CLOCK_MONOTONIC as u32 , }) ; let umtx_timeout_ptr = umtx_timeout . as_ref () . map_or (null () , | t | t as * const _) ; let umtx_timeout_size = umtx_timeout . as_ref () . map_or (0 , | t | size_of_val (t)) ; libc :: _umtx_op (futex as * const Atomic < u32 > as * mut _ , libc :: UMTX_OP_WAIT_UINT_PRIVATE , expected as libc :: c_ulong , crate :: ptr :: without_provenance_mut (umtx_timeout_size) , umtx_timeout_ptr as * mut _ ,) } any (target_os = "linux" , target_os = "android") => { libc :: syscall (libc :: SYS_futex , futex as * const Atomic < u32 >, libc :: FUTEX_WAIT_BITSET | libc :: FUTEX_PRIVATE_FLAG , expected , timespec . as_ref () . map_or (null () , | t | t as * const libc :: timespec) , null ::< u32 > () , ! 0u32 ,) } _ => { compile_error ! ("unknown target_os") ; } } } ; match (r < 0) . then (super :: os :: errno) { Some (libc :: ETIMEDOUT) => return false , Some (libc :: EINTR) => continue , _ => return true , } } }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [doc = " Wakes up one thread that's blocked on `futex_wait` on this futex."] # [doc = ""] # [doc = " Returns true if this actually woke up such a thread,"] # [doc = " or false if no thread was waiting on this futex."] # [doc = ""] # [doc = " On some platforms, this always returns false."] # [cfg (any (target_os = "linux" , target_os = "android"))] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { let ptr = futex as * const Atomic < u32 > ; let op = libc :: FUTEX_WAKE | libc :: FUTEX_PRIVATE_FLAG ; unsafe { libc :: syscall (libc :: SYS_futex , ptr , op , 1) > 0 } }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [doc = " Wakes up all threads that are waiting on `futex_wait` on this futex."] # [cfg (any (target_os = "linux" , target_os = "android"))] pub fn futex_wake_all (futex : & Atomic < u32 >) { let ptr = futex as * const Atomic < u32 > ; let op = libc :: FUTEX_WAKE | libc :: FUTEX_PRIVATE_FLAG ; unsafe { libc :: syscall (libc :: SYS_futex , ptr , op , i32 :: MAX) ; } }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [cfg (target_os = "freebsd")] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { use crate :: ptr :: null_mut ; unsafe { libc :: _umtx_op (futex as * const Atomic < u32 > as * mut _ , libc :: UMTX_OP_WAKE_PRIVATE , 1 , null_mut () , null_mut () ,) } ; false }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [cfg (target_os = "freebsd")] pub fn futex_wake_all (futex : & Atomic < u32 >) { use crate :: ptr :: null_mut ; unsafe { libc :: _umtx_op (futex as * const Atomic < u32 > as * mut _ , libc :: UMTX_OP_WAKE_PRIVATE , i32 :: MAX as libc :: c_ulong , null_mut () , null_mut () ,) } ; }
+}
+
+macro_rules! futex_wait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wait_introspect!();
+    # [cfg (target_os = "openbsd")] pub fn futex_wait (futex : & Atomic < u32 > , expected : u32 , timeout : Option < Duration >) -> bool { use super :: time :: Timespec ; use crate :: ptr :: { null , null_mut } ; let timespec = timeout . and_then (| d | Timespec :: zero () . checked_add_duration (& d)) . and_then (| t | t . to_timespec ()) ; let r = unsafe { libc :: futex (futex as * const Atomic < u32 > as * mut u32 , libc :: FUTEX_WAIT , expected as i32 , timespec . as_ref () . map_or (null () , | t | t as * const libc :: timespec) , null_mut () ,) } ; r == 0 || super :: os :: errno () != libc :: ETIMEDOUT }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [cfg (target_os = "openbsd")] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { use crate :: ptr :: { null , null_mut } ; unsafe { libc :: futex (futex as * const Atomic < u32 > as * mut u32 , libc :: FUTEX_WAKE , 1 , null () , null_mut () ,) > 0 } }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [cfg (target_os = "openbsd")] pub fn futex_wake_all (futex : & Atomic < u32 >) { use crate :: ptr :: { null , null_mut } ; unsafe { libc :: futex (futex as * const Atomic < u32 > as * mut u32 , libc :: FUTEX_WAKE , i32 :: MAX , null () , null_mut () ,) ; } }
+}
+
+macro_rules! futex_wait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wait_introspect!();
+    # [cfg (target_os = "dragonfly")] pub fn futex_wait (futex : & Atomic < u32 > , expected : u32 , timeout : Option < Duration >) -> bool { let timeout_ms = timeout . and_then (| d | Some (i32 :: try_from (d . as_millis ()) . ok () ? . max (1))) . unwrap_or (0) ; let r = unsafe { libc :: umtx_sleep (futex as * const Atomic < u32 > as * const i32 , expected as i32 , timeout_ms) } ; r == 0 || super :: os :: errno () != libc :: ETIMEDOUT }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [cfg (target_os = "dragonfly")] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { unsafe { libc :: umtx_wakeup (futex as * const Atomic < u32 > as * const i32 , 1) } ; false }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [cfg (target_os = "dragonfly")] pub fn futex_wake_all (futex : & Atomic < u32 >) { unsafe { libc :: umtx_wakeup (futex as * const Atomic < u32 > as * const i32 , i32 :: MAX) } ; }
+}
+mkitem!{# [cfg (target_os = "emscripten")] unsafe extern "C" { fn emscripten_futex_wake (addr : * const Atomic < u32 > , count : libc :: c_int) -> libc :: c_int ; fn emscripten_futex_wait (addr : * const Atomic < u32 > , val : libc :: c_uint , max_wait_ms : libc :: c_double ,) -> libc :: c_int ; }}
+
+macro_rules! futex_wait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wait_introspect!();
+    # [cfg (target_os = "emscripten")] pub fn futex_wait (futex : & Atomic < u32 > , expected : u32 , timeout : Option < Duration >) -> bool { unsafe { emscripten_futex_wait (futex , expected , timeout . map_or (f64 :: INFINITY , | d | d . as_secs_f64 () * 1000.0) ,) != - libc :: ETIMEDOUT } }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [cfg (target_os = "emscripten")] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { unsafe { emscripten_futex_wake (futex , 1) > 0 } }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [cfg (target_os = "emscripten")] pub fn futex_wake_all (futex : & Atomic < u32 >) { unsafe { emscripten_futex_wake (futex , i32 :: MAX) } ; }
+}
+
+macro_rules! futex_wait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wait_introspect!();
+    # [cfg (target_os = "fuchsia")] pub fn futex_wait (futex : & Atomic < u32 > , expected : u32 , timeout : Option < Duration >) -> bool { use super :: fuchsia :: * ; let deadline = timeout . and_then (| d | i64 :: try_from (d . as_nanos ()) . ok () ? . checked_add (zx_clock_get_monotonic ())) . unwrap_or (ZX_TIME_INFINITE) ; unsafe { zx_futex_wait (futex , zx_futex_t :: new (expected) , ZX_HANDLE_INVALID , deadline) != ZX_ERR_TIMED_OUT } }
+}
+
+macro_rules! futex_wake_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_introspect!();
+    # [cfg (target_os = "fuchsia")] pub fn futex_wake (futex : & Atomic < u32 >) -> bool { unsafe { super :: fuchsia :: zx_futex_wake (futex , 1) } ; false }
+}
+
+macro_rules! futex_wake_all_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function futex_wake_all in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    futex_wake_all_introspect!();
+    # [cfg (target_os = "fuchsia")] pub fn futex_wake_all (futex : & Atomic < u32 >) { unsafe { super :: fuchsia :: zx_futex_wake (futex , u32 :: MAX) } ; }
+}

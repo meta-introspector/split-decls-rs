@@ -1,0 +1,32 @@
+mkuse!{use crate :: cell :: Cell ;}
+mkuse!{use crate :: iter ;}
+mkuse!{use crate :: sync :: Arc ;}
+mkuse!{use crate :: thread :: Thread ;}
+mkitem!{crate :: thread_local ! { # [doc = " A thread local linked list of spawn hooks."] # [doc = ""] # [doc = " It is a linked list of Arcs, such that it can very cheaply be inherited by spawned threads."] # [doc = ""] # [doc = " (That technically makes it a set of linked lists with shared tails, so a linked tree.)"] static SPAWN_HOOKS : Cell < SpawnHooks > = const { Cell :: new (SpawnHooks { first : None }) } ; }}
+mkitem!{mkstruct!{# [derive (Default , Clone)] struct SpawnHooks { first : Option < Arc < SpawnHook > > , }}}
+mkitem!{mkimpl!{impl Drop for SpawnHooks { fn drop (& mut self) { let mut next = self . first . take () ; while let Some (SpawnHook { hook , next : n }) = next . and_then (| n | Arc :: into_inner (n)) { drop (hook) ; next = n ; } } }}}
+mkitem!{mkstruct!{struct SpawnHook { hook : Box < dyn Send + Sync + Fn (& Thread) -> Box < dyn Send + FnOnce () > > , next : Option < Arc < SpawnHook > > , }}}
+
+macro_rules! add_spawn_hook_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function add_spawn_hook in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    add_spawn_hook_introspect!();
+    # [doc = " Registers a function to run for every newly thread spawned."] # [doc = ""] # [doc = " The hook is executed in the parent thread, and returns a function"] # [doc = " that will be executed in the new thread."] # [doc = ""] # [doc = " The hook is called with the `Thread` handle for the new thread."] # [doc = ""] # [doc = " The hook will only be added for the current thread and is inherited by the threads it spawns."] # [doc = " In other words, adding a hook has no effect on already running threads (other than the current"] # [doc = " thread) and the threads they might spawn in the future."] # [doc = ""] # [doc = " Hooks can only be added, not removed."] # [doc = ""] # [doc = " The hooks will run in reverse order, starting with the most recently added."] # [doc = ""] # [doc = " # Usage"] # [doc = ""] # [doc = " ```"] # [doc = " #![feature(thread_spawn_hook)]"] # [doc = ""] # [doc = " std::thread::add_spawn_hook(|_| {"] # [doc = "     ..; // This will run in the parent (spawning) thread."] # [doc = "     move || {"] # [doc = "         ..; // This will run it the child (spawned) thread."] # [doc = "     }"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " A spawn hook can be used to \"inherit\" a thread local from the parent thread:"] # [doc = ""] # [doc = " ```"] # [doc = " #![feature(thread_spawn_hook)]"] # [doc = ""] # [doc = " use std::cell::Cell;"] # [doc = ""] # [doc = " thread_local! {"] # [doc = "     static X: Cell<u32> = Cell::new(0);"] # [doc = " }"] # [doc = ""] # [doc = " // This needs to be done once in the main thread before spawning any threads."] # [doc = " std::thread::add_spawn_hook(|_| {"] # [doc = "     // Get the value of X in the spawning thread."] # [doc = "     let value = X.get();"] # [doc = "     // Set the value of X in the newly spawned thread."] # [doc = "     move || X.set(value)"] # [doc = " });"] # [doc = ""] # [doc = " X.set(123);"] # [doc = ""] # [doc = " std::thread::spawn(|| {"] # [doc = "     assert_eq!(X.get(), 123);"] # [doc = " }).join().unwrap();"] # [doc = " ```"] # [unstable (feature = "thread_spawn_hook" , issue = "132951")] pub fn add_spawn_hook < F , G > (hook : F) where F : 'static + Send + Sync + Fn (& Thread) -> G , G : 'static + Send + FnOnce () , { SPAWN_HOOKS . with (| h | { let mut hooks = h . take () ; let next = hooks . first . take () ; hooks . first = Some (Arc :: new (SpawnHook { hook : Box :: new (move | thread | Box :: new (hook (thread))) , next , })) ; h . set (hooks) ; }) ; }
+}
+
+macro_rules! run_spawn_hooks_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function run_spawn_hooks in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    run_spawn_hooks_introspect!();
+    # [doc = " Runs all the spawn hooks."] # [doc = ""] # [doc = " Called on the parent thread."] # [doc = ""] # [doc = " Returns the functions to be called on the newly spawned thread."] pub (super) fn run_spawn_hooks (thread : & Thread) -> ChildSpawnHooks { if let Ok (hooks) = SPAWN_HOOKS . try_with (| hooks | { let snapshot = hooks . take () ; hooks . set (snapshot . clone ()) ; snapshot }) { let to_run : Vec < _ > = iter :: successors (hooks . first . as_deref () , | hook | hook . next . as_deref ()) . map (| hook | (hook . hook) (thread)) . collect () ; ChildSpawnHooks { hooks , to_run } } else { ChildSpawnHooks :: default () } }
+}
+mkitem!{mkstruct!{# [doc = " The results of running the spawn hooks."] # [doc = ""] # [doc = " This struct is sent to the new thread."] # [doc = " It contains the inherited hooks and the closures to be run."] # [derive (Default)] pub (super) struct ChildSpawnHooks { hooks : SpawnHooks , to_run : Vec < Box < dyn FnOnce () + Send > > , }}}
+mkitem!{mkimpl!{impl ChildSpawnHooks { pub (super) fn run (self) { SPAWN_HOOKS . set (self . hooks) ; for run in self . to_run { run () ; } } }}}

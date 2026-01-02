@@ -1,0 +1,15 @@
+mkuse!{use std :: cmp :: Ordering ;}
+mkuse!{use std :: mem ;}
+mkuse!{use rustc_index :: { Idx , IndexVec } ;}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}
+mkitem!{mkstruct!{# [doc = " Simple implementation of a union-find data structure, i.e. a disjoint-set"] # [doc = " forest."] # [derive (Debug)] pub struct UnionFind < Key : Idx > { table : IndexVec < Key , UnionFindEntry < Key > > , }}}
+mkitem!{mkstruct!{# [derive (Debug)] struct UnionFindEntry < Key > { # [doc = " Transitively points towards the \"root\" of the set containing this key."] # [doc = ""] # [doc = " Invariant: A root key is its own parent."] parent : Key , # [doc = " When merging two \"root\" keys, their ranks determine which key becomes"] # [doc = " the new root, to prevent the parent tree from becoming unnecessarily"] # [doc = " tall. See [`UnionFind::unify`] for details."] rank : u32 , }}}
+mkitem!{mkimpl!{impl < Key : Idx > UnionFind < Key > { # [doc = " Creates a new disjoint-set forest containing the keys `0..num_keys`."] # [doc = " Initially, every key is part of its own one-element set."] pub fn new (num_keys : usize) -> Self { Self { table : IndexVec :: from_fn_n (| key | UnionFindEntry { parent : key , rank : 0 } , num_keys) } } # [doc = " Returns the \"root\" key of the disjoint-set containing the given key."] # [doc = " If two keys have the same root, they belong to the same set."] # [doc = ""] # [doc = " Also updates internal data structures to make subsequent `find`"] # [doc = " operations faster."] pub fn find (& mut self , key : Key) -> Key { let mut curr = key ; while let parent = self . table [curr] . parent && curr != parent { let parent_parent = self . table [parent] . parent ; self . table [curr] . parent = parent_parent ; curr = parent ; } curr } # [doc = " Merges the set containing `a` and the set containing `b` into one set."] # [doc = ""] # [doc = " Returns the common root of both keys, after the merge."] pub fn unify (& mut self , a : Key , b : Key) -> Key { let mut a = self . find (a) ; let mut b = self . find (b) ; if a == b { return a ; } ; match Ord :: cmp (& self . table [a] . rank , & self . table [b] . rank) { Ordering :: Less => mem :: swap (& mut a , & mut b) , Ordering :: Equal => self . table [a] . rank += 1 , Ordering :: Greater => { } } debug_assert ! (self . table [a] . rank > self . table [b] . rank) ; debug_assert_eq ! (self . table [b] . parent , b) ; self . table [b] . parent = a ; a } # [doc = " Takes a \"snapshot\" of the current state of this disjoint-set forest, in"] # [doc = " the form of a vector that directly maps each key to its current root."] pub fn snapshot (& mut self) -> IndexVec < Key , Key > { self . table . indices () . map (| key | self . find (key)) . collect () } }}}

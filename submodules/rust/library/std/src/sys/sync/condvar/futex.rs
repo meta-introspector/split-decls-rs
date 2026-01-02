@@ -1,0 +1,6 @@
+mkuse!{use crate :: sync :: atomic :: Ordering :: Relaxed ;}
+mkuse!{use crate :: sys :: futex :: { Futex , futex_wait , futex_wake , futex_wake_all } ;}
+mkuse!{use crate :: sys :: sync :: Mutex ;}
+mkuse!{use crate :: time :: Duration ;}
+mkitem!{mkstruct!{pub struct Condvar { futex : Futex , }}}
+mkitem!{mkimpl!{impl Condvar { # [inline] pub const fn new () -> Self { Self { futex : Futex :: new (0) } } pub fn notify_one (& self) { self . futex . fetch_add (1 , Relaxed) ; futex_wake (& self . futex) ; } pub fn notify_all (& self) { self . futex . fetch_add (1 , Relaxed) ; futex_wake_all (& self . futex) ; } pub unsafe fn wait (& self , mutex : & Mutex) { self . wait_optional_timeout (mutex , None) ; } pub unsafe fn wait_timeout (& self , mutex : & Mutex , timeout : Duration) -> bool { self . wait_optional_timeout (mutex , Some (timeout)) } unsafe fn wait_optional_timeout (& self , mutex : & Mutex , timeout : Option < Duration >) -> bool { let futex_value = self . futex . load (Relaxed) ; mutex . unlock () ; let r = futex_wait (& self . futex , futex_value , timeout) ; mutex . lock () ; r } }}}

@@ -1,0 +1,52 @@
+mkuse!{use std :: fmt ;}
+mkuse!{use std :: hash :: { Hash , Hasher } ;}
+mkuse!{use std :: marker :: PhantomData ;}
+mkuse!{use std :: num :: NonZero ;}
+mkuse!{use std :: ops :: Deref ;}
+mkuse!{use std :: ptr :: NonNull ;}
+mkuse!{use crate :: aligned :: Aligned ;}
+mkuse!{use crate :: stable_hasher :: { HashStable , StableHasher } ;}
+mkitem!{mktrait!{# [doc = " This describes tags that the [`TaggedRef`] struct can hold."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - The [`BITS`] constant must be correct."] # [doc = " - No more than [`BITS`] least-significant bits may be set in the returned usize."] # [doc = " - [`Eq`] and [`Hash`] must be implementable with the returned `usize` from `into_usize`."] # [doc = ""] # [doc = " [`BITS`]: Tag::BITS"] pub unsafe trait Tag : Copy { # [doc = " Number of least-significant bits in the return value of [`into_usize`]"] # [doc = " which may be non-zero. In other words this is the bit width of the"] # [doc = " value."] # [doc = ""] # [doc = " [`into_usize`]: Tag::into_usize"] const BITS : u32 ; # [doc = " Turns this tag into an integer."] # [doc = ""] # [doc = " The inverse of this function is [`from_usize`]."] # [doc = ""] # [doc = " This function guarantees that only the least-significant [`Self::BITS`]"] # [doc = " bits can be non-zero."] # [doc = ""] # [doc = " [`from_usize`]: Tag::from_usize"] # [doc = " [`Self::BITS`]: Tag::BITS"] fn into_usize (self) -> usize ; # [doc = " Re-creates the tag from the integer returned by [`into_usize`]."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The passed `tag` must be returned from [`into_usize`]."] # [doc = ""] # [doc = " [`into_usize`]: Tag::into_usize"] unsafe fn from_usize (tag : usize) -> Self ; }}}
+
+macro_rules! bits_for_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function bits_for in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    bits_for_introspect!();
+    # [doc = " Returns the number of bits available for use for tags in a pointer to `T`"] # [doc = " (this is based on `T`'s alignment)."] pub const fn bits_for < T : ? Sized + Aligned > () -> u32 { crate :: aligned :: align_of :: < T > () . as_nonzero () . trailing_zeros () }
+}
+
+macro_rules! bits_for_tags_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function bits_for_tags in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    bits_for_tags_introspect!();
+    # [doc = " Returns the correct [`Tag::BITS`] constant for a set of tag values."] pub const fn bits_for_tags (mut tags : & [usize]) -> u32 { let mut bits = 0 ; while let & [tag , ref rest @ ..] = tags { tags = rest ; let b = usize :: BITS - tag . leading_zeros () ; if b > bits { bits = b ; } } bits }
+}
+mkitem!{mkstruct!{# [doc = " A covariant [`Copy`] tagged borrow. This is essentially `{ pointer: &'a P, tag: T }` packed"] # [doc = " in a single reference."] pub struct TaggedRef < 'a , Pointee : Aligned + ? Sized , T : Tag > { # [doc = " This is semantically a pair of `pointer: &'a P` and `tag: T` fields,"] # [doc = " however we pack them in a single pointer, to save space."] # [doc = ""] # [doc = " We pack the tag into the **most**-significant bits of the pointer to"] # [doc = " ease retrieval of the value. A left shift is a multiplication and"] # [doc = " those are embeddable in instruction encoding, for example:"] # [doc = ""] # [doc = " ```asm"] # [doc = " // (<https://godbolt.org/z/jqcYPWEr3>)"] # [doc = " example::shift_read3:"] # [doc = "     mov     eax, dword ptr [8*rdi]"] # [doc = "     ret"] # [doc = ""] # [doc = " example::mask_read3:"] # [doc = "     and     rdi, -8"] # [doc = "     mov     eax, dword ptr [rdi]"] # [doc = "     ret"] # [doc = " ```"] # [doc = ""] # [doc = " This is ASM outputted by rustc for reads of values behind tagged"] # [doc = " pointers for different approaches of tagging:"] # [doc = " - `shift_read3` uses `<< 3` (the tag is in the most-significant bits)"] # [doc = " - `mask_read3` uses `& !0b111` (the tag is in the least-significant bits)"] # [doc = ""] # [doc = " The shift approach thus produces less instructions and is likely faster"] # [doc = " (see <https://godbolt.org/z/Y913sMdWb>)."] # [doc = ""] # [doc = " Encoding diagram:"] # [doc = " ```text"] # [doc = " [ packed.addr                     ]"] # [doc = " [ tag ] [ pointer.addr >> T::BITS ] <-- usize::BITS - T::BITS bits"] # [doc = "    ^"] # [doc = "    |"] # [doc = " T::BITS bits"] # [doc = " ```"] # [doc = ""] # [doc = " The tag can be retrieved by `packed.addr() >> T::BITS` and the pointer"] # [doc = " can be retrieved by `packed.map_addr(|addr| addr << T::BITS)`."] packed : NonNull < Pointee > , tag_pointer_ghost : PhantomData < (& 'a Pointee , T) > , }}}
+mkitem!{mkimpl!{impl < 'a , P , T > TaggedRef < 'a , P , T > where P : Aligned + ? Sized , T : Tag , { # [doc = " Tags `pointer` with `tag`."] # [doc = ""] # [doc = " [`TaggedRef`]: crate::tagged_ptr::TaggedRef"] # [inline] pub fn new (pointer : & 'a P , tag : T) -> Self { Self { packed : Self :: pack (NonNull :: from (pointer) , tag) , tag_pointer_ghost : PhantomData } } # [doc = " Retrieves the pointer."] # [inline] pub fn pointer (self) -> & 'a P { unsafe { self . pointer_raw () . as_ref () } } # [doc = " Retrieves the tag."] # [inline] pub fn tag (& self) -> T { let tag = self . packed . addr () . get () >> Self :: TAG_BIT_SHIFT ; unsafe { T :: from_usize (tag) } } # [doc = " Sets the tag to a new value."] # [inline] pub fn set_tag (& mut self , tag : T) { self . packed = Self :: pack (self . pointer_raw () , tag) ; } const TAG_BIT_SHIFT : u32 = usize :: BITS - T :: BITS ; const ASSERTION : () = { assert ! (T :: BITS <= bits_for ::< P > ()) } ; # [doc = " Pack pointer `ptr` with a `tag`, according to `self.packed` encoding scheme."] # [inline] fn pack (ptr : NonNull < P > , tag : T) -> NonNull < P > { let () = Self :: ASSERTION ; let packed_tag = tag . into_usize () << Self :: TAG_BIT_SHIFT ; ptr . map_addr (| addr | { let packed = (addr . get () >> T :: BITS) | packed_tag ; unsafe { NonZero :: new_unchecked (packed) } }) } # [doc = " Retrieves the original raw pointer from `self.packed`."] # [inline] pub (super) fn pointer_raw (& self) -> NonNull < P > { self . packed . map_addr (| addr | unsafe { NonZero :: new_unchecked (addr . get () << T :: BITS) }) } }}}
+mkitem!{mkimpl!{impl < P , T > Copy for TaggedRef < '_ , P , T > where P : Aligned + ? Sized , T : Tag , { }}}
+mkitem!{mkimpl!{impl < P , T > Clone for TaggedRef < '_ , P , T > where P : Aligned + ? Sized , T : Tag , { # [inline] fn clone (& self) -> Self { * self } }}}
+mkitem!{mkimpl!{impl < P , T > Deref for TaggedRef < '_ , P , T > where P : Aligned + ? Sized , T : Tag , { type Target = P ; # [inline] fn deref (& self) -> & Self :: Target { self . pointer () } }}}
+mkitem!{mkimpl!{impl < P , T > fmt :: Debug for TaggedRef < '_ , P , T > where P : Aligned + fmt :: Debug + ? Sized , T : Tag + fmt :: Debug , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("TaggedRef") . field ("pointer" , & self . pointer ()) . field ("tag" , & self . tag ()) . finish () } }}}
+mkitem!{mkimpl!{impl < P , T > PartialEq for TaggedRef < '_ , P , T > where P : Aligned + ? Sized , T : Tag , { # [inline] # [allow (ambiguous_wide_pointer_comparisons)] fn eq (& self , other : & Self) -> bool { self . packed == other . packed } }}}
+mkitem!{mkimpl!{impl < P , T : Tag > Eq for TaggedRef < '_ , P , T > { }}}
+mkitem!{mkimpl!{impl < P , T : Tag > Hash for TaggedRef < '_ , P , T > { # [inline] fn hash < H : Hasher > (& self , state : & mut H) { self . packed . hash (state) ; } }}}
+mkitem!{mkimpl!{impl < 'a , P , T , HCX > HashStable < HCX > for TaggedRef < 'a , P , T > where P : HashStable < HCX > + Aligned + ? Sized , T : Tag + HashStable < HCX > , { fn hash_stable (& self , hcx : & mut HCX , hasher : & mut StableHasher) { self . pointer () . hash_stable (hcx , hasher) ; self . tag () . hash_stable (hcx , hasher) ; } }}}
+mkitem!{mkimpl!{unsafe impl < P , T > Sync for TaggedRef < '_ , P , T > where P : Sync + Aligned + ? Sized , T : Sync + Tag , { }}}
+mkitem!{mkimpl!{unsafe impl < P , T > Send for TaggedRef < '_ , P , T > where P : Sync + Aligned + ? Sized , T : Send + Tag , { }}}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                 
+            }}

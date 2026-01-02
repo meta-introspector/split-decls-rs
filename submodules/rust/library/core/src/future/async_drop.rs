@@ -1,0 +1,15 @@
+mkuse!{# [allow (unused_imports)] use core :: future :: Future ;}
+mkuse!{# [allow (unused_imports)] use crate :: pin :: Pin ;}
+mkuse!{# [allow (unused_imports)] use crate :: task :: { Context , Poll } ;}
+mkitem!{mktrait!{# [doc = " Async version of Drop trait."] # [doc = ""] # [doc = " When a value is no longer needed, Rust will run a \"destructor\" on that value."] # [doc = " The most common way that a value is no longer needed is when it goes out of"] # [doc = " scope. Destructors may still run in other circumstances, but we're going to"] # [doc = " focus on scope for the examples here. To learn about some of those other cases,"] # [doc = " please see [the reference] section on destructors."] # [doc = ""] # [doc = " [the reference]: https://doc.rust-lang.org/reference/destructors.html"] # [doc = ""] # [doc = " ## `Copy` and ([`Drop`]|`AsyncDrop`) are exclusive"] # [doc = ""] # [doc = " You cannot implement both [`Copy`] and ([`Drop`]|`AsyncDrop`) on the same type. Types that"] # [doc = " are `Copy` get implicitly duplicated by the compiler, making it very"] # [doc = " hard to predict when, and how often destructors will be executed. As such,"] # [doc = " these types cannot have destructors."] # [unstable (feature = "async_drop" , issue = "126482")] # [lang = "async_drop"] pub trait AsyncDrop { # [doc = " Executes the async destructor for this type."] # [doc = ""] # [doc = " This method is called implicitly when the value goes out of scope,"] # [doc = " and cannot be called explicitly."] # [doc = ""] # [doc = " When this method has been called, `self` has not yet been deallocated."] # [doc = " That only happens after the method is over."] # [doc = ""] # [doc = " # Panics"] # [allow (async_fn_in_trait)] async fn drop (self : Pin < & mut Self >) ; }}}
+
+macro_rules! async_drop_in_place_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function async_drop_in_place in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    async_drop_in_place_introspect!();
+    # [doc = " Async drop."] # [unstable (feature = "async_drop" , issue = "126482")] # [lang = "async_drop_in_place"] pub async unsafe fn async_drop_in_place < T : ? Sized > (_to_drop : * mut T) { }
+}

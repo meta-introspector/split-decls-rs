@@ -1,0 +1,17 @@
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use bool ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use char ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use f32 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use f64 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use i8 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use i16 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use i32 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use i64 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use i128 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use isize ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use str ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use u8 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use u16 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use u32 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use u64 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use u128 ;}
+mkuse!{# [stable (feature = "core_primitive" , since = "1.43.0")] pub use usize ;}

@@ -1,0 +1,13 @@
+mkuse!{use super :: { log , log1p , sqrt } ;}
+mkitem!{const LN2 : f64 = 0.693147180559945309417232121458176568 ;}
+
+macro_rules! acosh_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function acosh in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    acosh_introspect!();
+    # [doc = " Inverse hyperbolic cosine (f64)"] # [doc = ""] # [doc = " Calculates the inverse hyperbolic cosine of `x`."] # [doc = " Is defined as `log(x + sqrt(x*x-1))`."] # [doc = " `x` must be a number greater than or equal to 1."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn acosh (x : f64) -> f64 { let u = x . to_bits () ; let e = ((u >> 52) as usize) & 0x7ff ; if e < 0x3ff + 1 { return log1p (x - 1.0 + sqrt ((x - 1.0) * (x - 1.0) + 2.0 * (x - 1.0))) ; } if e < 0x3ff + 26 { return log (2.0 * x - 1.0 / (x + sqrt (x * x - 1.0))) ; } return log (x) + LN2 ; }
+}

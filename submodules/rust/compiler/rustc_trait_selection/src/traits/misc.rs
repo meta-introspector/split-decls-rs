@@ -1,0 +1,44 @@
+mkuse!{use std :: assert_matches :: assert_matches ;}
+mkuse!{use hir :: LangItem ;}
+mkuse!{use rustc_ast :: Mutability ;}
+mkuse!{use rustc_hir as hir ;}
+mkuse!{use rustc_infer :: infer :: { RegionResolutionError , TyCtxtInferExt } ;}
+mkuse!{use rustc_middle :: ty :: { self , AdtDef , Ty , TyCtxt , TypeVisitableExt , TypingMode } ;}
+mkuse!{use crate :: regions :: InferCtxtRegionExt ;}
+mkuse!{use crate :: traits :: { self , FulfillmentError , ObligationCause } ;}
+mkitem!{mkenum!{pub enum CopyImplementationError < 'tcx > { InfringingFields (Vec < (& 'tcx ty :: FieldDef , Ty < 'tcx > , InfringingFieldsReason < 'tcx >) >) , NotAnAdt , HasDestructor , HasUnsafeFields , }}}
+mkitem!{mkenum!{pub enum ConstParamTyImplementationError < 'tcx > { UnsizedConstParamsFeatureRequired , InvalidInnerTyOfBuiltinTy (Vec < (Ty < 'tcx > , InfringingFieldsReason < 'tcx >) >) , InfrigingFields (Vec < (& 'tcx ty :: FieldDef , Ty < 'tcx > , InfringingFieldsReason < 'tcx >) >) , NotAnAdtOrBuiltinAllowed , }}}
+mkitem!{mkenum!{pub enum InfringingFieldsReason < 'tcx > { Fulfill (Vec < FulfillmentError < 'tcx > >) , Regions (Vec < RegionResolutionError < 'tcx > >) , }}}
+
+macro_rules! type_allowed_to_implement_copy_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function type_allowed_to_implement_copy in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    type_allowed_to_implement_copy_introspect!();
+    # [doc = " Checks that the fields of the type (an ADT) all implement copy."] # [doc = ""] # [doc = " If fields don't implement copy, return an error containing a list of"] # [doc = " those violating fields."] # [doc = ""] # [doc = " If it's not an ADT, int ty, `bool`, float ty, `char`, raw pointer, `!`,"] # [doc = " a reference or an array returns `Err(NotAnAdt)`."] # [doc = ""] # [doc = " If the impl is `Safe`, `self_type` must not have unsafe fields. When used to"] # [doc = " generate suggestions in lints, `Safe` should be supplied so as to not"] # [doc = " suggest implementing `Copy` for types with unsafe fields."] pub fn type_allowed_to_implement_copy < 'tcx > (tcx : TyCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , self_type : Ty < 'tcx > , parent_cause : ObligationCause < 'tcx > , impl_safety : hir :: Safety ,) -> Result < () , CopyImplementationError < 'tcx > > { let (adt , args) = match self_type . kind () { ty :: Uint (_) | ty :: Int (_) | ty :: Bool | ty :: Float (_) | ty :: Char | ty :: RawPtr (..) | ty :: Never | ty :: Ref (_ , _ , hir :: Mutability :: Not) | ty :: Array (..) => return Ok (()) , & ty :: Adt (adt , args) => (adt , args) , _ => return Err (CopyImplementationError :: NotAnAdt) , } ; all_fields_implement_trait (tcx , param_env , self_type , adt , args , parent_cause , hir :: LangItem :: Copy ,) . map_err (CopyImplementationError :: InfringingFields) ? ; if adt . has_dtor (tcx) { return Err (CopyImplementationError :: HasDestructor) ; } if impl_safety . is_safe () && self_type . has_unsafe_fields () { return Err (CopyImplementationError :: HasUnsafeFields) ; } Ok (()) }
+}
+
+macro_rules! type_allowed_to_implement_const_param_ty_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function type_allowed_to_implement_const_param_ty in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    type_allowed_to_implement_const_param_ty_introspect!();
+    # [doc = " Checks that the fields of the type (an ADT) all implement `(Unsized?)ConstParamTy`."] # [doc = ""] # [doc = " If fields don't implement `(Unsized?)ConstParamTy`, return an error containing a list of"] # [doc = " those violating fields."] # [doc = ""] # [doc = " If it's not an ADT, int ty, `bool` or `char`, returns `Err(NotAnAdtOrBuiltinAllowed)`."] pub fn type_allowed_to_implement_const_param_ty < 'tcx > (tcx : TyCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , self_type : Ty < 'tcx > , lang_item : LangItem , parent_cause : ObligationCause < 'tcx > ,) -> Result < () , ConstParamTyImplementationError < 'tcx > > { assert_matches ! (lang_item , LangItem :: ConstParamTy | LangItem :: UnsizedConstParamTy) ; let inner_tys : Vec < _ > = match * self_type . kind () { ty :: Uint (_) | ty :: Int (_) | ty :: Bool | ty :: Char => return Ok (()) , ty :: Slice (inner_ty) | ty :: Ref (_ , inner_ty , Mutability :: Not) if lang_item == LangItem :: UnsizedConstParamTy => { vec ! [inner_ty] } ty :: Str if lang_item == LangItem :: UnsizedConstParamTy => { vec ! [Ty :: new_slice (tcx , tcx . types . u8)] } ty :: Str | ty :: Slice (..) | ty :: Ref (_ , _ , Mutability :: Not) => { return Err (ConstParamTyImplementationError :: UnsizedConstParamsFeatureRequired) ; } ty :: Array (inner_ty , _) => vec ! [inner_ty] , ty :: Tuple (inner_tys) => inner_tys . into_iter () . collect () , ty :: Adt (adt , args) if adt . is_enum () || adt . is_struct () => { all_fields_implement_trait (tcx , param_env , self_type , adt , args , parent_cause . clone () , lang_item ,) . map_err (ConstParamTyImplementationError :: InfrigingFields) ? ; vec ! [] } _ => return Err (ConstParamTyImplementationError :: NotAnAdtOrBuiltinAllowed) , } ; let mut infringing_inner_tys = vec ! [] ; for inner_ty in inner_tys { let infcx = tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let ocx = traits :: ObligationCtxt :: new_with_diagnostics (& infcx) ; ocx . register_bound (parent_cause . clone () , param_env , inner_ty , tcx . require_lang_item (lang_item , parent_cause . span) ,) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { infringing_inner_tys . push ((inner_ty , InfringingFieldsReason :: Fulfill (errors))) ; continue ; } let errors = infcx . resolve_regions (parent_cause . body_id , param_env , [self_type]) ; if ! errors . is_empty () { infringing_inner_tys . push ((inner_ty , InfringingFieldsReason :: Regions (errors))) ; continue ; } } if ! infringing_inner_tys . is_empty () { return Err (ConstParamTyImplementationError :: InvalidInnerTyOfBuiltinTy (infringing_inner_tys ,)) ; } Ok (()) }
+}
+
+macro_rules! all_fields_implement_trait_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function all_fields_implement_trait in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    all_fields_implement_trait_introspect!();
+    # [doc = " Check that all fields of a given `adt` implement `lang_item` trait."] pub fn all_fields_implement_trait < 'tcx > (tcx : TyCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , self_type : Ty < 'tcx > , adt : AdtDef < 'tcx > , args : ty :: GenericArgsRef < 'tcx > , parent_cause : ObligationCause < 'tcx > , lang_item : LangItem ,) -> Result < () , Vec < (& 'tcx ty :: FieldDef , Ty < 'tcx > , InfringingFieldsReason < 'tcx >) > > { let trait_def_id = tcx . require_lang_item (lang_item , parent_cause . span) ; let mut infringing = Vec :: new () ; for variant in adt . variants () { for field in & variant . fields { let infcx = tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let ocx = traits :: ObligationCtxt :: new_with_diagnostics (& infcx) ; let unnormalized_ty = field . ty (tcx , args) ; if unnormalized_ty . references_error () { continue ; } let field_span = tcx . def_span (field . did) ; let field_ty_span = match tcx . hir_get_if_local (field . did) { Some (hir :: Node :: Field (field_def)) => field_def . ty . span , _ => field_span , } ; let normalization_cause = if field . ty (tcx , traits :: GenericArgs :: identity_for_item (tcx , adt . did ())) . has_non_region_param () { parent_cause . clone () } else { ObligationCause :: dummy_with_span (field_ty_span) } ; let ty = ocx . normalize (& normalization_cause , param_env , unnormalized_ty) ; let normalization_errors = ocx . select_where_possible () ; if ! normalization_errors . is_empty () || ty . references_error () { tcx . dcx () . span_delayed_bug (field_span , format ! ("couldn't normalize struct field `{unnormalized_ty}` when checking {tr} implementation" , tr = tcx . def_path_str (trait_def_id))) ; continue ; } ocx . register_bound (ObligationCause :: dummy_with_span (field_ty_span) , param_env , ty , trait_def_id ,) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { infringing . push ((field , ty , InfringingFieldsReason :: Fulfill (errors))) ; } let errors = infcx . resolve_regions (parent_cause . body_id , param_env , [self_type]) ; if ! errors . is_empty () { infringing . push ((field , ty , InfringingFieldsReason :: Regions (errors))) ; } } } if infringing . is_empty () { Ok (()) } else { Err (infringing) } }
+}

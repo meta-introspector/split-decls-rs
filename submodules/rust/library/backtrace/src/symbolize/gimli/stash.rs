@@ -1,0 +1,6 @@
+mkuse!{use super :: Mmap ;}
+mkuse!{use alloc :: vec ;}
+mkuse!{use alloc :: vec :: Vec ;}
+mkuse!{use core :: cell :: UnsafeCell ;}
+mkitem!{mkstruct!{# [doc = " A simple arena allocator for byte buffers."] pub struct Stash { buffers : UnsafeCell < Vec < Vec < u8 > > > , mmaps : UnsafeCell < Vec < Mmap > > , }}}
+mkitem!{mkimpl!{impl Stash { pub fn new () -> Stash { Stash { buffers : UnsafeCell :: new (Vec :: new ()) , mmaps : UnsafeCell :: new (Vec :: new ()) , } } # [doc = " Allocates a buffer of the specified size and returns a mutable reference"] # [doc = " to it."] pub fn allocate (& self , size : usize) -> & mut [u8] { let buffers = unsafe { & mut * self . buffers . get () } ; let i = buffers . len () ; buffers . push (vec ! [0 ; size]) ; & mut buffers [i] } # [doc = " Stores a `Mmap` for the lifetime of this `Stash`, returning a pointer"] # [doc = " which is scoped to just this lifetime."] pub fn cache_mmap (& self , map : Mmap) -> & [u8] { unsafe { let mmaps = & mut * self . mmaps . get () ; mmaps . push (map) ; mmaps . last () . unwrap () } } }}}

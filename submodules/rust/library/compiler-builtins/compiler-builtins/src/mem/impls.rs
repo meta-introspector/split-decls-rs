@@ -1,0 +1,104 @@
+mkuse!{use core :: ffi :: c_int ;}
+mkuse!{use core :: intrinsics :: likely ;}
+mkitem!{const WORD_SIZE : usize = core :: mem :: size_of :: < usize > () ;}
+mkitem!{const WORD_MASK : usize = WORD_SIZE - 1 ;}
+mkitem!{const WORD_COPY_THRESHOLD : usize = if 2 * WORD_SIZE > 16 { 2 * WORD_SIZE } else { 16 } ;}
+
+macro_rules! read_usize_unaligned_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function read_usize_unaligned in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    read_usize_unaligned_introspect!();
+    # [cfg (feature = "mem-unaligned")] unsafe fn read_usize_unaligned (x : * const usize) -> usize { let x_read = (x as * const [u8 ; core :: mem :: size_of :: < usize > ()]) . read () ; usize :: from_ne_bytes (x_read) }
+}
+
+macro_rules! load_chunk_aligned_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function load_chunk_aligned in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    load_chunk_aligned_introspect!();
+    # [doc = " Loads a `T`-sized chunk from `src` into `dst` at offset `offset`, if that does not exceed"] # [doc = " `load_sz`. The offset pointers must both be `T`-aligned. Returns the new offset, advanced by the"] # [doc = " chunk size if a load happened."] # [cfg (not (feature = "mem-unaligned"))] # [inline (always)] unsafe fn load_chunk_aligned < T : Copy > (src : * const usize , dst : * mut usize , load_sz : usize , offset : usize ,) -> usize { let chunk_sz = core :: mem :: size_of :: < T > () ; if (load_sz & chunk_sz) != 0 { * dst . wrapping_byte_add (offset) . cast :: < T > () = * src . wrapping_byte_add (offset) . cast :: < T > () ; offset | chunk_sz } else { offset } }
+}
+
+macro_rules! load_aligned_partial_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function load_aligned_partial in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    load_aligned_partial_introspect!();
+    # [doc = " Load `load_sz` many bytes from `src`, which must be usize-aligned. Acts as if we did a `usize`"] # [doc = " read with the out-of-bounds part filled with 0s."] # [doc = " `load_sz` be strictly less than `WORD_SIZE`."] # [cfg (not (feature = "mem-unaligned"))] # [inline (always)] unsafe fn load_aligned_partial (src : * const usize , load_sz : usize) -> usize { debug_assert ! (load_sz < WORD_SIZE) ; const { assert ! (WORD_SIZE <= 8) } ; let mut i = 0 ; let mut out = 0usize ; i = load_chunk_aligned :: < u32 > (src , & raw mut out , load_sz , i) ; i = load_chunk_aligned :: < u16 > (src , & raw mut out , load_sz , i) ; i = load_chunk_aligned :: < u8 > (src , & raw mut out , load_sz , i) ; debug_assert ! (i == load_sz) ; out }
+}
+
+macro_rules! load_aligned_end_partial_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function load_aligned_end_partial in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    load_aligned_end_partial_introspect!();
+    # [doc = " Load `load_sz` many bytes from `src.wrapping_byte_add(WORD_SIZE - load_sz)`. `src` must be"] # [doc = " `usize`-aligned. The bytes are returned as the *last* bytes of the return value, i.e., this acts"] # [doc = " as if we had done a `usize` read from `src`, with the out-of-bounds part filled with 0s."] # [doc = " `load_sz` be strictly less than `WORD_SIZE`."] # [cfg (not (feature = "mem-unaligned"))] # [inline (always)] unsafe fn load_aligned_end_partial (src : * const usize , load_sz : usize) -> usize { debug_assert ! (load_sz < WORD_SIZE) ; const { assert ! (WORD_SIZE <= 8) } ; let mut i = 0 ; let mut out = 0usize ; let src_shifted = src . wrapping_byte_add (WORD_SIZE - load_sz) ; let out_shifted = (& raw mut out) . wrapping_byte_add (WORD_SIZE - load_sz) ; i = load_chunk_aligned :: < u8 > (src_shifted , out_shifted , load_sz , i) ; i = load_chunk_aligned :: < u16 > (src_shifted , out_shifted , load_sz , i) ; i = load_chunk_aligned :: < u32 > (src_shifted , out_shifted , load_sz , i) ; debug_assert ! (i == load_sz) ; out }
+}
+
+macro_rules! copy_forward_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function copy_forward in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    copy_forward_introspect!();
+    # [inline (always)] pub unsafe fn copy_forward (mut dest : * mut u8 , mut src : * const u8 , mut n : usize) { # [inline (always)] unsafe fn copy_forward_bytes (mut dest : * mut u8 , mut src : * const u8 , n : usize) { let dest_end = dest . wrapping_add (n) ; while dest < dest_end { * dest = * src ; dest = dest . wrapping_add (1) ; src = src . wrapping_add (1) ; } } # [inline (always)] unsafe fn copy_forward_aligned_words (dest : * mut u8 , src : * const u8 , n : usize) { let mut dest_usize = dest as * mut usize ; let mut src_usize = src as * mut usize ; let dest_end = dest . wrapping_add (n) as * mut usize ; while dest_usize < dest_end { * dest_usize = * src_usize ; dest_usize = dest_usize . wrapping_add (1) ; src_usize = src_usize . wrapping_add (1) ; } } # [doc = " `n` is in units of bytes, but must be a multiple of the word size and must not be 0."] # [doc = " `src` *must not* be `usize`-aligned."] # [cfg (not (feature = "mem-unaligned"))] # [inline (always)] unsafe fn copy_forward_misaligned_words (dest : * mut u8 , src : * const u8 , n : usize) { debug_assert ! (n > 0 && n % WORD_SIZE == 0) ; debug_assert ! (src . addr () % WORD_SIZE != 0) ; let mut dest_usize = dest as * mut usize ; let dest_end = dest . wrapping_add (n) as * mut usize ; let offset = src as usize & WORD_MASK ; let shift = offset * 8 ; let mut src_aligned = src . wrapping_byte_sub (offset) as * mut usize ; let mut prev_word = load_aligned_end_partial (src_aligned , WORD_SIZE - offset) ; while dest_usize . wrapping_add (1) < dest_end { src_aligned = src_aligned . wrapping_add (1) ; let cur_word = * src_aligned ; let reassembled = if cfg ! (target_endian = "little") { prev_word >> shift | cur_word << (WORD_SIZE * 8 - shift) } else { prev_word << shift | cur_word >> (WORD_SIZE * 8 - shift) } ; prev_word = cur_word ; * dest_usize = reassembled ; dest_usize = dest_usize . wrapping_add (1) ; } src_aligned = src_aligned . wrapping_add (1) ; let cur_word = load_aligned_partial (src_aligned , offset) ; let reassembled = if cfg ! (target_endian = "little") { prev_word >> shift | cur_word << (WORD_SIZE * 8 - shift) } else { prev_word << shift | cur_word >> (WORD_SIZE * 8 - shift) } ; * dest_usize = reassembled ; } # [doc = " `n` is in units of bytes, but must be a multiple of the word size and must not be 0."] # [doc = " `src` *must not* be `usize`-aligned."] # [cfg (feature = "mem-unaligned")] # [inline (always)] unsafe fn copy_forward_misaligned_words (dest : * mut u8 , src : * const u8 , n : usize) { let mut dest_usize = dest as * mut usize ; let mut src_usize = src as * mut usize ; let dest_end = dest . wrapping_add (n) as * mut usize ; while dest_usize < dest_end { * dest_usize = read_usize_unaligned (src_usize) ; dest_usize = dest_usize . wrapping_add (1) ; src_usize = src_usize . wrapping_add (1) ; } } if n >= WORD_COPY_THRESHOLD { let dest_misalignment = (dest as usize) . wrapping_neg () & WORD_MASK ; copy_forward_bytes (dest , src , dest_misalignment) ; dest = dest . wrapping_add (dest_misalignment) ; src = src . wrapping_add (dest_misalignment) ; n -= dest_misalignment ; let n_words = n & ! WORD_MASK ; let src_misalignment = src as usize & WORD_MASK ; if likely (src_misalignment == 0) { copy_forward_aligned_words (dest , src , n_words) ; } else { copy_forward_misaligned_words (dest , src , n_words) ; } dest = dest . wrapping_add (n_words) ; src = src . wrapping_add (n_words) ; n -= n_words ; } copy_forward_bytes (dest , src , n) ; }
+}
+
+macro_rules! copy_backward_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function copy_backward in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    copy_backward_introspect!();
+    # [inline (always)] pub unsafe fn copy_backward (dest : * mut u8 , src : * const u8 , mut n : usize) { # [inline (always)] unsafe fn copy_backward_bytes (mut dest : * mut u8 , mut src : * const u8 , n : usize) { let dest_start = dest . wrapping_sub (n) ; while dest_start < dest { dest = dest . wrapping_sub (1) ; src = src . wrapping_sub (1) ; * dest = * src ; } } # [inline (always)] unsafe fn copy_backward_aligned_words (dest : * mut u8 , src : * const u8 , n : usize) { let mut dest_usize = dest as * mut usize ; let mut src_usize = src as * mut usize ; let dest_start = dest . wrapping_sub (n) as * mut usize ; while dest_start < dest_usize { dest_usize = dest_usize . wrapping_sub (1) ; src_usize = src_usize . wrapping_sub (1) ; * dest_usize = * src_usize ; } } # [doc = " `n` is in units of bytes, but must be a multiple of the word size and must not be 0."] # [doc = " `src` *must not* be `usize`-aligned."] # [cfg (not (feature = "mem-unaligned"))] # [inline (always)] unsafe fn copy_backward_misaligned_words (dest : * mut u8 , src : * const u8 , n : usize) { debug_assert ! (n > 0 && n % WORD_SIZE == 0) ; debug_assert ! (src . addr () % WORD_SIZE != 0) ; let mut dest_usize = dest as * mut usize ; let dest_start = dest . wrapping_sub (n) as * mut usize ; let offset = src as usize & WORD_MASK ; let shift = offset * 8 ; let mut src_aligned = src . wrapping_byte_sub (offset) as * mut usize ; let mut prev_word = load_aligned_partial (src_aligned , offset) ; while dest_start . wrapping_add (1) < dest_usize { src_aligned = src_aligned . wrapping_sub (1) ; let cur_word = * src_aligned ; let reassembled = if cfg ! (target_endian = "little") { prev_word << (WORD_SIZE * 8 - shift) | cur_word >> shift } else { prev_word >> (WORD_SIZE * 8 - shift) | cur_word << shift } ; prev_word = cur_word ; dest_usize = dest_usize . wrapping_sub (1) ; * dest_usize = reassembled ; } src_aligned = src_aligned . wrapping_sub (1) ; let cur_word = load_aligned_end_partial (src_aligned , WORD_SIZE - offset) ; let reassembled = if cfg ! (target_endian = "little") { prev_word << (WORD_SIZE * 8 - shift) | cur_word >> shift } else { prev_word >> (WORD_SIZE * 8 - shift) | cur_word << shift } ; dest_usize = dest_usize . wrapping_sub (1) ; * dest_usize = reassembled ; } # [doc = " `n` is in units of bytes, but must be a multiple of the word size and must not be 0."] # [doc = " `src` *must not* be `usize`-aligned."] # [cfg (feature = "mem-unaligned")] # [inline (always)] unsafe fn copy_backward_misaligned_words (dest : * mut u8 , src : * const u8 , n : usize) { let mut dest_usize = dest as * mut usize ; let mut src_usize = src as * mut usize ; let dest_start = dest . wrapping_sub (n) as * mut usize ; while dest_start < dest_usize { dest_usize = dest_usize . wrapping_sub (1) ; src_usize = src_usize . wrapping_sub (1) ; * dest_usize = read_usize_unaligned (src_usize) ; } } let mut dest = dest . wrapping_add (n) ; let mut src = src . wrapping_add (n) ; if n >= WORD_COPY_THRESHOLD { let dest_misalignment = dest as usize & WORD_MASK ; copy_backward_bytes (dest , src , dest_misalignment) ; dest = dest . wrapping_sub (dest_misalignment) ; src = src . wrapping_sub (dest_misalignment) ; n -= dest_misalignment ; let n_words = n & ! WORD_MASK ; let src_misalignment = src as usize & WORD_MASK ; if likely (src_misalignment == 0) { copy_backward_aligned_words (dest , src , n_words) ; } else { copy_backward_misaligned_words (dest , src , n_words) ; } dest = dest . wrapping_sub (n_words) ; src = src . wrapping_sub (n_words) ; n -= n_words ; } copy_backward_bytes (dest , src , n) ; }
+}
+
+macro_rules! set_bytes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function set_bytes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    set_bytes_introspect!();
+    # [inline (always)] pub unsafe fn set_bytes (mut s : * mut u8 , c : u8 , mut n : usize) { # [inline (always)] pub unsafe fn set_bytes_bytes (mut s : * mut u8 , c : u8 , n : usize) { let end = s . wrapping_add (n) ; while s < end { * s = c ; s = s . wrapping_add (1) ; } } # [inline (always)] pub unsafe fn set_bytes_words (s : * mut u8 , c : u8 , n : usize) { let mut broadcast = c as usize ; let mut bits = 8 ; while bits < WORD_SIZE * 8 { broadcast |= broadcast << bits ; bits *= 2 ; } let mut s_usize = s as * mut usize ; let end = s . wrapping_add (n) as * mut usize ; while s_usize < end { * s_usize = broadcast ; s_usize = s_usize . wrapping_add (1) ; } } if likely (n >= WORD_COPY_THRESHOLD) { let misalignment = (s as usize) . wrapping_neg () & WORD_MASK ; set_bytes_bytes (s , c , misalignment) ; s = s . wrapping_add (misalignment) ; n -= misalignment ; let n_words = n & ! WORD_MASK ; set_bytes_words (s , c , n_words) ; s = s . wrapping_add (n_words) ; n -= n_words ; } set_bytes_bytes (s , c , n) ; }
+}
+
+macro_rules! compare_bytes_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function compare_bytes in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    compare_bytes_introspect!();
+    # [inline (always)] pub unsafe fn compare_bytes (s1 : * const u8 , s2 : * const u8 , n : usize) -> c_int { let mut i = 0 ; while i < n { let a = * s1 . wrapping_add (i) ; let b = * s2 . wrapping_add (i) ; if a != b { return c_int :: from (a) - c_int :: from (b) ; } i += 1 ; } 0 }
+}
+
+macro_rules! c_string_length_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function c_string_length in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    c_string_length_introspect!();
+    # [inline (always)] pub unsafe fn c_string_length (mut s : * const core :: ffi :: c_char) -> usize { let mut n = 0 ; while * s != 0 { n += 1 ; s = s . wrapping_add (1) ; } n }
+}

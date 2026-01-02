@@ -1,0 +1,14 @@
+mkuse!{use rustc_macros :: { Diagnostic , LintDiagnostic } ;}
+mkuse!{use rustc_middle :: ty :: { Instance , Ty } ;}
+mkuse!{use rustc_span :: { Span , Symbol } ;}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_recursion_limit)] pub (crate) struct RecursionLimit < 'tcx > { # [primary_span] pub span : Span , pub instance : Instance < 'tcx > , # [note] pub def_span : Span , pub def_path_str : String , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_no_optimized_mir)] pub (crate) struct NoOptimizedMir { # [note] pub span : Span , pub crate_name : Symbol , pub instance : String , }}}
+mkitem!{mkstruct!{# [derive (LintDiagnostic)] # [diag (monomorphize_large_assignments)] # [note] pub (crate) struct LargeAssignmentsLint { # [label] pub span : Span , pub size : u64 , pub limit : u64 , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_symbol_already_defined)] pub (crate) struct SymbolAlreadyDefined { # [primary_span] pub span : Option < Span > , pub symbol : String , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_couldnt_dump_mono_stats)] pub (crate) struct CouldntDumpMonoStats { pub error : String , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_encountered_error_while_instantiating)] pub (crate) struct EncounteredErrorWhileInstantiating < 'tcx > { # [primary_span] pub span : Span , pub kind : & 'static str , pub instance : Instance < 'tcx > , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_encountered_error_while_instantiating_global_asm)] pub (crate) struct EncounteredErrorWhileInstantiatingGlobalAsm { # [primary_span] pub span : Span , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_start_not_found)] # [help] pub (crate) struct StartNotFound ;}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_abi_error_disabled_vector_type)] # [help] pub (crate) struct AbiErrorDisabledVectorType < 'a > { # [primary_span] # [label] pub span : Span , pub required_feature : & 'a str , pub ty : Ty < 'a > , # [doc = " Whether this is a problem at a call site or at a declaration."] pub is_call : bool , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_abi_error_unsupported_vector_type)] pub (crate) struct AbiErrorUnsupportedVectorType < 'a > { # [primary_span] # [label] pub span : Span , pub ty : Ty < 'a > , # [doc = " Whether this is a problem at a call site or at a declaration."] pub is_call : bool , }}}
+mkitem!{mkstruct!{# [derive (Diagnostic)] # [diag (monomorphize_abi_required_target_feature)] # [help] pub (crate) struct AbiRequiredTargetFeature < 'a > { # [primary_span] # [label] pub span : Span , pub required_feature : & 'a str , pub abi : & 'a str , # [doc = " Whether this is a problem at a call site or at a declaration."] pub is_call : bool , }}}

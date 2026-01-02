@@ -1,0 +1,74 @@
+mkuse!{use std :: assert_matches :: assert_matches ;}
+mkuse!{use std :: sync :: Arc ;}
+mkuse!{use itertools :: Itertools ;}
+mkuse!{use rustc_abi :: Align ;}
+mkuse!{use rustc_codegen_ssa :: traits :: { BaseTypeCodegenMethods , ConstCodegenMethods } ;}
+mkuse!{use rustc_data_structures :: fx :: FxIndexMap ;}
+mkuse!{use rustc_index :: IndexVec ;}
+mkuse!{use rustc_macros :: TryFromU32 ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_session :: RemapFileNameExt ;}
+mkuse!{use rustc_session :: config :: RemapPathScopeComponents ;}
+mkuse!{use rustc_span :: { SourceFile , StableSourceFileId } ;}
+mkuse!{use tracing :: debug ;}
+mkuse!{use crate :: common :: CodegenCx ;}
+mkuse!{use crate :: coverageinfo :: llvm_cov ;}
+mkuse!{use crate :: coverageinfo :: mapgen :: covfun :: prepare_covfun_record ;}
+mkuse!{use crate :: llvm ;}
+mkmod!{covfun, { 
+                getname!(covfun);
+                getsrc!(covfun);
+                getpath!(covfun);
+                get_deps!(covfun);
+                get_crates!(covfun);
+                mkinclude!(covfun);
+                 
+            }}
+mkmod!{spans, { 
+                getname!(spans);
+                getsrc!(spans);
+                getpath!(spans);
+                get_deps!(spans);
+                get_crates!(spans);
+                mkinclude!(spans);
+                 
+            }}
+mkmod!{unused, { 
+                getname!(unused);
+                getsrc!(unused);
+                getpath!(unused);
+                get_deps!(unused);
+                get_crates!(unused);
+                mkinclude!(unused);
+                 
+            }}
+mkitem!{mkenum!{# [doc = " Version number that will be included the `__llvm_covmap` section header."] # [doc = " Corresponds to LLVM's `llvm::coverage::CovMapVersion` (in `CoverageMapping.h`),"] # [doc = " or at least the subset that we know and care about."] # [doc = ""] # [doc = " Note that version `n` is encoded as `(n-1)`."] # [derive (Clone , Copy , Debug , PartialEq , Eq , PartialOrd , Ord , TryFromU32)] enum CovmapVersion { # [doc = " Used by LLVM 18 onwards."] Version7 = 6 , }}}
+mkitem!{mkimpl!{impl CovmapVersion { fn to_u32 (self) -> u32 { self as u32 } }}}
+
+macro_rules! finalize_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function finalize in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    finalize_introspect!();
+    # [doc = " Generates and exports the coverage map, which is embedded in special"] # [doc = " linker sections in the final binary."] # [doc = ""] # [doc = " Those sections are then read and understood by LLVM's `llvm-cov` tool,"] # [doc = " which is distributed in the `llvm-tools` rustup component."] pub (crate) fn finalize (cx : & mut CodegenCx < '_ , '_ >) { let tcx = cx . tcx ; let covmap_version = CovmapVersion :: try_from (llvm_cov :: mapping_version ()) . unwrap_or_else (| raw_version : u32 | { panic ! ("unknown coverage mapping version reported by `llvm-wrapper`: {raw_version}") }) ; assert_matches ! (covmap_version , CovmapVersion :: Version7) ; debug ! ("Generating coverage map for CodegenUnit: `{}`" , cx . codegen_unit . name ()) ; let Some (ref coverage_cx) = cx . coverage_cx else { return } ; let mut covfun_records = coverage_cx . instances_used () . into_iter () . sorted_by_cached_key (| & instance | tcx . symbol_name (instance) . name) . filter_map (| instance | prepare_covfun_record (tcx , instance , true)) . collect :: < Vec < _ > > () ; if cx . codegen_unit . is_code_coverage_dead_code_cgu () { unused :: prepare_covfun_records_for_unused_functions (cx , & mut covfun_records) ; } if covfun_records . is_empty () { return ; } let global_file_table = GlobalFileTable :: build (tcx , covfun_records . iter () . flat_map (| c | c . all_source_files ())) ; for covfun in & covfun_records { covfun :: generate_covfun_record (cx , & global_file_table , covfun) } generate_covmap_record (cx , covmap_version , & global_file_table . filenames_buffer) ; }
+}
+mkitem!{mkstruct!{# [doc = " Maps \"global\" (per-CGU) file ID numbers to their underlying source file paths."] # [derive (Debug)] struct GlobalFileTable { # [doc = " This \"raw\" table doesn't include the working dir, so a file's"] # [doc = " global ID is its index in this set **plus one**."] raw_file_table : FxIndexMap < StableSourceFileId , String > , # [doc = " The file table in encoded form (possibly compressed), which can be"] # [doc = " included directly in this CGU's `__llvm_covmap` record."] filenames_buffer : Vec < u8 > , # [doc = " Truncated hash of the bytes in `filenames_buffer`."] # [doc = ""] # [doc = " The `llvm-cov` tool uses this hash to associate each covfun record with"] # [doc = " its corresponding filenames table, since the final binary will typically"] # [doc = " contain multiple covmap records from different compilation units."] filenames_hash : u64 , }}}
+mkitem!{mkimpl!{impl GlobalFileTable { # [doc = " Builds a \"global file table\" for this CGU, mapping numeric IDs to"] # [doc = " path strings."] fn build < 'a > (tcx : TyCtxt < '_ > , all_files : impl Iterator < Item = & 'a SourceFile >) -> Self { let mut raw_file_table = FxIndexMap :: default () ; for file in all_files { raw_file_table . entry (file . stable_id) . or_insert_with (| | { file . name . for_scope (tcx . sess , RemapPathScopeComponents :: MACRO) . to_string_lossy () . into_owned () }) ; } let mut table = Vec :: with_capacity (raw_file_table . len () + 1) ; let base_dir = tcx . sess . opts . working_dir . for_scope (tcx . sess , RemapPathScopeComponents :: MACRO) . to_string_lossy () ; table . push (base_dir . as_ref ()) ; table . extend (raw_file_table . values () . map (| name | name . as_str ())) ; let filenames_buffer = llvm_cov :: write_filenames_to_buffer (& table) ; let filenames_hash = llvm_cov :: hash_bytes (& filenames_buffer) ; Self { raw_file_table , filenames_buffer , filenames_hash } } fn get_existing_id (& self , file : & SourceFile) -> Option < GlobalFileId > { let raw_id = self . raw_file_table . get_index_of (& file . stable_id) ? ; Some (GlobalFileId :: from_usize (raw_id + 1)) } }}}
+mkitem!{rustc_index :: newtype_index ! { # [doc = " An index into the CGU's overall list of file paths. The underlying paths"] # [doc = " will be embedded in the `__llvm_covmap` linker section."] struct GlobalFileId { } }}
+mkitem!{rustc_index :: newtype_index ! { # [doc = " An index into a function's list of global file IDs. That underlying list"] # [doc = " of local-to-global mappings will be embedded in the function's record in"] # [doc = " the `__llvm_covfun` linker section."] struct LocalFileId { } }}
+mkitem!{mkstruct!{# [doc = " Holds a mapping from \"local\" (per-function) file IDs to their corresponding"] # [doc = " source files."] # [derive (Debug , Default)] struct VirtualFileMapping { local_file_table : IndexVec < LocalFileId , Arc < SourceFile > > , }}}
+mkitem!{mkimpl!{impl VirtualFileMapping { fn push_file (& mut self , source_file : & Arc < SourceFile >) -> LocalFileId { self . local_file_table . push (Arc :: clone (source_file)) } # [doc = " Resolves all of the filenames in this local file mapping to a list of"] # [doc = " global file IDs in its CGU, for inclusion in this function's"] # [doc = " `__llvm_covfun` record."] # [doc = ""] # [doc = " The global file IDs are returned as `u32` to make FFI easier."] fn resolve_all (& self , global_file_table : & GlobalFileTable) -> Option < Vec < u32 > > { self . local_file_table . iter () . map (| file | try { let id = global_file_table . get_existing_id (file) ? ; GlobalFileId :: as_u32 (id) }) . collect :: < Option < Vec < _ > > > () } }}}
+
+macro_rules! generate_covmap_record_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function generate_covmap_record in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    generate_covmap_record_introspect!();
+    # [doc = " Generates the contents of the covmap record for this CGU, which mostly"] # [doc = " consists of a header and a list of filenames. The record is then stored"] # [doc = " as a global variable in the `__llvm_covmap` section."] fn generate_covmap_record < 'll > (cx : & mut CodegenCx < 'll , '_ > , version : CovmapVersion , filenames_buffer : & [u8] ,) { let covmap_header = cx . const_struct (& [cx . const_u32 (0) , cx . const_u32 (filenames_buffer . len () as u32) , cx . const_u32 (0) , cx . const_u32 (version . to_u32 ()) ,] , false ,) ; let covmap_record = cx . const_struct (& [covmap_header , cx . const_bytes (filenames_buffer)] , false) ; let covmap_global = llvm :: add_global (cx . llmod , cx . val_ty (covmap_record) , & llvm_cov :: covmap_var_name ()) ; llvm :: set_initializer (covmap_global , covmap_record) ; llvm :: set_global_constant (covmap_global , true) ; llvm :: set_linkage (covmap_global , llvm :: Linkage :: PrivateLinkage) ; llvm :: set_section (covmap_global , & llvm_cov :: covmap_section_name (cx . llmod)) ; llvm :: set_alignment (covmap_global , Align :: EIGHT) ; cx . add_used_global (covmap_global) ; }
+}

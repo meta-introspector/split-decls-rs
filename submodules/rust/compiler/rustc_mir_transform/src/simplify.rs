@@ -1,0 +1,86 @@
+mkuse!{use itertools :: Itertools as _ ;}
+mkuse!{use rustc_index :: { Idx , IndexSlice , IndexVec } ;}
+mkuse!{use rustc_middle :: mir :: visit :: { MutVisitor , MutatingUseContext , PlaceContext , Visitor } ;}
+mkuse!{use rustc_middle :: mir :: * ;}
+mkuse!{use rustc_middle :: ty :: TyCtxt ;}
+mkuse!{use rustc_span :: DUMMY_SP ;}
+mkuse!{use smallvec :: SmallVec ;}
+mkuse!{use tracing :: { debug , trace } ;}
+mkitem!{mkenum!{pub (super) enum SimplifyCfg { Initial , PromoteConsts , RemoveFalseEdges , # [doc = " Runs at the beginning of \"analysis to runtime\" lowering, *before* drop elaboration."] PostAnalysis , # [doc = " Runs at the end of \"analysis to runtime\" lowering, *after* drop elaboration."] # [doc = " This is before the main optimization passes on runtime MIR kick in."] PreOptimizations , Final , MakeShim , AfterUnreachableEnumBranching , }}}
+mkitem!{mkimpl!{impl SimplifyCfg { fn name (& self) -> & 'static str { match self { SimplifyCfg :: Initial => "SimplifyCfg-initial" , SimplifyCfg :: PromoteConsts => "SimplifyCfg-promote-consts" , SimplifyCfg :: RemoveFalseEdges => "SimplifyCfg-remove-false-edges" , SimplifyCfg :: PostAnalysis => "SimplifyCfg-post-analysis" , SimplifyCfg :: PreOptimizations => "SimplifyCfg-pre-optimizations" , SimplifyCfg :: Final => "SimplifyCfg-final" , SimplifyCfg :: MakeShim => "SimplifyCfg-make_shim" , SimplifyCfg :: AfterUnreachableEnumBranching => { "SimplifyCfg-after-unreachable-enum-branching" } } } }}}
+
+macro_rules! simplify_cfg_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function simplify_cfg in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    simplify_cfg_introspect!();
+    pub (super) fn simplify_cfg < 'tcx > (tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { if CfgSimplifier :: new (tcx , body) . simplify () { body . basic_blocks . invalidate_cfg_cache () ; } remove_dead_blocks (body) ; body . basic_blocks . as_mut_preserves_cfg () . shrink_to_fit () ; }
+}
+mkitem!{mkimpl!{impl < 'tcx > crate :: MirPass < 'tcx > for SimplifyCfg { fn name (& self) -> & 'static str { self . name () } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { debug ! ("SimplifyCfg({:?}) - simplifying {:?}" , self . name () , body . source) ; simplify_cfg (tcx , body) ; } fn is_required (& self) -> bool { false } }}}
+mkitem!{mkstruct!{struct CfgSimplifier < 'a , 'tcx > { preserve_switch_reads : bool , basic_blocks : & 'a mut IndexSlice < BasicBlock , BasicBlockData < 'tcx > > , pred_count : IndexVec < BasicBlock , u32 > , }}}
+mkitem!{mkimpl!{impl < 'a , 'tcx > CfgSimplifier < 'a , 'tcx > { fn new (tcx : TyCtxt < 'tcx > , body : & 'a mut Body < 'tcx >) -> Self { let mut pred_count = IndexVec :: from_elem (0u32 , & body . basic_blocks) ; pred_count [START_BLOCK] = 1 ; for (_ , data) in traversal :: preorder (body) { if let Some (ref term) = data . terminator { for tgt in term . successors () { pred_count [tgt] += 1 ; } } } let preserve_switch_reads = matches ! (body . phase , MirPhase :: Built | MirPhase :: Analysis (_)) || tcx . sess . opts . unstable_opts . mir_preserve_ub ; let basic_blocks = body . basic_blocks . as_mut_preserves_cfg () ; CfgSimplifier { preserve_switch_reads , basic_blocks , pred_count } } # [doc = " Returns whether we actually simplified anything. In that case, the caller *must* invalidate"] # [doc = " the CFG caches of the MIR body."] # [must_use] fn simplify (mut self) -> bool { self . strip_nops () ; let mut merged_blocks = Vec :: new () ; let mut outer_changed = false ; loop { let mut changed = false ; for bb in self . basic_blocks . indices () { if self . pred_count [bb] == 0 { continue ; } debug ! ("simplifying {:?}" , bb) ; let mut terminator = self . basic_blocks [bb] . terminator . take () . expect ("invalid terminator state") ; terminator . successors_mut (| successor | self . collapse_goto_chain (successor , & mut changed)) ; let mut inner_changed = true ; merged_blocks . clear () ; while inner_changed { inner_changed = false ; inner_changed |= self . simplify_branch (& mut terminator) ; inner_changed |= self . merge_successor (& mut merged_blocks , & mut terminator) ; changed |= inner_changed ; } let statements_to_merge = merged_blocks . iter () . map (| & i | self . basic_blocks [i] . statements . len ()) . sum () ; if statements_to_merge > 0 { let mut statements = std :: mem :: take (& mut self . basic_blocks [bb] . statements) ; statements . reserve (statements_to_merge) ; for & from in & merged_blocks { statements . append (& mut self . basic_blocks [from] . statements) ; } self . basic_blocks [bb] . statements = statements ; } self . basic_blocks [bb] . terminator = Some (terminator) ; } if ! changed { break ; } outer_changed = true ; } outer_changed } # [doc = " This function will return `None` if"] # [doc = " * the block has statements"] # [doc = " * the block has a terminator other than `goto`"] # [doc = " * the block has no terminator (meaning some other part of the current optimization stole it)"] fn take_terminator_if_simple_goto (& mut self , bb : BasicBlock) -> Option < Terminator < 'tcx > > { match self . basic_blocks [bb] { BasicBlockData { ref statements , terminator : ref mut terminator @ Some (Terminator { kind : TerminatorKind :: Goto { .. } , .. }) , .. } if statements . is_empty () => terminator . take () , _ => None , } } # [doc = " Collapse a goto chain starting from `start`"] fn collapse_goto_chain (& mut self , start : & mut BasicBlock , changed : & mut bool) { let mut terminators : SmallVec < [_ ; 1] > = Default :: default () ; let mut current = * start ; while let Some (terminator) = self . take_terminator_if_simple_goto (current) { let Terminator { kind : TerminatorKind :: Goto { target } , .. } = terminator else { unreachable ! () ; } ; terminators . push ((current , terminator)) ; current = target ; } let last = current ; * changed |= * start != last ; * start = last ; while let Some ((current , mut terminator)) = terminators . pop () { let Terminator { kind : TerminatorKind :: Goto { ref mut target } , .. } = terminator else { unreachable ! () ; } ; * changed |= * target != last ; * target = last ; debug ! ("collapsing goto chain from {:?} to {:?}" , current , target) ; if self . pred_count [current] == 1 { self . pred_count [current] = 0 ; } else { self . pred_count [* target] += 1 ; self . pred_count [current] -= 1 ; } self . basic_blocks [current] . terminator = Some (terminator) ; } } fn merge_successor (& mut self , merged_blocks : & mut Vec < BasicBlock > , terminator : & mut Terminator < 'tcx > ,) -> bool { let target = match terminator . kind { TerminatorKind :: Goto { target } if self . pred_count [target] == 1 => target , _ => return false , } ; debug ! ("merging block {:?} into {:?}" , target , terminator) ; * terminator = match self . basic_blocks [target] . terminator . take () { Some (terminator) => terminator , None => { return false ; } } ; merged_blocks . push (target) ; self . pred_count [target] = 0 ; true } fn simplify_branch (& mut self , terminator : & mut Terminator < 'tcx >) -> bool { if self . preserve_switch_reads { return false ; } let TerminatorKind :: SwitchInt { .. } = terminator . kind else { return false ; } ; let Ok (first_succ) = terminator . successors () . all_equal_value () else { return false ; } ; let count = terminator . successors () . count () ; self . pred_count [first_succ] -= (count - 1) as u32 ; debug ! ("simplifying branch {:?}" , terminator) ; terminator . kind = TerminatorKind :: Goto { target : first_succ } ; true } fn strip_nops (& mut self) { for blk in self . basic_blocks . iter_mut () { blk . statements . retain (| stmt | ! matches ! (stmt . kind , StatementKind :: Nop)) } } }}}
+
+macro_rules! simplify_duplicate_switch_targets_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function simplify_duplicate_switch_targets in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    simplify_duplicate_switch_targets_introspect!();
+    pub (super) fn simplify_duplicate_switch_targets (terminator : & mut Terminator < '_ >) { if let TerminatorKind :: SwitchInt { targets , .. } = & mut terminator . kind { let otherwise = targets . otherwise () ; if targets . iter () . any (| t | t . 1 == otherwise) { * targets = SwitchTargets :: new (targets . iter () . filter (| t | t . 1 != otherwise) , targets . otherwise () ,) ; } } }
+}
+
+macro_rules! remove_dead_blocks_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function remove_dead_blocks in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    remove_dead_blocks_introspect!();
+    pub (super) fn remove_dead_blocks (body : & mut Body < '_ >) { let should_deduplicate_unreachable = | bbdata : & BasicBlockData < '_ > | { bbdata . terminator . is_some () && bbdata . is_empty_unreachable () && ! bbdata . is_cleanup } ; let reachable = traversal :: reachable_as_bitset (body) ; let empty_unreachable_blocks = body . basic_blocks . iter_enumerated () . filter (| (bb , bbdata) | should_deduplicate_unreachable (bbdata) && reachable . contains (* bb)) . count () ; let num_blocks = body . basic_blocks . len () ; if num_blocks == reachable . count () && empty_unreachable_blocks <= 1 { return ; } let basic_blocks = body . basic_blocks . as_mut () ; let mut replacements : Vec < _ > = (0 .. num_blocks) . map (BasicBlock :: new) . collect () ; let mut orig_index = 0 ; let mut used_index = 0 ; let mut kept_unreachable = None ; let mut deduplicated_unreachable = false ; basic_blocks . raw . retain (| bbdata | { let orig_bb = BasicBlock :: new (orig_index) ; if ! reachable . contains (orig_bb) { orig_index += 1 ; return false ; } let used_bb = BasicBlock :: new (used_index) ; if should_deduplicate_unreachable (bbdata) { let kept_unreachable = * kept_unreachable . get_or_insert (used_bb) ; if kept_unreachable != used_bb { replacements [orig_index] = kept_unreachable ; deduplicated_unreachable = true ; orig_index += 1 ; return false ; } } replacements [orig_index] = used_bb ; used_index += 1 ; orig_index += 1 ; true }) ; if deduplicated_unreachable { basic_blocks [kept_unreachable . unwrap ()] . terminator_mut () . source_info = SourceInfo { span : DUMMY_SP , scope : OUTERMOST_SOURCE_SCOPE } ; } for block in basic_blocks { block . terminator_mut () . successors_mut (| target | * target = replacements [target . index ()]) ; } }
+}
+mkitem!{mkenum!{pub (super) enum SimplifyLocals { BeforeConstProp , AfterGVN , Final , }}}
+mkitem!{mkimpl!{impl < 'tcx > crate :: MirPass < 'tcx > for SimplifyLocals { fn name (& self) -> & 'static str { match & self { SimplifyLocals :: BeforeConstProp => "SimplifyLocals-before-const-prop" , SimplifyLocals :: AfterGVN => "SimplifyLocals-after-value-numbering" , SimplifyLocals :: Final => "SimplifyLocals-final" , } } fn is_enabled (& self , sess : & rustc_session :: Session) -> bool { sess . mir_opt_level () > 0 } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { trace ! ("running SimplifyLocals on {:?}" , body . source) ; let mut used_locals = UsedLocals :: new (body) ; remove_unused_definitions_helper (& mut used_locals , body) ; let map = make_local_map (& mut body . local_decls , & used_locals) ; if map . iter () . any (Option :: is_none) { let mut updater = LocalUpdater { map , tcx } ; updater . visit_body_preserves_cfg (body) ; body . local_decls . shrink_to_fit () ; } } fn is_required (& self) -> bool { false } }}}
+
+macro_rules! remove_unused_definitions_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function remove_unused_definitions in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    remove_unused_definitions_introspect!();
+    pub (super) fn remove_unused_definitions < 'tcx > (body : & mut Body < 'tcx >) { let mut used_locals = UsedLocals :: new (body) ; remove_unused_definitions_helper (& mut used_locals , body) ; }
+}
+
+macro_rules! make_local_map_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function make_local_map in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    make_local_map_introspect!();
+    # [doc = " Construct the mapping while swapping out unused stuff out from the `vec`."] fn make_local_map < V > (local_decls : & mut IndexVec < Local , V > , used_locals : & UsedLocals ,) -> IndexVec < Local , Option < Local > > { let mut map : IndexVec < Local , Option < Local > > = IndexVec :: from_elem (None , local_decls) ; let mut used = Local :: ZERO ; for alive_index in local_decls . indices () { if ! used_locals . is_used (alive_index) { continue ; } map [alive_index] = Some (used) ; if alive_index != used { local_decls . swap (alive_index , used) ; } used . increment_by (1) ; } local_decls . truncate (used . index ()) ; map }
+}
+mkitem!{mkstruct!{# [doc = " Keeps track of used & unused locals."] struct UsedLocals { increment : bool , arg_count : u32 , use_count : IndexVec < Local , u32 > , }}}
+mkitem!{mkimpl!{impl UsedLocals { # [doc = " Determines which locals are used & unused in the given body."] fn new (body : & Body < '_ >) -> Self { let mut this = Self { increment : true , arg_count : body . arg_count . try_into () . unwrap () , use_count : IndexVec :: from_elem (0 , & body . local_decls) , } ; this . visit_body (body) ; this } # [doc = " Checks if local is used."] # [doc = ""] # [doc = " Return place and arguments are always considered used."] fn is_used (& self , local : Local) -> bool { trace ! ("is_used({:?}): use_count: {:?}" , local , self . use_count [local]) ; local . as_u32 () <= self . arg_count || self . use_count [local] != 0 } # [doc = " Updates the use counts to reflect the removal of given statement."] fn statement_removed (& mut self , statement : & Statement < '_ >) { self . increment = false ; let location = Location :: START ; self . visit_statement (statement , location) ; } # [doc = " Visits a left-hand side of an assignment."] fn visit_lhs (& mut self , place : & Place < '_ > , location : Location) { if place . is_indirect () { self . visit_place (place , PlaceContext :: MutatingUse (MutatingUseContext :: Store) , location) ; } else { self . super_projection (place . as_ref () , PlaceContext :: MutatingUse (MutatingUseContext :: Projection) , location ,) ; } } }}}
+mkitem!{mkimpl!{impl < 'tcx > Visitor < 'tcx > for UsedLocals { fn visit_statement (& mut self , statement : & Statement < 'tcx > , location : Location) { match statement . kind { StatementKind :: Intrinsic (..) | StatementKind :: Retag (..) | StatementKind :: Coverage (..) | StatementKind :: FakeRead (..) | StatementKind :: PlaceMention (..) | StatementKind :: AscribeUserType (..) => { self . super_statement (statement , location) ; } StatementKind :: ConstEvalCounter | StatementKind :: Nop => { } StatementKind :: StorageLive (_local) | StatementKind :: StorageDead (_local) => { } StatementKind :: Assign (box (ref place , ref rvalue)) => { if rvalue . is_safe_to_remove () { self . visit_lhs (place , location) ; self . visit_rvalue (rvalue , location) ; } else { self . super_statement (statement , location) ; } } StatementKind :: SetDiscriminant { ref place , variant_index : _ } | StatementKind :: Deinit (ref place) | StatementKind :: BackwardIncompatibleDropHint { ref place , reason : _ } => { self . visit_lhs (place , location) ; } } } fn visit_local (& mut self , local : Local , _ctx : PlaceContext , _location : Location) { if self . increment { self . use_count [local] += 1 ; } else { assert_ne ! (self . use_count [local] , 0) ; self . use_count [local] -= 1 ; } } }}}
+
+macro_rules! remove_unused_definitions_helper_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function remove_unused_definitions_helper in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    remove_unused_definitions_helper_introspect!();
+    # [doc = " Removes unused definitions. Updates the used locals to reflect the changes made."] fn remove_unused_definitions_helper (used_locals : & mut UsedLocals , body : & mut Body < '_ >) { let mut modified = true ; while modified { modified = false ; for data in body . basic_blocks . as_mut_preserves_cfg () { data . statements . retain (| statement | { let keep = match & statement . kind { StatementKind :: StorageLive (local) | StatementKind :: StorageDead (local) => { used_locals . is_used (* local) } StatementKind :: Assign (box (place , _)) => used_locals . is_used (place . local) , StatementKind :: SetDiscriminant { place , .. } | StatementKind :: BackwardIncompatibleDropHint { place , reason : _ } | StatementKind :: Deinit (place) => used_locals . is_used (place . local) , StatementKind :: Nop => false , _ => true , } ; if ! keep { trace ! ("removing statement {:?}" , statement) ; modified = true ; used_locals . statement_removed (statement) ; } keep }) ; } } }
+}
+mkitem!{mkstruct!{struct LocalUpdater < 'tcx > { map : IndexVec < Local , Option < Local > > , tcx : TyCtxt < 'tcx > , }}}
+mkitem!{mkimpl!{impl < 'tcx > MutVisitor < 'tcx > for LocalUpdater < 'tcx > { fn tcx (& self) -> TyCtxt < 'tcx > { self . tcx } fn visit_local (& mut self , l : & mut Local , _ : PlaceContext , _ : Location) { * l = self . map [* l] . unwrap () ; } }}}

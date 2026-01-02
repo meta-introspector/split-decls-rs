@@ -1,0 +1,42 @@
+error: use std :: cmp :: max;
+error: use std :: collections :: { BTreeMap, BTreeSet };
+error: use std :: ffi :: OsString;
+error: use std :: fmt :: Write as _;
+error: use std :: fs :: { self, File };
+error: use std :: io :: { self, IsTerminal, Read, Write };
+error: use std :: panic :: { self, PanicHookInfo, catch_unwind };
+error: use std :: path :: { Path, PathBuf };
+error: use std :: process :: { self, Command, Stdio };
+error: use std :: sync :: OnceLock;
+error: use std :: sync :: atomic :: { AtomicBool, Ordering };
+error: use std :: time :: Instant;
+error: use std :: { env, str };
+error: use rustc_ast as ast;
+error: use crate :: rustc_codegen_ssa :: traits :: CodegenBackend;
+error: use crate :: rustc_codegen_ssa :: { CodegenErrors, CodegenResults };
+error: use crate :: rustc_data_structures :: profiling ::
+error: use crate :: rustc_complete :: emitter :: stderr_destination;
+error: use crate :: rustc_complete :: registry :: Registry;
+error: use crate :: rustc_complete :: translation :: Translator;
+error: use crate :: rustc_complete ::
+error: use crate :: rustc_feature :: find_gated_cfg;
+error: use rustc_index as _;
+error: use rustc_interface :: util :: { self, get_codegen_backend };
+error: use rustc_interface ::
+error: use crate :: rustc_lint :: unerased_lint_store;
+error: use crate :: rustc_metadata :: creader :: MetadataLoader;
+error: use crate :: rustc_metadata :: locator;
+error: use crate :: rustc_complete :: ty :: TyCtxt;
+error: use crate :: rustc_parse :: lexer :: StripTokens;
+error: use crate :: rustc_parse ::
+error: use crate :: rustc_complete :: config ::
+error: use crate :: rustc_complete :: getopts :: { self, Matches };
+error: use crate :: rustc_complete :: lint :: { Lint, LintId };
+error: use crate :: rustc_complete :: output ::
+error: use crate :: rustc_complete :: { EarlyDiagCtxt, Session, config };
+error: use crate :: rustc_complete :: FileName;
+error: use crate :: rustc_complete :: def_id :: LOCAL_CRATE;
+error: use crate :: rustc_target :: json :: ToJson;
+error: use crate :: rustc_target :: spec :: { Target, TargetTuple };
+error: use tracing :: trace;
+error: use crate :: session_diagnostics ::

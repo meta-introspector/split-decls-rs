@@ -1,0 +1,9 @@
+mkuse!{use rustc_hir :: def :: Res ;}
+mkuse!{use rustc_macros :: { HashStable , TyDecodable , TyEncodable } ;}
+mkuse!{use rustc_span :: Ident ;}
+mkuse!{use rustc_span :: def_id :: DefId ;}
+mkuse!{use smallvec :: SmallVec ;}
+mkuse!{use crate :: ty ;}
+mkitem!{mkenum!{# [doc = " A simplified version of `ImportKind` from resolve."] # [doc = " `DefId`s here correspond to `use` and `extern crate` items themselves, not their targets."] # [derive (Clone , Copy , Debug , TyEncodable , TyDecodable , HashStable)] pub enum Reexport { Single (DefId) , Glob (DefId) , ExternCrate (DefId) , MacroUse , MacroExport , }}}
+mkitem!{mkimpl!{impl Reexport { pub fn id (self) -> Option < DefId > { match self { Reexport :: Single (id) | Reexport :: Glob (id) | Reexport :: ExternCrate (id) => Some (id) , Reexport :: MacroUse | Reexport :: MacroExport => None , } } }}}
+mkitem!{mkstruct!{# [doc = " This structure is supposed to keep enough data to re-create `NameBinding`s for other crates"] # [doc = " during name resolution. Right now the bindings are not recreated entirely precisely so we may"] # [doc = " need to add more data in the future to correctly support macros 2.0, for example."] # [doc = " Module child can be either a proper item or a reexport (including private imports)."] # [doc = " In case of reexport all the fields describe the reexport item itself, not what it refers to."] # [derive (Debug , TyEncodable , TyDecodable , HashStable)] pub struct ModChild { # [doc = " Name of the item."] pub ident : Ident , # [doc = " Resolution result corresponding to the item."] # [doc = " Local variables cannot be exported, so this `Res` doesn't need the ID parameter."] pub res : Res < ! > , # [doc = " Visibility of the item."] pub vis : ty :: Visibility < DefId > , # [doc = " Reexport chain linking this module child to its original reexported item."] # [doc = " Empty if the module child is a proper item."] pub reexport_chain : SmallVec < [Reexport ; 2] > , }}}

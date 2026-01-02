@@ -1,0 +1,271 @@
+mkuse!{use crate :: core_arch :: x86 :: __m128i ;}
+mkuse!{use crate :: ptr ;}
+mkuse!{# [cfg (test)] use stdarch_test :: assert_instr ;}
+mkitem!{mkstruct!{# [repr (C , packed)] struct EncodeKey128Output (u32 , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i) ;}}
+mkitem!{mkstruct!{# [repr (C , packed)] struct EncodeKey256Output (u32 , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i ,) ;}}
+mkitem!{mkstruct!{# [repr (C , packed)] struct AesOutput (u8 , __m128i) ;}}
+mkitem!{mkstruct!{# [repr (C , packed)] struct WideAesOutput (u8 , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i , __m128i ,) ;}}
+mkitem!{# [allow (improper_ctypes)] unsafe extern "unadjusted" { # [link_name = "llvm.x86.loadiwkey"] fn loadiwkey (integrity_key : __m128i , key_lo : __m128i , key_hi : __m128i , control : u32) ; # [link_name = "llvm.x86.encodekey128"] fn encodekey128 (key_metadata : u32 , key : __m128i) -> EncodeKey128Output ; # [link_name = "llvm.x86.encodekey256"] fn encodekey256 (key_metadata : u32 , key_lo : __m128i , key_hi : __m128i) -> EncodeKey256Output ; # [link_name = "llvm.x86.aesenc128kl"] fn aesenc128kl (data : __m128i , handle : * const u8) -> AesOutput ; # [link_name = "llvm.x86.aesdec128kl"] fn aesdec128kl (data : __m128i , handle : * const u8) -> AesOutput ; # [link_name = "llvm.x86.aesenc256kl"] fn aesenc256kl (data : __m128i , handle : * const u8) -> AesOutput ; # [link_name = "llvm.x86.aesdec256kl"] fn aesdec256kl (data : __m128i , handle : * const u8) -> AesOutput ; # [link_name = "llvm.x86.aesencwide128kl"] fn aesencwide128kl (handle : * const u8 , i0 : __m128i , i1 : __m128i , i2 : __m128i , i3 : __m128i , i4 : __m128i , i5 : __m128i , i6 : __m128i , i7 : __m128i ,) -> WideAesOutput ; # [link_name = "llvm.x86.aesdecwide128kl"] fn aesdecwide128kl (handle : * const u8 , i0 : __m128i , i1 : __m128i , i2 : __m128i , i3 : __m128i , i4 : __m128i , i5 : __m128i , i6 : __m128i , i7 : __m128i ,) -> WideAesOutput ; # [link_name = "llvm.x86.aesencwide256kl"] fn aesencwide256kl (handle : * const u8 , i0 : __m128i , i1 : __m128i , i2 : __m128i , i3 : __m128i , i4 : __m128i , i5 : __m128i , i6 : __m128i , i7 : __m128i ,) -> WideAesOutput ; # [link_name = "llvm.x86.aesdecwide256kl"] fn aesdecwide256kl (handle : * const u8 , i0 : __m128i , i1 : __m128i , i2 : __m128i , i3 : __m128i , i4 : __m128i , i5 : __m128i , i6 : __m128i , i7 : __m128i ,) -> WideAesOutput ; }}
+
+macro_rules! _mm_loadiwkey_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_loadiwkey in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_loadiwkey_introspect!();
+    # [doc = " Load internal wrapping key (IWKey). The 32-bit unsigned integer `control` specifies IWKey's KeySource"] # [doc = " and whether backing up the key is permitted. IWKey's 256-bit encryption key is loaded from `key_lo`"] # [doc = " and `key_hi`."] # [doc = ""] # [doc = "  - `control[0]`: NoBackup bit. If set, the IWKey cannot be backed up."] # [doc = "  - `control[1:4]`: KeySource bits. These bits specify the encoding method of the IWKey. The only"] # [doc = "    allowed values are `0` (AES GCM SIV wrapping algorithm with the specified key) and `1` (AES GCM"] # [doc = "    SIV wrapping algorithm with random keys enforced by hardware). After calling `_mm_loadiwkey` with"] # [doc = "    KeySource set to `1`, software must check `ZF` to ensure that the key was loaded successfully."] # [doc = "    Using any other value may result in a General Protection Exception."] # [doc = "  - `control[5:31]`: Reserved for future use, must be set to `0`."] # [doc = ""] # [doc = " Note that setting the NoBackup bit and using the KeySource value `1` requires hardware support. These"] # [doc = " permissions can be found by calling `__cpuid(0x19)` and checking the `ECX[0:1]` bits. Failing to follow"] # [doc = " these restrictions may result in a General Protection Exception."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_loadiwkey)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (loadiwkey))] pub unsafe fn _mm_loadiwkey (control : u32 , integrity_key : __m128i , key_lo : __m128i , key_hi : __m128i ,) { loadiwkey (integrity_key , key_lo , key_hi , control) ; }
+}
+
+macro_rules! _mm_encodekey128_u32_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_encodekey128_u32 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_encodekey128_u32_introspect!();
+    # [doc = " Wrap a 128-bit AES key into a 384-bit key handle and stores it in `handle`. Returns the `control`"] # [doc = " parameter used to create the IWKey."] # [doc = ""] # [doc = "  - `key_params[0]`: If set, this key can only be used by the Kernel."] # [doc = "  - `key_params[1]`: If set, this key can not be used to encrypt."] # [doc = "  - `key_params[2]`: If set, this key can not be used to decrypt."] # [doc = "  - `key_params[31:3]`: Reserved for future use, must be set to `0`."] # [doc = ""] # [doc = " Note that these restrictions need hardware support, and the supported restrictions can be found by"] # [doc = " calling `__cpuid(0x19)` and checking the `EAX[0:2]` bits. Failing to follow these restrictions may"] # [doc = " result in a General Protection Exception."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_encodekey128_u32)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (encodekey128))] pub unsafe fn _mm_encodekey128_u32 (key_params : u32 , key : __m128i , handle : * mut u8) -> u32 { let EncodeKey128Output (control , key0 , key1 , key2 , _ , _ , _) = encodekey128 (key_params , key) ; ptr :: write_unaligned (handle . cast () , [key0 , key1 , key2]) ; control }
+}
+
+macro_rules! _mm_encodekey256_u32_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_encodekey256_u32 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_encodekey256_u32_introspect!();
+    # [doc = " Wrap a 256-bit AES key into a 512-bit key handle and stores it in `handle`. Returns the `control`"] # [doc = " parameter used to create the IWKey."] # [doc = ""] # [doc = "  - `key_params[0]`: If set, this key can only be used by the Kernel."] # [doc = "  - `key_params[1]`: If set, this key can not be used to encrypt."] # [doc = "  - `key_params[2]`: If set, this key can not be used to decrypt."] # [doc = "  - `key_params[31:3]`: Reserved for future use, must be set to `0`."] # [doc = ""] # [doc = " Note that these restrictions need hardware support, and the supported restrictions can be found by"] # [doc = " calling `__cpuid(0x19)` and checking the `EAX[0:2]` bits. Failing to follow these restrictions may"] # [doc = " result in a General Protection Exception."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_encodekey256_u32)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (encodekey256))] pub unsafe fn _mm_encodekey256_u32 (key_params : u32 , key_lo : __m128i , key_hi : __m128i , handle : * mut u8 ,) -> u32 { let EncodeKey256Output (control , key0 , key1 , key2 , key3 , _ , _ , _) = encodekey256 (key_params , key_lo , key_hi) ; ptr :: write_unaligned (handle . cast () , [key0 , key1 , key2 , key3]) ; control }
+}
+
+macro_rules! _mm_aesenc128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesenc128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesenc128kl_u8_introspect!();
+    # [doc = " Encrypt 10 rounds of unsigned 8-bit integers in `input` using 128-bit AES key specified in the"] # [doc = " 384-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesenc128kl_u8)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesenc128kl))] pub unsafe fn _mm_aesenc128kl_u8 (output : * mut __m128i , input : __m128i , handle : * const u8) -> u8 { let AesOutput (status , result) = aesenc128kl (input , handle) ; * output = result ; status }
+}
+
+macro_rules! _mm_aesdec128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesdec128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesdec128kl_u8_introspect!();
+    # [doc = " Decrypt 10 rounds of unsigned 8-bit integers in `input` using 128-bit AES key specified in the"] # [doc = " 384-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesdec128kl_u8)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesdec128kl))] pub unsafe fn _mm_aesdec128kl_u8 (output : * mut __m128i , input : __m128i , handle : * const u8) -> u8 { let AesOutput (status , result) = aesdec128kl (input , handle) ; * output = result ; status }
+}
+
+macro_rules! _mm_aesenc256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesenc256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesenc256kl_u8_introspect!();
+    # [doc = " Encrypt 14 rounds of unsigned 8-bit integers in `input` using 256-bit AES key specified in the"] # [doc = " 512-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesenc256kl_u8)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesenc256kl))] pub unsafe fn _mm_aesenc256kl_u8 (output : * mut __m128i , input : __m128i , handle : * const u8) -> u8 { let AesOutput (status , result) = aesenc256kl (input , handle) ; * output = result ; status }
+}
+
+macro_rules! _mm_aesdec256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesdec256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesdec256kl_u8_introspect!();
+    # [doc = " Decrypt 14 rounds of unsigned 8-bit integers in `input` using 256-bit AES key specified in the"] # [doc = " 512-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesdec256kl_u8)"] # [inline] # [target_feature (enable = "kl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesdec256kl))] pub unsafe fn _mm_aesdec256kl_u8 (output : * mut __m128i , input : __m128i , handle : * const u8) -> u8 { let AesOutput (status , result) = aesdec256kl (input , handle) ; * output = result ; status }
+}
+
+macro_rules! _mm_aesencwide128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesencwide128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesencwide128kl_u8_introspect!();
+    # [doc = " Encrypt 10 rounds of 8 groups of unsigned 8-bit integers in `input` using 128-bit AES key specified"] # [doc = " in the 384-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesencwide128kl_u8)"] # [inline] # [target_feature (enable = "widekl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesencwide128kl))] pub unsafe fn _mm_aesencwide128kl_u8 (output : * mut __m128i , input : * const __m128i , handle : * const u8 ,) -> u8 { let input = & * ptr :: slice_from_raw_parts (input , 8) ; let WideAesOutput (status , out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7) = aesencwide128kl (handle , input [0] , input [1] , input [2] , input [3] , input [4] , input [5] , input [6] , input [7] ,) ; * output . cast () = [out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7] ; status }
+}
+
+macro_rules! _mm_aesdecwide128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesdecwide128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesdecwide128kl_u8_introspect!();
+    # [doc = " Decrypt 10 rounds of 8 groups of unsigned 8-bit integers in `input` using 128-bit AES key specified"] # [doc = " in the 384-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesdecwide128kl_u8)"] # [inline] # [target_feature (enable = "widekl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesdecwide128kl))] pub unsafe fn _mm_aesdecwide128kl_u8 (output : * mut __m128i , input : * const __m128i , handle : * const u8 ,) -> u8 { let input = & * ptr :: slice_from_raw_parts (input , 8) ; let WideAesOutput (status , out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7) = aesdecwide128kl (handle , input [0] , input [1] , input [2] , input [3] , input [4] , input [5] , input [6] , input [7] ,) ; * output . cast () = [out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7] ; status }
+}
+
+macro_rules! _mm_aesencwide256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesencwide256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesencwide256kl_u8_introspect!();
+    # [doc = " Encrypt 14 rounds of 8 groups of unsigned 8-bit integers in `input` using 256-bit AES key specified"] # [doc = " in the 512-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesencwide256kl_u8)"] # [inline] # [target_feature (enable = "widekl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesencwide256kl))] pub unsafe fn _mm_aesencwide256kl_u8 (output : * mut __m128i , input : * const __m128i , handle : * const u8 ,) -> u8 { let input = & * ptr :: slice_from_raw_parts (input , 8) ; let WideAesOutput (status , out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7) = aesencwide256kl (handle , input [0] , input [1] , input [2] , input [3] , input [4] , input [5] , input [6] , input [7] ,) ; * output . cast () = [out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7] ; status }
+}
+
+macro_rules! _mm_aesdecwide256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function _mm_aesdecwide256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    _mm_aesdecwide256kl_u8_introspect!();
+    # [doc = " Decrypt 14 rounds of 8 groups of unsigned 8-bit integers in `input` using 256-bit AES key specified"] # [doc = " in the 512-bit key handle `handle`. Store the resulting unsigned 8-bit integers into the corresponding"] # [doc = " elements of `output`. Returns `0` if the operation was successful, and `1` if the operation failed"] # [doc = " due to a handle violation."] # [doc = ""] # [doc = " [Intel's documentation](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_aesdecwide256kl_u8)"] # [inline] # [target_feature (enable = "widekl")] # [stable (feature = "keylocker_x86" , since = "1.89.0")] # [cfg_attr (test , assert_instr (aesdecwide256kl))] pub unsafe fn _mm_aesdecwide256kl_u8 (output : * mut __m128i , input : * const __m128i , handle : * const u8 ,) -> u8 { let input = & * ptr :: slice_from_raw_parts (input , 8) ; let WideAesOutput (status , out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7) = aesdecwide256kl (handle , input [0] , input [1] , input [2] , input [3] , input [4] , input [5] , input [6] , input [7] ,) ; * output . cast () = [out0 , out1 , out2 , out3 , out4 , out5 , out6 , out7] ; status }
+}
+mkmod!{tests, { 
+                getname!(tests);
+                getsrc!(tests);
+                getpath!(tests);
+                get_deps!(tests);
+                get_crates!(tests);
+                mkinclude!(tests);
+                mkuse!{use crate :: core_arch :: x86 :: * ;}
+mkuse!{use stdarch_test :: simd_test ;}
+
+macro_rules! encodekey128_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function encodekey128 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    encodekey128_introspect!();
+    # [target_feature (enable = "kl")] unsafe fn encodekey128 () -> [u8 ; 48] { let mut handle = [0 ; 48] ; let _ = _mm_encodekey128_u32 (0 , _mm_setzero_si128 () , handle . as_mut_ptr ()) ; handle }
+}
+
+macro_rules! encodekey256_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function encodekey256 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    encodekey256_introspect!();
+    # [target_feature (enable = "kl")] unsafe fn encodekey256 () -> [u8 ; 64] { let mut handle = [0 ; 64] ; let _ = _mm_encodekey256_u32 (0 , _mm_setzero_si128 () , _mm_setzero_si128 () , handle . as_mut_ptr () ,) ; handle }
+}
+
+macro_rules! test_mm_encodekey128_u32_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_encodekey128_u32 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_encodekey128_u32_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_encodekey128_u32 () { encodekey128 () ; }
+}
+
+macro_rules! test_mm_encodekey256_u32_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_encodekey256_u32 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_encodekey256_u32_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_encodekey256_u32 () { encodekey256 () ; }
+}
+
+macro_rules! test_mm_aesenc128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesenc128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesenc128kl_u8_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_aesenc128kl_u8 () { let mut buffer = _mm_setzero_si128 () ; let key = encodekey128 () ; for _ in 0 .. 100 { let status = _mm_aesenc128kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesdec128kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } assert_eq_m128i (buffer , _mm_setzero_si128 ()) ; }
+}
+
+macro_rules! test_mm_aesdec128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesdec128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesdec128kl_u8_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_aesdec128kl_u8 () { let mut buffer = _mm_setzero_si128 () ; let key = encodekey128 () ; for _ in 0 .. 100 { let status = _mm_aesdec128kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesenc128kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } assert_eq_m128i (buffer , _mm_setzero_si128 ()) ; }
+}
+
+macro_rules! test_mm_aesenc256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesenc256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesenc256kl_u8_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_aesenc256kl_u8 () { let mut buffer = _mm_setzero_si128 () ; let key = encodekey256 () ; for _ in 0 .. 100 { let status = _mm_aesenc256kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesdec256kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } assert_eq_m128i (buffer , _mm_setzero_si128 ()) ; }
+}
+
+macro_rules! test_mm_aesdec256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesdec256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesdec256kl_u8_introspect!();
+    # [simd_test (enable = "kl")] unsafe fn test_mm_aesdec256kl_u8 () { let mut buffer = _mm_setzero_si128 () ; let key = encodekey256 () ; for _ in 0 .. 100 { let status = _mm_aesdec256kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesenc256kl_u8 (& mut buffer , buffer , key . as_ptr ()) ; assert_eq ! (status , 0) ; } assert_eq_m128i (buffer , _mm_setzero_si128 ()) ; }
+}
+
+macro_rules! test_mm_aesencwide128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesencwide128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesencwide128kl_u8_introspect!();
+    # [simd_test (enable = "widekl")] unsafe fn test_mm_aesencwide128kl_u8 () { let mut buffer = [_mm_setzero_si128 () ; 8] ; let key = encodekey128 () ; for _ in 0 .. 100 { let status = _mm_aesencwide128kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesdecwide128kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for elem in buffer { assert_eq_m128i (elem , _mm_setzero_si128 ()) ; } }
+}
+
+macro_rules! test_mm_aesdecwide128kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesdecwide128kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesdecwide128kl_u8_introspect!();
+    # [simd_test (enable = "widekl")] unsafe fn test_mm_aesdecwide128kl_u8 () { let mut buffer = [_mm_setzero_si128 () ; 8] ; let key = encodekey128 () ; for _ in 0 .. 100 { let status = _mm_aesdecwide128kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesencwide128kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for elem in buffer { assert_eq_m128i (elem , _mm_setzero_si128 ()) ; } }
+}
+
+macro_rules! test_mm_aesencwide256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesencwide256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesencwide256kl_u8_introspect!();
+    # [simd_test (enable = "widekl")] unsafe fn test_mm_aesencwide256kl_u8 () { let mut buffer = [_mm_setzero_si128 () ; 8] ; let key = encodekey256 () ; for _ in 0 .. 100 { let status = _mm_aesencwide256kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesdecwide256kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for elem in buffer { assert_eq_m128i (elem , _mm_setzero_si128 ()) ; } }
+}
+
+macro_rules! test_mm_aesdecwide256kl_u8_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function test_mm_aesdecwide256kl_u8 in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    test_mm_aesdecwide256kl_u8_introspect!();
+    # [simd_test (enable = "widekl")] unsafe fn test_mm_aesdecwide256kl_u8 () { let mut buffer = [_mm_setzero_si128 () ; 8] ; let key = encodekey256 () ; for _ in 0 .. 100 { let status = _mm_aesdecwide256kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for _ in 0 .. 100 { let status = _mm_aesencwide256kl_u8 (buffer . as_mut_ptr () , buffer . as_ptr () , key . as_ptr ()) ; assert_eq ! (status , 0) ; } for elem in buffer { assert_eq_m128i (elem , _mm_setzero_si128 ()) ; } }
+} 
+            }}

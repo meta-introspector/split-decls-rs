@@ -1,0 +1,9 @@
+mkuse!{use crate :: sync :: atomic :: Ordering :: { Acquire , Relaxed , Release } ;}
+mkuse!{use crate :: sys :: futex :: { self , futex_wait , futex_wake } ;}
+mkitem!{type Futex = futex :: SmallFutex ;}
+mkitem!{type State = futex :: SmallPrimitive ;}
+mkitem!{mkstruct!{pub struct Mutex { futex : Futex , }}}
+mkitem!{const UNLOCKED : State = 0 ;}
+mkitem!{const LOCKED : State = 1 ;}
+mkitem!{const CONTENDED : State = 2 ;}
+mkitem!{mkimpl!{impl Mutex { # [inline] pub const fn new () -> Self { Self { futex : Futex :: new (UNLOCKED) } } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_try_lock")] pub fn try_lock (& self) -> bool { self . futex . compare_exchange (UNLOCKED , LOCKED , Acquire , Relaxed) . is_ok () } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_lock")] pub fn lock (& self) { if self . futex . compare_exchange (UNLOCKED , LOCKED , Acquire , Relaxed) . is_err () { self . lock_contended () ; } } # [cold] fn lock_contended (& self) { let mut state = self . spin () ; if state == UNLOCKED { match self . futex . compare_exchange (UNLOCKED , LOCKED , Acquire , Relaxed) { Ok (_) => return , Err (s) => state = s , } } loop { if state != CONTENDED && self . futex . swap (CONTENDED , Acquire) == UNLOCKED { return ; } futex_wait (& self . futex , CONTENDED , None) ; state = self . spin () ; } } fn spin (& self) -> State { let mut spin = 100 ; loop { let state = self . futex . load (Relaxed) ; if state != LOCKED || spin == 0 { return state ; } crate :: hint :: spin_loop () ; spin -= 1 ; } } # [inline] # [cfg_attr (not (test) , rustc_diagnostic_item = "sys_mutex_unlock")] pub unsafe fn unlock (& self) { if self . futex . swap (UNLOCKED , Release) == CONTENDED { self . wake () ; } } # [cold] fn wake (& self) { futex_wake (& self . futex) ; } }}}

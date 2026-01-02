@@ -1,0 +1,93 @@
+mkuse!{use super :: { cosf , fabsf , logf , sinf , sqrtf } ;}
+mkitem!{const INVSQRTPI : f32 = 5.6418961287e-01 ;}
+mkitem!{const TPI : f32 = 6.3661974669e-01 ;}
+
+macro_rules! common_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function common in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    common_introspect!();
+    fn common (ix : u32 , x : f32 , y0 : bool) -> f32 { let z : f32 ; let s : f32 ; let mut c : f32 ; let mut ss : f32 ; let mut cc : f32 ; s = sinf (x) ; c = cosf (x) ; if y0 { c = - c ; } cc = s + c ; if ix < 0x7f000000 { ss = s - c ; z = - cosf (2.0 * x) ; if s * c < 0.0 { cc = z / ss ; } else { ss = z / cc ; } if ix < 0x58800000 { if y0 { ss = - ss ; } cc = pzerof (x) * cc - qzerof (x) * ss ; } } return INVSQRTPI * cc / sqrtf (x) ; }
+}
+mkitem!{const R02 : f32 = 1.5625000000e-02 ;}
+mkitem!{const R03 : f32 = - 1.8997929874e-04 ;}
+mkitem!{const R04 : f32 = 1.8295404516e-06 ;}
+mkitem!{const R05 : f32 = - 4.6183270541e-09 ;}
+mkitem!{const S01 : f32 = 1.5619102865e-02 ;}
+mkitem!{const S02 : f32 = 1.1692678527e-04 ;}
+mkitem!{const S03 : f32 = 5.1354652442e-07 ;}
+mkitem!{const S04 : f32 = 1.1661400734e-09 ;}
+
+macro_rules! j0f_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function j0f in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    j0f_introspect!();
+    # [doc = " Zeroth order of the [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) of the first kind (f32)."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn j0f (mut x : f32) -> f32 { let z : f32 ; let r : f32 ; let s : f32 ; let mut ix : u32 ; ix = x . to_bits () ; ix &= 0x7fffffff ; if ix >= 0x7f800000 { return 1.0 / (x * x) ; } x = fabsf (x) ; if ix >= 0x40000000 { return common (ix , x , false) ; } if ix >= 0x3a000000 { z = x * x ; r = z * (R02 + z * (R03 + z * (R04 + z * R05))) ; s = 1.0 + z * (S01 + z * (S02 + z * (S03 + z * S04))) ; return (1.0 + x / 2.0) * (1.0 - x / 2.0) + z * (r / s) ; } if ix >= 0x21800000 { x = 0.25 * x * x ; } return 1.0 - x ; }
+}
+mkitem!{const U00 : f32 = - 7.3804296553e-02 ;}
+mkitem!{const U01 : f32 = 1.7666645348e-01 ;}
+mkitem!{const U02 : f32 = - 1.3818567619e-02 ;}
+mkitem!{const U03 : f32 = 3.4745343146e-04 ;}
+mkitem!{const U04 : f32 = - 3.8140706238e-06 ;}
+mkitem!{const U05 : f32 = 1.9559013964e-08 ;}
+mkitem!{const U06 : f32 = - 3.9820518410e-11 ;}
+mkitem!{const V01 : f32 = 1.2730483897e-02 ;}
+mkitem!{const V02 : f32 = 7.6006865129e-05 ;}
+mkitem!{const V03 : f32 = 2.5915085189e-07 ;}
+mkitem!{const V04 : f32 = 4.4111031494e-10 ;}
+
+macro_rules! y0f_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function y0f in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    y0f_introspect!();
+    # [doc = " Zeroth order of the [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) of the second kind (f32)."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn y0f (x : f32) -> f32 { let z : f32 ; let u : f32 ; let v : f32 ; let ix : u32 ; ix = x . to_bits () ; if (ix & 0x7fffffff) == 0 { return - 1.0 / 0.0 ; } if (ix >> 31) != 0 { return 0.0 / 0.0 ; } if ix >= 0x7f800000 { return 1.0 / x ; } if ix >= 0x40000000 { return common (ix , x , true) ; } if ix >= 0x39000000 { z = x * x ; u = U00 + z * (U01 + z * (U02 + z * (U03 + z * (U04 + z * (U05 + z * U06))))) ; v = 1.0 + z * (V01 + z * (V02 + z * (V03 + z * V04))) ; return u / v + TPI * (j0f (x) * logf (x)) ; } return U00 + TPI * logf (x) ; }
+}
+mkitem!{const PR8 : [f32 ; 6] = [0.0000000000e+00 , - 7.0312500000e-02 , - 8.0816707611e+00 , - 2.5706311035e+02 , - 2.4852163086e+03 , - 5.2530439453e+03 ,] ;}
+mkitem!{const PS8 : [f32 ; 5] = [1.1653436279e+02 , 3.8337448730e+03 , 4.0597855469e+04 , 1.1675296875e+05 , 4.7627726562e+04 ,] ;}
+mkitem!{const PR5 : [f32 ; 6] = [- 1.1412546255e-11 , - 7.0312492549e-02 , - 4.1596107483e+00 , - 6.7674766541e+01 , - 3.3123129272e+02 , - 3.4643338013e+02 ,] ;}
+mkitem!{const PS5 : [f32 ; 5] = [6.0753936768e+01 , 1.0512523193e+03 , 5.9789707031e+03 , 9.6254453125e+03 , 2.4060581055e+03 ,] ;}
+mkitem!{const PR3 : [f32 ; 6] = [- 2.5470459075e-09 , - 7.0311963558e-02 , - 2.4090321064e+00 , - 2.1965976715e+01 , - 5.8079170227e+01 , - 3.1447946548e+01 ,] ;}
+mkitem!{const PS3 : [f32 ; 5] = [3.5856033325e+01 , 3.6151397705e+02 , 1.1936077881e+03 , 1.1279968262e+03 , 1.7358093262e+02 ,] ;}
+mkitem!{const PR2 : [f32 ; 6] = [- 8.8753431271e-08 , - 7.0303097367e-02 , - 1.4507384300e+00 , - 7.6356959343e+00 , - 1.1193166733e+01 , - 3.2336456776e+00 ,] ;}
+mkitem!{const PS2 : [f32 ; 5] = [2.2220300674e+01 , 1.3620678711e+02 , 2.7047027588e+02 , 1.5387539673e+02 , 1.4657617569e+01 ,] ;}
+
+macro_rules! pzerof_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function pzerof in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    pzerof_introspect!();
+    fn pzerof (x : f32) -> f32 { let p : & [f32 ; 6] ; let q : & [f32 ; 5] ; let z : f32 ; let r : f32 ; let s : f32 ; let mut ix : u32 ; ix = x . to_bits () ; ix &= 0x7fffffff ; if ix >= 0x41000000 { p = & PR8 ; q = & PS8 ; } else if ix >= 0x409173eb { p = & PR5 ; q = & PS5 ; } else if ix >= 0x4036d917 { p = & PR3 ; q = & PS3 ; } else { p = & PR2 ; q = & PS2 ; } z = 1.0 / (x * x) ; r = p [0] + z * (p [1] + z * (p [2] + z * (p [3] + z * (p [4] + z * p [5])))) ; s = 1.0 + z * (q [0] + z * (q [1] + z * (q [2] + z * (q [3] + z * q [4])))) ; return 1.0 + r / s ; }
+}
+mkitem!{const QR8 : [f32 ; 6] = [0.0000000000e+00 , 7.3242187500e-02 , 1.1768206596e+01 , 5.5767340088e+02 , 8.8591972656e+03 , 3.7014625000e+04 ,] ;}
+mkitem!{const QS8 : [f32 ; 6] = [1.6377603149e+02 , 8.0983447266e+03 , 1.4253829688e+05 , 8.0330925000e+05 , 8.4050156250e+05 , - 3.4389928125e+05 ,] ;}
+mkitem!{const QR5 : [f32 ; 6] = [1.8408595828e-11 , 7.3242180049e-02 , 5.8356351852e+00 , 1.3511157227e+02 , 1.0272437744e+03 , 1.9899779053e+03 ,] ;}
+mkitem!{const QS5 : [f32 ; 6] = [8.2776611328e+01 , 2.0778142090e+03 , 1.8847289062e+04 , 5.6751113281e+04 , 3.5976753906e+04 , - 5.3543427734e+03 ,] ;}
+mkitem!{const QR3 : [f32 ; 6] = [4.3774099900e-09 , 7.3241114616e-02 , 3.3442313671e+00 , 4.2621845245e+01 , 1.7080809021e+02 , 1.6673394775e+02 ,] ;}
+mkitem!{const QS3 : [f32 ; 6] = [4.8758872986e+01 , 7.0968920898e+02 , 3.7041481934e+03 , 6.4604252930e+03 , 2.5163337402e+03 , - 1.4924745178e+02 ,] ;}
+mkitem!{const QR2 : [f32 ; 6] = [1.5044444979e-07 , 7.3223426938e-02 , 1.9981917143e+00 , 1.4495602608e+01 , 3.1666231155e+01 , 1.6252708435e+01 ,] ;}
+mkitem!{const QS2 : [f32 ; 6] = [3.0365585327e+01 , 2.6934811401e+02 , 8.4478375244e+02 , 8.8293585205e+02 , 2.1266638184e+02 , - 5.3109550476e+00 ,] ;}
+
+macro_rules! qzerof_introspect {
+    () => {
+        emit_message!("📊 INTROSPECT: Function qzerof in module {}", module_path!());
+    };
+}
+
+mkfn!{
+    qzerof_introspect!();
+    fn qzerof (x : f32) -> f32 { let p : & [f32 ; 6] ; let q : & [f32 ; 6] ; let s : f32 ; let r : f32 ; let z : f32 ; let mut ix : u32 ; ix = x . to_bits () ; ix &= 0x7fffffff ; if ix >= 0x41000000 { p = & QR8 ; q = & QS8 ; } else if ix >= 0x409173eb { p = & QR5 ; q = & QS5 ; } else if ix >= 0x4036d917 { p = & QR3 ; q = & QS3 ; } else { p = & QR2 ; q = & QS2 ; } z = 1.0 / (x * x) ; r = p [0] + z * (p [1] + z * (p [2] + z * (p [3] + z * (p [4] + z * p [5])))) ; s = 1.0 + z * (q [0] + z * (q [1] + z * (q [2] + z * (q [3] + z * (q [4] + z * q [5]))))) ; return (- 0.125 + r / s) / x ; }
+}
