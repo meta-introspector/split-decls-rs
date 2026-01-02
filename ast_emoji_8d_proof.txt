@@ -1,0 +1,31 @@
+# 🎭 AST → EMOJI → 8D PROOF DATA
+
+## RUSTC VECTORS
+0: fn main() { rustc_driver::main() } → 🔧🔗📦🌐 → [0.3, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.8]
+1: struct TyCtxt<'tcx> { data: &'tcx TypeckResults } → 🏗️📦🔺 → [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 0.0, 0.4]
+2: impl<'tcx> TyCtxt<'tcx> { fn type_of(self, def_id: DefId) -> Ty<'tcx> } → 🔧⚙️🔗📦🔺 → [0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+3: match expr.kind { ExprKind::Call(func, args) => { emit_call(func, args) } } → 🎯🔗📦🌐➡️ → [0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6]
+4: if let Some(def_id) = tcx.opt_local_def_id(hir_id) { check_def(def_id) } → 📦❓🔗📦 → [0.0, 0.0, 4.0, 1.0, 1.0, 1.0, 0.0, 0.4]
+5: for item in tcx.hir().items() { visit_item(item) } → 🔄🔗📦 → [0.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+6: let param_env = tcx.param_env(def_id); → 📦🔗 → [0.0, 0.0, 2.0, 1.0, 1.0, 1.0, 0.0, 0.2]
+7: return tcx.type_of(def_id).instantiate_identity(); → ↩️🔗 → [0.0, 0.0, 3.0, 3.0, 1.0, 0.0, 0.0, 0.3]
+
+## MACRO VECTORS
+0: compose_rustc!(main => rustc_driver::main) → 🔗🌐➡️ → [0.0, 0.0, 4.0, 0.0, 1.0, 0.0, 1.0, 0.4]
+1: rustc_core!(TyCtxt<'tcx> => { data: &'tcx TypeckResults }) → 🔗📦🔺➡️ → [0.0, 1.0, 0.0, 4.0, 1.0, 1.0, 0.0, 0.5]
+2: rustc_traits!(impl TyCtxt => type_of(def_id) -> Ty) → ⚙️🔗➡️ → [0.0, 0.0, 0.0, 2.0, 1.0, 0.0, 0.0, 0.5]
+3: rustc_mir!(match expr => ExprKind::Call(func, args) => emit_call) → 🎯🔗🌐➡️ → [0.0, 0.0, 0.0, 4.0, 1.0, 0.0, 1.0, 0.5]
+4: rustc_coherence!(if Some(def_id) => check_def(def_id)) → ❓🔗➡️ → [0.0, 0.0, 4.0, 6.0, 1.0, 0.0, 0.0, 0.4]
+5: rustc_lifetimes!(for item in hir().items() => visit_item) → ❓🔄🔗➡️ → [0.0, 0.0, 0.0, 3.0, 1.0, 0.0, 0.0, 0.5]
+6: rustc_variance!(let param_env = tcx.param_env(def_id)) → 📦🔗 → [0.0, 0.0, 2.0, 1.0, 1.0, 1.0, 0.0, 0.2]
+7: mkrust!(return type_of(def_id).instantiate_identity()) → ↩️🔗 → [0.0, 0.0, 3.0, 3.0, 1.0, 0.0, 0.0, 0.3]
+
+## PRIME VECTORS
+0: 2^46: main() → 3^20: rustc_driver → 🔗⚡ → [1.0, 0.0, 2.0, 0.0, 1.0, 0.0, 0.0, 0.2]
+1: 5^9: TyCtxt → 7^6: TypeckResults → ⚡ → [1.0, 0.0, 1.0, 3.0, 0.0, 0.0, 0.0, 0.1]
+2: 11^2: impl → 13^3: type_of → 17: Ty → ⚙️⚡ → [1.0, 0.0, 3.0, 2.0, 0.0, 0.0, 0.0, 0.3]
+3: 19: match → 23: ExprKind → 29: Call → 31: emit → 🎯 → [0.0, 0.0, 1.0, 4.0, 0.0, 0.0, 0.0, 0.1]
+4: 37: if → 41: Some → 43: def_id → 47: check → ❓ → [0.0, 0.0, 1.0, 3.0, 0.0, 0.0, 0.0, 0.1]
+5: 53: for → 59: items → 61: visit → 🔄 → [0.0, 0.0, 1.0, 4.0, 0.0, 0.0, 0.0, 0.1]
+6: 67: let → 71: param_env → 73: tcx → 📦 → [0.0, 0.0, 1.0, 4.0, 0.0, 1.0, 0.0, 0.1]
+7: 79: return → 83: type_of → 89: instantiate → ↩️ → [0.0, 0.0, 2.0, 6.0, 0.0, 0.0, 0.0, 0.2]

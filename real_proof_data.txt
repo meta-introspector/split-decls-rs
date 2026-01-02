@@ -1,0 +1,2146 @@
+# 🎭 REAL PROOF: RUSTC → 8D → GENERATED CODE
+
+## Vector 1
+Original: pub struct ResolverGlobalCtxt {     pub visibilities_for_hashing: Vec<(LocalDefId, Visibility)>,     /// Item with a given `LocalDefId` was defined during macro expansion with ID `ExpnId`.
+Emoji: 🏗️🏗️🔗📦🔺
+8D: [0.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: struct GeneratedStruct<T>() {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 2
+Original: pub struct ResolverAstLowering {     pub legacy_const_generic_args: FxHashMap<DefId, Option<Vec<usize>>>,
+Emoji: 🏗️📦🔺
+8D: [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 0.0, 0.4]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 3
+Original: pub struct DelegationFnSig {     pub header: ast::FnHeader,     pub param_count: usize,
+Emoji: 🏗️📦🌐
+8D: [0.0, 0.0, 4.0, 1.0, 0.0, 1.0, 1.0, 0.4]
+Generated: struct GeneratedStruct {
+    let value = 42;
+}
+Compiles: false
+
+## Vector 4
+Original: pub struct MainDefinition {     pub res: Res<ast::NodeId>,     pub is_import: bool,
+Emoji: 🏗️📦🔺🌐
+8D: [0.0, 1.0, 0.0, 5.0, 0.0, 1.0, 1.0, 0.5]
+Generated: struct GeneratedStruct<T> {
+    let value = 42;
+}
+Compiles: false
+
+## Vector 5
+Original: impl MainDefinition {     pub fn opt_fn_def_id(self) -> Option<DefId> {         if let Res::Def(DefKind::Fn, def_id) = self.res { Some(def_id) } else { None }
+Emoji: 🔧⚙️❓📦📋🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 6
+Original: pub fn opt_fn_def_id(self) -> Option<DefId> {         if let Res::Def(DefKind::Fn, def_id) = self.res { Some(def_id) } else { None }     }
+Emoji: 🔧❓📦📋🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 7
+Original: pub struct ImplTraitHeader<'tcx> {     pub trait_ref: ty::EarlyBinder<'tcx, ty::TraitRef<'tcx>>,     pub polarity: ImplPolarity,
+Emoji: 🏗️🧠🏗️📦🔺🌐
+8D: [0.0, 1.0, 3.0, 2.0, 0.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct<T> {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 8
+Original: impl Asyncness {     pub fn is_async(self) -> bool {         matches!(self, Asyncness::Yes)
+Emoji: 🔧⚙️🔗📦🌐
+8D: [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 9
+Original: pub fn is_async(self) -> bool {         matches!(self, Asyncness::Yes)     }
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 10
+Original: impl Visibility {     pub fn to_string(self, def_id: LocalDefId, tcx: TyCtxt<'_>) -> String {         match self {
+Emoji: 🔧⚙️🎯🧠📋🏗️🔗📦🔺
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 0.0, 1.0]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 11
+Original: pub fn to_string(self, def_id: LocalDefId, tcx: TyCtxt<'_>) -> String {         match self {             ty::Visibility::Restricted(restricted_id) => {
+Emoji: 🔧🎯🧠📋🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 2.0, 3.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 12
+Original: match self {             ty::Visibility::Restricted(restricted_id) => {                 if restricted_id.is_top_level_module() {
+Emoji: 🎯❓🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 4.0, 4.0, 1.0, 1.0, 1.0, 0.9]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 13
+Original: } else if restricted_id == tcx.parent_module_from_def_id(def_id).to_local_def_id() {                     "pub(self)".to_string()                 } else {
+Emoji: ❓🧠📋🔗📦
+8D: [0.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct() {
+}
+Compiles: false
+
+## Vector 14
+Original: tcx.def_path(restricted_id.to_def_id()).to_string_no_crate_verbose()                     )                 }
+Emoji: 🧠📋🔗
+8D: [0.0, 0.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: struct GeneratedStruct(param: i32);
+Compiles: false
+
+## Vector 15
+Original: pub struct ClosureSizeProfileData<'tcx> {     /// Tuple containing the types of closure captures before the feature `capture_disjoint_fields`     pub before_feature_tys: Ty<'tcx>,
+Emoji: 🏗️🧠🏗️📦🔺
+8D: [0.0, 1.0, 2.0, 5.0, 0.0, 1.0, 0.0, 0.7]
+Generated: struct GeneratedStruct<T> {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 16
+Original: impl TyCtxt<'_> {     #[inline]     pub fn opt_parent(self, id: DefId) -> Option<DefId> {
+Emoji: 🔧⚙️🔗📦🔺
+8D: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 17
+Original: pub fn opt_parent(self, id: DefId) -> Option<DefId> {         self.def_key(id).parent.map(|index| DefId { index, ..id })     }
+Emoji: 🔧🔗📦🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 18
+Original: pub fn parent(self, id: DefId) -> DefId {         match self.opt_parent(id) {             Some(id) => id,
+Emoji: 🔧🎯🔗📦➡️
+8D: [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 19
+Original: match self.opt_parent(id) {             Some(id) => id,             // not `unwrap_or_else` to avoid breaking caller tracking
+Emoji: 🎯🔗📦➡️
+8D: [0.0, 0.0, 0.0, 4.0, 1.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct() {
+}
+Compiles: false
+
+## Vector 20
+Original: pub fn opt_local_parent(self, id: LocalDefId) -> Option<LocalDefId> {         self.opt_parent(id.to_def_id()).map(DefId::expect_local)     }
+Emoji: 🔧📋🔗📦🔺🌐
+8D: [1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 21
+Original: pub fn local_parent(self, id: impl Into<LocalDefId>) -> LocalDefId {         self.parent(id.into().to_def_id()).expect_local()     }
+Emoji: 🔧⚙️📋🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 22
+Original: pub fn is_descendant_of(self, mut descendant: DefId, ancestor: DefId) -> bool {         if descendant.krate != ancestor.krate {             return false;
+Emoji: 🔧❓↩️🔗📦
+8D: [1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 23
+Original: match self.opt_parent(descendant) {                 Some(parent) => descendant = parent,                 None => return false,
+Emoji: 🎯↩️🔗📦➡️
+8D: [0.0, 0.0, 2.0, 3.0, 1.0, 1.0, 0.0, 0.7]
+Generated: struct GeneratedStruct() {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 24
+Original: pub fn is_public(self) -> bool {         matches!(self, Visibility::Public)     }
+Emoji: 🔧🏗️🔗📦🌐
+8D: [1.0, 0.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 25
+Original: pub fn map_id<OutId>(self, f: impl FnOnce(Id) -> OutId) -> Visibility<OutId> {         match self {             Visibility::Public => Visibility::Public,
+Emoji: 🔧⚙️🎯🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 26
+Original: match self {             Visibility::Public => Visibility::Public,             Visibility::Restricted(id) => Visibility::Restricted(f(id)),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 27
+Original: pub fn to_def_id(self) -> Visibility<DefId> {         self.map_id(Into::into)     }
+Emoji: 🔧📋🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 28
+Original: pub fn is_accessible_from(self, module: impl Into<DefId>, tcx: TyCtxt<'_>) -> bool {         match self {             // Public items are visible everywhere.
+Emoji: 🔧⚙️🎯🧠🔗📦🔺
+8D: [1.0, 1.0, 3.0, 2.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 29
+Original: match self {             // Public items are visible everywhere.             Visibility::Public => true,
+Emoji: 🎯🏗️📦🌐➡️
+8D: [0.0, 0.0, 2.0, 4.0, 0.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 30
+Original: Visibility::Restricted(id) => tcx.is_descendant_of(module.into(), id.into()),         }     }
+Emoji: 🧠🏗️🔗🌐➡️
+8D: [0.0, 0.0, 2.0, 4.0, 1.0, 0.0, 1.0, 0.7]
+Generated: struct GeneratedStruct();
+Compiles: true
+
+## Vector 31
+Original: pub fn is_at_least(self, vis: Visibility<impl Into<DefId>>, tcx: TyCtxt<'_>) -> bool {         match vis {             Visibility::Public => self.is_public(),
+Emoji: 🔧⚙️🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 3.0, 5.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 32
+Original: match vis {             Visibility::Public => self.is_public(),             Visibility::Restricted(id) => self.is_accessible_from(id, tcx),
+Emoji: 🎯🧠🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.9]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 33
+Original: impl Visibility<DefId> {     pub fn expect_local(self) -> Visibility {         self.map_id(|id| id.expect_local())
+Emoji: 🔧⚙️🏗️🔗📦🔺
+8D: [1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 34
+Original: pub fn expect_local(self) -> Visibility {         self.map_id(|id| id.expect_local())     }
+Emoji: 🔧🏗️🔗📦
+8D: [1.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function() {
+    42
+}
+Compiles: false
+
+## Vector 35
+Original: pub fn is_visible_locally(self) -> bool {         match self {             Visibility::Public => true,
+Emoji: 🔧🎯🏗️🔗📦🌐➡️
+8D: [1.0, 0.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 36
+Original: match self {             Visibility::Public => true,             Visibility::Restricted(def_id) => def_id.is_local(),
+Emoji: 🎯📋🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.9]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 37
+Original: pub struct CrateVariancesMap<'tcx> {     /// For each item with generics, maps to a vector of the variance     /// of its generics. If an item has no generics, it will have no
+Emoji: 🏗️🧠📦🔺
+8D: [0.0, 1.0, 0.0, 5.0, 0.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 38
+Original: pub struct CReaderCacheKey {     pub cnum: Option<CrateNum>,     pub pos: usize,
+Emoji: 🏗️📦🔺
+8D: [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 0.0, 0.4]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 39
+Original: pub struct Ty<'tcx>(Interned<'tcx, WithCachedTypeInfo<TyKind<'tcx>>>);  impl<'tcx> rustc_type_ir::inherent::IntoKind for Ty<'tcx> {
+Emoji: 🏗️🔄🧠🏗️🔗📦🔺🌐
+8D: [0.0, 1.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0]
+Generated: struct GeneratedStruct<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 40
+Original: fn kind(self) -> TyKind<'tcx> {         *self.kind()     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 41
+Original: fn flags(&self) -> TypeFlags {         self.0.flags     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 42
+Original: fn outer_exclusive_binder(&self) -> DebruijnIndex {         self.0.outer_exclusive_binder     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 43
+Original: pub struct CratePredicatesMap<'tcx> {     /// For each struct with outlive bounds, maps to a vector of the     /// predicate of its outlive bounds. If an item has no outlives
+Emoji: 🏗️🧠📦🔺
+8D: [0.0, 1.0, 0.0, 5.0, 0.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 44
+Original: pub struct Term<'tcx> {     ptr: NonNull<()>,     marker: PhantomData<(Ty<'tcx>, Const<'tcx>)>,
+Emoji: 🏗️🧠🔗📦🔺
+8D: [0.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.0, 0.6]
+Generated: struct GeneratedStruct<T>() {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 45
+Original: fn kind(self) -> Self::Kind {         self.kind()     }
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 46
+Original: impl Debug for Term<'_> {     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {         match self.kind() {
+Emoji: 🔧⚙️🎯🔄🔗📦🔺🌐
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 47
+Original: fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {         match self.kind() {             TermKind::Ty(ty) => write!(f, "Term::Ty({ty:?})"),
+Emoji: 🔧🎯🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 48
+Original: match self.kind() {             TermKind::Ty(ty) => write!(f, "Term::Ty({ty:?})"),             TermKind::Const(ct) => write!(f, "Term::Const({ct:?})"),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 49
+Original: fn from(ty: Ty<'tcx>) -> Self {         TermKind::Ty(ty).pack()     }
+Emoji: 🔧🧠🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 50
+Original: fn from(c: Const<'tcx>) -> Self {         TermKind::Const(c).pack()     }
+Emoji: 🔧🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 51
+Original: fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {         self.kind().hash_stable(hcx, hasher);     }
+Emoji: 🔧🔗📦🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 52
+Original: fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(         self,         folder: &mut F,
+Emoji: 🔧🧠🔗🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 0.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32);
+Compiles: false
+
+## Vector 53
+Original: match self.kind() {             ty::TermKind::Ty(ty) => ty.try_fold_with(folder).map(Into::into),             ty::TermKind::Const(ct) => ct.try_fold_with(folder).map(Into::into),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 54
+Original: fn fold_with<F: TypeFolder<TyCtxt<'tcx>>>(self, folder: &mut F) -> Self {         match self.kind() {             ty::TermKind::Ty(ty) => ty.fold_with(folder).into(),
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 55
+Original: match self.kind() {             ty::TermKind::Ty(ty) => ty.fold_with(folder).into(),             ty::TermKind::Const(ct) => ct.fold_with(folder).into(),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 56
+Original: fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {         match self.kind() {             ty::TermKind::Ty(ty) => ty.visit_with(visitor),
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 57
+Original: match self.kind() {             ty::TermKind::Ty(ty) => ty.visit_with(visitor),             ty::TermKind::Const(ct) => ct.visit_with(visitor),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 58
+Original: fn encode(&self, e: &mut E) {         self.kind().encode(e)     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 59
+Original: fn decode(d: &mut D) -> Self {         let res: TermKind<'tcx> = Decodable::decode(d);         res.pack()
+Emoji: 🔧📦🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 2.0, 0.0, 1.0, 1.0, 1.0, 0.7]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 60
+Original: pub fn kind(self) -> TermKind<'tcx> {         let ptr =             unsafe { self.ptr.map_addr(|addr| NonZero::new_unchecked(addr.get() & !TAG_MASK)) };
+Emoji: 🔧📦🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 2.0, 0.0, 1.0, 1.0, 1.0, 0.7]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 61
+Original: match self.ptr.addr().get() & TAG_MASK {                 TYPE_TAG => TermKind::Ty(Ty(Interned::new_unchecked(                     ptr.cast::<WithCachedTypeInfo<ty::TyKind<'tcx>>>().as_ref(),
+Emoji: 🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [0.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: struct GeneratedStruct<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 62
+Original: pub fn as_type(&self) -> Option<Ty<'tcx>> {         if let TermKind::Ty(ty) = self.kind() { Some(ty) } else { None }     }
+Emoji: 🔧❓📦🧠🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 63
+Original: pub fn expect_type(&self) -> Ty<'tcx> {         self.as_type().expect("expected a type, but found a const")     }
+Emoji: 🔧🧠🏗️🔗📦🔺
+8D: [1.0, 1.0, 2.0, 6.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 64
+Original: pub fn as_const(&self) -> Option<Const<'tcx>> {         if let TermKind::Const(c) = self.kind() { Some(c) } else { None }     }
+Emoji: 🔧❓📦🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 65
+Original: pub fn expect_const(&self) -> Const<'tcx> {         self.as_const().expect("expected a const, but found a type")     }
+Emoji: 🔧🧠🏗️🔗📦🔺
+8D: [1.0, 1.0, 2.0, 6.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 66
+Original: pub fn into_arg(self) -> GenericArg<'tcx> {         match self.kind() {             TermKind::Ty(ty) => ty.into(),
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 67
+Original: match self.kind() {             TermKind::Ty(ty) => ty.into(),             TermKind::Const(c) => c.into(),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 68
+Original: pub fn to_alias_term(self) -> Option<AliasTerm<'tcx>> {         match self.kind() {             TermKind::Ty(ty) => match *ty.kind() {
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 69
+Original: match self.kind() {             TermKind::Ty(ty) => match *ty.kind() {                 ty::Alias(_kind, alias_ty) => Some(alias_ty.into()),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 70
+Original: pub fn is_infer(&self) -> bool {         match self.kind() {             TermKind::Ty(ty) => ty.is_ty_var(),
+Emoji: 🔧🎯🏗️🔗📦🌐➡️
+8D: [1.0, 0.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 71
+Original: match self.kind() {             TermKind::Ty(ty) => ty.is_ty_var(),             TermKind::Const(ct) => ct.is_ct_infer(),
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 72
+Original: pub fn is_trivially_wf(&self, tcx: TyCtxt<'tcx>) -> bool {         match self.kind() {             TermKind::Ty(ty) => ty.is_trivially_wf(tcx),
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 73
+Original: match self.kind() {             TermKind::Ty(ty) => ty.is_trivially_wf(tcx),             TermKind::Const(ct) => ct.is_trivially_wf(),
+Emoji: 🎯🧠🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 4.0, 5.0, 1.0, 1.0, 1.0, 0.9]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 74
+Original: pub fn walk(self) -> TypeWalker<TyCtxt<'tcx>> {         TypeWalker::new(self.into())     }
+Emoji: 🔧🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 75
+Original: fn pack(self) -> Term<'tcx> {         let (tag, ptr) = match self {             TermKind::Ty(ty) => {
+Emoji: 🔧🎯📦🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 2.0, 3.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 76
+Original: pub struct InstantiatedPredicates<'tcx> {     pub predicates: Vec<Clause<'tcx>>,     pub spans: Vec<Span>,
+Emoji: 🏗️🧠📏📦🔺
+8D: [0.0, 1.0, 1.0, 2.0, 0.0, 1.0, 0.0, 0.6]
+Generated: struct GeneratedStruct<T> {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 77
+Original: pub fn empty() -> InstantiatedPredicates<'tcx> {         InstantiatedPredicates { predicates: vec![], spans: vec![] }     }
+Emoji: 🔧🧠📏🏗️🔗📦🔺
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 78
+Original: pub fn is_empty(&self) -> bool {         self.predicates.is_empty()     }
+Emoji: 🔧🏗️🔗📦
+8D: [1.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function() {
+    42
+}
+Compiles: false
+
+## Vector 79
+Original: pub fn iter(&self) -> <&Self as IntoIterator>::IntoIter {         self.into_iter()     }
+Emoji: 🔧🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 80
+Original: fn into_iter(self) -> Self::IntoIter {         debug_assert_eq!(self.predicates.len(), self.spans.len());         std::iter::zip(self.predicates, self.spans)
+Emoji: 🔧📏🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 81
+Original: fn into_iter(self) -> Self::IntoIter {         debug_assert_eq!(self.predicates.len(), self.spans.len());         std::iter::zip(self.predicates.iter().copied(), self.spans.iter().copied())
+Emoji: 🔧📏🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 82
+Original: pub struct OpaqueHiddenType<'tcx> {     /// The span of this particular definition of the opaque type. So     /// for example:
+Emoji: 🏗️🔄🧠📏🏗️📦🔺
+8D: [0.0, 1.0, 4.0, 6.0, 0.0, 1.0, 0.0, 0.9]
+Generated: struct GeneratedStruct<T> {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 83
+Original: pub fn new_error(tcx: TyCtxt<'tcx>, guar: ErrorGuaranteed) -> OpaqueHiddenType<'tcx> {         OpaqueHiddenType { span: DUMMY_SP, ty: Ty::new_error(tcx, guar) }     }
+Emoji: 🔧🧠📏🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 4.0, 0.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 84
+Original: pub fn build_mismatch_error(         &self,         other: &Self,
+Emoji: 🔧🔗
+8D: [1.0, 0.0, 2.0, 1.0, 1.0, 0.0, 0.0, 0.2]
+Generated: fn generated_function();
+Compiles: false
+
+## Vector 85
+Original: Ok(tcx.dcx().create_err(OpaqueHiddenTypeMismatch {             self_ty: self.ty,             other_ty: other.ty,
+Emoji: 🎯🧠🏗️🔗📦
+8D: [0.0, 0.0, 1.0, 2.0, 1.0, 1.0, 0.0, 0.6]
+Generated: struct GeneratedStruct() {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 86
+Original: pub fn remap_generic_params_to_declaration_params(         self,         opaque_type_key: OpaqueTypeKey<'tcx>,
+Emoji: 🔧🧠🏗️🔗🔺
+8D: [1.0, 1.0, 1.0, 2.0, 1.0, 0.0, 0.0, 0.6]
+Generated: fn generated_function<T>();
+Compiles: false
+
+## Vector 87
+Original: DefiningScopeKind::HirTypeck => fold_regions(tcx, self, |_, _| tcx.lifetimes.re_erased),             DefiningScopeKind::MirBorrowck => self,         };
+Emoji: 🧠🔗🌐➡️
+8D: [0.0, 0.0, 0.0, 4.0, 1.0, 0.0, 1.0, 0.5]
+Generated: struct GeneratedStruct();
+Compiles: true
+
+## Vector 88
+Original: assert_eq!(result.ty, fold_regions(tcx, result.ty, |_, _| tcx.lifetimes.re_erased));         }         result
+Emoji: 🧠🏗️🔗
+8D: [0.0, 0.0, 4.0, 1.0, 1.0, 0.0, 0.0, 0.4]
+Generated: struct GeneratedStruct(param: i32);
+Compiles: false
+
+## Vector 89
+Original: pub struct Placeholder<T> {     pub universe: UniverseIndex,     pub bound: T,
+Emoji: 🏗️📦🔺
+8D: [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 0.0, 0.4]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 90
+Original: fn universe(self) -> UniverseIndex {         self.universe     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 91
+Original: fn var(self) -> BoundVar {         self.bound.var     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 92
+Original: fn with_updated_universe(self, ui: UniverseIndex) -> Self {         Placeholder { universe: ui, ..self }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 93
+Original: fn new(ui: UniverseIndex, bound: BoundRegion) -> Self {         Placeholder { universe: ui, bound }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 94
+Original: fn new_anon(ui: UniverseIndex, var: BoundVar) -> Self {         Placeholder { universe: ui, bound: BoundRegion { var, kind: BoundRegionKind::Anon } }     }
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 95
+Original: fn universe(self) -> UniverseIndex {         self.universe     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 96
+Original: fn var(self) -> BoundVar {         self.bound.var     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 97
+Original: fn with_updated_universe(self, ui: UniverseIndex) -> Self {         Placeholder { universe: ui, ..self }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 98
+Original: fn new(ui: UniverseIndex, bound: BoundTy) -> Self {         Placeholder { universe: ui, bound }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 99
+Original: fn new_anon(ui: UniverseIndex, var: BoundVar) -> Self {         Placeholder { universe: ui, bound: BoundTy { var, kind: BoundTyKind::Anon } }     }
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 100
+Original: pub struct BoundConst {     pub var: BoundVar, }
+Emoji: 🏗️📦
+8D: [0.0, 0.0, 3.0, 4.0, 0.0, 1.0, 0.0, 0.3]
+Generated: struct GeneratedStruct {
+}
+Compiles: true
+
+## Vector 101
+Original: fn var(self) -> BoundVar {         self.var     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 102
+Original: fn assert_eq(self, var: ty::BoundVariableKind) {         var.expect_const()     }
+Emoji: 🔧🏗️🔗📦🌐
+8D: [1.0, 0.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 103
+Original: fn universe(self) -> UniverseIndex {         self.universe     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 104
+Original: fn var(self) -> BoundVar {         self.bound.var     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 105
+Original: fn with_updated_universe(self, ui: UniverseIndex) -> Self {         Placeholder { universe: ui, ..self }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 106
+Original: fn new(ui: UniverseIndex, bound: BoundConst) -> Self {         Placeholder { universe: ui, bound }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 107
+Original: fn new_anon(ui: UniverseIndex, var: BoundVar) -> Self {         Placeholder { universe: ui, bound: BoundConst { var } }     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 108
+Original: fn flags(&self) -> TypeFlags {         (**self).flags()     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 109
+Original: fn outer_exclusive_binder(&self) -> DebruijnIndex {         (**self).outer_exclusive_binder()     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 110
+Original: pub struct ParamEnv<'tcx> {     /// Caller bounds are `Obligation`s that the caller must satisfy. This is     /// basically the set of bounds on the in-scope type parameters, translated
+Emoji: 🏗️🧠🏗️📦🔺
+8D: [0.0, 1.0, 2.0, 5.0, 0.0, 1.0, 0.0, 0.7]
+Generated: struct GeneratedStruct<T> {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 111
+Original: fn caller_bounds(self) -> impl inherent::SliceLike<Item = ty::Clause<'tcx>> {         self.caller_bounds()     }
+Emoji: 🔧⚙️🧠🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 112
+Original: pub fn empty() -> Self {         Self::new(ListWithCachedTypeInfo::empty())     }
+Emoji: 🔧🏗️🔗📦🌐
+8D: [1.0, 0.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.6]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 113
+Original: pub fn caller_bounds(self) -> Clauses<'tcx> {         self.caller_bounds     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 114
+Original: pub fn new(caller_bounds: Clauses<'tcx>) -> Self {         ParamEnv { caller_bounds }     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 115
+Original: pub fn and<T: TypeVisitable<TyCtxt<'tcx>>>(self, value: T) -> ParamEnvAnd<'tcx, T> {         ParamEnvAnd { param_env: self, value }     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 116
+Original: pub struct ParamEnvAnd<'tcx, T> {     pub param_env: ParamEnv<'tcx>,     pub value: T,
+Emoji: 🏗️🧠📦🔺
+8D: [0.0, 1.0, 0.0, 5.0, 0.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 117
+Original: pub struct TypingEnv<'tcx> {     #[type_foldable(identity)]     #[type_visitable(ignore)]
+Emoji: 🏗️🧠🏗️🔗📦🔺
+8D: [0.0, 1.0, 3.0, 2.0, 1.0, 1.0, 0.0, 0.8]
+Generated: struct GeneratedStruct<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 118
+Original: pub fn fully_monomorphized() -> TypingEnv<'tcx> {         TypingEnv { typing_mode: TypingMode::PostAnalysis, param_env: ParamEnv::empty() }     }
+Emoji: 🔧🧠🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 119
+Original: pub fn non_body_analysis(         tcx: TyCtxt<'tcx>,         def_id: impl IntoQueryParam<DefId>,
+Emoji: 🔧⚙️🧠📋🔗🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 0.0, 0.0, 0.7]
+Generated: fn generated_function<T>();
+Compiles: false
+
+## Vector 120
+Original: TypingEnv { typing_mode: TypingMode::non_body_analysis(), param_env: tcx.param_env(def_id) }     }
+Emoji: 🧠📋🏗️🔗📦🌐
+8D: [0.0, 0.0, 2.0, 6.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 121
+Original: pub fn post_analysis(tcx: TyCtxt<'tcx>, def_id: impl IntoQueryParam<DefId>) -> TypingEnv<'tcx> {         tcx.typing_env_normalized_for_post_analysis(def_id)     }
+Emoji: 🔧⚙️🧠📋🏗️🔗📦🔺
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 0.0, 1.0]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 122
+Original: tcx.typing_env_normalized_for_post_analysis(def_id)     }
+Emoji: 🧠📋🏗️🔗
+8D: [0.0, 0.0, 0.0, 5.0, 1.0, 0.0, 0.0, 0.5]
+Generated: struct GeneratedStruct();
+Compiles: true
+
+## Vector 123
+Original: pub fn with_post_analysis_normalized(self, tcx: TyCtxt<'tcx>) -> TypingEnv<'tcx> {         let TypingEnv { typing_mode, param_env } = self;         if let TypingMode::PostAnalysis = typing_mode {
+Emoji: 🔧❓📦🧠🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 124
+Original: let param_env = if tcx.next_trait_solver_globally() {             param_env         } else {
+Emoji: ❓📦🧠🔗📦
+8D: [0.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct() {
+}
+Compiles: false
+
+## Vector 125
+Original: ParamEnv::new(tcx.reveal_opaque_types_in_bounds(param_env.caller_bounds()))         };         TypingEnv { typing_mode: TypingMode::PostAnalysis, param_env }
+Emoji: 🧠🏗️🔗📦🌐
+8D: [0.0, 0.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.6]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 126
+Original: pub fn as_query_input<T>(self, value: T) -> PseudoCanonicalInput<'tcx, T>     where         T: TypeVisitable<TyCtxt<'tcx>>,
+Emoji: 🔧🧠🔗🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 0.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32);
+Compiles: false
+
+## Vector 127
+Original: pub struct PseudoCanonicalInput<'tcx, T> {     pub typing_env: TypingEnv<'tcx>,     pub value: T,
+Emoji: 🏗️🧠🏗️📦🔺
+8D: [0.0, 1.0, 2.0, 5.0, 0.0, 1.0, 0.0, 0.7]
+Generated: struct GeneratedStruct<T> {
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 128
+Original: pub struct Destructor {     /// The `DefId` of the destructor method     pub did: DefId,
+Emoji: 🏗️📦
+8D: [0.0, 0.0, 3.0, 4.0, 0.0, 1.0, 0.0, 0.3]
+Generated: struct GeneratedStruct {
+}
+Compiles: true
+
+## Vector 129
+Original: pub struct AsyncDestructor {     /// The `DefId` of the `impl AsyncDrop`     pub impl_did: DefId,
+Emoji: 🏗️⚙️📦
+8D: [1.0, 0.0, 0.0, 3.0, 0.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function {
+    42
+}
+Compiles: false
+
+## Vector 130
+Original: pub struct VariantFlags(u8); bitflags::bitflags! {     impl VariantFlags: u8 {
+Emoji: 🏗️⚙️🔗📦🌐
+8D: [1.0, 0.0, 2.0, 4.0, 1.0, 1.0, 1.0, 0.7]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 131
+Original: impl VariantFlags: u8 {         const NO_VARIANT_FLAGS        = 0;         /// Indicates whether the field list of this variant is `#[non_exhaustive]`.
+Emoji: ⚙️📦
+8D: [1.0, 0.0, 3.0, 3.0, 0.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function {
+    param + 1
+}
+Compiles: false
+
+## Vector 132
+Original: pub struct VariantDef {     /// `DefId` that identifies the variant itself.     /// If this variant belongs to a struct or union, then this is a copy of its `DefId`.
+Emoji: 🏗️📦
+8D: [0.0, 0.0, 3.0, 4.0, 0.0, 1.0, 0.0, 0.3]
+Generated: struct GeneratedStruct {
+}
+Compiles: true
+
+## Vector 133
+Original: impl VariantDef {     /// Creates a new `VariantDef`.     ///
+Emoji: ⚙️📦
+8D: [1.0, 0.0, 3.0, 3.0, 0.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function {
+    param + 1
+}
+Compiles: false
+
+## Vector 134
+Original: pub fn new(         name: Symbol,         variant_did: Option<DefId>,
+Emoji: 🔧🔗🔺
+8D: [1.0, 1.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: fn generated_function<T>(param: i32);
+Compiles: false
+
+## Vector 135
+Original: pub fn is_field_list_non_exhaustive(&self) -> bool {         self.flags.intersects(VariantFlags::IS_FIELD_LIST_NON_EXHAUSTIVE)     }
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 136
+Original: pub fn field_list_has_applicable_non_exhaustive(&self) -> bool {         self.is_field_list_non_exhaustive() && !self.def_id.is_local()     }
+Emoji: 🔧📋🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 137
+Original: pub fn ident(&self, tcx: TyCtxt<'_>) -> Ident {         Ident::new(self.name, tcx.def_ident_span(self.def_id).unwrap())     }
+Emoji: 🔧🧠📋📏🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 4.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 138
+Original: Ident::new(self.name, tcx.def_ident_span(self.def_id).unwrap())     }
+Emoji: 🧠📋📏🔗🌐
+8D: [0.0, 0.0, 0.0, 6.0, 1.0, 0.0, 1.0, 0.5]
+Generated: struct GeneratedStruct();
+Compiles: true
+
+## Vector 139
+Original: pub fn has_errors(&self) -> Result<(), ErrorGuaranteed> {         self.tainted.map_or(Ok(()), Err)     }
+Emoji: 🔧🔗📦🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 140
+Original: pub fn ctor_kind(&self) -> Option<CtorKind> {         self.ctor.map(|(kind, _)| kind)     }
+Emoji: 🔧🔗📦🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 141
+Original: pub fn ctor_def_id(&self) -> Option<DefId> {         self.ctor.map(|(_, def_id)| def_id)     }
+Emoji: 🔧📋🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 142
+Original: pub fn single_field(&self) -> &FieldDef {         assert!(self.fields.len() == 1);
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 143
+Original: pub fn tail_opt(&self) -> Option<&FieldDef> {         self.fields.raw.last()     }
+Emoji: 🔧🔗📦🔺
+8D: [1.0, 1.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function<T>(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 144
+Original: pub fn tail(&self) -> &FieldDef {         self.tail_opt().expect("expected unsized ADT to have a tail field")     }
+Emoji: 🔧🔗📦
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 145
+Original: pub fn has_unsafe_fields(&self) -> bool {         self.fields.iter().any(|x| x.safety.is_unsafe())     }
+Emoji: 🔧🏗️🔗📦
+8D: [1.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function() {
+    42
+}
+Compiles: false
+
+## Vector 146
+Original: impl PartialEq for VariantDef {     #[inline]     fn eq(&self, other: &Self) -> bool {
+Emoji: 🔧⚙️🔄🔗📦
+8D: [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 147
+Original: fn eq(&self, other: &Self) -> bool {         // There should be only one `VariantDef` for each `def_id`, therefore         // it is fine to implement `PartialEq` only based on `def_id`.
+Emoji: 🔧🔄📋🔗📦
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function() {
+    42
+}
+Compiles: false
+
+## Vector 148
+Original: impl Eq for VariantDef {}  impl Hash for VariantDef {
+Emoji: ⚙️🔄📦
+8D: [1.0, 0.0, 4.0, 0.0, 0.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function {
+    param + 1
+}
+Compiles: false
+
+## Vector 149
+Original: impl Hash for VariantDef {     #[inline]     fn hash<H: Hasher>(&self, s: &mut H) {
+Emoji: 🔧⚙️🔄🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 150
+Original: fn hash<H: Hasher>(&self, s: &mut H) {         // There should be only one `VariantDef` for each `def_id`, therefore         // it is fine to implement `Hash` only based on `def_id`.
+Emoji: 🔧🔄📋🔗📦🔺
+8D: [1.0, 1.0, 1.0, 3.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 151
+Original: pub struct FieldDef {     pub did: DefId,     pub name: Symbol,
+Emoji: 🏗️📦
+8D: [0.0, 0.0, 3.0, 4.0, 0.0, 1.0, 0.0, 0.3]
+Generated: struct GeneratedStruct {
+}
+Compiles: true
+
+## Vector 152
+Original: impl PartialEq for FieldDef {     #[inline]     fn eq(&self, other: &Self) -> bool {
+Emoji: 🔧⚙️🔄🔗📦
+8D: [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 153
+Original: fn eq(&self, other: &Self) -> bool {         // There should be only one `FieldDef` for each `did`, therefore it is         // fine to implement `PartialEq` only based on `did`.
+Emoji: 🔧🔄🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 154
+Original: impl Eq for FieldDef {}  impl Hash for FieldDef {
+Emoji: ⚙️🔄📦
+8D: [1.0, 0.0, 4.0, 0.0, 0.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function {
+    param + 1
+}
+Compiles: false
+
+## Vector 155
+Original: impl Hash for FieldDef {     #[inline]     fn hash<H: Hasher>(&self, s: &mut H) {
+Emoji: 🔧⚙️🔄🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 156
+Original: fn hash<H: Hasher>(&self, s: &mut H) {         // There should be only one `FieldDef` for each `did`, therefore it is         // fine to implement `Hash` only based on `did`.
+Emoji: 🔧🔄🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 157
+Original: pub fn ty(&self, tcx: TyCtxt<'tcx>, args: GenericArgsRef<'tcx>) -> Ty<'tcx> {         tcx.type_of(self.did).instantiate(tcx, args)     }
+Emoji: 🔧🧠🏗️🔗📦🔺
+8D: [1.0, 1.0, 2.0, 6.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 158
+Original: tcx.type_of(self.did).instantiate(tcx, args)     }
+Emoji: 🧠🏗️🔗
+8D: [0.0, 0.0, 4.0, 1.0, 1.0, 0.0, 0.0, 0.4]
+Generated: struct GeneratedStruct(param: i32);
+Compiles: false
+
+## Vector 159
+Original: pub fn ident(&self, tcx: TyCtxt<'_>) -> Ident {         Ident::new(self.name, tcx.def_ident_span(self.did).unwrap())     }
+Emoji: 🔧🧠📋📏🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 4.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 160
+Original: Ident::new(self.name, tcx.def_ident_span(self.did).unwrap())     } }
+Emoji: 🧠📋📏🔗🌐
+8D: [0.0, 0.0, 0.0, 6.0, 1.0, 0.0, 1.0, 0.5]
+Generated: struct GeneratedStruct();
+Compiles: true
+
+## Vector 161
+Original: pub fn typeck_body(self, body: hir::BodyId) -> &'tcx TypeckResults<'tcx> {         self.typeck(self.hir_body_owner_def_id(body))     }
+Emoji: 🔧🧠📋🏗️🔗📦🔺🌐
+8D: [1.0, 1.0, 4.0, 0.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 162
+Original: pub fn provided_trait_methods(self, id: DefId) -> impl 'tcx + Iterator<Item = &'tcx AssocItem> {         self.associated_items(id)             .in_definition_order()
+Emoji: 🔧⚙️🧠🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 163
+Original: pub fn repr_options_of_def(self, did: LocalDefId) -> ReprOptions {         let mut flags = ReprFlags::empty();         let mut size = None;
+Emoji: 🔧📦🏗️🔗📦🌐
+8D: [1.0, 0.0, 2.0, 6.0, 1.0, 1.0, 1.0, 0.7]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 164
+Original: pub fn opt_item_name(self, def_id: impl IntoQueryParam<DefId>) -> Option<Symbol> {         let def_id = def_id.into_query_param();         if let Some(cnum) = def_id.as_crate_root() {
+Emoji: 🔧⚙️❓📦📋🔗📦🔺
+8D: [1.0, 1.0, 4.0, 5.0, 1.0, 1.0, 0.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 165
+Original: match def_key.disambiguated_data.data {                 // The name of a constructor is that of its parent.                 rustc_hir::definitions::DefPathData::Ctor => self
+Emoji: 🎯📦🌐➡️
+8D: [0.0, 0.0, 0.0, 4.0, 0.0, 1.0, 1.0, 0.5]
+Generated: struct GeneratedStruct {
+    let value = 42;
+}
+Compiles: false
+
+## Vector 166
+Original: pub fn item_name(self, id: impl IntoQueryParam<DefId>) -> Symbol {         let id = id.into_query_param();         self.opt_item_name(id).unwrap_or_else(|| {
+Emoji: 🔧⚙️📦🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 167
+Original: pub fn opt_item_ident(self, def_id: impl IntoQueryParam<DefId>) -> Option<Ident> {         let def_id = def_id.into_query_param();         let def = self.opt_item_name(def_id)?;
+Emoji: 🔧⚙️📦📋🔗📦🔺
+8D: [1.0, 1.0, 3.0, 2.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 168
+Original: pub fn item_ident(self, def_id: impl IntoQueryParam<DefId>) -> Ident {         let def_id = def_id.into_query_param();         self.opt_item_ident(def_id).unwrap_or_else(|| {
+Emoji: 🔧⚙️📦📋🔗📦🔺
+8D: [1.0, 1.0, 3.0, 2.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 169
+Original: pub fn opt_associated_item(self, def_id: DefId) -> Option<AssocItem> {         if let DefKind::AssocConst | DefKind::AssocFn | DefKind::AssocTy = self.def_kind(def_id) {             Some(self.associated_item(def_id))
+Emoji: 🔧❓📦📋🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 170
+Original: pub fn opt_rpitit_info(self, def_id: DefId) -> Option<ImplTraitInTraitData> {         if let DefKind::AssocTy = self.def_kind(def_id)             && let AssocKind::Type { data: AssocTypeData::Rpitit(rpitit_info) } =
+Emoji: 🔧❓📦📋🔗📦🔺🌐
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 171
+Original: pub fn find_field_index(self, ident: Ident, variant: &VariantDef) -> Option<FieldIdx> {         variant.fields.iter_enumerated().find_map(|(i, field)| {             self.hygienic_eq(ident, field.ident(self), variant.def_id).then_some(i)
+Emoji: 🔧📋🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 172
+Original: pub fn impls_are_allowed_to_overlap(         self,         def_id1: DefId,
+Emoji: 🔧📋🔗
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32);
+Compiles: false
+
+## Vector 173
+Original: match (impl1.polarity, impl2.polarity) {             (ImplPolarity::Reservation, _) | (_, ImplPolarity::Reservation) => {                 // `#[rustc_reservation_impl]` impls don't overlap with anything
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 174
+Original: pub fn expect_variant_res(self, res: Res) -> &'tcx VariantDef {         match res {             Res::Def(DefKind::Variant, did) => {
+Emoji: 🔧🎯🧠🔗📦🌐➡️
+8D: [1.0, 0.0, 3.0, 2.0, 1.0, 1.0, 1.0, 0.8]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 175
+Original: match res {             Res::Def(DefKind::Variant, did) => {                 let enum_did = self.parent(did);
+Emoji: 🎯📦🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 176
+Original: pub fn instance_mir(self, instance: ty::InstanceKind<'tcx>) -> &'tcx Body<'tcx> {         match instance {             ty::InstanceKind::Item(def) => {
+Emoji: 🔧🎯🧠🏗️🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 1.0, 6.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 177
+Original: match instance {             ty::InstanceKind::Item(def) => {                 debug!("calling def_kind on def: {:?}", def);
+Emoji: 🎯🏗️🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 1.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 178
+Original: match def_kind {                     DefKind::Const                     | DefKind::Static { .. }
+Emoji: 🎯📦🌐
+8D: [0.0, 0.0, 3.0, 5.0, 0.0, 1.0, 1.0, 0.3]
+Generated: struct GeneratedStruct {
+    let value = 42;
+}
+Compiles: false
+
+## Vector 179
+Original: pub fn get_attrs(         self,         did: impl Into<DefId>,
+Emoji: 🔧⚙️🔗🔺
+8D: [1.0, 1.0, 0.0, 4.0, 1.0, 0.0, 0.0, 0.5]
+Generated: fn generated_function<T>();
+Compiles: false
+
+## Vector 180
+Original: pub fn get_all_attrs(self, did: impl Into<DefId>) -> &'tcx [hir::Attribute] {         let did: DefId = did.into();         if let Some(did) = did.as_local() {
+Emoji: 🔧⚙️❓📦🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 181
+Original: pub fn get_diagnostic_attr(         self,         did: impl Into<DefId>,
+Emoji: 🔧⚙️🔗🔺
+8D: [1.0, 1.0, 0.0, 4.0, 1.0, 0.0, 0.0, 0.5]
+Generated: fn generated_function<T>();
+Compiles: false
+
+## Vector 182
+Original: pub fn get_attrs_by_path(         self,         did: DefId,
+Emoji: 🔧🔗
+8D: [1.0, 0.0, 2.0, 1.0, 1.0, 0.0, 0.0, 0.2]
+Generated: fn generated_function();
+Compiles: false
+
+## Vector 183
+Original: pub fn get_attr(self, did: impl Into<DefId>, attr: Symbol) -> Option<&'tcx hir::Attribute> {         if cfg!(debug_assertions) && !rustc_feature::is_valid_for_get_attr(attr) {             let did: DefId = did.into();
+Emoji: 🔧⚙️❓📦🧠🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 184
+Original: pub fn has_attr(self, did: impl Into<DefId>, attr: Symbol) -> bool {         self.get_attrs(did, attr).next().is_some()     }
+Emoji: 🔧⚙️🔗📦🔺
+8D: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 185
+Original: pub fn has_attrs_with_path(self, did: impl Into<DefId>, attrs: &[Symbol]) -> bool {         self.get_attrs_by_path(did.into(), attrs).next().is_some()     }
+Emoji: 🔧⚙️🔗📦🔺
+8D: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 186
+Original: pub fn trait_is_auto(self, trait_def_id: DefId) -> bool {         self.trait_def(trait_def_id).has_auto_impl     }
+Emoji: 🔧⚙️📋🔗📦
+8D: [1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 187
+Original: pub fn trait_is_coinductive(self, trait_def_id: DefId) -> bool {         self.trait_def(trait_def_id).is_coinductive     }
+Emoji: 🔧📋🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 188
+Original: pub fn trait_is_alias(self, trait_def_id: DefId) -> bool {         self.def_kind(trait_def_id) == DefKind::TraitAlias     }
+Emoji: 🔧📋🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 189
+Original: fn layout_error(self, err: LayoutError<'tcx>) -> &'tcx LayoutError<'tcx> {         self.arena.alloc(err)     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 190
+Original: fn ordinary_coroutine_layout(         self,         def_id: DefId,
+Emoji: 🔧📋🔗
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32);
+Compiles: false
+
+## Vector 191
+Original: fn async_drop_coroutine_layout(         self,         def_id: DefId,
+Emoji: 🔧📋🔗
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32);
+Compiles: false
+
+## Vector 192
+Original: pub fn coroutine_layout(         self,         def_id: DefId,
+Emoji: 🔧📋🔗
+8D: [1.0, 0.0, 3.0, 5.0, 1.0, 0.0, 0.0, 0.3]
+Generated: fn generated_function(param: i32);
+Compiles: false
+
+## Vector 193
+Original: pub fn trait_id_of_impl(self, def_id: DefId) -> Option<DefId> {         self.impl_trait_ref(def_id).map(|tr| tr.skip_binder().def_id)     }
+Emoji: 🔧📋🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 194
+Original: pub fn assoc_parent(self, def_id: DefId) -> Option<(DefId, DefKind)> {         if !self.def_kind(def_id).is_assoc() {             return None;
+Emoji: 🔧❓↩️📋🔗📦🔺
+8D: [1.0, 1.0, 3.0, 1.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 195
+Original: pub fn trait_item_of(self, def_id: impl IntoQueryParam<DefId>) -> Option<DefId> {         self.opt_associated_item(def_id.into_query_param())?.trait_item_def_id()     }
+Emoji: 🔧⚙️📋🔗📦🔺
+8D: [1.0, 1.0, 2.0, 5.0, 1.0, 1.0, 0.0, 0.7]
+Generated: fn generated_function<T>() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 196
+Original: pub fn trait_of_assoc(self, def_id: DefId) -> Option<DefId> {         match self.assoc_parent(def_id) {             Some((id, DefKind::Trait)) => Some(id),
+Emoji: 🔧🎯📋🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 197
+Original: match self.assoc_parent(def_id) {             Some((id, DefKind::Trait)) => Some(id),             _ => None,
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 198
+Original: pub fn impl_of_assoc(self, def_id: DefId) -> Option<DefId> {         match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { .. })) => Some(id),
+Emoji: 🔧🎯📋🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 199
+Original: match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { .. })) => Some(id),             _ => None,
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 200
+Original: pub fn inherent_impl_of_assoc(self, def_id: DefId) -> Option<DefId> {         match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { of_trait: false })) => Some(id),
+Emoji: 🔧🎯📋🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 201
+Original: match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { of_trait: false })) => Some(id),             _ => None,
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 202
+Original: pub fn trait_impl_of_assoc(self, def_id: DefId) -> Option<DefId> {         match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { of_trait: true })) => Some(id),
+Emoji: 🔧🎯📋🔗📦🔺🌐➡️
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 1.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 203
+Original: match self.assoc_parent(def_id) {             Some((id, DefKind::Impl { of_trait: true })) => Some(id),             _ => None,
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 204
+Original: pub fn is_exportable(self, def_id: DefId) -> bool {         self.exportable_items(def_id.krate).contains(&def_id)     }
+Emoji: 🔧📋🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 205
+Original: pub fn is_builtin_derived(self, def_id: DefId) -> bool {         if self.is_automatically_derived(def_id)             && let Some(def_id) = def_id.as_local()
+Emoji: 🔧❓📦📋🔗📦
+8D: [1.0, 0.0, 1.0, 2.0, 1.0, 1.0, 0.0, 0.6]
+Generated: fn generated_function() {
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 206
+Original: pub fn is_automatically_derived(self, def_id: DefId) -> bool {         find_attr!(self.get_all_attrs(def_id), AttributeKind::AutomaticallyDerived(..))     }
+Emoji: 🔧📋🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 207
+Original: pub fn span_of_impl(self, impl_def_id: DefId) -> Result<Span, Symbol> {         if let Some(impl_def_id) = impl_def_id.as_local() {             Ok(self.def_span(impl_def_id))
+Emoji: 🔧❓📦📋📏🔗📦🔺
+8D: [1.0, 1.0, 3.0, 3.0, 1.0, 1.0, 0.0, 0.8]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 208
+Original: pub fn hygienic_eq(self, use_ident: Ident, def_ident: Ident, def_parent_def_id: DefId) -> bool {         // We could use `Ident::eq` here, but we deliberately don't. The identifier         // comparison fails frequently, and we want to avoid the expensive
+Emoji: 🔧📋🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 209
+Original: pub fn adjust_ident(self, mut ident: Ident, scope: DefId) -> Ident {         ident.span.normalize_to_macros_2_0_and_adjust(self.expn_that_defined(scope));         ident
+Emoji: 🔧📏🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 210
+Original: pub fn adjust_ident_and_get_scope(         self,         mut ident: Ident,
+Emoji: 🔧🔗
+8D: [1.0, 0.0, 2.0, 1.0, 1.0, 0.0, 0.0, 0.2]
+Generated: fn generated_function();
+Compiles: false
+
+## Vector 211
+Original: pub fn is_const_fn(self, def_id: DefId) -> bool {         matches!(             self.def_kind(def_id),
+Emoji: 🔧📋🔗📦
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 0.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    param + 1
+}
+Compiles: false
+
+## Vector 212
+Original: pub fn is_conditionally_const(self, def_id: impl Into<DefId>) -> bool {         let def_id: DefId = def_id.into();         match self.def_kind(def_id) {
+Emoji: 🔧⚙️🎯📦📋🔗📦🔺
+8D: [1.0, 1.0, 4.0, 6.0, 1.0, 1.0, 0.0, 0.9]
+Generated: fn generated_function<T>(param: i32) {
+    println!("Generated from 8D coordinates");
+    param + 1
+}
+Compiles: false
+
+## Vector 213
+Original: match self.def_kind(def_id) {             DefKind::Impl { of_trait: true } => {                 let header = self.impl_trait_header(def_id).unwrap();
+Emoji: 🎯📦📋🔗📦🌐➡️
+8D: [0.0, 0.0, 3.0, 2.0, 1.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct(param: i32) {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 214
+Original: match self.def_kind(parent_def_id) {                     DefKind::Impl { of_trait: false } => false,                     DefKind::Impl { of_trait: true } | DefKind::Trait => {
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 215
+Original: match self.def_kind(parent_def_id) {                     DefKind::Impl { of_trait: false } => {                         self.constness(def_id) == hir::Constness::Const
+Emoji: 🎯📋🔗📦🌐➡️
+8D: [0.0, 0.0, 2.0, 5.0, 1.0, 1.0, 1.0, 0.7]
+Generated: struct GeneratedStruct() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+
+## Vector 216
+Original: pub fn is_const_trait(self, def_id: DefId) -> bool {         self.trait_def(def_id).constness == hir::Constness::Const     }
+Emoji: 🔧📋🔗📦🌐
+8D: [1.0, 0.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 217
+Original: pub fn is_const_default_method(self, def_id: DefId) -> bool {         matches!(self.trait_of_assoc(def_id), Some(trait_id) if self.is_const_trait(trait_id))     }
+Emoji: 🔧❓📋🔗📦
+8D: [1.0, 0.0, 0.0, 5.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function() {
+    42
+}
+Compiles: false
+
+## Vector 218
+Original: pub fn impl_method_has_trait_impl_trait_tys(self, def_id: DefId) -> bool {         if self.def_kind(def_id) != DefKind::AssocFn {             return false;
+Emoji: 🔧❓↩️📋🏗️🔗📦🌐
+8D: [1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Generated: fn generated_function() {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+    42
+}
+Compiles: false
+
+## Vector 219
+Original: pub fn provide(providers: &mut Providers) {     closure::provide(providers);     context::provide(providers);
+Emoji: 🔧🔗📦🌐
+8D: [1.0, 0.0, 4.0, 2.0, 1.0, 1.0, 1.0, 0.4]
+Generated: fn generated_function(param: i32) {
+    let value = 42;
+    param + 1
+}
+Compiles: false
+
+## Vector 220
+Original: pub struct CrateInherentImpls {     pub inherent_impls: FxIndexMap<LocalDefId, Vec<DefId>>,     pub incoherent_impls: FxIndexMap<SimplifiedType, Vec<LocalDefId>>,
+Emoji: 🏗️📦🔺
+8D: [0.0, 1.0, 4.0, 1.0, 0.0, 1.0, 0.0, 0.4]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 221
+Original: pub struct SymbolName<'tcx> {     /// `&str` gives a consistent ordering, which ensures reproducible builds.     pub name: &'tcx str,
+Emoji: 🏗️🧠📦🔺
+8D: [0.0, 1.0, 0.0, 5.0, 0.0, 1.0, 0.0, 0.5]
+Generated: struct GeneratedStruct<T> {
+}
+Compiles: false
+
+## Vector 222
+Original: pub fn new(tcx: TyCtxt<'tcx>, name: &str) -> SymbolName<'tcx> {         SymbolName { name: tcx.arena.alloc_str(name) }     }
+Emoji: 🔧🧠🔗📦🔺
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 0.0, 0.5]
+Generated: fn generated_function<T>() {
+    42
+}
+Compiles: false
+
+## Vector 223
+Original: SymbolName { name: tcx.arena.alloc_str(name) }     } }
+Emoji: 🧠🔗📦
+8D: [0.0, 0.0, 3.0, 5.0, 1.0, 1.0, 0.0, 0.3]
+Generated: struct GeneratedStruct(param: i32) {
+}
+Compiles: false
+
+## Vector 224
+Original: fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {         fmt::Display::fmt(&self.name, fmt)     }
+Emoji: 🔧🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 225
+Original: fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {         fmt::Display::fmt(&self.name, fmt)     }
+Emoji: 🔧🔗📦🔺🌐
+8D: [1.0, 1.0, 0.0, 6.0, 1.0, 1.0, 1.0, 0.5]
+Generated: fn generated_function<T>() {
+    let value = 42;
+    42
+}
+Compiles: false
+
+## Vector 226
+Original: pub struct DestructuredConst<'tcx> {     pub variant: Option<VariantIdx>,     pub fields: &'tcx [ty::Const<'tcx>],
+Emoji: 🏗️🧠🏗️📦🔺🌐
+8D: [0.0, 1.0, 3.0, 2.0, 0.0, 1.0, 1.0, 0.8]
+Generated: struct GeneratedStruct<T> {
+    let value = 42;
+    println!("Generated from 8D coordinates");
+}
+Compiles: false
+

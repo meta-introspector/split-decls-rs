@@ -49,3 +49,4 @@ pub mod prelude {
 pub mod exports {
     include!("exports.rs");
 }
+pub mod rustc_compose;
