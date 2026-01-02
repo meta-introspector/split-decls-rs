@@ -145,6 +145,14 @@ impl UnifiedDriver {
         self.print_symbol_usage_report(target);
         self.generate_unified_imports_for_target(target);
         
+        // Generate complete code with all dependencies
+        println!("🔧 Generating complete dependency tree...");
+        let complete_code = self.generate_complete_code_with_includes(target)?;
+        
+        // Write to src/current.rs
+        fs::write("src/current.rs", complete_code)?;
+        println!("📁 Generated src/current.rs with complete dependency tree");
+        
         Ok(())
     }
     
@@ -339,41 +347,28 @@ impl UnifiedDriver {
         }
         complete_code.push_str("\n");
         
-        // Include wrap_types with resolver macros
-        complete_code.push_str("// Custom macro to include processed rustc files\n");
-        complete_code.push_str("macro_rules! include_rustc {\n");
-        complete_code.push_str("    ($crate_name:ident, $file:ident) => {\n");
-        complete_code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/\", stringify!($file), \".rs\"));\n");
-        complete_code.push_str("    };\n");
-        complete_code.push_str("    ($crate_name:ident) => {\n");
-        complete_code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/lib.rs\"));\n");
-        complete_code.push_str("    };\n");
-        complete_code.push_str("}\n\n");
+        // Include wrap_types for mock definitions
+        complete_code.push_str("include!(\"wrap_types.rs\");\n\n");
         
-        // Include all dependencies in correct order
+        // Generate modules from processed files
+        println!("📦 Including processed rustc modules...");
         let mut included_count = 0;
-        for dep in &self.resolved_order {
-            if let Some(entry) = self.symbol_map.get(dep) {
-                if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
-                    let file_path = format!("submodules/{}", source_file);
-                    if Path::new(&file_path).exists() {
-                        if let Ok(content) = fs::read_to_string(&file_path) {
-                            complete_code.push_str(&format!("// === {} ===\n", dep));
-                            complete_code.push_str(&content);
-                            complete_code.push_str("\n\n");
-                            included_count += 1;
-                        }
-                    }
-                }
-            }
+        
+        for (crate_name, content) in &self.processed_files {
+            complete_code.push_str(&format!("// === {} ===\n", crate_name));
+            complete_code.push_str(&format!("pub mod {} {{\n", crate_name));
+            complete_code.push_str(&content);
+            complete_code.push_str("\n}\n\n");
+            included_count += 1;
         }
         
-        println!("📁 Included {} dependency files", included_count);
+        println!("📁 Included {} rustc modules", included_count);
         
-        // Add target code
+        // Add target execution code
         complete_code.push_str(&format!("// === TARGET: {} ===\n", target));
         complete_code.push_str("fn main() {\n");
-        complete_code.push_str(&format!("    println!(\"Executing target: {}\");\n", target));
+        complete_code.push_str(&format!("    println!(\"🚀 Executing target: {}\");\n", target));
+        complete_code.push_str(&format!("    {}();\n", target));
         complete_code.push_str("}\n");
         
         Ok(complete_code)
