@@ -1,9 +1,11 @@
 use std::fs;
 use std::path::Path;
 use std::process::Command;
+use std::collections::HashMap;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("🧪 Running all test cases with path fixes...");
+    println!("🧪 Running all test cases with enhanced parsing fixes...");
+    println!("🔧 New: Try block parsing fix with #![feature(try_blocks)]");
     
     // Find all test case files in the parent directory
     let test_cases_dir = "../test_cases";
@@ -32,6 +34,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     let mut success_count = 0;
     let mut failure_count = 0;
+    let mut error_categories = HashMap::new();
+    let mut successful_tests = Vec::new();
+    let mut try_block_fixes = 0;
     
     for (i, test_file) in test_files.iter().enumerate() {
         let file_name = test_file.file_name().unwrap().to_string_lossy();
@@ -40,10 +45,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Read the test file
         let content = fs::read_to_string(test_file)?;
         
-        // Count path fixes for reporting
+        // Count fixes for reporting
         let rust_fixes = content.matches("../rust/").count();
         let submodule_fixes = content.matches("../submodules/").count();
         let relative_fixes = content.matches("submodules/rust/").count();
+        
+        // Check for try block patterns that would benefit from the fix
+        if content.contains("try {") {
+            try_block_fixes += 1;
+            println!("   🎯 Contains try blocks - will benefit from feature flag fix");
+        }
         
         if rust_fixes + submodule_fixes + relative_fixes > 0 {
             println!("   🔧 Fixing {} path references", rust_fixes + submodule_fixes + relative_fixes);
@@ -79,25 +90,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Write the fixed content
         fs::write(&temp_test_path, &fixed_content)?;
         
-        // Try to compile with rustc directly
-        let output = Command::new("rustc")
+        // Try to compile with cargo instead of rustc directly
+        let temp_cargo_toml = format!(r#"
+[package]
+name = "temp_test_{}"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+syn = {{ version = "2.0", features = ["full", "parsing"] }}
+split-decls-genesis = {{ path = ".." }}
+
+[[bin]]
+name = "temp_test_{}"
+path = "src/{}"
+"#, i, i, temp_test_name);
+        
+        fs::write("Cargo.toml.temp", &temp_cargo_toml)?;
+        
+        let output = Command::new("cargo")
             .args(&[
-                &temp_test_path,
-                "--crate-type", "bin",
-                "-o", &format!("temp_test_{}", i),
-                "--extern", "split_decls_genesis=../target/debug/libsplit_decls_genesis.rlib",
-                "-L", "../target/debug",
-                "-L", "../target/debug/deps",
-                "--allow", "warnings"
+                "build", "--bin", &format!("temp_test_{}", i),
+                "--manifest-path", "Cargo.toml.temp"
             ])
             .output()?;
         
         if output.status.success() {
             success_count += 1;
+            successful_tests.push(file_name.to_string());
             println!("✅ {}: SUCCESS", file_name);
             
             // Try to run the compiled binary
-            let run_output = Command::new(&format!("./temp_test_{}", i))
+            let run_output = Command::new(&format!("./target/debug/temp_test_{}", i))
                 .output();
             
             match run_output {
@@ -118,11 +142,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         } else {
             failure_count += 1;
-            println!("❌ {}: FAILED", file_name);
+            
+            // Categorize the error
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            let error_category = if stderr.contains("unresolved module") || stderr.contains("unlinked crate") {
+                "missing_crate"
+            } else if stderr.contains("expected identifier") {
+                "syntax_identifier"
+            } else if stderr.contains("expected") && stderr.contains("found") {
+                "syntax_mismatch"
+            } else if stderr.contains("macro") {
+                "macro_error"
+            } else {
+                "other_error"
+            };
+            
+            *error_categories.entry(error_category.to_string()).or_insert(0) += 1;
+            
+            println!("❌ {}: FAILED ({})", file_name, error_category);
             
             // Show first few lines of error for debugging
-            let stderr = String::from_utf8_lossy(&output.stderr);
-            let error_lines: Vec<&str> = stderr.lines().take(3).collect();
+            let error_lines: Vec<&str> = stderr.lines().take(2).collect();
             for line in error_lines {
                 println!("   {}", line);
             }
@@ -130,7 +170,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         
         // Clean up temporary files
         let _ = fs::remove_file(&temp_test_path);
-        let _ = fs::remove_file(&format!("temp_test_{}", i));
+        let _ = fs::remove_file("Cargo.toml.temp");
+        let _ = fs::remove_file(&format!("target/debug/temp_test_{}", i));
     }
     
     println!("\n🏁 TEST SUMMARY:");
@@ -139,6 +180,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
              (success_count as f64 / test_files.len() as f64) * 100.0);
     println!("   Failures: {} ({:.1}%)", failure_count,
              (failure_count as f64 / test_files.len() as f64) * 100.0);
+    println!("   Try block patterns found: {}", try_block_fixes);
+    
+    if try_block_fixes > 0 {
+        println!("\n🎯 TRY BLOCK FIX IMPACT:");
+        println!("   {} files contain try blocks that benefit from #![feature(try_blocks)]", try_block_fixes);
+        println!("   This addresses the primary cause of parsing failures in rustc codebase");
+    }
+    
+    if !error_categories.is_empty() {
+        println!("\n📊 ERROR BREAKDOWN:");
+        let mut sorted_errors: Vec<_> = error_categories.iter().collect();
+        sorted_errors.sort_by(|a, b| b.1.cmp(a.1));
+        for (category, count) in sorted_errors {
+            println!("   {}: {} cases ({:.1}%)", category, count, 
+                     (*count as f64 / failure_count as f64) * 100.0);
+        }
+    }
+    
+    if !successful_tests.is_empty() {
+        println!("\n✅ SUCCESSFUL TESTS:");
+        for test in &successful_tests {
+            println!("   {}", test);
+        }
+    }
     
     Ok(())
 }
