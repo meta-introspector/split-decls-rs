@@ -1,0 +1,9 @@
+[package]
+name = "lib-introspector-core"
+version = "0.1.0"
+edition = "2021"
+description = "Core introspector functions lib for all your meta programming needs"
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "parsing", "extra-traits", "visit"] }
+regex = "1.0"

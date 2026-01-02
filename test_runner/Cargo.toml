@@ -1,0 +1,48 @@
+[package]
+name = "test_runner"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "parsing", "extra-traits", "visit"] }
+lib-introspector-core = { path = "../lib-introspector-core" }
+
+[[bin]]
+name = "run_tests"
+path = "src/main.rs"
+
+[[bin]]
+name = "reproduce_error"
+path = "src/reproduce_error.rs"
+
+[[bin]]
+name = "test_5"
+path = "src/test_5.rs"
+[[bin]]
+name = "test_20"
+path = "src/test_20.rs"
+[[bin]]
+name = "test_2"
+path = "src/test_2.rs"
+
+[[bin]]
+name = "test_try_block"
+path = "src/test_try_block.rs"
+
+[[bin]]
+name = "line_by_line_parser"
+path = "src/line_by_line_parser.rs"
+
+[[bin]]
+name = "test_clean_code"
+path = "src/test_clean_code.rs"
+
+[[bin]]
+name = "try_block_test"
+path = "src/manual_tests/try_block_test.rs"
+
+[[bin]]
+name = "syn_parse_try_test"
+path = "src/syn_parse_try_test.rs"
