@@ -43,7 +43,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut processed = 0;
     let mut failed = 0;
     
-    for file_path in rust_files.iter().take(100) { // Limit for testing
+    for file_path in rust_files.iter() { // Process all files
         match fs::read_to_string(file_path) {
             Ok(_content) => {
                 processed += 1;
