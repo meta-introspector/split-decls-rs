@@ -61,8 +61,34 @@ mkfn!{{
 }
 
 fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::error::Error) -> Result<(), Box<dyn std::error::Error>> {
+    // Extract error type from error message
+    let error_msg = error.to_string();
+    let error_type = if error_msg.contains("expected square brackets") {
+        "expected_square_brackets"
+    } else if error_msg.contains("expected identifier") {
+        "expected_identifier"  
+    } else if error_msg.contains("expected `,`") {
+        "expected_comma"
+    } else if error_msg.contains("expected an expression") {
+        "expected_expression"
+    } else if error_msg.contains("unexpected token") {
+        "unexpected_token"
+    } else {
+        "other_parse_error"
+    };
+    
+    // Check if we should create a test case for this error type (max 3 per type)
+    let mut counters = ERROR_COUNTERS.lock().unwrap();
+    let count = counters.entry(error_type.to_string()).or_insert(0);
+    *count += 1;
+    
+    // Only keep 3 examples of each error type
+    if *count > 3 {
+        return Ok(()); // Skip this test case
+    }
+    
     let file_name = file_path.split('/').last().unwrap_or("unknown");
-    let test_case_name = format!("test_case_{}.rs", file_name.replace('.', "_"));
+    let test_case_name = format!("test_case_{}_{}.rs", error_type, file_name.replace('.', "_"));
     let test_case_path = format!("test_cases/{}", test_case_name);
     
     // Create test_cases directory if it doesn't exist
@@ -74,7 +100,7 @@ fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::err
     let mut error_line = None;
     
     // Try to isolate the error by binary search approach
-    for (i, line) in lines.iter().enumerate() {
+    for (i, _line) in lines.iter().enumerate() {
         let test_content = lines[0..=i].join("\n");
         if let Err(_) = syn::parse_file(&test_content) {
             error_line = Some(i);
@@ -89,17 +115,21 @@ fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::err
     let test_case_content = format!(
         "// MINIMAL TEST CASE for parsing failure in: {}\n\
          // Error: {}\n\
+         // Error type: {}\n\
+         // Sample #{} of 3\n\
          // Problematic line: {}\n\
          \n\
          {}\n",
         file_path,
-        error,
+        error_msg.lines().next().unwrap_or("unknown error"),
+        error_type,
+        *count,
         error_line.map_or("unknown".to_string(), |l| format!("line {}", l + 1)),
         minimal_content
     );
     
     fs::write(&test_case_path, test_case_content)?;
-    println!("📝 Created test case: {}", test_case_path);
+    println!("📝 Created test case: {} (sample {}/3)", test_case_name, *count);
     
     Ok(())
 }

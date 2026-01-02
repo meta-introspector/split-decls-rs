@@ -28,11 +28,103 @@ A fully functional rustc interpreter that intercepts and tracks every function c
 - 117 files with zero dependencies (optimal starting points)
 - Complete dependency database: symbol_map.json.gz (compressed)
 
-🔄 Progressive Compilation Status:
-Step 1/3102: submodules/rust/compiler/rustc/build.rs ✅ SUCCESS
-- Source: 1847B | Binary: 68200B | Decls: 0
-Step 2/3102: submodules/rust/compiler/rustc/src/main.rs ❌ FAILED
+🔄 Build System Status (runbuild):
+- 1220 parsing failures remaining
+- 25 minimal test cases generated (3 per error type)
+- Primary issue: "expected square brackets" (attribute spacing)
+- Macro injection system: ✅ WORKING
+- Test case sampling: ✅ IMPLEMENTED
+
+🚫 Unified Wrapper Status:
+- BLOCKED: Must resolve runbuild parsing issues first
+- Cannot proceed until build.rs processes files cleanly
 ```
+
+## Development Workflow (Updated)
+
+### Phase 1: Build System Resolution (CURRENT)
+```bash
+# Step 1: Generate processed files and identify parsing issues
+cargo run --bin runbuild > build.txt 2>&1
+
+# Step 2: Analyze parsing failures
+grep "Failed to process" build.txt | wc -l
+
+# Step 3: Review test cases (max 3 per error type)
+ls test_cases | wc -l
+grep "^// Error type:" test_cases/*.rs | cut -d':' -f3 | sort | uniq -c
+
+# Step 4: Fix parsing issues in build.rs
+# - Attribute spacing: # [attr] → #[attr]
+# - Macro definitions: Ensure all mkitem!/mkfn!/mkmod! are defined
+# - Syntax normalization: Handle edge cases
+
+# Step 5: Verify fixes
+cargo run --bin runbuild > build.txt 2>&1
+grep "Failed to process" build.txt | wc -l  # Target: 0 failures
+```
+
+### Phase 2: Unified Wrapper Testing (NEXT)
+```bash
+# Only proceed when runbuild has 0 parsing failures
+
+# Step 1: Test unified wrapper compilation
+cargo run --bin unified_rustc_wrapped > report.txt 2>&1
+
+# Step 2: Analyze compilation errors
+grep -A1 -E "error\[" report.txt | sort | uniq -c | sort -rn
+
+# Step 3: Fix compilation issues
+# - Missing crates: Add extern crate declarations
+# - Type conflicts: Update wrap_types.rs
+# - Module issues: Fix module structure
+
+# Step 4: Run complete rustc interpreter
+cargo run --bin unified_rustc_wrapped
+```
+
+## Key Insight: Sequential Dependencies
+
+**CRITICAL**: The workflow has strict sequential dependencies:
+
+1. **build.rs parsing** → Must be 100% successful
+2. **unified_rustc_wrapped compilation** → Depends on clean processed files
+3. **rustc interpreter execution** → Depends on successful compilation
+
+**Current Blocker**: 1220 parsing failures in build.rs must be resolved before proceeding to unified wrapper testing.
+
+## Recent Achievements
+
+### 🔧 Test Case Sampling System (2026-01-02)
+- **Implemented smart sampling**: Max 3 examples per error type instead of 678 total
+- **Error type classification**: Automatic categorization of parsing failures
+- **Reduced noise**: 678 → 25 test cases for focused debugging
+- **Current error breakdown**:
+  - `expected_square_brackets`: 6 cases (attribute spacing: `# [attr]` → `#[attr]`)
+  - `expected_identifier`: 5 cases (syntax parsing issues)
+  - `expected_comma`: 4 cases (missing commas in syntax)
+  - `other_parse_error`: 4 cases (miscellaneous parsing failures)
+  - `expected_expression`: 3 cases (expression syntax errors)
+  - `unexpected_token`: 3 cases (token parsing issues)
+
+### 🚀 Macro Injection System Breakthrough (2026-01-02)
+- **Root cause identified**: Build system failing to parse files with undefined macros (`mkitem!`, `mkfn!`, `mkmod!`)
+- **Solution implemented**: Inject `macro_wrappers.rs` definitions before parsing each file
+- **Massive improvement**: 33 → 678 test cases generated (20x better error detection)
+- **Issue isolated**: Attribute spacing problem - `# [repr (C)]` vs `#[repr(C)]`
+
+### 🔧 Enhanced Macro Reporting (2026-01-02)
+- **emit_message! upgrade**: Macros now write to `macro_report.txt` instead of compile_error!
+- **mkmod/mkuse integration**: Track module and use statement processing
+- **File-based logging**: Persistent macro execution tracking
+
+## Next Steps (Priority Order)
+
+1. **Fix attribute spacing normalization** in build.rs process_file()
+2. **Resolve remaining 15 non-bracket parsing errors** using test cases
+3. **Verify 0 parsing failures** in runbuild
+4. **Proceed to unified wrapper testing** only after clean build
+5. **Document unified wrapper fixes** as separate phase
 
 ## Purpose
 
