@@ -1,0 +1,3775 @@
+   Compiling split-decls-genesis v0.1.0 (/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis)
+warning: unused import: `std::collections::HashMap`
+ --> src/self_improving_compiler.rs:1:5
+  |
+1 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Hash`
+ --> src/symbol_resolver.rs:5:17
+  |
+5 | use std::hash::{Hash, Hasher};
+  |                 ^^^^
+
+warning: unused import: `File`
+ --> src/symbol_resolver.rs:6:11
+  |
+6 | use syn::{File, visit::Visit};
+  |           ^^^^
+
+warning: unused import: `std::path::Path`
+ --> src/dependency_extractor.rs:5:5
+  |
+5 | use std::path::Path;
+  |     ^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_mir_dataflow`
+  --> src/rustc_complete.rs:10:14
+   |
+10 | macro_rules! use_crate_rustc_mir_dataflow { () => { pub use rustc_mir_dataflow::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_macros)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused macro definition: `use_crate_rustc_infer`
+  --> src/rustc_complete.rs:11:14
+   |
+11 | macro_rules! use_crate_rustc_infer { () => { pub use rustc_infer::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_parse_format`
+  --> src/rustc_complete.rs:12:14
+   |
+12 | macro_rules! use_crate_rustc_parse_format { () => { pub use rustc_parse_format::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hir_analysis`
+  --> src/rustc_complete.rs:13:14
+   |
+13 | macro_rules! use_crate_rustc_hir_analysis { () => { pub use rustc_hir_analysis::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ty_utils`
+  --> src/rustc_complete.rs:14:14
+   |
+14 | macro_rules! use_crate_rustc_ty_utils { () => { pub use rustc_ty_utils::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_middle`
+  --> src/rustc_complete.rs:15:14
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_query_system`
+  --> src/rustc_complete.rs:16:14
+   |
+16 | macro_rules! use_crate_rustc_query_system { () => { pub use rustc_query_system::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hir_typeck`
+  --> src/rustc_complete.rs:17:14
+   |
+17 | macro_rules! use_crate_rustc_hir_typeck { () => { pub use rustc_hir_typeck::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hir`
+  --> src/rustc_complete.rs:18:14
+   |
+18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_attr_parsing`
+  --> src/rustc_complete.rs:19:14
+   |
+19 | macro_rules! use_crate_rustc_attr_parsing { () => { pub use rustc_attr_parsing::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_builtin_macros`
+  --> src/rustc_complete.rs:20:14
+   |
+20 | macro_rules! use_crate_rustc_builtin_macros { () => { pub use rustc_builtin_macros::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_interface`
+  --> src/rustc_complete.rs:21:14
+   |
+21 | macro_rules! use_crate_rustc_interface { () => { pub use rustc_interface::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_mir_build`
+  --> src/rustc_complete.rs:22:14
+   |
+22 | macro_rules! use_crate_rustc_mir_build { () => { pub use rustc_mir_build::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_symbol_mangling`
+  --> src/rustc_complete.rs:23:14
+   |
+23 | macro_rules! use_crate_rustc_symbol_mangling { () => { pub use rustc_symbol_mangling::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_codegen_gcc`
+  --> src/rustc_complete.rs:24:14
+   |
+24 | macro_rules! use_crate_rustc_codegen_gcc { () => { /* Optional backend - stub */ }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_expand`
+  --> src/rustc_complete.rs:25:14
+   |
+25 | macro_rules! use_crate_rustc_expand { () => { pub use rustc_expand::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_session`
+  --> src/rustc_complete.rs:26:14
+   |
+26 | macro_rules! use_crate_rustc_session { () => { pub use rustc_session::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_mir_transform`
+  --> src/rustc_complete.rs:27:14
+   |
+27 | macro_rules! use_crate_rustc_mir_transform { () => { pub use rustc_mir_transform::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_index`
+  --> src/rustc_complete.rs:28:14
+   |
+28 | macro_rules! use_crate_rustc_index { () => { pub use rustc_index::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_next_trait_solver`
+  --> src/rustc_complete.rs:29:14
+   |
+29 | macro_rules! use_crate_rustc_next_trait_solver { () => { pub use rustc_next_trait_solver::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_parse`
+  --> src/rustc_complete.rs:30:14
+   |
+30 | macro_rules! use_crate_rustc_parse { () => { pub use rustc_parse::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_codegen_llvm`
+  --> src/rustc_complete.rs:31:14
+   |
+31 | macro_rules! use_crate_rustc_codegen_llvm { () => { pub use rustc_codegen_llvm::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_lint`
+  --> src/rustc_complete.rs:32:14
+   |
+32 | macro_rules! use_crate_rustc_lint { () => { pub use rustc_lint::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_public`
+  --> src/rustc_complete.rs:33:14
+   |
+33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_passes`
+  --> src/rustc_complete.rs:34:14
+   |
+34 | macro_rules! use_crate_rustc_passes { () => { pub use rustc_passes::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_codegen_ssa`
+  --> src/rustc_complete.rs:35:14
+   |
+35 | macro_rules! use_crate_rustc_codegen_ssa { () => { pub use rustc_codegen_ssa::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_trait_selection`
+  --> src/rustc_complete.rs:36:14
+   |
+36 | macro_rules! use_crate_rustc_trait_selection { () => { pub use rustc_trait_selection::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_codegen_cranelift`
+  --> src/rustc_complete.rs:37:14
+   |
+37 | macro_rules! use_crate_rustc_codegen_cranelift { () => { /* Optional backend - stub */ }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_const_eval`
+  --> src/rustc_complete.rs:38:14
+   |
+38 | macro_rules! use_crate_rustc_const_eval { () => { pub use rustc_const_eval::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_pattern_analysis`
+  --> src/rustc_complete.rs:39:14
+   |
+39 | macro_rules! use_crate_rustc_pattern_analysis { () => { pub use rustc_pattern_analysis::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_span`
+  --> src/rustc_complete.rs:40:14
+   |
+40 | macro_rules! use_crate_rustc_span { () => { pub use rustc_span::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ast`
+  --> src/rustc_complete.rs:41:14
+   |
+41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_type_ir`
+  --> src/rustc_complete.rs:42:14
+   |
+42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_resolve`
+  --> src/rustc_complete.rs:43:14
+   |
+43 | macro_rules! use_crate_rustc_resolve { () => { pub use rustc_resolve::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_borrowck`
+  --> src/rustc_complete.rs:44:14
+   |
+44 | macro_rules! use_crate_rustc_borrowck { () => { pub use rustc_borrowck::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_data_structures`
+  --> src/rustc_complete.rs:45:14
+   |
+45 | macro_rules! use_crate_rustc_data_structures { () => { pub use rustc_data_structures::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_serialize`
+  --> src/rustc_complete.rs:46:14
+   |
+46 | macro_rules! use_crate_rustc_serialize { () => { pub use rustc_serialize::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_errors`
+  --> src/rustc_complete.rs:47:14
+   |
+47 | macro_rules! use_crate_rustc_errors { () => { pub use rustc_errors::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_metadata`
+  --> src/rustc_complete.rs:48:14
+   |
+48 | macro_rules! use_crate_rustc_metadata { () => { pub use rustc_metadata::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_transmute`
+  --> src/rustc_complete.rs:49:14
+   |
+49 | macro_rules! use_crate_rustc_transmute { () => { pub use rustc_transmute::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_thread_pool`
+  --> src/rustc_complete.rs:50:14
+   |
+50 | macro_rules! use_crate_rustc_thread_pool { () => { pub use rustc_thread_pool::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_incremental`
+  --> src/rustc_complete.rs:51:14
+   |
+51 | macro_rules! use_crate_rustc_incremental { () => { pub use rustc_incremental::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ast_ir`
+  --> src/rustc_complete.rs:52:14
+   |
+52 | macro_rules! use_crate_rustc_ast_ir { () => { pub use rustc_ast_ir::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_traits`
+  --> src/rustc_complete.rs:53:14
+   |
+53 | macro_rules! use_crate_rustc_traits { () => { pub use rustc_traits::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_macros`
+  --> src/rustc_complete.rs:54:14
+   |
+54 | macro_rules! use_crate_rustc_macros { () => { pub use rustc_macros::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ast_lowering`
+  --> src/rustc_complete.rs:55:14
+   |
+55 | macro_rules! use_crate_rustc_ast_lowering { () => { pub use rustc_ast_lowering::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_driver_impl`
+  --> src/rustc_complete.rs:56:14
+   |
+56 | macro_rules! use_crate_rustc_driver_impl { () => { pub use rustc_driver_impl::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_query_impl`
+  --> src/rustc_complete.rs:57:14
+   |
+57 | macro_rules! use_crate_rustc_query_impl { () => { pub use rustc_query_impl::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_monomorphize`
+  --> src/rustc_complete.rs:58:14
+   |
+58 | macro_rules! use_crate_rustc_monomorphize { () => { pub use rustc_monomorphize::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ast_passes`
+  --> src/rustc_complete.rs:59:14
+   |
+59 | macro_rules! use_crate_rustc_ast_passes { () => { pub use rustc_ast_passes::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_lint_defs`
+  --> src/rustc_complete.rs:60:14
+   |
+60 | macro_rules! use_crate_rustc_lint_defs { () => { pub use rustc_lint_defs::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_arena`
+  --> src/rustc_complete.rs:61:14
+   |
+61 | macro_rules! use_crate_rustc_arena { () => { pub use rustc_arena::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_abi`
+  --> src/rustc_complete.rs:62:14
+   |
+62 | macro_rules! use_crate_rustc_abi { () => { pub use rustc_abi::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_sanitizers`
+  --> src/rustc_complete.rs:63:14
+   |
+63 | macro_rules! use_crate_rustc_sanitizers { () => { pub use rustc_sanitizers::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_privacy`
+  --> src/rustc_complete.rs:64:14
+   |
+64 | macro_rules! use_crate_rustc_privacy { () => { pub use rustc_privacy::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hir_id`
+  --> src/rustc_complete.rs:65:14
+   |
+65 | macro_rules! use_crate_rustc_hir_id { () => { pub use rustc_hir_id::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_baked_icu_data`
+  --> src/rustc_complete.rs:66:14
+   |
+66 | macro_rules! use_crate_rustc_baked_icu_data { () => { pub use rustc_baked_icu_data::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_error_messages`
+  --> src/rustc_complete.rs:67:14
+   |
+67 | macro_rules! use_crate_rustc_error_messages { () => { pub use rustc_error_messages::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_feature`
+  --> src/rustc_complete.rs:68:14
+   |
+68 | macro_rules! use_crate_rustc_feature { () => { pub use rustc_feature::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_graphviz`
+  --> src/rustc_complete.rs:69:14
+   |
+69 | macro_rules! use_crate_rustc_graphviz { () => { pub use rustc_graphviz::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_llvm`
+  --> src/rustc_complete.rs:70:14
+   |
+70 | macro_rules! use_crate_rustc_llvm { () => { pub use rustc_llvm::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_public_bridge`
+  --> src/rustc_complete.rs:71:14
+   |
+71 | macro_rules! use_crate_rustc_public_bridge { () => { pub use rustc_public_bridge::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_ast_pretty`
+  --> src/rustc_complete.rs:72:14
+   |
+72 | macro_rules! use_crate_rustc_ast_pretty { () => { pub use rustc_ast_pretty::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hir_pretty`
+  --> src/rustc_complete.rs:73:14
+   |
+73 | macro_rules! use_crate_rustc_hir_pretty { () => { pub use rustc_hir_pretty::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_lexer`
+  --> src/rustc_complete.rs:74:14
+   |
+74 | macro_rules! use_crate_rustc_lexer { () => { pub use rustc_lexer::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_index_macros`
+  --> src/rustc_complete.rs:75:14
+   |
+75 | macro_rules! use_crate_rustc_index_macros { () => { pub use rustc_index_macros::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_log`
+  --> src/rustc_complete.rs:76:14
+   |
+76 | macro_rules! use_crate_rustc_log { () => { pub use rustc_log::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_hashes`
+  --> src/rustc_complete.rs:77:14
+   |
+77 | macro_rules! use_crate_rustc_hashes { () => { pub use rustc_hashes::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_fs_util`
+  --> src/rustc_complete.rs:78:14
+   |
+78 | macro_rules! use_crate_rustc_fs_util { () => { pub use rustc_fs_util::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_fluent_macro`
+  --> src/rustc_complete.rs:79:14
+   |
+79 | macro_rules! use_crate_rustc_fluent_macro { () => { pub use rustc_fluent_macro::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_type_ir_macros`
+  --> src/rustc_complete.rs:80:14
+   |
+80 | macro_rules! use_crate_rustc_type_ir_macros { () => { pub use rustc_type_ir_macros::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_error_codes`
+  --> src/rustc_complete.rs:81:14
+   |
+81 | macro_rules! use_crate_rustc_error_codes { () => { pub use rustc_error_codes::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused macro definition: `use_crate_rustc_driver`
+  --> src/rustc_complete.rs:82:14
+   |
+82 | macro_rules! use_crate_rustc_driver { () => { pub use rustc_driver::*; }; }
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Hasher`
+ --> src/symbol_resolver.rs:5:23
+  |
+5 | use std::hash::{Hash, Hasher};
+  |                       ^^^^^^
+
+warning: unused variable: `rustc_paths`
+  --> src/dependency_extractor.rs:96:9
+   |
+96 |     let rustc_paths = vec![
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_rustc_paths`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `export_use_object___read___archive_____ArchiveFile___ArchiveMember___3` should have a snake case name
+ --> src/exports.rs:4:8
+  |
+4 | pub fn export_use_object___read___archive_____ArchiveFile___ArchiveMember___3() { /* compiler_builtins__main__use_object___read___archive...
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_object_read_archive_archive_file_archive_member_3`
+  |
+  = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: function `export_use_std___process_____Command___Stdio___7` should have a snake case name
+ --> src/exports.rs:8:8
+  |
+8 | pub fn export_use_std___process_____Command___Stdio___7() { /* stdarch__main__use_std___process_____Command___Stdio__ */ }
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_stdio_7`
+
+warning: function `export_use_std_____env___process___8` should have a snake case name
+ --> src/exports.rs:9:8
+  |
+9 | pub fn export_use_std_____env___process___8() { /* rustc_codegen_gcc__main__use_std_____env___process__ */ }
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_process_8`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___13` should have a snake case name
+  --> src/exports.rs:14:8
+   |
+14 | pub fn export_use_criterion_____Criterion___criterion_main___13() { /* compiler_builtins__float_pow__use_criterion_____Criterion___criter...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_13`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___17` should have a snake case name
+  --> src/exports.rs:18:8
+   |
+18 | pub fn export_use_criterion_____Criterion___criterion_main___17() { /* compiler_builtins__float_conv__use_criterion_____Criterion___crite...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_17`
+
+warning: function `export_use_rustc_middle___ty_____AssocTag___GenericArg___18` should have a snake case name
+  --> src/exports.rs:19:8
+   |
+19 | pub fn export_use_rustc_middle___ty_____AssocTag___GenericArg___18() { /* rustc_codegen_cranelift__main_shim__use_rustc_middle___ty_____A...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_middle_ty_assoc_tag_generic_arg_18`
+
+warning: function `export___aeabi_unwind_cpp_pr0_26` should have a snake case name
+  --> src/exports.rs:27:8
+   |
+27 | pub fn export___aeabi_unwind_cpp_pr0_26() { /* compiler_builtins__main____aeabi_unwind_cpp_pr0 */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_aeabi_unwind_cpp_pr0_26`
+
+warning: function `export_BUILD_DIR_27` should have a snake case name
+  --> src/exports.rs:28:8
+   |
+28 | pub fn export_BUILD_DIR_27() { /* rustc_codegen_gcc__main__BUILD_DIR */ }
+   |        ^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_build_dir_27`
+
+warning: function `export_use_crate___dataflow_____BorrowIndex___Borrowck___BorrowckDomain___Borrows___38` should have a snake case name
+  --> src/exports.rs:39:8
+   |
+39 | pub fn export_use_crate___dataflow_____BorrowIndex___Borrowck___BorrowckDomain___Borrows___38() { /* rustc_borrowck__lib__use_crate___dat...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_dataflow_borrow_index_borrowck_borrowck_domain_borrows_38`
+
+warning: function `export_use_std___path___PathBuf_47` should have a snake case name
+  --> src/exports.rs:48:8
+   |
+48 | pub fn export_use_std___path___PathBuf_47() { /* stdarch__main__use_std___path___PathBuf */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_buf_47`
+
+warning: function `export_use_cranelift_frontend_____FunctionBuilder___FunctionBuilderContext___63` should have a snake case name
+  --> src/exports.rs:64:8
+   |
+64 | pub fn export_use_cranelift_frontend_____FunctionBuilder___FunctionBuilderContext___63() { /* rustc_codegen_cranelift__main_shim__use_cra...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_cranelift_frontend_function_builder_function_builder_context_63`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___64` should have a snake case name
+  --> src/exports.rs:65:8
+   |
+65 | pub fn export_use_criterion_____Criterion___criterion_main___64() { /* compiler_builtins__float_cmp__use_criterion_____Criterion___criter...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_64`
+
+warning: function `export_use_crate___domain___get_domain_69` should have a snake case name
+  --> src/exports.rs:70:8
+   |
+70 | pub fn export_use_crate___domain___get_domain_69() { /* compiler_builtins__edge_cases__use_crate___domain___get_domain */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_domain_get_domain_69`
+
+warning: function `export_use_std___fmt___Write_as___73` should have a snake case name
+  --> src/exports.rs:74:8
+   |
+74 | pub fn export_use_std___fmt___Write_as___73() { /* compiler_builtins__plot_domains__use_std___fmt___Write_as__ */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_write_as_73`
+
+warning: function `export_use_std___io___Write_74` should have a snake case name
+  --> src/exports.rs:75:8
+   |
+75 | pub fn export_use_std___io___Write_74() { /* stdarch__main__use_std___io___Write */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_write_74`
+
+warning: function `export_use_self___initialized_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeInitializedPlaces___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____75` should have a snake case name
+  --> src/exports.rs:76:8
+   |
+76 | ...fn export_use_self___initialized_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeInitializedPlaces___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____75() ...
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_initialized_ever_initialized_places_ever_initialized_places_domain_maybe_initialized_places_maybe_uninitialized_places_maybe_uninitialized_places_domain_75`
+
+warning: function `export_EverInitializedPlacesDomain_83` should have a snake case name
+  --> src/exports.rs:84:8
+   |
+84 | pub fn export_EverInitializedPlacesDomain_83() { /* rustc_mir_dataflow__initialized__EverInitializedPlacesDomain */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_ever_initialized_places_domain_83`
+
+warning: function `export_Archive_86` should have a snake case name
+  --> src/exports.rs:87:8
+   |
+87 | pub fn export_Archive_86() { /* compiler_builtins__main__Archive */ }
+   |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_archive_86`
+
+warning: function `export_use_std___io_____BufWriter___Write___88` should have a snake case name
+  --> src/exports.rs:89:8
+   |
+89 | pub fn export_use_std___io_____BufWriter___Write___88() { /* compiler_builtins__plot_domains__use_std___io_____BufWriter___Write__ */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_buf_writer_write_88`
+
+warning: function `export_use_std___process___Command_91` should have a snake case name
+  --> src/exports.rs:92:8
+   |
+92 | pub fn export_use_std___process___Command_91() { /* compiler_builtins__plot_domains__use_std___process___Command */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_91`
+
+warning: function `export_use_rustc_session___config___EntryFnType_93` should have a snake case name
+  --> src/exports.rs:94:8
+   |
+94 | pub fn export_use_rustc_session___config___EntryFnType_93() { /* rustc_codegen_cranelift__main_shim__use_rustc_session___config___EntryFn...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_session_config_entry_fn_type_93`
+
+warning: function `export__start_110` should have a snake case name
+   --> src/exports.rs:111:8
+    |
+111 | pub fn export__start_110() { /* compiler_builtins__main___start */ }
+    |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_start_110`
+
+warning: function `export_CHECK_LIBRARIES_114` should have a snake case name
+   --> src/exports.rs:115:8
+    |
+115 | pub fn export_CHECK_LIBRARIES_114() { /* compiler_builtins__main__CHECK_LIBRARIES */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_check_libraries_114`
+
+warning: function `export_use_std___any___type_name_126` should have a snake case name
+   --> src/exports.rs:127:8
+    |
+127 | pub fn export_use_std___any___type_name_126() { /* compiler_builtins__main__use_std___any___type_name */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_any_type_name_126`
+
+warning: function `export_use_itertools___Itertools_130` should have a snake case name
+   --> src/exports.rs:131:8
+    |
+131 | pub fn export_use_itertools___Itertools_130() { /* stdarch__main__use_itertools___Itertools */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_itertools_itertools_130`
+
+warning: function `export_use_libm_test_____CheckBasis___CheckCtx___GeneratorKind___MathOp___op___142` should have a snake case name
+   --> src/exports.rs:143:8
+    |
+143 | pub fn export_use_libm_test_____CheckBasis___CheckCtx___GeneratorKind___MathOp___op___142() { /* compiler_builtins__plot_domains__use_lib...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_check_basis_check_ctx_generator_kind_math_op_op_142`
+
+warning: function `export_use_std___fmt_143` should have a snake case name
+   --> src/exports.rs:144:8
+    |
+144 | pub fn export_use_std___fmt_143() { /* compiler_builtins__domain__use_std___fmt */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_143`
+
+warning: function `export_DotDotDotForRemainingFields_150` should have a snake case name
+   --> src/exports.rs:151:8
+    |
+151 | pub fn export_DotDotDotForRemainingFields_150() { /* rustc_parse__errors__DotDotDotForRemainingFields */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_dot_dot_dot_for_remaining_fields_150`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___153` should have a snake case name
+   --> src/exports.rs:154:8
+    |
+154 | pub fn export_use_criterion_____Criterion___criterion_main___153() { /* compiler_builtins__float_trunc__use_criterion_____Criterion___cri...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_153`
+
+warning: function `export_Command_155` should have a snake case name
+   --> src/exports.rs:156:8
+    |
+156 | pub fn export_Command_155() { /* rustc_codegen_cranelift__main__Command */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `export_command_155`
+
+warning: function `export_BorrowsDomain_157` should have a snake case name
+   --> src/exports.rs:158:8
+    |
+158 | pub fn export_BorrowsDomain_157() { /* rustc_borrowck__dataflow__BorrowsDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_borrows_domain_157`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___165` should have a snake case name
+   --> src/exports.rs:166:8
+    |
+166 | pub fn export_use_criterion_____Criterion___criterion_main___165() { /* compiler_builtins__float_extend__use_criterion_____Criterion___cr...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_165`
+
+warning: function `export_use_crate___prelude_____175` should have a snake case name
+   --> src/exports.rs:176:8
+    |
+176 | pub fn export_use_crate___prelude_____175() { /* rustc_codegen_cranelift__main_shim__use_crate___prelude____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_prelude_175`
+
+warning: function `export_SymInfo_176` should have a snake case name
+   --> src/exports.rs:177:8
+    |
+177 | pub fn export_SymInfo_176() { /* compiler_builtins__main__SymInfo */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_sym_info_176`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___184` should have a snake case name
+   --> src/exports.rs:185:8
+    |
+185 | pub fn export_use_criterion_____Criterion___criterion_main___184() { /* compiler_builtins__random__use_criterion_____Criterion___criterio...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_184`
+
+warning: function `export_SysrootKind_190` should have a snake case name
+   --> src/exports.rs:191:8
+    |
+191 | pub fn export_SysrootKind_190() { /* rustc_codegen_cranelift__main__SysrootKind */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_sysroot_kind_190`
+
+warning: function `export_use_libm___support___Int_191` should have a snake case name
+   --> src/exports.rs:192:8
+    |
+192 | pub fn export_use_libm___support___Int_191() { /* compiler_builtins__domain__use_libm___support___Int */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_support_int_191`
+
+warning: function `export_use_std___path___Path_197` should have a snake case name
+   --> src/exports.rs:198:8
+    |
+198 | pub fn export_use_std___path___Path_197() { /* compiler_builtins__plot_domains__use_std___path___Path */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_197`
+
+warning: function `export_use_libm_test___generate_____edge_cases___spaced___199` should have a snake case name
+   --> src/exports.rs:200:8
+    |
+200 | pub fn export_use_libm_test___generate_____edge_cases___spaced___199() { /* compiler_builtins__plot_domains__use_libm_test___generate____...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_generate_edge_cases_spaced_199`
+
+warning: function `export_USAGE_208` should have a snake case name
+   --> src/exports.rs:209:8
+    |
+209 | pub fn export_USAGE_208() { /* compiler_builtins__main__USAGE */ }
+    |        ^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_usage_208`
+
+warning: function `export_use_std___env_211` should have a snake case name
+   --> src/exports.rs:212:8
+    |
+212 | pub fn export_use_std___env_211() { /* stdarch__main__use_std___env */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_211`
+
+warning: function `export_use_crate___thread_____self___main_thread___216` should have a snake case name
+   --> src/exports.rs:217:8
+    |
+217 | pub fn export_use_crate___thread_____self___main_thread___216() { /* std__rt__use_crate___thread_____self___main_thread__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_thread_self_main_thread_216`
+
+warning: function `export_use_rug___az_____self___Az___218` should have a snake case name
+   --> src/exports.rs:219:8
+    |
+219 | pub fn export_use_rug___az_____self___Az___218() { /* compiler_builtins__main__use_rug___az_____self___Az__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rug_az_self_az_218`
+
+warning: function `export_use_walkdir___WalkDir_227` should have a snake case name
+   --> src/exports.rs:228:8
+    |
+228 | pub fn export_use_walkdir___WalkDir_227() { /* stdarch__main__use_walkdir___WalkDir */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_walkdir_walk_dir_227`
+
+warning: function `export_use_rustc_mir_dataflow___impls_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____228` should have a snake case name
+   --> src/exports.rs:229:8
+    |
+229 | ...fn export_use_rustc_mir_dataflow___impls_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____228() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_mir_dataflow_impls_ever_initialized_places_ever_initialized_places_domain_maybe_uninitialized_places_maybe_uninitialized_places_domain_228`
+
+warning: function `export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___229` should have a snake case name
+   --> src/exports.rs:230:8
+    |
+230 | pub fn export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___229() { /* compiler_builtins__mem_icount__use_ia...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_iai_callgrind_library_benchmark_library_benchmark_group_main_229`
+
+warning: function `export_use_self___remainderf___remainderf_230` should have a snake case name
+   --> src/exports.rs:231:8
+    |
+231 | pub fn export_use_self___remainderf___remainderf_230() { /* compiler_builtins__mod__use_self___remainderf___remainderf */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_remainderf_remainderf_230`
+
+warning: function `export_Pos_249` should have a snake case name
+   --> src/exports.rs:250:8
+    |
+250 | pub fn export_Pos_249() { /* backtrace__main__Pos */ }
+    |        ^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_pos_249`
+
+warning: function `export_use_mini_core_____253` should have a snake case name
+   --> src/exports.rs:254:8
+    |
+254 | pub fn export_use_mini_core_____253() { /* rustc_codegen_gcc__empty_main__use_mini_core____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_mini_core_253`
+
+warning: function `export_use_rustc_hir___LangItem_270` should have a snake case name
+   --> src/exports.rs:271:8
+    |
+271 | pub fn export_use_rustc_hir___LangItem_270() { /* rustc_codegen_cranelift__main_shim__use_rustc_hir___LangItem */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_hir_lang_item_270`
+
+warning: function `export_use_std___collections_____BTreeMap___BTreeSet___275` should have a snake case name
+   --> src/exports.rs:276:8
+    |
+276 | pub fn export_use_std___collections_____BTreeMap___BTreeSet___275() { /* compiler_builtins__main__use_std___collections_____BTreeMap___BT...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_collections_btree_map_btree_set_275`
+
+warning: function `export_FromStrRadix_290` should have a snake case name
+   --> src/exports.rs:291:8
+    |
+291 | pub fn export_FromStrRadix_290() { /* compiler_builtins__main__FromStrRadix */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_from_str_radix_290`
+
+warning: function `export_MaybeUninitializedPlacesDomain_292` should have a snake case name
+   --> src/exports.rs:293:8
+    |
+293 | pub fn export_MaybeUninitializedPlacesDomain_292() { /* rustc_mir_dataflow__initialized__MaybeUninitializedPlacesDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_maybe_uninitialized_places_domain_292`
+
+warning: function `export_use_libm_test_____MathOp___TupleCall___295` should have a snake case name
+   --> src/exports.rs:296:8
+    |
+296 | pub fn export_use_libm_test_____MathOp___TupleCall___295() { /* compiler_builtins__main__use_libm_test_____MathOp___TupleCall__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_math_op_tuple_call_295`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___296` should have a snake case name
+   --> src/exports.rs:297:8
+    |
+297 | pub fn export_use_criterion_____Criterion___criterion_main___296() { /* compiler_builtins__float_mul__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_296`
+
+warning: function `export_use_std_____env___process___299` should have a snake case name
+   --> src/exports.rs:300:8
+    |
+300 | pub fn export_use_std_____env___process___299() { /* rustc_codegen_cranelift__main__use_std_____env___process__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_process_299`
+
+warning: function `export_use_libm_test___mpfloat___MpOp_301` should have a snake case name
+   --> src/exports.rs:302:8
+    |
+302 | pub fn export_use_libm_test___mpfloat___MpOp_301() { /* compiler_builtins__main__use_libm_test___mpfloat___MpOp */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_mpfloat_mp_op_301`
+
+warning: function `export_use_std___path_____Path___PathBuf___302` should have a snake case name
+   --> src/exports.rs:303:8
+    |
+303 | pub fn export_use_std___path_____Path___PathBuf___302() { /* compiler_builtins__main__use_std___path_____Path___PathBuf__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_path_buf_302`
+
+warning: function `export_use_super_____303` should have a snake case name
+   --> src/exports.rs:304:8
+    |
+304 | pub fn export_use_super_____303() { /* stdarch__main__use_super____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_super_303`
+
+warning: function `export_use_self___utils___Compiler_311` should have a snake case name
+   --> src/exports.rs:312:8
+    |
+312 | pub fn export_use_self___utils___Compiler_311() { /* rustc_codegen_cranelift__main__use_self___utils___Compiler */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_utils_compiler_311`
+
+warning: function `export_use_rustc_span_____DUMMY_SP___Ident___315` should have a snake case name
+   --> src/exports.rs:316:8
+    |
+316 | pub fn export_use_rustc_span_____DUMMY_SP___Ident___315() { /* rustc_codegen_cranelift__main_shim__use_rustc_span_____DUMMY_SP___Ident__ ...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_span_dummy_sp_ident_315`
+
+warning: function `export_use_mylib___my_func_318` should have a snake case name
+   --> src/exports.rs:319:8
+    |
+319 | pub fn export_use_mylib___my_func_318() { /* rustc_codegen_gcc__main__use_mylib___my_func */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_mylib_my_func_318`
+
+warning: function `export_use_std___str___FromStr_327` should have a snake case name
+   --> src/exports.rs:328:8
+    |
+328 | pub fn export_use_std___str___FromStr_327() { /* compiler_builtins__main__use_std___str___FromStr */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_str_from_str_327`
+
+warning: function `export__Unwind_Resume_337` should have a snake case name
+   --> src/exports.rs:338:8
+    |
+338 | pub fn export__Unwind_Resume_337() { /* compiler_builtins__main___Unwind_Resume */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_unwind_resume_337`
+
+warning: function `export_use_std___process_____Command___Stdio___340` should have a snake case name
+   --> src/exports.rs:341:8
+    |
+341 | pub fn export_use_std___process_____Command___Stdio___340() { /* compiler_builtins__main__use_std___process_____Command___Stdio__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_stdio_340`
+
+warning: function `export_use_std___io_____BufRead___BufReader___345` should have a snake case name
+   --> src/exports.rs:346:8
+    |
+346 | pub fn export_use_std___io_____BufRead___BufReader___345() { /* compiler_builtins__main__use_std___io_____BufRead___BufReader__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_buf_read_buf_reader_345`
+
+warning: function `export_use_std_____env___fs___351` should have a snake case name
+   --> src/exports.rs:352:8
+    |
+352 | pub fn export_use_std_____env___fs___351() { /* compiler_builtins__plot_domains__use_std_____env___fs__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_fs_351`
+
+warning: function `export_use_libm___support_____Hexf___hf32___hf64___353` should have a snake case name
+   --> src/exports.rs:354:8
+    |
+354 | pub fn export_use_libm___support_____Hexf___hf32___hf64___353() { /* compiler_builtins__main__use_libm___support_____Hexf___hf32___hf64__...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_support_hexf_hf32_hf64_353`
+
+warning: function `export_JL_PLOT_374` should have a snake case name
+   --> src/exports.rs:375:8
+    |
+375 | pub fn export_JL_PLOT_374() { /* compiler_builtins__plot_domains__JL_PLOT */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_jl_plot_374`
+
+warning: function `export_use_crate_____assert_test_result___filter_tests___run_test___test_main___test_main_static___377` should have a snake case name
+   --> src/exports.rs:378:8
+    |
+378 | pub fn export_use_crate_____assert_test_result___filter_tests___run_test___test_main___test_main_static___377() { /* test__lib__use_crate...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_assert_test_result_filter_tests_run_test_test_main_test_main_static_377`
+
+warning: function `export_use_std___num___ParseIntError_378` should have a snake case name
+   --> src/exports.rs:379:8
+    |
+379 | pub fn export_use_std___num___ParseIntError_378() { /* compiler_builtins__main__use_std___num___ParseIntError */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_num_parse_int_error_378`
+
+warning: function `export_use_self___remainder___remainder_379` should have a snake case name
+   --> src/exports.rs:380:8
+    |
+380 | pub fn export_use_self___remainder___remainder_379() { /* compiler_builtins__mod__use_self___remainder___remainder */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_remainder_remainder_379`
+
+warning: function `export_CodegenBackend_382` should have a snake case name
+   --> src/exports.rs:383:8
+    |
+383 | pub fn export_CodegenBackend_382() { /* rustc_codegen_cranelift__main__CodegenBackend */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_codegen_backend_382`
+
+warning: function `export_use_serde_json___Value_387` should have a snake case name
+   --> src/exports.rs:388:8
+    |
+388 | pub fn export_use_serde_json___Value_387() { /* compiler_builtins__main__use_serde_json___Value */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_serde_json_value_387`
+
+warning: function `export_TargetFeature_389` should have a snake case name
+   --> src/exports.rs:390:8
+    |
+390 | pub fn export_TargetFeature_389() { /* stdarch__main__TargetFeature */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_target_feature_389`
+
+warning: function `export_use_intrinsic___Test_396` should have a snake case name
+   --> src/exports.rs:397:8
+    |
+397 | pub fn export_use_intrinsic___Test_396() { /* stdarch__main__use_intrinsic___Test */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_intrinsic_test_396`
+
+warning: function `export_use_std___fs_400` should have a snake case name
+   --> src/exports.rs:401:8
+    |
+401 | pub fn export_use_std___fs_400() { /* compiler_builtins__main__use_std___fs */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fs_400`
+
+warning: function `export_BoxIter_404` should have a snake case name
+   --> src/exports.rs:405:8
+    |
+405 | pub fn export_BoxIter_404() { /* compiler_builtins__domain__BoxIter */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_box_iter_404`
+
+warning: function `export_use_std___ops___Bound_410` should have a snake case name
+   --> src/exports.rs:411:8
+    |
+411 | pub fn export_use_std___ops___Bound_410() { /* compiler_builtins__domain__use_std___ops___Bound */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_ops_bound_410`
+
+warning: function `export_Command_411` should have a snake case name
+   --> src/exports.rs:412:8
+    |
+412 | pub fn export_Command_411() { /* rustc_codegen_gcc__main__Command */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `export_command_411`
+
+warning: function `export_ParseTuple_413` should have a snake case name
+   --> src/exports.rs:414:8
+    |
+414 | pub fn export_ParseTuple_413() { /* compiler_builtins__main__ParseTuple */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_parse_tuple_413`
+
+warning: function `export_use_crate___errors_____self___AmbiguousRangePattern___AtDotDotInStructPattern___AtInStructPattern___DotDotDotForRemainingFields___DotDotDotRangeToPatternNotAllowed___DotDotDotRestPattern___EnumPatternInsteadOfIdentifier___ExpectedBindingLeftOfAt___ExpectedCommaAfterPatternField___GenericArgsInPatRequireTurbofishSyntax___InclusiveRangeExtraEquals___InclusiveRangeMatchArrow___InclusiveRangeNoEnd___InvalidMutInPattern___ParenRangeSuggestion___PatternOnWrongSideOfAt___RemoveLet___RepeatedMutInPattern___SwitchRefBoxOrder___TopLevelOrPatternNotAllowed___TopLevelOrPatternNotAllowedSugg___TrailingVertNotAllowed___TrailingVertSuggestion___UnexpectedExpressionInPattern___UnexpectedExpressionInPatternSugg___UnexpectedLifetimeInPattern___UnexpectedParenInRangePat___UnexpectedParenInRangePatSugg___UnexpectedVertVertBeforeFunctionParam___UnexpectedVertVertInPattern___WrapInParens_____421` should have a snake case name
+   --> src/exports.rs:422:8
+    |
+422 | ...fn export_use_crate___errors_____self___Ambi..._UnexpectedVertVertInPattern___WrapInParens_____421() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^...^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_errors_self_ambiguous_range_pattern_at_dot_dot_in_struct_pattern_at_in_struct_pattern_dot_dot_dot_for_remaining_fields_dot_dot_dot_range_to_pattern_not_allowed_dot_dot_dot_rest_pattern_enum_pattern_instead_of_identifier_expected_binding_left_of_at_expected_comma_after_pattern_field_generic_args_in_pat_require_turbofish_syntax_inclusive_range_extra_equals_inclusive_range_match_arrow_inclusive_range_no_end_invalid_mut_in_pattern_paren_range_suggestion_pattern_on_wrong_side_of_at_remove_let_repeated_mut_in_pattern_switch_ref_box_order_top_level_or_pattern_not_allowed_top_level_or_pattern_not_allowed_sugg_trailing_vert_not_allowed_trailing_vert_suggestion_unexpected_expression_in_pattern_unexpected_expression_in_pattern_sugg_unexpected_lifetime_in_pattern_unexpected_paren_in_range_pat_unexpected_paren_in_range_pat_sugg_unexpected_vert_vert_before_function_param_unexpected_vert_vert_in_pattern_wrap_in_parens_421`
+
+warning: function `export_Lines_429` should have a snake case name
+   --> src/exports.rs:430:8
+    |
+430 | pub fn export_Lines_429() { /* stdarch__main__Lines */ }
+    |        ^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_lines_429`
+
+warning: function `export___aeabi_unwind_cpp_pr1_437` should have a snake case name
+   --> src/exports.rs:438:8
+    |
+438 | pub fn export___aeabi_unwind_cpp_pr1_437() { /* compiler_builtins__main____aeabi_unwind_cpp_pr1 */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_aeabi_unwind_cpp_pr1_437`
+
+warning: function `export_use_std___fmt_438` should have a snake case name
+   --> src/exports.rs:439:8
+    |
+439 | pub fn export_use_std___fmt_438() { /* stdarch__main__use_std___fmt */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_438`
+
+warning: function `export_use_crate___common___gen_c_____write_main_cpp___write_mod_cpp___442` should have a snake case name
+   --> src/exports.rs:443:8
+    |
+443 | pub fn export_use_crate___common___gen_c_____write_main_cpp___write_mod_cpp___442() { /* stdarch__mod__use_crate___common___gen_c_____wri...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_common_gen_c_write_main_cpp_write_mod_cpp_442`
+
+warning: function `export_EitherPrim_449` should have a snake case name
+   --> src/exports.rs:450:8
+    |
+450 | pub fn export_EitherPrim_449() { /* compiler_builtins__domain__EitherPrim */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_either_prim_449`
+
+warning: function `export_use_std___path___PathBuf_456` should have a snake case name
+   --> src/exports.rs:457:8
+    |
+457 | pub fn export_use_std___path___PathBuf_456() { /* rustc_codegen_cranelift__main__use_std___path___PathBuf */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_buf_456`
+
+warning: function `export_use_std___fs___File_457` should have a snake case name
+   --> src/exports.rs:458:8
+    |
+458 | pub fn export_use_std___fs___File_457() { /* stdarch__main__use_std___fs___File */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fs_file_457`
+
+warning: function `export_Domain_458` should have a snake case name
+   --> src/exports.rs:459:8
+    |
+459 | pub fn export_Domain_458() { /* compiler_builtins__domain__Domain */ }
+    |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_domain_458`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___460` should have a snake case name
+   --> src/exports.rs:461:8
+    |
+461 | pub fn export_use_criterion_____Criterion___criterion_main___460() { /* compiler_builtins__float_sub__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_460`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___463` should have a snake case name
+   --> src/exports.rs:464:8
+    |
+464 | pub fn export_use_criterion_____Criterion___criterion_main___463() { /* compiler_builtins__float_add__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_463`
+
+warning: function `export_use_crate___domain___get_domain_464` should have a snake case name
+   --> src/exports.rs:465:8
+    |
+465 | pub fn export_use_crate___domain___get_domain_464() { /* compiler_builtins__spaced__use_crate___domain___get_domain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_domain_get_domain_464`
+
+warning: function `export_CHECK_EXTENSIONS_468` should have a snake case name
+   --> src/exports.rs:469:8
+    |
+469 | pub fn export_CHECK_EXTENSIONS_468() { /* compiler_builtins__main__CHECK_EXTENSIONS */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_check_extensions_468`
+
+warning: function `export_use_crate_____BaseName___Float___FloatExt___Identifier___472` should have a snake case name
+   --> src/exports.rs:473:8
+    |
+473 | pub fn export_use_crate_____BaseName___Float___FloatExt___Identifier___472() { /* compiler_builtins__domain__use_crate_____BaseName___Flo...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_base_name_float_float_ext_identifier_472`
+
+warning: function `export_use_std___path_____Path___PathBuf___476` should have a snake case name
+   --> src/exports.rs:477:8
+    |
+477 | pub fn export_use_std___path_____Path___PathBuf___476() { /* stdarch__main__use_std___path_____Path___PathBuf__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_path_buf_476`
+
+warning: function `export_use_std___env_489` should have a snake case name
+   --> src/exports.rs:490:8
+    |
+490 | pub fn export_use_std___env_489() { /* compiler_builtins__main__use_std___env */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_489`
+
+warning: function `export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___492` should have a snake case name
+   --> src/exports.rs:493:8
+    |
+493 | pub fn export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___492() { /* compiler_builtins__icount__use_iai_ca...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_iai_callgrind_library_benchmark_library_benchmark_group_main_492`
+
+warning: function `export_use_crate___common___gen_rust_____compile_rust_programs___write_bin_cargo_toml___write_lib_cargo_toml___write_lib_rs___write_main_rs_____494` should have a snake case name
+   --> src/exports.rs:495:8
+    |
+495 | ...fn export_use_crate___common___gen_rust_____compile_rust_programs___write_bin_cargo_toml___write_lib_cargo_toml___write_lib_rs___write_main_rs_____494() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_common_gen_rust_compile_rust_programs_write_bin_cargo_toml_write_lib_cargo_toml_write_lib_rs_write_main_rs_494`
+
+warning: function `export_use_std___io___prelude_____495` should have a snake case name
+   --> src/exports.rs:496:8
+    |
+496 | pub fn export_use_std___io___prelude_____495() { /* stdarch__main__use_std___io___prelude____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_prelude_495`
+
+warning: function `export_use_libm_test___generate___spaced___SpacedInput_496` should have a snake case name
+   --> src/exports.rs:497:8
+    |
+497 | pub fn export_use_libm_test___generate___spaced___SpacedInput_496() { /* compiler_builtins__plot_domains__use_libm_test___generate___spac...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_generate_spaced_spaced_input_496`
+
+warning: function `export_use_arm___ArmArchitectureTest_503` should have a snake case name
+   --> src/exports.rs:504:8
+    |
+504 | pub fn export_use_arm___ArmArchitectureTest_503() { /* stdarch__main__use_arm___ArmArchitectureTest */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_arm_arm_architecture_test_503`
+
+warning: function `export_use_object_____File_as_ObjFile___Object___ObjectSection___ObjectSymbol___Symbol___SymbolKind___SymbolScope_____504` should have a snake case name
+   --> src/exports.rs:505:8
+    |
+505 | pub fn export_use_object_____File_as_ObjFile___Object___ObjectSection___ObjectSymbol___Symbol___SymbolKind___SymbolScope_____504() { /* c...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_object_file_as_obj_file_object_object_section_object_symbol_symbol_symbol_kind_symbol_scope_504`
+
+warning: function `export_use_common___SupportedArchitectureTest_508` should have a snake case name
+   --> src/exports.rs:509:8
+    |
+509 | pub fn export_use_common___SupportedArchitectureTest_508() { /* stdarch__main__use_common___SupportedArchitectureTest */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_common_supported_architecture_test_508`
+
+warning: function `export_use_quote___quote_510` should have a snake case name
+   --> src/exports.rs:511:8
+    |
+511 | pub fn export_use_quote___quote_510() { /* stdarch__main__use_quote___quote */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_quote_quote_510`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___519` should have a snake case name
+   --> src/exports.rs:520:8
+    |
+520 | pub fn export_use_criterion_____Criterion___criterion_main___519() { /* compiler_builtins__float_div__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_519`
+
+warning: function `export_BorrowckDomain_520` should have a snake case name
+   --> src/exports.rs:521:8
+    |
+521 | pub fn export_BorrowckDomain_520() { /* rustc_borrowck__dataflow__BorrowckDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_borrowck_domain_520`
+
+warning: function `export_use_common___cli_____Cli___ProcessedCli___522` should have a snake case name
+   --> src/exports.rs:523:8
+    |
+523 | pub fn export_use_common___cli_____Cli___ProcessedCli___522() { /* stdarch__main__use_common___cli_____Cli___ProcessedCli__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_common_cli_cli_processed_cli_522`
+
+warning: function `export_use_std___io_____self___BufReader___523` should have a snake case name
+   --> src/exports.rs:524:8
+    |
+524 | pub fn export_use_std___io_____self___BufReader___523() { /* stdarch__main__use_std___io_____self___BufReader__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_self_buf_reader_523`
+
+warning: `split-decls-genesis` (lib) generated 188 warnings (run `cargo fix --lib -p split-decls-genesis` to apply 4 suggestions)
+warning: unused import: `std::fs`
+ --> src/bin/elf_analyzer.rs:1:5
+  |
+1 | use std::fs;
+  |     ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused macro definition: `safe_println`
+   --> src/macro_wrappers.rs:180:14
+    |
+180 | macro_rules! safe_println {
+    |              ^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_macros)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused macro definition: `safe_print`
+   --> src/macro_wrappers.rs:186:14
+    |
+186 | macro_rules! safe_print {
+    |              ^^^^^^^^^^
+
+warning: unused macro definition: `mkinclude`
+   --> src/macro_wrappers.rs:192:14
+    |
+192 | macro_rules! mkinclude {
+    |              ^^^^^^^^^
+
+warning: unused macro definition: `mkitem`
+   --> src/macro_wrappers.rs:201:14
+    |
+201 | macro_rules! mkitem {
+    |              ^^^^^^
+
+warning: unused macro definition: `mkuse`
+   --> src/macro_wrappers.rs:239:14
+    |
+239 | macro_rules! mkuse {
+    |              ^^^^^
+
+warning: unused macro definition: `mkstruct`
+   --> src/macro_wrappers.rs:243:14
+    |
+243 | macro_rules! mkstruct {
+    |              ^^^^^^^^
+
+warning: unused macro definition: `mkenum`
+   --> src/macro_wrappers.rs:247:14
+    |
+247 | macro_rules! mkenum {
+    |              ^^^^^^
+
+warning: unused macro definition: `mktrait`
+   --> src/macro_wrappers.rs:251:14
+    |
+251 | macro_rules! mktrait {
+    |              ^^^^^^^
+
+warning: unused macro definition: `mkimpl`
+   --> src/macro_wrappers.rs:255:14
+    |
+255 | macro_rules! mkimpl {
+    |              ^^^^^^
+
+warning: unused macro definition: `getname`
+   --> src/macro_wrappers.rs:259:14
+    |
+259 | macro_rules! getname {
+    |              ^^^^^^^
+
+warning: unused macro definition: `getsrc`
+   --> src/macro_wrappers.rs:265:14
+    |
+265 | macro_rules! getsrc {
+    |              ^^^^^^
+
+warning: unused macro definition: `getpath`
+   --> src/macro_wrappers.rs:271:14
+    |
+271 | macro_rules! getpath {
+    |              ^^^^^^^
+
+warning: unused macro definition: `get_deps`
+   --> src/macro_wrappers.rs:277:14
+    |
+277 | macro_rules! get_deps {
+    |              ^^^^^^^^
+
+warning: unused macro definition: `get_crates`
+   --> src/macro_wrappers.rs:285:14
+    |
+285 | macro_rules! get_crates {
+    |              ^^^^^^^^^^
+
+warning: unused macro definition: `forall_crates`
+   --> src/macro_wrappers.rs:293:14
+    |
+293 | macro_rules! forall_crates {
+    |              ^^^^^^^^^^^^^
+
+warning: unused macro definition: `emit_extern`
+   --> src/macro_wrappers.rs:299:14
+    |
+299 | macro_rules! emit_extern {
+    |              ^^^^^^^^^^^
+
+warning: unused macro definition: `get_externs`
+   --> src/macro_wrappers.rs:305:14
+    |
+305 | macro_rules! get_externs {
+    |              ^^^^^^^^^^^
+
+warning: unused macro definition: `test_module_include`
+  --> test_dependency_tracking.rs:24:14
+   |
+24 | macro_rules! test_module_include { () => { "test_dependency_tracking.rs" }; }
+   |              ^^^^^^^^^^^^^^^^^^^
+
+warning: module `ast_patch_FN_0052` should have a snake case name
+ --> src/main.rs:4:5
+  |
+4 | mod ast_patch_FN_0052;
+  |     ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `ast_patch_fn_0052`
+  |
+  = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+error: expected item, found `;`
+    --> src/bin/current.rs:1688:3
+     |
+1688 | }};
+     |   ^
+     |
+     = help: macro definition declarations are not followed by a semicolon
+help: remove this semicolon
+     |
+1688 - }};
+1688 + }}
+     |
+
+warning: unnecessary parentheses around `if` condition
+   --> src/bin/batch_genmocks.rs:221:16
+    |
+221 |             if (trimmed.starts_with("pub fn ") || trimmed.starts_with("fn ")) {
+    |                ^                                                            ^
+    |
+    = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default
+help: remove these parentheses
+    |
+221 -             if (trimmed.starts_with("pub fn ") || trimmed.starts_with("fn ")) {
+221 +             if trimmed.starts_with("pub fn ") || trimmed.starts_with("fn ") {
+    |
+
+warning: variable `current_level` is assigned to, but never used
+  --> src/bin/fix_lattice.rs:72:13
+   |
+72 |     let mut current_level = 0;
+   |             ^^^^^^^^^^^^^
+   |
+   = note: consider using `_current_level` instead
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `split_decls_genesis::rustc_topological`
+ --> src/bin/test_topological.rs:1:5
+  |
+1 | use split_decls_genesis::rustc_topological;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `symbol`
+  --> src/bin/generate_unified_wrapper.rs:20:10
+   |
+20 |     for (symbol, entry) in &symbol_map {
+   |          ^^^^^^ help: if this is intentional, prefix it with an underscore: `_symbol`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `processed_files` is never read
+  --> src/bin/unified_driver.rs:15:5
+   |
+13 | struct UnifiedDriver {
+   |        ------------- field in this struct
+14 |     symbol_map: HashMap<String, Value>,
+15 |     processed_files: HashMap<String, String>,
+   |     ^^^^^^^^^^^^^^^
+   |
+   = note: `UnifiedDriver` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+error[E0599]: no function or associated item named `from_raw` found for struct `ExitStatus` in the current scope
+  --> src/bin/elf_analyzer.rs:30:47
+   |
+30 |             status: std::process::ExitStatus::from_raw(0),
+   |                                               ^^^^^^^^ function or associated item not found in `ExitStatus`
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ExitStatusExt` which provides `from_raw` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use std::os::unix::process::ExitStatusExt;
+   |
+help: there is an associated function `from` with a similar name
+   |
+30 -             status: std::process::ExitStatus::from_raw(0),
+30 +             status: std::process::ExitStatus::from(0),
+   |
+
+error[E0260]: the name `rustc_driver_impl` is defined multiple times
+    --> src/bin/current.rs:1693:1
+     |
+  26 | extern crate rustc_driver_impl;
+     | ------------------------------- previous import of the extern crate `rustc_driver_impl` here
+...
+1693 | pub mod rustc_driver_impl {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^ `rustc_driver_impl` redefined here
+     |
+     = note: `rustc_driver_impl` must be defined only once in the type namespace of this module
+help: you can use `as` to change the binding name of the import
+     |
+  26 | extern crate rustc_driver_impl as other_rustc_driver_impl;
+     |                                ++++++++++++++++++++++++++
+
+error[E0260]: the name `rustc_data_structures` is defined multiple times
+    --> src/bin/current.rs:1701:1
+     |
+  30 | extern crate rustc_data_structures;
+     | ----------------------------------- previous import of the extern crate `rustc_data_structures` here
+...
+1701 | pub mod rustc_data_structures {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `rustc_data_structures` redefined here
+     |
+     = note: `rustc_data_structures` must be defined only once in the type namespace of this module
+help: you can use `as` to change the binding name of the import
+     |
+  30 | extern crate rustc_data_structures as other_rustc_data_structures;
+     |                                    ++++++++++++++++++++++++++++++
+
+error[E0260]: the name `rustc_session` is defined multiple times
+    --> src/bin/current.rs:1707:1
+     |
+  27 | extern crate rustc_session;
+     | --------------------------- previous import of the extern crate `rustc_session` here
+...
+1707 | pub mod rustc_session {
+     | ^^^^^^^^^^^^^^^^^^^^^ `rustc_session` redefined here
+     |
+     = note: `rustc_session` must be defined only once in the type namespace of this module
+help: you can use `as` to change the binding name of the import
+     |
+  27 | extern crate rustc_session as other_rustc_session;
+     |                            ++++++++++++++++++++++
+
+warning: unused import: `std::path::Path`
+ --> src/bin/quick_file_test.rs:3:5
+  |
+3 | use std::path::Path;
+  |     ^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0599]: no function or associated item named `from_raw` found for struct `ExitStatus` in the current scope
+  --> src/bin/elf_analyzer.rs:43:47
+   |
+43 |             status: std::process::ExitStatus::from_raw(0),
+   |                                               ^^^^^^^^ function or associated item not found in `ExitStatus`
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ExitStatusExt` which provides `from_raw` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use std::os::unix::process::ExitStatusExt;
+   |
+help: there is an associated function `from` with a similar name
+   |
+43 -             status: std::process::ExitStatus::from_raw(0),
+43 +             status: std::process::ExitStatus::from(0),
+   |
+
+error[E0599]: no function or associated item named `from_raw` found for struct `ExitStatus` in the current scope
+  --> src/bin/elf_analyzer.rs:56:47
+   |
+56 |             status: std::process::ExitStatus::from_raw(0),
+   |                                               ^^^^^^^^ function or associated item not found in `ExitStatus`
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ExitStatusExt` which provides `from_raw` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use std::os::unix::process::ExitStatusExt;
+   |
+help: there is an associated function `from` with a similar name
+   |
+56 -             status: std::process::ExitStatus::from_raw(0),
+56 +             status: std::process::ExitStatus::from(0),
+   |
+
+error: attempted to repeat an expression containing no syntax variables matched as repeating at this depth
+   --> src/bin/current.rs:129:25
+    |
+129 | macro do_not_use_print($($t:tt)*) {
+    |                         ^^^^^^^
+
+For more information about this error, try `rustc --explain E0599`.
+error[E0432]: unresolved import `std::any`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:20:10
+   |
+20 | use std::any::Any;
+   |          ^^^ could not find `any` in `std`
+
+error[E0432]: unresolved import `std::path`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:21:10
+   |
+21 | use std::path::{Path, PathBuf};
+   |          ^^^^ could not find `path` in `std`
+
+warning: `split-decls-genesis` (bin "elf_analyzer") generated 1 warning
+error: could not compile `split-decls-genesis` (bin "elf_analyzer") due to 3 previous errors; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:10:61
+   |
+10 | macro_rules! use_crate_rustc_mir_dataflow { () => { pub use rustc_mir_dataflow::*; }; }
+   |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `debuginfo` in the type namespace is first re-exported here
+...
+35 | macro_rules! use_crate_rustc_codegen_ssa { () => { pub use rustc_codegen_ssa::*; }; }
+   |                                                            -------------------- but the name `debuginfo` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:92:1
+   |
+92 | use_crate_rustc_mir_dataflow!();
+   | ------------------------------- in this macro invocation
+   |
+   = note: `#[warn(ambiguous_glob_reexports)]` on by default
+   = note: this warning originates in the macro `use_crate_rustc_mir_dataflow` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:10:61
+   |
+10 | macro_rules! use_crate_rustc_mir_dataflow { () => { pub use rustc_mir_dataflow::*; }; }
+   |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `DEFAULT_LOCALE_RESOURCE` in the value namespace is first re-exported here
+...
+82 | macro_rules! use_crate_rustc_driver { () => { pub use rustc_driver::*; }; }
+   |                                                       --------------- but the name `DEFAULT_LOCALE_RESOURCE` in the value namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:92:1
+   |
+92 | use_crate_rustc_mir_dataflow!();
+   | ------------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_mir_dataflow` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:11:54
+   |
+11 | macro_rules! use_crate_rustc_infer { () => { pub use rustc_infer::*; }; }
+   |                                                      ^^^^^^^^^^^^^^ the name `infer` in the type namespace is first re-exported here
+...
+36 | macro_rules! use_crate_rustc_trait_selection { () => { pub use rustc_trait_selection::*; }; }
+   |                                                                ------------------------ but the name `infer` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:93:1
+   |
+93 | use_crate_rustc_infer!();
+   | ------------------------ in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_infer` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:11:54
+   |
+11 | macro_rules! use_crate_rustc_infer { () => { pub use rustc_infer::*; }; }
+   |                                                      ^^^^^^^^^^^^^^ the name `traits` in the type namespace is first re-exported here
+...
+36 | macro_rules! use_crate_rustc_trait_selection { () => { pub use rustc_trait_selection::*; }; }
+   |                                                                ------------------------ but the name `traits` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:93:1
+   |
+93 | use_crate_rustc_infer!();
+   | ------------------------ in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_infer` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:13:61
+   |
+13 | macro_rules! use_crate_rustc_hir_analysis { () => { pub use rustc_hir_analysis::*; }; }
+   |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `errors` in the type namespace is first re-exported here
+...
+48 | macro_rules! use_crate_rustc_metadata { () => { pub use rustc_metadata::*; }; }
+   |                                                         ----------------- but the name `errors` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:95:1
+   |
+95 | use_crate_rustc_hir_analysis!();
+   | ------------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_hir_analysis` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:13:61
+   |
+13 | macro_rules! use_crate_rustc_hir_analysis { () => { pub use rustc_hir_analysis::*; }; }
+   |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `provide` in the value namespace is first re-exported here
+...
+64 | macro_rules! use_crate_rustc_privacy { () => { pub use rustc_privacy::*; }; }
+   |                                                        ---------------- but the name `provide` in the value namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:95:1
+   |
+95 | use_crate_rustc_hir_analysis!();
+   | ------------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_hir_analysis` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:13:61
+   |
+13 | macro_rules! use_crate_rustc_hir_analysis { () => { pub use rustc_hir_analysis::*; }; }
+   |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `check_crate` in the value namespace is first re-exported here
+...
+32 | macro_rules! use_crate_rustc_lint { () => { pub use rustc_lint::*; }; }
+   |                                                     ------------- but the name `check_crate` in the value namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:95:1
+   |
+95 | use_crate_rustc_hir_analysis!();
+   | ------------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_hir_analysis` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `error` in the type namespace is first re-exported here
+...
+47 | macro_rules! use_crate_rustc_errors { () => { pub use rustc_errors::*; }; }
+   |                                                       --------------- but the name `error` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `lint` in the type namespace is first re-exported here
+...
+26 | macro_rules! use_crate_rustc_session { () => { pub use rustc_session::*; }; }
+   |                                                        ---------------- but the name `lint` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `mir` in the type namespace is first re-exported here
+...
+35 | macro_rules! use_crate_rustc_codegen_ssa { () => { pub use rustc_codegen_ssa::*; }; }
+   |                                                            -------------------- but the name `mir` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `thir` in the type namespace is first re-exported here
+...
+22 | macro_rules! use_crate_rustc_mir_build { () => { pub use rustc_mir_build::*; }; }
+   |                                                          ------------------ but the name `thir` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `ty` in the type namespace is first re-exported here
+...
+33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+   |                                                       --------------- but the name `ty` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0432]: unresolved import `std::str`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:22:10
+   |
+22 | use std::str::FromStr;
+   |          ^^^ could not find `str` in `std`
+
+error[E0433]: failed to resolve: could not find `sync` in `std`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:24:10
+   |
+24 | use std::sync::atomic::AtomicBool;
+   |          ^^^^ could not find `sync` in `std`
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `util` in the type namespace is first re-exported here
+...
+41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+   |                                                    ------------ but the name `util` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `query` in the type namespace is first re-exported here
+16 | macro_rules! use_crate_rustc_query_system { () => { pub use rustc_query_system::*; }; }
+   |                                                             --------------------- but the name `query` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `dep_graph` in the type namespace is first re-exported here
+16 | macro_rules! use_crate_rustc_query_system { () => { pub use rustc_query_system::*; }; }
+   |                                                             --------------------- but the name `dep_graph` in the type namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+  --> src/rustc_complete.rs:15:55
+   |
+15 | macro_rules! use_crate_rustc_middle { () => { pub use rustc_middle::*; }; }
+   |                                                       ^^^^^^^^^^^^^^^ the name `arena_types` in the macro namespace is first re-exported here
+...
+18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+   |                                                    ------------ but the name `arena_types` in the macro namespace is also re-exported here
+   |
+  ::: unified_rustc_wrapped.rs:97:1
+   |
+97 | use_crate_rustc_middle!();
+   | ------------------------- in this macro invocation
+   |
+   = note: this warning originates in the macro `use_crate_rustc_middle` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `lang_items` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `lang_items` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `HashStableContext` in the type namespace is first re-exported here
+...
+ 65 | macro_rules! use_crate_rustc_hir_id { () => { pub use rustc_hir_id::*; }; }
+    |                                                       --------------- but the name `HashStableContext` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Item` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Item` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ItemKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ItemKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `BoundConstness` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `BoundConstness` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ImplPolarity` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `ImplPolarity` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericBounds` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericBounds` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `PreciseCapturingArg` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `PreciseCapturingArg` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Lifetime` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Lifetime` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Path` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Path` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `PathSegment` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `PathSegment` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericArg` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericArg` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericArgs` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericArgs` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TraitBoundModifiers` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `TraitBoundModifiers` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericBound` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericBound` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericParamKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericParamKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `GenericParam` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `GenericParam` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Generics` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Generics` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `WherePredicate` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `WherePredicate` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `WherePredicateKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `WherePredicateKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `WhereBoundPredicate` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `WhereBoundPredicate` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `WhereRegionPredicate` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `WhereRegionPredicate` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `WhereEqPredicate` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `WhereEqPredicate` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `AttrArgs` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `AttrArgs` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `AttrItem` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `AttrItem` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Attribute` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Attribute` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Crate` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Crate` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Closure` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `Closure` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ClosureKind` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `ClosureKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Block` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Block` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TyPat` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `TyPat` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Pat` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `Pat` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `PatField` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `PatField` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `RangeEnd` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `RangeEnd` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TyPatKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `TyPatKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `PatKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `PatKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Stmt` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Stmt` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `StmtKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `StmtKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Arm` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Arm` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ExprField` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ExprField` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `BlockCheckMode` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `BlockCheckMode` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `UnsafeSource` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `UnsafeSource` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `CoroutineKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `CoroutineKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `AnonConst` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `AnonConst` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Expr` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Expr` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ExprKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ExprKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `MutTy` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `MutTy` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FnSig` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `FnSig` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `AssocItemConstraint` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `AssocItemConstraint` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Term` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Term` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `AssocItemConstraintKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `AssocItemConstraintKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Ty` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Ty` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FnPtrTy` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `FnPtrTy` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `UnsafeBinderTy` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `UnsafeBinderTy` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TyKind` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `TyKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `InlineAsmOperand` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `InlineAsmOperand` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `InlineAsm` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `InlineAsm` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Param` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `Param` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FnDecl` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `FnDecl` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Defaultness` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Defaultness` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FnRetTy` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `FnRetTy` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ClosureBinder` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ClosureBinder` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ModSpans` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ModSpans` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `EnumDef` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `EnumDef` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Variant` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Variant` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TraitRef` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `TraitRef` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `PolyTraitRef` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `PolyTraitRef` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FieldDef` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `FieldDef` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `VariantData` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `VariantData` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Safety` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Safety` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `FnHeader` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `FnHeader` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `Impl` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `Impl` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `TraitImplHeader` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `TraitImplHeader` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ForeignItem` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ForeignItem` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:18:52
+    |
+ 18 | macro_rules! use_crate_rustc_hir { () => { pub use rustc_hir::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `ForeignItemKind` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `ForeignItemKind` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:100:1
+    |
+100 | use_crate_rustc_hir!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_hir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:19:61
+    |
+ 19 | macro_rules! use_crate_rustc_attr_parsing { () => { pub use rustc_attr_parsing::*; }; }
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `parser` in the type namespace is first re-exported here
+...
+ 30 | macro_rules! use_crate_rustc_parse { () => { pub use rustc_parse::*; }; }
+    |                                                      -------------- but the name `parser` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:101:1
+    |
+101 | use_crate_rustc_attr_parsing!();
+    | ------------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_attr_parsing` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:19:61
+    |
+ 19 | macro_rules! use_crate_rustc_attr_parsing { () => { pub use rustc_attr_parsing::*; }; }
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `parse_cfg_attr` in the value namespace is first re-exported here
+...
+ 30 | macro_rules! use_crate_rustc_parse { () => { pub use rustc_parse::*; }; }
+    |                                                      -------------- but the name `parse_cfg_attr` in the value namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:101:1
+    |
+101 | use_crate_rustc_attr_parsing!();
+    | ------------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_attr_parsing` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:19:61
+    |
+ 19 | macro_rules! use_crate_rustc_attr_parsing { () => { pub use rustc_attr_parsing::*; }; }
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^ the name `Condition` in the type namespace is first re-exported here
+...
+ 49 | macro_rules! use_crate_rustc_transmute { () => { pub use rustc_transmute::*; }; }
+    |                                                          ------------------ but the name `Condition` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:101:1
+    |
+101 | use_crate_rustc_attr_parsing!();
+    | ------------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_attr_parsing` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:21:58
+    |
+ 21 | macro_rules! use_crate_rustc_interface { () => { pub use rustc_interface::*; }; }
+    |                                                          ^^^^^^^^^^^^^^^^^^ the name `run_compiler` in the value namespace is first re-exported here
+...
+ 82 | macro_rules! use_crate_rustc_driver { () => { pub use rustc_driver::*; }; }
+    |                                                       --------------- but the name `run_compiler` in the value namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:103:1
+    |
+103 | use_crate_rustc_interface!();
+    | ---------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_interface` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:25:55
+    |
+ 25 | macro_rules! use_crate_rustc_expand { () => { pub use rustc_expand::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `base` in the type namespace is first re-exported here
+...
+ 35 | macro_rules! use_crate_rustc_codegen_ssa { () => { pub use rustc_codegen_ssa::*; }; }
+    |                                                            -------------------- but the name `base` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:107:1
+    |
+107 | use_crate_rustc_expand!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_expand` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:25:55
+    |
+ 25 | macro_rules! use_crate_rustc_expand { () => { pub use rustc_expand::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `config` in the type namespace is first re-exported here
+ 26 | macro_rules! use_crate_rustc_session { () => { pub use rustc_session::*; }; }
+    |                                                        ---------------- but the name `config` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:107:1
+    |
+107 | use_crate_rustc_expand!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_expand` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:25:55
+    |
+ 25 | macro_rules! use_crate_rustc_expand { () => { pub use rustc_expand::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `expand` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `expand` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:107:1
+    |
+107 | use_crate_rustc_expand!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_expand` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:29:66
+    |
+ 29 | macro_rules! use_crate_rustc_next_trait_solver { () => { pub use rustc_next_trait_solver::*; }; }
+    |                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ the name `solve` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `solve` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:111:1
+    |
+111 | use_crate_rustc_next_trait_solver!();
+    | ------------------------------------ in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_next_trait_solver` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:32:53
+    |
+ 32 | macro_rules! use_crate_rustc_lint { () => { pub use rustc_lint::*; }; }
+    |                                                     ^^^^^^^^^^^^^ the name `builtin` in the type namespace is first re-exported here
+...
+ 60 | macro_rules! use_crate_rustc_lint_defs { () => { pub use rustc_lint_defs::*; }; }
+    |                                                          ------------------ but the name `builtin` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:114:1
+    |
+114 | use_crate_rustc_lint!();
+    | ----------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_lint` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:32:53
+    |
+ 32 | macro_rules! use_crate_rustc_lint { () => { pub use rustc_lint::*; }; }
+    |                                                     ^^^^^^^^^^^^^ the name `Level` in the type namespace is first re-exported here
+...
+ 47 | macro_rules! use_crate_rustc_errors { () => { pub use rustc_errors::*; }; }
+    |                                                       --------------- but the name `Level` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:114:1
+    |
+114 | use_crate_rustc_lint!();
+    | ----------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_lint` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:33:55
+    |
+ 33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `rustc_internal` in the type namespace is first re-exported here
+...
+ 71 | macro_rules! use_crate_rustc_public_bridge { () => { pub use rustc_public_bridge::*; }; }
+    |                                                              ---------------------- but the name `rustc_internal` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:115:1
+    |
+115 | use_crate_rustc_public!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_public` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:33:55
+    |
+ 33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `Symbol` in the type namespace is first re-exported here
+...
+ 40 | macro_rules! use_crate_rustc_span { () => { pub use rustc_span::*; }; }
+    |                                                     ------------- but the name `Symbol` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:115:1
+    |
+115 | use_crate_rustc_public!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_public` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:33:55
+    |
+ 33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `Opaque` in the type namespace is first re-exported here
+...
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ---------------- but the name `Opaque` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:115:1
+    |
+115 | use_crate_rustc_public!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_public` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:33:55
+    |
+ 33 | macro_rules! use_crate_rustc_public { () => { pub use rustc_public::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `Error` in the type namespace is first re-exported here
+...
+ 76 | macro_rules! use_crate_rustc_log { () => { pub use rustc_log::*; }; }
+    |                                                    ------------ but the name `Error` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:115:1
+    |
+115 | use_crate_rustc_public!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_public` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:34:55
+    |
+ 34 | macro_rules! use_crate_rustc_passes { () => { pub use rustc_passes::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `entry` in the type namespace is first re-exported here
+...
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ------------ but the name `entry` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:116:1
+    |
+116 | use_crate_rustc_passes!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_passes` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:34:55
+    |
+ 34 | macro_rules! use_crate_rustc_passes { () => { pub use rustc_passes::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `stability` in the type namespace is first re-exported here
+...
+ 55 | macro_rules! use_crate_rustc_ast_lowering { () => { pub use rustc_ast_lowering::*; }; }
+    |                                                             --------------------- but the name `stability` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:116:1
+    |
+116 | use_crate_rustc_passes!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_passes` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:40:53
+    |
+ 40 | macro_rules! use_crate_rustc_span { () => { pub use rustc_span::*; }; }
+    |                                                     ^^^^^^^^^^^^^ the name `profiling` in the type namespace is first re-exported here
+...
+ 45 | macro_rules! use_crate_rustc_data_structures { () => { pub use rustc_data_structures::*; }; }
+    |                                                                ------------------------ but the name `profiling` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:122:1
+    |
+122 | use_crate_rustc_span!();
+    | ----------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_span` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:41:52
+    |
+ 41 | macro_rules! use_crate_rustc_ast { () => { pub use rustc_ast::*; }; }
+    |                                                    ^^^^^^^^^^^^ the name `visit` in the type namespace is first re-exported here
+...
+ 52 | macro_rules! use_crate_rustc_ast_ir { () => { pub use rustc_ast_ir::*; }; }
+    |                                                       --------------- but the name `visit` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:123:1
+    |
+123 | use_crate_rustc_ast!();
+    | ---------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_ast` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:42:56
+    |
+ 42 | macro_rules! use_crate_rustc_type_ir { () => { pub use rustc_type_ir::*; }; }
+    |                                                        ^^^^^^^^^^^^^^^^ the name `Float` in the type namespace is first re-exported here
+...
+ 62 | macro_rules! use_crate_rustc_abi { () => { pub use rustc_abi::*; }; }
+    |                                                    ------------ but the name `Float` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:124:1
+    |
+124 | use_crate_rustc_type_ir!();
+    | -------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_type_ir` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:47:55
+    |
+ 47 | macro_rules! use_crate_rustc_errors { () => { pub use rustc_errors::*; }; }
+    |                                                       ^^^^^^^^^^^^^^^ the name `Style` in the type namespace is first re-exported here
+...
+ 69 | macro_rules! use_crate_rustc_graphviz { () => { pub use rustc_graphviz::*; }; }
+    |                                                         ----------------- but the name `Style` in the type namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:129:1
+    |
+129 | use_crate_rustc_errors!();
+    | ------------------------- in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_errors` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:56:60
+    |
+ 56 | macro_rules! use_crate_rustc_driver_impl { () => { pub use rustc_driver_impl::*; }; }
+    |                                                            ^^^^^^^^^^^^^^^^^^^^ the name `init_logger` in the value namespace is first re-exported here
+...
+ 76 | macro_rules! use_crate_rustc_log { () => { pub use rustc_log::*; }; }
+    |                                                    ------------ but the name `init_logger` in the value namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:138:1
+    |
+138 | use_crate_rustc_driver_impl!();
+    | ------------------------------ in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_driver_impl` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: ambiguous glob re-exports
+   --> src/rustc_complete.rs:56:60
+    |
+ 56 | macro_rules! use_crate_rustc_driver_impl { () => { pub use rustc_driver_impl::*; }; }
+    |                                                            ^^^^^^^^^^^^^^^^^^^^ the name `init_logger_with_additional_layer` in the value namespace is first re-exported here
+...
+ 76 | macro_rules! use_crate_rustc_log { () => { pub use rustc_log::*; }; }
+    |                                                    ------------ but the name `init_logger_with_additional_layer` in the value namespace is also re-exported here
+    |
+   ::: unified_rustc_wrapped.rs:138:1
+    |
+138 | use_crate_rustc_driver_impl!();
+    | ------------------------------ in this macro invocation
+    |
+    = note: this warning originates in the macro `use_crate_rustc_driver_impl` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: private item shadows public glob re-export
+   --> unified_rustc_wrapped.rs:166:1
+    |
+166 | / fn main() {
+167 | |     // Check if --version was requested and override it
+168 | |     let args: Vec<String> = std::env::args().collect();
+169 | |     if args.len() > 1 && (args[1] == "--version" || args[1] == "-V") {
+...   |
+179 | |     rustc_driver_impl::main();
+180 | | }
+    | |_^
+    |
+note: the name `main` in the value namespace is supposed to be publicly re-exported here
+   --> src/rustc_complete.rs:56:60
+    |
+ 56 | macro_rules! use_crate_rustc_driver_impl { () => { pub use rustc_driver_impl::*; }; }
+    |                                                            ^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: unified_rustc_wrapped.rs:138:1
+    |
+138 | use_crate_rustc_driver_impl!();
+    | ------------------------------ in this macro invocation
+note: but the private item here shadows it
+   --> unified_rustc_wrapped.rs:166:1
+    |
+166 | / fn main() {
+167 | |     // Check if --version was requested and override it
+168 | |     let args: Vec<String> = std::env::args().collect();
+169 | |     if args.len() > 1 && (args[1] == "--version" || args[1] == "-V") {
+...   |
+179 | |     rustc_driver_impl::main();
+180 | | }
+    | |_^
+    = note: `#[warn(hidden_glob_reexports)]` on by default
+    = note: this warning originates in the macro `use_crate_rustc_driver_impl` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0432]: unresolved import `std::sync`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:23:10
+   |
+23 | use std::sync::Arc;
+   |          ^^^^ could not find `sync` in `std`
+
+error[E0432]: unresolved imports `std::env`, `std::io`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^  ^^ no `io` in `std`
+   |           |
+   |           no `env` in `std`
+   |
+   = help: consider importing one of these modules instead:
+           ::std::env
+           tempfile::env
+   = help: consider importing one of these modules instead:
+           core::io
+           ::std::io
+           ::std::os::unix::io
+           ring::io
+
+error[E0432]: unresolved import `lint`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:32:9
+   |
+32 | pub use lint::{declare_lint, declare_lint_pass, declare_tool_lint, impl_lint_pass};
+   |         ^^^^ help: a similar path exists: `rustc_session::lint`
+
+error[E0432]: unresolved import `rustc_lint_defs`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:33:9
+   |
+33 | pub use rustc_lint_defs as lint;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^ no external crate `rustc_lint_defs`
+
+warning: `split-decls-genesis` (bin "test_topological") generated 1 warning (run `cargo fix --bin "test_topological"` to apply 1 suggestion)
+error[E0432]: unresolved import `session`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:37:9
+   |
+37 | pub use session::*;
+   |         ^^^^^^^ use of unresolved module or unlinked crate `session`
+   |
+help: to make use of source file /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs, use `mod session` in this file to declare the module
+  --> src/bin/current.rs:22:1
+   |
+22 + mod session;
+   |
+
+warning: `split-decls-genesis` (bin "split-decls-genesis") generated 1 warning
+error[E0432]: unresolved import `getopts`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:40:9
+   |
+40 | pub use getopts;
+   |         ^^^^^^^ no external crate `getopts`
+   |
+help: consider importing this crate instead
+   |
+40 | pub use rustc_session::getopts;
+   |         +++++++++++++++
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:34:12
+   |
+34 | use crate::rustc_complete::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:35:12
+   |
+35 | use crate::rustc_complete::codes::*;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:36:12
+   |
+36 | use crate::rustc_complete::emitter::{
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+warning: `split-decls-genesis` (bin "fix_lattice") generated 1 warning
+warning: `split-decls-genesis` (bin "test_dependency_tracking") generated 18 warnings
+warning: `split-decls-genesis` (bin "batch_genmocks") generated 1 warning (run `cargo fix --bin "batch_genmocks"` to apply 1 suggestion)
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:39:12
+   |
+39 | use crate::rustc_complete::json::JsonEmitter;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:40:12
+   |
+40 | use crate::rustc_complete::timings::TimingSectionHandler;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:41:12
+   |
+41 | use crate::rustc_complete::translation::Translator;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0432]: unresolved import `crate::rustc_complete`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:28:12
+   |
+28 | use crate::rustc_complete::NodeId;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:46:12
+   |
+46 | use crate::rustc_complete::limit::Limit;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0432]: unresolved import `crate::rustc_complete`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:42:12
+   |
+42 | use crate::rustc_complete::{
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+warning: `split-decls-genesis` (bin "generate_unified_wrapper") generated 1 warning
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:48:16
+   |
+48 | pub use crate::rustc_complete::def_id::StableCrateId;
+   |                ^^^^^^^^^^^^^^
+   |                |
+   |                unresolved import
+   |                help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:49:12
+   |
+49 | use crate::rustc_complete::edition::Edition;
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0433]: failed to resolve: unresolved import
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:50:12
+   |
+50 | use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0432]: unresolved import `rustc_macros`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:47:5
+   |
+47 | use rustc_macros::HashStable_Generic;
+   |     ^^^^^^^^^^^^ use of unresolved module or unlinked crate `rustc_macros`
+   |
+help: there is a crate or module with a similar name
+   |
+47 - use rustc_macros::HashStable_Generic;
+47 + use rustc_errors::HashStable_Generic;
+   |
+
+error[E0433]: failed to resolve: could not find `rustc_target` in the crate root
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:52:12
+   |
+52 | use crate::rustc_target::asm::InlineAsmArch;
+   |            ^^^^^^^^^^^^ could not find `rustc_target` in the crate root
+
+error[E0433]: failed to resolve: could not find `rustc_target` in the crate root
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:53:12
+   |
+53 | use crate::rustc_target::spec::{
+   |            ^^^^^^^^^^^^ could not find `rustc_target` in the crate root
+
+warning: `split-decls-genesis` (bin "quick_file_test") generated 1 warning (run `cargo fix --bin "quick_file_test"` to apply 1 suggestion)
+error[E0432]: unresolved import `crate::rustc_complete`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:51:12
+   |
+51 | use crate::rustc_complete::{FileNameDisplayPreference, RealFileName, Span, Symbol};
+   |            ^^^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `split_decls_genesis::rustc_complete`
+
+error[E0432]: unresolved import `crate::code_stats`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:59:12
+   |
+59 | use crate::code_stats::CodeStats;
+   |            ^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `rustc_session::code_stats`
+
+warning: `split-decls-genesis` (bin "unified_driver") generated 1 warning
+error[E0432]: unresolved import `crate::code_stats`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:60:16
+   |
+60 | pub use crate::code_stats::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
+   |                ^^^^^^^^^^
+   |                |
+   |                unresolved import
+   |                help: a similar path exists: `rustc_session::code_stats`
+
+error[E0432]: unresolved import `crate::config`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:62:5
+   |
+62 |     self, CoverageLevel, CoverageOptions, CrateType, DebugInfo, ErrorOutputType, FunctionReturn,
+   |     ^^^^ no `config` in the root
+   |
+   = help: consider importing this module instead:
+           rustc_session::config
+
+error[E0432]: unresolved import `crate::filesearch`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:66:12
+   |
+66 | use crate::filesearch::FileSearch;
+   |            ^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `rustc_session::filesearch`
+
+error[E0432]: unresolved import `crate::parse`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:68:12
+   |
+68 | use crate::parse::{ParseSess, add_feature_diagnostics};
+   |            ^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `rustc_session::parse`
+
+error[E0432]: unresolved import `crate::search_paths`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:69:12
+   |
+69 | use crate::search_paths::SearchPath;
+   |            ^^^^^^^^^^^^
+   |            |
+   |            unresolved import
+   |            help: a similar path exists: `rustc_session::search_paths`
+
+error[E0432]: unresolved imports `crate::errors`, `crate::filesearch`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:70:13
+   |
+70 | use crate::{errors, filesearch, lint};
+   |             ^^^^^^  ^^^^^^^^^^ no `filesearch` in the root
+   |             |
+   |             no `errors` in the root
+   |
+   = help: consider importing one of these modules instead:
+           rustc_interface::errors
+           rustc_session::errors
+   = help: consider importing this module instead:
+           rustc_session::filesearch
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `rustc_fluent_macro`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:42:1
+   |
+42 | rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
+   | ^^^^^^^^^^^^^^^^^^ use of unresolved module or unlinked crate `rustc_fluent_macro`
+
+warning: `split-decls-genesis` (bin "unified_rustc_wrapped") generated 114 warnings
+error[E0659]: `env` is ambiguous
+  --> src/bin/../wrap_types.rs:7:26
+   |
+ 7 |         include!(concat!(env!("CARGO_MANIFEST_DIR"), "/submodules/rust/compiler/", stringify!($crate_name), "/src/lib.rs"));
+   |                          ^^^ ambiguous name
+...
+12 | include_rustc!(rustc_session);
+   | ----------------------------- in this macro invocation
+   |
+   = note: ambiguous because of a conflict between a macro-expanded name and a less macro-expanded name from outer scope during import or macro resolution
+   = note: `env` could refer to a macro from prelude
+note: `env` could also refer to the unresolved item imported here
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^
+   = help: use `crate::env` to refer to this unresolved item unambiguously
+   = note: this error originates in the macro `include_rustc` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0659]: `env` is ambiguous
+  --> src/bin/../wrap_types.rs:4:26
+   |
+ 4 |         include!(concat!(env!("CARGO_MANIFEST_DIR"), "/submodules/rust/compiler/", stringify!($crate_name), "/src/", stringify!($file), "...
+   |                          ^^^ ambiguous name
+...
+13 | include_rustc!(rustc_session, session);
+   | -------------------------------------- in this macro invocation
+   |
+   = note: ambiguous because of a conflict between a macro-expanded name and a less macro-expanded name from outer scope during import or macro resolution
+   = note: `env` could refer to a macro from prelude
+note: `env` could also refer to the unresolved item imported here
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^
+   = help: use `crate::env` to refer to this unresolved item unambiguously
+   = note: this error originates in the macro `include_rustc` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0659]: `env` is ambiguous
+  --> src/bin/../wrap_types.rs:4:26
+   |
+ 4 |         include!(concat!(env!("CARGO_MANIFEST_DIR"), "/submodules/rust/compiler/", stringify!($crate_name), "/src/", stringify!($file), "...
+   |                          ^^^ ambiguous name
+...
+14 | include_rustc!(rustc_session, parse);
+   | ------------------------------------ in this macro invocation
+   |
+   = note: ambiguous because of a conflict between a macro-expanded name and a less macro-expanded name from outer scope during import or macro resolution
+   = note: `env` could refer to a macro from prelude
+note: `env` could also refer to the unresolved item imported here
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^
+   = help: use `crate::env` to refer to this unresolved item unambiguously
+   = note: this error originates in the macro `include_rustc` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0659]: `env` is ambiguous
+  --> src/bin/../wrap_types.rs:4:26
+   |
+ 4 |         include!(concat!(env!("CARGO_MANIFEST_DIR"), "/submodules/rust/compiler/", stringify!($crate_name), "/src/", stringify!($file), "...
+   |                          ^^^ ambiguous name
+...
+15 | include_rustc!(rustc_session, config);
+   | ------------------------------------- in this macro invocation
+   |
+   = note: ambiguous because of a conflict between a macro-expanded name and a less macro-expanded name from outer scope during import or macro resolution
+   = note: `env` could refer to a macro from prelude
+note: `env` could also refer to the unresolved item imported here
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^
+   = help: use `crate::env` to refer to this unresolved item unambiguously
+   = note: this error originates in the macro `include_rustc` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0659]: `env` is ambiguous
+  --> src/bin/../wrap_types.rs:7:26
+   |
+ 7 |         include!(concat!(env!("CARGO_MANIFEST_DIR"), "/submodules/rust/compiler/", stringify!($crate_name), "/src/lib.rs"));
+   |                          ^^^ ambiguous name
+...
+16 | include_rustc!(rustc_errors);
+   | ---------------------------- in this macro invocation
+   |
+   = note: ambiguous because of a conflict between a macro-expanded name and a less macro-expanded name from outer scope during import or macro resolution
+   = note: `env` could refer to a macro from prelude
+note: `env` could also refer to the unresolved item imported here
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:25:11
+   |
+25 | use std::{env, io};
+   |           ^^^
+   = help: use `crate::env` to refer to this unresolved item unambiguously
+   = note: this error originates in the macro `include_rustc` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0603]: module `rng` is private
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/session.rs:27:21
+   |
+27 | use rand::{RngCore, rng};
+   |                     ^^^ private module
+   |
+note: the module `rng` is defined here
+  --> /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rand-0.8.5/src/lib.rs:99:1
+   |
+99 | mod rng;
+   | ^^^^^^^
+
+warning: unexpected `cfg` condition name: `bootstrap`
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:22:12
+   |
+22 | #[cfg_attr(bootstrap, feature(round_char_boundary))]
+   |            ^^^^^^^^^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = help: consider using a Cargo feature instead
+   = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+            [lints.rust]
+            unexpected_cfgs = { level = "warn", check-cfg = ['cfg(bootstrap)'] }
+   = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(bootstrap)");` to the top of the `build.rs`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+
+warning: crate-level attribute should be an inner attribute
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:23:1
+   |
+23 | #[feature(default_field_values)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_attributes)]` (part of `#[warn(unused)]`) on by default
+help: add a `!`
+   |
+23 | #![feature(default_field_values)]
+   |  +
+
+warning: crate-level attribute should be an inner attribute
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:24:1
+   |
+24 | #[feature(iter_intersperse)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: add a `!`
+   |
+24 | #![feature(iter_intersperse)]
+   |  +
+
+warning: crate-level attribute should be an inner attribute
+  --> /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/submodules/rust/compiler/rustc_session/src/lib.rs:25:1
+   |
+25 | #[feature(rustc_attrs)]
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: add a `!`
+   |
+25 | #![feature(rustc_attrs)]
+   |  +
+
+warning: the feature `async_closure` has been stable since 1.85.0 and no longer requires an attribute to enable
+  --> src/bin/current.rs:20:12
+   |
+20 | #![feature(async_closure)]
+   |            ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(stable_features)]` on by default
+
+warning: the feature `bench_black_box` has been stable since 1.66.0 and no longer requires an attribute to enable
+  --> src/bin/current.rs:13:12
+   |
+13 | #![feature(bench_black_box)]
+   |            ^^^^^^^^^^^^^^^
+
+warning: the feature `panic_info_message` has been stable since 1.81.0 and no longer requires an attribute to enable
+ --> src/bin/current.rs:9:12
+  |
+9 | #![feature(panic_info_message)]
+  |            ^^^^^^^^^^^^^^^^^^
+
+error[E0635]: unknown feature `generator_trait`
+  --> src/bin/current.rs:19:12
+   |
+19 | #![feature(generator_trait)]
+   |            ^^^^^^^^^^^^^^^
+
+Some errors have detailed explanations: E0260, E0432, E0433, E0603, E0635, E0659.
+For more information about an error, try `rustc --explain E0260`.
+warning: `split-decls-genesis` (bin "current") generated 7 warnings
+error: could not compile `split-decls-genesis` (bin "current") due to 46 previous errors; 7 warnings emitted

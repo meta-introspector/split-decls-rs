@@ -1,11 +1,16 @@
 use std::collections::HashMap;
 use serde_json::Value;
 use std::fs;
-use std::io::Write;
+use std::io::{Write, Read};
+use flate2::read::GzDecoder;
 
 fn main() {
+    let compressed_data = fs::read("symbol_map.json.gz").unwrap();
+    let mut decoder = GzDecoder::new(&compressed_data[..]);
+    let mut symbol_map_content = String::new();
+    decoder.read_to_string(&mut symbol_map_content).unwrap();
     let symbol_map: HashMap<String, Value> = 
-        serde_json::from_str(&fs::read_to_string("symbol_map.json").unwrap()).unwrap();
+        serde_json::from_str(&symbol_map_content).unwrap();
     
     println!("🎯 Starting complete rustc analysis...");
     let mut output = std::fs::File::create("rustc_complete_analysis.txt").unwrap();

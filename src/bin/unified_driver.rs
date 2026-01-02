@@ -1,6 +1,7 @@
 use std::collections::{HashMap, HashSet, VecDeque};
 use std::env;
 use std::fs;
+use std::io::Read;
 use std::path::Path;
 use std::process::Command;
 use serde_json::Value;
@@ -22,7 +23,10 @@ impl UnifiedDriver {
         println!("🔄 Loading symbol map and processed files...");
         
         // Load symbol map
-        let symbol_map_content = fs::read_to_string("symbol_map.json")?;
+        let compressed_data = fs::read("symbol_map.json.gz")?;
+        let mut decoder = flate2::read::GzDecoder::new(&compressed_data[..]);
+        let mut symbol_map_content = String::new();
+        decoder.read_to_string(&mut symbol_map_content)?;
         let symbol_map: HashMap<String, Value> = serde_json::from_str(&symbol_map_content)?;
         
         // Load all processed files

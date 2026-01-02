@@ -1,23 +1,83 @@
-#![recursion_limit = "512"]
-#![allow(internal_features)]
-#![allow(unused)]
-#![allow(rustc::untranslatable_diagnostic)]
 #![feature(rustc_private)]
-#![feature(core_intrinsics)]
-#![feature(decl_macro)]
 #![feature(panic_backtrace_config)]
 #![feature(panic_update_hook)]
-#![feature(rustdoc_internals)]
-#![feature(try_blocks)]
+#![allow(unused)]
+
+// Auto-generated rustc main with all dependencies
+
+// Include macro wrappers
+#[macro_use]
+#[path = "src/macro_wrappers.rs"]
+mod macro_wrappers;
+
+// Define the include_dep! macro
+macro_rules! include_dep {
+    ($dep:expr, $file:expr) => {
+        {
+            println!("Loading dependency: {}", $dep);
+            include!($file);
+        }
+    };
+}
+
+macro_rules! rustcmain {
+    () => {
+        {
+            println!("Loading dependency: rustc_driver_impl::lib::main");
+            
+            // Include the processed rustc files
+            #[path = "processed_submodules_rust_compiler_rustc_driver_impl_src_lib.rs"]
+            mod rustc_driver_impl_lib;
+            
+            // Create the rustc_complete module structure that the processed file expects
+            mod rustc_complete {
+                // Add the modules that the processed file is trying to import
+                pub mod emitter {
+                    pub use super::rustc_errors::emitter::*;
+                }
+                pub mod registry {
+                    pub use super::rustc_errors::registry::*;
+                }
+                pub mod translation {
+                    pub use super::rustc_errors::translation::*;
+                }
+                pub mod ty {
+                    // This would need rustc_middle, but let's start simple
+                }
+                pub mod config {
+                    pub use super::rustc_session::config::*;
+                }
+                pub mod getopts {
+                    pub use super::rustc_session::getopts::*;
+                }
+                pub mod lint {
+                    // This would need rustc_lint
+                }
+                pub mod output {
+                    pub use super::rustc_session::output::*;
+                }
+                
+                // Re-export the main types
+                pub use super::rustc_errors::{ColorConfig, DiagCtxt, ErrCode, FatalError};
+                pub use super::rustc_session::{EarlyDiagCtxt, Session};
+                pub use super::rustc_errors::markdown;
+            }
+            
+            // Include the processed file as a module
+            #[path = "processed_submodules_rust_compiler_rustc_driver_impl_src_lib.rs"]
+            mod rustc_driver_impl_lib;
+            
+            // Call the main function from the included module
+            rustc_driver_impl_lib::main();
+        }
+    };
+}
 
 // Include our rustc_complete module with macros
 #[macro_use]
 #[path = "src/rustc_complete.rs"]
 mod rustc_complete;
 
-// Add extern crate declarations needed for rustc_driver
-extern crate rustc_mir_dataflow;
-extern crate rustc_infer;
 extern crate rustc_parse_format;
 extern crate rustc_hir_analysis;
 extern crate rustc_ty_utils;
@@ -164,6 +224,5 @@ use_crate_rustc_error_codes!();
 use_crate_rustc_driver!();
 
 fn main() {
-    println!("🚀 Unified rustc wrapper with 73 crates loaded");
-    rustc_driver_impl::main();
+    rustcmain!();
 }
