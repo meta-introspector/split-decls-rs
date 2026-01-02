@@ -28,3 +28,4 @@ y
 /strace1.txt
 /perf.data
 manual_tests/target
+simple-libp2p-server/target/
