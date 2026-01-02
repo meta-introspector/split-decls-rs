@@ -5,6 +5,9 @@ edition = "2024"
 description = "Self-creating Rust system through macro emergence"
 default-run = "split-decls-genesis"
 
+[features]
+proc_macros = []
+
 [workspace]
 members = ["runbuild"]
 

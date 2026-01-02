@@ -10,6 +10,21 @@
 #![feature(rustdoc_internals)]
 #![feature(try_blocks)]
 
+// Conditional proc macro inclusion
+macro_rules! proc_macro_item {
+    ($($item:tt)*) => {
+        #[cfg(feature = "proc_macros")]
+        $($item)*
+    };
+}
+
+macro_rules! no_proc_macro_item {
+    ($($item:tt)*) => {
+        #[cfg(not(feature = "proc_macros"))]
+        $($item)*
+    };
+}
+
 extern crate rustc_serialize;
 extern crate rustc_infer;
 extern crate rustc_resolve;
