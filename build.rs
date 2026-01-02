@@ -55,9 +55,58 @@ mkfn!{{
     }
 }
 
+fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::error::Error) -> Result<(), Box<dyn std::error::Error>> {
+    let file_name = file_path.split('/').last().unwrap_or("unknown");
+    let test_case_name = format!("test_case_{}.rs", file_name.replace('.', "_"));
+    let test_case_path = format!("test_cases/{}", test_case_name);
+    
+    // Create test_cases directory if it doesn't exist
+    fs::create_dir_all("test_cases")?;
+    
+    // Try to find the problematic line by parsing line by line
+    let lines: Vec<&str> = content.lines().collect();
+    let mut minimal_content = String::new();
+    let mut error_line = None;
+    
+    // Try to isolate the error by binary search approach
+    for (i, line) in lines.iter().enumerate() {
+        let test_content = lines[0..=i].join("\n");
+        if let Err(_) = syn::parse_file(&test_content) {
+            error_line = Some(i);
+            // Include a few lines around the error for context
+            let start = i.saturating_sub(3);
+            let end = (i + 4).min(lines.len());
+            minimal_content = lines[start..end].join("\n");
+            break;
+        }
+    }
+    
+    let test_case_content = format!(
+        "// MINIMAL TEST CASE for parsing failure in: {}\n\
+         // Error: {}\n\
+         // Problematic line: {}\n\
+         \n\
+         {}\n",
+        file_path,
+        error,
+        error_line.map_or("unknown".to_string(), |l| format!("line {}", l + 1)),
+        minimal_content
+    );
+    
+    fs::write(&test_case_path, test_case_content)?;
+    println!("📝 Created test case: {}", test_case_path);
+    
+    Ok(())
+}
+
 fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     let content = fs::read_to_string(file_path)?;
-    let ast = parse_file(&content)?;
+    
+    // Include macro definitions from macro_wrappers.rs
+    let macro_defs = fs::read_to_string("src/macro_wrappers.rs")?;
+    let content_with_macros = format!("{}\n{}", macro_defs, content);
+    
+    let ast = parse_file(&content_with_macros)?;
     
     let wrapped_items: Vec<_> = ast.items.iter().map(wrap_item).collect();
     let mut result = wrapped_items.join("\n");
@@ -73,6 +122,10 @@ fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     
     // Fix inner doc comments - convert //! to //
     result = result.replace("//!", "//");
+    
+    // Fix attribute spacing - remove spaces in attributes
+    result = result.replace("# [", "#[");
+    result = result.replace("# !", "#!");
     
     Ok(result)
 }
@@ -124,6 +177,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         }
                         Err(e) => {
                             println!("❌ Failed to process {}: {}", source_file, e);
+                            
+                            // Create minimal test case for this failure
+                            if let Ok(content) = fs::read_to_string(&file_path) {
+                                if let Err(test_err) = create_minimal_test_case(&source_file, &content, e.as_ref()) {
+                                    println!("⚠️  Failed to create test case: {}", test_err);
+                                }
+                            }
                         }
                     }
                 } else {
