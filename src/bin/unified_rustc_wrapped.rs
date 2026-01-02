@@ -9,6 +9,8 @@
 #![feature(panic_update_hook)]
 #![feature(rustdoc_internals)]
 #![feature(try_blocks)]
+#![feature(assert_matches)]
+#![feature(error_reporter)]
 
 include!("../wrap_types.rs");
 include!("../macro_wrappers.rs");
