@@ -34,6 +34,7 @@ pollster = "0.3"
 tokio = { version = "1.0", features = ["full"] }
 libp2p = { version = "0.54", features = ["gossipsub", "mdns", "noise", "macros", "tcp", "yamux", "tokio"] }
 env_logger = "0.11"
+glob = "0.3"
 futures-intrusive = "0.5"
 measureme = "11.0"
 indexmap = "2.0"

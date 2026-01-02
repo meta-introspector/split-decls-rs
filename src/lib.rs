@@ -13,6 +13,7 @@ pub mod rustc_matrix;
 pub mod monster_trinity;
 pub mod galois_transform;
 pub mod rust_lattice;
+pub mod conformal_proof;
 
 // Minimal external crates
 pub mod compiler_feedback;
