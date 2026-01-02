@@ -1,15 +1,1 @@
-mkuse!{use crate :: fs :: File ;}
-mkuse!{use crate :: io :: Read ;}
-mkuse!{use crate :: sync :: OnceLock ;}
-mkitem!{static DEVICE : OnceLock < File > = OnceLock :: new () ;}
-
-macro_rules! fill_bytes_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function fill_bytes in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    fill_bytes_introspect!();
-    pub fn fill_bytes (bytes : & mut [u8]) { DEVICE . get_or_try_init (| | File :: open ("/dev/urandom")) . and_then (| mut dev | dev . read_exact (bytes)) . expect ("failed to generate random data") ; }
-}
+# ! [doc = " Random data from `/dev/urandom`"] # ! [doc = ""] # ! [doc = " Before `getentropy` was standardized in 2024, UNIX didn't have a standardized"] # ! [doc = " way of getting random data, so systems just followed the precedent set by"] # ! [doc = " Linux and exposed random devices at `/dev/random` and `/dev/urandom`. Thus,"] # ! [doc = " for the few systems that support neither `arc4random_buf` nor `getentropy`"] # ! [doc = " yet, we just read from the file."] use split_decls_genesis :: ourprelude :: * ; use crate :: fs :: File ; use crate :: io :: Read ; use crate :: sync :: OnceLock ; static DEVICE : OnceLock < File > = OnceLock :: new () ; pub fn fill_bytes (bytes : & mut [u8]) { DEVICE . get_or_try_init (| | File :: open ("/dev/urandom")) . and_then (| mut dev | dev . read_exact (bytes)) . expect ("failed to generate random data") ; }

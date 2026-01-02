@@ -1,12 +1,1 @@
-mkuse!{use crate :: support :: Float ;}
-
-macro_rules! fmin_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function fmin in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    fmin_introspect!();
-    # [inline] pub fn fmin < F : Float > (x : F , y : F) -> F { let res = if y . is_nan () || x < y { x } else { y } ; res . canonicalize () }
-}
+# ! [doc = " IEEE 754-2008 `minNum`. This has been superseded by IEEE 754-2019 `minimumNumber`."] # ! [doc = ""] # ! [doc = " Per the spec, returns the canonicalized result of:"] # ! [doc = " - `x` if `x < y`"] # ! [doc = " - `y` if `y < x`"] # ! [doc = " - The other number if one is NaN"] # ! [doc = " - Otherwise, either `x` or `y`, canonicalized"] # ! [doc = " - -0.0 and +0.0 may be disregarded (unlike newer operations)"] # ! [doc = ""] # ! [doc = " Excluded from our implementation is sNaN handling."] # ! [doc = ""] # ! [doc = " More on the differences: [link]."] # ! [doc = ""] # ! [doc = " [link]: https://grouper.ieee.org/groups/msc/ANSI_IEEE-Std-754-2019/background/minNum_maxNum_Removal_Demotion_v3.pdf"] use split_decls_genesis :: ourprelude :: * ; use crate :: support :: Float ; #[inline] pub fn fmin < F : Float > (x : F , y : F) -> F { let res = if y . is_nan () || x < y { x } else { y } ; res . canonicalize () }

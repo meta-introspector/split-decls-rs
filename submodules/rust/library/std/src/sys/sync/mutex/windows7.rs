@@ -1,17 +1,1 @@
-mkuse!{use crate :: cell :: UnsafeCell ;}
-mkuse!{use crate :: sys :: c ;}
-mkitem!{mkstruct!{pub struct Mutex { srwlock : UnsafeCell < c :: SRWLOCK > , }}}
-mkitem!{mkimpl!{unsafe impl Send for Mutex { }}}
-mkitem!{mkimpl!{unsafe impl Sync for Mutex { }}}
-
-macro_rules! raw_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function raw in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    raw_introspect!();
-    # [inline] pub unsafe fn raw (m : & Mutex) -> * mut c :: SRWLOCK { m . srwlock . get () }
-}
-mkitem!{mkimpl!{impl Mutex { # [inline] pub const fn new () -> Mutex { Mutex { srwlock : UnsafeCell :: new (c :: SRWLOCK_INIT) } } # [inline] pub fn lock (& self) { unsafe { c :: AcquireSRWLockExclusive (raw (self)) ; } } # [inline] pub fn try_lock (& self) -> bool { unsafe { c :: TryAcquireSRWLockExclusive (raw (self)) } } # [inline] pub unsafe fn unlock (& self) { c :: ReleaseSRWLockExclusive (raw (self)) ; } }}}
+# ! [doc = " System Mutexes"] # ! [doc = ""] # ! [doc = " The Windows implementation of mutexes is a little odd and it might not be"] # ! [doc = " immediately obvious what's going on. The primary oddness is that SRWLock is"] # ! [doc = " used instead of CriticalSection, and this is done because:"] # ! [doc = ""] # ! [doc = " 1. SRWLock is several times faster than CriticalSection according to"] # ! [doc = "    benchmarks performed on both Windows 8 and Windows 7."] # ! [doc = ""] # ! [doc = " 2. CriticalSection allows recursive locking while SRWLock deadlocks. The"] # ! [doc = "    Unix implementation deadlocks so consistency is preferred. See #19962 for"] # ! [doc = "    more details."] # ! [doc = ""] # ! [doc = " 3. While CriticalSection is fair and SRWLock is not, the current Rust policy"] # ! [doc = "    is that there are no guarantees of fairness."] use split_decls_genesis :: ourprelude :: * ; use crate :: cell :: UnsafeCell ; use crate :: sys :: c ; pub struct Mutex { srwlock : UnsafeCell < c :: SRWLOCK > , } unsafe impl Send for Mutex { } unsafe impl Sync for Mutex { } #[inline] pub unsafe fn raw (m : & Mutex) -> * mut c :: SRWLOCK { m . srwlock . get () } impl Mutex { #[inline] pub const fn new () -> Mutex { Mutex { srwlock : UnsafeCell :: new (c :: SRWLOCK_INIT) } } #[inline] pub fn lock (& self) { unsafe { c :: AcquireSRWLockExclusive (raw (self)) ; } } #[inline] pub fn try_lock (& self) -> bool { unsafe { c :: TryAcquireSRWLockExclusive (raw (self)) } } #[inline] pub unsafe fn unlock (& self) { c :: ReleaseSRWLockExclusive (raw (self)) ; } }

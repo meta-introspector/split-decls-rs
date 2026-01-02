@@ -1,1 +1,1 @@
-mkuse!{pub use core :: pattern_type ;}
+# ! [doc = " Helper module for exporting the `pattern_type` macro"] use split_decls_genesis :: ourprelude :: * ; pub use core :: pattern_type ;

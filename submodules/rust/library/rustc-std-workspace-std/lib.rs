@@ -1,1 +1,1 @@
-mkuse!{pub use std :: * ;}
+# ! [feature (restricted_std)] use split_decls_genesis :: ourprelude :: * ; pub use std :: * ;

@@ -1,12 +1,1 @@
-mkuse!{pub use crate :: macros :: builtin :: { contracts_ensures as ensures , contracts_requires as requires } ;}
-
-macro_rules! build_check_ensures_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function build_check_ensures in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    build_check_ensures_introspect!();
-    # [doc = " This is an identity function used as part of the desugaring of the `#[ensures]` attribute."] # [doc = ""] # [doc = " This is an existing hack to allow users to omit the type of the return value in their ensures"] # [doc = " attribute."] # [doc = ""] # [doc = " Ideally, rustc should be able to generate the type annotation."] # [doc = " The existing lowering logic makes it rather hard to add the explicit type annotation,"] # [doc = " while the function call is fairly straight forward."] # [unstable (feature = "contracts_internals" , issue = "128044")] # [rustc_const_unstable (feature = "contracts" , issue = "128044")] # [lang = "contract_build_check_ensures"] pub const fn build_check_ensures < Ret , C > (cond : C) -> C where C : Fn (& Ret) -> bool + Copy + 'static , { cond }
-}
+# ! [doc = " Unstable module containing the unstable contracts lang items and attribute macros."] use split_decls_genesis :: ourprelude :: * ; pub use crate :: macros :: builtin :: { contracts_ensures as ensures , contracts_requires as requires } ; #[doc = " This is an identity function used as part of the desugaring of the `#[ensures]` attribute."] #[doc = ""] #[doc = " This is an existing hack to allow users to omit the type of the return value in their ensures"] #[doc = " attribute."] #[doc = ""] #[doc = " Ideally, rustc should be able to generate the type annotation."] #[doc = " The existing lowering logic makes it rather hard to add the explicit type annotation,"] #[doc = " while the function call is fairly straight forward."] #[unstable (feature = "contracts_internals" , issue = "128044")] #[rustc_const_unstable (feature = "contracts" , issue = "128044")] #[lang = "contract_build_check_ensures"] pub const fn build_check_ensures < Ret , C > (cond : C) -> C where C : Fn (& Ret) -> bool + Copy + 'static , { cond }

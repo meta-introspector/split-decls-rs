@@ -10,7 +10,18 @@ pub fn get_use_matrix() -> HashMap<String, Vec<String>> {
 
 // Macro definitions for wrapping Rust constructs with handlers
 
-// Replace problematic print statements with emit_message
+// Prelude macro that injects all necessary imports and definitions
+macro_rules! prelude {
+    () => {
+        // Common imports that most files need
+        #[allow(unused_imports)]
+        use std::sync::atomic::{Atomic, AtomicBool, AtomicPtr, Ordering};
+        #[allow(unused_imports)]
+        use std::ffi::c_void;
+        #[allow(unused_imports)]
+        use std::ptr::NonNull;
+    };
+}
 macro_rules! emit_message {
     ($($arg:tt)*) => {
         {

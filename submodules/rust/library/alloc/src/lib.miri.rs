@@ -1,2 +1,1 @@
-mkitem!{extern crate alloc as realalloc ;}
-mkuse!{pub use realalloc :: * ;}
+# ! [doc = " Grep bootstrap for `MIRI_REPLACE_LIBRS_IF_NOT_TEST` to learn what this is about."] # ! [no_std] use split_decls_genesis :: ourprelude :: * ; extern crate alloc as realalloc ; pub use realalloc :: * ;

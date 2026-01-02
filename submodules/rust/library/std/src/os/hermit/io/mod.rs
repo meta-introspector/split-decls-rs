@@ -1,1 +1,1 @@
-mkuse!{# [stable (feature = "rust1" , since = "1.0.0")] pub use crate :: os :: fd :: * ;}
+# ! [stable (feature = "rust1" , since = "1.0.0")] use split_decls_genesis :: ourprelude :: * ; #[stable (feature = "rust1" , since = "1.0.0")] pub use crate :: os :: fd :: * ;

@@ -1,2 +1,1 @@
-mkitem!{extern crate alloc as foo ;}
-mkuse!{pub use foo :: * ;}
+# ! [feature (no_core)] # ! [no_core] use split_decls_genesis :: ourprelude :: * ; extern crate alloc as foo ; pub use foo :: * ;

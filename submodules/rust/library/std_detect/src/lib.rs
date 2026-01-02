@@ -1,11 +1,1 @@
-mkitem!{# [cfg (test)] # [macro_use] extern crate std ;}
-mkitem!{# [cfg_attr (feature = "std_detect_file_io" , allow (unused_extern_crates))] # [cfg (feature = "std_detect_file_io")] extern crate alloc ;}
-mkmod!{detect, { 
-                getname!(detect);
-                getsrc!(detect);
-                getpath!(detect);
-                get_deps!(detect);
-                get_crates!(detect);
-                mkinclude!(detect);
-                 
-            }}
+# ! [doc = " Run-time feature detection for the Rust standard library."] # ! [doc = ""] # ! [doc = " To detect whether a feature is enabled in the system running the binary"] # ! [doc = " use one of the appropriate macro for the target:"] # ! [doc = ""] # ! [doc = " * `x86` and `x86_64`: [`is_x86_feature_detected`]"] # ! [doc = " * `arm`: [`is_arm_feature_detected`]"] # ! [doc = " * `aarch64`: [`is_aarch64_feature_detected`]"] # ! [doc = " * `riscv`: [`is_riscv_feature_detected`]"] # ! [doc = " * `mips`: [`is_mips_feature_detected`]"] # ! [doc = " * `mips64`: [`is_mips64_feature_detected`]"] # ! [doc = " * `powerpc`: [`is_powerpc_feature_detected`]"] # ! [doc = " * `powerpc64`: [`is_powerpc64_feature_detected`]"] # ! [doc = " * `loongarch`: [`is_loongarch_feature_detected`]"] # ! [doc = " * `s390x`: [`is_s390x_feature_detected`]"] # ! [unstable (feature = "stdarch_internal" , issue = "none")] # ! [feature (staged_api , cfg_select , doc_cfg , allow_internal_unstable)] # ! [deny (rust_2018_idioms)] # ! [allow (clippy :: shadow_reuse)] # ! [cfg_attr (test , allow (unused_imports))] # ! [no_std] # ! [allow (internal_features)] use split_decls_genesis :: ourprelude :: * ; #[cfg (test)] #[macro_use] extern crate std ; #[cfg_attr (feature = "std_detect_file_io" , allow (unused_extern_crates))] #[cfg (feature = "std_detect_file_io")] extern crate alloc ; #[doc (hidden)] #[unstable (feature = "stdarch_internal" , issue = "none")] pub mod detect ;

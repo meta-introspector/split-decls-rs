@@ -1,10 +1,1 @@
-mkmod!{os_str, { 
-                getname!(os_str);
-                getsrc!(os_str);
-                getpath!(os_str);
-                get_deps!(os_str);
-                get_crates!(os_str);
-                mkinclude!(os_str);
-                 
-            }}
-mkuse!{# [stable (feature = "rust1" , since = "1.0.0")] pub use self :: os_str :: { OsStrExt , OsStringExt } ;}
+# ! [doc = " Unix-specific extensions to primitives in the [`std::ffi`] module."] # ! [doc = ""] # ! [doc = " # Examples"] # ! [doc = ""] # ! [doc = " ```"] # ! [doc = " use std::ffi::OsString;"] # ! [doc = " use std::os::unix::ffi::OsStringExt;"] # ! [doc = ""] # ! [doc = " let bytes = b\"foo\".to_vec();"] # ! [doc = ""] # ! [doc = " // OsStringExt::from_vec"] # ! [doc = " let os_string = OsString::from_vec(bytes);"] # ! [doc = " assert_eq!(os_string.to_str(), Some(\"foo\"));"] # ! [doc = ""] # ! [doc = " // OsStringExt::into_vec"] # ! [doc = " let bytes = os_string.into_vec();"] # ! [doc = " assert_eq!(bytes, b\"foo\");"] # ! [doc = " ```"] # ! [doc = ""] # ! [doc = " ```"] # ! [doc = " use std::ffi::OsStr;"] # ! [doc = " use std::os::unix::ffi::OsStrExt;"] # ! [doc = ""] # ! [doc = " let bytes = b\"foo\";"] # ! [doc = ""] # ! [doc = " // OsStrExt::from_bytes"] # ! [doc = " let os_str = OsStr::from_bytes(bytes);"] # ! [doc = " assert_eq!(os_str.to_str(), Some(\"foo\"));"] # ! [doc = ""] # ! [doc = " // OsStrExt::as_bytes"] # ! [doc = " let bytes = os_str.as_bytes();"] # ! [doc = " assert_eq!(bytes, b\"foo\");"] # ! [doc = " ```"] # ! [doc = ""] # ! [doc = " [`std::ffi`]: crate::ffi"] # ! [stable (feature = "rust1" , since = "1.0.0")] use split_decls_genesis :: ourprelude :: * ; mod os_str ; #[stable (feature = "rust1" , since = "1.0.0")] pub use self :: os_str :: { OsStrExt , OsStringExt } ;

@@ -1,11 +1,1 @@
-
-macro_rules! fill_bytes_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function fill_bytes in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    fill_bytes_introspect!();
-    pub fn fill_bytes (bytes : & mut [u8]) { let ret = unsafe { libc :: CCRandomGenerateBytes (bytes . as_mut_ptr () . cast () , bytes . len ()) } ; assert_eq ! (ret , libc :: kCCSuccess , "failed to generate random data") ; }
-}
+# ! [doc = " Random data on Apple platforms."] # ! [doc = ""] # ! [doc = " `CCRandomGenerateBytes` calls into `CCRandomCopyBytes` with `kCCRandomDefault`."] # ! [doc = " `CCRandomCopyBytes` manages a CSPRNG which is seeded from the kernel's CSPRNG."] # ! [doc = " We use `CCRandomGenerateBytes` instead of `SecCopyBytes` because it is accessible via"] # ! [doc = " `libSystem` (libc) while the other needs to link to `Security.framework`."] # ! [doc = ""] # ! [doc = " Note that technically, `arc4random_buf` is available as well, but that calls"] # ! [doc = " into the same system service anyway, and `CCRandomGenerateBytes` has been"] # ! [doc = " proven to be App Store-compatible."] use split_decls_genesis :: ourprelude :: * ; pub fn fill_bytes (bytes : & mut [u8]) { let ret = unsafe { libc :: CCRandomGenerateBytes (bytes . as_mut_ptr () . cast () , bytes . len ()) } ; assert_eq ! (ret , libc :: kCCSuccess , "failed to generate random data") ; }

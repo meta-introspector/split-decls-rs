@@ -1,11 +1,1 @@
-
-macro_rules! panic_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function panic in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    panic_introspect!();
-    # [panic_handler] fn panic (_ : & core :: panic :: PanicInfo < '_ >) -> ! { loop { } }
-}
+# ! [doc = " This is needed for tests on targets that require a `#[panic_handler]` function"] # ! [no_std] use split_decls_genesis :: ourprelude :: * ; #[panic_handler] fn panic (_ : & core :: panic :: PanicInfo < '_ >) -> ! { loop { } }

@@ -1,4 +1,1 @@
-mkuse!{use crate :: os :: raw :: c_void ;}
-mkitem!{# [stable (feature = "raw_ext" , since = "1.1.0")] pub type HANDLE = * mut c_void ;}
-mkitem!{# [cfg (target_pointer_width = "32")] # [doc (cfg (all ()))] # [stable (feature = "raw_ext" , since = "1.1.0")] pub type SOCKET = u32 ;}
-mkitem!{# [cfg (target_pointer_width = "64")] # [doc (cfg (all ()))] # [stable (feature = "raw_ext" , since = "1.1.0")] pub type SOCKET = u64 ;}
+# ! [doc = " Windows-specific primitives."] # ! [stable (feature = "raw_ext" , since = "1.1.0")] use split_decls_genesis :: ourprelude :: * ; use crate :: os :: raw :: c_void ; #[stable (feature = "raw_ext" , since = "1.1.0")] pub type HANDLE = * mut c_void ; #[cfg (target_pointer_width = "32")] #[doc (cfg (all ()))] #[stable (feature = "raw_ext" , since = "1.1.0")] pub type SOCKET = u32 ; #[cfg (target_pointer_width = "64")] #[doc (cfg (all ()))] #[stable (feature = "raw_ext" , since = "1.1.0")] pub type SOCKET = u64 ;

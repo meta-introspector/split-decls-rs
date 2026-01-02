@@ -1,13 +1,4 @@
-
-macro_rules! __rust_probestack_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function __rust_probestack in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    __rust_probestack_introspect!();
-    # [cfg (target_arch = "x86_64")] # [unsafe (naked)] # [rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
+# ! [doc = " This module defines the `__rust_probestack` intrinsic which is used in the"] # ! [doc = " implementation of \"stack probes\" on certain platforms."] # ! [doc = ""] # ! [doc = " The purpose of a stack probe is to provide a static guarantee that if a"] # ! [doc = " thread has a guard page then a stack overflow is guaranteed to hit that"] # ! [doc = " guard page. If a function did not have a stack probe then there's a risk of"] # ! [doc = " having a stack frame *larger* than the guard page, so a function call could"] # ! [doc = " skip over the guard page entirely and then later hit maybe the heap or"] # ! [doc = " another thread, possibly leading to security vulnerabilities such as [The"] # ! [doc = " Stack Clash], for example."] # ! [doc = ""] # ! [doc = " [The Stack Clash]: https://blog.qualys.com/securitylabs/2017/06/19/the-stack-clash"] # ! [doc = ""] # ! [doc = " The `__rust_probestack` is called in the prologue of functions whose stack"] # ! [doc = " size is larger than the guard page, for example larger than 4096 bytes on"] # ! [doc = " x86. This function is then responsible for \"touching\" all pages relevant to"] # ! [doc = " the stack to ensure that that if any of them are the guard page we'll hit"] # ! [doc = " them guaranteed."] # ! [doc = ""] # ! [doc = " The precise ABI for how this function operates is defined by LLVM. There's"] # ! [doc = " no real documentation as to what this is, so you'd basically need to read"] # ! [doc = " the LLVM source code for reference. Often though the test cases can be"] # ! [doc = " illuminating as to the ABI that's generated, or just looking at the output"] # ! [doc = " of `llc`."] # ! [doc = ""] # ! [doc = " Note that `#[naked]` is typically used here for the stack probe because the"] # ! [doc = " ABI corresponds to no actual ABI."] # ! [doc = ""] # ! [doc = " Finally it's worth noting that at the time of this writing LLVM only has"] # ! [doc = " support for stack probes on x86 and x86_64. There's no support for stack"] # ! [doc = " probes on any other architecture like ARM or PowerPC64. LLVM I'm sure would"] # ! [doc = " be more than welcome to accept such a change!"] # ! [cfg (not (feature = "mangled-names"))] # ! [cfg (not (any (windows , target_os = "cygwin")))] # ! [cfg (any (target_arch = "x86_64" , target_arch = "x86"))] use split_decls_genesis :: ourprelude :: * ; #[cfg (target_arch = "x86_64")] #[unsafe (naked)] #[rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
             .cfi_startproc
             pushq  %rbp
             .cfi_adjust_cfa_offset 8
@@ -54,7 +45,7 @@ mkfn!{
             leave
             .cfi_def_cfa_register %rsp
             .cfi_adjust_cfa_offset -8
-    " , # [cfg (not (all (target_env = "sgx" , target_vendor = "fortanix")))] "       ret" , # [cfg (all (target_env = "sgx" , target_vendor = "fortanix"))] "
+    " , #[cfg (not (all (target_env = "sgx" , target_vendor = "fortanix")))] "       ret" , #[cfg (all (target_env = "sgx" , target_vendor = "fortanix"))] "
             // for this target, [manually patch for LVI].
             //
             // [manually patch for LVI]: https://software.intel.com/security-software-guidance/insights/deep-dive-load-value-injection#specialinstructions
@@ -63,18 +54,7 @@ mkfn!{
             jmp *%r11
     " , "
             .cfi_endproc
-    " , options (att_syntax)) }
-}
-
-macro_rules! __rust_probestack_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function __rust_probestack in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    __rust_probestack_introspect!();
-    # [cfg (all (target_arch = "x86" , not (target_os = "uefi")))] # [unsafe (naked)] # [rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
+    " , options (att_syntax)) } #[cfg (all (target_arch = "x86" , not (target_os = "uefi")))] #[unsafe (naked)] #[rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
             .cfi_startproc
             push   %ebp
             .cfi_adjust_cfa_offset 4
@@ -104,18 +84,7 @@ mkfn!{
             .cfi_adjust_cfa_offset -4
             ret
             .cfi_endproc
-    " , options (att_syntax)) }
-}
-
-macro_rules! __rust_probestack_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function __rust_probestack in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    __rust_probestack_introspect!();
-    # [cfg (all (target_arch = "x86" , target_os = "uefi"))] # [unsafe (naked)] # [rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
+    " , options (att_syntax)) } #[cfg (all (target_arch = "x86" , target_os = "uefi"))] #[unsafe (naked)] #[rustc_std_internal_symbol] pub unsafe extern "custom" fn __rust_probestack () { core :: arch :: naked_asm ! ("
             .cfi_startproc
             push   %ebp
             .cfi_adjust_cfa_offset 4
@@ -151,4 +120,3 @@ mkfn!{
             ret
             .cfi_endproc
     " , options (att_syntax)) }
-}

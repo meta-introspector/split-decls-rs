@@ -1,1 +1,1 @@
-mkuse!{pub use rustc_driver_impl :: * ;}
+# ! [allow (internal_features)] # ! [doc (rust_logo)] # ! [feature (rustdoc_internals)] use split_decls_genesis :: ourprelude :: * ; pub use rustc_driver_impl :: * ;

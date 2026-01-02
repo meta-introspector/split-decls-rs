@@ -1,13 +1,1 @@
-mkuse!{use super :: auxvec ;}
-mkuse!{use crate :: detect :: { Feature , bit , cache } ;}
-
-macro_rules! detect_features_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function detect_features in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    detect_features_introspect!();
-    # [doc = " Try to read the features from the auxiliary vector."] pub (crate) fn detect_features () -> cache :: Initializer { let mut value = cache :: Initializer :: default () ; let enable_feature = | value : & mut cache :: Initializer , f , enable | { if enable { value . set (f as u32) ; } } ; if let Ok (auxv) = auxvec :: auxv () { enable_feature (& mut value , Feature :: i8mm , bit :: test (auxv . hwcap , 27)) ; enable_feature (& mut value , Feature :: dotprod , bit :: test (auxv . hwcap , 24)) ; enable_feature (& mut value , Feature :: neon , bit :: test (auxv . hwcap , 12)) ; enable_feature (& mut value , Feature :: pmull , bit :: test (auxv . hwcap2 , 1)) ; enable_feature (& mut value , Feature :: crc , bit :: test (auxv . hwcap2 , 4)) ; enable_feature (& mut value , Feature :: aes , bit :: test (auxv . hwcap2 , 0)) ; enable_feature (& mut value , Feature :: sha2 , bit :: test (auxv . hwcap2 , 2) && bit :: test (auxv . hwcap2 , 3) ,) ; return value ; } value }
-}
+# ! [doc = " Run-time feature detection for ARM on Linux."] use split_decls_genesis :: ourprelude :: * ; use super :: auxvec ; use crate :: detect :: { Feature , bit , cache } ; #[doc = " Try to read the features from the auxiliary vector."] pub (crate) fn detect_features () -> cache :: Initializer { let mut value = cache :: Initializer :: default () ; let enable_feature = | value : & mut cache :: Initializer , f , enable | { if enable { value . set (f as u32) ; } } ; if let Ok (auxv) = auxvec :: auxv () { enable_feature (& mut value , Feature :: i8mm , bit :: test (auxv . hwcap , 27)) ; enable_feature (& mut value , Feature :: dotprod , bit :: test (auxv . hwcap , 24)) ; enable_feature (& mut value , Feature :: neon , bit :: test (auxv . hwcap , 12)) ; enable_feature (& mut value , Feature :: pmull , bit :: test (auxv . hwcap2 , 1)) ; enable_feature (& mut value , Feature :: crc , bit :: test (auxv . hwcap2 , 4)) ; enable_feature (& mut value , Feature :: aes , bit :: test (auxv . hwcap2 , 0)) ; enable_feature (& mut value , Feature :: sha2 , bit :: test (auxv . hwcap2 , 2) && bit :: test (auxv . hwcap2 , 3) ,) ; return value ; } value }

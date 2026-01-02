@@ -1,2 +1,1 @@
-mkuse!{pub use core :: * ;}
-mkuse!{use compiler_builtins as _ ;}
+# ! [feature (no_core)] # ! [no_core] use split_decls_genesis :: ourprelude :: * ; pub use core :: * ; use compiler_builtins as _ ;

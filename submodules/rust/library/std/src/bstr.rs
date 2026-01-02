@@ -1,1 +1,1 @@
-mkuse!{# [unstable (feature = "bstr" , issue = "134915")] pub use alloc :: bstr :: { ByteStr , ByteString } ;}
+# ! [doc = " The `ByteStr` and `ByteString` types and trait implementations."] use split_decls_genesis :: ourprelude :: * ; #[unstable (feature = "bstr" , issue = "134915")] pub use alloc :: bstr :: { ByteStr , ByteString } ;

@@ -1,11 +1,1 @@
-
-macro_rules! fill_bytes_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function fill_bytes in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    fill_bytes_introspect!();
-    pub fn fill_bytes (bytes : & mut [u8]) { for chunk in bytes . chunks_mut (256) { let r = unsafe { libc :: getentropy (chunk . as_mut_ptr () . cast () , chunk . len ()) } ; assert_ne ! (r , - 1 , "failed to generate random data") ; } }
-}
+# ! [doc = " Random data generation through `getentropy`."] # ! [doc = ""] # ! [doc = " Since issue 8 (2024), the POSIX specification mandates the existence of the"] # ! [doc = " `getentropy` function, which fills a slice of up to `GETENTROPY_MAX` bytes"] # ! [doc = " (256 on all known platforms) with random data. Unfortunately, it's only"] # ! [doc = " meant to be used to seed other CPRNGs, which we don't have, so we only use"] # ! [doc = " it where `arc4random_buf` and friends aren't available or secure (currently"] # ! [doc = " that's only the case on Emscripten)."] use split_decls_genesis :: ourprelude :: * ; pub fn fill_bytes (bytes : & mut [u8]) { for chunk in bytes . chunks_mut (256) { let r = unsafe { libc :: getentropy (chunk . as_mut_ptr () . cast () , chunk . len ()) } ; assert_ne ! (r , - 1 , "failed to generate random data") ; } }

@@ -7,6 +7,9 @@
 #![feature(optimize_attribute)]
 #![feature(allocator_api)]
 
+pub mod ourprelude;
+pub mod build_lib;
+
 // Minimal external crates
 pub mod compiler_feedback;
 pub mod self_improving_compiler;

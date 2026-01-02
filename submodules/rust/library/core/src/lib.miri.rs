@@ -1,2 +1,1 @@
-mkitem!{extern crate core as realcore ;}
-mkuse!{pub use realcore :: * ;}
+# ! [doc = " Grep bootstrap for `MIRI_REPLACE_LIBRS_IF_NOT_TEST` to learn what this is about."] # ! [no_std] use split_decls_genesis :: ourprelude :: * ; extern crate core as realcore ; pub use realcore :: * ;

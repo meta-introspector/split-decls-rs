@@ -1,0 +1,19 @@
+[package]
+name = "manual_tests"
+version = "0.1.0"
+edition = "2021"
+build = false
+
+[workspace]
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "parsing"] }
+split-decls-genesis = { path = ".." }
+
+[[bin]]
+name = "test_single"
+path = "src/test_single.rs"
+
+[[bin]]
+name = "test_case_expected_expression_need_type_info_rs"
+path = "../test_cases/test_case_expected_expression_need_type_info_rs.rs"

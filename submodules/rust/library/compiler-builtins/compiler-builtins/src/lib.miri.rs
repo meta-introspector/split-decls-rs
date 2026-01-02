@@ -1,2 +1,1 @@
-mkitem!{extern crate compiler_builtins as real ;}
-mkuse!{pub use real :: * ;}
+# ! [doc = " Grep bootstrap for `MIRI_REPLACE_LIBRS_IF_NOT_TEST` to learn what this is about."] # ! [no_std] # ! [feature (rustc_private)] use split_decls_genesis :: ourprelude :: * ; extern crate compiler_builtins as real ; pub use real :: * ;

@@ -1,18 +1,1 @@
-mkmod!{cfi, { 
-                getname!(cfi);
-                getsrc!(cfi);
-                getpath!(cfi);
-                get_deps!(cfi);
-                get_crates!(cfi);
-                mkinclude!(cfi);
-                 
-            }}
-mkmod!{kcfi, { 
-                getname!(kcfi);
-                getsrc!(kcfi);
-                getpath!(kcfi);
-                get_deps!(kcfi);
-                get_crates!(kcfi);
-                mkinclude!(kcfi);
-                 
-            }}
+# ! [doc = " Sanitizers support for the Rust compiler."] # ! [doc = ""] # ! [doc = " This crate contains the source code for providing support for the sanitizers to the Rust"] # ! [doc = " compiler."] use split_decls_genesis :: ourprelude :: * ; pub mod cfi ; pub mod kcfi ;

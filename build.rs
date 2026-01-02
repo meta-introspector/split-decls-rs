@@ -1,4 +1,5 @@
-use syn::{parse_file, Item};
+use syn::{parse_file, Item, File};
+use quote::quote;
 use std::fs;
 use std::path::Path;
 use std::collections::HashMap;
@@ -6,6 +7,194 @@ use std::sync::{Mutex, LazyLock};
 
 // Global error type counters for sampling
 static ERROR_COUNTERS: LazyLock<Mutex<HashMap<String, usize>>> = LazyLock::new(|| Mutex::new(HashMap::new()));
+
+// Global audit log
+static AUDIT_LOG: LazyLock<Mutex<Vec<String>>> = LazyLock::new(|| Mutex::new(Vec::new()));
+
+fn log_audit(message: String) {
+    if let Ok(mut log) = AUDIT_LOG.lock() {
+        log.push(message);
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct TransformationStep {
+    pub name: String,
+    pub content: String,
+    pub success: bool,
+    pub error: Option<String>,
+}
+
+#[derive(Debug)]
+pub struct ProcessingAudit {
+    pub original_content: String,
+    pub steps: Vec<TransformationStep>,
+    pub final_success: bool,
+    pub bisection_log: Vec<String>,
+}
+
+impl ProcessingAudit {
+    pub fn new(content: &str) -> Self {
+        Self {
+            original_content: content.to_string(),
+            steps: Vec::new(),
+            final_success: false,
+            bisection_log: Vec::new(),
+        }
+    }
+
+    pub fn add_step(&mut self, name: &str, content: String, success: bool, error: Option<String>) {
+        self.steps.push(TransformationStep {
+            name: name.to_string(),
+            content,
+            success,
+            error,
+        });
+    }
+
+    pub fn test_parse(&self, content: &str) -> (bool, Option<String>) {
+        match parse_file(content) {
+            Ok(_) => (true, None),
+            Err(e) => (false, Some(e.to_string())),
+        }
+    }
+
+    pub fn bisect_transformations(&mut self) -> Result<String, String> {
+        self.bisection_log.push("Starting bisection process".to_string());
+        
+        // Test original
+        let (original_ok, _) = self.test_parse(&self.original_content);
+        if !original_ok {
+            return Err("Original content doesn't parse".to_string());
+        }
+
+        // Try all transformations together first
+        let mut current = self.original_content.clone();
+        let mut successful_steps = Vec::new();
+
+        // Apply each transformation one by one and test
+        for (i, step) in self.steps.iter().enumerate() {
+            let test_content = apply_transformation_by_name(&current, &step.name);
+            let (parse_ok, parse_error) = self.test_parse(&test_content);
+            
+            if parse_ok {
+                self.bisection_log.push(format!("✅ Step {}: {} - SUCCESS", i+1, step.name));
+                current = test_content;
+                successful_steps.push(step.name.clone());
+            } else {
+                self.bisection_log.push(format!("❌ Step {}: {} - FAILED: {}", 
+                    i+1, step.name, parse_error.unwrap_or("Unknown error".to_string())));
+                // Skip this transformation
+            }
+        }
+
+        self.bisection_log.push(format!("Bisection complete. Applied {} out of {} transformations", 
+            successful_steps.len(), self.steps.len()));
+
+        Ok(current)
+    }
+}
+
+pub fn add_prelude(content: &str) -> String {
+    match add_prelude_syn(content) {
+        Ok(result) => result,
+        Err(_) => {
+            // Fallback to original method if syn parsing fails
+            format!("use split_decls_genesis::ourprelude::*;\n{}", content)
+        }
+    }
+}
+
+fn add_prelude_syn(content: &str) -> Result<String, syn::Error> {
+    let mut file: File = parse_file(content)?;
+    
+    // Create the prelude use statement
+    let prelude_use: Item = syn::parse_quote! {
+        use split_decls_genesis::ourprelude::*;
+    };
+    
+    // Insert at the beginning of items (after attributes and comments)
+    file.items.insert(0, prelude_use);
+    
+    Ok(quote!(#file).to_string())
+}
+
+pub fn fix_file_paths(content: &str) -> String {
+    content.replace("\"../messages.ftl\"", "\"messages.ftl\"")
+}
+
+pub fn fix_env_vars(content: &str) -> String {
+    content.replace("env ! (\"CFG_RELEASE_CHANNEL\")", "\"dev\"")
+}
+
+pub fn fix_attribute_spacing(content: &str) -> String {
+    content.replace("# [", "#[")
+}
+
+pub fn remove_crate_attrs(content: &str) -> String {
+    content.replace("# [allow (internal_features)] # [allow (rustc :: untranslatable_diagnostic)] # [doc (html_root_url = \"https://doc.rust-lang.org/nightly/nightly-rustc/\")] # [doc (rust_logo)] # [feature (decl_macro)] # [feature (panic_backtrace_config)] # [feature (panic_update_hook)] # [feature (rustdoc_internals)] # [feature (try_blocks)] ", "")
+}
+
+fn apply_transformation_by_name(content: &str, name: &str) -> String {
+    match name {
+        "add_prelude" => add_prelude(content),
+        "fix_file_paths" => fix_file_paths(content),
+        "fix_env_vars" => fix_env_vars(content),
+        "fix_attribute_spacing" => fix_attribute_spacing(content),
+        "remove_crate_attrs" => remove_crate_attrs(content),
+        _ => content.to_string(),
+    }
+}
+
+pub fn process_content_with_audit(content: &str) -> Result<(String, ProcessingAudit), Box<dyn std::error::Error>> {
+    let mut audit = ProcessingAudit::new(content);
+    
+    // Define transformation steps
+    let transformations = vec![
+        "add_prelude",
+        "fix_file_paths", 
+        "fix_env_vars",
+        "fix_attribute_spacing",
+        "remove_crate_attrs",
+    ];
+
+    // Test original content
+    let (original_ok, original_error) = audit.test_parse(content);
+    if !original_ok {
+        return Err(format!("Original content doesn't parse: {}", 
+            original_error.unwrap_or("Unknown error".to_string())).into());
+    }
+
+    // Apply transformations and record each step
+    let mut current = content.to_string();
+    for transform_name in &transformations {
+        let transformed = apply_transformation_by_name(&current, transform_name);
+        let (parse_ok, parse_error) = audit.test_parse(&transformed);
+        
+        audit.add_step(transform_name, transformed.clone(), parse_ok, parse_error);
+        
+        if parse_ok {
+            current = transformed;
+        }
+    }
+
+    // Try to parse the final result
+    let (final_ok, _) = audit.test_parse(&current);
+    
+    if !final_ok {
+        // If final result doesn't parse, run bisection
+        match audit.bisect_transformations() {
+            Ok(bisected_result) => {
+                audit.final_success = true;
+                Ok((bisected_result, audit))
+            }
+            Err(e) => Err(e.into())
+        }
+    } else {
+        audit.final_success = true;
+        Ok((current, audit))
+    }
+}
 
 fn wrap_item(item: &Item) -> String {
     match item {
@@ -94,41 +283,74 @@ fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::err
     // Create test_cases directory if it doesn't exist
     fs::create_dir_all("test_cases")?;
     
-    // Try to find the problematic line by parsing line by line
-    let lines: Vec<&str> = content.lines().collect();
-    let mut minimal_content = String::new();
-    let mut error_line = None;
-    
-    // Try to isolate the error by binary search approach
-    for (i, _line) in lines.iter().enumerate() {
-        let test_content = lines[0..=i].join("\n");
-        if let Err(_) = syn::parse_file(&test_content) {
-            error_line = Some(i);
-            // Include a few lines around the error for context
-            let start = i.saturating_sub(3);
-            let end = (i + 4).min(lines.len());
-            minimal_content = lines[start..end].join("\n");
-            break;
-        }
-    }
-    
-    let test_case_content = format!(
-        "// MINIMAL TEST CASE for parsing failure in: {}\n\
-         // Error: {}\n\
-         // Error type: {}\n\
-         // Sample #{} of 3\n\
-         // Problematic line: {}\n\
-         \n\
-         {}\n",
-        file_path,
+    let test_content = format!(
+        r#"// Test case for parsing error: {}
+// Original file: {}
+// Error type: {}
+// Sample #{} of 3
+
+use syn::parse_file;
+use split_decls_genesis::build_lib::*;
+use std::fs;
+
+macro_rules! runbuild {{
+    ($source_path:expr) => {{
+        {{
+            println!("🔧 Running build process on: {{}}", $source_path);
+            
+            // Read original source
+            let original = fs::read_to_string($source_path).expect("Failed to read source file");
+            println!("1️⃣ Original source loaded ({{}} bytes)", original.len());
+            
+            // Test original parsing
+            match parse_file(&original) {{
+                Ok(_) => println!("✅ Original parses fine"),
+                Err(e) => {{
+                    println!("❌ Original source broken: {{}}", e);
+                    return;
+                }}
+            }}
+            
+            // Apply transformations step by step
+            println!("\\n2️⃣ Adding prelude...");
+            let step2 = add_prelude(&original);
+            match parse_file(&step2) {{
+                Ok(_) => println!("✅ After prelude: Parse OK"),
+                Err(e) => {{
+                    println!("❌ Prelude broke parsing: {{}}", e);
+                    return;
+                }}
+            }}
+            
+            println!("\\n3️⃣ Running full process_content...");
+            match process_content(&original) {{
+                Ok(result) => {{
+                    println!("✅ Full process completed ({{}} bytes)", result.len());
+                    
+                    // Test final result parsing
+                    match parse_file(&result) {{
+                        Ok(_) => println!("✅ Final result parses fine"),
+                        Err(e) => println!("❌ Final result broken: {{}}", e),
+                    }}
+                }}
+                Err(e) => println!("❌ Process failed: {{}}", e),
+            }}
+        }}
+    }};
+}}
+
+fn main() {{
+    runbuild!("{}");
+}}
+"#,
         error_msg.lines().next().unwrap_or("unknown error"),
+        file_path,
         error_type,
         *count,
-        error_line.map_or("unknown".to_string(), |l| format!("line {}", l + 1)),
-        minimal_content
+        file_path
     );
     
-    fs::write(&test_case_path, test_case_content)?;
+    fs::write(&test_case_path, test_content)?;
     println!("📝 Created test case: {} (sample {}/3)", test_case_name, *count);
     
     Ok(())
@@ -137,32 +359,40 @@ fn create_minimal_test_case(file_path: &str, content: &str, error: &dyn std::err
 fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     let content = fs::read_to_string(file_path)?;
     
-    // Include macro definitions from macro_wrappers.rs
-    let macro_defs = fs::read_to_string("src/macro_wrappers.rs")?;
-    let content_with_macros = format!("{}\n{}", macro_defs, content);
-    
-    let ast = parse_file(&content_with_macros)?;
-    
-    let wrapped_items: Vec<_> = ast.items.iter().map(wrap_item).collect();
-    let mut result = wrapped_items.join("\n");
-    
-    // Fix file paths in the generated content
-    result = result.replace("\"../messages.ftl\"", "\"messages.ftl\"");
-    
-    // Fix environment variable references
-    result = result.replace("env ! (\"CFG_RELEASE_CHANNEL\")", "\"dev\"");
-    
-    // Fix crate-level attributes - remove them completely since they're now in unified_rustc_wrapped.rs
-    result = result.replace("# [allow (internal_features)] # [allow (rustc :: untranslatable_diagnostic)] # [doc (html_root_url = \"https://doc.rust-lang.org/nightly/nightly-rustc/\")] # [doc (rust_logo)] # [feature (decl_macro)] # [feature (panic_backtrace_config)] # [feature (panic_update_hook)] # [feature (rustdoc_internals)] # [feature (try_blocks)] ", "");
-    
-    // Fix inner doc comments - convert //! to //
-    result = result.replace("//!", "//");
-    
-    // Fix attribute spacing - remove spaces in attributes
-    result = result.replace("# [", "#[");
-    result = result.replace("# !", "#!");
-    
-    Ok(result)
+    // Use the new auditing system
+    match process_content_with_audit(&content) {
+        Ok((result, audit)) => {
+            // Log audit results
+            let success_count = audit.steps.iter().filter(|s| s.success).count();
+            let total_count = audit.steps.len();
+            
+            log_audit(format!("📁 {}: {}/{} transformations successful, final: {}", 
+                file_path, success_count, total_count, audit.final_success));
+            
+            // Log any failed transformations
+            for step in &audit.steps {
+                if !step.success {
+                    if let Some(ref error) = step.error {
+                        log_audit(format!("  ❌ {}: {}", step.name, error));
+                    }
+                }
+            }
+            
+            // Log bisection if it occurred
+            if !audit.bisection_log.is_empty() {
+                log_audit(format!("  🔍 Bisection performed for {}", file_path));
+                for log_entry in &audit.bisection_log {
+                    log_audit(format!("    {}", log_entry));
+                }
+            }
+            
+            Ok(result)
+        }
+        Err(e) => {
+            log_audit(format!("❌ {}: FAILED - {}", file_path, e));
+            Err(e)
+        }
+    }
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -233,5 +463,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("Missing symbol map".into());
     }
     
+    // Write audit log
+    write_audit_log()?;
+    
+    Ok(())
+}
+
+fn write_audit_log() -> Result<(), Box<dyn std::error::Error>> {
+    if let Ok(log) = AUDIT_LOG.lock() {
+        if !log.is_empty() {
+            println!("📝 Writing audit log to build_audit.log...");
+            let audit_content = log.join("\n");
+            fs::write("build_audit.log", audit_content)?;
+            
+            // Print summary
+            let total_files = log.iter().filter(|line| line.starts_with("📁")).count();
+            let successful_files = log.iter().filter(|line| line.contains("final: true")).count();
+            let bisection_files = log.iter().filter(|line| line.contains("🔍 Bisection performed")).count();
+            
+            println!("📊 Build Audit Summary:");
+            println!("  Total files processed: {}", total_files);
+            println!("  Successful files: {}", successful_files);
+            println!("  Files requiring bisection: {}", bisection_files);
+            println!("  Success rate: {:.1}%", (successful_files as f64 / total_files as f64) * 100.0);
+        }
+    }
     Ok(())
 }

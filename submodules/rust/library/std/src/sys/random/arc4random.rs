@@ -1,13 +1,1 @@
-mkuse!{# [cfg (not (any (target_os = "haiku" , target_os = "illumos" , target_os = "solaris" , target_os = "vita" ,)))] use libc :: arc4random_buf ;}
-mkitem!{# [cfg (any (target_os = "haiku" , target_os = "illumos" , target_os = "solaris" , target_os = "vita" ,))] # [cfg_attr (target_os = "haiku" , link (name = "bsd"))] unsafe extern "C" { fn arc4random_buf (buf : * mut core :: ffi :: c_void , nbytes : libc :: size_t) ; }}
-
-macro_rules! fill_bytes_introspect {
-    () => {
-        emit_message!("📊 INTROSPECT: Function fill_bytes in module {}", module_path!());
-    };
-}
-
-mkfn!{
-    fill_bytes_introspect!();
-    pub fn fill_bytes (bytes : & mut [u8]) { unsafe { arc4random_buf (bytes . as_mut_ptr () . cast () , bytes . len ()) } }
-}
+# ! [doc = " Random data generation with `arc4random_buf`."] # ! [doc = ""] # ! [doc = " Contrary to its name, `arc4random` doesn't actually use the horribly-broken"] # ! [doc = " RC4 cypher anymore, at least not on modern systems, but rather something"] # ! [doc = " like ChaCha20 with continual reseeding from the OS. That makes it an ideal"] # ! [doc = " source of large quantities of cryptographically secure data, which is exactly"] # ! [doc = " what we need for `DefaultRandomSource`. Unfortunately, it's not available"] # ! [doc = " on all UNIX systems, most notably Linux (until recently, but it's just a"] # ! [doc = " wrapper for `getrandom`. Since we need to hook into `getrandom` directly"] # ! [doc = " for `HashMap` keys anyway, we just keep our version)."] use split_decls_genesis :: ourprelude :: * ; #[cfg (not (any (target_os = "haiku" , target_os = "illumos" , target_os = "solaris" , target_os = "vita" ,)))] use libc :: arc4random_buf ; #[cfg (any (target_os = "haiku" , target_os = "illumos" , target_os = "solaris" , target_os = "vita" ,))] #[cfg_attr (target_os = "haiku" , link (name = "bsd"))] unsafe extern "C" { fn arc4random_buf (buf : * mut core :: ffi :: c_void , nbytes : libc :: size_t) ; } pub fn fill_bytes (bytes : & mut [u8]) { unsafe { arc4random_buf (bytes . as_mut_ptr () . cast () , bytes . len ()) } }

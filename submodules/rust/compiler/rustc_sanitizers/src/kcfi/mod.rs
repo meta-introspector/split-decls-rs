@@ -1,10 +1,1 @@
-mkmod!{typeid, { 
-                getname!(typeid);
-                getsrc!(typeid);
-                getpath!(typeid);
-                get_deps!(typeid);
-                get_crates!(typeid);
-                mkinclude!(typeid);
-                 
-            }}
-mkuse!{pub use crate :: kcfi :: typeid :: { TypeIdOptions , typeid_for_fnabi , typeid_for_instance } ;}
+# ! [doc = " LLVM Kernel Control Flow Integrity (KCFI) and cross-language LLVM KCFI support for the Rust"] # ! [doc = " compiler."] # ! [doc = ""] # ! [doc = " For more information about LLVM KCFI and cross-language LLVM KCFI support for the Rust compiler,"] # ! [doc = " see the tracking issue #123479."] use split_decls_genesis :: ourprelude :: * ; pub mod typeid ; pub use crate :: kcfi :: typeid :: { TypeIdOptions , typeid_for_fnabi , typeid_for_instance } ;
