@@ -13,7 +13,17 @@ pub fn get_use_matrix() -> HashMap<String, Vec<String>> {
 // Replace problematic print statements with emit_message
 macro_rules! emit_message {
     ($($arg:tt)*) => {
-        // Silent message emission for compilation compatibility
+        {
+            use std::fs::OpenOptions;
+            use std::io::Write;
+            let message = format!($($arg)*);
+            if let Ok(mut file) = OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open("macro_report.txt") {
+                let _ = writeln!(file, "{}", message);
+            }
+        }
     };
 }
 
@@ -305,7 +315,7 @@ macro_rules! mkitem {
 macro_rules! mkmod {
     // Handle introspection pattern: mkmod!{name, { content }}
     ($name:ident, { $($content:tt)* }) => {
-        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
+        emit_message!("MOD|{}|{}", module_path!(), stringify!($name));
         mod $name {
             const MODULE_NAME: &str = stringify!($name);
             $($content)*
@@ -313,14 +323,14 @@ macro_rules! mkmod {
     };
     // Handle standard patterns
     (pub mod $name:ident { $($content:tt)* }) => {
-        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
+        emit_message!("MOD|{}|{}", module_path!(), stringify!($name));
         pub mod $name {
             const MODULE_NAME: &str = stringify!($name);
             $($content)*
         }
     };
     (mod $name:ident { $($content:tt)* }) => {
-        compile_error!(concat!("MOD|", module_path!(), "|", stringify!($name)));
+        emit_message!("MOD|{}|{}", module_path!(), stringify!($name));
         mod $name {
             const MODULE_NAME: &str = stringify!($name);
             $($content)*
@@ -331,7 +341,8 @@ macro_rules! mkmod {
 #[macro_export]
 macro_rules! mkuse {
     ($use_stmt:item) => { 
-        compile_error!(concat!("USE|", module_path!(), "|", stringify!($use_stmt)));
+        emit_message!("USE|{}|{}", module_path!(), stringify!($use_stmt));
+        $use_stmt
     };
 }
 

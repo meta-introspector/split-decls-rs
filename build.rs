@@ -1,6 +1,11 @@
 use syn::{parse_file, Item};
 use std::fs;
 use std::path::Path;
+use std::collections::HashMap;
+use std::sync::{Mutex, LazyLock};
+
+// Global error type counters for sampling
+static ERROR_COUNTERS: LazyLock<Mutex<HashMap<String, usize>>> = LazyLock::new(|| Mutex::new(HashMap::new()));
 
 fn wrap_item(item: &Item) -> String {
     match item {
