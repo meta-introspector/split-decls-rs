@@ -1,23 +1,17 @@
 use std::collections::{HashMap, HashSet, VecDeque};
-use std::env;
 use std::fs;
-use std::path::Path;
-use std::process::Command;
 use serde_json::Value;
-use syn::{parse_file, visit::Visit};
-
-const AUTO_FIX_CACHE_FILE: &str = "autofix_cache.json";
+use syn::{parse_file, visit::Visit, Item};
 
 #[derive(Debug)]
-struct UnifiedDriver {
+struct DependencyResolver {
     symbol_map: HashMap<String, Value>,
     processed_files: HashMap<String, String>,
     resolved_order: Vec<String>,
     included_crates: HashSet<String>,
-    autofix_cache: HashMap<String, String>,
 }
 
-impl UnifiedDriver {
+impl DependencyResolver {
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
         println!("🔄 Loading symbol map and processed files...");
         
@@ -27,23 +21,18 @@ impl UnifiedDriver {
         
         // Load all processed files
         let mut processed_files = HashMap::new();
-        if Path::new("submodules/rust/compiler").exists() {
-            for entry in fs::read_dir("submodules/rust/compiler")? {
-                let entry = entry?;
-                if entry.file_type()?.is_dir() {
-                    let crate_name = entry.file_name().to_string_lossy().to_string();
-                    let lib_path = entry.path().join("src/lib.rs");
-                    if lib_path.exists() {
-                        if let Ok(content) = fs::read_to_string(&lib_path) {
-                            processed_files.insert(crate_name, content);
-                        }
+        for entry in fs::read_dir("submodules/rust/compiler")? {
+            let entry = entry?;
+            if entry.file_type()?.is_dir() {
+                let crate_name = entry.file_name().to_string_lossy().to_string();
+                let lib_path = entry.path().join("src/lib.rs");
+                if lib_path.exists() {
+                    if let Ok(content) = fs::read_to_string(&lib_path) {
+                        processed_files.insert(crate_name, content);
                     }
                 }
             }
         }
-        
-        // Load autofix cache
-        let autofix_cache = load_autofix_cache();
         
         println!("✅ Loaded {} symbols and {} processed files", symbol_map.len(), processed_files.len());
         
@@ -52,15 +41,14 @@ impl UnifiedDriver {
             processed_files,
             resolved_order: Vec::new(),
             included_crates: HashSet::new(),
-            autofix_cache,
         })
     }
     
-    pub fn resolve_target_with_deps(&mut self, target: &str) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn resolve_complete_dependency_tree(&mut self, target: &str) -> Result<String, Box<dyn std::error::Error>> {
         println!("🎯 Resolving complete dependency tree for: {}", target);
         
-        // Step 1: Find all dependencies recursively with AST analysis
-        let all_deps = self.find_all_dependencies_comprehensive(target)?;
+        // Step 1: Find all dependencies recursively
+        let all_deps = self.find_all_dependencies(target)?;
         println!("📊 Found {} total dependencies", all_deps.len());
         
         // Step 2: Topologically sort dependencies
@@ -68,22 +56,12 @@ impl UnifiedDriver {
         println!("🔄 Sorted {} dependencies in correct order", self.resolved_order.len());
         
         // Step 3: Generate complete code with all dependencies
-        let complete_code = self.generate_complete_code_with_includes(target)?;
+        let complete_code = self.generate_complete_code(target)?;
         
-        // Write complete code
-        fs::write("src/current.rs", &complete_code)?;
-        println!("✅ Generated complete resolved code: src/current.rs");
-        println!("📊 Included {} crates and {} dependencies", 
-                 self.included_crates.len(), 
-                 self.resolved_order.len());
-        
-        // Save autofix cache
-        save_autofix_cache(&self.autofix_cache);
-        
-        Ok(())
+        Ok(complete_code)
     }
     
-    fn find_all_dependencies_comprehensive(&mut self, target: &str) -> Result<HashSet<String>, Box<dyn std::error::Error>> {
+    fn find_all_dependencies(&self, target: &str) -> Result<HashSet<String>, Box<dyn std::error::Error>> {
         let mut all_deps = HashSet::new();
         let mut queue = VecDeque::new();
         queue.push_back(target.to_string());
@@ -95,7 +73,7 @@ impl UnifiedDriver {
             
             all_deps.insert(current.clone());
             
-            // Method 1: Get dependencies from symbol map
+            // Get dependencies from symbol map
             if let Some(entry) = self.symbol_map.get(&current) {
                 if let Some(deps) = entry.get("dependencies").and_then(|d| d.as_array()) {
                     for dep in deps {
@@ -104,16 +82,9 @@ impl UnifiedDriver {
                         }
                     }
                 }
-            } else {
-                // Method 2: Try auto-fix for missing symbols
-                if let Some(found_symbol) = self.auto_fix_missing_symbol(&current) {
-                    println!("🔧 AUTO-FIX: Found {} -> {}", current, found_symbol);
-                    queue.push_back(found_symbol);
-                    continue;
-                }
             }
             
-            // Method 3: AST analysis for additional dependencies
+            // Also analyze AST for additional dependencies
             if let Some(source_file) = self.get_source_file(&current) {
                 if let Ok(ast_deps) = self.extract_ast_dependencies(&source_file) {
                     for dep in ast_deps {
@@ -179,68 +150,49 @@ impl UnifiedDriver {
         Ok(())
     }
     
-    fn generate_complete_code_with_includes(&mut self, target: &str) -> Result<String, Box<dyn std::error::Error>> {
-        let mut complete_code = String::new();
+    fn generate_complete_code(&mut self, target: &str) -> Result<String, Box<dyn std::error::Error>> {
+        let mut code = String::new();
         
-        // Add header with all features
-        complete_code.push_str("#![recursion_limit = \"512\"]\n");
-        complete_code.push_str("#![allow(internal_features)]\n");
-        complete_code.push_str("#![allow(unused)]\n");
-        complete_code.push_str("#![allow(rustc::untranslatable_diagnostic)]\n");
-        complete_code.push_str("#![feature(rustc_private)]\n");
-        complete_code.push_str("#![feature(core_intrinsics)]\n");
-        complete_code.push_str("#![feature(decl_macro)]\n");
-        complete_code.push_str("#![feature(panic_backtrace_config)]\n");
-        complete_code.push_str("#![feature(panic_update_hook)]\n");
-        complete_code.push_str("#![feature(rustdoc_internals)]\n");
-        complete_code.push_str("#![feature(try_blocks)]\n\n");
+        // Add header
+        code.push_str("#![recursion_limit = \"512\"]\n");
+        code.push_str("#![allow(internal_features)]\n");
+        code.push_str("#![allow(unused)]\n");
+        code.push_str("#![feature(rustc_private)]\n\n");
         
         // Add all required extern crates
         let required_crates = self.find_required_crates()?;
         for crate_name in &required_crates {
-            complete_code.push_str(&format!("extern crate {};\n", crate_name));
+            code.push_str(&format!("extern crate {};\n", crate_name));
             self.included_crates.insert(crate_name.clone());
         }
-        complete_code.push_str("\n");
+        code.push_str("\n");
         
         // Include wrap_types with resolver macros
-        complete_code.push_str("// Custom macro to include processed rustc files\n");
-        complete_code.push_str("macro_rules! include_rustc {\n");
-        complete_code.push_str("    ($crate_name:ident, $file:ident) => {\n");
-        complete_code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/\", stringify!($file), \".rs\"));\n");
-        complete_code.push_str("    };\n");
-        complete_code.push_str("    ($crate_name:ident) => {\n");
-        complete_code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/lib.rs\"));\n");
-        complete_code.push_str("    };\n");
-        complete_code.push_str("}\n\n");
+        code.push_str("// Custom macro to include processed rustc files\n");
+        code.push_str("macro_rules! include_rustc {\n");
+        code.push_str("    ($crate_name:ident, $file:ident) => {\n");
+        code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/\", stringify!($file), \".rs\"));\n");
+        code.push_str("    };\n");
+        code.push_str("    ($crate_name:ident) => {\n");
+        code.push_str("        include!(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/submodules/rust/compiler/\", stringify!($crate_name), \"/src/lib.rs\"));\n");
+        code.push_str("    };\n");
+        code.push_str("}\n\n");
         
         // Include all dependencies in correct order
-        let mut included_count = 0;
         for dep in &self.resolved_order {
-            if let Some(entry) = self.symbol_map.get(dep) {
-                if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
-                    let file_path = format!("submodules/{}", source_file);
-                    if Path::new(&file_path).exists() {
-                        if let Ok(content) = fs::read_to_string(&file_path) {
-                            complete_code.push_str(&format!("// === {} ===\n", dep));
-                            complete_code.push_str(&content);
-                            complete_code.push_str("\n\n");
-                            included_count += 1;
-                        }
-                    }
-                }
+            if let Some(crate_name) = self.get_crate_name(dep) {
+                code.push_str(&format!("// === {} ===\n", dep));
+                code.push_str(&format!("include_rustc!({});\n\n", crate_name));
             }
         }
         
-        println!("📁 Included {} dependency files", included_count);
-        
         // Add target code
-        complete_code.push_str(&format!("// === TARGET: {} ===\n", target));
-        complete_code.push_str("fn main() {\n");
-        complete_code.push_str(&format!("    println!(\"Executing target: {}\");\n", target));
-        complete_code.push_str("}\n");
+        code.push_str(&format!("// === TARGET: {} ===\n", target));
+        if let Some(target_code) = self.get_target_code(target) {
+            code.push_str(&target_code);
+        }
         
-        Ok(complete_code)
+        Ok(code)
     }
     
     fn find_required_crates(&self) -> Result<Vec<String>, Box<dyn std::error::Error>> {
@@ -272,25 +224,15 @@ impl UnifiedDriver {
             .and_then(|path| fs::read_to_string(format!("submodules/{}", path)).ok())
     }
     
-    fn auto_fix_missing_symbol(&mut self, missing_symbol: &str) -> Option<String> {
-        // Check cache first
-        if let Some(cached_result) = self.autofix_cache.get(missing_symbol) {
-            return Some(cached_result.clone());
-        }
-        
-        // Fast partial matching
-        let partial_matches: Vec<_> = self.symbol_map.keys()
-            .filter(|key| key.contains(missing_symbol) || missing_symbol.contains(*key))
-            .take(10)
-            .collect();
-        
-        if let Some(best_match) = partial_matches.first() {
-            let result = (*best_match).clone();
-            self.autofix_cache.insert(missing_symbol.to_string(), result.clone());
-            return Some(result);
-        }
-        
-        None
+    fn get_crate_name(&self, symbol: &str) -> Option<&str> {
+        self.symbol_map.get(symbol)
+            .and_then(|entry| entry.get("crate_name"))
+            .and_then(|s| s.as_str())
+    }
+    
+    fn get_target_code(&self, target: &str) -> Option<String> {
+        // Generate the final target code
+        Some(format!("fn main() {{\n    {}();\n}}", target))
     }
 }
 
@@ -317,40 +259,36 @@ impl<'ast> Visit<'ast> for DependencyVisitor {
         }
         syn::visit::visit_item_use(self, node);
     }
-}
-
-fn load_autofix_cache() -> HashMap<String, String> {
-    if let Ok(content) = fs::read_to_string(AUTO_FIX_CACHE_FILE) {
-        serde_json::from_str(&content).unwrap_or_default()
-    } else {
-        HashMap::new()
-    }
-}
-
-fn save_autofix_cache(cache: &HashMap<String, String>) {
-    if let Ok(cache_data) = serde_json::to_string_pretty(cache) {
-        let _ = fs::write(AUTO_FIX_CACHE_FILE, cache_data);
-        println!("💾 Saved {} auto-fixes to cache", cache.len());
+    
+    fn visit_item_fn(&mut self, node: &'ast syn::ItemFn) {
+        // Extract function calls as potential dependencies
+        syn::visit::visit_item_fn(self, node);
     }
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = env::args().collect();
+    let args: Vec<String> = std::env::args().collect();
     if args.len() != 2 {
         eprintln!("Usage: {} <target_symbol>", args[0]);
-        eprintln!("Example: {} \"rustc_driver::main\"", args[0]);
         std::process::exit(1);
     }
     
     let target = &args[1];
-    let mut driver = UnifiedDriver::new()?;
+    let mut resolver = DependencyResolver::new()?;
     
-    println!("🚀 Starting unified dependency resolution...");
-    driver.resolve_target_with_deps(target)?;
+    println!("🚀 Starting complete dependency resolution...");
+    let complete_code = resolver.resolve_complete_dependency_tree(target)?;
+    
+    // Write the complete resolved code
+    fs::write("src/resolved_complete.rs", &complete_code)?;
+    println!("✅ Generated complete resolved code: src/resolved_complete.rs");
+    println!("📊 Included {} crates and {} dependencies", 
+             resolver.included_crates.len(), 
+             resolver.resolved_order.len());
     
     // Test compilation
     println!("🔧 Testing compilation...");
-    let output = Command::new("cargo")
+    let output = std::process::Command::new("cargo")
         .args(&["check", "--lib"])
         .output()?;
     

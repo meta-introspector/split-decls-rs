@@ -68,6 +68,12 @@ fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     // Fix environment variable references
     result = result.replace("env ! (\"CFG_RELEASE_CHANNEL\")", "\"dev\"");
     
+    // Fix crate-level attributes - remove them completely since they're now in unified_rustc_wrapped.rs
+    result = result.replace("# [allow (internal_features)] # [allow (rustc :: untranslatable_diagnostic)] # [doc (html_root_url = \"https://doc.rust-lang.org/nightly/nightly-rustc/\")] # [doc (rust_logo)] # [feature (decl_macro)] # [feature (panic_backtrace_config)] # [feature (panic_update_hook)] # [feature (rustdoc_internals)] # [feature (try_blocks)] ", "");
+    
+    // Fix inner doc comments - convert //! to //
+    result = result.replace("//!", "//");
+    
     Ok(result)
 }
 

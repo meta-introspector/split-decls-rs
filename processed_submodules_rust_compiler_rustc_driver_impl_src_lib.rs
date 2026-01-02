@@ -1,4 +1,4 @@
-mkuse!{# [allow (internal_features)] # [allow (rustc :: untranslatable_diagnostic)] # [doc (html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")] # [doc (rust_logo)] # [feature (decl_macro)] # [feature (panic_backtrace_config)] # [feature (panic_update_hook)] # [feature (rustdoc_internals)] # [feature (try_blocks)] use std :: cmp :: max ;}
+mkuse!{use std :: cmp :: max ;}
 mkuse!{use std :: collections :: { BTreeMap , BTreeSet } ;}
 mkuse!{use std :: ffi :: OsString ;}
 mkuse!{use std :: fmt :: Write as _ ;}
