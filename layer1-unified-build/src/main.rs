@@ -4,6 +4,9 @@ use walkdir::WalkDir;
 
 use unified_build::transform_bootstrap::add_bootstrap_features;
 use unified_build::transform_jobserver::fix_jobserver_imports;
+use unified_build::transform_platform::remove_platform_specific;
+use unified_build::transform_tests::remove_test_code;
+use unified_build::transform_unused::remove_unused_code;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let rustc_path = std::env::args().nth(1)
@@ -36,6 +39,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mut transformed = content;
             transformed = add_bootstrap_features(&transformed);
             transformed = fix_jobserver_imports(&transformed);
+            transformed = remove_platform_specific(&transformed);
+            transformed = remove_test_code(&transformed);
+            transformed = remove_unused_code(&transformed);
 
             // Write processed file
             let output_file = Path::new(&output_path).join("processed").join(&relative_path);
