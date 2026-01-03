@@ -5,7 +5,9 @@
 use split_decls_genesis::{
     symbol_resolver::{find_rust_files_in_dependency_fast, extract_all_symbols_from_file_fast, Symbol},
     dependency_extractor::get_rustc_dependencies,
-    build_lib::*
+    build_lib::*,
+    transformations::*,
+    transformation_tracker::TransformationTracker,
 };
 use std::collections::{HashMap, BTreeMap};
 use std::fs;
@@ -57,6 +59,7 @@ fn process_rustc_files() -> Result<(), Box<dyn std::error::Error>> {
     let rustc_deps = get_rustc_dependencies().unwrap_or_default();
     let mut processed_count = 0;
     let mut total_files = 0;
+    let mut tracker = TransformationTracker::new();
     
     // Count total files
     for dep in &rustc_deps {
@@ -73,8 +76,8 @@ fn process_rustc_files() -> Result<(), Box<dyn std::error::Error>> {
         
         for file in rust_files {
             if let Ok(content) = fs::read_to_string(&file) {
-                // Apply transformations (from run_build.rs)
-                let transformed = apply_transformations(&content, &file.to_string_lossy())?;
+                // Apply transformations with tracking
+                let transformed = apply_transformations_with_tracking(&content, &file.to_string_lossy(), &mut tracker)?;
                 
                 // Write transformed file to submodules/
                 let output_path = get_output_path(&file, &dep.name)?;
@@ -93,8 +96,46 @@ fn process_rustc_files() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     
+    // Save audit log
+    tracker.save_audit_log(Path::new("transformation_audit.log"))?;
+    println!("{}", tracker.get_summary());
     println!("✅ Processed {} files with transformations", processed_count);
     Ok(())
+}
+
+fn apply_transformations_with_tracking(content: &str, file_path: &str, tracker: &mut TransformationTracker) -> Result<String, Box<dyn std::error::Error>> {
+    let mut transformed = content.to_string();
+    
+    // Apply systematic transformations in order with tracking
+    
+    // 1. Strip malformed doc attributes first
+    transformed = tracker.track("DOC_STRIP", "Strip malformed doc attributes", file_path, &transformed, strip_malformed_doc_attributes);
+    
+    // 2. Add bootstrap features for lib.rs files
+    if file_path.ends_with("/lib.rs") {
+        transformed = tracker.track("BOOTSTRAP_FEATURES", "Add compiler bootstrap features", file_path, &transformed, add_bootstrap_features);
+    }
+    
+    // 3. Fix jobserver imports
+    transformed = tracker.track("JOBSERVER_FIX", "Fix jobserver imports", file_path, &transformed, fix_jobserver_imports);
+    
+    // 4. Add missing type definitions
+    transformed = tracker.track("TYPE_DEFS", "Add missing type definitions", file_path, &transformed, |c| add_missing_type_definitions(c, file_path));
+    
+    // 5. Add required imports
+    transformed = tracker.track("IMPORTS", "Add required imports", file_path, &transformed, |c| add_required_imports(c, file_path));
+    
+    // 6. Fix attribute spacing: # [attr] → #[attr]
+    transformed = tracker.track("ATTR_SPACING", "Fix attribute spacing", file_path, &transformed, |c| c.replace("# [", "#["));
+    
+    // 7. Handle newtype_index! macros
+    transformed = tracker.track("NEWTYPE_INDEX", "Expand newtype_index macros", file_path, &transformed, |c| expand_newtype_index_macros(c).unwrap_or_else(|_| c.to_string()));
+    
+    // 8. Add source tracking comment
+    let mut result = format!("// @source(file=\"{}\", generator=\"unified_build.rs\")\n", file_path);
+    result.push_str(&transformed);
+    
+    Ok(result)
 }
 
 fn apply_transformations(content: &str, file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
