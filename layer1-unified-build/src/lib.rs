@@ -10,4 +10,7 @@ pub mod transform_tests;
 pub mod transform_unused;
 pub mod transform_safe;
 pub mod transform_imports;
+pub mod transform_diagnostics;
+pub mod crate_processor;
 pub mod transform_strings;
+pub mod actionable_errors;

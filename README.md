@@ -17,6 +17,21 @@ A fully functional rustc interpreter that intercepts and tracks every function c
 - **✅ Import Resolution**: ALL import errors fixed - rustc crates can now find each other
 - **🔧 Dependency Cycles**: Broken all circular dependencies between rustc crates
 - **🎯 HIR Tracing**: Ready for self-compilation analysis with working build system
+- **🚀 ACTIONABLE ERRORS**: Fast feedback loop with specific fix commands
+
+### 🚀 NEW: Actionable Error System (2026-01-03)
+```
+🎯 ROBUST UNIFIED PROCESSOR
+- Run processor → Get specific error with fix command → Apply fix → Re-run
+- No more guessing: Each error shows exactly how to fix it
+- Quick fixes: ./quick_fix.sh attributes|macros|imports|all
+- Fast iteration: Seconds between error and fix
+
+Example:
+❌ Syn parse error: "macro mkitem not found"
+🔧 Quick Fix: Add macro definition
+⚡ Run This: echo 'macro_rules! mkitem { ... }' >> src/macro_stubs.rs
+```
 
 ### 📊 Latest Results
 ```
@@ -44,6 +59,33 @@ A fully functional rustc interpreter that intercepts and tracks every function c
 ```
 
 ## Development Workflow (Updated)
+
+### Phase 0: Actionable Error Processing (NEW - 2026-01-03)
+```bash
+# FAST FEEDBACK LOOP: Run → Get specific error → Apply fix → Re-run
+
+# Step 1: Run unified processor
+cd layer1-unified-build && cargo run ../../rust ./output
+
+# Step 2: Get actionable error with fix command
+# Example output:
+# 🚨 ACTIONABLE ERROR
+# 📁 File: compiler/rustc_hir_analysis/src/lib.rs
+# 🔧 Quick Fix: Add macro definition: macro_rules! mkitem { ... }
+# ⚡ Run This: echo 'macro_rules! mkitem { ... }' >> src/macro_stubs.rs
+
+# Step 3: Apply quick fix
+./quick_fix.sh macros  # or run the specific command shown
+
+# Step 4: Re-run processor (fast iteration)
+cargo run ../../rust ./output
+
+# Available quick fixes:
+./quick_fix.sh attributes  # Fix # [attr] → #[attr] spacing
+./quick_fix.sh macros      # Add common macro stubs
+./quick_fix.sh imports     # Add common import stubs
+./quick_fix.sh all         # Apply all fixes
+```
 
 ### Phase 1: Import Resolution (COMPLETE ✅)
 ```bash
