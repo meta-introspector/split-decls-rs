@@ -11,7 +11,7 @@ full_rustc = []
 gpu = ["wgpu"]
 
 [workspace]
-members = ["runbuild"]
+members = []
 
 [dependencies]
 anyhow = "1.0"

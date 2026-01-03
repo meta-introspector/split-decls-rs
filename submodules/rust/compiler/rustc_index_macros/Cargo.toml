@@ -10,5 +10,5 @@ path = "src/lib.rs"
 proc-macro2 = "1.0"
 quote = "1.0"
 syn = "2.0"
-rustc_serialize = { path = "../rustc_serialize" }
-rustc_graphviz = { path = "../rustc_graphviz" }
+#rustc_serialize = { path = "../rustc_serialize" }
+#rustc_graphviz = { path = "../rustc_graphviz" }

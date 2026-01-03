@@ -53,7 +53,7 @@ A fully functional rustc interpreter that intercepts and tracks every function c
 ### Phase 1: Build System Resolution (CURRENT)
 ```bash
 # Step 1: Generate processed files and identify parsing issues
-cargo run --bin runbuild > build.txt 2>&1
+cargo run --bin unified_build > build.txt 2>&1
 
 # Step 2: Analyze parsing failures
 grep "Failed to process" build.txt | wc -l
@@ -62,13 +62,13 @@ grep "Failed to process" build.txt | wc -l
 ls test_cases | wc -l
 grep "^// Error type:" test_cases/*.rs | cut -d':' -f3 | sort | uniq -c
 
-# Step 4: Fix parsing issues in build.rs
+# Step 4: Fix parsing issues in unified_build
 # - Attribute spacing: # [attr] → #[attr]
 # - Macro definitions: Ensure all mkitem!/mkfn!/mkmod! are defined
 # - Syntax normalization: Handle edge cases
 
 # Step 5: Verify fixes
-cargo run --bin runbuild > build.txt 2>&1
+cargo run --bin unified_build > build.txt 2>&1
 grep "Failed to process" build.txt | wc -l  # Target: 0 failures
 ```
 
@@ -95,11 +95,11 @@ cargo run --bin unified_rustc_wrapped
 
 **CRITICAL**: The workflow has strict sequential dependencies:
 
-1. **build.rs parsing** → Must be 100% successful
+1. **unified_build processing** → Must be 100% successful
 2. **unified_rustc_wrapped compilation** → Depends on clean processed files
 3. **rustc interpreter execution** → Depends on successful compilation
 
-**Current Blocker**: 1220 parsing failures in build.rs must be resolved before proceeding to unified wrapper testing.
+**Current Blocker**: Any parsing failures in unified_build must be resolved before proceeding to unified wrapper testing.
 
 ## Recent Achievements
 
@@ -194,29 +194,26 @@ pub mod ty {
 
 ### Running Complete Workflow
 ```bash
-# Step 1: Generate symbol map and processed files
-cargo run -p runbuild
+# Step 1: Generate symbol map and processed files using unified_build
+cargo run --bin unified_build
 
-# Step 2: Run unified driver to generate current.rs with macro fixes
-cargo run --bin unified_driver
-
-# Step 3: Test the unified rustc wrapper
+# Step 2: Test the unified rustc wrapper
 cargo check --bin unified_rustc_wrapped
 
-# Step 4: Analyze errors (if any)
+# Step 3: Analyze errors (if any)
 cargo check --bin unified_rustc_wrapped 2>&1 | tee report.txt
 grep error report.txt | sort | uniq -c | sort -rn | head
 
-# Step 5: Run the complete rustc interpreter
+# Step 4: Run the complete rustc interpreter
 cargo run --bin unified_rustc_wrapped
 ```
 
 ### Development Workflow
 ```bash
-# For debugging: Run build.rs standalone (separate crate)
-cargo run -p runbuild
+# For symbol map generation and processing: Use unified_build (the new meta)
+cargo run --bin unified_build
 
-# For symbol map generation: Run export separately  
+# For symbol map export: Run export separately  
 cargo run --bin export_symbol_map
 
 # Normal build (without symbol map generation)

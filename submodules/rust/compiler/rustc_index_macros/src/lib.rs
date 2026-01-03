@@ -1,5 +1,6 @@
 #![feature(rustc_attrs)]
 
+#![feature(type_alias_impl_trait)]
 // Stub proc macros for rustc_index
 use proc_macro::TokenStream;
 

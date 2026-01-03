@@ -7,5 +7,4 @@ edition = "2024"
 path = "src/lib.rs"
 [dependencies]
 rustc-stable-hash = "0.1"
-rustc_serialize = { path = "../rustc_serialize" }
-rustc_graphviz = { path = "../rustc_graphviz" }
+#rustc_serialize = { path = "../rustc_serialize" }
