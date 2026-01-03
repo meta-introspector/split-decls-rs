@@ -34,6 +34,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.path().extension().map_or(false, |ext| ext == "rs"))
+        .filter(|e| {
+            // Skip test files and examples
+            let path_str = e.path().to_string_lossy();
+            !path_str.contains("/tests/") && 
+            !path_str.contains("/examples/") &&
+            !path_str.contains("/benches/") &&
+            path_str.contains("/compiler/")
+        })
     {
         if let Ok(content) = fs::read_to_string(entry.path()) {
             let relative_path = entry.path().strip_prefix(&rustc_path)
@@ -97,6 +105,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut processor = CrateProcessor::new();
     processor.discover_crates(&format!("{}/processed", output_path))?;
     processor.process_in_topological_order()?;
+    
+    // Generate workspace AFTER all crates are created
+    processor.generate_workspace(&output_path)?;
     
     println!("\n🎉 All crates processed successfully!");
     

@@ -19,18 +19,25 @@ A fully functional rustc interpreter that intercepts and tracks every function c
 - **🎯 HIR Tracing**: Ready for self-compilation analysis with working build system
 - **🚀 ACTIONABLE ERRORS**: Fast feedback loop with specific fix commands
 
-### 🚀 NEW: Actionable Error System (2026-01-03)
+### 🚀 NEW: Self-Healing Unified Processor (2026-01-03)
 ```
-🎯 ROBUST UNIFIED PROCESSOR
-- Run processor → Get specific error with fix command → Apply fix → Re-run
-- No more guessing: Each error shows exactly how to fix it
-- Quick fixes: ./quick_fix.sh attributes|macros|imports|all
-- Fast iteration: Seconds between error and fix
+🎯 CARGO TREE GUIDED PROCESSING
+- Discovers real dependencies from rustc Cargo.toml files
+- Processes 76 crates in proper topological order (25 levels)
+- Generates workspace with actual dependency relationships
+- Auto-bisects any error to identify exact root cause
 
-Example:
-❌ Syn parse error: "macro mkitem not found"
-🔧 Quick Fix: Add macro definition
-⚡ Run This: echo 'macro_rules! mkitem { ... }' >> src/macro_stubs.rs
+🔧 SELF-HEALING CAPABILITIES
+- Detects workspace conflicts → Generates proper structure
+- Identifies edition mismatches → Updates to Rust 2024
+- Finds transformation bugs → Bisects to exact problem
+- Handles syntax errors → Shows before/after comparison
+
+Example Healing Cycle:
+❌ Error: "let chains only allowed in Rust 2024"
+🔍 Auto-bisection: Identifies rustfmt stage failure  
+🔧 Self-heal: Updates edition = "2024" automatically
+✅ Continue: Processes all 76 crates successfully
 ```
 
 ### 📊 Latest Results
