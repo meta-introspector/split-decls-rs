@@ -2,8 +2,8 @@
 
 use std::sync::{Arc, LazyLock, OnceLock};
 
-pub use jobserver::{Acquired, Client, HelperThread};
-use jobserver::{FromEnv, FromEnvErrorKind};
+pub use jobserver_crate::{Acquired, Client, HelperThread};
+use jobserver_crate::{FromEnv, FromEnvErrorKind};
 use parking_lot::{Condvar, Mutex};
 
 // We can only call `from_env_ext` once per process

@@ -10,6 +10,9 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(box_patterns)]
+#![feature(macro_metavar_expr)]
+#![feature(assert_matches)]
 
 //! The Rust Abstract Syntax Tree (AST).
 //!
@@ -18,6 +21,7 @@
 //! This API is completely unstable and subject to change.
 
 // tidy-alphabetical-start
+#![doc(
     html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/",
     test(attr(deny(warnings)))
 )]

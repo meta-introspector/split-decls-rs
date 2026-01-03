@@ -1,20 +1,23 @@
-// Minimal build.rs - expensive processing moved to separate tool
-// Run: cargo run --bin process_rustc_files for expensive operations
-
-// Minimal build.rs - expensive processing moved to unified_build.rs
-// Run: cargo run --bin unified_build for complete processing
+// Build script to enable compiler bootstrap mode for rustc crates only
+use std::env;
 
 fn main() {
-    println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=src/");
+    // Only enable bootstrap mode for rustc crates, not external dependencies
+    let crate_name = env::var("CARGO_PKG_NAME").unwrap_or_default();
     
-    // Enable try blocks feature for rustc source parsing
-    println!("cargo:rustc-cfg=feature=\"try_blocks\"");
-    
-    // Check if expensive processing was done
-    if std::path::Path::new("build_cache.json").exists() {
-        println!("cargo:rustc-cfg=feature=\"processed\"");
-    } else {
-        println!("cargo:warning=Run 'cargo run --bin unified_build' for complete processing");
+    if crate_name.starts_with("rustc_") || crate_name == "split-decls-genesis" {
+        // Enable bootstrap mode - this allows stability attributes
+        println!("cargo:rustc-cfg=bootstrap");
+        
+        // Enable staged API for stability attributes
+        println!("cargo:rustc-cfg=staged_api");
+        
+        // Set rustc version info (required for some compiler crates)
+        println!("cargo:rustc-env=CFG_VERSION=1.85.0-dev");
+        println!("cargo:rustc-env=CFG_VER_HASH=unknown");
+        println!("cargo:rustc-env=CFG_VER_DATE=unknown");
     }
+    
+    // Set environment variables that rustc expects during bootstrap
+    println!("cargo:rustc-env=CFG_COMPILER_HOST_TRIPLE={}", env::var("TARGET").unwrap_or_else(|_| "x86_64-unknown-linux-gnu".to_string()));
 }

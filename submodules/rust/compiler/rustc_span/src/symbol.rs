@@ -8,6 +8,10 @@ use std::hash::{Hash, Hasher};
 use std::ops::Deref;
 use std::{fmt, str};
 
+// Use the actual rustc SymbolIndex instead of our JSON system
+pub use rustc_index::Idx;
+pub type SymbolIndex = rustc_index::IndexVec<rustc_span::symbol::Symbol, String>;
+
 use rustc_arena::DroplessArena;
 use rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 use rustc_data_structures::stable_hasher::{

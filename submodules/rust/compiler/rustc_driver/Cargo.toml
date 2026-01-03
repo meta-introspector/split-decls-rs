@@ -4,20 +4,9 @@ version = "0.0.0"
 edition = "2024"
 
 [lib]
-path = "src/lib.rs"
+crate-type = ["dylib"]
+
 [dependencies]
+# tidy-alphabetical-start
 rustc_driver_impl = { path = "../rustc_driver_impl" }
-rustc_data_structures = { path = "../rustc_data_structures" }
-tracing = "0.1"
-rustc-hash = "2.0"
-rustc_hashes = { path = "../rustc_hashes" }
-ena = "0.14"
-arrayvec = "0.7"
-bitflags = "2.0"
-either = "1.0"
-elsa = "1.0"
-tempfile = "3.0"
-rustc_thread_pool = { path = "../rustc_thread_pool" }
-rustc-stable-hash = "0.1"
-rustc_serialize = { path = "../rustc_serialize" }
-rustc_graphviz = { path = "../rustc_graphviz" }
+# tidy-alphabetical-end

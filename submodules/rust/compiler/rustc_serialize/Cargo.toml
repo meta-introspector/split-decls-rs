@@ -3,19 +3,16 @@ name = "rustc_serialize"
 version = "0.0.0"
 edition = "2024"
 
-[lib]
-path = "src/lib.rs"
 [dependencies]
-rustc_data_structures = { path = "../rustc_data_structures" }
-tracing = "0.1"
-rustc-hash = "2.0"
+# tidy-alphabetical-start
+indexmap = "2.0.0"
 rustc_hashes = { path = "../rustc_hashes" }
-ena = "0.14"
-arrayvec = "0.7"
-bitflags = "2.0"
-either = "1.0"
-elsa = "1.0"
-tempfile = "3.0"
-rustc_thread_pool = { path = "../rustc_thread_pool" }
-rustc-stable-hash = "0.1"
-rustc_graphviz = { path = "../rustc_graphviz" }
+smallvec = { version = "1.8.1", features = ["union", "may_dangle"] }
+thin-vec = "0.2.12"
+# tidy-alphabetical-end
+
+[dev-dependencies]
+# tidy-alphabetical-start
+rustc_macros = { path = "../rustc_macros" }
+tempfile = "3.2"
+# tidy-alphabetical-end

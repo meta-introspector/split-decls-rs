@@ -10,6 +10,9 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(proc_macro_diagnostic)]
+#![feature(proc_macro_tracked_env)]
+#![feature(if_let_guard)]
 
 // tidy-alphabetical-start
 // tidy-alphabetical-end

@@ -8,16 +8,18 @@
 #![feature(specialization)]
 #![feature(never_type)]
 #![feature(cfg_select)]
+#![feature(sized_hierarchy)]
+#![feature(core_intrinsics)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
 
 //! Support code for encoding and decoding types.
 
-// tidy-alphabetical-start
-    html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/",
-    html_playground_url = "https://play.rust-lang.org/",
-    test(attr(allow(unused_variables), deny(warnings)))
-)]
+// // tidy-alphabetical-start
+//     html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/",
+//     html_playground_url = "https://play.rust-lang.org/",
+//     test(attr(allow(unused_variables), deny(warnings)))
+// )]
 // tidy-alphabetical-end
 
 // Allows macros to refer to this crate as `::rustc_serialize`.

@@ -3,19 +3,21 @@ name = "rustc_index"
 version = "0.0.0"
 edition = "2024"
 
-[lib]
-path = "src/lib.rs"
 [dependencies]
-tracing = "0.1"
-rustc-hash = "2.0"
-ena = "0.14"
-arrayvec = "0.7"
-bitflags = "2.0"
-either = "1.0"
-elsa = "1.0"
-tempfile = "3.0"
-rustc-stable-hash = "0.1"
+# tidy-alphabetical-start
 rustc_index_macros = { path = "../rustc_index_macros" }
-smallvec = "1.0"
-#rustc_serialize = { path = "../rustc_serialize" }
-#rustc_graphviz = { path = "../rustc_graphviz" }
+rustc_macros = { path = "../rustc_macros", optional = true }
+rustc_serialize = { path = "../rustc_serialize", optional = true }
+smallvec = "1.8.1"
+# tidy-alphabetical-end
+
+[features]
+# tidy-alphabetical-start
+default = ["nightly"]
+nightly = [
+    "dep:rustc_macros",
+    "dep:rustc_serialize",
+    "rustc_index_macros/nightly",
+]
+rustc_randomized_layouts = []
+# tidy-alphabetical-end

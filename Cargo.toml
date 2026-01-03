@@ -13,6 +13,9 @@ gpu = ["wgpu"]
 [workspace]
 members = []
 
+[build-dependencies]
+# Build script dependencies for compiler bootstrap
+
 [dependencies]
 anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
@@ -47,13 +50,22 @@ ena = "0.14"
 flate2 = "1.0"
 synstructure = "0.13"
 arrayvec = "0.7"
-jobserver = "0.1"
-
+jobserver_crate = { version = "0.1.28", package = "jobserver" }
+regex = "1.0"
 # Rustc internal crates for HIR tracing
 rustc_driver = { path = "submodules/rust/compiler/rustc_driver" }
 rustc_interface = { path = "submodules/rust/compiler/rustc_interface" }
 rustc_middle = { path = "submodules/rust/compiler/rustc_middle" }
 rustc_hir = { path = "submodules/rust/compiler/rustc_hir" }
+rustc_macros = { path = "submodules/rust/compiler/rustc_macros" }
+rustc_serialize = { path = "submodules/rust/compiler/rustc_serialize" }
+rustc_hashes = { path = "submodules/rust/compiler/rustc_hashes" }
+rustc_graphviz = { path = "submodules/rust/compiler/rustc_graphviz" }
+rustc_span = { path = "submodules/rust/compiler/rustc_span" }
+rustc_session = { path = "submodules/rust/compiler/rustc_session" }
+rustc_index = { path = "submodules/rust/compiler/rustc_index" }
+rustc_ast = { path = "submodules/rust/compiler/rustc_ast" }
+rustc_errors = { path = "submodules/rust/compiler/rustc_errors" }
 bitflags = "2.0"
 tempfile = "3.0"
 parking_lot = "0.12"
@@ -61,8 +73,6 @@ crossbeam-deque = "0.8"
 rand = "0.8"
 rand_xorshift = "0.3"
 ring = "0.17"
-regex = "1.0"
-
 # Missing external crates for extracted rustc code
 scoped-tls = "1.0"
 dyn-clone = "1.0"
@@ -84,7 +94,6 @@ digest = "*"
 either = "*"
 elsa = "*"
 equivalent = "*"
-
 # Rustc compiler crates for extracted code
 #rustc_ast = { path = "../rust/compiler/rustc_ast" }
 #rustc_middle = { path = "../rust/compiler/rustc_middle" }
@@ -94,22 +103,10 @@ equivalent = "*"
 #rustc_errors = { path = "../rust/compiler/rustc_errors" }
 #rustc_session = { path = "../rust/compiler/rustc_session" }
 
-[build-dependencies]
-anyhow = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-toml = "0.8"
-syn = { version = "2.0", features = ["full", "visit", "parsing"] }
-quote = "1.0"
-walkdir = "2.0"
-flate2 = "1.0"
-
 [[bin]]
 name = "unified_rustc_wrapped"
 path = "src/bin/unified_rustc_wrapped.rs"
 required-features = ["full_rustc"]
-
 # [[bin]]
 # name = "test_dependency_tracking"
 # path = "test_dependency_tracking.rs"
-

@@ -10,9 +10,17 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(if_let_guard)]
+#![feature(core_io_borrowed_buf)]
+#![feature(read_buf)]
+#![feature(map_try_insert)]
+#![feature(array_windows)]
 
 //! Source positions and related helper functions.
 //!
+
+// Add missing types
+pub type AttrId = u32;
 //! Important concepts in this module include:
 //!
 //! - the *span*, represented by [`SpanData`] and related types;

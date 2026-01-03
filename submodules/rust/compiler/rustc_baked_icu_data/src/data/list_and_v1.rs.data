@@ -1,0 +1,11 @@
+// Stub data file for rustc_baked_icu_data
+// This is a minimal placeholder to avoid compilation errors
+
+// Define the missing macro to accept any token type
+macro_rules! impl_list_and_v1 {
+    ($provider:ty) => {
+        // Stub implementation
+    };
+}
+
+pub const DATA: &[u8] = &[];

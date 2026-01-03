@@ -6,6 +6,20 @@
 #![feature(lang_items)]
 #![feature(optimize_attribute)]
 #![feature(allocator_api)]
+#![feature(maybe_uninit_write_slice)]
+#![feature(panic_can_unwind)]
+#![feature(extend_one)]
+#![feature(proc_macro_diagnostic)]
+#![feature(proc_macro_span)]
+#![feature(proc_macro_tracked_env)]
+#![feature(track_path)]
+#![feature(proc_macro_expand)]
+#![feature(proc_macro_internals)]
+#![feature(proc_macro_value)]
+#![feature(allow_internal_unstable)]
+#![feature(allow_internal_unsafe)]
+#![feature(staged_api)]
+#![cfg_attr(bootstrap, feature(rustc_allow_const_fn_unstable))]
 
 pub mod ourprelude;
 pub mod build_lib;

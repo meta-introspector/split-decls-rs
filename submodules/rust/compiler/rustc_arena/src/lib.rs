@@ -10,6 +10,10 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(unwrap_infallible)]
+#![feature(maybe_uninit_slice)]
+#![feature(core_intrinsics)]
+#![feature(decl_macro)]
 
 //! The arena, a fast but limited type of allocator.
 //!
@@ -21,6 +25,7 @@
 //! This crate implements several kinds of arena.
 
 // tidy-alphabetical-start
+#![doc(
     html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/",
     test(no_crate_inject, attr(deny(warnings)))
 )]

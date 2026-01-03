@@ -12,6 +12,7 @@
 #![feature(negative_impls)]
 
 // tidy-alphabetical-start
+#![cfg_attr(
     feature = "nightly",
     feature(associated_type_defaults, never_type, rustc_attrs, negative_impls)
 )]

@@ -10,6 +10,11 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(proc_macro_diagnostic)]
+#![feature(new_range_api)]
+#![feature(track_path)]
+#![feature(new_zeroed_alloc)]
+#![feature(extend_one)]
 
 // tidy-alphabetical-start
 // tidy-alphabetical-end

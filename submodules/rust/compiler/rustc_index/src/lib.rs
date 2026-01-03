@@ -10,6 +10,10 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(step_trait)]
+#![feature(new_range_api)]
+#![feature(new_zeroed_alloc)]
+#![feature(extend_one)]
 
 // tidy-alphabetical-start
 // tidy-alphabetical-end
@@ -35,6 +39,25 @@ impl Idx for PreorderIndex {
     
     fn index(self) -> usize {
         self.0
+    }
+}
+
+impl std::iter::Step for PreorderIndex {
+    fn steps_between(start: &Self, end: &Self) -> (usize, Option<usize>) {
+        if start.0 <= end.0 {
+            let diff = end.0 - start.0;
+            (diff, Some(diff))
+        } else {
+            (0, None)
+        }
+    }
+
+    fn forward_checked(start: Self, count: usize) -> Option<Self> {
+        start.0.checked_add(count).map(PreorderIndex)
+    }
+
+    fn backward_checked(start: Self, count: usize) -> Option<Self> {
+        start.0.checked_sub(count).map(PreorderIndex)
     }
 }
 #[cfg(feature = "nightly")]

@@ -10,6 +10,11 @@
 #![feature(cfg_select)]
 #![feature(ptr_alignment_type)]
 #![feature(negative_impls)]
+#![feature(array_windows)]
+#![feature(assert_matches)]
+#![feature(file_buffered)]
+#![feature(thread_id_value)]
+#![feature(unwrap_infallible)]
 
 #![feature(rustc_private)]
 #![feature(allocator_api)]
