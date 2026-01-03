@@ -6,7 +6,7 @@ use std::collections::HashMap;
 pub struct MonsterSymbol {
     pub name: String,
     // Trinity 1: As Message
-    pub as_message: RustcMessage,
+    pub as_message: Box<RustcMessage>,
     // Trinity 2: As Function  
     pub as_function: Vec<u8>, // Compiled bytecode
     // Trinity 3: As Type
@@ -36,7 +36,7 @@ pub struct TypeSignature {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RustcMessage {
     // The symbol IS the message
-    Symbol(MonsterSymbol),
+    Symbol(Box<MonsterSymbol>),
     
     // Core trinity operations
     InvokeAsMessage { symbol: String, payload: Vec<u8> },
@@ -72,9 +72,9 @@ impl MonsterMatrix {
         for (name, _) in data {
             let monster = MonsterSymbol {
                 name: name.clone(),
-                as_message: RustcMessage::Symbol(MonsterSymbol {
+                as_message: Box::new(RustcMessage::Symbol(Box::new(MonsterSymbol {
                     name: name.clone(),
-                    as_message: RustcMessage::Identity { symbol: name.clone() },
+                    as_message: Box::new(RustcMessage::Identity { symbol: name.clone() }),
                     as_function: vec![0x90], // NOP bytecode
                     as_type: TypeSignature {
                         inputs: vec![],
@@ -86,7 +86,7 @@ impl MonsterMatrix {
                         eval_input: vec![0x90],
                         is_self_consuming: true,
                     },
-                }),
+                }))),
                 as_function: vec![0x90], // Compiled form
                 as_type: TypeSignature {
                     inputs: vec!["Self".to_string()],

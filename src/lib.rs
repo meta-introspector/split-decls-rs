@@ -11,9 +11,15 @@ pub mod ourprelude;
 pub mod build_lib;
 pub mod rustc_matrix;
 pub mod monster_trinity;
+pub mod conformal_proof;
 pub mod galois_transform;
 pub mod rust_lattice;
-pub mod conformal_proof;
+pub mod symbol_cache;
+pub mod daemon;
+pub mod function_store;
+pub mod function_graduator;
+pub mod ast_tracer;
+pub mod hir_tracer;
 
 // Minimal external crates
 pub mod compiler_feedback;
@@ -55,3 +61,10 @@ pub mod exports {
     include!("exports.rs");
 }
 pub mod rustc_compose;
+
+use rustc_matrix::RustcMatrix;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    RustcMatrix::run().await
+}

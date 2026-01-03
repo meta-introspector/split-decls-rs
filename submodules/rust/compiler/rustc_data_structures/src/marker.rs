@@ -62,7 +62,7 @@ macro_rules! already_send {
 // These structures are already `Send`.
 already_send!(
     [std::backtrace::Backtrace][std::io::Stdout][std::io::Stderr][std::io::Error][std::fs::File]
-        [rustc_arena::DroplessArena][jobserver_crate::Client][jobserver_crate::HelperThread]
+        [rustc_arena::DroplessArena][jobserver::Client][jobserver::HelperThread]
         [crate::memmap::Mmap][crate::profiling::SelfProfiler][crate::owned_slice::OwnedSlice]
 );
 
@@ -137,7 +137,7 @@ macro_rules! already_sync {
 already_sync!(
     [std::sync::atomic::AtomicBool][std::sync::atomic::AtomicUsize][std::sync::atomic::AtomicU8]
         [std::sync::atomic::AtomicU32][std::backtrace::Backtrace][std::io::Error][std::fs::File]
-        [jobserver_crate::Client][jobserver_crate::HelperThread][crate::memmap::Mmap]
+        [jobserver::Client][jobserver::HelperThread][crate::memmap::Mmap]
         [crate::profiling::SelfProfiler][crate::owned_slice::OwnedSlice]
 );
 

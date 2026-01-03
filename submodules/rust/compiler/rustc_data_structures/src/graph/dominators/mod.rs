@@ -11,7 +11,7 @@
 //! Thomas Lengauer and Robert Endre Tarjan.
 //! <https://www.cs.princeton.edu/courses/archive/spr03/cs423/download/dominators.pdf>
 
-use rustc_index::{Idx, IndexSlice, IndexVec};
+use rustc_index::{Idx, IndexSlice, IndexVec, PreorderIndex};
 
 use super::ControlFlowGraph;
 
@@ -21,11 +21,6 @@ mod tests;
 struct PreOrderFrame<Iter> {
     pre_order_idx: PreorderIndex,
     iter: Iter,
-}
-
-rustc_index::newtype_index! {
-    #[orderable]
-    struct PreorderIndex {}
 }
 
 #[derive(Clone, Debug)]
